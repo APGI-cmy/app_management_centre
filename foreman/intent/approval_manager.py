@@ -3,7 +3,7 @@ Approval Manager.
 QA Coverage: QA-204
 """
 
-from typing import Dict, Any
+from typing import Any
 from datetime import datetime
 
 _approvals = {}
@@ -20,8 +20,8 @@ class ApprovalManager:
         if organisation_id not in _requirements:
             _requirements[organisation_id] = {}
     
-    def present_for_approval(self, requirement_id: str = None, requirement: Dict = None, 
-                           approver: str = None) -> Dict[str, Any]:
+    def present_for_approval(self, requirement_id: str = None, requirement: dict = None, 
+                           approver: str = None) -> dict[str, Any]:
         """Present requirement for approval."""
         req_id = requirement_id or requirement.get("requirement_id") if requirement else None
         
@@ -46,7 +46,7 @@ class ApprovalManager:
         return approval
     
     def handle_approval(self, requirement_id: str, approver: str, decision: str,
-                       comments: str = None, reason: str = None) -> Dict[str, Any]:
+                       comments: str = None, reason: str = None) -> dict[str, Any]:
         """Handle approval decision (approve/reject). QA-204"""
         from datetime import datetime
         
@@ -90,14 +90,14 @@ class ApprovalManager:
         else:
             raise ValueError(f"Invalid decision: {decision}. Must be APPROVE or REJECT")
     
-    def get_requirement(self, requirement_id: str) -> Dict[str, Any]:
+    def get_requirement(self, requirement_id: str) -> dict[str, Any]:
         """Get requirement by ID. QA-204"""
         return _requirements[self.organisation_id].get(requirement_id, {
             "requirement_id": requirement_id,
             "state": "UNKNOWN"
         })
     
-    def await_decision(self, approval_id: str) -> Dict[str, Any]:
+    def await_decision(self, approval_id: str) -> dict[str, Any]:
         """Wait for approval decision."""
         # Find approval by ID
         for req_id, approval in _approvals.get(self.organisation_id, {}).items():
@@ -112,7 +112,7 @@ class ApprovalManager:
             "decision_made": False
         }
     
-    def request_approval(self, requirement: Dict) -> Dict[str, Any]:
+    def request_approval(self, requirement: dict) -> dict[str, Any]:
         """Request approval for requirement."""
         return {
             "approval_id": "appr-001",
@@ -120,7 +120,7 @@ class ApprovalManager:
             "status": "PENDING"
         }
     
-    def record_decision(self, approval_id: str, decision: str, approver: str) -> Dict[str, Any]:
+    def record_decision(self, approval_id: str, decision: str, approver: str) -> dict[str, Any]:
         """Record approval decision."""
         # Find and update approval
         for req_id, approval in _approvals.get(self.organisation_id, {}).items():

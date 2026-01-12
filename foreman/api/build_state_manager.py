@@ -12,7 +12,7 @@ Responsibilities:
 - Handle state consistency failures
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime, timedelta
 
 
@@ -44,7 +44,7 @@ class BuildStateManager:
         self.build_states = {}
         self.state_history = {}
     
-    def track_state_transition(self, build_id: str, from_state: str, to_state: str, reason: str = "") -> Dict[str, Any]:
+    def track_state_transition(self, build_id: str, from_state: str, to_state: str, reason: str = "") -> dict[str, Any]:
         """
         QA-084: Track build state transitions
         
@@ -104,7 +104,7 @@ class BuildStateManager:
             "to_state": to_state
         }
     
-    def update_progress_metrics(self, build_id: str, qa_green: int, qa_red: int, qa_total: int) -> Dict[str, Any]:
+    def update_progress_metrics(self, build_id: str, qa_green: int, qa_red: int, qa_total: int) -> dict[str, Any]:
         """
         QA-085: Update build progress metrics
         
@@ -157,7 +157,7 @@ class BuildStateManager:
             "time_elapsed_seconds": time_elapsed
         }
     
-    def detect_stall(self, build_id: str) -> Dict[str, Any]:
+    def detect_stall(self, build_id: str) -> dict[str, Any]:
         """
         QA-086: Detect build stall
         
@@ -235,7 +235,7 @@ class BuildStateManager:
         
         self.build_states[build_id]["last_heartbeat"] = datetime.now().isoformat()
     
-    def persist_state(self, build_id: str) -> Dict[str, Any]:
+    def persist_state(self, build_id: str) -> dict[str, Any]:
         """
         QA-087: Persist build state
         
@@ -276,7 +276,7 @@ class BuildStateManager:
             "recovery_point_created": True
         }
     
-    def handle_state_failure(self, build_id: str, failure_type: str) -> Dict[str, Any]:
+    def handle_state_failure(self, build_id: str, failure_type: str) -> dict[str, Any]:
         """
         QA-088: Build State Manager failure modes
         
@@ -366,7 +366,7 @@ class BuildStateManager:
         
         return to_state in valid_transitions.get(from_state, [])
     
-    def _validate_state_consistency(self, build_state: Dict[str, Any]) -> bool:
+    def _validate_state_consistency(self, build_state: dict[str, Any]) -> bool:
         """Validate state consistency"""
         # Check required fields exist
         required_fields = ["current_state"]

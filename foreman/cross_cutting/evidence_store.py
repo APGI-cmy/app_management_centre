@@ -4,7 +4,7 @@ QA Coverage: QA-180 to QA-189
 """
 
 from datetime import datetime
-from typing import Dict, Any, Optional
+from typing import Any
 from pathlib import Path
 import json
 
@@ -22,8 +22,8 @@ class EvidenceStore:
             _evidence_artifacts[organisation_id] = {}
     
     def store_artifact(self, artifact_type: str = None, content: Any = None, 
-                      metadata: Dict = None, organisation_id: str = None,
-                      artifact_id: str = None, category: str = "general") -> Dict[str, Any]:
+                      metadata: dict = None, organisation_id: str = None,
+                      artifact_id: str = None, category: str = "general") -> dict[str, Any]:
         """Store evidence artifact. QA-180"""
         # Generate artifact_id if not provided
         if artifact_id is None:
@@ -44,7 +44,7 @@ class EvidenceStore:
         
         return artifact
     
-    def retrieve_artifact(self, artifact_id: str) -> Optional[Dict]:
+    def retrieve_artifact(self, artifact_id: str) -> dict | None:
         """Retrieve evidence by ID. QA-166"""
         return _evidence_artifacts.get(self.organisation_id, {}).get(artifact_id)
     

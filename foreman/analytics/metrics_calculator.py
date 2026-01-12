@@ -6,7 +6,7 @@ Calculates build success rates, average times, and costs.
 QA Coverage: QA-133, QA-134, QA-135
 """
 
-from typing import Dict, Any, List
+from typing import Any
 from datetime import datetime, timedelta
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
@@ -32,7 +32,7 @@ class MetricsCalculator:
         total = len(completions)
         return (successful / total) * 100 if total > 0 else 0.0
     
-    def get_success_rate_trend(self, organisation_id: str, time_period: str) -> Dict[str, Any]:
+    def get_success_rate_trend(self, organisation_id: str, time_period: str) -> dict[str, Any]:
         """Get success rate trend data. QA-133"""
         return {
             "data_points": [
@@ -54,7 +54,7 @@ class MetricsCalculator:
         """Get baseline build time for comparison. QA-134"""
         return 45.0  # Default baseline
     
-    def compare_to_baseline(self, current: float, baseline: float) -> Dict[str, Any]:
+    def compare_to_baseline(self, current: float, baseline: float) -> dict[str, Any]:
         """Compare current time to baseline. QA-134"""
         diff = ((current - baseline) / baseline) * 100 if baseline > 0 else 0
         return {
@@ -62,7 +62,7 @@ class MetricsCalculator:
             "direction": "faster" if diff < 0 else "slower"
         }
     
-    def get_build_time_by_wave(self, organisation_id: str, time_period: str) -> Dict[str, float]:
+    def get_build_time_by_wave(self, organisation_id: str, time_period: str) -> dict[str, float]:
         """Get build time breakdown by wave. QA-134"""
         times = _build_times.get(organisation_id, [])
         by_wave = {}

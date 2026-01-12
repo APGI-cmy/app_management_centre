@@ -11,7 +11,7 @@ Responsibilities:
 - Handle intake failure modes
 """
 
-from typing import Dict, Any, Optional
+from typing import Any
 from datetime import datetime
 
 
@@ -27,7 +27,7 @@ class IntentIntakeHandler:
         """Initialize Intent Intake Handler"""
         self.pending_intents = {}
     
-    def accept_intent(self, message_content: str, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def accept_intent(self, message_content: str, context: dict[str, Any] | None = None) -> dict[str, Any]:
         """
         QA-058: Accept informal intent
         
@@ -63,7 +63,7 @@ class IntentIntakeHandler:
         self.pending_intents[intent_id] = intent
         return intent
     
-    def validate_intent(self, intent_id: str) -> Dict[str, Any]:
+    def validate_intent(self, intent_id: str) -> dict[str, Any]:
         """
         QA-059: Validate intent input
         
@@ -110,7 +110,7 @@ class IntentIntakeHandler:
         
         return validation_result
     
-    def route_to_clarification(self, intent_id: str, ambiguity_reason: str) -> Dict[str, Any]:
+    def route_to_clarification(self, intent_id: str, ambiguity_reason: str) -> dict[str, Any]:
         """
         QA-060: Route intent to clarification
         
@@ -149,7 +149,7 @@ class IntentIntakeHandler:
         
         return routing_result
     
-    def handle_intake_failure(self, intent_id: str, failure_type: str, error_details: str) -> Dict[str, Any]:
+    def handle_intake_failure(self, intent_id: str, failure_type: str, error_details: str) -> dict[str, Any]:
         """
         QA-061: Intent Intake failure modes
         

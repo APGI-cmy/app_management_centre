@@ -8,7 +8,7 @@ from UI to API to backend to analytics to recovery and governance.
 Authority: Wave 2.13 and Wave 2.14 specifications, BL-024 Constitutional Sandbox Pattern
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime, UTC
 from enum import Enum
 
@@ -34,7 +34,7 @@ class IntentToBuildE2EOrchestrator:
         self.organisation_id = organisation_id
         self.flows = {}
     
-    def execute_intent_intake_e2e(self, intent_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_intent_intake_e2e(self, intent_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-491: E2E intent intake - from UI submission through backend processing
         """
@@ -92,7 +92,7 @@ class IntentToBuildE2EOrchestrator:
             "organisation_id": self.organisation_id
         }
     
-    def execute_clarification_e2e(self, intent_id: str, clarification_request: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_clarification_e2e(self, intent_id: str, clarification_request: dict[str, Any]) -> dict[str, Any]:
         """
         QA-492: E2E clarification - complete clarification flow
         """
@@ -137,7 +137,7 @@ class IntentToBuildE2EOrchestrator:
             "e2e_duration_ms": 120
         }
     
-    def execute_requirement_generation_e2e(self, intent_id: str) -> Dict[str, Any]:
+    def execute_requirement_generation_e2e(self, intent_id: str) -> dict[str, Any]:
         """
         QA-493: E2E requirement generation - from intent to structured requirements
         """
@@ -182,7 +182,7 @@ class IntentToBuildE2EOrchestrator:
             "e2e_duration_ms": 200
         }
     
-    def execute_build_execution_e2e(self, requirement_id: str) -> Dict[str, Any]:
+    def execute_build_execution_e2e(self, requirement_id: str) -> dict[str, Any]:
         """
         QA-494: E2E build execution - from requirement to build completion
         """
@@ -237,7 +237,7 @@ class IntentToBuildE2EOrchestrator:
             "e2e_duration_ms": 300
         }
     
-    def execute_build_delivery_e2e(self, build_id: str) -> Dict[str, Any]:
+    def execute_build_delivery_e2e(self, build_id: str) -> dict[str, Any]:
         """
         QA-495: E2E build delivery - from build completion to user notification
         """
@@ -302,7 +302,7 @@ class EscalationE2EOrchestrator:
         self.organisation_id = organisation_id
         self.escalations = {}
     
-    def execute_escalation_trigger_e2e(self, issue_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_escalation_trigger_e2e(self, issue_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-496: E2E escalation trigger - from issue detection to escalation creation
         """
@@ -349,7 +349,7 @@ class EscalationE2EOrchestrator:
             "e2e_duration_ms": 100
         }
     
-    def execute_escalation_presentation_e2e(self, escalation_id: str) -> Dict[str, Any]:
+    def execute_escalation_presentation_e2e(self, escalation_id: str) -> dict[str, Any]:
         """
         QA-497: E2E escalation presentation - from creation to user display
         """
@@ -385,7 +385,7 @@ class EscalationE2EOrchestrator:
             "e2e_duration_ms": 80
         }
     
-    def execute_escalation_decision_e2e(self, escalation_id: str, decision: str) -> Dict[str, Any]:
+    def execute_escalation_decision_e2e(self, escalation_id: str, decision: str) -> dict[str, Any]:
         """
         QA-498: E2E escalation decision - from user input to decision recording
         """
@@ -438,7 +438,7 @@ class EscalationE2EOrchestrator:
             "e2e_duration_ms": 120
         }
     
-    def execute_escalation_audit_e2e(self, escalation_id: str) -> Dict[str, Any]:
+    def execute_escalation_audit_e2e(self, escalation_id: str) -> dict[str, Any]:
         """
         QA-499: E2E escalation audit - complete audit trail generation
         """
@@ -475,7 +475,7 @@ class EscalationE2EOrchestrator:
             "e2e_duration_ms": 90
         }
     
-    def execute_escalation_error_recovery_e2e(self, escalation_id: str, error_scenario: str) -> Dict[str, Any]:
+    def execute_escalation_error_recovery_e2e(self, escalation_id: str, error_scenario: str) -> dict[str, Any]:
         """
         QA-500: E2E escalation error recovery - error handling and recovery
         """
@@ -532,7 +532,7 @@ class ParkingStationE2EOrchestrator:
         self.organisation_id = organisation_id
         self.ideas = {}
     
-    def execute_idea_submission_e2e(self, idea_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_idea_submission_e2e(self, idea_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-501: E2E idea submission - from UI to parking station storage
         """
@@ -586,7 +586,7 @@ class ParkingStationE2EOrchestrator:
             "e2e_duration_ms": 110
         }
     
-    def execute_discussion_e2e(self, idea_id: str, comment_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_discussion_e2e(self, idea_id: str, comment_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-502: E2E discussion - idea discussion and collaboration
         """
@@ -629,7 +629,7 @@ class ParkingStationE2EOrchestrator:
             "e2e_duration_ms": 100
         }
     
-    def execute_requirement_conversion_e2e(self, idea_id: str) -> Dict[str, Any]:
+    def execute_requirement_conversion_e2e(self, idea_id: str) -> dict[str, Any]:
         """
         QA-503: E2E requirement conversion - parking station to formal requirement
         """
@@ -676,7 +676,7 @@ class ParkingStationE2EOrchestrator:
             "e2e_duration_ms": 180
         }
     
-    def execute_build_from_parking_e2e(self, requirement_id: str) -> Dict[str, Any]:
+    def execute_build_from_parking_e2e(self, requirement_id: str) -> dict[str, Any]:
         """
         QA-504: E2E build from parking - requirement to build execution
         """
@@ -724,7 +724,7 @@ class ParkingStationE2EOrchestrator:
             "e2e_duration_ms": 250
         }
     
-    def execute_parking_audit_e2e(self, idea_id: str) -> Dict[str, Any]:
+    def execute_parking_audit_e2e(self, idea_id: str) -> dict[str, Any]:
         """
         QA-505: E2E parking audit - complete audit trail from idea to build
         """
@@ -780,7 +780,7 @@ class DashboardE2EOrchestrator:
         self.organisation_id = organisation_id
         self.dashboard_state = {}
     
-    def execute_status_update_e2e(self, domain: str, status: str, reason: str) -> Dict[str, Any]:
+    def execute_status_update_e2e(self, domain: str, status: str, reason: str) -> dict[str, Any]:
         """
         QA-506: E2E status update - from backend change to UI display
         """
@@ -836,7 +836,7 @@ class DashboardE2EOrchestrator:
             "e2e_duration_ms": 85
         }
     
-    def execute_drill_down_e2e(self, domain: str) -> Dict[str, Any]:
+    def execute_drill_down_e2e(self, domain: str) -> dict[str, Any]:
         """
         QA-507: E2E drill-down - from UI interaction to detailed data display
         """
@@ -888,7 +888,7 @@ class DashboardE2EOrchestrator:
             "e2e_duration_ms": 120
         }
     
-    def execute_filter_application_e2e(self, filters: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_filter_application_e2e(self, filters: dict[str, Any]) -> dict[str, Any]:
         """
         QA-508: E2E filter application - from UI filter to filtered results
         """
@@ -942,7 +942,7 @@ class DashboardE2EOrchestrator:
             "e2e_duration_ms": 110
         }
     
-    def execute_real_time_update_e2e(self, event_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_real_time_update_e2e(self, event_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-509: E2E real-time update - from event to live UI update
         """
@@ -990,7 +990,7 @@ class DashboardE2EOrchestrator:
             "e2e_duration_ms": 50
         }
     
-    def execute_dashboard_audit_e2e(self, time_range: str) -> Dict[str, Any]:
+    def execute_dashboard_audit_e2e(self, time_range: str) -> dict[str, Any]:
         """
         QA-510: E2E dashboard audit - complete audit trail for dashboard operations
         """
@@ -1058,7 +1058,7 @@ class MultiUserE2EOrchestrator:
         self.organisation_id = organisation_id
         self.sessions = {}
     
-    def execute_multi_user_conversation_e2e(self, users: List[str], conversation_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_multi_user_conversation_e2e(self, users: list[str], conversation_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-511: E2E multi-user conversation - multiple users in single conversation
         """
@@ -1115,7 +1115,7 @@ class MultiUserE2EOrchestrator:
             "e2e_duration_ms": 120
         }
     
-    def execute_multi_user_collaboration_e2e(self, users: List[str], collaboration_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_multi_user_collaboration_e2e(self, users: list[str], collaboration_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-512: E2E multi-user collaboration - concurrent editing and updates
         """
@@ -1162,7 +1162,7 @@ class MultiUserE2EOrchestrator:
             "e2e_duration_ms": 150
         }
     
-    def execute_multi_user_approval_e2e(self, users: List[str], approval_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_multi_user_approval_e2e(self, users: list[str], approval_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-513: E2E multi-user approval - multi-stage approval workflow
         """
@@ -1218,7 +1218,7 @@ class MultiUserE2EOrchestrator:
             "e2e_duration_ms": 200
         }
     
-    def execute_multi_user_notification_e2e(self, users: List[str], notification_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_multi_user_notification_e2e(self, users: list[str], notification_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-514: E2E multi-user notification - broadcast to multiple users
         """
@@ -1265,7 +1265,7 @@ class MultiUserE2EOrchestrator:
             "e2e_duration_ms": 80
         }
     
-    def execute_multi_user_audit_e2e(self, users: List[str], time_range: str) -> Dict[str, Any]:
+    def execute_multi_user_audit_e2e(self, users: list[str], time_range: str) -> dict[str, Any]:
         """
         QA-515: E2E multi-user audit - complete audit trail for multi-user operations
         """
@@ -1334,7 +1334,7 @@ class ErrorRecoveryE2EOrchestrator:
         self.organisation_id = organisation_id
         self.recovery_attempts = {}
     
-    def execute_failure_detection_e2e(self, operation_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_failure_detection_e2e(self, operation_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-516: E2E failure detection - detect and classify failures across system
         """
@@ -1381,7 +1381,7 @@ class ErrorRecoveryE2EOrchestrator:
             "e2e_duration_ms": 100
         }
     
-    def execute_retry_logic_e2e(self, operation_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_retry_logic_e2e(self, operation_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-517: E2E retry logic - automatic retry with backoff
         """
@@ -1420,7 +1420,7 @@ class ErrorRecoveryE2EOrchestrator:
             "e2e_duration_ms": 150
         }
     
-    def execute_fallback_handling_e2e(self, operation_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_fallback_handling_e2e(self, operation_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-518: E2E fallback handling - graceful degradation
         """
@@ -1467,7 +1467,7 @@ class ErrorRecoveryE2EOrchestrator:
             "e2e_duration_ms": 120
         }
     
-    def execute_escalation_on_failure_e2e(self, failure_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_escalation_on_failure_e2e(self, failure_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-519: E2E escalation on failure - automatic escalation for critical failures
         """
@@ -1522,7 +1522,7 @@ class ErrorRecoveryE2EOrchestrator:
             "e2e_duration_ms": 130
         }
     
-    def execute_failure_audit_e2e(self, time_range: str) -> Dict[str, Any]:
+    def execute_failure_audit_e2e(self, time_range: str) -> dict[str, Any]:
         """
         QA-520: E2E failure audit - complete audit trail for all failures and recovery
         """
@@ -1591,7 +1591,7 @@ class PerformanceE2EOrchestrator:
         self.organisation_id = organisation_id
         self.performance_data = {}
     
-    def execute_response_time_e2e(self, request_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_response_time_e2e(self, request_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-521: E2E response time - measure and validate response times
         """
@@ -1639,7 +1639,7 @@ class PerformanceE2EOrchestrator:
             "e2e_duration_ms": 85
         }
     
-    def execute_throughput_e2e(self, load_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_throughput_e2e(self, load_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-522: E2E throughput - measure system throughput under load
         """
@@ -1679,7 +1679,7 @@ class PerformanceE2EOrchestrator:
             "e2e_duration_ms": 95
         }
     
-    def execute_resource_utilization_e2e(self, resource_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_resource_utilization_e2e(self, resource_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-523: E2E resource utilization - monitor CPU, memory, and I/O
         """
@@ -1727,7 +1727,7 @@ class PerformanceE2EOrchestrator:
             "e2e_duration_ms": 110
         }
     
-    def execute_scalability_e2e(self, scale_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_scalability_e2e(self, scale_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-524: E2E scalability - validate system scales appropriately
         """
@@ -1768,7 +1768,7 @@ class PerformanceE2EOrchestrator:
             "e2e_duration_ms": 140
         }
     
-    def execute_performance_monitoring_e2e(self, time_range: str) -> Dict[str, Any]:
+    def execute_performance_monitoring_e2e(self, time_range: str) -> dict[str, Any]:
         """
         QA-525: E2E performance monitoring - continuous performance tracking
         """
@@ -1836,7 +1836,7 @@ class SecurityE2EOrchestrator:
         self.organisation_id = organisation_id
         self.security_events = {}
     
-    def execute_authentication_e2e(self, auth_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_authentication_e2e(self, auth_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-526: E2E authentication - complete authentication flow
         """
@@ -1891,7 +1891,7 @@ class SecurityE2EOrchestrator:
             "e2e_duration_ms": 95
         }
     
-    def execute_authorization_e2e(self, authz_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_authorization_e2e(self, authz_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-527: E2E authorization - complete authorization flow
         """
@@ -1939,7 +1939,7 @@ class SecurityE2EOrchestrator:
             "e2e_duration_ms": 75
         }
     
-    def execute_data_encryption_e2e(self, data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_data_encryption_e2e(self, data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-528: E2E data encryption - encrypt data at rest and in transit
         """
@@ -1986,7 +1986,7 @@ class SecurityE2EOrchestrator:
             "e2e_duration_ms": 90
         }
     
-    def execute_audit_trail_e2e(self, time_range: str) -> Dict[str, Any]:
+    def execute_audit_trail_e2e(self, time_range: str) -> dict[str, Any]:
         """
         QA-529: E2E audit trail - complete security audit trail
         """
@@ -2043,7 +2043,7 @@ class SecurityE2EOrchestrator:
             "e2e_duration_ms": 160
         }
     
-    def execute_incident_response_e2e(self, incident_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_incident_response_e2e(self, incident_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-530: E2E security incident response - detect, contain, and resolve security incidents
         """

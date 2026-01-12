@@ -5,7 +5,6 @@ Implements the Wave entity representing an execution phase.
 """
 
 from enum import Enum
-from typing import Optional, List, Dict
 from datetime import datetime
 
 
@@ -19,7 +18,7 @@ class WaveState(Enum):
 
 
 # Global wave registry
-_wave_registry: Dict[str, 'Wave'] = {}
+_wave_registry: dict[str, 'Wave'] = {}
 
 
 class Wave:
@@ -33,9 +32,9 @@ class Wave:
         self,
         id: str,
         program_id: str,
-        name: Optional[str] = None,
-        sequence_number: Optional[int] = None,
-        dependencies: Optional[List[str]] = None
+        name: str | None = None,
+        sequence_number: int | None = None,
+        dependencies: list[str] | None = None
     ):
         """
         Initialize a new Wave.

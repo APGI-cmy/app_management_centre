@@ -11,7 +11,7 @@ Responsibilities:
 - Handle generation failures
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime
 
 
@@ -27,7 +27,7 @@ class RequirementGenerator:
         """Initialize Requirement Generator"""
         self.requirements = {}
     
-    def generate_requirement(self, intent_id: str, clarified_content: str) -> Dict[str, Any]:
+    def generate_requirement(self, intent_id: str, clarified_content: str) -> dict[str, Any]:
         """
         QA-067: Generate requirement from clarified intent
         
@@ -81,7 +81,7 @@ class RequirementGenerator:
             "traceability": traceability
         }
     
-    def include_approval_metadata(self, requirement_id: str) -> Dict[str, Any]:
+    def include_approval_metadata(self, requirement_id: str) -> dict[str, Any]:
         """
         QA-068: Include approval workflow metadata
         
@@ -141,7 +141,7 @@ class RequirementGenerator:
             "approval_metadata": approval_metadata
         }
     
-    def link_to_intent(self, requirement_id: str, intent_id: str) -> Dict[str, Any]:
+    def link_to_intent(self, requirement_id: str, intent_id: str) -> dict[str, Any]:
         """
         QA-069: Link requirement to original intent
         
@@ -183,7 +183,7 @@ class RequirementGenerator:
             "context_preserved": True
         }
     
-    def handle_generation_failure(self, intent_id: str, failure_reason: str) -> Dict[str, Any]:
+    def handle_generation_failure(self, intent_id: str, failure_reason: str) -> dict[str, Any]:
         """
         QA-070: Requirement Generator failure modes
         
@@ -232,7 +232,7 @@ class RequirementGenerator:
         first_sentence = content.split('.')[0] if '.' in content else content
         return first_sentence[:50] + ('...' if len(first_sentence) > 50 else '')
     
-    def _generate_acceptance_criteria(self, content: str) -> List[str]:
+    def _generate_acceptance_criteria(self, content: str) -> list[str]:
         """
         Generate acceptance criteria from content (simplified)
         

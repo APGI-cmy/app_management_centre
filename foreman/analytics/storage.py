@@ -4,7 +4,7 @@ QA Coverage: QA-138
 """
 
 from datetime import datetime, timedelta
-from typing import Dict, Any, List
+from typing import Any
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
 from foreman.analytics.exceptions import DataCorruptionError
@@ -22,7 +22,7 @@ class MetricHistoryStorage:
         if organisation_id not in _history:
             _history[organisation_id] = []
     
-    def get_metric_history(self, metric_name: str, days: int) -> List[Dict]:
+    def get_metric_history(self, metric_name: str, days: int) -> list[dict]:
         """Get metric history for specified days."""
         cutoff = datetime.now(UTC) - timedelta(days=days)
         
@@ -38,14 +38,14 @@ class MetricHistoryStorage:
         filtered.sort(key=lambda x: x.get("timestamp", datetime.min), reverse=True)
         return filtered
     
-    def get_retention_policy(self) -> Dict[str, int]:
+    def get_retention_policy(self) -> dict[str, int]:
         """Get retention policy settings."""
         return {
             "days": 90,
             "archive_after_days": 365
         }
     
-    def validate_metric_data(self, data: Dict) -> bool:
+    def validate_metric_data(self, data: dict) -> bool:
         """Validate metric data structure. QA-141"""
         # Check required fields and types
         if not isinstance(data.get("metric"), str):

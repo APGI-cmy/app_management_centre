@@ -7,7 +7,7 @@ Implements stall detection based on heartbeat monitoring.
 import threading
 import time
 from datetime import datetime, timedelta
-from typing import Optional, Dict, Any
+from typing import Any
 
 
 class StallDetector:
@@ -33,7 +33,7 @@ class StallDetector:
         self._running = False
         self._thread: threading.Thread = None
         self._stalled = False
-        self._stall_info: Optional[Dict[str, Any]] = None
+        self._stall_info: dict[str, Any] | None = None
     
     def start(self) -> None:
         """Start monitoring for stalls."""
@@ -59,7 +59,7 @@ class StallDetector:
         """
         return self._stalled
     
-    def get_stall_info(self) -> Optional[Dict[str, Any]]:
+    def get_stall_info(self) -> dict[str, Any] | None:
         """
         Get information about the current stall.
         

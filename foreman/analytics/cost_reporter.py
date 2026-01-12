@@ -1,6 +1,6 @@
 """Cost Reporter. QA-144"""
 
-from typing import Dict, Any
+from typing import Any
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
 
@@ -11,7 +11,7 @@ class CostReporter:
     def __init__(self, organisation_id: str):
         self.organisation_id = organisation_id
     
-    def generate_build_report(self, build_id: str) -> Dict[str, Any]:
+    def generate_build_report(self, build_id: str) -> dict[str, Any]:
         """Generate per-build report. QA-144"""
         from foreman.analytics.cost_tracker import _build_costs
         
@@ -25,7 +25,7 @@ class CostReporter:
             "model_breakdown": {"gpt-4": cost}
         }
     
-    def generate_builder_report(self, builder_id: str) -> Dict[str, Any]:
+    def generate_builder_report(self, builder_id: str) -> dict[str, Any]:
         """Generate per-builder report. QA-144"""
         # Mock data for ui-builder
         if builder_id == "ui-builder":
@@ -37,7 +37,7 @@ class CostReporter:
             }
         return {"builder_id": builder_id, "total_cost": 0, "builds_count": 0, "avg_cost_per_build": 0}
     
-    def generate_period_report(self, time_period: str) -> Dict[str, Any]:
+    def generate_period_report(self, time_period: str) -> dict[str, Any]:
         """Generate period report. QA-144"""
         from foreman.analytics.cost_tracker import _build_costs
         

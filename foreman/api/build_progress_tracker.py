@@ -11,7 +11,7 @@ Responsibilities:
 - Handle visibility failure modes
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime
 
 
@@ -28,7 +28,7 @@ class BuildProgressTracker:
         self.build_progress_cache = {}
         self.update_subscribers = {}
     
-    def get_progress_data(self, build_id: str) -> Dict[str, Any]:
+    def get_progress_data(self, build_id: str) -> dict[str, Any]:
         """
         QA-089: Render build progress UI (API support)
         
@@ -81,7 +81,7 @@ class BuildProgressTracker:
             "qa_status_summary": qa_status_summary
         }
     
-    def get_build_details(self, build_id: str) -> Dict[str, Any]:
+    def get_build_details(self, build_id: str) -> dict[str, Any]:
         """
         QA-090: Render build details (API support)
         
@@ -137,7 +137,7 @@ class BuildProgressTracker:
             "wave_breakdown": wave_breakdown
         }
     
-    def push_realtime_update(self, build_id: str, update_data: Dict[str, Any]) -> Dict[str, Any]:
+    def push_realtime_update(self, build_id: str, update_data: dict[str, Any]) -> dict[str, Any]:
         """
         QA-091: Real-time build updates (API support)
         
@@ -201,7 +201,7 @@ class BuildProgressTracker:
         if subscriber_id not in self.update_subscribers[build_id]:
             self.update_subscribers[build_id].append(subscriber_id)
     
-    def handle_visibility_failure(self, build_id: str, failure_type: str) -> Dict[str, Any]:
+    def handle_visibility_failure(self, build_id: str, failure_type: str) -> dict[str, Any]:
         """
         QA-092: Build Visibility failure modes
         
@@ -278,7 +278,7 @@ class BuildProgressTracker:
                 "recovery_action": "escalate"
             }
     
-    def update_progress_cache(self, build_id: str, progress_data: Dict[str, Any]) -> None:
+    def update_progress_cache(self, build_id: str, progress_data: dict[str, Any]) -> None:
         """
         Update progress cache (internal helper)
         

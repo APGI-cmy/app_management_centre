@@ -3,7 +3,7 @@ System Health Watchdog (CROSS-06).
 QA Coverage: QA-195 to QA-199
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime
 import uuid
 
@@ -69,7 +69,7 @@ class SystemHealthWatchdog:
             _registered_components[self.organisation_id][component_id]["last_heartbeat"] = datetime.now(UTC)
             _registered_components[self.organisation_id][component_id]["responsive"] = True
     
-    def check_health(self) -> Dict[str, Any]:
+    def check_health(self) -> dict[str, Any]:
         """Check system health. QA-195"""
         components = _registered_components.get(self.organisation_id, {})
         components_status = {}
@@ -105,7 +105,7 @@ class SystemHealthWatchdog:
         
         return health_status
     
-    def monitor_system(self) -> Dict[str, Any]:
+    def monitor_system(self) -> dict[str, Any]:
         """Monitor system health. QA-195"""
         health_status = {
             "status": "HEALTHY",
@@ -118,7 +118,7 @@ class SystemHealthWatchdog:
         
         return health_status
     
-    def detect_failures(self, timeout_multiplier: float = 1.0) -> List[Dict[str, Any]]:
+    def detect_failures(self, timeout_multiplier: float = 1.0) -> list[dict[str, Any]]:
         """Detect system failures. QA-196"""
         failures = []
         components = _registered_components.get(self.organisation_id, {})
@@ -168,14 +168,14 @@ class SystemHealthWatchdog:
         """Verify watchdog independence. QA-197"""
         return True
     
-    def get_disable_prevention_status(self) -> Dict[str, Any]:
+    def get_disable_prevention_status(self) -> dict[str, Any]:
         """Get disable prevention status. QA-197"""
         return {
             "prevention_active": self.disable_prevention_active,
             "description": "Watchdog cannot be disabled by monitored components"
         }
     
-    def configure_reporting(self, interval_seconds: int = 60, escalation_channel: str = "email") -> Dict[str, Any]:
+    def configure_reporting(self, interval_seconds: int = 60, escalation_channel: str = "email") -> dict[str, Any]:
         """Configure reporting settings. QA-198"""
         return {
             "configured": True,
@@ -183,7 +183,7 @@ class SystemHealthWatchdog:
             "channel": escalation_channel
         }
     
-    def generate_status_report(self) -> Dict[str, Any]:
+    def generate_status_report(self) -> dict[str, Any]:
         """Generate status report. QA-198"""
         checks = _health_checks.get(self.organisation_id, [])
         components = _registered_components.get(self.organisation_id, {})
@@ -198,7 +198,7 @@ class SystemHealthWatchdog:
             "alerts": []
         }
     
-    def generate_alerts(self) -> List[Dict[str, Any]]:
+    def generate_alerts(self) -> list[dict[str, Any]]:
         """Generate alerts for unhealthy components. QA-198"""
         alerts = []
         components = _registered_components.get(self.organisation_id, {})
@@ -218,7 +218,7 @@ class SystemHealthWatchdog:
         
         return alerts
     
-    def route_alerts(self, alerts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def route_alerts(self, alerts: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Route alerts to escalation system. QA-198"""
         routed = []
         
@@ -233,7 +233,7 @@ class SystemHealthWatchdog:
         
         return routed
     
-    def check_self_health(self) -> Dict[str, Any]:
+    def check_self_health(self) -> dict[str, Any]:
         """Check watchdog self-health. QA-199"""
         self.last_self_check = datetime.now(UTC)
         
@@ -244,7 +244,7 @@ class SystemHealthWatchdog:
             "last_check": self.last_self_check.isoformat()
         }
     
-    def get_redundancy_status(self) -> Dict[str, Any]:
+    def get_redundancy_status(self) -> dict[str, Any]:
         """Get redundancy status. QA-199"""
         instances = _watchdog_instances.get(self.organisation_id, [])
         
@@ -254,7 +254,7 @@ class SystemHealthWatchdog:
             "active_instance": self.instance_id
         }
     
-    def simulate_failover(self) -> Dict[str, Any]:
+    def simulate_failover(self) -> dict[str, Any]:
         """Simulate failover to redundant instance. QA-199"""
         # Create new instance for failover
         new_instance_id = str(uuid.uuid4())

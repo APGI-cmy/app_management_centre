@@ -13,7 +13,7 @@ Responsibilities:
 - Handle orchestration failures
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime
 
 
@@ -30,7 +30,7 @@ class BuildOrchestrator:
         self.builds = {}
         self.builder_assignments = {}
     
-    def initiate_build(self, requirement_id: str, architecture_ref: str) -> Dict[str, Any]:
+    def initiate_build(self, requirement_id: str, architecture_ref: str) -> dict[str, Any]:
         """
         QA-078: Initiate build from approved requirement
         
@@ -101,7 +101,7 @@ class BuildOrchestrator:
             "waves": waves
         }
     
-    def assign_builder(self, build_id: str, qa_start: int, qa_end: int, builder_type: str) -> Dict[str, Any]:
+    def assign_builder(self, build_id: str, qa_start: int, qa_end: int, builder_type: str) -> dict[str, Any]:
         """
         QA-079: Assign builder to QA range
         
@@ -162,7 +162,7 @@ class BuildOrchestrator:
             "task_created": True
         }
     
-    def monitor_progress(self, build_id: str) -> Dict[str, Any]:
+    def monitor_progress(self, build_id: str) -> dict[str, Any]:
         """
         QA-080: Monitor build progress
         
@@ -213,7 +213,7 @@ class BuildOrchestrator:
             "qa_red": build.get("qa_red", 0)
         }
     
-    def handle_blocking(self, build_id: str, blocker_reason: str, blocker_context: Dict[str, Any]) -> Dict[str, Any]:
+    def handle_blocking(self, build_id: str, blocker_reason: str, blocker_context: dict[str, Any]) -> dict[str, Any]:
         """
         QA-081: Handle build blocking
         
@@ -264,7 +264,7 @@ class BuildOrchestrator:
             "build_paused": True
         }
     
-    def complete_build(self, build_id: str) -> Dict[str, Any]:
+    def complete_build(self, build_id: str) -> dict[str, Any]:
         """
         QA-082: Complete build
         
@@ -327,7 +327,7 @@ class BuildOrchestrator:
             "completion_status": "COMPLETE"
         }
     
-    def handle_orchestration_failure(self, build_id: str, failure_type: str) -> Dict[str, Any]:
+    def handle_orchestration_failure(self, build_id: str, failure_type: str) -> dict[str, Any]:
         """
         QA-083: Build Orchestrator failure modes
         

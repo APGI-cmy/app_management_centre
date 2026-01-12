@@ -13,7 +13,7 @@ Responsibilities:
 - Manage failure modes and state consistency
 """
 
-from typing import Dict, Any, Optional, List
+from typing import Any
 from datetime import datetime, timedelta
 
 
@@ -31,7 +31,7 @@ class ApprovalManager:
         """Initialize Approval Manager"""
         self.approval_requests = {}
     
-    def present_for_approval(self, requirement_id: str, requirement_spec: Dict[str, Any]) -> Dict[str, Any]:
+    def present_for_approval(self, requirement_id: str, requirement_spec: dict[str, Any]) -> dict[str, Any]:
         """
         QA-071: Present requirement for approval
         
@@ -86,7 +86,7 @@ class ApprovalManager:
             "approval_ui_rendered": True
         }
     
-    def handle_approval(self, approval_id: str) -> Dict[str, Any]:
+    def handle_approval(self, approval_id: str) -> dict[str, Any]:
         """
         QA-072: Handle approval (accept)
         
@@ -128,7 +128,7 @@ class ApprovalManager:
             "build_initiation_triggered": True
         }
     
-    def handle_rejection(self, approval_id: str, rejection_reason: str) -> Dict[str, Any]:
+    def handle_rejection(self, approval_id: str, rejection_reason: str) -> dict[str, Any]:
         """
         QA-073: Handle rejection
         
@@ -172,7 +172,7 @@ class ApprovalManager:
             "intent_available_for_rework": True
         }
     
-    def handle_conditional_approval(self, approval_id: str, conditions: List[str]) -> Dict[str, Any]:
+    def handle_conditional_approval(self, approval_id: str, conditions: list[str]) -> dict[str, Any]:
         """
         QA-074: Handle conditional approval
         
@@ -208,7 +208,7 @@ class ApprovalManager:
             "gated_progression": True
         }
     
-    def detect_timeout(self, approval_id: str) -> Dict[str, Any]:
+    def detect_timeout(self, approval_id: str) -> dict[str, Any]:
         """
         QA-075: Approval timeout detection
         
@@ -248,7 +248,7 @@ class ApprovalManager:
             "reminder_sent": silence_detected
         }
     
-    def handle_memory_proposal_approval(self, proposal_id: str, proposal_content: Dict[str, Any]) -> Dict[str, Any]:
+    def handle_memory_proposal_approval(self, proposal_id: str, proposal_content: dict[str, Any]) -> dict[str, Any]:
         """
         QA-076: Memory write proposal approval
         
@@ -296,7 +296,7 @@ class ApprovalManager:
             "write_execution_pending": True
         }
     
-    def handle_failure(self, approval_id: str, failure_type: str) -> Dict[str, Any]:
+    def handle_failure(self, approval_id: str, failure_type: str) -> dict[str, Any]:
         """
         QA-077: Approval Manager failure modes
         

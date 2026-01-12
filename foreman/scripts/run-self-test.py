@@ -28,8 +28,7 @@ import json
 import os
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 import argparse
 
 
@@ -52,7 +51,7 @@ class ForemanSelfTest:
         
         # Test results storage
         self.results = {
-            "test_timestamp": datetime.now(timezone.utc).isoformat(),
+            "test_timestamp": datetime.now(UTC).isoformat(),
             "foreman_version": self.FOREMAN_VERSION,
             "overall_status": "PASS",
             "subsystems": [],
@@ -83,14 +82,14 @@ class ForemanSelfTest:
             }.get(level, "  ")
             print(f"{prefix} {message}")
     
-    def check_file_exists(self, file_path: Path) -> Tuple[bool, str]:
+    def check_file_exists(self, file_path: Path) -> tuple[bool, str]:
         """Check if file exists and is readable"""
         if not file_path.exists():
             return False, "File does not exist"
         if not file_path.is_file():
             return False, "Path is not a file"
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path) as f:
                 content = f.read()
                 if len(content) < self.MIN_FILE_SIZE:
                     return False, "File appears to be empty or too small"
@@ -98,14 +97,14 @@ class ForemanSelfTest:
         except Exception as e:
             return False, f"Error reading file: {str(e)}"
     
-    def validate_json_file(self, file_path: Path) -> Tuple[bool, str, dict]:
+    def validate_json_file(self, file_path: Path) -> tuple[bool, str, dict]:
         """Validate JSON file and return parsed data"""
         exists, msg = self.check_file_exists(file_path)
         if not exists:
             return False, msg, {}
         
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path) as f:
                 data = json.load(f)
             return True, "Valid JSON", data
         except json.JSONDecodeError as e:
@@ -113,8 +112,8 @@ class ForemanSelfTest:
         except Exception as e:
             return False, f"Error parsing JSON: {str(e)}", {}
     
-    def validate_subsystem(self, name: str, required_files: List[str], 
-                          json_files: List[str] = None) -> Dict:
+    def validate_subsystem(self, name: str, required_files: list[str], 
+                          json_files: list[str] = None) -> dict:
         """Validate a subsystem by checking required files"""
         self.log(f"Validating {name}...", "INFO")
         
@@ -191,7 +190,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_core_governance(self) -> Dict:
+    def test_core_governance(self) -> dict:
         """Test Core Governance System"""
         required_files = [
             "foreman/identity.md",
@@ -217,7 +216,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_architecture_system(self) -> Dict:
+    def test_architecture_system(self) -> dict:
         """Test Architecture System"""
         required_files = [
             "foreman/minimum-architecture-template.md",
@@ -244,7 +243,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_builder_agents(self) -> Dict:
+    def test_builder_agents(self) -> dict:
         """Test Builder Agent System"""
         required_files = [
             "foreman/builder/ui-builder-spec.md",
@@ -294,7 +293,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_compliance_engine(self) -> Dict:
+    def test_compliance_engine(self) -> dict:
         """Test Compliance Engine"""
         required_files = [
             "foreman/compliance/compliance-reference-map.md",
@@ -323,7 +322,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_qa_system(self) -> Dict:
+    def test_qa_system(self) -> dict:
         """Test QA & QA-of-QA System"""
         required_files = [
             "foreman/qa-governance.md",
@@ -345,7 +344,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_runtime_continuity(self) -> Dict:
+    def test_runtime_continuity(self) -> dict:
         """Test Runtime & Continuity System"""
         required_files = [
             "foreman/runtime-agent-plan.md",
@@ -381,7 +380,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_change_management(self) -> Dict:
+    def test_change_management(self) -> dict:
         """Test Change Management System"""
         required_files = [
             "foreman/change-management/change-policy.md",
@@ -415,7 +414,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_upgrade_continuity(self) -> Dict:
+    def test_upgrade_continuity(self) -> dict:
         """Test Upgrade & Continuity System"""
         required_files = [
             "foreman/upgrade/upgrade-cycle.md",
@@ -434,7 +433,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_test_environment(self) -> Dict:
+    def test_test_environment(self) -> dict:
         """Test Test Environment System"""
         required_files = [
             "foreman/test-environment/test-env-architecture.md",
@@ -447,7 +446,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_orchestration_pipeline(self) -> Dict:
+    def test_orchestration_pipeline(self) -> dict:
         """Test Orchestration & Build Pipeline"""
         required_files = [
             "foreman/task-distribution-rules.md",
@@ -472,7 +471,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_platform_standards(self) -> Dict:
+    def test_platform_standards(self) -> dict:
         """Test Platform & UI Standards"""
         required_files = [
             "foreman/platform/watchdog-standard-spec.md",
@@ -487,7 +486,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_innovation_admin(self) -> Dict:
+    def test_innovation_admin(self) -> dict:
         """Test Innovation & Admin Intelligence"""
         required_files = [
             "foreman/admin/admin-innovation-chat-spec.md",
@@ -508,7 +507,7 @@ class ForemanSelfTest:
         
         return subsystem
     
-    def test_memory_fabric(self) -> Dict:
+    def test_memory_fabric(self) -> dict:
         """Test Unified Memory Fabric with integrated memory client"""
         # Try to import memory client
         try:
@@ -595,11 +594,11 @@ class ForemanSelfTest:
                 subsystem["details"] += f", Write Test: PASS (ID: {entry_id[:20]}...)"
                 
                 # Clean up test file
-                test_file = memory_dir / 'foreman' / f'events-{datetime.now(timezone.utc).strftime("%Y-%m-%d")}.json'
+                test_file = memory_dir / 'foreman' / f'events-{datetime.now(UTC).strftime("%Y-%m-%d")}.json'
                 if test_file.exists():
                     import tempfile
                     # Read, remove test entry, and rewrite
-                    with open(test_file, 'r') as f:
+                    with open(test_file) as f:
                         data = json.load(f)
                     data['entries'] = [e for e in data.get('entries', []) if e.get('id') != entry_id]
                     if len(data['entries']) == 0:
@@ -887,7 +886,7 @@ Critical systems are missing or broken. Address failures before proceeding.
 
 """
         
-        md += """---
+        md += f"""---
 
 ## Compliance Status
 
@@ -900,8 +899,8 @@ Critical systems are missing or broken. Address failures before proceeding.
 
 ## Test Execution Details
 
-**Repository Path:** `{repo_path}`  
-**Report Generated:** {timestamp}  
+**Repository Path:** `{self.repo_root}`  
+**Report Generated:** {datetime.now(UTC).isoformat()}  
 
 For detailed specifications, see:
 - `foreman/self-test/self-test-spec.md`
@@ -910,10 +909,7 @@ For detailed specifications, see:
 ---
 
 **End of Self-Test Report**
-""".format(
-            repo_path=self.repo_root,
-            timestamp=datetime.now(timezone.utc).isoformat()
-        )
+"""
         
         return md
 

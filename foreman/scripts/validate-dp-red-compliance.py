@@ -12,7 +12,6 @@ import json
 import sys
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Tuple, Set, Optional
 import argparse
 
 
@@ -40,7 +39,7 @@ class DPREDValidator:
         self.registry = None
         self.current_phase = None
     
-    def _parse_iso_date(self, date_str: str) -> Optional[datetime]:
+    def _parse_iso_date(self, date_str: str) -> datetime | None:
         """Parse ISO-8601 date string to datetime object.
         
         Args:
@@ -54,7 +53,7 @@ class DPREDValidator:
         except (ValueError, AttributeError):
             return None
     
-    def _calculate_age_days(self, date_str: str) -> Optional[int]:
+    def _calculate_age_days(self, date_str: str) -> int | None:
         """Calculate age in days from ISO-8601 date string to now.
         
         Args:
@@ -68,7 +67,7 @@ class DPREDValidator:
             return None
         return (datetime.now().astimezone() - dt).days
         
-    def validate(self) -> Tuple[bool, Dict]:
+    def validate(self) -> tuple[bool, dict]:
         """Run all validations and return results."""
         
         # Load files
@@ -97,7 +96,7 @@ class DPREDValidator:
             return False
         
         try:
-            with open(self.registry_path, 'r') as f:
+            with open(self.registry_path) as f:
                 self.registry = json.load(f)
             return True
         except json.JSONDecodeError as e:
@@ -114,7 +113,7 @@ class DPREDValidator:
             return False
         
         try:
-            with open(self.phase_file, 'r') as f:
+            with open(self.phase_file) as f:
                 phase_data = json.load(f)
             self.current_phase = phase_data.get('phase')
             if not self.current_phase:
@@ -378,7 +377,7 @@ class DPREDValidator:
                     f"Found {len(entries)} entries. All tests must be GREEN before build phase."
                 )
     
-    def _get_failing_tests(self) -> Optional[Set[str]]:
+    def _get_failing_tests(self) -> set[str] | None:
         """Get list of currently failing tests.
         
         Returns None if test execution is not available or fails.
@@ -398,7 +397,7 @@ class DPREDValidator:
         
         return None
     
-    def _generate_report(self) -> Dict:
+    def _generate_report(self) -> dict:
         """Generate validation report."""
         entries = self.registry.get('entries', []) if self.registry else []
         
@@ -425,7 +424,7 @@ class DPREDValidator:
         return report
 
 
-def print_human_readable(report: Dict):
+def print_human_readable(report: dict):
     """Print human-readable report."""
     print("=" * 80)
     print("DP-RED COMPLIANCE VALIDATION REPORT")
