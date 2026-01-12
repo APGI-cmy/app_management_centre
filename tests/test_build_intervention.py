@@ -123,7 +123,7 @@ class TestAlertIssuance:
         
         assert alert_file.exists()
         
-        with open(alert_file, 'r') as f:
+        with open(alert_file) as f:
             alert_data = json.load(f)
         
         assert alert_data['alert_id'] == alert_id
@@ -241,7 +241,7 @@ class TestEmergencyStop:
         
         assert stop_file.exists()
         
-        with open(stop_file, 'r') as f:
+        with open(stop_file) as f:
             stop_data = json.load(f)
         
         assert stop_data['stop_id'] == stop_id
@@ -413,7 +413,7 @@ class TestResumption:
         
         # Load from disk
         stop_file = intervention_controller.intervention_log_dir / f"{stop_id}.json"
-        with open(stop_file, 'r') as f:
+        with open(stop_file) as f:
             stop_data = json.load(f)
         
         assert stop_data['status'] == 'resumed'

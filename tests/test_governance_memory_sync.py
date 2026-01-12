@@ -53,7 +53,7 @@ class TestGovernanceVersionTracking:
         """
         version_file = project_root / 'memory' / '.governance-version.json'
         
-        with open(version_file, 'r') as f:
+        with open(version_file) as f:
             version_data = json.load(f)
         
         required_fields = ['version', 'timestamp', 'checksum', 'schema_version', 'files']
@@ -70,7 +70,7 @@ class TestGovernanceVersionTracking:
         """
         version_file = project_root / 'memory' / '.governance-version.json'
         
-        with open(version_file, 'r') as f:
+        with open(version_file) as f:
             version_data = json.load(f)
         
         version = version_data['version']
@@ -91,7 +91,7 @@ class TestGovernanceVersionTracking:
         """
         version_file = project_root / 'memory' / '.governance-version.json'
         
-        with open(version_file, 'r') as f:
+        with open(version_file) as f:
             version_data = json.load(f)
         
         files = version_data.get('files', [])
@@ -118,7 +118,7 @@ class TestGovernanceVersionTracking:
             "Governance version schema must exist at memory/schema/governance-version.json"
         
         # Schema must be valid JSON
-        with open(schema_file, 'r') as f:
+        with open(schema_file) as f:
             schema = json.load(f)
         
         assert 'schema' in schema, \
@@ -141,7 +141,7 @@ class TestMemoryStateTransitions:
         assert contract_file.exists(), \
             "Memory sync contract must exist"
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         required_states = ['UNINITIALIZED', 'LOADING', 'LOADED', 'STALE', 'INVALID']
@@ -158,7 +158,7 @@ class TestMemoryStateTransitions:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Check for state transition documentation
@@ -190,7 +190,7 @@ class TestChangeDetection:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must have version comparison logic
@@ -207,7 +207,7 @@ class TestChangeDetection:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must specify checksum algorithm
@@ -222,7 +222,7 @@ class TestChangeDetection:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must document when memory becomes stale
@@ -244,7 +244,7 @@ class TestAtomicReload:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must require atomic reload
@@ -261,7 +261,7 @@ class TestAtomicReload:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must prohibit partial loads
@@ -278,7 +278,7 @@ class TestAtomicReload:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must require logging
@@ -298,7 +298,7 @@ class TestInvalidationTracking:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must define InvalidationEvent
@@ -319,7 +319,7 @@ class TestInvalidationTracking:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         reasons = ['version_mismatch', 'checksum_mismatch', 'manual', 'initialization']
@@ -336,7 +336,7 @@ class TestInvalidationTracking:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'audit' in content.lower(), \
@@ -355,7 +355,7 @@ class TestSoftStopBehavior:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'soft stop' in content.lower() or 'SOFT STOP' in content, \
@@ -369,7 +369,7 @@ class TestSoftStopBehavior:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must document transition to STALE
@@ -389,7 +389,7 @@ class TestAPIExtensions:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         api_methods = [
@@ -413,7 +413,7 @@ class TestAPIExtensions:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'getMemoryState' in content, \
@@ -432,7 +432,7 @@ class TestIntegrationPatterns:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'startup' in content.lower() or 'initialization' in content.lower(), \
@@ -446,7 +446,7 @@ class TestIntegrationPatterns:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'periodic' in content.lower() or 'background' in content.lower(), \
@@ -460,7 +460,7 @@ class TestIntegrationPatterns:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'UI' in content or 'display' in content.lower(), \
@@ -479,7 +479,7 @@ class TestAcceptanceCriteria:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'detect' in content.lower() and 'change' in content.lower(), \
@@ -493,7 +493,7 @@ class TestAcceptanceCriteria:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'reload' in content.lower(), \
@@ -509,7 +509,7 @@ class TestAcceptanceCriteria:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         assert 'explicit' in content.lower() and 'invalidation' in content.lower(), \
@@ -525,7 +525,7 @@ class TestAcceptanceCriteria:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         states = ['LOADED', 'STALE', 'INVALID']
@@ -549,7 +549,7 @@ class TestComplianceAndScope:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         # Must maintain read-only
@@ -564,7 +564,7 @@ class TestComplianceAndScope:
         """
         contract_file = project_root / 'fm' / 'governance' / 'MEMORY_SYNC_CONTRACT.md'
         
-        with open(contract_file, 'r') as f:
+        with open(contract_file) as f:
             content = f.read()
         
         out_of_scope_items = [

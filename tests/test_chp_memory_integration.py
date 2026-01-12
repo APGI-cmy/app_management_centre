@@ -576,7 +576,7 @@ def cleanup_test_chp_proposals():
                 file_path = os.path.join(proposals_dir, file)
                 try:
                     # Only delete test proposals
-                    with open(file_path, 'r') as f:
+                    with open(file_path) as f:
                         data = json.load(f)
                         if data.get('proposer') == 'CHP' and 'test' in data.get('description', '').lower():
                             os.remove(file_path)

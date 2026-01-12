@@ -18,7 +18,7 @@ These tests define the advanced analytics capabilities including:
 
 import pytest
 from datetime import datetime, timedelta
-from typing import Dict, List, Any
+from typing import Any
 
 
 @pytest.mark.wave2
@@ -53,7 +53,7 @@ class TestPredictiveModeling:
         assert "model_id" in model_state, "Model ID should be generated"
         assert model_state["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _initialize_predictive_model(self, config: Dict[str, Any]) -> Dict[str, Any]:
+    def _initialize_predictive_model(self, config: dict[str, Any]) -> dict[str, Any]:
         """Helper: Initialize a predictive model"""
         if not config.get("model_type"):
             raise ValueError("model_type is required")
@@ -97,7 +97,7 @@ class TestPredictiveModeling:
         assert training_result["samples_count"] == 3, "Sample count should match training data"
         assert training_result["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _train_predictive_model(self, model_id: str, data: Dict[str, Any]) -> Dict[str, Any]:
+    def _train_predictive_model(self, model_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Helper: Train a predictive model"""
         if not data.get("features") or not data.get("labels"):
             raise ValueError("features and labels are required")
@@ -144,7 +144,7 @@ class TestPredictiveModeling:
         assert 0.0 <= prediction["confidence"] <= 1.0, "Confidence should be between 0 and 1"
         assert prediction["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _predict_with_model(self, model_id: str, input_data: Dict[str, Any]) -> Dict[str, Any]:
+    def _predict_with_model(self, model_id: str, input_data: dict[str, Any]) -> dict[str, Any]:
         """Helper: Generate prediction"""
         if not input_data.get("features"):
             raise ValueError("features are required")
@@ -187,7 +187,7 @@ class TestPredictiveModeling:
         assert evaluation["baseline_comparison"] in ["better", "worse", "equal"], "Valid comparison result"
         assert evaluation["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _evaluate_model(self, model_id: str, test_data: Dict[str, Any], baseline: Dict[str, float]) -> Dict[str, Any]:
+    def _evaluate_model(self, model_id: str, test_data: dict[str, Any], baseline: dict[str, float]) -> dict[str, Any]:
         """Helper: Evaluate model performance"""
         if not test_data.get("features") or not test_data.get("labels"):
             raise ValueError("features and labels are required")
@@ -240,7 +240,7 @@ class TestPredictiveModeling:
         assert version_state["best_version"] == "1.1", "Best performing version identified"
         assert version_state["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _manage_model_versions(self, model_id: str, versions: List[Dict[str, Any]], organisation_id: str) -> Dict[str, Any]:
+    def _manage_model_versions(self, model_id: str, versions: list[dict[str, Any]], organisation_id: str) -> dict[str, Any]:
         """Helper: Manage model versions"""
         if not versions:
             raise ValueError("versions list cannot be empty")
@@ -293,7 +293,7 @@ class TestTrendAnalysis:
         assert trend_detector["window_size"] == 7, "Window size configured"
         assert trend_detector["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _initialize_trend_detection(self, config: Dict[str, Any]) -> Dict[str, Any]:
+    def _initialize_trend_detection(self, config: dict[str, Any]) -> dict[str, Any]:
         """Helper: Initialize trend detection"""
         if not config.get("algorithm"):
             raise ValueError("algorithm is required")
@@ -346,7 +346,7 @@ class TestTrendAnalysis:
         assert 0.0 <= trend_analysis["confidence"] <= 1.0, "Confidence should be valid"
         assert trend_analysis["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _analyze_historical_trend(self, data: Dict[str, Any]) -> Dict[str, Any]:
+    def _analyze_historical_trend(self, data: dict[str, Any]) -> dict[str, Any]:
         """Helper: Analyze historical trend"""
         if not data.get("data_points"):
             raise ValueError("data_points are required")
@@ -408,7 +408,7 @@ class TestTrendAnalysis:
         assert monitoring_result["alert_generated"] is True, "Alert should be generated for anomaly"
         assert monitoring_result["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _monitor_realtime_trend(self, config: Dict[str, Any], data_point: Dict[str, Any]) -> Dict[str, Any]:
+    def _monitor_realtime_trend(self, config: dict[str, Any], data_point: dict[str, Any]) -> dict[str, Any]:
         """Helper: Monitor real-time trend"""
         if not config.get("organisation_id"):
             raise ValueError("organisation_id is required in config")
@@ -469,7 +469,7 @@ class TestTrendAnalysis:
         assert "csv" in visualization["export_formats"], "CSV export available"
         assert visualization["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _generate_trend_visualization(self, data: Dict[str, Any]) -> Dict[str, Any]:
+    def _generate_trend_visualization(self, data: dict[str, Any]) -> dict[str, Any]:
         """Helper: Generate trend visualization"""
         if not data.get("data_points"):
             raise ValueError("data_points are required")
@@ -520,7 +520,7 @@ class TestTrendAnalysis:
         assert "worst_case" in forecast["scenarios"], "Worst case scenario"
         assert forecast["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _generate_trend_forecast(self, request: Dict[str, Any]) -> Dict[str, Any]:
+    def _generate_trend_forecast(self, request: dict[str, Any]) -> dict[str, Any]:
         """Helper: Generate trend forecast"""
         if not request.get("historical_data"):
             raise ValueError("historical_data is required")
@@ -591,7 +591,7 @@ class TestInsightGeneration:
         assert all(0.0 <= i["score"] <= 1.0 for i in insights), "Scores should be valid"
         assert all(i["organisation_id"] == "test_org_001" for i in insights), "Tenant isolation maintained"
     
-    def _extract_insights(self, data: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def _extract_insights(self, data: dict[str, Any]) -> list[dict[str, Any]]:
         """Helper: Extract insights from data"""
         if not data.get("metrics"):
             raise ValueError("metrics are required")
@@ -650,7 +650,7 @@ class TestInsightGeneration:
         assert validation["false_positive_risk"] == "low", "Risk should be low"
         assert validation["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _validate_insight(self, insight: Dict[str, Any]) -> Dict[str, Any]:
+    def _validate_insight(self, insight: dict[str, Any]) -> dict[str, Any]:
         """Helper: Validate insight"""
         if not insight.get("organisation_id"):
             raise ValueError("organisation_id is required")
@@ -723,7 +723,7 @@ class TestInsightGeneration:
         assert prioritized[0]["priority_score"] > prioritized[1]["priority_score"], "Scores should be ordered"
         assert all(i["organisation_id"] == "test_org_001" for i in prioritized), "Tenant isolation maintained"
     
-    def _prioritize_insights(self, insights: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def _prioritize_insights(self, insights: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Helper: Prioritize insights"""
         if not insights:
             return []
@@ -779,7 +779,7 @@ class TestInsightGeneration:
         assert "affected_metrics" in presentation["context"], "Metrics context"
         assert presentation["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _generate_insight_presentation(self, insight: Dict[str, Any]) -> Dict[str, Any]:
+    def _generate_insight_presentation(self, insight: dict[str, Any]) -> dict[str, Any]:
         """Helper: Generate insight presentation"""
         if not insight.get("organisation_id"):
             raise ValueError("organisation_id is required")
@@ -838,7 +838,7 @@ class TestInsightGeneration:
         assert len(actionability["tracking_metrics"]) > 0, "Metrics for outcome tracking"
         assert actionability["organisation_id"] == "test_org_001", "Tenant isolation maintained"
     
-    def _generate_actionable_recommendations(self, insight: Dict[str, Any]) -> Dict[str, Any]:
+    def _generate_actionable_recommendations(self, insight: dict[str, Any]) -> dict[str, Any]:
         """Helper: Generate actionable recommendations"""
         if not insight.get("organisation_id"):
             raise ValueError("organisation_id is required")

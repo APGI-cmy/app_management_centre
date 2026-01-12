@@ -505,7 +505,7 @@ class TestProposalIntegration:
             "Proposal schema must exist at /memory/schema/memory-proposal.json"
         
         # Validate it's valid JSON
-        with open(schema_path, 'r', encoding='utf-8') as f:
+        with open(schema_path, encoding='utf-8') as f:
             schema = json.load(f)
         
         assert 'schema' in schema, \
@@ -566,7 +566,7 @@ def cleanup_test_proposals():
                 file_path = os.path.join(proposals_dir, file)
                 try:
                     # Only delete test proposals
-                    with open(file_path, 'r') as f:
+                    with open(file_path) as f:
                         data = json.load(f)
                         if data.get('proposed_by') == 'test-agent':
                             os.remove(file_path)

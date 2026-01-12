@@ -220,7 +220,7 @@ class TestAlertReader:
         reader = AlertReader(alert_store_path=str(alert_store_file))
         
         # Read original content
-        with open(alert_store_file, 'r') as f:
+        with open(alert_store_file) as f:
             original_content = f.read()
         
         # Perform multiple read operations
@@ -230,7 +230,7 @@ class TestAlertReader:
         reader.get_alert_summary()
         
         # Verify content unchanged
-        with open(alert_store_file, 'r') as f:
+        with open(alert_store_file) as f:
             current_content = f.read()
         
         assert current_content == original_content

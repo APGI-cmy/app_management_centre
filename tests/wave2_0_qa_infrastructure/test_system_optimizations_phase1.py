@@ -10,7 +10,6 @@ Build-to-Green Status: COMPLETE
 """
 
 import pytest
-from typing import Dict, Any
 import time
 
 # Import cache module

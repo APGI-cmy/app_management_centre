@@ -11,7 +11,6 @@ Build-to-Green Target: All 11 tests must pass
 """
 
 import pytest
-from typing import Dict, Any
 
 
 class TestBuildVisibilityUI:

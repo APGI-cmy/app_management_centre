@@ -222,7 +222,7 @@ class TestExecutionLayerIntegration:
         plan_build = repo_root / "plan-build.py"
         assert plan_build.exists(), "plan-build.py must exist"
         
-        with open(plan_build, 'r') as f:
+        with open(plan_build) as f:
             content = f.read()
         
         # Check if it calls governance gate
@@ -234,7 +234,7 @@ class TestExecutionLayerIntegration:
         create_tasks = repo_root / "create-build-tasks.py"
         assert create_tasks.exists(), "create-build-tasks.py must exist"
         
-        with open(create_tasks, 'r') as f:
+        with open(create_tasks) as f:
             content = f.read()
         
         # Check if it tracks governance lineage
@@ -246,7 +246,7 @@ class TestExecutionLayerIntegration:
         validate_repo = repo_root / "validate-repository.py"
         assert validate_repo.exists(), "validate-repository.py must exist"
         
-        with open(validate_repo, 'r') as f:
+        with open(validate_repo) as f:
             content = f.read()
         
         # Check if it validates governance execution
@@ -294,7 +294,7 @@ class TestGovernanceEnforcementEnd2End:
         
         # Verify JSON is valid
         import json
-        with open(gate_evidence[0], 'r') as f:
+        with open(gate_evidence[0]) as f:
             evidence = json.load(f)
         
         assert 'validation_id' in evidence, "Evidence must have validation_id"

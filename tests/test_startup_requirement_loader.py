@@ -89,7 +89,7 @@ class TestRequirementsSchema:
             "startup-requirements.schema.json must exist"
         
         # Validate it's valid JSON
-        with open(schema_path, 'r') as f:
+        with open(schema_path) as f:
             schema = json.load(f)
         
         assert "type" in schema, "Schema must define type"
@@ -108,7 +108,7 @@ class TestRequirementsSchema:
             "startup-requirements.json must exist"
         
         # Validate it's valid JSON
-        with open(req_path, 'r') as f:
+        with open(req_path) as f:
             requirements = json.load(f)
         
         assert "version" in requirements, "Requirements must have version"
@@ -123,7 +123,7 @@ class TestRequirementsSchema:
         """
         req_path = project_root / "lib" / "startup" / "startup-requirements.json"
         
-        with open(req_path, 'r') as f:
+        with open(req_path) as f:
             requirements = json.load(f)
         
         for req in requirements["requirements"]:
@@ -153,7 +153,7 @@ class TestRequirementsSchema:
         """
         req_path = project_root / "lib" / "startup" / "startup-requirements.json"
         
-        with open(req_path, 'r') as f:
+        with open(req_path) as f:
             requirements = json.load(f)
         
         memory_reqs = [r for r in requirements["requirements"] if r["category"] == "memory"]
@@ -345,7 +345,7 @@ class TestAcceptanceCriteria:
         req_path = project_root / "lib" / "startup" / "startup-requirements.json"
         assert req_path.exists()
         
-        with open(req_path, 'r') as f:
+        with open(req_path) as f:
             requirements = json.load(f)
         
         assert "requirements" in requirements
