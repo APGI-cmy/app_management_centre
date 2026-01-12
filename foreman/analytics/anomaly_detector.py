@@ -1,6 +1,5 @@
 """Cost Anomaly Detector. QA-143"""
 
-from typing import List, Dict
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
 
@@ -28,7 +27,7 @@ class CostAnomalyDetector:
             return sum(baseline_costs) / len(baseline_costs) if baseline_costs else 10.0
         return 10.0
     
-    def detect_anomalies(self) -> List[Dict]:
+    def detect_anomalies(self) -> list[dict]:
         """Detect cost anomalies. QA-143"""
         from foreman.analytics.cost_tracker import _build_costs
         

@@ -4,7 +4,7 @@ QA Coverage: QA-137 to QA-141
 """
 
 from datetime import datetime
-from typing import Dict, Any, List
+from typing import Any
 import time
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
@@ -46,7 +46,7 @@ class MetricsEngine:
         if organisation_id not in _metrics_data:
             _metrics_data[organisation_id] = []
     
-    def calculate_aggregates(self, time_period: str) -> Dict[str, Any]:
+    def calculate_aggregates(self, time_period: str) -> dict[str, Any]:
         """Calculate aggregate metrics with caching. QA-137"""
         cache_key = f"aggregates_{time_period}"
         
@@ -74,7 +74,7 @@ class MetricsEngine:
         _cache[self.organisation_id][cache_key] = result
         return result
     
-    def get_source_data(self) -> List[Dict]:
+    def get_source_data(self) -> list[dict]:
         """Get source data for validation. QA-137"""
         return _metrics_data.get(self.organisation_id, [])
     

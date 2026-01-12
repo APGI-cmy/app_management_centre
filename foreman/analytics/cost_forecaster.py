@@ -1,6 +1,6 @@
 """Cost Forecaster. QA-145"""
 
-from typing import Dict, Any
+from typing import Any
 from datetime import datetime, timedelta
 
 
@@ -10,7 +10,7 @@ class CostForecaster:
     def __init__(self, organisation_id: str):
         self.organisation_id = organisation_id
     
-    def analyze_trend(self, days: int) -> Dict[str, Any]:
+    def analyze_trend(self, days: int) -> dict[str, Any]:
         """Analyze cost trend. QA-145"""
         return {
             "direction": "increasing",
@@ -18,7 +18,7 @@ class CostForecaster:
             "r_squared": 0.85
         }
     
-    def project_cost(self, days_ahead: int) -> Dict[str, Any]:
+    def project_cost(self, days_ahead: int) -> dict[str, Any]:
         """Project future cost. QA-145"""
         projected = 24.50 + (days_ahead * 0.5)
         return {

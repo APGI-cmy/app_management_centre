@@ -3,7 +3,7 @@ Escalation Manager.
 QA Coverage: QA-208 to QA-210
 """
 
-from typing import Dict, Any
+from typing import Any
 
 _escalations = {}
 
@@ -17,8 +17,8 @@ class EscalationManager:
         if self.organisation_id not in _escalations:
             _escalations[self.organisation_id] = {}
     
-    def create_escalation(self, issue: Dict, severity: str = "HIGH", 
-                         context: Dict = None) -> Dict[str, Any]:
+    def create_escalation(self, issue: dict, severity: str = "HIGH", 
+                         context: dict = None) -> dict[str, Any]:
         """Create escalation. QA-208"""
         escalation_id = f"esc-{len(_escalations[self.organisation_id])+1}"
         
@@ -35,7 +35,7 @@ class EscalationManager:
         
         return escalation
     
-    def route_escalation(self, escalation_id: str, routing_rules: Dict = None) -> Dict[str, Any]:
+    def route_escalation(self, escalation_id: str, routing_rules: dict = None) -> dict[str, Any]:
         """Route escalation to appropriate handler. QA-209"""
         escalation = _escalations.get(self.organisation_id, {}).get(escalation_id, {})
         
@@ -50,7 +50,7 @@ class EscalationManager:
             "channel": "inbox"
         }
     
-    def resolve_escalation(self, escalation_id: str, resolution: str, resolver: str = None) -> Dict[str, Any]:
+    def resolve_escalation(self, escalation_id: str, resolution: str, resolver: str = None) -> dict[str, Any]:
         """Resolve escalation. QA-210"""
         escalation = _escalations.get(self.organisation_id, {}).get(escalation_id, {})
         

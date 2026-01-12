@@ -29,6 +29,40 @@ governance:
     repository: MaturionISMS/maturion-foreman-governance
     reference: main
   
+  # Application-Specific Governance Bindings
+  # These documents govern FM and builder operations in this repository
+  bindings:
+    # Application Repository Bindings (Section 3.1)
+    - id: fm-authority-model
+      path: governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
+      role: fm-execution-authority
+    
+    - id: builder-bindings
+      path: governance/canon/BUILDER_CONTRACT_BINDING_CHECKLIST.md
+      role: builder-requirements
+    
+    - id: execution-bootstrap-protocol
+      path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md
+      role: execution-discipline
+    
+    # FM-Specific Bindings (Section 4.1)
+    - id: fm-builder-appointment
+      path: governance/canon/FM_BUILDER_APPOINTMENT_PROTOCOL.md
+      role: builder-appointment-authority
+    
+    - id: fm-governance-loading
+      path: governance/canon/FM_GOVERNANCE_LOADING_PROTOCOL.md
+      role: governance-loading-protocol
+    
+    - id: fm-runtime-enforcement
+      path: governance/canon/FM_RUNTIME_ENFORCEMENT_AND_AWARENESS_MODEL.md
+      role: fm-runtime-enforcement
+    
+    # Builder-Specific Bindings (Section 4.2)
+    - id: build-tree-model
+      path: governance/canon/BUILD_TREE_EXECUTION_MODEL.md
+      role: build-tree-execution
+  
   # Tier-0 Canonical Governance (Constitutional Authority)
   # These 14 documents MUST be loaded and validated before ANY execution
   # Source: governance/TIER_0_CANON_MANIFEST.json

@@ -3,13 +3,13 @@ Evidence Renderer.
 QA Coverage: QA-207
 """
 
-from typing import Dict, Any
+from typing import Any
 
 
 class EvidenceRenderer:
     """Renders evidence for UI display."""
     
-    def render_evidence(self, evidence: Dict) -> Dict[str, Any]:
+    def render_evidence(self, evidence: dict) -> dict[str, Any]:
         """
         Render evidence with formatting and immutability verification.
         QA-207
@@ -38,7 +38,7 @@ class EvidenceRenderer:
         """Format content for display."""
         return f"<div class='evidence-content'>{content}</div>"
     
-    def _format_metadata(self, metadata: Dict[str, Any]) -> Dict[str, Any]:
+    def _format_metadata(self, metadata: dict[str, Any]) -> dict[str, Any]:
         """Format metadata for display."""
         return {
             "formatted": True,

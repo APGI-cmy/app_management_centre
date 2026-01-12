@@ -292,12 +292,95 @@ The **Execution Bootstrap Protocol** mandates 7-step verification before handove
 
 ---
 
+## .agent File Governance Artifacts (2026-01-12) - NEW
+
+**Status**: ACTIVE - Layer-Down Complete  
+**Version**: 1.0.0  
+**Compliance Deadline**: Immediate (HIGH Priority)  
+**Authority**: maturion-foreman-governance PR #934 (merged)
+
+### Layer-Down Summary
+
+The **. agent File Governance Framework** mandates 4 canonical documents for defining, validating, and maintaining repository `.agent` files. These documents are now mandatory for all FPC-compliant repositories.
+
+**4 Canonical Documents Layered Down**:
+
+| Document | Location | Size | Purpose |
+|----------|----------|------|---------|
+| AGENT_FILE_SCHEMA.md | governance/schemas/ | 24KB, 791 lines | Defines `.agent` file structure and requirements |
+| AGENT_FILE_BINDING_REQUIREMENTS.md | governance/canon/ | 20KB, 654 lines | Specifies mandatory and optional governance bindings |
+| AGENT_FILE_VALIDATION.md | governance/runbooks/ | 23KB, 824 lines | 4-level validation procedure for `.agent` files |
+| AGENT_FILE_MAINTENANCE.md | governance/runbooks/ | 23KB, 653 lines | Maintenance protocol for `.agent` files |
+
+### Implementation Status
+
+**Repository Compliance**: ✅ COMPLETE (as of 2026-01-12)
+
+| Component | Status | Location | Notes |
+|-----------|--------|----------|-------|
+| Document 1: Schema | ✅ COMPLETE | `governance/schemas/AGENT_FILE_SCHEMA.md` | 791 lines, defines structure |
+| Document 2: Binding Requirements | ✅ COMPLETE | `governance/canon/AGENT_FILE_BINDING_REQUIREMENTS.md` | 654 lines, defines mandatory bindings |
+| Document 3: Validation Runbook | ✅ COMPLETE | `governance/runbooks/AGENT_FILE_VALIDATION.md` | 824 lines, 4-level validation |
+| Document 4: Maintenance Runbook | ✅ COMPLETE | `governance/runbooks/AGENT_FILE_MAINTENANCE.md` | 653 lines, maintenance protocol |
+| .agent File Validation | ✅ COMPLETE | `governance/evidence/initialization/AGENT_FILE_VALIDATION_RESULTS.md` | All 4 levels validated |
+| .agent File Bindings Update | ✅ COMPLETE | `.agent` (root) | 7 application-specific bindings added |
+
+### Validation Results
+
+**.agent File Validation (4 Levels)**:
+- ✅ **Level 1 (Syntax)**: PASS - File parseable, valid YAML
+- ✅ **Level 2 (Schema)**: PASS - All required fields present
+- ✅ **Level 3 (Semantic)**: PASS - Canonical references valid
+- ✅ **Level 4 (Alignment)**: PASS - Bindings added per requirements
+
+### Bindings Added to .agent File
+
+Per AGENT_FILE_BINDING_REQUIREMENTS.md, the following mandatory bindings were added:
+
+**Application Repository Bindings (Section 3.1)**:
+1. `fm-authority-model` - FM execution authority
+2. `builder-bindings` - Builder requirements
+3. `execution-bootstrap-protocol` - Execution discipline
+
+**FM-Specific Bindings (Section 4.1)**:
+4. `fm-builder-appointment` - Builder appointment authority
+5. `fm-governance-loading` - Governance loading protocol
+6. `fm-runtime-enforcement` - FM runtime enforcement
+
+**Builder-Specific Bindings (Section 4.2)**:
+7. `build-tree-model` - Build tree execution
+
+### Canonical References
+
+- **Source Repository**: APGI-cmy/maturion-foreman-governance  
+- **Branch**: main (PR #934 merged)  
+- **Layer-Down Protocol**: governance/canon/CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md  
+- **Binding Requirements**: governance/canon/AGENT_FILE_BINDING_REQUIREMENTS.md  
+- **Validation Runbook**: governance/runbooks/AGENT_FILE_VALIDATION.md
+
+### Compliance Verification
+
+**All Requirements Met**:
+- [x] 4 canonical documents copied to appropriate directories
+- [x] .agent file validated (all 4 levels)
+- [x] Missing bindings identified and added
+- [x] Validation results documented
+- [x] GOVERNANCE_ALIGNMENT.md updated
+- [x] Evidence artifacts created
+
+**Compliance Status**: ✅ READY  
+**Enforcement Date**: 2026-01-12 (immediate)  
+**Next Review**: Quarterly (per AGENT_FILE_MAINTENANCE.md)
+
+---
+
 ## Version History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 1.0.0 | 2026-01-05 | GovernanceLiaison_FM | Initial creation - governance layer-down corrections |
 | 1.1.0 | 2026-01-11 | GovernanceLiaison_FM | Added Execution Bootstrap Protocol (v2.0.0+) compliance documentation |
+| 1.2.0 | 2026-01-12 | GovernanceLiaison_FM | Added .agent File Governance Framework (4 canonical documents) and bindings update |
 
 ---
 
