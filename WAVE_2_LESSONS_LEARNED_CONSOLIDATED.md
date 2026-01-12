@@ -40,6 +40,7 @@
 | Subwave 2.9: Threading deadlock + infinite recursion | Event bus threading model allowed recursion | Added thread-safe event handling + recursion detection | Concurrency checklist mandatory; CST-2 to include deadlock detection; watchdog alerts on recursion signatures |
 | Subwave 2.10: Pytest naming collision (`TestStatus`) | Enum name collision with pytest auto-discovery | Renamed enum; adjusted fixtures | Naming convention check in design review; reserved names list in builder issues; lint gate for conflicting enums |
 | PR #546: Execution Bootstrap Protocol violation | Validation script used deprecated APIs | Replaced with modern patterns; added self-check | Enforce BL-026 scanner + Bootstrap self-check in every prehandover; reject handover without proof bundle |
+| IBWR CWT: Evidence not provided | Claimed CWT execution without attaching proof; misapplied Bootstrap evidence requirement | Clarified CWT as planning-only (Type B), deferred execution to Wave 3.1 with PREHANDOVER_PROOF mandate | Require PREHANDOVER_PROOF + logs for any IBWR CWT claim; if infrastructure missing, explicitly label as planning and defer with timeline; add IBWR CWT evidence check to prehandovers |
 
 **Verification:** Each prevention item is mapped to a Wave 3 subwave owner in `WAVE_3_IMPLEMENTATION_PLAN.md` and to CST-2 acceptance criteria.
 
