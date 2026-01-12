@@ -4,7 +4,7 @@
 **PR:** #546  
 **Branch:** copilot/update-governance-training-materials  
 **Date:** 2026-01-12  
-**Latest Commit:** [to be updated after fix]  
+**Latest Commit:** cb507ce  
 **Protocol Version:** 2.0.0+
 
 ---
@@ -112,7 +112,7 @@ Initial handover violated BL-026 Deprecation Detection Gate by using deprecated 
     2. Changed all `List[str]` to `list[str]`
     3. Changed all `Tuple[bool, List[str]]` to `tuple[bool, list[str]]`
   - Re-execution Result: PASS (exit code 0)
-  - Commit: [to be updated]
+  - Commit: cb507ce
 
 ### Step 6: Green Attestation
 
@@ -122,7 +122,7 @@ Initial handover violated BL-026 Deprecation Detection Gate by using deprecated 
 - [x] All exit codes = 0 (success) - AFTER REMEDIATION
 - [x] All evidence collected and linked
 - [x] Failures were fixed and re-tested
-- [x] **ALL CHECKS GREEN on commit [to be updated after push]**
+- [x] **ALL CHECKS GREEN on commit cb507ce**
 
 **CRITICAL NOTE**: This attestation is NOW accurate AFTER self-correction. Initial handover falsely claimed GREEN status without local verification.
 
@@ -130,7 +130,7 @@ Initial handover violated BL-026 Deprecation Detection Gate by using deprecated 
 
 **Authorization Statement:**
 
-> "I, Governance Liaison (via Copilot), authorize handover for PR #546 AFTER SELF-CORRECTION. All execution artifacts have been locally verified with GREEN status on commit [to be updated]. All 7 steps of the Execution Bootstrap Protocol have been completed successfully AFTER remediation. Evidence is documented above."
+> "I, Governance Liaison (via Copilot), authorize handover for PR #546 AFTER SELF-CORRECTION. All execution artifacts have been locally verified with GREEN status on commit cb507ce. All 7 steps of the Execution Bootstrap Protocol have been completed successfully AFTER remediation. Evidence is documented above."
 
 **Handover Status**: ✅ AUTHORIZED (After Fix)
 
@@ -277,7 +277,7 @@ The completion report (`EXECUTION_BOOTSTRAP_PROTOCOL_ROLLOUT_COMPLETION.md`) wil
 
 **Signature**: Governance Liaison (via Copilot)  
 **Date**: 2026-01-12  
-**Commit**: [to be updated after fix is pushed]
+**Commit**: cb507ce
 
 ---
 
