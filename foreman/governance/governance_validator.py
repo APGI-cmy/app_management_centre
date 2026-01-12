@@ -7,7 +7,6 @@ Detects violations, generates reports, logs validation events.
 """
 
 from datetime import datetime
-from typing import Dict, List, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 
@@ -27,7 +26,7 @@ class Violation:
     description: str
     affected_component: str
     remediation: str
-    context: Dict[str, any]
+    context: dict[str, any]
     detected_at: datetime = field(default_factory=datetime.now)
 
 
@@ -41,10 +40,10 @@ class GovernanceValidator:
     
     def __init__(self, governance_loader=None):
         self.governance_loader = governance_loader
-        self.validation_history: List[Dict[str, any]] = []
-        self.violations: Dict[str, Violation] = {}
+        self.validation_history: list[dict[str, any]] = []
+        self.violations: dict[str, Violation] = {}
     
-    def validate(self, artifact: Dict[str, any], rule_ids: Optional[List[str]] = None) -> Dict[str, any]:
+    def validate(self, artifact: dict[str, any], rule_ids: list[str] | None = None) -> dict[str, any]:
         """
         QA-121: Validate against governance rules.
         
@@ -59,7 +58,7 @@ class GovernanceValidator:
         """
         import uuid
         
-        violations_found: List[Violation] = []
+        violations_found: list[Violation] = []
         rules_checked = 0
         
         # Get rules to validate against
@@ -99,7 +98,7 @@ class GovernanceValidator:
             'validation_id': str(uuid.uuid4())
         }
     
-    def detect_violations(self, artifact: Dict[str, any]) -> Dict[str, any]:
+    def detect_violations(self, artifact: dict[str, any]) -> dict[str, any]:
         """
         QA-122: Detect governance violations.
         
@@ -130,7 +129,7 @@ class GovernanceValidator:
             'total_violations': len(validation_result['violations'])
         }
     
-    def generate_violation_report(self, violation_id: str) -> Dict[str, any]:
+    def generate_violation_report(self, violation_id: str) -> dict[str, any]:
         """
         QA-123: Generate violation report.
         
@@ -158,7 +157,7 @@ class GovernanceValidator:
             'detected_at': violation.detected_at.isoformat()
         }
     
-    def log_validation_event(self, event: Dict[str, any]) -> Dict[str, any]:
+    def log_validation_event(self, event: dict[str, any]) -> dict[str, any]:
         """
         QA-124: Log governance validation events.
         
@@ -183,11 +182,11 @@ class GovernanceValidator:
             'logged_at': log_entry['logged_at']
         }
     
-    def get_validation_history(self) -> List[Dict[str, any]]:
+    def get_validation_history(self) -> list[dict[str, any]]:
         """Get complete validation history."""
         return self.validation_history
     
-    def handle_failure_modes(self, failure_type: str, **kwargs) -> Dict[str, any]:
+    def handle_failure_modes(self, failure_type: str, **kwargs) -> dict[str, any]:
         """
         QA-125: Handle governance validator failure modes.
         
@@ -234,7 +233,7 @@ class GovernanceValidator:
         
         return {'status': 'error', 'reason': f'Unknown failure type: {failure_type}'}
     
-    def _execute_rule(self, rule, artifact: Dict[str, any]) -> Optional[Violation]:
+    def _execute_rule(self, rule, artifact: dict[str, any]) -> Violation | None:
         """Execute a governance rule against an artifact."""
         import uuid
         
@@ -256,7 +255,7 @@ class GovernanceValidator:
         
         return None
     
-    def _serialize_violation(self, violation: Violation) -> Dict[str, any]:
+    def _serialize_violation(self, violation: Violation) -> dict[str, any]:
         """Serialize violation for reporting."""
         return {
             'violation_id': violation.violation_id,

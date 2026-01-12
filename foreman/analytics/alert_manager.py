@@ -3,7 +3,7 @@ Metric Alert Manager.
 QA Coverage: QA-139
 """
 
-from typing import List, Dict, Any
+from typing import Any
 
 _thresholds = {}
 _alerts = {}
@@ -23,7 +23,7 @@ class MetricAlertManager:
         """Set alert threshold for a metric."""
         _thresholds[self.organisation_id][metric_name] = max_value
     
-    def check_thresholds(self) -> List[Dict]:
+    def check_thresholds(self) -> list[dict]:
         """Check metrics against thresholds and generate alerts."""
         alerts = []
         
@@ -55,11 +55,11 @@ class MetricAlertManager:
         
         return alerts
     
-    def get_all_alerts(self) -> List[Dict]:
+    def get_all_alerts(self) -> list[dict]:
         """Get all alerts."""
         return _alerts.get(self.organisation_id, [])
     
-    def route_alerts(self, alerts: List[Dict]) -> Dict[str, bool]:
+    def route_alerts(self, alerts: list[dict]) -> dict[str, bool]:
         """Route alerts to appropriate channels."""
         has_high_severity = any(a.get("severity") == "HIGH" for a in alerts)
         return {

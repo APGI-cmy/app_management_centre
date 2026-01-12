@@ -7,7 +7,6 @@ audits overrides, handles governance updates.
 """
 
 from datetime import datetime
-from typing import Dict, List, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 import uuid
@@ -30,7 +29,7 @@ class EnforcementEvent:
     priority: str
     reason: str
     timestamp: datetime = field(default_factory=datetime.now)
-    escalated_to: Optional[str] = None
+    escalated_to: str | None = None
 
 
 class GovernanceSupremacyEnforcer:
@@ -44,11 +43,11 @@ class GovernanceSupremacyEnforcer:
     def __init__(self, governance_validator=None, escalation_manager=None):
         self.governance_validator = governance_validator
         self.escalation_manager = escalation_manager
-        self.enforcement_log: List[EnforcementEvent] = []
-        self.override_log: List[Dict[str, any]] = []
+        self.enforcement_log: list[EnforcementEvent] = []
+        self.override_log: list[dict[str, any]] = []
         self.protected_files = ['BUILD_PHILOSOPHY.md']
     
-    def enforce_hard_violation(self, violation_id: str) -> Dict[str, any]:
+    def enforce_hard_violation(self, violation_id: str) -> dict[str, any]:
         """
         QA-126: Enforce hard governance violations.
         
@@ -94,7 +93,7 @@ class GovernanceSupremacyEnforcer:
             'enforcement_event_id': enforcement_event.event_id
         }
     
-    def enforce_soft_violation(self, violation_id: str) -> Dict[str, any]:
+    def enforce_soft_violation(self, violation_id: str) -> dict[str, any]:
         """
         QA-127: Enforce soft governance violations.
         
@@ -137,7 +136,7 @@ class GovernanceSupremacyEnforcer:
             'enforcement_event_id': enforcement_event.event_id
         }
     
-    def prevent_governance_weakening(self, change: Dict[str, any]) -> Dict[str, any]:
+    def prevent_governance_weakening(self, change: dict[str, any]) -> dict[str, any]:
         """
         QA-128: Prevent governance weakening.
         
@@ -182,10 +181,10 @@ class GovernanceSupremacyEnforcer:
     
     def audit_governance_override(
         self,
-        override_request: Dict[str, any],
+        override_request: dict[str, any],
         justification: str,
         approved_by: str
-    ) -> Dict[str, any]:
+    ) -> dict[str, any]:
         """
         QA-129: Audit governance overrides.
         
@@ -223,7 +222,7 @@ class GovernanceSupremacyEnforcer:
             'audit_complete': True
         }
     
-    def handle_governance_update(self, update: Dict[str, any]) -> Dict[str, any]:
+    def handle_governance_update(self, update: dict[str, any]) -> dict[str, any]:
         """
         QA-130: Governance update handling.
         
@@ -259,7 +258,7 @@ class GovernanceSupremacyEnforcer:
             'update_allowed': is_compatible and not has_breaking_changes
         }
     
-    def handle_failure_modes(self, failure_type: str, **kwargs) -> Dict[str, any]:
+    def handle_failure_modes(self, failure_type: str, **kwargs) -> dict[str, any]:
         """
         QA-131: Handle governance supremacy failure modes.
         
@@ -300,7 +299,7 @@ class GovernanceSupremacyEnforcer:
         
         return {'status': 'error', 'reason': f'Unknown failure type: {failure_type}'}
     
-    def _halt_operation(self, violation) -> Dict[str, any]:
+    def _halt_operation(self, violation) -> dict[str, any]:
         """Halt current operation due to hard violation."""
         return {
             'halted': True,
@@ -308,7 +307,7 @@ class GovernanceSupremacyEnforcer:
             'timestamp': datetime.now().isoformat()
         }
     
-    def _escalate_violation(self, violation, priority: str) -> Dict[str, any]:
+    def _escalate_violation(self, violation, priority: str) -> dict[str, any]:
         """Escalate violation to ESC-02."""
         if self.escalation_manager:
             try:
@@ -338,7 +337,7 @@ class GovernanceSupremacyEnforcer:
         core_rules = ['BP-001', 'BP-002', 'BP-003']  # Build Philosophy core rules
         return rule_id in core_rules
     
-    def _is_weakening_change(self, change: Dict[str, any]) -> bool:
+    def _is_weakening_change(self, change: dict[str, any]) -> bool:
         """Check if change weakens governance."""
         # Simulated check
         return change.get('severity_change') == 'hard_to_soft'
@@ -352,12 +351,12 @@ class GovernanceSupremacyEnforcer:
         # Breaking if major version changes
         return current_major == new_major
     
-    def _is_breaking_change(self, change: Dict[str, any]) -> bool:
+    def _is_breaking_change(self, change: dict[str, any]) -> bool:
         """Check if change is breaking."""
         breaking_types = ['rule_removal', 'severity_reduction', 'mandatory_to_optional']
         return change.get('type') in breaking_types
     
-    def _get_recent_overrides(self, hours: int = 24) -> List[Dict[str, any]]:
+    def _get_recent_overrides(self, hours: int = 24) -> list[dict[str, any]]:
         """Get overrides from recent time period."""
         from datetime import timedelta
         cutoff = datetime.now() - timedelta(hours=hours)

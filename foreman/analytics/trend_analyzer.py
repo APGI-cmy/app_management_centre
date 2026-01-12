@@ -5,7 +5,7 @@ QA Coverage: QA-446 to QA-450
 Provides trend calculation, visualization, forecasting, anomaly detection, and comparison.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime, timedelta
 from statistics import mean, stdev
 import sys
@@ -35,7 +35,7 @@ class TrendAnalyzer:
         if organisation_id not in _trend_data:
             _trend_data[organisation_id] = {}
     
-    def calculate_trend(self, metric_name: str, data_points: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def calculate_trend(self, metric_name: str, data_points: list[dict[str, Any]]) -> dict[str, Any]:
         """
         Calculate trend from data points. QA-446
         
@@ -100,7 +100,7 @@ class TrendAnalyzer:
             "data_point_count": n
         }
     
-    def prepare_visualization_data(self, metric_name: str, data_points: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def prepare_visualization_data(self, metric_name: str, data_points: list[dict[str, Any]]) -> dict[str, Any]:
         """
         Prepare data for trend visualization. QA-447
         
@@ -139,7 +139,7 @@ class TrendAnalyzer:
             "chart_type": "line"
         }
     
-    def forecast_trend(self, metric_name: str, data_points: List[Dict[str, Any]], periods: int) -> Dict[str, Any]:
+    def forecast_trend(self, metric_name: str, data_points: list[dict[str, Any]], periods: int) -> dict[str, Any]:
         """
         Forecast future trend values. QA-448
         
@@ -185,7 +185,7 @@ class TrendAnalyzer:
             "accuracy_estimate": trend["confidence"]
         }
     
-    def detect_anomalies(self, metric_name: str, data_points: List[Dict[str, Any]], sensitivity: float = 2.0) -> List[Dict[str, Any]]:
+    def detect_anomalies(self, metric_name: str, data_points: list[dict[str, Any]], sensitivity: float = 2.0) -> list[dict[str, Any]]:
         """
         Detect anomalies in trend data. QA-449
         
@@ -233,8 +233,8 @@ class TrendAnalyzer:
         
         return anomalies
     
-    def compare_trends(self, metric_name_1: str, data_points_1: List[Dict[str, Any]], 
-                      metric_name_2: str, data_points_2: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def compare_trends(self, metric_name_1: str, data_points_1: list[dict[str, Any]], 
+                      metric_name_2: str, data_points_2: list[dict[str, Any]]) -> dict[str, Any]:
         """
         Compare two trends. QA-450
         

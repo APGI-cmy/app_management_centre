@@ -3,7 +3,7 @@ Cost Tracker (ANALYTICS-03).
 QA Coverage: QA-142 to QA-146
 """
 
-from typing import Dict, Any
+from typing import Any
 from datetime import datetime
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
@@ -41,7 +41,7 @@ class CostTracker:
         _token_usage[self.organisation_id][build_id]["input"] += input_tokens
         _token_usage[self.organisation_id][build_id]["output"] += output_tokens
     
-    def get_total_tokens(self, build_id: str) -> Dict[str, int]:
+    def get_total_tokens(self, build_id: str) -> dict[str, int]:
         """Get total tokens for a build. QA-142"""
         usage = _token_usage[self.organisation_id].get(build_id, {"input": 0, "output": 0})
         return {"input": usage["input"], "output": usage["output"]}
@@ -67,7 +67,7 @@ class CostTracker:
         
         return total_cost
     
-    def get_costs_by_build(self, organisation_id: str) -> Dict[str, float]:
+    def get_costs_by_build(self, organisation_id: str) -> dict[str, float]:
         """Get costs by build ID. QA-142"""
         return _build_costs.get(organisation_id, {})
     
@@ -81,7 +81,7 @@ class CostTracker:
             "timestamp": timestamp
         }
     
-    def get_cost_breakdown(self, build_id: str) -> Dict[str, Any]:
+    def get_cost_breakdown(self, build_id: str) -> dict[str, Any]:
         """Get detailed cost breakdown. QA-143"""
         cost_info = _build_costs[self.organisation_id].get(build_id, 0)
         cost = cost_info.get("cost") if isinstance(cost_info, dict) else cost_info

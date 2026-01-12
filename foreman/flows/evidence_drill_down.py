@@ -3,7 +3,7 @@ Evidence Drill-Down Flow.
 QA Coverage: QA-205 to QA-207
 """
 
-from typing import Dict, Any, List
+from typing import Any
 
 _navigation_state = {}
 
@@ -16,7 +16,7 @@ class EvidenceDrillDownFlow:
         if organisation_id not in _navigation_state:
             _navigation_state[organisation_id] = {"current_path": [], "breadcrumbs": []}
     
-    def get_domain_status(self, domain: str) -> Dict[str, Any]:
+    def get_domain_status(self, domain: str) -> dict[str, Any]:
         """Get domain status. QA-205"""
         return {
             "domain": domain,
@@ -25,7 +25,7 @@ class EvidenceDrillDownFlow:
             "component_count": 5
         }
     
-    def get_domain_components(self, domain: str) -> List[Dict[str, Any]]:
+    def get_domain_components(self, domain: str) -> list[dict[str, Any]]:
         """Get components in domain. Returns list of component dicts."""
         # Implicitly navigate to domain when getting components
         if self.organisation_id not in _navigation_state:
@@ -48,7 +48,7 @@ class EvidenceDrillDownFlow:
             }
         ]
     
-    def get_component_details(self, component_id: str) -> Dict[str, Any]:
+    def get_component_details(self, component_id: str) -> dict[str, Any]:
         """Get component details with evidence links. QA-205"""
         # Update navigation state to track current component
         current_path = _navigation_state[self.organisation_id].get("current_path", [])
@@ -78,7 +78,7 @@ class EvidenceDrillDownFlow:
             ]
         }
     
-    def navigate_to_domain(self, domain: str) -> Dict[str, Any]:
+    def navigate_to_domain(self, domain: str) -> dict[str, Any]:
         """Navigate to domain. QA-206"""
         _navigation_state[self.organisation_id]["current_path"] = [domain]
         _navigation_state[self.organisation_id]["breadcrumbs"] = [
@@ -90,7 +90,7 @@ class EvidenceDrillDownFlow:
             "navigation_successful": True
         }
     
-    def navigate_to_component(self, component_id: str) -> Dict[str, Any]:
+    def navigate_to_component(self, component_id: str) -> dict[str, Any]:
         """Navigate to component. QA-206"""
         current_path = _navigation_state[self.organisation_id]["current_path"]
         domain = current_path[0] if current_path else "UNKNOWN"
@@ -107,7 +107,7 @@ class EvidenceDrillDownFlow:
             "navigation_successful": True
         }
     
-    def navigate_to_evidence(self, evidence_id: str) -> Dict[str, Any]:
+    def navigate_to_evidence(self, evidence_id: str) -> dict[str, Any]:
         """Navigate to evidence. QA-206"""
         current_path = _navigation_state[self.organisation_id]["current_path"]
         new_path = current_path + [evidence_id]
@@ -123,15 +123,15 @@ class EvidenceDrillDownFlow:
             "navigation_successful": True
         }
     
-    def get_current_path(self) -> List[str]:
+    def get_current_path(self) -> list[str]:
         """Get current navigation path. QA-206"""
         return _navigation_state.get(self.organisation_id, {}).get("current_path", [])
     
-    def get_breadcrumbs(self) -> List[Dict[str, str]]:
+    def get_breadcrumbs(self) -> list[dict[str, str]]:
         """Get breadcrumb trail. QA-206"""
         return _navigation_state.get(self.organisation_id, {}).get("breadcrumbs", [])
     
-    def navigate_back(self) -> Dict[str, Any]:
+    def navigate_back(self) -> dict[str, Any]:
         """Navigate back one level. QA-206"""
         current_path = _navigation_state[self.organisation_id]["current_path"]
         breadcrumbs = _navigation_state[self.organisation_id]["breadcrumbs"]
@@ -149,14 +149,14 @@ class EvidenceDrillDownFlow:
             "navigation_successful": True
         }
     
-    def get_navigation_context(self) -> Dict[str, Any]:
+    def get_navigation_context(self) -> dict[str, Any]:
         """Get navigation context. QA-205"""
         return {
             "path": _navigation_state.get(self.organisation_id, {}).get("current_path", []),
             "breadcrumbs": _navigation_state.get(self.organisation_id, {}).get("breadcrumbs", [])
         }
     
-    def get_evidence(self, evidence_id: str) -> Dict[str, Any]:
+    def get_evidence(self, evidence_id: str) -> dict[str, Any]:
         """Get evidence by ID. QA-207"""
         # Get component from current path if available
         current_path = _navigation_state.get(self.organisation_id, {}).get("current_path", [])
@@ -174,7 +174,7 @@ class EvidenceDrillDownFlow:
             "metadata": {"type": "test_evidence"}
         }
     
-    def traverse_path(self, path: List[str]) -> Dict[str, Any]:
+    def traverse_path(self, path: list[str]) -> dict[str, Any]:
         """Traverse drill-down path. QA-206"""
         _navigation_state[self.organisation_id]["current_path"] = path
         
@@ -184,7 +184,7 @@ class EvidenceDrillDownFlow:
             "traversal_successful": True
         }
     
-    def retrieve_evidence(self, evidence_id: str) -> Dict[str, Any]:
+    def retrieve_evidence(self, evidence_id: str) -> dict[str, Any]:
         """Retrieve and display evidence. QA-207"""
         return {
             "evidence_id": evidence_id,

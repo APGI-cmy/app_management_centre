@@ -5,7 +5,6 @@ Implements the Program entity representing a high-level initiative.
 """
 
 from enum import Enum
-from typing import Optional, List, Dict
 from datetime import datetime
 
 
@@ -19,7 +18,7 @@ class ProgramState(Enum):
 
 
 # Global program registry
-_program_registry: Dict[str, 'Program'] = {}
+_program_registry: dict[str, 'Program'] = {}
 
 
 class Program:
@@ -33,8 +32,8 @@ class Program:
         self,
         id: str,
         name: str,
-        description: Optional[str] = None,
-        objectives: Optional[List[str]] = None
+        description: str | None = None,
+        objectives: list[str] | None = None
     ):
         """
         Initialize a new Program.
@@ -57,7 +56,7 @@ class Program:
         # Metadata
         self.created_at = datetime.now(UTC)
         self.updated_at = datetime.now(UTC)
-        self.evidence_location: Optional[str] = None
+        self.evidence_location: str | None = None
         
         # Auto-register
         _program_registry[self.id] = self

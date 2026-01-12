@@ -12,7 +12,7 @@ Responsibilities:
 - Prevent infinite loops
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any, Optional
 from datetime import datetime
 
 
@@ -57,7 +57,7 @@ class ClarificationLoopManager:
         
         return clarification_id
     
-    def manage_iteration(self, clarification_id: str, question: str, response: str) -> Dict[str, Any]:
+    def manage_iteration(self, clarification_id: str, question: str, response: str) -> dict[str, Any]:
         """
         QA-062: Manage clarification iterations
         
@@ -110,7 +110,7 @@ class ClarificationLoopManager:
             "can_continue": can_continue
         }
     
-    def detect_sufficient_clarification(self, clarification_id: str, user_response: str) -> Dict[str, Any]:
+    def detect_sufficient_clarification(self, clarification_id: str, user_response: str) -> dict[str, Any]:
         """
         QA-063: Detect sufficient clarification
         
@@ -161,7 +161,7 @@ class ClarificationLoopManager:
             "transition_trigger": transition_trigger
         }
     
-    def handle_timeout(self, clarification_id: str) -> Dict[str, Any]:
+    def handle_timeout(self, clarification_id: str) -> dict[str, Any]:
         """
         QA-064: Handle clarification timeout
         
@@ -204,7 +204,7 @@ class ClarificationLoopManager:
             "structured_capture": structured_capture
         }
     
-    def preserve_history(self, clarification_id: str) -> Dict[str, Any]:
+    def preserve_history(self, clarification_id: str) -> dict[str, Any]:
         """
         QA-065: Preserve clarification history
         
@@ -246,7 +246,7 @@ class ClarificationLoopManager:
             "iteration_count": session["iteration_count"]
         }
     
-    def handle_failure(self, clarification_id: str, failure_type: str) -> Dict[str, Any]:
+    def handle_failure(self, clarification_id: str, failure_type: str) -> dict[str, Any]:
         """
         QA-066: Clarification Loop failure modes
         

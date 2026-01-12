@@ -4,7 +4,7 @@ Task Manager - manages task lifecycle and state transitions.
 Implements task assignment, execution tracking, and completion validation.
 """
 
-from typing import Dict, List, Optional, Any, Union
+from typing import Any
 from datetime import datetime
 import uuid
 
@@ -34,8 +34,8 @@ class TaskManager:
     
     def __init__(self, blocker_manager=None, notification_manager=None):
         """Initialize TaskManager."""
-        self._tasks: Dict[str, Task] = {}
-        self._transition_logs: Dict[str, List[Dict[str, Any]]] = {}
+        self._tasks: dict[str, Task] = {}
+        self._transition_logs: dict[str, list[dict[str, Any]]] = {}
         self._blocker_manager = blocker_manager
         self._notification_manager = notification_manager
     
@@ -49,7 +49,7 @@ class TaskManager:
         self._tasks[task.id] = task
         self._transition_logs[task.id] = []
     
-    def get_task(self, task_id: str) -> Optional[Task]:
+    def get_task(self, task_id: str) -> Task | None:
         """
         Retrieve a task by ID.
         
@@ -61,7 +61,7 @@ class TaskManager:
         """
         return self._tasks.get(task_id)
     
-    def assign_task(self, task_or_id: Union[str, Task], builder_id: str) -> None:
+    def assign_task(self, task_or_id: str | Task, builder_id: str) -> None:
         """
         Assign a task to a builder.
         
@@ -135,7 +135,7 @@ class TaskManager:
         task.started_at = datetime.now(UTC)
         task.updated_at = datetime.now(UTC)
     
-    def complete_task(self, task_id: str, qa_results: Optional[Dict[str, Any]] = None) -> None:
+    def complete_task(self, task_id: str, qa_results: dict[str, Any] | None = None) -> None:
         """
         Mark a task as completed.
         
@@ -172,9 +172,9 @@ class TaskManager:
         self,
         task_id: str,
         reason: str,
-        qa_results: Optional[Dict[str, Any]] = None,
-        diagnostics: Optional[Dict[str, Any]] = None,
-        failure_type: Optional[str] = None
+        qa_results: dict[str, Any] | None = None,
+        diagnostics: dict[str, Any] | None = None,
+        failure_type: str | None = None
     ) -> None:
         """
         Mark a task as failed.
@@ -241,7 +241,7 @@ class TaskManager:
                 message=f"Task {task_id} failed: {reason}"
             )
     
-    def get_transition_log(self, task_id: str) -> List[Dict[str, Any]]:
+    def get_transition_log(self, task_id: str) -> list[dict[str, Any]]:
         """
         Get state transition log for a task.
         
@@ -271,7 +271,7 @@ class TaskManager:
             'timestamp': datetime.now(UTC).isoformat()
         })
     
-    def _classify_failure(self, failure_type: Optional[str], reason: str) -> BlockerClassification:
+    def _classify_failure(self, failure_type: str | None, reason: str) -> BlockerClassification:
         """
         Classify a failure into a blocker classification.
         
