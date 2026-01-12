@@ -12,7 +12,7 @@ Responsibilities:
 - Prevent infinite loops
 """
 
-from typing import Any
+from typing import Any, Optional
 from datetime import datetime
 
 

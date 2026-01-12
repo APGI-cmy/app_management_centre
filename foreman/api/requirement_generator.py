@@ -11,7 +11,7 @@ Responsibilities:
 - Handle generation failures
 """
 
-from typing import Any
+from typing import Any, Optional
 from datetime import datetime
 
 

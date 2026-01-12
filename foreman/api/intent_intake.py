@@ -11,7 +11,7 @@ Responsibilities:
 - Handle intake failure modes
 """
 
-from typing import Any
+from typing import Any, Optional
 from datetime import datetime
 
 

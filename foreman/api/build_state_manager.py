@@ -12,7 +12,7 @@ Responsibilities:
 - Handle state consistency failures
 """
 
-from typing import Any
+from typing import Any, Optional
 from datetime import datetime, timedelta
 
 
