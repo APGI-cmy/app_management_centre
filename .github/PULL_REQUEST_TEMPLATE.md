@@ -24,6 +24,37 @@
 -
 -
 
+## Pre-Handover Execution Evidence (Required for ALL PRs)
+
+**Execution Bootstrap Protocol v2.0.0+ Compliance**
+
+- [ ] All checks executed locally BEFORE creating this PR
+- [ ] All exit codes = 0 (SUCCESS)
+- [ ] PREHANDOVER_PROOF document attached (for execution-related PRs)
+- [ ] CI is confirmation only (not diagnostic)
+
+**Local Execution Summary**:
+```bash
+# Commands executed locally with exit code = 0:
+# - ruff check --select UP foreman/[domain]/
+# - pytest tests/[domain]/ -v
+# - [any other checks]
+```
+
+**Evidence**: [Link to PREHANDOVER_PROOF document or paste evidence below]
+
+```
+<!-- Paste execution evidence here:
+- Command outputs
+- Exit codes
+- Timestamps
+-->
+```
+
+**If any box unchecked: Close PR and execute locally first.**
+
+---
+
 ## Testing
 
 <!-- Describe the testing you've performed -->
