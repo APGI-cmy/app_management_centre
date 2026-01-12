@@ -17,7 +17,6 @@ Exit Codes:
 import sys
 import re
 from pathlib import Path
-from typing import List, Tuple
 
 
 def check_section_exists(content: str, section_name: str) -> bool:
@@ -26,7 +25,7 @@ def check_section_exists(content: str, section_name: str) -> bool:
     return bool(re.search(pattern, content, re.IGNORECASE))
 
 
-def check_category_0_complete(content: str) -> Tuple[bool, List[str]]:
+def check_category_0_complete(content: str) -> tuple[bool, list[str]]:
     """Check if Category 0 (7-step protocol) is complete."""
     errors = []
     
@@ -63,7 +62,7 @@ def check_category_0_complete(content: str) -> Tuple[bool, List[str]]:
     return len(errors) == 0, errors
 
 
-def check_agent_attestation(content: str) -> Tuple[bool, List[str]]:
+def check_agent_attestation(content: str) -> tuple[bool, list[str]]:
     """Check if agent attestation section exists."""
     errors = []
     
@@ -73,7 +72,7 @@ def check_agent_attestation(content: str) -> Tuple[bool, List[str]]:
     return len(errors) == 0, errors
 
 
-def check_metadata(content: str) -> Tuple[bool, List[str]]:
+def check_metadata(content: str) -> tuple[bool, list[str]]:
     """Check if required metadata exists."""
     errors = []
     
@@ -98,7 +97,7 @@ def check_metadata(content: str) -> Tuple[bool, List[str]]:
     return len(errors) == 0, errors
 
 
-def validate_prehandover_proof(file_path: Path) -> Tuple[bool, List[str]]:
+def validate_prehandover_proof(file_path: Path) -> tuple[bool, list[str]]:
     """
     Validate a PREHANDOVER_PROOF document.
     
