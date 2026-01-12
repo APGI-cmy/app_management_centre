@@ -7,7 +7,7 @@ Implements continuous heartbeat generation to prove liveness.
 import threading
 import time
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import Any
 
 
 class HeartbeatMonitor:
@@ -28,7 +28,7 @@ class HeartbeatMonitor:
             interval_seconds: Time between heartbeats in seconds
         """
         self.interval_seconds = interval_seconds
-        self._heartbeats: List[Dict[str, Any]] = []
+        self._heartbeats: list[dict[str, Any]] = []
         self._running = False
         self._thread: threading.Thread = None
     
@@ -47,7 +47,7 @@ class HeartbeatMonitor:
         if self._thread:
             self._thread.join(timeout=2)
     
-    def get_heartbeats(self) -> List[Dict[str, Any]]:
+    def get_heartbeats(self) -> list[dict[str, Any]]:
         """
         Get all recorded heartbeats.
         
@@ -56,7 +56,7 @@ class HeartbeatMonitor:
         """
         return self._heartbeats.copy()
     
-    def get_latest_heartbeat(self) -> Dict[str, Any]:
+    def get_latest_heartbeat(self) -> dict[str, Any]:
         """
         Get the most recent heartbeat.
         

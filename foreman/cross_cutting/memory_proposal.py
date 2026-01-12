@@ -1,7 +1,7 @@
 """Memory Write Proposal. QA-149"""
 
-from datetime import datetime
-from typing import Dict, Any
+from datetime import datetime, UTC
+from typing import Any
 
 
 class MemoryWriteProposal:
@@ -19,7 +19,7 @@ class MemoryWriteProposal:
         self.status = "PENDING"
         self.created_at = datetime.now(UTC)
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to dict. QA-149"""
         return {
             "proposal_id": self.proposal_id,

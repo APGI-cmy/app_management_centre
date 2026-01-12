@@ -20,17 +20,16 @@ import json
 import subprocess
 import re
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
 
 class QAGreenValidator:
     """Validates QA green status according to constitutional requirements"""
     
     def __init__(self, test_dir: str = "tests"):
         self.test_dir = Path(test_dir)
-        self.violations: List[Dict] = []
-        self.test_results: Optional[Dict] = None
+        self.violations: list[dict] = []
+        self.test_results: dict | None = None
         
-    def validate(self) -> Tuple[bool, Dict]:
+    def validate(self) -> tuple[bool, dict]:
         """
         Validate QA green status.
         

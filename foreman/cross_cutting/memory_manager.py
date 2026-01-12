@@ -4,8 +4,8 @@ QA Coverage: QA-147 to QA-154
 """
 
 from pathlib import Path
-from datetime import datetime
-from typing import Dict, Any, List, Optional
+from datetime import datetime, UTC
+from typing import Any
 import json
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
@@ -40,7 +40,7 @@ class GlobalMemoryManager:
         if organisation_id not in _audit_log:
             _audit_log[organisation_id] = {}
     
-    def initialize_fabric(self) -> Dict[str, Any]:
+    def initialize_fabric(self) -> dict[str, Any]:
         """Initialize memory fabric structure. QA-147"""
         dirs_to_create = ["global", "scoped", "proposals", "archive"]
         dirs_created = []
@@ -64,7 +64,7 @@ class GlobalMemoryManager:
         }
     
     def write_memory(self, key: str, category: str, content: str, organisation_id: str, 
-                     version: int = 1, references: List[str] = None, conflicts_with: List[str] = None):
+                     version: int = 1, references: list[str] = None, conflicts_with: list[str] = None):
         """Write memory entry. QA-148, QA-151, QA-153"""
         if key not in _memories[organisation_id]:
             _memories[organisation_id][key] = []
@@ -82,7 +82,7 @@ class GlobalMemoryManager:
         
         _memories[organisation_id][key].append(memory_entry)
     
-    def read_memory(self, key: str, version: Optional[int] = None) -> Optional[Dict]:
+    def read_memory(self, key: str, version: int | None = None) -> dict | None:
         """Read memory by key. QA-148, QA-151"""
         memories = _memories.get(self.organisation_id, {}).get(key, [])
         
@@ -105,7 +105,7 @@ class GlobalMemoryManager:
         # Return latest version
         return memories[-1] if memories else None
     
-    def read_by_category(self, category: str) -> List[Dict]:
+    def read_by_category(self, category: str) -> list[dict]:
         """Read all memories in a category. QA-148"""
         results = []
         for key, mem_list in _memories.get(self.organisation_id, {}).items():
@@ -114,7 +114,7 @@ class GlobalMemoryManager:
                     results.append(mem)
         return results
     
-    def search_memory(self, query: str) -> List[Dict]:
+    def search_memory(self, query: str) -> list[dict]:
         """Full-text search in memory. QA-148"""
         results = []
         for key, mem_list in _memories.get(self.organisation_id, {}).items():
@@ -154,7 +154,7 @@ class GlobalMemoryManager:
             proposal.rejector = rejector
             proposal.rejection_reason = reason
     
-    def execute_write(self, proposal_id: str) -> Dict[str, Any]:
+    def execute_write(self, proposal_id: str) -> dict[str, Any]:
         """Execute approved write. QA-150"""
         proposal = _proposals[self.organisation_id].get(proposal_id)
         
@@ -198,7 +198,7 @@ class GlobalMemoryManager:
         """Attempt to update memory (should fail due to immutability). QA-150"""
         raise Exception("Memory is immutable - cannot update")
     
-    def get_audit_log(self, key: str) -> List[Dict]:
+    def get_audit_log(self, key: str) -> list[dict]:
         """Get audit log for a memory key. QA-150"""
         return _audit_log.get(self.organisation_id, {}).get(key, [])
     
@@ -215,11 +215,11 @@ class GlobalMemoryManager:
             version=new_version
         )
     
-    def get_memory_history(self, key: str) -> List[Dict]:
+    def get_memory_history(self, key: str) -> list[dict]:
         """Get version history for memory. QA-151"""
         return _memories.get(self.organisation_id, {}).get(key, [])
     
-    def rollback_memory(self, key: str, to_version: int) -> Dict[str, bool]:
+    def rollback_memory(self, key: str, to_version: int) -> dict[str, bool]:
         """Rollback memory to previous version. QA-151"""
         history = self.get_memory_history(key)
         target = None
@@ -242,6 +242,6 @@ class GlobalMemoryManager:
         
         return {"success": False}
     
-    def recover_from_corruption(self, key: str) -> Dict[str, bool]:
+    def recover_from_corruption(self, key: str) -> dict[str, bool]:
         """Recover from memory corruption. QA-152"""
         return {"recovered": False, "quarantined": True}

@@ -3,7 +3,7 @@ Requirement Generator.
 QA Coverage: QA-203
 """
 
-from typing import Dict, Any, List
+from typing import Any
 
 
 class RequirementGenerator:
@@ -12,7 +12,7 @@ class RequirementGenerator:
     def __init__(self, organisation_id: str):
         self.organisation_id = organisation_id
     
-    def generate_requirement(self, clarified_intent: Dict) -> Dict[str, Any]:
+    def generate_requirement(self, clarified_intent: dict) -> dict[str, Any]:
         """Generate comprehensive requirement specification from intent."""
         intent_text = clarified_intent.get("text", "")
         clarifications = clarified_intent.get("clarifications", [])

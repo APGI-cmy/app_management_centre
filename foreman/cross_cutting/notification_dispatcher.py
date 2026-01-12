@@ -3,8 +3,8 @@ Notification Dispatcher (CROSS-03).
 QA Coverage: QA-190 to QA-194
 """
 
-from typing import Dict, Any, List
-from datetime import datetime
+from typing import Any
+from datetime import datetime, UTC
 
 _notifications = {}
 
@@ -18,8 +18,8 @@ class NotificationDispatcher:
             _notifications[organisation_id] = []
     
     def create_notification(self, recipient: str, message: str, subject: str = None,
-                          channel: str = "email", channels: List[str] = None, 
-                          priority: str = "NORMAL") -> Dict[str, Any]:
+                          channel: str = "email", channels: list[str] = None, 
+                          priority: str = "NORMAL") -> dict[str, Any]:
         """Create notification. QA-190"""
         notification_id = f"notif-{len(_notifications[self.organisation_id])+1}"
         
@@ -42,7 +42,7 @@ class NotificationDispatcher:
         return notification
     
     def dispatch_notification(self, recipient: str, message: str, 
-                            channel: str = "email", priority: str = "NORMAL", subject: str = None) -> Dict[str, Any]:
+                            channel: str = "email", priority: str = "NORMAL", subject: str = None) -> dict[str, Any]:
         """Dispatch notification. QA-190"""
         notification = {
             "recipient": recipient,
@@ -61,7 +61,7 @@ class NotificationDispatcher:
             "notification_id": f"notif-{len(_notifications[self.organisation_id])}"
         }
     
-    def deliver(self, notification_id: str, max_retries: int = 0) -> Dict[str, Any]:
+    def deliver(self, notification_id: str, max_retries: int = 0) -> dict[str, Any]:
         """Deliver notification. QA-190"""
         # Find notification
         notification = None
