@@ -10,7 +10,6 @@ Build-to-Green Target: All 4 tests must pass
 """
 
 import pytest
-from typing import Dict, Any
 
 
 class TestParkingStationUI:

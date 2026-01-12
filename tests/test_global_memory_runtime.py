@@ -169,7 +169,7 @@ class TestMemoryValidation:
             "Memory schema must exist at memory/schema/memory-entry.json"
         
         # Schema must be valid JSON
-        with open(schema_path, 'r') as f:
+        with open(schema_path) as f:
             schema = json.load(f)
         
         assert 'schema' in schema, \
@@ -308,7 +308,7 @@ class TestFailFastBehavior:
             "Seed governance memory must exist"
         
         # File must be valid JSON
-        with open(governance_file, 'r') as f:
+        with open(governance_file) as f:
             data = json.load(f)
         
         assert 'entries' in data, \
@@ -337,7 +337,7 @@ class TestReadOnlyEnforcement:
         runtime_loader_path = project_root / 'lib' / 'memory' / 'runtime-loader.ts'
         
         if runtime_loader_path.exists():
-            with open(runtime_loader_path, 'r') as f:
+            with open(runtime_loader_path) as f:
                 content = f.read()
             
             # Check for prohibited write operations (actual implementations)

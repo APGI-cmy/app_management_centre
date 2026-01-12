@@ -13,7 +13,7 @@ Data Contract:
 
 import pytest
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from sqlalchemy.exc import IntegrityError
 
 from fm.data.models import (
@@ -95,13 +95,13 @@ class TestMessageHandler:
         - State update (PENDING → DELIVERED)
         """
         # Deliver message
-        before_delivery = datetime.now(timezone.utc).replace(tzinfo=None)
+        before_delivery = datetime.now(UTC).replace(tzinfo=None)
         
         sample_message.deliver()
         db_session.commit()
         db_session.refresh(sample_message)
         
-        after_delivery = datetime.now(timezone.utc).replace(tzinfo=None)
+        after_delivery = datetime.now(UTC).replace(tzinfo=None)
         
         # Verify state transition
         assert sample_message.state == MessageState.DELIVERED, "State should be DELIVERED"
@@ -149,13 +149,13 @@ class TestMessageHandler:
         db_session.commit()
         
         # Mark as read
-        before_read = datetime.now(timezone.utc).replace(tzinfo=None)
+        before_read = datetime.now(UTC).replace(tzinfo=None)
         
         sample_message.mark_read(test_user_id)
         db_session.commit()
         db_session.refresh(sample_message)
         
-        after_read = datetime.now(timezone.utc).replace(tzinfo=None)
+        after_read = datetime.now(UTC).replace(tzinfo=None)
         
         # Verify state transition
         assert sample_message.state == MessageState.READ, "State should be READ"

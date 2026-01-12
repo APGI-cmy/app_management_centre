@@ -10,7 +10,6 @@ Build-to-Green Status: COMPLETE - All 5 tests passing
 """
 
 import pytest
-from typing import Dict, Any
 
 
 class TestDrillDownNavigation:

@@ -11,9 +11,8 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from typing import Dict, Tuple
 
-def run_validation(report_path: str, repo: str) -> Tuple[int, str]:
+def run_validation(report_path: str, repo: str) -> tuple[int, str]:
     """
     Run the validation script and return exit code and output.
     

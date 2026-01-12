@@ -7,7 +7,7 @@ Provides fixtures and setup/teardown for test isolation.
 import pytest
 import os
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from pathlib import Path
 
 
@@ -90,7 +90,7 @@ def create_qa_evidence():
         evidence = {
             "qa_id": qa_id,
             "status": status,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "details": details
         }
         return evidence

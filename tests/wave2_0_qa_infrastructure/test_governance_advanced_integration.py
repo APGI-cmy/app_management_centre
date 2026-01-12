@@ -13,7 +13,6 @@ Build-to-Green Status: IN PROGRESS
 """
 
 import pytest
-from typing import Dict, Any, List
 from datetime import datetime, timedelta, UTC
 
 # Import integration failure handler module

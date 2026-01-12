@@ -6,7 +6,6 @@ Fixtures and configuration for UI builder tests (QA-019 to QA-057).
 
 import pytest
 from pathlib import Path
-from typing import Dict, Any
 
 
 @pytest.fixture

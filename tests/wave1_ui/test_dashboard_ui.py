@@ -11,7 +11,6 @@ Build-to-Green Target: All 20 tests must pass
 """
 
 import pytest
-from typing import Dict, Any
 
 
 class TestDomainStatusManagerUI:

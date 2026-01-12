@@ -13,7 +13,7 @@ Data Contract:
 
 import pytest
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from sqlalchemy.exc import IntegrityError
 
 from fm.data.models import (
@@ -120,13 +120,13 @@ class TestConversationManager:
         """
         # Archive conversation
         archive_reason = "User completed conversation"
-        before_archive = datetime.now(timezone.utc).replace(tzinfo=None)
+        before_archive = datetime.now(UTC).replace(tzinfo=None)
         
         sample_conversation.archive(archive_reason)
         db_session.commit()
         db_session.refresh(sample_conversation)
         
-        after_archive = datetime.now(timezone.utc).replace(tzinfo=None)
+        after_archive = datetime.now(UTC).replace(tzinfo=None)
         
         # Verify state transition
         assert sample_conversation.state == ConversationState.ARCHIVED, "State should be ARCHIVED"
@@ -174,13 +174,13 @@ class TestConversationManager:
         db_session.commit()
         
         # Resume conversation
-        before_resume = datetime.now(timezone.utc).replace(tzinfo=None)
+        before_resume = datetime.now(UTC).replace(tzinfo=None)
         
         sample_conversation.resume()
         db_session.commit()
         db_session.refresh(sample_conversation)
         
-        after_resume = datetime.now(timezone.utc).replace(tzinfo=None)
+        after_resume = datetime.now(UTC).replace(tzinfo=None)
         
         # Verify state transition
         assert sample_conversation.state == ConversationState.RESUMED, "State should be RESUMED"
