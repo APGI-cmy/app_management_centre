@@ -4,12 +4,12 @@ Notification Manager - manages notifications and escalations.
 Implements notification creation and delivery.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Any
 from datetime import datetime
 
 
 # Global notification registry
-_notification_registry: List[Dict[str, Any]] = []
+_notification_registry: list[dict[str, Any]] = []
 
 
 class NotificationManager:
@@ -59,9 +59,9 @@ class NotificationManager:
     
     def get_notifications(
         self,
-        recipient: Optional[str] = None,
-        type: Optional[str] = None
-    ) -> List[Dict[str, Any]]:
+        recipient: str | None = None,
+        type: str | None = None
+    ) -> list[dict[str, Any]]:
         """
         Get notifications, optionally filtered.
         

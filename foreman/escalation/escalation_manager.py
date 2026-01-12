@@ -28,7 +28,7 @@ structure, routes to Johan, tracks lifecycle, and handles priority/context linki
 """
 
 from datetime import datetime
-from typing import Dict, List, Optional, Literal
+from typing import Literal
 from dataclasses import dataclass, field
 from enum import Enum
 import uuid
@@ -60,11 +60,11 @@ class Escalation:
     priority: EscalationPriority
     status: EscalationStatus = EscalationStatus.PENDING
     created_at: datetime = field(default_factory=datetime.now)
-    presented_at: Optional[datetime] = None
-    resolved_at: Optional[datetime] = None
-    decision_made: Optional[Dict[str, any]] = None
-    context_links: Dict[str, any] = field(default_factory=dict)
-    audit_trail: List[Dict[str, any]] = field(default_factory=list)
+    presented_at: datetime | None = None
+    resolved_at: datetime | None = None
+    decision_made: dict[str, any] | None = None
+    context_links: dict[str, any] = field(default_factory=dict)
+    audit_trail: list[dict[str, any]] = field(default_factory=list)
 
 
 class EscalationManager:
@@ -77,7 +77,7 @@ class EscalationManager:
     
     def __init__(self, organisation_id: str = None):
         self.organisation_id = organisation_id
-        self.escalations: Dict[str, Escalation] = {}
+        self.escalations: dict[str, Escalation] = {}
         self.max_retries = 3
     
     def create_escalation(
@@ -89,8 +89,8 @@ class EscalationManager:
         decision: str = None,
         consequence: str = "",
         priority: str = "NORMAL",
-        context_links: Optional[Dict[str, any]] = None,
-        context: Optional[Dict[str, any]] = None
+        context_links: dict[str, any] | None = None,
+        context: dict[str, any] | None = None
     ) -> Escalation:
         """
         QA-097, QA-208: Create escalation with 5 elements.
@@ -169,7 +169,7 @@ class EscalationManager:
         # Return escalation object (QA-097)
         return escalation
     
-    def route_to_johan(self, escalation_id: str) -> Dict[str, any]:
+    def route_to_johan(self, escalation_id: str) -> dict[str, any]:
         """
         QA-098: Route escalation to Johan.
         
@@ -227,7 +227,7 @@ class EscalationManager:
         
         return {'status': 'error'}  # Should not reach here
     
-    def present_in_ui(self, escalation_id: str) -> Dict[str, any]:
+    def present_in_ui(self, escalation_id: str) -> dict[str, any]:
         """
         QA-099: Present escalation in UI.
         
@@ -265,8 +265,8 @@ class EscalationManager:
         self,
         escalation_id: str,
         decision: str,
-        decision_data: Optional[Dict[str, any]] = None
-    ) -> Dict[str, any]:
+        decision_data: dict[str, any] | None = None
+    ) -> dict[str, any]:
         """
         QA-100: Handle escalation decision.
         
@@ -336,7 +336,7 @@ class EscalationManager:
             
             raise RuntimeError(f"Decision execution failed: {str(e)}")
     
-    def track_lifecycle(self, escalation_id: str) -> Dict[str, any]:
+    def track_lifecycle(self, escalation_id: str) -> dict[str, any]:
         """
         QA-101: Track escalation lifecycle.
         
@@ -367,7 +367,7 @@ class EscalationManager:
             }
         }
     
-    def handle_priority_routing(self, escalation_id: str) -> Dict[str, any]:
+    def handle_priority_routing(self, escalation_id: str) -> dict[str, any]:
         """
         QA-102: Escalation priority handling.
         
@@ -416,10 +416,10 @@ class EscalationManager:
     def link_context(
         self,
         escalation_id: str,
-        build_id: Optional[str] = None,
-        conversation_id: Optional[str] = None,
-        evidence_ids: Optional[List[str]] = None
-    ) -> Dict[str, any]:
+        build_id: str | None = None,
+        conversation_id: str | None = None,
+        evidence_ids: list[str] | None = None
+    ) -> dict[str, any]:
         """
         QA-103: Escalation context linking.
         
@@ -469,8 +469,8 @@ class EscalationManager:
         self,
         escalation: Escalation,
         decision: str,
-        decision_data: Optional[Dict[str, any]]
-    ) -> Dict[str, any]:
+        decision_data: dict[str, any] | None
+    ) -> dict[str, any]:
         """Execute the decision made on an escalation."""
         # In production, this would trigger actual actions
         return {
@@ -479,7 +479,7 @@ class EscalationManager:
             'timestamp': datetime.now().isoformat()
         }
     
-    def route_escalation(self, escalation_id: str, target: str) -> Dict[str, any]:
+    def route_escalation(self, escalation_id: str, target: str) -> dict[str, any]:
         """
         QA-209: Route escalation to target user inbox.
         
@@ -523,7 +523,7 @@ class EscalationManager:
         decision: str,
         action: str = None,
         notes: str = None
-    ) -> Dict[str, any]:
+    ) -> dict[str, any]:
         """
         QA-210: Resolve escalation with decision and action.
         
@@ -574,7 +574,7 @@ class EscalationManager:
             "escalation_id": escalation_id
         }
     
-    def get_escalation(self, escalation_id: str) -> Dict[str, any]:
+    def get_escalation(self, escalation_id: str) -> dict[str, any]:
         """
         QA-210: Get escalation by ID as dict.
         

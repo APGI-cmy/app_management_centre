@@ -18,7 +18,6 @@ import re
 import sys
 import json
 from pathlib import Path
-from typing import List, Dict, Tuple
 
 class TestDebtDetector:
     """Detects test debt in test files"""
@@ -65,9 +64,9 @@ class TestDebtDetector:
     
     def __init__(self, test_dir: str = "tests"):
         self.test_dir = Path(test_dir)
-        self.violations: List[Dict] = []
+        self.violations: list[dict] = []
         
-    def scan(self) -> Tuple[bool, List[Dict]]:
+    def scan(self) -> tuple[bool, list[dict]]:
         """
         Scan test directory for test debt.
         
@@ -133,7 +132,7 @@ class TestDebtDetector:
             # Silently skip files that can't be read
             pass
         
-    def _find_test_files(self) -> List[Path]:
+    def _find_test_files(self) -> list[Path]:
         """Find all test files in test directory"""
         test_files = []
         
@@ -220,7 +219,7 @@ class TestDebtDetector:
         except Exception as e:
             print(f"Warning: Could not scan {file_path}: {e}", file=sys.stderr)
             
-    def _check_commented_tests(self, file_path: Path, lines: List[str]):
+    def _check_commented_tests(self, file_path: Path, lines: list[str]):
         """Check for blocks of commented out test code"""
         in_comment_block = False
         comment_start = 0

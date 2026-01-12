@@ -4,7 +4,7 @@ QA Coverage: QA-169 to QA-179
 """
 
 from datetime import datetime
-from typing import Dict, Any, List, Optional
+from typing import Any
 
 _audit_events = {}
 
@@ -24,7 +24,7 @@ class AuditLogger:
             _audit_events[organisation_id] = []
     
     def log_governance_event(self, actor: str, action: str, target: str = None, outcome: str = None,
-                            resource: str = None, metadata: Dict = None, details: Dict = None) -> Dict[str, Any]:
+                            resource: str = None, metadata: dict = None, details: dict = None) -> dict[str, Any]:
         """Log governance event. QA-169"""
         combined_metadata = {**(metadata or {}), **(details or {})}
         entry_id = f"evt-{len(_audit_events[self.organisation_id])+1}"
@@ -45,7 +45,7 @@ class AuditLogger:
         return log_entry
     
     def log_event(self, actor: str, action: str, outcome: str, 
-                  resource: str = None, metadata: Dict = None) -> Dict[str, Any]:
+                  resource: str = None, metadata: dict = None) -> dict[str, Any]:
         """Log governance event. QA-169"""
         event = {
             "timestamp": datetime.now(UTC).isoformat(),
@@ -64,7 +64,7 @@ class AuditLogger:
             "event_id": f"evt-{len(_audit_events[self.organisation_id])}"
         }
     
-    def get_log_entry(self, entry_id: str) -> Optional[Dict]:
+    def get_log_entry(self, entry_id: str) -> dict | None:
         """Get specific log entry by ID. QA-169"""
         for entry in _audit_events.get(self.organisation_id, []):
             if entry.get("entry_id") == entry_id:
@@ -75,7 +75,7 @@ class AuditLogger:
         """Attempt to modify log entry (should fail due to immutability). QA-169"""
         raise Exception("Audit log is immutable - cannot modify entries")
     
-    def query_events(self, filters: Dict = None) -> List[Dict]:
+    def query_events(self, filters: dict = None) -> list[dict]:
         """Query audit log. QA-173"""
         events = _audit_events.get(self.organisation_id, [])
         

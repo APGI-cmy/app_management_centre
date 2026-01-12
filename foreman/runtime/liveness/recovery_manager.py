@@ -6,7 +6,7 @@ Implements recovery strategy selection and execution.
 
 import threading
 import time
-from typing import Dict, List, Any, Optional
+from typing import Any
 
 
 class RecoveryManager:
@@ -37,7 +37,7 @@ class RecoveryManager:
         self.stall_detector = stall_detector
         self._running = False
         self._thread: threading.Thread = None
-        self._recovery_attempts: List[Dict[str, Any]] = []
+        self._recovery_attempts: list[dict[str, Any]] = []
     
     def start(self) -> None:
         """Start monitoring and recovery."""
@@ -67,7 +67,7 @@ class RecoveryManager:
         """
         return self.RECOVERY_STRATEGIES.get(stall_type, 'restart_heartbeat')
     
-    def get_recovery_attempts(self) -> List[Dict[str, Any]]:
+    def get_recovery_attempts(self) -> list[dict[str, Any]]:
         """
         Get all recovery attempts.
         
@@ -76,7 +76,7 @@ class RecoveryManager:
         """
         return self._recovery_attempts.copy()
     
-    def get_recovery_log(self) -> List[Dict[str, Any]]:
+    def get_recovery_log(self) -> list[dict[str, Any]]:
         """
         Get recovery log (alias for get_recovery_attempts with enhanced format).
         

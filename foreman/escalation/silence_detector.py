@@ -19,7 +19,7 @@ Differentiates between intentional pauses and actual stalls.
 """
 
 from datetime import datetime, timedelta
-from typing import Dict, Optional, Literal
+from typing import Literal
 from dataclasses import dataclass, field
 from enum import Enum
 
@@ -37,7 +37,7 @@ class BuildMonitor:
     build_id: str
     last_update: datetime
     is_paused: bool = False
-    pause_reason: Optional[str] = None
+    pause_reason: str | None = None
     silence_detected: bool = False
     silence_type: SilenceType = SilenceType.UNKNOWN
     escalated: bool = False
@@ -52,10 +52,10 @@ class SilenceDetector:
     """
     
     def __init__(self, silence_threshold_hours: float = 2.0):
-        self.monitored_builds: Dict[str, BuildMonitor] = {}
+        self.monitored_builds: dict[str, BuildMonitor] = {}
         self.silence_threshold = timedelta(hours=silence_threshold_hours)
     
-    def monitor_heartbeat(self, build_id: str, last_update: Optional[datetime] = None) -> Dict[str, any]:
+    def monitor_heartbeat(self, build_id: str, last_update: datetime | None = None) -> dict[str, any]:
         """
         QA-105: Monitor build heartbeat.
         
@@ -103,7 +103,7 @@ class SilenceDetector:
             'is_paused': monitor.is_paused
         }
     
-    def detect_silence(self, build_id: str) -> Dict[str, any]:
+    def detect_silence(self, build_id: str) -> dict[str, any]:
         """
         QA-106: Detect silence.
         
@@ -159,7 +159,7 @@ class SilenceDetector:
             'silence_type': monitor.silence_type.value if is_silent else None
         }
     
-    def differentiate_silence_type(self, build_id: str) -> Dict[str, any]:
+    def differentiate_silence_type(self, build_id: str) -> dict[str, any]:
         """
         QA-107: Differentiate silence types.
         
@@ -187,7 +187,7 @@ class SilenceDetector:
             'handling': 'no_escalation' if silence_type == SilenceType.INTENTIONAL_PAUSE else 'escalate'
         }
     
-    def handle_silence_recovery(self, build_id: str) -> Dict[str, any]:
+    def handle_silence_recovery(self, build_id: str) -> dict[str, any]:
         """
         QA-108: Silence recovery.
         
@@ -244,7 +244,7 @@ class SilenceDetector:
             monitor.pause_reason = None
             monitor.last_update = datetime.now()
     
-    def handle_failure_modes(self, failure_type: str, **kwargs) -> Dict[str, any]:
+    def handle_failure_modes(self, failure_type: str, **kwargs) -> dict[str, any]:
         """
         QA-109: Handle silence detector failure modes.
         
@@ -300,7 +300,7 @@ class SilenceDetector:
         else:
             return SilenceType.ACTUAL_STALL
     
-    def _create_escalation_context(self, monitor: BuildMonitor, elapsed: timedelta) -> Dict[str, any]:
+    def _create_escalation_context(self, monitor: BuildMonitor, elapsed: timedelta) -> dict[str, any]:
         """Create context for silence escalation."""
         return {
             'issue': 'BuildSilence',
@@ -311,7 +311,7 @@ class SilenceDetector:
             'is_paused': monitor.is_paused
         }
     
-    def _trigger_escalation(self, monitor: BuildMonitor, context: Dict[str, any]) -> None:
+    def _trigger_escalation(self, monitor: BuildMonitor, context: dict[str, any]) -> None:
         """Trigger escalation to ESC-02."""
         # In production, this would create actual escalation via ESC-02
         pass

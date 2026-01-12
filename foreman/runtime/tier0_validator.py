@@ -18,7 +18,7 @@ import sys
 import json
 import subprocess
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any
 
 
 class Tier0RuntimeValidator:
@@ -197,7 +197,7 @@ class Tier0RuntimeValidator:
                 print("This is a system failure that must be resolved before execution.")
                 print()
     
-    def get_validation_results(self) -> Dict[str, Any]:
+    def get_validation_results(self) -> dict[str, Any]:
         """Get validation results for external use"""
         return self.validation_results
 

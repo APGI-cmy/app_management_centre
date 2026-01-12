@@ -19,7 +19,7 @@ need human attention. Routes pings to notification service and tracks lifecycle.
 """
 
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Literal
+from typing import Literal
 from dataclasses import dataclass, field
 import uuid
 
@@ -32,12 +32,12 @@ PingPriority = Literal["normal", "high", "urgent", "critical"]
 class Ping:
     """Represents a ping for attention required."""
     ping_id: str
-    context: Dict[str, any]
+    context: dict[str, any]
     priority: PingPriority
     status: PingStatus = "sent"
     created_at: datetime = field(default_factory=datetime.now)
-    delivered_at: Optional[datetime] = None
-    acknowledged_at: Optional[datetime] = None
+    delivered_at: datetime | None = None
+    acknowledged_at: datetime | None = None
     retry_count: int = 0
     timeout_threshold: timedelta = field(default_factory=lambda: timedelta(hours=24))
 
@@ -51,14 +51,14 @@ class PingGenerator:
     """
     
     def __init__(self):
-        self.pings: Dict[str, Ping] = {}
-        self.recent_contexts: List[Dict[str, any]] = []
+        self.pings: dict[str, Ping] = {}
+        self.recent_contexts: list[dict[str, any]] = []
         self.max_retries = 3
         self.duplicate_window = timedelta(minutes=5)
     
     def generate_ping(
         self,
-        context: Dict[str, any],
+        context: dict[str, any],
         priority: PingPriority = "normal"
     ) -> Ping:
         """
@@ -100,7 +100,7 @@ class PingGenerator:
         
         return ping
     
-    def route_ping(self, ping_id: str) -> Dict[str, any]:
+    def route_ping(self, ping_id: str) -> dict[str, any]:
         """
         QA-094: Route ping to notification service.
         
@@ -143,7 +143,7 @@ class PingGenerator:
                 )
             raise
     
-    def track_lifecycle(self, ping_id: str) -> Dict[str, any]:
+    def track_lifecycle(self, ping_id: str) -> dict[str, any]:
         """
         QA-095: Track ping lifecycle.
         
@@ -187,7 +187,7 @@ class PingGenerator:
         ping.status = "acknowledged"
         ping.acknowledged_at = datetime.now()
     
-    def _is_duplicate(self, context: Dict[str, any]) -> bool:
+    def _is_duplicate(self, context: dict[str, any]) -> bool:
         """
         QA-096: Duplicate ping prevention.
         
@@ -209,7 +209,7 @@ class PingGenerator:
         
         return False
     
-    def _contexts_similar(self, context1: Dict[str, any], context2: Dict[str, any]) -> bool:
+    def _contexts_similar(self, context1: dict[str, any], context2: dict[str, any]) -> bool:
         """Check if two contexts are similar enough to be duplicates."""
         # Simple similarity check - same keys and similar values
         if context1.keys() != context2.keys():
@@ -232,7 +232,7 @@ class PingGenerator:
         # Simulate delivery - in production this would be actual integration
         pass
     
-    def handle_failure_modes(self, failure_type: str, **kwargs) -> Dict[str, any]:
+    def handle_failure_modes(self, failure_type: str, **kwargs) -> dict[str, any]:
         """
         QA-096: Handle ping generator failure modes.
         
