@@ -5,10 +5,8 @@ Extends alert_manager.py to provide SLA-based alerting using telemetry metrics.
 Wires P95/P99 latency violations to appropriate alert channels with trace correlation.
 """
 
-from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
-
-UTC = timezone.utc
+from datetime import datetime, UTC
+from typing import Any
 
 # In-memory storage for SLA definitions and violations (tenant-isolated)
 _sla_definitions = {}
@@ -45,9 +43,9 @@ class SLAAlertRouter:
     def define_sla(
         self,
         operation_name: str,
-        p95_threshold_ms: Optional[float] = None,
-        p99_threshold_ms: Optional[float] = None,
-        avg_threshold_ms: Optional[float] = None,
+        p95_threshold_ms: float | None = None,
+        p99_threshold_ms: float | None = None,
+        avg_threshold_ms: float | None = None,
         severity: str = "HIGH"
     ):
         """
@@ -69,16 +67,16 @@ class SLAAlertRouter:
             "defined_at": datetime.now(UTC)
         }
     
-    def get_sla_definition(self, operation_name: str) -> Optional[Dict[str, Any]]:
+    def get_sla_definition(self, operation_name: str) -> dict[str, Any] | None:
         """Retrieve SLA definition for an operation."""
         return _sla_definitions.get(self.organisation_id, {}).get(operation_name)
     
     def check_sla_compliance(
         self,
         operation_name: str,
-        metrics: Dict[str, Any],
-        trace_id: Optional[str] = None
-    ) -> Dict[str, Any]:
+        metrics: dict[str, Any],
+        trace_id: str | None = None
+    ) -> dict[str, Any]:
         """
         Check if metrics comply with SLA thresholds.
         
@@ -141,9 +139,9 @@ class SLAAlertRouter:
     
     def create_alert_for_violation(
         self,
-        compliance_result: Dict[str, Any],
-        additional_context: Optional[Dict] = None
-    ) -> Dict[str, Any]:
+        compliance_result: dict[str, Any],
+        additional_context: dict | None = None
+    ) -> dict[str, Any]:
         """
         Create an alert for SLA violation.
         
@@ -180,9 +178,9 @@ class SLAAlertRouter:
     
     def route_alert(
         self,
-        alert: Dict[str, Any],
+        alert: dict[str, Any],
         audit_logger=None
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Route alert to appropriate channels and log to audit trail.
         
@@ -238,9 +236,9 @@ class SLAAlertRouter:
     
     def get_all_violations(
         self,
-        status: Optional[str] = None,
-        operation_name: Optional[str] = None
-    ) -> List[Dict[str, Any]]:
+        status: str | None = None,
+        operation_name: str | None = None
+    ) -> list[dict[str, Any]]:
         """
         Retrieve SLA violations with optional filtering.
         
@@ -285,7 +283,7 @@ class SLAAlertRouter:
         self,
         alert_id: str,
         resolved_by: str,
-        resolution_notes: Optional[str] = None
+        resolution_notes: str | None = None
     ) -> bool:
         """
         Mark a violation as resolved.
@@ -307,7 +305,7 @@ class SLAAlertRouter:
                 return True
         return False
     
-    def get_violation_summary(self) -> Dict[str, Any]:
+    def get_violation_summary(self) -> dict[str, Any]:
         """
         Get summary statistics for SLA violations.
         

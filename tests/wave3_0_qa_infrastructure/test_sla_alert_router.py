@@ -9,9 +9,9 @@ Tests SLA-based alerting with telemetry integration including:
 """
 
 import pytest
-from datetime import datetime, timezone
+from datetime import datetime, UTC, UTC
 
-UTC = timezone.utc
+UTC = UTC
 
 
 @pytest.mark.wave3

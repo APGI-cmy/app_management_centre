@@ -10,10 +10,10 @@ Demonstrates complete flow:
 """
 
 import pytest
-from datetime import datetime, timezone
+from datetime import datetime, UTC, UTC
 import time
 
-UTC = timezone.utc
+UTC = UTC
 
 
 @pytest.mark.wave3

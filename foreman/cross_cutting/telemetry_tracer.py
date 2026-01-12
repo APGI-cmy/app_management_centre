@@ -9,13 +9,10 @@ Provides end-to-end tracing across UI→API→Backend→Governance flows with:
 - Integration with audit logger
 """
 
-from datetime import datetime, timezone
-from typing import Dict, Any, List, Optional
+from datetime import datetime, UTC
+from typing import Any
 import uuid
 import time
-
-# UTC timezone constant
-UTC = timezone.utc
 
 # In-memory storage for traces (tenant-isolated)
 _traces = {}
@@ -43,8 +40,8 @@ class TelemetrySpan:
         trace_id: str,
         organisation_id: str,
         operation_name: str,
-        parent_span_id: Optional[str] = None,
-        metadata: Optional[Dict[str, Any]] = None
+        parent_span_id: str | None = None,
+        metadata: dict[str, Any] | None = None
     ):
         self.span_id = span_id
         self.trace_id = trace_id
@@ -58,7 +55,7 @@ class TelemetrySpan:
         self.status = "IN_PROGRESS"
         self.events = []
     
-    def add_event(self, event_name: str, attributes: Optional[Dict] = None):
+    def add_event(self, event_name: str, attributes: dict | None = None):
         """Add an event to the span."""
         self.events.append({
             "timestamp": datetime.now(UTC),
@@ -72,7 +69,7 @@ class TelemetrySpan:
         self.duration_ms = (self.end_time - self.start_time).total_seconds() * 1000
         self.status = status
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert span to dictionary for storage/serialization."""
         return {
             "span_id": self.span_id,
@@ -115,7 +112,7 @@ class TelemetryTracer:
     def start_trace(
         self,
         operation_name: str,
-        metadata: Optional[Dict[str, Any]] = None
+        metadata: dict[str, Any] | None = None
     ) -> str:
         """
         Start a new distributed trace.
@@ -146,8 +143,8 @@ class TelemetryTracer:
         self,
         trace_id: str,
         operation_name: str,
-        parent_span_id: Optional[str] = None,
-        metadata: Optional[Dict[str, Any]] = None
+        parent_span_id: str | None = None,
+        metadata: dict[str, Any] | None = None
     ) -> TelemetrySpan:
         """
         Start a new span within a trace.
@@ -203,14 +200,14 @@ class TelemetryTracer:
             # Remove from active traces
             del _active_traces[self.organisation_id][trace_id]
     
-    def get_trace(self, trace_id: str) -> Optional[Dict[str, Any]]:
+    def get_trace(self, trace_id: str) -> dict[str, Any] | None:
         """Retrieve a specific trace by ID."""
         for trace in _traces.get(self.organisation_id, []):
             if trace["trace_id"] == trace_id:
                 return trace
         return None
     
-    def get_spans_for_trace(self, trace_id: str) -> List[Dict[str, Any]]:
+    def get_spans_for_trace(self, trace_id: str) -> list[dict[str, Any]]:
         """Get all spans associated with a trace."""
         spans = []
         for span in _spans.get(self.organisation_id, {}).values():
@@ -218,15 +215,15 @@ class TelemetryTracer:
                 spans.append(span.to_dict())
         return spans
     
-    def get_all_traces(self) -> List[Dict[str, Any]]:
+    def get_all_traces(self) -> list[dict[str, Any]]:
         """Get all traces for this organisation."""
         return _traces.get(self.organisation_id, [])
     
     def calculate_percentile_latency(
         self,
-        operation_name: Optional[str] = None,
+        operation_name: str | None = None,
         percentile: float = 95.0
-    ) -> Optional[float]:
+    ) -> float | None:
         """
         Calculate percentile latency (P50, P95, P99) for operations.
         
@@ -260,8 +257,8 @@ class TelemetryTracer:
     
     def get_latency_metrics(
         self,
-        operation_name: Optional[str] = None
-    ) -> Dict[str, Any]:
+        operation_name: str | None = None
+    ) -> dict[str, Any]:
         """
         Get comprehensive latency metrics for operations.
         
@@ -290,7 +287,7 @@ class TelemetryTracer:
             "sample_count": len(durations)
         }
     
-    def create_audit_context(self, trace_id: str, span_id: str) -> Dict[str, Any]:
+    def create_audit_context(self, trace_id: str, span_id: str) -> dict[str, Any]:
         """
         Create audit context with trace correlation.
         
@@ -306,6 +303,6 @@ class TelemetryTracer:
             "timestamp": datetime.now(UTC).isoformat()
         }
     
-    def get_active_traces(self) -> List[Dict[str, Any]]:
+    def get_active_traces(self) -> list[dict[str, Any]]:
         """Get all currently active (not finished) traces."""
         return list(_active_traces.get(self.organisation_id, {}).values())

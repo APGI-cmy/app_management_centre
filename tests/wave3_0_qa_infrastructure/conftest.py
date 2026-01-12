@@ -1,9 +1,7 @@
 """Test fixtures for Wave 3.0 QA Infrastructure"""
 
 import pytest
-from datetime import datetime, timezone
-
-UTC = timezone.utc
+from datetime import datetime, UTC
 
 
 @pytest.fixture
