@@ -1,6 +1,6 @@
 """Memory Write Proposal. QA-149"""
 
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Any
 
 

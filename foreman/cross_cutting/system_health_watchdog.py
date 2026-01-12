@@ -4,7 +4,7 @@ QA Coverage: QA-195 to QA-199
 """
 
 from typing import Any
-from datetime import datetime
+from datetime import datetime, UTC
 import uuid
 
 _health_checks = {}

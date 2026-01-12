@@ -4,7 +4,7 @@ QA Coverage: QA-147 to QA-154
 """
 
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Any
 import json
 import sys

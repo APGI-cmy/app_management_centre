@@ -4,7 +4,7 @@ QA Coverage: QA-190 to QA-194
 """
 
 from typing import Any
-from datetime import datetime
+from datetime import datetime, UTC
 
 _notifications = {}
 

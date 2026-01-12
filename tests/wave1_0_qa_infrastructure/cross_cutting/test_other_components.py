@@ -17,7 +17,7 @@ Expected State: RED (intentionally failing until implementation exists)
 """
 
 import pytest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 
 
 @pytest.mark.cross_cutting

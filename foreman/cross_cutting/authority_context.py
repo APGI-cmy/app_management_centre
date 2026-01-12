@@ -4,7 +4,6 @@ QA Coverage: QA-158
 """
 
 
-
 class AuthorityContext:
     """Represents authority context for permission checks."""
     

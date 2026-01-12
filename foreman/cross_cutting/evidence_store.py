@@ -3,7 +3,7 @@ Evidence Store (CROSS-04).
 QA Coverage: QA-180 to QA-189
 """
 
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Any
 from pathlib import Path
 import json

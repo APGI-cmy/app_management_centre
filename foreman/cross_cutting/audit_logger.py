@@ -3,7 +3,7 @@ Audit Logger (CROSS-05).
 QA Coverage: QA-169 to QA-179
 """
 
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import Any
 
 _audit_events = {}
