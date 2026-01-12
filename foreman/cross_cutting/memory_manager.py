@@ -4,10 +4,13 @@ QA Coverage: QA-147 to QA-154
 """
 
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 import json
 import sys
+
+# UTC timezone constant for compatibility
+UTC = timezone.utc
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
 
 from foreman.cross_cutting.memory_proposal import MemoryWriteProposal

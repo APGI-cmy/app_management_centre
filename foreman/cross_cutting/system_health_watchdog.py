@@ -4,8 +4,11 @@ QA Coverage: QA-195 to QA-199
 """
 
 from typing import Dict, Any, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 import uuid
+
+# UTC timezone constant for compatibility
+UTC = timezone.utc
 
 _health_checks = {}
 _registered_components = {}

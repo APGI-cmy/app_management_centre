@@ -3,10 +3,13 @@ Evidence Store (CROSS-04).
 QA Coverage: QA-180 to QA-189
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, Optional
 from pathlib import Path
 import json
+
+# UTC timezone constant for compatibility
+UTC = timezone.utc
 
 _evidence_artifacts = {}
 

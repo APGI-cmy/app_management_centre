@@ -1,7 +1,10 @@
 """Memory Write Proposal. QA-149"""
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any
+
+# UTC timezone constant for compatibility
+UTC = timezone.utc
 
 
 class MemoryWriteProposal:

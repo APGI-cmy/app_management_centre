@@ -3,8 +3,11 @@ Audit Logger (CROSS-05).
 QA Coverage: QA-169 to QA-179
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
+
+# UTC timezone constant for compatibility
+UTC = timezone.utc
 
 _audit_events = {}
 
