@@ -3,7 +3,7 @@ Authority Enforcer (CROSS-02).
 QA Coverage: QA-158 to QA-168
 """
 
-from typing import Dict, Any, List
+from typing import Any
 
 _override_audit = {}
 
@@ -32,7 +32,7 @@ class AuthorityEnforcer:
         """Check if context can override policy. QA-158"""
         return context.role == "JOHAN"
     
-    def execute_override(self, context, policy: str, reason: str) -> Dict[str, Any]:
+    def execute_override(self, context, policy: str, reason: str) -> dict[str, Any]:
         """Execute override with audit. QA-158"""
         if context.user_id not in _override_audit:
             _override_audit[context.user_id] = []
@@ -46,6 +46,6 @@ class AuthorityEnforcer:
         
         return {"success": True}
     
-    def get_override_audit(self, user_id: str) -> List[Dict]:
+    def get_override_audit(self, user_id: str) -> list[dict]:
         """Get override audit log. QA-158"""
         return _override_audit.get(user_id, [])

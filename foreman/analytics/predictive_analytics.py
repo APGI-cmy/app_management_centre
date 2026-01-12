@@ -6,7 +6,7 @@ Provides predictive model initialization, prediction generation, accuracy tracki
 visualization, and error handling.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
@@ -43,7 +43,7 @@ class PredictiveAnalytics:
         if organisation_id not in _accuracy_metrics:
             _accuracy_metrics[organisation_id] = {}
     
-    def initialize_model(self, model_config: Dict[str, Any]) -> Dict[str, Any]:
+    def initialize_model(self, model_config: dict[str, Any]) -> dict[str, Any]:
         """
         Initialize a predictive model. QA-451
         
@@ -80,7 +80,7 @@ class PredictiveAnalytics:
         
         return model_state
     
-    def generate_prediction(self, model_id: str, input_data: Dict[str, Any]) -> Dict[str, Any]:
+    def generate_prediction(self, model_id: str, input_data: dict[str, Any]) -> dict[str, Any]:
         """
         Generate prediction using a model. QA-452
         
@@ -137,7 +137,7 @@ class PredictiveAnalytics:
         
         return prediction
     
-    def track_accuracy(self, prediction_id: str, actual_value: float) -> Dict[str, Any]:
+    def track_accuracy(self, prediction_id: str, actual_value: float) -> dict[str, Any]:
         """
         Track prediction accuracy. QA-453
         
@@ -197,7 +197,7 @@ class PredictiveAnalytics:
         
         return accuracy_record
     
-    def prepare_prediction_visualization(self, model_id: str, historical_predictions: List[str]) -> Dict[str, Any]:
+    def prepare_prediction_visualization(self, model_id: str, historical_predictions: list[str]) -> dict[str, Any]:
         """
         Prepare visualization data for predictions. QA-454
         
@@ -238,7 +238,7 @@ class PredictiveAnalytics:
         
         return viz_data
     
-    def handle_prediction_error(self, model_id: str, error_context: Dict[str, Any]) -> Dict[str, Any]:
+    def handle_prediction_error(self, model_id: str, error_context: dict[str, Any]) -> dict[str, Any]:
         """
         Handle prediction errors. QA-455
         

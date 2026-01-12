@@ -8,7 +8,7 @@ Architectural Reference: FM_ARCHITECTURE_SPEC_V2_WIRING_COMPLETE.md Section 16.3
 """
 
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Any
+from typing import Any
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
 from foreman.analytics.exceptions import DataLoadError
@@ -41,7 +41,7 @@ class UsageAnalyzer:
     def __init__(self, organisation_id: str):
         self.organisation_id = organisation_id
     
-    def get_analytics_summary(self) -> Dict[str, Any]:
+    def get_analytics_summary(self) -> dict[str, Any]:
         """
         Get summary analytics data for rendering.
         
@@ -107,7 +107,7 @@ class UsageAnalyzer:
             "timestamp": datetime.now(UTC)
         })
     
-    def get_build_details_for_period(self, time_period: str, organisation_id: str = None) -> List[Dict]:
+    def get_build_details_for_period(self, time_period: str, organisation_id: str = None) -> list[dict]:
         """
         Get detailed build information for drill-down.
         

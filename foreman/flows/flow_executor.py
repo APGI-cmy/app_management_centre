@@ -3,14 +3,14 @@ Flow Executor.
 QA Coverage: QA-200
 """
 
-from typing import Dict, Any
+from typing import Any
 from datetime import datetime
 
 
 class FlowExecutor:
     """Executes flows end-to-end."""
     
-    def execute_flow(self, flow, input_data: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_flow(self, flow, input_data: dict[str, Any]) -> dict[str, Any]:
         """Execute a flow from start to completion. QA-200"""
         
         # Simulate flow execution through all states

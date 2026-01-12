@@ -14,7 +14,6 @@ import json
 import os
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
 
 
 class BuilderRegistry:
@@ -34,7 +33,7 @@ class BuilderRegistry:
     def load_json_file(self, file_path: Path, file_type: str) -> dict:
         """Load and parse a JSON file."""
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path) as f:
                 data = json.load(f)
                 self.validation_results.append(
                     f"✓ Successfully loaded {file_type}: {file_path.name}"
@@ -298,7 +297,7 @@ class BuilderRegistry:
         
         return "\n".join(report_lines)
     
-    def initialize(self) -> Tuple[bool, str]:
+    def initialize(self) -> tuple[bool, str]:
         """
         Execute the full initialization and validation process.
         

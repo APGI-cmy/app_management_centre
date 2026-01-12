@@ -5,7 +5,6 @@ Implements the Blocker entity representing obstacles preventing progress.
 """
 
 from enum import Enum
-from typing import Optional, Dict
 from datetime import datetime
 
 
@@ -28,8 +27,8 @@ class BlockerClassification(Enum):
 
 
 # Global blocker registry for automatic lookup
-_blocker_registry: Dict[str, 'Blocker'] = {}
-_task_blockers_index: Dict[str, list] = {}
+_blocker_registry: dict[str, 'Blocker'] = {}
+_task_blockers_index: dict[str, list] = {}
 
 
 class Blocker:
@@ -44,7 +43,7 @@ class Blocker:
         id: str,
         task_id: str,
         reason: str,
-        classification: Optional[BlockerClassification] = None
+        classification: BlockerClassification | None = None
     ):
         """
         Initialize a new Blocker.
@@ -66,8 +65,8 @@ class Blocker:
         # Metadata
         self.created_at = datetime.now(UTC)
         self.updated_at = datetime.now(UTC)
-        self.resolved_at: Optional[datetime] = None
-        self.resolution: Optional[str] = None
+        self.resolved_at: datetime | None = None
+        self.resolution: str | None = None
         
         # Auto-register in global registry
         _blocker_registry[self.id] = self

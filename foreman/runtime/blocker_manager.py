@@ -4,7 +4,6 @@ Blocker Manager - manages blockers and obstacles.
 Implements blocker creation, tracking, and resolution.
 """
 
-from typing import Dict, List
 from datetime import datetime
 
 from foreman.domain.blocker import Blocker, BlockerStatus
@@ -52,7 +51,7 @@ class BlockerManager:
         """
         return Blocker.get_by_id(blocker_id)
     
-    def get_blockers_for_task(self, task_id: str) -> List[Blocker]:
+    def get_blockers_for_task(self, task_id: str) -> list[Blocker]:
         """
         Get all blockers for a specific task.
         

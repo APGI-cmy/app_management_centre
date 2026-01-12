@@ -5,7 +5,7 @@ QA Coverage: QA-456 to QA-460
 Provides report template creation, data aggregation, rendering, export, and scheduling.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any
 from datetime import datetime, timedelta
 import json
 import sys
@@ -47,7 +47,7 @@ class ReportGenerator:
         if organisation_id not in _report_schedules:
             _report_schedules[organisation_id] = {}
     
-    def create_template(self, template_config: Dict[str, Any]) -> Dict[str, Any]:
+    def create_template(self, template_config: dict[str, Any]) -> dict[str, Any]:
         """
         Create a report template. QA-456
         
@@ -90,7 +90,7 @@ class ReportGenerator:
         
         return template
     
-    def aggregate_data(self, data_sources: List[Dict[str, Any]], aggregation_rules: Dict[str, Any]) -> Dict[str, Any]:
+    def aggregate_data(self, data_sources: list[dict[str, Any]], aggregation_rules: dict[str, Any]) -> dict[str, Any]:
         """
         Aggregate data from multiple sources. QA-457
         
@@ -157,7 +157,7 @@ class ReportGenerator:
         
         return aggregated_data
     
-    def render_report(self, template_id: str, data: Dict[str, Any]) -> Dict[str, Any]:
+    def render_report(self, template_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """
         Render a report using template and data. QA-458
         
@@ -219,7 +219,7 @@ class ReportGenerator:
         
         return rendered_report
     
-    def _render_table_section(self, data: Dict[str, Any], section: Dict[str, Any]) -> Dict[str, Any]:
+    def _render_table_section(self, data: dict[str, Any], section: dict[str, Any]) -> dict[str, Any]:
         """Helper to render table section."""
         data_key = section.get('data_key', 'table_data')
         table_data = data.get(data_key, [])
@@ -230,7 +230,7 @@ class ReportGenerator:
             "rows": table_data
         }
     
-    def _render_chart_section(self, data: Dict[str, Any], section: Dict[str, Any]) -> Dict[str, Any]:
+    def _render_chart_section(self, data: dict[str, Any], section: dict[str, Any]) -> dict[str, Any]:
         """Helper to render chart section."""
         data_key = section.get('data_key', 'chart_data')
         chart_data = data.get(data_key, [])
@@ -243,7 +243,7 @@ class ReportGenerator:
             "y_axis": section.get('y_axis', 'Y')
         }
     
-    def _render_summary_section(self, data: Dict[str, Any], section: Dict[str, Any]) -> Dict[str, Any]:
+    def _render_summary_section(self, data: dict[str, Any], section: dict[str, Any]) -> dict[str, Any]:
         """Helper to render summary section."""
         metrics = section.get('metrics', [])
         summary = {}
@@ -258,7 +258,7 @@ class ReportGenerator:
             "metrics": summary
         }
     
-    def export_report(self, report_id: str, format: str) -> Dict[str, Any]:
+    def export_report(self, report_id: str, format: str) -> dict[str, Any]:
         """
         Export rendered report to specified format. QA-459
         
@@ -311,7 +311,7 @@ class ReportGenerator:
         
         return export_record
     
-    def _export_to_html(self, report: Dict[str, Any]) -> str:
+    def _export_to_html(self, report: dict[str, Any]) -> str:
         """Helper to export report to HTML."""
         html = f"<html><head><title>{report['template_name']}</title></head><body>"
         html += f"<h1>{report['template_name']}</h1>"
@@ -323,7 +323,7 @@ class ReportGenerator:
         html += "</body></html>"
         return html
     
-    def _export_to_csv(self, report: Dict[str, Any]) -> str:
+    def _export_to_csv(self, report: dict[str, Any]) -> str:
         """Helper to export report to CSV."""
         csv_lines = [f"Report: {report['template_name']}"]
         
@@ -337,7 +337,7 @@ class ReportGenerator:
         
         return '\n'.join(csv_lines)
     
-    def schedule_report(self, template_id: str, schedule_config: Dict[str, Any]) -> Dict[str, Any]:
+    def schedule_report(self, template_id: str, schedule_config: dict[str, Any]) -> dict[str, Any]:
         """
         Schedule automatic report generation. QA-460
         

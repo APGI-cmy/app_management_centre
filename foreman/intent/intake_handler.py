@@ -3,7 +3,7 @@ Intent Intake Handler.
 QA Coverage: QA-201
 """
 
-from typing import Dict, Any
+from typing import Any
 from datetime import datetime
 
 
@@ -18,7 +18,7 @@ class IntentIntakeHandler:
         if organisation_id not in _intents:
             _intents[organisation_id] = {}
     
-    def accept_intent(self, user_id: str, intent_text: str, context: Dict) -> Dict[str, Any]:
+    def accept_intent(self, user_id: str, intent_text: str, context: dict) -> dict[str, Any]:
         """Accept and process user intent. QA-201"""
         intent_id = f"intent-{len(_intents[self.organisation_id])+1:03d}"
         
@@ -38,11 +38,11 @@ class IntentIntakeHandler:
             "intent_id": intent_id
         }
     
-    def get_intent(self, intent_id: str) -> Dict[str, Any]:
+    def get_intent(self, intent_id: str) -> dict[str, Any]:
         """Get intent by ID. QA-201"""
         return _intents.get(self.organisation_id, {}).get(intent_id, {})
     
-    def validate_intent(self, intent_id: str) -> Dict[str, bool]:
+    def validate_intent(self, intent_id: str) -> dict[str, bool]:
         """Validate intent completeness. QA-201"""
         intent = self.get_intent(intent_id)
         

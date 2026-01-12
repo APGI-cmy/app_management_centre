@@ -4,7 +4,7 @@ Program Manager - manages programs and their lifecycle.
 Implements program status tracking and aggregation.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Any
 
 from foreman.domain.program import Program, ProgramState
 from foreman.domain.wave import Wave
@@ -23,13 +23,13 @@ class ProgramManager:
     
     def __init__(self):
         """Initialize ProgramManager."""
-        self._programs: Dict[str, Program] = {}
-        self._waves: Dict[str, Wave] = {}
-        self._tasks: Dict[str, Task] = {}
+        self._programs: dict[str, Program] = {}
+        self._waves: dict[str, Wave] = {}
+        self._tasks: dict[str, Task] = {}
         
         # Indices
-        self._program_waves: Dict[str, List[str]] = {}  # program_id -> wave_ids
-        self._wave_tasks: Dict[str, List[str]] = {}  # wave_id -> task_ids
+        self._program_waves: dict[str, list[str]] = {}  # program_id -> wave_ids
+        self._wave_tasks: dict[str, list[str]] = {}  # wave_id -> task_ids
     
     def register_program(self, program: Program) -> None:
         """Register a program."""
@@ -51,7 +51,7 @@ class ProgramManager:
         if task.wave_id and task.wave_id in self._wave_tasks:
             self._wave_tasks[task.wave_id].append(task.id)
     
-    def get_program_status(self, program_id: str) -> Dict[str, Any]:
+    def get_program_status(self, program_id: str) -> dict[str, Any]:
         """
         Get aggregated status for a program.
         

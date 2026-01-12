@@ -1,6 +1,6 @@
 """Memory Consistency Validator. QA-153"""
 
-from typing import Dict, Any, List
+from typing import Any
 
 
 class MemoryConsistencyValidator:
@@ -9,7 +9,7 @@ class MemoryConsistencyValidator:
     def __init__(self, manager):
         self.manager = manager
     
-    def validate_consistency(self) -> Dict[str, Any]:
+    def validate_consistency(self) -> dict[str, Any]:
         """Validate memory consistency. QA-153"""
         import sys
         sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
