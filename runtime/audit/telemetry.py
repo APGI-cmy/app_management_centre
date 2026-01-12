@@ -37,12 +37,12 @@ class TelemetrySpan:
     """Represents a traced operation span"""
     span_id: str
     trace_id: str
-    parent_span_id: Optional[str]
+    parent_span_id: str | None
     operation: str
     organisation_id: str
     start_time: datetime
-    end_time: Optional[datetime] = None
-    status: Optional[SpanStatus] = None
+    end_time: datetime | None = None
+    status: SpanStatus | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
     errors: list[dict[str, Any]] = field(default_factory=list)
     
@@ -62,7 +62,7 @@ class TelemetrySpan:
             "details": details or {}
         })
     
-    def duration_ms(self) -> Optional[float]:
+    def duration_ms(self) -> float | None:
         """Calculate span duration in milliseconds"""
         if self.end_time:
             delta = self.end_time - self.start_time
@@ -92,7 +92,7 @@ class TelemetryEvent:
     organisation_id: str
     timestamp: datetime
     data: dict[str, Any] = field(default_factory=dict)
-    correlation_id: Optional[str] = None
+    correlation_id: str | None = None
 
 
 class TelemetryCollector:
@@ -123,8 +123,8 @@ class TelemetryCollector:
         self,
         operation: str,
         organisation_id: str,
-        parent_span_id: Optional[str] = None,
-        trace_id: Optional[str] = None,
+        parent_span_id: str | None = None,
+        trace_id: str | None = None,
         metadata: dict[str, Any] = None
     ) -> TelemetrySpan:
         """Start a new telemetry span"""
@@ -151,7 +151,7 @@ class TelemetryCollector:
         span_id: str,
         status: SpanStatus,
         metadata: dict[str, Any] = None
-    ) -> Optional[TelemetrySpan]:
+    ) -> TelemetrySpan | None:
         """Complete an active span"""
         with self._lock:
             span = self._active_spans.pop(span_id, None)
@@ -203,7 +203,7 @@ class TelemetryCollector:
         level: TelemetryLevel,
         organisation_id: str,
         data: dict[str, Any] = None,
-        correlation_id: Optional[str] = None
+        correlation_id: str | None = None
     ) -> TelemetryEvent:
         """Log a telemetry event"""
         event = TelemetryEvent(
@@ -227,8 +227,8 @@ class TelemetryCollector:
     def get_spans(
         self,
         organisation_id: str,
-        trace_id: Optional[str] = None,
-        operation: Optional[str] = None,
+        trace_id: str | None = None,
+        operation: str | None = None,
         limit: int = 100
     ) -> list[TelemetrySpan]:
         """Query spans for an organisation"""
@@ -247,7 +247,7 @@ class TelemetryCollector:
     def get_metrics(
         self,
         organisation_id: str,
-        metric_name: Optional[str] = None,
+        metric_name: str | None = None,
         limit: int = 100
     ) -> list[TelemetryMetric]:
         """Query metrics for an organisation"""
@@ -262,8 +262,8 @@ class TelemetryCollector:
     def get_events(
         self,
         organisation_id: str,
-        event_type: Optional[str] = None,
-        level: Optional[TelemetryLevel] = None,
+        event_type: str | None = None,
+        level: TelemetryLevel | None = None,
         limit: int = 100
     ) -> list[TelemetryEvent]:
         """Query events for an organisation"""
@@ -322,7 +322,7 @@ class TelemetryCollector:
 
 
 # Global telemetry collector instance
-_telemetry_collector: Optional[TelemetryCollector] = None
+_telemetry_collector: TelemetryCollector | None = None
 
 
 def get_telemetry_collector() -> TelemetryCollector:

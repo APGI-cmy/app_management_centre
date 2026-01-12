@@ -50,7 +50,7 @@ class AuditEntry:
     # Who and what
     actor: str
     action: str
-    resource: Optional[str]
+    resource: str | None
     
     # Results
     outcome: str
@@ -59,8 +59,8 @@ class AuditEntry:
     
     # Context
     metadata: dict[str, Any] = field(default_factory=dict)
-    trace_id: Optional[str] = None
-    span_id: Optional[str] = None
+    trace_id: str | None = None
+    span_id: str | None = None
     
     # Immutability
     immutable: bool = True
@@ -109,10 +109,10 @@ class RuntimeAuditTrail:
         outcome: str,
         severity: AuditSeverity,
         category: AuditCategory,
-        resource: Optional[str] = None,
+        resource: str | None = None,
         metadata: dict[str, Any] = None,
-        trace_id: Optional[str] = None,
-        span_id: Optional[str] = None
+        trace_id: str | None = None,
+        span_id: str | None = None
     ) -> AuditEntry:
         """
         Log an audit event (QA-171: Log governance event)
@@ -172,9 +172,9 @@ class RuntimeAuditTrail:
         actor: str,
         action: str,
         outcome: str,
-        resource: Optional[str] = None,
+        resource: str | None = None,
         metadata: dict[str, Any] = None,
-        trace_id: Optional[str] = None
+        trace_id: str | None = None
     ) -> AuditEntry:
         """
         Log governance event (QA-171)
@@ -200,9 +200,9 @@ class RuntimeAuditTrail:
         outcome: str,
         permission_check: bool,
         override_used: bool = False,
-        resource: Optional[str] = None,
+        resource: str | None = None,
         metadata: dict[str, Any] = None,
-        trace_id: Optional[str] = None
+        trace_id: str | None = None
     ) -> AuditEntry:
         """
         Log authority event (QA-172: Log authority event)
@@ -236,9 +236,9 @@ class RuntimeAuditTrail:
         action: str,
         outcome: str,
         isolation_verified: bool,
-        resource: Optional[str] = None,
+        resource: str | None = None,
         metadata: dict[str, Any] = None,
-        trace_id: Optional[str] = None
+        trace_id: str | None = None
     ) -> AuditEntry:
         """
         Log tenant isolation enforcement event
@@ -271,7 +271,7 @@ class RuntimeAuditTrail:
         duration_ms: float,
         threshold_ms: float,
         metadata: dict[str, Any] = None,
-        trace_id: Optional[str] = None
+        trace_id: str | None = None
     ) -> AuditEntry:
         """
         Log SLA breach event
@@ -300,12 +300,12 @@ class RuntimeAuditTrail:
     def query_audit_log(
         self,
         organisation_id: str,
-        actor: Optional[str] = None,
-        action: Optional[str] = None,
-        category: Optional[AuditCategory] = None,
-        severity: Optional[AuditSeverity] = None,
-        start_time: Optional[datetime] = None,
-        end_time: Optional[datetime] = None,
+        actor: str | None = None,
+        action: str | None = None,
+        category: AuditCategory | None = None,
+        severity: AuditSeverity | None = None,
+        start_time: datetime | None = None,
+        end_time: datetime | None = None,
         limit: int = 100
     ) -> list[AuditEntry]:
         """
@@ -337,7 +337,7 @@ class RuntimeAuditTrail:
         # Return most recent first, up to limit
         return list(reversed(entries))[:limit]
     
-    def get_audit_entry(self, organisation_id: str, entry_id: str) -> Optional[AuditEntry]:
+    def get_audit_entry(self, organisation_id: str, entry_id: str) -> AuditEntry | None:
         """Retrieve a specific audit entry by ID"""
         with self._lock:
             entries = self._entries.get(organisation_id, [])
@@ -404,7 +404,7 @@ class RuntimeAuditTrail:
 
 
 # Global runtime audit trail instance
-_runtime_audit_trail: Optional[RuntimeAuditTrail] = None
+_runtime_audit_trail: RuntimeAuditTrail | None = None
 
 
 def get_runtime_audit_trail() -> RuntimeAuditTrail:
