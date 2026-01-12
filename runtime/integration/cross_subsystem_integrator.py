@@ -7,9 +7,9 @@ Authority: Wave 2.0 Subwave 2.9 - Deep Integration Phase 1 (QA-461 to QA-465)
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, List, Optional, Any, Set
+from typing import Optional, Any, Set
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from enum import Enum
 
 
@@ -28,10 +28,10 @@ class SubsystemEvent:
     event_id: str
     source_subsystem: str
     event_type: str
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     timestamp: datetime
     organisation_id: str
-    propagated_to: Set[str] = field(default_factory=set)
+    propagated_to: set[str] = field(default_factory=set)
     
     def mark_propagated(self, target_subsystem: str) -> None:
         """Mark this event as propagated to a target subsystem"""
@@ -44,7 +44,7 @@ class DataSyncRecord:
     sync_id: str
     source_subsystem: str
     target_subsystem: str
-    data_keys: List[str]
+    data_keys: list[str]
     timestamp: datetime
     organisation_id: str
     status: str = "pending"  # pending, in_progress, completed, failed
@@ -54,8 +54,8 @@ class DataSyncRecord:
 class StateCoordination:
     """Coordination of state across multiple subsystems"""
     coordination_id: str
-    participating_subsystems: List[str]
-    coordinated_state: Dict[str, Any]
+    participating_subsystems: list[str]
+    coordinated_state: dict[str, Any]
     organisation_id: str
     last_updated: datetime
 
@@ -64,7 +64,7 @@ class StateCoordination:
 class DependencyGraph:
     """Dependency graph between subsystems"""
     organisation_id: str
-    dependencies: Dict[str, List[str]] = field(default_factory=dict)  # subsystem -> depends_on
+    dependencies: dict[str, list[str]] = field(default_factory=dict)  # subsystem -> depends_on
     
     def add_dependency(self, subsystem: str, depends_on: str) -> None:
         """Add a dependency relationship"""
@@ -73,7 +73,7 @@ class DependencyGraph:
         if depends_on not in self.dependencies[subsystem]:
             self.dependencies[subsystem].append(depends_on)
     
-    def get_dependencies(self, subsystem: str) -> List[str]:
+    def get_dependencies(self, subsystem: str) -> list[str]:
         """Get all dependencies for a subsystem"""
         return self.dependencies.get(subsystem, [])
     
@@ -112,21 +112,21 @@ class CrossSubsystemIntegrator:
     """
     
     def __init__(self):
-        self.events: Dict[str, List[SubsystemEvent]] = {}  # org_id -> events
-        self.sync_records: Dict[str, List[DataSyncRecord]] = {}  # org_id -> records
-        self.state_coordinations: Dict[str, List[StateCoordination]] = {}  # org_id -> coordinations
-        self.dependency_graphs: Dict[str, DependencyGraph] = {}  # org_id -> graph
-        self.subsystem_states: Dict[str, Dict[str, SubsystemState]] = {}  # org_id -> {subsystem -> state}
-        self.error_log: Dict[str, List[Dict[str, Any]]] = {}  # org_id -> errors
+        self.events: dict[str, list[SubsystemEvent]] = {}  # org_id -> events
+        self.sync_records: dict[str, list[DataSyncRecord]] = {}  # org_id -> records
+        self.state_coordinations: dict[str, list[StateCoordination]] = {}  # org_id -> coordinations
+        self.dependency_graphs: dict[str, DependencyGraph] = {}  # org_id -> graph
+        self.subsystem_states: dict[str, dict[str, SubsystemState]] = {}  # org_id -> {subsystem -> state}
+        self.error_log: dict[str, list[dict[str, Any]]] = {}  # org_id -> errors
     
     # QA-461: Event Propagation
     def propagate_event(
         self,
         organisation_id: str,
         source_subsystem: str,
-        target_subsystems: List[str],
+        target_subsystems: list[str],
         event_type: str,
-        payload: Dict[str, Any]
+        payload: dict[str, Any]
     ) -> SubsystemEvent:
         """
         Propagate an event from source subsystem to target subsystems
@@ -141,14 +141,14 @@ class CrossSubsystemIntegrator:
         Returns:
             SubsystemEvent with propagation tracking
         """
-        event_id = f"{source_subsystem}_{event_type}_{datetime.now(timezone.utc).timestamp()}"
+        event_id = f"{source_subsystem}_{event_type}_{datetime.now(UTC).timestamp()}"
         
         event = SubsystemEvent(
             event_id=event_id,
             source_subsystem=source_subsystem,
             event_type=event_type,
             payload=payload,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             organisation_id=organisation_id,
             propagated_to=set()
         )
@@ -168,8 +168,8 @@ class CrossSubsystemIntegrator:
     def get_propagated_events(
         self,
         organisation_id: str,
-        subsystem: Optional[str] = None
-    ) -> List[SubsystemEvent]:
+        subsystem: str | None = None
+    ) -> list[SubsystemEvent]:
         """Get events propagated to a specific subsystem or all events"""
         events = self.events.get(organisation_id, [])
         
@@ -184,7 +184,7 @@ class CrossSubsystemIntegrator:
         organisation_id: str,
         source_subsystem: str,
         target_subsystem: str,
-        data_keys: List[str]
+        data_keys: list[str]
     ) -> DataSyncRecord:
         """
         Synchronize data between two subsystems
@@ -198,14 +198,14 @@ class CrossSubsystemIntegrator:
         Returns:
             DataSyncRecord tracking the synchronization
         """
-        sync_id = f"sync_{source_subsystem}_{target_subsystem}_{datetime.now(timezone.utc).timestamp()}"
+        sync_id = f"sync_{source_subsystem}_{target_subsystem}_{datetime.now(UTC).timestamp()}"
         
         record = DataSyncRecord(
             sync_id=sync_id,
             source_subsystem=source_subsystem,
             target_subsystem=target_subsystem,
             data_keys=data_keys,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             organisation_id=organisation_id,
             status="in_progress"
         )
@@ -224,7 +224,7 @@ class CrossSubsystemIntegrator:
         self,
         organisation_id: str,
         sync_id: str
-    ) -> Optional[DataSyncRecord]:
+    ) -> DataSyncRecord | None:
         """Get status of a data synchronization"""
         records = self.sync_records.get(organisation_id, [])
         for record in records:
@@ -236,8 +236,8 @@ class CrossSubsystemIntegrator:
     def coordinate_state(
         self,
         organisation_id: str,
-        subsystems: List[str],
-        coordinated_state: Dict[str, Any]
+        subsystems: list[str],
+        coordinated_state: dict[str, Any]
     ) -> StateCoordination:
         """
         Coordinate state across multiple subsystems
@@ -250,14 +250,14 @@ class CrossSubsystemIntegrator:
         Returns:
             StateCoordination tracking the coordination
         """
-        coordination_id = f"coord_{datetime.now(timezone.utc).timestamp()}"
+        coordination_id = f"coord_{datetime.now(UTC).timestamp()}"
         
         coordination = StateCoordination(
             coordination_id=coordination_id,
             participating_subsystems=subsystems,
             coordinated_state=coordinated_state,
             organisation_id=organisation_id,
-            last_updated=datetime.now(timezone.utc)
+            last_updated=datetime.now(UTC)
         )
         
         # Store coordination
@@ -278,7 +278,7 @@ class CrossSubsystemIntegrator:
         self,
         organisation_id: str,
         coordination_id: str
-    ) -> Optional[StateCoordination]:
+    ) -> StateCoordination | None:
         """Get a specific state coordination"""
         coordinations = self.state_coordinations.get(organisation_id, [])
         for coord in coordinations:
@@ -291,7 +291,7 @@ class CrossSubsystemIntegrator:
         self,
         organisation_id: str,
         subsystem: str,
-        depends_on: List[str]
+        depends_on: list[str]
     ) -> DependencyGraph:
         """
         Manage dependencies between subsystems
@@ -323,7 +323,7 @@ class CrossSubsystemIntegrator:
         self,
         organisation_id: str,
         subsystem: str
-    ) -> List[str]:
+    ) -> list[str]:
         """Get all dependencies for a subsystem"""
         if organisation_id in self.dependency_graphs:
             return self.dependency_graphs[organisation_id].get_dependencies(subsystem)
@@ -343,11 +343,11 @@ class CrossSubsystemIntegrator:
         self,
         organisation_id: str,
         source_subsystem: str,
-        affected_subsystems: List[str],
+        affected_subsystems: list[str],
         error_type: str,
         error_message: str,
-        recovery_action: Optional[str] = None
-    ) -> Dict[str, Any]:
+        recovery_action: str | None = None
+    ) -> dict[str, Any]:
         """
         Handle errors that span multiple subsystems
         
@@ -362,7 +362,7 @@ class CrossSubsystemIntegrator:
         Returns:
             Error record with handling details
         """
-        error_id = f"error_{source_subsystem}_{datetime.now(timezone.utc).timestamp()}"
+        error_id = f"error_{source_subsystem}_{datetime.now(UTC).timestamp()}"
         
         error_record = {
             "error_id": error_id,
@@ -371,7 +371,7 @@ class CrossSubsystemIntegrator:
             "error_type": error_type,
             "error_message": error_message,
             "recovery_action": recovery_action,
-            "timestamp": datetime.now(timezone.utc),
+            "timestamp": datetime.now(UTC),
             "organisation_id": organisation_id,
             "escalated": False
         }
@@ -398,7 +398,7 @@ class CrossSubsystemIntegrator:
         self,
         organisation_id: str,
         subsystem: str
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """Get all errors affecting a specific subsystem"""
         errors = self.error_log.get(organisation_id, [])
         return [

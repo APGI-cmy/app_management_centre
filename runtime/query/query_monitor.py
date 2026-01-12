@@ -5,7 +5,7 @@ Provides query performance monitoring, execution time tracking, and trend analys
 """
 
 import time
-from typing import Dict, Any, List, Optional
+from typing import Any, List, Optional
 from dataclasses import dataclass, field
 from collections import deque
 
@@ -18,7 +18,7 @@ class QueryMetrics:
     timestamp: float = field(default_factory=time.time)
     query_count: int = 1
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary"""
         return {
             'query_id': self.query_id,
@@ -50,9 +50,9 @@ class QueryMonitor:
         self.alert_threshold = alert_threshold
         self.max_history = max_history
         
-        self._metrics: Dict[str, QueryMetrics] = {}
+        self._metrics: dict[str, QueryMetrics] = {}
         self._history: deque = deque(maxlen=max_history)
-        self._alerts: List[Dict[str, Any]] = []
+        self._alerts: list[dict[str, Any]] = []
         self._total_queries = 0
         self._total_time = 0.0
     
@@ -111,19 +111,19 @@ class QueryMonitor:
         }
         self._alerts.append(alert)
     
-    def get_metrics(self, query_id: str) -> Optional[QueryMetrics]:
+    def get_metrics(self, query_id: str) -> QueryMetrics | None:
         """Get metrics for specific query"""
         return self._metrics.get(query_id)
     
-    def get_all_metrics(self) -> Dict[str, QueryMetrics]:
+    def get_all_metrics(self) -> dict[str, QueryMetrics]:
         """Get metrics for all queries"""
         return self._metrics.copy()
     
-    def get_alerts(self) -> List[Dict[str, Any]]:
+    def get_alerts(self) -> list[dict[str, Any]]:
         """Get all performance alerts"""
         return self._alerts.copy()
     
-    def get_statistics(self) -> Dict[str, Any]:
+    def get_statistics(self) -> dict[str, Any]:
         """
         Get comprehensive performance statistics
         
@@ -141,7 +141,7 @@ class QueryMonitor:
             'alert_threshold': self.alert_threshold
         }
     
-    def get_trend_analysis(self, window_size: int = 100) -> Dict[str, Any]:
+    def get_trend_analysis(self, window_size: int = 100) -> dict[str, Any]:
         """
         Analyze performance trends
         

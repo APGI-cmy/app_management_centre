@@ -4,7 +4,7 @@ Query Optimizer
 Provides query plan optimization, index usage optimization, and execution plan analysis.
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any, List, Optional
 from dataclasses import dataclass, field
 import hashlib
 import json
@@ -16,12 +16,12 @@ class QueryPlan:
     query: str
     plan_id: str
     estimated_cost: float
-    indexes_used: List[str] = field(default_factory=list)
-    join_type: Optional[str] = None
-    optimization_applied: List[str] = field(default_factory=list)
+    indexes_used: list[str] = field(default_factory=list)
+    join_type: str | None = None
+    optimization_applied: list[str] = field(default_factory=list)
     is_cached: bool = False
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary"""
         return {
             'query': self.query,
@@ -47,10 +47,10 @@ class QueryOptimizer:
     
     def __init__(self):
         """Initialize query optimizer"""
-        self._plan_cache: Dict[str, QueryPlan] = {}
-        self._index_recommendations: Dict[str, List[str]] = {}
+        self._plan_cache: dict[str, QueryPlan] = {}
+        self._index_recommendations: dict[str, list[str]] = {}
     
-    def optimize_query(self, query: str, available_indexes: Optional[List[str]] = None) -> QueryPlan:
+    def optimize_query(self, query: str, available_indexes: list[str] | None = None) -> QueryPlan:
         """
         Optimize query execution plan
         
@@ -117,7 +117,7 @@ class QueryOptimizer:
         
         return base_cost
     
-    def _select_optimal_indexes(self, query: str, available_indexes: List[str]) -> List[str]:
+    def _select_optimal_indexes(self, query: str, available_indexes: list[str]) -> list[str]:
         """
         Select optimal indexes for query
         
@@ -166,7 +166,7 @@ class QueryOptimizer:
         if recommendation not in self._index_recommendations[table]:
             self._index_recommendations[table].append(recommendation)
     
-    def get_index_recommendations(self) -> Dict[str, List[str]]:
+    def get_index_recommendations(self) -> dict[str, list[str]]:
         """Get all index recommendations"""
         return self._index_recommendations.copy()
     

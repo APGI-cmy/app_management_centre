@@ -6,7 +6,7 @@ status tracking, and alerting.
 """
 
 import time
-from typing import Dict, Any, List, Optional
+from typing import Any, List, Optional
 from dataclasses import dataclass
 from enum import Enum
 
@@ -24,7 +24,7 @@ class HealthCheckResult:
     """Result of a health check"""
     status: HealthStatus
     timestamp: float
-    details: Dict[str, Any]
+    details: dict[str, Any]
     message: str
 
 
@@ -50,10 +50,10 @@ class PoolHealthMonitor:
         """
         self.unhealthy_threshold = unhealthy_threshold
         self.degraded_threshold = degraded_threshold
-        self._health_history: List[HealthCheckResult] = []
-        self._alerts: List[Dict[str, Any]] = []
+        self._health_history: list[HealthCheckResult] = []
+        self._alerts: list[dict[str, Any]] = []
     
-    def check_health(self, pool_stats: Dict[str, Any]) -> HealthCheckResult:
+    def check_health(self, pool_stats: dict[str, Any]) -> HealthCheckResult:
         """
         Check pool health based on statistics
         
@@ -126,13 +126,13 @@ class PoolHealthMonitor:
         }
         self._alerts.append(alert)
     
-    def get_current_status(self) -> Optional[HealthStatus]:
+    def get_current_status(self) -> HealthStatus | None:
         """Get current health status"""
         if not self._health_history:
             return HealthStatus.UNKNOWN
         return self._health_history[-1].status
     
-    def get_health_history(self, limit: int = 10) -> List[HealthCheckResult]:
+    def get_health_history(self, limit: int = 10) -> list[HealthCheckResult]:
         """
         Get recent health check history
         
@@ -144,7 +144,7 @@ class PoolHealthMonitor:
         """
         return self._health_history[-limit:]
     
-    def get_alerts(self) -> List[Dict[str, Any]]:
+    def get_alerts(self) -> list[dict[str, Any]]:
         """Get all health alerts"""
         return self._alerts.copy()
     
@@ -152,7 +152,7 @@ class PoolHealthMonitor:
         """Clear all health alerts"""
         self._alerts.clear()
     
-    def get_health_summary(self) -> Dict[str, Any]:
+    def get_health_summary(self) -> dict[str, Any]:
         """
         Get health summary statistics
         

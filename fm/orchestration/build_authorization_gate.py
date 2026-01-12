@@ -13,7 +13,7 @@ from dataclasses import dataclass, asdict
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Optional
 
 
 class GateResult(Enum):
@@ -35,8 +35,8 @@ class PreconditionResult:
     name: str
     status: PreconditionStatus
     message: str
-    evidence_paths: List[str]
-    blocking_conditions: List[str]
+    evidence_paths: list[str]
+    blocking_conditions: list[str]
 
 
 @dataclass
@@ -45,10 +45,10 @@ class BuildAuthorizationResult:
     build_id: str
     gate_result: GateResult
     timestamp: str
-    precondition_results: List[PreconditionResult]
+    precondition_results: list[PreconditionResult]
     summary: str
     
-    def to_dict(self) -> Dict:
+    def to_dict(self) -> dict:
         """Convert to dictionary for JSON serialization"""
         return {
             'build_id': self.build_id,
@@ -83,7 +83,7 @@ class BuildAuthorizationGate:
     8. Zero Test Debt = CONFIRMED
     """
     
-    def __init__(self, repo_root: Optional[Path] = None):
+    def __init__(self, repo_root: Path | None = None):
         """
         Initialize the gate validator
         

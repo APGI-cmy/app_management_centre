@@ -6,7 +6,7 @@ timing, metrics collection, and performance analysis.
 """
 
 import time
-from typing import Dict, Any, List, Optional
+from typing import Any, List, Optional
 from dataclasses import dataclass
 
 
@@ -18,7 +18,7 @@ class PerformanceMetrics:
     timestamp: float
     cache_hit: bool
     success: bool
-    error: Optional[str] = None
+    error: str | None = None
 
 
 class LazyPerformanceMonitor:
@@ -41,8 +41,8 @@ class LazyPerformanceMonitor:
             slow_load_threshold: Threshold in seconds for slow load alerts
         """
         self.slow_load_threshold = slow_load_threshold
-        self._metrics: List[PerformanceMetrics] = []
-        self._alerts: List[Dict[str, Any]] = []
+        self._metrics: list[PerformanceMetrics] = []
+        self._alerts: list[dict[str, Any]] = []
     
     def record_load(
         self, 
@@ -50,7 +50,7 @@ class LazyPerformanceMonitor:
         load_time: float, 
         cache_hit: bool = False,
         success: bool = True,
-        error: Optional[str] = None
+        error: str | None = None
     ) -> PerformanceMetrics:
         """
         Record a load operation
@@ -93,7 +93,7 @@ class LazyPerformanceMonitor:
         }
         self._alerts.append(alert)
     
-    def get_metrics_for_key(self, key: str) -> List[PerformanceMetrics]:
+    def get_metrics_for_key(self, key: str) -> list[PerformanceMetrics]:
         """
         Get all metrics for a specific key
         
@@ -105,7 +105,7 @@ class LazyPerformanceMonitor:
         """
         return [m for m in self._metrics if m.key == key]
     
-    def get_statistics(self) -> Dict[str, Any]:
+    def get_statistics(self) -> dict[str, Any]:
         """
         Get performance statistics
         
@@ -145,7 +145,7 @@ class LazyPerformanceMonitor:
             'cache_hit_rate': len(cache_hits) / len(self._metrics) if self._metrics else 0.0
         }
     
-    def get_alerts(self) -> List[Dict[str, Any]]:
+    def get_alerts(self) -> list[dict[str, Any]]:
         """Get all performance alerts"""
         return self._alerts.copy()
     
@@ -153,7 +153,7 @@ class LazyPerformanceMonitor:
         """Clear all alerts"""
         self._alerts.clear()
     
-    def get_trend_analysis(self, window_size: int = 10) -> Dict[str, Any]:
+    def get_trend_analysis(self, window_size: int = 10) -> dict[str, Any]:
         """
         Analyze performance trends
         

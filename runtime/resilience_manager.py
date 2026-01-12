@@ -14,9 +14,9 @@ Resilience Patterns:
 - QA-270: Graceful degradation
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Optional, Any
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from enum import Enum
 import threading
 import time
@@ -51,8 +51,8 @@ class CircuitBreaker:
     timeout_seconds: int
     half_open_max_calls: int
     half_open_calls: int
-    last_failure_time: Optional[datetime]
-    opened_at: Optional[datetime]
+    last_failure_time: datetime | None
+    opened_at: datetime | None
     organisation_id: str
 
 
@@ -64,7 +64,7 @@ class Bulkhead:
     max_concurrent_calls: int
     current_calls: int
     max_wait_duration_ms: int
-    active_requests: Dict[str, datetime]
+    active_requests: dict[str, datetime]
     organisation_id: str
 
 
@@ -98,7 +98,7 @@ class TimedOperation:
 class ServiceDegradation:
     """Service degradation configuration"""
     service_name: str
-    levels: List[Dict[str, Any]]
+    levels: list[dict[str, Any]]
     current_level: str
     organisation_id: str
 
@@ -123,11 +123,11 @@ class ResilienceManager:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._circuit_breakers: Dict[str, CircuitBreaker] = {}
-        self._bulkheads: Dict[str, Bulkhead] = {}
-        self._retry_policies: Dict[str, RetryPolicy] = {}
-        self._timed_operations: Dict[str, TimedOperation] = {}
-        self._degradation_configs: Dict[str, ServiceDegradation] = {}
+        self._circuit_breakers: dict[str, CircuitBreaker] = {}
+        self._bulkheads: dict[str, Bulkhead] = {}
+        self._retry_policies: dict[str, RetryPolicy] = {}
+        self._timed_operations: dict[str, TimedOperation] = {}
+        self._degradation_configs: dict[str, ServiceDegradation] = {}
         self._lock = threading.Lock()
     
     def initialize_circuit_breaker(
@@ -170,7 +170,7 @@ class ResilienceManager:
         
         return circuit_id
     
-    def get_circuit_status(self, circuit_id: str) -> Dict[str, Any]:
+    def get_circuit_status(self, circuit_id: str) -> dict[str, Any]:
         """
         QA-266: Get circuit breaker status
         
@@ -188,7 +188,7 @@ class ResilienceManager:
             
             # Check if timeout expired and transition to HALF_OPEN
             if circuit.state == CircuitState.OPEN and circuit.opened_at:
-                elapsed = (datetime.now(timezone.utc) - circuit.opened_at).total_seconds()
+                elapsed = (datetime.now(UTC) - circuit.opened_at).total_seconds()
                 if elapsed >= circuit.timeout_seconds:
                     circuit.state = CircuitState.HALF_OPEN
                     circuit.half_open_calls = 0
@@ -213,14 +213,14 @@ class ResilienceManager:
             
             circuit = self._circuit_breakers[circuit_id]
             circuit.failure_count += 1
-            circuit.last_failure_time = datetime.now(timezone.utc)
+            circuit.last_failure_time = datetime.now(UTC)
             
             # Transition to OPEN if threshold exceeded
             if circuit.failure_count >= circuit.failure_threshold:
                 circuit.state = CircuitState.OPEN
-                circuit.opened_at = datetime.now(timezone.utc)
+                circuit.opened_at = datetime.now(UTC)
     
-    def attempt_call(self, circuit_id: str) -> Dict[str, Any]:
+    def attempt_call(self, circuit_id: str) -> dict[str, Any]:
         """
         QA-266: Attempt call through circuit breaker
         
@@ -241,7 +241,7 @@ class ResilienceManager:
             elif circuit.state == CircuitState.OPEN:
                 # Check if timeout expired
                 if circuit.opened_at:
-                    elapsed = (datetime.now(timezone.utc) - circuit.opened_at).total_seconds()
+                    elapsed = (datetime.now(UTC) - circuit.opened_at).total_seconds()
                     if elapsed >= circuit.timeout_seconds:
                         circuit.state = CircuitState.HALF_OPEN
                         circuit.half_open_calls = 0
@@ -295,7 +295,7 @@ class ResilienceManager:
         self,
         bulkhead_id: str,
         request_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-267: Acquire slot in bulkhead
         
@@ -314,7 +314,7 @@ class ResilienceManager:
             
             if bulkhead.current_calls < bulkhead.max_concurrent_calls:
                 bulkhead.current_calls += 1
-                bulkhead.active_requests[request_id] = datetime.now(timezone.utc)
+                bulkhead.active_requests[request_id] = datetime.now(UTC)
                 return {
                     "acquired": True,
                     "bulkhead_id": bulkhead_id,
@@ -374,7 +374,7 @@ class ResilienceManager:
         operation_name: str,
         simulated_failures: int,
         config: RetryPolicy
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-268: Execute operation with retry and exponential backoff
         
@@ -387,7 +387,7 @@ class ResilienceManager:
             Dict with execution results
         """
         retry_count = 0
-        delay_sequence: List[int] = []
+        delay_sequence: list[int] = []
         total_delay_ms = 0
         
         for attempt in range(config.max_retries + 1):
@@ -455,7 +455,7 @@ class ResilienceManager:
             operation_name=operation_name,
             timeout_ms=timeout_ms,
             cancellable=cancellable,
-            started_at=datetime.now(timezone.utc),
+            started_at=datetime.now(UTC),
             timed_out=False,
             cancelled=False,
             cleanup_executed=False
@@ -481,7 +481,7 @@ class ResilienceManager:
         
         return operation_id
     
-    def get_operation_status(self, operation_id: str) -> Dict[str, Any]:
+    def get_operation_status(self, operation_id: str) -> dict[str, Any]:
         """
         QA-269: Get timed operation status
         
@@ -496,7 +496,7 @@ class ResilienceManager:
                 return {"error": "Operation not found"}
             
             operation = self._timed_operations[operation_id]
-            elapsed = (datetime.now(timezone.utc) - operation.started_at).total_seconds() * 1000
+            elapsed = (datetime.now(UTC) - operation.started_at).total_seconds() * 1000
             
             return {
                 "timed_out": operation.timed_out,
@@ -510,8 +510,8 @@ class ResilienceManager:
     def configure_degradation_policy(
         self,
         service_name: str,
-        levels: List[Dict[str, Any]]
-    ) -> Dict[str, Any]:
+        levels: list[dict[str, Any]]
+    ) -> dict[str, Any]:
         """
         QA-270: Configure graceful degradation policy
         
@@ -539,7 +539,7 @@ class ResilienceManager:
             "organisation_id": self.organisation_id
         }
     
-    def get_service_level(self, service_name: str) -> Dict[str, Any]:
+    def get_service_level(self, service_name: str) -> dict[str, Any]:
         """
         QA-270: Get current service degradation level
         
@@ -573,7 +573,7 @@ class ResilienceManager:
         service_name: str,
         reason: str,
         target_level: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-270: Trigger service degradation
         
@@ -615,7 +615,7 @@ class ResilienceManager:
         self,
         service_name: str,
         target_level: str = "full"
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-270: Attempt service recovery
         

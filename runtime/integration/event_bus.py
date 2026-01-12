@@ -6,9 +6,10 @@ Authority: Wave 2.0 Subwave 2.9 - Deep Integration Phase 1 (QA-466 to QA-470)
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, List, Optional, Any, Callable
+from typing import Optional, Any
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from collections import deque
 from enum import Enum
 import threading
@@ -27,11 +28,11 @@ class Event:
     """Published event"""
     event_id: str
     event_type: str
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     timestamp: datetime
     organisation_id: str
     sequence_number: int
-    delivered_to: List[str] = field(default_factory=list)
+    delivered_to: list[str] = field(default_factory=list)
     
     def mark_delivered(self, subscriber_id: str) -> None:
         """Mark event as delivered to a subscriber"""
@@ -43,7 +44,7 @@ class Event:
 class Subscription:
     """Event subscription"""
     subscriber_id: str
-    event_types: List[str]
+    event_types: list[str]
     callback: Callable[[Event], None]
     organisation_id: str
     active: bool = True
@@ -70,13 +71,13 @@ class EventQueue:
         self.next_sequence += 1
         self.events.append(event)
     
-    def dequeue(self) -> Optional[Event]:
+    def dequeue(self) -> Event | None:
         """Remove and return next event"""
         if self.events:
             return self.events.popleft()
         return None
     
-    def peek(self) -> Optional[Event]:
+    def peek(self) -> Event | None:
         """View next event without removing"""
         if self.events:
             return self.events[0]
@@ -95,10 +96,10 @@ class EventBus:
     
     def __init__(self):
         self.state = EventBusState.INITIALIZING
-        self.subscriptions: Dict[str, List[Subscription]] = {}  # org_id -> subscriptions
-        self.event_queues: Dict[str, EventQueue] = {}  # org_id -> queue
-        self.published_events: Dict[str, List[Event]] = {}  # org_id -> events
-        self.failed_deliveries: Dict[str, List[Dict[str, Any]]] = {}  # org_id -> failures
+        self.subscriptions: dict[str, list[Subscription]] = {}  # org_id -> subscriptions
+        self.event_queues: dict[str, EventQueue] = {}  # org_id -> queue
+        self.published_events: dict[str, list[Event]] = {}  # org_id -> events
+        self.failed_deliveries: dict[str, list[dict[str, Any]]] = {}  # org_id -> failures
         self.lock = threading.Lock()
         self.next_event_id = 1
     
@@ -146,7 +147,7 @@ class EventBus:
         self,
         organisation_id: str,
         event_type: str,
-        payload: Dict[str, Any]
+        payload: dict[str, Any]
     ) -> Event:
         """
         Publish an event to the bus
@@ -170,7 +171,7 @@ class EventBus:
                 event_id=event_id,
                 event_type=event_type,
                 payload=payload,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 organisation_id=organisation_id,
                 sequence_number=0  # Will be set by queue
             )
@@ -190,8 +191,8 @@ class EventBus:
     def get_published_events(
         self,
         organisation_id: str,
-        event_type: Optional[str] = None
-    ) -> List[Event]:
+        event_type: str | None = None
+    ) -> list[Event]:
         """Get published events, optionally filtered by type"""
         events = self.published_events.get(organisation_id, [])
         
@@ -205,8 +206,8 @@ class EventBus:
         self,
         organisation_id: str,
         subscriber_id: str,
-        event_types: List[str],
-        callback: Optional[Callable[[Event], None]] = None
+        event_types: list[str],
+        callback: Callable[[Event], None] | None = None
     ) -> Subscription:
         """
         Subscribe to events
@@ -269,7 +270,7 @@ class EventBus:
     def get_subscriptions(
         self,
         organisation_id: str
-    ) -> List[Subscription]:
+    ) -> list[Subscription]:
         """Get all active subscriptions for a tenant"""
         return [
             sub for sub in self.subscriptions.get(organisation_id, [])
@@ -281,8 +282,8 @@ class EventBus:
         self,
         organisation_id: str,
         start_sequence: int = 0,
-        limit: Optional[int] = None
-    ) -> List[Event]:
+        limit: int | None = None
+    ) -> list[Event]:
         """
         Get events in sequence order
         
@@ -344,7 +345,7 @@ class EventBus:
         subscriber_id: str,
         error: str,
         attempt_retry: bool = True
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Handle failure in event delivery
         
@@ -362,7 +363,7 @@ class EventBus:
             "event_id": event.event_id,
             "subscriber_id": subscriber_id,
             "error": error,
-            "timestamp": datetime.now(timezone.utc),
+            "timestamp": datetime.now(UTC),
             "organisation_id": organisation_id,
             "retry_count": 0,
             "recovered": False
@@ -386,8 +387,8 @@ class EventBus:
     def get_failed_deliveries(
         self,
         organisation_id: str,
-        subscriber_id: Optional[str] = None
-    ) -> List[Dict[str, Any]]:
+        subscriber_id: str | None = None
+    ) -> list[dict[str, Any]]:
         """Get failed delivery records"""
         failures = self.failed_deliveries.get(organisation_id, [])
         

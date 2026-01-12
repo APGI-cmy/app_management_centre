@@ -7,9 +7,9 @@ Authority: Wave 2.0 Subwave 2.10 - Deep Integration Phase 2 (QA-476 to QA-480)
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, List, Optional, Any, Set
+from typing import Optional, Any, Set
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from enum import Enum
 import uuid
 
@@ -38,12 +38,12 @@ class Transaction:
     transaction_id: str
     organisation_id: str
     state: TransactionState
-    participating_subsystems: Set[str]
-    operations: List[Dict[str, Any]]
+    participating_subsystems: set[str]
+    operations: list[dict[str, Any]]
     timestamp: datetime
-    committed_at: Optional[datetime] = None
-    rolled_back_at: Optional[datetime] = None
-    failure_reason: Optional[str] = None
+    committed_at: datetime | None = None
+    rolled_back_at: datetime | None = None
+    failure_reason: str | None = None
     
     def can_commit(self) -> bool:
         """Check if transaction can be committed"""
@@ -60,15 +60,15 @@ class DistributedCoordination:
     coordination_id: str
     organisation_id: str
     transaction_id: str
-    participating_nodes: List[str]
+    participating_nodes: list[str]
     status: CoordinationStatus
     timestamp: datetime
-    coordinated_at: Optional[datetime] = None
+    coordinated_at: datetime | None = None
     
     def mark_coordinated(self) -> None:
         """Mark coordination as complete"""
         self.status = CoordinationStatus.COORDINATED
-        self.coordinated_at = datetime.now(timezone.utc)
+        self.coordinated_at = datetime.now(UTC)
 
 
 @dataclass
@@ -78,10 +78,10 @@ class FailureRecovery:
     organisation_id: str
     transaction_id: str
     failure_reason: str
-    recovery_actions: List[str]
+    recovery_actions: list[str]
     recovery_status: str  # pending, in_progress, completed, failed
     timestamp: datetime
-    completed_at: Optional[datetime] = None
+    completed_at: datetime | None = None
 
 
 class TransactionManager:
@@ -94,15 +94,15 @@ class TransactionManager:
     
     def __init__(self):
         """Initialize transaction manager with in-memory storage"""
-        self._transactions: Dict[str, Transaction] = {}
-        self._coordinations: Dict[str, DistributedCoordination] = {}
-        self._recoveries: Dict[str, FailureRecovery] = {}
+        self._transactions: dict[str, Transaction] = {}
+        self._coordinations: dict[str, DistributedCoordination] = {}
+        self._recoveries: dict[str, FailureRecovery] = {}
     
     def initialize_transaction(
         self,
         organisation_id: str,
-        subsystems: List[str],
-        operations: List[Dict[str, Any]]
+        subsystems: list[str],
+        operations: list[dict[str, Any]]
     ) -> Transaction:
         """
         Initialize a new distributed transaction.
@@ -123,7 +123,7 @@ class TransactionManager:
             state=TransactionState.INITIALIZED,
             participating_subsystems=set(subsystems),
             operations=operations,
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._transactions[transaction_id] = transaction
@@ -158,14 +158,14 @@ class TransactionManager:
         
         # Execute commit
         transaction.state = TransactionState.COMMITTED
-        transaction.committed_at = datetime.now(timezone.utc)
+        transaction.committed_at = datetime.now(UTC)
         
         return transaction
     
     def rollback_transaction(
         self,
         transaction_id: str,
-        reason: Optional[str] = None
+        reason: str | None = None
     ) -> Transaction:
         """
         Roll back a transaction.
@@ -192,7 +192,7 @@ class TransactionManager:
         
         # Execute rollback
         transaction.state = TransactionState.ROLLED_BACK
-        transaction.rolled_back_at = datetime.now(timezone.utc)
+        transaction.rolled_back_at = datetime.now(UTC)
         if reason:
             transaction.failure_reason = reason
         
@@ -202,7 +202,7 @@ class TransactionManager:
         self,
         organisation_id: str,
         transaction_id: str,
-        nodes: List[str]
+        nodes: list[str]
     ) -> DistributedCoordination:
         """
         Coordinate a distributed transaction across multiple nodes.
@@ -223,7 +223,7 @@ class TransactionManager:
             transaction_id=transaction_id,
             participating_nodes=nodes,
             status=CoordinationStatus.PENDING,
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._coordinations[coordination_id] = coordination
@@ -241,7 +241,7 @@ class TransactionManager:
         organisation_id: str,
         transaction_id: str,
         failure_reason: str,
-        recovery_actions: List[str]
+        recovery_actions: list[str]
     ) -> FailureRecovery:
         """
         Recover from transaction failure.
@@ -264,7 +264,7 @@ class TransactionManager:
             failure_reason=failure_reason,
             recovery_actions=recovery_actions,
             recovery_status="pending",
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._recoveries[recovery_id] = recovery
@@ -279,23 +279,23 @@ class TransactionManager:
         
         # Complete recovery
         recovery.recovery_status = "completed"
-        recovery.completed_at = datetime.now(timezone.utc)
+        recovery.completed_at = datetime.now(UTC)
         
         return recovery
     
-    def get_transaction(self, transaction_id: str) -> Optional[Transaction]:
+    def get_transaction(self, transaction_id: str) -> Transaction | None:
         """Get transaction by ID"""
         return self._transactions.get(transaction_id)
     
-    def get_coordination(self, coordination_id: str) -> Optional[DistributedCoordination]:
+    def get_coordination(self, coordination_id: str) -> DistributedCoordination | None:
         """Get coordination by ID"""
         return self._coordinations.get(coordination_id)
     
-    def get_recovery(self, recovery_id: str) -> Optional[FailureRecovery]:
+    def get_recovery(self, recovery_id: str) -> FailureRecovery | None:
         """Get recovery by ID"""
         return self._recoveries.get(recovery_id)
     
-    def get_transactions_by_org(self, organisation_id: str) -> List[Transaction]:
+    def get_transactions_by_org(self, organisation_id: str) -> list[Transaction]:
         """Get all transactions for an organisation"""
         return [
             txn for txn in self._transactions.values()

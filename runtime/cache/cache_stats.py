@@ -4,7 +4,7 @@ Cache Statistics Tracking
 Provides detailed cache statistics collection and reporting.
 """
 
-from typing import Dict, Any, List
+from typing import Any, List
 from dataclasses import dataclass, field
 import time
 
@@ -64,7 +64,7 @@ class CacheStatistics:
         """Get uptime in seconds"""
         return time.time() - self.start_time
     
-    def get_report(self) -> Dict[str, Any]:
+    def get_report(self) -> dict[str, Any]:
         """
         Generate comprehensive statistics report
         

@@ -14,9 +14,9 @@ Failure Prediction Capabilities:
 - QA-265: ML-based failure prediction model
 """
 
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Optional, Any, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from enum import Enum
 import threading
 import uuid
@@ -57,7 +57,7 @@ class PredictionModel:
     model_type: str
     trained_at: datetime
     accuracy: float
-    feature_importance: Dict[str, float]
+    feature_importance: dict[str, float]
     organisation_id: str
 
 
@@ -81,16 +81,16 @@ class FailurePredictor:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._patterns: Dict[str, FailurePattern] = {}
-        self._models: Dict[str, PredictionModel] = {}
-        self._alert_history: Dict[str, datetime] = {}  # For deduplication
+        self._patterns: dict[str, FailurePattern] = {}
+        self._models: dict[str, PredictionModel] = {}
+        self._alert_history: dict[str, datetime] = {}  # For deduplication
         self._lock = threading.Lock()
     
     def analyze_failure_patterns(
         self,
-        historical_data: List[Dict[str, Any]],
+        historical_data: list[dict[str, Any]],
         time_window_hours: int = 24
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-261: Analyze historical failures to detect patterns
         
@@ -110,7 +110,7 @@ class FailurePredictor:
                 - organisation_id: Tenant ID
         """
         # Group failures by type
-        failure_by_type: Dict[str, List[Dict[str, Any]]] = {}
+        failure_by_type: dict[str, list[dict[str, Any]]] = {}
         for failure in historical_data:
             failure_type = failure.get("type", "unknown")
             if failure_type not in failure_by_type:
@@ -118,8 +118,8 @@ class FailurePredictor:
             failure_by_type[failure_type].append(failure)
         
         # Calculate frequencies
-        pattern_frequency: Dict[str, int] = {}
-        pattern_types: List[str] = []
+        pattern_frequency: dict[str, int] = {}
+        pattern_types: list[str] = []
         
         for failure_type, failures in failure_by_type.items():
             count = len(failures)
@@ -162,8 +162,8 @@ class FailurePredictor:
     def calculate_failure_risk(
         self,
         failure_type: str,
-        indicators: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        indicators: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         QA-262: Calculate predictive failure risk score
         
@@ -265,9 +265,9 @@ class FailurePredictor:
     
     def generate_proactive_alert(
         self,
-        risk_assessment: Dict[str, Any],
+        risk_assessment: dict[str, Any],
         include_recommendations: bool = True
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-263: Generate proactive failure alert
         
@@ -298,7 +298,7 @@ class FailurePredictor:
         with self._lock:
             if alert_hash in self._alert_history:
                 last_alert = self._alert_history[alert_hash]
-                if datetime.now(timezone.utc) - last_alert < timedelta(minutes=15):
+                if datetime.now(UTC) - last_alert < timedelta(minutes=15):
                     return {
                         "alert_generated": False,
                         "suppressed_duplicate": True,
@@ -307,7 +307,7 @@ class FailurePredictor:
                     }
             
             # Record new alert
-            self._alert_history[alert_hash] = datetime.now(timezone.utc)
+            self._alert_history[alert_hash] = datetime.now(UTC)
         
         # Determine severity
         if risk_score >= 0.8:
@@ -358,9 +358,9 @@ class FailurePredictor:
     
     def analyze_failure_trends(
         self,
-        time_series_data: List[Dict[str, Any]],
+        time_series_data: list[dict[str, Any]],
         analysis_period_days: int = 7
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-264: Analyze failure trends over time
         
@@ -435,9 +435,9 @@ class FailurePredictor:
     
     def train_prediction_model(
         self,
-        training_data: Dict[str, List[Dict[str, Any]]],
+        training_data: dict[str, list[dict[str, Any]]],
         model_type: str = "logistic_regression"
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-265: Train ML-based failure prediction model
         
@@ -482,7 +482,7 @@ class FailurePredictor:
         model = PredictionModel(
             model_id=model_id,
             model_type=model_type,
-            trained_at=datetime.now(timezone.utc),
+            trained_at=datetime.now(UTC),
             accuracy=accuracy,
             feature_importance=feature_importance,
             organisation_id=self.organisation_id
@@ -503,8 +503,8 @@ class FailurePredictor:
     def predict_failure_probability(
         self,
         model_id: str,
-        current_metrics: Dict[str, float]
-    ) -> Dict[str, Any]:
+        current_metrics: dict[str, float]
+    ) -> dict[str, Any]:
         """
         QA-265: Predict failure probability using trained model
         

@@ -6,7 +6,8 @@ initialization, data fetch, and error handling.
 """
 
 import time
-from typing import Any, Optional, Dict, Callable
+from typing import Any, Optional
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from threading import Lock
 
@@ -40,10 +41,10 @@ class LazyLoadable:
     loader: Callable[[], Any]  # Function to load data
     loaded: bool = False
     data: Any = None
-    last_loaded: Optional[float] = None
+    last_loaded: float | None = None
     load_count: int = 0
     error_count: int = 0
-    organisation_id: Optional[str] = None  # Tenant isolation
+    organisation_id: str | None = None  # Tenant isolation
     
     def mark_loaded(self, data: Any) -> None:
         """Mark data as loaded"""
@@ -75,7 +76,7 @@ class LazyLoader:
     - Performance tracking
     """
     
-    def __init__(self, config: Optional[LazyLoadConfig] = None):
+    def __init__(self, config: LazyLoadConfig | None = None):
         """
         Initialize lazy loader
         
@@ -86,7 +87,7 @@ class LazyLoader:
         if not self.config.validate():
             raise ValueError("Invalid lazy load configuration")
         
-        self._loadables: Dict[str, LazyLoadable] = {}
+        self._loadables: dict[str, LazyLoadable] = {}
         self._lock = Lock()
         self._ready = False
         self._stats = {
@@ -114,7 +115,7 @@ class LazyLoader:
         self, 
         key: str, 
         loader: Callable[[], Any], 
-        organisation_id: Optional[str] = None
+        organisation_id: str | None = None
     ) -> None:
         """
         Register a lazy loadable
@@ -235,7 +236,7 @@ class LazyLoader:
                 return False
             return self._loadables[key].loaded
     
-    def get_if_loaded(self, key: str) -> Optional[Any]:
+    def get_if_loaded(self, key: str) -> Any | None:
         """
         Get data if already loaded (without triggering load)
         
@@ -289,7 +290,7 @@ class LazyLoader:
             del self._loadables[key]
             return True
     
-    def get_loadable_info(self, key: str) -> Optional[Dict[str, Any]]:
+    def get_loadable_info(self, key: str) -> dict[str, Any] | None:
         """
         Get information about a loadable
         
@@ -313,7 +314,7 @@ class LazyLoader:
                 'organisation_id': loadable.organisation_id
             }
     
-    def get_statistics(self) -> Dict[str, Any]:
+    def get_statistics(self) -> dict[str, Any]:
         """
         Get loader statistics
         

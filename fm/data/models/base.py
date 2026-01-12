@@ -5,7 +5,7 @@ Architecture Reference: FM_ARCHITECTURE_SPEC_V2_WIRING_COMPLETE.md
 Tenant Isolation: Mandatory organisation_id on all tables
 """
 
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from typing import Optional
 from sqlalchemy import Column, String, DateTime, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -28,8 +28,8 @@ class TenantIsolatedModel(Base):
     organisation_id = Column(String(255), nullable=False, index=True)
     
     # Audit timestamps (MANDATORY)
-    created_at = Column(DateTime, nullable=False, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
-    updated_at = Column(DateTime, nullable=False, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None), onupdate=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
+    created_at = Column(DateTime, nullable=False, default=lambda: datetime.now(UTC).replace(tzinfo=None))
+    updated_at = Column(DateTime, nullable=False, default=lambda: datetime.now(UTC).replace(tzinfo=None), onupdate=lambda: datetime.now(UTC).replace(tzinfo=None))
 
 
 class DatabaseConfig:
@@ -37,7 +37,7 @@ class DatabaseConfig:
     Database configuration and session management.
     """
     
-    def __init__(self, database_url: Optional[str] = None):
+    def __init__(self, database_url: str | None = None):
         """
         Initialize database configuration.
         
@@ -79,10 +79,10 @@ class DatabaseConfig:
 
 
 # Global database config instance
-_db_config: Optional[DatabaseConfig] = None
+_db_config: DatabaseConfig | None = None
 
 
-def init_database(database_url: Optional[str] = None) -> DatabaseConfig:
+def init_database(database_url: str | None = None) -> DatabaseConfig:
     """
     Initialize the database configuration.
     

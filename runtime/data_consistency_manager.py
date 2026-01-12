@@ -7,9 +7,9 @@ Tenant Isolation: All operations scoped by organisation_id
 """
 
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Optional, Any
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 
 
 class ConsistencyStatus(Enum):
@@ -26,21 +26,21 @@ class Escalation:
     escalation_type: str
     organisation_id: str
     timestamp: datetime
-    details: Dict[str, Any]
+    details: dict[str, Any]
 
 
 class ConsistencyValidator:
     """Validates data consistency between sources"""
     
     def __init__(self):
-        self._validation_history: List[Dict[str, Any]] = []
+        self._validation_history: list[dict[str, Any]] = []
     
     def validate_consistency(
         self,
-        source: Dict[str, Any],
-        target: Dict[str, Any],
+        source: dict[str, Any],
+        target: dict[str, Any],
         record_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Validate consistency between source and target data
         
@@ -67,7 +67,7 @@ class ConsistencyValidator:
             "status": status,
             "record_id": record_id,
             "differences": differences,
-            "timestamp": datetime.now(timezone.utc).isoformat()
+            "timestamp": datetime.now(UTC).isoformat()
         }
         
         self._validation_history.append(result)
@@ -78,15 +78,15 @@ class ReconciliationEngine:
     """Reconciles inconsistent data"""
     
     def __init__(self):
-        self._reconciliation_history: List[Dict[str, Any]] = []
+        self._reconciliation_history: list[dict[str, Any]] = []
     
     def reconcile(
         self,
-        source: Dict[str, Any],
-        target: Dict[str, Any],
+        source: dict[str, Any],
+        target: dict[str, Any],
         record_id: str,
         strategy: str = "source_wins"
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Reconcile inconsistent data using specified strategy
         
@@ -147,7 +147,7 @@ class ReconciliationEngine:
             "record_id": record_id,
             "resolved_data": resolved_data,
             "strategy": strategy,
-            "timestamp": datetime.now(timezone.utc).isoformat()
+            "timestamp": datetime.now(UTC).isoformat()
         }
         
         self._reconciliation_history.append(result)
@@ -170,7 +170,7 @@ class DataConsistencyManager:
         self.organisation_id = organisation_id
         self._validator = ConsistencyValidator()
         self._reconciliation_engine = ReconciliationEngine()
-        self._escalations: List[Escalation] = []
+        self._escalations: list[Escalation] = []
     
     def get_validator(self) -> ConsistencyValidator:
         """Get consistency validator"""
@@ -184,16 +184,16 @@ class DataConsistencyManager:
         self,
         record_id: str,
         reason: str,
-        details: Optional[Dict[str, Any]] = None
+        details: dict[str, Any] | None = None
     ) -> str:
         """Escalate a reconciliation failure"""
-        escalation_id = f"esc_{self.organisation_id}_{int(datetime.now(timezone.utc).timestamp())}"
+        escalation_id = f"esc_{self.organisation_id}_{int(datetime.now(UTC).timestamp())}"
         
         escalation = Escalation(
             escalation_id=escalation_id,
             escalation_type="data_consistency_failure",
             organisation_id=self.organisation_id,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             details={
                 "record_id": record_id,
                 "reason": reason,
@@ -204,7 +204,7 @@ class DataConsistencyManager:
         self._escalations.append(escalation)
         return escalation_id
     
-    def get_escalations(self, organisation_id: str) -> List[Dict[str, Any]]:
+    def get_escalations(self, organisation_id: str) -> list[dict[str, Any]]:
         """Get escalations for organisation"""
         if organisation_id != self.organisation_id:
             return []

@@ -12,7 +12,7 @@ Tenant Isolation: All operations require organisation_id
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, UTC
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Any, Optional
 
 
 class IntegrationEventType(Enum):
@@ -39,17 +39,17 @@ class IntegrationEvent:
     event_type: IntegrationEventType
     organisation_id: str
     timestamp: datetime
-    service: Optional[str] = None
-    remaining_requests: Optional[int] = None
-    reset_time: Optional[datetime] = None
-    webhook_id: Optional[str] = None
-    failure_reason: Optional[str] = None
-    health_status: Optional[str] = None
-    source: Optional[str] = None
-    destination: Optional[str] = None
-    sync_id: Optional[str] = None
-    contract_name: Optional[str] = None
-    payload: Optional[Dict[str, Any]] = None
+    service: str | None = None
+    remaining_requests: int | None = None
+    reset_time: datetime | None = None
+    webhook_id: str | None = None
+    failure_reason: str | None = None
+    health_status: str | None = None
+    source: str | None = None
+    destination: str | None = None
+    sync_id: str | None = None
+    contract_name: str | None = None
+    payload: dict[str, Any] | None = None
 
 
 @dataclass
@@ -59,16 +59,16 @@ class IntegrationHandlerResult:
     rate_limit_active: bool = False
     retry_scheduled: bool = False
     fallback_enabled: bool = False
-    fallback_method: Optional[str] = None
+    fallback_method: str | None = None
     degraded_mode_enabled: bool = False
     sync_failure_detected: bool = False
     reconciliation_initiated: bool = False
     rejected: bool = False
     escalated: bool = False
-    action: Optional[IntegrationAction] = None
+    action: IntegrationAction | None = None
     notification_sent: bool = False
-    notification_type: Optional[str] = None
-    escalation_reason: Optional[str] = None
+    notification_type: str | None = None
+    escalation_reason: str | None = None
     timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
@@ -102,7 +102,7 @@ class DegradedConfig:
 class ConsistencyCheck:
     """Result of consistency check."""
     is_consistent: bool = True
-    inconsistencies: List[str] = field(default_factory=list)
+    inconsistencies: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -110,14 +110,14 @@ class ReconciliationStatus:
     """Status of reconciliation process."""
     in_progress: bool = False
     completed: bool = False
-    errors: List[str] = field(default_factory=list)
+    errors: list[str] = field(default_factory=list)
 
 
 @dataclass
 class ValidationResult:
     """Result of contract validation."""
     is_valid: bool = True
-    violations: List[str] = field(default_factory=list)
+    violations: list[str] = field(default_factory=list)
 
 
 class IntegrationFailureHandler:
@@ -289,13 +289,13 @@ class RateLimitHandler:
         self.organisation_id = organisation_id
         self._backoff_config = BackoffConfig()
         self._rate_limit_active = False
-        self._reset_time: Optional[datetime] = None
-        self._queued_requests: List[Dict[str, Any]] = []
+        self._reset_time: datetime | None = None
+        self._queued_requests: list[dict[str, Any]] = []
 
     def activate_rate_limit(
         self,
-        reset_time: Optional[datetime] = None,
-        remaining_requests: Optional[int] = None
+        reset_time: datetime | None = None,
+        remaining_requests: int | None = None
     ) -> None:
         """Activate rate limiting."""
         self._rate_limit_active = True
@@ -305,7 +305,7 @@ class RateLimitHandler:
         """Get backoff configuration."""
         return self._backoff_config
 
-    def get_queued_requests(self, organisation_id: str) -> List[Dict[str, Any]]:
+    def get_queued_requests(self, organisation_id: str) -> list[dict[str, Any]]:
         """
         Get queued requests.
         
@@ -334,8 +334,8 @@ class RetryManager:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._retry_configs: Dict[str, RetryConfig] = {}
-        self._consistency_checks: Dict[str, ConsistencyCheck] = {}
+        self._retry_configs: dict[str, RetryConfig] = {}
+        self._consistency_checks: dict[str, ConsistencyCheck] = {}
 
     def schedule_retry(self, webhook_id: str, failure_reason: str) -> None:
         """Schedule a retry for failed webhook."""
@@ -346,7 +346,7 @@ class RetryManager:
             max_delay_seconds=300
         )
 
-    def get_retry_config(self, webhook_id: str) -> Optional[RetryConfig]:
+    def get_retry_config(self, webhook_id: str) -> RetryConfig | None:
         """Get retry configuration for webhook."""
         return self._retry_configs.get(webhook_id)
 
@@ -385,13 +385,13 @@ class ServiceHealthMonitor:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._service_statuses: Dict[str, str] = {}
+        self._service_statuses: dict[str, str] = {}
 
     def update_status(self, service: str, status: str) -> None:
         """Update service health status."""
         self._service_statuses[service] = status
 
-    def get_status(self, service: str, organisation_id: str) -> Optional[str]:
+    def get_status(self, service: str, organisation_id: str) -> str | None:
         """
         Get service health status.
         
@@ -420,7 +420,7 @@ class SyncReconciler:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._reconciliation_statuses: Dict[str, ReconciliationStatus] = {}
+        self._reconciliation_statuses: dict[str, ReconciliationStatus] = {}
 
     def initiate_reconciliation(
         self,
@@ -438,7 +438,7 @@ class SyncReconciler:
         self,
         sync_id: str,
         organisation_id: str
-    ) -> Optional[ReconciliationStatus]:
+    ) -> ReconciliationStatus | None:
         """
         Get reconciliation status.
         
@@ -468,7 +468,7 @@ class ContractValidator:
         """
         self.organisation_id = organisation_id
         # Define contract schemas
-        self._contracts: Dict[str, Dict[str, Any]] = {
+        self._contracts: dict[str, dict[str, Any]] = {
             "integration-contract-v1": {
                 "required_fields": ["version", "data", "organisation_id"],
                 "version": "1.0"
@@ -478,7 +478,7 @@ class ContractValidator:
     def validate(
         self,
         contract_name: str,
-        payload: Dict[str, Any]
+        payload: dict[str, Any]
     ) -> ValidationResult:
         """
         Validate payload against contract.

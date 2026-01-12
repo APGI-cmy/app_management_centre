@@ -14,9 +14,9 @@ Error Cascade Management:
 - QA-255: Build completion cascade (IN_PROGRESS → COMPLETED with validation)
 """
 
-from typing import Dict, List, Optional, Any, Set
+from typing import Optional, Any, Set
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from enum import Enum
 
 
@@ -45,8 +45,8 @@ class CascadeEvent:
     component_id: str
     error_message: str
     timestamp: datetime
-    caused_by: Optional[str] = None  # Parent event ID
-    children: List[str] = field(default_factory=list)  # Child event IDs
+    caused_by: str | None = None  # Parent event ID
+    children: list[str] = field(default_factory=list)  # Child event IDs
 
 
 @dataclass
@@ -57,13 +57,13 @@ class CascadeChain:
     organisation_id: str
     root_event: CascadeEvent
     state: CascadeState
-    all_events: List[CascadeEvent] = field(default_factory=list)
-    affected_components: Set[str] = field(default_factory=set)
-    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    contained_at: Optional[datetime] = None
-    resolved_at: Optional[datetime] = None
-    containment_actions: List[Dict[str, Any]] = field(default_factory=list)
-    audit_trail: List[Dict[str, Any]] = field(default_factory=list)
+    all_events: list[CascadeEvent] = field(default_factory=list)
+    affected_components: set[str] = field(default_factory=set)
+    started_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    contained_at: datetime | None = None
+    resolved_at: datetime | None = None
+    containment_actions: list[dict[str, Any]] = field(default_factory=list)
+    audit_trail: list[dict[str, Any]] = field(default_factory=list)
 
 
 class ErrorCascadeManager:
@@ -86,16 +86,16 @@ class ErrorCascadeManager:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._active_cascades: Dict[str, CascadeChain] = {}
-        self._cascade_history: List[CascadeChain] = []
-        self._immutable_entities: Dict[str, Dict[str, Any]] = {}  # For QA-251
+        self._active_cascades: dict[str, CascadeChain] = {}
+        self._cascade_history: list[CascadeChain] = []
+        self._immutable_entities: dict[str, dict[str, Any]] = {}  # For QA-251
         
     def enforce_requirement_freeze(
         self,
         requirement_id: str,
         current_state: str,
-        data: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        data: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         QA-251: Enforce requirement freeze after approval
         
@@ -123,7 +123,7 @@ class ErrorCascadeManager:
             }
         
         # Freeze the requirement
-        freeze_timestamp = datetime.now(timezone.utc)
+        freeze_timestamp = datetime.now(UTC)
         
         frozen_data = {
             "requirement_id": requirement_id,
@@ -153,7 +153,7 @@ class ErrorCascadeManager:
             "organisation_id": self.organisation_id
         }
     
-    def verify_immutability(self, requirement_id: str) -> Dict[str, Any]:
+    def verify_immutability(self, requirement_id: str) -> dict[str, Any]:
         """
         Verify requirement immutability
         
@@ -182,10 +182,10 @@ class ErrorCascadeManager:
     def handle_build_initiation_cascade(
         self,
         build_id: str,
-        builder_assignments: List[Dict[str, Any]],
-        tasks: List[Dict[str, Any]],
-        monitoring_config: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        builder_assignments: list[dict[str, Any]],
+        tasks: list[dict[str, Any]],
+        monitoring_config: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         QA-252: Handle build initiation cascade (INITIATED → IN_PROGRESS)
         
@@ -218,7 +218,7 @@ class ErrorCascadeManager:
             event_type="build_initiated",
             component_id=build_id,
             error_message="",  # No error, this is a normal cascade
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         cascade = CascadeChain(
@@ -240,7 +240,7 @@ class ErrorCascadeManager:
         # Mark as contained (all steps completed)
         if builders_assigned and tasks_created and monitoring_started:
             cascade.state = CascadeState.CONTAINED
-            cascade.contained_at = datetime.now(timezone.utc)
+            cascade.contained_at = datetime.now(UTC)
         
         # Store cascade
         self._active_cascades[chain_id] = cascade
@@ -248,7 +248,7 @@ class ErrorCascadeManager:
         # Audit trail
         cascade.audit_trail.append({
             "action": "build_initiation_cascade_handled",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "build_id": build_id,
             "success": cascade.state == CascadeState.CONTAINED
         })
@@ -266,9 +266,9 @@ class ErrorCascadeManager:
     def handle_build_blocking_cascade(
         self,
         build_id: str,
-        blocker_details: Dict[str, Any],
+        blocker_details: dict[str, Any],
         escalation_required: bool = True
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-253: Handle build blocking cascade (IN_PROGRESS → BLOCKED)
         
@@ -299,7 +299,7 @@ class ErrorCascadeManager:
             event_type="build_blocked",
             component_id=build_id,
             error_message=blocker_details.get("message", "Build blocked"),
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         cascade = CascadeChain(
@@ -320,7 +320,7 @@ class ErrorCascadeManager:
         
         # Mark as contained
         cascade.state = CascadeState.CONTAINED
-        cascade.contained_at = datetime.now(timezone.utc)
+        cascade.contained_at = datetime.now(UTC)
         
         # Store cascade
         self._active_cascades[chain_id] = cascade
@@ -328,7 +328,7 @@ class ErrorCascadeManager:
         # Audit trail
         cascade.audit_trail.append({
             "action": "build_blocking_cascade_handled",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "build_id": build_id,
             "escalation_triggered": escalation_triggered
         })
@@ -345,9 +345,9 @@ class ErrorCascadeManager:
     def handle_build_unblocking_cascade(
         self,
         build_id: str,
-        resolution_details: Dict[str, Any],
+        resolution_details: dict[str, Any],
         restore_state: bool = True
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-254: Handle build unblocking cascade (BLOCKED → IN_PROGRESS)
         
@@ -378,7 +378,7 @@ class ErrorCascadeManager:
             event_type="build_unblocked",
             component_id=build_id,
             error_message="",  # No error
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         cascade = CascadeChain(
@@ -399,7 +399,7 @@ class ErrorCascadeManager:
         
         # Mark as resolved
         cascade.state = CascadeState.RESOLVED
-        cascade.resolved_at = datetime.now(timezone.utc)
+        cascade.resolved_at = datetime.now(UTC)
         
         # Store cascade
         self._active_cascades[chain_id] = cascade
@@ -407,7 +407,7 @@ class ErrorCascadeManager:
         # Audit trail
         cascade.audit_trail.append({
             "action": "build_unblocking_cascade_handled",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "build_id": build_id,
             "state_restored": state_restored
         })
@@ -424,10 +424,10 @@ class ErrorCascadeManager:
     def handle_build_completion_cascade(
         self,
         build_id: str,
-        validation_results: Dict[str, Any],
-        deliverables: List[Dict[str, Any]],
-        handover_config: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        validation_results: dict[str, Any],
+        deliverables: list[dict[str, Any]],
+        handover_config: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         QA-255: Handle build completion cascade (IN_PROGRESS → COMPLETED)
         
@@ -471,7 +471,7 @@ class ErrorCascadeManager:
             event_type="build_completed",
             component_id=build_id,
             error_message="",  # No error
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         cascade = CascadeChain(
@@ -492,7 +492,7 @@ class ErrorCascadeManager:
         # Mark as resolved
         if deliverables_created and handover_triggered:
             cascade.state = CascadeState.RESOLVED
-            cascade.resolved_at = datetime.now(timezone.utc)
+            cascade.resolved_at = datetime.now(UTC)
         
         # Store cascade
         self._active_cascades[chain_id] = cascade
@@ -500,7 +500,7 @@ class ErrorCascadeManager:
         # Audit trail
         cascade.audit_trail.append({
             "action": "build_completion_cascade_handled",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "build_id": build_id,
             "validation_percent": validation_results.get("coverage_percent"),
             "success": cascade.state == CascadeState.RESOLVED
@@ -515,7 +515,7 @@ class ErrorCascadeManager:
             "organisation_id": self.organisation_id
         }
     
-    def get_cascade_status(self, chain_id: str) -> Optional[Dict[str, Any]]:
+    def get_cascade_status(self, chain_id: str) -> dict[str, Any] | None:
         """
         Get status of a cascade chain
         
@@ -558,7 +558,7 @@ class ErrorCascadeManager:
         self,
         cascade: CascadeChain,
         build_id: str,
-        assignments: List[Dict[str, Any]]
+        assignments: list[dict[str, Any]]
     ) -> bool:
         """Assign builders to build"""
         import uuid
@@ -569,7 +569,7 @@ class ErrorCascadeManager:
                 event_type="builder_assigned",
                 component_id=assignment.get("builder_id", "unknown"),
                 error_message="",
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 caused_by=cascade.root_event.event_id
             )
             cascade.all_events.append(event)
@@ -581,7 +581,7 @@ class ErrorCascadeManager:
         self,
         cascade: CascadeChain,
         build_id: str,
-        tasks: List[Dict[str, Any]]
+        tasks: list[dict[str, Any]]
     ) -> bool:
         """Create build tasks"""
         import uuid
@@ -592,7 +592,7 @@ class ErrorCascadeManager:
                 event_type="task_created",
                 component_id=task.get("task_id", "unknown"),
                 error_message="",
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 caused_by=cascade.root_event.event_id
             )
             cascade.all_events.append(event)
@@ -603,7 +603,7 @@ class ErrorCascadeManager:
         self,
         cascade: CascadeChain,
         build_id: str,
-        config: Dict[str, Any]
+        config: dict[str, Any]
     ) -> bool:
         """Start build monitoring"""
         import uuid
@@ -613,7 +613,7 @@ class ErrorCascadeManager:
             event_type="monitoring_started",
             component_id=build_id,
             error_message="",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             caused_by=cascade.root_event.event_id
         )
         cascade.all_events.append(event)
@@ -624,7 +624,7 @@ class ErrorCascadeManager:
         self,
         cascade: CascadeChain,
         build_id: str,
-        details: Dict[str, Any]
+        details: dict[str, Any]
     ) -> bool:
         """Trigger escalation"""
         import uuid
@@ -634,7 +634,7 @@ class ErrorCascadeManager:
             event_type="escalation_triggered",
             component_id=build_id,
             error_message=details.get("message", ""),
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             caused_by=cascade.root_event.event_id
         )
         cascade.all_events.append(event)
@@ -654,7 +654,7 @@ class ErrorCascadeManager:
             event_type="pause_propagated",
             component_id=build_id,
             error_message="",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             caused_by=cascade.root_event.event_id
         )
         cascade.all_events.append(event)
@@ -674,7 +674,7 @@ class ErrorCascadeManager:
             event_type="resume_triggered",
             component_id=build_id,
             error_message="",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             caused_by=cascade.root_event.event_id
         )
         cascade.all_events.append(event)
@@ -685,7 +685,7 @@ class ErrorCascadeManager:
         self,
         cascade: CascadeChain,
         build_id: str,
-        details: Dict[str, Any]
+        details: dict[str, Any]
     ) -> bool:
         """Restore build state"""
         import uuid
@@ -695,7 +695,7 @@ class ErrorCascadeManager:
             event_type="state_restored",
             component_id=build_id,
             error_message="",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             caused_by=cascade.root_event.event_id
         )
         cascade.all_events.append(event)
@@ -706,7 +706,7 @@ class ErrorCascadeManager:
         self,
         cascade: CascadeChain,
         build_id: str,
-        deliverables: List[Dict[str, Any]]
+        deliverables: list[dict[str, Any]]
     ) -> bool:
         """Create build deliverables"""
         import uuid
@@ -717,7 +717,7 @@ class ErrorCascadeManager:
                 event_type="deliverable_created",
                 component_id=deliverable.get("deliverable_id", "unknown"),
                 error_message="",
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 caused_by=cascade.root_event.event_id
             )
             cascade.all_events.append(event)
@@ -728,7 +728,7 @@ class ErrorCascadeManager:
         self,
         cascade: CascadeChain,
         build_id: str,
-        config: Dict[str, Any]
+        config: dict[str, Any]
     ) -> bool:
         """Trigger build handover"""
         import uuid
@@ -738,7 +738,7 @@ class ErrorCascadeManager:
             event_type="handover_triggered",
             component_id=build_id,
             error_message="",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             caused_by=cascade.root_event.event_id
         )
         cascade.all_events.append(event)

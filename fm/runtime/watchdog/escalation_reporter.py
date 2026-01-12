@@ -15,7 +15,7 @@ All it does:
 """
 
 import logging
-from typing import List, Dict, Any, Optional
+from typing import Any, Optional
 from datetime import datetime
 
 
@@ -43,7 +43,7 @@ class EscalationReporter:
         """Initialize EscalationReporter."""
         logger.info("EscalationReporter initialized")
     
-    def should_escalate(self, alert: Dict[str, Any]) -> bool:
+    def should_escalate(self, alert: dict[str, Any]) -> bool:
         """
         Determine if an alert should be escalated.
         
@@ -81,9 +81,9 @@ class EscalationReporter:
     
     def generate_escalation_report(
         self,
-        alerts: List[Dict[str, Any]],
-        organisation_id: Optional[str] = None
-    ) -> Dict[str, Any]:
+        alerts: list[dict[str, Any]],
+        organisation_id: str | None = None
+    ) -> dict[str, Any]:
         """
         Generate escalation report for alerts.
         
@@ -134,7 +134,7 @@ class EscalationReporter:
         
         return report
     
-    def _get_escalation_reason(self, alert: Dict[str, Any]) -> str:
+    def _get_escalation_reason(self, alert: dict[str, Any]) -> str:
         """
         Get reason why alert is being escalated.
         
@@ -165,7 +165,7 @@ class EscalationReporter:
     
     def log_escalation(
         self,
-        report: Dict[str, Any],
+        report: dict[str, Any],
         destination: str = 'human_oversight'
     ) -> None:
         """
@@ -191,8 +191,8 @@ class EscalationReporter:
     
     def get_escalation_summary(
         self,
-        alerts: List[Dict[str, Any]]
-    ) -> Dict[str, Any]:
+        alerts: list[dict[str, Any]]
+    ) -> dict[str, Any]:
         """
         Get summary of escalations.
         
