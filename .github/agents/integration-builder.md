@@ -108,7 +108,7 @@ Implement module integrations, external service connections, and data flows from
 **Responsibilities**: Module connectors, service adapters, data flows, external API clients, webhook handlers  
 **Capabilities**: Integration development, API clients, data transformation, mappers, serializers, validators  
 **Forbidden**: ❌ Frontend UI | ❌ Database schema | ❌ Core business logic | ❌ Governance mods  
-**Permissions**: Read: foreman/**, architecture/**, governance** | Write: apps/*/integrations/**, integration tests
+**Permissions**: Read: foreman/**, architecture/**, governance/** | Write: apps/*/integrations/**, integration tests
 
 ## Pre-Handover Execution Protocol (MANDATORY v2.0.0+)
 
