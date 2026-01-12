@@ -20,7 +20,6 @@ Ensures governance rules are available for validation and enforcement.
 """
 
 from datetime import datetime
-from typing import Dict, List, Optional
 from dataclasses import dataclass, field
 from pathlib import Path
 import json
@@ -46,14 +45,14 @@ class GovernanceLoader:
     Implements QA-117 to QA-120.
     """
     
-    def __init__(self, governance_repo_path: Optional[str] = None):
+    def __init__(self, governance_repo_path: str | None = None):
         self.governance_repo_path = governance_repo_path or "governance"
-        self.rules: Dict[str, GovernanceRule] = {}
-        self.cache: Dict[str, any] = {}
-        self.load_status: Dict[str, any] = {}
+        self.rules: dict[str, GovernanceRule] = {}
+        self.cache: dict[str, any] = {}
+        self.load_status: dict[str, any] = {}
         self.max_retries = 3
     
-    def load_governance_repository(self) -> Dict[str, any]:
+    def load_governance_repository(self) -> dict[str, any]:
         """
         QA-117: Load governance repository at startup.
         
@@ -115,7 +114,7 @@ class GovernanceLoader:
         
         return {'status': 'error'}  # Should not reach here
     
-    def parse_governance_rules(self) -> Dict[str, any]:
+    def parse_governance_rules(self) -> dict[str, any]:
         """
         QA-118: Parse governance rules.
         
@@ -124,9 +123,9 @@ class GovernanceLoader:
         Returns:
             Dict containing parsing results
         """
-        validation_rules: List[GovernanceRule] = []
-        enforcement_rules: List[GovernanceRule] = []
-        parse_errors: List[Dict[str, any]] = []
+        validation_rules: list[GovernanceRule] = []
+        enforcement_rules: list[GovernanceRule] = []
+        parse_errors: list[dict[str, any]] = []
         
         # Parse BUILD_PHILOSOPHY.md
         try:
@@ -178,7 +177,7 @@ class GovernanceLoader:
             'status': 'success' if not parse_errors else 'partial_success'
         }
     
-    def cache_governance(self) -> Dict[str, any]:
+    def cache_governance(self) -> dict[str, any]:
         """
         QA-119: Cache governance in memory.
         
@@ -219,7 +218,7 @@ class GovernanceLoader:
                 'error': str(e)
             }
     
-    def refresh_cache(self) -> Dict[str, any]:
+    def refresh_cache(self) -> dict[str, any]:
         """Refresh cache when governance is updated."""
         # Reload from repository
         load_result = self.load_governance_repository()
@@ -243,19 +242,19 @@ class GovernanceLoader:
             'reason': 'Repository load failed'
         }
     
-    def get_rule(self, rule_id: str) -> Optional[GovernanceRule]:
+    def get_rule(self, rule_id: str) -> GovernanceRule | None:
         """Get a specific rule by ID."""
         return self.rules.get(rule_id)
     
-    def get_rules_by_category(self, category: str) -> List[GovernanceRule]:
+    def get_rules_by_category(self, category: str) -> list[GovernanceRule]:
         """Get all rules in a category."""
         return [rule for rule in self.rules.values() if rule.category == category]
     
-    def get_rules_by_severity(self, severity: str) -> List[GovernanceRule]:
+    def get_rules_by_severity(self, severity: str) -> list[GovernanceRule]:
         """Get all rules with a severity level."""
         return [rule for rule in self.rules.values() if rule.severity == severity]
     
-    def handle_failure_modes(self, failure_type: str, **kwargs) -> Dict[str, any]:
+    def handle_failure_modes(self, failure_type: str, **kwargs) -> dict[str, any]:
         """
         QA-120: Handle governance loader failure modes.
         
@@ -320,7 +319,7 @@ class GovernanceLoader:
         
         return {'status': 'error', 'reason': f'Unknown failure type: {failure_type}'}
     
-    def _sync_repository(self) -> Dict[str, any]:
+    def _sync_repository(self) -> dict[str, any]:
         """Sync governance repository (clone/pull)."""
         # In production, this would do actual git operations
         return {
@@ -334,7 +333,7 @@ class GovernanceLoader:
         # In production, this would read actual file
         return True
     
-    def _load_governance_specs(self) -> Dict[str, bool]:
+    def _load_governance_specs(self) -> dict[str, bool]:
         """Load governance specification files."""
         # In production, this would read actual files
         return {
@@ -344,7 +343,7 @@ class GovernanceLoader:
             'versioning-rules.md': True
         }
     
-    def _parse_build_philosophy(self) -> List[GovernanceRule]:
+    def _parse_build_philosophy(self) -> list[GovernanceRule]:
         """Parse BUILD_PHILOSOPHY.md into rules."""
         # Simulated rules for testing
         return [
@@ -366,12 +365,12 @@ class GovernanceLoader:
             )
         ]
     
-    def _parse_spec_file(self, filename: str) -> List[GovernanceRule]:
+    def _parse_spec_file(self, filename: str) -> list[GovernanceRule]:
         """Parse a spec file into rules."""
         # Simulated parsing for testing
         return []
     
-    def _serialize_rule(self, rule: GovernanceRule) -> Dict[str, any]:
+    def _serialize_rule(self, rule: GovernanceRule) -> dict[str, any]:
         """Serialize a rule for caching."""
         return {
             'rule_id': rule.rule_id,

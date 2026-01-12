@@ -5,7 +5,7 @@ Implements the Task entity with state transitions and lifecycle management.
 """
 
 from enum import Enum
-from typing import Optional, List, Dict, Any
+from typing import Any
 from datetime import datetime
 
 
@@ -20,7 +20,7 @@ class TaskState(Enum):
 
 
 # Global task registry for automatic lookup
-_task_registry: Dict[str, 'Task'] = {}
+_task_registry: dict[str, 'Task'] = {}
 
 
 class Task:
@@ -36,10 +36,10 @@ class Task:
         id: str,
         name: str,
         type: str,
-        wave_id: Optional[str] = None,
-        prerequisites: Optional[List[str]] = None,
-        architecture_ref: Optional[str] = None,
-        qa_suite_ref: Optional[str] = None
+        wave_id: str | None = None,
+        prerequisites: list[str] | None = None,
+        architecture_ref: str | None = None,
+        qa_suite_ref: str | None = None
     ):
         """
         Initialize a new Task.
@@ -63,14 +63,14 @@ class Task:
         
         # State management
         self.state = TaskState.CREATED
-        self.assigned_builder_id: Optional[str] = None
-        self.started_at: Optional[datetime] = None
-        self.completed_at: Optional[datetime] = None
-        self.failed_at: Optional[datetime] = None
+        self.assigned_builder_id: str | None = None
+        self.started_at: datetime | None = None
+        self.completed_at: datetime | None = None
+        self.failed_at: datetime | None = None
         
         # Failure tracking
-        self.failure_reason: Optional[str] = None
-        self.diagnostics: Optional[Dict[str, Any]] = None
+        self.failure_reason: str | None = None
+        self.diagnostics: dict[str, Any] | None = None
         
         # Metadata
         self.created_at = datetime.now(UTC)

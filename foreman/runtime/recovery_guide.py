@@ -4,7 +4,7 @@ Recovery Guide - provides recovery paths for different failure types.
 Implements failure classification and recovery documentation.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Any
 
 
 class RecoveryGuide:
@@ -75,7 +75,7 @@ class RecoveryGuide:
         """Initialize RecoveryGuide."""
         pass
     
-    def get_recovery_path(self, failure_type: str) -> Optional[Dict[str, Any]]:
+    def get_recovery_path(self, failure_type: str) -> dict[str, Any] | None:
         """
         Get recovery path for a failure type.
         
@@ -87,7 +87,7 @@ class RecoveryGuide:
         """
         return self.RECOVERY_PATHS.get(failure_type)
     
-    def list_failure_types(self) -> List[str]:
+    def list_failure_types(self) -> list[str]:
         """
         List all known failure types.
         
