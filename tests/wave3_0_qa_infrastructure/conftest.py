@@ -36,13 +36,16 @@ def cleanup_telemetry():
     """Clean up telemetry state before and after each test."""
     from foreman.cross_cutting import telemetry_tracer
     from foreman.cross_cutting import audit_logger
+    from foreman.cross_cutting import sla_alert_router
     
     # Clean before test
     telemetry_tracer.clear_all()
     audit_logger.clear_all()
+    sla_alert_router.clear_all()
     
     yield
     
     # Clean after test
     telemetry_tracer.clear_all()
     audit_logger.clear_all()
+    sla_alert_router.clear_all()
