@@ -14,7 +14,7 @@ Error Cascade Management:
 - QA-255: Build completion cascade (IN_PROGRESS → COMPLETED with validation)
 """
 
-from typing import Optional, Any, Set
+from typing import Optional, Any
 from dataclasses import dataclass, field
 from datetime import datetime, timezone, UTC
 from enum import Enum

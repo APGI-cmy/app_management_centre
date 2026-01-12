@@ -5,7 +5,7 @@ Provides query performance monitoring, execution time tracking, and trend analys
 """
 
 import time
-from typing import Any, List, Optional
+from typing import Any, Optional
 from dataclasses import dataclass, field
 from collections import deque
 

@@ -6,7 +6,7 @@ status tracking, and alerting.
 """
 
 import time
-from typing import Any, List, Optional
+from typing import Any, Optional
 from dataclasses import dataclass
 from enum import Enum
 

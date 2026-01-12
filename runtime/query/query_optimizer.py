@@ -4,7 +4,7 @@ Query Optimizer
 Provides query plan optimization, index usage optimization, and execution plan analysis.
 """
 
-from typing import Any, List, Optional
+from typing import Any, Optional
 from dataclasses import dataclass, field
 import hashlib
 import json

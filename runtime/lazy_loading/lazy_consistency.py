@@ -6,7 +6,7 @@ consistency checks, validation, and synchronization.
 """
 
 import time
-from typing import Any, List, Optional
+from typing import Any, Optional
 from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum

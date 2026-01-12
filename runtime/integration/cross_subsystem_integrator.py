@@ -7,7 +7,7 @@ Authority: Wave 2.0 Subwave 2.9 - Deep Integration Phase 1 (QA-461 to QA-465)
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Optional, Any, Set
+from typing import Optional, Any
 from dataclasses import dataclass, field
 from datetime import datetime, timezone, UTC
 from enum import Enum

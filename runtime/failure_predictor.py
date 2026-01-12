@@ -14,7 +14,7 @@ Failure Prediction Capabilities:
 - QA-265: ML-based failure prediction model
 """
 
-from typing import Optional, Any, Tuple
+from typing import Optional, Any
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone, UTC
 from enum import Enum

@@ -4,7 +4,7 @@ Cache Statistics Tracking
 Provides detailed cache statistics collection and reporting.
 """
 
-from typing import Any, List
+from typing import Any
 from dataclasses import dataclass, field
 import time
 

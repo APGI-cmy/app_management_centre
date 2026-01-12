@@ -4,7 +4,7 @@ Pool Statistics
 Provides statistics collection and reporting for connection pools.
 """
 
-from typing import Any, List
+from typing import Any
 from dataclasses import dataclass
 import time
 

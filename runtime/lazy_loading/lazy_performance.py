@@ -6,7 +6,7 @@ timing, metrics collection, and performance analysis.
 """
 
 import time
-from typing import Any, List, Optional
+from typing import Any, Optional
 from dataclasses import dataclass
 
 

@@ -7,7 +7,7 @@ Tenant Isolation: All operations scoped by organisation_id
 """
 
 from enum import Enum
-from typing import Optional, Set, Any
+from typing import Optional, Any
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone, UTC
 import threading

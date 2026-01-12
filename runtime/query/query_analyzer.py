@@ -5,7 +5,7 @@ Provides query analysis, profiling, slow query detection, and pattern analysis.
 """
 
 import time
-from typing import Any, List, Optional
+from typing import Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 
