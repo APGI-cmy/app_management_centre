@@ -6,7 +6,7 @@ Renders analytics sections and handles failure modes for UI display.
 QA Coverage: QA-132, QA-136 (rendering and failure modes)
 """
 
-from typing import Dict, Any
+from typing import Any
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
 from foreman.analytics.exceptions import DataLoadError, CalculationError
@@ -20,7 +20,7 @@ class AnalyticsRenderer:
     QA-136: Error UX rendering
     """
     
-    def render_analytics_section(self, analytics_data: Dict[str, Any]) -> Dict[str, Any]:
+    def render_analytics_section(self, analytics_data: dict[str, Any]) -> dict[str, Any]:
         """
         Render analytics section from summary data.
         
@@ -42,7 +42,7 @@ class AnalyticsRenderer:
         
         return rendered
     
-    def render_error_state(self, error: DataLoadError) -> Dict[str, Any]:
+    def render_error_state(self, error: DataLoadError) -> dict[str, Any]:
         """
         Render error UI for data load failures.
         
@@ -54,7 +54,7 @@ class AnalyticsRenderer:
             "technical_details": str(error)
         }
     
-    def render_calculation_error(self, error: CalculationError) -> Dict[str, Any]:
+    def render_calculation_error(self, error: CalculationError) -> dict[str, Any]:
         """
         Render error UI for calculation failures.
         
