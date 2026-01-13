@@ -20,7 +20,6 @@ import sys
 import hashlib
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Dict, Optional, Tuple
 
 # Project root
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -49,9 +48,9 @@ class AgentContextSync:
     def detect_canonical_triggers(
         self,
         manual: bool = False,
-        trigger_reason: Optional[str] = None,
-        canonical_commit: Optional[str] = None
-    ) -> List[Dict]:
+        trigger_reason: str | None = None,
+        canonical_commit: str | None = None
+    ) -> list[dict]:
         """
         Detect trigger events from canonical governance changes.
         
@@ -103,7 +102,7 @@ class AgentContextSync:
         
         return triggers
     
-    def evaluate_affected_agents(self, trigger: Dict) -> List[Dict]:
+    def evaluate_affected_agents(self, trigger: dict) -> list[dict]:
         """
         Evaluate which agents are affected by trigger event.
         
@@ -153,9 +152,9 @@ class AgentContextSync:
     
     def prepare_context_updates(
         self,
-        trigger: Dict,
-        affected_agents: List[Dict]
-    ) -> List[Dict]:
+        trigger: dict,
+        affected_agents: list[dict]
+    ) -> list[dict]:
         """
         Prepare context updates for affected agents.
         
@@ -203,7 +202,7 @@ class AgentContextSync:
         
         return updates
     
-    def request_approvals(self, updates: List[Dict], trigger: Dict) -> Dict[str, str]:
+    def request_approvals(self, updates: list[dict], trigger: dict) -> dict[str, str]:
         """
         Request approvals for updates.
         
@@ -243,9 +242,9 @@ class AgentContextSync:
     
     def apply_updates(
         self,
-        updates: List[Dict],
-        approvals: Dict[str, str]
-    ) -> Tuple[List[Dict], List[Dict]]:
+        updates: list[dict],
+        approvals: dict[str, str]
+    ) -> tuple[list[dict], list[dict]]:
         """
         Apply approved updates to agent context files.
         
@@ -283,10 +282,10 @@ class AgentContextSync:
     
     def log_sync_event(
         self,
-        trigger: Dict,
-        updates: List[Dict],
+        trigger: dict,
+        updates: list[dict],
         outcome: str
-    ) -> Dict:
+    ) -> dict:
         """
         Log synchronisation event for audit.
         
@@ -407,14 +406,14 @@ class AgentContextSync:
         # Additive updates are auto-approved
         return False
     
-    def _write_sync_event(self, event: Dict):
+    def _write_sync_event(self, event: dict):
         """Write sync event to audit log."""
         # Ensure directory exists
         AUDIT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
         
         # Read existing log
         if AUDIT_LOG_PATH.exists():
-            with open(AUDIT_LOG_PATH, 'r') as f:
+            with open(AUDIT_LOG_PATH) as f:
                 log = json.load(f)
         else:
             log = {"events": []}

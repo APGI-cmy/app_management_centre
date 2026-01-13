@@ -23,8 +23,12 @@ echo -e "${BLUE}╚════════════════════�
 echo ""
 
 # Detect repository root
-REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
-cd "$REPO_ROOT"
+if REPO_ROOT=$(git rev-parse --show-toplevel); then
+    cd "$REPO_ROOT"
+else
+    echo "Warning: Not in a git repository, using current directory"
+    REPO_ROOT=$(pwd)
+fi
 
 echo "Repository root: $REPO_ROOT"
 echo ""

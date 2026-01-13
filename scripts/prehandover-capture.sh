@@ -322,7 +322,7 @@ EOF
 <summary>View Execution Log</summary>
 
 \`\`\`
-$(cat "$log" 2>/dev/null || echo "[Log content not available]")
+$(if [ -f "$log" ]; then cat "$log"; else echo "[Log file not found: $log]"; fi)
 \`\`\`
 
 </details>

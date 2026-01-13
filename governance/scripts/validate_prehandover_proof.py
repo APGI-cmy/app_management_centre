@@ -153,11 +153,12 @@ def check_metadata(content: str) -> tuple[bool, list[str]]:
     ]
     
     for field in required_fields:
-        if field not in content:
+        # Check for field with or without markdown bold
+        if field not in content and f"**{field.rstrip(':')}**:" not in content:
             errors.append(f"Missing required field: {field}")
     
     # Check protocol version
-    if "Protocol Version:" in content:
+    if "Protocol Version:" in content or "**Protocol Version**:" in content:
         if "2.0.0" not in content:
             errors.append("Protocol version must be 2.0.0 or higher")
     
