@@ -5,7 +5,7 @@ Provides query analysis, profiling, slow query detection, and pattern analysis.
 """
 
 import time
-from typing import Dict, Any, List, Optional
+from typing import Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 
@@ -18,9 +18,9 @@ class QueryProfile:
     timestamp: float = field(default_factory=time.time)
     row_count: int = 0
     is_slow: bool = False
-    pattern: Optional[str] = None
+    pattern: str | None = None
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary"""
         return {
             'query': self.query,
@@ -51,10 +51,10 @@ class QueryAnalyzer:
             slow_query_threshold: Threshold in seconds for slow query detection
         """
         self.slow_query_threshold = slow_query_threshold
-        self._query_log: List[QueryProfile] = []
-        self._slow_queries: List[QueryProfile] = []
-        self._patterns: Dict[str, int] = {}
-        self._alerts: List[Dict[str, Any]] = []
+        self._query_log: list[QueryProfile] = []
+        self._slow_queries: list[QueryProfile] = []
+        self._patterns: dict[str, int] = {}
+        self._alerts: list[dict[str, Any]] = []
     
     def analyze_query(self, query: str, execution_time: float, row_count: int = 0) -> QueryProfile:
         """
@@ -122,19 +122,19 @@ class QueryAnalyzer:
         }
         self._alerts.append(alert)
     
-    def get_slow_queries(self) -> List[QueryProfile]:
+    def get_slow_queries(self) -> list[QueryProfile]:
         """Get all detected slow queries"""
         return self._slow_queries.copy()
     
-    def get_query_patterns(self) -> Dict[str, int]:
+    def get_query_patterns(self) -> dict[str, int]:
         """Get query pattern statistics"""
         return self._patterns.copy()
     
-    def get_alerts(self) -> List[Dict[str, Any]]:
+    def get_alerts(self) -> list[dict[str, Any]]:
         """Get performance alerts"""
         return self._alerts.copy()
     
-    def get_log(self) -> List[QueryProfile]:
+    def get_log(self) -> list[QueryProfile]:
         """Get full query log"""
         return self._query_log.copy()
     

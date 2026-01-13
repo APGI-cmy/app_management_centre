@@ -14,9 +14,9 @@ Advanced Recovery Patterns:
 - QA-260: Parallel recovery coordination (concurrent execution)
 """
 
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Optional, Any
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from enum import Enum
 import threading
 import uuid
@@ -49,7 +49,7 @@ class RecoveryContext:
     business_hours: bool
     failure_criticality: str  # low, medium, high, critical
     sla_risk: str  # low, moderate, high, critical
-    resource_availability: Dict[str, float] = field(default_factory=dict)
+    resource_availability: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass
@@ -61,7 +61,7 @@ class FailureRecord:
     recovery_strategy: str
     recovery_outcome: str
     recovery_duration_ms: int
-    context: Dict[str, Any] = field(default_factory=dict)
+    context: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -69,10 +69,10 @@ class CascadingFailure:
     """Failure with dependencies"""
     id: str
     type: str
-    depends_on: List[str]
+    depends_on: list[str]
     recovered: bool = False
     recovery_attempted: bool = False
-    error: Optional[str] = None
+    error: str | None = None
 
 
 class AdvancedRecoveryHandler:
@@ -95,16 +95,16 @@ class AdvancedRecoveryHandler:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._failure_history: Dict[str, List[FailureRecord]] = {}
-        self._active_recoveries: Dict[str, Dict[str, Any]] = {}
+        self._failure_history: dict[str, list[FailureRecord]] = {}
+        self._active_recoveries: dict[str, dict[str, Any]] = {}
         self._recovery_lock = threading.Lock()
         
     def select_adaptive_pattern(
         self,
         failure_type: str,
-        failure_history: List[Dict[str, Any]],
-        context: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        failure_history: list[dict[str, Any]],
+        context: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         QA-256: Select recovery pattern adaptively based on failure history
         
@@ -128,7 +128,7 @@ class AdvancedRecoveryHandler:
         total_failures = sum(f.get("count", 1) for f in failure_history)
         
         # Calculate success rates for each strategy used
-        strategy_performance: Dict[str, float] = {}
+        strategy_performance: dict[str, float] = {}
         for failure in failure_history:
             strategy = failure.get("last_strategy", "unknown")
             count = failure.get("count", 1)
@@ -178,9 +178,9 @@ class AdvancedRecoveryHandler:
     
     def orchestrate_cascading_recovery(
         self,
-        failures: List[Dict[str, Any]],
+        failures: list[dict[str, Any]],
         execution_mode: str = "sequential"
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-257: Orchestrate cascading recovery with dependency management
         
@@ -203,7 +203,7 @@ class AdvancedRecoveryHandler:
         failure_map = {f["id"]: CascadingFailure(**f) for f in failures}
         
         # Topological sort to determine execution order
-        execution_order: List[str] = []
+        execution_order: list[str] = []
         resolved: set = set()
         
         def can_execute(failure_id: str) -> bool:
@@ -234,7 +234,7 @@ class AdvancedRecoveryHandler:
             self._active_recoveries[orchestration_id] = {
                 "failures": failure_map,
                 "execution_order": execution_order,
-                "started_at": datetime.now(timezone.utc),
+                "started_at": datetime.now(UTC),
                 "execution_mode": execution_mode,
                 "state": "planned"
             }
@@ -250,8 +250,8 @@ class AdvancedRecoveryHandler:
     def select_contextual_strategy(
         self,
         failure_type: str,
-        context: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        context: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         QA-258: Select recovery strategy based on system context
         
@@ -268,7 +268,7 @@ class AdvancedRecoveryHandler:
                 - context_factors_considered: Number of factors
                 - decision_factors: List of influencing factors
         """
-        decision_factors: List[str] = []
+        decision_factors: list[str] = []
         strategy: str
         
         # Analyze context factors
@@ -339,7 +339,7 @@ class AdvancedRecoveryHandler:
                 "state": "initiated",
                 "steps_completed": 2,  # Simulate 2 steps completed before failure
                 "total_steps": 5,
-                "started_at": datetime.now(timezone.utc),
+                "started_at": datetime.now(UTC),
                 "organisation_id": self.organisation_id
             }
         
@@ -348,8 +348,8 @@ class AdvancedRecoveryHandler:
     def rollback_recovery(
         self,
         recovery_id: str,
-        secondary_failure: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        secondary_failure: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         QA-259: Rollback recovery when secondary failure occurs
         
@@ -383,14 +383,14 @@ class AdvancedRecoveryHandler:
                 rollback_steps.append({
                     "step": i,
                     "action": "rollback",
-                    "timestamp": datetime.now(timezone.utc).isoformat()
+                    "timestamp": datetime.now(UTC).isoformat()
                 })
             
             # Update recovery state
             recovery["state"] = "rolled_back"
             recovery["rollback_reason"] = secondary_failure
             recovery["rollback_steps"] = rollback_steps
-            recovery["rollback_completed_at"] = datetime.now(timezone.utc)
+            recovery["rollback_completed_at"] = datetime.now(UTC)
             
         return {
             "rollback_successful": True,
@@ -401,7 +401,7 @@ class AdvancedRecoveryHandler:
             "organisation_id": self.organisation_id
         }
     
-    def get_recovery_status(self, recovery_id: str) -> Dict[str, Any]:
+    def get_recovery_status(self, recovery_id: str) -> dict[str, Any]:
         """
         Get recovery status
         
@@ -424,9 +424,9 @@ class AdvancedRecoveryHandler:
     
     def execute_parallel_recovery(
         self,
-        failures: List[Dict[str, Any]],
+        failures: list[dict[str, Any]],
         max_parallelism: int = 5
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-260: Execute parallel recovery for independent failures
         
@@ -445,8 +445,8 @@ class AdvancedRecoveryHandler:
                 - resource_conflicts: Number of conflicts
                 - recovery_results: Results for each recovery
         """
-        recovery_results: List[Dict[str, Any]] = []
-        completion_times: List[float] = []
+        recovery_results: list[dict[str, Any]] = []
+        completion_times: list[float] = []
         resource_conflicts = 0
         
         # Track resources in use
@@ -464,7 +464,7 @@ class AdvancedRecoveryHandler:
                 resources_in_use.add(failure_resource)
             
             # Simulate recovery execution
-            start_time = datetime.now(timezone.utc)
+            start_time = datetime.now(UTC)
             
             # Execute recovery
             recovery_result = {
@@ -476,7 +476,7 @@ class AdvancedRecoveryHandler:
             recovery_results.append(recovery_result)
             
             # Track completion time
-            end_time = datetime.now(timezone.utc)
+            end_time = datetime.now(UTC)
             duration_ms = (end_time - start_time).total_seconds() * 1000
             completion_times.append(duration_ms)
         

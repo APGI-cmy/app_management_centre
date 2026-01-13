@@ -11,8 +11,8 @@ Data Contract:
 - Fields: clarificationId, messageId, questions, responses, state, resolvedAt
 """
 
-from datetime import datetime, timezone
-from typing import Optional, List, Dict
+from datetime import datetime, timezone, UTC
+from typing import Optional
 from sqlalchemy import Column, String, DateTime, Float, Integer, ForeignKey, Text, Enum as SQLEnum
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.mutable import MutableList
@@ -85,7 +85,7 @@ class ClarificationSession(TenantIsolatedModel):
     _responses = Column("responses", Text, nullable=False, default="[]")
     
     @property
-    def questions(self) -> List[Dict]:
+    def questions(self) -> list[dict]:
         """Get questions as Python list."""
         try:
             return json.loads(self._questions) if self._questions else []
@@ -93,12 +93,12 @@ class ClarificationSession(TenantIsolatedModel):
             return []
     
     @questions.setter
-    def questions(self, value: List[Dict]):
+    def questions(self, value: list[dict]):
         """Set questions from Python list."""
         self._questions = json.dumps(value) if value else "[]"
     
     @property
-    def responses(self) -> List[Dict]:
+    def responses(self) -> list[dict]:
         """Get responses as Python list."""
         try:
             return json.loads(self._responses) if self._responses else []
@@ -106,7 +106,7 @@ class ClarificationSession(TenantIsolatedModel):
             return []
     
     @responses.setter
-    def responses(self, value: List[Dict]):
+    def responses(self, value: list[dict]):
         """Set responses from Python list."""
         self._responses = json.dumps(value) if value else "[]"
     
@@ -137,7 +137,7 @@ class ClarificationSession(TenantIsolatedModel):
         if not 0.0 <= score <= 1.0:
             raise ValueError(f"Ambiguity score must be between 0.0 and 1.0, got {score}")
     
-    def add_clarification_round(self, questions: List[str], response: Optional[str] = None) -> None:
+    def add_clarification_round(self, questions: list[str], response: str | None = None) -> None:
         """
         Add a clarification round (question and optionally response).
         
@@ -154,7 +154,7 @@ class ClarificationSession(TenantIsolatedModel):
         """
         if self.iteration_count >= self.max_iterations:
             self.state = ClarificationState.STALLED
-            self.stalled_at = datetime.now(timezone.utc).replace(tzinfo=None)
+            self.stalled_at = datetime.now(UTC).replace(tzinfo=None)
             raise ValueError(f"Clarification session {self.id} exceeded max iterations ({self.max_iterations})")
         
         self.iteration_count += 1
@@ -164,7 +164,7 @@ class ClarificationSession(TenantIsolatedModel):
         current_questions.append({
             "iteration": self.iteration_count,
             "questions": questions,
-            "timestamp": datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
+            "timestamp": datetime.now(UTC).replace(tzinfo=None).isoformat()
         })
         self.questions = current_questions
         
@@ -174,14 +174,14 @@ class ClarificationSession(TenantIsolatedModel):
             current_responses.append({
                 "iteration": self.iteration_count,
                 "response": response,
-                "timestamp": datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
+                "timestamp": datetime.now(UTC).replace(tzinfo=None).isoformat()
             })
             self.responses = current_responses
         
         self.state = ClarificationState.ACTIVE
-        self.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
+        self.updated_at = datetime.now(UTC).replace(tzinfo=None)
     
-    def resolve(self, resolved_intent: Dict) -> None:
+    def resolve(self, resolved_intent: dict) -> None:
         """
         Resolve clarification session with final intent.
         
@@ -191,15 +191,15 @@ class ClarificationSession(TenantIsolatedModel):
             resolved_intent: Final resolved intent data
         """
         self.state = ClarificationState.RESOLVED
-        self.resolved_at = datetime.now(timezone.utc).replace(tzinfo=None)
-        self.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
+        self.resolved_at = datetime.now(UTC).replace(tzinfo=None)
+        self.updated_at = datetime.now(UTC).replace(tzinfo=None)
         
         # Store resolved intent in responses
         current_responses = self.responses if isinstance(self.responses, list) else []
         current_responses.append({
             "iteration": "final",
             "resolved_intent": resolved_intent,
-            "timestamp": datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
+            "timestamp": datetime.now(UTC).replace(tzinfo=None).isoformat()
         })
         self.responses = current_responses
     
@@ -215,7 +215,7 @@ class ClarificationSession(TenantIsolatedModel):
         if self.iteration_count >= self.max_iterations and self.state != ClarificationState.RESOLVED:
             if self.state != ClarificationState.STALLED:
                 self.state = ClarificationState.STALLED
-                self.stalled_at = datetime.now(timezone.utc).replace(tzinfo=None)
-                self.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
+                self.stalled_at = datetime.now(UTC).replace(tzinfo=None)
+                self.updated_at = datetime.now(UTC).replace(tzinfo=None)
             return True
         return False

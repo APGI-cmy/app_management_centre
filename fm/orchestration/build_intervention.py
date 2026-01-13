@@ -12,9 +12,9 @@ Core Principles:
 """
 
 import logging
-from typing import Dict, Any, List, Optional
+from typing import Any, Optional
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 import json
 import uuid
 
@@ -50,8 +50,8 @@ class BuildInterventionController:
         rationale: str,
         triggered_by: str,
         triggered_by_type: str = 'human',
-        ip_address: Optional[str] = None
-    ) -> Dict[str, Any]:
+        ip_address: str | None = None
+    ) -> dict[str, Any]:
         """
         Issue a non-blocking alert for the specified build node.
         
@@ -77,7 +77,7 @@ class BuildInterventionController:
         
         # Generate unique alert ID
         alert_id = f"alert-{uuid.uuid4().hex[:12]}"
-        timestamp = datetime.now(timezone.utc).isoformat() + "Z"
+        timestamp = datetime.now(UTC).isoformat() + "Z"
         
         # Determine routing based on scope
         routing = self._determine_alert_routing(scope_level)
@@ -126,10 +126,10 @@ class BuildInterventionController:
         target_node_id: str,
         critical_rationale: str,
         triggered_by: str,
-        confirmation: Dict[str, Any],
+        confirmation: dict[str, Any],
         triggered_by_type: str = 'human',
-        ip_address: Optional[str] = None
-    ) -> Dict[str, Any]:
+        ip_address: str | None = None
+    ) -> dict[str, Any]:
         """
         Issue an immediate emergency stop for the specified scope.
         
@@ -157,7 +157,7 @@ class BuildInterventionController:
         
         # Generate unique stop ID
         stop_id = f"stop-{uuid.uuid4().hex[:12]}"
-        timestamp = datetime.now(timezone.utc).isoformat() + "Z"
+        timestamp = datetime.now(UTC).isoformat() + "Z"
         
         # Determine affected nodes
         affected_nodes = self._determine_affected_nodes(scope_level, target_node_id)
@@ -212,7 +212,7 @@ class BuildInterventionController:
             "resumption_requires": routing['required_authorization']
         }
     
-    def get_intervention_context(self, intervention_id: str) -> Dict[str, Any]:
+    def get_intervention_context(self, intervention_id: str) -> dict[str, Any]:
         """
         Get the full context for an intervention (alert or stop).
         
@@ -257,8 +257,8 @@ class BuildInterventionController:
         stop_id: str,
         authorized_by: str,
         resolution_summary: str,
-        resume_conditions: List[str]
-    ) -> Dict[str, Any]:
+        resume_conditions: list[str]
+    ) -> dict[str, Any]:
         """
         Resume execution after an emergency stop.
         
@@ -295,7 +295,7 @@ class BuildInterventionController:
         if not self._verify_resumption_authority(authorized_by, required_auth):
             raise PermissionError(f"User {authorized_by} not authorized to resume {required_auth}")
         
-        timestamp = datetime.now(timezone.utc).isoformat() + "Z"
+        timestamp = datetime.now(UTC).isoformat() + "Z"
         
         # Update stop record
         stop['status'] = 'resumed'
@@ -339,7 +339,7 @@ class BuildInterventionController:
                 f"Rationale for {intervention_type} must be at least {min_length} characters"
             )
     
-    def _validate_stop_confirmation(self, confirmation: Dict[str, Any]) -> None:
+    def _validate_stop_confirmation(self, confirmation: dict[str, Any]) -> None:
         """Validate emergency stop confirmation."""
         if not confirmation.get('acknowledged_impact'):
             raise ValueError("Emergency stop requires acknowledged_impact=true")
@@ -360,7 +360,7 @@ class BuildInterventionController:
         else:
             return 'unknown'
     
-    def _determine_alert_routing(self, scope_level: str) -> Dict[str, Any]:
+    def _determine_alert_routing(self, scope_level: str) -> dict[str, Any]:
         """Determine routing for alerts based on scope."""
         routing_table = {
             'step': {
@@ -386,7 +386,7 @@ class BuildInterventionController:
         }
         return routing_table.get(scope_level, routing_table['step'])
     
-    def _determine_stop_routing(self, scope_level: str) -> Dict[str, Any]:
+    def _determine_stop_routing(self, scope_level: str) -> dict[str, Any]:
         """Determine routing and authorization for emergency stops."""
         routing_table = {
             'step': {
@@ -408,7 +408,7 @@ class BuildInterventionController:
         }
         return routing_table.get(scope_level, routing_table['step'])
     
-    def _determine_affected_nodes(self, scope_level: str, target_node_id: str) -> List[str]:
+    def _determine_affected_nodes(self, scope_level: str, target_node_id: str) -> list[str]:
         """Determine which nodes are affected by a stop at this scope."""
         # TODO: In production, this would query the actual build tree
         # For now, return mock data
@@ -421,7 +421,7 @@ class BuildInterventionController:
         else:  # application
             return [target_node_id, "all_waves", "all_tasks"]
     
-    def _prepare_context_package(self, node_id: str) -> Dict[str, Any]:
+    def _prepare_context_package(self, node_id: str) -> dict[str, Any]:
         """Prepare context package for alert."""
         # TODO: In production, this would gather actual node state
         return {
@@ -430,7 +430,7 @@ class BuildInterventionController:
             "blockers": []
         }
     
-    def _create_execution_snapshot(self, node_id: str, affected_nodes: List[str]) -> Dict[str, Any]:
+    def _create_execution_snapshot(self, node_id: str, affected_nodes: list[str]) -> dict[str, Any]:
         """Create snapshot of execution state at moment of stop."""
         # TODO: In production, this would capture actual execution state
         return {
@@ -439,7 +439,7 @@ class BuildInterventionController:
             "pending_transitions": []
         }
     
-    def _create_evidence_package(self, node_id: str, affected_nodes: List[str]) -> Dict[str, Any]:
+    def _create_evidence_package(self, node_id: str, affected_nodes: list[str]) -> dict[str, Any]:
         """Create evidence package for emergency stop."""
         # TODO: In production, this would gather all evidence artifacts
         return {
@@ -455,25 +455,25 @@ class BuildInterventionController:
         # For now, accept any user that matches the required authority pattern
         return True  # Simplified for initial implementation
     
-    def _save_intervention(self, intervention_id: str, intervention_data: Dict[str, Any]) -> None:
+    def _save_intervention(self, intervention_id: str, intervention_data: dict[str, Any]) -> None:
         """Persist intervention to disk."""
         intervention_file = self.intervention_log_dir / f"{intervention_id}.json"
         with open(intervention_file, 'w') as f:
             json.dump(intervention_data, f, indent=2)
     
-    def _load_intervention(self, intervention_id: str) -> Optional[Dict[str, Any]]:
+    def _load_intervention(self, intervention_id: str) -> dict[str, Any] | None:
         """Load intervention from disk."""
         intervention_file = self.intervention_log_dir / f"{intervention_id}.json"
         if not intervention_file.exists():
             return None
         
-        with open(intervention_file, 'r') as f:
+        with open(intervention_file) as f:
             return json.load(f)
     
-    def _log_intervention_audit(self, intervention_id: str, action: str, data: Dict[str, Any]) -> None:
+    def _log_intervention_audit(self, intervention_id: str, action: str, data: dict[str, Any]) -> None:
         """Log intervention action to audit trail."""
         audit_entry = {
-            "timestamp": datetime.now(timezone.utc).isoformat() + "Z",
+            "timestamp": datetime.now(UTC).isoformat() + "Z",
             "intervention_id": intervention_id,
             "action": action,
             "data_summary": {
@@ -492,7 +492,7 @@ class BuildInterventionController:
     
     # Context retrieval methods (mock implementations)
     
-    def _get_node_inspection(self, node_id: str) -> Dict[str, Any]:
+    def _get_node_inspection(self, node_id: str) -> dict[str, Any]:
         """Get inspection data for node."""
         # TODO: Integrate with build_node_inspector
         return {
@@ -501,22 +501,22 @@ class BuildInterventionController:
             "state": "BUILDING"
         }
     
-    def _get_node_evidence(self, node_id: str) -> List[Dict[str, Any]]:
+    def _get_node_evidence(self, node_id: str) -> list[dict[str, Any]]:
         """Get evidence artifacts for node."""
         # TODO: Integrate with evidence system
         return []
     
-    def _get_node_blockers(self, node_id: str) -> List[Dict[str, Any]]:
+    def _get_node_blockers(self, node_id: str) -> list[dict[str, Any]]:
         """Get blockers for node."""
         # TODO: Integrate with blocker tracking
         return []
     
-    def _get_node_decisions(self, node_id: str) -> List[Dict[str, Any]]:
+    def _get_node_decisions(self, node_id: str) -> list[dict[str, Any]]:
         """Get recent decisions for node."""
         # TODO: Integrate with decision system
         return []
     
-    def _get_node_timeline(self, node_id: str) -> List[Dict[str, Any]]:
+    def _get_node_timeline(self, node_id: str) -> list[dict[str, Any]]:
         """Get state timeline for node."""
         # TODO: Integrate with timeline system
         return []

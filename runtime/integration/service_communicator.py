@@ -6,9 +6,10 @@ Authority: Wave 2.0 Subwave 2.9 - Deep Integration Phase 1 (QA-471 to QA-475)
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, List, Optional, Any, Callable
+from typing import Optional, Any
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 from enum import Enum
 import time
 import hashlib
@@ -41,7 +42,7 @@ class ServiceEndpoint:
     protocol: str = "http"
     version: str = "1.0"
     state: ServiceState = ServiceState.UNKNOWN
-    last_health_check: Optional[datetime] = None
+    last_health_check: datetime | None = None
     
     def get_url(self) -> str:
         """Get full URL for the service"""
@@ -56,7 +57,7 @@ class ServiceRequest:
     target_service: str
     method: str
     endpoint: str
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     timestamp: datetime
     organisation_id: str
     security_level: SecurityLevel = SecurityLevel.BASIC
@@ -64,7 +65,7 @@ class ServiceRequest:
     
     def is_expired(self) -> bool:
         """Check if request has exceeded timeout"""
-        elapsed = (datetime.now(timezone.utc) - self.timestamp).total_seconds()
+        elapsed = (datetime.now(UTC) - self.timestamp).total_seconds()
         return elapsed > self.timeout_seconds
 
 
@@ -73,7 +74,7 @@ class ServiceResponse:
     """Service response"""
     request_id: str
     status_code: int
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     timestamp: datetime
     response_time_ms: float
     organisation_id: str
@@ -90,7 +91,7 @@ class RetryPolicy:
     initial_delay_seconds: float = 1.0
     max_delay_seconds: float = 30.0
     exponential_backoff: bool = True
-    retry_on_status_codes: List[int] = field(default_factory=lambda: [500, 502, 503, 504])
+    retry_on_status_codes: list[int] = field(default_factory=lambda: [500, 502, 503, 504])
     
     def get_delay(self, attempt: int) -> float:
         """Calculate delay for a given retry attempt"""
@@ -114,7 +115,7 @@ class HealthCheckResult:
     state: ServiceState
     timestamp: datetime
     response_time_ms: float
-    details: Dict[str, Any] = field(default_factory=dict)
+    details: dict[str, Any] = field(default_factory=dict)
     
     def is_healthy(self) -> bool:
         """Check if service is healthy"""
@@ -126,9 +127,9 @@ class SecurityContext:
     """Security context for service communication"""
     organisation_id: str
     security_level: SecurityLevel
-    api_key: Optional[str] = None
-    token: Optional[str] = None
-    certificate_hash: Optional[str] = None
+    api_key: str | None = None
+    token: str | None = None
+    certificate_hash: str | None = None
     
     def validate(self) -> bool:
         """Validate security context"""
@@ -150,12 +151,12 @@ class ServiceCommunicator:
     """
     
     def __init__(self):
-        self.service_registry: Dict[str, Dict[str, ServiceEndpoint]] = {}  # org_id -> {service_id -> endpoint}
-        self.requests: Dict[str, List[ServiceRequest]] = {}  # org_id -> requests
-        self.responses: Dict[str, List[ServiceResponse]] = {}  # org_id -> responses
-        self.health_checks: Dict[str, Dict[str, HealthCheckResult]] = {}  # org_id -> {service_id -> result}
-        self.retry_policies: Dict[str, RetryPolicy] = {}  # org_id -> policy
-        self.security_contexts: Dict[str, SecurityContext] = {}  # org_id -> context
+        self.service_registry: dict[str, dict[str, ServiceEndpoint]] = {}  # org_id -> {service_id -> endpoint}
+        self.requests: dict[str, list[ServiceRequest]] = {}  # org_id -> requests
+        self.responses: dict[str, list[ServiceResponse]] = {}  # org_id -> responses
+        self.health_checks: dict[str, dict[str, HealthCheckResult]] = {}  # org_id -> {service_id -> result}
+        self.retry_policies: dict[str, RetryPolicy] = {}  # org_id -> policy
+        self.security_contexts: dict[str, SecurityContext] = {}  # org_id -> context
         self.next_request_id = 1
     
     # QA-471: Service Discovery
@@ -205,7 +206,7 @@ class ServiceCommunicator:
         self,
         organisation_id: str,
         service_id: str
-    ) -> Optional[ServiceEndpoint]:
+    ) -> ServiceEndpoint | None:
         """
         Discover a registered service
         
@@ -223,8 +224,8 @@ class ServiceCommunicator:
     def list_services(
         self,
         organisation_id: str,
-        state_filter: Optional[ServiceState] = None
-    ) -> List[ServiceEndpoint]:
+        state_filter: ServiceState | None = None
+    ) -> list[ServiceEndpoint]:
         """List all registered services, optionally filtered by state"""
         services = self.service_registry.get(organisation_id, {}).values()
         
@@ -241,7 +242,7 @@ class ServiceCommunicator:
         target_service: str,
         method: str,
         endpoint: str,
-        payload: Dict[str, Any],
+        payload: dict[str, Any],
         timeout_seconds: int = 30
     ) -> ServiceResponse:
         """
@@ -274,7 +275,7 @@ class ServiceCommunicator:
             method=method,
             endpoint=endpoint,
             payload=payload,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             organisation_id=organisation_id,
             security_level=security_level,
             timeout_seconds=timeout_seconds
@@ -295,7 +296,7 @@ class ServiceCommunicator:
                 request_id=request_id,
                 status_code=404,
                 payload={"error": "Service not found"},
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 response_time_ms=(time.time() - start_time) * 1000,
                 organisation_id=organisation_id
             )
@@ -305,7 +306,7 @@ class ServiceCommunicator:
                 request_id=request_id,
                 status_code=200,
                 payload={"success": True, "data": "Response data"},
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 response_time_ms=(time.time() - start_time) * 1000,
                 organisation_id=organisation_id
             )
@@ -321,7 +322,7 @@ class ServiceCommunicator:
         self,
         organisation_id: str,
         request_id: str
-    ) -> Optional[ServiceResponse]:
+    ) -> ServiceResponse | None:
         """Get response for a specific request"""
         responses = self.responses.get(organisation_id, [])
         for response in responses:
@@ -337,8 +338,8 @@ class ServiceCommunicator:
         target_service: str,
         method: str,
         endpoint: str,
-        payload: Dict[str, Any],
-        retry_policy: Optional[RetryPolicy] = None
+        payload: dict[str, Any],
+        retry_policy: RetryPolicy | None = None
     ) -> ServiceResponse:
         """
         Send request with automatic retry on failure
@@ -430,7 +431,7 @@ class ServiceCommunicator:
             result = HealthCheckResult(
                 service_id=service_id,
                 state=ServiceState.OFFLINE,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 response_time_ms=(time.time() - start_time) * 1000,
                 details={"error": "Service not registered"}
             )
@@ -449,7 +450,7 @@ class ServiceCommunicator:
             result = HealthCheckResult(
                 service_id=service_id,
                 state=state,
-                timestamp=datetime.now(timezone.utc),
+                timestamp=datetime.now(UTC),
                 response_time_ms=response_time_ms,
                 details={"url": endpoint.get_url()}
             )
@@ -469,7 +470,7 @@ class ServiceCommunicator:
         self,
         organisation_id: str,
         service_id: str
-    ) -> Optional[HealthCheckResult]:
+    ) -> HealthCheckResult | None:
         """Get most recent health check result for a service"""
         if organisation_id in self.health_checks:
             return self.health_checks[organisation_id].get(service_id)
@@ -489,9 +490,9 @@ class ServiceCommunicator:
         self,
         organisation_id: str,
         security_level: SecurityLevel,
-        api_key: Optional[str] = None,
-        token: Optional[str] = None,
-        certificate: Optional[str] = None
+        api_key: str | None = None,
+        token: str | None = None,
+        certificate: str | None = None
     ) -> SecurityContext:
         """
         Configure security for service communication
@@ -548,8 +549,8 @@ class ServiceCommunicator:
     def encrypt_payload(
         self,
         organisation_id: str,
-        payload: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        payload: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         Encrypt payload based on security level
         
@@ -576,8 +577,8 @@ class ServiceCommunicator:
     def decrypt_payload(
         self,
         organisation_id: str,
-        encrypted_payload: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        encrypted_payload: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         Decrypt payload based on security level
         

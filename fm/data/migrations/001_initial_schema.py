@@ -18,7 +18,7 @@ from typing import Optional
 from fm.data.models import Base, init_database, get_database
 
 
-def upgrade(database_url: Optional[str] = None) -> None:
+def upgrade(database_url: str | None = None) -> None:
     """
     Apply migration: Create all Conversational Interface tables.
     
@@ -41,7 +41,7 @@ def upgrade(database_url: Optional[str] = None) -> None:
     print("   - clarification_sessions table (CONV-04)")
 
 
-def downgrade(database_url: Optional[str] = None) -> None:
+def downgrade(database_url: str | None = None) -> None:
     """
     Rollback migration: Drop all Conversational Interface tables.
     

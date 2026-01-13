@@ -6,9 +6,9 @@ Authority: Wave 2.0 Subwave 2.8 - Full Watchdog Coverage (QA-400)
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Optional, Any
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 import json
 
 
@@ -20,7 +20,7 @@ class Escalation:
     severity: str
     organisation_id: str
     timestamp: datetime
-    details: Dict[str, Any]
+    details: dict[str, Any]
 
 
 class GracefulShutdown:
@@ -28,10 +28,10 @@ class GracefulShutdown:
     
     def __init__(self):
         self._shutdown_initiated = False
-        self._shutdown_reason: Optional[str] = None
-        self._shutdown_time: Optional[datetime] = None
+        self._shutdown_reason: str | None = None
+        self._shutdown_time: datetime | None = None
     
-    def initiate(self, reason: str) -> Dict[str, Any]:
+    def initiate(self, reason: str) -> dict[str, Any]:
         """
         Initiate graceful shutdown
         
@@ -39,7 +39,7 @@ class GracefulShutdown:
         """
         self._shutdown_initiated = True
         self._shutdown_reason = reason
-        self._shutdown_time = datetime.now(timezone.utc)
+        self._shutdown_time = datetime.now(UTC)
         
         return {
             "status": "initiated",
@@ -51,7 +51,7 @@ class GracefulShutdown:
         """Check if shutdown is initiated"""
         return self._shutdown_initiated
     
-    def get_shutdown_info(self) -> Optional[Dict[str, Any]]:
+    def get_shutdown_info(self) -> dict[str, Any] | None:
         """Get shutdown information"""
         if not self._shutdown_initiated:
             return None
@@ -66,14 +66,14 @@ class StatePreserver:
     """Preserves system state during failures"""
     
     def __init__(self):
-        self._preserved_states: Dict[str, Dict[str, Any]] = {}  # org_id -> state_type -> data
+        self._preserved_states: dict[str, dict[str, Any]] = {}  # org_id -> state_type -> data
     
     def preserve_state(
         self,
         state_type: str,
         state_data: Any,
         organisation_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Preserve state data
         
@@ -96,7 +96,7 @@ class StatePreserver:
         
         self._preserved_states[organisation_id][state_type] = {
             "data": state_data,
-            "preserved_at": datetime.now(timezone.utc).isoformat(),
+            "preserved_at": datetime.now(UTC).isoformat(),
             "count": state_count
         }
         
@@ -125,7 +125,7 @@ class StatePreserver:
         
         return self._preserved_states[organisation_id][state_type]["data"]
     
-    def get_preserved_states(self, organisation_id: Optional[str] = None) -> Dict[str, Any]:
+    def get_preserved_states(self, organisation_id: str | None = None) -> dict[str, Any]:
         """Get all preserved states, optionally filtered by organisation"""
         if organisation_id:
             return self._preserved_states.get(organisation_id, {})
@@ -136,13 +136,13 @@ class RecoveryCoordinator:
     """Coordinates system recovery"""
     
     def __init__(self):
-        self._recovery_plans: List[Dict[str, Any]] = []
+        self._recovery_plans: list[dict[str, Any]] = []
     
     def generate_recovery_plan(
         self,
         failure_reason: str,
-        preserved_states: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        preserved_states: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         Generate recovery plan based on failure and preserved states
         
@@ -199,11 +199,11 @@ class RecoveryCoordinator:
         total_duration = sum(step["estimated_duration_minutes"] for step in steps)
         
         recovery_plan = {
-            "plan_id": f"recovery_{int(datetime.now(timezone.utc).timestamp())}",
+            "plan_id": f"recovery_{int(datetime.now(UTC).timestamp())}",
             "failure_reason": failure_reason,
             "steps": steps,
             "estimated_duration_minutes": total_duration,
-            "created_at": datetime.now(timezone.utc).isoformat()
+            "created_at": datetime.now(UTC).isoformat()
         }
         
         self._recovery_plans.append(recovery_plan)
@@ -227,7 +227,7 @@ class SystemFailureHandler:
         self._graceful_shutdown = GracefulShutdown()
         self._state_preserver = StatePreserver()
         self._recovery_coordinator = RecoveryCoordinator()
-        self._escalations: List[Escalation] = []
+        self._escalations: list[Escalation] = []
     
     def get_graceful_shutdown(self) -> GracefulShutdown:
         """Get graceful shutdown manager"""
@@ -244,17 +244,17 @@ class SystemFailureHandler:
     def escalate_system_failure(
         self,
         reason: str,
-        details: Optional[Dict[str, Any]] = None
+        details: dict[str, Any] | None = None
     ) -> str:
         """Escalate system-wide failure"""
-        escalation_id = f"esc_{self.organisation_id}_{int(datetime.now(timezone.utc).timestamp())}"
+        escalation_id = f"esc_{self.organisation_id}_{int(datetime.now(UTC).timestamp())}"
         
         escalation = Escalation(
             escalation_id=escalation_id,
             escalation_type="system_wide_failure",
             severity="critical",
             organisation_id=self.organisation_id,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             details={
                 "reason": reason,
                 **(details or {})
@@ -264,7 +264,7 @@ class SystemFailureHandler:
         self._escalations.append(escalation)
         return escalation_id
     
-    def get_escalations(self, organisation_id: str) -> List[Dict[str, Any]]:
+    def get_escalations(self, organisation_id: str) -> list[dict[str, Any]]:
         """Get escalations for organisation"""
         if organisation_id != self.organisation_id:
             return []

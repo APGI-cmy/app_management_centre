@@ -8,7 +8,7 @@ cache operations, and invalidation logic.
 import hashlib
 import json
 import time
-from typing import Any, Dict, Optional, List
+from typing import Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 
@@ -61,7 +61,7 @@ class CacheManager:
     - Cache statistics tracking
     """
     
-    def __init__(self, config: Optional[CacheConfig] = None):
+    def __init__(self, config: CacheConfig | None = None):
         """
         Initialize cache manager
         
@@ -72,7 +72,7 @@ class CacheManager:
         if not self.config.validate():
             raise ValueError("Invalid cache configuration")
         
-        self._cache: Dict[str, CacheEntry] = {}
+        self._cache: dict[str, CacheEntry] = {}
         self._ready = False
         self._stats = {
             'hits': 0,
@@ -135,7 +135,7 @@ class CacheManager:
         # Format: cache:hash
         return f"cache:{key_hash}"
     
-    def get(self, key: str) -> Optional[Any]:
+    def get(self, key: str) -> Any | None:
         """
         Get value from cache
         
@@ -170,7 +170,7 @@ class CacheManager:
         self._stats['hits'] += 1
         return entry.value
     
-    def set(self, key: str, value: Any, ttl: Optional[int] = None) -> bool:
+    def set(self, key: str, value: Any, ttl: int | None = None) -> bool:
         """
         Set value in cache
         
@@ -255,7 +255,7 @@ class CacheManager:
         self._invalidate_key(oldest_key)
         self._stats['evictions'] += 1
     
-    def get_statistics(self) -> Dict[str, Any]:
+    def get_statistics(self) -> dict[str, Any]:
         """
         Get cache statistics
         

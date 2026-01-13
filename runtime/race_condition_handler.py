@@ -7,9 +7,9 @@ Tenant Isolation: All operations scoped by organisation_id
 """
 
 from enum import Enum
-from typing import Dict, List, Optional, Any
+from typing import Optional, Any
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 import threading
 
 
@@ -30,14 +30,14 @@ class Escalation:
     escalation_type: str
     organisation_id: str
     timestamp: datetime
-    details: Dict[str, Any]
+    details: dict[str, Any]
 
 
 class RaceDetector:
     """Detects race conditions on resources"""
     
     def __init__(self):
-        self._access_attempts: Dict[str, List[AccessAttempt]] = {}
+        self._access_attempts: dict[str, list[AccessAttempt]] = {}
         self._lock = threading.Lock()
     
     def record_access(self, attempt: AccessAttempt) -> None:
@@ -88,7 +88,7 @@ class RetryStrategy:
         self.max_retries = max_retries
         self.initial_backoff_ms = initial_backoff_ms
         self.backoff_multiplier = backoff_multiplier
-        self._retry_counts: Dict[str, Dict[str, int]] = {}  # resource -> accessor -> count
+        self._retry_counts: dict[str, dict[str, int]] = {}  # resource -> accessor -> count
     
     def retry(
         self,
@@ -96,7 +96,7 @@ class RetryStrategy:
         accessor_id: str,
         operation: str,
         attempt: int
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Determine if retry should occur and calculate backoff
         
@@ -138,22 +138,22 @@ class RaceEscalator:
     """Manages escalation of persistent race conditions"""
     
     def __init__(self):
-        self._escalations: Dict[str, List[Escalation]] = {}
+        self._escalations: dict[str, list[Escalation]] = {}
     
     def escalate(
         self,
         escalation_type: str,
         organisation_id: str,
-        details: Optional[Dict[str, Any]] = None
+        details: dict[str, Any] | None = None
     ) -> str:
         """Create an escalation"""
-        escalation_id = f"esc_{organisation_id}_{int(datetime.now(timezone.utc).timestamp())}"
+        escalation_id = f"esc_{organisation_id}_{int(datetime.now(UTC).timestamp())}"
         
         escalation = Escalation(
             escalation_id=escalation_id,
             escalation_type=escalation_type,
             organisation_id=organisation_id,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             details=details or {}
         )
         
@@ -163,7 +163,7 @@ class RaceEscalator:
         self._escalations[organisation_id].append(escalation)
         return escalation_id
     
-    def get_escalations(self, organisation_id: str) -> List[Dict[str, Any]]:
+    def get_escalations(self, organisation_id: str) -> list[dict[str, Any]]:
         """Get escalations for an organisation"""
         if organisation_id not in self._escalations:
             return []
@@ -201,7 +201,7 @@ class RaceConditionHandler:
         resource_id: str,
         accessor_id: str,
         operation: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Attempt to access a resource
         
@@ -211,7 +211,7 @@ class RaceConditionHandler:
             resource_id=resource_id,
             accessor_id=accessor_id,
             operation=operation,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             organisation_id=self.organisation_id
         )
         

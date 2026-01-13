@@ -7,9 +7,9 @@ Authority: Wave 2.0 Subwave 2.10 - Deep Integration Phase 2 (QA-481 to QA-485)
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Optional, Any
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from enum import Enum
 import uuid
 
@@ -35,10 +35,10 @@ class ConsistencyValidation:
     """Consistency validation record"""
     validation_id: str
     organisation_id: str
-    subsystems: List[str]
-    data_keys: List[str]
+    subsystems: list[str]
+    data_keys: list[str]
     status: ConsistencyStatus
-    inconsistencies: List[Dict[str, Any]]
+    inconsistencies: list[dict[str, Any]]
     timestamp: datetime
     
     def is_consistent(self) -> bool:
@@ -52,10 +52,10 @@ class ConsistencyRepair:
     repair_id: str
     organisation_id: str
     validation_id: str
-    repairs_applied: List[Dict[str, Any]]
+    repairs_applied: list[dict[str, Any]]
     repair_status: str  # pending, in_progress, completed, failed
     timestamp: datetime
-    completed_at: Optional[datetime] = None
+    completed_at: datetime | None = None
 
 
 @dataclass
@@ -63,8 +63,8 @@ class ConsistencyMonitor:
     """Consistency monitoring record"""
     monitor_id: str
     organisation_id: str
-    subsystems: List[str]
-    data_keys: List[str]
+    subsystems: list[str]
+    data_keys: list[str]
     check_interval: int  # seconds
     violations_detected: int
     last_check: datetime
@@ -72,7 +72,7 @@ class ConsistencyMonitor:
     
     def should_check(self) -> bool:
         """Check if monitoring check is due"""
-        return datetime.now(timezone.utc) >= self.next_check
+        return datetime.now(UTC) >= self.next_check
 
 
 @dataclass
@@ -81,11 +81,11 @@ class EventualConsistencyRecord:
     record_id: str
     organisation_id: str
     source_subsystem: str
-    target_subsystems: List[str]
+    target_subsystems: list[str]
     data_key: str
-    propagation_status: Dict[str, str]  # subsystem -> status
-    convergence_time: Optional[int] = None  # seconds
-    converged_at: Optional[datetime] = None
+    propagation_status: dict[str, str]  # subsystem -> status
+    convergence_time: int | None = None  # seconds
+    converged_at: datetime | None = None
     
     def is_converged(self) -> bool:
         """Check if all targets have converged"""
@@ -100,12 +100,12 @@ class ConsistencyConflict:
     """Consistency conflict record"""
     conflict_id: str
     organisation_id: str
-    subsystems: List[str]
+    subsystems: list[str]
     data_key: str
-    conflicting_values: Dict[str, Any]  # subsystem -> value
+    conflicting_values: dict[str, Any]  # subsystem -> value
     resolution_strategy: ConflictResolutionStrategy
-    resolved_value: Optional[Any] = None
-    resolved_at: Optional[datetime] = None
+    resolved_value: Any | None = None
+    resolved_at: datetime | None = None
 
 
 class ConsistencyManager:
@@ -118,17 +118,17 @@ class ConsistencyManager:
     
     def __init__(self):
         """Initialize consistency manager with in-memory storage"""
-        self._validations: Dict[str, ConsistencyValidation] = {}
-        self._repairs: Dict[str, ConsistencyRepair] = {}
-        self._monitors: Dict[str, ConsistencyMonitor] = {}
-        self._eventual_records: Dict[str, EventualConsistencyRecord] = {}
-        self._conflicts: Dict[str, ConsistencyConflict] = {}
+        self._validations: dict[str, ConsistencyValidation] = {}
+        self._repairs: dict[str, ConsistencyRepair] = {}
+        self._monitors: dict[str, ConsistencyMonitor] = {}
+        self._eventual_records: dict[str, EventualConsistencyRecord] = {}
+        self._conflicts: dict[str, ConsistencyConflict] = {}
     
     def validate_consistency(
         self,
         organisation_id: str,
-        subsystems: List[str],
-        data_keys: List[str]
+        subsystems: list[str],
+        data_keys: list[str]
     ) -> ConsistencyValidation:
         """
         Validate data consistency across subsystems.
@@ -155,7 +155,7 @@ class ConsistencyManager:
             data_keys=data_keys,
             status=status,
             inconsistencies=inconsistencies,
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._validations[validation_id] = validation
@@ -166,7 +166,7 @@ class ConsistencyManager:
         self,
         organisation_id: str,
         validation_id: str,
-        repair_actions: List[Dict[str, Any]]
+        repair_actions: list[dict[str, Any]]
     ) -> ConsistencyRepair:
         """
         Repair detected inconsistencies.
@@ -187,7 +187,7 @@ class ConsistencyManager:
             validation_id=validation_id,
             repairs_applied=repair_actions,
             repair_status="pending",
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._repairs[repair_id] = repair
@@ -197,15 +197,15 @@ class ConsistencyManager:
         
         # Complete repairs
         repair.repair_status = "completed"
-        repair.completed_at = datetime.now(timezone.utc)
+        repair.completed_at = datetime.now(UTC)
         
         return repair
     
     def monitor_consistency(
         self,
         organisation_id: str,
-        subsystems: List[str],
-        data_keys: List[str],
+        subsystems: list[str],
+        data_keys: list[str],
         check_interval: int = 60
     ) -> ConsistencyMonitor:
         """
@@ -222,7 +222,7 @@ class ConsistencyManager:
         """
         monitor_id = f"monitor_{uuid.uuid4().hex[:16]}"
         
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         
         monitor = ConsistencyMonitor(
             monitor_id=monitor_id,
@@ -243,7 +243,7 @@ class ConsistencyManager:
         self,
         organisation_id: str,
         source_subsystem: str,
-        target_subsystems: List[str],
+        target_subsystems: list[str],
         data_key: str
     ) -> EventualConsistencyRecord:
         """
@@ -284,16 +284,16 @@ class ConsistencyManager:
         
         # Mark as converged
         record.convergence_time = 1  # 1 second (simulated)
-        record.converged_at = datetime.now(timezone.utc)
+        record.converged_at = datetime.now(UTC)
         
         return record
     
     def resolve_conflict(
         self,
         organisation_id: str,
-        subsystems: List[str],
+        subsystems: list[str],
         data_key: str,
-        conflicting_values: Dict[str, Any],
+        conflicting_values: dict[str, Any],
         strategy: ConflictResolutionStrategy = ConflictResolutionStrategy.LATEST_WINS
     ) -> ConsistencyConflict:
         """
@@ -335,26 +335,26 @@ class ConsistencyManager:
         else:  # MANUAL
             conflict.resolved_value = None  # Requires manual intervention
         
-        conflict.resolved_at = datetime.now(timezone.utc)
+        conflict.resolved_at = datetime.now(UTC)
         
         return conflict
     
-    def get_validation(self, validation_id: str) -> Optional[ConsistencyValidation]:
+    def get_validation(self, validation_id: str) -> ConsistencyValidation | None:
         """Get validation by ID"""
         return self._validations.get(validation_id)
     
-    def get_repair(self, repair_id: str) -> Optional[ConsistencyRepair]:
+    def get_repair(self, repair_id: str) -> ConsistencyRepair | None:
         """Get repair by ID"""
         return self._repairs.get(repair_id)
     
-    def get_monitor(self, monitor_id: str) -> Optional[ConsistencyMonitor]:
+    def get_monitor(self, monitor_id: str) -> ConsistencyMonitor | None:
         """Get monitor by ID"""
         return self._monitors.get(monitor_id)
     
-    def get_eventual_record(self, record_id: str) -> Optional[EventualConsistencyRecord]:
+    def get_eventual_record(self, record_id: str) -> EventualConsistencyRecord | None:
         """Get eventual consistency record by ID"""
         return self._eventual_records.get(record_id)
     
-    def get_conflict(self, conflict_id: str) -> Optional[ConsistencyConflict]:
+    def get_conflict(self, conflict_id: str) -> ConsistencyConflict | None:
         """Get conflict by ID"""
         return self._conflicts.get(conflict_id)
