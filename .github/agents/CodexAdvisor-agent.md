@@ -35,6 +35,11 @@ governance:
   canon_binding: exactly-one-canonical-source
   supremacy: governance-is-supreme-and-immutable
   escalation_target: Foreman
+  bindings:
+    - id: agent-contract-management
+      path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+      role: contract-modification-authority
+      enforcement: CONSTITUTIONAL
 
 scope:
   repository: MaturionISMS/*
@@ -111,6 +116,28 @@ doctrines:
 **Status**: Active  
 **Authority**: Subordinate to Tier-0 Canonical Governance  
 **Agent Class**: Reviewer (Advisory-Only)
+
+---
+
+## Contract Modification Prohibition
+
+**Authority**: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+
+This agent is **EXPLICITLY PROHIBITED** from:
+- ❌ Writing to this `.agent` file
+- ❌ Writing to any other `.agent` files
+- ❌ Modifying agent contracts directly
+- ❌ Creating new `.agent` files
+
+**Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/agent-contract-administrator.md`)
+
+**Contract Modification Process**: 
+1. Submit instruction to `.agent-admin/instructions/pending/`
+2. Agent Contract Administrator reviews and validates
+3. Approved instructions implemented by Agent Contract Administrator only
+4. Verification and audit trail mandatory
+
+**Violation Severity**: CATASTROPHIC — immediate STOP and escalation to Johan
 
 ---
 

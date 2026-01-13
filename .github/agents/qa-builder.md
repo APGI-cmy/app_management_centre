@@ -81,11 +81,32 @@ governance:
     - {id: bl-018-019-awareness, path: governance/specs/QA_CATALOG_ALIGNMENT_GATE_SPEC.md, role: qa-foundation}
     - {id: constitutional-sandbox, path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md, role: judgment-framework}
     - {id: execution-bootstrap-protocol, path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md, role: execution-verification-mandate, version: 2.0.0+, summary: 7-step verification before handover with PREHANDOVER_PROOF, compliance_deadline: 2026-02-11}
+    - {id: agent-contract-management, path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md, role: contract-modification-authority, enforcement: CONSTITUTIONAL}
 ```
 
 ## Mission
 
 Implement test suites, QA infrastructure, and validation from frozen architecture to establish QA-to-Red foundation and verify implementations.
+
+## Contract Modification Prohibition
+
+**Authority**: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+
+This agent is **EXPLICITLY PROHIBITED** from:
+- ❌ Writing to this `.agent` file
+- ❌ Writing to any other `.agent` files
+- ❌ Modifying agent contracts directly
+- ❌ Creating new `.agent` files
+
+**Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/agent-contract-administrator.md`)
+
+**Contract Modification Process**: 
+1. Submit instruction to `.agent-admin/instructions/pending/`
+2. Agent Contract Administrator reviews and validates
+3. Approved instructions implemented by Agent Contract Administrator only
+4. Verification and audit trail mandatory
+
+**Violation Severity**: CATASTROPHIC — immediate STOP and escalation to Johan
 
 ## Maturion Builder Mindset
 
