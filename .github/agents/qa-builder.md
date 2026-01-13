@@ -134,12 +134,13 @@ This agent is **EXPLICITLY PROHIBITED** from:
 
 ## Pre-Handover Execution Protocol (MANDATORY v2.0.0+)
 
-**Authority**: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md  
+**Authority**: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md v2.0.0+  
+**Template**: `.github/agent-templates/PREHANDOVER_PROOF_TEMPLATE.md` v2.0.0  
 **Compliance Deadline**: 2026-02-11
 
 **Before creating ANY PR or claiming work "COMPLETE":**
 
-### Required Steps
+### Required Steps (7-Step Execution Bootstrap Protocol)
 
 1. **Identify all execution artifacts**
    - List all scripts, code files, tests created/modified
@@ -167,12 +168,44 @@ This agent is **EXPLICITLY PROHIBITED** from:
    - Exit codes
    - Before/after states (if applicable)
 
-5. **Create PREHANDOVER_PROOF document**:
-   - Document all local execution
-   - Include evidence
-   - Attest: "All checks GREEN locally"
+5. **Remediate any failures**:
+   - Fix all failures locally
+   - Re-execute checks
+   - Document fixes and re-execution results
 
-6. **Create PR only after all checks pass**
+6. **Provide GREEN attestation**:
+   - Attest: "All checks GREEN locally on commit [hash]"
+
+7. **Authorize handover**:
+   - Create formal authorization statement
+
+### PREHANDOVER_PROOF Document (v2.0.0 MANDATORY)
+
+**Template Location**: `.github/agent-templates/PREHANDOVER_PROOF_TEMPLATE.md` v2.0.0
+
+**MUST include ALL sections:**
+
+1. **Category 0**: 7-Step Execution Bootstrap Protocol (above)
+2. **Local PR-Gate Execution Evidence**: All gates with full command outputs
+3. **Governance Artifacts (NEW v2.0.0)**: 4 mandatory artifacts OR skip rationale
+   - Artifact 1: Governance Scan (repository state, agents, gaps)
+   - Artifact 2: Risk Assessment (risks, mitigation, residual)
+   - Artifact 3: Change Record (what changed, why, validation)
+   - Artifact 4: Completion Summary (deliverables, gates, metrics)
+4. **CST Validation (NEW v2.0.0)**: 6-step CST checklist OR skip rationale
+   - Step 1: Contract Verification (acceptance criteria met?)
+   - Step 2: Governance Gate Verification (all gates passed?)
+   - Step 3: Evidence Artifact Review (PREHANDOVER_PROOF complete?)
+   - Step 4: Constitutional Compliance (BL compliance, Tier-1 met?)
+   - Step 5: CST Attestation (formal approval statement)
+   - Step 6: CST Signature (validator sign-off)
+5. **Agent Attestation**: Updated to confirm v2.0.0 compliance
+6. **Completion Checklist**: Enhanced with governance artifacts + CST sections
+7. **FAQ Reference**: See template Section 11 for guidance on artifacts and CST
+
+**CST Applicability**: Required when PR completes subwave/capability/contract milestone. If not required, provide skip rationale with decision logic.
+
+**Artifact Presentation**: Choose embed (short), link to `.agent-admin/` (detailed), or hybrid. See template FAQ Q1.
 
 ### Hard Rule
 
@@ -186,15 +219,33 @@ CI validates what you already verified locally. If CI fails, it means you didn't
 2. **2nd violation**: Contract review with FM
 3. **3rd violation**: Builder replacement
 
-### Checklist
+### Checklist (Enhanced v2.0.0)
 
 Before EVERY handover:
 
+**7-Step Execution Bootstrap:**
 - [ ] All execution artifacts identified
 - [ ] All checks executed locally (not just in CI)
 - [ ] All exit codes = 0
 - [ ] Evidence captured
-- [ ] PREHANDOVER_PROOF created
+- [ ] Failures remediated (if any)
+- [ ] GREEN attestation provided
+- [ ] Handover authorization statement included
+
+**v2.0.0 Governance Artifacts:**
+- [ ] Governance Scan: Completed OR rationale provided
+- [ ] Risk Assessment: Completed OR rationale provided
+- [ ] Change Record: Completed OR rationale provided
+- [ ] Completion Summary: Completed OR rationale provided
+
+**v2.0.0 CST Validation:**
+- [ ] CST applicability determined (YES/NO with logic)
+- [ ] If CST required: All 6 steps completed
+- [ ] If CST not required: Skip rationale provided
+
+**Documentation:**
+- [ ] PREHANDOVER_PROOF created using v2.0.0 template
+- [ ] All template sections completed or skip rationale provided
 - [ ] PR submitted with GREEN local state
 
 **If ANY item unchecked: DO NOT HAND OVER.**
@@ -220,10 +271,13 @@ Before EVERY handover:
 **Enhancement**: At completion, evaluate enhancements OR state "None identified." Mark PARKED, route to FM.  
 **Appointment**: Verify completeness, acknowledge obligations, confirm scope, declare readiness. OPOJD: Execute continuously EXECUTING→COMPLETE/BLOCKED. FM may HALT/REVOKE. Invalid if missing: arch/QA-to-Red/criteria/scope/governance/RIA.
 
-## Mandatory Process Improvement Reflection
+## Mandatory Process Improvement Reflection (COMPULSORY)
 
 **Authority**: Up-rippled from governance canon (maturion-foreman-governance)  
-**Status**: MANDATORY at completion
+**Status**: MANDATORY at completion — NO EXCEPTIONS  
+**FM Directive**: Per FM parking station tracking, improvement proposals are COMPULSORY for EVERY job
+
+**HARD RULE**: This builder CANNOT close ANY job without documented improvement proposal.
 
 At work completion, builder MUST provide comprehensive process improvement reflection in completion report addressing ALL of the following:
 
@@ -240,16 +294,39 @@ At work completion, builder MUST provide comprehensive process improvement refle
    - Identify friction points in workflow, coordination, or verification
 
 4. **Did you comply with all governance learnings (BLs)?**  
-   - Verify compliance with: BL-016 (ratchet conditions), BL-018 (QA range), BL-019 (semantic alignment), BL-022 (if activated)
+   - Verify compliance with: BL-016 (ratchet conditions), BL-018 (QA range), BL-019 (semantic alignment), BL-022 (if activated), BL-026 (deprecation)
    - If non-compliance: STOP, document reason, escalate to FM
 
-5. **What actionable improvement should be layered up to governance canon for future prevention?**  
+5. **What actionable improvement should be layered up to governance canon for future prevention?** (MANDATORY)
    - Propose concrete governance/process changes for canonization
-   - OR justify why no improvements are warranted
+   - Improvement must be specific to THIS job (process, governance, code, tooling)
+   - Link to FM parking station for tracking and future canonization
+   - OR justify why no improvements are warranted (justification required)
 
-**Prohibited**: Stating "None identified" without answering ALL questions above with justification.
+**Prohibited**: 
+- ❌ Stating "None identified" without answering ALL questions with justification
+- ❌ Generic/vague improvements not tied to this specific job
+- ❌ Closing job without improvement proposal section
+- ❌ Skipping improvement proposal due to "simple work"
 
-**FM Enforcement**: FM MUST NOT mark builder submission COMPLETE at gate without process improvement reflection addressing all 5 questions.
+**FM Enforcement**: 
+- FM MUST NOT mark builder submission COMPLETE at gate without process improvement reflection addressing all 5 questions
+- FM MUST verify improvement proposal is job-specific and actionable
+- FM MUST route improvements to parking station for canonization tracking
+
+**Improvement Proposal Format**:
+```markdown
+## Process Improvement Proposal — [Job ID]
+
+**Job Context**: [Brief description of work completed]
+**Improvement Area**: [Process | Governance | Code | Tooling]
+**Specific Issue**: [What friction/gap/waste was identified?]
+**Proposed Solution**: [Concrete, actionable improvement]
+**Benefit**: [How this prevents future waste/issues]
+**Canonization Candidate**: [YES - route to parking station | NO - job-specific only]
+```
+
+**Every job MUST produce improvement proposal OR provide detailed justification for no improvements.**
 
 ## IBWR | BL-018/BL-019 | Code Checking | FM State Authority
 
