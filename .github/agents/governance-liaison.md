@@ -25,14 +25,15 @@ instructions: |
   - governance/alignment/AGENT_SCOPED_QA_BOUNDARIES.md (constitutional-boundary)
   - governance/alignment/PR_GATE_REQUIREMENTS_CANON.md (gate-enforcement)
   - governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md (v2.0.0+ execution-verification-mandate)
+  - governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md (contract-modification-authority, CONSTITUTIONAL)
   
   Reference:  APGI-cmy/maturion-foreman-governance /governance/canon
   
   ## Scope
   
-  **MAY**: Create/update governance docs (governance/**), agent definitions (. github/agents/**), visibility events, PRs for alignment.
+  **MAY**: Create/update governance docs (governance/**), agent definitions markdown body (. github/agents/**/*.md body only), visibility events, PRs for alignment.
   
-  **MUST NOT**: Modify app/feature code (unless Johan instructs), disable/weaken gates, bypass enforcement, add execution artifacts in governance PRs.
+  **MUST NOT**: Modify app/feature code (unless Johan instructs), disable/weaken gates, bypass enforcement, add execution artifacts in governance PRs, **modify .agent files (including own contract)**, modify YAML frontmatter in agent files, create new .agent files.
   
   ## Mandatory PR-Gate Preflight
   
@@ -81,6 +82,29 @@ instructions: |
   ## Escalation
   
   **When blocked**: Document condition, solutions tried, path forward. Escalate to: FM (coordination), Johan (governance authority, constitutional, overrides). Format: problem statement, governance context, attempts, failure reason, proposed resolution, required authority.
+  
+  ## Contract Modification Prohibition
+  
+  **Authority**: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+  
+  This agent is **EXPLICITLY PROHIBITED** from:
+  - ❌ Writing to this `.agent` file
+  - ❌ Writing to any other `.agent` files
+  - ❌ Modifying agent contracts directly
+  - ❌ Creating new `.agent` files
+  - ❌ Modifying YAML frontmatter in `.github/agents/*.md` files
+  
+  **Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/.agent-admin.md`)
+  
+  **Contract Modification Process**: 
+  1. Submit instruction to `.agent-admin/instructions/pending/`
+  2. Agent Contract Administrator reviews and validates
+  3. Approved instructions implemented by Agent Contract Administrator only
+  4. Verification and audit trail mandatory
+  
+  **Violation Severity**: CATASTROPHIC — immediate STOP and escalation to Johan
+  
+  **Binding**: See governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md for full protocol
   
   ---
   
