@@ -9,6 +9,7 @@ Tenant Isolation: All operations scoped by organisation_id
 """
 
 from typing import Dict, Any, List, Optional
+from datetime import datetime, UTC
 
 
 class DrillDownNavigator:
@@ -201,9 +202,12 @@ class DrillDownNavigator:
             "new_level": breadcrumb_level
         }
     
-    def get_current_level_data(self) -> Dict[str, Any]:
+    def get_current_level_data(self, dashboard=None) -> Dict[str, Any]:
         """
         Get data for current drill-down level.
+        
+        Args:
+            dashboard: Optional GovernanceDashboardV2 instance for domain data integration
         
         Returns:
             Data filtered for current navigation context
@@ -213,20 +217,23 @@ class DrillDownNavigator:
             last_nav = self.navigation_history[self.current_level - 1]
             context_label = last_nav.get("target", last_nav.get("label", f"Level {self.current_level}"))
         
-        return {
+        level_data = {
             "level": self.current_level,
             "context": context_label,
             "organisation_id": self.organisation_id,
-            "data": self._load_level_data(self.current_level, context_label)
+            "data": self._load_level_data(self.current_level, context_label, dashboard)
         }
+        
+        return level_data
     
-    def _load_level_data(self, level: int, context: str) -> Dict[str, Any]:
+    def _load_level_data(self, level: int, context: str, dashboard=None) -> Dict[str, Any]:
         """
         Load data for specific level and context.
         
         Args:
             level: Drill-down level
             context: Navigation context
+            dashboard: Optional GovernanceDashboardV2 instance for domain data
             
         Returns:
             Level-specific data
@@ -234,6 +241,15 @@ class DrillDownNavigator:
         # Return different data based on level
         if level == 0:
             return {"type": "root_dashboard", "domains": 11, "summary": "all_domains"}
+        elif level == 1 and dashboard:
+            # At level 1, get domain-specific data from dashboard
+            domain_status = dashboard.get_domain_status(context)
+            return {
+                "type": f"level_{level}_data",
+                "context": context,
+                "filtered_by": context,
+                **{k: v for k, v in domain_status.items() if k not in ["status", "organisation_id", "timestamp"]}
+            }
         else:
             return {
                 "type": f"level_{level}_data",
@@ -243,5 +259,4 @@ class DrillDownNavigator:
     
     def _get_timestamp(self) -> str:
         """Get current timestamp in ISO format."""
-        from datetime import datetime
         return datetime.now(UTC).isoformat() + "Z"

@@ -9,7 +9,7 @@ Tenant Isolation: All operations scoped by organisation_id
 """
 
 from typing import Dict, Any, List, Optional, Callable
-from datetime import datetime
+from datetime import datetime, UTC
 
 
 class RealtimeDashboardConnection:
@@ -112,7 +112,7 @@ class RealtimeDashboardConnection:
             message: Message data to process
         """
         # Validate message type
-        valid_types = ["status_update", "metric_update", "alert", "heartbeat"]
+        valid_types = ["status_update", "metric_update", "alert", "heartbeat", "domain_added", "evidence_linked"]
         message_type = message.get("type")
         
         if message_type not in valid_types:

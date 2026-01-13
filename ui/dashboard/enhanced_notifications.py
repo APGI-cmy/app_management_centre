@@ -9,7 +9,7 @@ Tenant Isolation: All operations scoped by organisation_id
 """
 
 from typing import Dict, Any, List
-from datetime import datetime
+from datetime import datetime, UTC
 
 
 class UpdateNotificationManager:
