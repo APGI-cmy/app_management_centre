@@ -17,7 +17,7 @@ All it does:
 
 import json
 import logging
-from typing import List, Dict, Any, Optional
+from typing import Any, Optional
 from pathlib import Path
 from datetime import datetime
 
@@ -42,7 +42,7 @@ class AlertReader:
     - Make decisions
     """
     
-    def __init__(self, alert_store_path: Optional[str] = None):
+    def __init__(self, alert_store_path: str | None = None):
         """
         Initialize AlertReader.
         
@@ -58,7 +58,7 @@ class AlertReader:
         self.alert_store_path = Path(alert_store_path)
         logger.info(f"AlertReader initialized with alert store: {self.alert_store_path}")
     
-    def read_alerts(self, organisation_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    def read_alerts(self, organisation_id: str | None = None) -> list[dict[str, Any]]:
         """
         Read alerts from the alert store.
         
@@ -81,7 +81,7 @@ class AlertReader:
                 logger.error(error_msg)
                 raise FileNotFoundError(error_msg)
             
-            with open(self.alert_store_path, 'r') as f:
+            with open(self.alert_store_path) as f:
                 data = json.load(f)
             
             # Validate basic structure
@@ -114,7 +114,7 @@ class AlertReader:
             logger.error(error_msg)
             raise RuntimeError(error_msg)
     
-    def get_active_alerts(self, organisation_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    def get_active_alerts(self, organisation_id: str | None = None) -> list[dict[str, Any]]:
         """
         Get only active (unresolved) alerts.
         
@@ -136,7 +136,7 @@ class AlertReader:
         logger.info(f"Found {len(active_alerts)} active alerts")
         return active_alerts
     
-    def get_critical_alerts(self, organisation_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    def get_critical_alerts(self, organisation_id: str | None = None) -> list[dict[str, Any]]:
         """
         Get critical severity alerts.
         
@@ -159,8 +159,8 @@ class AlertReader:
     def get_alerts_by_type(
         self,
         alert_type: str,
-        organisation_id: Optional[str] = None
-    ) -> List[Dict[str, Any]]:
+        organisation_id: str | None = None
+    ) -> list[dict[str, Any]]:
         """
         Get alerts by type.
         
@@ -181,7 +181,7 @@ class AlertReader:
         logger.info(f"Found {len(filtered_alerts)} alerts of type {alert_type}")
         return filtered_alerts
     
-    def get_alert_summary(self, organisation_id: Optional[str] = None) -> Dict[str, Any]:
+    def get_alert_summary(self, organisation_id: str | None = None) -> dict[str, Any]:
         """
         Get summary of alert status.
         

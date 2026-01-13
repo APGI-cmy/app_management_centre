@@ -6,7 +6,8 @@ consistency checks, validation, and synchronization.
 """
 
 import time
-from typing import Dict, Any, List, Optional, Callable
+from typing import Any, Optional
+from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
 
@@ -25,7 +26,7 @@ class ConsistencyCheck:
     key: str
     status: ConsistencyStatus
     timestamp: float
-    details: Dict[str, Any]
+    details: dict[str, Any]
     message: str
 
 
@@ -49,16 +50,16 @@ class LazyConsistencyManager:
             stale_threshold: Time in seconds before data is considered stale
         """
         self.stale_threshold = stale_threshold
-        self._consistency_checks: Dict[str, List[ConsistencyCheck]] = {}
-        self._versions: Dict[str, int] = {}
-        self._last_validated: Dict[str, float] = {}
-        self._alerts: List[Dict[str, Any]] = []
+        self._consistency_checks: dict[str, list[ConsistencyCheck]] = {}
+        self._versions: dict[str, int] = {}
+        self._last_validated: dict[str, float] = {}
+        self._alerts: list[dict[str, Any]] = []
     
     def check_consistency(
         self, 
         key: str, 
-        last_loaded: Optional[float],
-        validator: Optional[Callable[[], bool]] = None
+        last_loaded: float | None,
+        validator: Callable[[], bool] | None = None
     ) -> ConsistencyCheck:
         """
         Check data consistency
@@ -136,7 +137,7 @@ class LazyConsistencyManager:
         }
         self._alerts.append(alert)
     
-    def mark_version(self, key: str, version: Optional[int] = None) -> int:
+    def mark_version(self, key: str, version: int | None = None) -> int:
         """
         Mark data version
         
@@ -198,7 +199,7 @@ class LazyConsistencyManager:
         
         return self._consistency_checks[key][-1].status
     
-    def get_consistency_history(self, key: str, limit: int = 10) -> List[ConsistencyCheck]:
+    def get_consistency_history(self, key: str, limit: int = 10) -> list[ConsistencyCheck]:
         """
         Get consistency check history
         
@@ -214,7 +215,7 @@ class LazyConsistencyManager:
         
         return self._consistency_checks[key][-limit:]
     
-    def get_alerts(self) -> List[Dict[str, Any]]:
+    def get_alerts(self) -> list[dict[str, Any]]:
         """Get all consistency alerts"""
         return self._alerts.copy()
     
@@ -222,7 +223,7 @@ class LazyConsistencyManager:
         """Clear all alerts"""
         self._alerts.clear()
     
-    def get_statistics(self) -> Dict[str, Any]:
+    def get_statistics(self) -> dict[str, Any]:
         """
         Get consistency statistics
         
@@ -264,7 +265,7 @@ class LazyConsistencyManager:
             'consistency_rate': consistent / len(all_checks) if all_checks else 0.0
         }
     
-    def clear_history(self, key: Optional[str] = None) -> None:
+    def clear_history(self, key: str | None = None) -> None:
         """
         Clear consistency history
         

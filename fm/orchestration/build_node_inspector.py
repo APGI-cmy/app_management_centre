@@ -9,9 +9,9 @@ Every status, state, or indicator must be fully explainable through inspection.
 """
 
 import logging
-from typing import Dict, Any, List, Optional
+from typing import Any, Optional
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 import json
 
 logger = logging.getLogger(__name__)
@@ -42,7 +42,7 @@ class BuildNodeInspector:
         node_id: str,
         depth: int = 3,
         include_children: bool = False
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Inspect a build node and return comprehensive information.
         
@@ -68,7 +68,7 @@ class BuildNodeInspector:
         inspection_data = {
             "node_id": node_id,
             "node_type": node_type,
-            "last_inspected_at": datetime.now(timezone.utc).isoformat() + "Z"
+            "last_inspected_at": datetime.now(UTC).isoformat() + "Z"
         }
         
         # Level 1: Quick Status View (always included)
@@ -107,7 +107,7 @@ class BuildNodeInspector:
         
         return inspection_data
     
-    def _get_quick_status(self, node_type: str, node_id: str) -> Dict[str, Any]:
+    def _get_quick_status(self, node_type: str, node_id: str) -> dict[str, Any]:
         """Get Level 1: Quick status view"""
         # TODO: Load from actual build tree data
         # For now, return mock data structure
@@ -118,7 +118,7 @@ class BuildNodeInspector:
             "updated_at": "2025-12-29T12:00:00Z"
         }
     
-    def _get_state_explanation(self, node_type: str, node_id: str) -> Dict[str, Any]:
+    def _get_state_explanation(self, node_type: str, node_id: str) -> dict[str, Any]:
         """Get Level 2: State explanation"""
         # TODO: Load from actual build tree data
         return {
@@ -158,7 +158,7 @@ class BuildNodeInspector:
             "completion_is_authoritative": False
         }
     
-    def _get_governing_checks(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_governing_checks(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get governing checks applicable to this node"""
         # TODO: Load from actual governance data
         return [
@@ -191,7 +191,7 @@ class BuildNodeInspector:
             }
         ]
     
-    def _get_requirements(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_requirements(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get requirements applicable to this node"""
         # TODO: Load from actual requirements data
         return [
@@ -245,7 +245,7 @@ class BuildNodeInspector:
             }
         ]
     
-    def _get_evidence(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_evidence(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get evidence artifacts for this node"""
         # TODO: Load from actual evidence data
         return [
@@ -291,7 +291,7 @@ class BuildNodeInspector:
             }
         ]
     
-    def _get_evidence_summary(self, evidence: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def _get_evidence_summary(self, evidence: list[dict[str, Any]]) -> dict[str, Any]:
         """Summarize evidence artifacts"""
         by_category = {"ARCHITECTURE": 0, "QA": 0, "BUILD": 0, "COMPLETION": 0}
         validated_count = 0
@@ -310,7 +310,7 @@ class BuildNodeInspector:
             "by_category": by_category
         }
     
-    def _get_decisions(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_decisions(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get decisions related to this node"""
         # TODO: Load from actual decision data
         return [
@@ -334,7 +334,7 @@ class BuildNodeInspector:
             }
         ]
     
-    def _get_audit_reports(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_audit_reports(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get audit reports related to this node"""
         # TODO: Load from actual audit data
         return [
@@ -349,27 +349,27 @@ class BuildNodeInspector:
             }
         ]
     
-    def _get_surveys(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_surveys(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get surveys related to this node"""
         # TODO: Load from actual survey data
         return []
     
-    def _get_blockers(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_blockers(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get active blockers for this node"""
         # TODO: Load from actual blocker data
         return []
     
-    def _get_resolution_paths(self, blockers: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def _get_resolution_paths(self, blockers: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Get resolution paths for blockers"""
         # TODO: Generate resolution paths based on blockers
         return []
     
-    def _get_stop_conditions(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_stop_conditions(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get active STOP conditions for this node"""
         # TODO: Load from actual STOP condition data
         return []
     
-    def _get_children(self, node_type: str, node_id: str) -> List[Dict[str, Any]]:
+    def _get_children(self, node_type: str, node_id: str) -> list[dict[str, Any]]:
         """Get child nodes"""
         # TODO: Load from actual build tree data
         return []
@@ -380,8 +380,8 @@ class BuildNodeInspector:
         node_type: str,
         inspected_by: str,
         inspection_depth: int,
-        ip_address: Optional[str] = None,
-        user_agent: Optional[str] = None
+        ip_address: str | None = None,
+        user_agent: str | None = None
     ) -> None:
         """
         Log an inspection access for audit trail.
@@ -395,11 +395,11 @@ class BuildNodeInspector:
             user_agent: Optional user agent string
         """
         log_entry = {
-            "log_id": f"inspect-{datetime.now(timezone.utc).timestamp()}",
+            "log_id": f"inspect-{datetime.now(UTC).timestamp()}",
             "node_id": node_id,
             "node_type": node_type,
             "inspected_by": inspected_by,
-            "inspected_at": datetime.now(timezone.utc).isoformat() + "Z",
+            "inspected_at": datetime.now(UTC).isoformat() + "Z",
             "inspection_depth": inspection_depth,
             "ip_address": ip_address,
             "user_agent": user_agent

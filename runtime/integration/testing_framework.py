@@ -7,9 +7,10 @@ Authority: Wave 2.0 Subwave 2.10 - Deep Integration Phase 2 (QA-486 to QA-490)
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, List, Optional, Any, Callable
+from typing import Optional, Any
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, UTC
 from enum import Enum
 import uuid
 
@@ -39,9 +40,9 @@ class TestFixture:
     fixture_id: str
     organisation_id: str
     name: str
-    setup_actions: List[Dict[str, Any]]
-    cleanup_actions: List[Dict[str, Any]]
-    resources: Dict[str, Any]
+    setup_actions: list[dict[str, Any]]
+    cleanup_actions: list[dict[str, Any]]
+    resources: dict[str, Any]
     timestamp: datetime
     setup_completed: bool = False
     cleanup_completed: bool = False
@@ -60,14 +61,14 @@ class TestExecution:
     test_name: str
     status: IntegrationTestStatus
     started_at: datetime
-    completed_at: Optional[datetime] = None
-    duration_ms: Optional[int] = None
-    error_message: Optional[str] = None
+    completed_at: datetime | None = None
+    duration_ms: int | None = None
+    error_message: str | None = None
     
-    def mark_completed(self, status: IntegrationTestStatus, error: Optional[str] = None) -> None:
+    def mark_completed(self, status: IntegrationTestStatus, error: str | None = None) -> None:
         """Mark execution as completed"""
         self.status = status
-        self.completed_at = datetime.now(timezone.utc)
+        self.completed_at = datetime.now(UTC)
         self.duration_ms = int((self.completed_at - self.started_at).total_seconds() * 1000)
         if error:
             self.error_message = error
@@ -79,10 +80,10 @@ class TestCleanup:
     cleanup_id: str
     organisation_id: str
     execution_id: str
-    cleanup_actions: List[str]
+    cleanup_actions: list[str]
     cleanup_status: str  # pending, in_progress, completed, failed
     timestamp: datetime
-    completed_at: Optional[datetime] = None
+    completed_at: datetime | None = None
 
 
 @dataclass
@@ -95,7 +96,7 @@ class CoverageMetrics:
     failed_tests: int
     skipped_tests: int
     coverage_percentage: float
-    subsystems_covered: List[str]
+    subsystems_covered: list[str]
     integration_points_tested: int
     timestamp: datetime
     
@@ -114,8 +115,8 @@ class FailureAnalysis:
     execution_id: str
     failure_category: FailureCategory
     root_cause: str
-    affected_subsystems: List[str]
-    recommended_actions: List[str]
+    affected_subsystems: list[str]
+    recommended_actions: list[str]
     timestamp: datetime
 
 
@@ -129,19 +130,19 @@ class IntegrationTestingFramework:
     
     def __init__(self):
         """Initialize testing framework with in-memory storage"""
-        self._fixtures: Dict[str, TestFixture] = {}
-        self._executions: Dict[str, TestExecution] = {}
-        self._cleanups: Dict[str, TestCleanup] = {}
-        self._metrics: Dict[str, CoverageMetrics] = {}
-        self._analyses: Dict[str, FailureAnalysis] = {}
+        self._fixtures: dict[str, TestFixture] = {}
+        self._executions: dict[str, TestExecution] = {}
+        self._cleanups: dict[str, TestCleanup] = {}
+        self._metrics: dict[str, CoverageMetrics] = {}
+        self._analyses: dict[str, FailureAnalysis] = {}
     
     def setup_fixture(
         self,
         organisation_id: str,
         name: str,
-        setup_actions: List[Dict[str, Any]],
-        cleanup_actions: List[Dict[str, Any]],
-        resources: Optional[Dict[str, Any]] = None
+        setup_actions: list[dict[str, Any]],
+        cleanup_actions: list[dict[str, Any]],
+        resources: dict[str, Any] | None = None
     ) -> TestFixture:
         """
         Set up test fixture.
@@ -165,7 +166,7 @@ class IntegrationTestingFramework:
             setup_actions=setup_actions,
             cleanup_actions=cleanup_actions,
             resources=resources or {},
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._fixtures[fixture_id] = fixture
@@ -185,7 +186,7 @@ class IntegrationTestingFramework:
         organisation_id: str,
         fixture_id: str,
         test_name: str,
-        test_func: Optional[Callable] = None
+        test_func: Callable | None = None
     ) -> TestExecution:
         """
         Execute integration test.
@@ -207,7 +208,7 @@ class IntegrationTestingFramework:
             fixture_id=fixture_id,
             test_name=test_name,
             status=IntegrationTestStatus.PENDING,
-            started_at=datetime.now(timezone.utc)
+            started_at=datetime.now(UTC)
         )
         
         self._executions[execution_id] = execution
@@ -260,7 +261,7 @@ class IntegrationTestingFramework:
             execution_id=execution_id,
             cleanup_actions=[action.get("action", "") for action in fixture.cleanup_actions],
             cleanup_status="pending",
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._cleanups[cleanup_id] = cleanup
@@ -274,7 +275,7 @@ class IntegrationTestingFramework:
         
         # Mark cleanup as completed
         cleanup.cleanup_status = "completed"
-        cleanup.completed_at = datetime.now(timezone.utc)
+        cleanup.completed_at = datetime.now(UTC)
         fixture.cleanup_completed = True
         
         return cleanup
@@ -282,8 +283,8 @@ class IntegrationTestingFramework:
     def calculate_coverage(
         self,
         organisation_id: str,
-        test_results: List[TestExecution],
-        subsystems_covered: List[str],
+        test_results: list[TestExecution],
+        subsystems_covered: list[str],
         integration_points_tested: int
     ) -> CoverageMetrics:
         """
@@ -318,7 +319,7 @@ class IntegrationTestingFramework:
             coverage_percentage=coverage_percentage,
             subsystems_covered=subsystems_covered,
             integration_points_tested=integration_points_tested,
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._metrics[metrics_id] = metrics
@@ -331,7 +332,7 @@ class IntegrationTestingFramework:
         execution_id: str,
         failure_category: FailureCategory,
         root_cause: str,
-        affected_subsystems: List[str]
+        affected_subsystems: list[str]
     ) -> FailureAnalysis:
         """
         Analyze test failure.
@@ -371,29 +372,29 @@ class IntegrationTestingFramework:
             root_cause=root_cause,
             affected_subsystems=affected_subsystems,
             recommended_actions=recommended_actions,
-            timestamp=datetime.now(timezone.utc)
+            timestamp=datetime.now(UTC)
         )
         
         self._analyses[analysis_id] = analysis
         
         return analysis
     
-    def get_fixture(self, fixture_id: str) -> Optional[TestFixture]:
+    def get_fixture(self, fixture_id: str) -> TestFixture | None:
         """Get fixture by ID"""
         return self._fixtures.get(fixture_id)
     
-    def get_execution(self, execution_id: str) -> Optional[TestExecution]:
+    def get_execution(self, execution_id: str) -> TestExecution | None:
         """Get execution by ID"""
         return self._executions.get(execution_id)
     
-    def get_cleanup(self, cleanup_id: str) -> Optional[TestCleanup]:
+    def get_cleanup(self, cleanup_id: str) -> TestCleanup | None:
         """Get cleanup by ID"""
         return self._cleanups.get(cleanup_id)
     
-    def get_metrics(self, metrics_id: str) -> Optional[CoverageMetrics]:
+    def get_metrics(self, metrics_id: str) -> CoverageMetrics | None:
         """Get metrics by ID"""
         return self._metrics.get(metrics_id)
     
-    def get_analysis(self, analysis_id: str) -> Optional[FailureAnalysis]:
+    def get_analysis(self, analysis_id: str) -> FailureAnalysis | None:
         """Get analysis by ID"""
         return self._analyses.get(analysis_id)

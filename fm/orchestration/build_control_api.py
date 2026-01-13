@@ -9,7 +9,7 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from pathlib import Path
 import logging
-from typing import Dict, Any
+from typing import Any
 
 # Handle both relative and absolute imports
 try:

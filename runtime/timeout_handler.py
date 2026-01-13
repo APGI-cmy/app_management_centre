@@ -14,9 +14,10 @@ Timeout Handling:
 - QA-250: Conditional approval timeout (PENDING_APPROVAL → CONDITIONAL)
 """
 
-from typing import Dict, List, Optional, Any, Callable
+from typing import Optional, Any
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from enum import Enum
 import threading
 import time
@@ -45,10 +46,10 @@ class TimeoutConfig:
     operation_id: str
     timeout_seconds: int
     action: TimeoutAction
-    default_value: Optional[Any] = None
+    default_value: Any | None = None
     max_extensions: int = 2
     extension_count: int = 0
-    callback: Optional[Callable] = None
+    callback: Callable | None = None
 
 
 @dataclass
@@ -59,12 +60,12 @@ class TimeoutRecord:
     organisation_id: str
     timeout_seconds: int
     started_at: datetime
-    triggered_at: Optional[datetime] = None
-    handled_at: Optional[datetime] = None
+    triggered_at: datetime | None = None
+    handled_at: datetime | None = None
     state: TimeoutState = TimeoutState.ACTIVE
-    action_taken: Optional[str] = None
-    context: Dict[str, Any] = field(default_factory=dict)
-    audit_trail: List[Dict[str, Any]] = field(default_factory=list)
+    action_taken: str | None = None
+    context: dict[str, Any] = field(default_factory=dict)
+    audit_trail: list[dict[str, Any]] = field(default_factory=list)
 
 
 class TimeoutHandler:
@@ -87,10 +88,10 @@ class TimeoutHandler:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._timeouts: Dict[str, TimeoutRecord] = {}
-        self._configs: Dict[str, TimeoutConfig] = {}
-        self._timeout_history: List[TimeoutRecord] = []
-        self._monitoring_threads: Dict[str, threading.Thread] = {}
+        self._timeouts: dict[str, TimeoutRecord] = {}
+        self._configs: dict[str, TimeoutConfig] = {}
+        self._timeout_history: list[TimeoutRecord] = []
+        self._monitoring_threads: dict[str, threading.Thread] = {}
         self._stop_monitoring = threading.Event()
         
     def start_timeout_monitoring(
@@ -99,8 +100,8 @@ class TimeoutHandler:
         operation_type: str,
         timeout_seconds: int,
         action: TimeoutAction = TimeoutAction.ESCALATE,
-        context: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
+        context: dict[str, Any] | None = None
+    ) -> dict[str, Any]:
         """
         QA-246, QA-247: Start monitoring operation timeout
         
@@ -127,7 +128,7 @@ class TimeoutHandler:
             operation_type=operation_type,
             organisation_id=self.organisation_id,
             timeout_seconds=timeout_seconds,
-            started_at=datetime.now(timezone.utc),
+            started_at=datetime.now(UTC),
             context=context or {}
         )
         
@@ -154,7 +155,7 @@ class TimeoutHandler:
         # Audit trail
         record.audit_trail.append({
             "action": "monitoring_started",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "timeout_seconds": timeout_seconds,
             "action_on_timeout": action.value
         })
@@ -177,7 +178,7 @@ class TimeoutHandler:
         entity_type: str,
         entity_id: str,
         preserve_context: bool = True
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-246, QA-248, QA-249, QA-250: Handle state transition timeout
         
@@ -213,7 +214,7 @@ class TimeoutHandler:
         
         # Mark as triggered
         record.state = TimeoutState.TRIGGERED
-        record.triggered_at = datetime.now(timezone.utc)
+        record.triggered_at = datetime.now(UTC)
         
         # Determine action based on config and context
         action_result = self._execute_timeout_action(
@@ -243,13 +244,13 @@ class TimeoutHandler:
         
         # Mark as handled
         record.state = TimeoutState.HANDLED
-        record.handled_at = datetime.now(timezone.utc)
+        record.handled_at = datetime.now(UTC)
         record.action_taken = action_result["action"]
         
         # Audit trail
         record.audit_trail.append({
             "action": "timeout_handled",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "from_state": from_state,
             "to_state": to_state,
             "action_taken": action_result["action"],
@@ -271,7 +272,7 @@ class TimeoutHandler:
         self,
         operation_id: str,
         additional_seconds: int
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Extend timeout for an operation
         
@@ -306,7 +307,7 @@ class TimeoutHandler:
         # Audit trail
         record.audit_trail.append({
             "action": "timeout_extended",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "additional_seconds": additional_seconds,
             "new_timeout": config.timeout_seconds,
             "extension_count": config.extension_count
@@ -323,7 +324,7 @@ class TimeoutHandler:
             "new_expires_at": new_expires_at.isoformat()
         }
     
-    def cancel_timeout_monitoring(self, operation_id: str) -> Dict[str, Any]:
+    def cancel_timeout_monitoring(self, operation_id: str) -> dict[str, Any]:
         """
         Cancel timeout monitoring (operation completed successfully)
         
@@ -355,7 +356,7 @@ class TimeoutHandler:
         # Audit trail
         record.audit_trail.append({
             "action": "monitoring_cancelled",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "reason": "operation_completed"
         })
         
@@ -363,11 +364,11 @@ class TimeoutHandler:
             "cancelled": True,
             "operation_id": operation_id,
             "duration_seconds": (
-                (datetime.now(timezone.utc) - record.started_at).total_seconds()
+                (datetime.now(UTC) - record.started_at).total_seconds()
             )
         }
     
-    def get_timeout_status(self, operation_id: str) -> Optional[Dict[str, Any]]:
+    def get_timeout_status(self, operation_id: str) -> dict[str, Any] | None:
         """
         Get current timeout status
         
@@ -381,7 +382,7 @@ class TimeoutHandler:
             record = self._timeouts[operation_id]
             config = self._configs[operation_id]
             
-            elapsed = (datetime.now(timezone.utc) - record.started_at).total_seconds()
+            elapsed = (datetime.now(UTC) - record.started_at).total_seconds()
             remaining = max(0, config.timeout_seconds - elapsed)
             
             return {
@@ -457,7 +458,7 @@ class TimeoutHandler:
             except Exception as e:
                 record.audit_trail.append({
                     "action": "callback_failed",
-                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "timestamp": datetime.now(UTC).isoformat(),
                     "error": str(e)
                 })
     
@@ -469,7 +470,7 @@ class TimeoutHandler:
         to_state: str,
         entity_type: str,
         entity_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Execute configured timeout action"""
         
         if config.action == TimeoutAction.ESCALATE:
@@ -524,7 +525,7 @@ class TimeoutHandler:
     def _track_rework_iteration(
         self,
         entity_id: str,
-        context: Dict[str, Any]
+        context: dict[str, Any]
     ) -> bool:
         """Track rework iteration count"""
         
@@ -533,20 +534,20 @@ class TimeoutHandler:
         else:
             context["iteration_count"] += 1
         
-        context["last_rework_at"] = datetime.now(timezone.utc).isoformat()
+        context["last_rework_at"] = datetime.now(UTC).isoformat()
         
         return True
     
     def _preserve_operation_context(
         self,
         operation_id: str,
-        context: Dict[str, Any]
+        context: dict[str, Any]
     ) -> bool:
         """Preserve operation context for recovery"""
         
         # Context is already stored in the record
         # This method ensures it's marked as preserved
-        context["preserved_at"] = datetime.now(timezone.utc).isoformat()
+        context["preserved_at"] = datetime.now(UTC).isoformat()
         context["preserved"] = True
         
         return True

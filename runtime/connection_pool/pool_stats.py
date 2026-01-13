@@ -4,7 +4,7 @@ Pool Statistics
 Provides statistics collection and reporting for connection pools.
 """
 
-from typing import Dict, Any, List
+from typing import Any
 from dataclasses import dataclass
 import time
 
@@ -23,9 +23,9 @@ class PoolStatistics:
     
     def __init__(self):
         """Initialize statistics container"""
-        self._snapshots: List[Dict[str, Any]] = []
+        self._snapshots: list[dict[str, Any]] = []
     
-    def record_snapshot(self, stats: Dict[str, Any]) -> None:
+    def record_snapshot(self, stats: dict[str, Any]) -> None:
         """
         Record a statistics snapshot
         
@@ -38,13 +38,13 @@ class PoolStatistics:
         }
         self._snapshots.append(snapshot)
     
-    def get_latest(self) -> Dict[str, Any]:
+    def get_latest(self) -> dict[str, Any]:
         """Get latest statistics snapshot"""
         if not self._snapshots:
             return {}
         return self._snapshots[-1]
     
-    def get_history(self, limit: int = 10) -> List[Dict[str, Any]]:
+    def get_history(self, limit: int = 10) -> list[dict[str, Any]]:
         """
         Get statistics history
         
@@ -56,7 +56,7 @@ class PoolStatistics:
         """
         return self._snapshots[-limit:]
     
-    def get_trend_analysis(self) -> Dict[str, Any]:
+    def get_trend_analysis(self) -> dict[str, Any]:
         """
         Analyze trends in pool statistics
         
@@ -98,7 +98,7 @@ class PoolStatistics:
             'timeout_change': recent_timeouts - older_timeouts
         }
     
-    def get_summary(self) -> Dict[str, Any]:
+    def get_summary(self) -> dict[str, Any]:
         """
         Get comprehensive statistics summary
         

@@ -14,9 +14,9 @@ Recovery Workflows:
 - QA-245: Intent rejection recovery (CLARIFYING → REJECTED)
 """
 
-from typing import Dict, List, Optional, Any, Literal
+from typing import Optional, Any, Literal
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 from enum import Enum
 
 
@@ -47,8 +47,8 @@ class RecoveryStep:
     retry_count: int = 0
     max_retries: int = 3
     completed: bool = False
-    error: Optional[str] = None
-    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    error: str | None = None
+    timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
 @dataclass
@@ -58,11 +58,11 @@ class RecoveryWorkflow:
     failure_type: str
     organisation_id: str
     state: RecoveryState
-    steps: List[RecoveryStep] = field(default_factory=list)
-    started_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    completed_at: Optional[datetime] = None
-    context: Dict[str, Any] = field(default_factory=dict)
-    audit_trail: List[Dict[str, Any]] = field(default_factory=list)
+    steps: list[RecoveryStep] = field(default_factory=list)
+    started_at: datetime = field(default_factory=lambda: datetime.now(UTC))
+    completed_at: datetime | None = None
+    context: dict[str, Any] = field(default_factory=dict)
+    audit_trail: list[dict[str, Any]] = field(default_factory=list)
 
 
 class FailureRecoveryHandler:
@@ -85,15 +85,15 @@ class FailureRecoveryHandler:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._workflows: Dict[str, RecoveryWorkflow] = {}
-        self._recovery_history: List[RecoveryWorkflow] = []
+        self._workflows: dict[str, RecoveryWorkflow] = {}
+        self._recovery_history: list[RecoveryWorkflow] = []
         
     def initiate_recovery(
         self,
         failure_type: str,
-        context: Dict[str, Any],
+        context: dict[str, Any],
         strategy: RecoveryStrategy = RecoveryStrategy.RETRY
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         QA-241: Initiate multi-level recovery workflow
         
@@ -135,7 +135,7 @@ class FailureRecoveryHandler:
         # Audit trail entry
         workflow.audit_trail.append({
             "action": "recovery_initiated",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "failure_type": failure_type,
             "strategy": strategy.value,
             "nested_levels": nested_levels
@@ -154,8 +154,8 @@ class FailureRecoveryHandler:
         self,
         workflow_id: str,
         step_id: str,
-        force_strategy: Optional[RecoveryStrategy] = None
-    ) -> Dict[str, Any]:
+        force_strategy: RecoveryStrategy | None = None
+    ) -> dict[str, Any]:
         """
         QA-242: Execute recovery step with error handling
         
@@ -220,7 +220,7 @@ class FailureRecoveryHandler:
         workflow.audit_trail.append({
             "action": "step_executed",
             "step_id": step_id,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "success": result["success"],
             "strategy": step.strategy.value,
             "retry_count": step.retry_count
@@ -244,8 +244,8 @@ class FailureRecoveryHandler:
         to_state: str,
         entity_type: str,
         entity_id: str,
-        error_details: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        error_details: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         QA-243, QA-244, QA-245: Handle state transition failures
         
@@ -298,7 +298,7 @@ class FailureRecoveryHandler:
         # Audit recovery
         workflow.audit_trail.append({
             "action": "state_transition_recovery",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "from_state": from_state,
             "to_state": to_state,
             "recovery_successful": rollback_result["success"]
@@ -314,7 +314,7 @@ class FailureRecoveryHandler:
             "organisation_id": self.organisation_id
         }
     
-    def complete_recovery(self, workflow_id: str) -> Dict[str, Any]:
+    def complete_recovery(self, workflow_id: str) -> dict[str, Any]:
         """
         Complete recovery workflow
         
@@ -337,7 +337,7 @@ class FailureRecoveryHandler:
         
         if all_completed:
             workflow.state = RecoveryState.COMPLETED
-            workflow.completed_at = datetime.now(timezone.utc)
+            workflow.completed_at = datetime.now(UTC)
         else:
             workflow.state = RecoveryState.FAILED
         
@@ -348,7 +348,7 @@ class FailureRecoveryHandler:
         # Audit completion
         workflow.audit_trail.append({
             "action": "recovery_completed",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "state": workflow.state.value,
             "steps_completed": sum(1 for s in workflow.steps if s.completed),
             "total_steps": len(workflow.steps)
@@ -427,7 +427,7 @@ class FailureRecoveryHandler:
         self,
         workflow: RecoveryWorkflow,
         step: RecoveryStep
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Execute recovery strategy"""
         
         if step.strategy == RecoveryStrategy.RETRY:
@@ -459,7 +459,7 @@ class FailureRecoveryHandler:
         self,
         workflow: RecoveryWorkflow,
         step: RecoveryStep,
-        result: Dict[str, Any]
+        result: dict[str, Any]
     ) -> str:
         """Determine next recovery action"""
         
@@ -482,7 +482,7 @@ class FailureRecoveryHandler:
         workflow: RecoveryWorkflow,
         target_state: str,
         entity_id: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Execute rollback to target state"""
         
         # Simulate rollback (in real implementation, would interact with state manager)
@@ -496,7 +496,7 @@ class FailureRecoveryHandler:
     def _track_rework_iteration(
         self,
         entity_id: str,
-        context: Dict[str, Any]
+        context: dict[str, Any]
     ) -> bool:
         """Track rework iteration for QA-246 scenarios"""
         
@@ -508,7 +508,7 @@ class FailureRecoveryHandler:
         
         return True
     
-    def get_recovery_status(self, workflow_id: str) -> Optional[Dict[str, Any]]:
+    def get_recovery_status(self, workflow_id: str) -> dict[str, Any] | None:
         """Get current status of recovery workflow"""
         
         if workflow_id in self._workflows:

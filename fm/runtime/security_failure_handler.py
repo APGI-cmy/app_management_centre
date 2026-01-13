@@ -12,7 +12,7 @@ Tenant Isolation: All operations require organisation_id
 from dataclasses import dataclass, field
 from datetime import datetime, UTC
 from enum import Enum
-from typing import Dict, Any, List, Optional
+from typing import Any, Optional
 import hashlib
 import json
 
@@ -40,16 +40,16 @@ class SecurityEvent:
     event_type: SecurityEventType
     organisation_id: str
     timestamp: datetime
-    user_id: Optional[str] = None
-    resource: Optional[str] = None
-    attempted_role: Optional[str] = None
-    current_role: Optional[str] = None
-    bypassed_rule: Optional[str] = None
-    action_attempted: Optional[str] = None
-    memory_scope: Optional[str] = None
-    write_attempted: Optional[bool] = None
-    data: Optional[Dict[str, Any]] = None
-    expected_hash: Optional[str] = None
+    user_id: str | None = None
+    resource: str | None = None
+    attempted_role: str | None = None
+    current_role: str | None = None
+    bypassed_rule: str | None = None
+    action_attempted: str | None = None
+    memory_scope: str | None = None
+    write_attempted: bool | None = None
+    data: dict[str, Any] | None = None
+    expected_hash: str | None = None
 
 
 @dataclass
@@ -59,8 +59,8 @@ class SecurityHandlerResult:
     blocked: bool = False
     prevented: bool = False
     escalated: bool = False
-    action: Optional[SecurityAction] = None
-    escalation_reason: Optional[str] = None
+    action: SecurityAction | None = None
+    escalation_reason: str | None = None
     timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
 
 
@@ -70,8 +70,8 @@ class AuditLogEntry:
     event_type: SecurityEventType
     organisation_id: str
     timestamp: datetime
-    user_id: Optional[str] = None
-    details: Dict[str, Any] = field(default_factory=dict)
+    user_id: str | None = None
+    details: dict[str, Any] = field(default_factory=dict)
     write_prevented: bool = False
 
 
@@ -214,7 +214,7 @@ class AuditLogger:
             organisation_id: Organisation ID for tenant isolation
         """
         self.organisation_id = organisation_id
-        self._entries: List[AuditLogEntry] = []
+        self._entries: list[AuditLogEntry] = []
 
     def log_event(self, event: SecurityEvent, result: SecurityHandlerResult) -> None:
         """
@@ -254,9 +254,9 @@ class AuditLogger:
 
     def get_entries(
         self,
-        event_type: Optional[SecurityEventType] = None,
-        organisation_id: Optional[str] = None
-    ) -> List[AuditLogEntry]:
+        event_type: SecurityEventType | None = None,
+        organisation_id: str | None = None
+    ) -> list[AuditLogEntry]:
         """
         Get audit log entries.
         
@@ -297,7 +297,7 @@ class IntegrityChecker:
         """
         self.organisation_id = organisation_id
 
-    def compute_hash(self, data: Dict[str, Any]) -> str:
+    def compute_hash(self, data: dict[str, Any]) -> str:
         """
         Compute cryptographic hash of data.
         
@@ -318,7 +318,7 @@ class IntegrityChecker:
         data_str = json.dumps(data, sort_keys=True)
         return hashlib.sha256(data_str.encode()).hexdigest()
 
-    def validate(self, data: Dict[str, Any], expected_hash: str) -> bool:
+    def validate(self, data: dict[str, Any], expected_hash: str) -> bool:
         """
         Validate data integrity.
         

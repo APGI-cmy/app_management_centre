@@ -7,7 +7,7 @@ connection acquisition and return, and pool management.
 
 import time
 import uuid
-from typing import Optional, Dict, Any, List
+from typing import Optional, Any
 from dataclasses import dataclass, field
 from datetime import datetime
 from threading import Lock
@@ -41,7 +41,7 @@ class Connection:
     last_used: float = field(default_factory=time.time)
     in_use: bool = False
     use_count: int = 0
-    organisation_id: Optional[str] = None  # Tenant isolation
+    organisation_id: str | None = None  # Tenant isolation
     
     def is_expired(self, max_lifetime: int) -> bool:
         """Check if connection has exceeded maximum lifetime"""
@@ -53,7 +53,7 @@ class Connection:
             return False
         return time.time() > (self.last_used + idle_timeout)
     
-    def acquire(self, organisation_id: Optional[str] = None) -> None:
+    def acquire(self, organisation_id: str | None = None) -> None:
         """Mark connection as in use"""
         self.in_use = True
         self.last_used = time.time()
@@ -80,7 +80,7 @@ class ConnectionPool:
     - Statistics tracking
     """
     
-    def __init__(self, config: Optional[ConnectionPoolConfig] = None):
+    def __init__(self, config: ConnectionPoolConfig | None = None):
         """
         Initialize connection pool
         
@@ -91,7 +91,7 @@ class ConnectionPool:
         if not self.config.validate():
             raise ValueError("Invalid connection pool configuration")
         
-        self._connections: Dict[str, Connection] = {}
+        self._connections: dict[str, Connection] = {}
         self._lock = Lock()
         self._ready = False
         self._stats = {
@@ -131,7 +131,7 @@ class ConnectionPool:
         """Get current pool configuration"""
         return self.config
     
-    def acquire(self, organisation_id: Optional[str] = None, timeout: Optional[int] = None) -> Optional[Connection]:
+    def acquire(self, organisation_id: str | None = None, timeout: int | None = None) -> Connection | None:
         """
         Acquire connection from pool
         
@@ -234,7 +234,7 @@ class ConnectionPool:
         with self._lock:
             return sum(1 for conn in self._connections.values() if conn.in_use)
     
-    def get_statistics(self) -> Dict[str, Any]:
+    def get_statistics(self) -> dict[str, Any]:
         """
         Get pool statistics
         

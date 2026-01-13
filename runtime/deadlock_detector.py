@@ -7,9 +7,9 @@ Tenant Isolation: All operations scoped by organisation_id
 """
 
 from enum import Enum
-from typing import Dict, List, Optional, Set, Any
+from typing import Optional, Any
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, UTC
 import threading
 
 
@@ -28,7 +28,7 @@ class LockRequest:
     holder_id: str
     requested_at: datetime
     granted: bool = False
-    lock_id: Optional[str] = None
+    lock_id: str | None = None
 
 
 @dataclass
@@ -46,7 +46,7 @@ class TimeoutManager:
     
     def __init__(self, timeout_seconds: int = 30):
         self.timeout_seconds = timeout_seconds
-        self._lock_requests: Dict[str, LockRequest] = {}
+        self._lock_requests: dict[str, LockRequest] = {}
     
     def record_request(self, resource_id: str, holder_id: str) -> None:
         """Record a lock request"""
@@ -54,7 +54,7 @@ class TimeoutManager:
         self._lock_requests[request_key] = LockRequest(
             resource_id=resource_id,
             holder_id=holder_id,
-            requested_at=datetime.now(timezone.utc)
+            requested_at=datetime.now(UTC)
         )
     
     def has_timeout_occurred(self, resource_id: str, holder_id: str) -> bool:
@@ -64,7 +64,7 @@ class TimeoutManager:
             return False
         
         request = self._lock_requests[request_key]
-        elapsed = (datetime.now(timezone.utc) - request.requested_at).total_seconds()
+        elapsed = (datetime.now(UTC) - request.requested_at).total_seconds()
         return elapsed > self.timeout_seconds
 
 
@@ -75,27 +75,27 @@ class Escalation:
     escalation_type: str
     organisation_id: str
     timestamp: datetime
-    details: Dict[str, Any]
+    details: dict[str, Any]
 
 
 class DeadlockRecovery:
     """Handles recovery from deadlocks"""
     
     def __init__(self, detector: 'DeadlockDetector'):
-        self._recovery_history: List[Dict[str, Any]] = []
+        self._recovery_history: list[dict[str, Any]] = []
         self._detector = detector
     
     def recover_from_deadlock(
         self,
-        resources: List[str],
-        holders: List[str]
-    ) -> Dict[str, Any]:
+        resources: list[str],
+        holders: list[str]
+    ) -> dict[str, Any]:
         """
         Recover from deadlock by releasing locks
         
         Strategy: Release all locks in deadlock cycle
         """
-        recovery_id = f"recovery_{int(datetime.now(timezone.utc).timestamp())}"
+        recovery_id = f"recovery_{int(datetime.now(UTC).timestamp())}"
         
         # Release all locks
         for resource_id in resources:
@@ -107,7 +107,7 @@ class DeadlockRecovery:
             "status": "recovered",
             "resources_released": resources,
             "holders_released": holders,
-            "timestamp": datetime.now(timezone.utc).isoformat()
+            "timestamp": datetime.now(UTC).isoformat()
         }
         
         self._recovery_history.append(recovery_record)
@@ -129,15 +129,15 @@ class DeadlockDetector:
     def __init__(self, organisation_id: str, timeout_seconds: int = 30):
         self.organisation_id = organisation_id
         self.timeout_seconds = timeout_seconds
-        self._locks: Dict[str, ResourceLock] = {}
-        self._lock_requests: Dict[str, List[str]] = {}  # resource -> list of waiting holders
+        self._locks: dict[str, ResourceLock] = {}
+        self._lock_requests: dict[str, list[str]] = {}  # resource -> list of waiting holders
         self._timeout_manager = TimeoutManager(timeout_seconds)
         self._recovery = DeadlockRecovery(self)
-        self._escalations: List[Escalation] = []
+        self._escalations: list[Escalation] = []
         self._lock_counter = 0
         self._lock = threading.Lock()
     
-    def acquire_lock(self, resource_id: str, holder_id: str) -> Optional[str]:
+    def acquire_lock(self, resource_id: str, holder_id: str) -> str | None:
         """
         Acquire a lock on a resource
         
@@ -162,7 +162,7 @@ class DeadlockDetector:
                 resource_id=resource_id,
                 holder_id=holder_id,
                 lock_id=lock_id,
-                acquired_at=datetime.now(timezone.utc),
+                acquired_at=datetime.now(UTC),
                 organisation_id=self.organisation_id
             )
             
@@ -215,10 +215,10 @@ class DeadlockDetector:
         with self._lock:
             # Build wait-for graph
             # holder -> list of resources they're waiting for
-            wait_for: Dict[str, Set[str]] = {}
+            wait_for: dict[str, set[str]] = {}
             
             # holder -> list of resources they hold
-            holds: Dict[str, Set[str]] = {}
+            holds: dict[str, set[str]] = {}
             
             # Build holds mapping
             for lock_key, lock in self._locks.items():
@@ -269,17 +269,17 @@ class DeadlockDetector:
     def record_unrecoverable_deadlock(self, *resources: str) -> None:
         """Record an unrecoverable deadlock for escalation"""
         escalation = Escalation(
-            escalation_id=f"esc_{self.organisation_id}_{int(datetime.now(timezone.utc).timestamp())}",
+            escalation_id=f"esc_{self.organisation_id}_{int(datetime.now(UTC).timestamp())}",
             escalation_type="deadlock_unrecoverable",
             organisation_id=self.organisation_id,
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
             details={
                 "resources": list(resources)
             }
         )
         self._escalations.append(escalation)
     
-    def get_escalations(self, organisation_id: str) -> List[Dict[str, Any]]:
+    def get_escalations(self, organisation_id: str) -> list[dict[str, Any]]:
         """Get escalations for organisation"""
         if organisation_id != self.organisation_id:
             return []
