@@ -94,7 +94,7 @@ instructions: |
   - ❌ Creating new `.agent` files
   - ❌ Modifying YAML frontmatter in `.github/agents/*.md` files
   
-  **Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/.agent-admin.md`)
+  **Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/agent-contract-administrator.md`)
   
   **Contract Modification Process**: 
   1. Submit instruction to `.agent-admin/instructions/pending/`

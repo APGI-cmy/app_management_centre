@@ -41,7 +41,7 @@ They bind agents to constitutional governance, define execution boundaries, and 
 ## Agent Contract Administrator Identity
 
 **Name**: Agent Contract Administrator  
-**Agent File**: `.github/agents/.agent-admin.md`  
+**Agent File**: `.github/agents/agent-contract-administrator.md`  
 **Repository Scope**: All Maturion repositories  
 **Governance Source**: APGI-cmy/maturion-foreman-governance  
 **Workspace**: `.agent-admin/`
@@ -167,7 +167,7 @@ This agent is **EXPLICITLY PROHIBITED** from:
 - ❌ Modifying agent contracts directly
 - ❌ Creating new `.agent` files
 
-**Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/.agent-admin.md`)
+**Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/agent-contract-administrator.md`)
 
 **Contract Modification Process**: 
 1. Submit instruction to `.agent-admin/instructions/pending/`

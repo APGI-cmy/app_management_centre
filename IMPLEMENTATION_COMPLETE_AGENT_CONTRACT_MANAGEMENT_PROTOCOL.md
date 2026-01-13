@@ -162,7 +162,7 @@ Successfully layered down the **Agent Contract Management Protocol** from canoni
    - Updated Scope/MUST NOT with explicit .agent prohibitions
    - Added Contract Modification Prohibition section
 
-2. **.github/agents/.agent-admin.md**
+2. **.github/agents/agent-contract-administrator.md**
    - Expanded Change Management Protocol to 7-step workflow
    - Updated workspace structure documentation
    - Updated retention policies
@@ -181,7 +181,7 @@ All agents (including Governance Liaison) are now **EXPLICITLY PROHIBITED** from
 - ❌ Creating new `.agent` files
 - ❌ Modifying YAML frontmatter in `.github/agents/*.md` files
 
-**Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/.agent-admin.md`) ONLY
+**Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/agent-contract-administrator.md`) ONLY
 
 **Violation Severity**: CATASTROPHIC
 

@@ -19,7 +19,7 @@
 **Artifacts Created/Modified:**
 - [x] Canonical Document: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
 - [x] Agent Contract: .github/agents/governance-liaison.md
-- [x] Agent Contract Administrator: .github/agents/.agent-admin.md
+- [x] Agent Contract Administrator: .github/agents/agent-contract-administrator.md
 - [x] Workspace Structure: .agent-admin/ (directories and README.md)
 - [x] Visibility Event: governance/events/agent-contract-management-protocol-layer-down-2026-01-13.md
 
@@ -232,7 +232,7 @@ Governance changes are properly coupled with enforcement updates.
 **Git Status:**
 ```bash
 $ git status --short
-M .github/agents/.agent-admin.md
+M .github/agents/agent-contract-administrator.md
 M .github/agents/governance-liaison.md
 ?? .agent-admin/README.md
 ?? governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
@@ -250,7 +250,7 @@ M .github/agents/governance-liaison.md
    - Updated Scope/MUST NOT section with explicit .agent file prohibitions
    - Added Contract Modification Prohibition section
 
-2. .github/agents/.agent-admin.md
+2. .github/agents/agent-contract-administrator.md
    - Expanded Change Management Protocol to 7-step instruction workflow
    - Updated workspace structure documentation
    - Updated retention policies

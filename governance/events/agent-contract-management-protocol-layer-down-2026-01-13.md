@@ -48,7 +48,7 @@ The **Agent Contract Management Protocol** has been layered down from the canoni
 
 ### 3. Agent Contract Administrator Updated
 
-**File**: `.github/agents/.agent-admin.md`
+**File**: `.github/agents/agent-contract-administrator.md`
 
 **Changes**:
 1. Expanded Change Management Protocol to instruction-based workflow (7 steps)
