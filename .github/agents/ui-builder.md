@@ -132,7 +132,16 @@ governance:
     - id: deprecation-detection-gate
       path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
       role: deprecation-enforcement
-      summary: Automated detection and blocking of deprecated Python APIs (BL-026)
+      summary: Automated detection and blocking of deprecated Python APIs (BL-026, T0-015)
+    
+    # Test Execution Protocol (MANDATORY)
+    - id: test-execution-protocol
+      path: governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md
+      role: test-execution-enforcement
+      version: 1.0.0
+      summary: CI is confirmatory, not diagnostic - all tests executed locally before PR
+      enforcement: MANDATORY
+      attestation_required: true
     
     # Builder Execution
     - id: code-checking

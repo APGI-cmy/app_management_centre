@@ -1,0 +1,203 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-01-13T06:13:00Z",
+  "description": "Builder agent training records for Test Execution Protocol and BL-026 Deprecation Detection",
+  "authority": "Governance Administrator + FM",
+  "compliance_requirement": "MANDATORY - No task assignment without complete attestations",
+  
+  "builders": [
+    {
+      "builder_id": "ui-builder",
+      "builder_name": "UI Builder",
+      "recruitment_date": "2025-12-30",
+      "training_date": null,
+      "trainer": null,
+      "training_status": "PENDING",
+      "protocols_trained": [
+        {
+          "protocol": "test-execution-protocol",
+          "protocol_name": "Agent Test Execution Protocol (CI-Confirmatory-Not-Diagnostic)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "test-execution-protocol/ui-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        },
+        {
+          "protocol": "bl-026-deprecation",
+          "protocol_name": "BL-026 Automated Deprecation Detection (T0-015)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "bl-026-deprecation/ui-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        }
+      ],
+      "task_assignment_blocked": true,
+      "blocking_reason": "Training attestations pending",
+      "next_review": "2026-04-13"
+    },
+    {
+      "builder_id": "api-builder",
+      "builder_name": "API Builder",
+      "recruitment_date": "2025-12-30",
+      "training_date": null,
+      "trainer": null,
+      "training_status": "PENDING",
+      "protocols_trained": [
+        {
+          "protocol": "test-execution-protocol",
+          "protocol_name": "Agent Test Execution Protocol (CI-Confirmatory-Not-Diagnostic)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "test-execution-protocol/api-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        },
+        {
+          "protocol": "bl-026-deprecation",
+          "protocol_name": "BL-026 Automated Deprecation Detection (T0-015)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "bl-026-deprecation/api-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        }
+      ],
+      "task_assignment_blocked": true,
+      "blocking_reason": "Training attestations pending",
+      "next_review": "2026-04-13"
+    },
+    {
+      "builder_id": "schema-builder",
+      "builder_name": "Schema Builder",
+      "recruitment_date": "2025-12-30",
+      "training_date": null,
+      "trainer": null,
+      "training_status": "PENDING",
+      "protocols_trained": [
+        {
+          "protocol": "test-execution-protocol",
+          "protocol_name": "Agent Test Execution Protocol (CI-Confirmatory-Not-Diagnostic)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "test-execution-protocol/schema-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        },
+        {
+          "protocol": "bl-026-deprecation",
+          "protocol_name": "BL-026 Automated Deprecation Detection (T0-015)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "bl-026-deprecation/schema-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        }
+      ],
+      "task_assignment_blocked": true,
+      "blocking_reason": "Training attestations pending",
+      "next_review": "2026-04-13"
+    },
+    {
+      "builder_id": "integration-builder",
+      "builder_name": "Integration Builder",
+      "recruitment_date": "2025-12-30",
+      "training_date": null,
+      "trainer": null,
+      "training_status": "PENDING",
+      "protocols_trained": [
+        {
+          "protocol": "test-execution-protocol",
+          "protocol_name": "Agent Test Execution Protocol (CI-Confirmatory-Not-Diagnostic)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "test-execution-protocol/integration-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        },
+        {
+          "protocol": "bl-026-deprecation",
+          "protocol_name": "BL-026 Automated Deprecation Detection (T0-015)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "bl-026-deprecation/integration-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        }
+      ],
+      "task_assignment_blocked": true,
+      "blocking_reason": "Training attestations pending",
+      "next_review": "2026-04-13"
+    },
+    {
+      "builder_id": "qa-builder",
+      "builder_name": "QA Builder",
+      "recruitment_date": "2025-12-30",
+      "training_date": null,
+      "trainer": null,
+      "training_status": "PENDING",
+      "protocols_trained": [
+        {
+          "protocol": "test-execution-protocol",
+          "protocol_name": "Agent Test Execution Protocol (CI-Confirmatory-Not-Diagnostic)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "test-execution-protocol/qa-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        },
+        {
+          "protocol": "bl-026-deprecation",
+          "protocol_name": "BL-026 Automated Deprecation Detection (T0-015)",
+          "version": "1.0.0",
+          "status": "PENDING",
+          "attestation_file": "bl-026-deprecation/qa-builder-attestation.md",
+          "attestation_submitted": null,
+          "verified_by": null,
+          "verification_date": null
+        }
+      ],
+      "task_assignment_blocked": true,
+      "blocking_reason": "Training attestations pending",
+      "next_review": "2026-04-13"
+    }
+  ],
+  
+  "training_schedule": {
+    "target_completion": "2026-01-27",
+    "training_method": "synchronous",
+    "training_coordinator": "FM + Governance Administrator",
+    "attestation_deadline": "2026-01-27",
+    "first_pr_review_requirement": "First 5 PRs post-training must validate protocol compliance"
+  },
+  
+  "compliance_metrics": {
+    "total_builders": 5,
+    "trained_builders": 0,
+    "pending_builders": 5,
+    "attestations_complete": 0,
+    "attestations_pending": 10,
+    "compliance_percentage": 0
+  },
+  
+  "quarterly_review": {
+    "next_review_date": "2026-04-13",
+    "review_items": [
+      "All active attestations",
+      "Protocol violations per builder",
+      "Training effectiveness",
+      "Protocol updates needed",
+      "Exception patterns"
+    ]
+  }
+}
