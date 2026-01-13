@@ -8,7 +8,7 @@ Architecture: Enhanced Dashboard Advanced Filtering
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any, Optional
 import json
 
 
@@ -23,7 +23,7 @@ class DashboardFilterPanel:
     - Tenant-isolated filter state
     """
     
-    def __init__(self, context: Dict[str, Any]):
+    def __init__(self, context: dict[str, Any]):
         """
         Initialize filter panel.
         
@@ -32,10 +32,10 @@ class DashboardFilterPanel:
         """
         self.context = context
         self.organisation_id = context.get("organisation_id")
-        self.active_filters: Dict[str, Any] = {}
-        self.saved_state: Optional[Dict[str, Any]] = None
+        self.active_filters: dict[str, Any] = {}
+        self.saved_state: dict[str, Any] | None = None
     
-    def render(self) -> Dict[str, Any]:
+    def render(self) -> dict[str, Any]:
         """
         Render filter panel component.
         
@@ -53,7 +53,7 @@ class DashboardFilterPanel:
             "aria_label": "Dashboard filter panel"
         }
     
-    def _get_filter_controls(self) -> List[Dict[str, Any]]:
+    def _get_filter_controls(self) -> list[dict[str, Any]]:
         """Get available filter controls."""
         return [
             {"type": "dropdown", "name": "status", "label": "Status", "options": ["GREEN", "AMBER", "RED"]},
@@ -62,7 +62,7 @@ class DashboardFilterPanel:
             {"type": "dropdown", "name": "builder", "label": "Builder", "options": ["ui-builder", "api-builder", "schema-builder", "integration-builder", "qa-builder"]}
         ]
     
-    def get_state(self) -> Dict[str, Any]:
+    def get_state(self) -> dict[str, Any]:
         """
         Get current filter state.
         
@@ -84,7 +84,7 @@ class DashboardFilterPanel:
         """
         self.active_filters[filter_name] = filter_value
     
-    def apply_filters(self, data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def apply_filters(self, data: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """
         Apply active filters to data.
         
@@ -119,7 +119,7 @@ class DashboardFilterPanel:
         if permanent:
             self.saved_state = None
     
-    def save_state(self) -> Dict[str, Any]:
+    def save_state(self) -> dict[str, Any]:
         """
         Save current filter state for later restoration.
         
@@ -136,7 +136,7 @@ class DashboardFilterPanel:
             "message": "Filter state saved"
         }
     
-    def restore_state(self) -> Dict[str, Any]:
+    def restore_state(self) -> dict[str, Any]:
         """
         Restore previously saved filter state.
         
@@ -156,7 +156,7 @@ class DashboardFilterPanel:
             "message": "Filter state restored"
         }
     
-    def reset_filters(self, confirmed: bool = False) -> Dict[str, Any]:
+    def reset_filters(self, confirmed: bool = False) -> dict[str, Any]:
         """
         Reset all filters with optional confirmation for many filters.
         

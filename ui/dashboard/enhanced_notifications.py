@@ -8,8 +8,8 @@ Architecture: Enhanced Dashboard Notifications
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, Any, List
-from datetime import datetime
+from typing import Any
+from datetime import datetime, UTC
 
 
 class UpdateNotificationManager:
@@ -23,7 +23,7 @@ class UpdateNotificationManager:
     - Notification queue management
     """
     
-    def __init__(self, context: Dict[str, Any], connection=None):
+    def __init__(self, context: dict[str, Any], connection=None):
         """
         Initialize notification manager.
         
@@ -33,7 +33,7 @@ class UpdateNotificationManager:
         """
         self.context = context
         self.organisation_id = context.get("organisation_id")
-        self.active_notifications: List[Dict[str, Any]] = []
+        self.active_notifications: list[dict[str, Any]] = []
         self.notification_counter = 0
         self.connection = connection
         
@@ -41,7 +41,7 @@ class UpdateNotificationManager:
         if connection:
             connection.on_update(self._auto_create_notification)
     
-    def _auto_create_notification(self, update: Dict[str, Any]):
+    def _auto_create_notification(self, update: dict[str, Any]):
         """
         Automatically create notification from update.
         
@@ -82,7 +82,7 @@ class UpdateNotificationManager:
         
         return notification_id
     
-    def get_active(self) -> List[Dict[str, Any]]:
+    def get_active(self) -> list[dict[str, Any]]:
         """
         Get all active notifications.
         
@@ -91,7 +91,7 @@ class UpdateNotificationManager:
         """
         return self.active_notifications.copy()
     
-    def dismiss(self, notification_id: str) -> Dict[str, Any]:
+    def dismiss(self, notification_id: str) -> dict[str, Any]:
         """
         Dismiss a notification.
         

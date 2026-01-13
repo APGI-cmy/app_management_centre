@@ -8,8 +8,9 @@ Architecture: Enhanced Dashboard Core
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, Any, List, Callable
-from datetime import datetime
+from typing import Any
+from collections.abc import Callable
+from datetime import datetime, UTC
 
 
 class EnhancedDashboard:
@@ -23,7 +24,7 @@ class EnhancedDashboard:
     - Update notification coordination
     """
     
-    def __init__(self, context: Dict[str, Any], connection):
+    def __init__(self, context: dict[str, Any], connection):
         """
         Initialize enhanced dashboard.
         
@@ -34,14 +35,14 @@ class EnhancedDashboard:
         self.context = context
         self.organisation_id = context.get("organisation_id")
         self.connection = connection
-        self.domain_statuses: Dict[str, Dict[str, Any]] = {}
-        self.refresh_handlers: List[Callable] = []
-        self.update_timestamps: Dict[str, datetime] = {}
+        self.domain_statuses: dict[str, dict[str, Any]] = {}
+        self.refresh_handlers: list[Callable] = []
+        self.update_timestamps: dict[str, datetime] = {}
         
         # Register for updates
         self.connection.on_update(self._handle_update)
     
-    def _handle_update(self, update: Dict[str, Any]):
+    def _handle_update(self, update: dict[str, Any]):
         """
         Handle incoming real-time update.
         
@@ -84,7 +85,7 @@ class EnhancedDashboard:
         """
         self.refresh_handlers.append(handler)
     
-    def manual_refresh(self) -> Dict[str, Any]:
+    def manual_refresh(self) -> dict[str, Any]:
         """
         Manually trigger dashboard refresh.
         
@@ -99,7 +100,7 @@ class EnhancedDashboard:
             "message": "Dashboard refreshed manually"
         }
     
-    def get_domain_status(self, domain: str) -> Dict[str, Any]:
+    def get_domain_status(self, domain: str) -> dict[str, Any]:
         """
         Get current status for a domain.
         

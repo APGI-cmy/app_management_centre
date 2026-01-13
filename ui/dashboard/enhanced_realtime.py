@@ -8,8 +8,9 @@ Architecture: Enhanced Dashboard Real-Time Updates
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, Any, List, Optional, Callable
-from datetime import datetime
+from typing import Any, Optional
+from collections.abc import Callable
+from datetime import datetime, UTC
 
 
 class RealtimeDashboardConnection:
@@ -23,7 +24,7 @@ class RealtimeDashboardConnection:
     - Tenant-isolated updates
     """
     
-    def __init__(self, context: Dict[str, Any]):
+    def __init__(self, context: dict[str, Any]):
         """
         Initialize real-time connection.
         
@@ -32,13 +33,13 @@ class RealtimeDashboardConnection:
         """
         self.context = context
         self.organisation_id = context.get("organisation_id")
-        self.connection_id: Optional[str] = None
+        self.connection_id: str | None = None
         self.is_connected = False
-        self.update_handlers: List[Callable] = []
+        self.update_handlers: list[Callable] = []
         self.message_sequence = 0
-        self.last_message_timestamp: Optional[datetime] = None
+        self.last_message_timestamp: datetime | None = None
     
-    def connect(self) -> Dict[str, Any]:
+    def connect(self) -> dict[str, Any]:
         """
         Establish WebSocket connection.
         
@@ -57,7 +58,7 @@ class RealtimeDashboardConnection:
             "connection_id": self.connection_id
         }
     
-    def disconnect(self) -> Dict[str, Any]:
+    def disconnect(self) -> dict[str, Any]:
         """
         Close WebSocket connection.
         
@@ -72,7 +73,7 @@ class RealtimeDashboardConnection:
             "status": "disconnected"
         }
     
-    def reconnect(self) -> Dict[str, Any]:
+    def reconnect(self) -> dict[str, Any]:
         """
         Reconnect WebSocket after disconnection.
         
@@ -82,7 +83,7 @@ class RealtimeDashboardConnection:
         # Simulate reconnection
         return self.connect()
     
-    def get_connection_info(self) -> Dict[str, Any]:
+    def get_connection_info(self) -> dict[str, Any]:
         """
         Get current connection information.
         
@@ -104,7 +105,7 @@ class RealtimeDashboardConnection:
         """
         self.update_handlers.append(handler)
     
-    def simulate_message(self, message: Dict[str, Any]):
+    def simulate_message(self, message: dict[str, Any]):
         """
         Simulate receiving a WebSocket message (for testing).
         
@@ -112,7 +113,7 @@ class RealtimeDashboardConnection:
             message: Message data to process
         """
         # Validate message type
-        valid_types = ["status_update", "metric_update", "alert", "heartbeat"]
+        valid_types = ["status_update", "metric_update", "alert", "heartbeat", "domain_added", "evidence_linked"]
         message_type = message.get("type")
         
         if message_type not in valid_types:
@@ -152,7 +153,7 @@ class EnhancedDashboard:
     - Update notification coordination
     """
     
-    def __init__(self, context: Dict[str, Any], connection: RealtimeDashboardConnection):
+    def __init__(self, context: dict[str, Any], connection: RealtimeDashboardConnection):
         """
         Initialize enhanced dashboard.
         
@@ -163,14 +164,14 @@ class EnhancedDashboard:
         self.context = context
         self.organisation_id = context.get("organisation_id")
         self.connection = connection
-        self.domain_statuses: Dict[str, Dict[str, Any]] = {}
-        self.refresh_handlers: List[Callable] = []
-        self.update_timestamps: Dict[str, datetime] = {}
+        self.domain_statuses: dict[str, dict[str, Any]] = {}
+        self.refresh_handlers: list[Callable] = []
+        self.update_timestamps: dict[str, datetime] = {}
         
         # Register for updates
         self.connection.on_update(self._handle_update)
     
-    def _handle_update(self, update: Dict[str, Any]):
+    def _handle_update(self, update: dict[str, Any]):
         """
         Handle incoming real-time update.
         
@@ -213,7 +214,7 @@ class EnhancedDashboard:
         """
         self.refresh_handlers.append(handler)
     
-    def manual_refresh(self) -> Dict[str, Any]:
+    def manual_refresh(self) -> dict[str, Any]:
         """
         Manually trigger dashboard refresh.
         
@@ -228,7 +229,7 @@ class EnhancedDashboard:
             "message": "Dashboard refreshed manually"
         }
     
-    def get_domain_status(self, domain: str) -> Dict[str, Any]:
+    def get_domain_status(self, domain: str) -> dict[str, Any]:
         """
         Get current status for a domain.
         
@@ -247,7 +248,7 @@ class EnhancedDashboard:
             "organisation_id": self.organisation_id
         }
     
-    def _parse_timestamp(self, timestamp_str: Optional[str]) -> datetime:
+    def _parse_timestamp(self, timestamp_str: str | None) -> datetime:
         """
         Parse ISO timestamp string.
         
@@ -280,7 +281,7 @@ class UpdateNotificationManager:
     - Notification queue management
     """
     
-    def __init__(self, context: Dict[str, Any]):
+    def __init__(self, context: dict[str, Any]):
         """
         Initialize notification manager.
         
@@ -289,7 +290,7 @@ class UpdateNotificationManager:
         """
         self.context = context
         self.organisation_id = context.get("organisation_id")
-        self.active_notifications: List[Dict[str, Any]] = []
+        self.active_notifications: list[dict[str, Any]] = []
         self.notification_counter = 0
     
     def add_notification(self, message: str, priority: str = "medium", notification_type: str = "info") -> str:
@@ -320,7 +321,7 @@ class UpdateNotificationManager:
         
         return notification_id
     
-    def get_active(self) -> List[Dict[str, Any]]:
+    def get_active(self) -> list[dict[str, Any]]:
         """
         Get all active notifications.
         
@@ -329,7 +330,7 @@ class UpdateNotificationManager:
         """
         return self.active_notifications.copy()
     
-    def dismiss(self, notification_id: str) -> Dict[str, Any]:
+    def dismiss(self, notification_id: str) -> dict[str, Any]:
         """
         Dismiss a notification.
         

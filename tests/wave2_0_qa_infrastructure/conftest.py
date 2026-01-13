@@ -7,7 +7,7 @@ Provides fixtures and setup/teardown for test isolation.
 import pytest
 import os
 import json
-from datetime import datetime
+from datetime import datetime, UTC
 from pathlib import Path
 
 

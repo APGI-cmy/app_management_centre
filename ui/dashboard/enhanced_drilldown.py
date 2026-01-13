@@ -8,7 +8,8 @@ Architecture: Enhanced Dashboard Drill-Down Navigation
 Tenant Isolation: All operations scoped by organisation_id
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any, Optional
+from datetime import datetime, UTC
 
 
 class DrillDownNavigator:
@@ -22,7 +23,7 @@ class DrillDownNavigator:
     - Context-aware data loading
     """
     
-    def __init__(self, context: Dict[str, Any]):
+    def __init__(self, context: dict[str, Any]):
         """
         Initialize drill-down navigator.
         
@@ -32,14 +33,14 @@ class DrillDownNavigator:
         self.context = context
         self.organisation_id = context.get("organisation_id")
         self.current_level = 0
-        self.navigation_history: List[Dict[str, Any]] = []
+        self.navigation_history: list[dict[str, Any]] = []
         self.state = {
             "current_level": 0,
             "history": [],
             "organisation_id": self.organisation_id
         }
     
-    def render(self) -> Dict[str, Any]:
+    def render(self) -> dict[str, Any]:
         """
         Render drill-down navigation component.
         
@@ -58,11 +59,11 @@ class DrillDownNavigator:
             "role": "navigation"
         }
     
-    def _get_hierarchy_levels(self) -> List[str]:
+    def _get_hierarchy_levels(self) -> list[str]:
         """Get available hierarchy levels for current context."""
         return ["Dashboard", "Domain", "Subsystem", "Component", "Detail"]
     
-    def get_state(self) -> Dict[str, Any]:
+    def get_state(self) -> dict[str, Any]:
         """
         Get current navigation state.
         
@@ -90,7 +91,7 @@ class DrillDownNavigator:
             "timestamp": self._get_timestamp()
         })
     
-    def navigate_down(self, target: str) -> Dict[str, Any]:
+    def navigate_down(self, target: str) -> dict[str, Any]:
         """
         Navigate down one level in hierarchy.
         
@@ -114,7 +115,7 @@ class DrillDownNavigator:
             "target": target
         }
     
-    def navigate_up(self) -> Dict[str, Any]:
+    def navigate_up(self) -> dict[str, Any]:
         """
         Navigate up one level in hierarchy.
         
@@ -136,7 +137,7 @@ class DrillDownNavigator:
             "new_level": new_level
         }
     
-    def navigate_to_root(self) -> Dict[str, Any]:
+    def navigate_to_root(self) -> dict[str, Any]:
         """
         Navigate to root level.
         
@@ -150,7 +151,7 @@ class DrillDownNavigator:
             "new_level": 0
         }
     
-    def get_breadcrumbs(self) -> List[Dict[str, Any]]:
+    def get_breadcrumbs(self) -> list[dict[str, Any]]:
         """
         Get breadcrumb trail for current navigation state.
         
@@ -178,7 +179,7 @@ class DrillDownNavigator:
         
         return breadcrumbs
     
-    def click_breadcrumb(self, breadcrumb_level: int) -> Dict[str, Any]:
+    def click_breadcrumb(self, breadcrumb_level: int) -> dict[str, Any]:
         """
         Navigate by clicking a breadcrumb.
         
@@ -201,9 +202,12 @@ class DrillDownNavigator:
             "new_level": breadcrumb_level
         }
     
-    def get_current_level_data(self) -> Dict[str, Any]:
+    def get_current_level_data(self, dashboard=None) -> dict[str, Any]:
         """
         Get data for current drill-down level.
+        
+        Args:
+            dashboard: Optional GovernanceDashboardV2 instance for domain data integration
         
         Returns:
             Data filtered for current navigation context
@@ -213,20 +217,23 @@ class DrillDownNavigator:
             last_nav = self.navigation_history[self.current_level - 1]
             context_label = last_nav.get("target", last_nav.get("label", f"Level {self.current_level}"))
         
-        return {
+        level_data = {
             "level": self.current_level,
             "context": context_label,
             "organisation_id": self.organisation_id,
-            "data": self._load_level_data(self.current_level, context_label)
+            "data": self._load_level_data(self.current_level, context_label, dashboard)
         }
+        
+        return level_data
     
-    def _load_level_data(self, level: int, context: str) -> Dict[str, Any]:
+    def _load_level_data(self, level: int, context: str, dashboard=None) -> dict[str, Any]:
         """
         Load data for specific level and context.
         
         Args:
             level: Drill-down level
             context: Navigation context
+            dashboard: Optional GovernanceDashboardV2 instance for domain data
             
         Returns:
             Level-specific data
@@ -234,6 +241,15 @@ class DrillDownNavigator:
         # Return different data based on level
         if level == 0:
             return {"type": "root_dashboard", "domains": 11, "summary": "all_domains"}
+        elif level == 1 and dashboard:
+            # At level 1, get domain-specific data from dashboard
+            domain_status = dashboard.get_domain_status(context)
+            return {
+                "type": f"level_{level}_data",
+                "context": context,
+                "filtered_by": context,
+                **{k: v for k, v in domain_status.items() if k not in ["status", "organisation_id", "timestamp"]}
+            }
         else:
             return {
                 "type": f"level_{level}_data",
@@ -243,5 +259,4 @@ class DrillDownNavigator:
     
     def _get_timestamp(self) -> str:
         """Get current timestamp in ISO format."""
-        from datetime import datetime
         return datetime.now(UTC).isoformat() + "Z"
