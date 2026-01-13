@@ -23,7 +23,6 @@ import sys
 import json
 import jsonschema
 from pathlib import Path
-from typing import Dict, List, Tuple
 from datetime import datetime
 
 
@@ -54,7 +53,7 @@ class CodeReviewClosureValidator:
             return False
         
         try:
-            with open(schema_file, 'r') as f:
+            with open(schema_file) as f:
                 self.schema = json.load(f)
             
             self.validations.append({
@@ -74,7 +73,7 @@ class CodeReviewClosureValidator:
             print(f"❌ FAIL: Error loading schema: {str(e)}")
             return False
     
-    def find_artifact(self, explicit_path: str = None) -> Tuple[bool, str]:
+    def find_artifact(self, explicit_path: str = None) -> tuple[bool, str]:
         """Find code review closure artifact"""
         if explicit_path:
             artifact_path = Path(explicit_path)
@@ -101,10 +100,10 @@ class CodeReviewClosureValidator:
         print(f"✅ PASS: Artifact found: {artifact_path}")
         return True, str(artifact_path)
     
-    def validate_artifact_json(self, artifact_path: str) -> Tuple[bool, Dict]:
+    def validate_artifact_json(self, artifact_path: str) -> tuple[bool, dict]:
         """Validate artifact is valid JSON"""
         try:
-            with open(artifact_path, 'r') as f:
+            with open(artifact_path) as f:
                 artifact = json.load(f)
             
             self.validations.append({
@@ -132,7 +131,7 @@ class CodeReviewClosureValidator:
             print(f"❌ FAIL: Error reading artifact: {str(e)}")
             return False, {}
     
-    def validate_schema_compliance(self, artifact: Dict) -> bool:
+    def validate_schema_compliance(self, artifact: dict) -> bool:
         """Validate artifact against schema"""
         try:
             jsonschema.validate(instance=artifact, schema=self.schema)
@@ -164,7 +163,7 @@ class CodeReviewClosureValidator:
             print(f"❌ FAIL: Error validating schema: {str(e)}")
             return False
     
-    def validate_immutability(self, artifact: Dict) -> bool:
+    def validate_immutability(self, artifact: dict) -> bool:
         """Validate artifact is marked immutable"""
         if not artifact.get('immutable'):
             self.errors.append({
@@ -183,7 +182,7 @@ class CodeReviewClosureValidator:
         print("✅ PASS: Artifact is immutable")
         return True
     
-    def validate_verdict(self, artifact: Dict) -> bool:
+    def validate_verdict(self, artifact: dict) -> bool:
         """Validate final verdict is present and complete"""
         verdict = artifact.get('final_verdict', {})
         
@@ -225,7 +224,7 @@ class CodeReviewClosureValidator:
         print(f"✅ PASS: Final verdict: {status}")
         return True
     
-    def validate_reviewed_files(self, artifact: Dict) -> bool:
+    def validate_reviewed_files(self, artifact: dict) -> bool:
         """Validate that at least one file was reviewed"""
         reviewed = artifact.get('what_was_reviewed', {})
         files = reviewed.get('files', [])
@@ -247,7 +246,7 @@ class CodeReviewClosureValidator:
         print(f"✅ PASS: {len(files)} file(s) reviewed")
         return True
     
-    def validate_artifact_type(self, artifact: Dict) -> bool:
+    def validate_artifact_type(self, artifact: dict) -> bool:
         """Validate artifact type is correct"""
         metadata = artifact.get('artifact_metadata', {})
         artifact_type = metadata.get('artifact_type')

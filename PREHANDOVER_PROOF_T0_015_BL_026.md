@@ -50,10 +50,21 @@ Branch protection enforcement is declared.
 
 **Exit Codes**: All checks returned exit code 0
 
+**Deprecation Validator** (`ruff check --select UP`):
+```
+$ ruff check --select UP governance/scripts/ scripts/
+All checks passed!
+
+Exit code: 0
+```
+
+**Status**: ✅ Zero BL-026 violations (167 violations found and fixed)
+
 ### 3. Exit Codes Verified ✅
 
 - `validate_tier0_consistency.py`: **Exit 0** ✅
 - `validate_tier0_activation.py`: **Exit 0** ✅
+- `ruff check --select UP` (BL-026 Deprecation Gate): **Exit 0** ✅
 
 ### 4. Evidence Captured ✅
 
@@ -71,9 +82,9 @@ Branch protection enforcement is declared.
 
 ## Pre-Handover Checklist
 
-- [x] **Identify execution artifacts** (validation scripts)
-- [x] **Execute ALL checks locally** (consistency + activation validators)
-- [x] **Verify ALL exit codes = 0** (both validators passed)
+- [x] **Identify execution artifacts** (validation scripts + deprecation check)
+- [x] **Execute ALL checks locally** (consistency + activation validators + BL-026 deprecation check)
+- [x] **Verify ALL exit codes = 0** (all 3 validators passed)
 - [x] **Capture evidence** (validation output documented)
 - [x] **Create PREHANDOVER_PROOF** (this document)
 - [x] **Create PR only after all checks pass** (PR ready)

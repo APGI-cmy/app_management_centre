@@ -30,7 +30,7 @@ def check_file_exists(filepath):
 def check_yaml_frontmatter(filepath):
     """Check that file has valid YAML frontmatter"""
     try:
-        with open(filepath, 'r') as f:
+        with open(filepath) as f:
             content = f.read()
             if not content.startswith('---'):
                 print(f"❌ FAIL: No YAML frontmatter found in {filepath}")
@@ -333,7 +333,7 @@ def validate_builder_contracts():
         return 1
     
     # Check schema version
-    with open(schema_path, 'r') as f:
+    with open(schema_path) as f:
         schema_content = f.read()
         if 'Version**: 2.0' in schema_content or '**Version**: 2.0' in schema_content:
             print("✅ Schema v2.0 detected (Maturion Doctrine Enforced)")

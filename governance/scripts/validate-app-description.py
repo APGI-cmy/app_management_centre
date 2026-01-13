@@ -21,7 +21,6 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
 from datetime import datetime
 
 
@@ -42,7 +41,7 @@ class AppDescriptionValidator:
             'evidence': {}
         }
         
-    def validate(self) -> Tuple[bool, Dict]:
+    def validate(self) -> tuple[bool, dict]:
         """Run all validation checks"""
         print(f"🔍 Validating App Description for {self.app_name}...\n")
         
@@ -130,7 +129,7 @@ class AppDescriptionValidator:
     
     def _load_content(self, path: Path):
         """Load App Description content"""
-        with open(path, 'r', encoding='utf-8') as f:
+        with open(path, encoding='utf-8') as f:
             self.content = f.read()
         self.results['evidence']['content_length'] = len(self.content)
     

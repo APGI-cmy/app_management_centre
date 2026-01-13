@@ -20,12 +20,12 @@ import json
 import subprocess
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from typing import Any, Optional
 
 class BranchProtectionVerifier:
     """Verifies branch protection status using multiple methods."""
     
-    def __init__(self, repo: str, branches: List[str] = None):
+    def __init__(self, repo: str, branches: list[str] = None):
         self.repo = repo
         self.branches = branches or ["main"]
         self.results = {
@@ -39,7 +39,7 @@ class BranchProtectionVerifier:
             "bootstrap_exception_details": None
         }
     
-    def verify(self) -> Dict[str, Any]:
+    def verify(self) -> dict[str, Any]:
         """Run verification using available methods."""
         print("🔍 Starting Branch Protection Verification...")
         print(f"   Repository: {self.repo}")
@@ -161,7 +161,7 @@ class BranchProtectionVerifier:
             print(f"   ⚠️  Error: {str(e)}")
             return False
     
-    def _extract_protection_details(self, branch_result: Dict[str, Any], protection_data: Dict[str, Any]):
+    def _extract_protection_details(self, branch_result: dict[str, Any], protection_data: dict[str, Any]):
         """Extract protection details from API response."""
         # Required status checks
         if "required_status_checks" in protection_data and protection_data["required_status_checks"]:
