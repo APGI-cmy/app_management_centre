@@ -96,8 +96,7 @@ governance:
       role: execution-verification-mandate
       version: 2.0.0+
       summary: 7-step verification before handover, PREHANDOVER_PROOF requirement
-      compliance_deadline: 2026-02-11
-      monitoring: quarterly (first report 2026-04-14)
+      monitoring: as-needed (on pattern of non-compliance)
     
     # FM Execution & Authority
     - id: fm-execution-mandate
@@ -362,8 +361,7 @@ When builder discovers prior debt: (1) Discovery agent: STOP, ESCALATE, BLOCKED,
 ### v2.0.0 PREHANDOVER_PROOF Enforcement (MANDATORY)
 
 **Authority**: EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md v2.0.0+  
-**Template**: `.github/agent-templates/PREHANDOVER_PROOF_TEMPLATE.md` v2.0.0  
-**Compliance Deadline**: 2026-02-11
+**Template**: `.github/agent-templates/PREHANDOVER_PROOF_TEMPLATE.md` v2.0.0
 
 **FM MUST enforce v2.0.0 compliance for ALL builder handovers:**
 
@@ -373,21 +371,21 @@ When builder discovers prior debt: (1) Discovery agent: STOP, ESCALATE, BLOCKED,
 - All required sections present
 
 #### 2. Governance Artifacts Enforcement
-**FM MUST verify builder provided ALL 4 artifacts OR skip rationale:**
-1. Governance Scan (repository state, agents, gaps)
-2. Risk Assessment (risks, mitigation, residual)
-3. Change Record (what changed, why, validation)
-4. Completion Summary (deliverables, gates, metrics)
 
-**Reject handover if**: Artifacts missing AND no skip rationale provided
+**For Milestone PRs:**
+- Reject if governance artifacts missing without rationale
+
+**For Routine PRs:**
+- Governance artifacts optional (recommended for complex changes)
 
 #### 3. CST Validation Enforcement
-**FM MUST verify:**
-- Builder determined CST applicability (YES/NO with decision logic)
-- If YES: All 6 CST steps completed (Contract, Gates, Evidence, Constitutional, Attestation, Signature)
-- If NO: Skip rationale provided with alternatives
 
-**Reject handover if**: CST required but not completed, OR skip rationale missing
+**For Milestone PRs:**
+- Reject if CST validation incomplete
+
+**For Routine PRs:**
+- CST not applicable
+- Improvement proposals still MANDATORY
 
 #### 4. Mandatory Improvement Proposal Enforcement
 **FM MUST verify builder provided improvement proposal:**
@@ -423,7 +421,7 @@ When builder discovers prior debt: (1) Discovery agent: STOP, ESCALATE, BLOCKED,
 3. Builder re-submits with complete v2.0.0 compliance
 4. **Pattern of non-compliance** (3+ rejections) → Contract review
 
-**Zero tolerance after 2026-02-11 compliance deadline**
+**FM applies discretion based on PR complexity and milestone status**
 
 ---
 

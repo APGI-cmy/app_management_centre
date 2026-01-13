@@ -225,10 +225,10 @@ As Agent Contract Administrator, I MUST monitor and enforce v2.0.0 PREHANDOVER_P
 
 #### 6. Monitoring Workflow
 
-**Regular Audits:**
-1. **Monthly**: Review all 5 builder contracts for v2.0.0 compliance
-2. **On Contract Change**: Verify v2.0.0 requirements preserved
-3. **On Builder Output Review**: Check PREHANDOVER_PROOF documents reference v2.0.0 template
+**As-Needed Audits:**
+1. **On Contract Change**: Verify v2.0.0 requirements preserved
+2. **On Pattern of Non-Compliance**: Review builder contracts when FM reports issues
+3. **On Builder Output Review**: Spot-check PREHANDOVER_PROOF documents for v2.0.0 compliance
 
 **Escalation Triggers:**
 - Builder contract missing v2.0.0 template reference → Immediate update required

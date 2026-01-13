@@ -316,18 +316,14 @@ This builder operates under **Maturion Build Philosophy**, not generic developme
 
 1. **Category 0**: 7-Step Execution Bootstrap Protocol (above)
 2. **Local PR-Gate Execution Evidence**: All gates with full command outputs
-3. **Governance Artifacts (NEW v2.0.0)**: 4 mandatory artifacts OR skip rationale
-   - Artifact 1: Governance Scan (repository state, agents, gaps)
-   - Artifact 2: Risk Assessment (risks, mitigation, residual)
-   - Artifact 3: Change Record (what changed, why, validation)
-   - Artifact 4: Completion Summary (deliverables, gates, metrics)
-4. **CST Validation (NEW v2.0.0)**: 6-step CST checklist OR skip rationale
-   - Step 1: Contract Verification (acceptance criteria met?)
-   - Step 2: Governance Gate Verification (all gates passed?)
-   - Step 3: Evidence Artifact Review (PREHANDOVER_PROOF complete?)
-   - Step 4: Constitutional Compliance (BL compliance, Tier-1 met?)
-   - Step 5: CST Attestation (formal approval statement)
-   - Step 6: CST Signature (validator sign-off)
+3. **Governance Artifacts (NEW v2.0.0)**: Required for milestone completions only
+   - **If completing subwave/capability/contract milestone**: Provide all 4 artifacts (Governance Scan, Risk Assessment, Change Record, Completion Summary)
+   - **If routine PR**: State "Routine PR - governance artifacts not applicable"
+   - See template FAQ Q1 for guidance on when artifacts are required
+4. **CST Validation (NEW v2.0.0)**: Required for milestone completions only
+   - **If completing subwave/capability/contract milestone**: Complete all 6 CST steps
+   - **If routine PR**: State "Routine PR - CST not applicable"
+   - CST validates integration of multiple work streams, not individual PRs
 5. **Agent Attestation**: Updated to confirm v2.0.0 compliance
 6. **Completion Checklist**: Enhanced with governance artifacts + CST sections
 7. **FAQ Reference**: See template Section 11 for guidance on artifacts and CST
@@ -361,16 +357,13 @@ Before EVERY handover:
 - [ ] GREEN attestation provided
 - [ ] Handover authorization statement included
 
-**v2.0.0 Governance Artifacts:**
-- [ ] Governance Scan: Completed OR rationale provided
-- [ ] Risk Assessment: Completed OR rationale provided
-- [ ] Change Record: Completed OR rationale provided
-- [ ] Completion Summary: Completed OR rationale provided
+**v2.0.0 Governance Artifacts:** (Milestone completions only)
+- [ ] If milestone: All 4 artifacts completed
+- [ ] If routine PR: State "Routine PR - not applicable"
 
-**v2.0.0 CST Validation:**
-- [ ] CST applicability determined (YES/NO with logic)
-- [ ] If CST required: All 6 steps completed
-- [ ] If CST not required: Skip rationale provided
+**v2.0.0 CST Validation:** (Milestone completions only)
+- [ ] If milestone: All 6 CST steps completed
+- [ ] If routine PR: State "Routine PR - not applicable"
 
 **Documentation:**
 - [ ] PREHANDOVER_PROOF created using v2.0.0 template
