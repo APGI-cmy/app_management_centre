@@ -21,7 +21,6 @@ import json
 import yaml
 import re
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
 
 class Tier0ConsistencyValidator:
     """Validates Tier-0 document consistency across all files"""
@@ -142,7 +141,7 @@ class Tier0ConsistencyValidator:
             
         return success
         
-    def load_manifest(self) -> Tuple[int, Set[str]]:
+    def load_manifest(self) -> tuple[int, set[str]]:
         """Load manifest and return document count and IDs"""
         if not self.manifest_path.exists():
             self.errors.append(f"Manifest not found: {self.manifest_path}")
@@ -192,7 +191,7 @@ class Tier0ConsistencyValidator:
             print(f"❌ FAIL: Error reading validation script: {e}")
             return None
             
-    def get_agent_yaml_tier0_docs(self) -> Tuple[int, Set[str]]:
+    def get_agent_yaml_tier0_docs(self) -> tuple[int, set[str]]:
         """Get Tier-0 document count and IDs from .agent file"""
         if not self.agent_yaml_path.exists():
             self.errors.append(".agent file not found")

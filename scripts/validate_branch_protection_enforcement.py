@@ -23,7 +23,7 @@ import json
 import subprocess
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from typing import Any, Optional
 
 
 class BranchProtectionEnforcementValidator:
@@ -84,7 +84,7 @@ class BranchProtectionEnforcementValidator:
             return False
         
         try:
-            with open(manifest_file, 'r') as f:
+            with open(manifest_file) as f:
                 self.manifest = json.load(f)
             
             self._add_validation("manifest_loaded", "Tier-0 manifest loaded successfully")

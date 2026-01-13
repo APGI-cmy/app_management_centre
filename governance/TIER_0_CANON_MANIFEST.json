@@ -1,9 +1,9 @@
 {
-  "version": "1.2.0",
-  "last_updated": "2026-01-02T11:46:00Z",
+  "version": "1.3.0",
+  "last_updated": "2026-01-13T05:45:00Z",
   "authority": "Phase X - Trans-Repo Governance Runtime Activation",
   "status": "MANDATORY",
-  "description": "Tier-0 Canonical Governance Manifest - Defines the 14 constitutional documents that MUST be activated in FM agent contracts",
+  "description": "Tier-0 Canonical Governance Manifest - Defines the 15 constitutional documents that MUST be activated in FM agent contracts",
   
   "tier_0_canonical_documents": [
     {
@@ -216,18 +216,36 @@
       "immutable": true,
       "gate_type": "MERGE_GATE",
       "note": "Canonically clarifies FM manages merge gate readiness; builders execute to specification; merge gate failures are FM coordination gaps."
+    },
+    {
+      "id": "T0-015",
+      "path": "governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md",
+      "title": "Automated Deprecation Detection Gate (BL-026)",
+      "authority": "Constitutional Authority",
+      "purpose": "Prohibits entry or retention of deprecated APIs in repository; enforces build-to-green and zero-debt requirements",
+      "required_sections": [
+        "Constitutional Authority",
+        "Purpose & Rationale",
+        "Scope",
+        "Enforcement",
+        "Exception Process"
+      ],
+      "validation_required": true,
+      "immutable": true,
+      "gate_type": "PRE_COMMIT_GATE",
+      "note": "Prevents deprecated API usage from entering the repository; violations constitute test debt and block build-to-green."
     }
   ],
   
   "activation_requirements": {
     "contract_binding": {
       "required": true,
-      "description": "FM agent contract MUST explicitly reference all 13 Tier-0 documents",
+      "description": "FM agent contract MUST explicitly reference all 15 Tier-0 documents",
       "validation_method": "CI gate checks .agent contract for tier_0_canon section"
     },
     "document_existence": {
       "required": true,
-      "description": "All 13 Tier-0 documents MUST exist and be accessible",
+      "description": "All 15 Tier-0 documents MUST exist and be accessible",
       "validation_method": "CI gate validates file existence and readability"
     },
     "schema_validation": {

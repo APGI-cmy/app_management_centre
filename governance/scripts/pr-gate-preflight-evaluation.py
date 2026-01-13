@@ -21,7 +21,7 @@ import yaml
 import subprocess
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any, Tuple
+from typing import Any
 
 class PreflightEvaluator:
     """Evaluates PR gate workflows for correctness and completeness."""
@@ -43,7 +43,7 @@ class PreflightEvaluator:
             "blocking_issues": []
         }
     
-    def evaluate(self) -> Dict[str, Any]:
+    def evaluate(self) -> dict[str, Any]:
         """Run all preflight evaluations."""
         print("🔍 Starting PR-Gate Preflight Evaluation...")
         print(f"   Repository: {self.repo_root}")
@@ -82,14 +82,14 @@ class PreflightEvaluator:
         
         return self.results
     
-    def _validate_syntax(self, workflow_files: List[Path]):
+    def _validate_syntax(self, workflow_files: list[Path]):
         """Validate YAML syntax and GitHub Actions structure."""
         print("\n1️⃣  Validating Workflow Syntax...")
         errors = []
         
         for workflow_file in workflow_files:
             try:
-                with open(workflow_file, 'r') as f:
+                with open(workflow_file) as f:
                     workflow_data = yaml.safe_load(f)
                 
                 # Validate basic structure
@@ -135,14 +135,14 @@ class PreflightEvaluator:
         if errors:
             self.results["blocking_issues"].extend(errors)
     
-    def _verify_dependencies(self, workflow_files: List[Path]):
+    def _verify_dependencies(self, workflow_files: list[Path]):
         """Verify that all dependencies are available."""
         print("\n2️⃣  Verifying Dependencies...")
         missing = []
         
         for workflow_file in workflow_files:
             try:
-                with open(workflow_file, 'r') as f:
+                with open(workflow_file) as f:
                     workflow_data = yaml.safe_load(f)
                 
                 if 'jobs' not in workflow_data:
@@ -186,7 +186,7 @@ class PreflightEvaluator:
         if missing:
             self.results["blocking_issues"].extend(missing)
     
-    def _extract_script_references(self, run_cmd: str) -> List[str]:
+    def _extract_script_references(self, run_cmd: str) -> list[str]:
         """Extract script file references from run commands."""
         references = []
         
@@ -200,14 +200,14 @@ class PreflightEvaluator:
         
         return references
     
-    def _validate_triggers(self, workflow_files: List[Path]):
+    def _validate_triggers(self, workflow_files: list[Path]):
         """Validate workflow trigger conditions."""
         print("\n3️⃣  Validating Trigger Conditions...")
         issues = []
         
         for workflow_file in workflow_files:
             try:
-                with open(workflow_file, 'r') as f:
+                with open(workflow_file) as f:
                     workflow_data = yaml.safe_load(f)
                 
                 if 'on' not in workflow_data and True not in workflow_data:
@@ -243,7 +243,7 @@ class PreflightEvaluator:
         if issues:
             self.results["blocking_issues"].extend(issues)
     
-    def _verify_role_awareness(self, workflow_files: List[Path]):
+    def _verify_role_awareness(self, workflow_files: list[Path]):
         """Verify that workflows are role-aware (builder, FM, governance)."""
         print("\n4️⃣  Verifying Role Awareness...")
         violations = []
@@ -253,7 +253,7 @@ class PreflightEvaluator:
         
         for workflow_file in gate_workflows:
             try:
-                with open(workflow_file, 'r') as f:
+                with open(workflow_file) as f:
                     content = f.read()
                 
                 # Look for role-related keywords

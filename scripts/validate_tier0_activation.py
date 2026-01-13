@@ -24,13 +24,12 @@ import sys
 import yaml
 import json
 from pathlib import Path
-from typing import Dict, List, Tuple
 
 class Tier0ActivationValidator:
     """Validates Tier-0 governance runtime activation"""
     
     MANIFEST_PATH = "governance/TIER_0_CANON_MANIFEST.json"
-    EXPECTED_TIER0_COUNT = 14
+    EXPECTED_TIER0_COUNT = 15
     
     def __init__(self, repo_root: str):
         self.repo_root = Path(repo_root)
@@ -53,7 +52,7 @@ class Tier0ActivationValidator:
             return False
         
         try:
-            with open(manifest_file, 'r') as f:
+            with open(manifest_file) as f:
                 self.manifest = json.load(f)
             
             self.validations.append({
@@ -163,7 +162,7 @@ class Tier0ActivationValidator:
         agent_file = self.repo_root / ".agent"
         
         try:
-            with open(agent_file, 'r') as f:
+            with open(agent_file) as f:
                 content = f.read()
                 
             # Extract YAML frontmatter
@@ -229,7 +228,7 @@ class Tier0ActivationValidator:
         agent_file = self.repo_root / ".agent"
         
         try:
-            with open(agent_file, 'r') as f:
+            with open(agent_file) as f:
                 content = f.read()
             
             parts = content.split('---', 2)
@@ -273,8 +272,8 @@ class Tier0ActivationValidator:
             print(f"❌ FAIL: Error checking manifest reference: {str(e)}")
             return False
     
-    def validate_tier0_count(self, tier0_docs: List[Dict]) -> bool:
-        """Validate that exactly 12 Tier-0 documents are referenced"""
+    def validate_tier0_count(self, tier0_docs: list[dict]) -> bool:
+        """Validate that exactly 15 Tier-0 documents are referenced"""
         doc_count = len(tier0_docs)
         
         if doc_count != self.EXPECTED_TIER0_COUNT:
@@ -294,7 +293,7 @@ class Tier0ActivationValidator:
         print(f"✅ PASS: Correct number of Tier-0 documents: {self.EXPECTED_TIER0_COUNT}")
         return True
     
-    def validate_documents_match_manifest(self, tier0_docs: List[Dict]) -> bool:
+    def validate_documents_match_manifest(self, tier0_docs: list[dict]) -> bool:
         """Validate that agent contract documents match the manifest"""
         manifest_docs = {doc['id']: doc for doc in self.manifest['tier_0_canonical_documents']}
         contract_docs = {doc.get('id'): doc for doc in tier0_docs if 'id' in doc}
@@ -357,12 +356,12 @@ class Tier0ActivationValidator:
         print("✅ PASS: All contract documents match manifest")
         return True
     
-    def extract_tier0_documents(self) -> List[Dict]:
+    def extract_tier0_documents(self) -> list[dict]:
         """Extract Tier-0 document references from agent contract"""
         agent_file = self.repo_root / ".agent"
         
         try:
-            with open(agent_file, 'r') as f:
+            with open(agent_file) as f:
                 content = f.read()
             
             parts = content.split('---', 2)
@@ -397,7 +396,7 @@ class Tier0ActivationValidator:
             print(f"❌ FAIL: Error extracting Tier-0 documents: {str(e)}")
             return []
     
-    def validate_tier0_documents_exist(self, tier0_docs: List[Dict]) -> bool:
+    def validate_tier0_documents_exist(self, tier0_docs: list[dict]) -> bool:
         """Validate that all referenced Tier-0 documents exist"""
         all_exist = True
         
@@ -432,7 +431,7 @@ class Tier0ActivationValidator:
         agent_file = self.repo_root / ".agent"
         
         try:
-            with open(agent_file, 'r') as f:
+            with open(agent_file) as f:
                 content = f.read()
             
             parts = content.split('---', 2)
@@ -472,7 +471,7 @@ class Tier0ActivationValidator:
         agent_file = self.repo_root / ".agent"
         
         try:
-            with open(agent_file, 'r') as f:
+            with open(agent_file) as f:
                 content = f.read()
             
             parts = content.split('---', 2)
@@ -543,7 +542,7 @@ class Tier0ActivationValidator:
         agent_file = self.repo_root / ".agent"
         
         try:
-            with open(agent_file, 'r') as f:
+            with open(agent_file) as f:
                 content = f.read()
             
             parts = content.split('---', 2)
@@ -792,14 +791,14 @@ class Tier0ActivationValidator:
             print("✅ ALL TIER-0 ACTIVATION CHECKS PASSED")
             print()
             print("Tier-0 governance runtime activation is VALID.")
-            print("All 14 constitutional documents are properly activated.")
+            print("All 15 constitutional documents are properly activated.")
             print("Branch protection enforcement is declared.")
             print("This PR may proceed to merge (subject to other gates).")
         else:
             print("❌ TIER-0 ACTIVATION FAILED")
             print()
             print("CATASTROPHIC: Tier-0 governance is not properly activated.")
-            print(f"Target: 14/14 Tier-0 documents + branch protection enforcement")
+            print(f"Target: 15/15 Tier-0 documents + branch protection enforcement")
             print(f"Status: INCOMPLETE or INVALID")
             print()
             print("This PR is BLOCKED from merge until all errors are resolved.")

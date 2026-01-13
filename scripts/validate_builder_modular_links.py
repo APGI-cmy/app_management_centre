@@ -22,7 +22,7 @@ import re
 import json
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Tuple, Optional
+from typing import Optional
 
 def log_info(message: str, verbose: bool = False):
     """Log informational message"""
@@ -41,7 +41,7 @@ def log_error(message: str):
     """Log error message"""
     print(f"❌ {message}")
 
-def extract_reference_links(content: str, source_file: str) -> List[Dict[str, str]]:
+def extract_reference_links(content: str, source_file: str) -> list[dict[str, str]]:
     """
     Extract all reference links to extended documentation from agent file content.
     
@@ -76,7 +76,7 @@ def extract_reference_links(content: str, source_file: str) -> List[Dict[str, st
     
     return links
 
-def validate_file_exists(base_dir: Path, link: Dict[str, str]) -> Tuple[bool, Optional[str]]:
+def validate_file_exists(base_dir: Path, link: dict[str, str]) -> tuple[bool, str | None]:
     """
     Validate that the referenced file exists.
     Returns (success, error_message)
@@ -91,7 +91,7 @@ def validate_file_exists(base_dir: Path, link: Dict[str, str]) -> Tuple[bool, Op
     
     return True, None
 
-def validate_section_reference(base_dir: Path, link: Dict[str, str]) -> Tuple[bool, Optional[str]]:
+def validate_section_reference(base_dir: Path, link: dict[str, str]) -> tuple[bool, str | None]:
     """
     Validate section references if present in the link context.
     
@@ -117,7 +117,7 @@ def validate_section_reference(base_dir: Path, link: Dict[str, str]) -> Tuple[bo
     file_path = base_dir / link['path']
     
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, encoding='utf-8') as f:
             content = f.read()
             
             # Look for section header
@@ -137,7 +137,7 @@ def validate_section_reference(base_dir: Path, link: Dict[str, str]) -> Tuple[bo
     except Exception as e:
         return False, f"Error reading file {link['path']}: {str(e)}"
 
-def validate_builder_agent_file(base_dir: Path, agent_file: Path, verbose: bool = False) -> Tuple[bool, Dict]:
+def validate_builder_agent_file(base_dir: Path, agent_file: Path, verbose: bool = False) -> tuple[bool, dict]:
     """
     Validate a single builder agent file's modular links.
     Returns (success, results_dict)
@@ -157,7 +157,7 @@ def validate_builder_agent_file(base_dir: Path, agent_file: Path, verbose: bool 
     
     # Read agent file
     try:
-        with open(agent_file, 'r', encoding='utf-8') as f:
+        with open(agent_file, encoding='utf-8') as f:
             content = f.read()
     except Exception as e:
         results['errors'].append(f"Failed to read file: {str(e)}")
@@ -208,7 +208,7 @@ def validate_builder_agent_file(base_dir: Path, agent_file: Path, verbose: bool 
     success = results['links_broken'] == 0
     return success, results
 
-def get_builders_from_filesystem(agents_dir: Path) -> List[str]:
+def get_builders_from_filesystem(agents_dir: Path) -> list[str]:
     """
     Dynamically discover builders from the filesystem.
     
@@ -235,7 +235,7 @@ def get_builders_from_filesystem(agents_dir: Path) -> List[str]:
             builders.append(file.stem)
     return sorted(builders)
 
-def validate_extended_reference_files(base_dir: Path, verbose: bool = False) -> Tuple[bool, Dict]:
+def validate_extended_reference_files(base_dir: Path, verbose: bool = False) -> tuple[bool, dict]:
     """
     Validate that all expected extended reference files exist and are accessible.
     """
@@ -276,7 +276,7 @@ def validate_extended_reference_files(base_dir: Path, verbose: bool = False) -> 
         
         if ref_file.exists():
             try:
-                with open(ref_file, 'r', encoding='utf-8') as f:
+                with open(ref_file, encoding='utf-8') as f:
                     content = f.read()
                     file_info['readable'] = True
                     file_info['size'] = len(content)
@@ -292,7 +292,7 @@ def validate_extended_reference_files(base_dir: Path, verbose: bool = False) -> 
     success = len(results['errors']) == 0
     return success, results
 
-def generate_evidence_report(all_results: Dict, output_path: Path):
+def generate_evidence_report(all_results: dict, output_path: Path):
     """Generate evidence report in JSON format"""
     evidence = {
         'validation_timestamp': datetime.now().astimezone().isoformat(),
