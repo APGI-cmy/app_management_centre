@@ -1,10 +1,10 @@
-# PREHANDOVER PROOF TEMPLATE (ENHANCED v2.1.0)
+# PREHANDOVER PROOF TEMPLATE (ENHANCED v2.0.0)
 
 **Purpose:** Standardized template for documenting local PR-gate execution before handover  
 **Required For:** ALL handovers (no exceptions)  
 **Authority:** Governance Rule — PR_GATE_LOCAL_EXECUTION_REQUIREMENT.md  
 **Protocol Version:** 2.0.0+ (Execution Bootstrap Protocol)  
-**Template Version:** 2.1.0 (Enhanced with Governance Artifacts + CST Validation)  
+**Template Version:** 2.0.0 (Enhanced with Governance Artifacts + CST Validation)  
 **Last Updated:** 2026-01-13  
 **Canonical Source:** maturion-foreman-governance/governance/templates/PREHANDOVER_PROOF_TEMPLATE.md
 
@@ -34,7 +34,7 @@
 **Date:** [YYYY-MM-DD]  
 **Latest Commit:** [commit-hash]  
 **Protocol Version:** 2.0.0+  
-**Template Version:** 2.1.0
+**Template Version:** 2.0.0
 
 ---
 
@@ -221,7 +221,7 @@ $ [command]
 
 ---
 
-## Governance Artifacts (MANDATORY v2.1.0+)
+## Governance Artifacts (MANDATORY v2.0.0+)
 
 **Authority:**  
 - EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md v2.0.0+  
@@ -465,7 +465,7 @@ $ [command]
 
 ---
 
-## CST Validation Section (v2.1.0+)
+## CST Validation Section (v2.0.0+)
 
 **Authority:** COMBINED_TESTING_PATTERN.md v1.0.0, EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md v2.0.0+ Section 7
 
@@ -673,19 +673,19 @@ I, **[Agent Name]**, attest that:
 - [x] This evidence is accurate and complete
 - [x] Constitutional compliance verified (BL-024): All Tier-1 requirements preserved
 - [x] If procedural guidance adapted: Adaptations documented with justification
-- [x] **NEW v2.1.0**: All 4 governance artifacts completed or rationale provided
-- [x] **NEW v2.1.0**: CST validation completed or skip rationale provided
+- [x] **NEW v2.0.0**: All 4 governance artifacts completed or rationale provided
+- [x] **NEW v2.0.0**: CST validation completed or skip rationale provided
 
 **Handover is authorized based on local verification.**
 
 **Signature:** [Agent Name]  
 **Date:** [YYYY-MM-DD]  
 **Commit:** [commit-hash]  
-**Template Version:** 2.1.0
+**Template Version:** 2.0.0
 
 ---
 
-## Completion Checklist (Enhanced v2.1.0)
+## Completion Checklist (Enhanced v2.0.0)
 
 ### Execution Bootstrap Protocol (Category 0)
 - [ ] Step 1: All execution artifacts identified and inventoried
@@ -702,14 +702,14 @@ I, **[Agent Name]**, attest that:
 - [ ] Each gate result documented (command + output + exit code + timestamp)
 - [ ] All gates GREEN
 
-### Governance Artifacts (NEW v2.1.0)
+### Governance Artifacts (NEW v2.0.0)
 - [ ] Governance Scan: Completed OR rationale for skip provided
 - [ ] Risk Assessment: Completed OR rationale for skip provided
 - [ ] Change Record: Completed OR rationale for skip provided
 - [ ] Completion Summary: Completed OR rationale for skip provided
 - [ ] Artifact presentation option selected (embedded/linked/hybrid)
 
-### CST Validation (NEW v2.1.0)
+### CST Validation (NEW v2.0.0)
 - [ ] CST applicability determined (YES/NO with decision logic)
 - [ ] If CST required: All 6 CST sections completed
 - [ ] If CST not required: Skip rationale provided with alternatives
@@ -736,7 +736,7 @@ I, **[Agent Name]**, attest that:
 
 ---
 
-## FAQ: Governance Artifacts (NEW v2.1.0)
+## FAQ: Governance Artifacts (NEW v2.0.0)
 
 ### Q1: When should I embed artifacts vs. link to separate files?
 
@@ -896,7 +896,7 @@ Both are required but serve different purposes. PREHANDOVER_PROOF = process comp
 
 ## Version History
 
-**v2.1.0 (2026-01-13):**
+**v2.0.0 (2026-01-13):**
 - ➕ Added Governance Artifacts section (4 artifacts: scan, risk, change, completion)
 - ➕ Added CST Validation section (6-step checklist + skip rationale)
 - ➕ Added artifact presentation options (embed/link/hybrid)
@@ -905,11 +905,11 @@ Both are required but serve different purposes. PREHANDOVER_PROOF = process comp
 - 📝 Updated instructions to include new sections
 - 📝 Enhanced attestation to reference new requirements
 
-**v2.0.0 (2026-01-11):**
+**v1.0.0 (2026-01-11):**
 - ✅ Execution Bootstrap Protocol (7-step process)
 - ✅ Local PR-gate execution evidence
 - ✅ Green attestation and handover authorization
 
 ---
 
-*END OF PREHANDOVER PROOF TEMPLATE v2.1.0*
+*END OF PREHANDOVER PROOF TEMPLATE v2.0.0*
