@@ -62,6 +62,15 @@ governance:
     - id: build-tree-model
       path: governance/canon/BUILD_TREE_EXECUTION_MODEL.md
       role: build-tree-execution
+    
+    # Test Execution Protocol (Mandatory)
+    - id: test-execution-protocol
+      path: governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md
+      role: test-execution-enforcement
+      version: 1.0.0
+      summary: CI is confirmatory, not diagnostic - all tests must be executed locally before PR
+      enforcement: MANDATORY
+      attestation_required: true
   
   # Tier-0 Canonical Governance (Constitutional Authority)
   # These 15 documents MUST be loaded and validated before ANY execution
@@ -234,6 +243,45 @@ governance:
     no_partial_delivery: true
     qa_is_proof: true
     handover_requires_green_ci: true
+    
+    # Test Execution Protocol (MANDATORY)
+    test_execution:
+      required: true
+      enforcement: MANDATORY
+      protocol_version: 1.0.0
+      description: "CI is confirmatory, not diagnostic - all tests must execute locally before PR"
+      requirements:
+        - Execute all affected tests locally before PR creation
+        - Verify 100% GREEN (zero failures, zero warnings)
+        - Run BL-026 deprecation check (ruff check --select UP)
+        - Create PREHANDOVER_PROOF with complete evidence
+        - Sign attestation confirming local execution
+      commands:
+        pytest: "pytest tests/ -v --strict-warnings"
+        deprecation: "ruff check --select UP ."
+        linting: "ruff check ."
+        format_check: "ruff format --check ."
+      failure_semantics:
+        on_pr_without_local_execution:
+          action: STOP
+          severity: CATASTROPHIC
+          message: "PR created without local test execution - protocol violation"
+          blocking: true
+        on_missing_prehandover_proof:
+          action: STOP
+          severity: CATASTROPHIC
+          message: "PREHANDOVER_PROOF missing - cannot verify local execution"
+          blocking: true
+        on_ci_discovers_failures:
+          action: STOP
+          severity: HIGH
+          message: "CI discovered failures that should have been caught locally"
+          escalation: MANDATORY
+          blocking: true
+      exception_process:
+        requires_fm_approval: true
+        documented_in: "governance/evidence/test-execution-exceptions.json"
+        quarterly_review: true
     
     # Branch Protection Enforcement (TIER-0 INVARIANT)
     branch_protection_enforcement:
