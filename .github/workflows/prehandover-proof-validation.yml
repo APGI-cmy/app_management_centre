@@ -1,0 +1,249 @@
+name: PREHANDOVER_PROOF Validation Gate
+
+# CI CLASSIFICATION: Soft Gate (Informational)
+# Purpose: Validates PREHANDOVER_PROOF completeness for Execution Bootstrap Protocol
+# Failure Semantics:
+#   - Missing/incomplete PREHANDOVER_PROOF → Warning comment (does not block)
+#   - Infrastructure failures → Retry + Comment
+# Timeout: 5 minutes
+# Authority: Execution Bootstrap Protocol v2.0.0+, Wave 3.2
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'PREHANDOVER_PROOF*.md'
+      - '.github/workflows/**'
+      - 'scripts/**'
+      - 'governance/scripts/**'
+
+# Explicit, least-privilege permissions
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate-prehandover-proof:
+    name: Validate PREHANDOVER_PROOF
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Detect PREHANDOVER_PROOF files
+        id: detect-proof
+        run: |
+          echo "🔍 Looking for PREHANDOVER_PROOF files..."
+          
+          # Find all PREHANDOVER_PROOF files
+          PROOF_FILES=$(find . -maxdepth 1 -name "PREHANDOVER_PROOF*.md" -type f || echo "")
+          
+          if [ -z "$PROOF_FILES" ]; then
+            echo "has_proof=false" >> $GITHUB_OUTPUT
+            echo "No PREHANDOVER_PROOF files found"
+          else
+            echo "has_proof=true" >> $GITHUB_OUTPUT
+            echo "$PROOF_FILES" > /tmp/proof_files.txt
+            echo "Found PREHANDOVER_PROOF files:"
+            echo "$PROOF_FILES"
+          fi
+
+      - name: Validate PREHANDOVER_PROOF documents
+        if: steps.detect-proof.outputs.has_proof == 'true'
+        id: validate
+        run: |
+          echo "🔍 Validating PREHANDOVER_PROOF documents..."
+          echo ""
+          
+          VALIDATION_FAILED=0
+          VALIDATION_RESULTS=""
+          
+          while IFS= read -r proof_file; do
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "Validating: $proof_file"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            
+            # Run validator
+            if python3 governance/scripts/validate_prehandover_proof.py "$proof_file" --verbose; then
+              VALIDATION_RESULTS="${VALIDATION_RESULTS}✅ **PASS**: \`$proof_file\`\n"
+              echo ""
+            else
+              VALIDATION_FAILED=1
+              VALIDATION_RESULTS="${VALIDATION_RESULTS}❌ **FAIL**: \`$proof_file\` (see logs above)\n"
+              echo ""
+            fi
+          done < /tmp/proof_files.txt
+          
+          # Save results for comment
+          echo -e "$VALIDATION_RESULTS" > /tmp/validation_results.txt
+          
+          if [ $VALIDATION_FAILED -eq 1 ]; then
+            echo "validation_status=failed" >> $GITHUB_OUTPUT
+          else
+            echo "validation_status=passed" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on PR - No PREHANDOVER_PROOF
+        if: steps.detect-proof.outputs.has_proof == 'false' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              ℹ️ **PREHANDOVER_PROOF Validation Gate - SKIP**
+              
+              **Outcome**: Informational SKIP  
+              **Reason**: No PREHANDOVER_PROOF files found in this PR  
+              **Status**: This gate does not block merge
+              
+              ---
+              
+              **When is PREHANDOVER_PROOF required?**
+              
+              PREHANDOVER_PROOF is required for PRs that modify execution artifacts:
+              - GitHub Actions workflows (\`.github/workflows/\`)
+              - Scripts (\`scripts/\`, \`governance/scripts/\`)
+              - Git hooks (\`.githooks/\`)
+              - CI/CD configurations
+              - Validation tools
+              
+              If this PR modifies execution artifacts, consider adding PREHANDOVER_PROOF:
+              \`\`\`bash
+              python3 scripts/generate-prehandover-proof-template.py --agent "Your Name" --pr ${context.issue.number}
+              ./scripts/prehandover-capture.sh -- "command1" "command2"
+              python3 governance/scripts/validate_prehandover_proof.py PREHANDOVER_PROOF.md
+              \`\`\`
+              
+              **Reference**: Execution Bootstrap Protocol v2.0.0+
+              
+              ---
+              
+              **Gate Status**: ℹ️ INFORMATIONAL SKIP
+              `
+            })
+
+      - name: Comment on PR - Validation Passed
+        if: steps.detect-proof.outputs.has_proof == 'true' && steps.validate.outputs.validation_status == 'passed' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = fs.readFileSync('/tmp/validation_results.txt', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              ✅ **PREHANDOVER_PROOF Validation Gate - PASS**
+              
+              All PREHANDOVER_PROOF documents are valid and complete.
+              
+              **Validation Results**:
+              
+              ${results}
+              
+              **Checks Performed**:
+              - ✅ Metadata completeness (Agent, PR, Branch, Date, Commit, Protocol Version)
+              - ✅ Category 0: Execution Bootstrap Protocol (7 steps)
+              - ✅ Exit codes validated (all 0)
+              - ✅ Evidence collection complete
+              - ✅ Agent attestation present
+              - ✅ Hard rules acknowledged
+              
+              **Authority**: Execution Bootstrap Protocol v2.0.0+, Wave 3.2
+              
+              ---
+              
+              **Gate Status**: ✅ PASS
+              `
+            })
+
+      - name: Comment on PR - Validation Failed
+        if: steps.detect-proof.outputs.has_proof == 'true' && steps.validate.outputs.validation_status == 'failed' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = fs.readFileSync('/tmp/validation_results.txt', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              ⚠️ **PREHANDOVER_PROOF Validation Gate - INCOMPLETE**
+              
+              **Outcome**: Informational Warning  
+              **Status**: This gate does not block merge (soft gate)
+              
+              ---
+              
+              **Validation Results**:
+              
+              ${results}
+              
+              **Common Issues**:
+              - Missing required metadata fields
+              - Incomplete Category 0 (7-step protocol) documentation
+              - Exit codes not documented or non-zero
+              - Missing evidence (logs, timestamps, outputs)
+              - Missing agent attestation
+              - Hard rules not acknowledged
+              
+              **To Fix**:
+              1. Review validation errors in workflow logs
+              2. Use template: \`python3 scripts/generate-prehandover-proof-template.py\`
+              3. Capture evidence: \`./scripts/prehandover-capture.sh -- "commands"\`
+              4. Validate locally: \`python3 governance/scripts/validate_prehandover_proof.py PROOF.md --verbose\`
+              5. Commit and push updated PREHANDOVER_PROOF
+              
+              **Reference**: Execution Bootstrap Protocol v2.0.0+
+              
+              ---
+              
+              **Gate Status**: ⚠️ INFORMATIONAL WARNING (does not block merge)
+              `
+            })
+
+      - name: Upload validation artifacts
+        if: always() && steps.detect-proof.outputs.has_proof == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: prehandover-proof-validation-results
+          path: |
+            /tmp/validation_results.txt
+            /tmp/proof_files.txt
+          retention-days: 30
+
+      - name: Workflow Success
+        if: always()
+        run: |
+          HAS_PROOF="${{ steps.detect-proof.outputs.has_proof }}"
+          VALIDATION_STATUS="${{ steps.validate.outputs.validation_status }}"
+          
+          if [ "$HAS_PROOF" = "false" ]; then
+            echo "ℹ️  No PREHANDOVER_PROOF files found - SKIP"
+          elif [ "$VALIDATION_STATUS" = "passed" ]; then
+            echo "✅ PREHANDOVER_PROOF validation passed"
+          else
+            echo "⚠️  PREHANDOVER_PROOF validation incomplete"
+            echo "   This is informational only - does not block merge"
+          fi
+          
+          echo ""
+          echo "This gate is SOFT - failures are informational warnings only."
+          exit 0

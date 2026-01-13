@@ -1,0 +1,107 @@
+#!/bin/bash
+#
+# Pre-push Hook for Full BL-026 Scan
+#
+# Constitutional Authority: BL-026 Automated Deprecation Detection Gate
+# Purpose: Prevent deprecated Python APIs from being pushed to remote
+#
+# Installation:
+#   git config core.hooksPath .githooks
+#   # Or manually: cp .githooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+#
+
+set -e
+
+echo "🔍 Full BL-026 Deprecation Scan: Pre-push validation..."
+echo ""
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Check if ruff is installed
+if ! command -v ruff &> /dev/null; then
+    echo -e "${RED}❌ ruff not found${NC}"
+    echo "Installing ruff..."
+    if ! pip install -q ruff; then
+        echo -e "${RED}❌ Failed to install ruff${NC}"
+        echo "Please install manually: pip install ruff"
+        echo ""
+        echo -e "${RED}Push BLOCKED by BL-026 Deprecation Detection Gate${NC}"
+        exit 1
+    fi
+    echo -e "${GREEN}✅ ruff installed${NC}"
+fi
+
+# Get all Python files in the repository (not just changed)
+echo "1. Scanning all Python files for BL-026 violations..."
+
+# Find all Python files, excluding common non-project directories
+PYTHON_FILES=$(find . -name "*.py" \
+    -not -path "./.git/*" \
+    -not -path "./venv/*" \
+    -not -path "./env/*" \
+    -not -path "./.venv/*" \
+    -not -path "./node_modules/*" \
+    -not -path "./.pytest_cache/*" \
+    -not -path "./__pycache__/*" \
+    -not -path "*/__pycache__/*" \
+    2>/dev/null || true)
+
+if [ -z "$PYTHON_FILES" ]; then
+    echo "   No Python files found"
+    echo -e "${GREEN}✅ BL-026 scan skipped (no Python files)${NC}"
+    echo ""
+    exit 0
+fi
+
+PYTHON_FILE_COUNT=$(echo "$PYTHON_FILES" | wc -l)
+echo "   Found $PYTHON_FILE_COUNT Python files to scan"
+echo ""
+
+# Run ruff deprecation check on all files
+echo "2. Running full ruff deprecation detection..."
+VIOLATIONS_FOUND=0
+
+# Create temporary file for results
+TEMP_RESULTS=$(mktemp)
+
+# Run ruff check with UP rules only
+if ! ruff check --select UP $PYTHON_FILES > "$TEMP_RESULTS" 2>&1; then
+    VIOLATIONS_FOUND=1
+fi
+
+# Check if violations were found
+if [ $VIOLATIONS_FOUND -eq 1 ]; then
+    echo -e "${RED}❌ DEPRECATED API USAGE DETECTED${NC}"
+    echo ""
+    cat "$TEMP_RESULTS"
+    echo ""
+    echo -e "${RED}Push BLOCKED by BL-026 Deprecation Detection Gate${NC}"
+    echo ""
+    echo "Common deprecated patterns to fix:"
+    echo "  • datetime.utcnow() → datetime.now(timezone.utc)"
+    echo "  • datetime.utcfromtimestamp(ts) → datetime.fromtimestamp(ts, tz=timezone.utc)"
+    echo "  • typing.List[X] → list[X] (Python 3.9+)"
+    echo "  • typing.Dict[K,V] → dict[K,V] (Python 3.9+)"
+    echo ""
+    echo "To fix automatically where possible:"
+    echo "  ruff check --select UP --fix <files>"
+    echo ""
+    echo "For justified exceptions (rare), see:"
+    echo "  governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md"
+    echo ""
+    rm -f "$TEMP_RESULTS"
+    exit 1
+fi
+
+rm -f "$TEMP_RESULTS"
+
+echo -e "${GREEN}✅ No deprecated APIs detected in $PYTHON_FILE_COUNT files${NC}"
+echo ""
+echo -e "${GREEN}✅ All pre-push checks passed - Push authorized${NC}"
+echo ""
+
+exit 0
