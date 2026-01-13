@@ -1,0 +1,10 @@
+{
+  "artifact_id": "artifact_003",
+  "artifact_number": 3,
+  "command": "python3 scripts/generate-prehandover-proof-template.py --help",
+  "start_time": "2026-01-13T05:25:35Z",
+  "end_time": "2026-01-13T05:25:35Z",
+  "exit_code": 0,
+  "log_file": "artifact_003.log",
+  "exit_code_file": "artifact_003.exitcode"
+}

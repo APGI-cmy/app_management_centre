@@ -16,7 +16,6 @@ import sys
 import subprocess
 import shutil
 from pathlib import Path
-from typing import List, Tuple
 
 
 class Color:
@@ -28,7 +27,7 @@ class Color:
     NC = '\033[0m'  # No Color
 
 
-def check_command_exists(command: str) -> Tuple[bool, str]:
+def check_command_exists(command: str) -> tuple[bool, str]:
     """Check if a command exists in PATH"""
     path = shutil.which(command)
     if path:
@@ -36,7 +35,7 @@ def check_command_exists(command: str) -> Tuple[bool, str]:
     return False, ""
 
 
-def check_python_version() -> Tuple[bool, str]:
+def check_python_version() -> tuple[bool, str]:
     """Check Python version (requires 3.9+)"""
     version = sys.version_info
     version_str = f"{version.major}.{version.minor}.{version.micro}"
@@ -46,7 +45,7 @@ def check_python_version() -> Tuple[bool, str]:
     return False, version_str
 
 
-def check_ruff_installed() -> Tuple[bool, str]:
+def check_ruff_installed() -> tuple[bool, str]:
     """Check if ruff is installed and get version"""
     try:
         result = subprocess.run(
@@ -63,7 +62,7 @@ def check_ruff_installed() -> Tuple[bool, str]:
         return False, ""
 
 
-def check_git_hooks_configured() -> Tuple[bool, str]:
+def check_git_hooks_configured() -> tuple[bool, str]:
     """Check if Git hooks are properly configured"""
     try:
         # Check if core.hooksPath is set
@@ -97,7 +96,7 @@ def check_git_hooks_configured() -> Tuple[bool, str]:
         return False, ""
 
 
-def check_hook_files_exist() -> Tuple[bool, List[str]]:
+def check_hook_files_exist() -> tuple[bool, list[str]]:
     """Check if required hook files exist in .githooks"""
     try:
         git_root = subprocess.run(

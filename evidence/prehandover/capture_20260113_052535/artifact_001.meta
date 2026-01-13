@@ -1,0 +1,10 @@
+{
+  "artifact_id": "artifact_001",
+  "artifact_number": 1,
+  "command": "python3 scripts/validate-builder-environment.py",
+  "start_time": "2026-01-13T05:25:35Z",
+  "end_time": "2026-01-13T05:25:35Z",
+  "exit_code": 1,
+  "log_file": "artifact_001.log",
+  "exit_code_file": "artifact_001.exitcode"
+}
