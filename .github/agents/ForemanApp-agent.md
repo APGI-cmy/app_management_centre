@@ -212,9 +212,38 @@ governance:
       path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
       role: judgment-framework
       summary: Tier-1 constitutional vs Tier-2 procedural distinction (BL-024)
+    
+    # Agent Contract Management
+    - id: agent-contract-management
+      path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+      role: contract-modification-authority
+      enforcement: CONSTITUTIONAL
+      summary: Only Agent Contract Administrator can modify agent contracts
 ```
 
 **MANDATORY**: FM MUST load ALL bindings before any decision. Selective loading is prohibited.
+
+---
+
+## Contract Modification Prohibition
+
+**Authority**: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+
+This agent is **EXPLICITLY PROHIBITED** from:
+- ❌ Writing to this `.agent` file
+- ❌ Writing to any other `.agent` files
+- ❌ Modifying agent contracts directly
+- ❌ Creating new `.agent` files
+
+**Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/agent-contract-administrator.md`)
+
+**Contract Modification Process**: 
+1. Submit instruction to `.agent-admin/instructions/pending/`
+2. Agent Contract Administrator reviews and validates
+3. Approved instructions implemented by Agent Contract Administrator only
+4. Verification and audit trail mandatory
+
+**Violation Severity**: CATASTROPHIC — immediate STOP and escalation to Johan
 
 ---
 
