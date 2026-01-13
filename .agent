@@ -64,11 +64,11 @@ governance:
       role: build-tree-execution
   
   # Tier-0 Canonical Governance (Constitutional Authority)
-  # These 14 documents MUST be loaded and validated before ANY execution
+  # These 15 documents MUST be loaded and validated before ANY execution
   # Source: governance/TIER_0_CANON_MANIFEST.json
   tier_0_canon:
     manifest_file: governance/TIER_0_CANON_MANIFEST.json
-    manifest_version: "1.2.0"
+    manifest_version: "1.3.0"
     
     constitutional_documents:
       # T0-001: Supreme Authority
@@ -184,6 +184,15 @@ governance:
         authority: Constitutional
         validation_required: true
         gate_type: MERGE_GATE
+      
+      # T0-015: Automated Deprecation Detection Gate
+      - id: T0-015
+        path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
+        title: Automated Deprecation Detection Gate (BL-026)
+        purpose: Prohibits entry or retention of deprecated APIs in repository; enforces build-to-green and zero-debt requirements
+        authority: Constitutional
+        validation_required: true
+        gate_type: PRE_COMMIT_GATE
     
     # Pre-execution requirements
     activation_requirements:
