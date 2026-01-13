@@ -22,6 +22,7 @@ import re
 import json
 from pathlib import Path
 from datetime import datetime
+from typing import Optional
 
 def log_info(message: str, verbose: bool = False):
     """Log informational message"""

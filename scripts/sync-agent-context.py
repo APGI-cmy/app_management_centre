@@ -20,6 +20,7 @@ import sys
 import hashlib
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Optional
 
 # Project root
 PROJECT_ROOT = Path(__file__).parent.parent

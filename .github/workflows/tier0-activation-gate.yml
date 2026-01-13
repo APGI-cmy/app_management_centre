@@ -81,7 +81,7 @@ jobs:
               
               **Validation Results:**
               - ✅ FM agent contract exists with Tier-0 section
-              - ✅ Constitutional documents properly referenced (14 documents)
+              - ✅ Constitutional documents properly referenced (15 documents)
               - ✅ All Tier-0 documents exist and accessible
               - ✅ Activation requirements declared
               - ✅ STOP + ESCALATE semantics declared
@@ -149,8 +149,9 @@ jobs:
               - governance/contracts/quality-integrity-contract.md
               - governance/contracts/FM_EXECUTION_MANDATE.md
               - governance/alignment/FM_MERGE_GATE_MANAGEMENT_CANON.md
+              - governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
               
-              **Total Required: 14 Tier-0 documents**
+              **Total Required: 15 Tier-0 documents**
               
               **Additional Requirements:**
               - Branch protection enforcement (3 required CI checks)
@@ -223,7 +224,7 @@ jobs:
               ## Tier-0 Requirements Checklist
               
               - [ ] FM agent contract (.agent) has tier_0_canon section
-              - [ ] Constitutional documents properly referenced (13 required)
+              - [ ] Constitutional documents properly referenced (15 required)
               - [ ] All Tier-0 documents exist and accessible
               - [ ] Activation requirements declared
               - [ ] STOP + ESCALATE failure semantics declared

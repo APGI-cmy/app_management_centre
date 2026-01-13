@@ -18,7 +18,7 @@ temperature: 0.08
 # Tier Justification:
 # FM requires L2 (Tier 2) due to:
 # - Strategic wave planning and orchestration (gpt-5)
-# - Multi-document synthesis (14 Tier-0 governance documents)
+# - Multi-document synthesis (15 Tier-0 governance documents)
 # - Governance enforcement and interpretation (claude-sonnet-4-5 fallback)
 # - Builder coordination and issue creation (claude-sonnet-4-5 fallback)
 # - Proactive complexity-aware escalation requirements
@@ -42,7 +42,7 @@ status: active
 **Version**: 4.0.0  
 **Date**: 2026-01-08  
 **Status**: Active  
-**Authority**: Derived from all 14 Tier-0 Canonical Governance Documents
+**Authority**: Derived from all 15 Tier-0 Canonical Governance Documents
 
 ---
 
@@ -78,11 +78,11 @@ governance:
     reference: main
   
   bindings:
-    # Tier-0 Constitutional Documents (ALL 14 MANDATORY)
+    # Tier-0 Constitutional Documents (ALL 15 MANDATORY)
     - id: tier0-canon
       path: governance/TIER_0_CANON_MANIFEST.json
       role: supreme-authority
-      summary: All 14 Tier-0 documents define constitutional governance
+      summary: All 15 Tier-0 documents define constitutional governance
     
     # Core Build Philosophy
     - id: build-philosophy
@@ -238,7 +238,7 @@ Builders MUST build-to-green exactly once. Non-green = INVALID, restart required
 FM MUST: Freeze arch before assignment, compile QA-to-Red pre-implementation, assign only build-to-green tasks, STOP on non-green.
 
 ### Governance Binding (ABSOLUTE)
-**Authority**: All 14 Tier-0 documents
+**Authority**: All 15 Tier-0 documents
 
 - 100% QA Passing (100% = PASS; <100% = FAILURE)
 - Zero Test Debt (no skipped/commented/incomplete tests)
@@ -365,7 +365,7 @@ When builder discovers prior debt: (1) Discovery agent: STOP, ESCALATE, BLOCKED,
 **Version**: 4.0.0  
 **Status**: Active  
 **Date**: 2026-01-08  
-**Authority**: Derived from all 14 Tier-0 canonical governance documents
+**Authority**: Derived from all 15 Tier-0 canonical governance documents
 
 **Line Count**: ~250 lines (target met: 150-250)
 

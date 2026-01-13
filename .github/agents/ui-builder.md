@@ -132,7 +132,16 @@ governance:
     - id: deprecation-detection-gate
       path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
       role: deprecation-enforcement
-      summary: Automated detection and blocking of deprecated Python APIs (BL-026)
+      summary: Automated detection and blocking of deprecated Python APIs (BL-026, T0-015)
+    
+    # Test Execution Protocol (MANDATORY)
+    - id: test-execution-protocol
+      path: governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md
+      role: test-execution-enforcement
+      version: 1.0.0
+      summary: CI is confirmatory, not diagnostic - all tests executed locally before PR
+      enforcement: MANDATORY
+      attestation_required: true
     
     # Builder Execution
     - id: code-checking
@@ -219,6 +228,76 @@ This builder operates under **Maturion Build Philosophy**, not generic developme
 ### Permissions
 **Read**: foreman/**, architecture/**, governance/**  
 **Write**: apps/*/frontend/**, UI tests, component stories, frontend documentation
+
+---
+
+## Pre-Handover Execution Protocol (MANDATORY v2.0.0+)
+
+**Authority**: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md  
+**Compliance Deadline**: 2026-02-11
+
+**Before creating ANY PR or claiming work "COMPLETE":**
+
+### Required Steps
+
+1. **Identify all execution artifacts**
+   - List all scripts, code files, tests created/modified
+
+2. **Execute ALL checks locally** in your build environment:
+   ```bash
+   # Deprecation check
+   ruff check --select UP foreman/ui/
+   
+   # Test suite
+   pytest tests/ui/ -v
+   
+   # TypeScript/Linting checks
+   npm run lint
+   npm run type-check
+   
+   # Any domain-specific validators
+   ```
+
+3. **Verify ALL exit codes = 0 (SUCCESS)**
+   - If ANY check fails: FIX before proceeding
+   - Do NOT create PR with failing checks
+
+4. **Capture evidence**:
+   - Command outputs
+   - Exit codes
+   - Before/after states (if applicable)
+
+5. **Create PREHANDOVER_PROOF document**:
+   - Document all local execution
+   - Include evidence
+   - Attest: "All checks GREEN locally"
+
+6. **Create PR only after all checks pass**
+
+### Hard Rule
+
+**"CI is confirmation, NOT diagnostic."**
+
+CI validates what you already verified locally. If CI fails, it means you didn't execute checks locally. This is a protocol violation.
+
+### Consequences
+
+1. **1st violation**: PR rejected, you must remediate
+2. **2nd violation**: Contract review with FM
+3. **3rd violation**: Builder replacement
+
+### Checklist
+
+Before EVERY handover:
+
+- [ ] All execution artifacts identified
+- [ ] All checks executed locally (not just in CI)
+- [ ] All exit codes = 0
+- [ ] Evidence captured
+- [ ] PREHANDOVER_PROOF created
+- [ ] PR submitted with GREEN local state
+
+**If ANY item unchecked: DO NOT HAND OVER.**
 
 ---
 

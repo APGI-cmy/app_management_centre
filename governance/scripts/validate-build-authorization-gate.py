@@ -28,7 +28,6 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
 from datetime import datetime
 
 
@@ -50,7 +49,7 @@ class BuildAuthorizationGateValidator:
             'decision': 'PENDING'
         }
         
-    def validate(self) -> Tuple[bool, Dict]:
+    def validate(self) -> tuple[bool, dict]:
         """Run all precondition checks"""
         print(f"🚦 Build Authorization Gate Validation for {self.app_name}")
         print("=" * 70)
@@ -97,7 +96,7 @@ class BuildAuthorizationGateValidator:
         
         return all_pass, self.results
     
-    def _run_validator(self, script_name: str, *args) -> Tuple[bool, str]:
+    def _run_validator(self, script_name: str, *args) -> tuple[bool, str]:
         """Run a validation script and return success status and output"""
         script_path = self.repo_root / "governance" / "scripts" / script_name
         
@@ -365,7 +364,7 @@ class BuildAuthorizationGateValidator:
         
         if arch_index_path.exists():
             try:
-                with open(arch_index_path, 'r') as f:
+                with open(arch_index_path) as f:
                     arch_index = json.load(f)
                 
                 has_timestamp = 'metadata' in arch_index and 'generated_at' in arch_index['metadata']

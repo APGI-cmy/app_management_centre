@@ -22,7 +22,6 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
 from datetime import datetime
 
 
@@ -46,7 +45,7 @@ class FRSAlignmentValidator:
         self.app_desc_content = None
         self.frs_content = None
         
-    def validate(self) -> Tuple[bool, Dict]:
+    def validate(self) -> tuple[bool, dict]:
         """Run all validation checks"""
         print(f"🔍 Validating FRS Alignment for {self.app_name}...\n")
         
@@ -115,7 +114,7 @@ class FRSAlignmentValidator:
             return False
         
         # Load App Description
-        with open(app_desc_path, 'r', encoding='utf-8') as f:
+        with open(app_desc_path, encoding='utf-8') as f:
             self.app_desc_content = f.read()
         
         self.results['evidence']['app_description_path'] = str(app_desc_path)
@@ -174,7 +173,7 @@ class FRSAlignmentValidator:
             return False
         
         # Load FRS
-        with open(frs_file, 'r', encoding='utf-8') as f:
+        with open(frs_file, encoding='utf-8') as f:
             self.frs_content = f.read()
         
         self.results['evidence']['frs_path'] = str(frs_file)

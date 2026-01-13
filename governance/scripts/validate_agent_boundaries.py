@@ -16,7 +16,7 @@ Exit Codes:
 import json
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Optional
 
 
 class AgentBoundaryViolation(Exception):
@@ -51,7 +51,7 @@ class AgentBoundaryValidator:
         self.current_repo = current_repo
         self.violations = []
     
-    def validate_qa_report(self, report_path: Path) -> Dict:
+    def validate_qa_report(self, report_path: Path) -> dict:
         """
         Validate single QA report for agent boundary compliance.
         
@@ -162,7 +162,7 @@ class AgentBoundaryValidator:
             'file': str(report_path)
         }
     
-    def validate_all_reports(self, report_paths: List[Path]) -> Dict:
+    def validate_all_reports(self, report_paths: list[Path]) -> dict:
         """
         Validate all QA reports for agent boundary compliance.
         
@@ -195,7 +195,7 @@ class AgentBoundaryValidator:
             'results': results
         }
     
-    def print_report(self, validation_result: Dict):
+    def print_report(self, validation_result: dict):
         """Print human-readable validation report"""
         print("=" * 70)
         print("AGENT QA BOUNDARY ENFORCEMENT REPORT")
@@ -265,7 +265,7 @@ class AgentBoundaryValidator:
             print("4. Re-run validation")
 
 
-def find_qa_reports(search_paths: List[str]) -> List[Path]:
+def find_qa_reports(search_paths: list[str]) -> list[Path]:
     """
     Find all QA report JSON files in given paths.
     

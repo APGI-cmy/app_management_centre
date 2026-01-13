@@ -29,7 +29,7 @@ class Tier0ActivationValidator:
     """Validates Tier-0 governance runtime activation"""
     
     MANIFEST_PATH = "governance/TIER_0_CANON_MANIFEST.json"
-    EXPECTED_TIER0_COUNT = 14
+    EXPECTED_TIER0_COUNT = 15
     
     def __init__(self, repo_root: str):
         self.repo_root = Path(repo_root)
@@ -273,7 +273,7 @@ class Tier0ActivationValidator:
             return False
     
     def validate_tier0_count(self, tier0_docs: list[dict]) -> bool:
-        """Validate that exactly 12 Tier-0 documents are referenced"""
+        """Validate that exactly 15 Tier-0 documents are referenced"""
         doc_count = len(tier0_docs)
         
         if doc_count != self.EXPECTED_TIER0_COUNT:
@@ -791,14 +791,14 @@ class Tier0ActivationValidator:
             print("✅ ALL TIER-0 ACTIVATION CHECKS PASSED")
             print()
             print("Tier-0 governance runtime activation is VALID.")
-            print("All 14 constitutional documents are properly activated.")
+            print("All 15 constitutional documents are properly activated.")
             print("Branch protection enforcement is declared.")
             print("This PR may proceed to merge (subject to other gates).")
         else:
             print("❌ TIER-0 ACTIVATION FAILED")
             print()
             print("CATASTROPHIC: Tier-0 governance is not properly activated.")
-            print(f"Target: 14/14 Tier-0 documents + branch protection enforcement")
+            print(f"Target: 15/15 Tier-0 documents + branch protection enforcement")
             print(f"Status: INCOMPLETE or INVALID")
             print()
             print("This PR is BLOCKED from merge until all errors are resolved.")

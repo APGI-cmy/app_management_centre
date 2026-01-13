@@ -21,7 +21,6 @@ Returns:
 import json
 import sys
 from pathlib import Path
-from typing import Dict, Tuple
 from datetime import datetime
 import subprocess
 
@@ -45,7 +44,7 @@ class GovernanceGate:
             'warnings': []
         }
         
-    def validate(self) -> Tuple[bool, Dict]:
+    def validate(self) -> tuple[bool, dict]:
         """Run all governance validations"""
         print("="*70)
         print(f"🛡️  MATURION GOVERNANCE GATE - {self.app_name}")
@@ -102,7 +101,7 @@ class GovernanceGate:
         
         return self.results['decision'] == 'AUTHORIZED', self.results
     
-    def _run_validation(self, script_name: str, *args) -> Dict:
+    def _run_validation(self, script_name: str, *args) -> dict:
         """Run a validation script and capture results"""
         script_path = self.repo_root / "governance" / "scripts" / script_name
         

@@ -22,7 +22,6 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
 from datetime import datetime
 
 
@@ -43,7 +42,7 @@ class ArchitectureCompilationValidator:
             'evidence': {}
         }
         
-    def validate(self) -> Tuple[bool, Dict]:
+    def validate(self) -> tuple[bool, dict]:
         """Run all validation checks"""
         print(f"🔍 Validating Architecture Compilation for {self.app_name}...\n")
         
@@ -151,7 +150,7 @@ class ArchitectureCompilationValidator:
         
         # Load and parse architecture index
         try:
-            with open(arch_index_path, 'r') as f:
+            with open(arch_index_path) as f:
                 arch_index = json.load(f)
             
             # Check completeness score
@@ -210,7 +209,7 @@ class ArchitectureCompilationValidator:
                 continue
             
             for arch_file in arch_dir.rglob("*.md"):
-                with open(arch_file, 'r', encoding='utf-8', errors='ignore') as f:
+                with open(arch_file, encoding='utf-8', errors='ignore') as f:
                     content = f.read()
                     for pattern in placeholder_patterns:
                         if re.search(pattern, content, re.IGNORECASE):
@@ -252,7 +251,7 @@ class ArchitectureCompilationValidator:
             return False
         
         try:
-            with open(arch_index_path, 'r') as f:
+            with open(arch_index_path) as f:
                 arch_index = json.load(f)
             
             # Check for version markers

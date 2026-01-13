@@ -24,6 +24,72 @@
 -
 -
 
+## Pre-Handover Execution Evidence (Required for ALL PRs)
+
+**Agent Test Execution Protocol v1.0.0 Compliance**  
+**Reference**: `governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md`
+
+### CI-Confirmatory Attestation (MANDATORY)
+
+- [ ] All tests executed locally BEFORE creating this PR
+- [ ] All exit codes = 0 (SUCCESS)
+- [ ] Zero test failures
+- [ ] Zero warnings
+- [ ] BL-026 deprecation check passed (ruff check --select UP)
+- [ ] PREHANDOVER_PROOF document created
+- [ ] CI is confirmation only (not diagnostic)
+
+**Agent Attestation**: I attest that all checks executed locally and verified GREEN on commit [hash]
+
+### Local Execution Summary
+
+**Commit Hash**: [insert commit hash]  
+**Execution Date**: [YYYY-MM-DD HH:MM:SS]
+
+| Check Type | Command | Exit Code | Status |
+|------------|---------|-----------|--------|
+| Unit Tests | `pytest tests/ -v` | 0 | ✅ PASS |
+| Deprecation (BL-026) | `ruff check --select UP .` | 0 | ✅ PASS |
+| Linting | `ruff check .` | 0 | ✅ PASS |
+| Format Check | `ruff format --check .` | 0 | ✅ PASS |
+
+**Test Summary**: X passed, 0 failed, 0 warnings in X.Xs
+
+### Execution Evidence
+
+```bash
+# Commands executed locally with exit code = 0:
+$ pytest tests/ -v --strict-warnings
+================================ test session starts =================================
+...
+================================ X passed in X.Xs ==================================
+
+$ ruff check --select UP .
+All checks passed!
+
+$ ruff check .
+All checks passed!
+```
+
+**Evidence Location**: [Link to PREHANDOVER_PROOF document if separate file, or evidence pasted above]
+
+### BL-026 Deprecation Validation (MANDATORY)
+
+- [ ] No deprecated Python APIs detected
+- [ ] `ruff check --select UP .` returns zero violations
+- [ ] All datetime.utcnow() replaced with datetime.now(timezone.utc)
+- [ ] All typing generics updated to built-in types (Python 3.9+)
+
+**Deprecation Check Output**:
+```bash
+$ ruff check --select UP .
+All checks passed!
+```
+
+**If any box unchecked: Close PR and execute locally first.**
+
+---
+
 ## Testing
 
 <!-- Describe the testing you've performed -->

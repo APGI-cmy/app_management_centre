@@ -74,7 +74,8 @@ governance:
     - {id: design-freeze, path: governance/policies/design-freeze-rule.md, role: architecture-stability}
     - {id: test-removal-governance, path: governance/policies/TEST_REMOVAL_GOVERNANCE_GATE_LOCAL.md, role: test-removal-compliance}
     - {id: warning-handling, path: governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md, role: warning-enforcement}
-    - {id: deprecation-detection-gate, path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md, role: deprecation-enforcement}
+    - {id: deprecation-detection-gate, path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md, role: deprecation-enforcement, summary: "BL-026/T0-015 enforcement"}
+    - {id: test-execution-protocol, path: governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md, role: test-execution-enforcement, version: 1.0.0, enforcement: MANDATORY, attestation_required: true, summary: "CI is confirmatory not diagnostic"}
     - {id: code-checking, path: governance/specs/FM_AI_ESCALATION_AND_CAPABILITY_SCALING_SPEC.md, role: quality-verification}
     - {id: ibwr-awareness, path: governance/specs/IN_BETWEEN_WAVE_RECONCILIATION_SPEC.md, role: wave-coordination}
     - {id: bl-018-019-awareness, path: governance/specs/QA_CATALOG_ALIGNMENT_GATE_SPEC.md, role: qa-foundation}
@@ -109,6 +110,70 @@ Implement module integrations, external service connections, and data flows from
 **Capabilities**: Integration development, API clients, data transformation, mappers, serializers, validators  
 **Forbidden**: ❌ Frontend UI | ❌ Database schema | ❌ Core business logic | ❌ Governance mods  
 **Permissions**: Read: foreman/**, architecture/**, governance/** | Write: apps/*/integrations/**, integration tests
+
+## Pre-Handover Execution Protocol (MANDATORY v2.0.0+)
+
+**Authority**: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md  
+**Compliance Deadline**: 2026-02-11
+
+**Before creating ANY PR or claiming work "COMPLETE":**
+
+### Required Steps
+
+1. **Identify all execution artifacts**
+   - List all scripts, code files, tests created/modified
+
+2. **Execute ALL checks locally** in your build environment:
+   ```bash
+   # Deprecation check
+   ruff check --select UP foreman/integrations/
+   
+   # Test suite
+   pytest tests/integrations/ -v
+   
+   # Any domain-specific validators
+   ```
+
+3. **Verify ALL exit codes = 0 (SUCCESS)**
+   - If ANY check fails: FIX before proceeding
+   - Do NOT create PR with failing checks
+
+4. **Capture evidence**:
+   - Command outputs
+   - Exit codes
+   - Before/after states (if applicable)
+
+5. **Create PREHANDOVER_PROOF document**:
+   - Document all local execution
+   - Include evidence
+   - Attest: "All checks GREEN locally"
+
+6. **Create PR only after all checks pass**
+
+### Hard Rule
+
+**"CI is confirmation, NOT diagnostic."**
+
+CI validates what you already verified locally. If CI fails, it means you didn't execute checks locally. This is a protocol violation.
+
+### Consequences
+
+1. **1st violation**: PR rejected, you must remediate
+2. **2nd violation**: Contract review with FM
+3. **3rd violation**: Builder replacement
+
+### Checklist
+
+Before EVERY handover:
+
+- [ ] All execution artifacts identified
+- [ ] All checks executed locally (not just in CI)
+- [ ] All exit codes = 0
+- [ ] Evidence captured
+- [ ] PREHANDOVER_PROOF created
+- [ ] PR submitted with GREEN local state
+
+**If ANY item unchecked: DO NOT HAND OVER.**
 
 ## One-Time Build | Zero Test Debt | Immediate Remedy
 
