@@ -272,38 +272,6 @@ class GovernanceDashboardV2:
                     for handler in self.refresh_handlers:
                         handler(f"realtime_{update_type}")
         
-    def _handle_realtime_update(self, update: dict[str, Any]):
-        """
-        Handle incoming realtime update.
-        
-        Args:
-            update: Update message from realtime connection
-        """
-        update_type = update.get("type")
-        
-        if update_type == "status_update":
-            domain = update.get("domain")
-            new_status = update.get("new_status", update.get("status"))
-            timestamp_str = update.get("timestamp")
-            
-            if domain and new_status:
-                # Parse timestamp for staleness check
-                update_timestamp = self._parse_timestamp(timestamp_str)
-                last_timestamp = self.update_timestamps.get(domain)
-                
-                # Apply update only if newer
-                if last_timestamp is None or update_timestamp > last_timestamp:
-                    self.domain_statuses[domain] = {
-                        "status": new_status,
-                        "organisation_id": self.organisation_id,
-                        "timestamp": update_timestamp
-                    }
-                    self.update_timestamps[domain] = update_timestamp
-                    
-                    # Trigger refresh
-                    for handler in self.refresh_handlers:
-                        handler(f"realtime_{update_type}")
-        
         elif update_type == "domain_added":
             domain = update.get("domain")
             status = update.get("status", "UNKNOWN")
