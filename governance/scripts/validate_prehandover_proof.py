@@ -25,6 +25,63 @@ def check_section_exists(content: str, section_name: str) -> bool:
     return bool(re.search(pattern, content, re.IGNORECASE))
 
 
+def check_exit_codes(content: str) -> tuple[bool, list[str]]:
+    """Check if exit codes are documented and all are 0."""
+    errors = []
+    warnings = []
+    
+    # Look for exit code patterns
+    exit_code_patterns = [
+        r"exit code[:\s]+(\d+)",
+        r"Exit Code[:\s]+(\d+)",
+        r"exitcode[:\s]+(\d+)",
+        r"return code[:\s]+(\d+)",
+    ]
+    
+    import re
+    found_exit_codes = []
+    
+    for pattern in exit_code_patterns:
+        matches = re.finditer(pattern, content, re.IGNORECASE)
+        for match in matches:
+            code = int(match.group(1))
+            found_exit_codes.append(code)
+    
+    if not found_exit_codes:
+        warnings.append("No exit codes documented (Step 3 may be incomplete)")
+    else:
+        # Check if all exit codes are 0
+        non_zero_codes = [code for code in found_exit_codes if code != 0]
+        if non_zero_codes:
+            errors.append(f"Non-zero exit codes found: {non_zero_codes} (All must be 0)")
+    
+    return len(errors) == 0, errors + warnings
+
+
+def check_evidence_completeness(content: str) -> tuple[bool, list[str]]:
+    """Check if evidence collection is complete (Step 4)."""
+    errors = []
+    
+    # Required evidence elements
+    evidence_markers = [
+        ("execution logs", "Execution logs or command outputs"),
+        ("timestamp", "Timestamps for execution"),
+        ("output", "Command outputs or results"),
+    ]
+    
+    missing_evidence = []
+    for marker, description in evidence_markers:
+        if marker not in content.lower():
+            missing_evidence.append(description)
+    
+    if missing_evidence:
+        errors.append(
+            f"Evidence collection (Step 4) incomplete. Missing: {', '.join(missing_evidence)}"
+        )
+    
+    return len(errors) == 0, errors
+
+
 def check_category_0_complete(content: str) -> tuple[bool, list[str]]:
     """Check if Category 0 (7-step protocol) is complete."""
     errors = []
@@ -58,6 +115,16 @@ def check_category_0_complete(content: str) -> tuple[bool, list[str]]:
     
     if "CI is confirmation, NOT diagnostic" not in content:
         errors.append("Missing hard rule acknowledgment: 'CI is confirmation, NOT diagnostic'")
+    
+    # Check exit codes (Step 3)
+    exit_codes_valid, exit_code_errors = check_exit_codes(content)
+    if not exit_codes_valid:
+        errors.extend(exit_code_errors)
+    
+    # Check evidence completeness (Step 4)
+    evidence_valid, evidence_errors = check_evidence_completeness(content)
+    if not evidence_valid:
+        errors.extend(evidence_errors)
     
     return len(errors) == 0, errors
 
@@ -139,29 +206,85 @@ def validate_prehandover_proof(file_path: Path) -> tuple[bool, list[str]]:
 
 def main():
     """Main entry point."""
-    if len(sys.argv) != 2:
-        print("Usage: validate_prehandover_proof.py <path-to-proof-file>")
-        print("Example: validate_prehandover_proof.py PREHANDOVER_PROOF_PR_123.md")
-        sys.exit(2)
+    import argparse
     
-    file_path = Path(sys.argv[1])
+    parser = argparse.ArgumentParser(
+        description="Validate PREHANDOVER_PROOF documents",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+    %(prog)s PREHANDOVER_PROOF_PR_123.md
+    %(prog)s --verbose PREHANDOVER_PROOF.md
+    %(prog)s --json PREHANDOVER_PROOF.md
+
+Exit Codes:
+    0 - Validation passed
+    1 - Validation failed
+    2 - File not found or invalid
+        """
+    )
     
-    print(f"Validating PREHANDOVER_PROOF: {file_path}")
-    print("-" * 60)
+    parser.add_argument(
+        "file",
+        help="Path to PREHANDOVER_PROOF file to validate"
+    )
+    parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Show detailed validation information"
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Output results in JSON format"
+    )
+    
+    args = parser.parse_args()
+    file_path = Path(args.file)
+    
+    if not args.json:
+        print(f"Validating PREHANDOVER_PROOF: {file_path}")
+        print("-" * 60)
     
     is_valid, errors = validate_prehandover_proof(file_path)
     
-    if is_valid:
+    if args.json:
+        import json
+        result = {
+            "file": str(file_path),
+            "valid": is_valid,
+            "errors": errors,
+            "error_count": len(errors)
+        }
+        print(json.dumps(result, indent=2))
+    elif is_valid:
         print("✅ VALIDATION PASSED")
         print("\nPREHANDOVER_PROOF is complete and valid.")
-        sys.exit(0)
+        if args.verbose:
+            print("\nAll required sections present:")
+            print("  ✓ Metadata (Agent, PR, Branch, Date, Commit, Protocol Version)")
+            print("  ✓ Category 0: Execution Bootstrap Protocol (7 steps)")
+            print("  ✓ Agent Attestation")
+            print("  ✓ Exit codes validated (all 0)")
+            print("  ✓ Evidence collection complete")
     else:
         print("❌ VALIDATION FAILED")
-        print("\nErrors found:")
+        print(f"\nErrors found ({len(errors)}):")
         for i, error in enumerate(errors, 1):
             print(f"  {i}. {error}")
         print("\nPlease fix these issues before handover.")
-        sys.exit(1)
+        if args.verbose:
+            print("\nValidation checklist:")
+            print("  • Ensure all 7 steps of Category 0 are documented")
+            print("  • All exit codes must be 0 (success)")
+            print("  • Evidence must include: logs, timestamps, outputs")
+            print("  • Required attestations: 'All checks GREEN', 'Handover authorized'")
+            print("  • Hard rule: 'CI is confirmation, NOT diagnostic'")
+    
+    if not args.json:
+        print()
+    
+    sys.exit(0 if is_valid else 1)
 
 
 if __name__ == "__main__":
