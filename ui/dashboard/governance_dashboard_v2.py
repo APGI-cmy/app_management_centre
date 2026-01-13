@@ -9,7 +9,8 @@ Tenant Isolation: All operations scoped by organisation_id
 Authority: WAVE_3_IMPLEMENTATION_PLAN.md, BL-024, BL-026
 """
 
-from typing import Dict, Any, List, Optional, Callable
+from typing import Any, Optional
+from collections.abc import Callable
 from datetime import datetime, UTC, timedelta
 
 
@@ -25,7 +26,7 @@ class GovernanceDashboardV2:
     - Tenant-isolated operations
     """
     
-    def __init__(self, context: Dict[str, Any], connection=None):
+    def __init__(self, context: dict[str, Any], connection=None):
         """
         Initialize Governance Dashboard V2.
         
@@ -38,25 +39,25 @@ class GovernanceDashboardV2:
         self.connection = connection
         
         # Domain status tracking
-        self.domain_statuses: Dict[str, Dict[str, Any]] = {}
+        self.domain_statuses: dict[str, dict[str, Any]] = {}
         
         # Evidence linking
-        self.evidence_links: Dict[str, Dict[str, Dict[str, Any]]] = {}
+        self.evidence_links: dict[str, dict[str, dict[str, Any]]] = {}
         
         # Refresh handlers
-        self.refresh_handlers: List[Callable] = []
+        self.refresh_handlers: list[Callable] = []
         
         # Update timestamps for staleness detection
-        self.update_timestamps: Dict[str, datetime] = {}
+        self.update_timestamps: dict[str, datetime] = {}
         
         # Domain registry
-        self.domains: List[str] = []
+        self.domains: list[str] = []
         
         # Register for realtime updates if connection provided
         if connection:
             connection.on_update(self._handle_realtime_update)
     
-    def set_domain_status(self, domain: str, status: str, details: Optional[Dict[str, Any]] = None):
+    def set_domain_status(self, domain: str, status: str, details: dict[str, Any] | None = None):
         """
         Set status for a governance domain.
         
@@ -77,7 +78,7 @@ class GovernanceDashboardV2:
         
         self.update_timestamps[domain] = datetime.now(UTC)
     
-    def get_domain_status(self, domain: str) -> Dict[str, Any]:
+    def get_domain_status(self, domain: str) -> dict[str, Any]:
         """
         Get status for a governance domain.
         
@@ -95,7 +96,7 @@ class GovernanceDashboardV2:
             "organisation_id": self.organisation_id
         }
     
-    def get_all_domains(self) -> List[str]:
+    def get_all_domains(self) -> list[str]:
         """
         Get list of all registered domains.
         
@@ -104,7 +105,7 @@ class GovernanceDashboardV2:
         """
         return self.domains.copy()
     
-    def add_evidence_link(self, domain: str, evidence_type: str, evidence_path: str, metadata: Optional[Dict[str, Any]] = None):
+    def add_evidence_link(self, domain: str, evidence_type: str, evidence_path: str, metadata: dict[str, Any] | None = None):
         """
         Add evidence link for a domain.
         
@@ -125,7 +126,7 @@ class GovernanceDashboardV2:
             **({"metadata": metadata} if metadata else {})
         }
     
-    def get_evidence_link(self, domain: str) -> Optional[Dict[str, Any]]:
+    def get_evidence_link(self, domain: str) -> dict[str, Any] | None:
         """
         Get primary evidence link for a domain.
         
@@ -144,7 +145,7 @@ class GovernanceDashboardV2:
         
         return None
     
-    def get_evidence_links(self, domain: str) -> Dict[str, Dict[str, Any]]:
+    def get_evidence_links(self, domain: str) -> dict[str, dict[str, Any]]:
         """
         Get all evidence links for a domain.
         
@@ -156,7 +157,7 @@ class GovernanceDashboardV2:
         """
         return self.evidence_links.get(domain, {}).copy()
     
-    def create_time_filter(self, filter_type: str, start_time: Optional[datetime] = None, end_time: Optional[datetime] = None) -> Dict[str, Any]:
+    def create_time_filter(self, filter_type: str, start_time: datetime | None = None, end_time: datetime | None = None) -> dict[str, Any]:
         """
         Create time-based filter configuration.
         
@@ -191,7 +192,7 @@ class GovernanceDashboardV2:
             "end_time": end_time
         }
     
-    def apply_time_filter(self, data: List[Dict[str, Any]], time_filter: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def apply_time_filter(self, data: list[dict[str, Any]], time_filter: dict[str, Any]) -> list[dict[str, Any]]:
         """
         Apply time filter to data.
         
@@ -239,7 +240,7 @@ class GovernanceDashboardV2:
         """
         self.refresh_handlers.append(handler)
     
-    def _handle_realtime_update(self, update: Dict[str, Any]):
+    def _handle_realtime_update(self, update: dict[str, Any]):
         """
         Handle incoming realtime update.
         
@@ -271,7 +272,7 @@ class GovernanceDashboardV2:
                     for handler in self.refresh_handlers:
                         handler(f"realtime_{update_type}")
         
-    def _handle_realtime_update(self, update: Dict[str, Any]):
+    def _handle_realtime_update(self, update: dict[str, Any]):
         """
         Handle incoming realtime update.
         
@@ -326,7 +327,7 @@ class GovernanceDashboardV2:
                 for handler in self.refresh_handlers:
                     handler(f"realtime_{update_type}")
     
-    def _parse_timestamp(self, timestamp_str: Optional[str]) -> datetime:
+    def _parse_timestamp(self, timestamp_str: str | None) -> datetime:
         """
         Parse ISO timestamp string.
         
