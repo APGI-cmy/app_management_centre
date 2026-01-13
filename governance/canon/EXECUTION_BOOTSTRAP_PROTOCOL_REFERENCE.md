@@ -36,9 +36,11 @@ This document provides a reference to the **Execution Bootstrap Protocol** from 
 ### Supporting Templates
 
 3. **PREHANDOVER_PROOF_TEMPLATE.md**
-   - Path: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
+   - Path (Local): `.github/agent-templates/PREHANDOVER_PROOF_TEMPLATE.md`
+   - Path (Canonical): `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
    - Role: Standard template for prehandover proof documentation
-   - Summary: Evidence format, execution logs, attestation requirements
+   - Summary: Evidence format, execution logs, attestation requirements, governance artifacts (v2.1.0+), CST validation (v2.1.0+)
+   - Version: 2.1.0 (Enhanced with governance artifacts and CST validation)
    - Status: MANDATORY for all execution-related PRs
 
 4. **EXECUTION_BOOTSTRAP_PROTOCOL_QUARTERLY_MONITORING_REPORT.template.md**
@@ -79,6 +81,7 @@ All agents (FM and Builders) **MUST** execute this 7-step verification before ha
    - Collect execution logs, exit codes, outputs
    - Format evidence according to PREHANDOVER_PROOF_TEMPLATE
    - Link to all execution evidence
+   - **v2.1.0+**: Complete governance artifacts (scan, risk, change, completion) OR provide skip rationale
 
 5. **Step 5: Failure Remediation**
    - If failures detected: FIX before handover
@@ -94,6 +97,7 @@ All agents (FM and Builders) **MUST** execute this 7-step verification before ha
    - Create PREHANDOVER_PROOF document
    - Include: "Handover authorized, all checks green"
    - Link to evidence and execution logs
+   - **v2.1.0+**: Complete CST validation section (if contract milestone) OR provide skip rationale
 
 **HARD RULE**: CI is confirmation, NOT diagnostic. No handover relying on CI to discover failures.
 
@@ -209,7 +213,8 @@ This protocol is documented in `GOVERNANCE_ALIGNMENT.md` as:
 
 - **Canonical Protocol**: maturion-foreman-governance/governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md
 - **Monitoring Spec**: maturion-foreman-governance/governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_MONITORING_AND_ENFORCEMENT.md
-- **Template**: maturion-foreman-governance/governance/templates/PREHANDOVER_PROOF_TEMPLATE.md
+- **Template (Canonical)**: maturion-foreman-governance/governance/templates/PREHANDOVER_PROOF_TEMPLATE.md v2.1.0
+- **Template (Local)**: .github/agent-templates/PREHANDOVER_PROOF_TEMPLATE.md v2.1.0
 - **Governance Alignment**: GOVERNANCE_ALIGNMENT.md (this repository)
 - **Issue Tracking**: GitHub Issue #[NUMBER] - Layer Down: Full Execution Bootstrap Protocol Governance Rollout (2026)
 
