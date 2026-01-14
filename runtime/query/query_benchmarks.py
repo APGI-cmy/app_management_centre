@@ -10,7 +10,8 @@ Tenant Isolation: All operations scoped by organisation_id
 
 import time
 import statistics
-from typing import Any, Callable, List, Dict
+from typing import Any
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime, UTC
 
@@ -20,7 +21,7 @@ class PerformanceBenchmark:
     """Performance benchmark result"""
     operation_name: str
     organisation_id: str
-    execution_times: List[float] = field(default_factory=list)
+    execution_times: list[float] = field(default_factory=list)
     timestamp: datetime = field(default_factory=lambda: datetime.now(UTC))
     
     def add_execution(self, exec_time: float) -> None:
@@ -80,7 +81,7 @@ class PerformanceBenchmark:
         """Check if P99 meets target (default 230ms)"""
         return self.get_p99() < target
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for reporting"""
         return {
             'operation_name': self.operation_name,
@@ -111,7 +112,7 @@ class QueryBenchmarkRunner:
     
     def __init__(self):
         """Initialize benchmark runner"""
-        self._benchmarks: Dict[str, PerformanceBenchmark] = {}
+        self._benchmarks: dict[str, PerformanceBenchmark] = {}
         self._active = True
     
     def benchmark_query(self, 
@@ -161,11 +162,11 @@ class QueryBenchmarkRunner:
         key = f"{organisation_id}:{operation_name}"
         return self._benchmarks.get(key)
     
-    def get_all_benchmarks(self) -> Dict[str, PerformanceBenchmark]:
+    def get_all_benchmarks(self) -> dict[str, PerformanceBenchmark]:
         """Get all stored benchmarks"""
         return self._benchmarks.copy()
     
-    def generate_report(self, organisation_id: str | None = None) -> Dict[str, Any]:
+    def generate_report(self, organisation_id: str | None = None) -> dict[str, Any]:
         """
         Generate performance report
         
@@ -217,7 +218,7 @@ class PerformanceValidator:
     CACHE_HIT_RATE_TARGET = 0.80  # 80%
     
     @staticmethod
-    def validate_p95_latency(latency: float) -> Dict[str, Any]:
+    def validate_p95_latency(latency: float) -> dict[str, Any]:
         """Validate P95 latency"""
         meets_target = latency < PerformanceValidator.P95_TARGET
         
@@ -231,7 +232,7 @@ class PerformanceValidator:
         }
     
     @staticmethod
-    def validate_p99_latency(latency: float) -> Dict[str, Any]:
+    def validate_p99_latency(latency: float) -> dict[str, Any]:
         """Validate P99 latency"""
         meets_target = latency < PerformanceValidator.P99_TARGET
         
@@ -245,7 +246,7 @@ class PerformanceValidator:
         }
     
     @staticmethod
-    def validate_query_execution(latency: float) -> Dict[str, Any]:
+    def validate_query_execution(latency: float) -> dict[str, Any]:
         """Validate query execution time"""
         meets_target = latency < PerformanceValidator.QUERY_P95_TARGET
         
@@ -259,7 +260,7 @@ class PerformanceValidator:
         }
     
     @staticmethod
-    def validate_cache_hit_rate(hit_rate: float) -> Dict[str, Any]:
+    def validate_cache_hit_rate(hit_rate: float) -> dict[str, Any]:
         """Validate cache hit rate"""
         meets_target = hit_rate >= PerformanceValidator.CACHE_HIT_RATE_TARGET
         
@@ -273,7 +274,7 @@ class PerformanceValidator:
         }
     
     @staticmethod
-    def validate_all(benchmark: PerformanceBenchmark, cache_hit_rate: float | None = None) -> Dict[str, Any]:
+    def validate_all(benchmark: PerformanceBenchmark, cache_hit_rate: float | None = None) -> dict[str, Any]:
         """
         Validate all performance targets
         
