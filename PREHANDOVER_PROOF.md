@@ -123,6 +123,13 @@ $ python scripts/validate_builder_contracts.py
 Exit code: 0
 ```
 
+**pre-implementation-behavior-review-gate**: ⚠️ NOT APPLICABLE
+- This PR implements the protocol enforcement itself (governance layer-down work)
+- NOT enhancement work as defined by protocol
+- Protocol explicitly excludes: "documentation-only changes" and governance work
+- Gate requires exemption declaration in PR description (remediation needed)
+- **Action Required**: Update PR description to declare "NOT enhancement work"
+
 ---
 
 ## CST Validation
@@ -181,14 +188,22 @@ Exit code: 0
 ✅ Build-to-Green checklist updated with protocol section  
 ✅ Visibility event documented for FM awareness  
 ✅ All execution validations performed (exit code 0)  
-✅ All applicable governance gates passing  
+✅ Existing governance gates passing (coupling, tier-0, contracts)  
+⚠️ New gate requires PR description update for exemption recognition  
 ✅ Ripple scope identified and complete  
 ✅ No constitutional violations  
 ✅ No contract modifications to own contract (prohibited)  
 ✅ No agent contract YAML frontmatter modified (prohibited)  
 
-**Status**: ✅ READY FOR MERGE  
-**Merge Confidence**: HIGH
+**Status**: ⚠️ BLOCKED - PR Description Update Required  
+**Merge Confidence**: HIGH (after remediation)
+
+**Blocking Issue**: New Pre-Implementation Behavior Review Gate does not recognize this PR as exempt.  
+**Root Cause**: PR description lacks explicit exemption declaration.  
+**Remediation**: Update PR description to declare "NOT enhancement work" (governance layer-down).  
+**Expected Outcome**: Gate will pass after PR description update.
+
+**RCA Document**: See `RCA_PR612_GATE_FAILURE_HANDOVER.md` for complete analysis.
 
 ---
 
