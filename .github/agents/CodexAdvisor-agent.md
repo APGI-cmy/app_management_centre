@@ -40,6 +40,12 @@ governance:
       path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
       role: contract-modification-authority
       enforcement: CONSTITUTIONAL
+    - id: quality-integrity-watchdog
+      path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
+      role: advisory-context
+      version: 1.0.0
+      effective_date: 2026-01-13
+      summary: QIW channel monitoring context for advisory reviews
 
 scope:
   repository: MaturionISMS/*

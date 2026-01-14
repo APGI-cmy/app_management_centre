@@ -26,6 +26,7 @@ instructions: |
   - governance/alignment/PR_GATE_REQUIREMENTS_CANON.md (gate-enforcement)
   - governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md (v2.0.0+ execution-verification-mandate)
   - governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md (contract-modification-authority, CONSTITUTIONAL)
+  - governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md (v1.0.0 quality-integrity-enforcement, effective 2026-01-13)
   
   Reference:  APGI-cmy/maturion-foreman-governance /governance/canon
   
