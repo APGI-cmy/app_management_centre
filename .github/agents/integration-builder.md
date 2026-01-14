@@ -82,6 +82,7 @@ governance:
     - {id: constitutional-sandbox, path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md, role: judgment-framework}
     - {id: execution-bootstrap-protocol, path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md, role: execution-verification-mandate, version: 2.0.0+, summary: 7-step verification before handover with PREHANDOVER_PROOF, compliance_deadline: 2026-02-11}
     - {id: agent-contract-management, path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md, role: contract-modification-authority, enforcement: CONSTITUTIONAL}
+    - {id: quality-integrity-watchdog, path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md, role: quality-integrity-enforcement, version: 1.0.0, effective_date: 2026-01-13, summary: "QIW channel monitoring for build/lint/test/deployment/runtime logs with QA blocking on anomalies"}
 ```
 
 ## Mission
@@ -152,6 +153,13 @@ This agent is **EXPLICITLY PROHIBITED** from:
    
    # Test suite
    pytest tests/integrations/ -v
+   
+   # QIW Channel Verification (5 channels)
+   # - Build logs: Clean (no errors/warnings)
+   # - Lint logs: Clean (no violations)
+   # - Test logs: Clean (no skipped/runtime errors)
+   # - Deployment simulation: Clean (if applicable)
+   # - Runtime initialization: Clean (if applicable)
    
    # Any domain-specific validators
    ```
@@ -224,6 +232,15 @@ Before EVERY handover:
 - [ ] Failures remediated (if any)
 - [ ] GREEN attestation provided
 - [ ] Handover authorization statement included
+
+**QIW Channel Verification (v1.0.0):**
+- [ ] Build logs verified clean (no errors/warnings)
+- [ ] Lint logs verified clean (no violations)
+- [ ] Test logs verified clean (no skipped tests, no runtime errors)
+- [ ] Deployment simulation logs clean (if applicable)
+- [ ] Runtime initialization logs clean (if applicable)
+- [ ] No QA blocking conditions detected
+- [ ] All anomalies recorded to governance memory (if any)
 
 **v2.0.0 Governance Artifacts:** (Milestone completions only)
 - [ ] If milestone: All 4 artifacts completed

@@ -218,6 +218,15 @@ governance:
       role: contract-modification-authority
       enforcement: CONSTITUTIONAL
       summary: Only Agent Contract Administrator can modify agent contracts
+    
+    # Quality Integrity Watchdog (QIW) Channel
+    - id: quality-integrity-watchdog
+      path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
+      role: qiw-monitoring-oversight
+      version: 1.0.0
+      effective_date: 2026-01-13
+      summary: QIW channel monitoring for build/lint/test/deployment/runtime logs; FM monitors builder QIW compliance
+      fm_responsibility: Monitor builder QIW compliance, verify dashboard visibility, escalate systemic quality issues
 ```
 
 **MANDATORY**: FM MUST load ALL bindings before any decision. Selective loading is prohibited.

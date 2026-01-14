@@ -256,6 +256,72 @@ As Agent Contract Administrator, I MUST monitor and enforce v2.0.0 PREHANDOVER_P
 
 ---
 
+## QIW Channel Integration Monitoring (NEW)
+
+**Authority**: WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md v1.0.0  
+**Effective Date**: 2026-01-13  
+**Compliance Requirement**: ALL builders MUST enforce QIW blocking
+
+### QIW Monitoring Responsibilities
+
+As Agent Contract Administrator, I MUST monitor QIW integration across all builder contracts.
+
+#### 1. QIW Governance Binding Verification
+
+**Check on Every Contract Review:**
+- Builder contracts include QIW governance binding in `governance.bindings`
+- Binding references v1.0.0 explicitly
+- Effective date mentioned: 2026-01-13
+- Summary includes "5 channel monitoring" and "QA blocking on anomalies"
+
+**Violation**: If builder contract missing QIW binding → Immediate update required
+
+#### 2. QIW Pre-Handover Checklist Requirements
+
+**All builders MUST include QIW verification checklist:**
+- Build logs verified clean (no errors/warnings)
+- Lint logs verified clean (no violations)
+- Test logs verified clean (no skipped tests, no runtime errors)
+- Deployment simulation logs clean (if applicable)
+- Runtime initialization logs clean (if applicable)
+- No QA blocking conditions detected
+- All anomalies recorded to governance memory (if any)
+
+**Check**: Builder Pre-Handover checklist includes QIW channel verification section
+
+#### 3. QIW Enforcement Consistency
+
+**All builders MUST enforce:**
+- QIW blocking on critical/error/warning anomalies
+- Zero-warning discipline (QIW extends existing requirement)
+- Governance memory integration (anomalies recorded)
+- Dashboard/API visibility (when available)
+
+**Monitoring**: Verify builders document QIW verification in execution steps
+
+#### 4. QIW Monitoring Workflow
+
+**As-Needed Audits:**
+1. **On Contract Change**: Verify QIW requirements preserved
+2. **On QIW Canonical Update**: Assess ripple to all builder contracts
+3. **On Builder QIW Violations**: Review contract for completeness
+
+**Escalation Triggers:**
+- Builder contract missing QIW binding → Immediate update required
+- Builder contract missing QIW Pre-Handover checklist → Immediate update required
+- Builder contract QIW enforcement unclear → Immediate clarification required
+
+**Builders Under QIW Monitoring:**
+1. api-builder.md ✅ (QIW integrated)
+2. qa-builder.md ✅ (QIW integrated)
+3. ui-builder.md ✅ (QIW integrated)
+4. schema-builder.md ✅ (QIW integrated)
+5. integration-builder.md ✅ (QIW integrated)
+
+**Constitutional Requirement**: All builders MUST enforce QIW blocking per canonical governance. Non-compliance = contract violation.
+
+---
+
 ## Self-Awareness and Continuous Improvement (MANDATORY)
 
 After every job completion, I MUST:  
@@ -337,6 +403,14 @@ governance:
       tier: 0
       status: constitutional
       summary: Pre-handover validation and evidence requirements
+    
+    - id: quality-integrity-watchdog
+      path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
+      role: qiw-monitoring-oversight
+      version: 1.0.0
+      effective_date: 2026-01-13
+      status: canonical
+      summary: QIW channel monitoring across all builders; agent-contract-admin monitors compliance
 
 local: 
   bindings:

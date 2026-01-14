@@ -71,6 +71,16 @@ governance:
       summary: CI is confirmatory, not diagnostic - all tests must be executed locally before PR
       enforcement: MANDATORY
       attestation_required: true
+    
+    # Quality Integrity Watchdog (QIW) Channel
+    - id: quality-integrity-watchdog
+      path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
+      role: quality-integrity-enforcement
+      version: 1.0.0
+      effective_date: 2026-01-13
+      summary: QIW channel monitoring for build/lint/test/deployment/runtime logs with QA blocking on anomalies
+      enforcement: MANDATORY
+      applies_to: all_builders
   
   # Tier-0 Canonical Governance (Constitutional Authority)
   # These 15 documents MUST be loaded and validated before ANY execution
