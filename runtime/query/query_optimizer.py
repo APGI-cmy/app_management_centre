@@ -177,3 +177,47 @@ class QueryOptimizer:
     def get_cache_size(self) -> int:
         """Get number of cached plans"""
         return len(self._plan_cache)
+    
+    def validate_performance_envelope(self, plan: QueryPlan, 
+                                      p95_target: float = 0.180,
+                                      p99_target: float = 0.230) -> dict[str, Any]:
+        """
+        Validate query plan against performance envelope
+        
+        Args:
+            plan: Query plan to validate
+            p95_target: P95 latency target in seconds (default 180ms)
+            p99_target: P99 latency target in seconds (default 230ms)
+        
+        Returns:
+            Validation result with recommendations
+        """
+        # Estimate execution time based on cost
+        # In production, this would use historical data
+        estimated_time = plan.estimated_cost * 0.010  # 10ms per cost unit
+        
+        # Check against targets
+        meets_p95 = estimated_time < p95_target
+        meets_p99 = estimated_time < p99_target
+        
+        # Generate recommendations
+        recommendations = []
+        if not meets_p95:
+            recommendations.append("Consider adding indexes to reduce query cost")
+        if not meets_p99:
+            recommendations.append("Query may need restructuring for P99 target")
+        if plan.estimated_cost > 10.0:
+            recommendations.append("High complexity query - consider simplification")
+        if not plan.indexes_used:
+            recommendations.append("No indexes selected - add relevant indexes")
+        
+        return {
+            'plan_id': plan.plan_id,
+            'estimated_time': estimated_time,
+            'meets_p95_target': meets_p95,
+            'meets_p99_target': meets_p99,
+            'p95_target': p95_target,
+            'p99_target': p99_target,
+            'recommendations': recommendations,
+            'estimated_cost': plan.estimated_cost
+        }
