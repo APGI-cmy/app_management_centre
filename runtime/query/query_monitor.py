@@ -184,6 +184,56 @@ class QueryMonitor:
         """Clear all alerts"""
         self._alerts.clear()
     
+    def get_percentile(self, percentile: float) -> float:
+        """
+        Calculate percentile of query execution times
+        
+        Args:
+            percentile: Percentile to calculate (0.0 to 1.0, e.g., 0.95 for P95)
+        
+        Returns:
+            Percentile value in seconds
+        """
+        if not self._history:
+            return 0.0
+        
+        # Extract execution times from history
+        execution_times = [q['execution_time'] for q in self._history]
+        execution_times.sort()
+        
+        # Calculate percentile index
+        index = int(len(execution_times) * percentile)
+        if index >= len(execution_times):
+            index = len(execution_times) - 1
+        
+        return execution_times[index]
+    
+    def get_p95_latency(self) -> float:
+        """Get P95 latency in seconds"""
+        return self.get_percentile(0.95)
+    
+    def get_p99_latency(self) -> float:
+        """Get P99 latency in seconds"""
+        return self.get_percentile(0.99)
+    
+    def get_performance_report(self) -> dict[str, Any]:
+        """
+        Get comprehensive performance report with percentiles
+        
+        Returns:
+            Performance report with P50, P95, P99 latencies
+        """
+        stats = self.get_statistics()
+        
+        return {
+            **stats,
+            'p50_latency': self.get_percentile(0.50),
+            'p95_latency': self.get_p95_latency(),
+            'p99_latency': self.get_p99_latency(),
+            'p95_target_met': self.get_p95_latency() < 0.180,  # 180ms target
+            'p99_target_met': self.get_p99_latency() < 0.230,  # 230ms target
+        }
+    
     def reset(self) -> None:
         """Reset all monitoring data"""
         self._metrics.clear()
