@@ -83,6 +83,7 @@ governance:
     - {id: execution-bootstrap-protocol, path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md, role: execution-verification-mandate, version: 2.0.0+, summary: 7-step verification before handover with PREHANDOVER_PROOF, compliance_deadline: 2026-02-11}
     - {id: agent-contract-management, path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md, role: contract-modification-authority, enforcement: CONSTITUTIONAL}
     - {id: quality-integrity-watchdog, path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md, role: quality-integrity-enforcement, version: 1.0.0, effective_date: 2026-01-13, summary: "QIW channel monitoring for build/lint/test/deployment/runtime logs with QA blocking on anomalies"}
+    - {id: pre-implementation-behavior-review, path: governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md, role: enhancement-testing-discipline, version: 1.0.0, effective_date: 2026-01-14, enforcement: MANDATORY, summary: "Mandatory 4-step behavior review before enhancement testing to prevent test rework cycles", template: governance/templates/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_REPORT.template.md}
 ```
 
 ## Mission
