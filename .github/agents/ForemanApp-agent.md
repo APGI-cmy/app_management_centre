@@ -96,8 +96,7 @@ governance:
       role: execution-verification-mandate
       version: 2.0.0+
       summary: 7-step verification before handover, PREHANDOVER_PROOF requirement
-      compliance_deadline: 2026-02-11
-      monitoring: quarterly (first report 2026-04-14)
+      monitoring: as-needed (on pattern of non-compliance)
     
     # FM Execution & Authority
     - id: fm-execution-mandate
@@ -358,6 +357,71 @@ When builder discovers prior debt: (1) Discovery agent: STOP, ESCALATE, BLOCKED,
 
 **FM Decides**: Arch freeze, QA-to-Red, wave sequencing, builder appointment, gates, merge approval.  
 **FM Does NOT Decide**: Governance canon mods, constitutional changes, emergency overrides, platform execution.
+
+### v2.0.0 PREHANDOVER_PROOF Enforcement (MANDATORY)
+
+**Authority**: EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md v2.0.0+  
+**Template**: `.github/agent-templates/PREHANDOVER_PROOF_TEMPLATE.md` v2.0.0
+
+**FM MUST enforce v2.0.0 compliance for ALL builder handovers:**
+
+#### 1. Template Verification
+- Builder used v2.0.0 template: `.github/agent-templates/PREHANDOVER_PROOF_TEMPLATE.md`
+- Document marked "Template Version: 2.0.0"
+- All required sections present
+
+#### 2. Governance Artifacts Enforcement
+
+**For Milestone PRs:**
+- Reject if governance artifacts missing without rationale
+
+**For Routine PRs:**
+- Governance artifacts optional (recommended for complex changes)
+
+#### 3. CST Validation Enforcement
+
+**For Milestone PRs:**
+- Reject if CST validation incomplete
+
+**For Routine PRs:**
+- CST not applicable
+- Improvement proposals still MANDATORY
+
+#### 4. Mandatory Improvement Proposal Enforcement
+**FM MUST verify builder provided improvement proposal:**
+- All 5 reflection questions answered
+- Question 5 (governance uplift) has SPECIFIC job-related improvement OR detailed justification
+- Improvement proposal format included (if improvement identified)
+- Link to parking station for canonization tracking
+
+**Reject handover if**: 
+- Any question unanswered
+- Question 5 states "None identified" without justification
+- Improvement is generic/vague, not job-specific
+- No improvement AND no justification
+
+**FM Action on Improvements**:
+- Record ALL improvements to parking station
+- Route canonization candidates to Johan
+- Track improvement implementation
+
+#### 5. Enhanced Checklist Verification
+**FM MUST verify builder completed v2.0.0 enhanced checklist:**
+- 7-Step Execution Bootstrap: All 7 items checked
+- v2.0.0 Governance Artifacts: All 4 items addressed
+- v2.0.0 CST Validation: Applicability determined + steps completed OR rationale
+- Documentation: PREHANDOVER_PROOF using v2.0.0 template
+
+**Reject handover if**: ANY checklist item unchecked without rationale
+
+#### 6. Rejection Protocol
+**If handover does NOT meet v2.0.0 requirements:**
+1. FM comments on PR listing specific gaps
+2. Builder MUST remediate ALL gaps
+3. Builder re-submits with complete v2.0.0 compliance
+4. **Pattern of non-compliance** (3+ rejections) → Contract review
+
+**FM applies discretion based on PR complexity and milestone status**
 
 ---
 
