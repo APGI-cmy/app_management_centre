@@ -15,6 +15,44 @@
 - [ ] Governance/policy update
 - [ ] Test improvement
 - [ ] Refactoring (no functional changes)
+- [ ] Enhancement (feature enhancement, performance optimization, API change, refactoring with behavior impact)
+
+## Pre-Implementation Behavior Review (MANDATORY for Enhancement Work)
+
+**Authority**: `governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md` v1.0.0
+
+### Enhancement Work Identification
+
+**Is this PR enhancement work?** (Select one)
+
+- [ ] ✅ YES - This PR enhances existing functionality (feature enhancement, performance optimization, behavior modification, API change, schema enhancement, UI/UX improvement, refactoring with behavior impact)
+- [ ] ❌ NO - This PR is net-new feature OR bug fix OR documentation only OR mechanical refactoring with no behavior change
+- [ ] ⚠️ EXEMPT - Exemption granted by FM (provide exemption reference)
+
+### If YES - Pre-Implementation Behavior Review Report Required
+
+**Compliance Status**:
+- [ ] Pre-Implementation Behavior Review Report completed
+- [ ] All 4 steps documented with evidence (Implementation Review, Current Behavior, Enhancement Delta, Test Design)
+- [ ] Behavior specifications use GIVEN/WHEN/THEN format
+- [ ] PRESERVE tests run against current implementation and pass
+- [ ] Enhancement delta explicitly identifies preserved/changed/new behaviors
+- [ ] Risk assessment completed for all behavior changes
+- [ ] Report reviewed and approved by FM/Senior Builder
+
+**Report Location**: [Path to PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_REPORT.md]
+
+**Template**: `governance/templates/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_REPORT.template.md`
+
+**4-Step Process Summary**:
+1. ✅ Current implementation reviewed in detail
+2. ✅ Actual current behavior documented and verified
+3. ✅ Enhancement delta identified (preserved/changed/new)
+4. ✅ Tests designed validating all behavior categories
+
+**If enhancement work without completed review**: PR will be REJECTED. Complete protocol before submission.
+
+---
 
 ## Changes Made
 

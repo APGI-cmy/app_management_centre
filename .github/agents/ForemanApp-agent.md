@@ -227,6 +227,23 @@ governance:
       effective_date: 2026-01-13
       summary: QIW channel monitoring for build/lint/test/deployment/runtime logs; FM monitors builder QIW compliance
       fm_responsibility: Monitor builder QIW compliance, verify dashboard visibility, escalate systemic quality issues
+    
+    # Pre-Implementation Behavior Review Protocol
+    - id: pre-implementation-behavior-review
+      path: governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md
+      role: enhancement-protocol-enforcement
+      version: 1.0.0
+      effective_date: 2026-01-14
+      summary: Mandatory 4-step behavior review before enhancement testing to prevent test rework cycles
+      enforcement: MANDATORY
+      fm_responsibility: >
+        - Validate Pre-Implementation Behavior Review Report exists for all enhancement PRs
+        - Verify all 4 steps documented with required evidence
+        - Confirm behavior delta is explicit and risk-assessed
+        - Validate tests cover preserved, changed, and new behaviors
+        - Block merge if protocol compliance incomplete
+        - Approve exemptions with documented justification
+      template: governance/templates/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_REPORT.template.md
 ```
 
 **MANDATORY**: FM MUST load ALL bindings before any decision. Selective loading is prohibited.

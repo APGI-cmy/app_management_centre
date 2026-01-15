@@ -10,6 +10,28 @@
 
 Before submitting your PR, verify ALL of the following:
 
+### Pre-Implementation Behavior Review (MANDATORY for Enhancement Work)
+
+- [ ] **Enhancement work identification completed**
+  - Determined if work is enhancement (vs net-new, bug fix, or documentation)
+  - Enhancement includes: feature enhancements, performance optimization, behavior modifications, API changes, schema enhancements, UI/UX improvements, refactoring with behavior impact
+
+- [ ] **Pre-Implementation Behavior Review Protocol completed** (if enhancement work)
+  - Step 1: Reviewed current implementation in detail
+  - Step 2: Documented actual current behavior (GIVEN/WHEN/THEN)
+  - Step 3: Identified enhancement delta (preserved/changed/new behaviors)
+  - Step 4: Designed tests validating all behavior categories
+  - Created Pre-Implementation Behavior Review Report
+  - PRESERVE tests run against current implementation and pass
+  - Report reviewed and approved by FM/Senior Builder
+  - **Template**: `governance/templates/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_REPORT.template.md`
+  - **Authority**: `governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md`
+
+- [ ] **Exemption obtained** (if enhancement work but protocol not applicable)
+  - Documented why protocol not applicable
+  - Obtained explicit FM exemption in writing
+  - Documented exemption rationale
+
 ### QA-to-Red Tests Now Pass
 
 - [ ] **All QA-to-Red tests identified for this task now pass**

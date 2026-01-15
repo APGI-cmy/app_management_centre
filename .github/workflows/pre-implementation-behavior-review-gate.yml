@@ -1,0 +1,259 @@
+name: Pre-Implementation Behavior Review Gate
+
+# CI CLASSIFICATION: Hard Gate (Enhancement PRs Only)
+# Purpose: Validates Pre-Implementation Behavior Review Protocol compliance for enhancement work
+# Authority: governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md v1.0.0
+# Failure Semantics:
+#   - Enhancement PR without review report → Block merge
+#   - Incomplete review report → Block merge
+#   - Non-enhancement PR → Skip validation (success)
+#   - Exemption granted → Skip validation (success)
+# Timeout: 5 minutes (documentation validation only)
+# Applicability: All Builder PRs with enhancement work
+# Effective Date: 2026-01-14
+# See: .github/CI_CLASSIFICATION.md
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+# Explicit, least-privilege permissions
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate-pre-implementation-review:
+    name: Validate Pre-Implementation Behavior Review
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Detect Enhancement Work
+        id: detect-enhancement
+        run: |
+          echo "🔍 Detecting PR type for Pre-Implementation Behavior Review requirement..."
+          
+          PR_BODY="${{ github.event.pull_request.body }}"
+          
+          # Check if PR explicitly identifies as enhancement work
+          if echo "$PR_BODY" | grep -q "✅ YES - This PR enhances existing functionality"; then
+            echo "enhancement=true" >> $GITHUB_OUTPUT
+            echo "✅ Enhancement work detected"
+          elif echo "$PR_BODY" | grep -q "❌ NO - This PR is net-new feature OR bug fix"; then
+            echo "enhancement=false" >> $GITHUB_OUTPUT
+            echo "⊘ Not enhancement work - protocol not required"
+          elif echo "$PR_BODY" | grep -q "⚠️ EXEMPT - Exemption granted by FM"; then
+            echo "enhancement=exempt" >> $GITHUB_OUTPUT
+            echo "⚠️ Exemption granted - protocol not required"
+          else
+            # Default: check PR title and description for enhancement keywords
+            ENHANCEMENT_KEYWORDS="enhance|optimization|optimize|performance|refactor.*behavior|API change|schema enhancement"
+            
+            if echo "$PR_BODY" | grep -Eiq "$ENHANCEMENT_KEYWORDS"; then
+              echo "enhancement=true" >> $GITHUB_OUTPUT
+              echo "⚠️ Enhancement keywords detected - assuming enhancement work"
+            else
+              echo "enhancement=false" >> $GITHUB_OUTPUT
+              echo "⊘ No enhancement indicators - protocol not required"
+            fi
+          fi
+      
+      - name: Check for Review Report
+        id: check-report
+        if: steps.detect-enhancement.outputs.enhancement == 'true'
+        run: |
+          echo "🔍 Checking for Pre-Implementation Behavior Review Report..."
+          
+          # Look for review report file
+          REPORT_FILES=$(find . -name "*BEHAVIOR_REVIEW*.md" -o -name "*PRE_IMPLEMENTATION*.md" | grep -v template | grep -v "governance/templates" || true)
+          
+          if [ -z "$REPORT_FILES" ]; then
+            echo "found=false" >> $GITHUB_OUTPUT
+            echo "❌ No Pre-Implementation Behavior Review Report found"
+          else
+            echo "found=true" >> $GITHUB_OUTPUT
+            echo "report_path=$REPORT_FILES" >> $GITHUB_OUTPUT
+            echo "✅ Review report found: $REPORT_FILES"
+          fi
+      
+      - name: Validate Review Report Completeness
+        id: validate-report
+        if: steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
+        run: |
+          echo "🔍 Validating review report completeness..."
+          
+          REPORT_PATH="${{ steps.check-report.outputs.report_path }}"
+          
+          # Required sections
+          REQUIRED_SECTIONS=(
+            "Step 1 Evidence: Implementation Review"
+            "Step 2 Evidence: Current Behavior Documentation"
+            "Step 3 Evidence: Enhancement Delta"
+            "Step 4 Evidence: Test Design"
+            "Builder Attestation"
+          )
+          
+          MISSING_SECTIONS=()
+          
+          for section in "${REQUIRED_SECTIONS[@]}"; do
+            if ! grep -q "$section" "$REPORT_PATH"; then
+              MISSING_SECTIONS+=("$section")
+            fi
+          done
+          
+          if [ ${#MISSING_SECTIONS[@]} -eq 0 ]; then
+            echo "complete=true" >> $GITHUB_OUTPUT
+            echo "✅ All required sections present"
+          else
+            echo "complete=false" >> $GITHUB_OUTPUT
+            echo "missing_sections=${MISSING_SECTIONS[*]}" >> $GITHUB_OUTPUT
+            echo "❌ Missing required sections: ${MISSING_SECTIONS[*]}"
+          fi
+      
+      - name: Validate PRESERVE Test Execution
+        id: validate-preserve-tests
+        if: steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
+        run: |
+          echo "🔍 Validating PRESERVE test execution evidence..."
+          
+          REPORT_PATH="${{ steps.check-report.outputs.report_path }}"
+          
+          # Check for pre-enhancement test run results
+          if grep -q "Pre-Enhancement Test Run Results" "$REPORT_PATH"; then
+            if grep -q "Test Run Status.*PASS\|✅ PASS" "$REPORT_PATH"; then
+              echo "preserve_tests_executed=true" >> $GITHUB_OUTPUT
+              echo "✅ PRESERVE tests executed and passing"
+            else
+              echo "preserve_tests_executed=false" >> $GITHUB_OUTPUT
+              echo "⚠️ PRESERVE test execution not verified"
+            fi
+          else
+            echo "preserve_tests_executed=false" >> $GITHUB_OUTPUT
+            echo "⚠️ No pre-enhancement test execution evidence"
+          fi
+      
+      - name: Check FM Approval
+        id: check-approval
+        if: steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
+        run: |
+          echo "🔍 Checking for FM/Reviewer approval..."
+          
+          REPORT_PATH="${{ steps.check-report.outputs.report_path }}"
+          
+          if grep -q "Review Status.*APPROVED\|✅ APPROVED" "$REPORT_PATH"; then
+            echo "approved=true" >> $GITHUB_OUTPUT
+            echo "✅ FM/Reviewer approval found"
+          else
+            echo "approved=false" >> $GITHUB_OUTPUT
+            echo "⚠️ FM/Reviewer approval not found (may be pending)"
+          fi
+      
+      - name: Gate Decision
+        id: gate-decision
+        run: |
+          echo "🔒 Making gate decision..."
+          
+          ENHANCEMENT="${{ steps.detect-enhancement.outputs.enhancement }}"
+          REPORT_FOUND="${{ steps.check-report.outputs.found }}"
+          REPORT_COMPLETE="${{ steps.validate-report.outputs.complete }}"
+          
+          if [ "$ENHANCEMENT" == "false" ] || [ "$ENHANCEMENT" == "exempt" ]; then
+            echo "result=PASS" >> $GITHUB_OUTPUT
+            echo "reason=Not enhancement work or exemption granted" >> $GITHUB_OUTPUT
+            echo "✅ GATE PASS: Protocol not applicable"
+          elif [ "$REPORT_FOUND" == "false" ]; then
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "reason=Enhancement PR missing Pre-Implementation Behavior Review Report" >> $GITHUB_OUTPUT
+            echo "❌ GATE FAIL: Report missing"
+          elif [ "$REPORT_COMPLETE" == "false" ]; then
+            echo "result=FAIL" >> $GITHUB_OUTPUT
+            echo "reason=Pre-Implementation Behavior Review Report incomplete: ${{ steps.validate-report.outputs.missing_sections }}" >> $GITHUB_OUTPUT
+            echo "❌ GATE FAIL: Report incomplete"
+          else
+            echo "result=PASS" >> $GITHUB_OUTPUT
+            echo "reason=Pre-Implementation Behavior Review Report present and complete" >> $GITHUB_OUTPUT
+            echo "✅ GATE PASS: Protocol compliance verified"
+          fi
+      
+      - name: Comment on PR (if failed)
+        if: steps.gate-decision.outputs.result == 'FAIL'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const reason = `${{ steps.gate-decision.outputs.reason }}`;
+            const body = `## ❌ Pre-Implementation Behavior Review Gate: BLOCKED
+            
+            **Reason**: ${reason}
+            
+            **Authority**: \`governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md\` v1.0.0
+            
+            ### Required Actions
+            
+            1. Complete all 4 steps of Pre-Implementation Behavior Review:
+               - Step 1: Review Current Implementation in Detail
+               - Step 2: Document Actual Current Behavior (with GIVEN/WHEN/THEN)
+               - Step 3: Identify Enhancement Delta (preserved/changed/new behaviors)
+               - Step 4: Design Tests Validating Both Preserved and New Behaviors
+            
+            2. Create Pre-Implementation Behavior Review Report using template:
+               \`governance/templates/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_REPORT.template.md\`
+            
+            3. Ensure all required sections are documented with evidence
+            
+            4. Run PRESERVE tests against current implementation (must pass)
+            
+            5. Obtain FM/Reviewer approval
+            
+            6. Update PR description to reference completed report
+            
+            **If this is not enhancement work**: Update PR description to select "❌ NO - This PR is net-new feature OR bug fix"
+            
+            **If exemption is needed**: Escalate to FM with justification
+            
+            ---
+            
+            **Merge will be blocked until protocol compliance is verified.**`;
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+      
+      - name: Comment on PR (if passed)
+        if: steps.gate-decision.outputs.result == 'PASS' && steps.detect-enhancement.outputs.enhancement == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `## ✅ Pre-Implementation Behavior Review Gate: PASS
+            
+            **Status**: Protocol compliance verified
+            
+            **Authority**: \`governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md\` v1.0.0
+            
+            Pre-Implementation Behavior Review Report found and complete. Enhancement work may proceed.`;
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+      
+      - name: Fail if blocked
+        if: steps.gate-decision.outputs.result == 'FAIL'
+        run: |
+          echo "❌ Gate blocked: ${{ steps.gate-decision.outputs.reason }}"
+          exit 1
+      
+      - name: Success
+        if: steps.gate-decision.outputs.result == 'PASS'
+        run: |
+          echo "✅ Gate passed: ${{ steps.gate-decision.outputs.reason }}"

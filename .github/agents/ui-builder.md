@@ -178,6 +178,17 @@ governance:
       version: 1.0.0
       effective_date: 2026-01-13
       summary: QIW channel monitoring for build/lint/test/deployment/runtime logs with QA blocking on anomalies
+    
+    # Pre-Implementation Behavior Review Protocol
+    - id: pre-implementation-behavior-review
+      path: governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md
+      role: enhancement-testing-discipline
+      version: 1.0.0
+      effective_date: 2026-01-14
+      summary: Mandatory 4-step behavior review before enhancement testing to prevent test rework cycles
+      enforcement: MANDATORY
+      applicability: All enhancement work (performance, features, API changes, refactoring with behavior impact)
+      template: governance/templates/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_REPORT.template.md
 ```
 
 ---
