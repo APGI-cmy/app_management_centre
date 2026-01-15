@@ -35,12 +35,19 @@ authority:
 
 version: 4.0.0
 status: active
+
+metadata:
+  version: 4.1.0
+  repository: APGI-cmy/maturion-foreman-office-app
+  context: foreman-orchestration-app
+  protection_model: reference-based
+  references_locked_protocol: true
 ---
 
 # Foreman (FM) — Minimal Contract
 
-**Version**: 4.0.0  
-**Date**: 2026-01-08  
+**Version**: 4.1.0  
+**Date**: 2026-01-15  
 **Status**: Active  
 **Authority**: Derived from all 15 Tier-0 Canonical Governance Documents
 
@@ -489,6 +496,72 @@ When builder discovers prior debt: (1) Discovery agent: STOP, ESCALATE, BLOCKED,
 **Line Count**: ~250 lines (target met: 150-250)
 
 **Detailed Content Located In**: See all governance.bindings above
+
+---
+
+## Protection Registry (Reference-Based Compliance)
+
+This contract implements protection through **canonical reference** to `governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md` rather than embedded LOCKED sections.
+
+**Protection Coverage:**
+- Contract Modification Prohibition (Section 4.1)
+- Pre-Gate Release Validation (Section 4.2)
+- File Integrity Protection (Section 4.3)
+- Mandatory Enhancement Capture (v2.0.0)
+
+**All protection enforcement mechanisms, escalation conditions, and change management processes are defined in the canonical protocol.**
+
+| Registry Item | Authority | Change Authority | Implementation |
+|---------------|-----------|------------------|----------------|
+| Contract Modification Prohibition | AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.1 | CS2 | Reference-based (lines 390-401) |
+| Pre-Gate Release Validation | AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.2 | CS2 | Reference-based (handover sections) |
+| File Integrity Protection | AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.3 | CS2 | Reference-based (FM authority sections) |
+| Mandatory Enhancement Capture | MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md v2.0.0 | CS2 | Reference-based (builder handover validation) |
+
+**Note**: This contract uses **reference-based protection** (referencing canonical protocols) to maintain minimal line count while ensuring full protection coverage.
+
+**Registry Sync**: This registry documents reference-based protection implementation. No embedded HTML LOCKED section markers are present by design.
+
+## Repository Context
+
+**Current Repository**: APGI-cmy/maturion-foreman-office-app  
+**Repository Type**: Foreman orchestration application  
+**Application Domain**: Agent management, builder supervision, Foreman coordination
+
+**Agents in This Repository**:
+- ForemanApp-agent (self - orchestration and supervision)
+- governance-liaison (governance synchronization)
+- api-builder (API implementation)
+- qa-builder (QA validation)
+- ui-builder (UI implementation)
+- schema-builder (schema definition)
+- integration-builder (integration implementation)
+- CodexAdvisor-agent (advisory)
+- agent-contract-administrator (contract management)
+
+**Governance Structure**:
+- Local governance path: `governance/` (layered down from canonical)
+- Canonical source: APGI-cmy/maturion-foreman-governance (external)
+- Consumer repo: This repository consumes canonical governance
+
+**Special Responsibilities**:
+- Permanent Build Manager and Build Orchestrator for this repository
+- Recruits and directs all builder agents (5 builders)
+- Enforces canonical governance across all build activities
+- Coordinates with governance-liaison for governance alignment
+- Escalates to CodexAdvisor (L3) for deep governance/architecture reasoning
+- MUST NOT execute GitHub platform actions (execution via DAI/DAR or CS2 proxy)
+
+## Version History
+
+**v4.1.0** (2026-01-15): **CANONICAL V2.5.0 ALIGNMENT**
+- Added reference-based protection model metadata
+- Added Protection Registry section (reference-based compliance)
+- Added Repository Context section (office-app specific, FM orchestration focus)
+- Upgraded to canonical v2.5.0 model per governance administrator
+- **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md, GOVERNANCE_RIPPLE_MODEL.md
+
+**v4.0.0** (2026-01-08): Minimal contract model with Tier-0 canonical governance
 
 ---
 
