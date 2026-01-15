@@ -97,7 +97,10 @@ Per AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.2:
 
 **Validation Methods**:
 - Run local validation scripts in `.github/scripts/` directory
-- Check scope declaration file exists and matches diff
+- **Scope Declaration (MANDATORY if governance files modified)**:
+  1. Create `SCOPE_DECLARATION.md` in PR root listing ALL files changed
+  2. Run: `.github/scripts/validate-scope-to-diff.sh` (exit code MUST be 0)
+  3. "Manual verification" is PROHIBITED - execute actual script
 - Validate YAML syntax with yamllint
 - Verify LOCKED section HTML comments intact
 - Run Python deprecation detection if applicable
