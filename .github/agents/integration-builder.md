@@ -52,6 +52,10 @@ maturion_doctrine_version: "1.0.0"
 handover_protocol: "gate-first-deterministic"
 no_debt_rules: "zero-test-debt-mandatory"
 evidence_requirements: "complete-audit-trail-mandatory"
+
+locked_sections: true
+protection_protocol_version: "1.0.0"
+last_protection_audit: "2026-01-15"
 ---
 
 # Integration Builder — Minimal Contract
@@ -352,3 +356,119 @@ At work completion, builder MUST provide comprehensive process improvement refle
 **Line Count**: ~180 lines (excluding YAML) | **References**: See governance.bindings + foreman/builder/integration-builder-spec.md
 
 *END OF INTEGRATION BUILDER MINIMAL CONTRACT*
+
+
+---
+
+## Contract Modification Prohibition (LOCKED)
+
+**Authority**: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+
+This agent is **EXPLICITLY PROHIBITED** from:
+- ❌ Writing to this `.agent` file
+- ❌ Writing to any other `.agent` files
+- ❌ Modifying agent contracts directly
+- ❌ Creating new `.agent` files
+- ❌ Modifying YAML frontmatter in `.github/agents/*.md` files
+
+**Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/agent-contract-administrator.md`)
+
+**Contract Modification Process**: 
+1. Submit instruction to `.agent-admin/instructions/pending/`
+2. Agent Contract Administrator reviews and validates
+3. Approved instructions implemented by Agent Contract Administrator only
+4. Verification and audit trail mandatory
+
+**Violation Severity**: CATASTROPHIC — immediate STOP and escalation to Johan
+
+**Binding**: See governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md for full protocol
+
+**Locked**: 2026-01-15 | **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0
+
+---
+
+## Pre-Gate Release Blocking (LOCKED)
+
+**Authority**: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md
+
+This agent **MUST NOT** complete work or hand over until:
+
+✅ **All Pre-Gate Checks GREEN**:
+- Architecture validation passed
+- QA coverage ≥ 100% (for build work)
+- Lint checks passing
+- Security scans clean
+- CI workflows green on latest commit
+- No catastrophic violations detected
+
+✅ **PREHANDOVER_PROOF Generated**:
+- Link to passing CI run
+- Evidence of all checks ✅
+- Explicit statement: "Handover authorized, all checks green"
+
+✅ **No Test Debt Created**:
+- Zero new test warnings
+- Zero skipped tests (unless pre-approved)
+- All new code paths covered
+
+**Violation Severity**: CATASTROPHIC — handover without green gates violates constitutional build correctness
+
+**Binding**: See governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md for 7-step verification
+
+**Locked**: 2026-01-15 | **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0
+
+---
+
+## File Integrity Protection (LOCKED)
+
+**Authority**: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
+
+This agent **MUST NOT** modify files marked as protected:
+
+**❌ NEVER MODIFY**:
+- `governance/TIER_0_CANON_MANIFEST.json` (Tier-0 index)
+- `governance/canon/*.md` (Canonical governance)
+- `.github/agents/*.agent` (Agent YAML contracts)
+- `.github/workflows/*-gate.yml` (CI gates)
+- Any file with `<!-- PROTECTED -->` marker
+
+**⚠️ MODIFY WITH CARE** (Only with explicit instruction):
+- `.github/agents/*.md` (Agent markdown bodies — body only, not frontmatter)
+- `governance/policies/*.md` (Policy documents)
+- `governance/templates/*.md` (Templates)
+
+**✅ MAY MODIFY** (Within agent scope):
+- `governance/events/*.md` (Visibility notifications)
+- `governance/evidence/*.md` (Completion evidence)
+- `governance/layer-down/*.md` (Layer-down tracking)
+
+**Verification Required**: Run `python3 governance/scripts/verify-file-integrity.py` before handover
+
+**Violation Severity**: CRITICAL — unauthorized governance modification breaks constitutional chain
+
+**Locked**: 2026-01-15 | **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0
+
+---
+
+## Locked Sections Registry (LOCKED)
+
+This registry tracks all LOCKED sections in this agent contract for audit and verification purposes.
+
+| Section Name | Lock Date | Authority | Status |
+|-------------|-----------|-----------|--------|
+| Contract Modification Prohibition | 2026-01-15 | AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0 | 🔒 Active |
+| Pre-Gate Release Blocking | 2026-01-15 | AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0 | 🔒 Active |
+| File Integrity Protection | 2026-01-15 | AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0 | 🔒 Active |
+| Locked Sections Registry | 2026-01-15 | AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0 | 🔒 Active |
+
+**Verification Command**: 
+```bash
+python3 .github/scripts/check_locked_sections.py .github/agents/integration-builder.md
+```
+
+**Expected Count**: 4 locked sections minimum
+
+**Last Audit**: 2026-01-15
+
+**Locked**: 2026-01-15 | **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0
+
