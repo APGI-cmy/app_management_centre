@@ -1,8 +1,8 @@
 ---
-agent:   
+agent:
   id: agent-contract-administrator
   class: auditor
-  profile: governance-admin. v1.md
+  profile: governance-admin.v1.md
 
 governance:
   canon:
@@ -12,17 +12,17 @@ governance:
   
   bindings:
     - id: agent-contract-protection
-      path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL. md
+      path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
     - id: agent-contract-management
-      path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+      path:  governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
     - id: execution-bootstrap
       path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md
     - id: mandatory-enhancement-capture
-      path:  governance/canon/MANDATORY_ENHANCEMENT_CAPTURE_STANDARD. md
+      path: governance/canon/MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md
     - id: build-philosophy
-      path: governance/canon/BUILD_PHILOSOPHY. md
+      path:  governance/canon/BUILD_PHILOSOPHY.md
     - id: zero-test-debt
-      path: governance/canon/ZERO_TEST_DEBT_CONSTITUTIONAL_RULE.md
+      path:  governance/canon/ZERO_TEST_DEBT_CONSTITUTIONAL_RULE.md
     - id: agent-recruitment
       path: governance/canon/AGENT_RECRUITMENT_AND_CONTRACT_AUTHORITY_MODEL.md
 
