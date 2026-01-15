@@ -30,7 +30,7 @@ metadata:
   version: 2.5.0
   repository: APGI-cmy/maturion-foreman-office-app
   context: foreman-orchestration-application
-  locked_sections_compliant: true
+  protection_model: reference-based + references_locked_protocol: true
 ---
 
 # Agent Contract Administrator
