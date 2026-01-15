@@ -1,0 +1,214 @@
+name: Locked Section Protection Gate
+
+# Authority: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0
+# Purpose: Enforce locked section protection on all agent contracts
+# Status: Active (Blocking PR gate)
+
+on:
+  pull_request:
+    paths:
+      - '.github/agents/*.md'
+      - '.github/agents/**/*.md'
+  push:
+    branches:
+      - main
+      - 'copilot/**'
+    paths:
+      - '.github/agents/*.md'
+      - '.github/agents/**/*.md'
+
+jobs:
+  validate-locked-sections:
+    name: Validate Locked Sections
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need full history for diff analysis
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+      
+      - name: Make check script executable
+        run: chmod +x .github/scripts/check_locked_sections.py
+      
+      - name: Validate all agent contracts
+        id: validate
+        run: |
+          echo "🔍 Validating locked sections in agent contracts..."
+          python3 .github/scripts/check_locked_sections.py --all
+          RESULT=$?
+          
+          if [ $RESULT -eq 0 ]; then
+            echo "validation_status=passed" >> $GITHUB_OUTPUT
+          else
+            echo "validation_status=failed" >> $GITHUB_OUTPUT
+          fi
+          
+          exit $RESULT
+      
+      - name: Check for locked section modifications (PR only)
+        if: github.event_name == 'pull_request'
+        id: check_diff
+        run: |
+          echo "🔍 Checking if locked sections were modified..."
+          
+          # Get list of modified agent files
+          MODIFIED_AGENTS=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '^.github/agents/.*\.md$' || true)
+          
+          if [ -z "$MODIFIED_AGENTS" ]; then
+            echo "No agent contracts modified in this PR"
+            echo "locked_modified=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "Modified agent contracts:"
+          echo "$MODIFIED_AGENTS"
+          
+          # Check each modified agent for locked section changes
+          LOCKED_MODIFIED=false
+          
+          for agent in $MODIFIED_AGENTS; do
+            echo ""
+            echo "Analyzing: $agent"
+            
+            # Get diff for this file
+            DIFF=$(git diff origin/${{ github.base_ref }}...HEAD -- "$agent")
+            
+            # Check if diff contains changes to LOCKED sections
+            if echo "$DIFF" | grep -E '^\+.*\(LOCKED\)|^\-.*\(LOCKED\)|^\+.*\*\*Locked\*\*:|^\-.*\*\*Locked\*\*:' > /dev/null; then
+              echo "⚠️  WARNING: Locked section modification detected in $agent"
+              LOCKED_MODIFIED=true
+            fi
+          done
+          
+          if [ "$LOCKED_MODIFIED" = "true" ]; then
+            echo "locked_modified=true" >> $GITHUB_OUTPUT
+          else
+            echo "locked_modified=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Check for CS2 override label (PR only)
+        if: github.event_name == 'pull_request' && steps.check_diff.outputs.locked_modified == 'true'
+        id: check_override
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: labels } = await github.rest.issues.listLabelsOnIssue({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const hasOverride = labels.some(label => 
+              label.name === 'cs2-override-locked-sections'
+            );
+            
+            core.setOutput('has_override', hasOverride);
+            
+            if (hasOverride) {
+              core.info('✅ CS2 override label found - locked section modifications authorized');
+            } else {
+              core.info('❌ No CS2 override label - locked section modifications NOT authorized');
+            }
+            
+            return hasOverride;
+      
+      - name: Fail if locked sections modified without override
+        if: |
+          github.event_name == 'pull_request' && 
+          steps.check_diff.outputs.locked_modified == 'true' && 
+          steps.check_override.outputs.has_override != 'true'
+        run: |
+          echo "❌ LOCKED SECTION PROTECTION VIOLATION"
+          echo ""
+          echo "This PR modifies one or more LOCKED sections in agent contracts."
+          echo "Locked sections can only be modified with CS2 (Governance Administrator) authorization."
+          echo ""
+          echo "📋 Required Actions:"
+          echo "  1. Review: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md"
+          echo "  2. Submit change request using: governance/templates/LOCKED_SECTION_CHANGE_REQUEST_TEMPLATE.md"
+          echo "  3. Obtain CS2 approval from Johan Ras"
+          echo "  4. Add label 'cs2-override-locked-sections' to this PR"
+          echo ""
+          echo "⚠️  Unauthorized modification of locked sections is a constitutional violation."
+          echo ""
+          exit 1
+      
+      - name: Post success comment (PR only)
+        if: |
+          github.event_name == 'pull_request' && 
+          steps.validate.outputs.validation_status == 'passed' &&
+          (steps.check_diff.outputs.locked_modified != 'true' || 
+           steps.check_override.outputs.has_override == 'true')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `## ✅ Locked Section Protection - PASSED
+            
+            All agent contracts have been validated and locked section protection is intact.
+            
+            **Validation Results**:
+            - ✅ All required locked sections present
+            - ✅ Lock markers properly formatted
+            - ✅ YAML frontmatter compliant
+            - ✅ Protection registry complete
+            
+            ${context.payload.pull_request.labels.some(l => l.name === 'cs2-override-locked-sections') 
+              ? '\n⚠️  **CS2 Override Active**: This PR has authorization to modify locked sections.\n' 
+              : ''}
+            
+            ---
+            *Gate: locked-section-protection-gate.yml*  
+            *Authority: AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0*`;
+            
+            // Check if we already commented
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number
+            });
+            
+            const existingComment = comments.find(c => 
+              c.body.includes('Locked Section Protection') && 
+              c.user.login === 'github-actions[bot]'
+            );
+            
+            if (existingComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+      
+      - name: Validation summary
+        if: always()
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "  LOCKED SECTION PROTECTION GATE SUMMARY"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "Status: ${{ steps.validate.outputs.validation_status == 'passed' && '✅ PASSED' || '❌ FAILED' }}"
+          echo ""
+          echo "Authority: AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.0.0"
+          echo "Gate: locked-section-protection-gate.yml"
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
