@@ -52,11 +52,18 @@ maturion_doctrine_version: "1.0.0"
 handover_protocol: "gate-first-deterministic"
 no_debt_rules: "zero-test-debt-mandatory"
 evidence_requirements: "complete-audit-trail-mandatory"
+
+metadata:
+  version: 3.1.0
+  repository: APGI-cmy/maturion-foreman-office-app
+  context: foreman-orchestration-app
+  protection_model: reference-based
+  references_locked_protocol: true
 ---
 
 # QA Builder — Minimal Contract
 
-**Version**: 3.0.0 | **Date**: 2026-01-08 | **Status**: Active | **Recruited**: 2025-12-30 (Wave 0.1)
+**Version**: 3.1.0 | **Date**: 2026-01-15 | **Status**: Active | **Recruited**: 2025-12-30 (Wave 0.1)
 
 ## Quick Onboarding
 
@@ -345,6 +352,69 @@ At work completion, builder MUST provide comprehensive process improvement refle
 **BL-018/BL-019**: FM ensures QA-Catalog-Alignment. Verify: QA range, semantic alignment, QA-to-Red RED. If NOT met: STOP, BLOCKED, escalate.  
 **Code Checking**: MUST check ALL code before handover (correctness, test alignment, arch adherence, defects, self-review). Evidence in report.  
 **FM States**: HALTED/BLOCKED/ESCALATED → Builder STOP and WAIT. HALT = FM complexity assessment, NOT error.
+
+---
+
+## Protection Registry (Reference-Based Compliance)
+
+This contract implements protection through **canonical reference** to `governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md` rather than embedded LOCKED sections.
+
+**Protection Coverage:**
+- Contract Modification Prohibition (Section 4.1)
+- Pre-Gate Release Validation (Section 4.2)
+- File Integrity Protection (Section 4.3)
+- Mandatory Enhancement Capture (v2.0.0)
+
+**All protection enforcement mechanisms, escalation conditions, and change management processes are defined in the canonical protocol.**
+
+| Registry Item | Authority | Change Authority | Implementation |
+|---------------|-----------|------------------|----------------|
+| Contract Modification Prohibition | AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.1 | CS2 | Reference-based (lines 93-104) |
+| Pre-Gate Release Validation | AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.2 | CS2 | Reference-based (lines 139-152) |
+| File Integrity Protection | AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.3 | CS2 | Reference-based (lines 121-137) |
+| Mandatory Enhancement Capture | MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md v2.0.0 | CS2 | Reference-based (lines 304-345) |
+
+**Note**: This contract uses **reference-based protection** (referencing canonical protocols) to maintain minimal line count while ensuring full protection coverage.
+
+**Registry Sync**: This registry documents reference-based protection implementation. No embedded HTML LOCKED section markers are present by design.
+
+## Repository Context
+
+**Current Repository**: APGI-cmy/maturion-foreman-office-app  
+**Repository Type**: Foreman orchestration application  
+**Application Domain**: Agent management, builder supervision, Foreman coordination
+
+**Agents in This Repository**:
+- ForemanApp-agent (orchestration and supervision)
+- governance-liaison (governance synchronization)
+- api-builder (API implementation)
+- qa-builder (self - QA validation)
+- ui-builder (UI implementation)
+- schema-builder (schema definition)
+- integration-builder (integration implementation)
+- CodexAdvisor-agent (advisory)
+- agent-contract-administrator (contract management)
+
+**Governance Structure**:
+- Local governance path: `governance/` (layered down from canonical)
+- Canonical source: APGI-cmy/maturion-foreman-governance (external)
+- Consumer repo: This repository consumes canonical governance
+
+**Special Responsibilities**:
+- Implement comprehensive test suites and QA infrastructure for ISMS modules
+- QA-to-Red test suite development
+- Coverage reporting and validation
+
+## Version History
+
+**v3.1.0** (2026-01-15): **CANONICAL V2.5.0 ALIGNMENT**
+- Added reference-based protection model metadata
+- Added Protection Registry section (reference-based compliance)
+- Added Repository Context section (office-app specific)
+- Upgraded to canonical v2.5.0 model per governance administrator
+- **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md, GOVERNANCE_RIPPLE_MODEL.md
+
+**v3.0.0** (2026-01-08): Minimal contract model
 
 ---
 
