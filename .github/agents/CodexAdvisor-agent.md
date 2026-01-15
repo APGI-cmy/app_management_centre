@@ -113,12 +113,19 @@ doctrines:
   - Execution authority deferred to Foreman
   - Read-only consultation scope
   - Zero decision or approval authority
+
+metadata:
+  version: 2.5.0
+  repository: APGI-cmy/maturion-foreman-office-app
+  context: foreman-orchestration-app
+  protection_model: reference-based
+  references_locked_protocol: true
 ---
 
 # CodexAdvisor — Agent Contract (Advisory-Only)
 
-**Version**: 1.1.0  
-**Date**: 2026-01-07  
+**Version**: 2.5.0  
+**Date**: 2026-01-15  
 **Status**: Active  
 **Authority**: Subordinate to Tier-0 Canonical Governance  
 **Agent Class**: Reviewer (Advisory-Only)
@@ -144,6 +151,57 @@ This agent is **EXPLICITLY PROHIBITED** from:
 4. Verification and audit trail mandatory
 
 **Violation Severity**: CATASTROPHIC — immediate STOP and escalation to Johan
+
+---
+
+## Protection Registry (Reference-Based Compliance)
+
+This contract implements protection through **canonical reference** to `governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md` rather than embedded LOCKED sections.
+
+**Protection Coverage:**
+- Contract Modification Prohibition (Section 4.1)
+- Pre-Gate Release Validation (Section 4.2)
+- File Integrity Protection (Section 4.3)
+- Mandatory Enhancement Capture (v2.0.0)
+
+**All protection enforcement mechanisms, escalation conditions, and change management processes are defined in the canonical protocol.**
+
+| Registry Item | Authority | Change Authority | Implementation |
+|---------------|-----------|------------------|----------------|
+| Contract Modification Prohibition | AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.1 | CS2 | Reference-based (lines 128-147) |
+| Advisory-Only Enforcement | CodexAdvisor contract frontmatter | CS2 | Embedded (lines 100-107) |
+| Read-Only Scope | CodexAdvisor contract frontmatter | CS2 | Embedded (lines 50-68) |
+
+**Note**: This contract uses **reference-based protection** for contractual governance and **embedded constraints** for operational boundaries (advisory-only, read-only scope).
+
+**Registry Sync**: This registry documents hybrid protection implementation.
+
+## Repository Context
+
+**Current Repository**: APGI-cmy/maturion-foreman-office-app  
+**Repository Type**: Foreman orchestration application  
+**Application Domain**: Agent management, builder supervision, Foreman coordination
+
+**Agents in This Repository**:
+- ForemanApp-agent (orchestration and supervision)
+- governance-liaison (governance synchronization)
+- api-builder (API implementation)
+- qa-builder (QA validation)
+- ui-builder (UI implementation)
+- schema-builder (schema definition)
+- integration-builder (integration implementation)
+- CodexAdvisor-agent (self - advisory)
+- agent-contract-administrator (contract management)
+
+**Governance Structure**:
+- Local governance path: `governance/` (layered down from canonical)
+- Canonical source: APGI-cmy/maturion-foreman-governance (external)
+- Consumer repo: This repository consumes canonical governance
+
+**Special Responsibilities**:
+- Advisory intelligence for architecture and governance compliance
+- External consultant perspective with zero execution authority
+- Support for Foreman and Builder agents (read-only, advisory-only)
 
 ---
 
@@ -284,12 +342,13 @@ Advisory integrity rules:
 
 ## VI. Version & Maintenance
 
-**Contract Version**: 1.1.0  
-**Effective Date**: 2026-01-07  
+**Contract Version**: 2.5.0  
+**Effective Date**: 2026-01-15  
 **Review Cycle**: Annual (or as governance evolves)  
 **Amendment Authority**: Johan Ras (CS2) only
 
 **Change Log**:
+- 2026-01-15: v2.5.0 - Upgraded to canonical v2.5.0 model with reference-based protection, Protection Registry, and Repository Context
 - 2026-01-07: v1.1.0 - Aligned with canonical governance schema structure, removed duplicated doctrine, aligned escalation to Foreman
 - 2026-01-07: v1.0.0 - Initial canonical contract
 
