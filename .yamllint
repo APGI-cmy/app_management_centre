@@ -1,0 +1,37 @@
+---
+# YAMLlint configuration for Maturion ecosystem
+# Authority: BL-028 (yamllint warnings ARE errors)
+#
+# Zero warnings, zero errors required for all YAML files
+
+extends: default
+
+rules:
+  # Line length: 80 chars (strict)
+  line-length:
+    max: 120  # Relaxed for GitHub Actions workflows with embedded scripts
+    level: error
+
+  # Document start: Not required for GitHub Actions workflows  
+  document-start:
+    present: false
+    
+  # Truthy: Allow on/off for GitHub Actions
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off']
+    
+  # Comments: Require space after #
+  comments:
+    min-spaces-from-content: 1
+    
+  # Indentation: 2 spaces
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    
+  # Trailing spaces: Not allowed
+  trailing-spaces: {}
+  
+  # Empty lines: Max 1
+  empty-lines:
+    max: 1

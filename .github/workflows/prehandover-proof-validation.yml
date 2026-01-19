@@ -43,10 +43,10 @@ jobs:
         id: detect-proof
         run: |
           echo "🔍 Looking for PREHANDOVER_PROOF files..."
-          
+
           # Find all PREHANDOVER_PROOF files
           PROOF_FILES=$(find . -maxdepth 1 -name "PREHANDOVER_PROOF*.md" -type f || echo "")
-          
+
           if [ -z "$PROOF_FILES" ]; then
             echo "has_proof=false" >> $GITHUB_OUTPUT
             echo "No PREHANDOVER_PROOF files found"
@@ -63,30 +63,62 @@ jobs:
         run: |
           echo "🔍 Validating PREHANDOVER_PROOF documents..."
           echo ""
-          
+          echo "Supports TWO validation modes (BL-027/028):"
+          echo "  1. Automated Script Execution (exit code 0)"
+          echo "  2. Evidence-Based Validation (manual verification + attestation)"
+          echo ""
+
           VALIDATION_FAILED=0
           VALIDATION_RESULTS=""
-          
+          EVIDENCE_BASED_COUNT=0
+          AUTOMATED_COUNT=0
+
           while IFS= read -r proof_file; do
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo "Validating: $proof_file"
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo ""
-            
-            # Run validator
-            if python3 governance/scripts/validate_prehandover_proof.py "$proof_file" --verbose; then
-              VALIDATION_RESULTS="${VALIDATION_RESULTS}✅ **PASS**: \`$proof_file\`\n"
+
+            # Check if evidence-based validation is used
+            if grep -q "Validation Mode.*Evidence-Based" "$proof_file"; then
+              echo "📋 Evidence-Based Validation Mode Detected"
+              echo "Validating evidence completeness..."
+              echo ""
+
+              # Validate evidence-based requirements
+              if python3 governance/scripts/validate_evidence_based.py "$proof_file"; then
+                EVIDENCE_BASED_COUNT=$((EVIDENCE_BASED_COUNT + 1))
+                VALIDATION_RESULTS="${VALIDATION_RESULTS}✅ **PASS** (Evidence-Based): \`$proof_file\`\n"
+                echo "✅ Evidence-based validation COMPLETE"
+              else
+                VALIDATION_FAILED=1
+                VALIDATION_RESULTS="${VALIDATION_RESULTS}❌ **FAIL** (Evidence-Based): \`$proof_file\` - Incomplete\n"
+                echo "❌ Evidence-based validation INCOMPLETE"
+              fi
               echo ""
             else
-              VALIDATION_FAILED=1
-              VALIDATION_RESULTS="${VALIDATION_RESULTS}❌ **FAIL**: \`$proof_file\` (see logs above)\n"
+              echo "🤖 Automated Validation Mode"
+              echo "Validating standard PREHANDOVER_PROOF format..."
               echo ""
+
+              # Run standard validator
+              if python3 governance/scripts/validate_prehandover_proof.py "$proof_file" --verbose; then
+                AUTOMATED_COUNT=$((AUTOMATED_COUNT + 1))
+                VALIDATION_RESULTS="${VALIDATION_RESULTS}✅ **PASS** (Automated): \`$proof_file\`\n"
+                echo ""
+              else
+                VALIDATION_FAILED=1
+                VALIDATION_RESULTS="${VALIDATION_RESULTS}❌ **FAIL** (Automated): \`$proof_file\` (see logs above)\n"
+                echo ""
+              fi
             fi
           done < /tmp/proof_files.txt
-          
+
           # Save results for comment
           echo -e "$VALIDATION_RESULTS" > /tmp/validation_results.txt
-          
+          echo "evidence_based_count=$EVIDENCE_BASED_COUNT" >> $GITHUB_OUTPUT
+          echo "automated_count=$AUTOMATED_COUNT" >> $GITHUB_OUTPUT
+
           if [ $VALIDATION_FAILED -eq 1 ]; then
             echo "validation_status=failed" >> $GITHUB_OUTPUT
           else
@@ -104,117 +136,186 @@ jobs:
               repo: context.repo.repo,
               body: `
               ℹ️ **PREHANDOVER_PROOF Validation Gate - SKIP**
-              
-              **Outcome**: Informational SKIP  
-              **Reason**: No PREHANDOVER_PROOF files found in this PR  
+
+              **Outcome**: Informational SKIP
+              **Reason**: No PREHANDOVER_PROOF files found in this PR
               **Status**: This gate does not block merge
-              
+
               ---
-              
+
               **When is PREHANDOVER_PROOF required?**
-              
+
               PREHANDOVER_PROOF is required for PRs that modify execution artifacts:
               - GitHub Actions workflows (\`.github/workflows/\`)
               - Scripts (\`scripts/\`, \`governance/scripts/\`)
               - Git hooks (\`.githooks/\`)
               - CI/CD configurations
               - Validation tools
-              
-              If this PR modifies execution artifacts, consider adding PREHANDOVER_PROOF:
+
+              **Two Validation Modes Supported** (BL-027/028):
+
+              1. **Automated Script Execution** (Preferred):
+                 - Execute validation script locally
+                 - Capture exit code (MUST be 0)
+                 - Document in PREHANDOVER_PROOF
+
+              2. **Evidence-Based Validation** (Alternative):
+                 - Manual verification with attestation
+                 - Required when scripts unavailable/impractical
+                 - Document verification steps, evidence, attestation
+
+              **Creating PREHANDOVER_PROOF**:
               \`\`\`bash
+              # Generate template
               python3 scripts/generate-prehandover-proof-template.py --agent "Your Name" --pr ${context.issue.number}
+
+              # Capture automated validation
               ./scripts/prehandover-capture.sh -- "command1" "command2"
+
+              # OR document evidence-based validation
+              # (See governance/schemas/evidence-based-validation-schema.md)
+
+              # Validate
               python3 governance/scripts/validate_prehandover_proof.py PREHANDOVER_PROOF.md
+              python3 governance/scripts/validate_evidence_based.py PREHANDOVER_PROOF.md
               \`\`\`
-              
-              **Reference**: Execution Bootstrap Protocol v2.0.0+
-              
+
+              **Reference**:
+              - Execution Bootstrap Protocol v2.0.0+
+              - BL-027/028: Evidence-Based Validation
+              - governance/schemas/evidence-based-validation-schema.md
+
               ---
-              
+
               **Gate Status**: ℹ️ INFORMATIONAL SKIP
               `
             })
 
       - name: Comment on PR - Validation Passed
-        if: steps.detect-proof.outputs.has_proof == 'true' && steps.validate.outputs.validation_status == 'passed' && github.event_name == 'pull_request'
+        if: >-
+          steps.detect-proof.outputs.has_proof == 'true' &&
+          steps.validate.outputs.validation_status == 'passed' &&
+          github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const results = fs.readFileSync('/tmp/validation_results.txt', 'utf8');
-            
+            const evidenceBasedCount = '${{ steps.validate.outputs.evidence_based_count }}';
+            const automatedCount = '${{ steps.validate.outputs.automated_count }}';
+
+            let validationModeInfo = '';
+            if (parseInt(evidenceBasedCount) > 0 && parseInt(automatedCount) > 0) {
+              validationModeInfo = `**Validation Modes**: ${evidenceBasedCount} Evidence, ${automatedCount} Automated`;
+            } else if (parseInt(evidenceBasedCount) > 0) {
+              validationModeInfo = `**Validation Mode**: Evidence-Based (Manual + Attestation)`;
+            } else {
+              validationModeInfo = `**Validation Mode**: Automated Script Execution`;
+            }
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
               ✅ **PREHANDOVER_PROOF Validation Gate - PASS**
-              
+
               All PREHANDOVER_PROOF documents are valid and complete.
-              
+
+              ${validationModeInfo}
+
               **Validation Results**:
-              
+
               ${results}
-              
+
+              **Validation Modes Supported** (BL-027/028):
+              - 🤖 **Automated**: Script execution with exit code 0
+              - 📋 **Evidence-Based**: Manual verification with attestation
+
               **Checks Performed**:
               - ✅ Metadata completeness (Agent, PR, Branch, Date, Commit, Protocol Version)
-              - ✅ Category 0: Execution Bootstrap Protocol (7 steps)
-              - ✅ Exit codes validated (all 0)
+              - ✅ Category 0: Execution Bootstrap Protocol (7 steps) OR Evidence-based validation
+              - ✅ Exit codes validated (all 0) OR Evidence attestation
               - ✅ Evidence collection complete
               - ✅ Agent attestation present
               - ✅ Hard rules acknowledged
-              
-              **Authority**: Execution Bootstrap Protocol v2.0.0+, Wave 3.2
-              
+
+              **Authority**: Execution Bootstrap Protocol v2.0.0+, BL-027/028
+
               ---
-              
+
               **Gate Status**: ✅ PASS
               `
             })
 
       - name: Comment on PR - Validation Failed
-        if: steps.detect-proof.outputs.has_proof == 'true' && steps.validate.outputs.validation_status == 'failed' && github.event_name == 'pull_request'
+        if: >-
+          steps.detect-proof.outputs.has_proof == 'true' &&
+          steps.validate.outputs.validation_status == 'failed' &&
+          github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
             const results = fs.readFileSync('/tmp/validation_results.txt', 'utf8');
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `
               ⚠️ **PREHANDOVER_PROOF Validation Gate - INCOMPLETE**
-              
-              **Outcome**: Informational Warning  
+
+              **Outcome**: Informational Warning
               **Status**: This gate does not block merge (soft gate)
-              
+
               ---
-              
+
               **Validation Results**:
-              
+
               ${results}
-              
+
               **Common Issues**:
+
+              **Automated Mode**:
               - Missing required metadata fields
               - Incomplete Category 0 (7-step protocol) documentation
               - Exit codes not documented or non-zero
               - Missing evidence (logs, timestamps, outputs)
               - Missing agent attestation
               - Hard rules not acknowledged
-              
+
+              **Evidence-Based Mode** (BL-027/028):
+              - Missing validation mode declaration
+              - No reason for evidence-based validation
+              - Verification method not documented
+              - Insufficient verification steps (minimum 3)
+              - No evidence artifacts provided
+              - Findings not documented with compliance status
+              - Missing agent attestation with confidence level
+
               **To Fix**:
+
+              **For Automated Validation**:
               1. Review validation errors in workflow logs
               2. Use template: \`python3 scripts/generate-prehandover-proof-template.py\`
               3. Capture evidence: \`./scripts/prehandover-capture.sh -- "commands"\`
               4. Validate locally: \`python3 governance/scripts/validate_prehandover_proof.py PROOF.md --verbose\`
               5. Commit and push updated PREHANDOVER_PROOF
-              
-              **Reference**: Execution Bootstrap Protocol v2.0.0+
-              
+
+              **For Evidence-Based Validation**:
+              1. Review schema: \`governance/schemas/evidence-based-validation-schema.md\`
+              2. Document all required components (mode, reason, method, steps, evidence, findings, attestation)
+              3. Validate locally: \`python3 governance/scripts/validate_evidence_based.py PROOF.md\`
+              4. Commit and push updated PREHANDOVER_PROOF
+
+              **Reference**:
+              - Execution Bootstrap Protocol v2.0.0+
+              - BL-027/028: Evidence-Based Validation
+              - governance/schemas/evidence-based-validation-schema.md
+
               ---
-              
+
               **Gate Status**: ⚠️ INFORMATIONAL WARNING (does not block merge)
               `
             })
@@ -234,7 +335,7 @@ jobs:
         run: |
           HAS_PROOF="${{ steps.detect-proof.outputs.has_proof }}"
           VALIDATION_STATUS="${{ steps.validate.outputs.validation_status }}"
-          
+
           if [ "$HAS_PROOF" = "false" ]; then
             echo "ℹ️  No PREHANDOVER_PROOF files found - SKIP"
           elif [ "$VALIDATION_STATUS" = "passed" ]; then
@@ -243,7 +344,7 @@ jobs:
             echo "⚠️  PREHANDOVER_PROOF validation incomplete"
             echo "   This is informational only - does not block merge"
           fi
-          
+
           echo ""
           echo "This gate is SOFT - failures are informational warnings only."
           exit 0
