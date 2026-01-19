@@ -947,10 +947,173 @@ This learning triggers:
 
 ---
 
+## BL-027: Scope Declaration MUST Be Created and Validated Before PR Handover
+
+**Date Registered**: 2026-01-19  
+**Classification**: CATASTROPHIC  
+**Issue Reference**: maturion-foreman-governance#981, maturion-foreman-office-app#979  
+**Root Cause Analysis**: Evidence-based validation formalization layer-down
+
+### Learning Statement
+
+Every PR MUST include a SCOPE_DECLARATION.md that lists all changed files before handover. Scope declaration MUST be validated either through automated script execution (exit code 0) OR through evidence-based validation (manual scope-to-diff verification with attestation).
+
+### Rationale
+
+**Governance Evolution**:
+- BL-027 formalizes the scope declaration requirement that emerged from bootstrap execution
+- Provides TWO validation paths: automated (preferred) OR evidence-based (alternative)
+- Evidence-based validation allows manual verification when scripts unavailable
+- Ensures scope discipline regardless of automation availability
+
+**Impact**:
+- Prevents scope creep and undocumented changes
+- Enables governance compliance even during bootstrap phases
+- Supports phased automation rollout
+- Maintains zero-governance-debt regardless of automation maturity
+
+**Two Validation Modes**:
+
+1. **Automated Script Execution** (Preferred):
+   - Execute `validate-scope-to-diff.sh` (if available)
+   - Capture exit code (MUST be 0)
+   - Document in PREHANDOVER_PROOF
+
+2. **Evidence-Based Validation** (Alternative):
+   - Create SCOPE_DECLARATION.md listing all changed files
+   - Execute `git diff --name-status` to verify
+   - Document verification steps, git diff output, and attestation
+   - Used when script unavailable or impractical
+
+### Mandatory Requirements (Permanent)
+
+All agents MUST:
+
+1. **Create SCOPE_DECLARATION.md Before Handover**
+   - List all modified files (M), added files (A), deleted files (D)
+   - One file per line with change type
+   - Include brief description of changes
+
+2. **Validate Scope Declaration**
+   - Automated: Run `validate-scope-to-diff.sh` if available
+   - Evidence-Based: Manual git diff verification with attestation
+   - Document validation in PREHANDOVER_PROOF
+
+3. **Document Validation Mode**
+   - State which mode used (Automated or Evidence-Based)
+   - If evidence-based, document reason, method, steps, evidence, attestation
+
+4. **Achieve Exit Code 0 OR Provide Complete Evidence**
+   - Automated: Exit code MUST be 0
+   - Evidence-Based: All evidence requirements MUST be met
+
+### Prohibited Actions (Permanent)
+
+1. ❌ Creating PR without SCOPE_DECLARATION.md
+2. ❌ Incomplete scope declaration (missing files)
+3. ❌ Skipping validation ("trust me, it's correct")
+4. ❌ Incomplete evidence-based validation
+5. ❌ Using evidence-based mode to circumvent requirements
+
+### Enforcement Mechanism
+
+**CI Workflow Recognition**:
+```yaml
+# CI detects validation mode and runs appropriate validator
+if grep -q "Validation Mode.*Evidence-Based" PREHANDOVER_PROOF.md; then
+  python3 governance/scripts/validate_evidence_based.py PREHANDOVER_PROOF.md
+else
+  ./scripts/validate-scope-to-diff.sh  # Exit code 0 required
+fi
+```
+
+**Evidence-Based Requirements**: See `governance/schemas/evidence-based-validation-schema.md`
+
+**Ratchet Condition**: This learning establishes that scope declaration is non-negotiable. Choice of validation mode (automated vs evidence-based) is flexible based on context, but validation itself is mandatory.
+
+### Application Examples
+
+**✅ CORRECT - Automated Validation**:
+```markdown
+### Gate: Scope Declaration Validation (BL-027)
+
+**Validation Mode**: Automated Script Execution
+**Command**: `./scripts/validate-scope-to-diff.sh`
+**Exit Code**: 0
+**Status**: ✅ PASS
+
+SCOPE_DECLARATION.md created and validated against git diff.
+```
+
+**✅ CORRECT - Evidence-Based Validation**:
+```markdown
+### Gate: Scope Declaration Validation (BL-027)
+
+**Validation Mode**: Evidence-Based (Script Not Present)
+**Reason**: `validate-scope-to-diff.sh` not present in repository
+**Method**: Manual git diff comparison
+
+**Verification Steps**:
+1. Created SCOPE_DECLARATION.md listing all changed files
+2. Executed `git diff --name-status HEAD~1 HEAD`
+3. Compared SCOPE_DECLARATION.md entries to git diff output
+4. Verified all files in git diff are listed
+5. Verified no extra files listed
+
+**Git Diff Output**:
+```
+M       .github/workflows/prehandover-proof-validation.yml
+A       governance/schemas/evidence-based-validation-schema.md
+A       governance/scripts/validate_evidence_based.py
+```
+
+**SCOPE_DECLARATION.md**: ✅ Created and matches git diff
+**File Count Match**: ✅ Yes (3 files in both)
+**Status**: ✅ PASS
+
+**Attestation**:
+I attest that SCOPE_DECLARATION.md accurately lists all files changed in this PR.
+**Date**: 2026-01-19T15:00:00Z
+**Verification Confidence**: HIGH
+```
+
+**❌ INCORRECT - No Scope Declaration**:
+```markdown
+# PREHANDOVER_PROOF without SCOPE_DECLARATION.md
+(Missing - violates BL-027)
+```
+
+### Related Learnings
+
+- BL-028: YAMLlint Warnings ARE Errors (companion validation requirement)
+- BL-026: Pre-Gate Validation Requirements
+- BL-024: Constitutional Sandbox Pattern (autonomous judgment)
+
+### Governance Impact
+
+This learning triggers:
+1. **Evidence-Based Validation Schema** created (`governance/schemas/evidence-based-validation-schema.md`)
+2. **Evidence-Based Validator** created (`governance/scripts/validate_evidence_based.py`)
+3. **CI Workflows Updated** to recognize both validation modes
+4. **YAMLlint Config** created (`.yamllint` for BL-028 compliance)
+5. **PREHANDOVER_PROOF Templates** updated with evidence-based examples
+
+### Status
+
+**Learning Registered**: ✅ COMPLETE  
+**Classification**: CATASTROPHIC  
+**Ratchet Activated**: ✅ ACTIVE  
+**Schema Created**: ✅ evidence-based-validation-schema.md  
+**Validator Created**: ✅ validate_evidence_based.py  
+**CI Workflows Updated**: ✅ prehandover-proof-validation.yml  
+**Layer-Down**: ✅ COMPLETE (governance#981 → office-app#979)
+
+---
+
 ## Registry Metadata
 
-**Total Learnings Registered**: 6  
-**Catastrophic**: 6 (BL-016, BL-017, BL-018, BL-019, BL-020, BL-021)  
+**Total Learnings Registered**: 7  
+**Catastrophic**: 7 (BL-016, BL-017, BL-018, BL-019, BL-020, BL-021, BL-027)  
 **Critical**: 0  
 **Major**: 0  
 **Moderate**: 0  
@@ -961,5 +1124,5 @@ This learning triggers:
 ---
 
 **Maintained by**: Maturion Foreman (FM)  
-**Last Updated**: 2026-01-08  
+**Last Updated**: 2026-01-19  
 **Registry Status**: ACTIVE
