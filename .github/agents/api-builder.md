@@ -36,7 +36,7 @@ governance:
     - id: warning-handling
       path: >
         governance/policies/
-# ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
+        ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
       role: warning-enforcement
     - id: deprecation-detection-gate
       path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
