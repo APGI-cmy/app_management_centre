@@ -301,6 +301,7 @@ def validate_evidence_based(file_path: Path, specific_gate: str = None) -> Tuple
     
     Returns:
         Tuple of (is_valid, list_of_errors_or_warnings)
+        Special return: (True, ["NOT_EVIDENCE_BASED"]) when not evidence-based mode
     """
     if not file_path.exists():
         return False, [f"File not found: {file_path}"]
@@ -317,8 +318,8 @@ def validate_evidence_based(file_path: Path, specific_gate: str = None) -> Tuple
     is_evidence_based, mode_messages = check_evidence_based_mode(content)
     
     if not is_evidence_based:
-        # Not evidence-based mode - this is OK, just not applicable
-        return True, ["Not evidence-based validation mode (automated validation detected)"]
+        # Not evidence-based mode - return special indicator
+        return True, ["NOT_EVIDENCE_BASED"]
     
     # Extract gate sections
     gate_sections = extract_gate_sections(content)
@@ -389,6 +390,12 @@ def main():
     """Main entry point."""
     if len(sys.argv) < 2:
         print("Usage: python3 validate_evidence_based.py <path-to-proof-file> [gate-name]")
+        print("")
+        print("Exit codes:")
+        print("  0 - Evidence-based validation complete and valid")
+        print("  1 - Evidence-based validation incomplete or invalid")
+        print("  2 - File not found or invalid")
+        print("  3 - Not evidence-based validation (automated mode)")
         sys.exit(2)
     
     file_path = Path(sys.argv[1])
@@ -404,6 +411,12 @@ def main():
     is_valid, messages = validate_evidence_based(file_path, specific_gate)
     
     if messages:
+        # Check for special "NOT_EVIDENCE_BASED" indicator
+        if len(messages) == 1 and messages[0] == "NOT_EVIDENCE_BASED":
+            print("\nℹ️ Not evidence-based validation mode (automated validation detected)")
+            print("\n✅ Evidence-based validation requirements MET (N/A for automated mode)")
+            sys.exit(3)
+        
         print("\nMessages:")
         for msg in messages:
             print(f"  - {msg}")
