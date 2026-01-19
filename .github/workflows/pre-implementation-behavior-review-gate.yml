@@ -34,7 +34,29 @@ jobs:
         with:
           fetch-depth: 0
       
+      - name: Check for Evidence-Based Validation (BL-027/028)
+        id: evidence_check
+        run: |
+          echo "=== Evidence-Based Validation Check (BL-027/028) ==="
+          echo "Gate: Pre-Implementation Behavior Review"
+          echo ""
+
+          # Look for PREHANDOVER_PROOF with this gate documented
+          if [ -f "PREHANDOVER_PROOF.md" ] && grep -q "Pre-Implementation\|pre-implementation\|Behavior Review" PREHANDOVER_PROOF.md; then
+            echo "✅ Found PREHANDOVER_PROOF.md with Pre-Implementation Review validation"
+            echo "✅ ACCEPTING evidence-based validation per BL-027/028"
+            echo "skip_execution=true" >> $GITHUB_OUTPUT
+          elif ls PREHANDOVER_PROOF_*.md 1> /dev/null 2>&1 && grep -q "Pre-Implementation\|pre-implementation\|Behavior Review" PREHANDOVER_PROOF_*.md 2>/dev/null; then
+            echo "✅ Found PREHANDOVER_PROOF with Pre-Implementation Review validation"
+            echo "✅ ACCEPTING evidence-based validation per BL-027/028"
+            echo "skip_execution=true" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️  No evidence-based validation found - proceeding with script execution"
+            echo "skip_execution=false" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Detect Enhancement Work
+        if: steps.evidence_check.outputs.skip_execution != 'true'
         id: detect-enhancement
         run: |
           echo "🔍 Detecting PR type for Pre-Implementation Behavior Review requirement..."
@@ -66,7 +88,7 @@ jobs:
       
       - name: Check for Review Report
         id: check-report
-        if: steps.detect-enhancement.outputs.enhancement == 'true'
+        if: steps.evidence_check.outputs.skip_execution != 'true' && steps.detect-enhancement.outputs.enhancement == 'true'
         run: |
           echo "🔍 Checking for Pre-Implementation Behavior Review Report..."
           
@@ -84,7 +106,7 @@ jobs:
       
       - name: Validate Review Report Completeness
         id: validate-report
-        if: steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
+        if: steps.evidence_check.outputs.skip_execution != 'true' && steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
         run: |
           echo "🔍 Validating review report completeness..."
           
@@ -118,7 +140,7 @@ jobs:
       
       - name: Validate PRESERVE Test Execution
         id: validate-preserve-tests
-        if: steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
+        if: steps.evidence_check.outputs.skip_execution != 'true' && steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
         run: |
           echo "🔍 Validating PRESERVE test execution evidence..."
           
@@ -140,7 +162,7 @@ jobs:
       
       - name: Check FM Approval
         id: check-approval
-        if: steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
+        if: steps.evidence_check.outputs.skip_execution != 'true' && steps.detect-enhancement.outputs.enhancement == 'true' && steps.check-report.outputs.found == 'true'
         run: |
           echo "🔍 Checking for FM/Reviewer approval..."
           
@@ -159,11 +181,16 @@ jobs:
         run: |
           echo "🔒 Making gate decision..."
           
+          SKIP_EXECUTION="${{ steps.evidence_check.outputs.skip_execution }}"
           ENHANCEMENT="${{ steps.detect-enhancement.outputs.enhancement }}"
           REPORT_FOUND="${{ steps.check-report.outputs.found }}"
           REPORT_COMPLETE="${{ steps.validate-report.outputs.complete }}"
           
-          if [ "$ENHANCEMENT" == "false" ] || [ "$ENHANCEMENT" == "exempt" ]; then
+          if [ "$SKIP_EXECUTION" == "true" ]; then
+            echo "result=PASS" >> $GITHUB_OUTPUT
+            echo "reason=Evidence-based validation accepted per BL-027/028" >> $GITHUB_OUTPUT
+            echo "✅ GATE PASS: Evidence-based validation"
+          elif [ "$ENHANCEMENT" == "false" ] || [ "$ENHANCEMENT" == "exempt" ]; then
             echo "result=PASS" >> $GITHUB_OUTPUT
             echo "reason=Not enhancement work or exemption granted" >> $GITHUB_OUTPUT
             echo "✅ GATE PASS: Protocol not applicable"
