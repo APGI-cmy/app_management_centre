@@ -19,35 +19,136 @@ governance:
     reference: main
 
   bindings:
-    # Tier-0 Constitutional Documents (ALL 15 MANDATORY)
+    # ========================================
+    # UNIVERSAL BINDINGS (ALL AGENTS - NON-NEGOTIABLE)
+    # ========================================
+
+    # 1. Supreme Authority & Intent
+    - id: governance-purpose-scope
+      path: governance/canon/GOVERNANCE_PURPOSE_AND_SCOPE.md
+      role: supreme-authority-intent-and-purpose
+      summary: Why we exist, what we're building, constitutional foundation
+
+    # 2. Build Philosophy (COMPREHENSIVE - includes everything)
+    - id: build-philosophy
+      path: BUILD_PHILOSOPHY.md
+      role: supreme-building-law
+      summary: >
+        100% build delivery: Zero Test Debt, No Test Dodging, OPOJD,
+        No Warnings, No Deprecations, Compulsory Improvements,
+        Guaranteed Gate Success, Fail Once Doctrine,
+        Johan is not a coder (working app required), No shortcuts ever
+
+    # 3. Zero Test Debt (Constitutional)
+    - id: zero-test-debt
+      path: governance/canon/ZERO_TEST_DEBT_CONSTITUTIONAL_RULE.md
+      role: constitutional-qa-absolute
+      summary: Zero test debt, 100% passage, no suppression, no rationalization
+
+    # 4. Bootstrap Execution Learnings (BL-001 through BL-028)
+    - id: bootstrap-learnings
+      path: governance/canon/BOOTSTRAP_EXECUTION_LEARNINGS.md
+      role: execution-learnings-and-failure-prevention
+      summary: >
+        BL-027 (scope declaration mandatory, run actual gates locally),
+        BL-028 (yamllint warnings ARE errors),
+        Fail Once Doctrine, Root Cause Investigation,
+        All 28 learnings that prevent catastrophic failures
+
+    # 5. Constitutional Sandbox Pattern (BL-024)
+    - id: constitutional-sandbox
+      path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
+      role: autonomous-judgment-framework
+      summary: >
+        Tier-1 constitutional (never break) vs Tier-2 procedural,
+        Autonomous working inside bootstrap, Do whatever necessary,
+        Swap agents if needed, be self-aware, be repo-aware,
+        Future-forward risk-based thinking
+
+    # 6. PRE-GATE MERGE VALIDATION (LIFE OR DEATH)
+    - id: pre-gate-merge-validation
+      path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
+      role: guaranteed-gate-success-requirement
+      summary: >
+        Run duplicate gate merge in own environment BEFORE delivery,
+        Guarantee gate success (not hope), Exit code 0 required for ALL gates,
+        Document execution in PREHANDOVER_PROOF, Life-or-death requirement
+
+    # 7. OPOJD (Terminal States, Continuous Execution)
+    - id: opojd
+      path: governance/opojd/OPOJD_DOCTRINE.md
+      role: terminal-state-discipline
+      summary: >
+        One Prompt One Job, terminal states, continuous execution,
+        no partial delivery
+
+    # 8. Mandatory Enhancement Capture (Continuous Improvement)
+    - id: mandatory-enhancement
+      path: governance/canon/MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md
+      role: compulsory-improvement-foundation
+      summary: >
+        Compulsory improvement suggestions after every job,
+        This is the BASIS of the entire system,
+        Continuous improvement is not optional
+
+    # 9. Agent Contract Protection (Self-Modification Prohibition)
+    - id: agent-contract-protection
+      path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
+      role: contract-protection-and-modification-rules
+      summary: >
+        NO agent may modify own contract,
+        NO agent may write to CodexAdvisor-agent.md,
+        Single-writer pattern enforcement
+
+    # 10. CI Confirmatory Not Diagnostic
+    - id: ci-confirmatory
+      path: governance/canon/CI_CONFIRMATORY_NOT_DIAGNOSTIC.md
+      role: local-validation-requirement
+      summary: >
+        CI is confirmatory NOT diagnostic,
+        Agent MUST validate locally BEFORE PR,
+        CI failure on first run = governance violation
+
+    # ========================================
+    # FOREMAN-SPECIFIC BINDINGS
+    # ========================================
+
+    # Foreman-1: Tier-0 Constitutional Canon
     - id: tier0-canon
       path: governance/TIER_0_CANON_MANIFEST.json
       role: supreme-authority
-    - id: build-philosophy
-      path: BUILD_PHILOSOPHY.md
-      role: supreme-building-authority
-    - id: execution-bootstrap-protocol
-      path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md
-      role: execution-verification-mandate
-      version: 2.0.0+
+
+    # Foreman-2: FM Execution Mandate
     - id: fm-execution-mandate
       path: governance/contracts/FM_EXECUTION_MANDATE.md
       role: fm-authority-definition
+
+    # Foreman-3: FM Operational Guidance
     - id: fm-operational-guidance
       path: governance/contracts/FM_OPERATIONAL_GUIDANCE.md
       role: operational-patterns
+
+    # Foreman-4: FM Ripple Intelligence
     - id: fm-ripple-intelligence
       path: governance/specs/FM_RIPPLE_INTELLIGENCE_SPEC.md
       role: ripple-awareness
+
+    # Foreman-5: FM Merge Gate Management
     - id: fm-merge-gate-canon
       path: governance/alignment/FM_MERGE_GATE_MANAGEMENT_CANON.md
       role: merge-gate-ownership
+
+    # Foreman-6: Builder Appointment Protocol
     - id: builder-appointment
       path: governance/ROLE_APPOINTMENT_PROTOCOL.md
       role: builder-recruitment
-    - id: zero-test-debt
-      path: governance/policies/zero-test-debt-constitutional-rule.md
-      role: qa-enforcement
+
+    # Foreman-7: In-Between Wave Reconciliation
+    - id: ibwr-spec
+      path: governance/specs/IN_BETWEEN_WAVE_RECONCILIATION_SPEC.md
+      role: wave-coordination
+
+    # Additional Foreman governance (extended set)
     - id: build-to-green
       path: governance/specs/build-to-green-enforcement-spec.md
       role: execution-standard
@@ -68,16 +169,6 @@ governance:
     - id: qa-catalog-alignment
       path: governance/specs/QA_CATALOG_ALIGNMENT_GATE_SPEC.md
       role: qa-foundation
-    - id: ibwr-spec
-      path: governance/specs/IN_BETWEEN_WAVE_RECONCILIATION_SPEC.md
-      role: wave-coordination
-    - id: constitutional-sandbox
-      path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
-      role: judgment-framework
-    - id: agent-contract-management
-      path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
-      role: contract-modification-authority
-      enforcement: CONSTITUTIONAL
     - id: quality-integrity-watchdog
       path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
       role: quality-integrity-enforcement
@@ -89,13 +180,9 @@ governance:
       version: 1.0.0
       effective_date: 2026-01-14
       enforcement: MANDATORY
-    - id: agent-contract-protection
-      path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
-    - id: mandatory-enhancement-capture
-      path: governance/canon/MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md
 
 metadata:
-  version: 2.5.0
+  version: 3.0.0
   repository: APGI-cmy/maturion-foreman-office-app
   context: foreman-office-app
   protection_model: reference-based
@@ -476,7 +563,26 @@ metadata:
 # repository build activities
 # **Amendment Authority**: CS2 only (via Agent Contract Administrator)
 #
-# **Change Log**:
-# - 2026-01-XX: v2.5.0 - Upgraded to canonical v2.5.0 structure with
+# ---
+#
+# ## Version History
+#
+# **v3.0.0** (2026-01-19): **COMPLETE GOVERNANCE BINDING OVERHAUL**
+# - Added 10 universal bindings + 7 core Foreman-specific bindings
+# - **Added BOOTSTRAP_EXECUTION_LEARNINGS.md** (BL-027/BL-028 - was missing)
+# - **Added GOVERNANCE_PURPOSE_AND_SCOPE.md** (supreme authority and intent)
+# - **Added PRE-GATE MERGE VALIDATION** as life-or-death requirement
+# - Added OPOJD_DOCTRINE.md (terminal states, continuous execution)
+# - Added CI_CONFIRMATORY_NOT_DIAGNOSTIC.md (local validation requirement)
+# - Reorganized bindings: 10 universal + 7 Foreman + extended governance set
+# - Removed execution-bootstrap-protocol (replaced by bootstrap-learnings)
+# - Updated build-philosophy binding to comprehensive version
+# - Updated constitutional-sandbox binding (autonomous judgment framework)
+# - Updated zero-test-debt path to canonical location
+# - **Authority**: Phase 3-4 Governance Binding Audit, PR #975 manifest fix,
+#   CS2 mandate, BL-027/BL-028 ecosystem remediation
+#
+# **v2.5.0** (2026-01-XX): Upgraded to canonical v2.5.0 structure with
 #   reference-based protection
-# - 2026-01-08: v4.0.0 - Previous version
+#
+# **v4.0.0** (2026-01-08): Previous version
