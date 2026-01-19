@@ -17,6 +17,8 @@ governance:
     path: /governance/canon
     reference: main
 
+---
+
   # COMPLETE CANONICAL BINDINGS (10 Universal + 4 Governance-Liaison-Specific)
   bindings:
     # ========================================
