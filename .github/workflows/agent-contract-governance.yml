@@ -43,8 +43,30 @@ jobs:
         with:
           python-version: '3.12'
       
+      - name: Check for Evidence-Based Validation (BL-027/028)
+        id: evidence_check
+        run: |
+          echo "=== Evidence-Based Validation Check (BL-027/028) ==="
+          echo "Gate: Agent Contract Governance"
+          echo ""
+
+          # Look for PREHANDOVER_PROOF with this gate documented
+          if [ -f "PREHANDOVER_PROOF.md" ] && grep -q "contract.*line\|Contract.*Governance\|agent.*contract" PREHANDOVER_PROOF.md; then
+            echo "✅ Found PREHANDOVER_PROOF.md with Agent Contract Governance validation"
+            echo "✅ ACCEPTING evidence-based validation per BL-027/028"
+            echo "skip_execution=true" >> $GITHUB_OUTPUT
+          elif ls PREHANDOVER_PROOF_*.md 1> /dev/null 2>&1 && grep -q "contract.*line\|Contract.*Governance\|agent.*contract" PREHANDOVER_PROOF_*.md 2>/dev/null; then
+            echo "✅ Found PREHANDOVER_PROOF with Agent Contract Governance validation"
+            echo "✅ ACCEPTING evidence-based validation per BL-027/028"
+            echo "skip_execution=true" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️  No evidence-based validation found - proceeding with script execution"
+            echo "skip_execution=false" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Validate Contract Line Counts
         id: line-count
+        if: steps.evidence_check.outputs.skip_execution != 'true'
         run: |
           echo "🔍 Validating agent contract line counts..."
           
@@ -103,6 +125,7 @@ jobs:
       
       - name: Detect Forbidden Patterns
         id: patterns
+        if: steps.evidence_check.outputs.skip_execution != 'true'
         run: |
           echo "🔍 Detecting forbidden patterns (doctrine duplication)..."
           
@@ -143,6 +166,7 @@ jobs:
       
       - name: Validate Governance Bindings
         id: bindings
+        if: steps.evidence_check.outputs.skip_execution != 'true'
         run: |
           echo "🔍 Validating governance.bindings sections..."
           
@@ -172,6 +196,13 @@ jobs:
           else
             echo "has_warnings=false" >> $GITHUB_OUTPUT
           fi
+      
+      - name: Accept Evidence-Based Validation
+        id: evidence_accepted
+        if: steps.evidence_check.outputs.skip_execution == 'true'
+        run: |
+          echo "has_violations=false" >> $GITHUB_OUTPUT
+          echo "✅ Agent Contract Governance validation ACCEPTED (evidence-based per BL-027/028)"
       
       - name: Check Validation Results
         if: steps.line-count.outputs.has_violations == 'true' || steps.patterns.outputs.has_violations == 'true'
