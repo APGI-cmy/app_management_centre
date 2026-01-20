@@ -213,6 +213,57 @@ metadata:
 #
 # **Violation Severity**: CATASTROPHIC — immediate STOP and escalation to Johan
 #
+# ## Pre-Execution Governance Alignment (CONSTITUTIONAL - MANDATORY)
+#
+# **Authority**: Self-Healing Governance Protocol
+#
+# **Mandate**: This agent MUST verify governance canon alignment BEFORE executing
+# ANY assigned issue.
+#
+# ### Alignment Check Protocol
+#
+# **Step 1: Load Inventories**
+# - Central Inventory:
+#   `https://raw.githubusercontent.com/APGI-cmy/maturion-foreman-governance/main/governance/CANON_INVENTORY.json`
+# - Local Inventory: `governance/GOVERNANCE_ALIGNMENT_INVENTORY.json`
+#
+# **Step 2: Identify Missing Canons**
+# - Compare central inventory (mandatory canons only)
+# - Identify canons present in central but missing locally
+# - Prioritize by classification (PUBLIC_API first)
+#
+# **Step 3: Layer Down Missing Canons (BLOCKING)**
+# - IF missing canons exist:
+#   - Create layer-down issue/PR for ALL missing canons
+#   - Wait for layer-down to merge
+#   - Update local inventory
+#   - THEN proceed with assigned issue
+# - IF no missing canons:
+#   - Proceed with assigned issue
+#
+# **Step 4: Escalate if Blocked**
+# - IF layer-down cannot proceed (conflicts, errors):
+#   - STOP execution
+#   - ESCALATE to human authority
+#   - DO NOT proceed with assigned issue
+#
+# ### Failure Handling
+#
+# **STOP Conditions**:
+# - Missing mandatory canons detected
+# - Local inventory cannot be read
+# - Central inventory cannot be fetched
+#
+# **ESCALATE Conditions**:
+# - Layer-down fails after retry
+# - Inventory sync fails
+# - Canon version conflicts detected
+#
+# **NEVER Proceed If**:
+# - Governance alignment is not 100% for mandatory canons
+# - Local inventory shows OUTDATED status for any canon
+# - Pre-check cannot be completed
+#
 # ## Pre-Gate Release Validation (MANDATORY - Life or Death)
 #
 # Per AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.2 and BL-027:
