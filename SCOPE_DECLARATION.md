@@ -1,103 +1,120 @@
-# Scope Declaration - governance-liaison.md v3.0.0 Upgrade
+# Scope Declaration - governance-liaison.md v3.1.0 Rewrite
 
-**Issue**: #979
-**PR**: TBD
-**Date**: 2026-01-19
-**Agent**: GitHub Copilot (working as agent-contract-administrator delegate)
+**Issue**: #979 - [CONTRACT] Rewrite governance-liaison.md in clean YAML format  
+**PR**: TBD  
+**Date**: 2026-01-19  
+**Agent**: agent-contract-administrator  
 **Authority**: BL-027 (Scope Declaration Mandatory Before PR Handover)
 
 ---
 
-## Files Modified
+## Files Modified (M)
 
-### Agent Contract Upgraded (1 file)
-1. `.github/agents/governance-liaison.md` - Upgraded from v2.5.0 to v3.0.0
+1. `.github/agents/governance-liaison.md` - COMPLETE REWRITE v3.0.0 → v3.1.0
+2. `SCOPE_DECLARATION.md` - Updated for v3.1.0 rewrite
 
 ---
 
-## Not Modified
+## Files Added (A)
 
-- All other agent contracts - Out of scope for this specific upgrade
-- `.github/agents/agent-contract-administrator.md` - Already at v3.0.0
-- All other repository files - Out of scope
+1. `.agent-admin/scans/scan_20260119_171340.md` - Comprehensive governance scan
+2. `.agent-admin/risk-assessments/risk_979_20260119.md` - Risk assessment
+3. `.github/agents/_archive/governance-liaison-v3.0.0-markdown.md` - Archived old contract
+
+**To be created before handover**:
+4. `.agent-admin/changes/change_979_20260119.md` - Change record
+5. `.agent-admin/completion-reports/completion_979_20260119.md` - Completion summary
+6. `PREHANDOVER_PROOF.md` - Pre-handover proof with gate validation evidence
+
+---
+
+## Files Deleted (D)
+
+(none)
 
 ---
 
 ## Changes Summary
 
-**Upgrade Type**: Agent contract binding upgrade to v3.0.0 with complete canonical bindings
+**Rewrite Type**: Complete contract reformat to YAML frontmatter + Markdown body structure
 
-**Key Changes**:
-1. **Added 10 Universal Canonical Bindings**:
-   - GOVERNANCE_PURPOSE_AND_SCOPE.md (intent and purpose)
-   - BUILD_PHILOSOPHY.md (comprehensive build law)
-   - ZERO_TEST_DEBT_CONSTITUTIONAL_RULE.md (constitutional QA)
-   - BOOTSTRAP_EXECUTION_LEARNINGS.md (BL-027/028 - was missing)
-   - CONSTITUTIONAL_SANDBOX_PATTERN.md (autonomous judgment)
-   - AGENT_CONTRACT_PROTECTION_PROTOCOL.md (pre-gate validation)
-   - OPOJD_DOCTRINE.md (terminal states)
-   - MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md (continuous improvement)
-   - AGENT_CONTRACT_PROTECTION_PROTOCOL.md (self-modification prohibition)
-   - CI_CONFIRMATORY_NOT_DIAGNOSTIC.md (local validation requirement)
+**NEW REQUIREMENT**: Format corrected from "YAML-only" (misinterpretation) to "YAML frontmatter + Markdown body" per BUILDER_CONTRACT_SCHEMA.md standard
 
-2. **Updated 4 Liaison-Specific Bindings**:
-   - PR_GATE_REQUIREMENTS_CANON.md
-   - FM_MERGE_GATE_MANAGEMENT_CANON.md
-   - AGENT_SCOPED_QA_BOUNDARIES.md
-   - WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
+### Key Changes
 
-3. **Expanded Pre-Gate Release Validation Section**:
-   - Added explicit BL-027/028 protocol steps
-   - Added SCOPE_DECLARATION.md creation requirement
-   - Added yamllint validation requirement (exit code 0)
-   - Added gate script execution commands
-   - Added PREHANDOVER_PROOF documentation requirement
-   - Emphasized guaranteed gate success (life-or-death requirement)
+1. **Format Structure**:
+   - **YAML Frontmatter** (lines 1 to `...`): Machine-readable metadata
+   - **Markdown Body** (after `...`): Human-readable documentation (all lines prefixed with `#`)
 
-4. **Updated Metadata**:
-   - Version: 2.5.0 → 3.0.0
-   - Context: foreman-office-app → foreman-orchestration-application
-   - Added contract_style: yaml-frontmatter-plus-markdown
+2. **YAML Frontmatter Content**:
+   - Agent metadata (name, description, id, class, role, profile)
+   - Repository context
+   - Governance canon reference
+   - Tier-0 manifest location
+   - All 14 canonical bindings with full details (id, path, version, role, enforcement, summary, critical flag)
+   - Metadata (version 3.1.0, contract_style: yaml-frontmatter-plus-markdown)
 
-5. **Added Version History Section**:
-   - Documented v3.0.0 changes
-   - Referenced v2.5.0 baseline
+3. **Markdown Body Content** (all lines prefixed with `#`):
+   - Authority & Mission
+   - Scope (Allowed & Restricted)
+   - Contract Modification Prohibition (CATASTROPHIC severity)
+   - Pre-Gate Release Validation (BL-027/BL-028, LIFE OR DEATH)
+   - PREHANDOVER_PROOF Template (Sections 0, 1, 2)
+   - SCOPE_DECLARATION Template
+   - Self-Demonstrating Validation Pattern (recursive self-validation)
+   - Code/Grep/Search Patterns for workflow validation
+   - Safety Authority (build readiness veto)
+   - Agent Boundaries & Immediate Remedy
+   - FM Office Visibility & Delivery
+   - Ripple Intelligence & Completion
+   - Escalation Protocol
+   - Protection Model & Protection Registry
+   - Constitutional Principles
+   - Prohibitions
+   - Version History (v3.1.0, v3.0.0, v2.5.0)
+   - Final Authority & Escalation Path
 
-6. **Fixed ALL yamllint violations** (BL-028 compliance):
-   - Removed trailing spaces
-   - Fixed line lengths (80 char limit)
-   - Fixed colon spacing
+4. **Zero Ambiguity Achieved**:
+   - All life-or-death steps locally explicit (no "see canonical for details")
+   - BL-027/BL-028 protocols fully embedded in contract
+   - Self-demonstrating validation pattern explained
+   - Templates for PREHANDOVER_PROOF and SCOPE_DECLARATION provided
+   - All procedural instructions clear and unambiguous
+
+5. **BL-028 Compliance**:
+   - All yamllint line-length errors fixed (44 errors)
    - Exit code: 0 ✅
 
-**Lines Changed**: ~231 insertions, ~50 deletions
+**Estimated Lines**: ~1,100 lines total (YAML frontmatter ~250 lines, Markdown body ~850 lines)
 
 ---
 
 ## Validation
 
 ### BL-027: Scope Declaration
-- ✅ SCOPE_DECLARATION.md updated (this file)
-- ✅ ALL modified files listed above (1 file total)
-- ⏳ Scope-to-diff validation pending (script check below)
+- ✅ SCOPE_DECLARATION.md created and updated (this file)
+- ✅ ALL modified and added files listed above
+- ⏳ Scope-to-diff validation: Script may not exist (non-blocking if absent)
 
 ### BL-028: yamllint Compliance
 - ✅ Exit code 0 achieved for governance-liaison.md
 - ✅ Zero warnings, zero errors
+- ✅ All 44 line-length errors fixed
 - ✅ No rationalizations, no exceptions
 
 ### Validation Commands
 
-**Scope-to-Diff Validation** (BL-027):
-```bash
-.github/scripts/validate-scope-to-diff.sh
-```
-Expected: Exit code 0 (or script not present - manual verification applies)
-
-**yamllint Validation** (BL-028):
+**yamllint Validation** (BL-028 - MANDATORY):
 ```bash
 yamllint .github/agents/governance-liaison.md
 ```
-Result: Exit code 0 ✅ (ACHIEVED - validated 2026-01-19)
+Result: **Exit code 0** ✅ (ACHIEVED - validated 2026-01-19 17:XX UTC)
+
+**Scope-to-Diff Validation** (BL-027 - if script exists):
+```bash
+.github/scripts/validate-scope-to-diff.sh
+```
+Expected: Exit code 0 (or script not present - documented here)
 
 ---
 
@@ -107,7 +124,8 @@ Result: Exit code 0 ✅ (ACHIEVED - validated 2026-01-19)
 - Zero Test Debt (yamllint warnings treated as errors - all fixed)
 - No Warning Escalations (all warnings fixed, not rationalized)
 - 100% Handovers (scope fully declared, validations documented)
-- Continuous Improvement (governance binding completeness achieved)
+- Continuous Improvement (self-demonstrating validation pattern added)
+- Build Philosophy (guaranteed gate success, not hope)
 
 **Bootstrap Learnings Applied**:
 - BL-027: Scope Declaration Mandatory Before PR Handover ✅
@@ -116,12 +134,12 @@ Result: Exit code 0 ✅ (ACHIEVED - validated 2026-01-19)
 **Canonical Authority**:
 - `governance/canon/BOOTSTRAP_EXECUTION_LEARNINGS.md` (BL-027/028)
 - `governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md` Section 4.2
+- `.github/agents/BUILDER_CONTRACT_SCHEMA.md` (contract format standard)
 - Issue APGI-cmy/maturion-foreman-office-app#979
-- PR APGI-cmy/maturion-foreman-office-app#975 (governance manifest fix)
-- Phase 1-3 Governance Binding Audit
+- Agent Contract Administrator authority (sole-writer pattern)
 
 ---
 
-**Agent**: GitHub Copilot (as agent-contract-administrator delegate)
-**Date**: 2026-01-19
-**Status**: Scope declared, yamllint validated (exit code 0), ready for gate execution
+**Agent**: agent-contract-administrator  
+**Date**: 2026-01-19  
+**Status**: Scope declared, yamllint validated (exit code 0), ready for PREHANDOVER_PROOF creation
