@@ -27,6 +27,23 @@ This schema defines the required structure and format for all builder agent cont
 
 ---
 
+## Schema Protection Notice
+
+This schema file defines the canonical structure for builder agent contracts.
+
+**Protection Authority**: CS2_AGENT_FILE_AUTHORITY_MODEL.md
+
+**Modification Authority**: CS2 (governance-repo-administrator in governance repo)
+
+**Builders CANNOT**:
+- Modify this schema to weaken requirements
+- Remove required sections from schema
+- Change schema validation rules
+
+**If schema changes needed**: Escalate to governance-repo-administrator
+
+---
+
 ## File Location
 
 All builder contracts MUST be located at:
