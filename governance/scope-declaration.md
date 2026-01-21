@@ -10,52 +10,47 @@
 
 ## PR Responsibility Domain
 
-`RESPONSIBILITY_DOMAIN:` Batch 1 Governance Canon Layer-Down
+`RESPONSIBILITY_DOMAIN:` Batch 2 Agent Governance Layer-Down (10 canons + 2 agent LOCKED sections)
 
 ---
 
 ## Explicitly In Scope
 
 `IN_SCOPE:`
-- Download and verify 10 critical canonical governance files from maturion-foreman-governance repository
-- Layer down canons to local `governance/canon/` directory:
-  1. AGENT_CONTRACT_PROTECTION_PROTOCOL.md
-  2. MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md
-  3. CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md
-  4. GOVERNANCE_RIPPLE_MODEL.md
-  5. CI_CONFIRMATORY_NOT_DIAGNOSTIC.md
-  6. SCOPE_DECLARATION_SCHEMA.md
-  7. SCOPE_TO_DIFF_RULE.md
-  8. GOVERNANCE_PURPOSE_AND_SCOPE.md
-  9. AGENT_RECRUITMENT_AND_CONTRACT_AUTHORITY_MODEL.md
-  10. CS2_AGENT_FILE_AUTHORITY_MODEL.md
-- Create SCOPE_DECLARATION.md (this file)
-- Create BATCH_1_INITIATION_SUMMARY.md documenting scope and objectives
-- Create BATCH_1_PREHANDOVER_PROOF.md documenting validation execution
-- Update governance documentation references to align with Batch 1 canons
-- Validate all governance markdown files for formatting correctness
-- Ensure canonical governance version tracking documentation
+- Download and layer down 10 agent governance canons from maturion-foreman-governance repository:
+  1. AGENT_FILE_BINDING_REQUIREMENTS.md (verify/update existing)
+  2. AGENT_CANONICAL_CONTEXT_SYNCHRONISATION_PROTOCOL.md (new)
+  3. AGENT_RECRUITMENT.md (new)
+  4. AGENT_RIPPLE_AWARENESS_OBLIGATION.md (new)
+  5. AGENT_ROLE_GATE_APPLICABILITY.md (new)
+  6. AGENT_ONBOARDING_QUICKSTART.md (new)
+  7. BUILDER_CONTRACT_BINDING_CHECKLIST.md (new)
+  8. COGNITIVE_CAPABILITY_ORCHESTRATION_MODEL.md (new)
+  9. DELEGATION_INSTRUCTION_AND_AUDIT_MODEL.md (new)
+  10. DOMAIN_OWNERSHIP_ACCOUNTABILITY.md (new)
+- Add 6 LOCKED sections to ui-builder.md (.github/agents/ui-builder.md)
+- Add 6 LOCKED sections to api-builder.md (.github/agents/api-builder.md)
+- Create governance/reports/batch-2-layerdown-log.txt
+- Create governance/reports/batch-2-gate-execution.md
+- Update this SCOPE_DECLARATION.md for Batch 2
+- Validate all gates locally before PR creation
 
 ---
 
 ## Explicitly Out of Scope
 
 `OUT_OF_SCOPE:`
-- ❌ Agent file modifications (Foreman-app_FM.md, CodexAdvisor-agent.md) - Reserved for Batch 1 Phase 2
+- ❌ Foreman-app_FM.md modifications (already has LOCKED sections)
+- ❌ CodexAdvisor-agent.md modifications (already has LOCKED sections)
+- ❌ schema-builder.md modifications (reserved for future batch)
+- ❌ qa-builder.md modifications (reserved for future batch)
+- ❌ integration-builder.md modifications (reserved for future batch)
 - ❌ Tests (no test changes in this governance layer-down)
 - ❌ CI workflow modifications
-- ❌ Migrations or database changes
-- ❌ Email or notification system changes
-- ❌ Logging or audit system modifications
-- ❌ Deployment or infrastructure changes
 - ❌ Application code changes
-- ❌ Implementation of any governance requirements beyond layer-down
 - ❌ Gate script modifications
-- ❌ Builder contract updates
-- ❌ QA catalog modifications
 - ❌ Architecture changes
-- ❌ Batch 2-10 canons (reserved for future batches)
-- ❌ Version alignment of existing local canons (to be addressed separately if needed)
+- ❌ Batch 3+ canons (reserved for future batches)
 
 ---
 
@@ -66,7 +61,8 @@
 - `TESTS: UNCHANGED` - No test suite modifications expected
 - `GOVERNANCE_GATES: GREEN` - Governance compliance gates must pass
 - `SCOPE_TO_DIFF: ALIGNED` - Scope declaration matches actual file changes
-- `FILE_COUNT: 10_CANONS + 3_DOCS` - Exactly 10 canon files + 3 documentation files created
+- `YAML_LINT: PASS` - All YAML/markdown syntax validation passes
+- `FILE_COUNT: 9_NEW_CANONS + 1_UPDATED_CANON + 2_AGENT_FILES` - Exactly as declared
 
 ---
 
@@ -81,9 +77,9 @@ This scope is frozen as of 2026-01-21. Any deviation from this declared scope re
 ## Authority
 
 **Canonical Reference**: `CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md`  
-**Gap Analysis**: `governance/reports/gap-analysis-office-app-20260121.md`  
-**Alignment Plan**: `governance/reports/alignment-plan-office-app-20260121.md`  
-**Issue Reference**: Batch 1 Initiation: FM App Governance Canon Layer-Down
+**Alignment Plan**: `governance/reports/alignment-plan-office-app-20260121.md` (Batch 2)  
+**Issue Reference**: [Governance Layer-Down] Batch 2: Agent Governance Alignment (10 canons + 2 agent LOCKED sections)
+**Dependencies**: ✅ Batch 1 Complete
 
 ---
 
