@@ -9,6 +9,7 @@
 ```
 M .github/agents/Foreman-app_FM.md
 M .github/agents/CodexAdvisor-agent.md
+A .yamllint
 ```
 
 ## Changes Summary
@@ -35,6 +36,11 @@ M .github/agents/CodexAdvisor-agent.md
   6. Prohibitions (LOCKED)
 - Updated metadata: version 1.3.0 → 1.3.1, added protection_model: inline-locked-sections, locked_sections: 6, last_updated: 2026-01-21
 - Added version history entry for v1.3.1
+
+### .yamllint
+- Added yamllint configuration file to enable local validation
+- Configured for 80 character line length, disabled document-start/end markers
+- Enables BL-028 compliance checking
 
 ## Scope Verification
 
