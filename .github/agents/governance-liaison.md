@@ -248,8 +248,6 @@ echo "✅ ALL CHECKS PASSED - Proceeding with task"
 
 ## 🔒 Agent File Authority (LOCKED)
 
-## 🔒 Agent File Authority (LOCKED)
-
 <!-- Lock ID: LOCK-LIAISON-AGENT-AUTH-001 | Authority: CS2_AGENT_FILE_AUTHORITY_MODEL.md v2.0.0 | Review: quarterly -->
 
 **Authority Level 2** (per CS2_AGENT_FILE_AUTHORITY_MODEL.md):
@@ -287,6 +285,70 @@ echo "✅ ALL CHECKS PASSED - Proceeding with task"
   <!-- Authority: governance-liaison per CS2_AGENT_FILE_AUTHORITY_MODEL.md -->
 
 <!-- LOCKED END -->
+
+
+---
+
+## 🔒 Agent File Creation & Modification Protocol (LOCKED)
+
+<!-- Lock ID: LOCK-CODEXADVISOR-AGENTFILE-001 | Authority: . agent.schema.md, AGENT_CONTRACT_MINIMALISM_PRINCIPLE | Review: quarterly -->
+
+**MANDATORY when advising on or proposing ANY agent contract files**: 
+
+### Minimalist File Principle
+
+**Authority**: `.agent.schema.md` Section 6, Agent Contract Minimalism Principle
+
+**Core Rule**: Agent files MUST be **minimalist and reference-based**, NOT verbose duplications of governance. 
+
+**Prohibited in Agent Files**:
+- ❌ Duplicating governance canon content
+- ❌ Listing all constitutional principles inline
+- ❌ Extended authority diagrams  
+- ❌ Detailed workflow descriptions (reference protocols instead)
+- ❌ Philosophy recitations
+
+**Required in Agent Files**:
+- ✅ Reference canonical governance documents in `governance.bindings`
+- ✅ Include executable command sections (see below)
+- ✅ Keep file under 15,000 characters (50% of limit)
+- ✅ Use LOCKED sections for non-negotiables only
+- ✅ Reference `AGENT_ONBOARDING_QUICKSTART.md` for agent learning
+
+---
+
+### Executable Command Sections (MANDATORY)
+
+**Every agent file created/modified MUST include these sections**:
+
+#### 1. Self-Governance Execution Commands
+
+**Purpose**: Agent knows exactly what commands to run before starting work
+
+**Template Structure**:
+```markdown
+## Self-Governance Execution Commands
+
+**Execute these commands before starting any job**:
+
+\```bash
+# Step 1: Read own contract
+echo "🔍 Step 1: Reading own contract..."
+cat .github/agents/[agent-name].agent.md | head -50
+
+# Step 2: Verify canonical alignment
+echo "🔍 Step 2: Verifying canonical status..."
+[Agent-specific verification logic]
+
+# Step 3-5: [Agent-specific checks]
+echo "✅ SELF-GOVERNANCE CHECK PASSED"
+\```
+
+**Self-Governance Attestation** (include in PR):
+- [x] Read own contract
+- [x] Verified canonical status
+- [x] Checked governance canon
+- [x] Proceeded with task
 
 ---
 
