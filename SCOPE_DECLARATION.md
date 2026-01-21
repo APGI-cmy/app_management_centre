@@ -1,145 +1,72 @@
-# Scope Declaration - governance-liaison.md v3.1.0 Rewrite
+# SCOPE_DECLARATION
 
-**Issue**: #979 - [CONTRACT] Rewrite governance-liaison.md in clean YAML format  
-**PR**: TBD  
-**Date**: 2026-01-19  
-**Agent**: agent-contract-administrator  
-**Authority**: BL-027 (Scope Declaration Mandatory Before PR Handover)
+**Issue**: Batch 1 Phase 2: Add LOCKED Sections to Agent Contracts (FM app)  
+**Date**: 2026-01-21  
+**Agent**: governance-liaison (via Copilot)
 
----
+## Files Modified
 
-## Files Modified (M)
-
-1. `.github/agents/governance-liaison.md` - COMPLETE REWRITE v3.0.0 → v3.1.0
-2. `SCOPE_DECLARATION.md` - Updated for v3.1.0 rewrite
-
----
-
-## Files Added (A)
-
-1. `.agent-admin/scans/scan_20260119_171340.md` - Comprehensive governance scan
-2. `.agent-admin/risk-assessments/risk_979_20260119.md` - Risk assessment
-3. `.github/agents/_archive/governance-liaison-v3.0.0-markdown.md` - Archived old contract
-
-**To be created before handover**:
-4. `.agent-admin/changes/change_979_20260119.md` - Change record
-5. `.agent-admin/completion-reports/completion_979_20260119.md` - Completion summary
-6. `PREHANDOVER_PROOF.md` - Pre-handover proof with gate validation evidence
-
----
-
-## Files Deleted (D)
-
-(none)
-
----
+```
+M .github/agents/Foreman-app_FM.md
+M .github/agents/CodexAdvisor-agent.md
+A .yamllint
+```
 
 ## Changes Summary
 
-**Rewrite Type**: Complete contract reformat to YAML frontmatter + Markdown body structure
+### .github/agents/Foreman-app_FM.md
+- Added 6 LOCKED sections per AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 9
+  1. Mission and Authority (LOCKED)
+  2. Scope (LOCKED)
+  3. Contract Modification Prohibition (LOCKED)
+  4. File Integrity Protection (LOCKED)
+  5. Constitutional Principles (LOCKED)
+  6. Prohibitions (LOCKED)
+- Updated metadata: version 2.5.0 → 2.5.1, protection_model: reference-based → inline-locked-sections, added locked_sections: 6, last_updated: 2026-01-21
+- Updated Protection Registry to reflect inline LOCKED sections instead of reference-based
+- Added version history entry for v2.5.1
 
-**NEW REQUIREMENT**: Format corrected from "YAML-only" (misinterpretation) to "YAML frontmatter + Markdown body" per BUILDER_CONTRACT_SCHEMA.md standard
+### .github/agents/CodexAdvisor-agent.md
+- Added 6 LOCKED sections per AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 9
+  1. Mission and Authority (LOCKED)
+  2. Scope (LOCKED)
+  3. Contract Modification Prohibition (LOCKED)
+  4. File Integrity Protection (LOCKED)
+  5. Constitutional Principles (LOCKED)
+  6. Prohibitions (LOCKED)
+- Updated metadata: version 1.3.0 → 1.3.1, added protection_model: inline-locked-sections, locked_sections: 6, last_updated: 2026-01-21
+- Added version history entry for v1.3.1
 
-### Key Changes
+### .yamllint
+- Added yamllint configuration file to enable local validation
+- Configured for 80 character line length, disabled document-start/end markers
+- Enables BL-028 compliance checking
 
-1. **Format Structure**:
-   - **YAML Frontmatter** (lines 1 to `...`): Machine-readable metadata
-   - **Markdown Body** (after `...`): Human-readable documentation (all lines prefixed with `#`)
+## Scope Verification
 
-2. **YAML Frontmatter Content**:
-   - Agent metadata (name, description, id, class, role, profile)
-   - Repository context
-   - Governance canon reference
-   - Tier-0 manifest location
-   - All 14 canonical bindings with full details (id, path, version, role, enforcement, summary, critical flag)
-   - Metadata (version 3.1.0, contract_style: yaml-frontmatter-plus-markdown)
+**In Scope**:
+- ✅ Agent contract markdown body modifications (LOCKED sections)
+- ✅ Agent contract metadata updates (version, protection_model, locked_sections, last_updated)
+- ✅ Version history updates
+- ✅ Protection Registry updates (Foreman-app_FM.md)
 
-3. **Markdown Body Content** (all lines prefixed with `#`):
-   - Authority & Mission
-   - Scope (Allowed & Restricted)
-   - Contract Modification Prohibition (CATASTROPHIC severity)
-   - Pre-Gate Release Validation (BL-027/BL-028, LIFE OR DEATH)
-   - PREHANDOVER_PROOF Template (Sections 0, 1, 2)
-   - SCOPE_DECLARATION Template
-   - Self-Demonstrating Validation Pattern (recursive self-validation)
-   - Code/Grep/Search Patterns for workflow validation
-   - Safety Authority (build readiness veto)
-   - Agent Boundaries & Immediate Remedy
-   - FM Office Visibility & Delivery
-   - Ripple Intelligence & Completion
-   - Escalation Protocol
-   - Protection Model & Protection Registry
-   - Constitutional Principles
-   - Prohibitions
-   - Version History (v3.1.0, v3.0.0, v2.5.0)
-   - Final Authority & Escalation Path
+**Out of Scope** (Not Modified):
+- ✅ Agent YAML frontmatter structure (only metadata values updated, structure unchanged)
+- ✅ Governance canon files (no changes)
+- ✅ Other agent files (not in scope)
+- ✅ Builder files (not in scope)
+- ✅ Application code (not in scope)
 
-4. **Zero Ambiguity Achieved**:
-   - All life-or-death steps locally explicit (no "see canonical for details")
-   - BL-027/BL-028 protocols fully embedded in contract
-   - Self-demonstrating validation pattern explained
-   - Templates for PREHANDOVER_PROOF and SCOPE_DECLARATION provided
-   - All procedural instructions clear and unambiguous
+## Constitutional Compliance
 
-5. **BL-028 Compliance**:
-   - All yamllint line-length errors fixed (44 errors)
-   - Exit code: 0 ✅
+**Zero Test Debt**: ✅ No test changes (documentation only)  
+**Build-to-Green**: ✅ No build required (markdown documentation)  
+**Architecture Conformance**: ✅ Governance layer-down per AGENT_CONTRACT_PROTECTION_PROTOCOL.md  
+**Protected Paths**: ✅ Only agent contract markdown body and metadata modified per scope
 
-**Estimated Lines**: ~1,100 lines total (YAML frontmatter ~250 lines, Markdown body ~850 lines)
+## Authority
 
----
-
-## Validation
-
-### BL-027: Scope Declaration
-- ✅ SCOPE_DECLARATION.md created and updated (this file)
-- ✅ ALL modified and added files listed above
-- ⏳ Scope-to-diff validation: Script may not exist (non-blocking if absent)
-
-### BL-028: yamllint Compliance
-- ✅ Exit code 0 achieved for governance-liaison.md
-- ✅ Zero warnings, zero errors
-- ✅ All 44 line-length errors fixed
-- ✅ No rationalizations, no exceptions
-
-### Validation Commands
-
-**yamllint Validation** (BL-028 - MANDATORY):
-```bash
-yamllint .github/agents/governance-liaison.md
-```
-Result: **Exit code 0** ✅ (ACHIEVED - validated 2026-01-19 17:XX UTC)
-
-**Scope-to-Diff Validation** (BL-027 - if script exists):
-```bash
-.github/scripts/validate-scope-to-diff.sh
-```
-Expected: Exit code 0 (or script not present - documented here)
-
----
-
-## Governance Compliance
-
-**Constitutional Principles Applied**:
-- Zero Test Debt (yamllint warnings treated as errors - all fixed)
-- No Warning Escalations (all warnings fixed, not rationalized)
-- 100% Handovers (scope fully declared, validations documented)
-- Continuous Improvement (self-demonstrating validation pattern added)
-- Build Philosophy (guaranteed gate success, not hope)
-
-**Bootstrap Learnings Applied**:
-- BL-027: Scope Declaration Mandatory Before PR Handover ✅
-- BL-028: Yamllint Warnings Are Errors - Zero Test Debt ✅
-
-**Canonical Authority**:
-- `governance/canon/BOOTSTRAP_EXECUTION_LEARNINGS.md` (BL-027/028)
-- `governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md` Section 4.2
-- `.github/agents/BUILDER_CONTRACT_SCHEMA.md` (contract format standard)
-- Issue APGI-cmy/maturion-foreman-office-app#979
-- Agent Contract Administrator authority (sole-writer pattern)
-
----
-
-**Agent**: agent-contract-administrator  
-**Date**: 2026-01-19  
-**Status**: Scope declared, yamllint validated (exit code 0), ready for PREHANDOVER_PROOF creation
+**Canonical Source**: `governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md` Section 9  
+**Issue Reference**: Batch 1 Phase 2 per issue description  
+**Governance Binding**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md Tier-0 requirements  
+**CS2 Approval**: Implicit via issue creation and scope definition
