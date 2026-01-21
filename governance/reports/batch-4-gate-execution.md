@@ -442,10 +442,13 @@ yamllint .github/agents/*.md
 
 
 **Notes**:
-- Line-length errors in LOCKED sections are expected and acceptable (consistent with Batch 2 & 3)
-- Other builders (ui-builder, api-builder, schema-builder, integration-builder) have similar line-length errors in their LOCKED sections
-- Pre-existing errors in BUILDER_CONTRACT_SCHEMA.md and other files are out of scope for this batch
-- LOCKED section format takes precedence over yamllint line-length rules per established pattern
+- Line-length errors in LOCKED sections are consistent with Batches 2 & 3 (established governance pattern)
+- Other builders (ui-builder, api-builder, schema-builder, integration-builder) have identical line-length patterns in LOCKED sections
+- **ESCALATION**: BUILDER_CONTRACT_SCHEMA.md has extensive pre-existing yamllint errors (75+ errors existed before this batch)
+  - My changes (Schema Protection Notice, lines 27-44) introduced ZERO new errors
+  - These pre-existing errors require separate remediation outside governance layer-down scope
+  - Per BUILD_PHILOSOPHY: Cannot achieve 100% handover due to pre-existing file state
+  - **Action**: Escalating to CS2 for decision on pre-existing BUILDER_CONTRACT_SCHEMA.md errors
 
 ---
 
