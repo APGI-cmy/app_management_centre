@@ -10,30 +10,30 @@
 
 ## PR Responsibility Domain
 
-`RESPONSIBILITY_DOMAIN:` Batch 3 PR Gates & Quality Alignment Layer-Down (10 canons + 2 agent LOCKED sections)
+`RESPONSIBILITY_DOMAIN:` Batch 4 FM-Specific & Learning Alignment Layer-Down (10 canons + 2 agent file updates)
 
 ---
 
 ## Explicitly In Scope
 
 `IN_SCOPE:`
-- Download and layer down 10 PR gate and quality canons from maturion-foreman-governance repository:
-  1. PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md (new)
-  2. PR_GATE_PRECONDITION_RULE.md (new)
-  3. PR_SCOPE_CONTROL_POLICY.md (new)
-  4. BRANCH_PROTECTION_ENFORCEMENT.md (new)
-  5. BUILDER_FIRST_PR_MERGE_MODEL.md (new)
-  6. QA_CATALOG_ALIGNMENT_GATE_CANON.md (new)
-  7. INITIALIZATION_COMPLETENESS_GATE.md (new)
-  8. WARNING_DISCOVERY_BLOCKER_PROTOCOL.md (new)
-  9. GATE_PREDICTIVE_COMPLIANCE_ANALYSIS.md (new)
-  10. MERGE_GATE_PHILOSOPHY.md (new)
-- Add 6 LOCKED sections to schema-builder.md (.github/agents/schema-builder.md)
-- Add 6 LOCKED sections to integration-builder.md (.github/agents/integration-builder.md)
-- Create GOVERNANCE_ARTIFACT_INVENTORY.md (document all 39 canons: 29 existing + 10 new)
-- Create governance/reports/batch-3-layerdown-log.txt
-- Create governance/reports/batch-3-gate-execution.md
-- Update this SCOPE_DECLARATION.md for Batch 3
+- Download and layer down 10 FM-specific and learning loop canons from maturion-foreman-governance repository:
+  1. FM_GOVERNANCE_LOADING_PROTOCOL.md (new)
+  2. FM_BUILDER_APPOINTMENT_PROTOCOL.md (new)
+  3. FM_PREAUTH_CHECKLIST_CANON.md (new)
+  4. FM_RUNTIME_ENFORCEMENT_AND_AWARENESS_MODEL.md (new)
+  5. FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md (new)
+  6. LEARNING_INTAKE_AND_PROMOTION_MODEL.md (new)
+  7. LEARNING_PROMOTION_RULE.md (new)
+  8. FAILURE_PROMOTION_RULE.md (new)
+  9. BUILD_INTERVENTION_AND_ALERT_MODEL.md (new)
+  10. CASCADING_FAILURE_CIRCUIT_BREAKER.md (new)
+- Add 6 LOCKED sections to qa-builder.md (.github/agents/qa-builder.md)
+- Add protection note to BUILDER_CONTRACT_SCHEMA.md (.github/agents/BUILDER_CONTRACT_SCHEMA.md)
+- Update GOVERNANCE_ARTIFACT_INVENTORY.md (document all 40 canons: 30 existing + 10 new)
+- Create governance/reports/batch-4-layerdown-log.txt
+- Create governance/reports/batch-4-gate-execution.md
+- Update this SCOPE_DECLARATION.md for Batch 4
 - Validate all gates locally before PR creation
 
 ---
@@ -45,13 +45,14 @@
 - ❌ CodexAdvisor-agent.md modifications (already has LOCKED sections)
 - ❌ ui-builder.md modifications (already has LOCKED sections from Batch 2)
 - ❌ api-builder.md modifications (already has LOCKED sections from Batch 2)
-- ❌ qa-builder.md modifications (reserved for future batch)
+- ❌ schema-builder.md modifications (already has LOCKED sections from Batch 3)
+- ❌ integration-builder.md modifications (already has LOCKED sections from Batch 3)
 - ❌ Tests (no test changes in this governance layer-down)
 - ❌ CI workflow modifications
 - ❌ Application code changes
 - ❌ Gate script modifications
 - ❌ Architecture changes
-- ❌ Batch 4+ canons (reserved for future batches)
+- ❌ Batch 5+ canons (reserved for future batches)
 
 ---
 
@@ -63,7 +64,8 @@
 - `GOVERNANCE_GATES: GREEN` - Governance compliance gates must pass
 - `SCOPE_TO_DIFF: ALIGNED` - Scope declaration matches actual file changes
 - `YAML_LINT: PASS` - All YAML/markdown syntax validation passes
-- `FILE_COUNT: 10_NEW_CANONS + 2_AGENT_FILES + 1_INVENTORY` - Exactly as declared
+- `LOCKED_SECTIONS: PASS` - LOCKED section validation passes
+- `FILE_COUNT: 10_NEW_CANONS + 1_QA_BUILDER + 1_SCHEMA_UPDATE + 1_INVENTORY` - Exactly as declared
 
 ---
 
@@ -78,9 +80,9 @@ This scope is frozen as of 2026-01-21. Any deviation from this declared scope re
 ## Authority
 
 **Canonical Reference**: `CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md`  
-**Alignment Plan**: `governance/reports/alignment-plan-office-app-20260121.md` (Batch 3)  
-**Issue Reference**: [Governance Layer-Down] Batch 3: PR Gates & Quality Alignment (10 canons + 2 agent LOCKED sections)
-**Dependencies**: ✅ Batch 1 Complete, ✅ Batch 2 Complete
+**Alignment Plan**: `governance/reports/alignment-plan-office-app-20260121.md` (Batch 4)  
+**Issue Reference**: [Governance Layer-Down] Batch 4: FM-Specific & Learning Alignment (10 canons + 2 agent file updates)  
+**Dependencies**: ✅ Batch 1 Complete, ✅ Batch 2 Complete, ✅ Batch 3 Complete
 
 ---
 
