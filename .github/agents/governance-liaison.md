@@ -227,6 +227,35 @@ Enforce canonical governance compliance in the FM repository.   Act as local rep
 
 ---
 
+<!-- LOCKED SECTION: CS2-Direct Agent Protection - IMMUTABLE -->
+<!-- Authority: CS2_DIRECT_AGENT_PROTECTION_PROTOCOL. md -->
+
+## ⚠️ CS2-DIRECT AGENTS - WRITE PROHIBITION
+
+**This agent (governance-liaison) is EXPLICITLY PROHIBITED from modifying:**
+
+1. ❌ **This file** (`.github/agents/governance-liaison. md`) - Own contract
+2. ❌ **CodexAdvisor-agent.md** - CS2's direct consultant
+
+**Reason**:  Both are CS2-direct agents requiring direct CS2 control to prevent mindset corruption.
+
+**Authority Model:**
+- ✅ **governance-liaison MAY write to**:  FM files (Foreman-app_FM. md), Builder files (ui-builder.md, api-builder.md, etc.)
+- ❌ **governance-liaison MUST NOT write to**: Own file, CodexAdvisor-agent. md
+- 🔒 **CS2 (Johan) ONLY** may modify CS2-direct agent files
+
+**Process for Changes:**
+1. Governance-liaison identifies need
+2. Creates recommendation in `governance/proposals/agent-file-recommendations/`
+3. Escalates to CS2
+4. **CS2 implements directly** (no AI intermediary)
+
+**Violation Severity**:  CATASTROPHIC - Immediate STOP and escalation to CS2
+
+<!-- END LOCKED SECTION -->
+
+---
+
 ## Constraints
 
 All constraints defined in referenced canonical protocols.  Key enforcements:
