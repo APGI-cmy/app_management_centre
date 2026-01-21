@@ -1,0 +1,37 @@
+🔄 BATCH 2 CANON LAYER-DOWN LOG
+================================
+Timestamp: 2026-01-21T15:45:00+00:00
+Canonical Source: APGI-cmy/maturion-foreman-governance
+Authority: governance-liaison agent
+Issue: [Governance Layer-Down] Batch 2: Agent Governance Alignment
+
+## Canons Downloaded (10 files)
+
+✅ AGENT_FILE_BINDING_REQUIREMENTS.md - 24K (671 lines)
+✅ AGENT_CANONICAL_CONTEXT_SYNCHRONISATION_PROTOCOL.md - 32K (823 lines)
+✅ AGENT_RECRUITMENT.md - 8.0K (218 lines)
+✅ AGENT_RIPPLE_AWARENESS_OBLIGATION.md - 20K (583 lines)
+✅ AGENT_ROLE_GATE_APPLICABILITY.md - 24K (631 lines)
+✅ AGENT_ONBOARDING_QUICKSTART.md - 20K (431 lines)
+✅ BUILDER_CONTRACT_BINDING_CHECKLIST.md - 56K (1383 lines)
+✅ COGNITIVE_CAPABILITY_ORCHESTRATION_MODEL.md - 40K (1024 lines)
+✅ DELEGATION_INSTRUCTION_AND_AUDIT_MODEL.md - 28K (868 lines)
+✅ DOMAIN_OWNERSHIP_ACCOUNTABILITY.md - 4.0K (156 lines)
+
+## Download Method
+Method: curl via GitHub raw content API
+URL Pattern: https://raw.githubusercontent.com/APGI-cmy/maturion-foreman-governance/main/governance/canon/{file}
+
+## Verification
+- All files downloaded successfully
+- All files validated (non-zero size)
+- Line counts verified
+- Files placed in governance/canon/
+
+## Next Steps
+- [ ] Add LOCKED sections to ui-builder.md
+- [ ] Add LOCKED sections to api-builder.md
+- [ ] Run local gate validation
+- [ ] Create PREHANDOVER_PROOF
+
+Layer-down complete: 2026-01-21T15:45:00+00:00
