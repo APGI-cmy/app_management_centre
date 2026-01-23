@@ -1,9 +1,9 @@
 # GOVERNANCE ARTIFACT INVENTORY
 
-**Repository**: APGI-cmy/maturion-foreman-office-app  
-**Last Updated**: 2026-01-23T12:25:00Z  
-**Batch**: 5 (Stop-and-Fix & BYG Philosophy)  
-**Total Canons**: 42 (40 pre-existing + 2 new)  
+**Repository**: APGI-cmy/maturion-foreman-office-app
+**Last Updated**: 2026-01-23T12:43:00Z
+**Batch**: 5 (Governance Liaison + Architecture Alignment)
+**Total Canons**: 52 (42 pre-existing + 10 new)
 **Canonical Source**: APGI-cmy/maturion-foreman-governance
 
 ---
@@ -17,7 +17,8 @@ This inventory documents all governance canon files layered down from the canoni
 - **Batch 2**: 10 canons (Agent Governance Alignment)
 - **Batch 3**: 10 canons (PR Gates & Quality Alignment)
 - **Batch 4**: 10 canons (FM-Specific & Learning Alignment)
-- **Batch 5**: 2 canons (Stop-and-Fix & BYG Philosophy) - **THIS BATCH**
+- **Batch 4.5**: 2 canons (Stop-and-Fix & BYG Philosophy)
+- **Batch 5**: 10 canons (Governance Liaison + Architecture Alignment) - **THIS BATCH**
 
 ---
 
@@ -89,12 +90,29 @@ This inventory documents all governance canon files layered down from the canoni
 
 ---
 
-## Batch 5: Stop-and-Fix & BYG Philosophy (2 canons) - NEW
+## Batch 4.5: Stop-and-Fix & BYG Philosophy (2 canons)
 
 | Canon File | Status | Last Updated | Location |
 |------------|--------|--------------|----------|
-| STOP_AND_FIX_DOCTRINE.md | ✅ Present | 2026-01-23 (Batch 5) | governance/canon/ |
-| BYG_DOCTRINE.md | ✅ Present | 2026-01-23 (Batch 5) | governance/philosophy/ |
+| STOP_AND_FIX_DOCTRINE.md | ✅ Present | 2026-01-23 (Batch 4.5) | governance/canon/ |
+| BYG_DOCTRINE.md | ✅ Present | 2026-01-23 (Batch 4.5) | governance/philosophy/ |
+
+---
+
+## Batch 5: Governance Liaison + Architecture Alignment (10 canons) - NEW
+
+| Canon File | Status | Last Updated |
+|------------|--------|--------------|
+| GOVERNANCE_LIAISON_MINIMUM_APPOINTMENT_REQUIREMENTS.md | ✅ Present | 2026-01-23 (Batch 5) |
+| GOVERNANCE_LIAISON_MINIMUM_REQUIREMENTS_VALIDATION.md | ✅ Present | 2026-01-23 (Batch 5) |
+| GOVERNANCE_LIAISON_ROLE_SURVEY.md | ✅ Present | 2026-01-23 (Batch 5) |
+| GOVERNANCE_LIAISON_TRAINING_PROTOCOL.md | ✅ Present | 2026-01-23 (Batch 5) |
+| ARCHITECTURE_COMPLETENESS_REQUIREMENTS.md | ✅ Present | 2026-01-23 (Batch 5) |
+| APP_STARTUP_REQUIREMENTS_DECLARATION.md | ✅ Present | 2026-01-23 (Batch 5) |
+| BUILD_EFFECTIVENESS_STANDARD.md | ✅ Present | 2026-01-23 (Batch 5) |
+| BUILD_TREE_EXECUTION_MODEL.md | ✅ Present | 2026-01-23 (Batch 5) |
+| BUILD_NODE_INSPECTION_MODEL.md | ✅ Present | 2026-01-23 (Batch 5) |
+| COMBINED_TESTING_PATTERN.md | ✅ Present | 2026-01-23 (Batch 5) |
 
 ---
 
@@ -116,13 +134,14 @@ This inventory documents all governance canon files layered down from the canoni
 
 ## Total Canon Count
 
-**Total Canons**: 42 files
+**Total Canons**: 52 files
 
 - Batch 1: 10 canons
 - Batch 2: 10 canons  
 - Batch 3: 10 canons
 - Batch 4: 10 canons
-- Batch 5: 2 canons (NEW)
+- Batch 4.5: 2 canons
+- Batch 5: 10 canons (NEW)
 - Pre-Existing: 0 canons (all now batched)
 
 ---
@@ -157,7 +176,7 @@ This inventory documents all governance canon files layered down from the canoni
 **Source**: APGI-cmy/maturion-foreman-governance  
 **Direction**: Canonical → Consumer (this repo)  
 **Method**: governance-liaison layer-down  
-**Files Layered Down**: STOP_AND_FIX_DOCTRINE.md (Tier-0), BYG_DOCTRINE.md (updated)
+**Files Layered Down**: 10 governance liaison and architecture canons (see Batch 5 section above)
 
 ---
 
