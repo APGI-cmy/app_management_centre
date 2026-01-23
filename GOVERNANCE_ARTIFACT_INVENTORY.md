@@ -1,9 +1,9 @@
 # GOVERNANCE ARTIFACT INVENTORY
 
 **Repository**: APGI-cmy/maturion-foreman-office-app  
-**Last Updated**: 2026-01-21T16:53:00Z  
-**Batch**: 4 (FM-Specific & Learning Alignment)  
-**Total Canons**: 40 (30 pre-existing + 10 new)  
+**Last Updated**: 2026-01-23T12:25:00Z  
+**Batch**: 5 (Stop-and-Fix & BYG Philosophy)  
+**Total Canons**: 42 (40 pre-existing + 2 new)  
 **Canonical Source**: APGI-cmy/maturion-foreman-governance
 
 ---
@@ -16,7 +16,8 @@ This inventory documents all governance canon files layered down from the canoni
 - **Batch 1**: 10 canons (Agent & Execution Governance)
 - **Batch 2**: 10 canons (Agent Governance Alignment)
 - **Batch 3**: 10 canons (PR Gates & Quality Alignment)
-- **Batch 4**: 10 canons (FM-Specific & Learning Alignment) - **THIS BATCH**
+- **Batch 4**: 10 canons (FM-Specific & Learning Alignment)
+- **Batch 5**: 2 canons (Stop-and-Fix & BYG Philosophy) - **THIS BATCH**
 
 ---
 
@@ -71,7 +72,7 @@ This inventory documents all governance canon files layered down from the canoni
 
 ---
 
-## Batch 4: FM-Specific & Learning Alignment (10 canons) - NEW
+## Batch 4: FM-Specific & Learning Alignment (10 canons)
 
 | Canon File | Status | Last Updated |
 |------------|--------|--------------|
@@ -85,6 +86,15 @@ This inventory documents all governance canon files layered down from the canoni
 | FAILURE_PROMOTION_RULE.md | ✅ Present | 2026-01-21 (Batch 4) |
 | BUILD_INTERVENTION_AND_ALERT_MODEL.md | ✅ Present | 2026-01-21 (Batch 4) |
 | CASCADING_FAILURE_CIRCUIT_BREAKER.md | ✅ Present | 2026-01-21 (Batch 4) |
+
+---
+
+## Batch 5: Stop-and-Fix & BYG Philosophy (2 canons) - NEW
+
+| Canon File | Status | Last Updated | Location |
+|------------|--------|--------------|----------|
+| STOP_AND_FIX_DOCTRINE.md | ✅ Present | 2026-01-23 (Batch 5) | governance/canon/ |
+| BYG_DOCTRINE.md | ✅ Present | 2026-01-23 (Batch 5) | governance/philosophy/ |
 
 ---
 
@@ -106,12 +116,13 @@ This inventory documents all governance canon files layered down from the canoni
 
 ## Total Canon Count
 
-**Total Canons**: 40 files
+**Total Canons**: 42 files
 
 - Batch 1: 10 canons
 - Batch 2: 10 canons  
 - Batch 3: 10 canons
-- Batch 4: 10 canons (NEW)
+- Batch 4: 10 canons
+- Batch 5: 2 canons (NEW)
 - Pre-Existing: 0 canons (all now batched)
 
 ---
@@ -142,10 +153,11 @@ This inventory documents all governance canon files layered down from the canoni
 
 ## Governance Ripple Status
 
-**Last Ripple**: Batch 4 (2026-01-21)  
+**Last Ripple**: Batch 5 (2026-01-23)  
 **Source**: APGI-cmy/maturion-foreman-governance  
 **Direction**: Canonical → Consumer (this repo)  
-**Method**: governance-liaison layer-down
+**Method**: governance-liaison layer-down  
+**Files Layered Down**: STOP_AND_FIX_DOCTRINE.md (Tier-0), BYG_DOCTRINE.md (updated)
 
 ---
 
