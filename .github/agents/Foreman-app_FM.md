@@ -27,7 +27,7 @@ governance:
     - id: build-philosophy
       path: BUILD_PHILOSOPHY.md
       role: supreme-building-authority
-    
+
     # Batch 1: Agent & Execution Governance (10 canons)
     - id: agent-contract-protection
       path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
@@ -59,7 +59,7 @@ governance:
     - id: cs2-agent-authority
       path: governance/canon/CS2_AGENT_FILE_AUTHORITY_MODEL.md
       role: cs2-authority
-    
+
     # Batch 2: Agent Governance Alignment (10 canons)
     - id: agent-file-binding-requirements
       path: governance/canon/AGENT_FILE_BINDING_REQUIREMENTS.md
@@ -91,7 +91,7 @@ governance:
     - id: domain-ownership
       path: governance/canon/DOMAIN_OWNERSHIP_ACCOUNTABILITY.md
       role: domain-accountability
-    
+
     # Batch 3: PR Gates & Quality Alignment (10 canons)
     - id: pr-gate-evaluation
       path: governance/canon/PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md
@@ -123,7 +123,7 @@ governance:
     - id: merge-gate-philosophy
       path: governance/canon/MERGE_GATE_PHILOSOPHY.md
       role: merge-philosophy
-    
+
     # Batch 4: FM-Specific & Learning Alignment (10 canons)
     - id: fm-governance-loading
       path: governance/canon/FM_GOVERNANCE_LOADING_PROTOCOL.md
@@ -155,7 +155,7 @@ governance:
     - id: cascading-failure-breaker
       path: governance/canon/CASCADING_FAILURE_CIRCUIT_BREAKER.md
       role: failure-breaker
-    
+
     # Batch 4.5: Stop-and-Fix & BYG Philosophy (2 canons)
     - id: stop-and-fix-doctrine
       path: governance/canon/STOP_AND_FIX_DOCTRINE.md
@@ -164,7 +164,7 @@ governance:
     - id: byg-doctrine
       path: governance/philosophy/BYG_DOCTRINE.md
       role: build-philosophy
-    
+
     # Batch 5: Governance Liaison + Architecture Alignment (10 canons)
     - id: governance-liaison-role
       path: governance/canon/GOVERNANCE_LIAISON_ROLE_SURVEY.md
@@ -187,7 +187,7 @@ governance:
     - id: combined-testing
       path: governance/canon/COMBINED_TESTING_PATTERN.md
       role: testing-pattern
-    
+
     # Batch 6: Memory, Platform & Compliance Alignment (10 canons)
     - id: memory-lifecycle
       path: governance/canon/MEMORY_LIFECYCLE_STATE_MACHINE_CONTRACT.md
@@ -219,7 +219,7 @@ governance:
     - id: system-commissioning
       path: governance/canon/SYSTEM_COMMISSIONING_AND_PROGRESSIVE_ACTIVATION_PROTOCOL.md
       role: system-commissioning
-    
+
     # Batch 7: Versioning & Ripple Intelligence Alignment (10 canons)
     - id: governance-versioning-sync
       path: governance/canon/GOVERNANCE_VERSIONING_AND_SYNC_PROTOCOL.md

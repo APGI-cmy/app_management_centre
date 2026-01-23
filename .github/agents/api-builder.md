@@ -26,7 +26,7 @@ governance:
     - id: build-philosophy
       path: BUILD_PHILOSOPHY.md
       role: supreme-building-authority
-    
+
     # Core Agent Governance (Batch 1-2)
     - id: agent-contract-protection
       path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
@@ -56,7 +56,7 @@ governance:
     - id: domain-ownership
       path: governance/canon/DOMAIN_OWNERSHIP_ACCOUNTABILITY.md
       role: domain-accountability
-    
+
     # Execution & Testing (Batch 1, 4, 5)
     - id: execution-bootstrap-protocol
       path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md
@@ -80,7 +80,7 @@ governance:
       role: test-execution-enforcement
       version: 1.0.0
       enforcement: MANDATORY
-    
+
     # Quality & Integrity (Batch 1, 3, 4)
     - id: quality-integrity-watchdog
       path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
@@ -97,7 +97,7 @@ governance:
     - id: warning-discovery-blocker
       path: governance/canon/WARNING_DISCOVERY_BLOCKER_PROTOCOL.md
       role: warning-enforcement
-    
+
     # PR Gates & Merge (Batch 3)
     - id: pr-gate-evaluation
       path: governance/canon/PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md
@@ -123,7 +123,7 @@ governance:
     - id: gate-predictive-compliance
       path: governance/canon/GATE_PREDICTIVE_COMPLIANCE_ANALYSIS.md
       role: predictive-compliance
-    
+
     # Governance & Ripple (Batch 1, 7)
     - id: governance-purpose-scope
       path: governance/canon/GOVERNANCE_PURPOSE_AND_SCOPE.md
@@ -146,7 +146,7 @@ governance:
     - id: ripple-intelligence-layer
       path: governance/canon/RIPPLE_INTELLIGENCE_LAYER.md
       role: ripple-intelligence
-    
+
     # FM Coordination (Batch 4)
     - id: fm-builder-appointment
       path: governance/canon/FM_BUILDER_APPOINTMENT_PROTOCOL.md
@@ -169,7 +169,7 @@ governance:
     - id: learning-promotion-rule
       path: governance/canon/LEARNING_PROMOTION_RULE.md
       role: learning-promotion
-    
+
     # Architecture & Build (Batch 5)
     - id: architecture-completeness
       path: governance/canon/ARCHITECTURE_COMPLETENESS_REQUIREMENTS.md
@@ -183,7 +183,7 @@ governance:
     - id: constitutional-sandbox
       path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
       role: judgment-framework
-    
+
     # Local Policies
     - id: builder-appointment
       path: governance/ROLE_APPOINTMENT_PROTOCOL.md
