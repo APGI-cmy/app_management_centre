@@ -180,9 +180,6 @@ governance:
     - id: build-tree-execution
       path: governance/canon/BUILD_TREE_EXECUTION_MODEL.md
       role: build-tree
-    - id: constitutional-sandbox
-      path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
-      role: judgment-framework
 
     # Local Policies
     - id: builder-appointment

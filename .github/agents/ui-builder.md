@@ -180,9 +180,6 @@ governance:
     - id: build-tree-execution
       path: governance/canon/BUILD_TREE_EXECUTION_MODEL.md
       role: build-tree
-    - id: constitutional-sandbox
-      path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
-      role: judgment-framework
 
     # Local Policies
     - id: builder-appointment
@@ -346,9 +343,6 @@ metadata:
 #       role: qa-foundation
 #       summary: FM ensures QA-to-Red foundation before appointment
 #
-#     - id: constitutional-sandbox
-#       path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
-#       role: judgment-framework
 #       summary: Tier-1 constitutional vs Tier-2 procedural distinction (BL-024)
 #
 #     # Agent Contract Management

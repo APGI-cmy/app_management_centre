@@ -320,9 +320,6 @@ governance:
     - id: ibwr-spec
       path: governance/specs/IN_BETWEEN_WAVE_RECONCILIATION_SPEC.md
       role: wave-coordination
-    - id: constitutional-sandbox
-      path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
-      role: judgment-framework
 
 metadata:
   version: 2.6.0
