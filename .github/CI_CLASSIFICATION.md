@@ -182,6 +182,52 @@ Each workflow is classified as:
 
 ---
 
+### 7. YAML Validation Gate (`yaml-validation.yml`)
+
+**Classification**: Hard Gate
+
+**Purpose**: Validates YAML syntax in workflow files and agent contract frontmatter
+
+**Gate Characteristics**:
+- Validates all `.yml` and `.yaml` files in repository
+- Extracts and validates YAML frontmatter from agent contract files (`.github/agents/*.md`)
+- Uses industry-standard frontmatter extraction (Jekyll/Hugo pattern)
+- Supports both `---` and `...` YAML document end markers
+- GitHub Actions compatibility mode for workflow files
+
+**Failure Semantics**:
+- YAML syntax errors in workflow files → Code failure → Block merge
+- YAML syntax errors in agent frontmatter → Code failure → Block merge
+- Style warnings (line length, spacing, etc.) → Advisory only (non-blocking)
+- Missing frontmatter in documentation files → Skipped (non-blocking)
+
+**Infrastructure Failure Handling**:
+- yamllint installation failure → Infrastructure failure
+- Python YAML parser unavailable → Infrastructure failure
+
+**Timeout Configuration**:
+- Job-level timeout: 5 minutes (validation only)
+
+**Validation Logic**:
+- Pure YAML files: Validates entire file content
+- Agent contract files: Extracts content between `---` markers (or `---` and `...`) and validates only frontmatter
+- Workflow files: Uses lenient validation due to GitHub Actions-specific syntax
+- Documentation files (SCHEMA, README): Skipped if no frontmatter present
+
+**Evidence-Based Bypass**:
+- Accepts PREHANDOVER_PROOF with documented YAML validation
+- Follows BL-027/028 evidence-based validation protocol
+
+**Authority**:
+- CS2 one-time authorization (R_Roster#55)
+- Industry-standard frontmatter extraction pattern
+
+**Reference**:
+- Canonical implementation: APGI-cmy/R_Roster#55
+- Issue: maturion-foreman-office-app (this repository)
+
+---
+
 ## Gate Applicability Matrix
 
 | Workflow                          | Gate Type       | FM Agent | Builder Agent | Governance Agent |
@@ -191,6 +237,7 @@ Each workflow is classified as:
 | Builder QA Gate                   | Hard Gate       | ⏭️ Skip  | ✅ Apply      | ⏭️ Skip          |
 | FM Architecture Gate              | Hard Gate       | ✅ Apply | ⏭️ Skip       | ⏭️ Skip          |
 | Code Review Closure Gate          | Hard Gate       | ✅ Apply | ✅ Apply      | ✅ Apply         |
+| YAML Validation Gate              | Hard Gate       | ✅ Apply | ✅ Apply      | ✅ Apply         |
 | Model Scaling Check               | Advisory Gate   | ℹ️ Info  | ℹ️ Info       | ℹ️ Info          |
 
 ---
