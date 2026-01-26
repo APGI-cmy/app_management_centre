@@ -18,9 +18,170 @@ governance:
     reference: main
 
   bindings:
+    # Tier-0 Constitutional Authority
+    - id: tier0-canon
+      path: governance/TIER_0_CANON_MANIFEST.json
+      role: supreme-authority
+      note: "Loads all 15 Tier-0 constitutional documents dynamically"
     - id: build-philosophy
       path: BUILD_PHILOSOPHY.md
       role: supreme-building-authority
+
+    # Core Agent Governance (Batch 1-2)
+    - id: agent-contract-protection
+      path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
+      role: contract-protection
+    - id: mandatory-enhancement-capture
+      path: governance/canon/MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md
+      role: enhancement-capture
+    - id: agent-recruitment
+      path: governance/canon/AGENT_RECRUITMENT.md
+      role: agent-legitimacy
+    - id: agent-onboarding
+      path: governance/canon/AGENT_ONBOARDING_QUICKSTART.md
+      role: agent-onboarding
+    - id: agent-contract-management
+      path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
+      role: contract-modification-authority
+      enforcement: CONSTITUTIONAL
+    - id: cs2-agent-authority
+      path: governance/canon/CS2_AGENT_FILE_AUTHORITY_MODEL.md
+      role: cs2-authority
+    - id: agent-file-binding-requirements
+      path: governance/canon/AGENT_FILE_BINDING_REQUIREMENTS.md
+      role: binding-requirements
+    - id: builder-contract-bindings
+      path: governance/canon/BUILDER_CONTRACT_BINDING_CHECKLIST.md
+      role: builder-requirements
+    - id: domain-ownership
+      path: governance/canon/DOMAIN_OWNERSHIP_ACCOUNTABILITY.md
+      role: domain-accountability
+
+    # Execution & Testing (Batch 1, 4, 5)
+    - id: execution-bootstrap-protocol
+      path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md
+      role: execution-verification-mandate
+      version: 2.0.0+
+    - id: ci-confirmatory
+      path: governance/canon/CI_CONFIRMATORY_NOT_DIAGNOSTIC.md
+      role: local-validation
+    - id: bootstrap-learnings
+      path: governance/canon/BOOTSTRAP_EXECUTION_LEARNINGS.md
+      role: execution-learnings
+    - id: stop-and-fix-doctrine
+      path: governance/canon/STOP_AND_FIX_DOCTRINE.md
+      role: test-debt-enforcement
+      enforcement: MANDATORY
+    - id: combined-testing
+      path: governance/canon/COMBINED_TESTING_PATTERN.md
+      role: testing-pattern
+    - id: test-execution-protocol
+      path: governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md
+      role: test-execution-enforcement
+      version: 1.0.0
+      enforcement: MANDATORY
+
+    # Quality & Integrity (Batch 1, 3, 4)
+    - id: quality-integrity-watchdog
+      path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
+      role: quality-integrity-enforcement
+      version: 1.0.0
+    - id: pre-implementation-behavior-review
+      path: governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md
+      role: enhancement-testing-discipline
+      version: 1.0.0
+      enforcement: MANDATORY
+    - id: qa-catalog-alignment
+      path: governance/canon/QA_CATALOG_ALIGNMENT_GATE_CANON.md
+      role: qa-foundation
+    - id: warning-discovery-blocker
+      path: governance/canon/WARNING_DISCOVERY_BLOCKER_PROTOCOL.md
+      role: warning-enforcement
+
+    # PR Gates & Merge (Batch 3)
+    - id: pr-gate-evaluation
+      path: governance/canon/PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md
+      role: gate-evaluation
+    - id: pr-gate-precondition
+      path: governance/canon/PR_GATE_PRECONDITION_RULE.md
+      role: gate-precondition
+    - id: pr-scope-control
+      path: governance/canon/PR_SCOPE_CONTROL_POLICY.md
+      role: scope-control
+    - id: branch-protection
+      path: governance/canon/BRANCH_PROTECTION_ENFORCEMENT.md
+      role: branch-protection
+    - id: builder-first-pr
+      path: governance/canon/BUILDER_FIRST_PR_MERGE_MODEL.md
+      role: first-pr-model
+    - id: merge-gate-philosophy
+      path: governance/canon/MERGE_GATE_PHILOSOPHY.md
+      role: merge-philosophy
+    - id: initialization-completeness
+      path: governance/canon/INITIALIZATION_COMPLETENESS_GATE.md
+      role: initialization-gate
+    - id: gate-predictive-compliance
+      path: governance/canon/GATE_PREDICTIVE_COMPLIANCE_ANALYSIS.md
+      role: predictive-compliance
+
+    # Governance & Ripple (Batch 1, 7)
+    - id: governance-purpose-scope
+      path: governance/canon/GOVERNANCE_PURPOSE_AND_SCOPE.md
+      role: supreme-authority-and-scope
+    - id: governance-ripple-model
+      path: governance/canon/GOVERNANCE_RIPPLE_MODEL.md
+      role: ripple-propagation
+    - id: agent-ripple-awareness
+      path: governance/canon/AGENT_RIPPLE_AWARENESS_OBLIGATION.md
+      role: ripple-awareness
+    - id: scope-declaration-schema
+      path: governance/canon/SCOPE_DECLARATION_SCHEMA.md
+      role: scope-definition
+    - id: scope-to-diff-rule
+      path: governance/canon/SCOPE_TO_DIFF_RULE.md
+      role: scope-enforcement
+    - id: cross-repo-layer-down
+      path: governance/canon/CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md
+      role: layer-down-protocol
+    - id: ripple-intelligence-layer
+      path: governance/canon/RIPPLE_INTELLIGENCE_LAYER.md
+      role: ripple-intelligence
+
+    # FM Coordination (Batch 4)
+    - id: fm-builder-appointment
+      path: governance/canon/FM_BUILDER_APPOINTMENT_PROTOCOL.md
+      role: fm-builder-appointment
+    - id: foreman-authority-supervision
+      path: governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
+      role: fm-authority
+    - id: fm-runtime-enforcement
+      path: governance/canon/FM_RUNTIME_ENFORCEMENT_AND_AWARENESS_MODEL.md
+      role: fm-runtime
+    - id: build-intervention-alert
+      path: governance/canon/BUILD_INTERVENTION_AND_ALERT_MODEL.md
+      role: build-intervention
+    - id: cascading-failure-breaker
+      path: governance/canon/CASCADING_FAILURE_CIRCUIT_BREAKER.md
+      role: failure-breaker
+    - id: failure-promotion-rule
+      path: governance/canon/FAILURE_PROMOTION_RULE.md
+      role: failure-promotion
+    - id: learning-promotion-rule
+      path: governance/canon/LEARNING_PROMOTION_RULE.md
+      role: learning-promotion
+
+    # Architecture & Build (Batch 5)
+    - id: architecture-completeness
+      path: governance/canon/ARCHITECTURE_COMPLETENESS_REQUIREMENTS.md
+      role: architecture-completeness
+    - id: build-effectiveness
+      path: governance/canon/BUILD_EFFECTIVENESS_STANDARD.md
+      role: build-effectiveness
+    - id: build-tree-execution
+      path: governance/canon/BUILD_TREE_EXECUTION_MODEL.md
+      role: build-tree
+
+    # Local Policies
     - id: builder-appointment
       path: governance/ROLE_APPOINTMENT_PROTOCOL.md
       role: constitutional-appointment
@@ -34,60 +195,31 @@ governance:
       path: governance/policies/TEST_REMOVAL_GOVERNANCE_GATE_LOCAL.md
       role: test-removal-compliance
     - id: warning-handling
-      path: >
-        governance/policies/
-# ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
+      path: governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
       role: warning-enforcement
     - id: deprecation-detection-gate
       path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
       role: deprecation-enforcement
-    - id: test-execution-protocol
-      path: governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md
-      role: test-execution-enforcement
-      version: 1.0.0
-      enforcement: MANDATORY
-    - id: code-checking
-      path: governance/specs/FM_AI_ESCALATION_AND_CAPABILITY_SCALING_SPEC.md
-      role: quality-verification
     - id: ibwr-awareness
       path: governance/specs/IN_BETWEEN_WAVE_RECONCILIATION_SPEC.md
       role: wave-coordination
-    - id: bl-018-019-awareness
+    - id: qa-catalog-alignment-spec
       path: governance/specs/QA_CATALOG_ALIGNMENT_GATE_SPEC.md
       role: qa-foundation
-    - id: constitutional-sandbox
-      path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
-      role: judgment-framework
-    - id: execution-bootstrap-protocol
-      path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md
-      role: execution-verification-mandate
-      version: 2.0.0+
-    - id: agent-contract-management
-      path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
-      role: contract-modification-authority
-      enforcement: CONSTITUTIONAL
-    - id: quality-integrity-watchdog
-      path: governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
-      role: quality-integrity-enforcement
-      version: 1.0.0
-      effective_date: 2026-01-13
-    - id: pre-implementation-behavior-review
-      path: governance/canon/PRE_IMPLEMENTATION_BEHAVIOR_REVIEW_PROTOCOL.md
-      role: enhancement-testing-discipline
-      version: 1.0.0
-      effective_date: 2026-01-14
-      enforcement: MANDATORY
-    - id: agent-contract-protection
-      path: governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md
-    - id: mandatory-enhancement-capture
-      path: governance/canon/MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md
+    - id: build-to-green
+      path: governance/specs/build-to-green-enforcement-spec.md
+      role: execution-standard
 
 metadata:
-  version: 2.5.0
+  version: 2.6.0
   repository: APGI-cmy/maturion-foreman-office-app
   context: foreman-office-app
   protection_model: reference-based
   references_locked_protocol: true
+  last_updated: 2026-01-23
+  governance_alignment_wave: Agent File Alignment Wave (Issue #XXX)
+  total_canon_bindings: 65
+  batches_covered: "1-7 (all critical canons)"
 ...
 #
 # # UI Builder — Agent Contract
@@ -211,9 +343,6 @@ metadata:
 #       role: qa-foundation
 #       summary: FM ensures QA-to-Red foundation before appointment
 #
-#     - id: constitutional-sandbox
-#       path: governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md
-#       role: judgment-framework
 #       summary: Tier-1 constitutional vs Tier-2 procedural distinction (BL-024)
 #
 #     # Agent Contract Management
