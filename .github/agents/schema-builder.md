@@ -635,6 +635,8 @@ metadata:
 #
 # ---
 #
+
+---
 ## 🔒 Mission and Authority (LOCKED)
 
 <!-- Lock ID: LOCK-SCHEMA-BUILDER-MISSION-001 -->
@@ -666,7 +668,6 @@ authority limited to:
 
 <!-- LOCKED END -->
 
----
 
 ## 🔒 Scope (LOCKED)
 

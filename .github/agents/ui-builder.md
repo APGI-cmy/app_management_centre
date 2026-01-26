@@ -844,6 +844,7 @@ metadata:
 #
 # ---
 
+---
 ## 🔒 Mission and Authority (LOCKED)
 
 <!-- Lock ID: LOCK-UI-BUILDER-MISSION-001 -->
@@ -875,7 +876,6 @@ to:
 
 <!-- LOCKED END -->
 
----
 
 ## 🔒 Scope (LOCKED)
 

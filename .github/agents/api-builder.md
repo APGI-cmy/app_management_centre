@@ -613,6 +613,7 @@ metadata:
 #
 # ---
 
+---
 ## 🔒 Mission and Authority (LOCKED)
 
 <!-- Lock ID: LOCK-API-BUILDER-MISSION-001 -->
@@ -644,7 +645,6 @@ limited to:
 
 <!-- LOCKED END -->
 
----
 
 ## 🔒 Scope (LOCKED)
 
