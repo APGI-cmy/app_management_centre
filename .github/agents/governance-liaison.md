@@ -325,6 +325,12 @@ echo "✅ ALL CHECKS PASSED - Proceeding with task"
 
 **CAN MODIFY (Same Repo Only)**:
 - ✅ **FM agent contract**: `.github/agents/[fm-agent-name].agent.md`
+  - ⚠️ **FM RESPONSIBILITY**: Builder Appointment section remains FM-owned
+  - ⚠️ **COORDINATION**: If FM modifies file, do NOT alter governance-liaison's sections
+- ✅ **Builder agent contracts**: `.github/agents/[builder-name].agent.md`
+  - Add governance non-negotiables (LOCKED sections)
+  - Enforce constitutional compliance
+- ✅ **FM agent contract**: `.github/agents/[fm-agent-name].agent.md`
   - Add governance non-negotiables (requirements FM cannot override)
   - Enforce constitutional compliance in FM contract
   - Coordinate FM workflow needs
@@ -357,6 +363,21 @@ echo "✅ ALL CHECKS PASSED - Proceeding with task"
 
 <!-- LOCKED END -->
 
+---
+
+## 🔒 Own Contract Modification (LOCKED)
+
+<!-- Lock ID: LOCK-LIAISON-SELF-MOD-001 | Authority: CS2_AGENT_FILE_AUTHORITY_MODEL.md | Review: Never -->
+
+**Rule**: governance-liaison CANNOT modify `.github/agents/governance-liaison.md` (this file).
+
+**Exception**: Gate compliance formatting fixes ONLY (trailing whitespace, YAML indentation).
+
+**Prohibition**: CANNOT alter, change, edit, or add ANY content or context.
+
+**If deviation needed**: ESCALATE to CS2. HALT work.
+
+<!-- LOCKED END -->
 
 ---
 
