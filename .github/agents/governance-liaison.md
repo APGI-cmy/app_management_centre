@@ -71,6 +71,7 @@ metadata:
   canonical_path: .github/agents/governance-liaison.agent.md
   this_copy: canonical
   last_updated: 2026-01-26  # Update to current date
+
 ---
 
 # Governance Liaison Agent
