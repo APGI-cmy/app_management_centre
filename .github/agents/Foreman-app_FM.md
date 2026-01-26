@@ -217,7 +217,8 @@ governance:
       path: governance/canon/COMMISSIONING_EVIDENCE_MODEL.md
       role: commissioning-evidence
     - id: system-commissioning
-      path: governance/canon/SYSTEM_COMMISSIONING_AND_PROGRESSIVE_ACTIVATION_PROTOCOL.md
+      path: |
+        governance/canon/SYSTEM_COMMISSIONING_AND_PROGRESSIVE_ACTIVATION_PROTOCOL.md
       role: system-commissioning
 
     # Batch 7: Versioning & Ripple Intelligence Alignment (10 canons)
@@ -248,7 +249,7 @@ governance:
     - id: ripple-runtime-integration
       path: governance/canon/RIPPLE_RUNTIME_INTEGRATION_SURVEY.md
       role: ripple-runtime
-    
+
     # Additional Key Canons
     - id: execution-bootstrap-protocol
       path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL_REFERENCE.md
@@ -279,7 +280,7 @@ governance:
     - id: maturion-runtime-monitor
       path: governance/canon/MATURION_RUNTIME_EXECUTION_MONITOR_SPEC.md
       role: runtime-monitor
-    
+
     # Local Policies & Specs (non-canon references)
     - id: fm-execution-mandate
       path: governance/contracts/FM_EXECUTION_MANDATE.md
@@ -309,7 +310,8 @@ governance:
       path: governance/policies/TEST_REMOVAL_GOVERNANCE_GATE_LOCAL.md
       role: test-removal-authorization
     - id: warning-handling
-      path: governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
+      path: |
+        governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
       role: warning-enforcement
     - id: deprecation-detection-gate
       path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
@@ -329,7 +331,7 @@ metadata:
   references_locked_protocol: true
   locked_sections: 6
   last_updated: 2026-01-23
-  governance_alignment_wave: Agent File Alignment Wave (Issue #XXX)
+  governance_alignment_wave: "Agent File Alignment Wave (Issue #XXX)"
   total_canon_bindings: 95
   batches_covered: "1-7 (all 70+ canons)"
 ---

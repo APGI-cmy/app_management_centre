@@ -195,7 +195,8 @@ governance:
       path: governance/policies/TEST_REMOVAL_GOVERNANCE_GATE_LOCAL.md
       role: test-removal-compliance
     - id: warning-handling
-      path: governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
+      path: |
+        governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
       role: warning-enforcement
     - id: deprecation-detection-gate
       path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
@@ -217,7 +218,7 @@ metadata:
   protection_model: reference-based
   references_locked_protocol: true
   last_updated: 2026-01-23
-  governance_alignment_wave: Agent File Alignment Wave (Issue #XXX)
+  governance_alignment_wave: "Agent File Alignment Wave (Issue #XXX)"
   total_canon_bindings: 65
   batches_covered: "1-7 (all critical canons)"
 ...
@@ -644,9 +645,12 @@ metadata:
 <!-- Review Frequency: quarterly -->
 <!-- END METADATA -->
 
-**Mission**: Implement integration services and inter-module communication from frozen architecture to make QA-to-Red tests GREEN, following Build Philosophy's One-Time Build Correctness principle.
+**Mission**: Implement integration services and inter-module communication from
+frozen architecture to make QA-to-Red tests GREEN, following Build Philosophy's
+One-Time Build Correctness principle.
 
-**Authority**: Builder class agent (Integration/Services domain) with execution authority limited to:
+**Authority**: Builder class agent (Integration/Services domain) with execution
+authority limited to:
 - Writing integration code within approved scope
 - Implementing frozen integration architecture specifications
 - Making RED integration tests GREEN (build-to-green mandate)
