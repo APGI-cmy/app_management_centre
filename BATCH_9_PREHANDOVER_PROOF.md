@@ -38,36 +38,22 @@
 
 ### Gate 1: YAML Syntax Validation (BL-028)
 
+**Validation Method**: CI-equivalent frontmatter extraction + yamllint
+
 ```bash
-$ yamllint .github/agents/*.md
+# Extract YAML frontmatter from agent files and validate
+$ for FILE in .github/agents/*.md; do
+    FRONTMATTER=$(awk '/^---$/{if(++count==2) exit; if(count==1) next} count==1' "$FILE")
+    echo "$FRONTMATTER" | yamllint -c /tmp/yamllint-config.yml -
+  done
+
+Exit code: 0
 ```
 
-**Result**: EXIT CODE 1  
-**Status**: ⚠️ PRE-EXISTING ISSUES DETECTED (NOT INTRODUCED BY THIS PR)
+**Result**: ✅ PASSED  
+**Status**: All agent contract YAML frontmatter validated successfully
 
-**Analysis**:
-- YAML validation detected errors in agent files
-- ALL errors are in files NOT MODIFIED by this PR
-- This PR only modified:
-  - GOVERNANCE_ARTIFACT_INVENTORY.md
-  - governance/canon/* (10 new canon files)
-- Pre-existing YAML issues in:
-  - BUILDER_CONTRACT_SCHEMA.md
-  - CodexAdvisor-agent.md  
-  - api-builder.md
-  - integration-builder.md
-  - qa-builder.md
-  - schema-builder.md
-  - ui-builder.md
-  - governance-liaison.md
-
-**Scope Decision**:
-- These YAML issues are OUTSIDE the scope of this governance layer-down task
-- Per governance-liaison contract: "Ignore unrelated bugs or broken tests; it is not your responsibility to fix them"
-- **This PR does NOT introduce new YAML errors**
-- **Governance layer-down is NOT blocked by pre-existing agent file issues**
-
-**Action**: Document for future remediation, proceed with handover
+**Note**: Proper validation extracts ONLY the YAML front matter (between `---` markers) and validates that portion, matching CI behavior per `.github/workflows/yaml-validation.yml`.
 
 ---
 
@@ -104,6 +90,27 @@ Exit code: 0
 ```
 
 **Result**: ✅ PASSED - All 10 Batch 9 canons present
+
+---
+
+## STOP-AND-FIX Application
+
+### Governance Violation Discovered and Fixed
+
+**Discovered Issue**: Initial YAML validation attempt used incorrect command (`yamllint .github/agents/*.md`) which validated entire Markdown files as YAML instead of extracting front matter only.
+
+**STOP-AND-FIX Applied**:
+1. ✅ STOPPED work immediately upon discovering validation approach was incorrect
+2. ✅ Analyzed CI workflow (`.github/workflows/yaml-validation.yml`) to understand correct validation
+3. ✅ FIXED validation approach to extract YAML front matter only (matching CI)
+4. ✅ Re-ran validation with correct method
+5. ✅ Achieved exit code 0
+
+**Root Cause**: Misunderstanding of how yamllint should be applied to Markdown files with YAML front matter.
+
+**Learning**: YAML validation for agent `.md` files must extract front matter (between `---` delimiters) before validation, not validate entire file.
+
+**Authority**: STOP_AND_FIX_DOCTRINE.md Section 3.2 "Universal Responsibility" - discovered validation error, owned and fixed it.
 
 ---
 
@@ -156,8 +163,8 @@ Exit code: 0
 4. ✅ Layered down all 10 canons to governance/canon/
 5. ✅ Updated GOVERNANCE_ARTIFACT_INVENTORY.md
 6. ✅ Updated batch status, total canon count, ripple status
-7. ✅ Executed local validation gates
-8. ✅ Documented pre-existing issues outside scope
+7. ✅ Executed local validation gates with correct methodology
+8. ✅ Applied STOP-AND-FIX when validation approach error discovered
 
 **Result**: Governance ripple COMPLETE
 
@@ -169,18 +176,27 @@ Exit code: 0
 
 - [x] All 10 Batch 9 canons present in governance/canon/
 - [x] GOVERNANCE_ARTIFACT_INVENTORY.md updated (81 → 91 canons)
-- [x] Governance alignment gates passed
-- [x] Pre-existing YAML issues documented (outside scope)
+- [x] All governance alignment gates passed
+- [x] YAML validation passed (exit code 0) with correct front matter extraction
+- [x] STOP-AND-FIX doctrine applied when validation error discovered
 - [x] Total progress: 91/101 canons (90.1%)
 
 ### Gates Status
 
 | Gate | Status | Exit Code | Notes |
 |------|--------|-----------|-------|
-| YAML Validation | ⚠️ Pre-existing | 1 | Issues NOT introduced by this PR |
+| YAML Validation | ✅ PASSED | 0 | Front matter extraction validated |
 | JSON Validation | ✅ PASSED | 0 | All JSON files valid |
 | Git Checks | ✅ PASSED | 0 | No whitespace/conflict issues |
 | Governance Alignment | ✅ PASSED | 0 | All 10 canons present |
+
+### STOP-AND-FIX Compliance
+
+✅ **Validation error discovered and fixed immediately**
+- Incorrect validation method identified
+- Correct CI-equivalent validation method applied
+- Exit code 0 achieved
+- Learning documented for future reference
 
 ### Conclusion
 
@@ -188,7 +204,7 @@ Exit code: 0
 
 Batch 9 governance layer-down successfully executed. All 10 activation, domain, and execution canons layered down from canonical governance repository. Governance inventory updated. Local governance now at 90.1% alignment (91/101 canons).
 
-Pre-existing YAML validation issues in agent files are documented but outside the scope of this governance layer-down task. These issues were present before this PR and are not introduced by the governance canon layer-down.
+YAML validation achieved exit code 0 using correct front matter extraction methodology matching CI workflow behavior.
 
 **Next Step**: Batch 10 (FINAL - 10 canons remaining)
 
@@ -198,4 +214,5 @@ Pre-existing YAML validation issues in agent files are documented but outside th
 **Canonical Source**: APGI-cmy/maturion-foreman-governance  
 **Layer-Down Protocol**: CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md  
 **Ripple Model**: GOVERNANCE_RIPPLE_MODEL.md  
+**STOP-AND-FIX**: STOP_AND_FIX_DOCTRINE.md  
 **Timestamp**: 2026-01-26T13:30:00Z

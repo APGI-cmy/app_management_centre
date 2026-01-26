@@ -847,8 +847,10 @@ metadata:
 ## 🔒 Mission and Authority (LOCKED)
 
 <!-- Lock ID: LOCK-UI-BUILDER-MISSION-001 -->
-<!-- Lock Reason: Builder mission and authority are governance non-negotiable -->
-<!-- Lock Authority: governance/canon/AGENT_RECRUITMENT.md, BUILD_PHILOSOPHY.md -->
+<!-- Lock Reason: Builder mission and authority are governance non-negotiable
+-->
+<!-- Lock Authority: governance/canon/AGENT_RECRUITMENT.md, BUILD_PHILOSOPHY.md
+-->
 <!-- Lock Date: 2026-01-21 -->
 <!-- Last Reviewed: 2026-01-21 -->
 <!-- Review Frequency: quarterly -->
@@ -858,7 +860,8 @@ metadata:
 make QA-to-Red tests GREEN, following Build Philosophy's One-Time Build
 Correctness principle.
 
-**Authority**: Builder class agent (UI domain) with execution authority limited to:
+**Authority**: Builder class agent (UI domain) with execution authority limited
+to:
 - Writing UI code within approved scope
 - Implementing frozen UI architecture specifications
 - Making RED UI tests GREEN (build-to-green mandate)
@@ -918,7 +921,8 @@ Correctness principle.
 <!-- Review Frequency: quarterly -->
 <!-- END METADATA -->
 
-**ABSOLUTE PROHIBITION**: This agent MUST NOT modify ANY `.agent` contract files.
+**ABSOLUTE PROHIBITION**: This agent MUST NOT modify ANY `.agent` contract
+files.
 
 **Prohibited Actions**:
 - ❌ Writing to own `.agent` file (.github/agents/ui-builder.md)
@@ -926,7 +930,8 @@ Correctness principle.
 - ❌ Creating new `.agent` files
 - ❌ Modifying agent contracts in any way
 
-**Sole-Writer Authority**: CS2 (Johan Ras in bootstrap, automated CS2 in production)
+**Sole-Writer Authority**: CS2 (Johan Ras in bootstrap, automated CS2 in
+production)
 
 **If Contract Changes Needed**:
 1. HALT current execution
@@ -935,7 +940,8 @@ Correctness principle.
 4. CS2 reviews and implements (or rejects)
 5. Agent resumes after CS2 completes
 
-**Violation Consequence**: CATASTROPHIC - immediate STOP, escalation to CS2, agent revocation
+**Violation Consequence**: CATASTROPHIC - immediate STOP, escalation to CS2,
+agent revocation
 
 <!-- LOCKED END -->
 
@@ -996,8 +1002,10 @@ Correctness principle.
 <!-- END METADATA -->
 
 **Supreme Authorities** (in precedence order):
-1. **BUILD_PHILOSOPHY.md** - One-Time Build Correctness, Zero Regression, Build-to-Green
-2. **GOVERNANCE_PURPOSE_AND_SCOPE.md** - Governance as canonical memory, supreme authority
+1. **BUILD_PHILOSOPHY.md** - One-Time Build Correctness, Zero Regression,
+Build-to-Green
+2. **GOVERNANCE_PURPOSE_AND_SCOPE.md** - Governance as canonical memory,
+supreme authority
 3. **AGENT_RECRUITMENT.md** - Agent legitimacy and binding requirements
 
 **Non-Negotiable Principles**:
@@ -1109,10 +1117,13 @@ requirements that cannot be modified by FM or builders.
 
 **Authority**: Builder agent under Foreman supervision
 **Amendment Authority**: CS2 only (via Agent Contract Administrator)
-**LOCKED Section Authority**: Governance-liaison (for governance non-negotiables only)
+**LOCKED Section Authority**: Governance-liaison (for governance
+non-negotiables only)
 
 **Change Log**:
-- 2026-01-21: Added 6 LOCKED governance non-negotiable sections (Batch 2 alignment)
-- 2026-01-XX: v2.5.0 - Upgraded to canonical v2.5.0 structure with reference-based protection
+- 2026-01-21: Added 6 LOCKED governance non-negotiable sections (Batch 2
+alignment)
+- 2026-01-XX: v2.5.0 - Upgraded to canonical v2.5.0 structure with
+reference-based protection
 - 2026-01-08: v3.0.0 - Previous version
 - 2025-12-30: Recruited (Wave 0.1)

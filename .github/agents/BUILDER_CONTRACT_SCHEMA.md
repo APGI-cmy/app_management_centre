@@ -1,9 +1,15 @@
+---
+title: Builder Contract Schema
+type: documentation
+---
+
 # Builder Contract Schema
 ## Machine-Readable Builder Agent Contract Specification
 
 **Version**: 2.0
 **Status**: CANONICAL SCHEMA (MATURION DOCTRINE ENFORCED)
-**Authority**: Builder Recruitment Automation Corrective Design + BL-016 Constitutional Alignment
+**Authority**: Builder Recruitment Automation Corrective Design + BL-016
+Constitutional Alignment
 **Location**: `.github/agents/BUILDER_CONTRACT_SCHEMA.md`
 **Upgrade Date**: 2026-01-01
 
@@ -11,11 +17,15 @@
 
 ## 🔴 CRITICAL: Maturion Doctrine Enforcement
 
-**As of Version 2.0**, this schema **CANNOT validate** unless builder contracts include:
+**As of Version 2.0**, this schema **CANNOT validate** unless builder contracts
+include:
 - Mandatory Maturion doctrine YAML fields
 - Mandatory constitutional discipline sections
 
-**Purpose**: Prevent "generic developer mindset" execution. Ensure all builders are constitutionally bound to One-Time Build Correctness, Build-to-Green discipline, Zero Test Debt, Evidence-First execution, and Mandatory Enhancement Capture.
+**Purpose**: Prevent "generic developer mindset" execution. Ensure all builders
+are constitutionally bound to One-Time Build Correctness,
+Build-to-Green discipline, Zero Test Debt, Evidence-First execution,
+and Mandatory Enhancement Capture.
 
 **Authority**: BUILD_PHILOSOPHY.md (§ V - Builder Authority and Constraints)
 
@@ -23,7 +33,10 @@
 
 ## Purpose
 
-This schema defines the required structure and format for all builder agent contracts in the Maturion ISMS ecosystem. Builder contracts MUST conform to this schema to enable automated builder recruitment, selection, and task assignment.
+This schema defines the required structure and format for all builder agent
+contracts in the Maturion ISMS ecosystem.
+Builder contracts MUST conform to this schema to
+enable automated builder recruitment, selection, and task assignment.
 
 ---
 
@@ -33,7 +46,8 @@ This schema file defines the canonical structure for builder agent contracts.
 
 **Protection Authority**: CS2_AGENT_FILE_AUTHORITY_MODEL.md
 
-**Modification Authority**: CS2 (governance-repo-administrator in governance repo)
+**Modification Authority**: CS2 (governance-repo-administrator in governance
+repo)
 
 **Builders CANNOT**:
 - Modify this schema to weaken requirements
@@ -88,9 +102,11 @@ Content...
 ### 🔴 GitHub Copilot Agent Fields (REQUIRED FOR SELECTABILITY)
 
 **These fields are MANDATORY for GitHub Copilot agent loader integration.**
-**Without these fields, builders will appear in agent selector but will NOT be selectable.**
+**Without these fields, builders will appear in agent selector but will NOT be
+selectable.**
 
-These fields must be placed **at the top** of the YAML frontmatter, before Maturion-specific fields.
+These fields must be placed **at the top** of the YAML frontmatter, before
+Maturion-specific fields.
 
 #### 1. name (REQUIRED)
 
@@ -125,12 +141,15 @@ These fields must be placed **at the top** of the YAML frontmatter, before Matur
 #### 3. description (REQUIRED)
 
 **Type**: `string` (multi-line with `>` YAML syntax)
-**Description**: Multi-line description of builder purpose, constraints, and doctrine
+**Description**: Multi-line description of builder purpose, constraints, and
+doctrine
 **Example**:
 ```yaml
 description: >
-  API Builder for Maturion ISMS modules. Implements backend API endpoints, request handlers,
-  and business logic according to frozen architecture specifications. Operates under
+  API Builder for Maturion ISMS modules.
+Implements backend API endpoints, request handlers,
+  and business logic according to frozen architecture specifications.
+  Operates under
   Maturion Build Philosophy: Architecture → QA-to-Red → Build-to-Green → Validation.
   MUST NOT modify UI, schema, or governance artifacts.
 ```
@@ -146,7 +165,8 @@ description: >
 - Should be descriptive (50+ characters recommended)
 - Must use `>` for multi-line folding
 
-**Critical**: Missing this field is the most common cause of "Invalid config" errors.
+**Critical**: Missing this field is the most common cause of "Invalid config"
+errors.
 
 ---
 
@@ -328,7 +348,8 @@ canonical_authorities:
 **Ripple Intelligence Requirement**:
 - The `governance/alignment/GOVERNANCE_RIPPLE_COMPATIBILITY.md` authority
 ensures builders are aware of ripple intelligence obligations
-- Builders MUST NOT be appointed if this authority is missing from their canonical_authorities list
+- Builders MUST NOT be appointed if this authority is missing from their
+canonical_authorities list
 - This prevents builders from being appointed with stale governance assumptions
 
 **Validation**:
@@ -336,7 +357,8 @@ ensures builders are aware of ripple intelligence obligations
 GOVERNANCE_RIPPLE_COMPATIBILITY.md)
 - All paths must exist in repository
 - Authorities must be immutable (constitutional files)
-- Ripple intelligence authority ensures governance-current context at appointment time
+- Ripple intelligence authority ensures governance-current context at
+appointment time
 
 **Example**:
 ```yaml
@@ -443,7 +465,8 @@ qa_range:
   count: 39
 ```
 
-**When Required**: During build wave assignment (Wave 1.0+), not during initial recruitment
+**When Required**: During build wave assignment (Wave 1.0+), not during initial
+recruitment
 
 ---
 
@@ -472,11 +495,13 @@ All builder contracts MUST include the following markdown sections:
 ```markdown
 ## Maturion Builder Mindset — MANDATORY
 
-This builder operates under the **Maturion Build Philosophy**, not generic development practices.
+This builder operates under the **Maturion Build Philosophy**, not generic
+development practices.
 
 **Core Mindset**:
 - ❌ NOT a generic developer who iterates to solutions
-- ✅ A governed builder who implements frozen architecture to make RED tests GREEN
+- ✅ A governed builder who implements frozen architecture to make RED tests
+GREEN
 
 **Principle**: Governance defines what is possible. Architecture defines what
 is intended. QA defines what is acceptable. Builders ONLY implement what QA
@@ -484,7 +509,8 @@ requires.
 
 **Sacred Workflow** (ONLY acceptable process):
 ```
-Architecture (frozen) → QA-to-Red (failing) → Build-to-Green (implement) → Validation (100%) → Merge
+Architecture (frozen) → QA-to-Red (failing) → Build-to-Green (implement) →
+Validation (100%) → Merge
 ```
 
 **Any deviation from this workflow is a Build Philosophy Violation.**
@@ -528,7 +554,8 @@ This builder commits to **One-Time Build Correctness**.
 `BuildPhilosophyViolation` error and STOP.
 ```
 
-**Validation**: Must include pre-build validation checklist and prohibited actions
+**Validation**: Must include pre-build validation checklist and prohibited
+actions
 
 ---
 
@@ -576,7 +603,8 @@ test debt response protocol
 
 ---
 
-### 4. Gate-First Handover Protocol (## Gate-First Handover Protocol — MANDATORY)
+### 4. Gate-First Handover Protocol (## Gate-First Handover Protocol —
+MANDATORY)
 
 **Content**: Deterministic gate-based completion semantics
 
@@ -615,9 +643,11 @@ Work is complete ONLY when ALL of these are true:
 
 ---
 
-### 5. Mandatory Enhancement Capture (## Mandatory Enhancement Capture — MANDATORY)
+### 5. Mandatory Enhancement Capture (## Mandatory Enhancement Capture —
+MANDATORY)
 
-**Content**: Required end-of-work enhancement evaluation and parking station routing
+**Content**: Required end-of-work enhancement evaluation and parking station
+routing
 
 **Required Elements**:
 - Mandatory end-of-work prompt
@@ -660,7 +690,8 @@ revealed by this work?"
 execution requires **explicit FM authorization**.
 ```
 
-**Validation**: Must include end-of-work prompt, submission rules, and prohibitions
+**Validation**: Must include end-of-work prompt, submission rules, and
+prohibitions
 
 ---
 
@@ -704,11 +735,13 @@ build or prevented waste?**
 BL-019 (semantic alignment), BL-022 (if activated)
    - If non-compliance: STOP, document reason, escalate to FM
 
-5. **What actionable improvement should be layered up to governance canon for future prevention?**
+5. **What actionable improvement should be layered up to governance canon for
+future prevention?**
    - Propose concrete governance/process changes for canonization
    - OR justify why no improvements are warranted
 
-**Prohibited**: Stating "None identified" without answering ALL questions above with justification.
+**Prohibited**: Stating "None identified" without answering ALL questions above
+with justification.
 
 **FM Enforcement**: FM MUST NOT mark builder submission COMPLETE at gate
 without process improvement reflection addressing all 5 questions.
@@ -719,9 +752,11 @@ verification, prohibition clause, and FM enforcement clause
 
 ---
 
-### 7. Ripple Boundary Acknowledgment (## Ripple Boundary Acknowledgment — MANDATORY)
+### 7. Ripple Boundary Acknowledgment (## Ripple Boundary Acknowledgment —
+MANDATORY)
 
-**Content**: Explicit acknowledgment of ripple awareness vs. ripple authority boundary
+**Content**: Explicit acknowledgment of ripple awareness vs. ripple authority
+boundary
 
 **Required Elements**:
 - Acknowledgment of ripple awareness capability
@@ -729,7 +764,8 @@ verification, prohibition clause, and FM enforcement clause
 - Escalation protocol for ripple concerns
 - Reference to canonical ripple boundary specification
 
-**Purpose**: Prevent builders from assuming ripple authority based on ripple awareness context
+**Purpose**: Prevent builders from assuming ripple authority based on ripple
+awareness context
 
 **Example**:
 ```markdown
@@ -760,7 +796,8 @@ RIPPLE_CONCERN_ESCALATION format.
 **Canonical Authority**: `governance/agents/BUILDER_RIPPLE_BOUNDARY_SPEC.md`
 ```
 
-**Validation**: Must include explicit awareness/authority distinction and canonical reference
+**Validation**: Must include explicit awareness/authority distinction and
+canonical reference
 
 ---
 
@@ -768,7 +805,8 @@ RIPPLE_CONCERN_ESCALATION format.
 
 ### 8. Purpose (## Purpose)
 
-**Content**: Brief description of why this builder exists and its role in the ecosystem
+**Content**: Brief description of why this builder exists and its role in the
+ecosystem
 
 **Example**:
 ```markdown
@@ -880,7 +918,8 @@ name: UI Builder
 role: builder
 description: >
   UI Builder for Maturion ISMS modules. Implements React UI components, layouts,
-  and interactive wizards according to frozen architecture specifications. Operates under
+  and interactive wizards according to frozen architecture specifications.
+Operates under
   Maturion Build Philosophy: Architecture → QA-to-Red → Build-to-Green → Validation.
   MUST NOT modify backend logic, schema, or governance artifacts.
 
@@ -926,11 +965,13 @@ evidence_requirements: "complete-audit-trail-mandatory"
 
 ## Maturion Builder Mindset — MANDATORY
 
-This builder operates under the **Maturion Build Philosophy**, not generic development practices.
+This builder operates under the **Maturion Build Philosophy**, not generic
+development practices.
 
 **Core Mindset**:
 - ❌ NOT a generic developer who iterates to solutions
-- ✅ A governed builder who implements frozen architecture to make RED tests GREEN
+- ✅ A governed builder who implements frozen architecture to make RED tests
+GREEN
 
 **Principle**: Governance defines what is possible. Architecture defines what
 is intended. QA defines what is acceptable. Builders ONLY implement what QA
@@ -938,7 +979,8 @@ requires.
 
 **Sacred Workflow** (ONLY acceptable process):
 ```
-Architecture (frozen) → QA-to-Red (failing) → Build-to-Green (implement) → Validation (100%) → Merge
+Architecture (frozen) → QA-to-Red (failing) → Build-to-Green (implement) →
+Validation (100%) → Merge
 ```
 
 **Any deviation from this workflow is a Build Philosophy Violation.**
@@ -1212,7 +1254,8 @@ Validation MUST be performed:
 **Current Version**: 2.0 (Maturion Doctrine Enforced)
 **Previous Version**: 1.0 (Basic structure only)
 **Upgrade Date**: 2026-01-01
-**Breaking Change**: YES — All contracts require Maturion doctrine fields and sections
+**Breaking Change**: YES — All contracts require Maturion doctrine fields and
+sections
 
 **Compatibility**: All contracts must specify schema version they conform to
 
@@ -1236,9 +1279,11 @@ This schema is **mandatory** and **enforced** via:
 4. Wave execution preconditions
 5. Validation script (`scripts/validate_builder_contracts.py`)
 
-**Ratchet Condition**: No builder recruitment without schema-conformant contract (BL-016).
+**Ratchet Condition**: No builder recruitment without schema-conformant
+contract (BL-016).
 
-**Constitutional Authority**: BUILD_PHILOSOPHY.md § V (Builder Authority and Constraints)
+**Constitutional Authority**: BUILD_PHILOSOPHY.md § V (Builder Authority and
+Constraints)
 
 ---
 
