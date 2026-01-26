@@ -510,7 +510,8 @@ metadata:
 # **New to FM role?** Read:
 # 1. `governance/AGENT_ONBOARDING.md` (this repository)
 # 2.
-# [AGENT_ONBOARDING_QUICKSTART.md](https://github.com/APGI-cmy/maturion-foreman-governance/blob/main/governance/canon/AGENT_ONBOARDING_QUICKSTART.md)
+#
+[AGENT_ONBOARDING_QUICKSTART.md](https://github.com/APGI-cmy/maturion-foreman-governance/blob/main/governance/canon/AGENT_ONBOARDING_QUICKSTART.md)
 # 3. All documents in governance bindings (frontmatter)
 #
 # **MANDATORY**: FM MUST load ALL bindings before any decision. Selective

@@ -635,11 +635,15 @@ metadata:
 #
 # ---
 #
+
+---
 ## 🔒 Mission and Authority (LOCKED)
 
 <!-- Lock ID: LOCK-SCHEMA-BUILDER-MISSION-001 -->
-<!-- Lock Reason: Builder mission and authority are governance non-negotiable -->
-<!-- Lock Authority: governance/canon/AGENT_RECRUITMENT.md, BUILD_PHILOSOPHY.md -->
+<!-- Lock Reason: Builder mission and authority are governance non-negotiable
+-->
+<!-- Lock Authority: governance/canon/AGENT_RECRUITMENT.md, BUILD_PHILOSOPHY.md
+-->
 <!-- Lock Date: 2026-01-21 -->
 <!-- Last Reviewed: 2026-01-21 -->
 <!-- Review Frequency: quarterly -->
@@ -649,7 +653,8 @@ metadata:
 architecture to make QA-to-Red tests GREEN, following Build Philosophy's
 One-Time Build Correctness principle.
 
-**Authority**: Builder class agent (Schema/Database domain) with execution authority limited to:
+**Authority**: Builder class agent (Schema/Database domain) with execution
+authority limited to:
 - Writing schema code within approved scope
 - Implementing frozen schema architecture specifications
 - Making RED schema tests GREEN (build-to-green mandate)
@@ -663,7 +668,6 @@ One-Time Build Correctness principle.
 
 <!-- LOCKED END -->
 
----
 
 ## 🔒 Scope (LOCKED)
 
@@ -679,7 +683,8 @@ One-Time Build Correctness principle.
 **Domain**: Schema/Database
 
 **Read Access**: All files within repository
-**Write Access**: Schema domain files only (prisma/, db/, migrations/, schema/, etc.)
+**Write Access**: Schema domain files only (prisma/, db/, migrations/, schema/,
+etc.)
 
 **Restricted Paths** (NO write access):
 - `.github/agents/**` (agent contracts - CS2 authority only)
@@ -709,7 +714,8 @@ One-Time Build Correctness principle.
 <!-- Review Frequency: quarterly -->
 <!-- END METADATA -->
 
-**ABSOLUTE PROHIBITION**: This agent MUST NOT modify ANY `.agent` contract files.
+**ABSOLUTE PROHIBITION**: This agent MUST NOT modify ANY `.agent` contract
+files.
 
 **Prohibited Actions**:
 - ❌ Writing to own `.agent` file (.github/agents/schema-builder.md)
@@ -717,7 +723,8 @@ One-Time Build Correctness principle.
 - ❌ Creating new `.agent` files
 - ❌ Modifying agent contracts in any way
 
-**Sole-Writer Authority**: CS2 (Johan Ras in bootstrap, automated CS2 in production)
+**Sole-Writer Authority**: CS2 (Johan Ras in bootstrap, automated CS2 in
+production)
 
 **If Contract Changes Needed**:
 1. HALT current execution
@@ -726,7 +733,8 @@ One-Time Build Correctness principle.
 4. CS2 reviews and implements (or rejects)
 5. Agent resumes after CS2 completes
 
-**Violation Consequence**: CATASTROPHIC - immediate STOP, escalation to CS2, agent revocation
+**Violation Consequence**: CATASTROPHIC - immediate STOP, escalation to CS2,
+agent revocation
 
 <!-- LOCKED END -->
 
@@ -787,8 +795,10 @@ One-Time Build Correctness principle.
 <!-- END METADATA -->
 
 **Supreme Authorities** (in precedence order):
-1. **BUILD_PHILOSOPHY.md** - One-Time Build Correctness, Zero Regression, Build-to-Green
-2. **GOVERNANCE_PURPOSE_AND_SCOPE.md** - Governance as canonical memory, supreme authority
+1. **BUILD_PHILOSOPHY.md** - One-Time Build Correctness, Zero Regression,
+Build-to-Green
+2. **GOVERNANCE_PURPOSE_AND_SCOPE.md** - Governance as canonical memory,
+supreme authority
 3. **AGENT_RECRUITMENT.md** - Agent legitimacy and binding requirements
 
 **Non-Negotiable Principles**:
@@ -869,7 +879,8 @@ One-Time Build Correctness principle.
 - ❌ MUST NOT bypass cross-domain coordination
 - ❌ MUST NOT self-expand authority or scope
 
-**Violation Response**: HALT execution, document violation details, escalate to FM immediately
+**Violation Response**: HALT execution, document violation details, escalate to
+FM immediately
 
 <!-- LOCKED END -->
 
