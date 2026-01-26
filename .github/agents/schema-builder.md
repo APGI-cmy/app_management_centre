@@ -195,7 +195,8 @@ governance:
       path: governance/policies/TEST_REMOVAL_GOVERNANCE_GATE_LOCAL.md
       role: test-removal-compliance
     - id: warning-handling
-      path: governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
+      path: |
+        governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
       role: warning-enforcement
     - id: deprecation-detection-gate
       path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
@@ -217,7 +218,7 @@ metadata:
   protection_model: reference-based
   references_locked_protocol: true
   last_updated: 2026-01-23
-  governance_alignment_wave: Agent File Alignment Wave (Issue #XXX)
+  governance_alignment_wave: "Agent File Alignment Wave (Issue #XXX)"
   total_canon_bindings: 65
   batches_covered: "1-7 (all critical canons)"
 ...
@@ -644,7 +645,9 @@ metadata:
 <!-- Review Frequency: quarterly -->
 <!-- END METADATA -->
 
-**Mission**: Implement Prisma schema and database models from frozen architecture to make QA-to-Red tests GREEN, following Build Philosophy's One-Time Build Correctness principle.
+**Mission**: Implement Prisma schema and database models from frozen
+architecture to make QA-to-Red tests GREEN, following Build Philosophy's
+One-Time Build Correctness principle.
 
 **Authority**: Builder class agent (Schema/Database domain) with execution authority limited to:
 - Writing schema code within approved scope

@@ -195,7 +195,8 @@ governance:
       path: governance/policies/TEST_REMOVAL_GOVERNANCE_GATE_LOCAL.md
       role: test-removal-compliance
     - id: warning-handling
-      path: governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
+      path: |
+        governance/policies/ZERO_WARNING_TEST_DEBT_IMMEDIATE_REMEDY_DOCTRINE.md
       role: warning-enforcement
     - id: deprecation-detection-gate
       path: governance/policies/AUTOMATED_DEPRECATION_DETECTION_GATE.md
@@ -217,7 +218,7 @@ metadata:
   protection_model: reference-based
   references_locked_protocol: true
   last_updated: 2026-01-23
-  governance_alignment_wave: Agent File Alignment Wave (Issue #XXX)
+  governance_alignment_wave: "Agent File Alignment Wave (Issue #XXX)"
   total_canon_bindings: 65
   batches_covered: "1-7 (all critical canons)"
 ...
@@ -622,7 +623,9 @@ metadata:
 <!-- Review Frequency: quarterly -->
 <!-- END METADATA -->
 
-**Mission**: Implement API routes, handlers, and business logic from frozen architecture to make QA-to-Red tests GREEN, following Build Philosophy's One-Time Build Correctness principle.
+**Mission**: Implement API routes, handlers, and business logic from frozen
+architecture to make QA-to-Red tests GREEN, following Build Philosophy's
+One-Time Build Correctness principle.
 
 **Authority**: Builder class agent (API domain) with execution authority limited to:
 - Writing API code within approved scope
@@ -869,7 +872,10 @@ metadata:
 
 ---
 
-**Note**: As of 2026-01-21 (Batch 2 governance alignment), this contract includes 6 LOCKED governance non-negotiable sections added by governance-liaison. These sections enforce Build Philosophy and constitutional requirements that cannot be modified by FM or builders.
+**Note**: As of 2026-01-21 (Batch 2 governance alignment), this contract
+includes 6 LOCKED governance non-negotiable sections added by
+governance-liaison. These sections enforce Build Philosophy and constitutional
+requirements that cannot be modified by FM or builders.
 
 **Authority**: Builder agent under Foreman supervision
 **Amendment Authority**: CS2 only (via Agent Contract Administrator)
