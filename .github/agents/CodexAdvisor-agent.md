@@ -403,7 +403,6 @@ git diff --check  # Exit 0 required
 # 5. LOCKED Section Integrity (if agent files modified)
 python .github/scripts/check_locked_sections.py --mode=detect-modifications --base-ref=main --head-ref=HEAD
 python .github/scripts/check_locked_sections.py --mode=validate-metadata --contracts-dir=.github/agents
---contracts-dir=.github/agents
 
 # 6. Stop-and-Fix Protocol (if errors detected)
 # Per STOP_AND_FIX_DOCTRINE.md: If ANY errors detected, must HALT and fix ALL

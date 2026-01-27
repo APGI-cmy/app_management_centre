@@ -5,7 +5,7 @@
 # Exit 0 = success (all validation passed)
 # Exit 1 = failure (syntax errors detected - STOP-AND-FIX required)
 
-set -euo pipefail
+set -uo pipefail
 
 echo "=== YAML Validation Script ==="
 echo "Authority: governance/canon/YAML_VALIDATION_PROTOCOL.md"
