@@ -1,8 +1,9 @@
 # GOVERNANCE ARTIFACT INVENTORY
 
 **Repository**: APGI-cmy/maturion-foreman-office-app
-**Last Updated**: 2026-01-27T06:25:00Z
+**Last Updated**: 2026-01-27T07:00:00Z
 **Batch**: 10 (Templates, Watchdog & Remaining Alignment) - **COMPLETE** 🎉
+**Latest Ripple**: STOP_AND_FIX_DOCTRINE.md v2.0.0 (2026-01-27) - Ban on excuse-based test dodging
 **Emergency Update**: YAML_VALIDATION_PROTOCOL.md (2026-01-27) - Catastrophic failure prevention
 **Total Canons**: 104 (92 + 12 Batch 10)
 **Canonical Source**: APGI-cmy/maturion-foreman-governance
@@ -102,7 +103,7 @@ This inventory documents all governance canon files layered down from the canoni
 
 | Canon File | Status | Last Updated | Location |
 |------------|--------|--------------|----------|
-| STOP_AND_FIX_DOCTRINE.md | ✅ Present | 2026-01-23 (Batch 4.5) | governance/canon/ |
+| STOP_AND_FIX_DOCTRINE.md | ✅ Present | **2026-01-27 v2.0.0 (Updated)** | governance/canon/ |
 | BYG_DOCTRINE.md | ✅ Present | 2026-01-23 (Batch 4.5) | governance/philosophy/ |
 
 ---
@@ -284,7 +285,39 @@ This inventory documents all governance canon files layered down from the canoni
 
 ---
 
-## Emergency Governance Updates (Post-Batch 9)
+## Emergency Governance Updates & Ripples (Post-Batch 10)
+
+### STOP_AND_FIX_DOCTRINE.md v2.0.0 (2026-01-27)
+
+| Canon File | Status | Updated | Authority |
+|------------|--------|---------|-----------|
+| STOP_AND_FIX_DOCTRINE.md | ✅ Updated v2.0.0 | 2026-01-27 | PR #1023 (canonical governance), governance-liaison |
+
+**Ripple Context**: Governance ripple from canonical repository (PR #1023) updating STOP_AND_FIX_DOCTRINE.md from v1.0.0 to v2.0.0.
+
+**Key Changes**:
+- ✅ Added Section 3.5: Ban on Excuse-Based Test Dodging
+- ✅ Enumerated 9 categories of prohibited excuse patterns
+- ✅ Expanded forbidden responses in Section 3.2 with comprehensive ban
+- ✅ Added Examples 5-6 demonstrating excuse-based test dodging violations
+- ✅ Strengthened universal responsibility obligation
+
+**Prohibited Excuse Patterns** (ALL banned):
+1. Minimization language ("just", "only", "minor")
+2. Scope deflection ("out of scope", "unrelated")
+3. Responsibility discharge ("not my code", "not my job")
+4. Deferral language ("will fix later", "future work")
+5. Rationalization ("non-blocking", "cosmetic")
+6. Blame shifting ("pre-existing", "was already broken")
+7. Complexity appeals ("too hard", "requires refactoring")
+8. Authority appeals ("reviewer said don't bother")
+9. Selective enforcement ("tests sufficient", "can't reproduce")
+
+**Impact**: All agents and builders MUST fix discovered issues immediately (or escalate if blocked). No excuse language permitted in code, PRs, or handovers.
+
+**Authority**: STOP_AND_FIX_DOCTRINE.md v2.0.0, BUILD_PHILOSOPHY.md, BYG_DOCTRINE.md
+
+---
 
 ### YAML_VALIDATION_PROTOCOL.md (2026-01-27)
 
