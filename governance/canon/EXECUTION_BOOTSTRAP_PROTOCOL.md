@@ -261,7 +261,9 @@ All applicable gates: GREEN
 
 **Action**: Verify that ALL validation commands produce ZERO warnings and exit code 0. Any warning or non-zero exit code MUST trigger immediate HALT and remediation.
 
-**🔒 Zero-Warning Rule (Authority: BUILD_PHILOSOPHY.md, STOP_AND_FIX_DOCTRINE.md)**:
+**YAML Validation**: Per `governance/canon/YAML_VALIDATION_PROTOCOL.md` v1.0.0 (created post-PR #679 catastrophic failure), YAML validation is MANDATORY before ALL handovers using `.github/scripts/validate-yaml-frontmatter.sh`.
+
+**🔒 Zero-Warning Rule (Authority: BUILD_PHILOSOPHY.md, STOP_AND_FIX_DOCTRINE.md, YAML_VALIDATION_PROTOCOL.md)**:
 
 **CRITICAL PROHIBITIONS**:
 - ❌ **PROHIBITED**: Handing over with ANY warning in validation output
@@ -287,7 +289,8 @@ git add <specific-files>  # Or 'git add .' after review
 git commit -m "Changes ready for validation"
 
 # 2. Run each gate validation
-yamllint .github/agents/*.md
+# YAML validation (MANDATORY per YAML_VALIDATION_PROTOCOL.md)
+.github/scripts/validate-yaml-frontmatter.sh
 EXIT_CODE_1=$?
 
 .github/scripts/validate-scope-to-diff.sh main
@@ -299,7 +302,7 @@ EXIT_CODE_3=$?
 # 3. Check for ANY non-zero exit code
 if [ $EXIT_CODE_1 -ne 0 ] || [ $EXIT_CODE_2 -ne 0 ] || [ $EXIT_CODE_3 -ne 0 ]; then
   echo "❌ VALIDATION FAILED - HALTING"
-  echo "Exit codes: yamllint=$EXIT_CODE_1, scope-to-diff=$EXIT_CODE_2, locked-sections=$EXIT_CODE_3"
+  echo "Exit codes: yaml-validation=$EXIT_CODE_1, scope-to-diff=$EXIT_CODE_2, locked-sections=$EXIT_CODE_3"
   echo "MUST FIX ALL ISSUES BEFORE PROCEEDING"
   exit 1
 fi
