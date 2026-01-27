@@ -312,7 +312,7 @@ IMMEDIATE HALT.**
 **Zero-Warning Requirements**:
 
 1. **ALL validation commands MUST exit with code 0**:
-   - ✅ `yamllint` exit code: 0 (no warnings, no errors)
+   - ✅ YAML validation script exit code: 0 (no syntax errors)
    - ✅ Scope-to-diff validation exit code: 0 (scope matches diff, no skips)
    - ✅ Build commands exit code: 0 (if applicable)
    - ✅ Test commands exit code: 0 (if applicable)
@@ -359,11 +359,7 @@ not just "passed")
    - Include evidence of complete validation with no warnings
    - If Stop-and-Fix applied, document what was fixed
 
-**Incident Context**: This lock added post-PR #1009 where agent handed over
-with scope-to-diff warnings and yamllint exit code 1,
-stating "will validate in CI".
-This violated BUILD_PHILOSOPHY.md, EXECUTION_BOOTSTRAP_PROTOCOL.md,
-and STOP_AND_FIX_DOCTRINE.md, representing a catastrophic governance failure.
+**Incident Context**: This lock added post-PR #1009 where agent handed over with scope-to-diff warnings and YAML validation exit code 1, stating "will validate in CI". This violated BUILD_PHILOSOPHY.md, EXECUTION_BOOTSTRAP_PROTOCOL.md, and STOP_AND_FIX_DOCTRINE.md, representing a catastrophic governance failure.
 
 **Enforcement**: Violations of zero-warning rule are critical governance
 failures. Agent must immediately correct and may require contract review.
@@ -392,8 +388,8 @@ canonical governance.
 
 **Quick Reference - Execute These Commands**:
 ```bash
-# 1. YAML Validation (BL-028: warnings ARE errors)
-yamllint .github/agents/*.md  # Exit 0 required
+# 1. YAML Validation (Authority: YAML_VALIDATION_PROTOCOL.md v1.0.0)
+.github/scripts/validate-yaml-frontmatter.sh  # Exit 0 required
 
 # 2. Scope-to-Diff Validation
 .github/scripts/validate-scope-to-diff.sh  # Exit 0 required
@@ -405,10 +401,8 @@ find governance -name "*.json" -exec jq empty {} \;  # Exit 0 required
 git diff --check  # Exit 0 required
 
 # 5. LOCKED Section Integrity (if agent files modified)
-python .github/scripts/check_locked_sections.py --mode=detect-modifications
---base-ref=main --head-ref=HEAD
-python .github/scripts/check_locked_sections.py --mode=validate-metadata
---contracts-dir=.github/agents
+python .github/scripts/check_locked_sections.py --mode=detect-modifications --base-ref=main --head-ref=HEAD
+python .github/scripts/check_locked_sections.py --mode=validate-metadata --contracts-dir=.github/agents
 
 # 6. Stop-and-Fix Protocol (if errors detected)
 # Per STOP_AND_FIX_DOCTRINE.md: If ANY errors detected, must HALT and fix ALL
@@ -456,12 +450,11 @@ only proceed when 100% pass with zero warnings.
 
 **Local Validation (copy-paste ready)**:
 ```bash
-# Gate 1: YAML
-yamllint .github/agents/*.md
+# Gate 1: YAML (Authority: YAML_VALIDATION_PROTOCOL.md v1.0.0)
+.github/scripts/validate-yaml-frontmatter.sh
 
 # Gate 2: Structure
-for f in governance/philosophy/BYG_DOCTRINE.md governance/CONSTITUTION.md
-governance/escalation/ESCALATION_POLICY.md .github/CODEOWNERS; do
+for f in governance/philosophy/BYG_DOCTRINE.md governance/CONSTITUTION.md governance/escalation/ESCALATION_POLICY.md .github/CODEOWNERS; do
   [ -f "$f" ] || exit 1
 done
 
@@ -469,10 +462,8 @@ done
 .github/scripts/validate-scope-to-diff.sh main
 
 # Gate 4: Locked sections
-python .github/scripts/check_locked_sections.py --mode=detect-modifications
---base-ref=main --head-ref=HEAD
-python .github/scripts/check_locked_sections.py --mode=validate-metadata
---contracts-dir=.github/agents
+python .github/scripts/check_locked_sections.py --mode=detect-modifications --base-ref=main --head-ref=HEAD
+python .github/scripts/check_locked_sections.py --mode=validate-metadata --contracts-dir=.github/agents
 
 # All must exit 0
 ```

@@ -8,6 +8,9 @@ name: YAML Validation Gate
 # Timeout: 5 minutes
 # Authority: CS2 (one-time authorization for gate fix per R_Roster#55)
 # Canonical Reference: APGI-cmy/R_Roster#55
+# Canonical Protocol: governance/canon/YAML_VALIDATION_PROTOCOL.md v1.0.0
+# Methodology: Extract frontmatter only from agent contracts (Jekyll/Hugo pattern)
+# Immutability: LOCKED - validation methodology cannot be overridden
 
 on:
   pull_request:

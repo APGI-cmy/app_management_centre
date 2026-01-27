@@ -1,9 +1,10 @@
 # GOVERNANCE ARTIFACT INVENTORY
 
 **Repository**: APGI-cmy/maturion-foreman-office-app
-**Last Updated**: 2026-01-26T13:15:00Z
+**Last Updated**: 2026-01-27T05:31:00Z
 **Batch**: 9 (Activation, Domain & Execution Alignment) - **COMPLETE**
-**Total Canons**: 91
+**Emergency Update**: YAML_VALIDATION_PROTOCOL.md (2026-01-27) - Catastrophic failure prevention
+**Total Canons**: 92 (91 + 1 emergency)
 **Canonical Source**: APGI-cmy/maturion-foreman-governance
 
 ---
@@ -249,6 +250,36 @@ This inventory documents all governance canon files layered down from the canoni
 | Agent File | Update Type | Batch Added |
 |------------|-------------|-------------|
 | BUILDER_CONTRACT_SCHEMA.md | Protection note added | Batch 4 (NEW) |
+
+---
+
+## Emergency Governance Updates (Post-Batch 9)
+
+### YAML_VALIDATION_PROTOCOL.md (2026-01-27)
+
+| Canon File | Status | Created | Authority |
+|------------|--------|---------|-----------|
+| YAML_VALIDATION_PROTOCOL.md | ✅ Present | 2026-01-27 | PR #679 Catastrophic Failure, Issue #681 |
+
+**Emergency Context**: Created in response to catastrophic YAML validation failure (PR #679) where >6,800 lines of fixes were required across 7 agent files due to validation methodology drift.
+
+**Purpose**: Immutably lock YAML validation methodology, provide copy-paste validation commands, prevent recurrence of validation debt accumulation.
+
+**Key Features**:
+- ✅ Immutable frontmatter extraction algorithm (Jekyll/Hugo pattern)
+- ✅ Copy-paste ready validation commands for agents
+- ✅ Local validation script (`.github/scripts/validate-yaml-frontmatter.sh`)
+- ✅ Zero-warning handover enforcement
+- ✅ STOP-AND-FIX triggers for YAML errors
+- ✅ Integration with EXECUTION_BOOTSTRAP_PROTOCOL.md Step 5.1
+
+**Artifacts Created**:
+- `governance/canon/YAML_VALIDATION_PROTOCOL.md` (15,343 chars)
+- `.github/scripts/validate-yaml-frontmatter.sh` (6,604 chars)
+- Updated `.github/workflows/yaml-validation.yml` (added canonical protocol reference)
+- Updated `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md` (added YAML validation requirement)
+
+**Authority**: STOP_AND_FIX_DOCTRINE.md, EXECUTION_BOOTSTRAP_PROTOCOL.md v1.1.0, BUILD_PHILOSOPHY.md, Incident PR#679
 
 ---
 
