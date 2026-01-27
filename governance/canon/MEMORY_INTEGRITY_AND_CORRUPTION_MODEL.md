@@ -1,12 +1,12 @@
 # MEMORY INTEGRITY AND CORRUPTION DETECTION MODEL
 
 ## Status
-**Type**: Canonical Governance Definition  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-24  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Type**: Canonical Governance Definition
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-24
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 **Applies To**: All Memory Systems, Watchdog, All Agents, All Repositories
 
 ---
@@ -513,7 +513,7 @@ This policy derives authority from and implements:
 
 **Output**: Daily integrity report with findings by severity
 
-**Escalation**: 
+**Escalation**:
 - S1 findings: Immediate human escalation
 - S2 findings: Escalate to Governance Admin + Foreman
 - S3 findings: Log and report to Governance Admin

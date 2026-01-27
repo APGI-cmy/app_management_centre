@@ -1,13 +1,13 @@
 # IN-BETWEEN WAVE RECONCILIATION (IBWR)
 
 ## Status
-**Type**: Canonical Governance Definition  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-04  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md and BUILD_PHILOSOPHY.md  
-**Applies To**: All Wave Executions, All Application Repositories  
+**Type**: Canonical Governance Definition
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-04
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md and BUILD_PHILOSOPHY.md
+**Applies To**: All Wave Executions, All Application Repositories
 **Related Canon**: MANDATORY_CANONICAL_PROGRESS_RECORDING_AND_WAVE_CLOSURE_CERTIFICATION.md, WAVE_MODEL.md, COMBINED_TESTING_PATTERN.md
 
 ---
@@ -522,7 +522,7 @@ This canon **implements** LEARNING_INTAKE_AND_PROMOTION_MODEL.md:
 
 ### 11.1 Wave Reconciliation Report
 
-**Location**: Application repository root or `/docs/`  
+**Location**: Application repository root or `/docs/`
 **Naming**: `WAVE_<n>_RECONCILIATION_REPORT.md`
 
 **Required Sections**:

@@ -1,9 +1,9 @@
 # GOVERNANCE BUILDER SUBMISSION SURVEY
 
-**Status**: Canonical Governance Survey  
-**Version**: 1.0.0  
-**Authority**: Maturion Engineering Leadership (Johan Ras)  
-**Created**: 2026-01-01  
+**Status**: Canonical Governance Survey
+**Version**: 1.0.0
+**Authority**: Maturion Engineering Leadership (Johan Ras)
+**Created**: 2026-01-01
 **Purpose**: Authoritative, exhaustive survey of ALL governance aspects that builder agents must submit to
 
 ---
@@ -1091,7 +1091,7 @@ Builders MUST escalate when:
 
 **Why It's Dangerous**: Builder operates under outdated or incorrect governance rules. Produces non-compliant builds.
 
-**Prevention**: 
+**Prevention**:
 - Explicit canonical governance binding in builder contract
 - Builder MUST fetch latest governance before each task
 - Builder MUST validate governance reference is resolvable
@@ -1160,7 +1160,7 @@ This survey represents an **exhaustive, authoritative, and binding inventory** o
 This survey explicitly covers:
 
 - ✅ Authority hierarchy and override semantics
-- ✅ Protected paths and STOP rules  
+- ✅ Protected paths and STOP rules
 - ✅ OPOJD (continuous execution doctrine)
 - ✅ Zero Test Debt and no partial passes
 - ✅ Evidence production obligations

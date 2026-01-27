@@ -1,9 +1,9 @@
 # ENVIRONMENT PROVISIONING PROCESS
 
 ## Status
-Canonical Governance Standard  
-Version: v1.0  
-Authority: Johan Ras  
+Canonical Governance Standard
+Version: v1.0
+Authority: Johan Ras
 Applies To: All Applications, All Builds, Foreman (FM), Builders, Owner (Johan)
 
 ---
@@ -503,10 +503,10 @@ This process integrates with:
 
 This process succeeds when:
 
-✅ **Environment setup is done once, correctly**  
-✅ **No late-stage environment surprises occur**  
-✅ **FM and Johan have a clean, repeatable handshake**  
-✅ **Builders never guess or hardcode environment values**  
+✅ **Environment setup is done once, correctly**
+✅ **No late-stage environment surprises occur**
+✅ **FM and Johan have a clean, repeatable handshake**
+✅ **Builders never guess or hardcode environment values**
 ✅ **Architecture completeness includes runtime reality**
 
 ---
@@ -515,37 +515,37 @@ This process succeeds when:
 
 ### Failure Mode 1: Missing `.env.example`
 
-**Symptom**: Architecture does not include `.env.example` file.  
-**Cause**: FM oversight or incomplete architecture.  
-**Mitigation**: Architecture completeness validation catches this before build authorization.  
+**Symptom**: Architecture does not include `.env.example` file.
+**Cause**: FM oversight or incomplete architecture.
+**Mitigation**: Architecture completeness validation catches this before build authorization.
 **Prevention**: FM uses architecture checklist (from `ARCHITECTURE_COMPLETENESS_REQUIREMENTS.md`).
 
 ### Failure Mode 2: Incomplete Instructions
 
-**Symptom**: Johan receives unclear or incomplete instructions.  
-**Cause**: FM drip-feeds environment requests or forgets to specify platform targets.  
-**Mitigation**: Johan escalates to FM for clarification.  
+**Symptom**: Johan receives unclear or incomplete instructions.
+**Cause**: FM drip-feeds environment requests or forgets to specify platform targets.
+**Mitigation**: Johan escalates to FM for clarification.
 **Prevention**: FM uses instruction template (defined in this document, Section 3, Phase 2).
 
 ### Failure Mode 3: Late-Stage Environment Discovery
 
-**Symptom**: Builder discovers missing environment variable during build.  
-**Cause**: Architecture incomplete (missed environment variable).  
-**Mitigation**: Treat as architecture failure, not builder failure. FM updates architecture and restarts provisioning process.  
+**Symptom**: Builder discovers missing environment variable during build.
+**Cause**: Architecture incomplete (missed environment variable).
+**Mitigation**: Treat as architecture failure, not builder failure. FM updates architecture and restarts provisioning process.
 **Prevention**: FM performs thorough functional analysis before architecture (per `GOVERNANCE_PURPOSE_AND_SCOPE.md` Section 5.1).
 
 ### Failure Mode 4: Incorrect Secret Value
 
-**Symptom**: Application fails at runtime due to incorrect secret value (e.g., wrong database password).  
-**Cause**: Johan provided incorrect value or platform configuration error.  
-**Mitigation**: FM requests Johan to verify and correct value. This is a validation failure, not provisioning failure.  
+**Symptom**: Application fails at runtime due to incorrect secret value (e.g., wrong database password).
+**Cause**: Johan provided incorrect value or platform configuration error.
+**Mitigation**: FM requests Johan to verify and correct value. This is a validation failure, not provisioning failure.
 **Prevention**: Clear documentation in `.env.example` (format, source, expected value pattern).
 
 ### Failure Mode 5: Builder Hardcodes Environment Values
 
-**Symptom**: Builder writes hardcoded values instead of using environment variables.  
-**Cause**: Builder bypasses architecture.  
-**Mitigation**: Code review or QA catches hardcoded values. Builder must use environment variables per architecture.  
+**Symptom**: Builder writes hardcoded values instead of using environment variables.
+**Cause**: Builder bypasses architecture.
+**Mitigation**: Code review or QA catches hardcoded values. Builder must use environment variables per architecture.
 **Prevention**: Architecture explicitly declares all environment variables as required. Builder QA includes check for hardcoded values.
 
 ---
@@ -571,8 +571,8 @@ This process supports:
 
 ### Version 1.0 (2025-12-22)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Issue - Govern Environment Variable Handling & .env.example Creation in Architecture Design
 
 **Summary**: Created canonical environment provisioning process defining FM-to-Johan handshake, responsibilities, and validation workflow.

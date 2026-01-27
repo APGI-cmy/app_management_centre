@@ -1,9 +1,9 @@
 # DOMAIN EVOLUTION RULES
 
 ## Status
-Canonical Governance Law  
-Version: v1  
-Authority: Governance  
+Canonical Governance Law
+Version: v1
+Authority: Governance
 Applies To: Responsibility Domain Registry
 
 ---

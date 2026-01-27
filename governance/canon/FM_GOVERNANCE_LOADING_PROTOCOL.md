@@ -1,11 +1,11 @@
 # FM GOVERNANCE LOADING PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Protocol  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-23  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Canonical Governance Protocol
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-23
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---
@@ -68,8 +68,8 @@ This is a **governance requirement document**, not an execution specification.
 
 ### 4.1 Canonical Repository
 
-**Repository**: `MaturionISMS/maturion-foreman-governance`  
-**Branch**: `main` (default branch)  
+**Repository**: `MaturionISMS/maturion-foreman-governance`
+**Branch**: `main` (default branch)
 **Access Method**: Git clone or GitHub API (read-only)
 
 The governance repository is the **sole authoritative source** for:
@@ -822,8 +822,8 @@ This document provides foundation for:
 
 ---
 
-**Protocol Status**: ✅ **COMPLETE**  
-**Activation**: Immediate (canonical upon merge)  
+**Protocol Status**: ✅ **COMPLETE**
+**Activation**: Immediate (canonical upon merge)
 **Next Review**: After FM app Phase 2 implementation
 
 ---

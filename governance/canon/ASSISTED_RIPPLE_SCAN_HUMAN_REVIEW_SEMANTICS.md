@@ -1,12 +1,12 @@
 # ASSISTED RIPPLE SCAN HUMAN REVIEW SEMANTICS
 
 ## Status
-**Type**: Canonical Governance Rule  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-02  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to RIPPLE_INTELLIGENCE_LAYER.md  
+**Type**: Canonical Governance Rule
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-02
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to RIPPLE_INTELLIGENCE_LAYER.md
 **Part of**: Ripple-Wave 2.1 — Assisted Local Repository Ripple Scan
 
 ---
@@ -115,7 +115,7 @@ Ripple reports DO NOT:
 
 **When**: Governance Administrator makes governance-class changes
 
-**Responsibility**: 
+**Responsibility**:
 - Review ripple scan report (if generated)
 - Assess impact criticality and breaking nature
 - Determine if coordination or escalation is needed
@@ -410,7 +410,7 @@ See ripple scan report for detailed impact analysis.
 
 **Confidence**: LOW
 
-**Known Uncertainties**: 
+**Known Uncertainties**:
 - Potential cross-repo impact (Wave 2.1 does not analyze cross-repo)
 - Some references may exist outside governance folders
 

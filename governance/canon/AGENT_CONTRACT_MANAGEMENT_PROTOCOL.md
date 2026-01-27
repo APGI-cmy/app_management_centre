@@ -1,9 +1,9 @@
 # Agent Contract Management Protocol
 
-**Version**: 1.0.0  
-**Date**: 2026-01-13  
-**Status**: CONSTITUTIONAL  
-**Authority**: Governance Canon (APGI-cmy/maturion-foreman-governance#938)  
+**Version**: 1.0.0
+**Date**: 2026-01-13
+**Status**: CONSTITUTIONAL
+**Authority**: Governance Canon (APGI-cmy/maturion-foreman-governance#938)
 **Layered Down From**: maturion-foreman-governance/governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
 
 ---
@@ -30,7 +30,7 @@ They bind agents to constitutional governance, define execution boundaries, and 
 
 **Prohibited**: All other agents (including builders, governance liaison, QA agents, FM) are **EXPLICITLY FORBIDDEN** from:
 - Writing to their own `.agent` files
-- Writing to other agents' `.agent` files  
+- Writing to other agents' `.agent` files
 - Modifying any `.agent` file directly
 - Creating new `.agent` files without approval
 
@@ -40,10 +40,10 @@ They bind agents to constitutional governance, define execution boundaries, and 
 
 ## Agent Contract Administrator Identity
 
-**Name**: Agent Contract Administrator  
-**Agent File**: `.github/agents/agent-contract-administrator.md`  
-**Repository Scope**: All Maturion repositories  
-**Governance Source**: APGI-cmy/maturion-foreman-governance  
+**Name**: Agent Contract Administrator
+**Agent File**: `.github/agents/agent-contract-administrator.md`
+**Repository Scope**: All Maturion repositories
+**Governance Source**: APGI-cmy/maturion-foreman-governance
 **Workspace**: `.agent-admin/`
 
 ### Responsibilities
@@ -169,7 +169,7 @@ This agent is **EXPLICITLY PROHIBITED** from:
 
 **Sole-Writer Authority**: Agent Contract Administrator (`.github/agents/agent-contract-administrator.md`)
 
-**Contract Modification Process**: 
+**Contract Modification Process**:
 1. Submit instruction to `.agent-admin/instructions/pending/`
 2. Agent Contract Administrator reviews and validates
 3. Approved instructions implemented by Agent Contract Administrator only
@@ -354,7 +354,7 @@ No agent, including FM, may:
 
 ---
 
-**Protocol Status**: ✅ ACTIVE (CONSTITUTIONAL)  
-**Last Updated**: 2026-01-13  
-**Authority**: Johan Ras  
+**Protocol Status**: ✅ ACTIVE (CONSTITUTIONAL)
+**Last Updated**: 2026-01-13
+**Authority**: Johan Ras
 **Enforcement**: MANDATORY

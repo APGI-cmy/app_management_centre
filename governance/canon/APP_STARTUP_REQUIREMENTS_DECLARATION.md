@@ -1,9 +1,9 @@
 # APP-SPECIFIC STARTUP REQUIREMENTS DECLARATION CONTRACT
 
 ## Status
-Canonical Governance Standard  
-Version: v1.0  
-Authority: Johan Ras  
+Canonical Governance Standard
+Version: v1.0
+Authority: Johan Ras
 Applies To: All Maturion Applications, Foreman (FM), Builders, Governance Administrator
 
 ---
@@ -216,14 +216,14 @@ For each commissioning phase (INSTALLED, VALIDATED, COMMISSIONED, ACTIVATED), de
   - **Success Criteria**: Process starts, listens on expected port, responds to health check
   - **Failure Impact**: BLOCKING - Cannot proceed to next phase
   - **Evidence**: Startup logs, health check response, process status
-  
+
 - [ ] **Database Connection** (MANDATORY)
   - **Purpose**: Verify application can connect to required database
   - **Validation Method**: Execute database connection test
   - **Success Criteria**: Connection established, schema version verified
   - **Failure Impact**: BLOCKING - Cannot proceed to next phase
   - **Evidence**: Connection test logs, schema validation output
-  
+
 - [ ] **API Endpoint Response** (OPTIONAL)
   - **Purpose**: Verify optional external API integration
   - **Validation Method**: Call external API health endpoint
@@ -1146,11 +1146,11 @@ This contract integrates with:
 
 This contract succeeds when:
 
-✅ **All applications have valid startup requirement declarations**  
-✅ **FM app interprets declarations consistently and correctly**  
-✅ **MANDATORY vs OPTIONAL distinction respected in commissioning**  
-✅ **Human authorization checkpoints enforced per risk profile**  
-✅ **Complete audit trail demonstrates declaration compliance**  
+✅ **All applications have valid startup requirement declarations**
+✅ **FM app interprets declarations consistently and correctly**
+✅ **MANDATORY vs OPTIONAL distinction respected in commissioning**
+✅ **Human authorization checkpoints enforced per risk profile**
+✅ **Complete audit trail demonstrates declaration compliance**
 ✅ **Commissioning adapts to application-specific needs while maintaining governance**
 
 ---
@@ -1181,8 +1181,8 @@ This contract supports:
 
 ### Version 1.0 (2025-12-24)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Issue G-C3 — Define App-Specific Startup Requirement Declaration Contract
 
 **Summary**: Created canonical contract for how applications declare unique commissioning requirements in structured, auditable, machine-interpretable format.

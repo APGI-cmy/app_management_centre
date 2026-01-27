@@ -1,14 +1,14 @@
 # Pre-Implementation Behavior Review Protocol
 
 ## Status
-**Type**: Canonical Governance Protocol  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-14  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to BUILD_PHILOSOPHY.md  
-**Applies To**: All Builders, All Enhancement Work, All Application Repositories  
-**Related Canon**: BUILD_PHILOSOPHY.md, MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md, BUILDER_CONTRACT_BINDING_CHECKLIST.md  
+**Type**: Canonical Governance Protocol
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-14
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to BUILD_PHILOSOPHY.md
+**Applies To**: All Builders, All Enhancement Work, All Application Repositories
+**Related Canon**: BUILD_PHILOSOPHY.md, MANDATORY_ENHANCEMENT_CAPTURE_STANDARD.md, BUILDER_CONTRACT_BINDING_CHECKLIST.md
 **Bootstrap Learning**: Wave 3.5 Performance & Scalability Validation (APGI-cmy/maturion-foreman-office-app)
 
 ---

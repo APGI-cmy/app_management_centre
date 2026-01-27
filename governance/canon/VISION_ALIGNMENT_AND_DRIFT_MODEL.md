@@ -1,10 +1,10 @@
 # VISION ALIGNMENT AND DRIFT MODEL
 
 ## Status
-Canonical Vision Drift Detection Requirements  
-Version: v1.0  
-Authority: Johan Ras  
-Effective Date: 2025-12-23  
+Canonical Vision Drift Detection Requirements
+Version: v1.0
+Authority: Johan Ras
+Effective Date: 2025-12-23
 Required By: GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---
@@ -63,7 +63,7 @@ Vision drift:
 - ❌ Does NOT halt builds
 - ❌ Does NOT trigger enforcement actions
 
-**Governance violations** are defined by **canon, policy, and schema compliance**.  
+**Governance violations** are defined by **canon, policy, and schema compliance**.
 **Vision drift** is defined by **philosophical alignment with doctrine**.
 
 These are **separate concerns** with **separate detection mechanisms** and **separate escalation paths**.
@@ -122,8 +122,8 @@ Vision drift is classified into **three severity categories** based on **scope o
 - Documentation patterns that differ from canonical style without violating schema requirements
 - Minor deviations in reasoning transparency (e.g., not fully explaining architectural rationale)
 
-**Impact**: Low  
-**Escalation**: Dashboard only (aggregated trend view)  
+**Impact**: Low
+**Escalation**: Dashboard only (aggregated trend view)
 **Recommended Action**: Informational review; no immediate action required
 
 ---
@@ -140,8 +140,8 @@ Vision drift is classified into **three severity categories** based on **scope o
 - Architectural decisions that create technical debt inconsistent with BYG philosophy
 - Repeated reliance on ephemeral memory instead of promoting knowledge to canonical artifacts
 
-**Impact**: Medium  
-**Escalation**: Dashboard (highlighted) + Owner notification  
+**Impact**: Medium
+**Escalation**: Dashboard (highlighted) + Owner notification
 **Recommended Action**: Advisory review; architectural/governance discussion with FM; potential agent contract review
 
 ---
@@ -159,8 +159,8 @@ Vision drift is classified into **three severity categories** based on **scope o
 - Patterns suggesting loss of separation of duties (e.g., cross-role QA execution)
 - Evidence of "governance erosion" behaviors (e.g., weakening enforcement to make builds pass, disabling gates, creating placeholder artifacts)
 
-**Impact**: High  
-**Escalation**: Dashboard (critical alert) + Immediate Owner notification + FM escalation  
+**Impact**: High
+**Escalation**: Dashboard (critical alert) + Immediate Owner notification + FM escalation
 **Recommended Action**: Immediate review required; potential agent contract realignment; architectural review; governance audit
 
 ---

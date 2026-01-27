@@ -1,12 +1,12 @@
 successfully downloaded text file (SHA: 94c6acb22282dfd1e44cdd3fb510830d391782ee)# MEMORY LIFECYCLE STATE MACHINE CONTRACT
 
 ## Status
-**Type**: Canonical Governance Definition  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-24  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Type**: Canonical Governance Definition
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-24
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 **Applies To**: All FM Runtime Implementations, All Memory Systems, All Repositories
 
 ---
@@ -358,24 +358,24 @@ In addition to the primary lifecycle states, the following failure states exist:
 └──────┬──────┘            │
        │                   │
        ├─────────► FAILED ─┘ (Critical errors)
-       │                   
+       │
        ├─────────► DEGRADED (Warnings)
-       │                   
-       │ Validation pass   
-       ▼                   
-┌─────────────┐            
-│   LOADED    │            
-└──────┬──────┘            
-       │ Activate          
-       ▼                   
-┌─────────────┐            
-│   USABLE    │            
-└──────┬──────┘            
+       │
+       │ Validation pass
+       ▼
+┌─────────────┐
+│   LOADED    │
+└──────┬──────┘
+       │ Activate
+       ▼
+┌─────────────┐
+│   USABLE    │
+└──────┬──────┘
        │ Corruption detected
-       ▼                   
-┌─────────────┐            
+       ▼
+┌─────────────┐
 │  INVALID    │ ──────► Reload → LOADING
-└─────────────┘            
+└─────────────┘
 
 Note: All states can transition to INACTIVE on graceful system shutdown.
       Failure states (FAILED, INVALID) may also transition via retry to LOADING.
@@ -389,7 +389,7 @@ Note: All states can transition to INACTIVE on graceful system shutdown.
 
 **Trigger**: FM runtime startup OR explicit memory reload command
 
-**Trigger Owner**: 
+**Trigger Owner**:
 - FM Runtime (automatic on startup)
 - Governance Admin (manual reload command)
 - Johan (manual reload command)
@@ -711,7 +711,7 @@ Every state transition MUST log the following fields:
 
 **Retention**: Permanent (governance record)
 
-**Accessibility**: 
+**Accessibility**:
 - Governance Admin: Full access
 - Watchdog: Read-only access
 - FM Runtime: Write-only access (cannot modify existing entries)

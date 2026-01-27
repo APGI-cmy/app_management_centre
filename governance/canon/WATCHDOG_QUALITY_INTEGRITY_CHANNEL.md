@@ -1,14 +1,14 @@
 # WATCHDOG QUALITY INTEGRITY CHANNEL
 
 ## Status
-**Type**: Canonical Governance Definition  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-13  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to WATCHDOG_AUTHORITY_AND_SCOPE.md  
-**Applies To**: All Repositories, All Build Systems, All QA Gates  
-**Source**: https://github.com/APGI-cmy/maturion-foreman-governance/blob/main/governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md  
+**Type**: Canonical Governance Definition
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-13
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to WATCHDOG_AUTHORITY_AND_SCOPE.md
+**Applies To**: All Repositories, All Build Systems, All QA Gates
+**Source**: https://github.com/APGI-cmy/maturion-foreman-governance/blob/main/governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md
 **Layer-Down Date**: 2026-01-14
 
 ---
@@ -188,7 +188,7 @@ This policy derives authority from and implements:
   - `Compilation error`
   - `Fatal error`
   - Exit code non-zero (as secondary indicator)
-  
+
 - **Error Patterns**:
   - `ERROR` (word boundary)
   - `ERR` (word boundary)
@@ -197,7 +197,7 @@ This policy derives authority from and implements:
   - `Failed to compile`
   - `Cannot find module`
   - `Unresolved dependencies`
-  
+
 - **Warning Patterns**:
   - `WARNING` (word boundary)
   - `WARN` (word boundary)
@@ -239,13 +239,13 @@ This policy derives authority from and implements:
 - **Critical Patterns**:
   - Linting process crash
   - Configuration error preventing execution
-  
+
 - **Error Patterns**:
   - `error` (lint severity level)
   - `✖` (error marker)
   - Rule violations marked as errors
   - Security rule violations
-  
+
 - **Warning Patterns**:
   - `warning` (lint severity level)
   - `⚠` (warning marker)
@@ -295,20 +295,20 @@ This policy derives authority from and implements:
   - Test runner crash
   - All tests failing
   - `Cannot run tests` (infrastructure failure)
-  
+
 - **Error Patterns**:
   - `FAIL` or `✖` (test failure marker)
   - `Error:` in test output
   - `UnhandledPromiseRejectionWarning`
   - `Segmentation fault`
   - Assertion failures
-  
+
 - **Warning Patterns**:
   - `SKIP` or `⊘` (skipped test marker)
   - `.only` or `.skip` in test descriptions (test focus/suppression)
   - Coverage below threshold
   - `TODO` tests
-  
+
 - **Unexpected Passes**:
   - Tests marked `.failing` but passing
   - Tests expected to fail but succeed (indicates stale test)
@@ -356,14 +356,14 @@ This policy derives authority from and implements:
   - Server start failure
   - Port binding errors
   - Missing environment variables (required)
-  
+
 - **Error Patterns**:
   - `Build error` in deployment logs
   - `Failed to start` server messages
   - Route compilation errors
   - API endpoint failures during startup
   - Database connection errors
-  
+
 - **Warning Patterns**:
   - Environment variable warnings (optional vars missing)
   - Performance warnings (slow builds, slow starts)
@@ -413,7 +413,7 @@ This policy derives authority from and implements:
   - Application crash during initialization
   - Fatal errors preventing startup
   - `Cannot initialize` messages
-  
+
 - **Error Patterns**:
   - `Initialization error`
   - `Failed to connect` (database, services)
@@ -421,7 +421,7 @@ This policy derives authority from and implements:
   - `Governance hook failure`
   - `Engine initialization error`
   - Unhandled exceptions during startup
-  
+
 - **Warning Patterns**:
   - Slow initialization (performance warnings)
   - Retry attempts during initialization

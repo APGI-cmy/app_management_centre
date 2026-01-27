@@ -12,16 +12,16 @@ Entries are additive and non-retroactive.
 
 **Context:** Pre-Batch 3 (Governance Hardening & Readiness)
 
-**Observed Issue:**  
+**Observed Issue:**
 FM recruitment was initially attempted while governance artifacts and authority boundaries were still in flux.
 
-**Root Cause:**  
+**Root Cause:**
 No explicit rule existed requiring governance lock and layer-down completion before FM activation.
 
-**Learning:**  
+**Learning:**
 Governance MUST be stabilised, locked, and layered down before FM is recruited or granted planning authority.
 
-**Governance Impact:**  
+**Governance Impact:**
 Informs FM recruitment sequencing and Batch entry conditions.
 
 **Status:** Recorded
@@ -30,16 +30,16 @@ Informs FM recruitment sequencing and Batch entry conditions.
 
 **Context:** Batch 3A — Final Readiness Certification
 
-**Observed Issue:**  
+**Observed Issue:**
 Risk of interpreting readiness certification as implicit execution authorization.
 
-**Root Cause:**  
+**Root Cause:**
 Readiness and execution were not explicitly separated in early mental models.
 
-**Learning:**  
+**Learning:**
 Readiness certification records system state and constraints only; execution authority must be granted explicitly and separately.
 
-**Governance Impact:**  
+**Governance Impact:**
 Clarifies Batch 3A vs Batch 3B boundary.
 
 **Status:** Recorded
@@ -48,16 +48,16 @@ Clarifies Batch 3A vs Batch 3B boundary.
 
 **Context:** Batch 3B Entry Preparation
 
-**Observed Issue:**  
+**Observed Issue:**
 Multiple legacy FM agent definitions created ambiguity in authority and scope.
 
-**Root Cause:**  
+**Root Cause:**
 Historical agent contracts were not deprecated before reuse.
 
-**Learning:**  
+**Learning:**
 Exactly one canonical FM agent definition MUST exist before FM recruitment. Legacy definitions must be removed or explicitly deprecated.
 
-**Governance Impact:**  
+**Governance Impact:**
 Informs agent canonicalisation requirements and FM onboarding rules.
 
 **Status:** Recorded
@@ -66,16 +66,16 @@ Informs agent canonicalisation requirements and FM onboarding rules.
 
 **Context:** Batch 3B — Wave 0 Bootstrap Execution
 
-**Observed Issue:**  
+**Observed Issue:**
 FM could not perform GitHub platform actions prior to full automation.
 
-**Root Cause:**  
+**Root Cause:**
 Delegated execution pathways were not yet operational.
 
-**Learning:**  
+**Learning:**
 A human execution proxy may perform mechanical platform actions during bootstrap, provided authority, instruction, and auditability remain with FM and governance.
 
-**Governance Impact:**  
+**Governance Impact:**
 Informs Bootstrap Execution Proxy clause and future automated delegation design.
 
 **Status:** Recorded
@@ -181,7 +181,7 @@ This learning directly motivates creation of:
 - Builder wake/sleep signaling
 - UI-level execution visibility
 
-**Status:** Recorded  
+**Status:** Recorded
 **Applicability:** Wave 0 / Bootstrap phases only
 
 ### BL-0007 — Irresponsible Appointment of Officials Will Collapse the Model (Critical)
@@ -213,7 +213,7 @@ All officials MUST be appointed using a governed protocol that:
 - defines escalation triggers and STOP conditions
 - prevents coder-first defaults from reappearing under pressure
 
-**Status:** Recorded (Critical)  
+**Status:** Recorded (Critical)
 **Applies To:** FM, Governance Liaison, Builders, Watchdog roles
 
 ### BL-0008 — PR Gate Layer-Down Is a Mandatory Prerequisite to Builder Appointment
@@ -247,7 +247,7 @@ Before FM appoints builders:
 2. Gate ownership and red declarant authority must be enforceable
 3. Merge rules must be verifiable in the application repository
 
-**Status:** Recorded  
+**Status:** Recorded
 **Applies To:** All application repositories (FM app, SlotMaster, future apps)
 
 ---
@@ -404,8 +404,8 @@ This learning mandates updates to Platform Readiness Canon (G-PLAT-READY-01) to:
 
 ### Status
 
-**Recorded** — Non-Retroactive  
-**Applies To:** All future platform readiness declarations  
+**Recorded** — Non-Retroactive
+**Applies To:** All future platform readiness declarations
 **Effective:** 2025-12-31
 
 ---
@@ -472,8 +472,8 @@ This learning mandates updates to Platform Readiness Canon (G-PLAT-READY-01) to:
 
 ### Status
 
-**Recorded** — Non-Retroactive  
-**Applies To:** All future platform readiness declarations  
+**Recorded** — Non-Retroactive
+**Applies To:** All future platform readiness declarations
 **Effective:** 2025-12-31
 
 ---
@@ -540,8 +540,8 @@ This learning mandates updates to Platform Readiness Canon (G-PLAT-READY-01) to:
 
 ### Status
 
-**Recorded** — Non-Retroactive  
-**Applies To:** All future AMBER readiness declarations  
+**Recorded** — Non-Retroactive
+**Applies To:** All future AMBER readiness declarations
 **Effective:** 2025-12-31
 
 ---
@@ -615,8 +615,8 @@ This learning mandates updates to Platform Readiness Canon (G-PLAT-READY-01) to:
 
 ### Status
 
-**Recorded** — Non-Retroactive  
-**Applies To:** All future platform readiness models  
+**Recorded** — Non-Retroactive
+**Applies To:** All future platform readiness models
 **Effective:** 2025-12-31
 
 ---
@@ -690,8 +690,8 @@ This learning mandates updates to Platform Readiness Canon (G-PLAT-READY-01) to:
 
 ### Status
 
-**Recorded** — Non-Retroactive  
-**Applies To:** All future operational readiness validations  
+**Recorded** — Non-Retroactive
+**Applies To:** All future operational readiness validations
 **Effective:** 2025-12-31
 
 ---
@@ -876,7 +876,7 @@ Future architectures **must not** be declared complete without:
 - Numbered QA mapping
 - Demonstrated one-time build guarantee
 
-"Complete coverage" ≠ "Complete architecture"  
+"Complete coverage" ≠ "Complete architecture"
 "Wiring completeness" is now a constitutional requirement.
 
 ---
@@ -893,8 +893,8 @@ Future architectures **must not** be declared complete without:
 
 ### Status
 
-**Recorded** — Non-Retroactive  
-**Applies To:** All future architecture definitions  
+**Recorded** — Non-Retroactive
+**Applies To:** All future architecture definitions
 **Effective:** 2025-12-31
 
 ---
@@ -1053,8 +1053,8 @@ Future governance MUST:
 - Separate authority from execution mechanics explicitly
 - Prevent AI reinterpretation through binding checklists
 
-**Distributed governance intent is insufficient.**  
-**Binding artifacts are mandatory.**  
+**Distributed governance intent is insufficient.**
+**Binding artifacts are mandatory.**
 **Implicit phrasing is forbidden for constitutional requirements.**
 
 ---
@@ -1078,9 +1078,9 @@ Future governance MUST:
 
 ### Status
 
-**ACTIVE EXECUTION EXPECTATION** — Updated 2026-01-03  
-**Applies To:** All future governed builds  
-**Effective:** 2026-01-01  
+**ACTIVE EXECUTION EXPECTATION** — Updated 2026-01-03
+**Applies To:** All future governed builds
+**Effective:** 2026-01-01
 **Status Change:** Elevated from passive learning to active FM execution requirement
 
 **BL-016 Active Requirements:**
@@ -1100,13 +1100,13 @@ Future governance MUST:
 
 ## BL-017 — Warning Acceptance Criteria Must Be Defined Pre-Execution
 
-**Context:**  
+**Context:**
 Wave 1.0.1 — Schema Foundation (schema-builder, QA-001 to QA-018)
 
-**Observed Issue:**  
+**Observed Issue:**
 Wave 1.0.1 execution completed successfully with all 18 QA components GREEN (100% pass rate). However, test execution produced 194 warnings. No pre-defined acceptance criteria existed for warnings during build-to-green execution, forcing ad-hoc FM classification and gate decision post-execution.
 
-**Root Cause:**  
+**Root Cause:**
 Build initiation artifacts (QA-to-Red Suite Spec, QA Catalog, Builder Assignment Plan, Gate Topology) defined success criteria exclusively in terms of test pass/fail status. Warning acceptance criteria, classification taxonomy, and escalation thresholds were not specified.
 
 **Specific Gaps:**
@@ -1210,7 +1210,7 @@ Before Wave 1.0 subsequent builder executions (ui-builder, api-builder, integrat
 
 **Mitigation for Wave 1.0.1 (Retroactive):**
 
-FM has performed ad-hoc warning classification for Wave 1.0.1 (documented in `WAVE_1.0.1_WARNING_CLASSIFICATION_AND_GATE_DECISION.md`). 
+FM has performed ad-hoc warning classification for Wave 1.0.1 (documented in `WAVE_1.0.1_WARNING_CLASSIFICATION_AND_GATE_DECISION.md`).
 
 Decision: **Gate may proceed** with documented execution debt.
 
@@ -1261,9 +1261,9 @@ Future builder executions in Wave 1.0 (ui-builder, api-builder, integration-buil
 
 ### Status
 
-**Recorded** — Non-Retroactive  
-**Applies To:** All future builder executions (Wave 1.0 onwards)  
-**Effective:** 2026-01-02  
+**Recorded** — Non-Retroactive
+**Applies To:** All future builder executions (Wave 1.0 onwards)
+**Effective:** 2026-01-02
 **Retroactive Exception:** Wave 1.0.1 (schema-builder) accepted with ad-hoc classification
 
 ---
@@ -1655,9 +1655,9 @@ Future large-scope tasks (>40 QA components or >2000 LOC estimated) **MUST**:
 
 ### Status
 
-**Recorded** — Non-Retroactive  
-**Applies To:** All future large-scope builder executions (>40 QA or >2000 LOC)  
-**Effective:** 2026-01-03  
+**Recorded** — Non-Retroactive
+**Applies To:** All future large-scope builder executions (>40 QA or >2000 LOC)
+**Effective:** 2026-01-03
 **Resolution:** Platform constraint accommodation via controlled execution segmentation
 
 ---

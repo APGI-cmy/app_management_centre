@@ -1,11 +1,11 @@
 # .agent File Binding Requirements
 
 ## Status
-**Type**: Canonical Governance Requirements  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-12  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Canonical Governance Requirements
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-12
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Purpose**: Define mandatory and optional bindings for `.agent` files
 
 ---
@@ -32,8 +32,8 @@ These bindings MUST be present in ALL governed repositories, regardless of type,
 
 ### 2.1 GOVERNANCE_PURPOSE_AND_SCOPE.md
 
-**Binding ID**: `governance-purpose-scope`  
-**Path**: `governance/canon/GOVERNANCE_PURPOSE_AND_SCOPE.md`  
+**Binding ID**: `governance-purpose-scope`
+**Path**: `governance/canon/GOVERNANCE_PURPOSE_AND_SCOPE.md`
 **Role**: `supreme-authority-and-scope`
 
 **Why Mandatory**: Defines the ultimate authority and boundaries of governance itself. All agents must understand what governance is and what it governs.
@@ -49,8 +49,8 @@ governance:
 
 ### 2.2 AGENT_RECRUITMENT.md
 
-**Binding ID**: `agent-recruitment`  
-**Path**: `governance/canon/AGENT_RECRUITMENT.md`  
+**Binding ID**: `agent-recruitment`
+**Path**: `governance/canon/AGENT_RECRUITMENT.md`
 **Role**: `agent-legitimacy-and-authority`
 
 **Why Mandatory**: Defines how agents become legitimate and under what authority they operate. Critical for understanding which agents are authorized.
@@ -64,8 +64,8 @@ governance:
 
 ### 2.3 GOVERNANCE_RIPPLE_MODEL.md
 
-**Binding ID**: `governance-ripple-model`  
-**Path**: `governance/canon/GOVERNANCE_RIPPLE_MODEL.md`  
+**Binding ID**: `governance-ripple-model`
+**Path**: `governance/canon/GOVERNANCE_RIPPLE_MODEL.md`
 **Role**: `ripple-propagation-protocol`
 
 **Why Mandatory**: Defines how governance changes propagate across repositories. All repositories must understand ripple obligations.
@@ -87,8 +87,8 @@ In addition to Tier-0, application repositories MUST bind to:
 
 #### FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
 
-**Binding ID**: `fm-authority-model`  
-**Path**: `governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md`  
+**Binding ID**: `fm-authority-model`
+**Path**: `governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md`
 **Role**: `fm-execution-authority`
 
 **Why Mandatory**: FM is the execution authority. Application repos must understand FM's scope and responsibilities.
@@ -102,8 +102,8 @@ In addition to Tier-0, application repositories MUST bind to:
 
 #### BUILDER_CONTRACT_BINDING_CHECKLIST.md
 
-**Binding ID**: `builder-bindings`  
-**Path**: `governance/canon/BUILDER_CONTRACT_BINDING_CHECKLIST.md`  
+**Binding ID**: `builder-bindings`
+**Path**: `governance/canon/BUILDER_CONTRACT_BINDING_CHECKLIST.md`
 **Role**: `builder-requirements`
 
 **Why Mandatory**: Defines what builders must comply with. Application repos with builders must understand builder obligations.
@@ -117,8 +117,8 @@ In addition to Tier-0, application repositories MUST bind to:
 
 #### EXECUTION_BOOTSTRAP_PROTOCOL.md
 
-**Binding ID**: `execution-bootstrap-protocol`  
-**Path**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
+**Binding ID**: `execution-bootstrap-protocol`
+**Path**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
 **Role**: `execution-discipline`
 
 **Why Mandatory**: Defines execution discipline (build-to-green, prehandover proof, etc.). All execution repos must comply.
@@ -132,8 +132,8 @@ In addition to Tier-0, application repositories MUST bind to:
 
 #### AGENT_TEST_EXECUTION_PROTOCOL.md
 
-**Binding ID**: `agent-test-execution-protocol`  
-**Path**: `governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md`  
+**Binding ID**: `agent-test-execution-protocol`
+**Path**: `governance/runbooks/AGENT_TEST_EXECUTION_PROTOCOL.md`
 **Role**: `test-execution-before-handover`
 
 **Why Mandatory**: Enforces CI-Confirmatory-Not-Diagnostic by requiring test execution in agent environment before PR creation. Prevents merge gate failures post-handover due to test failures.
@@ -153,8 +153,8 @@ In addition to Tier-0, governance repositories MUST bind to:
 
 #### CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md
 
-**Binding ID**: `cross-repo-layer-down`  
-**Path**: `governance/canon/CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md`  
+**Binding ID**: `cross-repo-layer-down`
+**Path**: `governance/canon/CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md`
 **Role**: `cross-repo-governance-propagation`
 
 **Why Mandatory**: Governance repos must understand how to propagate governance to other repos.
@@ -168,8 +168,8 @@ In addition to Tier-0, governance repositories MUST bind to:
 
 #### MANDATORY_CANONICAL_PROGRESS_RECORDING_AND_WAVE_CLOSURE_CERTIFICATION.md
 
-**Binding ID**: `mandatory-progress-recording`  
-**Path**: `governance/canon/MANDATORY_CANONICAL_PROGRESS_RECORDING_AND_WAVE_CLOSURE_CERTIFICATION.md`  
+**Binding ID**: `mandatory-progress-recording`
+**Path**: `governance/canon/MANDATORY_CANONICAL_PROGRESS_RECORDING_AND_WAVE_CLOSURE_CERTIFICATION.md`
 **Role**: `progress-recording-standards`
 
 **Why Mandatory**: Governance repos track progress and certify completion. Must understand recording standards.
@@ -183,8 +183,8 @@ In addition to Tier-0, governance repositories MUST bind to:
 
 #### BOOTSTRAP_EXECUTION_LEARNINGS.md
 
-**Binding ID**: `bootstrap-learnings`  
-**Path**: `governance/canon/BOOTSTRAP_EXECUTION_LEARNINGS.md`  
+**Binding ID**: `bootstrap-learnings`
+**Path**: `governance/canon/BOOTSTRAP_EXECUTION_LEARNINGS.md`
 **Role**: `execution-learnings-capture`
 
 **Why Mandatory**: Governance repos must capture and promote learnings from execution.
@@ -220,11 +220,11 @@ If repository has FM agent (class: `overseer`, FM-specific), MUST bind to:
     - id: fm-builder-appointment
       path: governance/canon/FM_BUILDER_APPOINTMENT_PROTOCOL.md
       role: builder-appointment-authority
-    
+
     - id: fm-governance-loading
       path: governance/canon/FM_GOVERNANCE_LOADING_PROTOCOL.md
       role: governance-loading-protocol
-    
+
     - id: fm-runtime-enforcement
       path: governance/canon/FM_RUNTIME_ENFORCEMENT_AND_AWARENESS_MODEL.md
       role: fm-runtime-enforcement
@@ -243,7 +243,7 @@ If repository has builder agents (class: `builder`), MUST bind to:
     - id: build-tree-model
       path: governance/canon/BUILD_TREE_EXECUTION_MODEL.md
       role: build-tree-execution
-    
+
     - id: defect-resolution
       path: governance/canon/DEFECT_RESOLUTION_MAINTENANCE_CANON.md
       role: maintenance-protocol
@@ -261,7 +261,7 @@ If repository appoints a Governance Liaison agent, SHOULD bind to:
     - id: gl-requirements
       path: governance/canon/GOVERNANCE_LIAISON_MINIMUM_APPOINTMENT_REQUIREMENTS.md
       role: liaison-appointment
-    
+
     - id: gl-training
       path: governance/canon/GOVERNANCE_LIAISON_TRAINING_PROTOCOL.md
       role: liaison-training
@@ -279,7 +279,7 @@ If repository has Watchdog agent (monitoring/oversight), MUST bind to:
     - id: watchdog-authority
       path: governance/canon/WATCHDOG_AUTHORITY_AND_SCOPE.md
       role: watchdog-authority
-    
+
     - id: watchdog-observation
       path: governance/canon/WATCHDOG_COGNITIVE_OBSERVATION_PROTOCOL.md
       role: cognitive-observation
@@ -311,7 +311,7 @@ These bindings are NOT mandatory but SHOULD be included when the canonical docum
     - id: memory-lifecycle
       path: governance/canon/MEMORY_LIFECYCLE_STATE_MACHINE_CONTRACT.md
       role: memory-management
-    
+
     - id: learning-promotion
       path: governance/canon/LEARNING_INTAKE_AND_PROMOTION_MODEL.md
       role: learning-standards
@@ -326,7 +326,7 @@ These bindings are NOT mandatory but SHOULD be included when the canonical docum
     - id: branch-protection
       path: governance/canon/BRANCH_PROTECTION_ENFORCEMENT.md
       role: branch-protection-requirements
-    
+
     - id: pr-gate-protocol
       path: governance/canon/PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md
       role: pr-gate-enforcement
@@ -341,7 +341,7 @@ These bindings are NOT mandatory but SHOULD be included when the canonical docum
     - id: repository-initialization
       path: governance/canon/REPOSITORY_INITIALIZATION_AND_GOVERNANCE_SEEDING_PROTOCOL.md
       role: initialization-protocol
-    
+
     - id: system-commissioning
       path: governance/canon/SYSTEM_COMMISSIONING_AND_PROGRESSIVE_ACTIVATION_PROTOCOL.md
       role: commissioning-standards
@@ -356,7 +356,7 @@ These bindings are NOT mandatory but SHOULD be included when the canonical docum
     - id: agent-onboarding
       path: governance/canon/AGENT_ONBOARDING_QUICKSTART.md
       role: unified-agent-onboarding
-    
+
     - id: agent-contract-migration
       path: governance/canon/AGENT_CONTRACT_MIGRATION_GUIDE.md
       role: contract-minimalism-and-migration
@@ -501,24 +501,24 @@ governance:
     - id: governance-purpose-scope
       path: governance/canon/GOVERNANCE_PURPOSE_AND_SCOPE.md
       role: supreme-authority-and-scope
-    
+
     - id: agent-recruitment
       path: governance/canon/AGENT_RECRUITMENT.md
       role: agent-legitimacy-and-authority
-    
+
     - id: governance-ripple-model
       path: governance/canon/GOVERNANCE_RIPPLE_MODEL.md
       role: ripple-propagation-protocol
-    
+
     # Governance-specific (Section 3.2)
     - id: cross-repo-layer-down
       path: governance/canon/CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md
       role: cross-repo-governance-propagation
-    
+
     - id: mandatory-progress-recording
       path: governance/canon/MANDATORY_CANONICAL_PROGRESS_RECORDING_AND_WAVE_CLOSURE_CERTIFICATION.md
       role: progress-recording-standards
-    
+
     - id: bootstrap-learnings
       path: governance/canon/BOOTSTRAP_EXECUTION_LEARNINGS.md
       role: execution-learnings-capture
@@ -533,47 +533,47 @@ governance:
     - id: governance-purpose-scope
       path: governance/canon/GOVERNANCE_PURPOSE_AND_SCOPE.md
       role: supreme-authority-and-scope
-    
+
     - id: agent-recruitment
       path: governance/canon/AGENT_RECRUITMENT.md
       role: agent-legitimacy-and-authority
-    
+
     - id: governance-ripple-model
       path: governance/canon/GOVERNANCE_RIPPLE_MODEL.md
       role: ripple-propagation-protocol
-    
+
     # Application-specific (Section 3.1)
     - id: fm-authority-model
       path: governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
       role: fm-execution-authority
-    
+
     - id: builder-bindings
       path: governance/canon/BUILDER_CONTRACT_BINDING_CHECKLIST.md
       role: builder-requirements
-    
+
     - id: execution-bootstrap-protocol
       path: governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md
       role: execution-discipline
-    
+
     # FM-specific (Section 4.1)
     - id: fm-builder-appointment
       path: governance/canon/FM_BUILDER_APPOINTMENT_PROTOCOL.md
       role: builder-appointment-authority
-    
+
     - id: fm-governance-loading
       path: governance/canon/FM_GOVERNANCE_LOADING_PROTOCOL.md
       role: governance-loading-protocol
-    
+
     # Builder-specific (Section 4.2)
     - id: build-tree-model
       path: governance/canon/BUILD_TREE_EXECUTION_MODEL.md
       role: build-tree-execution
-    
+
     # Optional but recommended (Section 5)
     - id: architecture-completeness
       path: governance/canon/ARCHITECTURE_COMPLETENESS_REQUIREMENTS.md
       role: architecture-standards
-    
+
     - id: branch-protection
       path: governance/canon/BRANCH_PROTECTION_ENFORCEMENT.md
       role: branch-protection-requirements
@@ -588,11 +588,11 @@ governance:
     - id: governance-purpose-scope
       path: governance/canon/GOVERNANCE_PURPOSE_AND_SCOPE.md
       role: supreme-authority-and-scope
-    
+
     - id: agent-recruitment
       path: governance/canon/AGENT_RECRUITMENT.md
       role: agent-legitimacy-and-authority
-    
+
     - id: governance-ripple-model
       path: governance/canon/GOVERNANCE_RIPPLE_MODEL.md
       role: ripple-propagation-protocol
@@ -604,26 +604,26 @@ governance:
 
 ### Issue: Too Many Bindings
 
-**Symptom**: Repository has 15+ bindings  
-**Diagnosis**: May be over-specifying or including tangential documents  
+**Symptom**: Repository has 15+ bindings
+**Diagnosis**: May be over-specifying or including tangential documents
 **Solution**: Review for redundancy; keep only documents agents directly depend on
 
 ### Issue: Missing Expected Binding
 
-**Symptom**: Validation reports missing mandatory binding  
-**Diagnosis**: Repository type or agent roster requires binding  
+**Symptom**: Validation reports missing mandatory binding
+**Diagnosis**: Repository type or agent roster requires binding
 **Solution**: Consult Sections 2-4 for mandatory bindings, add missing binding
 
 ### Issue: Binding Path Not Found
 
-**Symptom**: Canonical document path cannot be resolved  
-**Diagnosis**: Document moved, renamed, or typo in path  
+**Symptom**: Canonical document path cannot be resolved
+**Diagnosis**: Document moved, renamed, or typo in path
 **Solution**: Check canonical governance repository, update path or reference
 
 ### Issue: Unclear If Binding Is Mandatory
 
-**Symptom**: Unsure if binding applies to repository  
-**Diagnosis**: Ambiguous applicability  
+**Symptom**: Unsure if binding applies to repository
+**Diagnosis**: Ambiguous applicability
 **Solution**: Consult decision tree (Section 7) or escalate to Governance Liaison
 
 ---
@@ -666,6 +666,6 @@ governance:
 
 **This is the single, authoritative source for `.agent` file binding requirements.**
 
-**Version**: 1.0.0  
-**Last Updated**: 2026-01-12  
+**Version**: 1.0.0
+**Last Updated**: 2026-01-12
 **Next Review**: 2026-07-12 (6 months)

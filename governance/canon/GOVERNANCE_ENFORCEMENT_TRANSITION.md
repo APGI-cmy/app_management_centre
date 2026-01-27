@@ -2,12 +2,12 @@
 
 ## Metadata
 
-**Status**: Canonical Governance Policy  
-**Version**: v1.0  
-**Authority**: Johan Ras / Governance Administrator  
-**Effective Date**: 2025-12-23  
-**Scope**: Governance Repository (maturion-foreman-governance)  
-**Related Issue**: #677  
+**Status**: Canonical Governance Policy
+**Version**: v1.0
+**Authority**: Johan Ras / Governance Administrator
+**Effective Date**: 2025-12-23
+**Scope**: Governance Repository (maturion-foreman-governance)
+**Related Issue**: #677
 **Classification**: Governance Policy / Enforcement Authority
 
 ---
@@ -394,8 +394,8 @@ This document formally transitions governance enforcement from legacy PR gate se
 **Governance Principle**:
 > Governance is canonical memory. Enforcement is the mechanism that makes governance real. When enforcement drifts from governance, governance is authoritative.
 
-**Effective Date**: 2025-12-23  
-**Authority**: Johan Ras / Governance Administrator  
+**Effective Date**: 2025-12-23
+**Authority**: Johan Ras / Governance Administrator
 **Status**: Canonical Governance Policy
 
 ---

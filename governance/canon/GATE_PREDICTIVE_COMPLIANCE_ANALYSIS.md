@@ -1,10 +1,10 @@
 # GATE-PREDICTIVE COMPLIANCE ANALYSIS (GPCA)
 
 ## Status
-Canonical Governance Policy  
-Version: v1.0  
-Authority: Governance Administrator  
-Effective Date: 2025-12-22  
+Canonical Governance Policy
+Version: v1.0
+Authority: Governance Administrator
+Effective Date: 2025-12-22
 Required By: Post-Transition Governance Model, GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---
@@ -76,7 +76,7 @@ GPCA **must never**:
 
 **Clarification**:
 - If Builder runs GPCA and it predicts PASS, but gate FAILS → Governance defect
-- If Builder runs GPCA and it predicts FAIL, but gate PASSES → Governance defect  
+- If Builder runs GPCA and it predicts FAIL, but gate PASSES → Governance defect
 - If Builder does NOT run GPCA → This invariant does not apply
 - If GPCA was not available → This invariant does not apply
 

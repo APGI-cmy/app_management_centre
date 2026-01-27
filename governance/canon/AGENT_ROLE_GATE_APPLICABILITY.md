@@ -1,11 +1,11 @@
 # AGENT ROLE GATE APPLICABILITY
 
 ## Status
-**Type**: Constitutional Governance Rule  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-22  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Constitutional Governance Rule
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-22
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Precedence**: Subordinate only to GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---
@@ -428,7 +428,7 @@ Gates **MUST** implement agent-role-aware evaluation:
 ```pseudocode
 function evaluateGate(pr):
     agentRole = detectAgentRole(pr)
-    
+
     if agentRole == "builder":
         enforceBuilderGates(pr)
     elif agentRole == "governance-administrator":
@@ -564,7 +564,7 @@ This document integrates with and clarifies:
 
 > **Enforce strictly — but only where enforcement applies.**
 
-This clarification does not weaken governance.  
+This clarification does not weaken governance.
 It **makes governance precise**.
 
 Precision is a prerequisite for scale.
@@ -621,9 +621,9 @@ All PR gates MUST follow this model. No repository, agent, or workflow may:
 
 ---
 
-**Status**: Active and Enforced  
-**Owner**: Governance Administrator  
-**Approval Authority**: Johan Ras  
+**Status**: Active and Enforced
+**Owner**: Governance Administrator
+**Approval Authority**: Johan Ras
 **Last Updated**: 2025-12-24
 
 ---

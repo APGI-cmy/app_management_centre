@@ -1,11 +1,11 @@
 # WARNING DISCOVERY BLOCKER PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Protocol  
-**Authority**: Supreme - Applies to ALL agents in ALL repositories  
-**Version**: 1.0.0  
-**Date**: 2026-01-07  
-**Owner**: Maturion Engineering Leadership (Johan)  
+**Type**: Canonical Governance Protocol
+**Authority**: Supreme - Applies to ALL agents in ALL repositories
+**Version**: 1.0.0
+**Date**: 2026-01-07
+**Owner**: Maturion Engineering Leadership (Johan)
 **Effective Date**: Immediate
 
 ---
@@ -116,7 +116,7 @@ When an agent discovers warnings or test debt from prior work:
    - Screenshots (if applicable)
    - Git diff showing warning context
 
-**Schema**: `governance/schemas/WARNING_DISCOVERY_REPORT.schema.md`  
+**Schema**: `governance/schemas/WARNING_DISCOVERY_REPORT.schema.md`
 **Template**: `governance/templates/WARNING_DISCOVERY_REPORT.template.md`
 
 ---
@@ -225,9 +225,9 @@ When FM or Governance receives a Warning Discovery Report:
 You are re-assigned to remediate warnings from [job/wave/subwave reference] as BLOCKER priority.
 
 **Warning Discovery Report**: [link to report]
-**Discovering Agent**: [agent ID]  
-**Warnings**: [summary]  
-**Impact**: [impact assessment]  
+**Discovering Agent**: [agent ID]
+**Warnings**: [summary]
+**Impact**: [impact assessment]
 
 **Your Responsibilities**:
 1. Review Warning Discovery Report
@@ -270,7 +270,7 @@ You are re-assigned to remediate warnings from [job/wave/subwave reference] as B
    - Submit WARNING_REMEDIATION_REPORT to FM/Governance
    - Request discovering agent verification
 
-**Schema**: `governance/schemas/WARNING_REMEDIATION_REPORT.schema.md`  
+**Schema**: `governance/schemas/WARNING_REMEDIATION_REPORT.schema.md`
 **Template**: `governance/templates/WARNING_REMEDIATION_REPORT.template.md`
 
 ---
@@ -297,7 +297,7 @@ You are re-assigned to remediate warnings from [job/wave/subwave reference] as B
    - Proceed with current task
    - Include verification reference in handover reports
 
-**Schema**: `governance/schemas/WARNING_VERIFICATION_REPORT.schema.md`  
+**Schema**: `governance/schemas/WARNING_VERIFICATION_REPORT.schema.md`
 **Template**: `governance/templates/WARNING_VERIFICATION_REPORT.template.md`
 
 ---
@@ -464,33 +464,33 @@ The following actions are **ABSOLUTELY FORBIDDEN**:
 
 ### 6.1 By Discovering Agent
 
-❌ **Proceeding with downstream work despite unresolved warnings**  
-❌ **Suppressing warnings without escalation**  
-❌ **Claiming "not my responsibility" and continuing**  
-❌ **Working around warnings instead of escalating**  
-❌ **Handing over work with unresolved prior warnings**  
+❌ **Proceeding with downstream work despite unresolved warnings**
+❌ **Suppressing warnings without escalation**
+❌ **Claiming "not my responsibility" and continuing**
+❌ **Working around warnings instead of escalating**
+❌ **Handing over work with unresolved prior warnings**
 ❌ **Fixing warnings that are not the discovering agent's responsibility** (usurps original agent accountability)
 
 ---
 
 ### 6.2 By Original Agent
 
-❌ **Ignoring re-assignment to remediate**  
-❌ **Delegating remediation to another agent**  
-❌ **Suppressing warnings instead of fixing root cause**  
-❌ **Claiming warnings are "not critical" to avoid remediation**  
-❌ **Proceeding with other work before remediation complete**  
+❌ **Ignoring re-assignment to remediate**
+❌ **Delegating remediation to another agent**
+❌ **Suppressing warnings instead of fixing root cause**
+❌ **Claiming warnings are "not critical" to avoid remediation**
+❌ **Proceeding with other work before remediation complete**
 ❌ **Providing false WARNING_REMEDIATION_REPORT**
 
 ---
 
 ### 6.3 By FM/Governance
 
-❌ **Allowing discovering agent to proceed without remediation**  
-❌ **Not re-assigning original agent as BLOCKER**  
-❌ **Authorizing downstream work before forward-scan complete**  
-❌ **Approving whitelist for CRITICAL warnings**  
-❌ **Permitting warning accumulation across waves**  
+❌ **Allowing discovering agent to proceed without remediation**
+❌ **Not re-assigning original agent as BLOCKER**
+❌ **Authorizing downstream work before forward-scan complete**
+❌ **Approving whitelist for CRITICAL warnings**
+❌ **Permitting warning accumulation across waves**
 ❌ **Not performing forward-scan after warning discovery**
 
 **Violation of these prohibitions is a governance violation requiring escalation and FL/CI activation.**
@@ -677,7 +677,7 @@ This protocol ensures that warnings and test debt from prior work:
 
 ---
 
-**Document Authority**: Governance Administrator  
-**Approval**: Johan (Maturion Engineering Leadership)  
-**Effective Date**: 2026-01-07  
+**Document Authority**: Governance Administrator
+**Approval**: Johan (Maturion Engineering Leadership)
+**Effective Date**: 2026-01-07
 **Integration**: All referenced governance documents updated to reference this protocol

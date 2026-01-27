@@ -1,9 +1,9 @@
 # DOMAIN OWNERSHIP ACCOUNTABILITY
 
 ## Status
-Canonical Governance Law  
-Version: v1  
-Authority: Governance  
+Canonical Governance Law
+Version: v1
+Authority: Governance
 Applies To: Responsibility Domains, Architecture Governance
 
 ---

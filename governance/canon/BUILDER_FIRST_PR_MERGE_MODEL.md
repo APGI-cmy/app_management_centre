@@ -1,9 +1,9 @@
 # Builder-First PR Merge Model (Canonical)
 
-**Status**: Constitutional - Mandatory  
-**Authority**: Supreme (Cannot be overridden)  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-22  
+**Status**: Constitutional - Mandatory
+**Authority**: Supreme (Cannot be overridden)
+**Version**: 1.0.0
+**Effective Date**: 2025-12-22
 **Supersedes**: Legacy CI-as-Truth model, governance-cascading-failure-gate, governance-scope-declaration-gate
 
 ---
@@ -54,12 +54,12 @@ This model implements and enforces:
 - Governance compliance status
 - Merge readiness
 
-**Implementation**: 
+**Implementation**:
 - Builders execute tests, analyze results, and generate reports
 - Reports declare PASS/FAIL and READY/NOT_READY
 - CI trusts Builder's assessment without reinterpretation
 
-**Rationale**: 
+**Rationale**:
 - Builders have full context of the build process
 - Builders follow Build Philosophy and governance rules
 - Builders are accountable for quality assessment
@@ -233,10 +233,10 @@ Enforce presence and validity of Builder QA artifacts.
 ### Gate Decision Logic
 
 ```
-IF artifacts_exist AND 
-   artifacts_valid_json AND 
-   build_status == "PASS" AND 
-   merge_readiness.ready == true AND 
+IF artifacts_exist AND
+   artifacts_valid_json AND
+   build_status == "PASS" AND
+   merge_readiness.ready == true AND
    compliance_status == "COMPLIANT"
 THEN
    AUTHORIZE MERGE
@@ -461,11 +461,11 @@ An auditor can:
 
 This model succeeds when:
 
-✅ **PRs with valid Builder QA artifacts always merge cleanly**  
-✅ **No surprise failures due to CI infrastructure or assumptions**  
-✅ **Merge outcome is deterministic based on artifacts alone**  
-✅ **CI never acts as debugging or diagnostic authority**  
-✅ **Builders are empowered as canonical QA authority**  
+✅ **PRs with valid Builder QA artifacts always merge cleanly**
+✅ **No surprise failures due to CI infrastructure or assumptions**
+✅ **Merge outcome is deterministic based on artifacts alone**
+✅ **CI never acts as debugging or diagnostic authority**
+✅ **Builders are empowered as canonical QA authority**
 ✅ **Governance is enforced through artifacts, not interpretation**
 
 ---
@@ -473,27 +473,27 @@ This model succeeds when:
 ## Failure Modes & Mitigation
 
 ### Failure Mode 1: Missing Artifacts
-**Symptom**: PR fails because `.qa/builder/*` files absent  
-**Cause**: Builder forgot to generate or commit artifacts  
-**Mitigation**: Builder must generate artifacts before PR  
+**Symptom**: PR fails because `.qa/builder/*` files absent
+**Cause**: Builder forgot to generate or commit artifacts
+**Mitigation**: Builder must generate artifacts before PR
 **NOT**: Gate tries to "work around" missing artifacts
 
 ### Failure Mode 2: Invalid Artifacts
-**Symptom**: PR fails because JSON syntax errors  
-**Cause**: Builder generated malformed JSON  
-**Mitigation**: Builder fixes JSON and regenerates  
+**Symptom**: PR fails because JSON syntax errors
+**Cause**: Builder generated malformed JSON
+**Mitigation**: Builder fixes JSON and regenerates
 **NOT**: Gate tries to "repair" invalid JSON
 
 ### Failure Mode 3: Builder Reports Failure
-**Symptom**: PR fails because `build_status != "PASS"`  
-**Cause**: Build genuinely failed (tests failing, etc.)  
-**Mitigation**: Builder fixes build, achieves GREEN, regenerates artifacts  
+**Symptom**: PR fails because `build_status != "PASS"`
+**Cause**: Build genuinely failed (tests failing, etc.)
+**Mitigation**: Builder fixes build, achieves GREEN, regenerates artifacts
 **NOT**: Override gate to "merge anyway"
 
 ### Failure Mode 4: Gate Logic Error
-**Symptom**: PR fails despite valid PASS/READY artifacts  
-**Cause**: Gate implementation bug  
-**Mitigation**: Fix gate logic, NOT Builder artifacts  
+**Symptom**: PR fails despite valid PASS/READY artifacts
+**Cause**: Gate implementation bug
+**Mitigation**: Fix gate logic, NOT Builder artifacts
 **Classification**: Governance defect, NOT build failure
 
 ---
@@ -536,9 +536,9 @@ All PRs MUST follow this model. No repository, agent, or workflow may:
 
 ---
 
-**Status**: Active and Enforced  
-**Owner**: Governance Administrator  
-**Approval Authority**: Johan Ras  
+**Status**: Active and Enforced
+**Owner**: Governance Administrator
+**Approval Authority**: Johan Ras
 **Last Updated**: 2025-12-22
 
 ---

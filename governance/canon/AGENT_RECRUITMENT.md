@@ -1,8 +1,8 @@
 # AGENT_RECRUITMENT
 
 ## Status
-Canonical Governance Document  
-Version: v1  
+Canonical Governance Document
+Version: v1
 Authority: Foreman (FM)
 
 ---
@@ -53,16 +53,16 @@ No repository, workflow, or application may self-recruit an agent.
 
 Only the following agent classes are recognized:
 
-- Builder  
+- Builder
   Executes explicitly scoped changes. Does not interpret governance.
 
-- Reviewer  
+- Reviewer
   Reviews changes for correctness and alignment. Does not execute changes.
 
-- Auditor  
+- Auditor
   Inspects state, history, and compliance. Does not propose or apply changes.
 
-- Overseer  
+- Overseer
   Interprets governance, diagnoses root causes, and proposes remediation.
   Overseer agents do not apply changes unless separately recruited as builders.
 

@@ -1,10 +1,10 @@
 # GOVERNANCE LIAISON MINIMUM APPOINTMENT REQUIREMENTS
 
 ## Status
-Canonical Governance Standard  
-Version: v1.0  
-Authority: Johan Ras (Human Authority)  
-Applies To: All Governance Liaison Agent Appointments  
+Canonical Governance Standard
+Version: v1.0
+Authority: Johan Ras (Human Authority)
+Applies To: All Governance Liaison Agent Appointments
 Related To: AGENT_RECRUITMENT.md, GOVERNANCE_LIAISON_ROLE_SURVEY.md, REPOSITORY_SEEDING_AND_ENFORCEMENT_ROLE_SEPARATION.md
 
 ---
@@ -41,8 +41,8 @@ This document derives authority from and implements:
 
 ### 3.1 Role Identity
 
-**Agent Role:** Governance Liaison  
-**Agent Class:** Administrator (per AGENT_RECRUITMENT.md Section 4)  
+**Agent Role:** Governance Liaison
+**Agent Class:** Administrator (per AGENT_RECRUITMENT.md Section 4)
 **Primary Responsibility:** Execute one-time or task-bounded governance structural activities under explicit authorization
 
 ### 3.2 Role Purpose
@@ -168,8 +168,8 @@ When explicitly authorized and within declared scope, Governance Liaison MAY:
 - ALL handover PRs MUST include PREHANDOVER_PROOF section
 - CI is confirmatory, NOT diagnostic — failures must be caught in preflight
 
-**Canonical Reference:** `governance/canon/REPOSITORY_SEEDING_AND_ENFORCEMENT_ROLE_SEPARATION.md` Section 3.1.2  
-**Execution Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
+**Canonical Reference:** `governance/canon/REPOSITORY_SEEDING_AND_ENFORCEMENT_ROLE_SEPARATION.md` Section 3.1.2
+**Execution Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 
 #### 4.1.2 Governance Coupling Tasks (Secondary Use Case)
@@ -202,7 +202,7 @@ When explicitly authorized and within declared scope, Governance Liaison MAY:
 
 **Constraint:** Governance Liaison does NOT determine what needs updating. FM or Governance Administrator provides complete specification.
 
-**Canonical Reference:** `governance/canon/ENFORCEMENT_DESIGN_NOTE.md` (coupling rule)  
+**Canonical Reference:** `governance/canon/ENFORCEMENT_DESIGN_NOTE.md` (coupling rule)
 **Execution Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
 
 ---
@@ -341,7 +341,7 @@ The following activities are **explicitly and permanently prohibited** for Gover
 - ❌ Attach placeholder prehandover proof ("will validate later")
 - ❌ Merge PRs with unknown gate status
 
-**Canonical Reference:** `governance/canon/REPOSITORY_SEEDING_AND_ENFORCEMENT_ROLE_SEPARATION.md` Section 3.1.3  
+**Canonical Reference:** `governance/canon/REPOSITORY_SEEDING_AND_ENFORCEMENT_ROLE_SEPARATION.md` Section 3.1.3
 **Execution Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md` Section 11
 
 ---
@@ -493,7 +493,7 @@ Governance Liaison agents MUST NOT:
 - ❌ Skip execution verification for "simple" changes
 - ❌ Claim completion based only on documentation
 
-**Canonical Reference:** `governance/canon/REPOSITORY_SEEDING_AND_ENFORCEMENT_ROLE_SEPARATION.md` Section 3.1.4  
+**Canonical Reference:** `governance/canon/REPOSITORY_SEEDING_AND_ENFORCEMENT_ROLE_SEPARATION.md` Section 3.1.4
 **Execution Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
 
 ### 7.2 STOP Discipline (Mandatory)
@@ -1023,8 +1023,8 @@ All requirements derive from:
 
 ### v1.1 (2026-01-11)
 
-**Status:** Execution Bootstrap Protocol Integration  
-**Authority:** Johan Ras (Human Authority)  
+**Status:** Execution Bootstrap Protocol Integration
+**Authority:** Johan Ras (Human Authority)
 **Trigger:** Issue — Update Governance Liaison Training Materials for Execution Bootstrap Protocol
 
 **Summary:** Integrated Execution Bootstrap Protocol requirements into Governance Liaison appointment and training standards.
@@ -1049,8 +1049,8 @@ All requirements derive from:
 
 ### v1.0 (2026-01-01)
 
-**Status:** Initial Release  
-**Authority:** Johan Ras (Human Authority)  
+**Status:** Initial Release
+**Authority:** Johan Ras (Human Authority)
 **Trigger:** Issue — Define Minimum Appointment Requirements for Governance Liaison Agent
 
 **Summary:** Created canonical minimum appointment requirements for Governance Liaison Agent.

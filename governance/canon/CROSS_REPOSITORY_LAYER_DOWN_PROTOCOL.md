@@ -1,12 +1,12 @@
 # CROSS-REPOSITORY LAYER-DOWN PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Process  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-05  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Extends GOVERNANCE_LAYERDOWN_CONTRACT.md  
+**Type**: Canonical Governance Process
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-05
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Extends GOVERNANCE_LAYERDOWN_CONTRACT.md
 **Purpose**: Define explicit, controlled protocol for governance propagation across repositories
 
 ---
@@ -252,7 +252,7 @@ Each layer-down completion MUST include:
    - Execution timestamp
    - Handover guarantee
 
-**Template**: See `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`  
+**Template**: See `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 **Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
 
 ---
@@ -315,7 +315,7 @@ The governance liaison agent does NOT have authority to:
 - ❌ Bypass execution verification for "simple" changes
 - ❌ Rely on CI to discover execution failures in layer-down work
 
-**Execution Verification Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
+**Execution Verification Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
 **Training Authority**: `governance/canon/GOVERNANCE_LIAISON_TRAINING_PROTOCOL.md`
 
 ---
@@ -360,11 +360,11 @@ Every downstream repository MUST maintain a `GOVERNANCE_ALIGNMENT.md` file:
 ```markdown
 # Governance Alignment Status
 
-**Repository**: maturion-foreman-office-app  
-**Governance Repo**: maturion-foreman-governance  
-**Aligned Version**: v1.0.0 (commit: abc123...)  
-**Last Synchronization**: 2026-01-05  
-**Governance Liaison**: Governance Liaison Agent  
+**Repository**: maturion-foreman-office-app
+**Governance Repo**: maturion-foreman-governance
+**Aligned Version**: v1.0.0 (commit: abc123...)
+**Last Synchronization**: 2026-01-05
+**Governance Liaison**: Governance Liaison Agent
 
 ## Canon Files Consumed
 
@@ -502,8 +502,8 @@ This protocol is reviewed:
 
 ### v1.1.0 (2026-01-11)
 
-**Status:** Execution Bootstrap Protocol Integration  
-**Authority:** Johan Ras (Human Authority)  
+**Status:** Execution Bootstrap Protocol Integration
+**Authority:** Johan Ras (Human Authority)
 **Trigger:** Issue — Update Governance Liaison Training Materials for Execution Bootstrap Protocol
 
 **Summary:** Integrated Execution Bootstrap Protocol requirements into cross-repository layer-down activities.
@@ -520,8 +520,8 @@ This protocol is reviewed:
 
 ### v1.0.0 (2026-01-05)
 
-**Status:** Initial Release  
-**Authority:** Johan Ras (Human Authority)  
+**Status:** Initial Release
+**Authority:** Johan Ras (Human Authority)
 **Trigger:** PR #869 — Concern about elevated governance view without explicit protocol
 
 **Summary:** Established explicit, controlled protocol for governance propagation across repositories.

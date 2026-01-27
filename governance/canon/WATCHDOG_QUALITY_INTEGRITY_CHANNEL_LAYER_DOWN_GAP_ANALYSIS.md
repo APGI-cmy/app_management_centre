@@ -1,19 +1,19 @@
 # WATCHDOG_QUALITY_INTEGRITY_CHANNEL Layer-Down Gap Analysis
 
-**Document Type**: Gap Analysis  
-**Version**: 1.0.0  
-**Status**: Active  
-**Created**: 2026-01-14  
-**Authority**: Layer-Down from maturion-foreman-governance#948  
+**Document Type**: Gap Analysis
+**Version**: 1.0.0
+**Status**: Active
+**Created**: 2026-01-14
+**Authority**: Layer-Down from maturion-foreman-governance#948
 
 ---
 
 ## I. Executive Summary
 
-**Canonical Authority**: [WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md v1.0.0](https://github.com/APGI-cmy/maturion-foreman-governance/blob/main/governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md)  
-**Source PR**: maturion-foreman-governance#948  
-**Classification**: PUBLIC_API (mandatory for all repos)  
-**Effective Date**: 2026-01-13  
+**Canonical Authority**: [WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md v1.0.0](https://github.com/APGI-cmy/maturion-foreman-governance/blob/main/governance/canon/WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md)
+**Source PR**: maturion-foreman-governance#948
+**Classification**: PUBLIC_API (mandatory for all repos)
+**Effective Date**: 2026-01-13
 
 **Purpose**: This gap analysis documents the delta between:
 - **Canonical Requirement**: WATCHDOG_QUALITY_INTEGRITY_CHANNEL.md v1.0.0
@@ -390,10 +390,10 @@ Configuration must match canonical schema (Section 8.1):
 
 ## X. Version Control
 
-**Version**: 1.0.0  
-**Created**: 2026-01-14  
-**Author**: Governance Liaison Agent  
-**Authority**: Layer-down from maturion-foreman-governance#948  
+**Version**: 1.0.0
+**Created**: 2026-01-14
+**Author**: Governance Liaison Agent
+**Authority**: Layer-down from maturion-foreman-governance#948
 
 **Changelog:**
 - 1.0.0 (2026-01-14): Initial gap analysis

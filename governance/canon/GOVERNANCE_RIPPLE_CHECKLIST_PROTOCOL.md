@@ -1,11 +1,11 @@
 # GOVERNANCE RIPPLE CHECKLIST PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Process — Mandatory Enforcement  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-26  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Canonical Governance Process — Mandatory Enforcement
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-26
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md, implements GOVERNANCE_RIPPLE_MODEL.md
 
 ---

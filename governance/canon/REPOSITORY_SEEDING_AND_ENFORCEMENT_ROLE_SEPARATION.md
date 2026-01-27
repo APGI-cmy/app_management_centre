@@ -1,10 +1,10 @@
 # REPOSITORY SEEDING AND ENFORCEMENT ROLE SEPARATION
 
 ## Status
-Canonical Governance Standard  
-Version: v1.0  
-Authority: Johan Ras  
-Applies To: All New Application Repositories, All Repository Seeding Agents, All Governance Enforcement Agents  
+Canonical Governance Standard
+Version: v1.0
+Authority: Johan Ras
+Applies To: All New Application Repositories, All Repository Seeding Agents, All Governance Enforcement Agents
 Related To: REPOSITORY_INITIALIZATION_AND_GOVERNANCE_SEEDING_PROTOCOL.md, INITIALIZATION_COMPLETENESS_GATE.md, AGENT_RECRUITMENT.md, AGENT_ROLE_GATE_APPLICABILITY.md
 
 ---
@@ -85,8 +85,8 @@ These are **distinct, non-overlapping roles** that must not be combined or subst
 
 #### 3.1.1 Identity and Classification
 
-**Agent Class**: Administrator (per AGENT_RECRUITMENT.md)  
-**Role**: Repository Seeding / Admin Liaison  
+**Agent Class**: Administrator (per AGENT_RECRUITMENT.md)
+**Role**: Repository Seeding / Admin Liaison
 **Primary Responsibility**: Execute repository initialization protocol
 
 #### 3.1.2 Authorized Activities
@@ -204,8 +204,8 @@ A Repository Seeding / Admin Liaison Agent succeeds when:
 
 #### 3.2.1 Identity and Classification
 
-**Agent Class**: Auditor / Overseer (per AGENT_RECRUITMENT.md)  
-**Role**: Governance Enforcement  
+**Agent Class**: Auditor / Overseer (per AGENT_RECRUITMENT.md)
+**Role**: Governance Enforcement
 **Primary Responsibility**: Observe and enforce governance compliance
 
 #### 3.2.2 Authorized Activities
@@ -475,7 +475,7 @@ This document **separates the roles** described in the initialization protocol:
 - Section 5.2 (Admin / Governance Liaison Agent) → Repository Seeding role
 - Section 9.4 (Governance Administrator) → Governance Enforcement role
 
-The REPOSITORY_INITIALIZATION_AND_GOVERNANCE_SEEDING_PROTOCOL.md defines **what must be done**.  
+The REPOSITORY_INITIALIZATION_AND_GOVERNANCE_SEEDING_PROTOCOL.md defines **what must be done**.
 This document defines **who is authorized to do it**.
 
 ### 7.2 AGENT_RECRUITMENT.md
@@ -561,12 +561,12 @@ This document **implements the separation of duties** principle:
 
 This role separation succeeds when:
 
-✅ **All repository initialization performed by Repository Seeding agents only**  
-✅ **All governance enforcement performed by Governance Enforcement agents only**  
-✅ **No agent performs activities outside declared role**  
-✅ **No incorrect role substitution occurs**  
-✅ **All agents recruited with explicit role declaration**  
-✅ **All role violations identified and corrected**  
+✅ **All repository initialization performed by Repository Seeding agents only**
+✅ **All governance enforcement performed by Governance Enforcement agents only**
+✅ **No agent performs activities outside declared role**
+✅ **No incorrect role substitution occurs**
+✅ **All agents recruited with explicit role declaration**
+✅ **All role violations identified and corrected**
 ✅ **Structurally incomplete repositories prevented**
 
 ---
@@ -624,8 +624,8 @@ This role separation succeeds when:
 
 ### Version 1.0 (2025-12-24)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Issue G-C11 — Repository Seeding Agent Role Separation & Initialization Completeness Gate
 
 **Summary**: Created canonical role separation between Repository Seeding / Admin Liaison agents and Governance Enforcement agents.

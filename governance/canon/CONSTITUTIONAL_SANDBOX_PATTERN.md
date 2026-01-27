@@ -1,9 +1,9 @@
 # Constitutional Sandbox Pattern
 
-**Status**: Canonical  
-**Authority**: Tier-0 Governance Canon  
-**Effective Date**: 2026-01-09  
-**Source**: Bootstrap Learning BL-024  
+**Status**: Canonical
+**Authority**: Tier-0 Governance Canon
+**Effective Date**: 2026-01-09
+**Source**: Bootstrap Learning BL-024
 **Maintained By**: Maturion Governance Administrator
 
 ---
@@ -53,7 +53,7 @@ This document defines the **Constitutional Sandbox Pattern**: the authoritative 
    - Test coverage must be complete
    - Quality cannot be negotiated downward
 
-**Authority Source**: 
+**Authority Source**:
 - `BUILD_PHILOSOPHY.md`
 - `governance/CONSTITUTION.md`
 - Tier-0 canonical governance documents
@@ -242,7 +242,7 @@ When exercising procedural flexibility:
 - ✅ Governance gates: ALL SATISFIED
 - ✅ BUILD_PHILOSOPHY: FULLY COMPLIANT
 
-**Efficiency Gain**: 60-95% reduction in delivery time while maintaining 
+**Efficiency Gain**: 60-95% reduction in delivery time while maintaining
 constitutional quality standards.
 ```
 
@@ -388,9 +388,9 @@ Zero Test Debt is constitutional (Tier 1), therefore:
 
 FM recognizes the Constitutional Sandbox Pattern (governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md):
 
-- Constitutional rules (BUILD_PHILOSOPHY, Zero Test Debt, 100% GREEN, GSR, QIC) 
+- Constitutional rules (BUILD_PHILOSOPHY, Zero Test Debt, 100% GREEN, GSR, QIC)
   have supreme authority—no exceptions, no flexibility
-- Procedural guidance (collaboration patterns, process steps, workflow sequences) 
+- Procedural guidance (collaboration patterns, process steps, workflow sequences)
   is flexible and advisory
 - Builder judgment within constitutional boundaries is encouraged for optimal execution
 - All execution must validate constitutional compliance before completion
@@ -408,7 +408,7 @@ FM MUST:
 ```markdown
 ## Agent Judgment Within Constitutional Sandbox
 
-This builder operates within the Constitutional Sandbox Pattern 
+This builder operates within the Constitutional Sandbox Pattern
 (governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md):
 
 **Mandatory (Constitutional - Tier 1)**:
@@ -521,7 +521,7 @@ When procedural flexibility patterns emerge repeatedly:
 **Before any procedural adaptation**:
 > "Does this maintain ALL constitutional requirements while optimizing execution?"
 
-If YES: Flexibility is encouraged.  
+If YES: Flexibility is encouraged.
 If NO: Adaptation is prohibited.
 
 ---
@@ -550,9 +550,9 @@ If NO: Adaptation is prohibited.
 
 ---
 
-**Authority**: Maturion (Johan Ras)  
-**Maintained By**: Maturion Governance Administrator  
-**Status**: Active and Enforced  
+**Authority**: Maturion (Johan Ras)
+**Maintained By**: Maturion Governance Administrator
+**Status**: Active and Enforced
 **Last Updated**: 2026-01-09
 
 ---

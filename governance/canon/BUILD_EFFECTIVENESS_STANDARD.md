@@ -1,8 +1,8 @@
 # BUILD EFFECTIVENESS STANDARD
 
 ## Status
-Canonical Governance Specification  
-Version: v1  
+Canonical Governance Specification
+Version: v1
 Authority: Foreman (FM)
 
 ---

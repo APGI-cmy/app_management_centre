@@ -1,9 +1,9 @@
 
 ## Status
-Canonical Governance Standard  
-Version: v1.0  
-Authority: Johan Ras  
-Applies To: All Maturion Applications, Foreman (FM), Builders, Wave Execution Systems, Governance Systems  
+Canonical Governance Standard
+Version: v1.0
+Authority: Johan Ras
+Applies To: All Maturion Applications, Foreman (FM), Builders, Wave Execution Systems, Governance Systems
 
 ---
 
@@ -255,26 +255,26 @@ Application (Root)
 Alerts MUST be classified by severity:
 
 #### Severity 1: Informational
-**Definition**: General awareness, no immediate action required  
-**Examples**: Build metrics, progress updates, non-critical observations  
-**Routing**: Dashboard, logs only  
+**Definition**: General awareness, no immediate action required
+**Examples**: Build metrics, progress updates, non-critical observations
+**Routing**: Dashboard, logs only
 
 #### Severity 2: Advisory
-**Definition**: Condition requiring attention when convenient  
-**Examples**: Code style deviations, documentation gaps, minor optimizations  
-**Routing**: Responsible agent (Builder/FM), Dashboard  
+**Definition**: Condition requiring attention when convenient
+**Examples**: Code style deviations, documentation gaps, minor optimizations
+**Routing**: Responsible agent (Builder/FM), Dashboard
 
 #### Severity 3: Attention Required
-**Definition**: Condition requiring prompt attention within normal workflow  
-**Examples**: Test flakiness, performance degradation, dependency version drift  
-**Routing**: Responsible agent (Builder/FM) with notification, Dashboard  
-**Escalation**: If unaddressed for 24 hours → escalate to Warning  
+**Definition**: Condition requiring prompt attention within normal workflow
+**Examples**: Test flakiness, performance degradation, dependency version drift
+**Routing**: Responsible agent (Builder/FM) with notification, Dashboard
+**Escalation**: If unaddressed for 24 hours → escalate to Warning
 
 #### Severity 4: Urgent
-**Definition**: Condition requiring immediate attention, potential escalation to blocking intervention  
-**Examples**: Repeated failures (1st/2nd occurrence), approaching thresholds, significant governance findings  
-**Routing**: Responsible authority with immediate notification  
-**Escalation**: If unaddressed for 4 hours → escalate to Warning  
+**Definition**: Condition requiring immediate attention, potential escalation to blocking intervention
+**Examples**: Repeated failures (1st/2nd occurrence), approaching thresholds, significant governance findings
+**Routing**: Responsible authority with immediate notification
+**Escalation**: If unaddressed for 4 hours → escalate to Warning
 
 ---
 
@@ -347,7 +347,7 @@ Emergency stops are triggered by:
 - Active breach or exploit attempt
 - Data exfiltration risk
 
-**Authority**: Foreman, Watchdog (hard stop), Human Authority  
+**Authority**: Foreman, Watchdog (hard stop), Human Authority
 **Scope**: Smallest scope containing vulnerability (typically step or sub-wave)
 
 ---
@@ -359,7 +359,7 @@ Emergency stops are triggered by:
 - Agent role violation (builder attempting FM authority, etc.)
 - Audit trail corruption or tampering
 
-**Authority**: Foreman, Watchdog (hard stop), Governance gates  
+**Authority**: Foreman, Watchdog (hard stop), Governance gates
 **Scope**: Scope of violation (step to application depending on severity)
 
 ---
@@ -370,7 +370,7 @@ Emergency stops are triggered by:
 - 3+ CI failures with different failure signatures
 - Catastrophic scope explosion
 
-**Authority**: Foreman, Automated gates  
+**Authority**: Foreman, Automated gates
 **Scope**: Smallest scope containing cascading failures (typically step or sub-wave)
 
 ---
@@ -382,7 +382,7 @@ Emergency stops are triggered by:
 - Database schema corruption risk
 - Filesystem integrity failure
 
-**Authority**: Foreman, Builder (if detected during execution), Automated monitoring  
+**Authority**: Foreman, Builder (if detected during execution), Automated monitoring
 **Scope**: Scope of data risk (step to application depending on data scope)
 
 ---
@@ -393,7 +393,7 @@ Emergency stops are triggered by:
 - Service degradation (critical SLA breached)
 - Resource exhaustion (memory, disk, network)
 
-**Authority**: Foreman, Automated monitoring  
+**Authority**: Foreman, Automated monitoring
 **Scope**: Application-level (infrastructure is shared across application)
 
 ---
@@ -402,7 +402,7 @@ Emergency stops are triggered by:
 **Conditions**:
 - Human Authority (Johan) issues explicit emergency stop for any reason
 
-**Authority**: Human Authority (Johan) ONLY  
+**Authority**: Human Authority (Johan) ONLY
 **Scope**: Any scope level (Johan's discretion)
 
 ---
@@ -518,7 +518,7 @@ Emergency stops are triggered by:
    - Evaluate risk of resumption without remediation
    - Document assessment in investigation report
 
-**Authority**: Foreman (step/sub-wave), Human Authority (wave/application)  
+**Authority**: Foreman (step/sub-wave), Human Authority (wave/application)
 **Deliverable**: Investigation Report (linked in audit trail)
 
 ---
@@ -536,7 +536,7 @@ Emergency stops are triggered by:
    - Update QA to prevent recurrence
    - Document execution in remediation artifact
 
-**Authority**: Foreman (step/sub-wave), Human Authority (wave/application)  
+**Authority**: Foreman (step/sub-wave), Human Authority (wave/application)
 **Deliverable**: Remediation Plan + Remediation Completion Evidence
 
 ---
@@ -554,7 +554,7 @@ Emergency stops are triggered by:
    - Authorization linked to node audit trail
    - Transition node from EMERGENCY_STOPPED to READY
 
-**Authority**: Foreman (step/sub-wave), Human Authority (wave/application)  
+**Authority**: Foreman (step/sub-wave), Human Authority (wave/application)
 **Deliverable**: Resume Authorization Record
 
 ---
@@ -572,7 +572,7 @@ Emergency stops are triggered by:
    - Watchdog observes for recurrence
    - Evidence of successful restart recorded
 
-**Authority**: System (executes authorized transition)  
+**Authority**: System (executes authorized transition)
 **Deliverable**: Restart Evidence
 
 ---
@@ -1041,15 +1041,15 @@ This intervention and alert model supports:
 
 This build intervention and alert model succeeds when:
 
-✅ **Clear distinction between Alert, Warning, Pause, and Emergency Stop semantics**  
-✅ **Intervention scope selection follows smallest-scope-necessary principle**  
-✅ **Authority matrix prevents unauthorized interventions**  
-✅ **No automatic resumption** (all resumes explicitly authorized)  
-✅ **Notification routing ensures alerts reach correct authority**  
-✅ **All interventions generate audit trail** (no silent interventions)  
-✅ **Emergency stops require investigation, remediation, and authorization to resume**  
-✅ **Human Authority receives all emergency stop notifications**  
-✅ **Intervention patterns feed into governance learning system**  
+✅ **Clear distinction between Alert, Warning, Pause, and Emergency Stop semantics**
+✅ **Intervention scope selection follows smallest-scope-necessary principle**
+✅ **Authority matrix prevents unauthorized interventions**
+✅ **No automatic resumption** (all resumes explicitly authorized)
+✅ **Notification routing ensures alerts reach correct authority**
+✅ **All interventions generate audit trail** (no silent interventions)
+✅ **Emergency stops require investigation, remediation, and authorization to resume**
+✅ **Human Authority receives all emergency stop notifications**
+✅ **Intervention patterns feed into governance learning system**
 ✅ **Compliance alignment with ISO 27001, NIST CSF, ISO 31000**
 
 ---
@@ -1058,8 +1058,8 @@ This build intervention and alert model succeeds when:
 
 ### Version 1.0 (2025-12-24)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Issue G-C10 — Define Build Intervention & Attention Routing Model
 
 **Summary**: Created canonical build intervention and alert model defining four intervention types (Alert, Warning, Pause, Emergency Stop), intervention scope levels, authority matrices, notification routing, and comprehensive audit trail requirements.

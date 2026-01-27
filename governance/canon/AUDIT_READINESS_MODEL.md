@@ -1,9 +1,9 @@
 # AUDIT READINESS MODEL
 
 ## Status
-Canonical Governance Specification  
-Version: v1.0  
-Authority: Governance Administrator  
+Canonical Governance Specification
+Version: v1.0
+Authority: Governance Administrator
 Required By: GOVERNANCE_COMPLETENESS_MODEL.md Section 5.8
 
 ---
@@ -149,7 +149,7 @@ compliance/
 ```
 
 ### 5.2 Control Mappings (REQUIRED)
-**Schema**: `governance/schemas/CONTROL_MAPPING.schema.md`  
+**Schema**: `governance/schemas/CONTROL_MAPPING.schema.md`
 **Location**: `compliance/control-mappings/*.md`
 
 **Requirements**:
@@ -159,7 +159,7 @@ compliance/
 - Control mappings MUST be reviewed quarterly (or per framework requirement)
 
 ### 5.3 Evidence Catalog (REQUIRED)
-**Schema**: `governance/schemas/EVIDENCE_CATALOG.schema.md`  
+**Schema**: `governance/schemas/EVIDENCE_CATALOG.schema.md`
 **Location**: `compliance/evidence/EVIDENCE_CATALOG.md`
 
 **Requirements**:
@@ -169,7 +169,7 @@ compliance/
 - Evidence verification status MUST be current
 
 ### 5.4 Evidence Artifacts (REQUIRED)
-**Schema**: `governance/schemas/EVIDENCE_CATALOG.schema.md` (Individual Evidence)  
+**Schema**: `governance/schemas/EVIDENCE_CATALOG.schema.md` (Individual Evidence)
 **Location**: `compliance/evidence/<category>/<evidence-id>.md`
 
 **Requirements**:
@@ -185,11 +185,11 @@ compliance/
 ```markdown
 # [FRAMEWORK] Compliance Status
 
-**Last Updated**: [ISO 8601]  
-**Framework Version**: [e.g., ISO 27001:2022]  
-**Overall Status**: [GREEN | AMBER | RED]  
-**Certification Status**: [Certified | In Progress | Not Certified]  
-**Last Audit Date**: [ISO 8601 or N/A]  
+**Last Updated**: [ISO 8601]
+**Framework Version**: [e.g., ISO 27001:2022]
+**Overall Status**: [GREEN | AMBER | RED]
+**Certification Status**: [Certified | In Progress | Not Certified]
+**Last Audit Date**: [ISO 8601 or N/A]
 **Next Audit Date**: [ISO 8601 or N/A]
 
 ## Control Summary
@@ -205,9 +205,9 @@ compliance/
 [Plan to address findings]
 
 ## Evidence Completeness
-**Evidence Items**: [Count]  
-**Verified Evidence**: [Count]  
-**Expired Evidence**: [Count]  
+**Evidence Items**: [Count]
+**Verified Evidence**: [Count]
+**Expired Evidence**: [Count]
 **Pending Renewal**: [Count]
 ```
 
