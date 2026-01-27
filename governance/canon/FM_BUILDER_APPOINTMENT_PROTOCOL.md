@@ -1,11 +1,11 @@
 
-**Status**: Canonical Governance Protocol  
-**Version**: 1.2.0  
-**Authority**: Supreme - Canonical  
-**Effective Date**: 2026-01-03  
-**Last Updated**: 2026-01-11  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Implements BL-0007 requirement for governed appointment protocol  
+**Status**: Canonical Governance Protocol
+**Version**: 1.2.0
+**Authority**: Supreme - Canonical
+**Effective Date**: 2026-01-03
+**Last Updated**: 2026-01-11
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Implements BL-0007 requirement for governed appointment protocol
 **Applies To**: All Foreman Instances, All Builder Appointments, All Repositories
 
 ---
@@ -710,15 +710,15 @@ For each builder appointment, FM MUST produce:
 1. **Appointment Incompleteness** (FM omits protocol steps)
    - **Cause**: FM did not follow protocol completely
    - **Responsibility**: FM (corrective action: re-appoint with full protocol)
-   
+
 2. **Mindset Incompatibility** (Builder cannot internalize execution model)
    - **Cause**: Builder mindset incompatible with OPOJD/One-Time Build Law
    - **Responsibility**: Builder (corrective action: revoke, replace)
-   
+
 3. **Protocol Ambiguity** (Protocol insufficiently detailed)
    - **Cause**: Protocol does not prevent specific failure mode
    - **Responsibility**: Governance (corrective action: enhance protocol)
-   
+
 4. **Builder Misconduct** (Builder violates after correct appointment)
    - **Cause**: Builder deliberately ignores constitutional requirements
    - **Responsibility**: Builder (corrective action: revoke, escalate)

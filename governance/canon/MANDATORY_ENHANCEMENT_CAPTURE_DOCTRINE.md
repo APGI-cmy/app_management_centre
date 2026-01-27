@@ -1,9 +1,9 @@
 # Mandatory Enhancement Capture Doctrine
 
-**Version**: 1.0.0  
-**Status**: CANONICAL  
-**Authority**: BUILD_PHILOSOPHY.md § Continuous Improvement  
-**Date**: 2026-01-05  
+**Version**: 1.0.0
+**Status**: CANONICAL
+**Authority**: BUILD_PHILOSOPHY.md § Continuous Improvement
+**Date**: 2026-01-05
 **Type**: Behavioral Doctrine
 
 ---
@@ -310,7 +310,7 @@ After declaring a job **COMPLETE**, this agent MUST:
 3. If no meaningful enhancements are identified:
    - State this explicitly (e.g., `No material future enhancements identified beyond current scope.`).
 
-**This section does not authorize scope creep in the current job.**  
+**This section does not authorize scope creep in the current job.**
 It mandates **capturing** enhancements for future planning under OPOJD and One-Time Build discipline.
 
 **Canonical Authority**: `governance/canon/MANDATORY_ENHANCEMENT_CAPTURE_DOCTRINE.md`
@@ -398,10 +398,10 @@ This doctrine is **COMPLETE** and **ACTIVE** when:
 
 ## XVI. Constitutional Status
 
-**Tier**: Behavioral Doctrine (Tier 1 equivalent)  
-**Authority**: BUILD_PHILOSOPHY.md § Continuous Improvement  
-**Binding**: All agents in Maturion ISMS ecosystem  
-**Enforcement**: Via agent contracts, completion validation, and governance review  
+**Tier**: Behavioral Doctrine (Tier 1 equivalent)
+**Authority**: BUILD_PHILOSOPHY.md § Continuous Improvement
+**Binding**: All agents in Maturion ISMS ecosystem
+**Enforcement**: Via agent contracts, completion validation, and governance review
 **Modification**: Requires Johan approval and governance repo alignment
 
 ---
@@ -416,8 +416,8 @@ This doctrine is **COMPLETE** and **ACTIVE** when:
 
 **This doctrine is now CANONICAL and ACTIVE across the Maturion ISMS ecosystem.**
 
-**Doctrine Authority**: Johan Ras (CS2)  
-**Implementation Authority**: Governance Liaison Agent (FM repo)  
+**Doctrine Authority**: Johan Ras (CS2)
+**Implementation Authority**: Governance Liaison Agent (FM repo)
 **Enforcement Authority**: Foreman (FM) and Human Review
 
 ---

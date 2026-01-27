@@ -1,12 +1,12 @@
 # AGENT RIPPLE AWARENESS OBLIGATION
 
 ## Status
-**Type**: Constitutional Governance Rule  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-02  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Type**: Constitutional Governance Rule
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-02
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 **Part of**: Ripple-Wave 1.2 — Agent Mindset Alignment
 
 ---
@@ -342,7 +342,7 @@ When submitting PRs for governance-class changes, agents **MUST** include:
 
 **Impact Classification**: Breaking (existing contracts will fail validation)
 
-**Remediation Path**: 
+**Remediation Path**:
 1. Update builder contract schema
 2. Update contract validation gate
 3. Coordinate with FM to update builder contracts in execution repos
@@ -573,9 +573,9 @@ All agents making governance-class changes MUST:
 
 ---
 
-**Status**: Active and Enforced  
-**Owner**: Governance Administrator  
-**Approval Authority**: Johan Ras  
+**Status**: Active and Enforced
+**Owner**: Governance Administrator
+**Approval Authority**: Johan Ras
 **Last Updated**: 2026-01-02
 
 ---

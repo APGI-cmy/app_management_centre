@@ -1,8 +1,8 @@
 
 ## Status
-Canonical Governance Standard  
-Version: v1.0  
-Authority: Johan Ras  
+Canonical Governance Standard
+Version: v1.0
+Authority: Johan Ras
 Applies To: All Maturion Applications, All Commissioning Scenarios, All Agents, Watchdog
 
 ---
@@ -786,9 +786,9 @@ evidence_items_reviewed: ["COMM-EVIDENCE-001", "COMM-EVIDENCE-002", "COMM-EVIDEN
 All required evidence present and satisfactory. Application ready for activation authorization.
 
 ### Authorization
-**Authorized**: Yes  
-**Authorized By**: Johan Ras  
-**Timestamp**: 2025-12-24T14:00:00Z  
+**Authorized**: Yes
+**Authorized By**: Johan Ras
+**Timestamp**: 2025-12-24T14:00:00Z
 **Next Phase**: Awaiting activation authorization
 ```
 
@@ -1127,12 +1127,12 @@ This evidence model supports:
 
 This evidence model succeeds when:
 
-✅ **Every commissioning step produces verifiable evidence**  
-✅ **No activation relies on trust or assertion without evidence**  
-✅ **Evidence is immutable, traceable, and auditable**  
-✅ **Evidence gaps are detected and escalated**  
-✅ **Human authority approves commissioning based on evidence**  
-✅ **Watchdog observes evidence without interfering**  
+✅ **Every commissioning step produces verifiable evidence**
+✅ **No activation relies on trust or assertion without evidence**
+✅ **Evidence is immutable, traceable, and auditable**
+✅ **Evidence gaps are detected and escalated**
+✅ **Human authority approves commissioning based on evidence**
+✅ **Watchdog observes evidence without interfering**
 ✅ **Evidence supports compliance and audit requirements**
 
 ---
@@ -1167,8 +1167,8 @@ This evidence model succeeds when:
 
 ### Version 1.0 (2025-12-24)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Issue G-C4 — Define Commissioning Audit & Evidence Model
 
 **Summary**: Created canonical commissioning evidence model defining evidence types, evidence lifecycle, evidence requirements by commissioning state, evidence validation rules, evidence authority, evidence storage requirements, evidence review and sign-off semantics, and Watchdog interaction with evidence.

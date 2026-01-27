@@ -1,10 +1,10 @@
 # Constitutional Sandbox Pattern — Rollout and Application Guidance
 
-**Type**: Supplementary Rollout Guidance  
-**Authority**: Governance (Canonical)  
-**Source**: Bootstrap Learning BL-024  
-**Canonical Reference**: `governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md`  
-**Date**: 2026-01-09  
+**Type**: Supplementary Rollout Guidance
+**Authority**: Governance (Canonical)
+**Source**: Bootstrap Learning BL-024
+**Canonical Reference**: `governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md`
+**Date**: 2026-01-09
 **Version**: 1.0.0
 
 ---
@@ -400,8 +400,8 @@ Reference: `governance/canon/CONSTITUTIONAL_SANDBOX_PATTERN.md`
 
 ---
 
-**Authority**: Maturion Governance Administrator  
-**Status**: Active Guidance  
+**Authority**: Maturion Governance Administrator
+**Status**: Active Guidance
 **Last Updated**: 2026-01-09
 
 ---

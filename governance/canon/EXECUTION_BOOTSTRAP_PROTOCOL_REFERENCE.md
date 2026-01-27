@@ -1,9 +1,9 @@
 # Execution Bootstrap Protocol - Canonical Reference
 
-**Status**: Active Reference  
-**Authority**: maturion-foreman-governance (Canonical Source)  
-**Version**: 2.0.0+  
-**Last Updated**: 2026-01-11  
+**Status**: Active Reference
+**Authority**: maturion-foreman-governance (Canonical Source)
+**Version**: 2.0.0+
+**Last Updated**: 2026-01-11
 **Compliance Deadline**: 2026-02-11
 
 ---
@@ -16,7 +16,7 @@ This document provides a reference to the **Execution Bootstrap Protocol** from 
 
 ## Canonical Source Documents
 
-**Repository**: `APGI-cmy/maturion-foreman-governance`  
+**Repository**: `APGI-cmy/maturion-foreman-governance`
 **Location**: `governance/canon/`
 
 ### Primary Protocol Documents
@@ -202,9 +202,9 @@ This protocol is documented in `GOVERNANCE_ALIGNMENT.md` as:
 
 ## Questions & Escalation
 
-**For protocol questions**: Governance Liaison  
-**For compliance issues**: FM (ForemanApp-agent)  
-**For constitutional matters**: Johan Ras (CS2)  
+**For protocol questions**: Governance Liaison
+**For compliance issues**: FM (ForemanApp-agent)
+**For constitutional matters**: Johan Ras (CS2)
 **For canonical updates**: Governance Administrator (governance repo)
 
 ---
@@ -220,8 +220,8 @@ This protocol is documented in `GOVERNANCE_ALIGNMENT.md` as:
 
 ---
 
-**Status**: Active Reference  
-**Compliance**: Required by 2026-02-11  
+**Status**: Active Reference
+**Compliance**: Required by 2026-02-11
 **Authority**: Canonical Governance (maturion-foreman-governance)
 
 ---

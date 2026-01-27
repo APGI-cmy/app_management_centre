@@ -1,13 +1,13 @@
 # YAML VALIDATION PROTOCOL
 
 ## Status
-**Type**: Tier-1 Canonical Governance — Mandatory Enforcement  
-**Authority**: Supreme - Constitutional  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-27  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Layer-Down Status**: PUBLIC_API  
-**Applies To**: All Agents, All Repositories, All YAML Files, All Agent Contracts  
+**Type**: Tier-1 Canonical Governance — Mandatory Enforcement
+**Authority**: Supreme - Constitutional
+**Version**: 1.0.0
+**Effective Date**: 2026-01-27
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Layer-Down Status**: PUBLIC_API
+**Applies To**: All Agents, All Repositories, All YAML Files, All Agent Contracts
 **Immutability**: LOCKED - Cannot be overridden or bypassed
 
 ---
@@ -229,7 +229,7 @@ echo "❌ If any 'FAILED' lines, validation FAILED (exit 1) - STOP-AND-FIX immed
 # OR manual commands from YAML_VALIDATION_PROTOCOL.md Section 3.2
 ```
 
-**Output**: 
+**Output**:
 ```
 === Validating .yml/.yaml files ===
 ✅ All .yml/.yaml files valid

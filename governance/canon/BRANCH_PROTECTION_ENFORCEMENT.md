@@ -1,13 +1,13 @@
 # BRANCH PROTECTION ENFORCEMENT
 
 ## Status
-**Type**: Canonical Governance Policy  
-**Authority**: Supreme - Constitutional  
-**Canon ID**: G-BRANCH-PROTECT-01  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-30  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md, CONSTITUTION.md  
+**Type**: Canonical Governance Policy
+**Authority**: Supreme - Constitutional
+**Canon ID**: G-BRANCH-PROTECT-01
+**Version**: 1.0.0
+**Effective Date**: 2025-12-30
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md, CONSTITUTION.md
 **Integrates With**: PLATFORM_READINESS_FOR_GOVERNED_BUILD_EXECUTION.md, PLATFORM_AUTHORITY_BOUNDARY_AND_DELEGATION_MODEL.md
 
 ---
@@ -122,11 +122,11 @@ This policy derives authority from and implements:
 ```
 IF branch_protection.allow_bypass == TRUE (for normal operations):
     THEN enforcement = BYPASSABLE (INVALID)
-    
+
 IF branch_protection.allow_bypass == FALSE:
     AND emergency_bypass_logged == TRUE:
     THEN enforcement = ACCEPTABLE (with audit)
-    
+
 IF branch_protection.allow_bypass == FALSE:
     AND emergency_bypass_logged == FALSE:
     THEN enforcement = VALID (constitutional)
@@ -293,10 +293,10 @@ FUNCTION verify_branch_protection(repository, branch):
         branch: branch,
         timestamp: NOW()
     }
-    
+
     # Maturion executes verification
     response = maturion.execute_platform_action(instruction)
-    
+
     # Maturion returns evidence
     evidence = {
         verification_id: GENERATE_ID(),
@@ -317,10 +317,10 @@ FUNCTION verify_branch_protection(repository, branch):
         verification_method: "github_api_v3_branch_protection_endpoint",
         api_response_hash: HASH(api_response)
     }
-    
+
     # FM stores evidence
     STORE_EVIDENCE(evidence, "governance/evidence/branch-protection/")
-    
+
     # FM evaluates enforcement status
     IF evidence.enforcement_status == "ACTIVE":
         RETURN VERIFIED
@@ -656,13 +656,13 @@ Branch protection enforcement status MUST be reported:
 
 This canon succeeds when:
 
-✅ **Branch protection is recognized as constitutional requirement**  
-✅ **Enforcement is verified programmatically, not assumed**  
-✅ **Responsibility boundaries are unambiguous (FM/CS2/Maturion)**  
-✅ **One-Time Build principles upheld (declarative, repeatable)**  
-✅ **Evidence-based readiness validation functional**  
-✅ **No manual CS2 dependency for normal operations**  
-✅ **Escalation path clear when automation impossible**  
+✅ **Branch protection is recognized as constitutional requirement**
+✅ **Enforcement is verified programmatically, not assumed**
+✅ **Responsibility boundaries are unambiguous (FM/CS2/Maturion)**
+✅ **One-Time Build principles upheld (declarative, repeatable)**
+✅ **Evidence-based readiness validation functional**
+✅ **No manual CS2 dependency for normal operations**
+✅ **Escalation path clear when automation impossible**
 ✅ **All verification attempts generate audit trail**
 
 ---
@@ -695,9 +695,9 @@ This canon succeeds when:
 
 ### 13.1 Current Version
 
-**Version**: 1.0.0  
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Version**: 1.0.0
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Platform Readiness ambiguity resolution (Issue: Formalize Branch Protection Enforcement)
 
 ### 13.2 Planned Evolution
@@ -734,8 +734,8 @@ Changes to this canon follow `VERSIONING_AND_EVOLUTION_GOVERNANCE.md`:
 
 ### Version 1.0.0 (2025-12-30)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Platform Readiness ambiguity (branch protection enforcement)
 
 **Summary**: Established branch protection as constitutional requirement with clear responsibility boundaries, verification requirements, and One-Time Build alignment.

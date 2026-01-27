@@ -1,9 +1,9 @@
 # PR SCOPE CONTROL POLICY
 
 ## Status
-Canonical Governance Policy  
-Version: v1  
-Authority: Governance  
+Canonical Governance Policy
+Version: v1
+Authority: Governance
 Applies To: All Builders, All PRs, All Repositories
 
 ---

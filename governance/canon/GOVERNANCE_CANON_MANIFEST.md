@@ -1,11 +1,11 @@
 # GOVERNANCE CANON MANIFEST
 
 ## Status
-**Type**: Canonical Governance Index  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-05  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Canonical Governance Index
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-05
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Purpose**: Authoritative index of all canonical governance standards with layer-down status
 
 ---
@@ -117,10 +117,10 @@ These canon files form the **minimum viable governance contract** for any downst
 
 ## 5. Public API Summary
 
-**Total Canonical Files**: 8  
-**PUBLIC_API**: 6 files (75%)  
-**OPTIONAL**: 0 files (0%)  
-**INTERNAL**: 2 files (25%)  
+**Total Canonical Files**: 8
+**PUBLIC_API**: 6 files (75%)
+**OPTIONAL**: 0 files (0%)
+**INTERNAL**: 2 files (25%)
 **DEPRECATED**: 0 files (0%)
 
 ---

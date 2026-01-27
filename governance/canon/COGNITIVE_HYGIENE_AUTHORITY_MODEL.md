@@ -1,11 +1,11 @@
 
 ## Status
-**Type**: Canonical Governance Definition  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-24  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md and FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md  
+**Type**: Canonical Governance Definition
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-24
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md and FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
 **Applies To**: All Cognitive Hygiene Protocol Invocations, All Foreman Instances, All Repositories
 
 ---
@@ -607,7 +607,7 @@ This is **constitutional authority**. CHP and Foreman are peers.
 - Advisory authority (cognitive health findings, recommendations)
 - None of the above create authority over Foreman
 
-**Governance Canon Principle**: 
+**Governance Canon Principle**:
 - Foreman authority is defined by FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
 - CHP authority is defined by this document (COGNITIVE_HYGIENE_AUTHORITY_MODEL.md)
 - Both documents are subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md

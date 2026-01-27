@@ -1,8 +1,8 @@
 # DOMAIN STATE ENFORCEMENT RULE
 
 ## Status
-Canonical Governance Rule  
-Version: v1  
+Canonical Governance Rule
+Version: v1
 Authority: Governance
 
 ---

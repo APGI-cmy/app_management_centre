@@ -1,9 +1,9 @@
 # COMPLIANCE AND STANDARDS GOVERNANCE
 
 ## Status
-Canonical Governance Policy  
-Version: v1  
-Authority: Johan Ras  
+Canonical Governance Policy
+Version: v1
+Authority: Johan Ras
 Applies To: All Apps, All Builds, Foreman Office, Builders, Governance Admin
 
 ---
@@ -25,16 +25,16 @@ Compliance is not a statement. It is an enforced system property:
 
 Maturion operates a three-layer compliance model:
 
-1) **Standards Layer**  
+1) **Standards Layer**
    Defines which standards and control families apply.
 
-2) **Control Implementation Layer**  
+2) **Control Implementation Layer**
    Maps controls to:
    - architecture requirements
    - system design decisions
    - build gates and QA proofs
 
-3) **Evidence & Audit Layer**  
+3) **Evidence & Audit Layer**
    Produces:
    - machine-verifiable evidence
    - audit reports (ISO/NIST-aligned)
@@ -73,16 +73,16 @@ Governance may later add:
 Each governed application MUST have a compliance folder in its governance-facing structure
 (either in FM build records or an app governance mirror) containing:
 
-- `COMPLIANCE_SCOPE.md`  
+- `COMPLIANCE_SCOPE.md`
   Declares which standards apply and why.
 
-- `CONTROL_MAPPING.md`  
+- `CONTROL_MAPPING.md`
   Maps controls to:
   - architecture artifacts
   - QA gates / tests
   - runtime evidence sources
 
-- `EVIDENCE_CATALOG.md`  
+- `EVIDENCE_CATALOG.md`
   Enumerates all evidence items and where they are produced.
 
 - `AUDIT_REPORT.md` (generated or reproducible)

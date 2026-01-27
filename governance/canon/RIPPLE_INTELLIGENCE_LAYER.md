@@ -1,11 +1,11 @@
 # RIPPLE INTELLIGENCE LAYER (RIL)
 
 ## Status
-**Type**: Canonical Governance Concept  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-02  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Canonical Governance Concept
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-02
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---
@@ -118,8 +118,8 @@ Ripple Intelligence operates across **three distinct planes**, each with differe
 
 ### 5.1 Plane 1: Proactive Downward Ripple (Change Introduction)
 
-**Timing**: **BEFORE** merge, **BEFORE** execution  
-**Direction**: Governance → Execution repositories → Runtime systems  
+**Timing**: **BEFORE** merge, **BEFORE** execution
+**Direction**: Governance → Execution repositories → Runtime systems
 **Purpose**: Predict and communicate impact of changes before they enter the system
 
 **Characteristics**:
@@ -136,14 +136,14 @@ Ripple Intelligence operates across **three distinct planes**, each with differe
 - Enforcement definition changes (new gates, updated requirements)
 
 **Example Scenario**:
-> Governance Administrator updates `BUILDER_CONTRACT_BINDING_CHECKLIST.md` to add a new mandatory requirement. 
-> 
+> Governance Administrator updates `BUILDER_CONTRACT_BINDING_CHECKLIST.md` to add a new mandatory requirement.
+>
 > **Proactive Downward Ripple** signals:
 > - Which agent contracts are affected (builder contracts)
 > - Which repositories contain those contracts (execution repos)
 > - What changes are required (contract schema updates, validator updates)
 > - What validation will fail if not addressed (contract validation gate)
-> 
+>
 > This awareness enables **proactive remediation** before the governance change merges.
 
 **Relationship to Existing Models**:
@@ -154,8 +154,8 @@ Ripple Intelligence operates across **three distinct planes**, each with differe
 
 ### 5.2 Plane 2: Reactive Runtime Ripple (Execution-Time Detection)
 
-**Timing**: **DURING** execution, **AFTER** merge  
-**Direction**: Runtime behavior → Enforcement mechanisms → Escalation  
+**Timing**: **DURING** execution, **AFTER** merge
+**Direction**: Runtime behavior → Enforcement mechanisms → Escalation
 **Purpose**: Detect and respond to governance violations during execution
 
 **Characteristics**:
@@ -173,13 +173,13 @@ Ripple Intelligence operates across **three distinct planes**, each with differe
 
 **Example Scenario**:
 > Builder modifies a file in `governance/canon/` during build execution.
-> 
+>
 > **Reactive Runtime Ripple** triggers:
 > - Enforcement mechanism detects scope violation
 > - Builder execution halts immediately
 > - Escalation to FM occurs with violation classification
 > - Audit trail records violation and response
-> 
+>
 > This is **reactive enforcement** responding to a violation in progress.
 
 **Relationship to Existing Models**:
@@ -190,8 +190,8 @@ Ripple Intelligence operates across **three distinct planes**, each with differe
 
 ### 5.3 Plane 3: Upward Learning Ripple (Feedback & Evolution)
 
-**Timing**: **AFTER** execution, **CONTINUOUS** learning  
-**Direction**: Execution experience → Governance improvements → Canon evolution  
+**Timing**: **AFTER** execution, **CONTINUOUS** learning
+**Direction**: Execution experience → Governance improvements → Canon evolution
 **Purpose**: Promote lessons learned and failure patterns to improve governance
 
 **Characteristics**:
@@ -209,14 +209,14 @@ Ripple Intelligence operates across **three distinct planes**, each with differe
 
 **Example Scenario**:
 > Builder encounters governance ambiguity 3 times: "Which gates apply to documentation-only changes?"
-> 
+>
 > **Upward Learning Ripple** triggers:
 > - Failure classification identifies governance gap
 > - Learning qualifies for promotion (affects multiple repos)
 > - Governance Administrator creates proposal for clarification
 > - Canon updated: "Documentation-only changes exempt from builder-specific gates"
 > - Updated governance propagates downward (Plane 1)
-> 
+>
 > This is **continuous improvement** driven by execution experience.
 
 **Relationship to Existing Models**:
@@ -255,8 +255,8 @@ Ripple Intelligence operates across **three distinct planes**, each with differe
 - **GOVERNANCE_RIPPLE_MODEL.md Section 4 (Downward Ripple)** → **Plane 1 (Proactive Downward Ripple)** extended with pre-merge intelligence
 - **GOVERNANCE_RIPPLE_MODEL.md Section 5 (Upward Ripple)** → **Plane 3 (Upward Learning Ripple)**
 
-**Key Insight**: 
-> "Ripple" previously referred to **post-merge propagation** (downward governance sync).  
+**Key Insight**:
+> "Ripple" previously referred to **post-merge propagation** (downward governance sync).
 > RIL extends "ripple" to include **pre-merge change-impact intelligence**.
 
 ### 6.3 Disambiguation Rules
@@ -463,12 +463,12 @@ This section provides **conceptual classification** of changes that trigger ripp
 
 **Principle**: Ripple Intelligence prioritizes **detecting impact before merge** over **reacting to violations during execution**.
 
-**Rationale**: 
+**Rationale**:
 - Proactive detection prevents violations from entering the system
 - Reactive enforcement is the last line of defense, not the first
 - Cost of remediation increases exponentially with latency
 
-**Implication**: 
+**Implication**:
 - Ripple Intelligence investments should prioritize Plane 1 (Proactive Downward Ripple)
 - Runtime enforcement (Plane 2) remains necessary but is not sufficient alone
 

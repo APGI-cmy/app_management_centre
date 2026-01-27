@@ -1,12 +1,12 @@
 # MEMORY STATE OBSERVABILITY AND QUERY CONTRACT
 
 ## Status
-**Type**: Canonical Governance Definition  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-24  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Type**: Canonical Governance Definition
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-24
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 **Applies To**: All FM Runtime Implementations, Watchdog, All Monitoring Systems, All Repositories
 
 ---

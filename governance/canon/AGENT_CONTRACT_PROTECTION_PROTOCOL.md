@@ -1,12 +1,12 @@
 # AGENT CONTRACT PROTECTION PROTOCOL
 
 ## Status
-**Type**: Constitutional Governance Rule — Tier-0  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-15  
-**Owner**: CS2 (Johan Ras in bootstrap mode, Maturion in production)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md, extends AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md  
+**Type**: Constitutional Governance Rule — Tier-0
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-15
+**Owner**: CS2 (Johan Ras in bootstrap mode, Maturion in production)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md, extends AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
 **Part of**: Agent Contract Authority Infrastructure
 
 ---

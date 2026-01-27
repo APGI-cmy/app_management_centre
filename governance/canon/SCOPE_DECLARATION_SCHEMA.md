@@ -1,9 +1,9 @@
 # SCOPE DECLARATION SCHEMA
 
 ## Status
-Canonical Governance Specification  
-Version: v1  
-Authority: Governance  
+Canonical Governance Specification
+Version: v1
+Authority: Governance
 Applies To: All PRs, All Builders, All Repositories
 
 ---
@@ -67,23 +67,23 @@ A valid Scope Declaration MUST contain the following sections **in order**:
 - `DATE_UTC:`
 
 ### 5.2 PR Responsibility Domain
-- `RESPONSIBILITY_DOMAIN:`  
+- `RESPONSIBILITY_DOMAIN:`
   Must be a **single noun phrase**.
 
-❌ Multiple domains are forbidden  
-❌ Compound domains are forbidden  
+❌ Multiple domains are forbidden
+❌ Compound domains are forbidden
 ❌ “System improvements” is forbidden
 
 ---
 
 ### 5.3 Explicitly In Scope
-- `IN_SCOPE:`  
+- `IN_SCOPE:`
   Bullet list of items directly related to the responsibility domain.
 
 ---
 
 ### 5.4 Explicitly Out of Scope
-- `OUT_OF_SCOPE:`  
+- `OUT_OF_SCOPE:`
   Bullet list that MUST include (at minimum):
 
   - Tests (unless tests are the responsibility)

@@ -1,9 +1,9 @@
 successfully downloaded text file (SHA: c53909370803693a685e3456a6d3344bc424bed2)# ACTIVATION STATE MODEL
 
 ## Status
-Canonical Governance Standard  
-Version: v1.0  
-Authority: Johan Ras  
+Canonical Governance Standard
+Version: v1.0
+Authority: Johan Ras
 Applies To: All Maturion Systems, All Subsystems, All Capabilities, Foreman (FM), Builders, Governance Administrator
 
 ---
@@ -370,7 +370,7 @@ All authorizations MUST be recorded in:
 ### 6.1 Forward Transitions (Activation)
 
 #### DORMANT → VALIDATED
-- **Preconditions**: 
+- **Preconditions**:
   - Component code/artifacts deployed
   - Technical validation requirements defined
   - Human authorization received
@@ -409,10 +409,10 @@ Components may skip intermediate states with explicit authorization:
 - **VALIDATED → ACTIVE** (skip READ_ONLY and PROPOSAL_ONLY)
   - Allowed if component has no read-only or proposal phase requirements
   - Requires explicit risk acceptance by Johan
-  
+
 - **VALIDATED → PROPOSAL_ONLY** (skip READ_ONLY)
   - Allowed if component has no read capability
-  
+
 - **READ_ONLY → ACTIVE** (skip PROPOSAL_ONLY)
   - Allowed if component has no proposal generation capability
 
@@ -947,11 +947,11 @@ This activation state model supports:
 
 This activation state model succeeds when:
 
-✅ **All components declare and respect activation states**  
-✅ **No component activates without explicit authorization**  
-✅ **State transitions are auditable and reversible**  
-✅ **Emergency deactivation mechanisms exist and are validated**  
-✅ **Activation state violations are detected and prevented**  
+✅ **All components declare and respect activation states**
+✅ **No component activates without explicit authorization**
+✅ **State transitions are auditable and reversible**
+✅ **Emergency deactivation mechanisms exist and are validated**
+✅ **Activation state violations are detected and prevented**
 ✅ **Progressive activation reduces operational risk**
 
 ---
@@ -960,8 +960,8 @@ This activation state model succeeds when:
 
 ### Version 1.0 (2025-12-24)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Issue G-C2 — Define Canonical Activation States & Transition Rules
 
 **Summary**: Created canonical activation state model defining five states (DORMANT, VALIDATED, READ_ONLY, PROPOSAL_ONLY, ACTIVE), allowed and forbidden transitions, authorization requirements, rollback rules, and emergency disable semantics.

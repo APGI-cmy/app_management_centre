@@ -1,12 +1,12 @@
 # ASSISTED RIPPLE SCAN SCOPE
 
 ## Status
-**Type**: Canonical Governance Specification  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-02  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to RIPPLE_INTELLIGENCE_LAYER.md  
+**Type**: Canonical Governance Specification
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-02
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to RIPPLE_INTELLIGENCE_LAYER.md
 **Part of**: Ripple-Wave 2.1 — Assisted Local Repository Ripple Scan
 
 ---

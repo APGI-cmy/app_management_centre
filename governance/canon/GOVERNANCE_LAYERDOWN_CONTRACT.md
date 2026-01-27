@@ -1,12 +1,12 @@
 # GOVERNANCE LAYERDOWN CONTRACT
 
 ## Status
-**Type**: Canonical Governance Standard  
-**Authority**: Supreme - Johan Ras  
-**Version**: 1.1.0  
-**Effective Date**: 2026-01-05 (Updated)  
-**Applies To**: All Application Repositories (FM, SlotMaster, Future Apps)  
-**Purpose**: Define authoritative requirements for layering governance into application repositories  
+**Type**: Canonical Governance Standard
+**Authority**: Supreme - Johan Ras
+**Version**: 1.1.0
+**Effective Date**: 2026-01-05 (Updated)
+**Applies To**: All Application Repositories (FM, SlotMaster, Future Apps)
+**Purpose**: Define authoritative requirements for layering governance into application repositories
 **Companion Protocol**: CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md (cross-repo coordination)
 
 ---
@@ -251,9 +251,9 @@ This repository follows canonical governance from the Maturion Governance Centre
 ```markdown
 # Governance Version
 
-**Version**: v1.0  
-**Governance Repository**: https://github.com/MaturionISMS/maturion-foreman-governance  
-**Last Updated**: [ISO 8601 timestamp]  
+**Version**: v1.0
+**Governance Repository**: https://github.com/MaturionISMS/maturion-foreman-governance
+**Last Updated**: [ISO 8601 timestamp]
 **Authority**: Johan Ras
 
 ## Canonical Governance Documents
@@ -634,7 +634,7 @@ All application repositories MUST include the following PR gate workflows in `.g
 **Universal Commissioning Phases** (apply to all applications):
 
 ```
-[BUILD COMPLETE] 
+[BUILD COMPLETE]
     ↓
 [INSTALLED] — Application deployed to target environment
     ↓ (Human Checkpoint: Johan authorizes validation)
@@ -645,7 +645,7 @@ All application repositories MUST include the following PR gate workflows in `.g
 [ACTIVATED] — Application authorized to process production workloads
 ```
 
-**Key Distinction**: 
+**Key Distinction**:
 - **Activation** = State transition (one-time human authorization)
 - **Execution** = Continuous operation (ongoing runtime behavior)
 
@@ -1135,8 +1135,8 @@ This contract integrates with and references:
 
 ### v1.0.0 (2025-12-29)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Issue GOV-LAYERDOWN-01
 
 **Summary**: Created single canonical layer-down contract synthesizing requirements from all relevant canonical governance documents.

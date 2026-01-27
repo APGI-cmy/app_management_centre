@@ -1,10 +1,10 @@
 # GOVERNANCE LIAISON ROLE SURVEY
 
 ## Status
-Governance Survey Artifact  
-Version: v1.0  
-Authority: Governance Administrator  
-Purpose: Derive Governance Liaison role boundaries from canonical governance  
+Governance Survey Artifact
+Version: v1.0
+Authority: Governance Administrator
+Purpose: Derive Governance Liaison role boundaries from canonical governance
 Date: 2026-01-01
 
 ---
@@ -70,7 +70,7 @@ The term "Governance Liaison" appears in the following contexts:
 
 **Canonical Reference:**
 ```
-The Admin / Governance Liaison Agent is the designated executor 
+The Admin / Governance Liaison Agent is the designated executor
 of repository initialization.
 ```
 
@@ -298,7 +298,7 @@ Governance Liaison MUST immediately STOP when:
 
 **Canonical Principle:**
 ```
-Repository Seeding / Admin Liaison Agents MUST halt and escalate 
+Repository Seeding / Admin Liaison Agents MUST halt and escalate
 when encountering ambiguity or conflict.
 ```
 
@@ -331,7 +331,7 @@ Based on canonical references to "coupling":
 
 **Canonical Rule:**
 ```
-If governance changes, contracts + validators MUST be updated 
+If governance changes, contracts + validators MUST be updated
 in the SAME work unit (coupling rule).
 ```
 
@@ -496,10 +496,10 @@ This survey provides the canonical basis for defining those requirements in alig
 
 **Survey Complete**
 
-**Surveyor:** Governance Administrator Agent  
-**Date:** 2026-01-01  
-**Version:** 1.0  
-**Authority:** Governance Administrator  
+**Surveyor:** Governance Administrator Agent
+**Date:** 2026-01-01
+**Version:** 1.0
+**Authority:** Governance Administrator
 **Reviewed By:** [Pending Johan Approval]
 
 ---

@@ -1,12 +1,12 @@
 # AGENT CANONICAL CONTEXT SYNCHRONISATION PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Protocol  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-24  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Type**: Canonical Governance Protocol
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-24
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 **Applies To**: All Agents, All Repositories
 
 ---
@@ -763,22 +763,22 @@ If conflict exists between this protocol and other governance documents:
 
 ### 13.1 What This Protocol Defines
 
-✅ What agent canonical context currency means  
-✅ Trigger events requiring synchronisation evaluation  
-✅ Authority for initiating and executing synchronisation  
-✅ Who may update which agent files under what conditions  
-✅ Prohibited behaviors (self-updating, learning, inference)  
-✅ Audit and evidence requirements  
-✅ Synchronisation workflow and state transitions  
+✅ What agent canonical context currency means
+✅ Trigger events requiring synchronisation evaluation
+✅ Authority for initiating and executing synchronisation
+✅ Who may update which agent files under what conditions
+✅ Prohibited behaviors (self-updating, learning, inference)
+✅ Audit and evidence requirements
+✅ Synchronisation workflow and state transitions
 ✅ Failure handling and escalation
 
 ### 13.2 What This Protocol Does NOT Define
 
-❌ Implementation mechanisms (tooling, automation, CI/CD)  
-❌ Runtime synchronisation technology choices  
-❌ Agent file storage or distribution systems  
-❌ Governance loading implementation details  
-❌ Specific commit message formats or PR templates  
+❌ Implementation mechanisms (tooling, automation, CI/CD)
+❌ Runtime synchronisation technology choices
+❌ Agent file storage or distribution systems
+❌ Governance loading implementation details
+❌ Specific commit message formats or PR templates
 ❌ Automation scripts or workflows
 
 **Separation Principle**: This is governance definition, not execution specification. Governance defines requirements; execution systems must conform.

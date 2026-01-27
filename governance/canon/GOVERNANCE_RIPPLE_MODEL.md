@@ -1,10 +1,10 @@
 # GOVERNANCE RIPPLE MODEL
 
 ## Status
-Canonical Governance Policy  
-Version: v1.0  
-Authority: Governance Administrator  
-Effective Date: 2025-12-22  
+Canonical Governance Policy
+Version: v1.0
+Authority: Governance Administrator
+Effective Date: 2025-12-22
 Required By: GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---

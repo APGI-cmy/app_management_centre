@@ -1,12 +1,12 @@
 # AGENT RECRUITMENT AND CONTRACT AUTHORITY MODEL
 
 ## Status
-**Type**: Constitutional Governance Rule  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-02  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Type**: Constitutional Governance Rule
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-02
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 **Part of**: Ripple-Wave 1.2 — Agent Mindset Alignment
 
 ---
@@ -704,9 +704,9 @@ All agents MUST:
 
 ---
 
-**Status**: Active and Enforced  
-**Owner**: Governance Administrator  
-**Approval Authority**: Johan Ras (Maturion Proxy)  
+**Status**: Active and Enforced
+**Owner**: Governance Administrator
+**Approval Authority**: Johan Ras (Maturion Proxy)
 **Last Updated**: 2026-01-02
 
 ---

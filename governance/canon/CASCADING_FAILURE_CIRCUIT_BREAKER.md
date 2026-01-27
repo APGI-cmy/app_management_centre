@@ -1,9 +1,9 @@
 # CASCADING FAILURE CIRCUIT BREAKER
 
 ## Status
-Canonical Governance Rule  
-Version: v1  
-Authority: Governance  
+Canonical Governance Rule
+Version: v1
+Authority: Governance
 Applies To: All PRs
 
 ---

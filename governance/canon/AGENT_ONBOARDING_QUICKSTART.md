@@ -1,8 +1,8 @@
 # Agent Onboarding Quickstart
 
-**Status**: Canonical Governance Document  
-**Version**: 1.0.0  
-**Authority**: Foreman (FM)  
+**Status**: Canonical Governance Document
+**Version**: 1.0.0
+**Authority**: Foreman (FM)
 **Purpose**: Single entry point for all agent onboarding
 
 ---

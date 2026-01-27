@@ -1,11 +1,11 @@
 # GOVERNANCE LIAISON TRAINING PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Training Standard  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2026-01-11  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Canonical Governance Training Standard
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2026-01-11
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Purpose**: Comprehensive training for Governance Liaison agents
 
 ---
@@ -833,8 +833,8 @@ After initial certification, Governance Liaison agents MUST:
 
 ### v1.0.0 (2026-01-11)
 
-**Status:** Initial Release  
-**Authority:** Johan Ras (Human Authority)  
+**Status:** Initial Release
+**Authority:** Johan Ras (Human Authority)
 **Trigger:** Issue — Update Governance Liaison Training Materials for Execution Bootstrap Protocol
 
 **Summary:** Created comprehensive training protocol for Governance Liaison agents integrating Execution Bootstrap Protocol requirements.
@@ -855,10 +855,10 @@ After initial certification, Governance Liaison agents MUST:
 
 ---
 
-**Status**: Active and Enforced  
-**Owner**: Governance Administrator  
-**Approval Authority**: Johan Ras  
-**Effective**: Immediate upon merge  
+**Status**: Active and Enforced
+**Owner**: Governance Administrator
+**Approval Authority**: Johan Ras
+**Effective**: Immediate upon merge
 **Last Updated**: 2026-01-11
 
 ---

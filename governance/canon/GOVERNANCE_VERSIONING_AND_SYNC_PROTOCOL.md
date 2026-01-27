@@ -1,11 +1,11 @@
 # GOVERNANCE VERSIONING AND SYNC PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Protocol  
-**Authority**: Supreme - Canonical  
-**Version**: v1.0.0  
-**Effective Date**: 2025-12-23  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Canonical Governance Protocol
+**Authority**: Supreme - Canonical
+**Version**: v1.0.0
+**Effective Date**: 2025-12-23
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---
@@ -122,9 +122,9 @@ Per **VERSIONING_AND_EVOLUTION_GOVERNANCE.md**, individual governance artifacts 
 **Format**:
 ```markdown
 ## Status
-Canonical Governance Policy  
-Version: v1.2.0  
-Authority: Governance Administrator  
+Canonical Governance Policy
+Version: v1.2.0
+Authority: Governance Administrator
 Last Updated: 2025-12-23
 ```
 

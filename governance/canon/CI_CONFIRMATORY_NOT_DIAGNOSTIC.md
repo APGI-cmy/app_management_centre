@@ -1,11 +1,11 @@
 # CI CONFIRMATORY NOT DIAGNOSTIC CANON
 
 ## Status
-**Type**: Constitutional Governance Rule  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-30  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Type**: Constitutional Governance Rule
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-30
+**Owner**: Maturion Engineering Leadership (Johan Ras)
 **Precedence**: Subordinate only to GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---
@@ -41,7 +41,7 @@ This canon derives authority from and operationalizes:
 
 > **CI execution is confirmatory, not diagnostic.**
 
-CI validates that governance obligations were satisfied **before** handover.  
+CI validates that governance obligations were satisfied **before** handover.
 CI does **not** discover, diagnose, or debug failures.
 
 **CI Role**:
@@ -612,9 +612,9 @@ No execution path may:
 
 ---
 
-**Status**: Active and Enforced  
-**Owner**: Governance Administrator  
-**Approval Authority**: Johan Ras  
+**Status**: Active and Enforced
+**Owner**: Governance Administrator
+**Approval Authority**: Johan Ras
 **Last Updated**: 2025-12-30
 
 ---

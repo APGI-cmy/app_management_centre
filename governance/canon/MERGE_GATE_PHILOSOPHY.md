@@ -1,10 +1,10 @@
 # MERGE GATE PHILOSOPHY
 
-**Version**: 1.0.0  
-**Date**: 2026-01-20  
-**Status**: Active  
-**Type**: Constitutional Governance Rule  
-**Authority**: Supreme - Canonical  
+**Version**: 1.0.0
+**Date**: 2026-01-20
+**Status**: Active
+**Type**: Constitutional Governance Rule
+**Authority**: Supreme - Canonical
 **Owner**: CS2 (Johan Ras in bootstrap mode, Maturion in production)
 
 ---
@@ -122,7 +122,7 @@ Agents validate locally BEFORE creating PRs. Merge gates confirm what the agent 
     echo "=== Evidence-Based Validation Check (BL-027/028) ==="
     echo "Gate: [GATE NAME]"
     echo ""
-    
+
     # Look for PREHANDOVER_PROOF with this gate documented
     if [ -f "PREHANDOVER_PROOF.md" ] && grep -qi "[gate-keyword]" PREHANDOVER_PROOF.md; then
       echo "✅ Found PREHANDOVER_PROOF.md with [Gate] validation"
@@ -286,8 +286,8 @@ Agents validate locally BEFORE creating PRs. Merge gates confirm what the agent 
 ```markdown
 # PREHANDOVER_PROOF
 
-**Agent**: governance-repo-administrator  
-**Task**: Remove agent-contract-administrator & align merge gates  
+**Agent**: governance-repo-administrator
+**Task**: Remove agent-contract-administrator & align merge gates
 **Date**: 2026-01-20
 
 ---
@@ -411,7 +411,7 @@ All files valid, zero warnings
 
 ## Version History
 
-**Version 1.0.0** (2026-01-20)  
+**Version 1.0.0** (2026-01-20)
 - Initial version documenting merge gate philosophy
 - Defines evidence-based validation pattern
 - Establishes two-mode validation (evidence vs. script execution)

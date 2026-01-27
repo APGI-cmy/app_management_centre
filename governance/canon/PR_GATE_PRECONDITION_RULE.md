@@ -1,9 +1,9 @@
 # PR GATE PRECONDITION RULE
 
 ## Status
-Canonical Governance Rule  
-Authority: Johan Ras  
-Applies To: All Builders, Foreman, Governance Administrator  
+Canonical Governance Rule
+Authority: Johan Ras
+Applies To: All Builders, Foreman, Governance Administrator
 Precedence: Subordinate only to GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---

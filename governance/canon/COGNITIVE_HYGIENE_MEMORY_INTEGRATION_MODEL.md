@@ -1,11 +1,11 @@
 
 ## Status
-**Type**: Canonical Governance Definition  
-**Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
-**Effective Date**: 2025-12-24  
-**Owner**: Maturion Engineering Leadership (Johan Ras)  
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Type**: Canonical Governance Definition
+**Authority**: Supreme - Canonical
+**Version**: 1.0.0
+**Effective Date**: 2025-12-24
+**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
 **Applies To**: All Cognitive Hygiene Protocol (CHP) Implementations, All Memory Systems, All Repositories
 
 ---

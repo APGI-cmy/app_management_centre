@@ -1,11 +1,11 @@
 # QA CATALOG ALIGNMENT GATE CANON
 
 ## Status
-**Type**: Canonical Gate Definition  
-**Authority**: Supreme - Applies to ALL repositories with wave-based delivery  
-**Version**: 1.0  
-**Date**: 2026-01-05  
-**Owner**: Maturion Engineering Leadership (Johan)  
+**Type**: Canonical Gate Definition
+**Authority**: Supreme - Applies to ALL repositories with wave-based delivery
+**Version**: 1.0
+**Date**: 2026-01-05
+**Owner**: Maturion Engineering Leadership (Johan)
 **Derived From**: BL-018, BL-019 (FM App Wave 2)
 
 ---
@@ -655,22 +655,22 @@ cat governance/evidence/qa-alignment-gates/wave-2-subwave-2.3-revalidation-*.jso
 
 The QA-Catalog-Alignment Gate is:
 
-✅ **Mandatory** - Must pass before ANY wave/subwave authorization  
-✅ **Semantic** - Validates alignment, not just existence  
-✅ **Automated** - Should be implemented as executable validation  
-✅ **Evidence-Based** - Produces auditable validation reports  
-✅ **Catastrophe-Preventing** - Blocks second-time failures  
-✅ **Forward-Scan-Aware** - Applied retroactively after BL creation  
-✅ **Cross-Repository** - Consistent definition, repository-specific implementation  
+✅ **Mandatory** - Must pass before ANY wave/subwave authorization
+✅ **Semantic** - Validates alignment, not just existence
+✅ **Automated** - Should be implemented as executable validation
+✅ **Evidence-Based** - Produces auditable validation reports
+✅ **Catastrophe-Preventing** - Blocks second-time failures
+✅ **Forward-Scan-Aware** - Applied retroactively after BL creation
+✅ **Cross-Repository** - Consistent definition, repository-specific implementation
 
 **This gate exists to prevent BL-018/BL-019 class failures from recurring. No exceptions.**
 
 ---
 
-**Version**: 1.0  
-**Date**: 2026-01-05  
-**Status**: Canonical - Active and Enforced  
-**Authority**: Supreme across ALL repositories with wave-based delivery  
+**Version**: 1.0
+**Date**: 2026-01-05
+**Status**: Canonical - Active and Enforced
+**Authority**: Supreme across ALL repositories with wave-based delivery
 **Next Review**: After first Wave 3+ execution using this gate
 
 ---

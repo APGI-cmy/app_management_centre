@@ -255,7 +255,7 @@ This inventory documents all governance canon files layered down from the canoni
 - Batch 9: 10 canons ✅
 - Batch 10: 12 canons ✅ **FINAL BATCH**
 
-**Progress**: 104/104 canons (100%) ✅ **GOVERNANCE ALIGNMENT COMPLETE**  
+**Progress**: 104/104 canons (100%) ✅ **GOVERNANCE ALIGNMENT COMPLETE**
 **Remaining**: 0 canons 🎉
 
 ---
@@ -322,7 +322,7 @@ This inventory documents all governance canon files layered down from the canoni
 **Method**: governance-liaison layer-down
 **Files Layered Down**: 12 templates, watchdog, and remaining governance canons. Includes watchdog authority and cognitive observation protocol, agent contract schema and migration guide, responsibility domain templates and registry, effectiveness/failure/scope templates, Maturion conceptual doctrine classification, and enforcement design notes. Completes 100% governance alignment for office-app.
 
-**Previous Ripple**: Batch 9 (2026-01-26)  
+**Previous Ripple**: Batch 9 (2026-01-26)
 **Files from Batch 9**: 10 activation, domain, and execution governance canons. Includes EXECUTION_BOOTSTRAP_PROTOCOL.md v1.1.0, CONSTITUTIONAL_SANDBOX_PATTERN.md (BL-024), domain evolution governance, vision alignment model, and FPC layer-down guide.
 
 **Alignment Status**: ✅ **100% COMPLETE** - All canonical governance layered down

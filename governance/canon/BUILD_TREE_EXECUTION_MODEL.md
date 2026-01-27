@@ -1,10 +1,10 @@
 # BUILD TREE & HIERARCHICAL EXECUTION MODEL
 
 ## Status
-Canonical Governance Standard  
-Version: v1.0  
-Authority: Johan Ras  
-Applies To: All Maturion Applications, Foreman (FM), Builders, Wave Execution Systems  
+Canonical Governance Standard
+Version: v1.0
+Authority: Johan Ras
+Applies To: All Maturion Applications, Foreman (FM), Builders, Wave Execution Systems
 
 ---
 
@@ -100,7 +100,7 @@ Application (Root)
 - Represents the top-level delivery commitment
 - Reports overall application build status to human authority
 
-**Examples**: 
+**Examples**:
 - Foreman App (complete application)
 - Builder Service (complete application)
 - Memory Fabric (complete subsystem)
@@ -350,10 +350,10 @@ When multiple child states exist, parent state is determined by precedence:
 **Example**:
 - If children are: [COMPLETED, IN_PROGRESS, COMPLETED]
   - Parent state: **IN_PROGRESS** (precedence rule 4)
-  
+
 - If children are: [COMPLETED, BLOCKED, COMPLETED]
   - Parent state: **BLOCKED** (precedence rule 3)
-  
+
 - If children are: [COMPLETED, COMPLETED, FAILED]
   - Parent state: **FAILED** (precedence rule 2)
 
@@ -1097,13 +1097,13 @@ This build tree execution model supports:
 
 This build tree execution model succeeds when:
 
-✅ **All builds are organized into App → Wave → Sub-Wave → Step hierarchy**  
-✅ **Execution states are maintained and rolled up correctly at all levels**  
-✅ **Dependencies are declared, validated, and enforced**  
-✅ **Authority boundaries are respected at each level**  
-✅ **Emergency stops can be triggered at appropriate scope**  
-✅ **Node independence and isolation prevent unintended side effects**  
-✅ **Status visibility enables real-time monitoring and governance**  
+✅ **All builds are organized into App → Wave → Sub-Wave → Step hierarchy**
+✅ **Execution states are maintained and rolled up correctly at all levels**
+✅ **Dependencies are declared, validated, and enforced**
+✅ **Authority boundaries are respected at each level**
+✅ **Emergency stops can be triggered at appropriate scope**
+✅ **Node independence and isolation prevent unintended side effects**
+✅ **Status visibility enables real-time monitoring and governance**
 ✅ **Audit trails provide complete execution history**
 
 ---
@@ -1112,8 +1112,8 @@ This build tree execution model succeeds when:
 
 ### Version 1.0 (2025-12-24)
 
-**Status**: Initial Release  
-**Authority**: Johan Ras  
+**Status**: Initial Release
+**Authority**: Johan Ras
 **Trigger**: Issue G-C8 — Define Build Tree & Hierarchical Execution Model
 
 **Summary**: Created canonical build tree execution model defining four-level hierarchy (Application → Wave → Sub-Wave → Step), execution states, status roll-up semantics, authority boundaries, dependency resolution, emergency stop semantics, and node independence rules.

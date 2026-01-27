@@ -1,9 +1,9 @@
 # ENFORCEMENT DESIGN NOTE: Builder Contract Binding Automation
 
-**Status**: Canonical Governance Design Specification  
-**Version**: 1.0.0  
-**Authority**: Maturion Engineering Leadership (Johan Ras)  
-**Created**: 2026-01-01  
+**Status**: Canonical Governance Design Specification
+**Version**: 1.0.0
+**Authority**: Maturion Engineering Leadership (Johan Ras)
+**Created**: 2026-01-01
 **Purpose**: Design for ensuring builder contract binding requirements cannot be missed again once FM is fully automated
 
 ---
@@ -380,13 +380,13 @@ class BuilderContractValidator {
     try {
       // Parse contract (YAML frontmatter or JSON)
       const contract = this.parseContract(contractPath);
-      
+
       // Schema validation
       const schemaValid = this.validateFn(contract);
-      
+
       // Additional checks (beyond schema)
       const additionalChecks = this.performAdditionalChecks(contract);
-      
+
       // Generate report
       return this.generateReport(contractPath, schemaValid, additionalChecks);
     } catch (error) {
@@ -399,7 +399,7 @@ class BuilderContractValidator {
 
   parseContract(contractPath) {
     const content = fs.readFileSync(contractPath, 'utf8');
-    
+
     // Try YAML frontmatter first
     if (content.startsWith('---')) {
       const match = content.match(/^---\n([\s\S]*?)\n---/);
@@ -407,7 +407,7 @@ class BuilderContractValidator {
         return yaml.load(match[1]);
       }
     }
-    
+
     // Try JSON
     try {
       return JSON.parse(content);
@@ -418,19 +418,19 @@ class BuilderContractValidator {
 
   performAdditionalChecks(contract) {
     const checks = [];
-    
+
     // Check 1: Canonical governance reference is resolvable
     checks.push(this.checkGovernanceReference(contract));
-    
+
     // Check 2: Protected paths are included in restricted_paths
     checks.push(this.checkProtectedPaths(contract));
-    
+
     // Check 3: Escalation triggers match survey
     checks.push(this.checkEscalationTriggers(contract));
-    
+
     // Check 4: Role-specific requirements (if applicable)
     checks.push(this.checkRoleSpecificRequirements(contract));
-    
+
     return checks;
   }
 
@@ -446,12 +446,12 @@ class BuilderContractValidator {
       '.github/workflows/**',
       'BUILD_PHILOSOPHY.md'
     ];
-    
+
     const restricted = contract.scope?.restricted_paths || [];
-    const missing = requiredProtectedPaths.filter(path => 
+    const missing = requiredProtectedPaths.filter(path =>
       !restricted.some(r => r.includes(path) || path.includes(r))
     );
-    
+
     return {
       check: 'protected_paths',
       status: missing.length === 0 ? 'PASS' : 'FAIL',
@@ -466,10 +466,10 @@ class BuilderContractValidator {
       'GOVERNANCE_CONFLICT',
       'SCOPE_BOUNDARY_EXCEEDED'
     ];
-    
+
     const triggers = contract.escalation?.triggers || [];
     const missing = requiredTriggers.filter(t => !triggers.includes(t));
-    
+
     return {
       check: 'escalation_triggers',
       status: missing.length === 0 ? 'PASS' : 'FAIL',
@@ -480,21 +480,21 @@ class BuilderContractValidator {
   checkRoleSpecificRequirements(contract) {
     // Check if role-specific requirements are present
     const role = contract.role;
-    
+
     if (role === 'UI Builder' && !contract.ui_standards) {
       return { check: 'role_specific', status: 'FAIL', reason: 'UI standards missing' };
     }
-    
+
     if (role === 'API Builder' && !contract.api_standards) {
       return { check: 'role_specific', status: 'FAIL', reason: 'API standards missing' };
     }
-    
+
     return { check: 'role_specific', status: 'PASS' };
   }
 
   generateReport(contractPath, schemaValid, additionalChecks) {
     const allPassed = schemaValid && additionalChecks.every(c => c.status === 'PASS');
-    
+
     return {
       contract_path: contractPath,
       validation_timestamp: new Date().toISOString(),
@@ -513,19 +513,19 @@ class BuilderContractValidator {
 // CLI Interface
 if (require.main === module) {
   const args = process.argv.slice(2);
-  
+
   if (args.length < 2) {
     console.error('Usage: node validate-builder-contract.js <schema-path> <contract-path>');
     process.exit(2);
   }
-  
+
   const [schemaPath, contractPath] = args;
-  
+
   const validator = new BuilderContractValidator(schemaPath);
   const result = validator.validate(contractPath);
-  
+
   console.log(JSON.stringify(result, null, 2));
-  
+
   if (result.overall_status === 'VALID') {
     process.exit(0);
   } else {
@@ -582,31 +582,31 @@ on:
 jobs:
   validate-builder-contracts:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      
+
       - name: Install validator dependencies
         run: |
           cd governance/tooling
           npm install ajv js-yaml
-      
+
       - name: Validate all builder contracts
         id: validate
         run: |
           schema="governance/schemas/BUILDER_CONTRACT.schema.json"
           exit_code=0
-          
+
           for contract in .github/agents/*.agent.md .agent **/*.agent.md; do
             if [ -f "$contract" ]; then
               echo "Validating: $contract"
-              
+
               if node governance/tooling/validate-builder-contract.js "$schema" "$contract"; then
                 echo "✅ VALID: $contract"
               else
@@ -615,16 +615,16 @@ jobs:
               fi
             fi
           done
-          
+
           exit $exit_code
-      
+
       - name: Upload validation reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: validation-reports
           path: validation-reports/*.json
-      
+
       - name: Block merge if validation fails
         if: steps.validate.outcome == 'failure'
         run: |
@@ -654,13 +654,13 @@ on:
 jobs:
   check-coupling:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 2  # Need previous commit for diff
-      
+
       - name: Check if survey changed
         id: survey_changed
         run: |
@@ -669,7 +669,7 @@ jobs:
           else
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Check if checklist changed
         id: checklist_changed
         run: |
@@ -678,7 +678,7 @@ jobs:
           else
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Verify schema updated
         if: steps.survey_changed.outputs.changed == 'true' || steps.checklist_changed.outputs.changed == 'true'
         run: |
@@ -689,7 +689,7 @@ jobs:
             echo "::error::COUPLING VIOLATION: Schema must be updated in same work unit"
             exit 1
           fi
-      
+
       - name: Verify validator updated or validated
         if: steps.survey_changed.outputs.changed == 'true' || steps.checklist_changed.outputs.changed == 'true'
         run: |
