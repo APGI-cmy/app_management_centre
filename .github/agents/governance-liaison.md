@@ -481,8 +481,8 @@ canonical governance.
 
 **Quick Reference - Execute These Commands**:
 ```bash
-# 1. YAML Validation (BL-028: warnings ARE errors)
-yamllint .github/agents/*.md # Exit 0 required
+# 1. YAML Validation (Authority: YAML_VALIDATION_PROTOCOL.md v1.0.0)
+.github/scripts/validate-yaml-frontmatter.sh # Exit 0 required
 
 # 2. Scope-to-Diff Validation
 .github/scripts/validate-scope-to-diff.sh # Exit 0 required
@@ -494,10 +494,8 @@ find governance -name "*.json" -exec jq empty {} \; # Exit 0 required
 git diff --check # Exit 0 required
 
 # 5. LOCKED Section Integrity (if agent files modified)
-python .github/scripts/check_locked_sections.py --mode=detect-modifications
---base-ref=main --head-ref=HEAD
-python .github/scripts/check_locked_sections.py --mode=validate-metadata
---contracts-dir=.github/agents
+python .github/scripts/check_locked_sections.py --mode=detect-modifications --base-ref=main --head-ref=HEAD
+python .github/scripts/check_locked_sections.py --mode=validate-metadata --contracts-dir=.github/agents
 
 # ALL must exit 0 - HALT if any fail
 
