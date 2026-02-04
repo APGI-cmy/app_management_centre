@@ -85,7 +85,8 @@ governance:
       role: test-debt-enforcement
       enforcement: MANDATORY
     - id: locked-sections-template
-      path: governance/canon/agent-contracts-guidance/templates/AGENT_FILE_LOCKED_SECTIONS_TEMPLATE.md
+      path: >-
+        governance/canon/agent-contracts-guidance/templates/AGENT_FILE_LOCKED_SECTIONS_TEMPLATE.md
       role: agent-lockdown-template
       version: 1.0.0
     - id: ripple-checklist

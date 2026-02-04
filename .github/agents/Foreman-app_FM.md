@@ -62,7 +62,8 @@ governance:
 
     # Batch 2: Agent Governance Alignment (10 canons)
     - id: agent-file-binding-requirements
-      path: governance/canon/agent-contracts-guidance/AGENT_FILE_BINDING_REQUIREMENTS.md
+      path: >-
+        governance/canon/agent-contracts-guidance/AGENT_FILE_BINDING_REQUIREMENTS.md
       role: binding-requirements
     - id: agent-context-sync
       path: governance/canon/AGENT_CANONICAL_CONTEXT_SYNCHRONISATION_PROTOCOL.md

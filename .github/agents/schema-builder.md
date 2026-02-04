@@ -38,7 +38,8 @@ governance:
       path: governance/canon/AGENT_RECRUITMENT.md
       role: agent-legitimacy
     - id: agent-onboarding
-      path: governance/canon/agent-contracts-guidance/AGENT_ONBOARDING_QUICKSTART.md
+      path: >-
+        governance/canon/agent-contracts-guidance/AGENT_ONBOARDING_QUICKSTART.md
       role: agent-onboarding
     - id: agent-contract-management
       path: governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md
@@ -48,7 +49,8 @@ governance:
       path: governance/canon/CS2_AGENT_FILE_AUTHORITY_MODEL.md
       role: cs2-authority
     - id: agent-file-binding-requirements
-      path: governance/canon/agent-contracts-guidance/AGENT_FILE_BINDING_REQUIREMENTS.md
+      path: >-
+        governance/canon/agent-contracts-guidance/AGENT_FILE_BINDING_REQUIREMENTS.md
       role: binding-requirements
     - id: builder-contract-bindings
       path: governance/canon/BUILDER_CONTRACT_BINDING_CHECKLIST.md
