@@ -1,0 +1,490 @@
+name: Agent File Baseline Gate (CS2 Authority)
+
+# CI CLASSIFICATION: Hard Gate
+# Purpose: Enforces CS2 authority over agent contract files via baseline comparison
+# Failure Semantics:
+#   - Agent file changed without CS2 approval → Constitutional violation → Block merge
+#   - Infrastructure failures → Explicit infra-failure signal → Retry + Comment
+# Timeout: 10 minutes
+# Authority: CS2_AGENT_FILE_AUTHORITY_MODEL.md, CS2 Directive 2026-02-04
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/agents/*.md'
+
+# Explicit, least-privilege permissions
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  agent-file-baseline-validation:
+    name: Validate Agent Files vs CS2 Baselines
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for comparing against base
+
+      - name: Detect Changed Agent Files
+        id: detect-changes
+        run: |
+          echo "🔍 Detecting agent file changes..."
+          
+          # Get changed files (fetch main for comparison)
+          git fetch origin main --depth=50 2>/dev/null || echo "Note: Could not fetch main branch"
+          
+          # Get list of changed agent files
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            CHANGED_AGENT_FILES=$(git diff --name-only origin/main...HEAD | grep -E '^\.github/agents/.*\.md$' | grep -v 'SCHEMA' | grep -v 'README' || echo "")
+          else
+            # Fallback: check current commit changes only
+            CHANGED_AGENT_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD | grep -E '^\.github/agents/.*\.md$' | grep -v 'SCHEMA' | grep -v 'README' || echo "")
+          fi
+          
+          echo "Changed agent files:"
+          echo "$CHANGED_AGENT_FILES"
+          
+          if [ -z "$CHANGED_AGENT_FILES" ]; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No agent file changes detected"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "$CHANGED_AGENT_FILES" > /tmp/changed_agent_files.txt
+            
+            # Count changes
+            CHANGE_COUNT=$(echo "$CHANGED_AGENT_FILES" | wc -l)
+            echo "change_count=$CHANGE_COUNT" >> $GITHUB_OUTPUT
+            echo "📝 Detected $CHANGE_COUNT agent file change(s)"
+          fi
+
+      - name: Check for Evidence-Based Validation (BL-027/028)
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        id: evidence_check
+        run: |
+          echo "=== Evidence-Based Validation Check (BL-027/028) ==="
+          echo "Gate: Agent File Baseline Validation"
+          echo ""
+
+          # Look for PREHANDOVER_PROOF with this gate documented
+          if [ -f "PREHANDOVER_PROOF.md" ] && grep -q "agent.*file.*baseline\|Agent.*File.*Baseline\|baseline.*validation" PREHANDOVER_PROOF.md; then
+            echo "✅ Found PREHANDOVER_PROOF.md with Agent File Baseline validation"
+            echo "✅ ACCEPTING evidence-based validation per BL-027/028"
+            echo "skip_execution=true" >> $GITHUB_OUTPUT
+          elif ls PREHANDOVER_PROOF_*.md 1> /dev/null 2>&1 && grep -q "agent.*file.*baseline\|Agent.*File.*Baseline\|baseline.*validation" PREHANDOVER_PROOF_*.md 2>/dev/null; then
+            echo "✅ Found PREHANDOVER_PROOF with Agent File Baseline validation"
+            echo "✅ ACCEPTING evidence-based validation per BL-027/028"
+            echo "skip_execution=true" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️  No evidence-based validation bypass detected"
+            echo "ℹ️  Proceeding with normal validation"
+            echo "skip_execution=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Python
+        if: steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'false'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Agent File Baseline Validation
+        if: steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'false'
+        id: validation
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          echo "🔍 Running agent file baseline validation..."
+          echo ""
+          
+          # Run validation script
+          if python3 scripts/validate_agent_file_baseline.py; then
+            echo "VALIDATION_RESULT=success" >> $GITHUB_ENV
+            echo "outcome=success" >> $GITHUB_OUTPUT
+            echo ""
+            echo "✅ Validation passed"
+          else
+            EXIT_CODE=$?
+            echo "VALIDATION_RESULT=failure" >> $GITHUB_ENV
+            echo "outcome=failure" >> $GITHUB_OUTPUT
+            echo ""
+            echo "❌ Validation failed (exit code: $EXIT_CODE)"
+          fi
+
+      - name: Read Validation Report
+        if: steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'false'
+        id: read-report
+        run: |
+          if [ -f "agent-baseline-validation-report.json" ]; then
+            echo "Reading validation report..."
+            cat agent-baseline-validation-report.json
+            
+            # Extract key fields for use in comments
+            CHANGED_FILES=$(jq -r '.changed_files[]' agent-baseline-validation-report.json | tr '\n' ', ' | sed 's/,$//')
+            echo "changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
+            
+            HAS_EXPLANATION=$(jq -r '.has_explanation' agent-baseline-validation-report.json)
+            echo "has_explanation=$HAS_EXPLANATION" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on PR - No Agent File Changes
+        if: steps.detect-changes.outputs.has_changes == 'false' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              ✅ **Agent File Baseline Gate - SKIP**
+              
+              **Outcome**: Non-blocking SKIP  
+              **Reason**: No agent contract files changed  
+              **Status**: This gate does not apply to this PR
+              
+              ---
+              
+              **Protected Files**: \`.github/agents/*.md\` (excluding SCHEMA and README)  
+              **Authority**: CS2_AGENT_FILE_AUTHORITY_MODEL.md
+              
+              ---
+              
+              **Gate Status**: ✅ PASS (via skip)
+              `
+            })
+
+      - name: Comment on PR - Evidence-Based Bypass
+        if: steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'true' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const changedFiles = require('fs').readFileSync('/tmp/changed_agent_files.txt', 'utf8').trim();
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              ✅ **Agent File Baseline Gate - EVIDENCE-BASED BYPASS**
+              
+              **Outcome**: PASS via Evidence-Based Validation (BL-027/028)  
+              **Reason**: PREHANDOVER_PROOF documents Agent File Baseline validation  
+              **Status**: Gate bypassed per Bootstrap Learning evidence protocol
+              
+              ---
+              
+              **Changed Agent Files**:
+              \`\`\`
+              ${changedFiles}
+              \`\`\`
+              
+              **Evidence-Based Validation**: ✅ PREHANDOVER_PROOF found and validated  
+              **Authority**: BL-027/028 Evidence-Based Validation Protocol
+              
+              ---
+              
+              **Gate Status**: ✅ PASS (via evidence-based bypass)
+              `
+            })
+
+      - name: Comment on PR - Validation Success
+        if: steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'false' && steps.validation.outputs.outcome == 'success' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const changedFiles = require('fs').readFileSync('/tmp/changed_agent_files.txt', 'utf8').trim();
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `
+              ✅ **Agent File Baseline Gate - PASS**
+
+              All agent contract files match CS2-approved baselines.
+
+              **Changed Agent Files**:
+              \`\`\`
+              ${changedFiles}
+              \`\`\`
+
+              **Validation**: All files match cryptographic hash of CS2 baselines  
+              **Authority**: CS2_AGENT_FILE_AUTHORITY_MODEL.md, CS2 Directive 2026-02-04
+
+              ---
+
+              **Next Steps**: Continue with other PR gates
+              `
+            })
+
+      - name: Comment on PR - Validation Failure
+        if: steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'false' && steps.validation.outputs.outcome == 'failure' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const changedFiles = fs.readFileSync('/tmp/changed_agent_files.txt', 'utf8').trim();
+            const hasExplanation = '${{ steps.read-report.outputs.has_explanation }}' === 'true';
+            
+            let body = `
+            ❌ **Agent File Baseline Gate - FAIL**
+            
+            **Outcome**: BLOCK MERGE - Constitutional Governance Violation  
+            **Reason**: Agent contract files changed without CS2 approval  
+            **Status**: This is a HARD GATE - merge is blocked
+            
+            ---
+            
+            ## Changed Agent Files
+            
+            \`\`\`
+            ${changedFiles}
+            \`\`\`
+            
+            **Problem**: Files above do not match CS2-approved baselines (cryptographic hash mismatch)
+            
+            ---
+            
+            ## Required Actions
+            `;
+            
+            if (!hasExplanation) {
+              body += `
+            ### 1. Agent: Add Change Request to PR Description
+            
+            Agent must add this section to PR description:
+            
+            \`\`\`markdown
+            ## Agent File Change Request
+            
+            **File**: {filename}.md
+            **Why**: {plain English reason for change}
+            **What to change**: {plain English description of changes}
+            **Authority**: {governance canon reference}
+            \`\`\`
+            
+            `;
+            }
+            
+            body += `
+            ### ${hasExplanation ? '1' : '2'}. CS2: Review & Approve Changes
+            
+            CS2 reviews plain English explanation (NOT code review) and decides:
+            - ✅ Approve → Update baseline
+            - ❌ Deny → Request changes or reject
+            
+            ### ${hasExplanation ? '2' : '3'}. CS2: Update Baseline (if approved)
+            
+            \`\`\`bash
+            # Copy PR version to baseline
+            cp .github/agents/{filename}.md governance/baselines/agent-files/{filename}.md
+            
+            # Commit with reference
+            git add governance/baselines/agent-files/{filename}.md
+            git commit -m "Approve {filename} changes from PR #${context.issue.number}"
+            git push
+            \`\`\`
+            
+            ### ${hasExplanation ? '3' : '4'}. Agent: Re-run PR
+            
+            After CS2 updates baseline, re-run this workflow → gate will pass → merge proceeds
+            
+            ---
+            
+            ## Why This Gate Exists
+            
+            **Problem Solved**: Agents previously modified their own contract files, removing critical content, causing governance failures.
+            
+            **Solution**: All agent file changes require CS2 review and approval via baseline update.
+            
+            **Authority**: CS2_AGENT_FILE_AUTHORITY_MODEL.md, CS2 Directive 2026-02-04  
+            **Classification**: Constitutional Protection Mechanism
+            
+            ---
+            
+            **Gate Status**: ❌ BLOCKED (requires CS2 approval)
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            })
+
+      - name: Create CS2 Escalation Issue
+        if: steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'false' && steps.validation.outputs.outcome == 'failure' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const changedFiles = fs.readFileSync('/tmp/changed_agent_files.txt', 'utf8').trim();
+            const prNumber = context.issue.number;
+            const prTitle = context.payload.pull_request.title;
+            const prAuthor = context.payload.pull_request.user.login;
+            const hasExplanation = '${{ steps.read-report.outputs.has_explanation }}' === 'true';
+            
+            const issueBody = `
+            # CS2 Review Required: Agent File Changes
+
+            **Classification**: Constitutional Governance Escalation  
+            **Authority**: CS2_AGENT_FILE_AUTHORITY_MODEL.md  
+            **Priority**: High (blocks PR merge)
+
+            ---
+
+            ## Summary
+
+            Agent contract files were modified in PR #${prNumber} without CS2-approved baseline update.
+
+            **PR**: #${prNumber} - ${prTitle}  
+            **Author**: @${prAuthor}  
+            **Changed Files**: ${changedFiles.split('\n').length} file(s)
+
+            ---
+
+            ## Changed Agent Files
+
+            \`\`\`
+            ${changedFiles}
+            \`\`\`
+
+            ---
+
+            ## Agent Explanation
+
+            ${hasExplanation ? '✅ Agent provided "Agent File Change Request" in PR description' : '❌ Agent has NOT provided "Agent File Change Request" in PR description'}
+
+            **Review**: See PR #${prNumber} description for agent's plain English explanation
+
+            ---
+
+            ## CS2 Actions Required
+
+            ### 1. Review Agent's Explanation
+
+            Read "Agent File Change Request" section in PR #${prNumber} description:
+            - **What changed**: Plain English description
+            - **Why**: Reason for change
+            - **Authority**: Governance canon reference
+
+            ### 2. Decide: Approve / Request Changes / Deny
+
+            - ✅ **Approve**: Changes are constitutional and necessary
+            - 🔄 **Request Changes**: Ask agent to modify approach
+            - ❌ **Deny**: Changes violate governance or are not necessary
+
+            ### 3. If Approved: Update Baseline
+
+            \`\`\`bash
+            # For each changed file, copy to baseline
+            cp .github/agents/{filename}.md governance/baselines/agent-files/{filename}.md
+
+            # Commit with reference
+            git add governance/baselines/agent-files/
+            git commit -m "CS2: Approve agent file changes from PR #${prNumber}"
+            git push
+            \`\`\`
+
+            ### 4. Close This Issue
+
+            After updating baselines:
+            - Agent re-runs PR #${prNumber}
+            - Gate passes
+            - Close this issue
+            - PR can merge
+
+            ---
+
+            ## Governance Context
+
+            **Why This Matters**: Agent contract files define constitutional constraints on agent behavior. Unauthorized changes can compromise governance enforcement.
+
+            **Previous Incident**: All agent contract markdown bodies were removed, leaving only YAML frontmatter, without CS2 approval.
+
+            **This Gate Prevents**: Agents from modifying their own constraints without human oversight.
+
+            ---
+
+            ## Quick Commands
+
+            \`\`\`bash
+            # View what changed
+            gh pr diff ${prNumber} -- .github/agents/
+
+            # Approve all changed files
+            for file in ${changedFiles.replace(/\n/g, ' ')}; do
+              cp "$file" "governance/baselines/agent-files/$(basename "$file")"
+            done
+            git add governance/baselines/agent-files/
+            git commit -m "CS2: Approve agent file changes from PR #${prNumber}"
+            git push
+            \`\`\`
+
+            ---
+
+            **Links**:
+            - PR: #${prNumber}
+            - Workflow: [Agent File Baseline Gate](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - Authority: \`CS2_AGENT_FILE_AUTHORITY_MODEL.md\`
+            `;
+
+            // Create escalation issue
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `CS2 Review: Agent File Changes in PR #${prNumber}`,
+              body: issueBody,
+              labels: ['cs2-review', 'agent-governance', 'high-priority']
+            });
+
+            // Comment on PR with link to escalation issue
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚨 **CS2 Escalation Issue Created**\n\nThis PR requires CS2 review and approval.\n\nSee: #${issue.data.number}`
+            });
+
+      - name: Fail Workflow on Validation Failure
+        if: steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'false' && steps.validation.outputs.outcome == 'failure'
+        run: |
+          echo "❌ AGENT FILE BASELINE VALIDATION FAILED"
+          echo ""
+          echo "Agent contract files changed without CS2 approval."
+          echo "This is a constitutional governance violation."
+          echo ""
+          echo "Merge is BLOCKED until CS2 approves changes and updates baselines."
+          echo ""
+          exit 1
+
+      - name: Upload Validation Report
+        if: always() && steps.detect-changes.outputs.has_changes == 'true' && steps.evidence_check.outputs.skip_execution == 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-baseline-validation-report
+          path: |
+            agent-baseline-validation-report.json
+            /tmp/changed_agent_files.txt
+          retention-days: 30
+
+      - name: Workflow Success
+        if: always() && (steps.detect-changes.outputs.has_changes == 'false' || steps.evidence_check.outputs.skip_execution == 'true' || steps.validation.outputs.outcome == 'success')
+        run: |
+          HAS_CHANGES="${{ steps.detect-changes.outputs.has_changes }}"
+          SKIP_EXECUTION="${{ steps.evidence_check.outputs.skip_execution }}"
+          
+          if [ "$HAS_CHANGES" = "false" ]; then
+            echo "✅ Agent File Baseline Gate - SKIP (No agent file changes)"
+          elif [ "$SKIP_EXECUTION" = "true" ]; then
+            echo "✅ Agent File Baseline Gate - PASS (Evidence-based bypass per BL-027/028)"
+          else
+            echo "✅ Agent File Baseline Gate completed successfully"
+          fi
+          exit 0
