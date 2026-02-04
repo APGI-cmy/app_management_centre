@@ -9,7 +9,9 @@
 # This script should be run ONCE by CS2 to establish initial baselines.
 # After this, all agent file changes require CS2 review and baseline update.
 
-set -e  # Exit on error
+# Note: Using set -e with explicit error handling
+# We disable it temporarily for some checks, then re-enable
+set -e
 
 echo "========================================"
 echo "Agent File Baseline Creation"
@@ -41,6 +43,8 @@ echo "Processing agent contract files..."
 echo ""
 
 # Process each agent file
+# Disable set -e temporarily for the loop to handle errors gracefully
+set +e
 for file in .github/agents/*.md; do
     # Check if file exists (in case glob doesn't match anything)
     if [ ! -f "$file" ]; then
@@ -59,9 +63,7 @@ for file in .github/agents/*.md; do
     fi
     
     # Copy to baseline directory
-    cp "$file" "$BASELINE_DIR/$filename"
-    
-    if [ $? -eq 0 ]; then
+    if cp "$file" "$BASELINE_DIR/$filename"; then
         echo "  ✅ Created baseline: $filename"
         CREATED_COUNT=$((CREATED_COUNT + 1))
     else
@@ -69,6 +71,7 @@ for file in .github/agents/*.md; do
         ERROR_COUNT=$((ERROR_COUNT + 1))
     fi
 done
+set -e  # Re-enable set -e
 
 echo ""
 echo "========================================"
