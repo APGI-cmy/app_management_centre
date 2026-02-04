@@ -1,0 +1,49 @@
+🔍 Validating LOCKED section format compliance...
+
+Checking CodexAdvisor-agent.md...
+  ❌ 10 error(s):
+     • CodexAdvisor-agent.md, Section 'Pre-Job Self-Governance' (line 110): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Agent File Authority' (line 221): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Agent File Creation & Modification Protocol' (line 258): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Zero-Warning Handover Enforcement' (line 293): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Pre-Handover Validation' (line 375): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Governance Repository Merge Gates' (line 439): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Gate Alignment Verification' (line 481): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Layer-Down & Ripple Protocol' (line 510): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Issue #999 - Cross-Repo Coordination' (line 568): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • CodexAdvisor-agent.md, Section 'Mandatory Improvement Capture' (line 620): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+Checking Foreman-app_FM.md...
+  ⚠️  1 warning(s):
+     • Foreman-app_FM.md: Found 6 old-style LOCKED section(s) without proper metadata. These should be updated to canonical format.
+Checking api-builder.md...
+  ✅ PASS
+Checking governance-liaison.md...
+  ❌ 12 error(s):
+     • governance-liaison.md: Mismatch between LOCKED SECTION START (11) and LOCKED END markers (10)
+     • governance-liaison.md, Section 'Pre-Job Self-Governance' (line 165): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Agent File Authority' (line 336): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Own Contract Modification' (line 387): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Agent File Creation & Modification Protocol' (line 403): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Pre-Handover Validation' (line 468): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Zero-Warning Handover Enforcement' (line 512): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Local Repo Merge Gates' (line 539): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Governance Layer-Down Protocol' (line 580): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Issue #999 - Self-Alignment Authority' (line 616): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Mandatory Improvement Capture' (line 677): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+     • governance-liaison.md, Section 'Canon Layer-Down Compliance Protocol' (line 710): Missing metadata fields: Lock Reason, Lock Authority, Lock Date, Last Reviewed, Review Frequency
+Checking integration-builder.md...
+  ✅ PASS
+Checking qa-builder.md...
+  ✅ PASS
+Checking schema-builder.md...
+  ✅ PASS
+Checking ui-builder.md...
+  ✅ PASS
+
+======================================================================
+VALIDATION SUMMARY
+======================================================================
+Total Errors:   22
+Total Warnings: 1
+Status:         ❌ FAIL
+======================================================================
