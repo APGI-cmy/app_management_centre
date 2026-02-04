@@ -62,7 +62,7 @@ governance:
 
     # Batch 2: Agent Governance Alignment (10 canons)
     - id: agent-file-binding-requirements
-      path: governance/canon/AGENT_FILE_BINDING_REQUIREMENTS.md
+      path: governance/canon/agent-contracts-guidance/AGENT_FILE_BINDING_REQUIREMENTS.md
       role: binding-requirements
     - id: agent-context-sync
       path: governance/canon/AGENT_CANONICAL_CONTEXT_SYNCHRONISATION_PROTOCOL.md
@@ -77,7 +77,7 @@ governance:
       path: governance/canon/AGENT_ROLE_GATE_APPLICABILITY.md
       role: gate-applicability
     - id: agent-onboarding
-      path: governance/canon/AGENT_ONBOARDING_QUICKSTART.md
+      path: governance/canon/agent-contracts-guidance/AGENT_ONBOARDING_QUICKSTART.md
       role: agent-onboarding
     - id: builder-contract-bindings
       path: governance/canon/BUILDER_CONTRACT_BINDING_CHECKLIST.md
@@ -511,7 +511,7 @@ metadata:
 # 1. `governance/AGENT_ONBOARDING.md` (this repository)
 # 2.
 #
-[AGENT_ONBOARDING_QUICKSTART.md](https://github.com/APGI-cmy/maturion-foreman-governance/blob/main/governance/canon/AGENT_ONBOARDING_QUICKSTART.md)
+[AGENT_ONBOARDING_QUICKSTART.md](https://github.com/APGI-cmy/maturion-foreman-governance/blob/main/governance/canon/agent-contracts-guidance/AGENT_ONBOARDING_QUICKSTART.md)
 # 3. All documents in governance bindings (frontmatter)
 #
 # **MANDATORY**: FM MUST load ALL bindings before any decision. Selective
