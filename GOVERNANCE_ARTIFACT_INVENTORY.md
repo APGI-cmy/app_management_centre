@@ -1,11 +1,12 @@
 # GOVERNANCE ARTIFACT INVENTORY
 
 **Repository**: APGI-cmy/maturion-foreman-office-app
-**Last Updated**: 2026-01-27T07:00:00Z
-**Batch**: 10 (Templates, Watchdog & Remaining Alignment) - **COMPLETE** 🎉
-**Latest Ripple**: STOP_AND_FIX_DOCTRINE.md v2.0.0 (2026-01-27) - Ban on excuse-based test dodging
+**Last Updated**: 2026-02-04T13:02:00Z
+**Batch**: 11 (Agent Contract Guidance Centralization) - **COMPLETE** 🎉
+**Latest Ripple**: Agent Contract Guidance Centralization (2026-02-04) - Centralized agent contract policies, schemas, templates, and runbooks
+**Previous Ripple**: STOP_AND_FIX_DOCTRINE.md v2.0.0 (2026-01-27) - Ban on excuse-based test dodging
 **Emergency Update**: YAML_VALIDATION_PROTOCOL.md (2026-01-27) - Catastrophic failure prevention
-**Total Canons**: 104 (92 + 12 Batch 10)
+**Total Canons**: 115 (104 + 11 Batch 11)
 **Canonical Source**: APGI-cmy/maturion-foreman-governance
 **Alignment Status**: ✅ **100% COMPLETE** - All canonical governance layered down
 
@@ -26,8 +27,9 @@ This inventory documents all governance canon files layered down from the canoni
 - **Batch 7**: 10 canons (Versioning & Ripple Intelligence Alignment) ✅
 - **Batch 8**: 10 canons (Repository Initialization & Requirements Alignment) ✅
 - **Batch 9**: 10 canons (Activation, Domain & Execution Alignment) ✅
-- **Batch 10**: 12 canons (Templates, Watchdog & Remaining) ✅ **COMPLETE** 🎉
-- **Total**: 104 canons ✅ **100% GOVERNANCE ALIGNMENT ACHIEVED**
+- **Batch 10**: 12 canons (Templates, Watchdog & Remaining) ✅
+- **Batch 11**: 11 canons (Agent Contract Guidance Centralization) ✅ **NEW**
+- **Total**: 115 canons ✅ **100% GOVERNANCE ALIGNMENT ACHIEVED**
 
 ---
 
@@ -240,9 +242,38 @@ This inventory documents all governance canon files layered down from the canoni
 
 ---
 
+## Batch 11: Agent Contract Guidance Centralization (11 canons) - **COMPLETE** 🎉
+
+| Canon File | Status | Last Updated | Location |
+|------------|--------|--------------|----------|
+| agent-contracts-guidance/README.md | ✅ Present | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/ |
+| agent-contracts-guidance/.agent.schema.md | ✅ Relocated | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/ |
+| agent-contracts-guidance/AGENT_FILE_CREATION_POLICY.md | ✅ Present | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/ |
+| agent-contracts-guidance/AGENT_FILE_BINDING_REQUIREMENTS.md | ✅ Relocated | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/ |
+| agent-contracts-guidance/AGENT_CONTRACT_MIGRATION_GUIDE.md | ✅ Relocated | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/ |
+| agent-contracts-guidance/AGENT_ONBOARDING_QUICKSTART.md | ✅ Relocated | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/ |
+| agent-contracts-guidance/templates/AGENT_CONTRACT.template.md | ✅ Present | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/templates/ |
+| agent-contracts-guidance/templates/AGENT_FILE_LOCKED_SECTIONS_TEMPLATE.md | ✅ Present | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/templates/ |
+| agent-contracts-guidance/runbooks/AGENT_FILE_VALIDATION.md | ✅ Present | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/runbooks/ |
+| agent-contracts-guidance/runbooks/AGENT_FILE_MAINTENANCE.md | ✅ Present | 2026-02-04 (Batch 11) | governance/canon/agent-contracts-guidance/runbooks/ |
+
+**Batch 11 Summary**:
+- **Source**: maturion-foreman-governance PR #1027
+- **Purpose**: Centralize all agent contract guidance into single authoritative location
+- **Structure**: Created `governance/canon/agent-contracts-guidance/` folder with 3 subdirectories
+- **Core Guidance** (6 files): README, schema, creation policy, binding requirements, migration guide, onboarding quickstart
+- **Templates** (2 files): Agent contract template, LOCKED sections template  
+- **Runbooks** (2 files): File validation, file maintenance
+- **Impact**: Single atomic location for all agent contract policies enables consistent ripple and enforcement
+- **Note**: Files previously scattered in `governance/canon/` are now centralized; old locations remain for backward compatibility during transition
+
+**Significance**: Eliminates scattered agent contract guidance, enables atomic cross-repository ripple, simplifies maintenance and discovery. All agent contract policies, schemas, templates, and runbooks now in one authoritative location.
+
+---
+
 ## Total Canon Count
 
-**Total Canons**: 104 files ✅ **100% COMPLETE**
+**Total Canons**: 115 files ✅ **100% COMPLETE**
 
 - Batch 1: 10 canons ✅
 - Batch 2: 10 canons ✅
@@ -254,9 +285,10 @@ This inventory documents all governance canon files layered down from the canoni
 - Batch 7: 10 canons ✅
 - Batch 8: 10 canons ✅
 - Batch 9: 10 canons ✅
-- Batch 10: 12 canons ✅ **FINAL BATCH**
+- Batch 10: 12 canons ✅
+- Batch 11: 11 canons ✅ **NEW - Agent Contract Guidance Centralization**
 
-**Progress**: 104/104 canons (100%) ✅ **GOVERNANCE ALIGNMENT COMPLETE**
+**Progress**: 115/115 canons (100%) ✅ **GOVERNANCE ALIGNMENT COMPLETE**
 **Remaining**: 0 canons 🎉
 
 ---
@@ -349,14 +381,14 @@ This inventory documents all governance canon files layered down from the canoni
 
 ## Governance Ripple Status
 
-**Last Ripple**: Batch 10 (2026-01-27) - **FINAL BATCH** 🎉
-**Source**: APGI-cmy/maturion-foreman-governance
+**Last Ripple**: Batch 11 (2026-02-04) - **Agent Contract Guidance Centralization** 🎉
+**Source**: APGI-cmy/maturion-foreman-governance (PR #1027)
 **Direction**: Canonical → Consumer (this repo)
 **Method**: governance-liaison layer-down
-**Files Layered Down**: 12 templates, watchdog, and remaining governance canons. Includes watchdog authority and cognitive observation protocol, agent contract schema and migration guide, responsibility domain templates and registry, effectiveness/failure/scope templates, Maturion conceptual doctrine classification, and enforcement design notes. Completes 100% governance alignment for office-app.
+**Files Layered Down**: 11 agent contract guidance files centralized into `governance/canon/agent-contracts-guidance/` with 3 subdirectories (core guidance, templates, runbooks). Includes schema, creation policy, binding requirements, migration guide, onboarding quickstart, contract templates, LOCKED sections template, validation and maintenance runbooks. Eliminates scattered guidance and enables atomic cross-repository ripple.
 
-**Previous Ripple**: Batch 9 (2026-01-26)
-**Files from Batch 9**: 10 activation, domain, and execution governance canons. Includes EXECUTION_BOOTSTRAP_PROTOCOL.md v1.1.0, CONSTITUTIONAL_SANDBOX_PATTERN.md (BL-024), domain evolution governance, vision alignment model, and FPC layer-down guide.
+**Previous Ripple**: Batch 10 (2026-01-27)
+**Files from Batch 10**: 12 templates, watchdog, and remaining governance canons. Includes watchdog authority and cognitive observation protocol, agent contract schema and migration guide, responsibility domain templates and registry, effectiveness/failure/scope templates, Maturion conceptual doctrine classification, and enforcement design notes.
 
 **Alignment Status**: ✅ **100% COMPLETE** - All canonical governance layered down
 

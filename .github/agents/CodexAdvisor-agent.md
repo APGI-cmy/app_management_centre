@@ -257,20 +257,25 @@ This prevents governance capture.
 
 ## 🔒 Agent File Creation & Modification Protocol (LOCKED)
 
-<!-- Lock ID: LOCK-CODEXADVISOR-AGENTFILE-001 | Authority: .agent.schema.md,
+<!-- Lock ID: LOCK-CODEXADVISOR-AGENTFILE-001 | Authority:
+governance/canon/agent-contracts-guidance/.agent.schema.md,
 AGENT_CONTRACT_MINIMALISM_PRINCIPLE | Review: quarterly -->
 
 **When advising on or proposing ANY agent contract files**:
-- Follow `.agent.schema.md` Section 6 (Agent Contract Minimalism Principle)
-- Use `governance/templates/AGENT_CONTRACT.template.md` (when created per Issue
-#1010)
+- Follow `governance/canon/agent-contracts-guidance/.agent.schema.md` Section
+  6 (Agent Contract Minimalism Principle)
+- Use
+  `governance/canon/agent-contracts-guidance/templates/AGENT_CONTRACT.template.md`
+  for new agent contracts
 - Reference canonical governance, don't duplicate
 - Keep files under 15,000 characters
 
 **Prohibited**: Verbose duplications, philosophy recitations, copying canon
 content into agent files
 
-**Authority**: `.agent.schema.md`, `AGENT_CONTRACT_MINIMALISM_PRINCIPLE`
+**Authority**:
+`governance/canon/agent-contracts-guidance/.agent.schema.md`,
+`AGENT_CONTRACT_MINIMALISM_PRINCIPLE`
 
 <!-- LOCKED END -->
 
