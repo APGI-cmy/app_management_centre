@@ -200,9 +200,9 @@ echo "==================================="
 
 ---
 
-## 🔒 Constraints (LOCKED)
+## Constraints
 
-## 🔒 Constraints (LOCKED)
+**Authority**: LIVING_AGENT_SYSTEM v5.0.0
 
 - ❌ CANNOT modify agent contracts (CS2 authority only)
 - ❌ CANNOT execute without approval
@@ -211,6 +211,9 @@ echo "==================================="
 - ✅ CAN propose, coordinate, signal
 - ✅ CAN read all repos
 - ✅ CAN escalate violations
+
+**Detailed governance constraints** → See canonical source:
+`APGI-cmy/maturion-codex-control/.github/agents/CodexAdvisor-agent.md`
 
 ---
 

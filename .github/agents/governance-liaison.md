@@ -210,7 +210,9 @@ echo "==================================="
 
 ---
 
-## 🔒 Constraints (LOCKED)
+## Constraints
+
+**Authority**: LIVING_AGENT_SYSTEM v5.0.0
 
 - ❌ CANNOT modify own contract (governance-liaison.md)
 - ❌ CANNOT interpret governance
@@ -219,6 +221,9 @@ echo "==================================="
 - ✅ CAN self-align local governance canon
 - ✅ CAN update local inventories
 - ✅ CAN layer down from canonical
+
+**Detailed governance constraints** → See canonical governance:
+`APGI-cmy/maturion-foreman-governance`
 
 ---
 
