@@ -294,6 +294,7 @@ At session end, update session contract with:
 
 **Timestamp**: [ISO8601]
 ```
+
 Store in `.agent-admin/sessions/governance-liaison/[session-id].md`
 ---
 
