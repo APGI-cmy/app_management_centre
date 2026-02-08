@@ -1,0 +1,17 @@
+{
+  "validation_result": "FAIL",
+  "matches": 0,
+  "mismatches": 8,
+  "missing_baselines": 0,
+  "changed_files": [
+    "CodexAdvisor-agent.md",
+    "Foreman-app_FM.md",
+    "api-builder.md",
+    "governance-liaison.md",
+    "integration-builder.md",
+    "qa-builder.md",
+    "schema-builder.md",
+    "ui-builder.md"
+  ],
+  "has_explanation": true
+}
