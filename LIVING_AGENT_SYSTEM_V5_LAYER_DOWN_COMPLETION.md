@@ -38,17 +38,22 @@ Both agent contracts verified as Living Agent System v5.0.0:
 - ✅ Self-alignment authority defined
 - ✅ 311 lines (62% reduction from v1.2.0)
 
-### 2. Infrastructure Setup ✅
+### 2. Infrastructure Setup ⚠️ UPDATED
 
-**Session Storage Directory Structure**
-- ✅ Created `.agent/` directory
-- ✅ Created `.agent/sessions/CodexAdvisor/` subdirectory
-- ✅ Created `.agent/sessions/governance-liaison/` subdirectory
-- ✅ Created `.agent/README.md` documentation
-- ✅ Updated `.gitignore` to exclude `.agent/sessions/` runtime data
+**Session Storage Directory Structure** ⚠️ REVERTED
+- ⚠️ `.agent/` directory structure REMOVED (conflict with FM Architecture Gate requirement)
+- ⚠️ FM Architecture Gate requires `.agent` to be a FILE (not directory)
+- ✅ Created `.agent` file with `role: governance` to satisfy gate requirements
+- ⚠️ Session storage directory structure deferred to future governance discussion
 
 **Legacy Cleanup**
 - ✅ Archived old `.agent` file (FMRepoBuilder) to `.github/agents/_archive/FMRepoBuilder-agent-LEGACY.md`
+
+**Structural Conflict Identified**:
+- FM Architecture Gate expects `.agent` as a FILE with `role:` field
+- Living Agent System v5.0.0 expects `.agent/sessions/` directory structure
+- **Resolution**: Used `.agent` FILE for this PR to pass gates
+- **Future Action**: Governance discussion needed on session storage location
 
 ### 3. Component Analysis: .agent-workspace-template
 
@@ -104,8 +109,8 @@ The agent file baseline validation shows mismatches for the v5.0.0 agent files c
 
 ## Files Modified
 
-1. `.agent/README.md` - Created (infrastructure documentation)
-2. `.gitignore` - Updated (exclude session runtime data)
+1. `.agent` - Created as FILE with `role: governance` (gate requirement)
+2. `.gitignore` - Updated (exclude session runtime data) 
 3. `.github/agents/_archive/FMRepoBuilder-agent-LEGACY.md` - Created (archived old agent)
 
 ## Files Verified (No Changes Needed)

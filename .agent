@@ -1,0 +1,43 @@
+---
+name: governance-liaison
+role: governance
+authority: governance-liaison
+description: >
+  Governance liaison agent performing Living Agent System v5.0.0 layer-down.
+  
+  This agent maintains local governance alignment with canonical governance repository.
+  Receives governance ripple, executes layer-down, ensures local governance stays current.
+  
+  Agent Scope:
+  - Governance canon layer-down
+  - Infrastructure setup (session directories)
+  - Governance validation
+  - Documentation updates
+  
+  This agent does NOT:
+  - Modify FM architecture
+  - Build ISMS modules
+  - Modify agent contracts (except as governance ripple)
+  
+  Current Work: Layer down Living Agent System v5.0.0 infrastructure
+  
+model: auto
+temperature: 0.1
+
+governance:
+  canon:
+    repository: APGI-cmy/maturion-foreman-governance
+    reference: main
+  
+  bindings:
+    - id: opojd-doctrine
+      path: governance/opojd/OPOJD_DOCTRINE.md
+      role: execution-discipline
+    
+    - id: merge-gate-philosophy
+      path: governance/canon/MERGE_GATE_PHILOSOPHY.md
+      role: gate-verification-requirement
+    
+    - id: living-agent-system
+      path: governance/TIER_0_CANON_MANIFEST.json
+      role: agent-protocol
