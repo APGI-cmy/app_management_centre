@@ -69,9 +69,9 @@
 
 **Agent-Specific Session Directories**:
 - ✅ `.agent-admin/sessions/governance-liaison/` (active)
-- ℹ️ `.agent/sessions/CodexAdvisor/` (referenced in wake-up protocol)
+- ✅ `.agent-admin/sessions/CodexAdvisor/` (referenced in wake-up protocol, corrected in this commit)
 
-**Note**: Session directories use `.agent-admin/` to avoid conflict with `.agent` file (FM Architecture Gate requirement).
+**Note**: Session directories use `.agent-admin/` to avoid conflict with `.agent` file (FM Architecture Gate requirement). Both agent contracts updated to reference correct storage location.
 
 ### 4. Wake-Up Protocol Integration ✅
 
