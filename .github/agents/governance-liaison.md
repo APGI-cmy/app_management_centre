@@ -296,7 +296,6 @@ At session end, update session contract with:
 ```
 
 Store in `.agent-admin/sessions/governance-liaison/[session-id].md`
-
 ---
 
 ## Authority References

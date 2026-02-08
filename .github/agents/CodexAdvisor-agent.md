@@ -242,7 +242,6 @@ At session end, update session contract with:
 ```
 
 Store in `.agent-admin/sessions/CodexAdvisor/[session-id].md`
-
 ---
 
 ## Authority References
