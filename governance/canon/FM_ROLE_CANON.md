@@ -96,13 +96,13 @@
   <meta name="route-pattern" content="/:user_id/:repository/raw/*name(/*path)" data-turbo-transient>
   <meta name="route-controller" content="blob" data-turbo-transient>
   <meta name="route-action" content="raw" data-turbo-transient>
-  <meta name="fetch-nonce" content="v2:9940296d-5ee4-8e78-f509-53e520939c17">
+  <meta name="fetch-nonce" content="v2:3ef608a5-4830-bec1-0203-b4e6b77ff23b">
 
     
   <meta name="current-catalog-service-hash" content="f3abb0cc802f3d7b95fc8762b94bdcb13bf39634c40c357301c4aa1d67a256fb">
 
 
-  <meta name="request-id" content="A400:236A6A:7F39715:A3D985E:698999C5" data-turbo-transient="true" /><meta name="html-safe-nonce" content="0112907f934ea3f9b1e9e8fdad6ffcbe3eda4218ee37fb364a5d3dcc62b90409" data-turbo-transient="true" /><meta name="visitor-payload" content="eyJyZWZlcnJlciI6bnVsbCwicmVxdWVzdF9pZCI6IkE0MDA6MjM2QTZBOjdGMzk3MTU6QTNEOTg1RTo2OTg5OTlDNSIsInZpc2l0b3JfaWQiOiI0MTUzODY4NTI5NjUxMjU5ODQ1IiwicmVnaW9uX2VkZ2UiOiJpYWQiLCJyZWdpb25fcmVuZGVyIjoiaWFkIn0=" data-turbo-transient="true" /><meta name="visitor-hmac" content="eda21301bc3f6093d3f7fd4bb4ebce02959188e17a5090842a8c30ffa7f67bd3" data-turbo-transient="true" />
+  <meta name="request-id" content="A401:2F68AF:7B0751C:9EA70FF:698999F2" data-turbo-transient="true" /><meta name="html-safe-nonce" content="8f799823895c02cfea1c60774f9a717e7ad1203e8eda130ff18bf29d4de10e39" data-turbo-transient="true" /><meta name="visitor-payload" content="eyJyZWZlcnJlciI6bnVsbCwicmVxdWVzdF9pZCI6IkE0MDE6MkY2OEFGOjdCMDc1MUM6OUVBNzBGRjo2OTg5OTlGMiIsInZpc2l0b3JfaWQiOiIxODU4MTU5ODA4MDYwODUxMDYiLCJyZWdpb25fZWRnZSI6ImlhZCIsInJlZ2lvbl9yZW5kZXIiOiJpYWQifQ==" data-turbo-transient="true" /><meta name="visitor-hmac" content="cd172d08b8c4ae1a458455776d773e0ff901c07d9789d748af6ae12388048fc9" data-turbo-transient="true" />
 
 
     <meta name="hovercard-subject-tag" content="repository:1109729142" data-turbo-transient>
@@ -111,7 +111,7 @@
   <meta name="github-keyboard-shortcuts" content="copilot" data-turbo-transient="true" />
   
 
-  <meta name="selected-link" value="/APGI-cmy/maturion-foreman-governance/raw/main/governance/TIER_0_CANON_MANIFEST.json" data-turbo-transient>
+  <meta name="selected-link" value="/APGI-cmy/maturion-foreman-governance/raw/main/governance/canon/FM_ROLE_CANON.md" data-turbo-transient>
   <link rel="assets" href="https://github.githubassets.com/">
 
     <meta name="google-site-verification" content="Apib7-x98H0j5cPqHWwSMm6dNU4GmODRoqxLiDzdx9I">
@@ -139,7 +139,7 @@
 
     <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
     <meta property="fb:app_id" content="1401488693436528">
-    <meta name="apple-itunes-app" content="app-id=1477376905, app-argument=https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/TIER_0_CANON_MANIFEST.json" />
+    <meta name="apple-itunes-app" content="app-id=1477376905, app-argument=https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/canon/FM_ROLE_CANON.md" />
 
       <meta property="og:url" content="https://github.com">
   <meta property="og:site_name" content="GitHub">
@@ -196,7 +196,7 @@
 
 
 
-      <link rel="canonical" href="https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/TIER_0_CANON_MANIFEST.json" data-turbo-transient>
+      <link rel="canonical" href="https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/canon/FM_ROLE_CANON.md" data-turbo-transient>
 
 
     <meta name="turbo-body-classes" content="logged-out env-production page-responsive min-height-full d-flex flex-column">
@@ -298,19 +298,19 @@
 
       <div class="d-flex flex-1 flex-order-2 text-right d-lg-none gap-2 flex-justify-end">
           <a
-            href="/login?return_to=https%3A%2F%2Fgithub.com%2FAPGI-cmy%2Fmaturion-foreman-governance%2Fraw%2Fmain%2Fgovernance%2FTIER_0_CANON_MANIFEST.json"
+            href="/login?return_to=https%3A%2F%2Fgithub.com%2FAPGI-cmy%2Fmaturion-foreman-governance%2Fraw%2Fmain%2Fgovernance%2Fcanon%2FFM_ROLE_CANON.md"
             class="HeaderMenu-link HeaderMenu-button d-inline-flex f5 no-underline border color-border-default rounded-2 px-2 py-1 color-fg-inherit js-prevent-focus-on-mobile-nav"
-            data-hydro-click="{&quot;event_type&quot;:&quot;authentication.click&quot;,&quot;payload&quot;:{&quot;location_in_page&quot;:&quot;site header menu&quot;,&quot;repository_id&quot;:null,&quot;auth_type&quot;:&quot;SIGN_UP&quot;,&quot;originating_url&quot;:&quot;https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/TIER_0_CANON_MANIFEST.json&quot;,&quot;user_id&quot;:null}}" data-hydro-click-hmac="63ec831441e8650394fc413bfe29640277da34d6a47ed329aa0862ab574d8825"
+            data-hydro-click="{&quot;event_type&quot;:&quot;authentication.click&quot;,&quot;payload&quot;:{&quot;location_in_page&quot;:&quot;site header menu&quot;,&quot;repository_id&quot;:null,&quot;auth_type&quot;:&quot;SIGN_UP&quot;,&quot;originating_url&quot;:&quot;https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/canon/FM_ROLE_CANON.md&quot;,&quot;user_id&quot;:null}}" data-hydro-click-hmac="dfc3ab1c73f682f41bf4f8e03b717b19def871678adef49ac00859b658b96704"
             data-analytics-event="{&quot;category&quot;:&quot;Marketing nav&quot;,&quot;action&quot;:&quot;click to Sign in&quot;,&quot;label&quot;:&quot;ref_page:Marketing;ref_cta:Sign in;ref_loc:Header&quot;}"
           >
             Sign in
           </a>
               <div class="AppHeader-appearanceSettings">
     <react-partial-anchor>
-      <button data-target="react-partial-anchor.anchor" id="icon-button-fa077355-a092-4100-96d3-90555bdb2315" aria-labelledby="tooltip-f93290bb-095a-42c4-9119-df4140dc893e" type="button" disabled="disabled" data-view-component="true" class="Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border cursor-wait">  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-sliders Button-visual">
+      <button data-target="react-partial-anchor.anchor" id="icon-button-bca4e8ea-c988-4990-b0a6-5b5d8e9de77b" aria-labelledby="tooltip-ad938ab8-7de3-4228-b018-32aacc5ca50e" type="button" disabled="disabled" data-view-component="true" class="Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border cursor-wait">  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-sliders Button-visual">
     <path d="M15 2.75a.75.75 0 0 1-.75.75h-4a.75.75 0 0 1 0-1.5h4a.75.75 0 0 1 .75.75Zm-8.5.75v1.25a.75.75 0 0 0 1.5 0v-4a.75.75 0 0 0-1.5 0V2H1.75a.75.75 0 0 0 0 1.5H6.5Zm1.25 5.25a.75.75 0 0 0 0-1.5h-6a.75.75 0 0 0 0 1.5h6ZM15 8a.75.75 0 0 1-.75.75H11.5V10a.75.75 0 1 1-1.5 0V6a.75.75 0 0 1 1.5 0v1.25h2.75A.75.75 0 0 1 15 8Zm-9 5.25v-2a.75.75 0 0 0-1.5 0v1.25H1.75a.75.75 0 0 0 0 1.5H4.5v1.25a.75.75 0 0 0 1.5 0v-2Zm9 0a.75.75 0 0 1-.75.75h-6a.75.75 0 0 1 0-1.5h6a.75.75 0 0 1 .75.75Z"></path>
 </svg>
-</button><tool-tip id="tooltip-f93290bb-095a-42c4-9119-df4140dc893e" for="icon-button-fa077355-a092-4100-96d3-90555bdb2315" popover="manual" data-direction="s" data-type="label" data-view-component="true" class="sr-only position-absolute">Appearance settings</tool-tip>
+</button><tool-tip id="tooltip-ad938ab8-7de3-4228-b018-32aacc5ca50e" for="icon-button-bca4e8ea-c988-4990-b0a6-5b5d8e9de77b" popover="manual" data-direction="s" data-type="label" data-view-component="true" class="sr-only position-absolute">Appearance settings</tool-tip>
 
       <template data-target="react-partial-anchor.template">
         <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-react.2b2a53c0ee686cca.module.css" />
@@ -358,7 +358,7 @@
                 
 
 
-<qbsearch-input class="search-input" data-scope="owner:APGI-cmy" data-custom-scopes-path="/search/custom_scopes" data-delete-custom-scopes-csrf="_1qWMGTL8W1XdsbmGTMOZPO7iIc2mVu1_NUWB1cfFXKsjyIlH7pXP1hbrtnjexVgCHK_0Ax0okiULT00CEFbdQ" data-max-custom-scopes="10" data-header-redesign-enabled="false" data-initial-value="" data-blackbird-suggestions-path="/search/suggestions" data-jump-to-suggestions-path="/_graphql/GetSuggestedNavigationDestinations" data-current-repository="" data-current-org="" data-current-owner="" data-logged-in="false" data-copilot-chat-enabled="false" data-nl-search-enabled="false" data-retain-scroll-position="true">
+<qbsearch-input class="search-input" data-scope="owner:APGI-cmy" data-custom-scopes-path="/search/custom_scopes" data-delete-custom-scopes-csrf="qSWcSpsPhOeaaEHChB5XRHtDZ32R9Q1Ni2j2vpdHmJfkQbIZ34AxXJfxPviBUXi0xefnF6ItCYm259yqyfB0fQ" data-max-custom-scopes="10" data-header-redesign-enabled="false" data-initial-value="" data-blackbird-suggestions-path="/search/suggestions" data-jump-to-suggestions-path="/_graphql/GetSuggestedNavigationDestinations" data-current-repository="" data-current-org="" data-current-owner="" data-logged-in="false" data-copilot-chat-enabled="false" data-nl-search-enabled="false" data-retain-scroll-position="true">
   <div
     class="search-input-container search-with-dialog position-relative d-flex flex-row flex-items-center mr-4 rounded"
     data-action="click:qbsearch-input#searchInputContainerClicked"
@@ -422,7 +422,7 @@
           ></div>
           <div class="QueryBuilder-InputWrapper">
             <div aria-hidden="true" class="QueryBuilder-Sizer" data-target="query-builder.sizer"></div>
-            <input id="query-builder-test" name="query-builder-test" value="" autocomplete="off" type="text" role="combobox" spellcheck="false" aria-expanded="false" aria-describedby="validation-b9139e42-111e-4b1d-b1b5-9c01805200bb" data-target="query-builder.input" data-action="
+            <input id="query-builder-test" name="query-builder-test" value="" autocomplete="off" type="text" role="combobox" spellcheck="false" aria-expanded="false" aria-describedby="validation-e2d2c30e-9ef3-4870-8571-9e7120051c20" data-target="query-builder.input" data-action="
           input:query-builder#inputChange
           blur:query-builder#inputBlur
           keydown:query-builder#inputKeydown
@@ -661,7 +661,7 @@
             ></ul>
 
         </div>
-      <div class="FormControl-inlineValidation" id="validation-b9139e42-111e-4b1d-b1b5-9c01805200bb" hidden="hidden">
+      <div class="FormControl-inlineValidation" id="validation-e2d2c30e-9ef3-4870-8571-9e7120051c20" hidden="hidden">
         <span class="FormControl-inlineValidation--visual">
           <svg aria-hidden="true" height="12" viewBox="0 0 12 12" version="1.1" width="12" data-view-component="true" class="octicon octicon-alert-fill">
     <path d="M4.855.708c.5-.896 1.79-.896 2.29 0l4.675 8.351a1.312 1.312 0 0 1-1.146 1.954H1.33A1.313 1.313 0 0 1 .183 9.058ZM7 7V3H5v4Zm-1 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
@@ -702,7 +702,7 @@
   
 </div>
       <scrollable-region data-labelled-by="feedback-dialog-title">
-        <div data-view-component="true" class="Overlay-body">        <!-- '"` --><!-- </textarea></xmp> --></option></form><form id="code-search-feedback-form" data-turbo="false" action="/search/feedback" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="U7sk1oRT9mGekHk8lFZBkyf1B1evhGRjMTu_SFxU3Iwu6K-9aRTeSX6d-rLnRUhoGZX4og3vcoP4qfMw-r9DTQ" />
+        <div data-view-component="true" class="Overlay-body">        <!-- '"` --><!-- </textarea></xmp> --></option></form><form id="code-search-feedback-form" data-turbo="false" action="/search/feedback" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="8p_n2VHkBYftfyvA-sveZZphMLNI-WOhuh-zfxGLBuvT4vsLvflucxsvtZeMiaHtmW5P_CNWVoaiVXPXrrZvpQ" />
           <p>We read every piece of feedback, and take your input very seriously.</p>
           <textarea name="feedback" class="form-control width-full mb-2" style="height: 120px" id="feedback"></textarea>
           <input name="include_email" id="include_email" aria-label="Include my email address so I can be contacted" class="form-control mr-2" type="checkbox">
@@ -740,7 +740,7 @@
         <div data-view-component="true" class="Overlay-body">        <div data-target="custom-scopes.customScopesModalDialogFlash"></div>
 
         <div hidden class="create-custom-scope-form" data-target="custom-scopes.createCustomScopeForm">
-        <!-- '"` --><!-- </textarea></xmp> --></option></form><form id="custom-scopes-dialog-form" data-turbo="false" action="/search/custom_scopes" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="m4Gsv9Qvno5xNs8H95crgdK3EFbavVsU1EWnESa5DxBDrYlOCd1TLPtbeS2BdvLBivLrd9brtHQn8kYCp3Q2Gg" />
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form id="custom-scopes-dialog-form" data-turbo="false" action="/search/custom_scopes" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="k67U7wlrnXKs5wUPvTHJ-H8oLXz1vKGmLHbgRm4Xpu1anOkCS_n67hJdtI1wMb3Dv_pU8RHRQeMNgHhj7SnNyQ" />
           <div data-target="custom-scopes.customScopesModalDialogFlash"></div>
 
           <input type="hidden" id="custom_scope_id" name="custom_scope_id" data-target="custom-scopes.customScopesIdField">
@@ -758,7 +758,7 @@
                 placeholder="github-ruby"
                 required
                 maxlength="50">
-              <input type="hidden" value="kf_4jN0Qruh5mvWdEsXzdu-TyqkbwZBCffcs1BkFrqjPfd5fj1EiYtryk5IbheUkEnmqJqNStnFLqUls4S12bg" data-csrf="true" />
+              <input type="hidden" value="_k9uAVRYJAG2-sAu_KDe1mJvIc_KGALjgDiy9bzAujbUm2jtJedsr_zIg3VsOH-q2zhwFE16xNYPj7nHE3qSVQ" data-csrf="true" />
             </auto-check>
           </div>
 
@@ -800,10 +800,10 @@
 
             <div class="position-relative HeaderMenu-link-wrap d-lg-inline-block">
               <a
-                href="/login?return_to=https%3A%2F%2Fgithub.com%2FAPGI-cmy%2Fmaturion-foreman-governance%2Fraw%2Fmain%2Fgovernance%2FTIER_0_CANON_MANIFEST.json"
+                href="/login?return_to=https%3A%2F%2Fgithub.com%2FAPGI-cmy%2Fmaturion-foreman-governance%2Fraw%2Fmain%2Fgovernance%2Fcanon%2FFM_ROLE_CANON.md"
                 class="HeaderMenu-link HeaderMenu-link--sign-in HeaderMenu-button flex-shrink-0 no-underline d-none d-lg-inline-flex border border-lg-0 rounded px-2 py-1"
                 style="margin-left: 12px;"
-                data-hydro-click="{&quot;event_type&quot;:&quot;authentication.click&quot;,&quot;payload&quot;:{&quot;location_in_page&quot;:&quot;site header menu&quot;,&quot;repository_id&quot;:null,&quot;auth_type&quot;:&quot;SIGN_UP&quot;,&quot;originating_url&quot;:&quot;https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/TIER_0_CANON_MANIFEST.json&quot;,&quot;user_id&quot;:null}}" data-hydro-click-hmac="63ec831441e8650394fc413bfe29640277da34d6a47ed329aa0862ab574d8825"
+                data-hydro-click="{&quot;event_type&quot;:&quot;authentication.click&quot;,&quot;payload&quot;:{&quot;location_in_page&quot;:&quot;site header menu&quot;,&quot;repository_id&quot;:null,&quot;auth_type&quot;:&quot;SIGN_UP&quot;,&quot;originating_url&quot;:&quot;https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/canon/FM_ROLE_CANON.md&quot;,&quot;user_id&quot;:null}}" data-hydro-click-hmac="dfc3ab1c73f682f41bf4f8e03b717b19def871678adef49ac00859b658b96704"
                 data-analytics-event="{&quot;category&quot;:&quot;Marketing nav&quot;,&quot;action&quot;:&quot;click to go to homepage&quot;,&quot;label&quot;:&quot;ref_page:Marketing;ref_cta:Sign in;ref_loc:Header&quot;}"
               >
                 Sign in
@@ -813,7 +813,7 @@
     <h4 data-view-component="true" class="color-fg-default mb-2">                    Sign in to GitHub
 </h4>
                         
-<!-- '"` --><!-- </textarea></xmp> --></option></form><form data-turbo="false" action="/session" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="7y2DTnmERSS-fCFlU7K72Oy3Ac4FRd5ZHqfOO8HA7hLSuxWHDazZ1iMUca9c9lFGnfLvprijx_0C_m3e-n62pw" />  <input type="hidden" name="add_account" id="add_account" autocomplete="off" class="form-control" />
+<!-- '"` --><!-- </textarea></xmp> --></option></form><form data-turbo="false" action="/session" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="rmsXzXW1WTCGdfzSQwKgXWddV0dyb9nnjpS1Bhbm60xyNgWPh_DA4kZiu778cl1MzoiPPZpW8JYTkw6WRb5-ag" />  <input type="hidden" name="add_account" id="add_account" autocomplete="off" class="form-control" />
 
     <label for="login_field">
       Username or email address
@@ -831,17 +831,17 @@
 <input type="hidden" class="js-support" name="javascript-support" value="unknown">
 <input type="hidden" class="js-webauthn-support" name="webauthn-support" value="unknown">
 <input type="hidden" class="js-webauthn-iuvpaa-support" name="webauthn-iuvpaa-support" value="unknown">
-<input type="hidden" name="return_to" id="return_to" value="https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/TIER_0_CANON_MANIFEST.json" autocomplete="off" class="form-control" />
+<input type="hidden" name="return_to" id="return_to" value="https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/canon/FM_ROLE_CANON.md" autocomplete="off" class="form-control" />
 <input type="hidden" name="allow_signup" id="allow_signup" autocomplete="off" class="form-control" />
 <input type="hidden" name="client_id" id="client_id" autocomplete="off" class="form-control" />
 <input type="hidden" name="integration" id="integration" autocomplete="off" class="form-control" />
-<input type="text" name="required_field_6979" hidden="hidden" class="form-control" /><input type="hidden" name="timestamp" value="1770625477250" autocomplete="off" class="form-control" /><input type="hidden" name="timestamp_secret" value="b10eee61d4bad0143da494cc1df35fb7c94d40de74b4df6a3f854233afee712c" autocomplete="off" class="form-control" />
+<input type="text" name="required_field_10bf" hidden="hidden" class="form-control" /><input type="hidden" name="timestamp" value="1770625522593" autocomplete="off" class="form-control" /><input type="hidden" name="timestamp_secret" value="d49ba61a08cb19fa03c0c1accd99fe50f557c28add5e96f2fbdaaa3744ff344d" autocomplete="off" class="form-control" />
 
     <input type="submit" name="commit" value="Sign in" class="btn btn-primary btn-block js-sign-in-button" data-disable-with="Signing in…" data-signin-label="Sign in" data-sso-label="Sign in with your identity provider" development="false" disable-emu-sso="false" />
   </div>
 </form>  <webauthn-status class="js-webauthn-login-emu-control">
         <div data-target="webauthn-status.partial" class="d-flex flex-justify-between flex-column mt-3 mb-0" hidden>
-          <a href="/login?return_to=https%3A%2F%2Fgithub.com%2FAPGI-cmy%2Fmaturion-foreman-governance%2Fraw%2Fmain%2Fgovernance%2FTIER_0_CANON_MANIFEST.json" data-analytics-event="{&quot;category&quot;:&quot;passkey_404_login&quot;,&quot;action&quot;:&quot;clicked&quot;,&quot;label&quot;:null}" data-view-component="true" class="Button--link Button--medium Button">  <span class="Button-content">
+          <a href="/login?return_to=https%3A%2F%2Fgithub.com%2FAPGI-cmy%2Fmaturion-foreman-governance%2Fraw%2Fmain%2Fgovernance%2Fcanon%2FFM_ROLE_CANON.md" data-analytics-event="{&quot;category&quot;:&quot;passkey_404_login&quot;,&quot;action&quot;:&quot;clicked&quot;,&quot;label&quot;:null}" data-view-component="true" class="Button--link Button--medium Button">  <span class="Button-content">
     <span class="Button-label">or continue with other methods</span>
   </span>
 </a>
@@ -851,20 +851,20 @@
 
 </div></div>            </div>
 
-              <a href="/signup?ref_cta=Sign+up&amp;ref_loc=header+logged+out&amp;ref_page=%2FAPGI-cmy%2Fmaturion-foreman-governance%2Fraw%2Fmain%2Fgovernance%2FTIER_0_CANON_MANIFEST.json&amp;source=header"
+              <a href="/signup?ref_cta=Sign+up&amp;ref_loc=header+logged+out&amp;ref_page=%2FAPGI-cmy%2Fmaturion-foreman-governance%2Fraw%2Fmain%2Fgovernance%2Fcanon%2FFM_ROLE_CANON.md&amp;source=header"
                 class="HeaderMenu-link HeaderMenu-link--sign-up HeaderMenu-button flex-shrink-0 d-flex d-lg-inline-flex no-underline border color-border-default rounded px-2 py-1"
-                data-hydro-click="{&quot;event_type&quot;:&quot;authentication.click&quot;,&quot;payload&quot;:{&quot;location_in_page&quot;:&quot;site header menu&quot;,&quot;repository_id&quot;:null,&quot;auth_type&quot;:&quot;SIGN_UP&quot;,&quot;originating_url&quot;:&quot;https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/TIER_0_CANON_MANIFEST.json&quot;,&quot;user_id&quot;:null}}" data-hydro-click-hmac="63ec831441e8650394fc413bfe29640277da34d6a47ed329aa0862ab574d8825"
-                data-analytics-event="{&quot;category&quot;:&quot;Sign up&quot;,&quot;action&quot;:&quot;click to sign up for account&quot;,&quot;label&quot;:&quot;ref_page:/APGI-cmy/maturion-foreman-governance/raw/main/governance/TIER_0_CANON_MANIFEST.json;ref_cta:Sign up;ref_loc:header logged out&quot;}"
+                data-hydro-click="{&quot;event_type&quot;:&quot;authentication.click&quot;,&quot;payload&quot;:{&quot;location_in_page&quot;:&quot;site header menu&quot;,&quot;repository_id&quot;:null,&quot;auth_type&quot;:&quot;SIGN_UP&quot;,&quot;originating_url&quot;:&quot;https://github.com/APGI-cmy/maturion-foreman-governance/raw/main/governance/canon/FM_ROLE_CANON.md&quot;,&quot;user_id&quot;:null}}" data-hydro-click-hmac="dfc3ab1c73f682f41bf4f8e03b717b19def871678adef49ac00859b658b96704"
+                data-analytics-event="{&quot;category&quot;:&quot;Sign up&quot;,&quot;action&quot;:&quot;click to sign up for account&quot;,&quot;label&quot;:&quot;ref_page:/APGI-cmy/maturion-foreman-governance/raw/main/governance/canon/FM_ROLE_CANON.md;ref_cta:Sign up;ref_loc:header logged out&quot;}"
               >
                 Sign up
               </a>
 
                 <div class="AppHeader-appearanceSettings">
     <react-partial-anchor>
-      <button data-target="react-partial-anchor.anchor" id="icon-button-341766b5-169c-4235-a1e9-3a79b92dfc61" aria-labelledby="tooltip-5e861e54-4b44-476f-bd03-2fb64204f1e8" type="button" disabled="disabled" data-view-component="true" class="Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border cursor-wait">  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-sliders Button-visual">
+      <button data-target="react-partial-anchor.anchor" id="icon-button-42fb4b22-a4db-4984-8f87-a06e734b4407" aria-labelledby="tooltip-34cac115-21e8-4972-b65d-c25a121a254f" type="button" disabled="disabled" data-view-component="true" class="Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border cursor-wait">  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-sliders Button-visual">
     <path d="M15 2.75a.75.75 0 0 1-.75.75h-4a.75.75 0 0 1 0-1.5h4a.75.75 0 0 1 .75.75Zm-8.5.75v1.25a.75.75 0 0 0 1.5 0v-4a.75.75 0 0 0-1.5 0V2H1.75a.75.75 0 0 0 0 1.5H6.5Zm1.25 5.25a.75.75 0 0 0 0-1.5h-6a.75.75 0 0 0 0 1.5h6ZM15 8a.75.75 0 0 1-.75.75H11.5V10a.75.75 0 1 1-1.5 0V6a.75.75 0 0 1 1.5 0v1.25h2.75A.75.75 0 0 1 15 8Zm-9 5.25v-2a.75.75 0 0 0-1.5 0v1.25H1.75a.75.75 0 0 0 0 1.5H4.5v1.25a.75.75 0 0 0 1.5 0v-2Zm9 0a.75.75 0 0 1-.75.75h-6a.75.75 0 0 1 0-1.5h6a.75.75 0 0 1 .75.75Z"></path>
 </svg>
-</button><tool-tip id="tooltip-5e861e54-4b44-476f-bd03-2fb64204f1e8" for="icon-button-341766b5-169c-4235-a1e9-3a79b92dfc61" popover="manual" data-direction="s" data-type="label" data-view-component="true" class="sr-only position-absolute">Appearance settings</tool-tip>
+</button><tool-tip id="tooltip-34cac115-21e8-4972-b65d-c25a121a254f" for="icon-button-42fb4b22-a4db-4984-8f87-a06e734b4407" popover="manual" data-direction="s" data-type="label" data-view-component="true" class="sr-only position-absolute">Appearance settings</tool-tip>
 
       <template data-target="react-partial-anchor.template">
         <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://github.githubassets.com/assets/primer-react.2b2a53c0ee686cca.module.css" />
@@ -902,10 +902,10 @@
         <span class="js-stale-session-flash-signed-out" hidden>You signed out in another tab or window. <a class="Link--inTextBlock" href="">Reload</a> to refresh your session.</span>
         <span class="js-stale-session-flash-switched" hidden>You switched accounts on another tab or window. <a class="Link--inTextBlock" href="">Reload</a> to refresh your session.</span>
 
-    <button id="icon-button-618bbb15-2f26-4833-ba11-c68b70fb725d" aria-labelledby="tooltip-74faa74c-24d0-4c22-8f25-f646ecef2785" type="button" data-view-component="true" class="Button Button--iconOnly Button--invisible Button--medium flash-close js-flash-close">  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x Button-visual">
+    <button id="icon-button-facfe91b-89db-4540-af5b-988e9df527af" aria-labelledby="tooltip-21f1d16e-d364-4dc3-810c-8b014a6eba73" type="button" data-view-component="true" class="Button Button--iconOnly Button--invisible Button--medium flash-close js-flash-close">  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-x Button-visual">
     <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
 </svg>
-</button><tool-tip id="tooltip-74faa74c-24d0-4c22-8f25-f646ecef2785" for="icon-button-618bbb15-2f26-4833-ba11-c68b70fb725d" popover="manual" data-direction="s" data-type="label" data-view-component="true" class="sr-only position-absolute">Dismiss alert</tool-tip>
+</button><tool-tip id="tooltip-21f1d16e-d364-4dc3-810c-8b014a6eba73" for="icon-button-facfe91b-89db-4540-af5b-988e9df527af" popover="manual" data-direction="s" data-type="label" data-view-component="true" class="sr-only position-absolute">Dismiss alert</tool-tip>
 
 
   
