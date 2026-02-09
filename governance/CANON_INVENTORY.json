@@ -1244,5 +1244,7 @@
       "path": "governance/canon/LAYER_UP_PROTOCOL.md",
       "layer_down_status": "PUBLIC_API"
     }
-  ]
+  ],
+  "immutable": true,
+  "timestamp": "2026-02-09T10:20:11Z"
 }
