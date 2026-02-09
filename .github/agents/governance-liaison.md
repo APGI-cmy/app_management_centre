@@ -458,6 +458,178 @@ Update session contract with:
 
 ---
 
+## 🔒 PR Failure Analysis Protocol (LOCKED)
+
+<!-- Lock ID: LOCK-LIAISON-PR-FAILURE-001 -->
+<!-- Lock Reason: Prevents catastrophic repeat PR failures - STOP AND FIX enforcement -->
+<!-- Lock Authority: STOP_AND_FIX_DOCTRINE.md, CS2 "We Only Fail Once" philosophy -->
+<!-- Lock Date: 2026-02-09 -->
+<!-- Last Reviewed: 2026-02-09 -->
+<!-- Review Frequency: quarterly -->
+<!-- END METADATA -->
+
+**MANDATORY before creating retry PR after ANY PR failure:**
+
+### Detection: Is This a Retry After Failure?
+
+Check for recent closed/failed PRs:
+```bash
+gh pr list --repo APGI-cmy/maturion-foreman-office-app --state closed --limit 10
+```
+
+If you see recently closed PRs from governance-liaison → EXECUTE THIS PROTOCOL.
+
+---
+
+### Step 1: Read Workflow Logs (MANDATORY)
+
+```bash
+# List recent workflow runs
+gh run list --repo APGI-cmy/maturion-foreman-office-app --limit 10
+
+# Identify the failed run from the closed PR
+# Read the complete workflow log
+gh run view <RUN_ID> --repo APGI-cmy/maturion-foreman-office-app --log
+
+# If run is large, get failed jobs specifically
+gh run view <RUN_ID> --repo APGI-cmy/maturion-foreman-office-app --log-failed
+```
+
+**Document what you find**:
+- Which gate failed? (Gatekeeper-1, Gatekeeper-2, other)
+- What was the exact error message?
+- What files/artifacts were missing or invalid?
+- What schema violations occurred?
+
+---
+
+### Step 2: Root Cause Analysis (MANDATORY)
+
+**Ask and answer these questions** BEFORE creating retry PR:
+
+1. **What exactly failed?**
+   - Be specific: Which file? Which field? Which validation?
+   
+2. **Why did it fail?**
+   - Was artifact missing?
+   - Was schema invalid?
+   - Was governance rule violated?
+   - Was there a script error?
+
+3. **What caused the root issue?**
+   - Agent logic error?
+   - Misunderstood requirement?
+   - Missing context?
+   - Environmental issue?
+
+4. **How do I fix it correctly?**
+   - What specific changes are needed?
+   - What validation should I run before committing?
+   - What evidence do I need to provide?
+
+5. **How do I prevent this from happening again?**
+   - Should I update my session contract?
+   - Should I add a validation step?
+   - Should I update documentation?
+
+---
+
+### Step 3: Fix Verification (MANDATORY)
+
+**Before pushing retry PR, verify locally**:
+
+```bash
+# If governance validation exists, run it
+if [ -f "scripts/validate_baseline.sh" ]; then
+    scripts/validate_baseline.sh governance-liaison
+fi
+
+# If schema validation exists, run it
+if [ -f "scripts/validate_agent_contracts.py" ]; then
+    python scripts/validate_agent_contracts.py
+fi
+
+# Verify files you changed are present and valid
+ls -lah <changed-files>
+
+# If you created JSON, validate it
+if command -v jq &> /dev/null; then
+    jq empty <your-json-file>
+fi
+
+# If you created YAML, validate it
+if command -v yamllint &> /dev/null; then
+    yamllint <your-yaml-file>
+fi
+```
+
+---
+
+### Step 4: Document Learning (MANDATORY)
+
+**In your session contract, add**:
+
+```markdown
+## PR Failure Analysis
+
+### Previous PR Failure
+- **PR Number**: #XXX
+- **Failure Date**: YYYY-MM-DD
+- **Gate Failed**: [Gatekeeper-1/Gatekeeper-2/other]
+- **Failure Category**: [from PR_GATE_FAILURE_HANDLING_PROTOCOL.md]
+
+### Root Cause
+[Describe what went wrong and why]
+
+### Fix Applied
+[Describe what you changed to fix it]
+
+### Verification Performed
+- [ ] Read workflow logs completely
+- [ ] Understood exact failure mode
+- [ ] Identified root cause
+- [ ] Applied fix
+- [ ] Ran local validation (if available)
+- [ ] Verified artifacts are present and valid
+- [ ] Updated session contract with learning
+
+### Prevention Measures
+[What you're doing to prevent recurrence]
+```
+
+---
+
+### Step 5: Escalation for Repeat Failures
+
+**If this is the 3rd failure of the same type**:
+
+1. **HALT** - Do not create another retry PR
+2. **Escalate to CS2** (Johan Ras) with:
+   - All 3 failure records
+   - Root cause analysis
+   - Why prevention measures failed
+   - Proposed governance update
+3. **Wait for explicit authorization** before proceeding
+
+**Severity**: Third occurrence = CATASTROPHIC per STOP_AND_FIX_DOCTRINE.md
+
+---
+
+### Checklist Before Retry PR
+
+- [ ] I have read the complete workflow logs from the failed PR
+- [ ] I understand exactly what failed and why
+- [ ] I have identified the root cause
+- [ ] I have applied a fix that addresses the root cause
+- [ ] I have verified the fix locally (where possible)
+- [ ] I have documented the failure, fix, and learning in session contract
+- [ ] I have added prevention measures to avoid recurrence
+- [ ] This is NOT the 3rd consecutive failure (if it is, I've escalated)
+
+**Only proceed with retry PR if ALL boxes are checked.**
+
+---
+
 ## Session Outcome Protocol
 
 At session end, update session contract with:
