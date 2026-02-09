@@ -18,7 +18,7 @@ import os
 import sys
 import yaml
 from pathlib import Path
-from typing import Dict, List, Tuple, Any
+from typing import Any
 
 # ANSI color codes
 GREEN = '\033[92m'
@@ -45,12 +45,12 @@ def print_info(message: str):
     """Print an info message"""
     print(f"{BLUE}ℹ️  {message}{RESET}")
 
-def load_yaml_frontmatter(file_path: Path) -> Tuple[Dict[str, Any], str]:
+def load_yaml_frontmatter(file_path: Path) -> tuple[dict[str, Any], str]:
     """Load YAML frontmatter from a markdown file"""
     if not file_path.exists():
         return {}, ""
     
-    with open(file_path, 'r', encoding='utf-8') as f:
+    with open(file_path, encoding='utf-8') as f:
         content = f.read()
     
     # Check for YAML frontmatter
@@ -129,7 +129,7 @@ def validate_modular_structure() -> bool:
             all_valid = False
         else:
             # Count governance bindings in the file
-            with open(bindings_path, 'r', encoding='utf-8') as f:
+            with open(bindings_path, encoding='utf-8') as f:
                 content = f.read()
                 binding_count = content.count('- **id**:')
                 print_info(f"  Found {binding_count} governance bindings")
