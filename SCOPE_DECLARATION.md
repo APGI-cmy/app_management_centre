@@ -1,55 +1,99 @@
-# SCOPE_DECLARATION
+# SCOPE DECLARATION
 
-**Issue**: Update governance-liaison agent contract to v1.2.0: Zero-Warning Enforcement, Ripple Protocol, and YAML Fixes
-**Date**: 2026-01-26
-**Agent**: governance-liaison (via Copilot)
+**SCOPE_SCHEMA_VERSION**: v1  
+**PR_ID**: TBD (Will be assigned when PR created)  
+**OWNER**: Copilot (coding-agent)  
+**DATE_UTC**: 2026-02-09
 
-## Files Modified
+---
 
-```
-M .github/agents/governance-liaison.md
-```
+## PR Responsibility Domain
 
-## Changes Summary
+**RESPONSIBILITY_DOMAIN**: FM Agent File Living Agent System v5.0.0 Alignment
 
-### .github/agents/governance-liaison.md
-- Fixed YAML frontmatter indentation errors:
-  - `canon` section: properties now properly indented (4 spaces)
-  - `tier_0_canon` section: properties now properly indented (4 spaces)
-  - `bindings` section: converted from inline `{...}` format to multi-line YAML (proper structure)
-  - `scope` and `capabilities` sections: converted arrays to multi-line format
-  - `metadata` section: removed inline comments that exceeded line limits
-  - `description` field: converted to multi-line with `>-` for line wrapping
-- All v1.2.0 content already present (no content changes):
-  - Zero-Warning Handover Enforcement LOCKED section ✓
-  - GOVERNANCE_RIPPLE_CHECKLIST_PROTOCOL.md references ✓
-  - Updated bindings (EXECUTION_BOOTSTRAP_PROTOCOL v1.1.0, AGENT_FILE_LOCKED_SECTIONS_TEMPLATE, ripple-checklist) ✓
-  - Version 1.2.0 metadata ✓
-  - Version history entry ✓
+---
 
-## Scope Verification
+## Explicitly In Scope
 
-**In Scope**:
-- ✅ YAML frontmatter formatting (indentation, structure)
-- ✅ Line-length fixes in YAML
-- ✅ Verification of v1.2.0 content presence
+**IN_SCOPE**:
+- Restructure `.github/agents/foreman.agent.md` to follow Living Agent System v5.0.0 specification
+- Add Wake-Up Protocol section with 4-level memory loading bash script
+- Add POLC Framework sections (Planning, Organizing, Leading, Control)
+- Add Session Closure Protocol section with bash script
+- Add Agent Protection Registry section
+- Reorganize existing FM content into POLC structure
+- Reference (not duplicate) canonical governance protocols in LOCKED sections
+- Preserve all existing governance bindings in YAML frontmatter
+- Create `SCOPE_DECLARATION.md` following canonical schema
+- Create `PREHANDOVER_PROOF.md` with execution log and completeness checklist
+- Update agent file version to 1.0.0 with LAS v5.0.0 compliance
+- Backup original foreman.agent.md as foreman.agent.md.backup
 
-**Out of Scope** (Not Modified):
-- ✅ Markdown body content (no changes - already v1.2.0)
-- ✅ LOCKED sections content (no changes - already correct)
-- ✅ Governance canon files (no changes)
-- ✅ Other agent files (not in scope)
-- ✅ Application code (not in scope)
+---
 
-## Constitutional Compliance
+## Explicitly Out of Scope
 
-**Zero Test Debt**: ✅ No test changes (YAML formatting only)
-**Build-to-Green**: ✅ No build required (agent contract YAML fix)
-**Architecture Conformance**: ✅ YAML formatting per BL-028
-**Protected Paths**: ✅ Only YAML frontmatter formatting modified
+**OUT_OF_SCOPE**:
+- Modifying canonical governance content in `governance/canon/` directory
+- Creating or modifying builder agent files (ui-builder, api-builder, etc.)
+- Modifying governance-liaison or CodexAdvisor agent files
+- Changes to wake-up or session closure scripts (if they exist as separate files in `.github/scripts/`)
+- Creating evidence-based validation scripts (if not already existing)
+- Modifying TIER_0_CANON_MANIFEST.json
+- Creating new governance protocols
+- Modifying BUILD_PHILOSOPHY.md or FM_ROLE_CANON.md
+- Changes to CI/CD workflows
+- Database migrations
+- Email configuration
+- Logging infrastructure
+- Audit systems
+- Deployment configuration
+- Infrastructure changes
+- Production code changes
+- Test suite modifications (unless governance validation tests directly related to agent file structure)
 
-## Authority
+---
 
-**Issue**: Update governance-liaison agent contract to v1.2.0
-**Standards**: BL-027 (Scope Declaration), BL-028 (YAML Warnings = Errors)
-**Governance**: EXECUTION_BOOTSTRAP_PROTOCOL.md v1.1.0, GOVERNANCE_RIPPLE_CHECKLIST_PROTOCOL.md
+## Expected Verification Signal
+
+**EXPECTED_VERIFICATION**:
+- **CI**: GREEN (all existing gates pass)
+- **TESTS**: UNCHANGED (or GREEN if governance validation tests exist)
+- **GOVERNANCE_GATES**: GREEN
+- **YAML_FRONTMATTER**: VALID (passes YAML validation)
+- **AGENT_FILE_STRUCTURE**: VALID (follows LAS v5.0.0 specification)
+- **LOCKED_SECTIONS**: VALID (references canonical governance, no duplication)
+- **SCOPE_DECLARATION**: PRESENT and VALID
+- **PREHANDOVER_PROOF**: PRESENT and COMPLETE
+
+---
+
+## Scope Freeze Declaration
+
+**SCOPE_FROZEN**: YES
+
+This scope is frozen as of 2026-02-09. Any scope expansion requires PR closure and restart per SCOPE_DECLARATION_SCHEMA.md.
+
+---
+
+## Additional Context
+
+### Why This Work
+- Problem Statement: FM agent file exists but does NOT follow Living Agent System v5.0.0 structure
+- Missing: Wake-Up Protocol, POLC Framework, Session Closure Protocol
+- Required: LAS v5.0.0 compliance to enable FM autonomous operation with proper memory management
+
+### Governance Authority
+- `governance/canon/LIVING_AGENT_SYSTEM.md` (defines LAS v5.0.0)
+- `governance/canon/SCOPE_DECLARATION_SCHEMA.md` (defines this document's structure)
+- `governance/canon/FOREMAN_MEMORY_PROTOCOL.md` (defines 4-level memory hierarchy)
+- `governance/canon/AGENT_CONTRACT_PROTECTION_PROTOCOL.md` (defines agent file protection)
+
+### Evidence Requirements
+- SCOPE_DECLARATION.md (this file)
+- PREHANDOVER_PROOF.md (to be created)
+- Both must pass evidence-based validation gate
+
+---
+
+**End of Scope Declaration**

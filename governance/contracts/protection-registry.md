@@ -2,8 +2,8 @@
 
 **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.4  
 **Owner**: governance-liaison  
-**Last Updated**: 2026-02-04  
-**Total LOCKED Sections**: 30
+**Last Updated**: 2026-02-09  
+**Total LOCKED Sections**: 31
 
 ---
 
@@ -23,6 +23,7 @@ This registry provides a central inventory of all LOCKED sections across all age
 | LOCK-API-BUILDER-MISSION-001 | api-builder.md | Mission and Authority | governance/canon/AGENT_RECRUITMENT.md, BUILD_PHILOSOPHY.md | 2026-01-21 | 2026-01-21 | quarterly |
 | LOCK-API-BUILDER-PROHIBITIONS-001 | api-builder.md | Prohibitions | BUILD_PHILOSOPHY.md, AGENT_RECRUITMENT.md | 2026-01-21 | 2026-01-21 | quarterly |
 | LOCK-API-BUILDER-SCOPE-001 | api-builder.md | Scope | governance/canon/AGENT_RECRUITMENT.md | 2026-01-21 | 2026-01-21 | quarterly |
+| LOCK-LIAISON-PR-FAILURE-001 | governance-liaison.md | PR Failure Analysis Protocol | STOP_AND_FIX_DOCTRINE.md, CS2 "We Only Fail Once" philosophy | 2026-02-09 | 2026-02-09 | quarterly |
 | LOCK-INTEGRATION-BUILDER-CONSTITUTIONAL-001 | integration-builder.md | Constitutional Principles | BUILD_PHILOSOPHY.md, GOVERNANCE_PURPOSE_AND_SCOPE.md | 2026-01-21 | 2026-01-21 | quarterly |
 | LOCK-INTEGRATION-BUILDER-CONTRACT-MOD-001 | integration-builder.md | Contract Modification Prohibition | governance/canon/AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md | 2026-01-21 | 2026-01-21 | quarterly |
 | LOCK-INTEGRATION-BUILDER-FILE-INTEGRITY-001 | integration-builder.md | File Integrity Protection | BUILD_PHILOSOPHY.md, CI_CONFIRMATORY_NOT_DIAGNOSTIC.md | 2026-01-21 | 2026-01-21 | quarterly |
@@ -54,7 +55,7 @@ This registry provides a central inventory of all LOCKED sections across all age
 
 ### Quarterly Review
 
-**Count**: 30 sections
+**Count**: 31 sections
 
 - **LOCK-API-BUILDER-CONSTITUTIONAL-001** (api-builder.md) — Last reviewed: 2026-01-21
 - **LOCK-API-BUILDER-CONTRACT-MOD-001** (api-builder.md) — Last reviewed: 2026-01-21
@@ -62,6 +63,7 @@ This registry provides a central inventory of all LOCKED sections across all age
 - **LOCK-API-BUILDER-MISSION-001** (api-builder.md) — Last reviewed: 2026-01-21
 - **LOCK-API-BUILDER-PROHIBITIONS-001** (api-builder.md) — Last reviewed: 2026-01-21
 - **LOCK-API-BUILDER-SCOPE-001** (api-builder.md) — Last reviewed: 2026-01-21
+- **LOCK-LIAISON-PR-FAILURE-001** (governance-liaison.md) — Last reviewed: 2026-02-09
 - **LOCK-INTEGRATION-BUILDER-CONSTITUTIONAL-001** (integration-builder.md) — Last reviewed: 2026-01-21
 - **LOCK-INTEGRATION-BUILDER-CONTRACT-MOD-001** (integration-builder.md) — Last reviewed: 2026-01-21
 - **LOCK-INTEGRATION-BUILDER-FILE-INTEGRITY-001** (integration-builder.md) — Last reviewed: 2026-01-21
@@ -91,9 +93,9 @@ This registry provides a central inventory of all LOCKED sections across all age
 
 ## Audit Trail
 
-### 2026-02-04 — Registry Created
+### 2026-02-09 — Registry Created
 
-- Initial registry created with 30 LOCKED sections
+- Initial registry created with 31 LOCKED sections
 - All builder agent files (api-builder, ui-builder, schema-builder, qa-builder, integration-builder) have 6 LOCKED sections each in canonical format
 - Foreman-app_FM.md has non-compliant LOCKED section format (corrective action in progress)
 - Authority: AGENT_CONTRACT_PROTECTION_PROTOCOL.md Section 4.4
