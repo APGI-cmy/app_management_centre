@@ -1,6 +1,6 @@
 {
   "validation_result": "FAIL",
-  "matches": 0,
+  "matches": 1,
   "mismatches": 8,
   "missing_baselines": 0,
   "changed_files": [
