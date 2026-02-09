@@ -2,7 +2,7 @@
 
 **Purpose**: Complete inventory of all governance artifacts in the maturion-foreman-governance repository
 **Created**: 2025-12-31
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-09T11:55:21Z
 **Authority**: Phase 1.1 — Platform Readiness Reset & Build Initiation Plan
 **Scope**: Inventory only — no interpretation, correction, or gap analysis
 
@@ -128,6 +128,9 @@ Canon files define constitutional governance rules, models, and protocols.
 | `MEMORY_INTEGRITY_AND_CORRUPTION_MODEL.md` | Defines memory integrity requirements | Readiness |
 | `MEMORY_LIFECYCLE_STATE_MACHINE_CONTRACT.md` | Defines memory lifecycle state transitions | Readiness |
 | `MEMORY_OBSERVABILITY_QUERY_CONTRACT.md` | Defines memory query interface contract | Readiness |
+| `FM_MERGE_GATE_MANAGEMENT_PROTOCOL.md` | **NEW v1.0.0 (2026-02-09) PUBLIC_API** - Canonical protocol establishing FM's autonomous authority and responsibility for merge gate management. Defines when FM can independently fix gate misalignments, when escalation is required, and complete operational workflow for gate maintenance. Ensures FM autonomy for gate alignment within authority bounds, zero gate drift, clear escalation paths, and predictable gate behavior for all agent classes | PR-gates, Readiness, Layer-down |
+| `MERGE_GATE_APPLICABILITY_MATRIX.md` | **NEW v1.0.0 (2026-02-09) PUBLIC_API** - Authoritative mapping of agent roles to applicable merge gates. Provides canonical agent role taxonomy, deterministic gate requirements per agent class (Builder, Liaison, Foreman, Overseer), gate-by-gate applicability rules, and exemption tracking. Single source of truth for which gates apply to which agent roles, ensuring zero ambiguity and no misapplied gates blocking valid work | PR-gates, Layer-down |
+| `MERGE_GATE_PHILOSOPHY.md` | **UPDATED v1.0.0 (2026-02-09)** - Constitutional governance rule establishing "CI is confirmatory, NOT diagnostic" principle. Defines agent pre-PR validation responsibilities (100% builds, zero warnings, zero deprecations, all tests passing, governance compliance, evidence documentation) and merge gate responsibilities (evidence verification, governance alignment confirmation) | PR-gates, Readiness, Layer-down |
 | `PENDING_CANON_REFERENCES_INTERIM_GUIDANCE.md` | **NEW v1.0.0 (2026-02-08) PUBLIC_API** - Interim guidance for handling references to canonical governance documents. Clarifies published status of FM_ROLE_CANON.md, WAVE_MODEL.md, LIVING_AGENT_SYSTEM.md, and newly published canon (2026-02-08). Provides workaround guidance for pending canon references. Addresses GAP-007 from Living Agent System v5.0.0 rollout | Readiness, Layer-down |
 | `PLATFORM_AUTHORITY_BOUNDARY_AND_DELEGATION_MODEL.md` | Defines platform authority boundaries | Readiness |
 | `PLATFORM_READINESS_FOR_GOVERNED_BUILD_EXECUTION.md` | Canonical definition of platform readiness | Readiness |

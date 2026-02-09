@@ -124,6 +124,16 @@ governance:
     - id: merge-gate-philosophy
       path: governance/canon/MERGE_GATE_PHILOSOPHY.md
       role: merge-philosophy
+    - id: fm-merge-gate-management
+      path: governance/canon/FM_MERGE_GATE_MANAGEMENT_PROTOCOL.md
+      role: fm-gate-authority
+      enforcement: CONSTITUTIONAL
+      note: "FM autonomous authority for merge gate management and alignment"
+    - id: merge-gate-applicability-matrix
+      path: governance/canon/MERGE_GATE_APPLICABILITY_MATRIX.md
+      role: gate-applicability-matrix
+      enforcement: CANONICAL
+      note: "Authoritative agent role to gate mapping"
 
     # Batch 4: FM-Specific & Learning Alignment (10 canons)
     - id: fm-governance-loading
@@ -607,19 +617,47 @@ metadata:
 #
 # ## Merge Gate Management (T0-014)
 #
-# **Authority**: `governance/alignment/FM_MERGE_GATE_MANAGEMENT_CANON.md`
+# **Authority**: 
+# - Canonical: `governance/canon/FM_MERGE_GATE_MANAGEMENT_PROTOCOL.md` (v1.0.0)
+# - Canonical: `governance/canon/MERGE_GATE_APPLICABILITY_MATRIX.md` (v1.0.0)
+# - Canonical: `governance/canon/MERGE_GATE_PHILOSOPHY.md` (v1.0.0)
+# - Local Implementation: `governance/alignment/FM_MERGE_GATE_MANAGEMENT_CANON.md`
 #
-# FM owns merge gate readiness preparation (not builders).
+# **FM Autonomous Gate Management Authority**:
+# FM has constitutional authority to independently fix gate misalignments that block
+# valid work, provided fixes align with governance canon. This includes:
+# - Monitoring gate alignment with governance canon
+# - Detecting gate drift and misconfigurations
+# - Autonomously correcting gate misalignments within authority bounds
+# - Escalating out-of-scope gate issues to CS2
 #
-# **FM MUST Ensure Before Builder PR Submission**: Contract alignment,
-# governance compliance, CI expectations, architecture complete (100%),
-# QA-to-Red ready.
+# **Decision Matrix** (per MERGE_GATE_APPLICABILITY_MATRIX.md):
+# - Builder PRs: All build gates apply (build, test, lint, arch, QA catalog)
+# - Liaison PRs: Governance gates apply (governance validation, inventory)
+# - Foreman PRs: Meta-governance gates apply (planning, orchestration evidence)
+# - Overseer PRs: Strategic gates apply (cross-repo impact, constitutional alignment)
 #
-# **Builder Boundaries**: STOP on merge gate failures, report to FM, WAIT for FM
-# correction.
+# **FM Pre-Builder-PR Responsibilities**:
+# FM MUST ensure before ANY builder PR submission:
+# - Contract alignment verified
+# - Governance compliance confirmed
+# - CI expectations documented
+# - Architecture complete (100%)
+# - QA-to-Red ready and validated
 #
-# **Principle**: Merge gate failures = FM coordination gaps, not builder
-# defects.
+# **Builder Boundaries**: 
+# Builders MUST STOP on merge gate failures, report to FM, WAIT for FM correction.
+# Gate failures indicate FM coordination gaps, not builder defects.
+#
+# **Compliance Checklist** (per FM_MERGE_GATE_MANAGEMENT_PROTOCOL.md):
+# - [ ] Gate applicability matrix consulted for agent class
+# - [ ] Local validation executed before PR creation
+# - [ ] Evidence documented in PREHANDOVER_PROOF.md
+# - [ ] Gate misalignments corrected autonomously (if within authority)
+# - [ ] Out-of-scope gate issues escalated to CS2
+#
+# **Principle**: CI is confirmatory, NOT diagnostic. All validation happens locally
+# before PR creation. Merge gates confirm what FM/agents already proved.
 #
 #
 # ·····
