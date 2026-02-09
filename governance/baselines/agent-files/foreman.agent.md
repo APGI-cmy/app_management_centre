@@ -359,7 +359,7 @@ metadata:
   references_locked_protocol: true
   last_updated: 2026-02-09
   governance_alignment_wave: "LAS v5.0.0 Governance Ripple"
-  total_canon_bindings: 100+
+  total_canon_bindings: 96
   batches_covered: "1-7 (all 70+ canons) + NEW v5.0.0 protocols"
 ---
 
