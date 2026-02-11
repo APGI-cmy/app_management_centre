@@ -1,0 +1,29 @@
+{
+  "last_sync": "2026-02-11T12:57:06Z",
+  "session_id": "liaison-20260211-125102",
+  "canonical_source": "APGI-cmy/maturion-foreman-governance",
+  "canonical_ref": "main",
+  "canonical_commit": "a44e65a49e785eb8bc3e02b563aabf4e931926be",
+  "inventory_version": "1.0.0",
+  "total_canons_tracked": 135,
+  "files_layered_down": 13,
+  "alignment_status": "ALIGNED",
+  "drift_detected": false,
+  "new_files_added": [
+    "governance/agent/AGENT_IGNORANCE_PROHIBITION_DOCTRINE.md",
+    "governance/canon/CANON_INVENTORY_INTEGRITY_REQUIREMENTS.md",
+    "governance/canon/CROSS_REPO_RIPPLE_TRANSPORT_PROTOCOL.md",
+    "governance/canon/MATURION_BOT_EXECUTION_IDENTITY_MODEL.md",
+    "governance/canon/MERGE_GATE_INTERFACE_STANDARD.md",
+    "governance/coordination/CROSS_AGENT_COORDINATION_PROTOCOL.md",
+    "governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md",
+    "governance/policy/ARCHITECTURE_TEST_TRACEABILITY_METHODOLOGY.md",
+    "governance/policy/BUILDER_QA_HANDOVER_POLICY.md",
+    "governance/policy/POLICY-NO-ONLY-LANGUAGE.md",
+    "governance/policy/PR_GATE_FAILURE_HANDLING_PROTOCOL.md",
+    "governance/policy/QA_POLICY_MASTER.md",
+    "governance/policy/TEST_REMOVAL_GOVERNANCE_GATE.md"
+  ],
+  "evidence_log": ".agent-admin/sessions/governance-liaison/liaison-20260211-125102_evidence.log",
+  "alignment_log": ".agent-admin/sessions/governance-liaison/liaison-20260211-125102_alignment.log"
+}
