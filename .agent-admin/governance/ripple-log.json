@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "ripples": [
+    {
+      "ripple_id": "ripple-2026-02-11-governance-canon-layerdown",
+      "timestamp": "2026-02-11T12:50:00Z",
+      "event_type": "manual_governance_ripple",
+      "canonical_commit": "a44e65a49e785eb8bc3e02b563aabf4e931926be",
+      "inventory_version": "1.0.0",
+      "changed_paths": [
+        "governance/canon/",
+        "governance/policy/",
+        "governance/coordination/",
+        "governance/agent/"
+      ],
+      "sender": "APGI-cmy/maturion-foreman-governance",
+      "receiver": "APGI-cmy/maturion-foreman-office-app",
+      "dispatch_id": "manual-2026-02-11",
+      "session_id": "liaison-20260211-125102",
+      "alignment_status": "COMPLETE",
+      "files_added": 13,
+      "files_updated": 0,
+      "drift_resolved": true
+    }
+  ]
+}
