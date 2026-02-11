@@ -1,9 +1,9 @@
 # GOVERNANCE PURPOSE AND SCOPE
 
 ## Status
-Canonical Governance Constitution
-Version: v1
-Authority: Johan Ras
+Canonical Governance Constitution  
+Version: v1  
+Authority: Johan Ras  
 Applies To: All Governance Artifacts, All Agents, All Build Platforms, All Applications
 
 ---

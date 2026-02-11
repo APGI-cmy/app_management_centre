@@ -1,10 +1,11 @@
+# FM RUNTIME ENFORCEMENT AND AWARENESS MODEL
 
 ## Status
-**Type**: Canonical Governance Model
-**Authority**: Supreme - Canonical
-**Version**: 1.0.0
-**Effective Date**: 2026-01-01
-**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Type**: Canonical Governance Model  
+**Authority**: Supreme - Canonical  
+**Version**: 1.0.0  
+**Effective Date**: 2026-01-01  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
 **Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md and FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
 
 ---

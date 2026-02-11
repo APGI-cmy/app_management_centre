@@ -1,14 +1,14 @@
 # Combined Subwave Testing (CST) and Combined Wave Testing (CWT) Pattern
 
 ## Status
-**Type**: Canonical Governance Pattern
-**Authority**: Supreme - Canonical
-**Version**: 1.0.0
-**Effective Date**: 2026-01-09
-**Owner**: Maturion Engineering Leadership (Johan Ras)
-**Precedence**: Subordinate to BUILD_PHILOSOPHY.md, WAVE_MODEL.md
-**Applies To**: All Multi-Wave Builds, All Application Repositories
-**Related Canon**: WAVE_MODEL.md, IN_BETWEEN_WAVE_RECONCILIATION.md, MANDATORY_CANONICAL_PROGRESS_RECORDING_AND_WAVE_CLOSURE_CERTIFICATION.md
+**Type**: Canonical Governance Pattern  
+**Authority**: Supreme - Canonical  
+**Version**: 1.0.0  
+**Effective Date**: 2026-01-09  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Precedence**: Subordinate to BUILD_PHILOSOPHY.md, WAVE_MODEL.md  
+**Applies To**: All Multi-Wave Builds, All Application Repositories  
+**Related Canon**: WAVE_MODEL.md, IN_BETWEEN_WAVE_RECONCILIATION.md, MANDATORY_CANONICAL_PROGRESS_RECORDING_AND_WAVE_CLOSURE_CERTIFICATION.md  
 **Bootstrap Learning**: BL-025
 
 ---

@@ -1,9 +1,9 @@
 # SCOPE TO DIFF GOVERNANCE RULE
 
 ## Status
-Canonical Governance Rule
-Version: v1
-Authority: Governance
+Canonical Governance Rule  
+Version: v1  
+Authority: Governance  
 Applies To: All PRs, All Repositories
 
 ---

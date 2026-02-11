@@ -1,12 +1,12 @@
 # CROSS-REPOSITORY RIPPLE AWARENESS MODEL
 
 ## Status
-**Type**: Canonical Governance Concept
-**Authority**: Supreme - Canonical
-**Version**: 1.0.0
-**Effective Date**: 2026-01-02
-**Owner**: Maturion Engineering Leadership (Johan Ras)
-**Precedence**: Subordinate to RIPPLE_INTELLIGENCE_LAYER.md
+**Type**: Canonical Governance Concept  
+**Authority**: Supreme - Canonical  
+**Version**: 1.0.0  
+**Effective Date**: 2026-01-02  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Precedence**: Subordinate to RIPPLE_INTELLIGENCE_LAYER.md  
 **Part of**: Ripple-Wave 2.2 — Passive Cross-Repository Ripple Awareness Signal
 
 ---

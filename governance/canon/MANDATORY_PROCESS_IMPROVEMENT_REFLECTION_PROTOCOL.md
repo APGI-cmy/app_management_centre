@@ -1,11 +1,11 @@
 # MANDATORY PROCESS IMPROVEMENT REFLECTION PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Standard
-**Authority**: Supreme - Johan Ras (Maturion)
-**Version**: 1.0.0
-**Effective Date**: 2026-01-11
-**Applies To**: All Governance-Repo Work Units
+**Type**: Canonical Governance Standard  
+**Authority**: Supreme - Johan Ras (Maturion)  
+**Version**: 1.0.0  
+**Effective Date**: 2026-01-11  
+**Applies To**: All Governance-Repo Work Units  
 **Enforcement**: Mandatory
 
 ---
@@ -133,7 +133,7 @@ If a question genuinely has no issues or improvements to report, the agent MUST 
 
 **Example of acceptable "no issues" response:**
 > **Question 2: What failed, was blocked, or required rework?**
->
+> 
 > No failures or blockers were encountered. This work unit involved a straightforward template migration with clear requirements, existing examples to reference, and no dependencies on external systems or coordination. The governance canon was unambiguous, and all necessary context was readily available.
 
 ---
@@ -149,7 +149,7 @@ Process improvement reflections MUST be stored in **one of the following canonic
 - `governance/reports/` — For reflections tied to specific work units, completions, or deliverables
 - `governance/evidence/` — For reflections supporting audit trails or incident investigations
 
-**Contextual Locations**:
+**Contextual Locations:**
 - Inline in completion reports (e.g., `COMPLETION_SUMMARY.md` for a wave or work unit)
 - Inline in incident reports (e.g., `governance/incidents/INCIDENT-YYYY-MM-DD-*.md`)
 - Inline in RCA documents (e.g., `RCA_*.md`)
@@ -252,8 +252,8 @@ Incident reports that lack process improvement reflections are **incomplete** an
 ```markdown
 # Process Improvement Reflection — Governance Restructuring (Issue #285)
 
-**Work Unit**: Governance folder restructuring and canon organization
-**Date**: 2026-01-11
+**Work Unit**: Governance folder restructuring and canon organization  
+**Date**: 2026-01-11  
 **Agent**: Governance Repo Administrator
 
 ---
@@ -276,13 +276,13 @@ A small coordination gap emerged when determining whether certain documents belo
 
 ## Question 3: What process, governance, or tooling changes would have improved this work unit or prevented waste?
 
-**Improvement 1: Automated Reference Validation**
+**Improvement 1: Automated Reference Validation**  
 An automated tool that scans all markdown files for internal links and validates them after file moves would have prevented the rework cycle. This could be implemented as a pre-commit hook or CI gate.
 
-**Improvement 2: Canon vs. Policy Classification Guide**
+**Improvement 2: Canon vs. Policy Classification Guide**  
 A clear decision tree or classification guide for determining whether a document is "canon" (binding authority) vs "policy" (implementation detail) would reduce ambiguity and judgment calls during restructuring. This could be added to `GOVERNANCE_PURPOSE_AND_SCOPE.md`.
 
-**Improvement 3: Dry-Run Mode for Restructuring**
+**Improvement 3: Dry-Run Mode for Restructuring**  
 A governance restructuring runbook with a "dry-run" validation step (grep all references, validate all links, check CI gates) before committing changes would reduce risk of breaking changes.
 
 ---
@@ -303,23 +303,23 @@ A governance restructuring runbook with a "dry-run" validation step (grep all re
 
 ## Question 5: What actionable improvement should be layered up to governance canon or processes for future prevention?
 
-**Proposed Canonical Update:**
+**Proposed Canonical Update:**  
 Add a new section to `GOVERNANCE_PURPOSE_AND_SCOPE.md` titled "Canon vs. Policy Classification Criteria" with explicit decision criteria:
 - **Canon**: Binding authority, applies globally, requires Maturion approval to change
 - **Policy**: Implementation guidance, may vary by context, FM/Governance Admin can update
 
-**Proposed Tooling Enhancement:**
+**Proposed Tooling Enhancement:**  
 Create a governance pre-commit hook or CI gate that validates internal markdown references. This should be added to `.github/workflows/governance-gate.yml` to run on all PRs affecting governance documents.
 
-**Proposed Runbook:**
+**Proposed Runbook:**  
 Create `governance/runbooks/GOVERNANCE_RESTRUCTURING_RUNBOOK.md` with step-by-step validation procedures for restructuring work, including dry-run validation steps.
 
 **BL Consideration**: No new BL entry required — this is implementation-level tooling, not a systematic governance gap. Existing BL-019 (forward-scan) already captures the principle.
 
 ---
 
-**Reflection Completed**: 2026-01-11
-**Stored**: governance/memory/PROCESS_IMPROVEMENT_REFLECTION_ISSUE_285_2026-01-11.md
+**Reflection Completed**: 2026-01-11  
+**Stored**: governance/memory/PROCESS_IMPROVEMENT_REFLECTION_ISSUE_285_2026-01-11.md  
 **Status**: COMPLETE
 ```
 
@@ -389,10 +389,10 @@ This protocol should be read in conjunction with:
 
 ## 14. Document Control
 
-**Owner**: Governance Administrator
-**Created**: 2026-01-11
-**Last Updated**: 2026-01-11
-**Status**: Active
+**Owner**: Governance Administrator  
+**Created**: 2026-01-11  
+**Last Updated**: 2026-01-11  
+**Status**: Active  
 **Next Review**: 2026-04-11 (Quarterly)
 
 **Version History**:

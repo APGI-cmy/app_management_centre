@@ -1,13 +1,13 @@
 # MANDATORY CANONICAL PROGRESS RECORDING AND WAVE CLOSURE CERTIFICATION
 
 ## Status
-**Type**: Canonical Governance Definition
-**Authority**: Supreme - Canonical
-**Version**: 1.0.0
-**Effective Date**: 2026-01-04
-**Owner**: Maturion Engineering Leadership (Johan Ras)
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md and BUILD_PHILOSOPHY.md
-**Applies To**: All Foreman Instances, All Wave Executions, All Application Repositories
+**Type**: Canonical Governance Definition  
+**Authority**: Supreme - Canonical  
+**Version**: 1.0.0  
+**Effective Date**: 2026-01-04  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md and BUILD_PHILOSOPHY.md  
+**Applies To**: All Foreman Instances, All Wave Executions, All Application Repositories  
 **Source Learning**: BOOTSTRAP_EXECUTION_LEARNINGS.md — BL-017
 
 ---

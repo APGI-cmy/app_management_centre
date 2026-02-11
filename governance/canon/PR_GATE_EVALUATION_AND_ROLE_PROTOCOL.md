@@ -1,11 +1,11 @@
 # PR GATE EVALUATION AND ROLE PROTOCOL
 
 ## Status
-**Type**: Constitutional Governance Rule
-**Authority**: Supreme - Canonical
-**Version**: 1.0.0
-**Effective Date**: 2025-12-23
-**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Type**: Constitutional Governance Rule  
+**Authority**: Supreme - Canonical  
+**Version**: 1.0.0  
+**Effective Date**: 2025-12-23  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
 **Precedence**: Subordinate only to GOVERNANCE_PURPOSE_AND_SCOPE.md
 
 ---
@@ -81,7 +81,7 @@ This section summarizes agent roles for gate evaluation purposes. Full definitio
 
 **Identity**: Agents executing build-to-green for application code changes
 
-**Canonical Reference**:
+**Canonical Reference**: 
 - `governance/canon/AGENT_RECRUITMENT.md` (Section 4.1)
 - `governance/canon/BUILDER_FIRST_PR_MERGE_MODEL.md`
 - `BUILD_PHILOSOPHY.md`
@@ -213,14 +213,14 @@ This section defines the **step-by-step operational protocol** for evaluating PR
 - **Example Error Message**:
   ```
   ❌ PR Gate Failed: Unable to Determine Agent Role
-
+  
   This PR does not declare an agent role. PR gate evaluation requires explicit role declaration.
-
+  
   Please add one of the following to your PR description:
   - AGENT_ROLE: builder
   - AGENT_ROLE: governance-administrator
   - AGENT_ROLE: fm
-
+  
   Canonical Reference: governance/canon/PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md Section 6.1
   ```
 
@@ -297,15 +297,15 @@ IF fm_is_building_application_code:
 **Process**:
 
 1. **For each gate in APPLICABLE_GATES:**
-
+   
    a. **Load Gate Requirements** from canonical source (e.g., BUILDER_FIRST_PR_MERGE_MODEL.md for Builder QA Reports gate)
-
+   
    b. **Evaluate Gate Logic** against PR contents:
       - Check for required artifacts
       - Validate artifact schemas
       - Verify preconditions satisfied
       - Validate semantic requirements (e.g., `build_status == "PASS"`)
-
+   
    c. **Record Gate Result**:
       - `PASS`: Gate requirement satisfied
       - `FAIL`: Gate requirement not satisfied
@@ -351,7 +351,7 @@ function determinePRGateStatus(gate_results):
     num_fail = count(gate_results where result == FAIL)
     num_error = count(gate_results where result == ERROR)
     num_total = length(gate_results)
-
+    
     // Determine overall status
     if num_error > 0:
         return "ERROR" // Governance defect - escalate
@@ -516,7 +516,7 @@ When multiple gates specify overlapping or conflicting requirements, precedence 
 Gate A: "Builder QA Reports"
   Result: PASS
   Canonical Reference: governance/canon/BUILDER_FIRST_PR_MERGE_MODEL.md
-
+  
 Gate B: "QIEL Enforcement"
   Result: FAIL
   Reason: test_status != "PASS"
@@ -652,8 +652,8 @@ A PR is **NOT stuck** when:
 
 **Escalation Path**:
 ```
-Submitting Agent
-  → Governance Administrator
+Submitting Agent 
+  → Governance Administrator 
   → Johan Ras (if governance ambiguity exists)
 ```
 
@@ -936,9 +936,9 @@ All PR gates MUST follow this operational protocol. No repository, agent, or wor
 
 ---
 
-**Status**: Active and Enforced
-**Owner**: Governance Administrator
-**Approval Authority**: Johan Ras
+**Status**: Active and Enforced  
+**Owner**: Governance Administrator  
+**Approval Authority**: Johan Ras  
 **Last Updated**: 2025-12-23
 
 ---

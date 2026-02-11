@@ -1,11 +1,11 @@
 # FPC (First Point of Contact) Repository Layer-Down Guide
 
 ## Status
-**Type**: Canonical Governance Process — Entry Point
-**Authority**: Supreme - Canonical
-**Version**: 1.0.0
-**Effective Date**: 2026-01-11
-**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Type**: Canonical Governance Process — Entry Point  
+**Authority**: Supreme - Canonical  
+**Version**: 1.0.0  
+**Effective Date**: 2026-01-11  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
 **Purpose**: Single entry point for layering governance into new repositories
 
 ---
@@ -100,7 +100,7 @@ Before declaring Phase 1 complete:
 5. ✅ **Attach PREHANDOVER_PROOF** — Include in PR description (see template)
 6. ✅ **Declare Complete** — ONLY after execution GREEN locally
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 
 ---
@@ -120,15 +120,15 @@ Before declaring Phase 1 complete:
 
 ## Current Governance Version
 
-**Governance Repository Version**: [VERSION_TAG or COMMIT_SHA]
-**Layer-Down Date**: [DATE]
-**Layer-Down Authority**: [NAME]
+**Governance Repository Version**: [VERSION_TAG or COMMIT_SHA]  
+**Layer-Down Date**: [DATE]  
+**Layer-Down Authority**: [NAME]  
 **Status**: [Aligned | Drift Detected | Update In Progress]
 
 ## Canonical Source
 
-**Repository**: `maturion-foreman-governance`
-**Branch**: `main`
+**Repository**: `maturion-foreman-governance`  
+**Branch**: `main`  
 **Location**: `https://github.com/APGI-cmy/maturion-foreman-governance`
 
 ## Layer-Down History
@@ -139,8 +139,8 @@ Before declaring Phase 1 complete:
 
 ## Drift Detection
 
-**Last Check**: [DATE]
-**Status**: [No drift detected | Drift detected - see details below]
+**Last Check**: [DATE]  
+**Status**: [No drift detected | Drift detected - see details below]  
 **Next Scheduled Check**: [DATE]
 
 ---
@@ -163,9 +163,9 @@ Before declaring Phase 1 complete:
 
 ## Initialization Metadata
 
-**Repository**: [REPO_NAME]
-**Initialization Date**: [DATE]
-**Initialized By**: [AGENT or PERSON]
+**Repository**: [REPO_NAME]  
+**Initialization Date**: [DATE]  
+**Initialized By**: [AGENT or PERSON]  
 **Initialization Authority**: [FM or Maturion]
 
 ## Layer-Down Checklist
@@ -181,18 +181,18 @@ Before declaring Phase 1 complete:
 
 ## Governance Version
 
-**Governance Repository Version**: [VERSION]
+**Governance Repository Version**: [VERSION]  
 **Canonical Source**: maturion-foreman-governance @ [COMMIT_SHA]
 
 ## Applicability Scope
 
-**Repository Type**: [Application | Library | Governance | Infrastructure]
-**Agent Roles**: [FM, Builders, Governance Liaison, etc.]
+**Repository Type**: [Application | Library | Governance | Infrastructure]  
+**Agent Roles**: [FM, Builders, Governance Liaison, etc.]  
 **Gate Applicability**: See AGENT_ROLE_GATE_APPLICABILITY.md in governance canon
 
 ---
 
-**Status**: [Initialization Complete | In Progress]
+**Status**: [Initialization Complete | In Progress]  
 **Next Step**: [Commissioning | Further Configuration Required]
 ```
 
@@ -209,7 +209,7 @@ Before declaring Phase 2 complete:
 5. ✅ **Attach PREHANDOVER_PROOF** — Include in PR description (see template)
 6. ✅ **Declare Complete** — ONLY after execution GREEN locally
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 
 ---
@@ -254,7 +254,7 @@ Before declaring Phase 3 complete:
 5. ✅ **Attach PREHANDOVER_PROOF** — Include in PR description (see template)
 6. ✅ **Declare Complete** — ONLY after execution GREEN locally
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 
 ---
@@ -283,7 +283,7 @@ Based on repository type, seed agent contracts in `.github/agents/`:
 
 **Schema**: See `governance/schemas/AGENT_FILE_SCHEMA.md` in canonical governance for complete specification.
 
-**Binding Requirements**: See `governance/canon/AGENT_FILE_BINDING_REQUIREMENTS.md` for mandatory bindings based on repository type.
+**Binding Requirements**: See `governance/canon/agent-contracts-guidance/AGENT_FILE_BINDING_REQUIREMENTS.md` for mandatory bindings based on repository type.
 
 **Template**: See `maturion-foreman-governance/.agent` as reference.
 
@@ -318,7 +318,7 @@ Based on repository type, seed agent contracts in `.github/agents/`:
 
 #### 4.3 Validate .agent File (MANDATORY)
 
-**Validation Authority**: `governance/runbooks/AGENT_FILE_VALIDATION.md`
+**Validation Authority**: `governance/canon/agent-contracts-guidance/runbooks/AGENT_FILE_VALIDATION.md`
 
 Before proceeding, validate the `.agent` file:
 
@@ -384,10 +384,10 @@ yq eval '.governance.bindings[].id' .agent
 ```markdown
 ## .agent File Validation
 
-**Validation Date**: [DATE]
-**Validation Levels**: 1-4 ALL PASS
-**Schema Version**: 1.0.0
-**Mandatory Bindings**: All present per AGENT_FILE_BINDING_REQUIREMENTS.md
+**Validation Date**: [DATE]  
+**Validation Levels**: 1-4 ALL PASS  
+**Schema Version**: 1.0.0  
+**Mandatory Bindings**: All present per AGENT_FILE_BINDING_REQUIREMENTS.md  
 **Validator**: [NAME]
 ```
 
@@ -402,9 +402,9 @@ Before declaring Phase 4 complete:
 5. ✅ **Attach PREHANDOVER_PROOF** — Include in PR description with validation evidence
 6. ✅ **Declare Complete** — ONLY after execution GREEN locally AND validation PASS
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
-**Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
-**Validation**: `governance/runbooks/AGENT_FILE_VALIDATION.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
+**Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`  
+**Validation**: `governance/canon/agent-contracts-guidance/runbooks/AGENT_FILE_VALIDATION.md`
 
 ---
 
@@ -438,7 +438,7 @@ Before declaring Phase 5 complete:
 5. ✅ **Attach PREHANDOVER_PROOF** — Include in PR description (see template)
 6. ✅ **Declare Complete** — ONLY after execution GREEN locally
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 
 ---
@@ -471,7 +471,7 @@ In `INITIALIZATION_EVIDENCE.md`, add section:
 ```markdown
 ## Latest Learnings Applied
 
-**Learnings Review Date**: [DATE]
+**Learnings Review Date**: [DATE]  
 **Bootstrap Learnings Version**: [VERSION or DATE]
 
 ### Learnings Incorporated:
@@ -496,7 +496,7 @@ Before declaring Phase 6 complete:
 5. ✅ **Attach PREHANDOVER_PROOF** — Include in PR description (see template)
 6. ✅ **Declare Complete** — ONLY after execution GREEN locally
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 
 ---
@@ -538,7 +538,7 @@ Before declaring Phase 7 complete:
 5. ✅ **Attach PREHANDOVER_PROOF** — Include in PR description (see template)
 6. ✅ **Declare Complete** — ONLY after execution GREEN locally
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 
 ---
@@ -571,8 +571,8 @@ Configure branch protection on default branch:
 
 ## Repository Status
 
-**Repository**: [REPO_NAME]
-**Initialization Complete**: [DATE]
+**Repository**: [REPO_NAME]  
+**Initialization Complete**: [DATE]  
 **Commissioning Phase**: [Not Started | Phase 1 | Phase 2 | Complete]
 
 ## Commissioning Checklist
@@ -597,7 +597,7 @@ Configure branch protection on default branch:
 
 ---
 
-**Current Status**: [Brief status description]
+**Current Status**: [Brief status description]  
 **Next Milestone**: [What needs to happen next]
 ```
 
@@ -616,7 +616,7 @@ Before declaring Phase 8 complete:
 
 **Note**: Phase 8 validation can be done via local simulation (checking gate trigger paths) or a separate draft test PR (not the bootstrap PR itself). The goal is to verify gates will execute correctly before the bootstrap PR is merged.
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 
 ---
@@ -749,8 +749,8 @@ After layer-down, a **Governance Liaison** agent (or FM in bootstrap mode) is re
 
 ### Example 1: New Application Repository
 
-**Repository**: `maturion-new-app`
-**Type**: Application (Next.js)
+**Repository**: `maturion-new-app`  
+**Type**: Application (Next.js)  
 **Agents**: FM + UI Builder + API Builder + QA Builder
 
 **Layer-Down Steps**:
@@ -770,8 +770,8 @@ After layer-down, a **Governance Liaison** agent (or FM in bootstrap mode) is re
 
 ### Example 2: New Governance Repository
 
-**Repository**: `maturion-governance-experimental`
-**Type**: Governance
+**Repository**: `maturion-governance-experimental`  
+**Type**: Governance  
 **Agents**: Governance Administrator only
 
 **Layer-Down Steps**:
@@ -809,9 +809,9 @@ After layer-down, a **Governance Liaison** agent (or FM in bootstrap mode) is re
 - `governance/canon/BOOTSTRAP_EXECUTION_LEARNINGS.md` - Latest learnings
 - `governance/canon/AGENT_RECRUITMENT.md` - Agent appointment process
 - `governance/schemas/AGENT_FILE_SCHEMA.md` - Repository `.agent` file specification
-- `governance/canon/AGENT_FILE_BINDING_REQUIREMENTS.md` - Mandatory and optional bindings for `.agent` files
-- `governance/runbooks/AGENT_FILE_VALIDATION.md` - Validation process for `.agent` files
-- `governance/runbooks/AGENT_FILE_MAINTENANCE.md` - Maintenance protocol for `.agent` files
+- `governance/canon/agent-contracts-guidance/AGENT_FILE_BINDING_REQUIREMENTS.md` - Mandatory and optional bindings for `.agent` files
+- `governance/canon/agent-contracts-guidance/runbooks/AGENT_FILE_VALIDATION.md` - Validation process for `.agent` files
+- `governance/canon/agent-contracts-guidance/runbooks/AGENT_FILE_MAINTENANCE.md` - Maintenance protocol for `.agent` files
 - `apps/foreman-office-app/mappings/GOVERNANCE_GATE_MAPPING.md` - Example mapping document
 
 ---

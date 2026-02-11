@@ -1,9 +1,9 @@
 # VERSIONING AND EVOLUTION GOVERNANCE
 
 ## Status
-Canonical Governance Specification
-Version: v1.0
-Authority: Governance Administrator
+Canonical Governance Specification  
+Version: v1.0  
+Authority: Governance Administrator  
 Required By: GOVERNANCE_COMPLETENESS_MODEL.md Section 5.6
 
 ---
@@ -98,9 +98,9 @@ Deprecated versions MUST follow controlled deprecation:
 **Example**:
 ```markdown
 ## Status
-Canonical Governance Specification
-Version: v1.2.0
-Authority: Governance Administrator
+Canonical Governance Specification  
+Version: v1.2.0  
+Authority: Governance Administrator  
 Last Updated: 2025-12-22
 ```
 
@@ -203,45 +203,45 @@ DEVELOPMENT → ALPHA → BETA → RELEASE_CANDIDATE → STABLE → DEPRECATED �
 ```
 
 #### 5.1.1 DEVELOPMENT
-**Description**: Active development, not released
-**Versioning**: No version or `0.x.x`
-**Stability**: Unstable, breaking changes expected
+**Description**: Active development, not released  
+**Versioning**: No version or `0.x.x`  
+**Stability**: Unstable, breaking changes expected  
 **Support**: No support
 
 #### 5.1.2 ALPHA
-**Description**: Early testing version
-**Versioning**: `x.x.x-alpha.N`
-**Stability**: Unstable, breaking changes possible
+**Description**: Early testing version  
+**Versioning**: `x.x.x-alpha.N`  
+**Stability**: Unstable, breaking changes possible  
 **Support**: No support
 
 #### 5.1.3 BETA
-**Description**: Feature-complete, testing in progress
-**Versioning**: `x.x.x-beta.N`
-**Stability**: Mostly stable, bug fixes only
+**Description**: Feature-complete, testing in progress  
+**Versioning**: `x.x.x-beta.N`  
+**Stability**: Mostly stable, bug fixes only  
 **Support**: Limited support
 
 #### 5.1.4 RELEASE_CANDIDATE (RC)
-**Description**: Final testing before stable
-**Versioning**: `x.x.x-rc.N`
-**Stability**: Stable, critical bugs only
+**Description**: Final testing before stable  
+**Versioning**: `x.x.x-rc.N`  
+**Stability**: Stable, critical bugs only  
 **Support**: Full support
 
 #### 5.1.5 STABLE
-**Description**: Production-ready release
-**Versioning**: `x.x.x`
-**Stability**: Stable, maintained
+**Description**: Production-ready release  
+**Versioning**: `x.x.x`  
+**Stability**: Stable, maintained  
 **Support**: Full support per support policy
 
 #### 5.1.6 DEPRECATED
-**Description**: End of active development, grace period active
-**Versioning**: Same, with deprecation notice
-**Stability**: Stable, security fixes only
+**Description**: End of active development, grace period active  
+**Versioning**: Same, with deprecation notice  
+**Stability**: Stable, security fixes only  
 **Support**: Maintenance support only
 
 #### 5.1.7 END_OF_LIFE (EOL)
-**Description**: No longer supported
-**Versioning**: Same, with EOL notice
-**Stability**: Unmaintained
+**Description**: No longer supported  
+**Versioning**: Same, with EOL notice  
+**Stability**: Unmaintained  
 **Support**: No support
 
 ---

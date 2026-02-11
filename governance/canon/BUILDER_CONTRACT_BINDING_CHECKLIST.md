@@ -1,10 +1,10 @@
 # BUILDER CONTRACT BINDING CHECKLIST
 
-**Status**: Canonical Governance Validation Checklist
-**Version**: 1.2.0
-**Authority**: Maturion Engineering Leadership (Johan Ras)
-**Created**: 2026-01-01
-**Last Updated**: 2026-01-11
+**Status**: Canonical Governance Validation Checklist  
+**Version**: 1.2.0  
+**Authority**: Maturion Engineering Leadership (Johan Ras)  
+**Created**: 2026-01-01  
+**Last Updated**: 2026-01-11  
 **Purpose**: Machine-checkable checklist of what MUST appear in every builder contract to be considered constitutionally bound
 
 ---
@@ -81,7 +81,7 @@ Each item includes:
 - **Validation**: Field exists and value is "Builder" or specific builder type ("UI Builder", "API Builder", etc.)
 - **Canonical Reference**: `governance/canon/AGENT_RECRUITMENT.md` section 4
 - **Severity if Missing**: BLOCKER - Agent class cannot be determined
-- **Format**:
+- **Format**: 
   ```yaml
   role: "Builder"
   # OR
@@ -119,7 +119,7 @@ Each item includes:
 
 - **Element**: `governance.canon` or `canonical_governance`
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists
   - Value is resolvable reference (e.g., "github:MaturionISMS/maturion-foreman-governance/governance/canon")
   - Reference can be resolved at validation time
@@ -136,7 +136,7 @@ Each item includes:
 
 - **Element**: `governance.profile` or `governance_profile`
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists
   - Value is "governance/profiles/builder.v1.md" or specific builder profile
   - Referenced profile exists
@@ -167,7 +167,7 @@ Each item includes:
 
 - **Element**: `scope.allowed_paths` or `allowed_paths`
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists
   - List of path patterns (glob or explicit)
   - Not empty (at least one path defined)
@@ -186,7 +186,7 @@ Each item includes:
 
 - **Element**: `scope.restricted_paths` or `restricted_paths`
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists
   - Includes at minimum: `/governance/**`, `.agent`, `.github/workflows/**`
   - List is not empty
@@ -207,7 +207,7 @@ Each item includes:
 
 - **Element**: `scope.escalation_required` or `escalation_paths`
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists
   - Includes architecture paths, governance paths
   - List may be empty if no escalation-required paths (but field must exist)
@@ -227,7 +227,7 @@ Each item includes:
 
 - **Element**: `build_philosophy.build_to_green` or explicit Build-to-Green clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States commitment to Build-to-Green mandate
   - Explicitly refuses non-Build-to-Green instructions
@@ -250,7 +250,7 @@ Each item includes:
 
 - **Element**: `build_philosophy.zero_test_debt` or explicit Zero Test Debt clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States absolute commitment to zero test debt
   - Defines what constitutes test debt
@@ -276,7 +276,7 @@ Each item includes:
 
 - **Element**: `build_philosophy.hundred_percent_green` or explicit 100% GREEN clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States 100% GREEN is absolute (not 99%, not "mostly passing")
   - Defines what 100% GREEN means
@@ -294,7 +294,7 @@ Each item includes:
 
 - **Element**: `build_philosophy.test_infrastructure_is_production` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States test helpers/fixtures/mocks are production code
   - States stub test infrastructure = not acceptable
@@ -313,7 +313,7 @@ Each item includes:
 
 - **Element**: `opojd.continuous_execution` or explicit OPOJD clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States commitment to continuous execution
   - States execution continues until completion or constitutional block
@@ -339,7 +339,7 @@ Each item includes:
 
 - **Element**: `opojd.legitimate_pause_points` or explicit enumeration
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Lists ONLY legitimate pause triggers (CS2, governance violation, unrecoverable failure, ambiguity)
   - Does not include "ask for approval" or "await permission"
@@ -361,7 +361,7 @@ Each item includes:
 
 - **Element**: `architecture.precondition_required` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States architecture MUST exist before building
   - States builder cannot build without architecture
@@ -380,7 +380,7 @@ Each item includes:
 
 - **Element**: `architecture.conformance_required` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States implementation MUST match architecture exactly
   - Prohibits "helpful improvements" or deviations
@@ -401,7 +401,7 @@ Each item includes:
 
 - **Element**: `evidence.required_artifacts` or explicit list
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Includes at minimum: BUILD_QA_REPORT.json, GOVERNANCE_COMPLIANCE_REPORT.json, SUMMARY.md
   - Specifies `.qa/builder/` location
@@ -423,7 +423,7 @@ Each item includes:
 
 - **Element**: `evidence.schema_compliance` or explicit commitment
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States artifacts MUST conform to schemas
   - References canonical schemas
@@ -440,7 +440,7 @@ Each item includes:
 
 - **Element**: `evidence.integrity` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States artifacts accurately reflect build state
   - Prohibits placeholder or fake artifacts
@@ -462,7 +462,7 @@ Each item includes:
 
 - **Element**: `gates.applicable_to_builders` or explicit list
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Lists gates applicable to builders (Build-to-Green, Architecture Completeness, Builder QA Artifact, Zero Test Debt, Scope Compliance)
   - Acknowledges builder-role-specific gate requirements
@@ -483,7 +483,7 @@ Each item includes:
 
 - **Element**: `gates.pre_merge_compliance` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States all applicable gates MUST pass before merge
   - States builder responsible for achieving gate compliance
@@ -504,7 +504,7 @@ Each item includes:
 
 - **Element**: `escalation.format` or explicit template
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Specifies required escalation fields (Category, Severity, Trigger, Canonical References, Context, etc.)
   - References escalation policy
@@ -527,7 +527,7 @@ Each item includes:
 
 - **Element**: `escalation.triggers` or explicit list
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Lists escalation triggers (ambiguity, architecture gap, governance conflict, scope exceeded, etc.)
   - Covers all categories from survey
@@ -549,7 +549,7 @@ Each item includes:
 
 - **Element**: `escalation.target`
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists
   - Value is "FOREMAN" or "FM"
 - **Canonical Reference**: `GOVERNANCE_BUILDER_SUBMISSION_SURVEY.md` section 11
@@ -566,7 +566,7 @@ Each item includes:
 
 - **Element**: `prohibited_roles` or explicit section
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Lists prohibited roles (Architect, QA Designer, Governance Administrator, Foreman, Requirements Interpreter, etc.)
   - Matches list from survey section 12
@@ -598,7 +598,7 @@ Each item includes:
 
 - **Element**: `technology.approved_stack_only` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States only approved technologies may be used
   - Prohibits introducing new dependencies without approval
@@ -619,7 +619,7 @@ Each item includes:
 
 - **Element**: `enhancement_capture.feature_enhancement_mandatory` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States feature enhancement evaluation required at end of work unit
   - States enhancements marked as PARKED (not for immediate execution)
@@ -638,7 +638,7 @@ Each item includes:
 
 - **Element**: `enhancement_capture.process_improvement_mandatory` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States process improvement reflection required at end of work unit
   - Lists ALL mandatory process reflection questions (5 questions minimum)
@@ -666,7 +666,7 @@ Each item includes:
 
 - **Element**: `enhancement_capture.bl_promotion_awareness` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States builder must flag systematic governance gaps for BL consideration
   - References Bootstrap Learning promotion model
@@ -689,7 +689,7 @@ Each item includes:
 
 - **Element**: `execution_bootstrap_protocol` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Acknowledges requirement to follow 7-step execution verification process
   - References EXECUTION_BOOTSTRAP_PROTOCOL.md
@@ -708,7 +708,7 @@ Each item includes:
 
 - **Element**: `prehandover_proof` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States builder MUST include PREHANDOVER_PROOF for executable artifacts
   - References template at governance/templates/PREHANDOVER_PROOF_TEMPLATE.md
@@ -732,7 +732,7 @@ Each item includes:
 
 - **Element**: `preflight_gate_validation` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Builder MUST enumerate ALL gates triggered by PR
   - Builder MUST validate gates in preflight (before PR creation)
@@ -759,7 +759,7 @@ Each item includes:
 
 - **Element**: `ui_standards` or explicit UI guidelines
 - **Requirement**: CONDITIONAL (if role = "UI Builder")
-- **Validation**:
+- **Validation**: 
   - Field exists if role is UI Builder
   - References UI component standards, accessibility requirements
 - **Severity if Missing**: MEDIUM
@@ -778,7 +778,7 @@ Each item includes:
 
 - **Element**: `api_standards` or explicit API guidelines
 - **Requirement**: CONDITIONAL (if role = "API Builder")
-- **Validation**:
+- **Validation**: 
   - Field exists if role is API Builder
   - References API contract standards (REST, GraphQL, etc.)
 - **Severity if Missing**: MEDIUM
@@ -797,7 +797,7 @@ Each item includes:
 
 - **Element**: `schema_standards` or explicit schema guidelines
 - **Requirement**: CONDITIONAL (if role = "Schema Builder")
-- **Validation**:
+- **Validation**: 
   - Field exists if role is Schema Builder
   - References schema evolution, backward compatibility requirements
 - **Severity if Missing**: MEDIUM
@@ -815,7 +815,7 @@ Each item includes:
 
 - **Element**: `integration_standards` or explicit integration guidelines
 - **Requirement**: CONDITIONAL (if role = "Integration Builder")
-- **Validation**:
+- **Validation**: 
   - Field exists if role is Integration Builder
   - References integration patterns, error handling, retry logic
 - **Severity if Missing**: MEDIUM
@@ -833,7 +833,7 @@ Each item includes:
 
 - **Element**: `qa_standards` or explicit QA guidelines
 - **Requirement**: CONDITIONAL (if role = "QA Builder")
-- **Validation**:
+- **Validation**: 
   - Field exists if role is QA Builder
   - References test coverage requirements, test types
 - **Severity if Missing**: HIGH
@@ -854,7 +854,7 @@ Each item includes:
 
 - **Element**: `constitutional.governance_supremacy` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States governance rules override all other considerations
   - States no builder preference may override governance
@@ -871,7 +871,7 @@ Each item includes:
 
 - **Element**: `constitutional.safeguards` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Acknowledges CS1-CS6 safeguards
   - States safeguards MUST be respected
@@ -893,7 +893,7 @@ Each item includes:
 
 - **Element**: `constitutional.one_time_build` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States commitment to One-Time Build Law
   - States build must be fully functional on first delivery
@@ -913,7 +913,7 @@ Each item includes:
 
 - **Element**: `constitutional.quality_integrity` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - States commitment to QIC (Quality Integrity Contract)
   - States QA must be comprehensive and accurate
@@ -930,7 +930,7 @@ Each item includes:
 
 - **Element**: `constitutional.authority_hierarchy` or explicit clause
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Field exists OR explicit section in contract text
   - Lists authority hierarchy (Johan → Governance → FM → Builder)
   - States higher authority always prevails
@@ -967,7 +967,7 @@ Each item includes:
 
 - **Element**: FM appointment instruction explicitly communicates OPOJD continuous execution requirement
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Appointment instruction document exists (typically using `governance/templates/FM_BUILDER_APPOINTMENT_INSTRUCTION.template.md`)
   - Document includes explicit OPOJD section with continuous execution mandate
   - Document prohibits mid-execution pauses / approval requests / progress reporting
@@ -984,7 +984,7 @@ Each item includes:
 
 - **Element**: FM appointment instruction explicitly defines acceptable execution states (BLOCKED / COMPLETE only)
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Appointment instruction document includes execution states section
   - Document lists acceptable states: BLOCKED (escalate blocker to FM), COMPLETE (100% GREEN QA achieved)
   - Document lists prohibited states: IN_PROGRESS, AWAITING_APPROVAL, PARTIAL_COMPLETION, progress percentages
@@ -1000,7 +1000,7 @@ Each item includes:
 
 - **Element**: FM appointment instruction explicitly communicates One-Time Build Law requirement
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Appointment instruction document includes One-Time Build Law section
   - Document states 100% QA GREEN on first delivery (no partial work, no iteration, no "MVP")
   - Document prohibits test debt (301/303 tests passing = TOTAL FAILURE)
@@ -1017,7 +1017,7 @@ Each item includes:
 
 - **Element**: FM appointment instruction explicitly references BL-0007 learnings
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Appointment instruction document cites BL-0007 (Bootstrap Execution Learning)
   - Document explains why appointment discipline is critical security control
   - Document contextualizes "coder-first defaults" as governance violations
@@ -1031,7 +1031,7 @@ Each item includes:
 
 - **Element**: FM appointment instruction explicitly references BL-016 learnings
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Appointment instruction document cites BL-016 (Bootstrap Execution Learning)
   - Document explains builder must self-recognize execution complexity limits
   - Document requires escalation when task complexity exceeds practical capability
@@ -1045,7 +1045,7 @@ Each item includes:
 
 - **Element**: FM appointment instruction explicitly enumerates escalation triggers and STOP conditions
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Appointment instruction document includes escalation triggers section
   - Document lists specific triggers: Architecture Missing/Incomplete, Governance Ambiguity, Constitutional Safeguard, Unrecoverable Failure, Scope Boundary, Execution Complexity
   - Document defines when builder MUST STOP and escalate (BLOCKED state)
@@ -1063,7 +1063,7 @@ Each item includes:
 
 - **Element**: FM requires builder to explicitly acknowledge execution model constraints before authorization
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - FM appointment process includes builder acknowledgment step (after instruction issuance, before authorization)
   - Builder explicitly acknowledges: OPOJD continuous execution, terminal-state execution, One-Time Build Law, escalation discipline
   - Builder acknowledgment is documented in appointment evidence
@@ -1079,7 +1079,7 @@ Each item includes:
 
 - **Element**: FM optionally verifies builder understanding through clarifying questions
 - **Requirement**: OPTIONAL (but recommended for high-risk or complex tasks)
-- **Validation**:
+- **Validation**: 
   - If used: FM asks verification questions (e.g., "What do you do if 4 of 5 components complete and 5th is blocked?")
   - Builder responses documented
   - Incorrect responses trigger repeat constitutional onboarding
@@ -1095,7 +1095,7 @@ Each item includes:
 
 - **Element**: FM documents complete appointment evidence in audit trail
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Appointment evidence file exists (e.g., `.evidence/fm/builder-appointments/[builder-id]-[timestamp].md`)
   - Evidence includes: Appointment timestamp, builder identity, scope definition, architecture reference, Red QA reference, appointment instruction, builder acknowledgment, authorization grant
   - Evidence is structured and auditable
@@ -1112,7 +1112,7 @@ Each item includes:
 
 - **Element**: FM verifies PR gate rules are layered down in target repository before builder appointment
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - PR gate workflow exists in target repository (e.g., `.github/workflows/pr-gate.yml`)
   - Gate enforcement includes builder-specific checks (Build-to-Green, Architecture Completeness, Builder QA Artifact, Zero Test Debt, Scope Compliance)
   - Gate applicability logic is role-aware (distinguishes builder PRs from FM PRs)
@@ -1127,7 +1127,7 @@ Each item includes:
 
 - **Element**: FM verifies architecture is complete, frozen, and wiring-complete before builder appointment
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Architecture document exists and is complete per Architecture Completeness Requirements
   - Architecture is frozen (no further changes without CS2 approval)
   - Architecture is wiring-complete (BL-015): All components have explicit operational definitions
@@ -1141,7 +1141,7 @@ Each item includes:
 
 - **Element**: FM verifies Red QA suite exists and is failing (RED state) before builder appointment
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Red QA suite exists and is derived from architecture
   - Red QA suite is failing (RED state) because implementation does not exist yet
   - Red QA suite is comprehensive (covers all architectural components)
@@ -1159,7 +1159,7 @@ Each item includes:
 
 - **Element**: FM establishes mechanism to detect when builder exhibits progress-oriented behavior (OPOJD violation)
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - FM supervision process includes OPOJD violation detection
   - Progress-oriented behavior indicators defined (incremental progress reports, mid-execution approval requests, partial delivery)
   - FM response to OPOJD violations defined (HALT, corrective instruction, re-verify understanding, escalate if repeated)
@@ -1172,7 +1172,7 @@ Each item includes:
 
 - **Element**: FM validates that builder operates in terminal states only (BLOCKED or COMPLETE)
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - FM supervision process includes terminal-state validation
   - Invalid states defined (IN_PROGRESS, AWAITING_APPROVAL, PARTIAL_COMPLETION)
   - FM response to invalid states defined (immediate intervention, corrective instruction)
@@ -1189,7 +1189,7 @@ Each item includes:
 
 - **Element**: FM classifies builder behavioral issues as "appointment incompleteness" (FM-side failure) vs. "builder misconduct" (builder-side failure)
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - FM classification process exists for builder failures
   - Default classification is "appointment incompleteness" unless builder misconduct is evident
   - Appointment incompleteness triggers corrective action (repeat constitutional onboarding, re-verify understanding)
@@ -1203,7 +1203,7 @@ Each item includes:
 
 - **Element**: FM corrective action process for appointment incompleteness
 - **Requirement**: MANDATORY
-- **Validation**:
+- **Validation**: 
   - Corrective action protocol exists (HALT execution, repeat constitutional onboarding, re-verify understanding, re-authorize)
   - Escalation trigger defined (builder cannot demonstrate understanding after 2 corrective attempts)
   - Corrective action documentation in evidence trail

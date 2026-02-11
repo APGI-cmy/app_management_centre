@@ -1,9 +1,9 @@
 # REQUIREMENT SPECIFICATION GOVERNANCE
 
 ## Status
-Canonical Governance Specification
-Version: v1.0
-Authority: Governance Administrator
+Canonical Governance Specification  
+Version: v1.0  
+Authority: Governance Administrator  
 Required By: GOVERNANCE_COMPLETENESS_MODEL.md Section 5.6
 
 ---
@@ -84,45 +84,45 @@ DRAFT → REVIEW → APPROVED → IMPLEMENTED → VERIFIED → [SUPERSEDED | ARC
 ```
 
 #### 4.1.1 DRAFT
-**Description**: Requirement under development
-**Allowed Actions**: Edit, refine, clarify
-**Approval**: Not required
+**Description**: Requirement under development  
+**Allowed Actions**: Edit, refine, clarify  
+**Approval**: Not required  
 **Traceability**: Not required
 
 #### 4.1.2 REVIEW
-**Description**: Requirement ready for approval review
-**Allowed Actions**: Review comments, minor edits
-**Approval**: Under review
+**Description**: Requirement ready for approval review  
+**Allowed Actions**: Review comments, minor edits  
+**Approval**: Under review  
 **Traceability**: Not required
 
 #### 4.1.3 APPROVED
-**Description**: Requirement approved for implementation
-**Allowed Actions**: Read-only, reference in architecture
-**Approval**: Approved by designated authority
+**Description**: Requirement approved for implementation  
+**Allowed Actions**: Read-only, reference in architecture  
+**Approval**: Approved by designated authority  
 **Traceability**: Required from this state forward
 
 #### 4.1.4 IMPLEMENTED
-**Description**: Requirement has been implemented
-**Allowed Actions**: Read-only, reference in tests
-**Approval**: Implementation complete
+**Description**: Requirement has been implemented  
+**Allowed Actions**: Read-only, reference in tests  
+**Approval**: Implementation complete  
 **Traceability**: Architecture and implementation must link to requirement
 
 #### 4.1.5 VERIFIED
-**Description**: Requirement implementation verified through testing
-**Allowed Actions**: Read-only, reference in evidence
-**Approval**: QA verification complete
+**Description**: Requirement implementation verified through testing  
+**Allowed Actions**: Read-only, reference in evidence  
+**Approval**: QA verification complete  
 **Traceability**: Tests and evidence must link to requirement
 
 #### 4.1.6 SUPERSEDED
-**Description**: Requirement replaced by newer version
-**Allowed Actions**: Read-only, archive
-**Approval**: N/A
+**Description**: Requirement replaced by newer version  
+**Allowed Actions**: Read-only, archive  
+**Approval**: N/A  
 **Traceability**: Link to superseding requirement
 
 #### 4.1.7 ARCHIVED
-**Description**: Requirement no longer applicable
-**Allowed Actions**: Read-only, retain for audit
-**Approval**: Archival approved
+**Description**: Requirement no longer applicable  
+**Allowed Actions**: Read-only, retain for audit  
+**Approval**: Archival approved  
 **Traceability**: Retained for audit trail
 
 ---
