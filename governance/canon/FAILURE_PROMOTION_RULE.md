@@ -1,9 +1,9 @@
 # FAILURE PROMOTION RULE
 
 ## Status
-Canonical Governance Rule
-Version: v1
-Authority: Governance
+Canonical Governance Rule  
+Version: v1  
+Authority: Governance  
 Applies To: All Builds, All Failure Records
 
 ---

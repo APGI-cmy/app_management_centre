@@ -1,11 +1,11 @@
 # FM PRE-AUTHORIZATION CHECKLIST CANON
 
 ## Status
-**Type**: Canonical Gate Definition
-**Authority**: Supreme - Applies to ALL wave/subwave planning and builder appointments
-**Version**: 1.0.0
-**Date**: 2026-01-05
-**Owner**: Maturion Engineering Leadership (Johan)
+**Type**: Canonical Gate Definition  
+**Authority**: Supreme - Applies to ALL wave/subwave planning and builder appointments  
+**Version**: 1.0.0  
+**Date**: 2026-01-05  
+**Owner**: Maturion Engineering Leadership (Johan)  
 **Derived From**: BL-018, BL-019, BL-020 (FM App Wave 2)
 
 ---
@@ -45,7 +45,7 @@ This checklist derives authority from and implements:
 > "FM must execute an explicit, structured pre-authorization checklist before:
 > - Declaring subwaves 'READY FOR AUTHORIZATION', or
 > - Issuing builder appointments.
->
+> 
 > This checklist must be defined canonically at governance level, rippled to FM repo, and layered down into ForemanApp .agent as a strong reference."
 
 This document is the **implementation** of that requirement.
@@ -83,8 +83,8 @@ FM **MUST** execute this checklist **BEFORE**:
 The checklist is FM's **final gate** before authorization:
 
 ```
-Architecture Complete → QA Catalog Extended → QA-to-Red Created →
-BL/FL-CI Clear → Dependencies Met → [FM PRE-AUTHORIZATION CHECKLIST] →
+Architecture Complete → QA Catalog Extended → QA-to-Red Created → 
+BL/FL-CI Clear → Dependencies Met → [FM PRE-AUTHORIZATION CHECKLIST] → 
 Authorization → Builder Appointment
 ```
 
@@ -399,7 +399,7 @@ This section defines the **cross-repository lifecycle** for this checklist, spec
 
 **Status**: ✅ **COMPLETE** (this document)
 
-**Location**: `maturion-foreman-governance` repository
+**Location**: `maturion-foreman-governance` repository  
 **Artifact**: `governance/canon/FM_PREAUTH_CHECKLIST_CANON.md`
 
 **Authority**: Canonical governance standard (PUBLIC_API in Governance Canon Manifest)
@@ -418,7 +418,7 @@ This section defines the **cross-repository lifecycle** for this checklist, spec
 
 **Status**: ⏳ **PENDING** (requires FM repo layer-down issue)
 
-**Location**: `maturion-foreman-office-app` repository
+**Location**: `maturion-foreman-office-app` repository  
 **Target Artifact**: `governance/specs/FM_PREAUTH_CHECKLIST.md` (FM-local version)
 
 **Responsible Agent**: GovernanceLiaison agent in FM repo
@@ -460,7 +460,7 @@ This section defines the **cross-repository lifecycle** for this checklist, spec
 
 **Status**: ⏳ **PENDING** (requires ForemanApp .agent update)
 
-**Location**: `maturion-foreman-office-app` repository
+**Location**: `maturion-foreman-office-app` repository  
 **Target Artifact**: `.github/agents/ForemanApp-agent.md`
 
 **Responsible Agent**: GovernanceLiaison agent in FM repo
@@ -502,7 +502,7 @@ This section defines the **cross-repository lifecycle** for this checklist, spec
 
 **Status**: ⏳ **PENDING** (requires FM operational execution)
 
-**Location**: FM execution in `maturion-foreman-office-app`
+**Location**: FM execution in `maturion-foreman-office-app`  
 **Manifestation**: Actual checklist execution during wave/subwave planning
 
 **Responsible Agent**: ForemanApp agent during execution
@@ -555,8 +555,8 @@ This section defines the **cross-repository lifecycle** for this checklist, spec
 ```markdown
 ## Layer-Down: FM Pre-Authorization Checklist Canon
 
-**Source**: `maturion-foreman-governance` governance/canon/FM_PREAUTH_CHECKLIST_CANON.md v1.0.0
-**Authority**: BL-020 structural fix
+**Source**: `maturion-foreman-governance` governance/canon/FM_PREAUTH_CHECKLIST_CANON.md v1.0.0  
+**Authority**: BL-020 structural fix  
 **Target Stages**: Stage 2 (FM-local doc) + Stage 3 (.agent binding)
 
 ### Objectives
@@ -580,8 +580,8 @@ FM repo layer-down COMPLETE when:
 - Agent workflow requires checklist execution before authorization
 - Evidence of layer-down completion documented
 
-**Assignee**: GovernanceLiaison agent in FM repo
-**Priority**: High (BL-020 structural fix)
+**Assignee**: GovernanceLiaison agent in FM repo  
+**Priority**: High (BL-020 structural fix)  
 **Blocks**: Future wave/subwave authorizations without checklist
 ```
 

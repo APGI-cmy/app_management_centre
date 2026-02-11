@@ -1,11 +1,11 @@
 # MANDATORY ENHANCEMENT & IMPROVEMENT CAPTURE STANDARD
 
 ## Status
-**Type**: Canonical Governance Standard
-**Authority**: Supreme - Johan Ras
-**Version**: 2.0.0
-**Effective Date**: 2026-01-08
-**Applies To**: All Agents, Builders, and Applications
+**Type**: Canonical Governance Standard  
+**Authority**: Supreme - Johan Ras  
+**Version**: 2.0.0  
+**Effective Date**: 2026-01-08  
+**Applies To**: All Agents, Builders, and Applications  
 **Enforcement**: Mandatory for all work units
 
 ---
@@ -85,8 +85,8 @@ The agent MUST produce outcomes for **BOTH** categories:
 
 The agent MUST produce **exactly one** of the following:
 
-1. **Feature Enhancement Proposal**, or
-2. An explicit declaration:
+1. **Feature Enhancement Proposal**, or  
+2. An explicit declaration:  
    ```
    No feature enhancement proposals identified for this work unit.
    ```
@@ -98,7 +98,7 @@ The agent MUST produce **BOTH**:
 1. **Answers to ALL mandatory process reflection questions** (see Section 5.3), AND
 2. **Either**:
    - **Process Improvement Proposal(s)** based on reflection, OR
-   - An explicit declaration after answering all questions:
+   - An explicit declaration after answering all questions:  
      ```
      No process improvement proposals identified for this work unit.
      (All mandatory reflection questions answered above)
@@ -149,7 +149,7 @@ Both outcomes (feature and process) are valid. Omission of either is a complianc
 Feature enhancement or improvement proposals MUST:
 
 - Be written in **plain, human-readable language**
-- Be explicitly marked:
+- Be explicitly marked:  
   **`PARKED — NOT AUTHORIZED FOR EXECUTION`**
 - Avoid prescriptive implementation detail
 - Avoid urgency or blocking language
@@ -163,7 +163,7 @@ Feature enhancement or improvement proposals MUST:
 Process improvement proposals MUST:
 
 - Be written in **plain, human-readable language**
-- Be explicitly marked:
+- Be explicitly marked:  
   **`PARKED — NOT AUTHORIZED FOR EXECUTION`**
 - Identify specific process, governance, tooling, or workflow gaps
 - Reference specific incidents, blockers, or failures that revealed the gap
@@ -267,8 +267,8 @@ If a process improvement is identified, include:
 ```markdown
 ## Enhancement: Automated Schema Validation
 
-**Status**: PARKED — NOT AUTHORIZED FOR EXECUTION
-**Submitted**: 2025-12-31
+**Status**: PARKED — NOT AUTHORIZED FOR EXECUTION  
+**Submitted**: 2025-12-31  
 **Context**: During governance layerdown validation, manual schema checking was time-consuming.
 
 **Proposal**: Create automated schema validation tooling that can verify governance artifacts against canonical schemas before PR submission. This could reduce manual validation effort and catch schema drift earlier.
@@ -281,8 +281,8 @@ If a process improvement is identified, include:
 ```markdown
 ## Process Improvement: QA Catalog Alignment Pre-Check Automation
 
-**Status**: PARKED — NOT AUTHORIZED FOR EXECUTION
-**Submitted**: 2026-01-08
+**Status**: PARKED — NOT AUTHORIZED FOR EXECUTION  
+**Submitted**: 2026-01-08  
 **Context**: Wave 2.2 subwave assignment in office-app
 
 **Problem**: Subwave was assigned QA ranges (QA-376 to QA-385) without verifying QA Catalog alignment. Ranges were semantically misaligned (parking station features vs network failure modes), causing builder appointment rejection and wave halt.
@@ -413,8 +413,8 @@ This standard exists to ensure that:
 
 ### 13.1 Guiding Principles
 
-> **We capture insight continuously.
-> We execute deliberately.
+> **We capture insight continuously.  
+> We execute deliberately.  
 > We improve systematically.**
 
 ---

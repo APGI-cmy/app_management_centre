@@ -1,8 +1,9 @@
+# SYSTEM COMMISSIONING AND PROGRESSIVE ACTIVATION PROTOCOL
 
 ## Status
-Canonical Governance Standard
-Version: v1.0
-Authority: Johan Ras
+Canonical Governance Standard  
+Version: v1.0  
+Authority: Johan Ras  
 Applies To: All Maturion Applications, All Activation Scenarios, Foreman (FM), Builders, Owner (Johan)
 
 ---
@@ -336,7 +337,7 @@ Deactivation is an **intentional governance-controlled state change**.
 
 **Principle**: Critical phase transitions require explicit human authorization.
 
-**Rationale**:
+**Rationale**: 
 - Activation has business, operational, and financial consequences
 - No AI or automated system may make these decisions unilaterally
 - Human authority ensures accountability and intentionality
@@ -430,7 +431,7 @@ Deactivation is an **intentional governance-controlled state change**.
 
 **Principle**: Each phase transition requires validation that preconditions are satisfied.
 
-**Rationale**:
+**Rationale**: 
 - Phases are not arbitrary labels; they represent increasing operational authority
 - Skipping validation creates risk of deploying unready applications
 - Validation evidence provides audit trail for compliance and incident response
@@ -540,7 +541,7 @@ The commissioning and activation audit trail serves to:
 - Deployed artifact identifier (commit SHA, version number, build ID)
 - Human confirmation of installation completion (Johan)
 
-**Evidence Location**:
+**Evidence Location**: 
 - Architecture/build evidence directory (e.g., `.architecture/commissioning/`)
 - Deployment logs (platform-specific)
 - PR comments or issue updates
@@ -765,12 +766,12 @@ The commissioning and activation audit trail serves to:
 
 **Requirement**: Each environment requires separate commissioning and activation.
 
-**Rationale**:
+**Rationale**: 
 - Production and non-production environments have different risk profiles
 - Validation results in one environment do not guarantee readiness in another
 - Human authorization is environment-specific
 
-**Process**:
+**Process**: 
 - Application commissioned in development: human authorization for dev activation
 - Application commissioned in staging: human authorization for staging activation
 - Application commissioned in production: human authorization for production activation
@@ -971,10 +972,10 @@ This protocol integrates with:
 
 This protocol succeeds when:
 
-✅ **All applications follow commissioning phases**
-✅ **No application activates without human authorization**
-✅ **Complete audit trail exists for all applications**
-✅ **Phase transitions are explicit and validated**
+✅ **All applications follow commissioning phases**  
+✅ **No application activates without human authorization**  
+✅ **Complete audit trail exists for all applications**  
+✅ **Phase transitions are explicit and validated**  
 ✅ **Activation vs execution distinction is clear and enforced**
 
 ---
@@ -1003,8 +1004,8 @@ This protocol supports:
 
 ### Version 1.0 (2025-12-24)
 
-**Status**: Initial Release
-**Authority**: Johan Ras
+**Status**: Initial Release  
+**Authority**: Johan Ras  
 **Trigger**: Issue G-C1 — Define System Commissioning & Progressive Activation Protocol
 
 **Summary**: Created canonical commissioning and progressive activation protocol defining four phases (Installed, Validated, Commissioned, Activated), human authority checkpoints, mandatory validation requirements, audit trail obligations, and prohibition of auto-activation.

@@ -1,10 +1,10 @@
 # GOVERNANCE COMPLETENESS MODEL
 
 ## Status
-Canonical Governance Enforcement Model
-Version: v1
-Authority: Johan Ras
-Applies To: Governance Repository Only (maturion-foreman-governance)
+Canonical Governance Enforcement Model  
+Version: v1  
+Authority: Johan Ras  
+Applies To: Governance Repository Only (maturion-foreman-governance)  
 Enforced By: Governance Gate (CI) + Governance Administrator (custodian)
 
 ---
@@ -17,7 +17,7 @@ This document defines what it means for the **Governance Repository** to be:
 - **Dependency-closed**
 - **Audit-structure-ready**
 
-This model exists to support the Governance Gate concept defined in QA governance:
+This model exists to support the Governance Gate concept defined in QA governance:  
 The Governance Gate is the final merge authority and validates **process compliance and evidence completeness**, not code quality. (Tests passing is necessary but not sufficient.) :contentReference[oaicite:0]{index=0} :contentReference[oaicite:1]{index=1}
 
 This model also supports the Governance Centre purpose: governance is canonical memory and assurance, drift is failure, QA is proof, and builds must be correct on first delivery. :contentReference[oaicite:2]{index=2} :contentReference[oaicite:3]{index=3} :contentReference[oaicite:4]{index=4}

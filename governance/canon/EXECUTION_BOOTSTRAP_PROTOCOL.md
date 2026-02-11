@@ -1,11 +1,11 @@
-successfully downloaded text file (SHA: b30e2dd100fa4e7cd2d96402eb6b9255e18ad27e)# EXECUTION BOOTSTRAP PROTOCOL
+# EXECUTION BOOTSTRAP PROTOCOL
 
 ## Status
-**Type**: Canonical Governance Process — Mandatory Enforcement
-**Authority**: Supreme - Canonical
-**Version**: 1.0.0
-**Effective Date**: 2026-01-11
-**Owner**: Maturion Engineering Leadership (Johan Ras)
+**Type**: Canonical Governance Process — Mandatory Enforcement  
+**Authority**: Supreme - Canonical  
+**Version**: 1.0.0  
+**Effective Date**: 2026-01-11  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
 **Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md, CI_CONFIRMATORY_NOT_DIAGNOSTIC.md
 
 ---
@@ -221,7 +221,7 @@ Before handover, agent MUST verify that local validation aligns with CI gate wor
 5. **Handle Mismatches**:
    - **If agent's proof incomplete**: Fix before handover, re-run all gates
    - **If gate workflow is wrong** (script missing, logic mismatch): **HALT and escalate to CS2/owner for urgent correction**
-     - **Escalation procedure**:
+     - **Escalation procedure**: 
        - Create GitHub issue with title: `[URGENT] Gate/Agent Drift Detected: [gate-name]`
        - Label: `gate-drift`, `escalation`, `cs2-required`
        - Include: Workflow file path, missing/incorrect script, evidence of mismatch
@@ -261,9 +261,7 @@ All applicable gates: GREEN
 
 **Action**: Verify that ALL validation commands produce ZERO warnings and exit code 0. Any warning or non-zero exit code MUST trigger immediate HALT and remediation.
 
-**YAML Validation**: Per `governance/canon/YAML_VALIDATION_PROTOCOL.md` v1.0.0 (created post-PR #679 catastrophic failure), YAML validation is MANDATORY before ALL handovers using `.github/scripts/validate-yaml-frontmatter.sh`.
-
-**🔒 Zero-Warning Rule (Authority: BUILD_PHILOSOPHY.md, STOP_AND_FIX_DOCTRINE.md, YAML_VALIDATION_PROTOCOL.md)**:
+**🔒 Zero-Warning Rule (Authority: BUILD_PHILOSOPHY.md, STOP_AND_FIX_DOCTRINE.md)**:
 
 **CRITICAL PROHIBITIONS**:
 - ❌ **PROHIBITED**: Handing over with ANY warning in validation output
@@ -289,8 +287,7 @@ git add <specific-files>  # Or 'git add .' after review
 git commit -m "Changes ready for validation"
 
 # 2. Run each gate validation
-# YAML validation (MANDATORY per YAML_VALIDATION_PROTOCOL.md)
-.github/scripts/validate-yaml-frontmatter.sh
+yamllint .github/agents/*.md
 EXIT_CODE_1=$?
 
 .github/scripts/validate-scope-to-diff.sh main
@@ -302,7 +299,7 @@ EXIT_CODE_3=$?
 # 3. Check for ANY non-zero exit code
 if [ $EXIT_CODE_1 -ne 0 ] || [ $EXIT_CODE_2 -ne 0 ] || [ $EXIT_CODE_3 -ne 0 ]; then
   echo "❌ VALIDATION FAILED - HALTING"
-  echo "Exit codes: yaml-validation=$EXIT_CODE_1, scope-to-diff=$EXIT_CODE_2, locked-sections=$EXIT_CODE_3"
+  echo "Exit codes: yamllint=$EXIT_CODE_1, scope-to-diff=$EXIT_CODE_2, locked-sections=$EXIT_CODE_3"
   echo "MUST FIX ALL ISSUES BEFORE PROCEEDING"
   exit 1
 fi
@@ -445,8 +442,8 @@ Every PR requiring execution verification MUST include this section in the PR de
 
 ### Execution Timestamp
 
-**Validation Performed**: [YYYY-MM-DD HH:MM:SS UTC]
-**Environment**: [Local development environment description]
+**Validation Performed**: [YYYY-MM-DD HH:MM:SS UTC]  
+**Environment**: [Local development environment description]  
 **Validator**: [Agent name or human name]
 
 ---
@@ -633,8 +630,8 @@ Exit code: 0
 
 ### Execution Timestamp
 
-**Validation Performed**: 2026-01-11 13:45:00 UTC
-**Environment**: Ubuntu 22.04, bash 5.1.16, yamllint 1.26.3
+**Validation Performed**: 2026-01-11 13:45:00 UTC  
+**Environment**: Ubuntu 22.04, bash 5.1.16, yamllint 1.26.3  
 **Validator**: governance-repo-administrator agent (via GitHub Copilot)
 
 ---
@@ -677,7 +674,7 @@ Before declaring this phase complete:
 5. ✅ **Attach PREHANDOVER_PROOF** — Include in PR description (see template)
 6. ✅ **Declare Complete** — ONLY after execution GREEN locally
 
-**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`
+**Authority**: `governance/canon/EXECUTION_BOOTSTRAP_PROTOCOL.md`  
 **Template**: `governance/templates/PREHANDOVER_PROOF_TEMPLATE.md`
 ```
 
@@ -916,10 +913,10 @@ No execution path may:
 
 ---
 
-**Status**: Active and Enforced
-**Owner**: Governance Administrator
-**Approval Authority**: Johan Ras
-**Effective**: Immediate upon merge
+**Status**: Active and Enforced  
+**Owner**: Governance Administrator  
+**Approval Authority**: Johan Ras  
+**Effective**: Immediate upon merge  
 **Last Updated**: 2026-01-26
 
 ---

@@ -1,4 +1,4 @@
-successfully downloaded text file (SHA: fbea4e3779be4aa063c28ca84b83df4b49f2ec0f)# DEFECT RESOLUTION AND MAINTENANCE CANON
+# DEFECT RESOLUTION AND MAINTENANCE CANON
 
 ## Status
 **Type**: Canonical Governance Protocol

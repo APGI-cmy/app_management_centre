@@ -1,13 +1,13 @@
 # COGNITIVE CAPABILITY ORCHESTRATION MODEL
 
 ## Status
-**Type**: Canonical Governance Definition
-**Authority**: Supreme - Canonical
-**Version**: 1.1.0 — ACTIVE OPERATIONAL GOVERNANCE
-**Effective Date**: 2026-01-03 (Activation), 2025-12-24 (Original)
-**Owner**: Maturion Engineering Leadership (Johan Ras)
-**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md
-**Applies To**: All Foreman Instances, All Cognitive Capability Invocations, All Repositories
+**Type**: Canonical Governance Definition  
+**Authority**: Supreme - Canonical  
+**Version**: 1.1.0 — ACTIVE OPERATIONAL GOVERNANCE  
+**Effective Date**: 2026-01-03 (Activation), 2025-12-24 (Original)  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Precedence**: Subordinate to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Applies To**: All Foreman Instances, All Cognitive Capability Invocations, All Repositories  
 **Integration**: ESCALATION_POLICY.md (active escalation semantics), FM_ROLE_CANON.md (FM responsibilities)
 
 ---
@@ -18,7 +18,7 @@ This document formally defines the **Cognitive Capability Orchestration Model** 
 
 The Maturion platform requires a governed mechanism for invoking diverse AI cognitive capabilities (reasoning, coding, visual generation, analysis, pedagogy, security reasoning, etc.) without fragmenting identity, memory, or authority.
 
-**ACTIVATION STATEMENT (2026-01-03)**:
+**ACTIVATION STATEMENT (2026-01-03)**:  
 Cognitive Capability Orchestration is **ACTIVE OPERATIONAL GOVERNANCE**, not theoretical planning. FM is **expected to invoke, select, and switch capabilities** based on task requirements and complexity assessment. Capability-aware scaling is **execution-relevant**, not planning-only.
 
 This document establishes:

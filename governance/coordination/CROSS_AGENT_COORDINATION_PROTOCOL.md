@@ -1,3 +1,4 @@
+# Cross-Agent Coordination Protocol
 
 **Version:** 1.0  
 **Status:** Constitutional - Active  

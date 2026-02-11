@@ -1,15 +1,15 @@
 # DELEGATION INSTRUCTION AND AUDIT MODEL
 
 ## Status
-**Type**: Canonical Governance Definition
-**Authority**: Supreme - Canonical
-**Version**: 1.0.0
-**Effective Date**: 2025-12-25
-**Owner**: Maturion Engineering Leadership (Johan Ras)
-**Canonical ID**: G-C13
-**Precedence**: Subordinate only to GOVERNANCE_PURPOSE_AND_SCOPE.md
-**Applies To**: All Foreman Instances, All Maturion Platform Instances, All Delegation Interactions
-**Trigger**: Issue FM-PLAT-EXEC-01 — Delegated Platform Action Execution via Maturion
+**Type**: Canonical Governance Definition  
+**Authority**: Supreme - Canonical  
+**Version**: 1.0.0  
+**Effective Date**: 2025-12-25  
+**Owner**: Maturion Engineering Leadership (Johan Ras)  
+**Canonical ID**: G-C13  
+**Precedence**: Subordinate only to GOVERNANCE_PURPOSE_AND_SCOPE.md  
+**Applies To**: All Foreman Instances, All Maturion Platform Instances, All Delegation Interactions  
+**Trigger**: Issue FM-PLAT-EXEC-01 — Delegated Platform Action Execution via Maturion  
 **Depends On**: G-C12 (PLATFORM_AUTHORITY_BOUNDARY_AND_DELEGATION_MODEL.md)
 
 ---
@@ -117,7 +117,7 @@ ACTION:
   TYPE: "<action-type>"  # See Section 4.2
   PARAMETERS:
     # Action-specific parameters (see Section 4.3)
-
+  
 # Authorization Context
 AUTHORIZATION:
   GOVERNANCE_STATUS: "<COMPLIANT|BLOCKED|OVERRIDE>"
@@ -458,24 +458,24 @@ INTEGRITY:
 Audit trails MUST be stored in multiple locations for redundancy and accessibility:
 
 #### 6.2.1 Maturion Central Audit Log (PRIMARY)
-**Location**: Maturion centralized audit storage
-**Purpose**: Permanent canonical record, cross-repository analytics
-**Format**: Structured files or database records per schema
-**Retention**: Permanent (never deleted)
+**Location**: Maturion centralized audit storage  
+**Purpose**: Permanent canonical record, cross-repository analytics  
+**Format**: Structured files or database records per schema  
+**Retention**: Permanent (never deleted)  
 **Access**: Human authority, Watchdog, Governance Administrator
 
 #### 6.2.2 Repository Evidence Trail (SECONDARY)
-**Location**: `<repository>/.evidence/platform-actions/YYYY-MM/PAA-YYYY-MM-DD-<seq>.md`
-**Purpose**: Repository-local audit trail, evidence for repository governance
-**Format**: Markdown files conforming to schema
-**Retention**: Permanent within repository
+**Location**: `<repository>/.evidence/platform-actions/YYYY-MM/PAA-YYYY-MM-DD-<seq>.md`  
+**Purpose**: Repository-local audit trail, evidence for repository governance  
+**Format**: Markdown files conforming to schema  
+**Retention**: Permanent within repository  
 **Access**: FM (read-only), Human authority, Governance Administrator
 
 #### 6.2.3 FM App Real-Time Log (TERTIARY)
-**Location**: FM App situational awareness center
-**Purpose**: Real-time visibility for human authority
-**Format**: Structured display from primary/secondary sources
-**Retention**: Session-based, backed by permanent sources
+**Location**: FM App situational awareness center  
+**Purpose**: Real-time visibility for human authority  
+**Format**: Structured display from primary/secondary sources  
+**Retention**: Session-based, backed by permanent sources  
 **Access**: Human authority (primary), authorized viewers
 
 **Consistency Requirement**: All three locations MUST remain synchronized. Maturion is responsible for propagating audit entries to all locations.
@@ -486,7 +486,7 @@ Audit trails MUST be stored in multiple locations for redundancy and accessibili
 
 #### Human Authority (Johan)
 - **Access Level**: Full read access to all audit trails
-- **Capabilities**:
+- **Capabilities**: 
   - Real-time monitoring via FM App
   - Historical queries across all repositories
   - Drill-down from summary to detail
@@ -848,10 +848,10 @@ This canonical model is considered complete and implemented when:
 
 **Platform action delegation is explicit, auditable, and evidence-based.**
 
-FM decides when platform actions are needed.
-FM constructs complete delegation instructions with authorization evidence.
-Maturion validates instructions and executes actions.
-Maturion confirms outcomes with platform evidence.
+FM decides when platform actions are needed.  
+FM constructs complete delegation instructions with authorization evidence.  
+Maturion validates instructions and executes actions.  
+Maturion confirms outcomes with platform evidence.  
 Every action generates immutable audit trail.
 
 This model ensures:
