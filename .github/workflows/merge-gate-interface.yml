@@ -449,7 +449,7 @@ jobs:
           echo "✅ gate-results.json schema VALID"
       
       - name: Validate Merge Gate Contexts
-        if: steps.classify.outputs.type != 'docs' && steps.validate-gate-schema.outputs != ''
+        if: steps.classify.outputs.type != 'docs'
         run: |
           echo "🔍 Validating Merge Gate Context Names..."
           echo "Per MERGE_GATE_INTERFACE_STANDARD.md § 2"
