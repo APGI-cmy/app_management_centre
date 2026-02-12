@@ -32,3 +32,23 @@
 - Observed: 2026-02-11 (Session 004)
 - Context: Demonstrating all success criteria met for complex contract work.
 - Response: Create comprehensive completion summary covering: objective achieved, success criteria validation (checklist format with ✅), contract metrics (size, content breakdown, references), key features, validation results, learning artifacts created, comparison with previous version, compliance verification, recommendations for future work; include file SHA256 checksums.
+
+## Pattern: Embedded Templates vs. References
+- Observed: 2026-02-12 (Session 002, PR #747)
+- Context: Documenting agent-factory 9-component template requirements
+- Symptom: File becomes too large (>30K characters, blocks GitHub UI selectability)
+- Detection: Check if Components 2, 3, or 8 contain 50+ lines of template content
+- Response:
+  1. **STOP** and calculate character count: `wc -m < <file>`
+  2. **IDENTIFY** embedded templates (Components 2, 3, 8 are common culprits)
+  3. **REPLACE** with 5-line references to canonical governance:
+     ```markdown
+     **Template source**: `.governance-pack/path/to/template.md`
+     **Required**: [Brief description]
+     **See**: [Reference to canonical location]
+     ```
+  4. **RE-VALIDATE** character count (<30K required, <25K recommended)
+  5. **ADD** character count validation to execution steps (Step 4.5)
+  6. **ENFORCE** 30K limit in YAML frontmatter (`file_size_limit`)
+- Prevention: Always use references to canonical governance, never embed large templates; target <25,000 characters (20% buffer)
+- Reference: PartPulse PR #265 (30K GitHub UI selectability limit)
