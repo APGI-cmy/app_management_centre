@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-02-12T07:55:40Z",
+  "layerdown_type": "governance_ripple",
+  "canonical_source": "APGI-cmy/maturion-foreman-governance",
+  "canonical_ref": "main",
+  "files_layered_down": [
+    {
+      "file": ".gitattributes",
+      "source_path": ".gitattributes",
+      "local_path": ".gitattributes",
+      "purpose": "Enforce LF line endings for deterministic SHA256 checksums"
+    },
+    {
+      "file": "CANON_INVENTORY.json",
+      "source_path": "governance/CANON_INVENTORY.json",
+      "local_path": "governance/CANON_INVENTORY.json",
+      "purpose": "Updated canon inventory with 151 files (LF normalized hashes)"
+    },
+    {
+      "file": "QA_POLICY_MASTER.md",
+      "source_path": "governance/policy/QA_POLICY_MASTER.md",
+      "local_path": "governance/policy/QA_POLICY_MASTER.md",
+      "purpose": "PUBLIC_API canon file with updated hash after LF normalization",
+      "sha256_expected": "506f2db83ea27539966ab9311fb8cc07f95c7c8fc007ff7f774adafe34bba972",
+      "sha256_actual": "506f2db83ea27539966ab9311fb8cc07f95c7c8fc007ff7f774adafe34bba972",
+      "hash_match": true
+    }
+  ],
+  "normalization_applied": true,
+  "git_renormalize_executed": true,
+  "total_files_renormalized": 236,
+  "inventory_change": {
+    "old_total_canons": 135,
+    "new_total_canons": 151,
+    "canons_added": 16
+  },
+  "alignment_status": "ALIGNED",
+  "drift_resolved": true,
+  "parent_issue": "APGI-cmy/maturion-foreman-governance#1099"
+}
