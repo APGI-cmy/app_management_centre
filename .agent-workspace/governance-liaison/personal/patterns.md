@@ -1,5 +1,86 @@
 # Patterns - Governance Liaison Agent
 
+## Pattern: Agent-Agnostic Validation Logic
+- Observed: 2026-02-12 (Session 003)
+- Context: Workflow validations that need to work across multiple agent types (foreman, governance-liaison, builders)
+- Pattern Structure:
+  ```bash
+  # Find any agent workspace dynamically
+  AGENT_WORKSPACES=$(find .agent-workspace -maxdepth 1 -type d -name "*" | grep -v "^\.$" | grep -v "^\.agent-workspace$")
+  
+  # Loop through to find required artifacts
+  for WORKSPACE in $AGENT_WORKSPACES; do
+    if [ -d "$WORKSPACE/memory" ]; then
+      # Check for artifacts
+    fi
+  done
+  ```
+- Response: Never hardcode agent names (e.g., "foreman"); use `find` with pattern matching; test with multiple agent types
+
+## Pattern: Ephemeral Artifact Evidence Validation
+- Observed: 2026-02-12 (Session 003)
+- Context: Required artifacts that are gitignored (e.g., working-contract.md, environment-health.json)
+- Pattern Method:
+  1. Identify that artifact is ephemeral (check .gitignore)
+  2. Validate evidence of creation (search prehandover proof for mention)
+  3. Use case-insensitive grep with flexible patterns
+  4. Fail if not documented
+- Response: For ephemeral files, validate mention in persistent proof; use patterns like `working.contract|working-contract` with grep -qi
+
+## Pattern: Blocking Enforcement with Evidence-First Errors
+- Observed: 2026-02-12 (Session 003)
+- Context: Converting advisory/warning checks to blocking validations
+- Pattern Error Structure:
+  ```bash
+  echo "❌ [WHAT FAILED IN CAPS]"
+  echo ""
+  echo "Required: [Exact requirement]"
+  echo "Missing: [Specific detail]"
+  echo ""
+  echo "🔧 Remediation:"
+  echo "  1. [Step 1]"
+  echo "  2. [Step 2]"
+  echo ""
+  echo "📚 Authority: [Canon reference]"
+  exit 1  # BLOCKING
+  ```
+- Response: Never use warnings for mandatory requirements; exit 1 for failures; include exact paths and schemas
+
+## Pattern: Merge Gate Context Validation
+- Observed: 2026-02-12 (Session 003)
+- Context: Ensuring gate-results.json complies with MERGE_GATE_INTERFACE_STANDARD.md
+- Pattern Validation:
+  ```bash
+  GATES=$(jq -r '.gates | keys[]' .agent-admin/gates/gate-results.json)
+  REQUIRED_GATES=("merge-gate/verdict" "governance/alignment" "stop-and-fix/enforcement")
+  
+  # Check for missing and invalid gates
+  # Fail if any missing or invalid
+  ```
+- Response: Validate actual gate names from JSON against canonical standard; detect both missing and extra gates
+
+## Pattern: Code Review Integration
+- Observed: 2026-02-12 (Session 003)
+- Context: Catching subtle issues before finalizing PR
+- Pattern Workflow:
+  1. Complete all code changes
+  2. Run `code_review` tool with PR title and description
+  3. Review all comments returned
+  4. Fix issues immediately (don't defer)
+  5. Re-run if significant changes made
+- Response: Always run code_review before session closure; treat findings as blocking; fix immediately
+
+## Pattern: Protected File Modification Handling
+- Observed: 2026-02-12 (Session 003)
+- Context: Modifying files that require CS2 approval per REQ-CM-005
+- Pattern Handling:
+  1. Identify protected file modification early
+  2. Document justification in PR description
+  3. Flag CS2 approval requirement prominently
+  4. Update sync-state.json with protected file details
+  5. Do not attempt to merge without CS2 approval
+- Response: Protected files require explicit escalation; governance liaison cannot self-approve; wait for CS2
+
 ## Pattern: Living Agent System v6.2.0 Contract Structure
 - Observed: 2026-02-11 (Session 001)
 - Context: Creating or upgrading agent contracts to v6.2.0
@@ -103,4 +184,4 @@
 - Response: Run validation early and often; treat script exit code 0 as success; note out-of-scope errors in session memory
 
 ---
-Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11
+Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-02-12
