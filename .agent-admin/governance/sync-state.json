@@ -1,12 +1,19 @@
 {
-  "timestamp": "2026-02-12T09:15:00Z",
+  "timestamp": "2026-02-12T09:41:01Z",
   "repository": "maturion-foreman-office-app",
+  "agent": "governance-liaison",
+  "session": "2026-02-12-merge-gate-fix",
   "alignment_state": "ALIGNED",
   "drift_detected": false,
   "governance_version": "Living Agent System v6.2.0",
-  "last_sync": "2026-02-12T09:15:00Z",
+  "last_sync": "2026-02-12T09:40:00Z",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
   "sync_method": "manual",
+  "local_governance": {
+    "tier_0_version": "current",
+    "canon_inventory_present": true,
+    "canon_inventory_path": "governance/CANON_INVENTORY.json"
+  },
   "artifacts_synced": [
     {
       "artifact": "MERGE_GATE_INTERFACE_STANDARD.md",
@@ -30,14 +37,38 @@
       "last_verified": "2026-02-12"
     }
   ],
+  "files_modified_this_pr": [
+    ".github/workflows/merge-gate-interface.yml"
+  ],
+  "canon_hash_audit": {
+    "performed": true,
+    "timestamp": "2026-02-12T09:40:00Z",
+    "status": "VALIDATED",
+    "placeholder_hashes_found": 0,
+    "truncated_hashes_found": 0,
+    "issues": []
+  },
   "validation": {
     "canon_inventory_checked": true,
     "placeholder_hashes": false,
     "protected_files_modified": true,
     "cs2_approval_required": true
   },
-  "notes": "Bootstrap PR creating new merge gates per Living Agent System v6.2.0. Protected workflow file modified - CS2 approval MANDATORY.",
+  "protected_files": {
+    "modified": true,
+    "files": [
+      ".github/workflows/merge-gate-interface.yml"
+    ],
+    "justification": "Critical fix to merge gate enforcement - closes enforcement gaps identified in PR #740"
+  },
+  "self_alignment_authority": {
+    "authority_source": "Issue #999, GOVERNANCE_LIAISON_MINIMUM_APPOINTMENT_REQUIREMENTS.md",
+    "scope": "Local governance artifacts only",
+    "can_self_align": true
+  },
+  "notes": "Merge gate enforcement fix - addresses violations from PR #740. Protected workflow file modified - CS2 approval MANDATORY per REQ-CM-005. Canon hash audit performed - all hashes valid.",
   "immutable": true,
-  "generated_by": "foreman",
-  "authority": "MERGE_GATE_INTERFACE_STANDARD.md § 6"
+  "generated_by": "governance-liaison",
+  "authority": "MERGE_GATE_INTERFACE_STANDARD.md § 6, Living Agent System v6.2.0",
+  "contract_version": "v2.0.0"
 }

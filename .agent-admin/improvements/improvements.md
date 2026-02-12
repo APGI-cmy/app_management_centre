@@ -1,158 +1,222 @@
 # Continuous Improvement Capture
 
 **Status**: CAPTURED  
-**Session**: 2026-02-12  
-**PR**: TBD (Bootstrap Governance Evolution)  
-**Agent**: foreman
+**Session**: 2026-02-12 (Merge Gate Enforcement Fix)  
+**PR**: TBD  
+**Agent**: governance-liaison
 
 ---
 
-## Improvements Identified
+## Session Context
 
-### 1. Standard 3-Gate Interface
-**Type**: CRITICAL IMPROVEMENT  
-**Captured**: Yes  
-**Status**: IMPLEMENTED
-
-**Problem**: 16 separate workflow files with inconsistent naming and no standard interface.
-
-**Solution**: Consolidated into single `merge-gate-interface.yml` with 3 standard jobs:
-- `merge-gate/verdict` - Evidence & protocol compliance
-- `governance/alignment` - Canon integrity & drift detection
-- `stop-and-fix/enforcement` - RCA requirement
-
-**Impact**:
-- Branch protection can be standardized across all repos
-- Simpler mental model (3 gates vs 16 workflows)
-- Consistent check naming for all governed repositories
-
-### 2. Wake-Up & Session-Closure Protocol Scripts
-**Type**: CRITICAL IMPROVEMENT  
-**Captured**: Yes  
-**Status**: IMPLEMENTED
-
-**Problem**: No executable scripts for Living Agent System v6.2.0 protocols.
-
-**Solution**: Created:
-- `.github/scripts/wake-up-protocol.sh` - Implements REQ-AS-005
-- `.github/scripts/session-closure.sh` - Implements REQ-EO-005
-
-**Impact**:
-- Protocol execution now verifiable
-- Evidence chain complete (working contract, session memories)
-- Learning artifacts systematically captured
-
-### 3. Evidence-First Error Messages
-**Type**: HIGH IMPROVEMENT  
-**Captured**: Yes  
-**Status**: IMPLEMENTED
-
-**Problem**: Some gates require log archaeology to understand failures.
-
-**Solution**: All gate failures now include:
-- Missing artifact exact path
-- Required schema/structure
-- Exact remediation steps
-- Authority reference
-
-**Impact**:
-- Agent debugging time reduced
-- Self-service remediation enabled
-- Governance transparency increased
-
-### 4. Zero Test Debt Enforcement in Gates
-**Type**: HIGH IMPROVEMENT  
-**Captured**: Yes  
-**Status**: IMPLEMENTED
-
-**Problem**: Test debt enforcement was not part of gate validation.
-
-**Solution**: `merge-gate/verdict` now validates `test_debt: "ZERO"` from gate-results.json.
-
-**Impact**:
-- 100% GREEN requirement enforced at gate level
-- No PR with test debt can merge
-- Aligns with BUILD_PHILOSOPHY.md
-
-### 5. Canon Hash Integrity Validation
-**Type**: CRITICAL IMPROVEMENT  
-**Captured**: Yes  
-**Status**: IMPLEMENTED
-
-**Problem**: Placeholder/truncated canon hashes could merge undetected.
-
-**Solution**: `governance/alignment` gate detects degraded mode and blocks merge.
-
-**Impact**:
-- Governance integrity protected
-- Degraded alignment mode escalates to CS2
-- Canon drift prevented
+This PR addresses critical merge gate enforcement failures identified in PR #740. Multiple violations were missed by merge gates that should have blocked the PR, indicating significant enforcement gaps in the workflow.
 
 ---
 
-## Improvements Captured
+## Improvements Identified and Implemented
 
-All identified improvements were implemented in this PR:
-- ✅ Standard 3-gate interface
-- ✅ Wake-up & session-closure scripts
-- ✅ Evidence-first error messages
-- ✅ Zero test debt enforcement
-- ✅ Canon hash integrity validation
-- ✅ Protected file detection
-- ✅ Stop-and-fix RCA requirement
-- ✅ Deterministic PR classification
+### 1. Agent-Agnostic Session Closure Validation
+**Type**: CRITICAL FIX  
+**Captured**: Yes  
+**Status**: ✅ IMPLEMENTED
+
+**Problem**: Session closure validation was hardcoded to `.agent-workspace/foreman/memory`, excluding governance-liaison and other agents.
+
+**Solution**: Made validation agent-agnostic by dynamically detecting any agent workspace directory using `find`.
+
+**Impact**:
+- Enforcement now works for all agents (foreman, governance-liaison, builders)
+- Closes gap that allowed PR #740 to merge without governance-liaison session closure
+- Dynamic discovery prevents future hardcoding issues
+
+### 2. Working Contract Validation
+**Type**: CRITICAL FIX  
+**Captured**: Yes  
+**Status**: ✅ IMPLEMENTED
+
+**Problem**: working-contract.md generation was mentioned in remediation text but never actually validated.
+
+**Solution**: Added validation step to check prehandover proof documents working-contract.md generation (ephemeral file).
+
+**Impact**:
+- Ensures wake-up protocol generates required contract per REQ-AS-005
+- Prehandover proof must explicitly mention "working contract" or "working-contract"
+- Closes gap from PR #740 where working-contract.md was not validated
+
+### 3. Canon Hash Audit Enforcement
+**Type**: CRITICAL FIX  
+**Captured**: Yes  
+**Status**: ✅ IMPLEMENTED
+
+**Problem**: Canon hash audit was not enforced for governance PRs.
+
+**Solution**: Added validation step requiring prehandover proof to document canon hash audit execution for governance PRs.
+
+**Impact**:
+- Prevents governance drift and placeholder hash issues per REQ-CM-001/002
+- Governance PRs must explicitly document hash audit in prehandover proof
+- Closes gap from PR #740 where canon hash audit was incomplete
+
+### 4. Learning Artifacts Enforcement
+**Type**: HIGH FIX  
+**Captured**: Yes  
+**Status**: ✅ IMPLEMENTED
+
+**Problem**: Learning artifacts (lessons-learned.md, patterns.md) check was non-blocking (warnings only).
+
+**Solution**: Converted to blocking validation that fails if files don't exist in agent workspace.
+
+**Impact**:
+- Ensures continuous learning capture per Living Agent System v6.2.0
+- Checks for files in .agent-workspace/*/personal/ directory (agent-agnostic)
+- Closes gap from PR #740 where learning artifacts were not updated
+
+### 5. Merge Gate Context Validation
+**Type**: CRITICAL FIX  
+**Captured**: Yes  
+**Status**: ✅ IMPLEMENTED
+
+**Problem**: No validation that gate-results.json contains correct merge gate context names per MERGE_GATE_INTERFACE_STANDARD.md.
+
+**Solution**: Added validation step checking gate names match canonical standard:
+- merge-gate/verdict
+- governance/alignment
+- stop-and-fix/enforcement
+
+**Impact**:
+- Ensures compliance with MERGE_GATE_INTERFACE_STANDARD.md § 2
+- Detects invalid or missing gate contexts
+- Closes gap from PR #740 where merge gate contexts were not validated
+
+### 6. Enhanced Report Verdict Output
+**Type**: MEDIUM IMPROVEMENT  
+**Captured**: Yes  
+**Status**: ✅ IMPLEMENTED
+
+**Problem**: Verdict report didn't include all new validations.
+
+**Solution**: Updated success message to include:
+- Working contract documented
+- Learning artifacts present
+- Merge gate contexts validated
+- Canon hash audit documented (governance PRs)
+
+**Impact**:
+- Clear visibility of what was validated
+- Better PR review experience
+- Complete audit trail
+
+---
+
+## Previous Session Improvements (Preserved)
+
+### Standard 3-Gate Interface
+**Status**: IMPLEMENTED (Previous Session)  
+Consolidated 16 workflows into single merge-gate-interface.yml with 3 standard jobs.
+
+### Wake-Up & Session-Closure Protocol Scripts
+**Status**: IMPLEMENTED (Previous Session)  
+Created executable scripts for Living Agent System v6.2.0 protocols.
+
+### Evidence-First Error Messages
+**Status**: IMPLEMENTED (Previous Session, Enhanced This Session)  
+All gate failures include exact paths, schemas, and remediation steps.
+
+### Zero Test Debt Enforcement
+**Status**: IMPLEMENTED (Previous Session)  
+Gate validates test_debt: "ZERO" from gate-results.json.
+
+### Canon Hash Integrity Validation
+**Status**: IMPLEMENTED (Previous Session, Enhanced This Session)  
+Detects degraded mode and blocks merge on placeholder/truncated hashes.
 
 ---
 
 ## Improvements Parked
 
-### 1. Automatic Branch Protection Update
+### 1. Automated Evidence Bundle Generation
 **Type**: MEDIUM IMPROVEMENT  
 **Parked**: Yes  
-**Reason**: Requires GitHub API write permissions and CS2 coordination
+**Reason**: Requires coordination with wake-up protocol scripts; enforce first, automate second.
 
-**Description**: Automate branch protection rule updates to require only 3 standard contexts.
+**Description**: Auto-generate evidence artifact bundle structure when PR is opened.
 
-**Future Work**: Create workflow to propose branch protection changes via PR with CS2 approval.
+**Future Work**: Add `.github/scripts/create-evidence-bundle.sh` called by wake-up protocol.
 
-### 2. Gate Performance Optimization
+### 2. Real-Time Gate Status Dashboard
 **Type**: LOW IMPROVEMENT  
 **Parked**: Yes  
-**Reason**: Premature optimization - validate effectiveness first
+**Reason**: Out of scope for immediate enforcement fix; dashboard is monitoring enhancement.
 
-**Description**: Optimize gate execution time by caching, parallelization, or dependency analysis.
+**Description**: Create dashboard showing gate status across all open PRs.
 
-**Future Work**: Monitor gate execution times over 1-2 weeks, then optimize if needed.
+**Future Work**: Could integrate with GitHub Projects or custom dashboard.
 
-### 3. Multi-Repo Gate Deployment
-**Type**: MEDIUM IMPROVEMENT  
+### 3. Git Pre-Push Hooks for Local Validation
+**Type**: LOW IMPROVEMENT  
 **Parked**: Yes  
-**Reason**: Requires ripple coordination and registry updates
+**Reason**: Requires developer environment setup; CI/CD enforcement is sufficient.
 
-**Description**: Deploy standard merge gate interface to all governed repositories.
+**Description**: Add git hooks that validate evidence artifacts before allowing push.
 
-**Future Work**: Create ripple plan for maturion-foreman-governance and ISMS module repos.
+**Future Work**: Could add to developer onboarding documentation.
+
+### 4. Automatic Branch Protection Update
+**Type**: MEDIUM IMPROVEMENT  
+**Parked**: Yes (From Previous Session)  
+**Reason**: Requires GitHub API write permissions and CS2 coordination.
+
+### 5. Gate Performance Optimization
+**Type**: LOW IMPROVEMENT  
+**Parked**: Yes (From Previous Session)  
+**Reason**: Premature optimization - validate effectiveness first.
+
+### 6. Multi-Repo Gate Deployment
+**Type**: MEDIUM IMPROVEMENT  
+**Parked**: Yes (From Previous Session)  
+**Reason**: Requires ripple coordination and registry updates.
 
 ---
 
 ## Rationale
 
-**Captured Improvements**: All critical and high-priority improvements were implemented because they:
-1. Close identified gaps in current gates
-2. Enforce Living Agent System v6.2.0 requirements
-3. Provide immediate governance value
-4. Are within FM authority and capability
+**Why Implemented Now**:
+- All implemented improvements directly address violations from PR #740
+- Each improvement closes a specific enforcement gap identified in the issue
+- Changes are surgical and focused on enforcement hardening
+- No architectural changes or new features
+- Within governance-liaison authority (local governance alignment)
 
-**Parked Improvements**: Medium/low priority improvements were parked because they:
-1. Require cross-repo coordination beyond this PR scope
-2. Need observation period before optimization
-3. May have dependencies on other governance work
-4. Can be addressed in follow-up PRs without blocking core functionality
+**Why Parked**:
+- Parked improvements are enhancements, not critical fixes
+- Enforcement must be solid before automation is added
+- Dashboard and tooling improvements can follow in future iterations
+- Some require cross-agent coordination or CS2 approval
+
+---
+
+## Lessons for Future Sessions
+
+1. **Always validate agent-agnostically**: Never hardcode agent names in workflow logic; use dynamic discovery with `find`.
+
+2. **Enforcement before automation**: Get strict enforcement working first, then add convenience automation.
+
+3. **Evidence-first error messages**: Every failure must include exact path, required structure, and remediation steps.
+
+4. **Test with multiple agent types**: When modifying agent-related workflows, test with foreman, governance-liaison, and builder scenarios.
+
+5. **Validate against canonical standards**: Always cross-reference MERGE_GATE_INTERFACE_STANDARD.md and other canonical governance docs.
+
+6. **Document what's ephemeral**: If a file is gitignored (like working-contract.md), validate its mention in persistent evidence (prehandover proof).
+
+7. **Make checks blocking, not advisory**: Warnings are ignored; failures are noticed. Convert advisory checks to blocking when requirements are clear.
 
 ---
 
 **Per**: EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md § 4  
 **Authority**: Continuous improvement capture is MANDATORY  
 **Status**: COMPLETE  
-**Session**: Bootstrap Governance Evolution  
+**Session**: Merge Gate Enforcement Fix  
+**Agent**: governance-liaison  
 **Date**: 2026-02-12
+

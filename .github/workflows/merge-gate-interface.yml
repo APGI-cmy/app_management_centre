@@ -194,76 +194,219 @@ jobs:
           echo "Per REQ-EO-005"
           echo ""
           
-          # Check for session memory file
-          if [ ! -d ".agent-workspace/foreman/memory" ]; then
+          # Find any agent workspace with memory directory (not hardcoded to foreman)
+          AGENT_WORKSPACES=$(find .agent-workspace -maxdepth 1 -type d -name "*" 2>/dev/null | grep -v "^\.$" | grep -v "^\.agent-workspace$" || echo "")
+          
+          if [ -z "$AGENT_WORKSPACES" ]; then
             echo "validation=failed" >> $GITHUB_OUTPUT
-            echo "❌ Session memory directory MISSING"
+            echo "❌ No agent workspace directories found"
             echo ""
-            echo "Required: .agent-workspace/foreman/memory/ must exist"
+            echo "Required: At least one agent workspace directory (e.g., .agent-workspace/foreman/ or .agent-workspace/governance-liaison/)"
             echo ""
             echo "🔧 Remediation:"
-            echo "  1. Run: .github/scripts/session-closure.sh foreman"
-            echo "  2. Verify session-NNN-YYYYMMDD.md created"
+            echo "  1. Run: .github/scripts/session-closure.sh <agent-name>"
+            echo "  2. Verify session-NNN-YYYYMMDD.md created in agent workspace"
             echo "  3. Commit and push"
             echo ""
-            echo "📚 Authority: REQ-EO-005, FOREMAN_MEMORY_PROTOCOL.md"
+            echo "📚 Authority: REQ-EO-005, Living Agent System v6.2.0"
             exit 1
           fi
           
-          LATEST_SESSION=$(ls -t .agent-workspace/foreman/memory/session-*.md 2>/dev/null | head -1 || echo "")
-          if [ -z "$LATEST_SESSION" ]; then
+          # Check for session memory in any agent workspace
+          SESSION_FOUND=false
+          LATEST_SESSION=""
+          
+          for WORKSPACE in $AGENT_WORKSPACES; do
+            if [ -d "$WORKSPACE/memory" ]; then
+              SESSIONS=$(find "$WORKSPACE/memory" -name "session-*.md" -type f 2>/dev/null || echo "")
+              if [ -n "$SESSIONS" ]; then
+                SESSION_FOUND=true
+                LATEST_SESSION=$(ls -t "$WORKSPACE"/memory/session-*.md 2>/dev/null | head -1)
+                break
+              fi
+            fi
+          done
+          
+          if [ "$SESSION_FOUND" = false ]; then
             echo "validation=failed" >> $GITHUB_OUTPUT
             echo "❌ Session Closure NOT EXECUTED"
             echo ""
-            echo "Required: Session memory file must exist"
-            echo "Missing: No session-*.md file in .agent-workspace/foreman/memory/"
+            echo "Required: Session memory file must exist in an agent workspace"
+            echo "Missing: No session-*.md file found in any .agent-workspace/*/memory/"
             echo ""
             echo "🔧 Remediation:"
-            echo "  1. Run: .github/scripts/session-closure.sh foreman"
-            echo "  2. Verify session file created"
+            echo "  1. Run: .github/scripts/session-closure.sh <agent-name>"
+            echo "  2. Verify session file created in .agent-workspace/<agent-name>/memory/"
             echo "  3. Update lessons-learned.md and patterns.md"
             echo "  4. Commit and push"
             echo ""
-            echo "📚 Authority: REQ-EO-005, FOREMAN_MEMORY_PROTOCOL.md"
+            echo "📚 Authority: REQ-EO-005, Living Agent System v6.2.0"
             exit 1
           fi
           
           echo "validation=passed" >> $GITHUB_OUTPUT
           echo "✅ Session closure EXECUTED (memory: $(basename $LATEST_SESSION))"
       
-      - name: Validate Learning Artifacts
+      - name: Validate Working Contract Evidence
         if: steps.classify.outputs.type != 'docs'
+        id: validate-working-contract
         run: |
-          echo "📚 Checking Learning Artifact Updates..."
-          echo "Per FOREMAN_MEMORY_PROTOCOL.md § 4.4.2"
+          echo "📋 Validating Working Contract Evidence..."
+          echo "Per REQ-AS-005 (Wake-up protocol generates working-contract.md)"
           echo ""
           
-          WARNINGS=0
-          
-          # Check if lessons-learned.md was updated
-          if ! git diff --name-only origin/main...HEAD 2>/dev/null | grep -q "lessons-learned.md"; then
-            echo "⚠️ WARNING: lessons-learned.md not updated"
-            ((WARNINGS++))
-          else
-            echo "✅ lessons-learned.md updated"
+          # working-contract.md is ephemeral (gitignored), so we check prehandover proof mentions it
+          PROOF=$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null | head -1)
+          if [ -z "$PROOF" ]; then
+            echo "❌ Cannot validate: prehandover proof missing (already reported)"
+            exit 1
           fi
           
-          # Check if patterns.md was updated
-          if ! git diff --name-only origin/main...HEAD 2>/dev/null | grep -q "patterns.md"; then
-            echo "⚠️ WARNING: patterns.md not updated"
-            ((WARNINGS++))
-          else
-            echo "✅ patterns.md updated"
-          fi
-          
-          if [ $WARNINGS -gt 0 ]; then
+          if ! grep -qi "working.contract\|working-contract" "$PROOF"; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ Working Contract NOT DOCUMENTED"
             echo ""
-            echo "ℹ️ Learning artifact updates are recommended but not blocking"
-            echo "Consider capturing lessons and patterns from this session"
+            echo "Required: Wake-up protocol generates working-contract.md"
+            echo "Evidence: Prehandover proof must document working-contract.md presence"
+            echo ""
+            echo "Missing: No working-contract mention in $(basename $PROOF)"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Verify wake-up protocol ran successfully"
+            echo "  2. Confirm working-contract.md was generated (ephemeral file)"
+            echo "  3. Document working-contract.md generation in prehandover proof"
+            echo "  4. Commit and push updated proof"
+            echo ""
+            echo "📚 Authority: REQ-AS-005, Living Agent System v6.2.0"
+            exit 1
           fi
+          
+          echo "validation=passed" >> $GITHUB_OUTPUT
+          echo "✅ Working contract DOCUMENTED (ephemeral, mentioned in prehandover)"
+      
+      - name: Validate Canon Hash Audit
+        if: steps.classify.outputs.type == 'governance'
+        id: validate-canon-audit
+        run: |
+          echo "🔐 Validating Canon Hash Audit Execution..."
+          echo "Per REQ-CM-001/002 (Canon hash audit on governance PRs)"
+          echo ""
+          
+          # Check if prehandover proof documents canon hash audit
+          PROOF=$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null | head -1)
+          if [ -z "$PROOF" ]; then
+            echo "❌ Cannot validate: prehandover proof missing (already reported)"
+            exit 1
+          fi
+          
+          if ! grep -qi "canon.*hash\|hash.*audit\|CANON_INVENTORY\|canon.*integrity" "$PROOF"; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ Canon Hash Audit NOT DOCUMENTED"
+            echo ""
+            echo "Required: Governance PRs must perform canon hash audit"
+            echo "Evidence: Prehandover proof must document canon hash verification"
+            echo ""
+            echo "Missing: No canon hash audit mention in $(basename $PROOF)"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Verify CANON_INVENTORY.json hashes"
+            echo "  2. Check for placeholder/truncated hashes"
+            echo "  3. Document hash audit in prehandover proof"
+            echo "  4. Include audit results and any issues found"
+            echo "  5. Commit and push updated proof"
+            echo ""
+            echo "📚 Authority: REQ-CM-001, REQ-CM-002"
+            exit 1
+          fi
+          
+          echo "validation=passed" >> $GITHUB_OUTPUT
+          echo "✅ Canon hash audit DOCUMENTED in prehandover proof"
+      
+      - name: Validate Learning Artifacts
+        if: steps.classify.outputs.type != 'docs'
+        id: validate-learning
+        run: |
+          echo "📚 Validating Learning Artifact Updates..."
+          echo "Per Living Agent System v6.2.0 § Memory Protocol"
+          echo ""
+          
+          MISSING=()
+          
+          # Find any agent workspace personal directories
+          PERSONAL_DIRS=$(find .agent-workspace -path "*/personal" -type d 2>/dev/null || echo "")
+          
+          if [ -z "$PERSONAL_DIRS" ]; then
+            MISSING+=("No agent workspace personal/ directories found")
+          else
+            # Check for lessons-learned.md in any personal directory
+            LESSONS_FOUND=false
+            for DIR in $PERSONAL_DIRS; do
+              if [ -f "$DIR/lessons-learned.md" ]; then
+                LESSONS_FOUND=true
+                # Check if it was updated in this PR
+                if git diff --name-only origin/main...HEAD 2>/dev/null | grep -q "$(echo $DIR | sed 's/^\.\///')/lessons-learned.md"; then
+                  echo "✅ lessons-learned.md updated in $DIR"
+                else
+                  echo "⚠️ WARNING: lessons-learned.md exists but not updated in $DIR"
+                fi
+                break
+              fi
+            done
+            
+            if [ "$LESSONS_FOUND" = false ]; then
+              MISSING+=("lessons-learned.md not found in any agent workspace")
+            fi
+            
+            # Check for patterns.md in any personal directory
+            PATTERNS_FOUND=false
+            for DIR in $PERSONAL_DIRS; do
+              if [ -f "$DIR/patterns.md" ]; then
+                PATTERNS_FOUND=true
+                # Check if it was updated in this PR
+                if git diff --name-only origin/main...HEAD 2>/dev/null | grep -q "$(echo $DIR | sed 's/^\.\///')/patterns.md"; then
+                  echo "✅ patterns.md updated in $DIR"
+                else
+                  echo "⚠️ WARNING: patterns.md exists but not updated in $DIR"
+                fi
+                break
+              fi
+            done
+            
+            if [ "$PATTERNS_FOUND" = false ]; then
+              MISSING+=("patterns.md not found in any agent workspace")
+            fi
+          fi
+          
+          if [ ${#MISSING[@]} -gt 0 ]; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ Learning Artifacts MISSING"
+            echo ""
+            echo "Missing artifacts:"
+            for ARTIFACT in "${MISSING[@]}"; do
+              echo "  - $ARTIFACT"
+            done
+            echo ""
+            echo "Required: Every agent must maintain learning artifacts"
+            echo "Expected locations:"
+            echo "  - .agent-workspace/<agent-name>/personal/lessons-learned.md"
+            echo "  - .agent-workspace/<agent-name>/personal/patterns.md"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Create personal/ directory in agent workspace"
+            echo "  2. Create lessons-learned.md and patterns.md"
+            echo "  3. Update with session learnings"
+            echo "  4. Commit and push"
+            echo ""
+            echo "📚 Authority: Living Agent System v6.2.0, Memory Protocol"
+            exit 1
+          fi
+          
+          echo "validation=passed" >> $GITHUB_OUTPUT
+          echo "✅ Learning artifacts present"
       
       - name: Validate Gate Results Schema
         if: steps.classify.outputs.type != 'docs' && steps.validate-evidence.outputs.validation == 'passed'
+        id: validate-gate-schema
         run: |
           echo "🔍 Validating Gate Results JSON Schema..."
           echo "Per EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md § 5"
@@ -299,11 +442,94 @@ jobs:
               echo "  - $FIELD"
             done
             echo ""
-            echo "Required schema: See design document"
+            echo "Required schema: See EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md"
             exit 1
           fi
           
           echo "✅ gate-results.json schema VALID"
+      
+      - name: Validate Merge Gate Contexts
+        if: steps.classify.outputs.type != 'docs' && steps.validate-gate-schema.outputs != ''
+        run: |
+          echo "🔍 Validating Merge Gate Context Names..."
+          echo "Per MERGE_GATE_INTERFACE_STANDARD.md § 2"
+          echo ""
+          
+          # Check gate-results.json for correct gate context names
+          if [ -f ".agent-admin/gates/gate-results.json" ]; then
+            # Extract gate names from JSON
+            GATES=$(jq -r '.gates | keys[]' .agent-admin/gates/gate-results.json 2>/dev/null || echo "")
+            
+            # Required gate contexts per standard
+            REQUIRED_GATES=(
+              "merge-gate/verdict"
+              "governance/alignment"
+              "stop-and-fix/enforcement"
+            )
+            
+            MISSING_GATES=()
+            INVALID_GATES=()
+            
+            # Check for required gates
+            for REQUIRED in "${REQUIRED_GATES[@]}"; do
+              if ! echo "$GATES" | grep -q "^$REQUIRED$"; then
+                MISSING_GATES+=("$REQUIRED")
+              fi
+            done
+            
+            # Check for invalid gate names (not matching standard)
+            for GATE in $GATES; do
+              VALID=false
+              for REQUIRED in "${REQUIRED_GATES[@]}"; do
+                if [ "$GATE" = "$REQUIRED" ]; then
+                  VALID=true
+                  break
+                fi
+              done
+              if [ "$VALID" = false ]; then
+                INVALID_GATES+=("$GATE")
+              fi
+            done
+            
+            if [ ${#MISSING_GATES[@]} -gt 0 ] || [ ${#INVALID_GATES[@]} -gt 0 ]; then
+              echo "❌ Merge Gate Contexts INVALID"
+              echo ""
+              
+              if [ ${#MISSING_GATES[@]} -gt 0 ]; then
+                echo "Missing required gate contexts:"
+                for GATE in "${MISSING_GATES[@]}"; do
+                  echo "  - $GATE"
+                done
+                echo ""
+              fi
+              
+              if [ ${#INVALID_GATES[@]} -gt 0 ]; then
+                echo "Invalid gate contexts (not in standard):"
+                for GATE in "${INVALID_GATES[@]}"; do
+                  echo "  - $GATE"
+                done
+                echo ""
+              fi
+              
+              echo "Required gate contexts per MERGE_GATE_INTERFACE_STANDARD.md:"
+              echo "  - merge-gate/verdict"
+              echo "  - governance/alignment"
+              echo "  - stop-and-fix/enforcement"
+              echo ""
+              echo "🔧 Remediation:"
+              echo "  1. Update gate-results.json with correct gate names"
+              echo "  2. Remove any non-standard gate contexts"
+              echo "  3. Ensure all three required gates are present"
+              echo "  4. Commit and push"
+              echo ""
+              echo "📚 Authority: MERGE_GATE_INTERFACE_STANDARD.md § 2"
+              exit 1
+            fi
+            
+            echo "✅ Merge gate contexts VALID (all required gates present)"
+          else
+            echo "⚠️ Cannot validate: gate-results.json missing (reported earlier)"
+          fi
       
       - name: Zero Test Debt Enforcement
         if: steps.classify.outputs.type == 'code'
@@ -365,10 +591,16 @@ jobs:
               body += '**All evidence and protocol validations PASSED:**\n';
               body += '  ✅ Evidence artifact bundle complete\n';
               body += '  ✅ Wake-up protocol executed\n';
+              body += '  ✅ Working contract documented\n';
               body += '  ✅ Session closure executed\n';
+              body += '  ✅ Learning artifacts present\n';
               body += '  ✅ Gate results JSON valid\n';
+              body += '  ✅ Merge gate contexts validated\n';
               if (prType === 'code') {
                 body += '  ✅ Zero test debt confirmed\n';
+              }
+              if (prType === 'governance') {
+                body += '  ✅ Canon hash audit documented\n';
               }
               body += '\n---\n\n';
               body += '**Authority**: MERGE_GATE_INTERFACE_STANDARD.md § 5\n';
