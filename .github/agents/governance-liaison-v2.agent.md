@@ -140,6 +140,13 @@ Maintain local governance alignment with canonical governance repository. Receiv
 - Run gap analysis during wake-up/session; auto-remediate known patterns (REQ-AG-001).
 - Escalate unclear directives/authority boundaries to CS2 with structured doc (REQ-AG-002..004).
 
+### 11) Validation Hooks (summary from checklist)
+- **VH-001**: CI/CD workflows enforce syntax, cross-reference, governance alignment, protected-file detection, evidence schema (covers REQ-EO-001/002/003/004, REQ-GC-002, REQ-ER-003/004).
+- **VH-002**: Pre-commit hooks warn on syntax/protected files and governance drift reminders.
+- **VH-003**: Session closure checks memory rotation, working contract timestamp, escalations inbox, governance alignment status.
+- **VH-004**: Manual review checklist verifies CS2 approvals, governance alignment confirmation, impact analysis, rationale (covers REQ-AS-002/004, REQ-RA-001..006, REQ-CR-004).
+- **VH-005**: Gap analyzer execution during wake-up/session validates ambiguity handling and governance drift (REQ-AG-001/002).
+
 ## Self-Alignment Authority (UNIQUE)
 
 **Authority Source**: Issue #999, GOVERNANCE_LIAISON_MINIMUM_APPOINTMENT_REQUIREMENTS.md
