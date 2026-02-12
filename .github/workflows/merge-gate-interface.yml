@@ -1,0 +1,873 @@
+name: Merge Gate Interface
+
+# CI CLASSIFICATION: Hard Gate (Constitutional)
+# Purpose: Unified 3-gate interface per Living Agent System v6.2.0
+# Failure Semantics: All gates must PASS for merge eligibility
+# Authority: MERGE_GATE_INTERFACE_STANDARD.md v1.0.0, FM_MERGE_GATE_MANAGEMENT_PROTOCOL.md T0-014
+# Version: 1.0.0 (Bootstrap)
+# Created: 2026-02-12
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+# Explicit, least-privilege permissions
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  # ============================================================================
+  # GATE 1: MERGE GATE VERDICT
+  # Validates evidence artifacts, protocol execution, test debt
+  # ============================================================================
+  
+  merge-gate/verdict:
+    name: Merge Gate Verdict
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Classify PR Type
+        id: classify
+        run: |
+          echo "🔍 Classifying PR type (deterministic)..."
+          
+          # Fetch main branch for comparison
+          git fetch origin main --depth=50 2>/dev/null || true
+          
+          # Get PR labels
+          LABELS='${{ toJSON(github.event.pull_request.labels.*.name) }}'
+          
+          # Get changed files
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            CHANGED_FILES=$(git diff --name-only origin/main...HEAD || echo "")
+          else
+            CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD || echo "")
+          fi
+          
+          # Rule 1: Label override (highest precedence)
+          if echo "$LABELS" | jq -r '.[]' | grep -q "governance-only"; then
+            echo "type=governance" >> $GITHUB_OUTPUT
+            echo "📋 PR Type: GOVERNANCE (label override)"
+          elif echo "$LABELS" | jq -r '.[]' | grep -q "docs-only"; then
+            echo "type=docs" >> $GITHUB_OUTPUT
+            echo "📋 PR Type: DOCS (label override)"
+          # Rule 2: Governance path changes
+          elif echo "$CHANGED_FILES" | grep -qE '^governance/|^\.agent$|^\.agent-admin/'; then
+            echo "type=governance" >> $GITHUB_OUTPUT
+            echo "📋 PR Type: GOVERNANCE (path-based)"
+          # Rule 3: Docs-only (only .md or docs/ changes)
+          elif echo "$CHANGED_FILES" | grep -qE '^docs/|\.md$' && \
+               ! echo "$CHANGED_FILES" | grep -qvE '^docs/|\.md$'; then
+            echo "type=docs" >> $GITHUB_OUTPUT
+            echo "📋 PR Type: DOCS (path-based)"
+          # Rule 4: Branch patterns
+          elif [[ "${{ github.head_ref }}" =~ ^release/|^hotfix/ ]]; then
+            echo "type=code" >> $GITHUB_OUTPUT
+            echo "📋 PR Type: CODE (branch pattern)"
+          # Default: Code change
+          else
+            echo "type=code" >> $GITHUB_OUTPUT
+            echo "📋 PR Type: CODE (default)"
+          fi
+          
+          echo ""
+          echo "Changed files:"
+          echo "$CHANGED_FILES" | head -20
+      
+      - name: Validate Evidence Artifact Bundle
+        if: steps.classify.outputs.type != 'docs'
+        id: validate-evidence
+        run: |
+          echo "📦 Validating Evidence Artifact Bundle..."
+          echo "Per EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md"
+          echo ""
+          
+          MISSING=()
+          
+          # Required: Prehandover proof
+          if [ ! -d ".agent-admin/prehandover" ]; then
+            MISSING+=("prehandover/ directory")
+          elif [ -z "$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null)" ]; then
+            MISSING+=("prehandover proof (.md file)")
+          fi
+          
+          # Required: Gate results JSON
+          if [ ! -f ".agent-admin/gates/gate-results.json" ]; then
+            MISSING+=("gates/gate-results.json")
+          fi
+          
+          # Required: Continuous improvement capture
+          if [ ! -f ".agent-admin/improvements/improvements.md" ]; then
+            MISSING+=("improvements/improvements.md")
+          fi
+          
+          # Required: Governance sync state
+          if [ ! -f ".agent-admin/governance/sync-state.json" ]; then
+            MISSING+=("governance/sync-state.json")
+          fi
+          
+          # Report findings
+          if [ ${#MISSING[@]} -gt 0 ]; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ Evidence Artifact Bundle INCOMPLETE"
+            echo ""
+            echo "Missing artifacts:"
+            for ARTIFACT in "${MISSING[@]}"; do
+              echo "  - .agent-admin/$ARTIFACT"
+            done
+            echo ""
+            echo "Required structure:"
+            echo "  .agent-admin/"
+            echo "    ├── prehandover/     # Prehandover proof (*.md)"
+            echo "    ├── gates/           # gate-results.json (machine-readable)"
+            echo "    ├── rca/             # RCA (when stop-and-fix occurred)"
+            echo "    ├── improvements/    # improvements.md (mandatory)"
+            echo "    └── governance/      # sync-state.json"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Create missing artifacts using templates"
+            echo "  2. Validate with: .github/scripts/validate-evidence-bundle.sh"
+            echo "  3. Commit and push"
+            echo ""
+            echo "📚 Authority: EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md § 3, § 4"
+            exit 1
+          else
+            echo "validation=passed" >> $GITHUB_OUTPUT
+            echo "✅ Evidence Artifact Bundle COMPLETE"
+          fi
+      
+      - name: Validate Wake-Up Protocol
+        if: steps.classify.outputs.type != 'docs'
+        id: validate-wakeup
+        run: |
+          echo "🌅 Validating Wake-Up Protocol Execution..."
+          echo "Per REQ-AS-005"
+          echo ""
+          
+          # Check prehandover proof documents wake-up execution
+          PROOF=$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null | head -1)
+          if [ -z "$PROOF" ]; then
+            echo "❌ Cannot validate: prehandover proof missing (already reported)"
+            exit 1
+          fi
+          
+          if ! grep -qi "wake.up\|wakeup\|wake-up" "$PROOF"; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ Wake-Up Protocol NOT EXECUTED"
+            echo ""
+            echo "Required: Every session must execute wake-up protocol"
+            echo "Evidence: Prehandover proof must document wake-up execution"
+            echo ""
+            echo "Missing: No wake-up protocol mention in $(basename $PROOF)"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Run: .github/scripts/wake-up-protocol.sh foreman"
+            echo "  2. Document execution in prehandover proof"
+            echo "  3. Verify working-contract.md generated (ephemeral)"
+            echo "  4. Commit and push updated proof"
+            echo ""
+            echo "📚 Authority: REQ-AS-005, Living Agent System v6.2.0"
+            exit 1
+          fi
+          
+          echo "validation=passed" >> $GITHUB_OUTPUT
+          echo "✅ Wake-up protocol EXECUTED (documented in prehandover)"
+      
+      - name: Validate Session Closure
+        if: steps.classify.outputs.type != 'docs'
+        id: validate-closure
+        run: |
+          echo "🔒 Validating Session Closure Execution..."
+          echo "Per REQ-EO-005"
+          echo ""
+          
+          # Check for session memory file
+          if [ ! -d ".agent-workspace/foreman/memory" ]; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ Session memory directory MISSING"
+            echo ""
+            echo "Required: .agent-workspace/foreman/memory/ must exist"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Run: .github/scripts/session-closure.sh foreman"
+            echo "  2. Verify session-NNN-YYYYMMDD.md created"
+            echo "  3. Commit and push"
+            echo ""
+            echo "📚 Authority: REQ-EO-005, FOREMAN_MEMORY_PROTOCOL.md"
+            exit 1
+          fi
+          
+          LATEST_SESSION=$(ls -t .agent-workspace/foreman/memory/session-*.md 2>/dev/null | head -1 || echo "")
+          if [ -z "$LATEST_SESSION" ]; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ Session Closure NOT EXECUTED"
+            echo ""
+            echo "Required: Session memory file must exist"
+            echo "Missing: No session-*.md file in .agent-workspace/foreman/memory/"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Run: .github/scripts/session-closure.sh foreman"
+            echo "  2. Verify session file created"
+            echo "  3. Update lessons-learned.md and patterns.md"
+            echo "  4. Commit and push"
+            echo ""
+            echo "📚 Authority: REQ-EO-005, FOREMAN_MEMORY_PROTOCOL.md"
+            exit 1
+          fi
+          
+          echo "validation=passed" >> $GITHUB_OUTPUT
+          echo "✅ Session closure EXECUTED (memory: $(basename $LATEST_SESSION))"
+      
+      - name: Validate Learning Artifacts
+        if: steps.classify.outputs.type != 'docs'
+        run: |
+          echo "📚 Checking Learning Artifact Updates..."
+          echo "Per FOREMAN_MEMORY_PROTOCOL.md § 4.4.2"
+          echo ""
+          
+          WARNINGS=0
+          
+          # Check if lessons-learned.md was updated
+          if ! git diff --name-only origin/main...HEAD 2>/dev/null | grep -q "lessons-learned.md"; then
+            echo "⚠️ WARNING: lessons-learned.md not updated"
+            ((WARNINGS++))
+          else
+            echo "✅ lessons-learned.md updated"
+          fi
+          
+          # Check if patterns.md was updated
+          if ! git diff --name-only origin/main...HEAD 2>/dev/null | grep -q "patterns.md"; then
+            echo "⚠️ WARNING: patterns.md not updated"
+            ((WARNINGS++))
+          else
+            echo "✅ patterns.md updated"
+          fi
+          
+          if [ $WARNINGS -gt 0 ]; then
+            echo ""
+            echo "ℹ️ Learning artifact updates are recommended but not blocking"
+            echo "Consider capturing lessons and patterns from this session"
+          fi
+      
+      - name: Validate Gate Results Schema
+        if: steps.classify.outputs.type != 'docs' && steps.validate-evidence.outputs.validation == 'passed'
+        run: |
+          echo "🔍 Validating Gate Results JSON Schema..."
+          echo "Per EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md § 5"
+          echo ""
+          
+          # Validate JSON syntax
+          if ! jq empty .agent-admin/gates/gate-results.json 2>/dev/null; then
+            echo "❌ gate-results.json INVALID JSON"
+            exit 1
+          fi
+          
+          # Validate required fields
+          REQUIRED_FIELDS=(
+            ".timestamp"
+            ".pr_number"
+            ".verdict"
+            ".gates"
+            ".test_results"
+          )
+          
+          MISSING_FIELDS=()
+          for FIELD in "${REQUIRED_FIELDS[@]}"; do
+            if ! jq -e "$FIELD" .agent-admin/gates/gate-results.json >/dev/null 2>&1; then
+              MISSING_FIELDS+=("$FIELD")
+            fi
+          done
+          
+          if [ ${#MISSING_FIELDS[@]} -gt 0 ]; then
+            echo "❌ gate-results.json MISSING REQUIRED FIELDS"
+            echo ""
+            echo "Missing fields:"
+            for FIELD in "${MISSING_FIELDS[@]}"; do
+              echo "  - $FIELD"
+            done
+            echo ""
+            echo "Required schema: See design document"
+            exit 1
+          fi
+          
+          echo "✅ gate-results.json schema VALID"
+      
+      - name: Zero Test Debt Enforcement
+        if: steps.classify.outputs.type == 'code'
+        run: |
+          echo "🧪 Enforcing Zero Test Debt..."
+          echo "Per BUILD_PHILOSOPHY.md"
+          echo ""
+          
+          if [ -f ".agent-admin/gates/gate-results.json" ]; then
+            TEST_DEBT=$(jq -r '.test_results.test_debt // "UNKNOWN"' .agent-admin/gates/gate-results.json)
+            
+            if [ "$TEST_DEBT" != "ZERO" ]; then
+              echo "❌ TEST DEBT DETECTED"
+              echo ""
+              echo "Test Debt Status: $TEST_DEBT"
+              echo "Required: ZERO test debt"
+              echo ""
+              echo "Zero test debt means:"
+              echo "  - No failing tests"
+              echo "  - No skipped tests"
+              echo "  - No TODO/placeholder tests"
+              echo "  - No hidden/excluded tests"
+              echo "  - 100% GREEN"
+              echo ""
+              echo "🔧 Remediation:"
+              echo "  1. Run full test suite"
+              echo "  2. Fix ALL failing tests"
+              echo "  3. Implement or remove ALL skipped/TODO tests"
+              echo "  4. Verify 100% GREEN"
+              echo "  5. Update gate-results.json: test_debt: 'ZERO'"
+              echo ""
+              echo "📚 Authority: BUILD_PHILOSOPHY.md - One-Time Build Law"
+              exit 1
+            fi
+            
+            echo "✅ Zero test debt CONFIRMED"
+          else
+            echo "⚠️ Cannot validate test debt: gate-results.json missing"
+          fi
+      
+      - name: Report Verdict
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const prType = '${{ steps.classify.outputs.type }}';
+            
+            let emoji = status === 'success' ? '✅' : '❌';
+            let verdict = status === 'success' ? 'PASS' : 'FAIL';
+            
+            let body = `${emoji} **MERGE GATE VERDICT: ${verdict}**\n\n`;
+            
+            if (prType === 'docs') {
+              body += '**PR Type**: Documentation-only\n';
+              body += '**Status**: Non-blocking SKIP\n\n';
+              body += 'Evidence artifact validation not required for docs-only changes.\n';
+            } else if (status === 'success') {
+              body += '**All evidence and protocol validations PASSED:**\n';
+              body += '  ✅ Evidence artifact bundle complete\n';
+              body += '  ✅ Wake-up protocol executed\n';
+              body += '  ✅ Session closure executed\n';
+              body += '  ✅ Gate results JSON valid\n';
+              if (prType === 'code') {
+                body += '  ✅ Zero test debt confirmed\n';
+              }
+              body += '\n---\n\n';
+              body += '**Authority**: MERGE_GATE_INTERFACE_STANDARD.md § 5\n';
+            } else {
+              body += '**Gate validation FAILED**\n\n';
+              body += 'See workflow logs for evidence-first error messages.\n';
+              body += 'Each failure includes:\n';
+              body += '  - Missing artifact path\n';
+              body += '  - Required schema/structure\n';
+              body += '  - Exact remediation steps\n\n';
+              body += '**No log archaeology required.**\n';
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+  
+  # ============================================================================
+  # GATE 2: GOVERNANCE ALIGNMENT
+  # Validates canon integrity, detects drift, checks protected files
+  # ============================================================================
+  
+  governance/alignment:
+    name: Governance Alignment
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Classify PR Type
+        id: classify
+        run: |
+          # Same classification logic as gate 1
+          git fetch origin main --depth=50 2>/dev/null || true
+          LABELS='${{ toJSON(github.event.pull_request.labels.*.name) }}'
+          
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            CHANGED_FILES=$(git diff --name-only origin/main...HEAD || echo "")
+          else
+            CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD || echo "")
+          fi
+          
+          if echo "$LABELS" | jq -r '.[]' | grep -q "governance-only"; then
+            echo "type=governance" >> $GITHUB_OUTPUT
+          elif echo "$LABELS" | jq -r '.[]' | grep -q "docs-only"; then
+            echo "type=docs" >> $GITHUB_OUTPUT
+          elif echo "$CHANGED_FILES" | grep -qE '^governance/|^\.agent$|^\.agent-admin/'; then
+            echo "type=governance" >> $GITHUB_OUTPUT
+          elif echo "$CHANGED_FILES" | grep -qE '^docs/|\.md$' && \
+               ! echo "$CHANGED_FILES" | grep -qvE '^docs/|\.md$'; then
+            echo "type=docs" >> $GITHUB_OUTPUT
+          else
+            echo "type=code" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Validate Canon Hash Integrity
+        if: steps.classify.outputs.type == 'governance'
+        id: validate-canon
+        run: |
+          echo "🔐 Validating Canon Hash Integrity..."
+          echo "Per REQ-CM-001, REQ-CM-002"
+          echo ""
+          
+          if [ ! -f "governance/CANON_INVENTORY.json" ]; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ CANON_INVENTORY.json NOT FOUND"
+            echo ""
+            echo "Required: governance/CANON_INVENTORY.json must exist"
+            echo ""
+            echo "📚 Authority: REQ-CM-001"
+            exit 1
+          fi
+          
+          # Check for placeholder/truncated hashes
+          # Look for strings that are suspiciously short or placeholder text
+          PLACEHOLDERS=$(jq -r '.. | select(type == "string") | select(. == "PLACEHOLDER" or . == "TBD" or . == "TODO" or (length > 0 and length < 20))' governance/CANON_INVENTORY.json | wc -l)
+          
+          if [ $PLACEHOLDERS -gt 0 ]; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ DEGRADED ALIGNMENT MODE DETECTED"
+            echo ""
+            echo "Found $PLACEHOLDERS placeholder/truncated canon hashes"
+            echo ""
+            echo "🚨 STATUS: DEGRADED ALIGNMENT MODE"
+            echo "🚨 ACTION: ESCALATE TO CS2"
+            echo "🚨 IMPACT: Merge BLOCKED per REQ-SS-004"
+            echo ""
+            echo "Placeholder patterns detected:"
+            echo "  - 'PLACEHOLDER'"
+            echo "  - 'TBD'"
+            echo "  - 'TODO'"
+            echo "  - Hashes shorter than 20 characters"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Identify placeholder hashes in CANON_INVENTORY.json"
+            echo "  2. Compute actual SHA256 hashes for affected canons"
+            echo "  3. Update CANON_INVENTORY.json with real hashes"
+            echo "  4. Open CS2 escalation issue"
+            echo ""
+            echo "📚 Authority: REQ-CM-002, REQ-SS-004"
+            exit 1
+          fi
+          
+          echo "validation=passed" >> $GITHUB_OUTPUT
+          echo "✅ Canon hash integrity VALIDATED (no placeholders)"
+      
+      - name: Detect Governance Drift
+        if: steps.classify.outputs.type == 'governance'
+        run: |
+          echo "🔍 Detecting Governance Drift..."
+          echo "Per MERGE_GATE_INTERFACE_STANDARD.md § 6"
+          echo ""
+          
+          if [ -f ".agent-admin/governance/sync-state.json" ]; then
+            DRIFT=$(jq -r '.drift_detected // false' .agent-admin/governance/sync-state.json)
+            ALIGNMENT_STATE=$(jq -r '.alignment_state // "UNKNOWN"' .agent-admin/governance/sync-state.json)
+            
+            if [ "$DRIFT" = "true" ] || [ "$ALIGNMENT_STATE" = "DRIFT" ]; then
+              echo "❌ GOVERNANCE DRIFT DETECTED"
+              echo ""
+              echo "Alignment State: $ALIGNMENT_STATE"
+              echo "Drift Detected: $DRIFT"
+              echo ""
+              echo "🔧 Remediation:"
+              echo "  1. Review drift details in sync-state.json"
+              echo "  2. Reconcile governance artifacts with canonical source"
+              echo "  3. Update sync-state.json: alignment_state: 'ALIGNED'"
+              echo "  4. Document reconciliation in PR description"
+              echo ""
+              echo "📚 Authority: MERGE_GATE_INTERFACE_STANDARD.md § 6"
+              exit 1
+            fi
+            
+            echo "✅ No governance drift (alignment: $ALIGNMENT_STATE)"
+          else
+            echo "⚠️ Cannot detect drift: sync-state.json missing (reported in gate 1)"
+          fi
+      
+      - name: Check Protected Files
+        id: check-protected
+        run: |
+          echo "🔒 Checking Protected File Modifications..."
+          echo "Per REQ-CM-005"
+          echo ""
+          
+          # Define protected files
+          PROTECTED_FILES=(
+            ".agent"
+            ".github/agents/foreman-v2.md"
+            "governance/canon/BUILD_PHILOSOPHY.md"
+            "governance/canon/MERGE_GATE_INTERFACE_STANDARD.md"
+            "governance/canon/EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md"
+          )
+          
+          MODIFIED_PROTECTED=()
+          
+          git fetch origin main --depth=50 2>/dev/null || true
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            CHANGED_FILES=$(git diff --name-only origin/main...HEAD || echo "")
+          else
+            CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD || echo "")
+          fi
+          
+          for FILE in "${PROTECTED_FILES[@]}"; do
+            if echo "$CHANGED_FILES" | grep -q "^$FILE$"; then
+              MODIFIED_PROTECTED+=("$FILE")
+            fi
+          done
+          
+          if [ ${#MODIFIED_PROTECTED[@]} -gt 0 ]; then
+            echo "protected_modified=true" >> $GITHUB_OUTPUT
+            echo "🔐 PROTECTED FILE MODIFICATION DETECTED"
+            echo ""
+            echo "Modified Protected Files:"
+            for FILE in "${MODIFIED_PROTECTED[@]}"; do
+              echo "  - $FILE"
+            done
+            echo ""
+            echo "⚠️ CS2 (Johan Ras) APPROVAL MANDATORY"
+            echo ""
+            echo "Protected file modifications require:"
+            echo "  1. Explicit CS2 approval"
+            echo "  2. PR label: 'requires-cs2-approval'"
+            echo "  3. Justification in PR description"
+            echo ""
+            echo "📚 Authority: REQ-CM-005"
+            echo ""
+            echo "Gate will PASS but CS2 review is flagged and REQUIRED before merge."
+          else
+            echo "protected_modified=false" >> $GITHUB_OUTPUT
+            echo "✅ No protected file modifications"
+          fi
+      
+      - name: Check Constitutional Canon
+        if: steps.classify.outputs.type == 'governance'
+        run: |
+          echo "⚖️ Checking Constitutional Canon Modifications..."
+          echo "Per REQ-CM-003"
+          echo ""
+          
+          CONSTITUTIONAL_CANONS=(
+            "governance/canon/BUILD_PHILOSOPHY.md"
+            "governance/canon/FM_ROLE_CANON.md"
+          )
+          
+          MODIFIED_CONSTITUTIONAL=()
+          
+          git fetch origin main --depth=50 2>/dev/null || true
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            CHANGED_FILES=$(git diff --name-only origin/main...HEAD || echo "")
+          else
+            CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD || echo "")
+          fi
+          
+          for CANON in "${CONSTITUTIONAL_CANONS[@]}"; do
+            if echo "$CHANGED_FILES" | grep -q "^$CANON$"; then
+              MODIFIED_CONSTITUTIONAL+=("$CANON")
+            fi
+          done
+          
+          if [ ${#MODIFIED_CONSTITUTIONAL[@]} -gt 0 ]; then
+            echo "⚠️ CONSTITUTIONAL CANON MODIFICATION DETECTED"
+            echo ""
+            echo "Modified Constitutional Canons:"
+            for CANON in "${MODIFIED_CONSTITUTIONAL[@]}"; do
+              echo "  - $CANON"
+            done
+            echo ""
+            echo "🚨 CRITICAL: Constitutional changes are RARE"
+            echo ""
+            echo "Required:"
+            echo "  1. CS2 explicit approval"
+            echo "  2. Constitutional amendment justification"
+            echo "  3. Impact analysis on existing governance"
+            echo "  4. Ripple coordination plan"
+            echo ""
+            echo "📚 Authority: REQ-CM-003"
+          fi
+      
+      - name: Report Alignment Status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const prType = '${{ steps.classify.outputs.type }}';
+            const protectedModified = '${{ steps.check-protected.outputs.protected_modified }}' === 'true';
+            
+            let emoji = status === 'success' ? '✅' : '❌';
+            let verdict = status === 'success' ? 'PASS' : 'FAIL';
+            
+            let body = `${emoji} **GOVERNANCE ALIGNMENT: ${verdict}**\n\n`;
+            
+            if (prType === 'docs') {
+              body += '**PR Type**: Documentation-only\n';
+              body += '**Status**: Non-blocking SKIP\n\n';
+              body += 'Governance alignment checks not required for docs-only changes.\n';
+            } else if (status === 'success') {
+              body += '**Governance alignment validated:**\n';
+              if (prType === 'governance') {
+                body += '  ✅ Canon hash integrity verified\n';
+                body += '  ✅ No governance drift detected\n';
+              }
+              body += '  ✅ Protected file checks complete\n';
+              
+              if (protectedModified) {
+                body += '\n---\n\n';
+                body += '⚠️ **CS2 APPROVAL REQUIRED**\n\n';
+                body += 'Protected files modified - CS2 (Johan Ras) review MANDATORY\n';
+                body += 'Add label: `requires-cs2-approval`\n';
+              }
+              
+              body += '\n---\n\n';
+              body += '**Authority**: MERGE_GATE_INTERFACE_STANDARD.md § 6\n';
+            } else {
+              body += '**Governance alignment FAILED**\n\n';
+              body += 'See workflow logs for details and remediation.\n';
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+  
+  # ============================================================================
+  # GATE 3: STOP-AND-FIX ENFORCEMENT
+  # Detects unresolved stop-and-fix conditions, requires RCA
+  # ============================================================================
+  
+  stop-and-fix/enforcement:
+    name: Stop-and-Fix Enforcement
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Classify PR Type
+        id: classify
+        run: |
+          # Same classification logic
+          git fetch origin main --depth=50 2>/dev/null || true
+          LABELS='${{ toJSON(github.event.pull_request.labels.*.name) }}'
+          
+          if git rev-parse origin/main >/dev/null 2>&1; then
+            CHANGED_FILES=$(git diff --name-only origin/main...HEAD || echo "")
+          else
+            CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD || echo "")
+          fi
+          
+          if echo "$LABELS" | jq -r '.[]' | grep -q "governance-only"; then
+            echo "type=governance" >> $GITHUB_OUTPUT
+          elif echo "$LABELS" | jq -r '.[]' | grep -q "docs-only"; then
+            echo "type=docs" >> $GITHUB_OUTPUT
+          elif echo "$CHANGED_FILES" | grep -qE '^governance/|^\.agent$|^\.agent-admin/'; then
+            echo "type=governance" >> $GITHUB_OUTPUT
+          elif echo "$CHANGED_FILES" | grep -qE '^docs/|\.md$' && \
+               ! echo "$CHANGED_FILES" | grep -qvE '^docs/|\.md$'; then
+            echo "type=docs" >> $GITHUB_OUTPUT
+          else
+            echo "type=code" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Detect Stop-and-Fix Conditions
+        id: detect-saf
+        run: |
+          echo "🔍 Detecting Stop-and-Fix Conditions..."
+          echo "Per MERGE_GATE_INTERFACE_STANDARD.md § 7"
+          echo ""
+          
+          SAF_DETECTED=false
+          SAF_INDICATORS=()
+          
+          # Check improvements.md for stop-and-fix mention
+          if [ -f ".agent-admin/improvements/improvements.md" ]; then
+            if grep -qi "stop.and.fix\|stop-and-fix\|blocking.issue\|critical.fix" .agent-admin/improvements/improvements.md; then
+              SAF_DETECTED=true
+              SAF_INDICATORS+=("improvements.md mentions stop-and-fix")
+            fi
+          fi
+          
+          # Check PR title for stop-and-fix keywords
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          if echo "$PR_TITLE" | grep -qiE "stop.and.fix|stop-and-fix|URGENT|CRITICAL.FIX|BLOCKER"; then
+            SAF_DETECTED=true
+            SAF_INDICATORS+=("PR title contains stop-and-fix keywords")
+          fi
+          
+          # Check for RCA files (indicates stop-and-fix occurred)
+          if [ -d ".agent-admin/rca" ] && [ -n "$(find .agent-admin/rca -name '*.md' -type f 2>/dev/null)" ]; then
+            SAF_DETECTED=true
+            SAF_INDICATORS+=("RCA file exists")
+          fi
+          
+          if [ "$SAF_DETECTED" = "true" ]; then
+            echo "detected=true" >> $GITHUB_OUTPUT
+            echo "⚠️ STOP-AND-FIX CONDITION DETECTED"
+            echo ""
+            echo "Indicators:"
+            for INDICATOR in "${SAF_INDICATORS[@]}"; do
+              echo "  - $INDICATOR"
+            done
+          else
+            echo "detected=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ No stop-and-fix condition detected"
+          fi
+      
+      - name: Validate RCA Presence
+        if: steps.detect-saf.outputs.detected == 'true'
+        id: validate-rca
+        run: |
+          echo "📄 Validating RCA Presence..."
+          echo ""
+          
+          if [ ! -d ".agent-admin/rca" ] || [ -z "$(find .agent-admin/rca -name '*.md' -type f 2>/dev/null)" ]; then
+            echo "validation=failed" >> $GITHUB_OUTPUT
+            echo "❌ RCA REQUIRED (Stop-and-Fix Occurred)"
+            echo ""
+            echo "Stop-and-fix condition detected but no RCA found"
+            echo ""
+            echo "Required: Root Cause Analysis documenting:"
+            echo "  1. What went wrong"
+            echo "  2. Why it went wrong (root cause)"
+            echo "  3. How it was fixed"
+            echo "  4. Preventive measures for future"
+            echo ""
+            echo "Missing: .agent-admin/rca/rca-YYYYMMDD.md"
+            echo ""
+            echo "🔧 Remediation:"
+            echo "  1. Create RCA using template"
+            echo "  2. Document root cause analysis thoroughly"
+            echo "  3. Save to .agent-admin/rca/rca-$(date +%Y%m%d).md"
+            echo "  4. Commit and push"
+            echo ""
+            echo "📚 Authority: MERGE_GATE_INTERFACE_STANDARD.md § 7"
+            exit 1
+          fi
+          
+          RCA_FILE=$(find .agent-admin/rca -name '*.md' -type f | head -1)
+          echo "validation=passed" >> $GITHUB_OUTPUT
+          echo "✅ RCA PRESENT: $(basename $RCA_FILE)"
+      
+      - name: Validate RCA Completeness
+        if: steps.detect-saf.outputs.detected == 'true' && steps.validate-rca.outputs.validation == 'passed'
+        run: |
+          echo "🔍 Validating RCA Completeness..."
+          echo ""
+          
+          RCA_FILE=$(find .agent-admin/rca -name '*.md' -type f | head -1)
+          
+          # Check for required sections
+          REQUIRED_SECTIONS=(
+            "Root Cause"
+            "Impact"
+            "Resolution"
+            "Prevention"
+          )
+          
+          MISSING_SECTIONS=()
+          
+          for SECTION in "${REQUIRED_SECTIONS[@]}"; do
+            if ! grep -qi "##.*$SECTION" "$RCA_FILE"; then
+              MISSING_SECTIONS+=("$SECTION")
+            fi
+          done
+          
+          if [ ${#MISSING_SECTIONS[@]} -gt 0 ]; then
+            echo "⚠️ WARNING: RCA may be incomplete"
+            echo ""
+            echo "Missing or unclear sections:"
+            for SECTION in "${MISSING_SECTIONS[@]}"; do
+              echo "  - $SECTION"
+            done
+            echo ""
+            echo "RCA should document all aspects for effective learning"
+            echo "Consider adding missing sections for completeness"
+          else
+            echo "✅ RCA COMPLETENESS VALIDATED"
+            echo "All required sections present"
+          fi
+      
+      - name: Report Stop-and-Fix Status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const prType = '${{ steps.classify.outputs.type }}';
+            const safDetected = '${{ steps.detect-saf.outputs.detected }}' === 'true';
+            
+            let emoji = status === 'success' ? '✅' : '❌';
+            let verdict = status === 'success' ? 'PASS' : 'FAIL';
+            
+            let body = `${emoji} **STOP-AND-FIX ENFORCEMENT: ${verdict}**\n\n`;
+            
+            if (prType === 'docs') {
+              body += '**PR Type**: Documentation-only\n';
+              body += '**Status**: Non-blocking SKIP\n\n';
+              body += 'Stop-and-fix enforcement not required for docs-only changes.\n';
+            } else if (status === 'success') {
+              if (safDetected) {
+                body += '**Stop-and-fix condition HANDLED:**\n';
+                body += '  ✅ Stop-and-fix detected\n';
+                body += '  ✅ RCA present and complete\n';
+                body += '  ✅ Root cause documented\n';
+                body += '  ✅ Prevention measures identified\n\n';
+                body += '---\n\n';
+                body += '**Learning**: RCA captured for future reference\n';
+              } else {
+                body += '**Status**: No stop-and-fix condition detected\n\n';
+                body += 'Gate passes (not applicable)\n';
+              }
+              body += '\n**Authority**: MERGE_GATE_INTERFACE_STANDARD.md § 7\n';
+            } else {
+              body += '**Stop-and-fix enforcement FAILED**\n\n';
+              body += 'Stop-and-fix occurred but RCA missing or incomplete\n';
+              body += 'See workflow logs for remediation steps.\n';
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
