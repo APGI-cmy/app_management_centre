@@ -185,3 +185,57 @@
 
 ---
 Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-02-12
+
+## Pattern: Variable-Based Line Length Management
+- Observed: 2026-02-12 (Session 004)
+- Context: When shell commands or URLs exceed yamllint 80-char limit
+- Response: Break into intermediate variables (e.g., `CANONICAL_URL="..."`; then use `$CANONICAL_URL`)
+- Example:
+  ```bash
+  # Instead of:
+  curl -f -s "https://raw.githubusercontent.com/$REPO/$REF/governance/CANON_INVENTORY.json" -o file.json
+  
+  # Use:
+  BASE_URL="https://raw.githubusercontent.com"
+  CANONICAL_BASE_URL="$BASE_URL/$REPO/$REF"
+  curl -f -s "$CANONICAL_BASE_URL/governance/CANON_INVENTORY.json" -o file.json
+  ```
+
+## Pattern: Multi-Line jq Filter Composition
+- Observed: 2026-02-12 (Session 004)
+- Context: When jq filters exceed line length limits
+- Response: Build filter in multiple variable assignments with proper escaping
+- Example:
+  ```bash
+  # Instead of:
+  FILES=$(jq -r '.artifacts[] | select(.layer_down_status == "PUBLIC_API") | .path' file.json)
+  
+  # Use:
+  JQ_FILTER='.artifacts[]'
+  JQ_FILTER="$JQ_FILTER | select(.layer_down_status == \"PUBLIC_API\")"
+  JQ_FILTER="$JQ_FILTER | .path"
+  FILES=$(jq -r "$JQ_FILTER" file.json)
+  ```
+
+## Pattern: Timestamped Automated PR Branches
+- Observed: 2026-02-12 (Session 004)
+- Context: Automated workflows creating alignment PRs
+- Response: Use format `<purpose>-YYYYMMDD-HHMMSS` for unique, sortable branch names
+- Example: `governance-alignment-20260212-102651`
+- Benefits: No branch name conflicts, chronological ordering, clear purpose
+
+## Pattern: Conditional Job Execution with Outputs
+- Observed: 2026-02-12 (Session 004)
+- Context: GitHub Actions workflows needing conditional job execution
+- Response: Use job outputs with `if: needs.<job>.outputs.<flag> == 'true'`
+- Example:
+  ```yaml
+  jobs:
+    check:
+      outputs:
+        needs_action: ${{ steps.check.outputs.needs_action }}
+    
+    act:
+      needs: check
+      if: needs.check.outputs.needs_action == 'true'
+  ```
