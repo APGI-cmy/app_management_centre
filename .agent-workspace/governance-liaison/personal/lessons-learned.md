@@ -91,3 +91,30 @@
 
 ---
 Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-02-12
+
+## Session 20260212 (Session 004)
+
+### Lesson: YAML Line Length Enforcement
+- Context: yamllint enforces 80-character line limit; initial workflow had 14 violations
+- Pattern: Long shell commands and URLs violate line length rules
+- Action: Break long commands into multi-line format using variables (CANONICAL_URL, INVENTORY, JQ_FILTER, etc.)
+
+### Lesson: Iterative YAML Validation
+- Context: Creating GitHub Actions workflows with strict linting rules
+- Pattern: Run yamllint after each significant change to catch issues early
+- Action: Validate YAML syntax immediately; fix violations before proceeding; repeat until clean
+
+### Lesson: Evidence Artifact Bundle is Mandatory
+- Context: EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md requires prehandover proof, gate results, and session memory
+- Pattern: All governed PRs need comprehensive evidence bundle
+- Action: Create all 3 artifacts (prehandover, gates, session) before reporting progress; document in gate-results.json
+
+### Lesson: Self-Alignment Authority Boundaries
+- Context: Implementing automated workflow within governance liaison scope
+- Pattern: Self-alignment authority (Issue #999) covers local governance automation, not canonical changes
+- Action: Verify all workflow actions stay within consumer-only mode; never modify canonical source; never write production code
+
+### Lesson: Workflow Automation Reduces Manual Overhead
+- Context: Manual governance alignment is time-consuming and error-prone
+- Pattern: Automated workflows enable proactive drift detection and alignment
+- Action: Implement automated ripple listeners for all cross-repo governance dependencies; use hourly drift checks

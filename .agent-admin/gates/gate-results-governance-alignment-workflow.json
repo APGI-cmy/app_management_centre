@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-02-12T10:26:51Z",
+  "pr_number": "TBD",
+  "verdict": "PASS",
+  "gates": {
+    "merge-gate/verdict": {
+      "status": "PASS",
+      "evidence_artifacts": {
+        "prehandover_proof": ".agent-admin/prehandover/PREHANDOVER_PROOF_GOVERNANCE_ALIGNMENT_WORKFLOW.md",
+        "gate_results": ".agent-admin/gates/gate-results-governance-alignment-workflow.json",
+        "session_memory": ".agent-workspace/governance-liaison/memory/session-004-20260212.md"
+      },
+      "issues": []
+    },
+    "governance/alignment": {
+      "status": "PASS",
+      "drift_detected": false,
+      "alignment_state": "ALIGNED",
+      "notes": "Workflow implements governance alignment automation per canonical protocol",
+      "issues": []
+    },
+    "stop-and-fix/enforcement": {
+      "status": "PASS",
+      "stop_and_fix_occurred": false,
+      "rca_required": false,
+      "issues": []
+    }
+  },
+  "governance_sync": {
+    "local_version": "1.0.0",
+    "canonical_version": "1.0.0",
+    "drift_detected": false,
+    "workflow_added": true,
+    "workflow_path": ".github/workflows/governance-alignment.yml"
+  },
+  "validation": {
+    "yamllint": {
+      "status": "PASS",
+      "errors": 0,
+      "warnings": 1,
+      "note": "Warning on line 3 (truthy) is acceptable GitHub Actions standard"
+    },
+    "agent_contract_compliance": {
+      "status": "PASS",
+      "role_boundaries_respected": true,
+      "self_alignment_authority_exercised": true,
+      "execution_protocols_followed": true
+    }
+  }
+}

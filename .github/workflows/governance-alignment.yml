@@ -1,0 +1,226 @@
+name: Governance Alignment
+
+on:
+  repository_dispatch:
+    types: [governance-ripple]
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  check-alignment:
+    name: Check Governance Alignment
+    runs-on: ubuntu-latest
+
+    outputs:
+      drift_detected: ${{ steps.drift.outputs.drift_detected }}
+      needs_alignment: ${{ steps.drift.outputs.needs_alignment }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Record ripple receipt (if triggered by dispatch)
+        if: github.event_name == 'repository_dispatch'
+        run: |
+          mkdir -p .agent-admin/ripple
+          cat > .agent-admin/ripple/received-$(date +%Y%m%d-%H%M%S).json <<EOF
+          {
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "event_type": "${{ github.event.action }}",
+            "source_repo": "${{ github.event.client_payload.source_repo }}",
+            "source_commit": "${{ github.event.client_payload.commit_sha }}",
+            "trigger": "repository_dispatch"
+          }
+          EOF
+
+      - name: Fetch canonical governance version
+        id: canonical
+        run: |
+          CANONICAL_REPO="APGI-cmy/maturion-foreman-governance"
+          CANONICAL_REF="main"
+          CANONICAL_URL="https://raw.githubusercontent.com"
+          CANONICAL_URL="$CANONICAL_URL/$CANONICAL_REPO/$CANONICAL_REF"
+          CANONICAL_URL="$CANONICAL_URL/governance/CANON_INVENTORY.json"
+          TEMP_FILE="/tmp/canonical_inventory.json"
+          if curl -f -s "$CANONICAL_URL" -o "$TEMP_FILE"; then
+            CANONICAL_VERSION=$(jq -r \
+              '.version // "unknown"' "$TEMP_FILE")
+            CANONICAL_COMMIT=$(jq -r \
+              '.provenance.commit_sha // "unknown"' "$TEMP_FILE")
+            echo "canonical_version=$CANONICAL_VERSION" >> $GITHUB_OUTPUT
+            echo "canonical_commit=$CANONICAL_COMMIT" >> $GITHUB_OUTPUT
+          else
+            echo "canonical_version=unknown" >> $GITHUB_OUTPUT
+            echo "canonical_commit=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check local governance version
+        id: local
+        run: |
+          LOCAL_INVENTORY="governance/CANON_INVENTORY.json"
+          if [ -f "$LOCAL_INVENTORY" ]; then
+            LOCAL_VERSION=$(jq -r \
+              '.version // "unknown"' "$LOCAL_INVENTORY")
+            LOCAL_COMMIT=$(jq -r \
+              '.provenance.commit_sha // "unknown"' "$LOCAL_INVENTORY")
+            echo "local_version=$LOCAL_VERSION" >> $GITHUB_OUTPUT
+            echo "local_commit=$LOCAL_COMMIT" >> $GITHUB_OUTPUT
+          else
+            echo "local_version=none" >> $GITHUB_OUTPUT
+            echo "local_commit=none" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Detect drift
+        id: drift
+        run: |
+          CANONICAL_VERSION="${{ steps.canonical.outputs.canonical_version }}"
+          LOCAL_VERSION="${{ steps.local.outputs.local_version }}"
+          CANONICAL_COMMIT="${{ steps.canonical.outputs.canonical_commit }}"
+          LOCAL_COMMIT="${{ steps.local.outputs.local_commit }}"
+          DRIFT_DETECTED="false"
+          NEEDS_ALIGNMENT="false"
+          if [ "$CANONICAL_VERSION" = "unknown" ]; then
+            DRIFT_DETECTED="unknown"
+          elif [ "$LOCAL_VERSION" = "none" ]; then
+            DRIFT_DETECTED="true"
+            NEEDS_ALIGNMENT="true"
+          elif [ "$CANONICAL_VERSION" != "$LOCAL_VERSION" ] \
+            || [ "$CANONICAL_COMMIT" != "$LOCAL_COMMIT" ]; then
+            DRIFT_DETECTED="true"
+            NEEDS_ALIGNMENT="true"
+          else
+            DRIFT_DETECTED="false"
+            NEEDS_ALIGNMENT="false"
+          fi
+          echo "drift_detected=$DRIFT_DETECTED" >> $GITHUB_OUTPUT
+          echo "needs_alignment=$NEEDS_ALIGNMENT" >> $GITHUB_OUTPUT
+
+      - name: Update sync state
+        run: |
+          mkdir -p .agent-admin/governance
+          SYNC_FILE=".agent-admin/governance/sync_state.json"
+          CANONICAL_VER="${{ steps.canonical.outputs.canonical_version }}"
+          CANONICAL_CMT="${{ steps.canonical.outputs.canonical_commit }}"
+          LOCAL_VER="${{ steps.local.outputs.local_version }}"
+          LOCAL_CMT="${{ steps.local.outputs.local_commit }}"
+          DRIFT="${{ steps.drift.outputs.drift_detected }}"
+          NEEDS="${{ steps.drift.outputs.needs_alignment }}"
+          cat > "$SYNC_FILE" <<EOF
+          {
+            "last_check": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "canonical_version": "$CANONICAL_VER",
+            "canonical_commit": "$CANONICAL_CMT",
+            "local_version": "$LOCAL_VER",
+            "local_commit": "$LOCAL_CMT",
+            "drift_detected": "$DRIFT",
+            "needs_alignment": "$NEEDS"
+          }
+          EOF
+
+  create-alignment-pr:
+    name: Create Alignment PR
+    needs: check-alignment
+    if: needs.check-alignment.outputs.needs_alignment == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.MATURION_BOT_TOKEN }}
+          fetch-depth: 0
+      - name: Create alignment branch
+        run: |
+          BRANCH_NAME="governance-alignment-$(date +%Y%m%d-%H%M%S)"
+          git config user.name "Maturion Bot"
+          git config user.email "maturion-bot@apgi.io"
+          git checkout -b "$BRANCH_NAME"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Layer down canonical governance
+        run: |
+          CANONICAL_REPO="APGI-cmy/maturion-foreman-governance"
+          CANONICAL_REF="main"
+          BASE_URL="https://raw.githubusercontent.com"
+          CANONICAL_BASE_URL="$BASE_URL/$CANONICAL_REPO/$CANONICAL_REF"
+          INVENTORY="governance/CANON_INVENTORY.json"
+          curl -f -s "$CANONICAL_BASE_URL/governance/CANON_INVENTORY.json" \
+            -o "$INVENTORY"
+          JQ_FILTER='.artifacts[]'
+          JQ_FILTER="$JQ_FILTER | select(.layer_down_status == \"PUBLIC_API\")"
+          JQ_FILTER="$JQ_FILTER | .path"
+          PUBLIC_API_FILES=$(jq -r "$JQ_FILTER" "$INVENTORY")
+          echo "$PUBLIC_API_FILES" | while read -r file; do
+            [ -z "$file" ] && continue
+            echo "  📄 Layering down: $file"
+            mkdir -p "$(dirname "$file")"
+            curl -f -s "$CANONICAL_BASE_URL/$file" -o "$file" \
+              || echo "    ⚠️  Failed (may not exist)"
+          done
+
+      - name: Update governance inventory
+        run: |
+          INVENTORY_FILE="GOVERNANCE_ARTIFACT_INVENTORY.md"
+          if [ -f "$INVENTORY_FILE" ]; then
+            TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            sed -i "s/Last Updated:.*/Last Updated: $TIMESTAMP/" \
+              "$INVENTORY_FILE" || true
+          fi
+
+      - name: Commit changes
+        run: |
+          git add governance/ GOVERNANCE_ARTIFACT_INVENTORY.md || true
+          git add .agent-admin/governance/sync_state.json || true
+          INVENTORY="governance/CANON_INVENTORY.json"
+          CANONICAL_SHA=$(jq -r \
+            '.provenance.commit_sha // "unknown"' "$INVENTORY")
+          CANONICAL_VER=$(jq -r \
+            '.version // "unknown"' "$INVENTORY")
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          COMMIT_MSG="Automated governance alignment"
+          COMMIT_MSG="$COMMIT_MSG: Layer down canonical governance"
+          COMMIT_MSG="$COMMIT_MSG\n\nCanonical commit: $CANONICAL_SHA"
+          COMMIT_MSG="$COMMIT_MSG\nCanonical version: $CANONICAL_VER"
+          COMMIT_MSG="$COMMIT_MSG\n\nTriggered by: ${{ github.event_name }}"
+          COMMIT_MSG="$COMMIT_MSG\nTimestamp: $TIMESTAMP"
+          COMMIT_MSG="$COMMIT_MSG\n\nAuthority: "
+          COMMIT_MSG="${COMMIT_MSG}CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md"
+          COMMIT_MSG="$COMMIT_MSG\nAgent: governance-liaison (automated)"
+          git commit -m "$COMMIT_MSG"
+          git push origin "$BRANCH_NAME"
+
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ secrets.MATURION_BOT_TOKEN }}
+        run: |
+          INVENTORY="governance/CANON_INVENTORY.json"
+          CANONICAL_VER=$(jq -r '.version // "unknown"' "$INVENTORY")
+          CANONICAL_SHA=$(jq -r \
+            '.provenance.commit_sha // "unknown"' "$INVENTORY")
+          TIMESTAMP=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          TITLE="Automated governance alignment"
+          TITLE="$TITLE: Layer down canonical governance"
+          BODY="## Automated Governance Alignment\n\n"
+          BODY="${BODY}**Triggered by**: ${{ github.event_name }}\n"
+          BODY="${BODY}**Timestamp**: $TIMESTAMP\n\n"
+          BODY="${BODY}### Alignment Details\n"
+          BODY="${BODY}- **Canonical version**: $CANONICAL_VER\n"
+          BODY="${BODY}- **Canonical commit**: $CANONICAL_SHA\n\n"
+          BODY="${BODY}### Actions Taken\n"
+          BODY="${BODY}- Layered down PUBLIC_API canonical governance"
+          BODY="${BODY} artifacts\n"
+          BODY="${BODY}- Updated CANON_INVENTORY.json\n"
+          BODY="${BODY}- Updated sync_state.json\n\n"
+          BODY="${BODY}**Authority**: "
+          BODY="${BODY}CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md\n"
+          BODY="${BODY}**Agent**: governance-liaison (automated)"
+          gh pr create \
+            --title "$TITLE" \
+            --body "$BODY" \
+            --head "$BRANCH_NAME" \
+            --base main
