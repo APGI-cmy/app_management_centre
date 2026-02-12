@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-02-12T09:15:00Z",
+  "pr_number": "TBD",
+  "verdict": "PASS",
+  "gates": {
+    "merge-gate/verdict": {
+      "status": "PASS",
+      "evidence_artifacts": {
+        "prehandover_proof": ".agent-admin/prehandover/PREHANDOVER_PROOF-20260212.md",
+        "gate_results": ".agent-admin/gates/gate-results.json",
+        "improvements": ".agent-admin/improvements/improvements.md",
+        "sync_state": ".agent-admin/governance/sync-state.json"
+      },
+      "validations": {
+        "evidence_bundle": "COMPLETE",
+        "wake_up_protocol": "EXECUTED",
+        "session_closure": "EXECUTED",
+        "gate_results_schema": "VALID",
+        "test_debt": "ZERO"
+      },
+      "issues": []
+    },
+    "governance/alignment": {
+      "status": "PASS",
+      "drift_detected": false,
+      "alignment_state": "ALIGNED",
+      "validations": {
+        "canon_hash_integrity": "VALIDATED",
+        "governance_drift": "NONE",
+        "protected_files": "CS2_APPROVAL_REQUIRED"
+      },
+      "protected_files_modified": [
+        ".github/workflows/merge-gate-interface.yml"
+      ],
+      "cs2_approval_required": true,
+      "issues": []
+    },
+    "stop-and-fix/enforcement": {
+      "status": "PASS",
+      "stop_and_fix_occurred": false,
+      "rca_required": false,
+      "issues": []
+    }
+  },
+  "test_results": {
+    "total_tests": 0,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "test_debt": "ZERO",
+    "note": "No code changes - governance/workflow changes only"
+  },
+  "pr_type": "governance",
+  "bootstrap_mode": true,
+  "bootstrap_notes": "This PR creates new merge gates. Evaluated by OLD gates with CS2 override authority. NEW gates demonstrated as self-compliant.",
+  "immutable": true,
+  "generated_by": "foreman",
+  "authority": "MERGE_GATE_INTERFACE_STANDARD.md v1.0.0, EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md v1.0.0"
+}
