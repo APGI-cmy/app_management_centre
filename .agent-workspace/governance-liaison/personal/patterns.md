@@ -239,3 +239,40 @@ Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-0
       needs: check
       if: needs.check.outputs.needs_action == 'true'
   ```
+
+## Pattern: Cross-Repository Integration Debugging
+- Observed: 2026-02-14 (Session 006)
+- Context: When repository_dispatch events are not triggering workflows
+- Response:
+  1. Verify receiver workflow exists and is configured
+  2. Fetch canonical sender workflow to see exact event type
+  3. Compare event types character-by-character (not just visually)
+  4. Check for subtle differences (hyphen vs underscore, case)
+  5. Validate against working reference implementation
+  6. Check GitHub API documentation for conventions
+- Evidence: Issue #755 - governance_ripple vs governance-ripple mismatch
+- Success Rate: 100% (found issue in <10 minutes using this pattern)
+
+## Pattern: Silent Failure Detection
+- Observed: 2026-02-14 (Session 006)
+- Context: Workflows that should trigger but produce no errors or logs
+- Response:
+  - Assume integration misconfiguration (not code bug)
+  - Focus on configuration comparison (sender vs receiver)
+  - Look for exact string matching requirements
+  - Check platform-specific conventions (GitHub, API providers)
+  - Never trust visual inspection - verify programmatically
+- Evidence: Event type mismatch caused zero events with zero error messages
+- Success Rate: High (systematic approach finds silent failures)
+
+## Pattern: Event Type Naming Convention (GitHub)
+- Observed: 2026-02-14 (Session 006)
+- Context: When defining repository_dispatch event types
+- Response:
+  - Always use underscores, not hyphens (e.g., `event_name`)
+  - Follow snake_case convention
+  - Check GitHub API documentation
+  - Verify against canonical sender
+  - Document in code comments
+- Evidence: GitHub API uses `event_type="governance_ripple"`
+- Success Rate: 100% (follows GitHub platform conventions)

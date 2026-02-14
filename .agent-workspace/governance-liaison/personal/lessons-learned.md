@@ -118,3 +118,45 @@ Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-0
 - Context: Manual governance alignment is time-consuming and error-prone
 - Pattern: Automated workflows enable proactive drift detection and alignment
 - Action: Implement automated ripple listeners for all cross-repo governance dependencies; use hourly drift checks
+
+## Session 20260214
+
+### Lesson: GitHub repository_dispatch Event Type Naming Convention
+- Context: When implementing cross-repository integrations using GitHub's repository_dispatch API
+- Pattern: GitHub uses underscores in event types, not hyphens (e.g., `governance_ripple` not `governance-ripple`)
+- Action: 
+  - Always use underscores in event type names
+  - Verify event types character-by-character between sender and receiver
+  - Reference GitHub API documentation for naming conventions
+- Why It Matters: Event type mismatches are completely silent - no errors, no warnings, just zero events delivered
+
+### Lesson: Silent Failures in Cross-Repository Integrations
+- Context: When debugging workflows that should trigger but don't
+- Pattern: repository_dispatch event type mismatches produce no error messages or logs
+- Action:
+  - Never assume event types match - verify character-by-character
+  - Check canonical sender's exact event type string
+  - Compare with local receiver's expected event type
+  - Look for subtle differences (hyphens vs underscores, case sensitivity)
+- Why It Matters: Silent failures can go undetected for long periods, breaking integrations without visible symptoms
+
+### Lesson: Reference Implementation Validation
+- Context: When fixing broken integrations or implementing new cross-repo features
+- Pattern: Find a known working implementation and compare configurations exactly
+- Action:
+  - Identify similar integration that works (e.g., maturion-isms governance receiver)
+  - Compare workflow configurations character-by-character
+  - Align with proven working setup
+  - Document the reference used for future debugging
+- Why It Matters: Proven working implementations provide authoritative patterns and accelerate debugging
+
+### Lesson: Systematic Root Cause Analysis for Cross-Repo Issues
+- Context: When cross-repository integrations fail silently
+- Pattern: Follow systematic debugging protocol:
+  1. Verify receiver configuration exists
+  2. Check canonical sender configuration
+  3. Compare event types character-by-character
+  4. Validate against reference implementation
+  5. Check platform conventions
+- Action: Use this protocol as standard debugging approach
+- Why It Matters: Systematic approach finds subtle issues faster than ad-hoc debugging
