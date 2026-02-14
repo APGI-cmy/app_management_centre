@@ -68,7 +68,7 @@ Complete governance ripple receiver and alignment infrastructure has been succes
 ### Workflow ✅
 - **File**: `.github/workflows/governance-alignment.yml`
 - **Triggers**:
-  - `repository_dispatch` (type: governance-ripple) - Immediate response
+  - `repository_dispatch` (type: governance_ripple) - Immediate response
   - `schedule` (cron: `0 * * * *`) - Hourly drift detection
   - `workflow_dispatch` - Manual execution
 - **Features**:
@@ -174,7 +174,7 @@ Will be validated on PR merge:
 From original issue:
 
 1. ✅ **Ripple events trigger immediate alignment**
-   - repository_dispatch configured with type: governance-ripple
+   - repository_dispatch configured with type: governance_ripple
 
 2. ✅ **Scheduled fallback ensures alignment within 24h**
    - Hourly cron schedule (60 min < 24 hours)
