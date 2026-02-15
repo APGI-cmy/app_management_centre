@@ -140,6 +140,33 @@ jobs:
             agent:liaison
           assignees: APGI-cmy
       
+      - name: Enable auto-merge
+        if: steps.align.outputs.drift_detected == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
+        run: |
+          # Wait briefly for PR to be fully created
+          sleep 2
+          
+          # Extract PR number from created PR
+          PR_NUMBER=$(gh pr list \
+            --head governance-ripple-sync-${{ github.run_id }} \
+            --json number \
+            --jq '.[0].number')
+          
+          if [ -n "$PR_NUMBER" ]; then
+            echo "📌 Enabling auto-merge for PR #$PR_NUMBER"
+            gh pr merge "$PR_NUMBER" \
+              --auto \
+              --squash \
+              --delete-branch \
+              && echo "✅ Auto-merge enabled" \
+              || echo "⚠️  Auto-merge failed (may require branch protection rules)"
+          else
+            echo "⚠️  Could not find PR number"
+            exit 1
+          fi
+      
       - name: Sync Summary
         if: always()
         run: |
@@ -153,6 +180,7 @@ jobs:
             echo "Canonical Commit: ${{ steps.metadata.outputs.canonical_commit }}"
             echo "Files Updated: ${{ steps.metadata.outputs.files_updated }}"
             echo "PR Created: Yes"
+            echo "Auto-merge: Enabled"
           else
             echo "Status: Governance aligned - no action needed"
           fi
