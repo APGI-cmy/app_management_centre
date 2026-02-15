@@ -145,3 +145,17 @@ Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-0
 - Context: merge-gate-interface.yml is 1105 lines with multiple jobs
 - Pattern: Generic string matches fail in large files with repeated patterns
 - Action: Include maximum context in old_str to ensure unique match; verify line numbers
+
+## Session 20260215
+
+### Lesson: Force-Push for Race Condition Prevention
+- Context: Concurrent governance events can trigger simultaneous workflow runs
+- Pattern: Multiple workflows pushing to same branch without force causes conflicts
+- Action: Use `git push --force` for automated governance branches that are recreated each run
+- Rationale: Safe because branch is deleted/recreated (line 169) and short-lived (auto-merged)
+
+### Lesson: Reference Implementations Guide Standardization
+- Context: R_Roster PR #122 demonstrated successful force-push strategy
+- Pattern: Cross-repository standardization requires following proven patterns
+- Action: Check reference implementations before enhancing workflows
+- Benefit: Ensures consistency and reduces reinvention of solutions

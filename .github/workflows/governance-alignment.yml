@@ -224,7 +224,7 @@ jobs:
           COMMIT_MSG="${COMMIT_MSG}CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md"
           COMMIT_MSG="$COMMIT_MSG\nAgent: governance-liaison (automated)"
           git commit -m "$COMMIT_MSG"
-          git push origin "$BRANCH_NAME"
+          git push origin "$BRANCH_NAME" --force
 
       - name: Create pull request
         if: steps.check_existing.outputs.should_create == 'true'
