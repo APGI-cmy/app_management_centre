@@ -1,23 +1,10 @@
 {
-  "last_sync": "2026-02-11T13:35:00Z",
-  "session_id": "liaison-20260211-132604",
-  "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "canonical_ref": "main",
-  "canonical_commit": "7b64968",
-  "inventory_version": "1.0.0",
-  "total_canons_tracked": 135,
-  "public_api_canons": 102,
-  "files_layered_down_this_session": 70,
-  "alignment_status": "FULLY_ALIGNED",
-  "drift_detected": false,
-  "drift_resolved": true,
-  "validation_method": "SHA256 hash comparison against canonical files",
-  "evidence_log": ".agent-admin/sessions/governance-liaison/liaison-20260211-132604_evidence.log",
-  "alignment_log": ".agent-admin/sessions/governance-liaison/liaison-20260211-132604_alignment.log",
-  "issues_found": [
-    "CANON_INVENTORY.json had text prefix corruption - fixed",
-    "68 PUBLIC_API files had version drift - all aligned",
-    "4 canonical inventory hashes stale - aligned to canonical files",
-    "2 additional files needed alignment - completed"
-  ]
+  "last_check": "2026-02-15T05:50:00Z",
+  "canonical_version": "Not modified (workflow changes only)",
+  "canonical_commit": "Not modified (workflow changes only)",
+  "local_version": "Not modified (workflow changes only)",
+  "local_commit": "Not modified (workflow changes only)",
+  "drift_detected": "false",
+  "needs_alignment": "false",
+  "note": "This PR modifies governance alignment workflow itself, not governance artifacts"
 }
