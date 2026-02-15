@@ -286,3 +286,25 @@ Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-0
 - Command: `git push origin "$BRANCH_NAME" --force`
 - Response: Always use force-push for governance-alignment-auto and similar automated branches
 - Reference: R_Roster PR #122 (proven implementation)
+
+## Pattern: Pre-Implementation Investigation
+- Observed: 2026-02-15 (Session 014)
+- Context: Issue requests implementation of feature
+- Problem: Feature may already exist in different form or under different name
+- Response: Before implementing, thoroughly investigate existing infrastructure
+- Detection: Check workflow files, use `gh workflow list`, examine documentation
+- Benefit: Prevents duplicate work, reveals existing solutions
+- Action: If found, create evidence-based completion document instead of implementing
+
+## Pattern: Operational Verification for Issue Closure
+- Observed: 2026-02-15 (Session 014)
+- Context: Closing issue without implementing new code
+- Problem: Stakeholders need confidence that solution exists and works
+- Response: Gather multiple evidence sources proving operational status
+- Evidence Types:
+  - Workflow runs (`gh run list`, `gh run view`)
+  - Registry entries (consumer registry)
+  - State files (sync_state.json, ripple-log.json)
+  - Logs and receipts (.agent-admin/ripple/)
+- Presentation: Create comprehensive completion document with all evidence
+- Outcome: Evidence-based closure with high confidence
