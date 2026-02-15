@@ -2,7 +2,7 @@ name: Governance Alignment
 
 on:
   repository_dispatch:
-    types: [governance-ripple]
+    types: [governance_ripple]
   schedule:
     - cron: '0 * * * *'
   workflow_dispatch:
@@ -134,15 +134,45 @@ jobs:
         with:
           token: ${{ secrets.MATURION_BOT_TOKEN }}
           fetch-depth: 0
-      - name: Create alignment branch
+      
+      - name: Check for existing governance alignment PRs
+        id: check_existing
+        env:
+          GH_TOKEN: ${{ secrets.MATURION_BOT_TOKEN }}
         run: |
-          BRANCH_NAME="governance-alignment-$(date +%Y%m%d-%H%M%S)"
+          echo "=== Checking for existing governance alignment PRs ==="
+          EXISTING_PRS=$(gh pr list \
+            --state open \
+            --json number,headRefName \
+            --jq '.[] | select(.headRefName | startswith("governance-alignment")) | .number' \
+            || echo "")
+          
+          if [ -n "$EXISTING_PRS" ]; then
+            echo "⚠️  Open governance alignment PR(s) found: $EXISTING_PRS"
+            echo "Skipping duplicate PR creation"
+            echo "should_create=false" >> $GITHUB_OUTPUT
+          else
+            echo "✅ No existing governance alignment PRs found"
+            echo "Proceeding with PR creation"
+            echo "should_create=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create alignment branch
+        if: steps.check_existing.outputs.should_create == 'true'
+        run: |
+          # Use stable branch name for auto-merge compatibility
+          BRANCH_NAME="governance-alignment-auto"
           git config user.name "Maturion Bot"
           git config user.email "maturion-bot@apgi.io"
+          
+          # Delete branch if it exists (from previous failed runs)
+          git push origin --delete "$BRANCH_NAME" 2>/dev/null || true
+          
           git checkout -b "$BRANCH_NAME"
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Layer down canonical governance
+        if: steps.check_existing.outputs.should_create == 'true'
         run: |
           CANONICAL_REPO="APGI-cmy/maturion-foreman-governance"
           CANONICAL_REF="main"
@@ -164,6 +194,7 @@ jobs:
           done
 
       - name: Update governance inventory
+        if: steps.check_existing.outputs.should_create == 'true'
         run: |
           INVENTORY_FILE="GOVERNANCE_ARTIFACT_INVENTORY.md"
           if [ -f "$INVENTORY_FILE" ]; then
@@ -173,6 +204,7 @@ jobs:
           fi
 
       - name: Commit changes
+        if: steps.check_existing.outputs.should_create == 'true'
         run: |
           git add governance/ GOVERNANCE_ARTIFACT_INVENTORY.md || true
           git add .agent-admin/governance/sync_state.json || true
@@ -195,6 +227,7 @@ jobs:
           git push origin "$BRANCH_NAME"
 
       - name: Create pull request
+        if: steps.check_existing.outputs.should_create == 'true'
         env:
           GH_TOKEN: ${{ secrets.MATURION_BOT_TOKEN }}
         run: |
@@ -219,8 +252,29 @@ jobs:
           BODY="${BODY}**Authority**: "
           BODY="${BODY}CROSS_REPOSITORY_LAYER_DOWN_PROTOCOL.md\n"
           BODY="${BODY}**Agent**: governance-liaison (automated)"
-          gh pr create \
+          
+          # Create PR
+          PR_URL=$(gh pr create \
             --title "$TITLE" \
             --body "$BODY" \
             --head "$BRANCH_NAME" \
-            --base main
+            --base main)
+          
+          echo "PR created: $PR_URL"
+          
+          # Extract PR number from URL
+          PR_NUMBER=$(echo "$PR_URL" | grep -oP '\d+$')
+          
+          # Add labels for merge gate bypass detection
+          gh pr edit "$PR_NUMBER" \
+            --add-label "governance" \
+            --add-label "automated" \
+            --add-label "agent:liaison"
+          
+          # Enable auto-merge
+          gh pr merge "$PR_NUMBER" \
+            --auto \
+            --squash \
+            --delete-branch
+          
+          echo "✅ Auto-merge enabled for PR #$PR_NUMBER"

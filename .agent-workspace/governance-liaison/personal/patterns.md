@@ -239,3 +239,37 @@ Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-0
       needs: check
       if: needs.check.outputs.needs_action == 'true'
   ```
+
+## Pattern: Auto-Merge System Implementation
+- Observed: 2026-02-15 (Session 006)
+- Context: Implementing auto-merge for automated governance PRs
+- Components:
+  - Stable branch naming (no timestamps)
+  - Duplicate PR prevention (check before create)
+  - PR labels for detection (governance, automated, agent:liaison)
+  - Auto-merge enablement (--auto --squash --delete-branch)
+  - Merge gate bypass logic (detect and skip validations)
+- Response: Apply all components together as a system; incomplete implementation will fail
+
+## Pattern: Merge Gate Bypass for Trusted Sources
+- Observed: 2026-02-15 (Session 006)
+- Context: Automated governance PRs from canonical source need bypass
+- Detection:
+  1. Check PR labels (all required: governance + automated + agent:liaison)
+  2. Check branch name pattern (exact match: governance-alignment-auto)
+  3. Use OR logic - either triggers bypass
+- Implementation:
+  1. Add detection step early in workflow
+  2. Set output flag (is_governance_auto=true/false)
+  3. Add condition to ALL validation steps
+  4. Update verdict reporting for bypass case
+- Response: Skip all evidence/protocol validations; show special bypass message
+
+## Pattern: Repository Dispatch Event Naming
+- Observed: 2026-02-15 (Session 006)
+- Context: Cross-repository communication via repository_dispatch
+- Rule: Event types use underscores (_), not hyphens (-)
+- Examples:
+  - Correct: `governance_ripple`
+  - Incorrect: `governance-ripple`
+- Response: Always use underscore format; check both sending and receiving repos for consistency
