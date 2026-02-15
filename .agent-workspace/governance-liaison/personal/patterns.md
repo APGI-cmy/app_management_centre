@@ -273,3 +273,16 @@ Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-0
   - Correct: `governance_ripple`
   - Incorrect: `governance-ripple`
 - Response: Always use underscore format; check both sending and receiving repos for consistency
+
+## Pattern: Force-Push for Automated Branches
+- Observed: 2026-02-15 (Session 013)
+- Context: Automated workflows creating ephemeral branches with potential concurrent runs
+- When: Branch is deleted/recreated each run AND auto-merged or short-lived
+- Safe conditions:
+  1. Branch is explicitly deleted before creation (line 169: `git push origin --delete`)
+  2. Branch serves only automated workflows
+  3. No human commits expected
+  4. Concurrent events possible (schedule + dispatch + manual)
+- Command: `git push origin "$BRANCH_NAME" --force`
+- Response: Always use force-push for governance-alignment-auto and similar automated branches
+- Reference: R_Roster PR #122 (proven implementation)
