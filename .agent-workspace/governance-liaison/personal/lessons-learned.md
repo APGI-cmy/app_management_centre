@@ -159,3 +159,23 @@ Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-0
 - Pattern: Cross-repository standardization requires following proven patterns
 - Action: Check reference implementations before enhancing workflows
 - Benefit: Ensures consistency and reduces reinvention of solutions
+
+## Session 20260215-014
+
+### Lesson: Always Investigate Before Implementing
+- Context: Issue requested implementing governance ripple receiver workflow
+- Pattern: Requested feature may already exist in different form or different name
+- Action: Before implementing, thoroughly investigate existing infrastructure
+- Benefit: Prevents duplicate work, reveals existing solutions, saves time
+
+### Lesson: Verify Operational Status, Not Just File Existence
+- Context: Found workflow file exists but needed to confirm it's actually working
+- Pattern: File existence doesn't guarantee functionality or correct configuration
+- Action: Use `gh workflow list`, `gh run list`, check logs, examine evidence trails
+- Benefit: Ensures solution is not just present but actually operational
+
+### Lesson: Evidence-Based Issue Closure
+- Context: Closing issue without implementing code requires strong evidence
+- Pattern: Documentation alone may not be convincing; need operational proof
+- Action: Gather multiple evidence sources: workflow runs, logs, registry entries, state files
+- Benefit: Provides confidence to stakeholders that solution is real and working
