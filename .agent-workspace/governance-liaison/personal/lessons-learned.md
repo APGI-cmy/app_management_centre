@@ -118,3 +118,30 @@ Authority: LIVING_AGENT_SYSTEM.md v6.2.0 | Created: 2026-02-11 | Updated: 2026-0
 - Context: Manual governance alignment is time-consuming and error-prone
 - Pattern: Automated workflows enable proactive drift detection and alignment
 - Action: Implement automated ripple listeners for all cross-repo governance dependencies; use hourly drift checks
+
+## Session 20260215
+
+### Lesson: Event Type Naming Conventions
+- Context: GitHub Actions repository_dispatch uses specific naming for event types
+- Pattern: Event types use underscores (_), not hyphens (-) in repository_dispatch triggers
+- Action: Always use underscore format (e.g., `governance_ripple`) not hyphen format (e.g., `governance-ripple`)
+
+### Lesson: Auto-Merge Requires Stable Branch Names
+- Context: Auto-merge systems need consistent branch names to prevent duplicates
+- Pattern: Timestamped branch names create new branches each time, breaking auto-merge
+- Action: Use stable branch names (e.g., `governance-alignment-auto`) for automated workflows
+
+### Lesson: Duplicate PR Prevention Is Essential
+- Context: Multiple triggers (schedule, dispatch, manual) can create duplicate PRs
+- Pattern: Check for existing open PRs before creating new ones
+- Action: Add `gh pr list` check with conditional skip logic before branch creation
+
+### Lesson: Bypass Detection Needs Redundancy
+- Context: Automated governance PRs need merge gate bypass but detection must be reliable
+- Pattern: Single detection method can fail (labels might not apply, branch might be renamed)
+- Action: Use multiple detection methods: check labels AND branch name pattern
+
+### Lesson: Large File Editing Requires Precision
+- Context: merge-gate-interface.yml is 1105 lines with multiple jobs
+- Pattern: Generic string matches fail in large files with repeated patterns
+- Action: Include maximum context in old_str to ensure unique match; verify line numbers
