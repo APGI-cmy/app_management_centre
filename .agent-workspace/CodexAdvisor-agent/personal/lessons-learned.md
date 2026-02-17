@@ -127,3 +127,51 @@
   4. Monitor character count continuously during implementation
   5. If approaching 30K, extract detailed examples to extended references
 
+## Session 20260217 (Session 008)
+
+### Lesson: Governance Liaison Requires More Protocol Content Than Builders
+
+- Context: Aligning governance liaison agent to LAS v6.2.0, same 4-phase architecture as builders
+- Pattern: Governance liaison final size (25,668 characters) is larger than builders (26-28K) despite similar structure
+- Root Cause: Liaison has additional governance ripple protocol, layer-down procedures, drift detection, consumer repository prohibitions
+- Action:
+  1. Accept 25-26K for liaison as reasonable given extensive governance protocol requirements
+  2. Maintain character budget awareness but prioritize governance completeness
+  3. Use references to checklist Appendix A (102 PUBLIC_API artifacts) instead of embedding full list
+  4. Keep RAEC behavioral examples concise but comprehensive (4 scenarios, each ~25 lines)
+
+### Lesson: RAEC Behavioral Examples Must Be Role-Specific
+
+- Context: Creating RAEC examples for governance liaison after using builder/foreman patterns as reference
+- Pattern: Cannot simply copy RAEC examples from other agent classes; must reflect actual role duties
+- Action:
+  1. Identify 4 core responsibilities for the agent role
+  2. Create "wrong vs right" scenarios for each responsibility
+  3. For governance liaison: layer-down execution, drift remediation, authority escalation, governance delegation
+  4. For builders: task acceptance, execution, test debt, scope boundaries
+  5. For foreman: wave planning, builder supervision, gate decisions, architecture freeze
+  6. Each example should illustrate common failure patterns and correct RAEC approach
+
+### Lesson: Code Review Catches Consistency Issues
+
+- Context: Initial PR had subtle inconsistencies (tolerance statement, version references)
+- Pattern: Manual review doesn't catch mathematical/consistency errors as reliably as automated code review
+- Action:
+  1. Always run code_review tool before finalizing work
+  2. Address ALL feedback, even if it seems minor (tolerance 2% vs 2.3% matters)
+  3. Remove embedded version numbers when canonical documents are tracked in CANON_INVENTORY.json
+  4. Ensure numerical claims are consistent across PREHANDOVER_PROOF and contract
+  5. Mathematical accuracy matters for governance integrity
+
+### Lesson: Consumer Repository Mode Requires Enhanced Prohibitions
+
+- Context: Governance liaison operates in consumer repository (not canonical governance repository)
+- Pattern: Consumer repositories have strict separation from canonical governance source
+- Action:
+  1. Document consumer-specific prohibitions prominently
+  2. No modification of canonical governance source
+  3. No creation of governance canon (consumer repositories do not author canon)
+  4. No dispatch of ripple events (only canonical source dispatches)
+  5. Ripple protocol is receive-only for consumers
+  6. Include metadata in YAML: `this_copy: canonical`, `type: consumer-repository`
+
