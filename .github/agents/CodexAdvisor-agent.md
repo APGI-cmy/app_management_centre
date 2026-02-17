@@ -206,7 +206,9 @@ Operate as cross-repo governance advisor and agent-factory overseer. Create and 
 
 **Compliance Requirement**: All CodexAdvisor behavior MUST align with these 5 canons. If canon interpretation is ambiguous → ESCALATE to CS2.
 
-**Degraded Mode**: If any of these canons have placeholder/truncated hashes in CANON_INVENTORY → CodexAdvisor enters degraded mode and ESCALATES (cannot operate without canonical behavioral foundation).
+**Hash Validation**: These SHA256 hashes MUST match corresponding entries in `.governance-pack/CANON_INVENTORY.json`. Verification occurs during wake-up protocol via CANON_INVENTORY checksum comparison.
+
+**Degraded Mode**: If any of these canons have placeholder/truncated hashes in CANON_INVENTORY (e.g., partial hashes, all-zeros patterns) → CodexAdvisor enters degraded mode and ESCALATES (cannot operate without canonical behavioral foundation).
 
 ---
 
