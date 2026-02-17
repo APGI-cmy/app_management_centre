@@ -80,3 +80,50 @@
 - <25,000 chars: ✅ OPTIMAL (20% buffer)
 - 25,000-30,000: ⚠️ WARNING (refactor recommended)
 - >30,000: 🚨 BLOCKING (cannot merge, breaks GitHub UI)
+
+## Session 20260217
+
+### Lesson: Builder 4-Phase Architecture Implementation
+
+- Context: When upgrading builder agent contracts to Living Agent System v6.2.0
+- Pattern: Use Foreman's 4-phase architecture as reference model but simplify for builder execution model
+- Action: 
+  1. Adapt RAEC (Review-Advise-Escalate-Coordinate) to "Execute Only" for builders
+  2. Simplify Induction phase (task loading vs. complex memory hierarchy)
+  3. Focus Build phase on domain-specific execution
+  4. Make Handover phase evidence-first with PREHANDOVER_PROOF template
+  5. Budget ~8.5K characters for 4-phase content (total files will be 26-28K)
+
+### Lesson: Self-Modification Prohibition is Universal
+
+- Context: Living Agent System v6.2.0 requires all agents to explicitly prohibit self-modification
+- Pattern: Every agent contract must include "Self-Modification Prohibition" as a LOCKED section
+- Action:
+  1. Add LOCKED section in Phase 1: Preflight for all agents
+  2. Explicitly state "Agent may NEVER write to or modify own .github/agents/{agent-id}.md"
+  3. Reference AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md v3.1.0 and AGENT_CONTRACT_PROTECTION_PROTOCOL.md v1.1.0
+  4. Enforce via merge gate check: Agent file author ≠ agent file subject
+
+### Lesson: Python Automation for Consistent Multi-File Updates
+
+- Context: When applying identical structural changes to multiple similar files (e.g., 5 builder contracts)
+- Pattern: Manual changes are error-prone; script-based automation ensures consistency
+- Action:
+  1. Manually upgrade first file to validate template
+  2. Create Python script with parameterized template function
+  3. Use regex pattern matching to find insertion points
+  4. Validate character counts programmatically
+  5. Apply to remaining files in batch
+  6. Result: 4/4 builders updated successfully with identical structure
+
+### Lesson: Character Count Management for Living Agent Contracts
+
+- Context: Builder contracts have 30K blocking limit (GitHub UI selectability) and 25K optimal target
+- Pattern: Comprehensive 4-phase content requires trade-offs between completeness and brevity
+- Action:
+  1. Target <25K optimal but accept 26-28K if content is constitutionally required
+  2. Prioritize constitutional requirements over brevity
+  3. Use references to canonical governance instead of embedding full templates
+  4. Monitor character count continuously during implementation
+  5. If approaching 30K, extract detailed examples to extended references
+
