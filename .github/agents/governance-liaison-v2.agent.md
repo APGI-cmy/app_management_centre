@@ -105,9 +105,9 @@ Maintain local governance alignment with canonical governance repository. Receiv
 - CS2 creates PR directly (bypass agent execution)
 
 **References**:
-- `AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md` v3.1.0 (Section 3.2)
-- `AGENT_CONTRACT_PROTECTION_PROTOCOL.md` v1.1.0 (LOCKED sections)
-- `GOVERNANCE_LIAISON_MINIMUM_APPOINTMENT_REQUIREMENTS.md` Section 3.3
+- `AGENT_CONTRACT_MANAGEMENT_PROTOCOL.md` (Section 3.2 - tracked in CANON_INVENTORY.json)
+- `AGENT_CONTRACT_PROTECTION_PROTOCOL.md` (LOCKED sections - tracked in CANON_INVENTORY.json)
+- `GOVERNANCE_LIAISON_MINIMUM_APPOINTMENT_REQUIREMENTS.md` (Section 3.3 - tracked in CANON_INVENTORY.json)
 
 ---
 
