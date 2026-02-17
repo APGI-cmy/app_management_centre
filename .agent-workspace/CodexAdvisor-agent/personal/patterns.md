@@ -52,3 +52,59 @@
   6. **ENFORCE** 30K limit in YAML frontmatter (`file_size_limit`)
 - Prevention: Always use references to canonical governance, never embed large templates; target <25,000 characters (20% buffer)
 - Reference: PartPulse PR #265 (30K GitHub UI selectability limit)
+
+## Pattern: 4-Phase Canonical Architecture for Builders
+
+- Observed: 2026-02-17 (Session 007)
+- Context: When implementing Living Agent System v6.2.0 for builder-class agents
+- Response:
+  - Phase 1 (Preflight): Identity/Authority + Self-Modification Prohibition (LOCKED) + 4 RAEC behavioral examples + 5 canonical references (SHA256)
+  - Phase 2 (Induction): Task loading protocol (6 steps) + Halt conditions (escalate to FM)
+  - Phase 3 (Build): Domain-specific execution + Zero-test-debt enforcement (100% GREEN required)
+  - Phase 4 (Handover): Completion requirements (7-point checklist) + PREHANDOVER_PROOF template
+  - Preserve all existing LOCKED sections (cumulative governance)
+  - Character budget: ~8.5K for 4-phase content, target final size 26-28K
+
+## Pattern: Consumer Repository Agent Contract Metadata
+
+- Observed: 2026-02-17 (Session 007)
+- Context: When updating agent contracts in consumer repositories (not canonical governance repository)
+- Response:
+  - Add to YAML frontmatter:
+    - `canonical_home: APGI-cmy/maturion-foreman-governance`
+    - `this_copy: consumer`
+    - `authority: CS2`
+    - `contract_pattern: four_phase_canonical`
+    - `operating_model: execute_only` (for builders) or `RAEC` (for supervisors)
+  - Respect consumer repository prohibitions:
+    - No modification of `.governance-pack/`
+    - No bypassing governance alignment gate
+    - No creating governance canon
+    - No dispatching ripple events
+
+## Pattern: Evidence-First Handover (PREHANDOVER_PROOF)
+
+- Observed: 2026-02-17 (Session 007)
+- Context: When completing agent contract alignment or major governance tasks
+- Response:
+  - Create comprehensive PREHANDOVER_PROOF document before PR merge
+  - Include 17 sections:
+    1. CS2 authorization confirmation
+    2. Checklist compliance matrix (100%)
+    3. Before/after comparison
+    4. Requirement mapping verification
+    5. Validation hook confirmation
+    6. LOCKED section metadata
+    7. Consumer repository adaptations
+    8. Canonical references enumeration
+    9. RAEC behavioral examples
+    10. Implementation evidence
+    11. Testing/validation status
+    12. Scope compliance verification
+    13. Security/safety verification
+    14. Architecture alignment verification
+    15. Governance hygiene check
+    16. Handover declaration
+    17. Lessons & recommendations
+  - Character count: Aim for 15-20K comprehensive documentation
+
