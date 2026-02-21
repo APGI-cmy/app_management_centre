@@ -1,0 +1,429 @@
+name: Ripple Integration
+
+# Authority: CROSS_REPO_RIPPLE_TRANSPORT_PROTOCOL.md, GOVERNANCE_RIPPLE_MODEL.md
+# Purpose: Full ripple-integration lifecycle with agent-file-aware escalation
+#
+# Triggers:
+#   1. repository_dispatch (governance_ripple) - direct canonical dispatch
+#   2. issues (opened, governance-ripple label) - canonical issue-based dispatch
+#   3. workflow_dispatch - manual / test trigger
+#
+# Logic:
+#   - Layer down canonical governance artifacts via align-governance.sh
+#   - Detect if any .github/agents/*.md files changed
+#   - Agent files changed  → DRAFT PR + CS2 escalation issue
+#   - Artifacts only       → Regular PR + auto-merge
+
+on:
+  repository_dispatch:
+    types: [governance_ripple]
+
+  issues:
+    types: [opened]
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  ripple-integration:
+    name: Ripple Integration
+    runs-on: ubuntu-latest
+
+    # Only process issues that carry the governance-ripple label
+    if: |
+      github.event_name == 'repository_dispatch' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' &&
+       contains(github.event.issue.labels.*.name, 'governance-ripple'))
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Maturion Bot"
+          git config --global user.email "bot@maturion.ai"
+
+      # ------------------------------------------------------------------
+      # Step 1: Log ripple event to inbox
+      # ------------------------------------------------------------------
+      - name: Log ripple event to inbox
+        id: inbox
+        run: |
+          mkdir -p .agent-admin/governance/ripple-inbox
+
+          DISPATCH_ID="${{ github.event.client_payload.dispatch_id }}"
+          if [ -z "$DISPATCH_ID" ]; then
+            DISPATCH_ID="run-${{ github.run_id }}"
+          fi
+          INBOX_FILE=".agent-admin/governance/ripple-inbox/ripple-${DISPATCH_ID}.json"
+
+          cat > "$INBOX_FILE" <<EOF
+          {
+            "dispatch_id": "$DISPATCH_ID",
+            "event_type": "governance_ripple",
+            "canonical_commit": "${{ github.event.client_payload.canonical_commit }}",
+            "inventory_version": "${{ github.event.client_payload.inventory_version }}",
+            "changed_paths": "${{ github.event.client_payload.changed_paths }}",
+            "sender": "${{ github.event.client_payload.sender }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "status": "processing",
+            "trigger": "${{ github.event_name }}"
+          }
+          EOF
+
+          echo "dispatch_id=$DISPATCH_ID" >> $GITHUB_OUTPUT
+          echo "inbox_file=$INBOX_FILE" >> $GITHUB_OUTPUT
+          echo "Ripple event logged: $INBOX_FILE"
+
+      # ------------------------------------------------------------------
+      # Step 2: Run governance alignment (layer-down)
+      # ------------------------------------------------------------------
+      - name: Run governance alignment
+        id: align
+        run: |
+          set +e
+
+          bash .github/scripts/align-governance.sh
+          EXIT_CODE=$?
+
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo "Alignment script failed with exit code $EXIT_CODE"
+            exit $EXIT_CODE
+          fi
+
+          # Detect whether the alignment produced changes
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "drift_detected=false" >> $GITHUB_OUTPUT
+          else
+            echo "drift_detected=true" >> $GITHUB_OUTPUT
+          fi
+
+      # ------------------------------------------------------------------
+      # Step 3: Detect agent file changes (requires CS2 escalation)
+      # ------------------------------------------------------------------
+      - name: Detect agent file changes
+        id: agent_files
+        if: steps.align.outputs.drift_detected == 'true'
+        run: |
+          AGENT_FILES_CHANGED=$(git diff --name-only HEAD 2>/dev/null | grep '^\.github/agents/' | wc -l || true)
+          STAGED_AGENT_FILES=$(git diff --cached --name-only 2>/dev/null | grep '^\.github/agents/' | wc -l || true)
+          TOTAL_AGENT=$((AGENT_FILES_CHANGED + STAGED_AGENT_FILES))
+
+          if [ "$TOTAL_AGENT" -gt 0 ]; then
+            echo "has_agent_changes=true" >> $GITHUB_OUTPUT
+            AGENT_FILE_LIST=$(git diff --name-only HEAD 2>/dev/null | grep '^\.github/agents/' || true)
+            STAGED_LIST=$(git diff --cached --name-only 2>/dev/null | grep '^\.github/agents/' || true)
+            COMBINED=$(echo -e "$AGENT_FILE_LIST\n$STAGED_LIST" | sort -u | tr '\n' ' ')
+            echo "agent_file_list=$COMBINED" >> $GITHUB_OUTPUT
+            echo "⚠️  Agent file changes detected: $COMBINED"
+          else
+            echo "has_agent_changes=false" >> $GITHUB_OUTPUT
+            echo "✅ No agent file changes — safe for auto-merge"
+          fi
+
+      # ------------------------------------------------------------------
+      # Step 4a: Create escalation document (agent files changed)
+      # ------------------------------------------------------------------
+      - name: Create escalation document
+        id: escalation
+        if: |
+          steps.align.outputs.drift_detected == 'true' &&
+          steps.agent_files.outputs.has_agent_changes == 'true'
+        run: |
+          mkdir -p .agent-workspace/governance-liaison/escalation-inbox
+
+          DISPATCH_ID="${{ steps.inbox.outputs.dispatch_id }}"
+          DATE=$(date -u +%Y%m%d)
+          ESCALATION_FILE=".agent-workspace/governance-liaison/escalation-inbox/blocker-${DATE}-${DISPATCH_ID}.md"
+
+          cat > "$ESCALATION_FILE" <<EOF
+          # Escalation: Agent File Change Detected
+
+          **Date**: $(date -u +%Y-%m-%d)
+          **Dispatch ID**: $DISPATCH_ID
+          **Type**: agent-file-change
+          **Authority Required**: CS2
+          **Workflow Run**: ${{ github.run_id }}
+
+          ## Description
+          Governance ripple event contains changes to agent contract files.
+          Per AGENT_CONTRACT_PROTECTION_PROTOCOL.md, only CS2 may authorize
+          agent file modifications.
+
+          ## Changed Agent Files
+          ${{ steps.agent_files.outputs.agent_file_list }}
+
+          ## Context
+          - Canonical commit: ${{ github.event.client_payload.canonical_commit }}
+          - Changed paths: ${{ github.event.client_payload.changed_paths }}
+          - Trigger: ${{ github.event_name }}
+
+          ## Required Action
+          CS2 must review and merge the draft alignment PR created by this run.
+          Draft PR will be created in the next step with DRAFT status.
+
+          ## References
+          - AGENT_CONTRACT_PROTECTION_PROTOCOL.md
+          - CS2_AGENT_FILE_AUTHORITY_MODEL.md
+          - GOVERNANCE_LIAISON_MINIMUM_APPOINTMENT_REQUIREMENTS.md
+
+          ---
+          **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md
+          **Living Agent System**: v6.2.0
+          EOF
+
+          echo "escalation_file=$ESCALATION_FILE" >> $GITHUB_OUTPUT
+          echo "Escalation document created: $ESCALATION_FILE"
+
+      # ------------------------------------------------------------------
+      # Step 4b: Create DRAFT PR for agent file changes (CS2 merge only)
+      # ------------------------------------------------------------------
+      - name: Create DRAFT alignment PR (agent file changes)
+        id: draft_pr
+        if: |
+          steps.align.outputs.drift_detected == 'true' &&
+          steps.agent_files.outputs.has_agent_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
+          commit-message: |
+            [DRAFT] Governance ripple alignment — agent file changes require CS2
+
+            Dispatch ID: ${{ steps.inbox.outputs.dispatch_id }}
+            Canonical commit: ${{ github.event.client_payload.canonical_commit }}
+            Agent files changed: ${{ steps.agent_files.outputs.agent_file_list }}
+          branch: governance-ripple-agent-${{ github.run_id }}
+          delete-branch: true
+          draft: true
+          title: '[DRAFT][CS2 Required] Governance Ripple — Agent File Changes'
+          body: |
+            ## ⚠️ DRAFT — CS2 Authorization Required
+
+            This PR was automatically created by the Ripple Integration workflow but
+            contains changes to **agent contract files** (`.github/agents/*.md`).
+
+            Per `AGENT_CONTRACT_PROTECTION_PROTOCOL.md`, **only CS2 may merge this PR**.
+
+            ### Why DRAFT?
+            Agent file changes require explicit CS2 authorization. This PR is kept as
+            DRAFT until CS2 reviews and approves the agent contract changes.
+
+            ### Changed Agent Files
+            ```
+            ${{ steps.agent_files.outputs.agent_file_list }}
+            ```
+
+            ### Ripple Metadata
+            - **Dispatch ID**: `${{ steps.inbox.outputs.dispatch_id }}`
+            - **Trigger**: `${{ github.event_name }}`
+            - **Canonical Commit**: `${{ github.event.client_payload.canonical_commit }}`
+            - **Changed Paths**: `${{ github.event.client_payload.changed_paths }}`
+            - **Escalation Document**: `${{ steps.escalation.outputs.escalation_file }}`
+
+            ### CS2 Action Required
+            1. Review the agent file changes in this PR
+            2. Verify changes align with canonical governance intent
+            3. If approved: Convert from DRAFT to Ready and merge
+            4. If rejected: Close this PR and escalate back to canonical governance
+
+            ### Authority
+            - `AGENT_CONTRACT_PROTECTION_PROTOCOL.md`
+            - `CS2_AGENT_FILE_AUTHORITY_MODEL.md`
+            - `GOVERNANCE_LIAISON_MINIMUM_APPOINTMENT_REQUIREMENTS.md`
+
+            ---
+            **Authority**: LIVING_AGENT_SYSTEM.md v6.2.0
+            **Workflow**: `.github/workflows/ripple-integration.yml`
+          labels: |
+            governance
+            cs2-required
+            agent-file-change
+            ripple-sync
+
+      # ------------------------------------------------------------------
+      # Step 4c: Open CS2 escalation issue
+      # ------------------------------------------------------------------
+      - name: Open CS2 escalation issue
+        if: |
+          steps.align.outputs.drift_detected == 'true' &&
+          steps.agent_files.outputs.has_agent_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
+        run: |
+          gh issue create \
+            --title "[CS2 Escalation] Governance Ripple — Agent File Changes Require Authorization" \
+            --body "## CS2 Authorization Required
+
+          A governance ripple event has produced changes to agent contract files that
+          require CS2 authorization per \`AGENT_CONTRACT_PROTECTION_PROTOCOL.md\`.
+
+          ### Changed Agent Files
+          \`\`\`
+          ${{ steps.agent_files.outputs.agent_file_list }}
+          \`\`\`
+
+          ### Ripple Details
+          - **Dispatch ID**: \`${{ steps.inbox.outputs.dispatch_id }}\`
+          - **Trigger**: \`${{ github.event_name }}\`
+          - **Canonical Commit**: \`${{ github.event.client_payload.canonical_commit }}\`
+          - **Escalation Document**: \`${{ steps.escalation.outputs.escalation_file }}\`
+
+          ### Action Required
+          Review and merge (or reject) the draft alignment PR created by run \`${{ github.run_id }}\`.
+
+          ---
+          **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md, CS2_AGENT_FILE_AUTHORITY_MODEL.md
+          **Assigned to**: CS2 / @APGI-cmy" \
+            --label "governance,cs2-required,agent-file-change" \
+            || echo "⚠️  Could not create escalation issue (may lack permissions)"
+
+      # ------------------------------------------------------------------
+      # Step 5a: Create regular PR (governance artifacts only)
+      # ------------------------------------------------------------------
+      - name: Create alignment PR (artifacts only)
+        id: artifact_pr
+        if: |
+          steps.align.outputs.drift_detected == 'true' &&
+          steps.agent_files.outputs.has_agent_changes != 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
+          commit-message: |
+            Governance ripple alignment — artifacts only
+
+            Dispatch ID: ${{ steps.inbox.outputs.dispatch_id }}
+            Canonical commit: ${{ github.event.client_payload.canonical_commit }}
+          branch: governance-ripple-artifacts-${{ github.run_id }}
+          delete-branch: true
+          title: '[Governance Ripple] Align canonical governance artifacts'
+          body: |
+            ## Governance Ripple — Artifact Alignment
+
+            This PR was automatically created in response to a governance ripple event.
+            It contains **only governance artifact changes** (no agent contract files),
+            so it is eligible for auto-merge.
+
+            ### Alignment Checklist
+            - ✅ Ripple event received and logged to inbox
+            - ✅ Governance artifacts layered down from canonical source
+            - ✅ No agent contract files changed (auto-merge safe)
+            - ✅ `sync_state.json` updated
+            - ✅ Escalation document: NOT REQUIRED
+
+            ### Ripple Metadata
+            - **Dispatch ID**: `${{ steps.inbox.outputs.dispatch_id }}`
+            - **Trigger**: `${{ github.event_name }}`
+            - **Canonical Commit**: `${{ github.event.client_payload.canonical_commit }}`
+            - **Changed Paths**: `${{ github.event.client_payload.changed_paths }}`
+
+            ### Review Checklist
+            - [ ] Verify governance artifacts are correct canonical copies
+            - [ ] Confirm `sync_state.json` reflects canonical version/commit
+            - [ ] Ensure all merge gate checks pass
+
+            ---
+            **Authority**: LIVING_AGENT_SYSTEM.md v6.2.0
+            **Workflow**: `.github/workflows/ripple-integration.yml`
+          labels: |
+            governance
+            automated
+            ripple-sync
+            agent:liaison
+
+      # ------------------------------------------------------------------
+      # Step 5b: Enable auto-merge for artifact-only PRs
+      # ------------------------------------------------------------------
+      - name: Enable auto-merge (artifacts only)
+        if: |
+          steps.align.outputs.drift_detected == 'true' &&
+          steps.agent_files.outputs.has_agent_changes != 'true' &&
+          steps.artifact_pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
+        run: |
+          PR_NUMBER="${{ steps.artifact_pr.outputs.pull-request-number }}"
+          echo "📌 Enabling auto-merge for PR #$PR_NUMBER"
+          gh pr merge "$PR_NUMBER" \
+            --auto \
+            --squash \
+            --delete-branch \
+            && echo "✅ Auto-merge enabled" \
+            || echo "⚠️  Auto-merge failed (may require branch protection rules)"
+
+      # ------------------------------------------------------------------
+      # Step 6: Archive ripple inbox entry
+      # ------------------------------------------------------------------
+      - name: Archive ripple inbox entry
+        if: always()
+        run: |
+          DISPATCH_ID="${{ steps.inbox.outputs.dispatch_id }}"
+          INBOX_FILE="${{ steps.inbox.outputs.inbox_file }}"
+          mkdir -p .agent-admin/governance/ripple-archive
+
+          if [ -f "$INBOX_FILE" ]; then
+            # Determine outcome
+            if [ "${{ steps.align.outputs.drift_detected }}" != "true" ]; then
+              OUTCOME="no-drift"
+            elif [ "${{ steps.agent_files.outputs.has_agent_changes }}" = "true" ]; then
+              OUTCOME="escalated-to-cs2"
+              PR_NUM="${{ steps.draft_pr.outputs.pull-request-number }}"
+            else
+              OUTCOME="auto-merged"
+              PR_NUM="${{ steps.artifact_pr.outputs.pull-request-number }}"
+            fi
+
+            # Write archived entry with outcome metadata
+            ARCHIVE_FILE=".agent-admin/governance/ripple-archive/ripple-${DISPATCH_ID}.json"
+            jq --arg outcome "$OUTCOME" \
+               --arg archived_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+               --arg pr_number "${PR_NUM:-null}" \
+               '. + {status: "archived", outcome: $outcome, archived_at: $archived_at, pr_number: $pr_number}' \
+               "$INBOX_FILE" > "$ARCHIVE_FILE" 2>/dev/null \
+            || {
+              echo "⚠️  jq not available — writing archive with inline metadata"
+              sed "s/\"status\": \"processing\"/\"status\": \"archived\", \"outcome\": \"$OUTCOME\", \"archived_at\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\", \"pr_number\": \"${PR_NUM:-null}\"/" \
+                "$INBOX_FILE" > "$ARCHIVE_FILE" \
+              || cp "$INBOX_FILE" "$ARCHIVE_FILE"
+            }
+
+            rm -f "$INBOX_FILE"
+            echo "Ripple event archived: $ARCHIVE_FILE (outcome: $OUTCOME)"
+          else
+            echo "⚠️  Inbox file not found, skipping archive"
+          fi
+
+      # ------------------------------------------------------------------
+      # Step 7: Summary
+      # ------------------------------------------------------------------
+      - name: Ripple integration summary
+        if: always()
+        run: |
+          echo "======================================"
+          echo "Ripple Integration Summary"
+          echo "======================================"
+          echo "Trigger:        ${{ github.event_name }}"
+          echo "Dispatch ID:    ${{ steps.inbox.outputs.dispatch_id }}"
+          echo "Drift Detected: ${{ steps.align.outputs.drift_detected }}"
+
+          if [ "${{ steps.align.outputs.drift_detected }}" = "true" ]; then
+            if [ "${{ steps.agent_files.outputs.has_agent_changes }}" = "true" ]; then
+              echo "Outcome:        DRAFT PR created — CS2 escalation required"
+              echo "Agent Files:    ${{ steps.agent_files.outputs.agent_file_list }}"
+              echo "Draft PR:       #${{ steps.draft_pr.outputs.pull-request-number }}"
+            else
+              echo "Outcome:        Alignment PR created — auto-merge enabled"
+              echo "Artifact PR:    #${{ steps.artifact_pr.outputs.pull-request-number }}"
+            fi
+          else
+            echo "Outcome:        No drift detected — no action required"
+          fi
+          echo "======================================"
