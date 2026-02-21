@@ -1,0 +1,33 @@
+# GitHub Labels for Governance Ripple Automation
+# Referenced by: .github/workflows/ripple-integration.yml
+# Authority: CROSS_REPO_RIPPLE_TRANSPORT_PROTOCOL.md, Living Agent System v6.2.0
+#
+# Synced by: .github/workflows/create-labels.yml
+
+- name: governance
+  color: "0075ca"
+  description: "Governance-related changes and ripple events"
+
+- name: layer-down
+  color: "5319e7"
+  description: "Canonical governance layer-down from upstream source"
+
+- name: automated
+  color: "e4e669"
+  description: "Automatically created by governance automation"
+
+- name: "agent:liaison"
+  color: "0e8a16"
+  description: "Created or managed by the Governance Liaison agent"
+
+- name: ripple-sync
+  color: "1d76db"
+  description: "Governance ripple synchronisation event"
+
+- name: cs2-required
+  color: "d73a4a"
+  description: "Requires CS2 authorization before merging"
+
+- name: agent-file-change
+  color: "b60205"
+  description: "PR contains changes to agent contract files (.github/agents/)"

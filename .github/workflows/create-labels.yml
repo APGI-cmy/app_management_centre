@@ -1,0 +1,73 @@
+name: Create Required Labels
+
+# Authority: Living Agent System v6.2.0
+# Purpose: Create / update all GitHub labels required by ripple-integration.yml
+#          Labels are defined in .github/labels.yml
+#
+# Triggers:
+#   - push to main (ensures labels exist after every merge)
+#   - workflow_dispatch (manual / on-demand creation)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/labels.yml'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  create-labels:
+    name: Create / Update Labels
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create / Update Labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
+          script: |
+            const fs = require('fs');
+            const yaml = require('js-yaml');
+
+            const labelsFile = fs.readFileSync('.github/labels.yml', 'utf8');
+            const labels = yaml.load(labelsFile);
+
+            for (const label of labels) {
+              const name        = label.name;
+              const color       = label.color;
+              const description = label.description || '';
+
+              try {
+                // Try to update the existing label first
+                await github.rest.issues.updateLabel({
+                  owner: context.repo.owner,
+                  repo:  context.repo.repo,
+                  name,
+                  color,
+                  description,
+                });
+                core.info(`✅ Updated label: "${name}"`);
+              } catch (err) {
+                if (err.status === 404) {
+                  // Label does not exist yet — create it
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo:  context.repo.repo,
+                    name,
+                    color,
+                    description,
+                  });
+                  core.info(`➕ Created label: "${name}"`);
+                } else {
+                  core.warning(`⚠️  Could not update/create label "${name}": ${err.message}`);
+                }
+              }
+            }
+
+            core.info('Label sync complete.');
