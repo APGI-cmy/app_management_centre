@@ -5,7 +5,7 @@ name: Ripple Integration
 #
 # Triggers:
 #   1. repository_dispatch (governance_ripple) - direct canonical dispatch
-#   2. issues (opened, governance-ripple label) - canonical issue-based dispatch
+#   2. issues (opened, governance + layer-down labels) - canonical issue-based dispatch
 #   3. workflow_dispatch - manual / test trigger
 #
 # Logic:
@@ -33,12 +33,14 @@ jobs:
     name: Ripple Integration
     runs-on: ubuntu-latest
 
-    # Only process issues that carry the governance-ripple label
+    # Only process issues that carry both the 'governance' and 'layer-down' labels
+    # (matching the upstream governance-layer-down-dispatch.yml label set)
     if: |
       github.event_name == 'repository_dispatch' ||
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'issues' &&
-       contains(github.event.issue.labels.*.name, 'governance-ripple'))
+       contains(github.event.issue.labels.*.name, 'governance') &&
+       contains(github.event.issue.labels.*.name, 'layer-down'))
 
     steps:
       - name: Checkout repository
@@ -145,31 +147,21 @@ jobs:
           DATE=$(date -u +%Y%m%d)
           ESCALATION_FILE=".agent-workspace/governance-liaison/escalation-inbox/blocker-${DATE}-${DISPATCH_ID}.md"
 
-          cat > "$ESCALATION_FILE" <<EOF
+          cat > "$ESCALATION_FILE" <<'EOF'
           # Escalation: Agent File Change Detected
 
-          **Date**: $(date -u +%Y-%m-%d)
-          **Dispatch ID**: $DISPATCH_ID
+          **Date**: DATESTAMP
+          **Dispatch ID**: DISPATCH_ID_PLACEHOLDER
           **Type**: agent-file-change
           **Authority Required**: CS2
-          **Workflow Run**: ${{ github.run_id }}
 
           ## Description
           Governance ripple event contains changes to agent contract files.
           Per AGENT_CONTRACT_PROTECTION_PROTOCOL.md, only CS2 may authorize
           agent file modifications.
 
-          ## Changed Agent Files
-          ${{ steps.agent_files.outputs.agent_file_list }}
-
-          ## Context
-          - Canonical commit: ${{ github.event.client_payload.canonical_commit }}
-          - Changed paths: ${{ github.event.client_payload.changed_paths }}
-          - Trigger: ${{ github.event_name }}
-
           ## Required Action
           CS2 must review and merge the draft alignment PR created by this run.
-          Draft PR will be created in the next step with DRAFT status.
 
           ## References
           - AGENT_CONTRACT_PROTECTION_PROTOCOL.md
@@ -180,6 +172,10 @@ jobs:
           **Authority**: AGENT_CONTRACT_PROTECTION_PROTOCOL.md
           **Living Agent System**: v6.2.0
           EOF
+
+          # Inject runtime values
+          sed -i "s/DATESTAMP/$(date -u +%Y-%m-%d)/g" "$ESCALATION_FILE"
+          sed -i "s/DISPATCH_ID_PLACEHOLDER/$DISPATCH_ID/g" "$ESCALATION_FILE"
 
           echo "escalation_file=$ESCALATION_FILE" >> $GITHUB_OUTPUT
           echo "Escalation document created: $ESCALATION_FILE"
