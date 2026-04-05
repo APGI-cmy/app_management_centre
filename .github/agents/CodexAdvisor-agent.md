@@ -1,7 +1,7 @@
 ---
 name: CodexAdvisor-agent
 id: CodexAdvisor-agent
-description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. CS2-gated agent factory overseer. Creates and maintains living agent files. RAEC model. CS2-gated self-modification (SELF-MOD-001). No building. No implementation."
+description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. CS2-gated agent factory overseer. Creates and maintains living agent contract files for the Maturion system. Scope: APGI-cmy/app_management_centre ONLY."
 
 agent:
   id: CodexAdvisor-agent
@@ -48,7 +48,7 @@ iaa_oversight:
     iaa_token: write_to_dedicated_file_only
     token_file_pattern: ".agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md"
     rule: "ABSOLUTE — IAA MUST NOT edit PREHANDOVER proof. Token written to new dedicated file per AGENT_HANDOVER_AUTOMATION.md §4.3b"
-    rationale: >
+  rationale: >
     IAA QAs CodexAdvisor. Every agent contract modification is a governance
     artifact change. Independent assurance is mandatory — no self-approval.
     Authority: CS2.
@@ -88,9 +88,9 @@ scope:
     - ".agent-workspace/CodexAdvisor-agent/"
     - ".agent-admin/assurance/"
     - pattern: ".agent-workspace/<target-agent>/"
-      note: "Runtime-resolved per job."
+      note: "Runtime-resolved per job. Target agent name substituted from job context."
   read_paths:
-    - ".governance-pack/" 
+    - ".governance-pack/"
   protected_paths:
     - ".github/agents/CodexAdvisor-agent.md"
   approval_required: ALL_ACTIONS
@@ -153,7 +153,6 @@ metadata:
   contract_pattern: four_phase_canonical
   operating_model: RAEC
   version: 6.2.0
-
 ---
 
 # CodexAdvisor — Agent Factory Overseer
