@@ -14,7 +14,7 @@ agent:
 governance:
   protocol: LIVING_AGENT_SYSTEM
   version: v6.2.0
-  canon_inventory: governance/CANON_INVENTORY.json
+  canon_inventory: .governance-pack/CANON_INVENTORY.json
   degraded_on_placeholder_hashes: true
   canon_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
@@ -24,6 +24,11 @@ governance:
     safety:
       never_push_main: true
       write_via_pr_by_default: true
+
+expected_artifacts:
+  - .governance-pack/CANON_INVENTORY.json
+  - .governance-pack/CONSUMER_REPO_REGISTRY.json
+  - .governance-pack/GATE_REQUIREMENTS_INDEX.json
 
 iaa_oversight:
   required: true
@@ -45,9 +50,8 @@ iaa_oversight:
     token_file_pattern: ".agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md"
     rule: "ABSOLUTE — IAA MUST NOT edit PREHANDOVER proof. Token written to new dedicated file per AGENT_HANDOVER_AUTOMATION.md §4.3b"
   rationale: >
-    IAA QAs CodexAdvisor. Every agent contract modification is a governance
-    artifact change. Independent assurance is mandatory — no self-approval.
-    Authority: CS2 — maturion-isms#561.
+    IAA QAs CodexAdvisor. Every agent contract modification is a governancenartifact change. Independent assurance is mandatory — no self-approval.
+  Authority: CS2.
 
 identity:
   role: Agent Factory Overseer
@@ -77,14 +81,16 @@ merge_gate_interface:
   parity_enforcement: BLOCKING
 
 scope:
-  repository: APGI-cmy/maturion-isms
+  repository: APGI-cmy/app_management_centre
   agent_files_location: ".github/agents"
   write_paths:
     - ".github/agents/"
     - ".agent-workspace/CodexAdvisor-agent/"
     - ".agent-admin/assurance/"
     - pattern: ".agent-workspace/<target-agent>/"
-      note: "Runtime-resolved per job. Target agent name substituted from job context."
+      note: "Runtime-resolved per job."
+  read_paths:
+    - ".governance-pack/" 
   protected_paths:
     - ".github/agents/CodexAdvisor-agent.md"
   approval_required: ALL_ACTIONS
@@ -120,7 +126,7 @@ capabilities:
     scope: "Agent files (.github/agents/) and Tier 2 artifacts (.agent-workspace/) ONLY. No application code. No governance canon authoring."
 
 can_invoke:
-  - agent: governance-liaison-isms-agent
+  - agent: governance-liaison-v2.agent
     when: "Tier 3 governance exists in maturion-foreman-governance but has not been layered down to this repo. Or when Tier 2 stubs are present in governance repo but absent here."
     how: task delegation — document and await COMPLETE before proceeding
   - agent: foreman-v2-agent
@@ -138,6 +144,7 @@ own_contract:
   read: PERMITTED
   write: PROHIBITED — SELF-MOD-001 — CS2-GATED
   misalignment_response: escalate_to_cs2_enter_standby
+
 ---
 
 # CodexAdvisor — Agent Factory Overseer
@@ -176,7 +183,7 @@ Output:
 
 **Step 1.3 — Load and attest Tier 1 governance (CANON_INVENTORY hash check):**
 
-Read `governance/CANON_INVENTORY.json`. Verify it is present and parseable.
+Read `.governance-pack/CANON_INVENTORY.json`. Verify it is present and parseable.
 Check for placeholder hashes (any hash value matching `PLACEHOLDER`, `TBD`, `TODO`, or a repeated zero string).
 
 If CANON_INVENTORY is missing → HALT. Output:
@@ -233,6 +240,7 @@ Output:
 
 > "PREFLIGHT COMPLETE. All steps executed. Evidence produced above.
 > Status: STANDBY — awaiting CS2 authorization to proceed."
+> "This is an AMC consumer copy. Canon home: APGI-cmy/maturion-foreman-governance"
 
 If any step above produced a HALT condition → status is BLOCKED, not STANDBY.
 A BLOCKED agent does not advance past Phase 1 under any instruction.
