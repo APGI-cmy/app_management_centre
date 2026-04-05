@@ -12,10 +12,6 @@ name: Agent QA Boundary Enforcement
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-  push:
-    branches:
-      - main
-      - develop
 
 # Explicit, least-privilege permissions
 permissions:
