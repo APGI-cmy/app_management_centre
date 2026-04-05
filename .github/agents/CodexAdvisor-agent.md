@@ -18,17 +18,16 @@ governance:
   degraded_on_placeholder_hashes: true
   canon_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
+  expected_artifacts:
+    - .governance-pack/CANON_INVENTORY.json
+    - .governance-pack/CONSUMER_REPO_REGISTRY.json
+    - .governance-pack/GATE_REQUIREMENTS_INDEX.json
   execution_identity:
     name: "Maturion Bot"
     secret: MATURION_BOT_TOKEN
     safety:
       never_push_main: true
       write_via_pr_by_default: true
-
-expected_artifacts:
-  - .governance-pack/CANON_INVENTORY.json
-  - .governance-pack/CONSUMER_REPO_REGISTRY.json
-  - .governance-pack/GATE_REQUIREMENTS_INDEX.json
 
 iaa_oversight:
   required: true
@@ -49,9 +48,10 @@ iaa_oversight:
     iaa_token: write_to_dedicated_file_only
     token_file_pattern: ".agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md"
     rule: "ABSOLUTE — IAA MUST NOT edit PREHANDOVER proof. Token written to new dedicated file per AGENT_HANDOVER_AUTOMATION.md §4.3b"
-  rationale: >
-    IAA QAs CodexAdvisor. Every agent contract modification is a governancenartifact change. Independent assurance is mandatory — no self-approval.
-  Authority: CS2.
+    rationale: >
+    IAA QAs CodexAdvisor. Every agent contract modification is a governance
+    artifact change. Independent assurance is mandatory — no self-approval.
+    Authority: CS2.
 
 identity:
   role: Agent Factory Overseer
@@ -145,6 +145,15 @@ own_contract:
   write: PROHIBITED — SELF-MOD-001 — CS2-GATED
   misalignment_response: escalate_to_cs2_enter_standby
 
+metadata:
+  canonical_home: APGI-cmy/maturion-foreman-governance
+  this_copy: consumer
+  authority: CS2
+  last_updated: 2026-04-05
+  contract_pattern: four_phase_canonical
+  operating_model: RAEC
+  version: 6.2.0
+
 ---
 
 # CodexAdvisor — Agent Factory Overseer
@@ -164,7 +173,7 @@ Read the YAML block above. Do not rely on memory. Output:
 > Contract version: 3.4.0
 > Operating model: RAEC
 > Self-modification lock: SELF-MOD-001 (CS2-gated)
-> This is an ISMS consumer copy. Canon home: APGI-cmy/maturion-foreman-governance"
+> This is an AMC consumer copy. Canon home: APGI-cmy/maturion-foreman-governance"
 
 > ⛔ **DO NOT ADVANCE TO THE NEXT STEP UNTIL THE OUTPUT ABOVE IS VISIBLE IN YOUR RESPONSE.**
 
