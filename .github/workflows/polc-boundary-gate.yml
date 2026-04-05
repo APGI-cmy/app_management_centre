@@ -1,0 +1,580 @@
+---
+name: POLC Boundary Validation
+
+# Authority: FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md,
+#            LIVING_AGENT_SYSTEM.md v6.2.0
+# Purpose: Prevent Foreman from implementing new features;
+#          allow supervision corrections. Three separate jobs provide
+#          independent status checks matching merge_gate_interface required_checks.
+# Issue: #193 (original gate), S-007/S-023 (machine enforcement improvements)
+# Contract: Foreman-ISMS Agent Contract v2.6.0,
+#           merge_gate_interface.required_checks
+# S-007: Each gate runs as its own named job so CI reports
+#        separate named status checks
+# S-023: builder-involvement-check now enforces pre-brief artifact existence
+
+'on':
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  foreman-implementation-check:
+    name: "foreman-implementation-check"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check 1 - Detect Foreman Implementation Commits
+        id: check1
+        run: |
+          echo "=== Check 1: Detect Foreman Implementation ==="
+          echo ""
+          echo "Refined: Block implementation, allow supervision"
+          echo ""
+
+          # If PR is labeled 'copilot-builder-role', Copilot is acting as a
+          # governed builder (not Foreman) in this PR. The
+          # foreman-implementation-check does not apply to builder PRs.
+          # Use exact matching: split the comma-separated label list and compare
+          # each label individually to avoid substring false positives.
+          PR_LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
+          HAS_BUILDER_LABEL=false
+          IFS=',' read -ra LABEL_ARRAY <<< "$PR_LABELS"
+          for label in "${LABEL_ARRAY[@]}"; do
+            if [[ "$label" == "copilot-builder-role" ]]; then
+              HAS_BUILDER_LABEL=true
+              break
+            fi
+          done
+          if [[ "$HAS_BUILDER_LABEL" == "true" ]]; then
+            echo "✅ PR labeled 'copilot-builder-role'"
+            echo "   Copilot is acting as a governed builder (not Foreman)."
+            echo "   foreman-implementation-check is not applicable — skipping."
+            exit 0
+          fi
+
+          # Get base branch
+          BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+          echo "Base branch: $BASE_BRANCH"
+
+          # Get all commits in this PR
+          COMMITS=$(git log origin/$BASE_BRANCH..HEAD \
+            --pretty=format:"%H|%an|%ae")
+
+          # Foreman identity patterns
+          FOREMAN_PATTERNS=(
+            "copilot-swe-agent\[bot\]"
+            "Copilot"
+            "198982749+Copilot@users.noreply.github.com"
+          )
+
+          VIOLATION_FOUND=false
+          VIOLATION_FILES=""
+          VIOLATION_COMMITS=""
+          SUPERVISION_FILES=""
+
+          echo "Checking commits for Foreman authorship..."
+          echo ""
+
+          while IFS='|' read -r commit_sha commit_author commit_email; do
+            IS_FOREMAN=false
+
+            # Check if commit is by Foreman
+            for pattern in "${FOREMAN_PATTERNS[@]}"; do
+              if [[ "$commit_author" =~ $pattern ]] || \
+                 [[ "$commit_email" =~ $pattern ]]; then
+                IS_FOREMAN=true
+                break
+              fi
+            done
+
+            if [ "$IS_FOREMAN" = true ]; then
+              echo "Foreman commit detected: $commit_sha ($commit_author)"
+
+              # Get files changed in this commit
+              FILES=$(git diff-tree --no-commit-id --name-only -r $commit_sha)
+
+              # Check each file
+              while IFS= read -r file; do
+                # Skip if file doesn't exist (deleted files)
+                if [ ! -f "$file" ]; then
+                  continue
+                fi
+
+                # SUPERVISION CORRECTIONS (PERMITTED)
+                # Documentation, config, test corrections, governance, session
+                # memory
+                if [[ "$file" =~ \.md$ ]] || \
+                   [[ "$file" =~ README ]] || \
+                   [[ "$file" =~ CHANGELOG ]] || \
+                   [[ "$file" =~ \.config\.(ts|js|json)$ ]] || \
+                   [[ "$file" =~ package\.json$ ]] || \
+                   [[ "$file" =~ tsconfig\.json$ ]] || \
+                   [[ "$file" =~ ^\.agent-workspace/foreman ]] || \
+                   [[ "$file" =~ ^\.agent-admin/ ]] || \
+                   [[ "$file" =~ ^governance/ ]] || \
+                   [[ "$file" =~ /02-architecture/ ]] || \
+                   [[ "$file" =~ BUILD_PROGRESS_TRACKER\.md$ ]]; then
+                  echo "  ✅ SUPERVISION: $file"
+                  echo "     (documentation/config/governance)"
+                  SUPERVISION_FILES="${SUPERVISION_FILES}\n  - ${file}"
+                  continue
+                fi
+
+                # IMPLEMENTATION DETECTION (PROHIBITED)
+                # Check for production code patterns
+                if [[ "$file" =~ ^modules/.*/src/.*\.(ts|tsx|js|jsx)$ ]] || \
+                   [[ "$file" =~ ^apps/.*/src/.*\.(ts|tsx|js|jsx)$ ]] || \
+                   [[ "$file" =~ ^packages/.*/src/.*\.(ts|tsx|js|jsx)$ ]]; then
+
+                  echo "  🔍 ANALYZING: $file (production code pattern)"
+
+                  # Get file diff to check for implementation indicators
+                  DIFF=$(git show $commit_sha -- "$file" 2>/dev/null || echo "")
+
+                  # Check for implementation patterns (new capability
+                  # indicators)
+                  IMPLEMENTATION_DETECTED=false
+
+                  # New component/function/class exports
+                  if echo "$DIFF" | \
+                     grep -qE '^\+.*export (function|class|const)'; then
+                    echo "    - New export detected (possible new capability)"
+                    IMPLEMENTATION_DETECTED=true
+                  fi
+
+                  # New React components
+                  if echo "$DIFF" | \
+                     grep -qE '^\+.*(function|const) [A-Z].*=>'; then
+                    echo "    - New component detected"
+                    IMPLEMENTATION_DETECTED=true
+                  fi
+
+                  # New API routes/handlers
+                  if echo "$DIFF" | grep -qE \
+                     '^\+.*(router\.|app\.|route\.)(get|post)'; then
+                    echo "    - New API route/handler detected"
+                    IMPLEMENTATION_DETECTED=true
+                  fi
+
+                  # New state management
+                  if echo "$DIFF" | grep -qE \
+                     '^\+.*(createSlice|useState|useReducer)'; then
+                    echo "    - New state management detected"
+                    IMPLEMENTATION_DETECTED=true
+                  fi
+
+                  # Large additions (>50 lines) suggesting feature expansion
+                  LINES_ADDED=$(echo "$DIFF" | grep -c '^+[^+]' || echo "0")
+                  if [ "$LINES_ADDED" -gt 50 ]; then
+                    echo "    - Large addition detected"
+                    echo "($LINES_ADDED lines) - possible feature expansion"
+                    IMPLEMENTATION_DETECTED=true
+                  fi
+
+                  if [ "$IMPLEMENTATION_DETECTED" = true ]; then
+                    VIOLATION_FOUND=true
+                    VIOLATION_FILES="${VIOLATION_FILES}\n  - ${file}"
+                    VIOLATION_COMMITS="${VIOLATION_COMMITS}\n"
+                    VIOLATION_COMMITS="${VIOLATION_COMMITS}  - ${commit_sha}"
+                    echo "  ❌ IMPLEMENTATION VIOLATION: $file"
+                  else
+                    echo "  ⚠️  AMBIGUOUS: $file (production"
+                    echo "file modified, but no clear implementation detected)"
+                    echo "    Manual review recommended"
+                  fi
+                fi
+
+                # TEST FILES - Check if new test or test correction
+                if [[ "$file" =~ \.test\.(ts|tsx|js|jsx)$ ]]; then
+                  echo "  🔍 ANALYZING TEST: $file"
+
+                  # Get file diff
+                  DIFF=$(git show $commit_sha -- "$file" 2>/dev/null || echo "")
+
+                  # Check if this is a new test file (implementation)
+                  if git log --diff-filter=A --oneline \
+                     origin/$BASE_BRANCH..HEAD -- "$file" | \
+                     grep -q "$commit_sha"; then
+                    echo "    - New test file detected (feature test creation)"
+                    VIOLATION_FOUND=true
+                    VIOLATION_FILES="${VIOLATION_FILES}\n"
+                    VIOLATION_FILES="${VIOLATION_FILES}  - ${file}"
+                    VIOLATION_COMMITS="${VIOLATION_COMMITS}\n"
+                    VIOLATION_COMMITS="${VIOLATION_COMMITS}  - ${commit_sha}"
+                  echo "  ❌ IMPLEMENTATION VIOLATION: New test"
+                  else
+                    # Existing test file - likely correction
+                    echo "    - Test modified (correction)"
+                    SUPERVISION_FILES="${SUPERVISION_FILES}\n"
+                    SUPERVISION_FILES="${SUPERVISION_FILES}  - ${file}"
+                    echo "  ✅ SUPERVISION: Test correction"
+                  fi
+                fi
+              done <<< "$FILES"
+            fi
+          done <<< "$COMMITS"
+
+          echo ""
+          echo "=== ANALYSIS SUMMARY ==="
+          echo ""
+
+          if [ -n "$SUPERVISION_FILES" ]; then
+            echo "✅ Supervision Corrections Detected (Permitted):"
+            echo -e "$SUPERVISION_FILES"
+            echo ""
+          fi
+
+          if [ "$VIOLATION_FOUND" = true ]; then
+            echo "❌ POLC BOUNDARY VIOLATION DETECTED"
+            echo ""
+            echo "Foreman authored commits"
+            echo "implementing new features/capabilities."
+            echo ""
+            echo "Implementation Files:"
+            echo -e "$VIOLATION_FILES"
+            echo ""
+            echo "Commits:${VIOLATION_COMMITS}"
+            echo ""
+            echo "Foreman MUST NOT implement new"
+            echo "features. Builders implement; Foreman supervises."
+            echo ""
+            echo "Permitted: Documentation, config,"
+            echo "test corrections, governance artifacts"
+            echo "Prohibited: New components,"
+            echo "API routes, business logic, feature expansion"
+            echo ""
+            echo "Action Required:"
+            echo "  1. Close this PR"
+            echo "  2. Create builder delegation issues"
+            echo "  3. Assign builders to implement"
+            echo "  4. Foreman supervises (does not implement)"
+            echo ""
+            echo "Override: CS2 only (for"
+            echo "ambiguous cases or justified exceptions)"
+            echo ""
+            exit 1
+          else
+            echo "✅ Check 1 PASSED - No Foreman implementation commits detected"
+            echo ""
+            echo "Foreman performed supervision"
+            echo "corrections only (or no production changes)."
+            echo ""
+          fi
+
+  # ---------------------------------------------------------------------------
+  # Job 2: Builder Involvement + Pre-Brief Existence Check (S-023)
+  # Validates that when implementation files changed, builder delegation
+  # occurred AND a pre-brief artifact exists.
+  # ---------------------------------------------------------------------------
+  builder-involvement-check:
+    name: "builder-involvement-check"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check Builder Involvement and Pre-Brief Existence
+        id: builder_check
+        run: |
+          echo "=== Builder Involvement + Pre-Brief Existence (S-023) ==="
+          echo ""
+          echo "Logic: Skip if only supervision corrections detected."
+          echo "       Fail if implementation changed but no pre-brief artifact."
+          echo ""
+
+          # Get base branch
+          BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+
+          # Check if production/implementation code was changed
+          CHANGED_FILES=$(git diff --name-only origin/$BASE_BRANCH...HEAD)
+
+          IMPLEMENTATION_CHANGED=false
+          SUPERVISION_ONLY=true
+
+          while IFS= read -r file; do
+            # Skip supervision files
+            if [[ "$file" =~ \.md$ ]] || \
+               [[ "$file" =~ README ]] || \
+               [[ "$file" =~ CHANGELOG ]] || \
+               [[ "$file" =~ \.config\.(ts|js|json)$ ]] || \
+               [[ "$file" =~ package\.json$ ]] || \
+               [[ "$file" =~ tsconfig\.json$ ]] || \
+               [[ "$file" =~ ^\.agent-workspace/ ]] || \
+               [[ "$file" =~ ^\.agent-admin/ ]] || \
+               [[ "$file" =~ ^governance/ ]] || \
+               [[ "$file" =~ /02-architecture/ ]] || \
+               [[ "$file" =~ BUILD_PROGRESS_TRACKER\.md$ ]]; then
+              continue
+            fi
+
+            # Check for implementation files
+            if [[ "$file" =~ ^modules/.*/src/.*\.(ts|tsx|js|jsx)$ ]] || \
+               [[ "$file" =~ ^apps/.*/src/.*\.(ts|tsx|js|jsx)$ ]] || \
+               [[ "$file" =~ ^packages/.*/src/.*\.(ts|tsx|js|jsx)$ ]]; then
+              IMPLEMENTATION_CHANGED=true
+              SUPERVISION_ONLY=false
+              break
+            fi
+
+            # Check for new test files (implementation)
+            if [[ "$file" =~ \.test\.(ts|tsx|js|jsx)$ ]]; then
+              # Check if this is a new test file
+              if git log --diff-filter=A --oneline \
+                 origin/$BASE_BRANCH..HEAD -- "$file" | grep -q .; then
+                IMPLEMENTATION_CHANGED=true
+                SUPERVISION_ONLY=false
+                break
+              fi
+            fi
+          done <<< "$CHANGED_FILES"
+
+          if [ "$SUPERVISION_ONLY" = true ]; then
+            echo "ℹ️  Only supervision corrections detected (docs, config, test fixes)"
+            echo "   No builder involvement or pre-brief check required."
+            echo ""
+            exit 0
+          fi
+
+          if [ "$IMPLEMENTATION_CHANGED" = false ]; then
+            echo "ℹ️  No implementation code changes detected - skipping check"
+            exit 0
+          fi
+
+          echo "Implementation code changes detected."
+          echo ""
+
+          # S-023: Check for IAA pre-brief artifact (HARD GATE)
+          # Per improvement S-023: fail when implementation files changed but
+          # no .agent-admin/assurance/iaa-prebrief-*.md exists on branch.
+          echo "--- S-023: Pre-Brief Existence Gate ---"
+          PREBRIEF_FOUND=false
+          ASSURANCE_DIR=".agent-admin/assurance"
+          if [ -d "$ASSURANCE_DIR" ]; then
+            PREBRIEF_FILES=$(find "$ASSURANCE_DIR" \
+              -name "iaa-prebrief-*.md" 2>/dev/null | head -5)
+            if [ -n "$PREBRIEF_FILES" ]; then
+              PREBRIEF_FOUND=true
+              echo "✅ IAA pre-brief artifact(s) found:"
+              echo "$PREBRIEF_FILES" | sed 's/^/   /'
+            fi
+          fi
+
+          if [ "$PREBRIEF_FOUND" = false ]; then
+            echo ""
+            echo "❌ S-023 GATE FAIL — No IAA pre-brief artifact found."
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            echo "🚨 POLC PRE-BRIEF VIOLATION (A-031)"
+            echo ""
+            echo "Implementation files changed but no IAA pre-brief artifact"
+            echo "exists at .agent-admin/assurance/iaa-prebrief-*.md"
+            echo ""
+            echo "Per LIVING_AGENT_SYSTEM.md v6.2.0 and Foreman contract"
+            echo "Phase 2 Step 2.7 (PRE-BRIEF-BEFORE-DELEGATION):"
+            echo "  The IAA pre-brief MUST be committed before any"
+            echo "  builder receives an implementation task."
+            echo ""
+            echo "REQUIRED:"
+            echo "  1. Invoke IAA directly: task(agent_type: independent-assurance-agent, action: PRE-BRIEF)"
+            echo "  2. Commit the IAA pre-brief artifact to .agent-admin/assurance/"
+            echo "  3. Only then proceed with implementation delegation"
+            echo ""
+            echo "Retroactive pre-brief commits after implementation work"
+            echo "has begun are a POLC boundary violation."
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            exit 1
+          fi
+
+          echo ""
+          echo "--- Builder Involvement Check ---"
+
+          # Check for builder commits
+          COMMITS=$(git log origin/$BASE_BRANCH..HEAD \
+            --pretty=format:"%H|%an|%ae")
+
+          BUILDER_PATTERNS=(
+            "ui-builder"
+            "api-builder"
+            "schema-builder"
+            "integration-builder"
+            "qa-builder"
+          )
+
+          BUILDER_FOUND=false
+
+          while IFS='|' read -r commit_sha commit_author commit_email; do
+            for pattern in "${BUILDER_PATTERNS[@]}"; do
+              if [[ "$commit_author" =~ $pattern ]] || \
+                 [[ "$commit_email" =~ $pattern ]]; then
+                BUILDER_FOUND=true
+                echo "✅ Builder commit found: $commit_sha ($commit_author)"
+                break 2
+              fi
+            done
+          done <<< "$COMMITS"
+
+          # Check for builder completion reports
+          if [ "$BUILDER_FOUND" = false ]; then
+            if ls .agent-workspace/*/memory/*COMPLETION* 1> /dev/null 2>&1 || \
+               ls .agent-workspace/*/COMPLETION* 1> /dev/null 2>&1; then
+              BUILDER_FOUND=true
+              echo "✅ Builder completion reports found in .agent-workspace/"
+            fi
+          fi
+
+          echo ""
+
+          if [ "$BUILDER_FOUND" = false ]; then
+            echo "⚠️  WARNING: NO BUILDER INVOLVEMENT DETECTED"
+            echo ""
+            echo "Implementation code changed but no builder artifacts found."
+            echo ""
+            echo "Expected: Builder commits"
+            echo "OR completion reports in .agent-workspace/"
+            echo ""
+            echo "If Foreman supervised builders,"
+            echo "where are the builder artifacts?"
+            echo "If Foreman implemented directly,"
+            echo "this should have been caught in foreman-implementation-check."
+            echo ""
+            echo "This is a WARNING. Manual review required."
+          else
+            echo "✅ Builder involvement confirmed"
+          fi
+
+  # ---------------------------------------------------------------------------
+  # Job 3: Session Memory Check
+  # Validates Foreman session memory is present and does not indicate
+  # the Foreman wrote production code directly.
+  # ---------------------------------------------------------------------------
+  session-memory-check:
+    name: "session-memory-check"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check Session Memory Presence and Compliance
+        run: |
+          echo "=== Session Memory Presence and Compliance ==="
+          echo ""
+
+          # If PR is labeled 'copilot-builder-role', Copilot is acting as a
+          # governed builder (not Foreman) in this PR.
+          # session-memory-check does not apply to builder PRs — Foreman session
+          # memory is not produced by builder-wave PRs.
+          # Use exact matching to avoid substring false positives.
+          PR_LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
+          HAS_BUILDER_LABEL=false
+          IFS=',' read -ra LABEL_ARRAY <<< "$PR_LABELS"
+          for label in "${LABEL_ARRAY[@]}"; do
+            if [[ "$label" == "copilot-builder-role" ]]; then
+              HAS_BUILDER_LABEL=true
+              break
+            fi
+          done
+          if [[ "$HAS_BUILDER_LABEL" == "true" ]]; then
+            echo "✅ PR labeled 'copilot-builder-role'"
+            echo "   Copilot is acting as a governed builder (not Foreman)."
+            echo "   session-memory-check is not applicable to builder PRs — skipping."
+            exit 0
+          fi
+
+          # Check for Foreman session memory
+          SESSION_MEMORY_FOUND=false
+
+          if ls .agent-workspace/foreman*/memory/session-*.md \
+             1> /dev/null 2>&1; then
+            SESSION_MEMORY_FOUND=true
+            SESSION_FILES=$(ls .agent-workspace/foreman*/memory/session-*.md \
+              2>/dev/null)
+            echo "✅ Session memory files found:"
+            echo "$SESSION_FILES" | while read -r file; do
+              echo "  - $file"
+            done
+          fi
+
+          echo ""
+
+          if [ "$SESSION_MEMORY_FOUND" = false ]; then
+            echo "❌ SESSION MEMORY REQUIRED"
+            echo ""
+            echo "Every Foreman session MUST create session memory."
+            echo ""
+            echo "Expected: .agent-workspace/foreman*/memory/session-NNN-YYYYMMDD.md"
+            echo ""
+            echo "Session memory must document:"
+            echo "  - Builder delegation (if implementation work occurred)"
+            echo "  - POLC supervision evidence"
+            echo "  - Decisions and lessons learned"
+            echo ""
+            echo "Per Living Agent System v6.2.0."
+            echo ""
+            exit 1
+          fi
+
+          echo "✅ Session memory present"
+          echo ""
+          echo "Checking session memory for POLC violations..."
+          echo "(Scoped to new session memory files introduced in this PR only)"
+          echo ""
+
+          # Scope POLC compliance scan to NEW session memory files introduced
+          # in this PR only. Scanning all historical files causes false
+          # positives from prior legitimately-supervised builder waves.
+          BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+          NEW_SESSION_FILES=$(git diff --name-only --diff-filter=A \
+            origin/$BASE_BRANCH...HEAD 2>/dev/null | \
+            grep -E '^\.agent-workspace/foreman.*/memory/session-.*\.md$' \
+            || true)
+
+          POLC_VIOLATION_IN_MEMORY=false
+          if [ -z "$NEW_SESSION_FILES" ]; then
+            echo "ℹ️  No new Foreman session memory files introduced in this PR."
+            echo "   POLC compliance scan skipped (scoped to PR-introduced files only)."
+          else
+            while IFS= read -r session_file; do
+              if [ -f "$session_file" ]; then
+                # Check for indicators that FM wrote production code; skip governance/workflow work
+                if grep -iE "(implemented|wrote).*code" "$session_file" | \
+                   grep -qviE \
+                     "did NOT|NOT.*implement|governance|workflow|\.github|\.agent-admin|\.agent-workspace|supervision|correction"; then
+                  echo "⚠️  WARNING: Session memory may indicate FM wrote production code: $session_file"
+                  POLC_VIOLATION_IN_MEMORY=true
+                fi
+              fi
+            done <<< "$NEW_SESSION_FILES"
+          fi
+
+          if [ "$POLC_VIOLATION_IN_MEMORY" = true ]; then
+            echo ""
+            echo "❌ SESSION MEMORY INDICATES POLC VIOLATION"
+            echo ""
+            echo "Session memory contains evidence that Foreman implemented"
+            echo "new features. This violates the POLC-Only Constraint."
+            echo ""
+            echo "Note: Supervision corrections (docs, config, test fixes)"
+            echo "are permitted."
+            echo ""
+            exit 1
+          fi
+
+          echo "✅ Session memory validates POLC compliance"
