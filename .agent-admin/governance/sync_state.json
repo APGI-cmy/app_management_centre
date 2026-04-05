@@ -1,10 +1,13 @@
 {
-  "last_check": "2026-04-05T08:40:01Z",
+  "last_check": "2026-04-05T11:47:33Z",
   "canonical_version": "1.0.0",
-  "canonical_commit": "unknown",
+  "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
   "local_version": "1.0.0",
-  "local_commit": "unknown",
+  "local_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
   "drift_detected": "false",
   "needs_alignment": "false",
-  "alignment_method": "align-governance.sh"
+  "sync_pending": false,
+  "last_layer_down": "2026-04-05T11:47:33Z",
+  "last_layer_down_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+  "alignment_method": "layer-down-governance-liaison"
 }

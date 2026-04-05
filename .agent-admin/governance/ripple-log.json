@@ -21,6 +21,32 @@
       "files_added": 13,
       "files_updated": 0,
       "drift_resolved": true
+    },
+    {
+      "ripple_id": "ripple-2026-04-05-governance-layer-down-6bbc3baf",
+      "timestamp": "2026-04-05T11:47:33Z",
+      "event_type": "governance_ripple",
+      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+      "inventory_version": "1.0.0",
+      "changed_paths": [
+        "governance/canon/GOVERNANCE_CANON_MANIFEST.md",
+        "governance/canon/PRE_BUILD_REALITY_CHECK_CANON.md",
+        "governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md",
+        "governance/templates/APP_DESCRIPTION_TEMPLATE.md",
+        "governance/templates/BUILDER_CHECKLIST_TEMPLATE.md",
+        "governance/templates/BUILD_PROGRESS_TRACKER_TEMPLATE.md",
+        "governance/templates/FRS_TEMPLATE.md",
+        "governance/templates/UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md"
+      ],
+      "sender": "APGI-cmy/maturion-foreman-governance",
+      "receiver": "APGI-cmy/app_management_centre",
+      "dispatch_id": "layer-down-2026-04-05-6bbc3baf",
+      "session_id": "governance-liaison-20260405-114733",
+      "alignment_status": "COMPLETE",
+      "files_added": 6,
+      "files_updated": 2,
+      "drift_resolved": true,
+      "trigger": "Merge pull request -1321 from APGI-cmy-copilot-implement-canon-documentation-updates"
     }
   ]
 }
