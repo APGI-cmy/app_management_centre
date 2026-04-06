@@ -111,9 +111,9 @@ jobs:
             echo "    Searching all session memory files for phase_1_preflight evidence..."
             echo ""
 
+            # NOTE (GOV-BREACH-AIMC-W5-002): Canonical evidence field is `phase_1_preflight: PREFLIGHT COMPLETE`.
+            # Agent contracts must include this as a mandatory Step 4.3 session memory field.
             if find .agent-workspace -name "session-*.md" 2>/dev/null | xargs grep -qliE "phase_1_preflight|Phase 1.*[Cc]omplete|PREFLIGHT COMPLETE|PREFLIGHT.*PASS|preflight.*evidence|Phase 1 output" 2>/dev/null; then
-              # NOTE (GOV-BREACH-AIMC-W5-002): Canonical evidence field is `phase_1_preflight: PREFLIGHT COMPLETE`.
-              # Agent contracts must include this as a mandatory Step 4.3 session memory field.
               EVIDENCE_FOUND=true
               echo "✅ Phase 1 preflight evidence found in at least one session memory file."
             else
@@ -145,11 +145,9 @@ jobs:
 
             if find "$SEARCH_PATHS" -name "session-*.md" 2>/dev/null | \
                xargs grep -qliE "phase_1_preflight|Phase 1.*[Cc]omplete|PREFLIGHT COMPLETE|PREFLIGHT.*PASS|preflight.*evidence|Phase 1 output" 2>/dev/null; then
-              # NOTE (GOV-BREACH-AIMC-W5-002): The canonical evidence field is `phase_1_preflight: PREFLIGHT COMPLETE`.
-              # All agent contracts must include this as a mandatory field in their Step 4.3 session memory
-              # generation instructions. See: .github/agents/CodexAdvisor-agent.md,
-              # .github/agents/foreman-v2-agent.md, and all builder agent contracts.
-              # Ref: issue [Governance] Require phase_1_preflight session memory field in all agent contracts
+              # Oversight-agent contracts require this in Step 4.3 session memory generation instructions.
+              # Builder-agent contracts include the equivalent requirement in their Handover Declaration /
+              # PREHANDOVER_PROOF-style checklist rather than as a Step 4.3 session-memory instruction.
               EVIDENCE_FOUND=true
             fi
           fi
