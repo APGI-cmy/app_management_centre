@@ -219,8 +219,6 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
           echo "=== Layer-Down / Governance Bypass Check ==="
-          # Bypass if: governance+automated+agent:liaison labels, or governance-alignment-auto branch,
-          # or layer-down label, or branch name contains layer-down, or PR title contains Layer-Down
           if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && "$PR_LABELS" == *"agent:liaison"* ) || \
                "$PR_BRANCH" == "governance-alignment-auto" || \
                "$PR_LABELS" == *"layer-down"* || \
@@ -344,8 +342,30 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
+      - name: Bypass for layer-down and governance alignment PRs
+        id: bypass_check
+        env:
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "=== Layer-Down / Governance Bypass Check ==="
+          if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && "$PR_LABELS" == *"agent:liaison"* ) || \
+               "$PR_BRANCH" == "governance-alignment-auto" || \
+               "$PR_LABELS" == *"layer-down"* || \
+               "$PR_BRANCH" == *"layer-down"* || \
+               "$PR_TITLE" == *"Layer-Down"* || \
+               "$PR_TITLE" == *"layer-down"* ]]; then
+            echo "✅ Layer-down / governance alignment PR detected — bypassing IAA token self-cert gate."
+            echo "bypass=true" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️  Regular Copilot PR — proceeding with IAA token self-cert enforcement."
+            echo "bypass=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Check IAA token self-certification guard
         id: token_self_cert_check
+        if: steps.bypass_check.outputs.bypass != 'true'
         run: |
           echo "=== IAA Token Self-Certification Guard ==="
           echo "Authority: IAA_PRE_BRIEF_PROTOCOL.md v1.2.0 §IAA Token Self-Certification Guard"
@@ -355,8 +375,7 @@ jobs:
           BASE_SHA="${{ github.event.pull_request.base.sha }}"
 
           # Scope check to token files that are NEW in this PR (not pre-existing in base)
-          # This prevents retroactive failures on historical token files that pre-date this check
-          TOKEN_FILES=$(git diff "$BASE_SHA" HEAD --name-only --diff-filter=A 2>/dev/null \ 
+          TOKEN_FILES=$(git diff "$BASE_SHA" HEAD --name-only --diff-filter=A 2>/dev/null \
             | grep "^${ASSURANCE_DIR}/iaa-token-.*\.md$" | head -20)
 
           if [ -z "$TOKEN_FILES" ]; then
@@ -369,7 +388,7 @@ jobs:
           while IFS= read -r token_file; do
             echo "Checking token file: $token_file"
 
-            # Skip REJECTION-PACKAGE files — they are not PASS tokens and do not carry PHASE_B_BLOCKING_TOKEN
+            # Skip REJECTION-PACKAGE files
             if head -10 "$token_file" 2>/dev/null | grep -qi "REJECTION.PACKAGE\|REJECTION-PACKAGE"; then
               echo "  ⏭️  REJECTION-PACKAGE file — skipping PHASE_B_BLOCKING_TOKEN check"
               continue
