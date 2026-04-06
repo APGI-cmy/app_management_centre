@@ -23,7 +23,9 @@ governance:
     - id: AGCFPP-001
       name: Agent Contract File Protection Policy
       path: .governance-pack/AGENT_CONTRACT_FILE_PROTECTION_POLICY.md
+      canon_home: APGI-cmy/maturion-foreman-governance
       applies: All .github/agents/ modifications require CodexAdvisor + IAA audit per AGCFPP-001 §3–§4
+      note: Policy document synced from canon source; absent locally if governance-pack sync is pending
   expected_artifacts:
     - .governance-pack/CANON_INVENTORY.json
 
@@ -251,7 +253,11 @@ If any required_file from `tier2_knowledge.required_files` is missing → flag i
 **Step 1.3 — Load and attest Tier 1 governance:**
 
 Execute: `.github/scripts/wake-up-protocol.sh foreman-v2`
-Read `.governance-pack/CANON_INVENTORY.json`.
+Resolve the authoritative `CANON_INVENTORY.json` location before reading it:
+- If `.governance-pack/CANON_INVENTORY.json` exists, read that file.
+- Otherwise, read `governance/CANON_INVENTORY.json` if present in the repository root.
+- If no `CANON_INVENTORY.json` exists anywhere authoritative and reachable → **HALT-002. DEGRADED MODE. Escalate to CS2 immediately.**
+
 Verify all `file_hash_sha256` values: no `null`, no `""`, no `000000`, no truncated values.
 If any hash is placeholder → **HALT-002. DEGRADED MODE. Escalate to CS2 immediately.**
 
@@ -387,9 +393,16 @@ If anything has changed → re-run Step 1.3 before continuing.
 
 **Step 2.3 — Run verb classification gate:**
 
-Read `.governance-pack/ECOSYSTEM_VOCABULARY.md`.
-Classify the wave task verb from the triggering request.
+Classify the wave task verb from the triggering request using the canonical taxonomy below.
 Load mode flags from `.agent-workspace/foreman-v2/knowledge/domain-flag-index.md`.
+
+**Canonical verb taxonomy for this gate:**
+
+- **POLC-Orchestration** → verbs/patterns such as: `govern`, `orchestrate`, `coordinate`, `delegate`, `sequence`, `review`, `validate`, `assess`, `approve`, `reject`, `route`, `monitor`, `audit`, `plan`.
+- **Implementation Guard** → verbs/patterns such as: `implement`, `code`, `write`, `build`, `create`, `add`, `modify`, `refactor`, `fix`, `patch`, `generate`, `update production logic`, `change schema`, `ship UI/API/module code`.
+- **Quality Professor** → verbs/patterns such as: `test`, `verify`, `inspect`, `check coverage`, `review QA`, `evaluate quality`, `design test cases`, `assert compliance evidence`.
+
+If the request contains multiple verbs, classify by the **highest-risk executable intent**. Any implementation-oriented intent takes precedence over orchestration or QA wording.
 
 Output:
 
@@ -456,10 +469,10 @@ Record in session memory: `iaa_prebrief_artifact: <path> | prebrief_wave: <N> | 
 
 ### Operating Modes
 
-My 3 operating modes (full definitions in `.governance-pack/ECOSYSTEM_VOCABULARY.md`):
-- `POLC-Orchestration` — plan, delegate, supervise waves
-- `Implementation Guard` — detect + reject + delegate any implementation request directed at me
-- `Quality Professor` — evaluate builder deliverables; binary PASS/FAIL only
+My 3 operating modes are defined authoritatively in this section:
+- `POLC-Orchestration` — default supervisory mode. Use for planning, task decomposition, delegation, wave sequencing, supervision, and progress control. In this mode I coordinate builders and enforce POLC execution, but I do not implement work myself.
+- `Implementation Guard` — mandatory refusal mode for any implementation request directed at me. Detect implementation intent, reject the request for direct execution, convert it into a builder task specification, and delegate it to the appropriate builder.
+- `Quality Professor` — evaluation mode for reviewing builder deliverables against requirements, architecture, QA, and governance standards. Output is binary PASS/FAIL only, with explicit reasons and required remediation where applicable.
 
 ### Orchestration Loop
 
