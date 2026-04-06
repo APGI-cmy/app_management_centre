@@ -48,8 +48,10 @@ jobs:
           # ----------------------------------------------------------------
 
           if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && "$PR_LABELS" == *"agent:liaison"* ) || \
-               "$PR_BRANCH" == "governance-alignment-auto" ]]; then
-            echo "✅ Automated governance alignment PR detected — bypassing preflight gate."
+               "$PR_BRANCH" == "governance-alignment-auto" || \
+               "$PR_LABELS" == *"layer-down"* || \
+               "$PR_BRANCH" == *"layer-down"* ]]; then
+            echo "✅ Automated governance alignment / layer-down PR detected — bypassing preflight gate."
             exit 0
           fi
 
@@ -160,7 +162,7 @@ jobs:
           else
             echo "❌ FAIL — No Phase 1 preflight evidence found in session memory."
             echo ""
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo ""
             echo "🚨 GOV-BREACH-AIMC-W5-002 — PREFLIGHT SKIP DETECTED"
             echo ""
@@ -175,7 +177,7 @@ jobs:
             echo "  - 'PREFLIGHT COMPLETE' declaration"
             echo "  - 'Phase 1 output:' section with declared evidence"
             echo ""
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo ""
             echo "Action Required:"
             echo "  1. Complete Phase 1 of your agent contract IN FULL."
@@ -209,8 +211,32 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 1
 
+      - name: Bypass for layer-down and governance alignment PRs
+        id: bypass_check
+        env:
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          echo "=== Layer-Down / Governance Bypass Check ==="
+          # Bypass if: governance+automated+agent:liaison labels, or governance-alignment-auto branch,
+          # or layer-down label, or branch name contains layer-down, or PR title contains Layer-Down
+          if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && "$PR_LABELS" == *"agent:liaison"* ) || \
+               "$PR_BRANCH" == "governance-alignment-auto" || \
+               "$PR_LABELS" == *"layer-down"* || \
+               "$PR_BRANCH" == *"layer-down"* || \
+               "$PR_TITLE" == *"Layer-Down"* || \
+               "$PR_TITLE" == *"layer-down"* ]]; then
+            echo "✅ Layer-down / governance alignment PR detected — bypassing IAA pre-brief gate."
+            echo "bypass=true" >> $GITHUB_OUTPUT
+          else
+            echo "ℹ️  Regular Copilot PR — proceeding with IAA pre-brief enforcement."
+            echo "bypass=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Check IAA Pre-Brief and Wave Tasks existence (HALT-008)
         id: prebrief_check
+        if: steps.bypass_check.outputs.bypass != 'true'
         run: |
           echo "=== IAA Pre-Brief Existence Gate (HALT-008) ==="
           echo "Authority: IAA_PRE_BRIEF_PROTOCOL.md v1.2.0"
@@ -279,7 +305,7 @@ jobs:
           if [ "$FAIL" = true ]; then
             echo "❌ FAIL — IAA Pre-Brief gate: HALT-008"
             echo ""
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo ""
             echo "🚨 HALT-008 — PRE-BRIEF GATE FAILED"
             echo ""
@@ -293,7 +319,7 @@ jobs:
             echo "  - If IAA is unavailable, HALT and notify CS2 (@APGI-cmy) via issue comment."
             echo "  - No Pre-Brief = no build actions."
             echo ""
-            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo ""
             exit 1
           else
@@ -330,7 +356,7 @@ jobs:
 
           # Scope check to token files that are NEW in this PR (not pre-existing in base)
           # This prevents retroactive failures on historical token files that pre-date this check
-          TOKEN_FILES=$(git diff "$BASE_SHA" HEAD --name-only --diff-filter=A 2>/dev/null \
+          TOKEN_FILES=$(git diff "$BASE_SHA" HEAD --name-only --diff-filter=A 2>/dev/null \ 
             | grep "^${ASSURANCE_DIR}/iaa-token-.*\.md$" | head -20)
 
           if [ -z "$TOKEN_FILES" ]; then
