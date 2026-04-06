@@ -497,6 +497,11 @@ Include:
 Write `.agent-workspace/CodexAdvisor-agent/memory/session-NNN-YYYYMMDD.md`
 Use `.agent-workspace/CodexAdvisor-agent/knowledge/session-memory-template.md` as base. All fields mandatory. Populate: `prior_sessions_reviewed`, `unresolved_items_from_prior_sessions`, `roles_invoked`, `agents_created_or_updated`, `escalations_triggered`, `iaa_invocation_result`.
 
+**CI Gate Traceability (GOV-BREACH-AIMC-W5-002 — mandatory):**
+The session memory file MUST include the following field so the CI preflight evidence gate can confirm Phase 1 was executed:
+- `phase_1_preflight: PREFLIGHT COMPLETE`
+A session memory file missing this field will cause CI to block the PR (GOV-BREACH-AIMC-W5-002 preflight-skip violation).
+
 **Suggestions for Improvement** field: NEVER blank — a blank field is a HANDOVER BLOCKER.
 
 **Parking Station (mandatory):**
