@@ -40,6 +40,21 @@ jobs:
           git config --global user.name "Maturion Bot"
           git config --global user.email "bot@maturion.ai"
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install agent-bootstrap dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Node: $(node --version)"
+          echo "npm: $(npm --version)"
+          cd mcp-servers/agent-bootstrap
+          echo "Installing dependencies via npm ci..."
+          npm ci
+
       - name: Agent-bootstrap MCP preflight self-test (Linux)
         shell: bash
         run: |
