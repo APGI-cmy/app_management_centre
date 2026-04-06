@@ -68,3 +68,5 @@ builder-modular-link-validation-evidence.json
 
 # Living Agent System v5.0.0 - Runtime session storage
 .agent/sessions/
+node_modules/
+mcp-servers/agent-bootstrap/node_modules/
