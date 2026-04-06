@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-02-11",
-  "total_canons": 151,
-  "generation_timestamp": "2026-02-11T14:03:46Z",
+  "last_updated": "2026-04-05",
+  "total_canons": 157,
+  "generation_timestamp": "2026-04-05T11:47:33Z",
   "canons": [
     {
       "filename": "ACTIVATION_STATE_MODEL.md",
@@ -75,7 +75,7 @@
       "version": "1",
       "file_hash": "963eed45e027",
       "effective_date": "unknown",
-      "description": "This document defines the only legitimate process by which software agents may be introduced (“recruited”) into the governance system administered by the Foreman.",
+      "description": "This document defines the only legitimate process by which software agents may be introduced (\u201crecruited\u201d) into the governance system administered by the Foreman.",
       "type": "canon",
       "path": "governance/canon/AGENT_RECRUITMENT.md",
       "layer_down_status": "PUBLIC_API",
@@ -314,7 +314,7 @@
     },
     {
       "filename": "COGNITIVE_CAPABILITY_ORCHESTRATION_MODEL.md",
-      "version": "1.1.0 — ACTIVE OPERATIONAL GOVERNANCE",
+      "version": "1.1.0 \u2014 ACTIVE OPERATIONAL GOVERNANCE",
       "file_hash": "d9d45cb972b7",
       "effective_date": "2026-01-03 (Activation), 2025-12-24 (Original)",
       "description": "This document formally defines the **Cognitive Capability Orchestration Model** for the Maturion ecosystem.",
@@ -733,13 +733,13 @@
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
       "version": "1.0.0",
-      "file_hash": "6c874e012d6f",
+      "file_hash": "dd1c1ef135e9",
       "effective_date": "2026-01-05",
       "description": "This manifest is the **single authoritative index** of all canonical governance standards in the maturion-foreman-governance repository.",
       "type": "canon",
       "path": "governance/canon/GOVERNANCE_CANON_MANIFEST.md",
       "layer_down_status": "INTERNAL",
-      "file_hash_sha256": "6c874e012d6f0ea32cb6d04e137014ecc052043169bfe060e79e297ae1d74dd0"
+      "file_hash_sha256": "dd1c1ef135e9283aeec28a7e219666f0830b5948dffebe75b95a9df824548d47"
     },
     {
       "filename": "GOVERNANCE_COMPLETENESS_MODEL.md",
@@ -889,7 +889,7 @@
       "version": "1.0",
       "file_hash": "23d86014f109",
       "effective_date": "unknown",
-      "description": "This document defines the **Initialization Completeness Gate** — a mandatory governance gate that verifies repository initialization completeness before architecture, build, or execution activities...",
+      "description": "This document defines the **Initialization Completeness Gate** \u2014 a mandatory governance gate that verifies repository initialization completeness before architecture, build, or execution activities...",
       "type": "canon",
       "path": "governance/canon/INITIALIZATION_COMPLETENESS_GATE.md",
       "layer_down_status": "PUBLIC_API",
@@ -1120,7 +1120,7 @@
       "version": "1.0.0",
       "file_hash": "1faef6d0741c",
       "effective_date": "2025-12-25",
-      "description": "This document formally defines the **authority boundary** between:\n- **Foreman (FM)** — execution authority within repositories\n- **Maturion** — control-plane authority for platform actions (GitHub)",
+      "description": "This document formally defines the **authority boundary** between:\n- **Foreman (FM)** \u2014 execution authority within repositories\n- **Maturion** \u2014 control-plane authority for platform actions (GitHub)",
       "type": "canon",
       "path": "governance/canon/PLATFORM_AUTHORITY_BOUNDARY_AND_DELEGATION_MODEL.md",
       "layer_down_status": "PUBLIC_API",
@@ -1296,7 +1296,7 @@
       "version": "1",
       "file_hash": "d2c96ce6d14c",
       "effective_date": "unknown",
-      "description": "This rule enforces alignment between a PR’s declared scope\nand the files actually modified in the PR.",
+      "description": "This rule enforces alignment between a PR\u2019s declared scope\nand the files actually modified in the PR.",
       "type": "canon",
       "path": "governance/canon/SCOPE_TO_DIFF_RULE.md",
       "layer_down_status": "PUBLIC_API",
@@ -1568,14 +1568,14 @@
     },
     {
       "filename": "APP_DESCRIPTION_REQUIREMENT_POLICY.md",
-      "version": "1.0",
-      "file_hash": "8aa9b82cd110",
-      "effective_date": "unknown",
+      "version": "v2.0",
+      "file_hash": "83bf51854b8f",
+      "effective_date": "2026-03-20",
       "description": "This policy establishes **App Descriptions as mandatory upstream authority artifacts** for all applications in the Maturion ecosystem.",
       "type": "policy",
       "path": "governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md",
       "layer_down_status": "PUBLIC_API",
-      "file_hash_sha256": "8aa9b82cd1100210bdb75b1f6f27be62e998f27e176c83f0ab1418a13f033ab7"
+      "file_hash_sha256": "83bf51854b8ffaa4981b052cc103d27bb766b25c007d7fc58a92311a9fe767a2"
     },
     {
       "filename": "ARCHITECTURE_TEST_TRACEABILITY_METHODOLOGY.md",
@@ -1664,6 +1664,72 @@
       "path": "governance/policy/TEST_REMOVAL_GOVERNANCE_GATE.md",
       "layer_down_status": "PUBLIC_API",
       "file_hash_sha256": "1bd997b07837e1c3375f5b4b40c9086a8fd39d598341f749ed7c8e23f0ad3c84"
+    },
+    {
+      "filename": "PRE_BUILD_REALITY_CHECK_CANON.md",
+      "version": "1.1.0",
+      "file_hash": "44782538c8f3",
+      "effective_date": "2026-04-05",
+      "description": "This canon establishes a mandatory Pre-Build Reality Check gate that must be passed before any implementation (build) work may begin in the Maturion module delivery lifecycle.",
+      "type": "canon",
+      "path": "governance/canon/PRE_BUILD_REALITY_CHECK_CANON.md",
+      "layer_down_status": "PUBLIC_API",
+      "file_hash_sha256": "44782538c8f33ec3e8c4b8e9c3eed7c98244c1c4f8a3fc5fa6c00bddaf4894e4"
+    },
+    {
+      "filename": "APP_DESCRIPTION_TEMPLATE.md",
+      "version": "1.0",
+      "file_hash": "4769dfb9acea",
+      "effective_date": "2026-04-05",
+      "description": "Template for App Description documents \u2014 provides the canonical structure and all mandatory \u00a7AD sections per APP_DESCRIPTION_REQUIREMENT_POLICY.md v2.0.",
+      "type": "template",
+      "path": "governance/templates/APP_DESCRIPTION_TEMPLATE.md",
+      "layer_down_status": "PUBLIC_API",
+      "file_hash_sha256": "4769dfb9acea4d06c16d7e88b2976b912dfcb4ca0edad39e0729916ac82bc491"
+    },
+    {
+      "filename": "BUILDER_CHECKLIST_TEMPLATE.md",
+      "version": "1.0",
+      "file_hash": "e931a0c55481",
+      "effective_date": "2026-04-05",
+      "description": "Template for Builder Checklist \u2014 Stage 9 of the canonical pre-build sequence per PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0.",
+      "type": "template",
+      "path": "governance/templates/BUILDER_CHECKLIST_TEMPLATE.md",
+      "layer_down_status": "PUBLIC_API",
+      "file_hash_sha256": "e931a0c554819628dbec73bdeb0321144c99a5caefc4e0c849dbd4ef24fc6a1a"
+    },
+    {
+      "filename": "BUILD_PROGRESS_TRACKER_TEMPLATE.md",
+      "version": "1.0.0",
+      "file_hash": "6c5a62300758",
+      "effective_date": "2026-04-05",
+      "description": "Template for Build Progress Tracker \u2014 tracks progression through all 12 canonical module lifecycle stages per PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0.",
+      "type": "template",
+      "path": "governance/templates/BUILD_PROGRESS_TRACKER_TEMPLATE.md",
+      "layer_down_status": "PUBLIC_API",
+      "file_hash_sha256": "6c5a6230075872d8106e6761b4b9be914eec70f7a4ad005059613ad57a7695a1"
+    },
+    {
+      "filename": "FRS_TEMPLATE.md",
+      "version": "1.0",
+      "file_hash": "681ab97d47db",
+      "effective_date": "2026-04-05",
+      "description": "Template for Functional Requirements Specification (FRS) \u2014 Stage 3 of the canonical pre-build sequence per PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0.",
+      "type": "template",
+      "path": "governance/templates/FRS_TEMPLATE.md",
+      "layer_down_status": "PUBLIC_API",
+      "file_hash_sha256": "681ab97d47db18ff6357c34cf267af315ea225947158cc2dcf70284aa29457fd"
+    },
+    {
+      "filename": "UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md",
+      "version": "1.0",
+      "file_hash": "53971ed0cb9f",
+      "effective_date": "2026-04-05",
+      "description": "Template for UX Workflow & Wiring Spec \u2014 Stage 2 of the canonical pre-build sequence per PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0.",
+      "type": "template",
+      "path": "governance/templates/UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md",
+      "layer_down_status": "PUBLIC_API",
+      "file_hash_sha256": "53971ed0cb9fda0bd40b7b6cc519449e232c753a4c3b4dabb5affd02dff4179f"
     }
   ]
 }
