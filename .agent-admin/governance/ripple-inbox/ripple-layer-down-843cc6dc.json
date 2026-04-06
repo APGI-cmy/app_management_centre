@@ -1,0 +1,14 @@
+{
+    "dispatch_id": "layer-down-843cc6dc-20260406",
+    "event_type": "governance_ripple",
+    "canonical_commit": "843cc6dc4dd88bee911ea21d809e72f28e7b93cf",
+    "inventory_version": "1.0.0",
+    "changed_paths": [
+        "governance/canon/AGENT_HANDOVER_AUTOMATION.md"
+    ],
+    "sender": "APGI-cmy/maturion-foreman-governance",
+    "timestamp": "2026-04-06T08:55:28Z",
+    "trigger": "Merge pull request -1322 from APGI-cmy-copilot-update-agent-handover-template",
+    "status": "complete",
+    "outcome": "AGENT_HANDOVER_AUTOMATION.md layered down (v1.1.4)"
+}

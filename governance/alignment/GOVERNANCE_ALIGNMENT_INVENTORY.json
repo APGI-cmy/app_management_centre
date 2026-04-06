@@ -1,147 +1,169 @@
 {
-  "schema_version": "1.0.0",
-  "consumer_repo": "APGI-cmy/app_management_centre",
-  "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-  "last_updated": "2026-04-06T07:45:00Z",
-  "alignment_status": "ALIGNED",
-  "total_artifacts": 10,
-  "artifacts": [
-    {
-      "filename": "GOVERNANCE_CANON_MANIFEST.md",
-      "path": "governance/canon/GOVERNANCE_CANON_MANIFEST.md",
-      "version": "1.0.0",
-      "type": "canon",
-      "layer_down_status": "INTERNAL",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "layered_down_at": "2026-04-05T11:47:33Z",
-      "file_hash_sha256": "dd1c1ef135e9283aeec28a7e219666f0830b5948dffebe75b95a9df824548d47",
-      "action": "UPDATED"
-    },
-    {
-      "filename": "PRE_BUILD_REALITY_CHECK_CANON.md",
-      "path": "governance/canon/PRE_BUILD_REALITY_CHECK_CANON.md",
-      "version": "1.1.0",
-      "type": "canon",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "layered_down_at": "2026-04-05T11:47:33Z",
-      "file_hash_sha256": "44782538c8f33ec3e8c4b8e9c3eed7c98244c1c4f8a3fc5fa6c00bddaf4894e4",
-      "action": "CREATED"
-    },
-    {
-      "filename": "APP_DESCRIPTION_REQUIREMENT_POLICY.md",
-      "path": "governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md",
-      "version": "v2.0",
-      "type": "policy",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "layered_down_at": "2026-04-05T11:47:33Z",
-      "file_hash_sha256": "83bf51854b8ffaa4981b052cc103d27bb766b25c007d7fc58a92311a9fe767a2",
-      "action": "UPDATED"
-    },
-    {
-      "filename": "APP_DESCRIPTION_TEMPLATE.md",
-      "path": "governance/templates/APP_DESCRIPTION_TEMPLATE.md",
-      "version": "1.0",
-      "type": "template",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "layered_down_at": "2026-04-05T11:47:33Z",
-      "file_hash_sha256": "4769dfb9acea4d06c16d7e88b2976b912dfcb4ca0edad39e0729916ac82bc491",
-      "action": "CREATED"
-    },
-    {
-      "filename": "BUILDER_CHECKLIST_TEMPLATE.md",
-      "path": "governance/templates/BUILDER_CHECKLIST_TEMPLATE.md",
-      "version": "1.0",
-      "type": "template",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "layered_down_at": "2026-04-05T11:47:33Z",
-      "file_hash_sha256": "e931a0c554819628dbec73bdeb0321144c99a5caefc4e0c849dbd4ef24fc6a1a",
-      "action": "CREATED"
-    },
-    {
-      "filename": "BUILD_PROGRESS_TRACKER_TEMPLATE.md",
-      "path": "governance/templates/BUILD_PROGRESS_TRACKER_TEMPLATE.md",
-      "version": "1.0.0",
-      "type": "template",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "layered_down_at": "2026-04-05T11:47:33Z",
-      "file_hash_sha256": "6c5a6230075872d8106e6761b4b9be914eec70f7a4ad005059613ad57a7695a1",
-      "action": "CREATED"
-    },
-    {
-      "filename": "FRS_TEMPLATE.md",
-      "path": "governance/templates/FRS_TEMPLATE.md",
-      "version": "1.0",
-      "type": "template",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "layered_down_at": "2026-04-05T11:47:33Z",
-      "file_hash_sha256": "681ab97d47db18ff6357c34cf267af315ea225947158cc2dcf70284aa29457fd",
-      "action": "CREATED"
-    },
-    {
-      "filename": "UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md",
-      "path": "governance/templates/UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md",
-      "version": "1.0",
-      "type": "template",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "layered_down_at": "2026-04-05T11:47:33Z",
-      "file_hash_sha256": "53971ed0cb9fda0bd40b7b6cc519449e232c753a4c3b4dabb5affd02dff4179f",
-      "action": "CREATED"
-    },
-    {
-      "filename": "TRS_TEMPLATE.md",
-      "path": "governance/templates/TRS_TEMPLATE.md",
-      "version": "1.0",
-      "type": "template",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "1d91d51a9aac53f6e2e86189ef4ae4b779c00228",
-      "layered_down_at": "2026-04-06T07:45:00Z",
-      "file_hash_sha256": "48c677f3e58b014d9599246ce694e12773d29aa4",
-      "action": "CREATED"
-    },
-    {
-      "filename": "minimum-architecture-template.md",
-      "path": "governance/templates/minimum-architecture-template.md",
-      "version": "v1.1",
-      "type": "template",
-      "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "1d91d51a9aac53f6e2e86189ef4ae4b779c00228",
-      "layered_down_at": "2026-04-06T07:45:00Z",
-      "file_hash_sha256": "64bd4233075dcd4d53cb7a7f5766ab72eb092933",
-      "action": "CREATED"
-    }
-  ],
-  "layer_down_history": [
-    {
-      "layer_down_id": "layer-down-2026-04-05-6bbc3baf",
-      "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-      "timestamp": "2026-04-05T11:47:33Z",
-      "trigger": "Merge pull request -1321 from APGI-cmy-copilot-implement-canon-documentation-updates",
-      "artifacts_changed": 8,
-      "artifacts_created": 6,
-      "artifacts_updated": 2,
-      "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-05",
-      "pr_ref": "APGI-cmy/app_management_centre#988",
-      "status": "COMPLETE"
-    },
-    {
-      "layer_down_id": "layer-down-2026-04-03-1d91d51a",
-      "canonical_commit": "1d91d51a9aac53f6e2e86189ef4ae4b779c00228",
-      "timestamp": "2026-04-06T07:45:00Z",
-      "trigger": "Merge pull request -1317 from APGI-cmy-copilot-update-frs-trs-architecture-templates",
-      "artifacts_changed": 3,
-      "artifacts_created": 2,
-      "artifacts_updated": 1,
-      "note": "FRS_TEMPLATE.md already present from 6bbc3baf (newer version). TRS_TEMPLATE.md and minimum-architecture-template.md added here.",
-      "issue_ref": "APGI-cmy/app_management_centre#867",
-      "status": "COMPLETE"
-    }
-  ]
+    "schema_version": "1.0.0",
+    "consumer_repo": "APGI-cmy/app_management_centre",
+    "canonical_source": "APGI-cmy/maturion-foreman-governance",
+    "last_layer_down_commit": "843cc6dc4dd88bee911ea21d809e72f28e7b93cf",
+    "last_updated": "2026-04-06T09:00:00Z",
+    "alignment_status": "ALIGNED",
+    "total_artifacts": 11,
+    "artifacts": [
+        {
+            "filename": "GOVERNANCE_CANON_MANIFEST.md",
+            "path": "governance/canon/GOVERNANCE_CANON_MANIFEST.md",
+            "version": "1.0.0",
+            "type": "canon",
+            "layer_down_status": "INTERNAL",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "layered_down_at": "2026-04-05T11:47:33Z",
+            "file_hash_sha256": "dd1c1ef135e9283aeec28a7e219666f0830b5948dffebe75b95a9df824548d47",
+            "action": "UPDATED"
+        },
+        {
+            "filename": "PRE_BUILD_REALITY_CHECK_CANON.md",
+            "path": "governance/canon/PRE_BUILD_REALITY_CHECK_CANON.md",
+            "version": "1.1.0",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "layered_down_at": "2026-04-05T11:47:33Z",
+            "file_hash_sha256": "44782538c8f33ec3e8c4b8e9c3eed7c98244c1c4f8a3fc5fa6c00bddaf4894e4",
+            "action": "CREATED"
+        },
+        {
+            "filename": "APP_DESCRIPTION_REQUIREMENT_POLICY.md",
+            "path": "governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md",
+            "version": "v2.0",
+            "type": "policy",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "layered_down_at": "2026-04-05T11:47:33Z",
+            "file_hash_sha256": "83bf51854b8ffaa4981b052cc103d27bb766b25c007d7fc58a92311a9fe767a2",
+            "action": "UPDATED"
+        },
+        {
+            "filename": "APP_DESCRIPTION_TEMPLATE.md",
+            "path": "governance/templates/APP_DESCRIPTION_TEMPLATE.md",
+            "version": "1.0",
+            "type": "template",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "layered_down_at": "2026-04-05T11:47:33Z",
+            "file_hash_sha256": "4769dfb9acea4d06c16d7e88b2976b912dfcb4ca0edad39e0729916ac82bc491",
+            "action": "CREATED"
+        },
+        {
+            "filename": "BUILDER_CHECKLIST_TEMPLATE.md",
+            "path": "governance/templates/BUILDER_CHECKLIST_TEMPLATE.md",
+            "version": "1.0",
+            "type": "template",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "layered_down_at": "2026-04-05T11:47:33Z",
+            "file_hash_sha256": "e931a0c554819628dbec73bdeb0321144c99a5caefc4e0c849dbd4ef24fc6a1a",
+            "action": "CREATED"
+        },
+        {
+            "filename": "BUILD_PROGRESS_TRACKER_TEMPLATE.md",
+            "path": "governance/templates/BUILD_PROGRESS_TRACKER_TEMPLATE.md",
+            "version": "1.0.0",
+            "type": "template",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "layered_down_at": "2026-04-05T11:47:33Z",
+            "file_hash_sha256": "6c5a6230075872d8106e6761b4b9be914eec70f7a4ad005059613ad57a7695a1",
+            "action": "CREATED"
+        },
+        {
+            "filename": "FRS_TEMPLATE.md",
+            "path": "governance/templates/FRS_TEMPLATE.md",
+            "version": "1.0",
+            "type": "template",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "layered_down_at": "2026-04-05T11:47:33Z",
+            "file_hash_sha256": "681ab97d47db18ff6357c34cf267af315ea225947158cc2dcf70284aa29457fd",
+            "action": "CREATED"
+        },
+        {
+            "filename": "UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md",
+            "path": "governance/templates/UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md",
+            "version": "1.0",
+            "type": "template",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "layered_down_at": "2026-04-05T11:47:33Z",
+            "file_hash_sha256": "53971ed0cb9fda0bd40b7b6cc519449e232c753a4c3b4dabb5affd02dff4179f",
+            "action": "CREATED"
+        },
+        {
+            "filename": "TRS_TEMPLATE.md",
+            "path": "governance/templates/TRS_TEMPLATE.md",
+            "version": "1.0",
+            "type": "template",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "1d91d51a9aac53f6e2e86189ef4ae4b779c00228",
+            "layered_down_at": "2026-04-06T07:45:00Z",
+            "file_hash_sha256": "48c677f3e58b014d9599246ce694e12773d29aa4",
+            "action": "CREATED"
+        },
+        {
+            "filename": "minimum-architecture-template.md",
+            "path": "governance/templates/minimum-architecture-template.md",
+            "version": "v1.1",
+            "type": "template",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "1d91d51a9aac53f6e2e86189ef4ae4b779c00228",
+            "layered_down_at": "2026-04-06T07:45:00Z",
+            "file_hash_sha256": "64bd4233075dcd4d53cb7a7f5766ab72eb092933",
+            "action": "CREATED"
+        },
+        {
+            "filename": "AGENT_HANDOVER_AUTOMATION.md",
+            "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
+            "version": "1.1.4",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "843cc6dc4dd88bee911ea21d809e72f28e7b93cf",
+            "layered_down_at": "2026-04-06T09:00:00Z",
+            "file_hash_sha256": "39867b98a8d68ceebc3676b8066070e3b410e6f68a954bfd28089e0ef3d24514",
+            "action": "CREATED"
+        }
+    ],
+    "layer_down_history": [
+        {
+            "layer_down_id": "layer-down-2026-04-05-6bbc3baf",
+            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
+            "timestamp": "2026-04-05T11:47:33Z",
+            "trigger": "Merge pull request -1321 from APGI-cmy-copilot-implement-canon-documentation-updates",
+            "artifacts_changed": 8,
+            "artifacts_created": 6,
+            "artifacts_updated": 2,
+            "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-05",
+            "pr_ref": "APGI-cmy/app_management_centre#988",
+            "status": "COMPLETE"
+        },
+        {
+            "layer_down_id": "layer-down-2026-04-03-1d91d51a",
+            "canonical_commit": "1d91d51a9aac53f6e2e86189ef4ae4b779c00228",
+            "timestamp": "2026-04-06T07:45:00Z",
+            "trigger": "Merge pull request -1317 from APGI-cmy-copilot-update-frs-trs-architecture-templates",
+            "artifacts_changed": 3,
+            "artifacts_created": 2,
+            "artifacts_updated": 1,
+            "note": "FRS_TEMPLATE.md already present from 6bbc3baf (newer version). TRS_TEMPLATE.md and minimum-architecture-template.md added here.",
+            "issue_ref": "APGI-cmy/app_management_centre#867",
+            "status": "COMPLETE"
+        },
+        {
+            "layer_down_id": "layer-down-2026-04-06-843cc6dc",
+            "canonical_commit": "843cc6dc4dd88bee911ea21d809e72f28e7b93cf",
+            "timestamp": "2026-04-06T09:00:00Z",
+            "trigger": "Merge pull request -1322 from APGI-cmy-copilot-update-agent-handover-template",
+            "artifacts_changed": 1,
+            "artifacts_created": 1,
+            "artifacts_updated": 0,
+            "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-06",
+            "status": "COMPLETE"
+        }
+    ]
 }

@@ -1,0 +1,2 @@
+| 2026-04-06 | governance-liaison-amc | session-018 | contract-alignment | Workspace path in contract (governance-liaison-amc) does not match actual path (governance-liaison) | session-018-20260406.md |
+| 2026-04-06 | governance-liaison-amc | session-018 | contract-alignment | CANON_INVENTORY.json reference in contract (.governance-pack/) does not match actual path (governance/) | session-018-20260406.md |
