@@ -74,11 +74,10 @@ jobs:
             "event_type": "governance_ripple",
             "canonical_commit": "${{ github.event.client_payload.canonical_commit }}",
             "inventory_version": "${{ github.event.client_payload.inventory_version }}",
-            "changed_paths": "${{ github.event.client_payload.changed_paths }}",
+            "changed_paths": ${{ toJSON(github.event.client_payload.changed_paths) }},
             "sender": "${{ github.event.client_payload.sender }}",
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "status": "processing",
-            "trigger": "${{ github.event_name }}"
+            "status": "processing"
           }
           EOF
 
