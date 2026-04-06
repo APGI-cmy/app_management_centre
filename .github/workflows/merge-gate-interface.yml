@@ -86,11 +86,12 @@ jobs:
 
       - name: Check for Automated Governance PR
         id: check_governance
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
           echo "=== Automated Governance PR Check ==="
           PR_LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
           PR_BRANCH="${{ github.event.pull_request.head.ref }}"
-          PR_TITLE="${{ github.event.pull_request.title }}"
           echo "PR Labels: $PR_LABELS"
           echo "PR Branch: $PR_BRANCH"
           echo "PR Title:  $PR_TITLE"
