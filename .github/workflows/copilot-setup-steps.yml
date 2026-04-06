@@ -31,7 +31,7 @@ jobs:
       # Falls back to github.token when MATURION_BOT_TOKEN is not available (e.g.
       # Copilot environment where repository secrets may not be injected).
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
 
@@ -52,8 +52,12 @@ jobs:
           echo "Node: $(node --version)"
           echo "npm: $(npm --version)"
           cd mcp-servers/agent-bootstrap
-          echo "Installing dependencies via npm ci..."
-          npm ci
+          if [ -d "node_modules" ]; then
+            echo "node_modules already present (committed for offline reliability) — skipping npm ci."
+          else
+            echo "node_modules absent — installing via npm ci (requires network)..."
+            npm ci
+          fi
 
       - name: Agent-bootstrap MCP preflight self-test (Linux)
         shell: bash
