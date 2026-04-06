@@ -1,5 +1,6 @@
 ---
 name: ui-builder
+id: ui-builder
 description: >
   UI Builder for Maturion ISMS modules. Implements React UI components,
   layouts, and interactive wizards according to frozen architecture
@@ -16,6 +17,7 @@ governance:
     repository: APGI-cmy/maturion-foreman-governance
     path: /governance/canon
     reference: main
+  canon_inventory: .governance-pack/CANON_INVENTORY.json
 
   bindings:
     # Tier-0 Constitutional Authority
@@ -213,16 +215,54 @@ governance:
       path: governance/specs/build-to-green-enforcement-spec.md
       role: execution-standard
 
+iaa_oversight:
+  required: true
+  trigger: all_wave_handovers
+  mandatory_artifacts:
+    - prehandover_proof
+    - session_memory
+  invocation_step: "Phase 4 Step 4.4 (invoke FM/IAA after commit of PREHANDOVER proof)"
+  verdict_handling:
+    pass: proceed_to_pr_open_under_foreman_supervision
+    stop_and_fix: halt_handover_return_to_phase3
+    escalate: route_to_cs2_via_foreman
+  policy_ref: AGCFPP-001
+
+merge_gate_interface:
+  required_checks:
+    - "Merge Gate Interface / merge-gate/verdict"
+    - "Merge Gate Interface / governance/alignment"
+    - "Merge Gate Interface / stop-and-fix/enforcement"
+    - "Builder QA Gate / builder-qa/verdict"
+  parity_required: true
+  parity_enforcement: BLOCKING
+
+scope:
+  repository: APGI-cmy/app_management_centre
+  agent_files_location: ".github/agents"
+  approval_required: FM_SUPERVISED
+
+can_invoke:
+  - agent: foreman-v2-agent
+    when: "Architecture clarification needed, scope creep detected, or build blocker encountered"
+    how: escalation via task delegation
+
+cannot_invoke:
+  - self (SELF-MOD-BUILDER-001)
+  - other builders directly (FM orchestrates all builder coordination)
+
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — CS2-GATED
+  misalignment_response: escalate_to_foreman
+
 metadata:
-  version: 2.7.0
-  repository: APGI-cmy/maturion-foreman-office-app
-  context: foreman-office-app
+  version: 2.8.0
+  repository: APGI-cmy/app_management_centre
+  context: app-management-centre
   protection_model: reference-based
   references_locked_protocol: true
-  last_updated: 2026-02-17
-  governance_alignment_wave: "Agent File Alignment Wave (Issue #XXX)"
-  total_canon_bindings: 65
-  batches_covered: "1-7 (all critical canons)"
+  last_updated: 2026-04-06
   contract_pattern: four_phase_canonical
   operating_model: execute_only
   canonical_home: APGI-cmy/maturion-foreman-governance

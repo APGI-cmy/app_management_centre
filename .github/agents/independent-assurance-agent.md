@@ -52,6 +52,16 @@ merge_gate_interface:
   parity_required: true
   parity_enforcement: BLOCKING
 
+iaa_oversight:
+  required: true
+  oversight_provider: CS2_ONLY
+  rationale: >
+    IAA cannot provide oversight of itself (SELF-MOD-IAA-001 / NO-SELF-REVIEW-001).
+    Any modification to this contract or review of IAA-produced outputs must be
+    authorised and reviewed by CS2 directly. No peer agent is authorised to provide
+    assurance of IAA output.
+  policy_ref: AGCFPP-001
+
 scope:
   repository: APGI-cmy/app_management_centre
   agent_files_location: ".github/agents"
@@ -91,6 +101,11 @@ cannot_invoke:
   - self (SELF-MOD-IAA-001)
   - builder-class (NO-BUILD-001 — IAA never produces deliverables)
   - foreman-v2-agent (independence — IAA never directs work under review)
+
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — SELF-MOD-IAA-001 — CS2-GATED
+  misalignment_response: escalate_to_cs2_halt_all_verdicts
 
 escalation:
   authority: CS2

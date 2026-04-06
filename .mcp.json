@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "agent-bootstrap": {
+      "command": "node",
+      "args": ["mcp-servers/agent-bootstrap/index.js"],
+      "description": "Agent bootstrap preflight enforcement server. Provides the agent_bootstrap tool — enforces constitutional preflight for all governed agents. Skipping is a GOV-BREACH-AIMC-W5-002 POLC violation."
+    }
+  }
+}

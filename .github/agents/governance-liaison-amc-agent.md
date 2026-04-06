@@ -129,6 +129,11 @@ cannot_invoke:
   - .github/agents/*.md writes (CodexAdvisor + CS2 only)
   - builder-class (governance liaison only — no implementation)
 
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — SELF-MOD-LIAISON — CS2-GATED
+  misalignment_response: escalate_to_cs2_enter_standby
+
 escalation:
   authority: CS2
   halt_conditions:

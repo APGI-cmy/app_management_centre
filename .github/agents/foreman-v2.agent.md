@@ -139,6 +139,11 @@ cannot_invoke:
   - self (SELF-MOD-FM-001)
   - .github/agents/*.md writes (CodexAdvisor + CS2)
 
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — SELF-MOD-FM-001 — CS2-GATED
+  misalignment_response: escalate_to_cs2_enter_standby
+
 escalation:
   authority: CS2
   halt_conditions:
