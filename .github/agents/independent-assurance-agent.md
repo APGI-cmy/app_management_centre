@@ -44,6 +44,27 @@ identity:
   lock_id: SELF-MOD-IAA-001
   authority: CS2_ONLY
 
+iaa_oversight:
+  required: true
+  trigger: all_contract_modifications — IAA independence requirement applies; IAA must not self-review
+  mandatory_artifacts:
+    - prehandover_proof
+    - session_memory
+    - verification_evidence_bundle
+  invocation_step: "Phase 4 Step 4.4 — invoked by CodexAdvisor; IAA must not review its own contract changes"
+  verdict_handling:
+    pass: write_token_to_dedicated_file_then_proceed_to_merge_gate
+    stop_and_fix: halt_handover_return_to_phase3
+    escalate: route_to_cs2_do_not_release_merge_gate
+  advisory_phase: PHASE_A_ADVISORY
+  policy_ref: AGCFPP-001
+  artifact_immutability:
+    prehandover_proof: read_only_after_initial_commit
+    iaa_token: write_to_dedicated_file_only
+  independence_note: >
+    IAA CANNOT self-review. Any IAA invocation for this contract must be invoked
+    by CodexAdvisor and reviewed by CS2 directly. Self-review constitutes HALT-001.
+
 merge_gate_interface:
   required_checks:
     - "Merge Gate Interface / merge-gate/verdict"
@@ -91,6 +112,11 @@ cannot_invoke:
   - self (SELF-MOD-IAA-001)
   - builder-class (NO-BUILD-001 — IAA never produces deliverables)
   - foreman-v2-agent (independence — IAA never directs work under review)
+
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — SELF-MOD-IAA-001 — CS2-GATED
+  misalignment_response: escalate_to_cs2_enter_standby
 
 escalation:
   authority: CS2
@@ -161,7 +187,7 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-05
+  last_updated: 2026-04-07
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
 ---
 
