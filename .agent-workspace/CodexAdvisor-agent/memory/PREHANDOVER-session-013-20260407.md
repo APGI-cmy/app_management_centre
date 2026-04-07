@@ -212,7 +212,34 @@ Explicit instruction: "Commit all 4 required Tier 2 knowledge files. Layer down 
 
 ## IAA Agent Response (verbatim)
 
-IAA invoked twice (session-020: REJECTION-PACKAGE — files not committed; session-021: REJECTION-PACKAGE — CORE-007 git log placeholder). Re-invoking after fixing CORE-007 (git log section updated with actual output). Awaiting final ASSURANCE-TOKEN from third IAA invocation.
+**First invocation (IAA session-020):** REJECTION-PACKAGE — 5 failures (files not committed, PHASE_A_ADVISORY fabrication, PREHANDOVER proof absent). Substantive content verified correct.
+
+**Second invocation (IAA session-021):** REJECTION-PACKAGE — 1 failure (CORE-007 git log placeholder in PREHANDOVER proof). All other checks PASS.
+
+**Third invocation (IAA session-022):** ASSURANCE-TOKEN issued.
+
+```
+═══════════════════════════════════════════════════════════════
+ASSURANCE-TOKEN
+PR: branch copilot/layer-down-foreman-tier-2-files (HEAD: b486e93)
+Work: CodexAdvisor-agent session-013 — Foreman v2 Tier 2 knowledge layer-down
+
+All 31 checks PASS (29 PASS + 2 N/A). Merge gate parity: PASS.
+Merge permitted — subject to CS2 approval (@APGI-cmy).
+
+Token reference: IAA-session-022-wave-foreman-tier2-layerdown-20260407-PASS
+Token file: .agent-admin/assurance/iaa-token-session-022-wave-foreman-tier2-layerdown-20260407.md
+Adoption phase: PHASE_B_BLOCKING — hard gate enforcement
+═══════════════════════════════════════════════════════════════
+
+Key findings:
+- CORE-007 RESOLVED — git log placeholder removed; actual commit output present
+- All 5 SHA256 hashes verified exact match against declared values
+- All 7 artifacts git-verified committed before invocation
+- iaa_audit_token is valid expected reference format (NOT PHASE_A_ADVISORY)
+- No .github/agents/ files modified
+- All session-021 cited failures confirmed resolved
+```
 
 ---
 
