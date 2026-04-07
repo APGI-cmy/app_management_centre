@@ -607,6 +607,7 @@ Output:
 Write `.agent-workspace/independent-assurance-agent/memory/session-NNN-YYYYMMDD.md`
 
 Required fields — all must be populated:
+- `phase_1_preflight: PREFLIGHT COMPLETE` — **mandatory CI gate field (GOV-BREACH-AIMC-W5-002)**
 - `session_id`, `date`, `pr_reviewed`, `invoking_agent`, `producing_agent`, `producing_agent_class`
 - `pr_category`, `checks_executed`, `checks_passed`, `checks_failed`
 - `merge_gate_parity_result: PASS / FAIL`

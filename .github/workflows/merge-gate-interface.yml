@@ -34,13 +34,14 @@ jobs:
         id: detect_agent
         run: |
           AGENT_ROLE="unknown"
-          if [[ "${{ contains(github.event.pull_request.labels.*.name, 'agent:foreman') }}" == "true" ]]; then
+          LABELS=$(jq -r '[.pull_request.labels[].name] | join(",")' "$GITHUB_EVENT_PATH")
+          if [[ "$LABELS" == *"agent:foreman"* ]]; then
             AGENT_ROLE="foreman"
-          elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'agent:builder') }}" == "true" ]]; then
+          elif [[ "$LABELS" == *"agent:builder"* ]]; then
             AGENT_ROLE="builder"
-          elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'agent:liaison') }}" == "true" ]]; then
+          elif [[ "$LABELS" == *"agent:liaison"* ]]; then
             AGENT_ROLE="liaison"
-          elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'agent:overseer') }}" == "true" ]]; then
+          elif [[ "$LABELS" == *"agent:overseer"* ]]; then
             AGENT_ROLE="overseer"
           fi
           echo "agent_role=$AGENT_ROLE" >> $GITHUB_OUTPUT
@@ -50,12 +51,15 @@ jobs:
         id: classify
         run: |
           PR_TYPE="code"
-          if [[ "${{ contains(github.event.pull_request.labels.*.name, 'governance-only') }}" == "true" ]]; then
+          LABELS=$(jq -r '[.pull_request.labels[].name] | join(",")' "$GITHUB_EVENT_PATH")
+          BASE_REF=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
+          HEAD_REF=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
+          if [[ "$LABELS" == *"governance-only"* ]]; then
             PR_TYPE="governance"
-          elif [[ "${{ contains(github.event.pull_request.labels.*.name, 'docs-only') }}" == "true" ]]; then
+          elif [[ "$LABELS" == *"docs-only"* ]]; then
             PR_TYPE="docs"
           else
-            CHANGED_FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD)
+            CHANGED_FILES=$(git diff --name-only "origin/${BASE_REF}"...HEAD)
             if echo "$CHANGED_FILES" | grep -qE '^governance/|^\.github/agents/|^\.agent-admin/'; then
               PR_TYPE="governance"
             elif echo "$CHANGED_FILES" | grep -qE '\.md$'; then
@@ -63,7 +67,7 @@ jobs:
                 PR_TYPE="docs"
               fi
             fi
-            if [[ "${{ github.event.pull_request.head.ref }}" =~ ^(release|hotfix)/ ]]; then
+            if [[ "$HEAD_REF" =~ ^(release|hotfix)/ ]]; then
               PR_TYPE="code"
             fi
           fi
@@ -88,9 +92,9 @@ jobs:
         id: check_governance
         run: |
           echo "=== Automated Governance PR Check ==="
-          PR_LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
-          PR_BRANCH="${{ github.event.pull_request.head.ref }}"
-          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_LABELS=$(jq -r '[.pull_request.labels[].name] | join(",")' "$GITHUB_EVENT_PATH")
+          PR_BRANCH=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
+          PR_TITLE=$(jq -r '.pull_request.title' "$GITHUB_EVENT_PATH")
           echo "PR Labels: $PR_LABELS"
           echo "PR Branch: $PR_BRANCH"
           echo "PR Title:  $PR_TITLE"
@@ -183,9 +187,11 @@ jobs:
           fi
 
       - name: Verdict Summary
+        env:
+          IS_GOVERNANCE_AUTO: ${{ steps.check_governance.outputs.is_governance_auto }}
         run: |
           echo "=== Merge Gate Verdict ==="
-          if [[ "${{ steps.check_governance.outputs.is_governance_auto }}" == "true" ]]; then
+          if [[ "$IS_GOVERNANCE_AUTO" == "true" ]]; then
             echo "✅ All merge gates PASSED (auto-approved — governance/layer-down PR)"
           else
             echo "✅ All merge gates PASSED"
@@ -247,7 +253,7 @@ jobs:
       - name: Check for Agent Self-Modification
         run: |
           echo "=== Agent Contract Self-Modification Check ==="
-          BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+          BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
           COMMITS=$(git log origin/$BASE_BRANCH..HEAD --pretty=format:"%H|%an|%ae")
           VIOLATION_FOUND=false
           VIOLATION_FILES=""
