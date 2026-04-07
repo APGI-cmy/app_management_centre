@@ -1,5 +1,6 @@
 ---
 name: ui-builder
+id: ui-builder
 description: >
   UI Builder for Maturion ISMS modules. Implements React UI components,
   layouts, and interactive wizards according to frozen architecture
@@ -12,6 +13,7 @@ agent:
   profile: builder-ui.v1.md
 
 governance:
+  canon_inventory: .governance-pack/CANON_INVENTORY.json
   canon:
     repository: APGI-cmy/maturion-foreman-governance
     path: /governance/canon
@@ -213,9 +215,49 @@ governance:
       path: governance/specs/build-to-green-enforcement-spec.md
       role: execution-standard
 
+iaa_oversight:
+  required: true
+  trigger: all_wave_handovers
+  advisory_phase: PHASE_A_ADVISORY
+  policy_ref: AGCFPP-001
+  artifact_immutability:
+    prehandover_proof: read_only_after_initial_commit
+    iaa_token: write_to_dedicated_file_only
+
+merge_gate_interface:
+  required_checks:
+    - "Merge Gate Interface / merge-gate/verdict"
+    - "Merge Gate Interface / governance/alignment"
+    - "Merge Gate Interface / stop-and-fix/enforcement"
+  parity_required: true
+  parity_enforcement: BLOCKING
+
+scope:
+  repository: APGI-cmy/app_management_centre
+  approval_required: WAVE_TASKS_ONLY
+
+capabilities:
+  build_application_code: FULL
+  write_tests: FULL
+  write_agent_contracts: PROHIBITED
+  orchestrate_builders: PROHIBITED
+  release_merge_gate: PROHIBITED
+
+can_invoke: []
+
+cannot_invoke:
+  - self
+  - agent-contracts (CodexAdvisor + CS2 only)
+  - other-builders (Foreman-orchestrated only)
+
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — CS2-GATED
+  misalignment_response: escalate_to_foreman_then_cs2
+
 metadata:
-  version: 2.7.0
-  last_updated: 2026-02-17
+  version: 3.4.0
+  last_updated: 2026-04-07
   contract_pattern: four_phase_canonical
   operating_model: execute_only
   canonical_home: APGI-cmy/maturion-foreman-governance
