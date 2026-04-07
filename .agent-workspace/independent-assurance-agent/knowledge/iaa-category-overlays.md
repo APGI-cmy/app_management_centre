@@ -1,9 +1,9 @@
 # IAA Category Overlays
 
 **Agent**: independent-assurance-agent
-**Version**: 3.6.0
+**Version**: 4.0.0
 **Status**: ACTIVE
-**Last Updated**: 2026-03-18
+**Last Updated**: 2026-04-07
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
 
 ---
@@ -296,7 +296,7 @@ before any qualifying builder task was delegated. Artifact existence is the sole
 model — no injection pipeline signature string or CI check run record is required.
 
 **Trigger**: Always applied alongside AGENT_CONTRACT, CANON_GOVERNANCE, CI_WORKFLOW,
-AAWP_MAT, KNOWLEDGE_GOVERNANCE, or AGENT_INTEGRITY overlays when the PR is T1 or T2.
+AAWP_MAT, KNOWLEDGE_GOVERNANCE, AGENT_INTEGRITY, or PRE_BUILD_STAGE overlays when the PR is T1 or T2.
 
 **AGCFPP-001 gate link**: For AGENT_CONTRACT PRs, `agent-contract-audit.yml` checks for IAA
 assurance token presence. OVL-INJ-001 complements this by verifying the Pre-Brief artifact
@@ -331,6 +331,60 @@ No Pre-Brief artifact found. IAA states:
 
 ---
 
+## PRE_BUILD_STAGE Overlay
+
+Applied when PR category is `PRE_BUILD_STAGE`.
+
+> **Mindset**: IAA verifies that the pre-build stage sequence mandated by `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 has been followed. Stage artifacts must be present, substantive, and sequentially complete. The 12-stage sequence is non-negotiable without documented CS2 approval.
+
+### Substance Checks (Primary)
+
+| Check ID | Check Name | What IAA Does |
+|----------|-----------|---------------|
+| OVL-PBG-010 | Stage declaration present | The PR or issue must explicitly declare which stage(s) of the 12-stage sequence is being delivered (Stage N: [Stage Name]). No declaration = REJECTION-PACKAGE. Stage numbers must match the canonical sequence in `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 §3.1. |
+| OVL-PBG-011 | Stage dependency chain verified | All stages preceding the declared stage(s) must be verifiably complete. IAA checks: are the predecessor stage artifacts present on the branch or declared complete in the session memory / PREHANDOVER proof? Any missing predecessor without documented CS2 waiver = REJECTION-PACKAGE citing the specific missing stage. |
+| OVL-PBG-012 | Stage artifact existence | The canonical artifact(s) for each declared stage must be present in the PR diff or confirmed on the branch: Stage 1 = App Description, Stage 2 = UX Workflow & Wiring Spec, Stage 3 = FRS, Stage 4 = TRS, Stage 5 = Architecture, Stage 6 = QA-to-Red suite, Stage 7 = PBFAG gate report, Stage 8 = Implementation Plan, Stage 9 = Builder Checklist, Stage 10 = IAA Pre-Brief artifact, Stage 11 = Builder Appointment issue/document, Stage 12 = Build deliverables. Missing artifact for any declared stage = REJECTION-PACKAGE. |
+| OVL-PBG-013 | Stage artifact completeness | Each stage artifact must be substantively populated. No stubs, TODO placeholders, blank sections, or skeleton-only content. Skeleton artifact = REJECTION-PACKAGE with specific empty sections identified. |
+| OVL-PBG-014 | Canon alignment | Each stage artifact must conform to the canonical stage definition in `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 and any associated template (e.g., `APP_DESCRIPTION_TEMPLATE.md` for Stage 1, `UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md` for Stage 2). Structural deviations from the template = REJECTION-PACKAGE with specific divergence identified. |
+| OVL-PBG-015 | PBFAG gate compliance (Stage 7) | When Stage 7 (PBFAG) is delivered: IAA must verify that all prior stages (1–6) are confirmed complete, the PBFAG gate report is present at the canonical path, and the gate is governed by `PRE_BUILD_REALITY_CHECK_CANON.md` v1.1.0. A PBFAG gate delivered without confirmed completion of stages 1–6 = REJECTION-PACKAGE. If Stage 7 is not being delivered in this PR, record OVL-PBG-015: N/A. |
+| OVL-PBG-016 | No skip or reorder | Verify that no stage in the sequence has been skipped or reordered without a documented CS2 approval waiver committed to the repository before the deviation. Any skip or reorder detected in the PR diff or declared in session memory without a waiver = REJECTION-PACKAGE citing `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 §4.2 and §4.3. |
+
+### Admin Checks (Secondary — Existence Only)
+
+| Check ID | Check Name | Pass Condition |
+|----------|-----------|----------------|
+| OVL-PBG-ADM-001 | PREHANDOVER ceremony complete | Covered by CERT-001 through CERT-004. |
+| OVL-PBG-ADM-002 | Stage reference in PREHANDOVER proof | PREHANDOVER proof declares the stage number(s) being delivered in this wave. Missing stage declaration in PREHANDOVER proof = note once and move on. |
+| OVL-PBG-ADM-003 | Build Progress Tracker updated | If a `BUILD_PROGRESS_TRACKER_TEMPLATE.md`-derived tracker exists for this module, the stage(s) delivered in this PR are marked complete in the tracker. Missing tracker update = note once and move on. |
+
+---
+
+## LIAISON_ADMIN Overlay
+
+Applied when PR category is `LIAISON_ADMIN`.
+
+> **Mindset**: IAA verifies that governance liaison administration operations (layer-down, ripple processing, drift correction, sync state management) have been executed correctly and completely. Liaison admin PRs are governance-critical — a failed layer-down leaves the consumer repo in drift.
+
+### Substance Checks (Primary)
+
+| Check ID | Check Name | What IAA Does |
+|----------|-----------|---------------|
+| OVL-LA-001 | Layer-down SHA256 integrity | For any layer-down operation in this PR: verify that SHA256 checksums for all written files are recorded in the PREHANDOVER proof or evidence bundle AND match the hashes in `.governance-pack/CANON_INVENTORY.json`. Any missing or mismatched hash = REJECTION-PACKAGE citing HALT-005. |
+| OVL-LA-002 | Sync state correctness | Verify that `.agent-admin/governance/sync_state.json` has been updated: `sync_pending: false` and `drift_detected: false` after a successful layer-down or drift correction. If sync state reflects pending drift or an incomplete sync = REJECTION-PACKAGE. |
+| OVL-LA-003 | Ripple inbox processed | For PRs containing ripple event processing: verify the ripple event has been moved from the inbox to archive (`.agent-admin/governance/ripple-archive/`). Unarchived ripple events in the inbox after a processing PR = REJECTION-PACKAGE. |
+| OVL-LA-004 | No canonical source modification | Verify the PR diff does not modify any file in `.governance-pack/` (receive-only from canonical source) or any canonical governance file in a way that constitutes writing to the canonical source. Any such modification = REJECTION-PACKAGE citing PROHIB-006. |
+| OVL-LA-005 | Consumer mode compliance | Verify the liaison has not dispatched ripple events (canonical source role only), not made architecture decisions, and not written production code. Any breach of consumer mode = REJECTION-PACKAGE with specific prohibition cited (PROHIB-001 through PROHIB-008). |
+
+### Admin Checks (Secondary — Existence Only)
+
+| Check ID | Check Name | Pass Condition |
+|----------|-----------|----------------|
+| OVL-LA-ADM-001 | PREHANDOVER ceremony complete | Covered by CERT-001 through CERT-004. |
+| OVL-LA-ADM-002 | Session memory present | Liaison session memory file is present in the PR bundle at `.agent-workspace/governance-liaison-amc/memory/session-NNN-YYYYMMDD.md`. Binary existence check only. |
+| OVL-LA-ADM-003 | Evidence artifact bundle present | `.agent-admin/build-evidence/session-NNN/` directory contains HANDOVER_SUMMARY.md and ALIGNMENT_EVIDENCE.md. Binary existence check only. |
+
+---
+
 ## AGENT_INTEGRITY Overlay
 
 Applied when PR category is `AGENT_INTEGRITY`.
@@ -354,6 +408,7 @@ Applied when PR category is `AGENT_INTEGRITY`.
 | 3.4.0 | 2026-03-11 | Renamed `INJECTION_AUDIT_TRAIL` overlay to `PRE_BRIEF_ASSURANCE`; removed injection pipeline signature string requirement; OVL-INJ-001 now requires Pre-Brief artifact existence only (issue #1061 — disable automatic injections) |
 | 3.5.0 | 2026-03-17 | BD-000 User Journey Trace section added (BD-000-A through BD-000-D) — mandatory for all build PRs impacting app behaviour; user journey declaration, step-by-step trace, edge case declaration and verification checks; issue [IAA functional behaviour strengthening] |
 | 3.6.0 | 2026-03-18 | Orientation Mandate scope note added — clarifies "cross-reference consistency" vs. declared-state integrity; OVL-KG-ADM-002 pass condition sharpened (file header version must match index.md registration AND exceed prior version — mismatch = FAIL); timestamp carve-out note added (stale Last Updated field is observation only, not REJECTION-PACKAGE trigger); issue [clarify audit scope cross-reference consistency and version bump history] |
+| 4.0.0 | 2026-04-07 | PRE_BUILD_STAGE overlay added (OVL-PBG-010–016) — enforces 12-stage pre-build sequence compliance per `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; LIAISON_ADMIN overlay added (OVL-LA-001–005, OVL-LA-ADM-001–003) — governance liaison admin operations require IAA assurance; PRE_BRIEF_ASSURANCE trigger updated to include PRE_BUILD_STAGE; ISMS PS-E/PS-F wave sync (maturion-isms#IAA-TIER2-PSE-PSF) |
 
 ---
 
