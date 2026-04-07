@@ -80,7 +80,7 @@ All three contracts now have the following top-level YAML key order:
 | Add `iaa_oversight` to `independent-assurance-agent` contract | ✅ DONE |
 | Confirm canonical field order is preserved | ✅ DONE |
 | Changelog updated | ✅ DONE (this file) |
-| CI passes for all 3 agents | ✅ YAML valid; line count pre-existing bypass via PREHANDOVER proof |
+| CI passes for all 3 agents | ✅ YAML valid; line count is a pre-existing hard-violation (all 3 contracts >400 lines); bypassed at repo-root via `PREHANDOVER_PROOF*.md` evidence gate |
 
 ---
 
@@ -95,7 +95,7 @@ All three contracts now have the following top-level YAML key order:
 | S5 No embedded Tier 2 content added | ✅ PASS |
 | S6 `can_invoke`, `cannot_invoke`, `own_contract` are top-level YAML keys | ✅ PASS |
 | S7 Artifact immutability rules present (`iaa_oversight.artifact_immutability`) | ✅ PASS |
-| S8 IAA token pattern reference (`.agent-admin/assurance/iaa-token-*`) | ✅ PASS (in `iaa_oversight`) |
+| S8 IAA token pattern reference (`.agent-admin/assurance/iaa-token-*`) | ✅ PASS (documented under `capabilities.assurance.artifact_immutability.token_file_pattern`) |
 
 **QP Result: PASS (8/8 gates)**
 
@@ -103,10 +103,14 @@ All three contracts now have the following top-level YAML key order:
 
 ## Note on Line Count
 
-All three governance agent contracts exceed the 400-line advisory gate (pre-existing condition,
-present before this change). This issue predates this session and is tracked separately.
-The Agent Contract Governance CI check includes an evidence-bypass mechanism (PREHANDOVER_PROOF);
-this session's PREHANDOVER proof documents the agent contract line count status.
+All three governance agent contracts exceed the 400-line hard-violation threshold enforced by
+the Agent Contract Governance CI check (with >300 lines treated as advisory warnings). This is a
+pre-existing condition, present before this change, and is tracked separately.
+The Agent Contract Governance CI check includes an evidence-bypass mechanism (`PREHANDOVER_PROOF`);
+the bypass is triggered by a repo-root `PREHANDOVER_PROOF.md` or `PREHANDOVER_PROOF_*.md` file
+containing contract-related keywords — the `.agent-workspace/...PREHANDOVER-*.md` proof created in
+this session is a governance artifact and does NOT trigger the CI bypass. The applicable repo-root
+proof file documents the agent contract line count status.
 
 ---
 
