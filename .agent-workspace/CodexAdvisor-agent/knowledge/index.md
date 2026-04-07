@@ -60,6 +60,8 @@
 | session-008 | 2026-02-17 | Governance Liaison LAS v6.2.0 alignment |
 | session-009 | 2026-04-06 | foreman-v2-agent AMC alignment |
 | session-010 | 2026-04-06 | CANON_INVENTORY.json governance pack sync |
+| session-011 | 2026-04-07 | .github/agents/ cleanup — archive extraneous files, metadata reduction |
+| session-012 | 2026-04-07 | Upgrade all builder agent contracts to v3.4.0 pattern (AMC) |
 
 ---
 
