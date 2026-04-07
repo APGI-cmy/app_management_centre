@@ -1,5 +1,6 @@
 ---
 name: integration-builder
+id: integration-builder
 description: >
   Integration Builder for Maturion ISMS modules. Implements inter-module
   integrations and external service connections according to frozen
@@ -12,6 +13,7 @@ agent:
   profile: builder-integration.v1.md
 
 governance:
+  canon_inventory: .governance-pack/CANON_INVENTORY.json
   canon:
     repository: APGI-cmy/maturion-foreman-governance
     path: /governance/canon
@@ -213,13 +215,53 @@ governance:
       path: governance/specs/build-to-green-enforcement-spec.md
       role: execution-standard
 
+iaa_oversight:
+  required: true
+  trigger: all_wave_handovers
+  advisory_phase: PHASE_A_ADVISORY
+  policy_ref: AGCFPP-001
+  artifact_immutability:
+    prehandover_proof: read_only_after_initial_commit
+    iaa_token: write_to_dedicated_file_only
+
+merge_gate_interface:
+  required_checks:
+    - "Merge Gate Interface / merge-gate/verdict"
+    - "Merge Gate Interface / governance/alignment"
+    - "Merge Gate Interface / stop-and-fix/enforcement"
+  parity_required: true
+  parity_enforcement: BLOCKING
+
+scope:
+  repository: APGI-cmy/app_management_centre
+  approval_required: WAVE_TASKS_ONLY
+
+capabilities:
+  build_application_code: FULL
+  write_tests: FULL
+  write_agent_contracts: PROHIBITED
+  orchestrate_builders: PROHIBITED
+  release_merge_gate: PROHIBITED
+
+can_invoke: []
+
+cannot_invoke:
+  - self
+  - agent-contracts (CodexAdvisor + CS2 only)
+  - other-builders (Foreman-orchestrated only)
+
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — CS2-GATED
+  misalignment_response: escalate_to_foreman_then_cs2
+
 metadata:
-  version: 2.6.0
+  version: 3.4.0
   repository: APGI-cmy/maturion-foreman-office-app
   context: foreman-office-app
   protection_model: reference-based
   references_locked_protocol: true
-  last_updated: 2026-01-23
+  last_updated: 2026-04-07
   governance_alignment_wave: "Agent File Alignment Wave (Issue #XXX)"
   total_canon_bindings: 65
   batches_covered: "1-7 (all critical canons)"
