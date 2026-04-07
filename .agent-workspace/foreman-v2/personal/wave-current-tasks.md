@@ -1,16 +1,20 @@
-# Wave Current Tasks — Wave 1 — AMC foreman-v2-agent alignment
+# Wave Current Tasks — wave-12stage-amc-alignment — AMC Operational Alignment to 12-Stage Pre-Build Model
 
-wave: wave1-align-foreman-v2-agent-amc-governance
-agent: CodexAdvisor-agent
-date: 20260406
-iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-wave1.md
+wave: wave-12stage-amc-alignment
+agent: foreman-v2-agent
+date: 20260407
+iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-wave-12stage-amc-alignment.md
 iaa_prebrief_status: COMMITTED
 
-## Tasks
-- [x] WAVE1-T001: Update governance.canon_inventory path to .governance-pack/
-- [x] WAVE1-T001: Update scope.repository to app_management_centre
-- [x] WAVE1-T001: Confirm metadata.this_copy = consumer
-- [x] WAVE1-T001: Confirm metadata.canonical_home = APGI-cmy/maturion-foreman-governance
-- [x] WAVE1-T001: Update metadata.last_updated
+## Tasks (IAA-declared)
 
-## Status: COMPLETE — awaiting merge
+- [ ] TASK-AMC-12S-01: Create `governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 — layer-down from canonical source
+- [ ] TASK-AMC-12S-02: Update `governance/CANON_INVENTORY.json` — add PRE_BUILD_STAGE_MODEL_CANON.md entry with valid SHA256
+- [ ] TASK-AMC-12S-03: Update `.governance-pack/CANON_INVENTORY.json` — add matching PRE_BUILD_STAGE_MODEL_CANON.md entry
+- [ ] TASK-AMC-12S-04: Add §AD-01 Build Lifecycle Stages section to `docs/governance/FM_APP_DESCRIPTION.md`
+
+## Delegated To
+
+- governance-liaison-amc-agent: TASK-AMC-12S-01, TASK-AMC-12S-02, TASK-AMC-12S-03, TASK-AMC-12S-04
+
+## Status: IN PROGRESS
