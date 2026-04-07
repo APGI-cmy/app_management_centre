@@ -121,6 +121,11 @@ cannot_invoke:
   - self (SELF-MOD-FM-001)
   - .github/agents/*.md writes (CodexAdvisor + CS2)
 
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — SELF-MOD-FM-001 — CS2-GATED
+  misalignment_response: escalate_to_cs2_enter_standby
+
 escalation:
   authority: CS2
   halt_conditions:
@@ -198,7 +203,7 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-06
+  last_updated: 2026-04-07
   tier2_knowledge: .agent-workspace/foreman-v2/knowledge/index.md
 ---
 
