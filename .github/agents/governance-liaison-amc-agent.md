@@ -680,6 +680,7 @@ Output:
    - File: `.agent-workspace/governance-liaison-amc/memory/session-NNN-YYYYMMDD.md`
    - Use the session memory template from `.agent-workspace/governance-liaison-amc/knowledge/session-memory-template.md`
    - Required fields (must all be populated — none may be blank or 'N/A'):
+     - `phase_1_preflight: PREFLIGHT COMPLETE` — **mandatory CI gate field (GOV-BREACH-AIMC-W5-002)**
      - `prior_sessions_reviewed`, `unresolved_items_from_prior_sessions`
      - `roles_invoked`, `governance_artifacts_aligned`, `escalations_triggered`
      - `iaa_invocation_result: [ASSURANCE-TOKEN / REJECTION-PACKAGE / NOT_REQUIRED / PHASE_A_ADVISORY]`

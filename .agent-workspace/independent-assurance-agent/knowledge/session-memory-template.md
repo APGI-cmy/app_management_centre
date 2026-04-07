@@ -21,6 +21,7 @@ Replace all `[placeholder]` values — no field may be left blank.
 - date: [YYYY-MM-DD]
 - agent_version: 6.2.0
 - contract_version: 2.0.0
+- phase_1_preflight: PREFLIGHT COMPLETE
 
 ## Invocation Context
 - pr_reviewed: [PR number and title]

@@ -611,6 +611,7 @@ Write `.agent-workspace/foreman-v2/memory/session-NNN-YYYYMMDD.md`
 Use template: `.agent-workspace/foreman-v2/knowledge/session-memory-template.md`
 
 Required fields — all must be populated, none may be blank or 'N/A':
+- `phase_1_preflight: PREFLIGHT COMPLETE` — **mandatory CI gate field (GOV-BREACH-AIMC-W5-002)**
 - `prior_sessions_reviewed: [list session IDs reviewed in Step 1.4]`
 - `unresolved_items_from_prior_sessions: [list, or 'none']`
 - `roles_invoked: [list all modes activated this session]`
