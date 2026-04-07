@@ -215,14 +215,7 @@ governance:
 
 metadata:
   version: 2.7.0
-  repository: APGI-cmy/maturion-foreman-office-app
-  context: foreman-office-app
-  protection_model: reference-based
-  references_locked_protocol: true
   last_updated: 2026-02-17
-  governance_alignment_wave: "Agent File Alignment Wave (Issue #XXX)"
-  total_canon_bindings: 65
-  batches_covered: "1-7 (all critical canons)"
   contract_pattern: four_phase_canonical
   operating_model: execute_only
   canonical_home: APGI-cmy/maturion-foreman-governance
