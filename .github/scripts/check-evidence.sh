@@ -31,15 +31,29 @@ echo "Pattern: $PATTERN"
 echo ""
 
 # Locate PREHANDOVER_PROOF file
+# Search order:
+#   1. Repo root: PREHANDOVER_PROOF.md
+#   2. Repo root: PREHANDOVER_PROOF_*.md (dated variants)
+#   3. AMC agent-workspace: .agent-workspace/foreman-v2/memory/PREHANDOVER-*.md
+#   4. Broader fallback: .agent-workspace/*/memory/PREHANDOVER-*.md
 PROOF_FILE=""
 if [ -f "PREHANDOVER_PROOF.md" ]; then
   PROOF_FILE="PREHANDOVER_PROOF.md"
 elif ls PREHANDOVER_PROOF_*.md 1>/dev/null 2>&1; then
   PROOF_FILE=$(ls PREHANDOVER_PROOF_*.md 2>/dev/null | sort | tail -1)
+elif ls .agent-workspace/foreman-v2/memory/PREHANDOVER-*.md 1>/dev/null 2>&1; then
+  PROOF_FILE=$(ls .agent-workspace/foreman-v2/memory/PREHANDOVER-*.md 2>/dev/null | sort | tail -1)
+elif ls .agent-workspace/*/memory/PREHANDOVER-*.md 1>/dev/null 2>&1; then
+  PROOF_FILE=$(ls .agent-workspace/*/memory/PREHANDOVER-*.md 2>/dev/null | sort | tail -1)
 fi
 
 if [ -z "$PROOF_FILE" ]; then
   echo "ℹ️  No PREHANDOVER_PROOF file found — evidence-based skip not available"
+  echo "   Searched paths:"
+  echo "     - PREHANDOVER_PROOF.md"
+  echo "     - PREHANDOVER_PROOF_*.md"
+  echo "     - .agent-workspace/foreman-v2/memory/PREHANDOVER-*.md"
+  echo "     - .agent-workspace/*/memory/PREHANDOVER-*.md"
   echo "   Proceeding with direct gate execution"
   echo ""
   echo "skip_execution=false"
