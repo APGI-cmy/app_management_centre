@@ -70,9 +70,10 @@ Any agent claiming class exemption → REJECTION-PACKAGE citing FAIL-ONLY-ONCE A
 6. Does PR contain any .agent-workspace/*/knowledge/ file changes?
    → YES: Category = KNOWLEDGE_GOVERNANCE. IAA = MANDATORY.
 
-7. Does PR contain any pre-build stage artifacts (App Description, UX Spec, FRS, TRS,
-   Architecture, QA-to-Red, PBFAG, Implementation Plan, Builder Checklist, IAA Pre-Brief,
-   Builder Appointment) or is the wave tagged `pre-build-stage`?
+7. Does PR contain any pre-build stage artifacts (App Description, UX Workflow & Wiring Spec,
+   FRS, TRS, Architecture, QA-to-Red suite, PBFAG gate report, Implementation Plan,
+   Builder Checklist, IAA Pre-Brief artifact, Builder Appointment) or is the wave tagged
+   `pre-build-stage`?
    → YES: Category = PRE_BUILD_STAGE. IAA = MANDATORY.
 
 8. Does PR contain any governance liaison admin artifacts (.agent-workspace/governance-liaison-amc/,
