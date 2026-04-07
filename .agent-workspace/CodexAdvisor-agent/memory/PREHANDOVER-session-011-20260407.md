@@ -74,4 +74,4 @@ OPOJD: PASS
 
 ---
 
-> ⚠️ IMMUTABILITY RULE: This file is READ-ONLY after initial commit. No agent may edit it post-commit. IAA token is written to dedicated file: `.agent-admin/assurance/iaa-token-session-011-wave1-20260407.md`
+> ⚠️ IMMUTABILITY RULE: This file is READ-ONLY after initial commit. No agent may edit it post-commit. Any IAA token for this session must be recorded as a separate assurance artifact and must not be inlined into this PREHANDOVER proof.
