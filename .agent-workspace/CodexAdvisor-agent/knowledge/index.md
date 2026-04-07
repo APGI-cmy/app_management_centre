@@ -62,6 +62,7 @@
 | session-010 | 2026-04-06 | CANON_INVENTORY.json governance pack sync |
 | session-011 | 2026-04-07 | .github/agents/ cleanup — archive extraneous files, metadata reduction |
 | session-012 | 2026-04-07 | Upgrade all builder agent contracts to v3.4.0 pattern (AMC) |
+| session-013 | 2026-04-07 | Foreman v2 Tier 2 knowledge layer-down from maturion-isms (FAIL-ONLY-ONCE v4.1.0, prehandover-template v1.7.0, wave-reconciliation-checklist v1.0.0, domain-flag-index v1.0.0) |
 
 ---
 
