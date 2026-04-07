@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "last_updated": "2026-04-06",
-    "total_canons": 158,
+    "total_canons": 159,
     "generation_timestamp": "2026-04-05T11:47:33Z",
     "canons": [
         {
@@ -1741,6 +1741,17 @@
             "path": "governance/templates/UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md",
             "layer_down_status": "PUBLIC_API",
             "file_hash_sha256": "53971ed0cb9fda0bd40b7b6cc519449e232c753a4c3b4dabb5affd02dff4179f"
+        },
+        {
+            "filename": "PRE_BUILD_STAGE_MODEL_CANON.md",
+            "version": "1.0.0",
+            "file_hash": "599696b5e8eb",
+            "effective_date": "2026-04-05",
+            "description": "This canon defines the canonical 12-stage pre-build sequence that all Maturion modules must follow before implementation begins.",
+            "type": "canon",
+            "path": "governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md",
+            "layer_down_status": "PUBLIC_API",
+            "file_hash_sha256": "599696b5e8eb09404a673c3b4f591206c0164dbcc3f10163fa75fed3e9acf4a9"
         }
     ]
 }
