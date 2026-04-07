@@ -1,9 +1,9 @@
 # IAA Trigger Table
 
 **Agent**: independent-assurance-agent
-**Version**: 2.1.0
+**Version**: 2.2.0
 **Status**: ACTIVE
-**Last Updated**: 2026-03-02
+**Last Updated**: 2026-04-07
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
 
 ---
@@ -28,6 +28,8 @@ Default: MANDATORY INVOCATION when in doubt.
 | AAWP_MAT | YES — MANDATORY | PR labelled `aawp-deliverable` or `mat-deliverable`; files match AAWP/MAT path patterns (`modules/mat/`, `packages/ai-centre/`, AAWP architecture files) | Evidence bundle completeness required. |
 | AGENT_INTEGRITY | YES — MANDATORY | Any `governance/quality/agent-integrity/` file created or modified | CS2-only update authority. Any non-CS2 modification → auto-REJECTION-PACKAGE. |
 | KNOWLEDGE_GOVERNANCE | YES — MANDATORY | Any `.agent-workspace/*/knowledge/` file created or modified; any Tier 2 knowledge index, overlay, trigger table, checklist, or FAIL-ONLY-ONCE registry updated | Covers all IAA and agent Tier 2 knowledge patches. Evidence bundle + PREHANDOVER ceremony required (FAIL-ONLY-ONCE A-015). |
+| PRE_BUILD_STAGE | YES — MANDATORY | Any pre-build stage artifact created or modified: App Description, UX Workflow & Wiring Spec, FRS, TRS, Architecture, QA-to-Red, PBFAG gate report, Implementation Plan, Builder Checklist, IAA Pre-Brief, Builder Appointment; any file under `modules/*/pre-build/`, `docs/governance/*_DESCRIPTION.md`, `docs/governance/*_FRS*.md`, `docs/governance/*_TRS*.md`, `docs/governance/*_ARCHITECTURE*.md`; any wave tagged `pre-build-stage` | Pre-build stage sequence compliance required per `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0. IAA applies PRE_BUILD_STAGE overlay (OVL-PBG-010–016). Stage skip or reorder without CS2 approval = REJECTION-PACKAGE. |
+| LIAISON_ADMIN | YES — MANDATORY | Any `.agent-workspace/governance-liaison-amc/` file created or modified; any layer-down execution report, ripple inbox entry, drift detection report, or sync state update under `.agent-admin/governance/`; any wave delivering governance liaison administration artifacts | Governance liaison admin operations (layer-down, ripple processing, drift correction) require IAA assurance. Evidence bundle + PREHANDOVER ceremony required. |
 | MIXED | YES — MANDATORY | PR contains both triggering and non-triggering artifacts | Ambiguity rule applies. Any triggering artifact activates IAA for the whole PR. |
 | EXEMPT | NO — if unambiguously non-triggering | Pure doc-only changes outside governance/canon; parking station updates (labelled `parking-station`); session memory files only; README changes with no agent/governance/CI content; admin/housekeeping (labelled `admin` or `housekeeping`) | Must be unambiguously non-triggering. If any doubt → apply AMBIGUITY RULE. |
 | AMBIGUOUS | YES — MANDATORY | Classification unclear; mixed signals; trigger table file is missing | FAIL-ONLY-ONCE A-003: ambiguity resolves to mandatory invocation. |
@@ -68,7 +70,17 @@ Any agent claiming class exemption → REJECTION-PACKAGE citing FAIL-ONLY-ONCE A
 6. Does PR contain any .agent-workspace/*/knowledge/ file changes?
    → YES: Category = KNOWLEDGE_GOVERNANCE. IAA = MANDATORY.
 
-7. Is the PR clearly and unambiguously doc-only, parking-station, or admin?
+7. Does PR contain any pre-build stage artifacts (App Description, UX Workflow & Wiring Spec,
+   FRS, TRS, Architecture, QA-to-Red suite, PBFAG gate report, Implementation Plan,
+   Builder Checklist, IAA Pre-Brief artifact, Builder Appointment) or is the wave tagged
+   `pre-build-stage`?
+   → YES: Category = PRE_BUILD_STAGE. IAA = MANDATORY.
+
+8. Does PR contain any governance liaison admin artifacts (.agent-workspace/governance-liaison-amc/,
+   layer-down reports, ripple inbox entries, sync state updates)?
+   → YES: Category = LIAISON_ADMIN. IAA = MANDATORY.
+
+9. Is the PR clearly and unambiguously doc-only, parking-station, or admin?
    → YES: Category = EXEMPT. IAA = NOT REQUIRED.
    → UNCERTAIN: Apply AMBIGUITY RULE → Category = AMBIGUOUS. IAA = MANDATORY.
 ```
@@ -82,6 +94,7 @@ Any agent claiming class exemption → REJECTION-PACKAGE citing FAIL-ONLY-ONCE A
 | 1.0.0 | 2026-02-25 | Initial STUB (placeholder from canon) |
 | 2.0.0 | 2026-02-28 | Fully populated from INDEPENDENT_ASSURANCE_AGENT_CANON.md; AGENT_INTEGRITY category added; classification decision flow added; STUB status removed |
 | 2.1.0 | 2026-03-02 | KNOWLEDGE_GOVERNANCE trigger category added; classification decision flow updated with step 6 for knowledge governance path (maturion-isms#IAA-TIER2) |
+| 2.2.0 | 2026-04-07 | PRE_BUILD_STAGE trigger category added — enforces 12-stage pre-build sequence compliance per `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 (ISMS PS-E); LIAISON_ADMIN trigger category added — governance liaison admin operations require IAA assurance (ISMS PS-F); classification decision flow updated with steps 7 and 8 |
 
 ---
 

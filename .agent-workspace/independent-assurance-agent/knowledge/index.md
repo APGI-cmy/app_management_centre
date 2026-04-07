@@ -2,8 +2,8 @@
 
 **Agent**: independent-assurance-agent
 **Contract Version**: 2.0.0
-**Knowledge Version**: 3.1.0
-**Last Updated**: 2026-03-18
+**Knowledge Version**: 3.2.0
+**Last Updated**: 2026-04-07
 **Architecture**: `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md`
 
 ---
@@ -12,11 +12,11 @@
 
 | File | Purpose | Version | Status |
 |------|---------|---------|--------|
-| `index.md` (this file) | Knowledge entry point and version reference | 2.9.0 | PRESENT |
+| `index.md` (this file) | Knowledge entry point and version reference | 3.2.0 | PRESENT |
 | `FAIL-ONLY-ONCE.md` | Permanent rules recording governance failures IAA must never repeat | 2.5.0 | PRESENT — Rules A-001 through A-032 active (A-032: Schema Column Compliance Check — IAA must read migration DDL directly for all PRs containing INSERT/SELECT operations; INC-ALCF-001 self-governance closure) |
-| `iaa-core-invariants-checklist.md` | Core checks applied to every IAA invocation regardless of category | 2.6.0 | ACTIVE — CORE-001 to CORE-022; CORE-016 PENDING carve-out updated per A-029 |
-| `iaa-trigger-table.md` | PR category classification table — when IAA activates and when it is exempt | 2.1.0 | ACTIVE — KNOWLEDGE_GOVERNANCE trigger category added |
-| `iaa-category-overlays.md` | Per-category additional checks (AGENT_CONTRACT, CANON_GOVERNANCE, CI_WORKFLOW, AAWP_MAT, KNOWLEDGE_GOVERNANCE, PRE_BRIEF_ASSURANCE) | 3.6.0 | ACTIVE — OVL-CI-005 Inherent Limitation Exception (v3.3.0, S-033); INJECTION_AUDIT_TRAIL renamed to PRE_BRIEF_ASSURANCE, artifact-existence-only OVL-INJ-001 (v3.4.0, issue #1061); Orientation Mandate scope note + OVL-KG-ADM-002 sharpened + timestamp carve-out (v3.6.0) |
+| `iaa-core-invariants-checklist.md` | Core checks applied to every IAA invocation regardless of category | 3.0.0 | ACTIVE — CORE-001 to CORE-024; CORE-024 pre-build stage sequence compliance (PS-E); CORE-016 PENDING carve-out updated per A-029 |
+| `iaa-trigger-table.md` | PR category classification table — when IAA activates and when it is exempt | 2.2.0 | ACTIVE — PRE_BUILD_STAGE trigger category added (PS-E); LIAISON_ADMIN trigger category added (PS-F); KNOWLEDGE_GOVERNANCE trigger category present |
+| `iaa-category-overlays.md` | Per-category additional checks (AGENT_CONTRACT, CANON_GOVERNANCE, CI_WORKFLOW, AAWP_MAT, KNOWLEDGE_GOVERNANCE, PRE_BRIEF_ASSURANCE, PRE_BUILD_STAGE, LIAISON_ADMIN) | 4.0.0 | ACTIVE — PRE_BUILD_STAGE overlay OVL-PBG-010–016 added (PS-E); LIAISON_ADMIN overlay OVL-LA-001–005 added (PS-F); OVL-CI-005 Inherent Limitation Exception (v3.3.0, S-033); PRE_BRIEF_ASSURANCE trigger updated to include PRE_BUILD_STAGE |
 | `session-memory-template.md` | Standard session memory template for IAA invocations | 1.0.0 | PRESENT |
 | `IAA_ZERO_SEVERITY_TOLERANCE.md` | Tier 2 operational note for Zero-Severity-Tolerance Rule — prohibited language table, machine-readable logic, exception procedure | 1.0.0 | ACTIVE |
 | `IAA_AGENT_CONTRACT_AUDIT_STANDARD.md` | **AGENT_CONTRACT Audit Standard** — mandatory audit steps, pre-approval doctrine, protected components checklist, tier placement discipline, decision matrix for all agent contract PRs reviewed by IAA | 1.0.0 | ACTIVE — Load at Step 2.4 when PR category is AGENT_CONTRACT |
@@ -47,6 +47,8 @@
 | CI / workflow changes | YES | |
 | AAWP / MAT deliverables | YES | |
 | Tier 2 knowledge file changes | YES — MANDATORY | KNOWLEDGE_GOVERNANCE category. Evidence bundle + PREHANDOVER ceremony required (A-015). |
+| Pre-build stage artifact delivered (App Description, FRS, TRS, Architecture, etc.) | YES — MANDATORY | PRE_BUILD_STAGE category. 12-stage sequence compliance per `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0. OVL-PBG-010–016 applies. |
+| Governance liaison admin operation (layer-down, ripple processing, drift correction) | YES — MANDATORY | LIAISON_ADMIN category. OVL-LA-001–005 applies. |
 | Doc-only or parking station updates | NO | Must be unambiguously doc-only |
 | Session memory files only | NO | |
 | Ambiguous / unclear category | YES — MANDATORY | FAIL-ONLY-ONCE A-003: ambiguity resolves to mandatory |
