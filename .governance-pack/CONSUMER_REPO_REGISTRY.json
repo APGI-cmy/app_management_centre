@@ -42,6 +42,16 @@
         "governance_layer_down"
       ],
       "description": "R_Roster App (governance coupling test repo)"
+    },
+    {
+      "repository": "APGI-cmy/app_management_centre",
+      "enabled": true,
+      "governance_liaison": "APGI-cmy",
+      "governance_liaison_agent": "governance-liaison-amc-agent",
+      "layer_down_events": [
+        "governance_layer_down"
+      ],
+      "description": "App Management Centre (AMC) — Maturion ISMS module host"
     }
   ]
 }
