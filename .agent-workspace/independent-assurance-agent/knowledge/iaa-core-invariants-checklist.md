@@ -1,9 +1,9 @@
 # IAA Core Invariants Checklist
 
 **Agent**: independent-assurance-agent
-**Version**: 2.9.0
+**Version**: 3.0.0
 **Status**: ACTIVE
-**Last Updated**: 2026-03-13
+**Last Updated**: 2026-04-07
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
 
 ---
@@ -80,6 +80,7 @@ All checks below are applied on every qualifying PR invocation.
 | CORE-021 | Zero-severity-tolerance | Any finding identified during the assurance review — regardless of perceived severity, wording, or delivery size — MUST produce REJECTION-PACKAGE. Prohibited: using terms "minor", "trivial", "cosmetic", "small", "negligible", "low-impact", "soft-pass", or "acceptable" to characterise a finding as passable. The only valid exception is an explicit written CS2 waiver quoted verbatim in the output. See `IAA_ZERO_SEVERITY_TOLERANCE.md` for full operational guidance. | ALL | REJECTION-PACKAGE |
 | CORE-022 | Secret field naming compliance | Agent contract files must use `secret_env_var:` — never `secret:` — in `governance.execution_identity` blocks and any YAML block. Scan the PR diff for the pattern `secret: "` in any `.github/agents/*.md` file (excluding `_archive/`). If found: FAIL. Enforces FAIL-ONLY-ONCE A-024. Prevents CI secret scanner false positives that block all gate checks. | AGENT_CONTRACT | REJECTION-PACKAGE |
 | CORE-023 | Workflow integrity ripple check | If the PR touches any file that is referenced by, executed by, or depended upon by `.github/workflows/*.yml` files (including test runners, build scripts, Edge Function paths, schema migration steps, or any path listed in workflow `paths:` triggers), IAA must verify: (a) all affected workflow files remain syntactically valid after the delivered changes, (b) any changed file paths are reflected in workflow `paths:` filters if applicable, (c) no workflow job is silently broken by the delivered changes. **Scope trigger**: applies when the PR diff includes changes to test files, frontend source, Edge Function source, schema migrations, build configuration, or any file type that workflows invoke or reference. If the PR does NOT touch any workflow-adjacent file, IAA records `CORE-023: N/A — no workflow-adjacent changes detected` and proceeds. See **CORE-023 Detail** below. | ALL | REJECTION-PACKAGE |
+| CORE-024 | Pre-build stage sequence compliance | When the PR category is `PRE_BUILD_STAGE` (any pre-build stage artifact delivered or referenced), IAA must verify that the 12-stage sequence defined in `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 §3.1 has been followed. Specific checks: (a) the declared stage number is present and valid, (b) all predecessor stages are confirmed complete, (c) no stage has been skipped or reordered without a documented CS2 waiver. If the PR is NOT `PRE_BUILD_STAGE` category, IAA records `CORE-024: N/A — not a PRE_BUILD_STAGE PR`. **Authority**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 §6.2. See **PRE_BUILD_STAGE Overlay** (OVL-PBG-010–016) for detailed stage-level checks. | PRE_BUILD_STAGE | REJECTION-PACKAGE |
 
 ---
 
@@ -240,6 +241,7 @@ This explicit N/A record is required. Silence is not acceptable.
 | 2.7.0 | 2026-03-04 | **BREAKING FIX**: CORE-016, CORE-018, CORE-019 fully rewritten to match §4.3b architecture (A-029). Verbatim response requirement moved from PREHANDOVER proof to dedicated token file. First Invocation Exception added to CORE-019 to break the circular dependency loop. Architecture Alignment Note added at top of file. CORE-007 carve-out updated for expected reference format. |
 | 2.8.0 | 2026-03-04 | Orientation Mandate section added — 90/10 rule codified in checklist; ceremony checks explicitly framed as 10% layer; substantive review as 90% primary obligation (CS2 directive) |
 | 2.9.0 | 2026-03-13 | CORE-023 added: Workflow integrity ripple check — IAA must verify CI/CD workflows are not silently broken by workflow-adjacent file changes; scope trigger table, PASS/FAIL conditions, and N/A recording requirement defined (CS2 directive 2026-03-13) |
+| 3.0.0 | 2026-04-07 | CORE-024 added: Pre-build stage sequence compliance — for PRE_BUILD_STAGE PRs, IAA must verify 12-stage sequence per `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; links to PRE_BUILD_STAGE overlay (OVL-PBG-010–016); ISMS PS-E wave sync |
 
 ---
 
