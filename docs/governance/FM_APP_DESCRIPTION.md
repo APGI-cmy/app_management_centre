@@ -1,11 +1,11 @@
 # Foreman Office App — Authoritative Application Description
 
-**Version:** 2.0  
+**Version:** 2.1  
 **Status:** Authoritative (Phase 4.1 Confirmed)  
 **Owner:** Johan Ras  
 **Product:** Maturion – Foreman Office (FM Office)  
 **Canonical Location:** `docs/governance/FM_APP_DESCRIPTION.md`  
-**Last Updated:** 2025-12-31  
+**Last Updated:** 2026-04-07  
 **Architecture Reference:** `docs/architecture/TRUE_NORTH_FM_ARCHITECTURE.md`
 
 ---
