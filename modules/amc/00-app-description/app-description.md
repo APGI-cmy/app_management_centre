@@ -1,21 +1,24 @@
 # AMC App Description — Stage 1
 
-## Document Header
+## Status Header
 
 | Field | Value |
 |---|---|
 | **Document Title** | AMC App Description |
 | **Application Name** | App Management Centre (AMC) |
-| **Lineage** | Successor to the Foreman App / Foreman Office App |
 | **Document Type** | Stage 1 App Description |
+| **Version** | 1.0 |
 | **Status** | Consolidated — Pending CS2 Approval |
-| **Authority** | Johan Ras (CS2) |
+| **Owner** | Johan Ras (CS2) |
+| **Approval Date** | Pending CS2 approval |
+| **Last Updated** | 2026-04-08 |
+| **Canonical Location** | `modules/amc/00-app-description/app-description.md` |
+| **Policy Authority** | `governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md §5.1` |
 | **Primary AI Executive** | Maturion |
 | **Supervisory Orchestration Layer** | Foreman |
 | **Stage** | Stage 1 of 12 — App Description |
 | **Purpose** | Single authoritative Stage 1 source artifact for FRS, TRS, Architecture, and build planning derivation |
-| **Consolidation Date** | 2026-04-08 |
-| **Consolidated From** | Hardened section drafts §1–§28 |
+| **Lineage** | Successor to the Foreman App / Foreman Office App |
 
 ---
 
@@ -224,18 +227,22 @@ For AMC, this is especially important because the application’s most important
 These must be established in the correct order.
 
 ### Normative Lifecycle Order
-AMC shall follow the following minimum lifecycle order:
+AMC shall follow the full canonical 12-stage lifecycle order:
 
 1. **App Description**
-2. **Functional Requirements Specification (FRS)**
-3. **Technical Requirements Specification (TRS)**
-4. **Architecture**
-5. **Detailed Design and Build Planning**
-6. **Implementation / Build Execution**
-7. **Verification and Assurance**
-8. **Deployment and Operationalization**
+2. **UX Workflow & Wiring Spec**
+3. **Functional Requirements Specification (FRS)**
+4. **Technical Requirements Specification (TRS)**
+5. **Architecture**
+6. **QA-to-Red**
+7. **PBFAG**
+8. **Implementation Plan**
+9. **Builder Checklist**
+10. **IAA Pre-Brief**
+11. **Builder Appointment**
+12. **Build**
 
-This order is normative. It is not a loose recommendation.
+This order is normative. It is not a loose recommendation. No stage may be skipped, collapsed, or reordered without explicit CS2 approval.
 
 ### Stage 1 — App Description
 The App Description stage defines the constitutional product truth of AMC.
@@ -459,15 +466,16 @@ No downstream artifact may:
 If downstream work discovers that Stage 1 is incomplete or contradictory, the correct response is to amend Stage 1 through governance, not to improvise product truth elsewhere.
 
 ### Authoritative Derivation Order
-The minimum authoritative derivation order for AMC shall be:
+The authoritative derivation order for AMC shall be:
 
 1. **App Description**
-2. **Functional Requirements Specification (FRS)**
-3. **Technical Requirements Specification (TRS)**
-4. **Architecture**
-5. **Detailed design and build planning artifacts**
-6. **Implementation artifacts**
-7. **Verification, assurance, and operationalization artifacts**
+2. **UX Workflow & Wiring Spec** (derived from App Description)
+3. **Functional Requirements Specification (FRS)** (derived from App Description and UX Workflow & Wiring Spec)
+4. **Technical Requirements Specification (TRS)** (derived from FRS and App Description technology baseline)
+5. **Architecture** (derived from FRS, TRS, and App Description)
+6. **Detailed design and build planning artifacts**
+7. **Implementation artifacts**
+8. **Verification, assurance, and operationalization artifacts**
 
 This order is normative. Later artifacts may not leapfrog earlier unresolved truth or treat later-stage assumptions as if they were equivalent to approved upstream intent.
 
@@ -651,6 +659,23 @@ Any derivation process that allows later artifacts to redefine AMC’s role, aut
 
 
 ## §7 — Technology Stack (§AD-03)
+
+> **Rule**: TRS is the downstream authoritative realization of this baseline. Any discrepancy between this section and TRS is a blocking defect that must be resolved before Architecture commences.
+
+### Authoritative Technology Stack
+
+| Layer | Technology | Notes |
+|-------|------------|-------|
+| **Frontend Framework** | React 18 + Vite | Executive dashboard and mobile-capable presentation layer |
+| **Language** | TypeScript 5.x | Type-safe authority-aware frontend and edge code |
+| **State Management** | React Context / Zustand | Auth state and UI state — see §AD-20 |
+| **Database** | Supabase (PostgreSQL) | Tenant-isolated relational persistence |
+| **Auth** | Supabase Auth | JWT-based; identity separation required — see §AD-14 |
+| **AI Integration** | AIMC Gateway | Direct provider calls prohibited — see §AD-14 |
+| **Edge Functions** | Supabase Edge Functions | Serverless orchestration boundary — see §AD-15 |
+| **Deployment** | Vercel | Governed deployment environment |
+| **CI/CD** | GitHub Actions | Foreman-governed build pipeline |
+| **Notification/UX** | react-hot-toast | Executive feedback surface — see §AD-19 |
 
 AMC shall declare a governed technology-stack baseline that is strong enough to constrain downstream design, but disciplined enough not to pretend that Stage 1 is the final architecture.
 
