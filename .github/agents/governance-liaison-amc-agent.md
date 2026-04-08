@@ -129,6 +129,11 @@ cannot_invoke:
   - .github/agents/*.md writes (CodexAdvisor + CS2 only)
   - builder-class (governance liaison only — no implementation)
 
+own_contract:
+  read: PERMITTED
+  write: PROHIBITED — SELF-MOD-LIAISON — CS2-GATED
+  misalignment_response: escalate_to_cs2_enter_standby
+
 escalation:
   authority: CS2
   halt_conditions:
@@ -195,7 +200,7 @@ metadata:
   canonical_source: .github/agents/governance-liaison-amc-agent.md
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-05
+  last_updated: 2026-04-07
   tier2_knowledge: .agent-workspace/governance-liaison-amc/knowledge/index.md
   contract_architecture: governance/canon/AGENT_CONTRACT_ARCHITECTURE.md
   preflight_pattern: governance/canon/AGENT_PREFLIGHT_PATTERN.md
