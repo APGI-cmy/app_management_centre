@@ -5,40 +5,35 @@ name: Copilot Setup Steps
 # missing dist/ files (MODULE_NOT_FOUND) surface as a clear Node stack trace
 # rather than the generic "MCP error -32000: Connection closed".
 #
-# Token policy: REQ-TU-001 / REQ-TU-002 (GOVERNANCE_TOKEN_USAGE_REQUIREMENTS.md)
-# All write operations use secrets.MATURION_BOT_TOKEN. GITHUB_TOKEN is prohibited
-# for any step that mutates repository state.
+# Copilot session mode: COMMENT_ONLY. No write-back. No push.
+# Read-only checkout is sufficient. All output delivered as PR comments or artifacts.
+# For bot write operations (git push, mutations), use copilot-bot-automation.yml.
 
 on:
   workflow_dispatch: {}
 
-# REQ-TU-004: Explicit write permissions required for agent push operations.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
     steps:
-      # REQ-TU-003: Token identity evidence — must appear before any write operation.
-      - name: Token identity evidence
-        run: |
-          echo "EXEC_IDENTITY: MATURION_BOT_TOKEN in use for write operations"
-
-      # REQ-TU-001: Use MATURION_BOT_TOKEN for checkout so that subsequent git push
-      # operations (agent write-back during the Copilot session) are authenticated
-      # with the correct token and are not blocked by GITHUB_TOKEN scope restrictions.
-      # Falls back to github.token when MATURION_BOT_TOKEN is not available (e.g.
-      # Copilot environment where repository secrets may not be injected).
+      # Read-only checkout — no token override needed. Default GITHUB_TOKEN is sufficient.
       - name: Checkout repository
         uses: actions/checkout@v5
-        with:
-          token: ${{ secrets.MATURION_BOT_TOKEN || github.token }}
 
-      - name: Configure git identity for bot operations
+      - name: Declare Copilot session mode
         run: |
-          git config --global user.name "Maturion Bot"
-          git config --global user.email "bot@maturion.ai"
+          echo "COPILOT_SESSION_MODE=COMMENT_ONLY" >> "$GITHUB_ENV"
+          echo "PUSH_DISABLED_INTENTIONAL=true" >> "$GITHUB_ENV"
+          echo "OUTPUT_MODE=PR_COMMENT_OR_ARTIFACT" >> "$GITHUB_ENV"
+          echo "--- Copilot Session Mode ---"
+          echo "COPILOT_SESSION_MODE=COMMENT_ONLY"
+          echo "PUSH_DISABLED_INTENTIONAL=true"
+          echo "OUTPUT_MODE=PR_COMMENT_OR_ARTIFACT"
+          echo "Copilot operates as comment-only. No push. No git write-back."
+          echo "All output delivered as PR comments or artifacts."
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
