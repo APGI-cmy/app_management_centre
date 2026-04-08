@@ -60,6 +60,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | Architecture Decision Records | `modules/amc/04-architecture/architecture-decision-records.md` | ⬜ Placeholder | Not started |
 | Architecture Completeness Checklist | `modules/amc/04-architecture/architecture-completeness-checklist.md` | ⬜ Placeholder | Not started |
 
+> **Note — Pre-existing FM-era architecture material**: `docs/architecture/` contains architecture documents produced for the FM Office app during the FM-origin era. These artifacts are classified as **FM-era / pre-12-stage reference material** and are preserved for historical context and traceability only. They have **not** been adopted as the canonical Stage 5 architecture for the new `modules/amc/` lifecycle. Stage 5 therefore remains **Not Started**. Any adoption or migration of those artifacts into the AMC 12-stage lifecycle requires explicit classification, a migration/adoption note, a tracker update, and CS2-approved lifecycle interpretation.
+
 ---
 
 ## Stage 6 — QA-to-Red

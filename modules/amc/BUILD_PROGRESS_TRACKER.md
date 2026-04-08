@@ -18,7 +18,7 @@
 | 2 | UX Workflow & Wiring Spec | ⬜ Not Started | Awaiting Stage 1 authority clarification and migration completion. |
 | 3 | FRS | ⬜ Not Started | |
 | 4 | TRS | ⬜ Not Started | |
-| 5 | Architecture | ⬜ Not Started | |
+| 5 | Architecture | ⬜ Not Started | Pre-existing FM-era architecture material exists in `docs/architecture/` but is classified as historical/reference only — not active Stage 5 lifecycle input. See Stage Detail below. |
 | 6 | QA-to-Red | ⬜ Not Started | |
 | 7 | PBFAG | ⬜ Not Started | |
 | 8 | Implementation Plan | ⬜ Not Started | |
@@ -47,7 +47,12 @@
 **Prerequisites**: Stage 1 complete (App Description authority resolved)  
 **Artifacts to Create**: `modules/amc/01-ux-workflow-wiring-spec/`
 
-### Stages 3–11
+### Stage 5 — Architecture
+
+**Status**: ⬜ Not Started  
+**Note — Pre-existing FM-era material**: The `docs/architecture/` directory contains architecture documents produced for the FM Office app during the FM-origin era. These artifacts are classified as historical/reference material for the purposes of the new `modules/amc/` 12-stage lifecycle. Their existence does **not** mean Stage 5 is complete or in progress. Stage 5 (Architecture) remains Not Started until CS2 explicitly adopts or commissions architecture artifacts through the canonical lifecycle sequence, which would require a classification decision, migration/adoption note, and tracker update.
+
+### Stages 3–4 and 6–11
 
 **Status**: ⬜ Not Started  
 **Prerequisites**: Each stage requires the prior stage to be complete per canonical sequence dependency chain.

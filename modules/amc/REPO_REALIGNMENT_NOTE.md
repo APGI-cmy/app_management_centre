@@ -24,7 +24,6 @@ This document records the governance-alignment decisions made when establishing 
 |----------|----------|--------|-------|
 | FM App Description | `docs/governance/FM_APP_DESCRIPTION.md` | **Active Canonical — Temporary** | v2.1. This is the current authoritative Stage 1 source. Remains active until migration to `modules/amc/00-app-description/app-description.md` is completed and CS2-approved. |
 | AMC Governance Canon | `governance/canon/` | Active | Includes `PRE_BUILD_STAGE_MODEL_CANON.md` and supporting canons. |
-| FM Office Architecture | `docs/architecture/` | **Pending Classification** | Architecture documents produced for the FM Office app. These originated in the FM-origin era; their active vs. legacy status requires a CS2 decision before any content is moved or reclassified. |
 
 ---
 
@@ -39,7 +38,7 @@ Legacy artifacts identified:
 | Artifact | Original Location | Notes |
 |----------|-------------------|-------|
 | FM App Description (root copy) | `APP_DESCRIPTION.md` | Convenience reference only — points to `docs/governance/FM_APP_DESCRIPTION.md`. Preserved for navigational continuity. |
-| FM Architecture documents | `docs/architecture/` | Architecture artifacts from the FM Office era. Pending classification decision — see §1 note above. Preserved for traceability until CS2 determination is made. |
+| FM Architecture documents | `docs/architecture/` | Architecture artifacts from the FM Office era. Classified as FM-era reference material — see §3 below. These artifacts do **not** constitute an active or in-progress Stage 5 in the new AMC 12-stage lifecycle. Preserved for traceability. |
 
 > **Note**: No files have been moved to `_legacy/foreman-app-origin/` in this wave. This directory has been created as the designated holding location for future migrations. Silent deletion is prohibited. Provenance must be preserved when artifacts are moved here.
 
@@ -50,6 +49,7 @@ Legacy artifacts identified:
 | Artifact | Location | Notes |
 |----------|----------|-------|
 | `APP_DESCRIPTION.md` (root) | `APP_DESCRIPTION.md` | Reference pointer only — canonical is `docs/governance/FM_APP_DESCRIPTION.md` |
+| FM Office Architecture | `docs/architecture/` | FM-era / pre-12-stage reference material. These architecture documents were produced for the FM Office app during the FM-origin era. They are preserved for historical context and traceability, but they are **not** active Stage 5 lifecycle input for the new `modules/amc/` lifecycle. Stage 5 (Architecture) remains **Not Started** until CS2 explicitly adopts, migrates, or commissions new architecture artifacts through the canonical 12-stage sequence. |
 | ISMS-level module tracker | `maturion-isms` repo | AMC module status is tracked there; this repo's `BUILD_PROGRESS_TRACKER.md` is the repo-local authority |
 
 ---
