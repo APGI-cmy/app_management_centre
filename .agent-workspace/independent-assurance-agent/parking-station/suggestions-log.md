@@ -38,3 +38,4 @@
 | 2026-04-08 | independent-assurance-agent | session-024 | Phase 4 | Liaison layer-down must update governance/CANON_INVENTORY.json alongside GOVERNANCE_ALIGNMENT_INVENTORY.json — both are required | session-024-20260408.md |
 | 2026-04-08 | independent-assurance-agent | session-026 | Phase 3 | governance-liaison-amc layer-down checklist must include ripple archiving (move processed ripple-run-*.json from inbox to archive) as an explicit numbered step before IAA invocation | session-026-20260408.md |
 | 2026-04-08 | independent-assurance-agent | session-026 | Phase 4 | Consider adding FAIL-GL-003 to GL FAIL-ONLY-ONCE.md: processed ripple events MUST be moved to ripple-archive before IAA invocation — if this failure recurs | session-026-20260408.md |
+| 2026-04-08 | independent-assurance-agent | session-027 | Phase 4 | Add CI check: validate ripple-inbox empty after layer-down commit to prevent OVL-LA-003 re-audit cycles | session-027-20260408.md |
