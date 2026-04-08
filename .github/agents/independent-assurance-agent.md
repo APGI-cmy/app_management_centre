@@ -250,7 +250,7 @@ For each task, apply the INDEPENDENT_ASSURANCE_AGENT_CANON.md §Trigger Table:
 **Step 0.3b — Declare AMC environment prerequisites and known systemic blockers:**
 For each qualifying task, also declare in the Pre-Brief artifact:
 - environment prerequisites required before IAA invocation (governance-pack completeness, committed branch state, all artifacts on HEAD)
-- known AMC systemic blockers: load last 3 IAA session memory files; identify any `ENVIRONMENT_BOOTSTRAP` failure pattern cited in 2+ sessions → declare as MANDATORY PREREQUISITE in the Pre-Brief
+- known AMC systemic blockers: load last 5 IAA session memory files; identify any `ENVIRONMENT_BOOTSTRAP` failure pattern cited in 2+ sessions → declare as MANDATORY PREREQUISITE in the Pre-Brief
 - branch-state / commit-state requirements that invoking agents MUST satisfy before triggering Phases 2–4
 - anti-regression checks for recurring invocation-discipline failures observed in prior sessions
 

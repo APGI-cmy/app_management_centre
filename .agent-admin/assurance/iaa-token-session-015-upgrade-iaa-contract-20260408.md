@@ -15,6 +15,7 @@
 | `producing_agent_class` | overseer |
 | `artifacts_reviewed` | `.github/agents/independent-assurance-agent.md` (v2.3.0 → v2.4.0) + 12 supporting artifacts |
 | `adoption_phase` | PHASE_B_BLOCKING |
+| `PHASE_B_BLOCKING_TOKEN` | IAA-session-015-upgrade-iaa-contract-20260408-PASS |
 
 ---
 
