@@ -21,7 +21,7 @@
 > This document remains the authoritative Stage 1 source until a CS2-approved migration decision is executed. The intended future canonical location is `modules/amc/00-app-description/app-description.md`.
 >
 > **Pending decision options**:
-> - **Option A**: Migrate content here to `modules/amc/00-app-description/app-description.md` and mark this file as legacy
+> - **Option A**: Migrate content from this file to `modules/amc/00-app-description/app-description.md` and mark this file as legacy
 > - **Option B**: Retain this file as permanent canonical; establish `modules/amc/00-app-description/app-description.md` as a pointer
 >
 > Until CS2 makes and executes this decision, **do not treat either option as resolved**. This file is the active authoritative source.

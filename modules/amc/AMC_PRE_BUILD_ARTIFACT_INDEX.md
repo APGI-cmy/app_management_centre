@@ -19,9 +19,9 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 |----------|----------|--------|-------|
 | FM App Description (authoritative) | `docs/governance/FM_APP_DESCRIPTION.md` | ✅ Active Canonical | v2.1, Phase 4.1 Confirmed. Current Stage 1 authority. |
 | App Description (root pointer) | `APP_DESCRIPTION.md` | 📌 Reference Only | Convenience pointer to canonical location |
-| App Description (stage location) | `modules/amc/00-app-description/app-description.md` | ⬜ Placeholder | Future canonical location — pending migration decision |
-| AMC Role Authority & Operating Model | `modules/amc/00-app-description/amc-role-authority-and-operating-model.md` | ⬜ Placeholder | Stage 1 companion artifact |
-| App Description Approval | `modules/amc/00-app-description/app-description-approval.md` | ⬜ Placeholder | Formal Stage 1 approval record |
+| App Description (stage location) | `modules/amc/00-app-description/app-description.md` | ⬜ Pending | Future canonical location — pending migration decision |
+| AMC Role Authority & Operating Model | `modules/amc/00-app-description/amc-role-authority-and-operating-model.md` | ⬜ Pending | Stage 1 companion artifact |
+| App Description Approval | `modules/amc/00-app-description/app-description-approval.md` | ⬜ Pending | Formal Stage 1 approval record |
 
 ---
 

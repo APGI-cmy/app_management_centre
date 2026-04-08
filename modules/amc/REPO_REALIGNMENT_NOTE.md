@@ -24,7 +24,7 @@ This document records the governance-alignment decisions made when establishing 
 |----------|----------|--------|-------|
 | FM App Description | `docs/governance/FM_APP_DESCRIPTION.md` | **Active Canonical — Temporary** | v2.1. This is the current authoritative Stage 1 source. Remains active until migration to `modules/amc/00-app-description/app-description.md` is completed and CS2-approved. |
 | AMC Governance Canon | `governance/canon/` | Active | Includes `PRE_BUILD_STAGE_MODEL_CANON.md` and supporting canons. |
-| AMC Architecture | `docs/architecture/` | Active | Architecture documents for the FM Office app. |
+| FM Office Architecture | `docs/architecture/` | **Pending Classification** | Architecture documents produced for the FM Office app. These originated in the FM-origin era; their active vs. legacy status requires a CS2 decision before any content is moved or reclassified. |
 
 ---
 
@@ -39,7 +39,7 @@ Legacy artifacts identified:
 | Artifact | Original Location | Notes |
 |----------|-------------------|-------|
 | FM App Description (root copy) | `APP_DESCRIPTION.md` | Convenience reference only — points to `docs/governance/FM_APP_DESCRIPTION.md`. Preserved for navigational continuity. |
-| FM Architecture documents | `docs/architecture/` | Architecture artifacts from the FM Office era. Preserved for traceability. |
+| FM Architecture documents | `docs/architecture/` | Architecture artifacts from the FM Office era. Pending classification decision — see §1 note above. Preserved for traceability until CS2 determination is made. |
 
 > **Note**: No files have been moved to `_legacy/foreman-app-origin/` in this wave. This directory has been created as the designated holding location for future migrations. Silent deletion is prohibited. Provenance must be preserved when artifacts are moved here.
 
@@ -49,7 +49,7 @@ Legacy artifacts identified:
 
 | Artifact | Location | Notes |
 |----------|----------|-------|
-| `APP_DESCRIPTION.md` (root) | `./APP_DESCRIPTION.md` | Reference pointer only — canonical is `docs/governance/FM_APP_DESCRIPTION.md` |
+| `APP_DESCRIPTION.md` (root) | `APP_DESCRIPTION.md` | Reference pointer only — canonical is `docs/governance/FM_APP_DESCRIPTION.md` |
 | ISMS-level module tracker | `maturion-isms` repo | AMC module status is tracked there; this repo's `BUILD_PROGRESS_TRACKER.md` is the repo-local authority |
 
 ---
