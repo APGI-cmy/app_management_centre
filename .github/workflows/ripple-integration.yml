@@ -68,17 +68,31 @@ jobs:
           fi
           INBOX_FILE=".agent-admin/governance/ripple-inbox/ripple-${DISPATCH_ID}.json"
 
+          CANONICAL_COMMIT="${{ github.event.client_payload.canonical_commit }}"
+          CANONICAL_COMMIT="${CANONICAL_COMMIT:-unknown}"
+          INVENTORY_VERSION="${{ github.event.client_payload.inventory_version }}"
+          INVENTORY_VERSION="${INVENTORY_VERSION:-unknown}"
+          SENDER="${{ github.event.client_payload.sender }}"
+          SENDER="${SENDER:-unknown}"
+
+          # Serialize changed_paths as a JSON array (schema-compliant)
+          CHANGED_PATHS_RAW="${{ github.event.client_payload.changed_paths }}"
+          if [ -z "$CHANGED_PATHS_RAW" ]; then
+            CHANGED_PATHS_JSON="[]"
+          else
+            CHANGED_PATHS_JSON=$(printf '%s' "$CHANGED_PATHS_RAW" | jq -Rc 'split(",") | map(ltrimstr(" ") | rtrimstr(" ")) | map(select(length > 0))')
+          fi
+
           cat > "$INBOX_FILE" <<EOF
           {
             "dispatch_id": "$DISPATCH_ID",
             "event_type": "governance_ripple",
-            "canonical_commit": "${{ github.event.client_payload.canonical_commit }}",
-            "inventory_version": "${{ github.event.client_payload.inventory_version }}",
-            "changed_paths": "${{ github.event.client_payload.changed_paths }}",
-            "sender": "${{ github.event.client_payload.sender }}",
+            "canonical_commit": "$CANONICAL_COMMIT",
+            "inventory_version": "$INVENTORY_VERSION",
+            "changed_paths": $CHANGED_PATHS_JSON,
+            "sender": "$SENDER",
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "status": "processing",
-            "trigger": "${{ github.event_name }}"
+            "status": "processing"
           }
           EOF
 
@@ -102,11 +116,21 @@ jobs:
             exit $EXIT_CODE
           fi
 
-          # Detect whether the alignment produced changes
-          if git diff --quiet && git diff --cached --quiet; then
-            echo "drift_detected=false" >> $GITHUB_OUTPUT
+          # Use computed drift flags from sync_state.json to avoid false drift
+          # detection caused by sync_state.json timestamp rewrites on every run.
+          SYNC_STATE=".agent-admin/governance/sync_state.json"
+          if [ -f "$SYNC_STATE" ]; then
+            DRIFT=$(jq -r '.drift_detected // "false"' "$SYNC_STATE")
+            echo "drift_detected=$DRIFT" >> $GITHUB_OUTPUT
           else
-            echo "drift_detected=true" >> $GITHUB_OUTPUT
+            # Fallback: git diff excluding sync_state.json
+            CHANGED=$(git diff --name-only HEAD 2>/dev/null | grep -v '\.agent-admin/governance/sync_state\.json' | wc -l || true)
+            STAGED=$(git diff --cached --name-only 2>/dev/null | grep -v '\.agent-admin/governance/sync_state\.json' | wc -l || true)
+            if [ "$((CHANGED + STAGED))" -eq 0 ]; then
+              echo "drift_detected=false" >> $GITHUB_OUTPUT
+            else
+              echo "drift_detected=true" >> $GITHUB_OUTPUT
+            fi
           fi
 
       # ------------------------------------------------------------------
