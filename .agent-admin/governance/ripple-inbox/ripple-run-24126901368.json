@@ -1,0 +1,11 @@
+{
+  "dispatch_id": "run-24126901368",
+  "event_type": "governance_ripple",
+  "canonical_commit": "",
+  "inventory_version": "",
+  "changed_paths": "",
+  "sender": "",
+  "timestamp": "2026-04-08T08:56:39Z",
+  "status": "processing",
+  "trigger": "issues"
+}
