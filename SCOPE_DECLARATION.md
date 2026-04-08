@@ -12,6 +12,7 @@
 - `.agent-workspace/foreman-v2/memory/PREHANDOVER-session-021-wave-amc-stage1-consolidation-20260408.md` — Foreman PREHANDOVER proof
 - `.agent-workspace/foreman-v2/memory/session-021-20260408.md` — Foreman session memory
 - `.agent-workspace/independent-assurance-agent/memory/session-026-20260408.md` — IAA session-026 memory (REJECTION-PACKAGE — ENVIRONMENT_BOOTSTRAP failures only; substantive deliverable passed all OVL-PBG-010–016 checks)
+- `.gitignore` — added `.agent-workspace/*/working-contract.md` pattern (ephemeral session artifact guard)
 - `SCOPE_DECLARATION.md` — this file
 
 ## IAA Status
