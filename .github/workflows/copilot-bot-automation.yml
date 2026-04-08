@@ -1,0 +1,55 @@
+# Purpose: Bot automation workflow for operations that require write-back.
+# This is the CORRECT home for any step that mutates repository state.
+# Copilot comment-only sessions MUST NOT use this workflow.
+#
+# Token policy: REQ-TU-001 / REQ-TU-002 (GOVERNANCE_TOKEN_USAGE_REQUIREMENTS.md)
+# All write operations use secrets.MATURION_BOT_TOKEN — no github.token fallback.
+# If MATURION_BOT_TOKEN is unavailable, this workflow fails explicitly (fail-fast).
+#
+# Authority: CS2 (Johan Ras / @APGI-cmy) — Issue #1024
+
+name: Copilot Bot Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Bot operation to perform'
+        required: true
+        type: string
+
+# REQ-TU-004: Explicit write permissions required for bot write operations.
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bot-automation:
+    runs-on: ubuntu-latest
+    steps:
+      # REQ-TU-003: Token identity evidence — confirms write-capable identity in use.
+      - name: Verify bot token availability
+        run: |
+          if [ -z "${{ secrets.MATURION_BOT_TOKEN }}" ]; then
+            echo "ERROR: MATURION_BOT_TOKEN is unavailable. Bot automation requires an explicit write token."
+            echo "Do not fall back to github.token for mutation operations."
+            echo "Resolve: ensure MATURION_BOT_TOKEN is configured as a repository secret."
+            exit 1
+          fi
+          echo "EXEC_IDENTITY: MATURION_BOT_TOKEN confirmed available for write operations"
+
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.MATURION_BOT_TOKEN }}
+
+      - name: Configure git identity for bot operations
+        run: |
+          git config --global user.name "Maturion Bot"
+          git config --global user.email "bot@maturion.ai"
+
+      - name: Log operation request
+        run: |
+          echo "Bot operation requested: ${{ github.event.inputs.operation }}"
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Timestamp: $(date -u +%Y-%m-%dT%H:%M:%SZ)"

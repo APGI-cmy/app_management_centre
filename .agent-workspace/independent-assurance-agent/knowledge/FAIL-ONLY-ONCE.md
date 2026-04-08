@@ -1,8 +1,8 @@
 # IAA FAIL-ONLY-ONCE Registry
 
 **Agent**: independent-assurance-agent
-**Version**: 2.5.0
-**Last Updated**: 2026-03-08
+**Version**: 2.8.0
+**Last Updated**: 2026-04-08
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
 
 ---
@@ -614,6 +614,7 @@ For any PR that contains Supabase INSERT or SELECT operations on a named table:
 | 2.5.0 | 2026-03-08 | A-032 (Schema Column Compliance Check) added — INC-ALCF-001: schema column mismatch escaped IAA gate in wave-upload-doclist-fix; audit_logs INSERT/SELECT used non-existent columns (user_id, resource_type, resource_id); organisation_id NOT NULL omitted; silent try/catch made failure invisible. IAA self-governance action per Pre-Brief §7 shared responsibility clause. Next sequential ID: A-033. |
 | 2.6.0 | 2026-03-12 | A-033 (Git-Committed vs Disk Existence — CORE-018 Verification Standard) added — INC-CI-GATEWAY-FIX-001-IAA: IAA evaluated PREHANDOVER as PASS based on disk file existence (`-f` check) when the PREHANDOVER was untracked (never committed to git). Phase 4 `git ls-tree HEAD` revealed file not in any commit. CORE-018(a) must use git verification, not disk existence. Next sequential ID: A-034. |
 | 2.7.0 | 2026-03-17 | A-034 (FUNCTIONAL-BEHAVIOUR-REGISTRY reading — mandatory for BUILD/AAWP_MAT PRs; niggle patterns as blocking checks), A-035 (niggle pattern library application — stack-specific patterns in niggle-pattern-library.md must be applied to relevant code areas) added — CS2 IAA functional behaviour strengthening issue. Next sequential ID: A-036. |
+| 2.8.0 | 2026-04-08 | A-036 (Invocation-Discipline Repeat Check — Recurring ENVIRONMENT_BOOTSTRAP failures must trigger systemic blocker promotion) added — IAA session-020 (2026-04-07): CodexAdvisor invoked IAA before artifacts were committed (3rd consecutive A-021 pattern). Original contract referenced A-003, conflicting with existing rule. New distinct rule A-036 established. Next sequential ID: A-037. |
 
 ---
 
@@ -693,3 +694,21 @@ For any PR classified as BUILD or AAWP_MAT, IAA MUST at Step 3.1:
 > If FAIL: REJECTION-PACKAGE citing pattern ID and specific violation.
 
 **Status**: ACTIVE — enforced on all BUILD/AAWP_MAT PRs
+
+---
+
+### A-036 — Invocation-Discipline Repeat Check — Recurring ENVIRONMENT_BOOTSTRAP Failures Must Trigger Systemic Promotion
+
+**Triggered by**: IAA session-020 (2026-04-07) — COPILOT-SWE-COMMIT-BEFORE-IAA pattern; CodexAdvisor invoked IAA before artifacts were committed to HEAD (3rd consecutive A-021 pattern). IAA REJECTION-PACKAGE issued. Original IAA contract referenced A-003 for this rule, conflicting with existing A-003 "Ambiguity Resolves to Mandatory Invocation."
+
+**Permanent Rule**:
+For every IAA invocation, check whether the same invocation-discipline failure (uncommitted artifacts, branch/HEAD mismatch, missing prerequisite repo-state) was cited in any prior session for the same producing agent or workflow.
+- First occurrence: cite and return REJECTION-PACKAGE. No systemic promotion required.
+- Second or subsequent occurrence for the same pattern: cite A-036 AND cite A-027 (systemic gap). Require the producing agent to add a mandatory "Pre-IAA Commit Gate" — explicit evidence of `git status`, `git ls-tree HEAD`, and SCOPE_DECLARATION match before any future IAA invocation.
+
+**How this is checked in Phase 3 (Step 3.1)**:
+> A-036 invocation-discipline repeat check:
+> Load last 5 IAA session memory files. Search for same ENVIRONMENT_BOOTSTRAP pattern (uncommitted artifacts, A-021 failure).
+> First occurrence: PASS (but cite in session memory). Second+ occurrence: FAIL → REJECTION-PACKAGE + systemic promotion requirement.
+
+**Status**: ACTIVE — enforced from session-020 (2026-04-07) onwards
