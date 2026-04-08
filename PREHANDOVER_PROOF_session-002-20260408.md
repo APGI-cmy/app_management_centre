@@ -5,7 +5,7 @@
 **Wave**: layer-down-b54d57b5  
 **Date**: 2026-04-08  
 **Canonical Commit**: b54d57b5864a4df67f5bc44323ebde3807192c39  
-**iaa_audit_token**: IAA-session-002-wave1-20260408-PASS
+**iaa_audit_token**: IAA-session-027-wave1-20260408-PASS
 
 ---
 
