@@ -29,3 +29,6 @@
 | 2026-04-07 | independent-assurance-agent | session-020-20260407 | VERDICT | iaa_audit_token field in PREHANDOVER template must explicitly prohibit PHASE_A_ADVISORY self-certification — A-006 fabrication pattern detected again in CodexAdvisor class agent | session-020-20260407.md |
 | 2026-04-07 | independent-assurance-agent | session-021 | Phase 3 | Prehandover template needs mandatory placeholder search step before commit (grep for remaining [placeholder] text) | session-021-20260407.md |
 | 2026-04-07 | independent-assurance-agent | session-021 | Phase 1 | iaa_audit_token format for re-invocations (REJECTION then re-invoke) is architecturally ambiguous — CS2 clarification needed | session-021-20260407.md |
+| 2026-04-08 | independent-assurance-agent | IAA-023 | Phase 3 | governance-liaison PREHANDOVER template needs git-status pre-commit check before IAA invocation | session-023-20260408.md |
+| 2026-04-08 | independent-assurance-agent | IAA-023 | Phase 1 | IAA phase (PHASE_B_BLOCKING) should ripple to governance-liaison knowledge on every IAA contract upgrade | session-023-20260408.md |
+| 2026-04-08 | independent-assurance-agent | IAA-023 | Phase 3 | Clarify whether OVL-LA-ADM-003 HANDOVER_SUMMARY+ALIGNMENT_EVIDENCE requirement applies to all liaison PRs or only non-layer-down admin operations | session-023-20260408.md |
