@@ -1,0 +1,22 @@
+{
+  "session": "session-002-20260408",
+  "agent": "governance-liaison-amc",
+  "canonical_commit": "b54d57b5864a4df67f5bc44323ebde3807192c39",
+  "ripple_events": [
+    {
+      "dispatch_id": "run-24131833105",
+      "event_type": "governance_ripple",
+      "canonical_commit": "b54d57b5864a4df67f5bc44323ebde3807192c39",
+      "changed_paths": [
+        ".github/agents/CodexAdvisor-agent.md",
+        ".github/agents/foreman-v2.agent.md",
+        ".github/agents/governance-repo-administrator-v2.agent.md",
+        "governance/canon/AGENT_HANDOVER_AUTOMATION.md"
+      ],
+      "sender": "APGI-cmy/maturion-foreman-governance",
+      "timestamp": "2026-04-08T10:58:25Z",
+      "processing_status": "PARTIAL",
+      "processing_notes": "AGENT_HANDOVER_AUTOMATION.md propagated. Agent files escalated to CS2 per PROHIB-002."
+    }
+  ]
+}

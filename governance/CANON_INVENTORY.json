@@ -72,14 +72,14 @@
         },
         {
             "filename": "AGENT_HANDOVER_AUTOMATION.md",
-            "version": "1.1.5",
-            "file_hash": "cff4158b2646",
+            "version": "1.2.0",
+            "file_hash": "84b120c7b199",
             "effective_date": "2026-04-08",
             "description": "Defines the canonical Handover phase (Phase 4) of the four-phase agent contract architecture. Automates evidence generation, session memory capture, memory rotation, and safe handover state verification.",
             "type": "canon",
             "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
             "layer_down_status": "PUBLIC_API",
-            "file_hash_sha256": "cff4158b2646246ea68de535398cc00e60c9c4424cfad7d6e239f51427f01d3c"
+            "file_hash_sha256": "84b120c7b19938f43ef16986732e0d4a67c5dbd35fbc92d4494c69b13d4f29f1"
         },
         {
             "filename": "AGENT_RECRUITMENT.md",
