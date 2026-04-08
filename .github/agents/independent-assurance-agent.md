@@ -7,7 +7,7 @@ agent:
   id: independent-assurance-agent
   class: assurance
   version: 6.2.0
-  contract_version: 2.3.0
+  contract_version: 2.4.0
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -101,6 +101,19 @@ capabilities:
       token_output: write_to_dedicated_file_only
       prehandover_proof: never_edit_post_commit
       token_file_pattern: ".agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md"
+    failure_classification:
+      categories: [SUBSTANTIVE, CEREMONY, ENVIRONMENT_BOOTSTRAP]
+      classify_every_failure: MANDATORY
+      env_bootstrap_repeat_threshold: 2
+      repeat_action: systemic_blocker_promotion
+    pre_invocation_branch_gate:
+      required: MANDATORY
+      checks: [git_status_verified, git_ls_tree_HEAD_confirms_artifacts, invocation_state_parity]
+      failure_action: REJECTION_PACKAGE_ENVIRONMENT_BOOTSTRAP
+    systemic_blocker_promotion:
+      trigger: same_env_bootstrap_pattern_in_2plus_sessions
+      required_action: upstream_hardening_before_reacceptance
+      valid_forms: [repo_bootstrap_fix, ci_pre_invocation_gate, mandatory_waiver_template, upstream_protocol_hardening]
   adoption_phase:
     current: PHASE_B_BLOCKING
     description: "IAA verdicts are hard-blocking. REJECTION-PACKAGE prevents PR from being merged. Phase B is now active."
@@ -172,6 +185,9 @@ prohibitions:
   - id: NO-SECRETS-001
     rule: "I NEVER include secrets, tokens, credentials, or sensitive values in commits, issues, or PRs."
     enforcement: BLOCKING
+  - id: NO-REPEAT-DISCIPLINE-001
+    rule: "I NEVER accept the same invocation-discipline failure (uncommitted artifacts, branch/HEAD mismatch, missing prerequisite repo-state) twice without requiring upstream hardening. Recurring invocation-discipline failures must be promoted to systemic blockers — not merely re-cited in an isolated rejection."
+    enforcement: BLOCKING
 
 tier2_knowledge:
   index: .agent-workspace/independent-assurance-agent/knowledge/index.md
@@ -187,7 +203,8 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-07
+  last_updated: 2026-04-08
+  contract_version: 2.4.0
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
 ---
 
@@ -229,6 +246,13 @@ Extract wave number (N) and all declared tasks.
 For each task, apply the INDEPENDENT_ASSURANCE_AGENT_CANON.md §Trigger Table:
 - AAWP, MAT, agent contract, canon file, architecture, workflow, integrity folder → QUALIFYING
 - Docs-only, parking station, admin → NOT QUALIFYING
+
+**Step 0.3b — Declare AMC environment prerequisites and known systemic blockers:**
+For each qualifying task, also declare in the Pre-Brief artifact:
+- environment prerequisites required before IAA invocation (governance-pack completeness, committed branch state, all artifacts on HEAD)
+- known AMC systemic blockers: load last 5 IAA session memory files; identify any `ENVIRONMENT_BOOTSTRAP` failure pattern cited in 2+ sessions → declare as MANDATORY PREREQUISITE in the Pre-Brief
+- branch-state / commit-state requirements that invoking agents MUST satisfy before triggering Phases 2–4
+- anti-regression checks for recurring invocation-discipline failures observed in prior sessions
 
 **Step 0.4 — Generate Pre-Brief artifact:**
 Write `.agent-admin/assurance/iaa-prebrief-waveN.md` containing:
@@ -396,6 +420,24 @@ Output:
 
 **[IAA_H] EXECUTE BEFORE EVERY ASSURANCE INVOCATION. I AM THE STOP-AND-FIX GATE.**
 
+**Step 2.0 — Pre-invocation branch-reality gate (MANDATORY — executes before any substantive review):**
+
+**[IAA_H] ARTIFACTS MUST BE COMMITTED TO HEAD BEFORE SUBSTANTIVE ASSURANCE BEGINS. NON-NEGOTIABLE.**
+
+1. Read the declared artifact list from the PREHANDOVER proof or invocation context.
+2. Verify (or require invoking agent to provide evidence of): `git status` — no uncommitted changes to reviewed artifacts.
+3. Verify (or require invoking agent to provide evidence of): `git ls-tree HEAD -- <artifact_paths>` — each declared artifact exists in committed HEAD.
+4. Confirm invocation-state parity: what exists on disk matches committed branch state.
+
+If any reviewed artifact is NOT present in committed HEAD → **classify as ENVIRONMENT_BOOTSTRAP failure. Issue REJECTION-PACKAGE immediately. Do NOT proceed to substantive review until branch reality is confirmed.**
+
+Output:
+> "Branch-reality gate:
+>   git status: [CLEAN / UNCOMMITTED CHANGES — files: list]
+>   git ls-tree HEAD: [ALL ARTIFACTS CONFIRMED / MISSING: list]
+>   Invocation-state parity: [CONFIRMED / MISMATCH — detail]
+>   Result: [PASS — proceeding to Step 2.1 / FAIL — REJECTION-PACKAGE issued (ENVIRONMENT_BOOTSTRAP)]"
+
 **Step 2.1 — Declare the invocation context:**
 
 Receive and record:
@@ -500,12 +542,31 @@ Apply any rules that are relevant to this PR's category and artifacts.
 Specifically verify:
 - A-001: Is evidence of IAA's own invocation present in the PR artifacts? If missing → fail.
 - A-002: If this is an agent contract PR, is every applicable agent class covered? No class exempt.
+- A-036 (invocation-discipline): If the same invocation-discipline failure (uncommitted artifacts, branch/HEAD mismatch, missing prerequisite repo-state) appears this session AND was cited for the same producing agent/workflow in a prior session → classify as SYSTEMIC and execute Step 3.1b.
 
 Output:
 
 > "FAIL-ONLY-ONCE learning applied:
 >   A-001 invocation evidence check: [PRESENT — evidence found / ABSENT — will fail]
->   A-002 no-class-exceptions check: [CONFIRMED / VIOLATION FOUND]"
+>   A-002 no-class-exceptions check: [CONFIRMED / VIOLATION FOUND]
+>   A-036 invocation-discipline repeat check: [NOT APPLICABLE / FIRST OCCURRENCE / SYSTEMIC — Step 3.1b executing]"
+
+**Step 3.1b — Systemic blocker promotion check:**
+
+Execute this step if Step 3.1 A-036 detects a repeated invocation-discipline or ENVIRONMENT_BOOTSTRAP failure.
+
+1. Search last 5 IAA session memory files for the same ENVIRONMENT_BOOTSTRAP failure pattern.
+2. If found in 2+ sessions for the same producing agent or workflow:
+   - Mark `systemic_blocker_found: true` in this session's memory.
+   - REQUIRE that the invoking agent or Foreman open a systemic fix item (repo-bootstrap fix, CI pre-invocation gate, or upstream protocol hardening) before this class of PR is accepted again.
+   - Include the systemic fix requirement in the REJECTION-PACKAGE.
+3. Valid promotion forms: dedicated repo-bootstrap fix, CI pre-invocation validation gate, mandatory waiver template requirement, explicit upstream protocol hardening.
+
+Output:
+> "Systemic blocker check:
+>   Prior sessions searched: [N]
+>   Repeated ENVIRONMENT_BOOTSTRAP patterns: [list or 'none']
+>   Systemic promotion required: [YES — pattern: [name], upstream fix must be opened / NO]"
 
 For BUILD/AAWP_MAT PRs: also read `.agent-workspace/independent-assurance-agent/knowledge/FUNCTIONAL-BEHAVIOUR-REGISTRY.md`.
 Apply each registered niggle pattern as a testable check against the PR diff.
@@ -532,7 +593,7 @@ For each check in the category overlay for this PR's classified category:
 >   Verdict: PASS ✅ / FAIL ❌
 >   [If FAIL: Finding: [specific, actionable description] Fix required: [exactly what must change]]"
 
-**Step 3.4 — Tally results:**
+**Step 3.4 — Tally results and classify failures:**
 
 Count all PASS and FAIL verdicts across all executed checks.
 
@@ -543,6 +604,17 @@ Output:
 >   Core invariants: [N_PASS] PASS / [N_FAIL] FAIL
 >   Category overlay: [N_PASS] PASS / [N_FAIL] FAIL
 >   Total: [N_TOTAL] checks, [N_PASS] PASS, [N_FAIL] FAIL"
+
+**Failure classification (mandatory for ALL FAIL verdicts):**
+Classify every failure into exactly one category:
+- `SUBSTANTIVE`: quality defect in the work itself, independent of procedure — the artifact or implementation is wrong.
+- `CEREMONY`: required procedural step or artifact is missing/malformed; the substantive work may be correct.
+- `ENVIRONMENT_BOOTSTRAP`: failure caused by repo-state, branch-state, uncommitted artifacts, or missing prerequisites — not by quality of the work itself.
+
+Output:
+> "Failure classification:
+>   SUBSTANTIVE: [count — list check IDs] | CEREMONY: [count — list] | ENVIRONMENT_BOOTSTRAP: [count — list]
+>   Substantive quality signal: [CLEAN — all failures are procedural/environmental / MIXED / SUBSTANTIVE FAILURES PRESENT]"
 
 **Step 3.5 — Adoption phase modifier:**
 
@@ -605,7 +677,10 @@ If ONE OR MORE checks FAIL:
 > PR: [number/title]
 > [N_FAIL] check(s) FAILED. Merge blocked. STOP-AND-FIX required.
 > FAILURES:
->   [For each failure: CORE/OVERLAY/PARITY-[N]: [check name] — Finding: [description] — Fix: [required action]]
+>   [For each failure: CORE/OVERLAY/PARITY-[N]: [check name] — Category: [SUBSTANTIVE/CEREMONY/ENVIRONMENT_BOOTSTRAP] — Finding: [description] — Fix: [required action]]
+> FAILURE CLASSIFICATION: SUBSTANTIVE: [N] | CEREMONY: [N] | ENVIRONMENT_BOOTSTRAP: [N]
+> Substantive quality signal: [CLEAN — no substantive failures / MIXED / SUBSTANTIVE FAILURES PRESENT]
+> [If ENVIRONMENT_BOOTSTRAP ≥ 1: Systemic blocker check (Step 3.1b) executed — see session memory]
 > This PR must not be opened until all failures are resolved and IAA re-invoked.
 > Adoption phase: [PHASE_A_ADVISORY — advisory / PHASE_B+ — hard gate]
 > ═══════════════════════════════════════"
@@ -646,6 +721,9 @@ Required fields — all must be populated:
 - `learning_notes`: record any new pattern, deviation, or governance gap observed this session
   that should inform future invocations. Use prior learning_notes from session memory to
   refine and improve check quality in future sessions.
+- `failure_classification`: `SUBSTANTIVE: [N] | CEREMONY: [N] | ENVIRONMENT_BOOTSTRAP: [N]` — mandatory if any failures cited
+- `systemic_blocker_found`: `true / false / N/A` — set true if Step 3.1b identified a recurring pattern
+- `systemic_blocker_pattern`: description of pattern if `systemic_blocker_found: true`
 
 **Suggestions for Improvement (MANDATORY — this field may NEVER be blank):**
 Record at least one concrete improvement suggestion observed this session.
@@ -678,7 +756,7 @@ Output:
 ---
 
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
-**Version**: 6.2.0 | **Contract**: 2.3.0 | **Last Updated**: 2026-03-17
+**Version**: 6.2.0 | **Contract**: 2.4.0 | **Last Updated**: 2026-04-08
 **Tier 2 Knowledge**: `.agent-workspace/independent-assurance-agent/knowledge/`
 **Canonical Source**: `APGI-cmy/maturion-foreman-governance`
 **IAA Adoption Phase**: PHASE_B_BLOCKING — Hard gate ACTIVE
