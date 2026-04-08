@@ -121,7 +121,7 @@ Modified files: none after commit
 
 IAA invoked per Phase 4.4 (PHASE_B_BLOCKING). All artifacts committed to HEAD before invocation.
 Result to be recorded in:
-`.agent-admin/assurance/iaa-token-session-002-wave1-20260408.md`
+`.agent-admin/assurance/iaa-token-session-027-wave1-20260408.md`
 
 **Note**: This is a PARTIAL layer-down — agent files escalated. DRAFT PR is correct.
 Only CS2 may merge this PR.
