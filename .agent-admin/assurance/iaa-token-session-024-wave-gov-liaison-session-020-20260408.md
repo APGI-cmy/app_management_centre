@@ -22,7 +22,7 @@
 ═══════════════════════════════════════
 ASSURANCE-TOKEN
 PR: branch copilot/propagate-governance-changes — governance-liaison-amc session-020 layer-down (canonical commit bfe47f6dec7786620065a33f37cdc3cd974f432a)
-All 20 checks PASS. Merge gate parity: PASS.
+All 20 applicable gate checks PASS. Full check summary contains 25 rows including N/A/informational items. Merge gate parity: PASS.
 Merge permitted (subject to CS2 approval).
 Token reference: IAA-session-024-wave-gov-liaison-session-020-20260408-PASS
 Adoption phase: PHASE_B_BLOCKING — hard gate ACTIVE

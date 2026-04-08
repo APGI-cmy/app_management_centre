@@ -733,7 +733,7 @@
         {
             "filename": "GOVERNANCE_CANON_MANIFEST.md",
             "version": "1.0.0",
-            "file_hash": "5c186e929fb3e554941a89a5530885a94e2cd4ecbf6bf97558295ba7e4285f9e",
+            "file_hash": "5c186e929fb3",
             "effective_date": "2026-01-05",
             "description": "This manifest is the **single authoritative index** of all canonical governance standards in the maturion-foreman-governance repository.",
             "type": "canon",
@@ -1745,7 +1745,7 @@
         {
             "filename": "COMMENT_ONLY_AGENT_SESSION_PROTOCOL.md",
             "version": "1.0.0",
-            "file_hash": "3b342b6fa746ad418a767f46c38dca5ff19a5e5f4ee72d766645337e5211b29c",
+            "file_hash": "3b342b6fa746",
             "effective_date": "2026-04-08",
             "description": "This protocol canonises the comment-only / non-mutating agent session mode as a first-class governance concept.",
             "type": "canon",
