@@ -203,7 +203,7 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-07
+  last_updated: 2026-04-08
   contract_version: 2.4.0
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
 ---
@@ -756,7 +756,7 @@ Output:
 ---
 
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
-**Version**: 6.2.0 | **Contract**: 2.4.0 | **Last Updated**: 2026-04-07
+**Version**: 6.2.0 | **Contract**: 2.4.0 | **Last Updated**: 2026-04-08
 **Tier 2 Knowledge**: `.agent-workspace/independent-assurance-agent/knowledge/`
 **Canonical Source**: `APGI-cmy/maturion-foreman-governance`
 **IAA Adoption Phase**: PHASE_B_BLOCKING — Hard gate ACTIVE

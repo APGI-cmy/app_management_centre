@@ -18,4 +18,6 @@
 - `.agent-workspace/CodexAdvisor-agent/memory/session-015-20260408.md` - Session-015 session memory
 - `.agent-workspace/CodexAdvisor-agent/memory/breach-registry.md` - OPOJD violation learning recorded
 - `.agent-workspace/CodexAdvisor-agent/parking-station/suggestions-log.md` - Parking station updated
+- `.agent-workspace/independent-assurance-agent/memory/session-021-20260408.md` - IAA session-021 memory recorded during the contract-upgrade invocation
+- `.agent-workspace/independent-assurance-agent/parking-station/suggestions-log.md` - IAA parking-station suggestions log updated during invocation
 - `SCOPE_DECLARATION.md` - This file (updated to match PR diff)

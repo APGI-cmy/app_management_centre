@@ -1,8 +1,8 @@
 # IAA FAIL-ONLY-ONCE Registry
 
 **Agent**: independent-assurance-agent
-**Version**: 2.5.0
-**Last Updated**: 2026-03-08
+**Version**: 2.8.0
+**Last Updated**: 2026-04-08
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
 
 ---
@@ -614,6 +614,7 @@ For any PR that contains Supabase INSERT or SELECT operations on a named table:
 | 2.5.0 | 2026-03-08 | A-032 (Schema Column Compliance Check) added — INC-ALCF-001: schema column mismatch escaped IAA gate in wave-upload-doclist-fix; audit_logs INSERT/SELECT used non-existent columns (user_id, resource_type, resource_id); organisation_id NOT NULL omitted; silent try/catch made failure invisible. IAA self-governance action per Pre-Brief §7 shared responsibility clause. Next sequential ID: A-033. |
 | 2.6.0 | 2026-03-12 | A-033 (Git-Committed vs Disk Existence — CORE-018 Verification Standard) added — INC-CI-GATEWAY-FIX-001-IAA: IAA evaluated PREHANDOVER as PASS based on disk file existence (`-f` check) when the PREHANDOVER was untracked (never committed to git). Phase 4 `git ls-tree HEAD` revealed file not in any commit. CORE-018(a) must use git verification, not disk existence. Next sequential ID: A-034. |
 | 2.7.0 | 2026-03-17 | A-034 (FUNCTIONAL-BEHAVIOUR-REGISTRY reading — mandatory for BUILD/AAWP_MAT PRs; niggle patterns as blocking checks), A-035 (niggle pattern library application — stack-specific patterns in niggle-pattern-library.md must be applied to relevant code areas) added — CS2 IAA functional behaviour strengthening issue. Next sequential ID: A-036. |
+| 2.8.0 | 2026-04-08 | A-036 (Invocation-Discipline Repeat Check — Recurring ENVIRONMENT_BOOTSTRAP failures must trigger systemic blocker promotion) added — IAA session-020 (2026-04-07): CodexAdvisor invoked IAA before artifacts were committed (3rd consecutive A-021 pattern). Original contract referenced A-003, conflicting with existing rule. New distinct rule A-036 established. Next sequential ID: A-037. |
 
 ---
 
