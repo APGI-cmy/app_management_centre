@@ -1,0 +1,17 @@
+{
+  "dispatch_id": "run-23374906530",
+  "event_type": "governance_ripple",
+  "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+  "inventory_version": "1.0.0",
+  "changed_paths": [
+    "governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
+    "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
+    "governance/canon/IAA_PRE_BRIEF_PROTOCOL.md",
+    "governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md"
+  ],
+  "sender": "APGI-cmy/maturion-foreman-governance",
+  "timestamp": "2026-03-21T07:34:06Z",
+  "status": "archived",
+  "archived_at": "2026-04-08T16:15:01Z",
+  "outcome": "ECAP-001 layer-down completed \u2014 three new canon files created, FOREMAN_AUTHORITY updated to v1.2.0"
+}
