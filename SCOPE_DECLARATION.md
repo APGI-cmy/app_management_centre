@@ -1,23 +1,16 @@
 # SCOPE_DECLARATION
 
-**Issue**: Upgrade AMC IAA contract to harden environment/bootstrap enforcement and pre-invocation branch-state discipline
+**Issue**: Consolidate hardened AMC Stage 1 sections into one authoritative App Description document
 **Date**: 2026-04-08
-**Agent**: CodexAdvisor-agent (session-014-20260407 / session-015-20260408)
+**Agent**: foreman-v2-agent (session-021, wave-amc-stage1-consolidation)
 
-## Files Modified
+## Files Modified / Added
 
-- `.github/agents/independent-assurance-agent.md` - IAA contract upgraded v2.3.0 → v2.4.0 (failure classification, branch-reality gate, systemic blocker promotion, A-036 invocation-discipline rule; lookback window unified to last 5 sessions)
-- `.agent-admin/assurance/iaa-token-session-015-upgrade-iaa-contract-20260408.md` - ASSURANCE-TOKEN; added PHASE_B_BLOCKING_TOKEN machine-readable field
-- `.agent-workspace/independent-assurance-agent/knowledge/index.md` - Tier 2 knowledge index contract_version updated to 2.4.0
-- `.agent-workspace/independent-assurance-agent/knowledge/FAIL-ONLY-ONCE.md` - A-036 rule added for invocation-discipline repeat check
-- `.agent-workspace/independent-assurance-agent/personal/lessons-learned.md` - IAA personal notes (created during IAA invocation)
-- `.agent-workspace/independent-assurance-agent/personal/patterns.md` - IAA personal patterns (created during IAA invocation)
-- `.agent-workspace/CodexAdvisor-agent/memory/PREHANDOVER-session-014-20260407.md` - Session-014 PREHANDOVER proof
-- `.agent-workspace/CodexAdvisor-agent/memory/PREHANDOVER-session-015-20260408.md` - Session-015 PREHANDOVER proof
-- `.agent-workspace/CodexAdvisor-agent/memory/session-014-20260407.md` - Session-014 session memory
-- `.agent-workspace/CodexAdvisor-agent/memory/session-015-20260408.md` - Session-015 session memory
-- `.agent-workspace/CodexAdvisor-agent/memory/breach-registry.md` - OPOJD violation learning recorded
-- `.agent-workspace/CodexAdvisor-agent/parking-station/suggestions-log.md` - Parking station updated
-- `.agent-workspace/independent-assurance-agent/memory/session-021-20260408.md` - IAA session-021 memory recorded during the contract-upgrade invocation
-- `.agent-workspace/independent-assurance-agent/parking-station/suggestions-log.md` - IAA parking-station suggestions log updated during invocation
-- `SCOPE_DECLARATION.md` - This file (updated to match PR diff)
+- `modules/amc/00-app-description/app-description.md` — consolidated AMC Stage 1 App Description (5032 lines, 28 sections §1–§28)
+- `.agent-admin/assurance/iaa-prebrief-wave-amc-stage1-consolidation.md` — IAA Pre-Brief for wave-amc-stage1-consolidation
+- `.agent-admin/assurance/iaa-token-session-026-wave-amc-stage1-consolidation-20260408.md` — IAA token file (written by independent-assurance-agent)
+- `.agent-workspace/foreman-v2/personal/wave-current-tasks.md` — wave current tasks updated for session-021
+- `.agent-workspace/foreman-v2/memory/PREHANDOVER-session-021-wave-amc-stage1-consolidation-20260408.md` — Foreman PREHANDOVER proof
+- `.agent-workspace/foreman-v2/memory/session-021-20260408.md` — Foreman session memory
+- `.agent-workspace/independent-assurance-agent/memory/session-026-20260408.md` — IAA session-026 memory
+- `SCOPE_DECLARATION.md` — this file
