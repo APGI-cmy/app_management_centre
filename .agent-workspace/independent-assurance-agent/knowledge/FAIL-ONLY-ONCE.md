@@ -693,3 +693,21 @@ For any PR classified as BUILD or AAWP_MAT, IAA MUST at Step 3.1:
 > If FAIL: REJECTION-PACKAGE citing pattern ID and specific violation.
 
 **Status**: ACTIVE — enforced on all BUILD/AAWP_MAT PRs
+
+---
+
+### A-036 — Invocation-Discipline Repeat Check — Recurring ENVIRONMENT_BOOTSTRAP Failures Must Trigger Systemic Promotion
+
+**Triggered by**: IAA session-020 (2026-04-07) — COPILOT-SWE-COMMIT-BEFORE-IAA pattern; CodexAdvisor invoked IAA before artifacts were committed to HEAD (3rd consecutive A-021 pattern). IAA REJECTION-PACKAGE issued. Original IAA contract referenced A-003 for this rule, conflicting with existing A-003 "Ambiguity Resolves to Mandatory Invocation."
+
+**Permanent Rule**:
+For every IAA invocation, check whether the same invocation-discipline failure (uncommitted artifacts, branch/HEAD mismatch, missing prerequisite repo-state) was cited in any prior session for the same producing agent or workflow.
+- First occurrence: cite and return REJECTION-PACKAGE. No systemic promotion required.
+- Second or subsequent occurrence for the same pattern: cite A-036 AND cite A-027 (systemic gap). Require the producing agent to add a mandatory "Pre-IAA Commit Gate" — explicit evidence of `git status`, `git ls-tree HEAD`, and SCOPE_DECLARATION match before any future IAA invocation.
+
+**How this is checked in Phase 3 (Step 3.1)**:
+> A-036 invocation-discipline repeat check:
+> Load last 5 IAA session memory files. Search for same ENVIRONMENT_BOOTSTRAP pattern (uncommitted artifacts, A-021 failure).
+> First occurrence: PASS (but cite in session memory). Second+ occurrence: FAIL → REJECTION-PACKAGE + systemic promotion requirement.
+
+**Status**: ACTIVE — enforced from session-020 (2026-04-07) onwards

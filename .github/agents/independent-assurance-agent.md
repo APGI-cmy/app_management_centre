@@ -542,18 +542,18 @@ Apply any rules that are relevant to this PR's category and artifacts.
 Specifically verify:
 - A-001: Is evidence of IAA's own invocation present in the PR artifacts? If missing → fail.
 - A-002: If this is an agent contract PR, is every applicable agent class covered? No class exempt.
-- A-003 (invocation-discipline): If the same invocation-discipline failure (uncommitted artifacts, branch/HEAD mismatch, missing prerequisite repo-state) appears this session AND was cited for the same producing agent/workflow in a prior session → classify as SYSTEMIC and execute Step 3.1b.
+- A-036 (invocation-discipline): If the same invocation-discipline failure (uncommitted artifacts, branch/HEAD mismatch, missing prerequisite repo-state) appears this session AND was cited for the same producing agent/workflow in a prior session → classify as SYSTEMIC and execute Step 3.1b.
 
 Output:
 
 > "FAIL-ONLY-ONCE learning applied:
 >   A-001 invocation evidence check: [PRESENT — evidence found / ABSENT — will fail]
 >   A-002 no-class-exceptions check: [CONFIRMED / VIOLATION FOUND]
->   A-003 invocation-discipline repeat check: [NOT APPLICABLE / FIRST OCCURRENCE / SYSTEMIC — Step 3.1b executing]"
+>   A-036 invocation-discipline repeat check: [NOT APPLICABLE / FIRST OCCURRENCE / SYSTEMIC — Step 3.1b executing]"
 
 **Step 3.1b — Systemic blocker promotion check:**
 
-Execute this step if Step 3.1 A-003 detects a repeated invocation-discipline or ENVIRONMENT_BOOTSTRAP failure.
+Execute this step if Step 3.1 A-036 detects a repeated invocation-discipline or ENVIRONMENT_BOOTSTRAP failure.
 
 1. Search last 5 IAA session memory files for the same ENVIRONMENT_BOOTSTRAP failure pattern.
 2. If found in 2+ sessions for the same producing agent or workflow:
