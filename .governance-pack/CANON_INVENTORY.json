@@ -1,8 +1,8 @@
 {
     "version": "1.0.0",
-    "last_updated": "2026-04-05",
-    "total_canons": 158,
-    "generation_timestamp": "2026-04-05T11:47:33Z",
+    "last_updated": "2026-04-08",
+    "total_canons": 159,
+    "generation_timestamp": "2026-04-08T09:38:53Z",
     "canons": [
         {
             "filename": "ACTIVATION_STATE_MODEL.md",
@@ -733,13 +733,13 @@
         {
             "filename": "GOVERNANCE_CANON_MANIFEST.md",
             "version": "1.0.0",
-            "file_hash": "dd1c1ef135e9",
+            "file_hash": "5c186e929fb3e554941a89a5530885a94e2cd4ecbf6bf97558295ba7e4285f9e",
             "effective_date": "2026-01-05",
             "description": "This manifest is the **single authoritative index** of all canonical governance standards in the maturion-foreman-governance repository.",
             "type": "canon",
             "path": "governance/canon/GOVERNANCE_CANON_MANIFEST.md",
             "layer_down_status": "INTERNAL",
-            "file_hash_sha256": "dd1c1ef135e9283aeec28a7e219666f0830b5948dffebe75b95a9df824548d47"
+            "file_hash_sha256": "5c186e929fb3e554941a89a5530885a94e2cd4ecbf6bf97558295ba7e4285f9e"
         },
         {
             "filename": "GOVERNANCE_COMPLETENESS_MODEL.md",
@@ -1741,6 +1741,17 @@
             "path": "governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md",
             "layer_down_status": "PUBLIC_API",
             "file_hash_sha256": "599696b5e8eb09404a673c3b4f591206c0164dbcc3f10163fa75fed3e9acf4a9"
+        },
+        {
+            "filename": "COMMENT_ONLY_AGENT_SESSION_PROTOCOL.md",
+            "version": "1.0.0",
+            "file_hash": "3b342b6fa746ad418a767f46c38dca5ff19a5e5f4ee72d766645337e5211b29c",
+            "effective_date": "2026-04-08",
+            "description": "This protocol canonises the comment-only / non-mutating agent session mode as a first-class governance concept.",
+            "type": "canon",
+            "path": "governance/canon/COMMENT_ONLY_AGENT_SESSION_PROTOCOL.md",
+            "layer_down_status": "PUBLIC_API",
+            "file_hash_sha256": "3b342b6fa746ad418a767f46c38dca5ff19a5e5f4ee72d766645337e5211b29c"
         }
     ]
 }

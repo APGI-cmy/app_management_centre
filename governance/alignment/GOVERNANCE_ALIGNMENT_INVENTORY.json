@@ -2,10 +2,10 @@
     "schema_version": "1.0.0",
     "consumer_repo": "APGI-cmy/app_management_centre",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
-    "last_layer_down_commit": "843cc6dc4dd88bee911ea21d809e72f28e7b93cf",
-    "last_updated": "2026-04-06T09:00:00Z",
+    "last_layer_down_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
+    "last_updated": "2026-04-08T09:38:53Z",
     "alignment_status": "ALIGNED",
-    "total_artifacts": 11,
+    "total_artifacts": 12,
     "artifacts": [
         {
             "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -13,9 +13,9 @@
             "version": "1.0.0",
             "type": "canon",
             "layer_down_status": "INTERNAL",
-            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-            "layered_down_at": "2026-04-05T11:47:33Z",
-            "file_hash_sha256": "dd1c1ef135e9283aeec28a7e219666f0830b5948dffebe75b95a9df824548d47",
+            "canonical_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
+            "layered_down_at": "2026-04-08T09:38:53Z",
+            "file_hash_sha256": "5c186e929fb3e554941a89a5530885a94e2cd4ecbf6bf97558295ba7e4285f9e",
             "action": "UPDATED"
         },
         {
@@ -126,6 +126,17 @@
             "canonical_commit": "843cc6dc4dd88bee911ea21d809e72f28e7b93cf",
             "layered_down_at": "2026-04-06T09:00:00Z",
             "file_hash_sha256": "39867b98a8d68ceebc3676b8066070e3b410e6f68a954bfd28089e0ef3d24514",
+            "action": "CREATED"
+        },
+        {
+            "filename": "COMMENT_ONLY_AGENT_SESSION_PROTOCOL.md",
+            "path": "governance/canon/COMMENT_ONLY_AGENT_SESSION_PROTOCOL.md",
+            "version": "1.0.0",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
+            "layered_down_at": "2026-04-08T09:38:53Z",
+            "file_hash_sha256": "3b342b6fa746ad418a767f46c38dca5ff19a5e5f4ee72d766645337e5211b29c",
             "action": "CREATED"
         }
     ],
