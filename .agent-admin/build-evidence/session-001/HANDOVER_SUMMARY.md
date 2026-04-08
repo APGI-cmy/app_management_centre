@@ -39,4 +39,7 @@ None. No agent contract files were modified.
 
 ## IAA Verdict
 
-REJECTION-PACKAGE received (initial). All 4 failures addressed per recommended fix sequence. Re-invocation complete. ASSURANCE-TOKEN expected.
+- Session-023: REJECTION-PACKAGE (4 failures — all resolved)
+- Session-024: REJECTION-PACKAGE (OVL-CG-ADM-001: governance/CANON_INVENTORY.json stale — resolved in commit 37bbeae)
+- Session-025: **ASSURANCE-TOKEN ISSUED** — IAA-session-025-layer-down-939f1b0b-reaudit2-20260408-PASS (34 checks PASS, 0 FAIL, substantive quality CLEAN)
+- Token file: `.agent-admin/assurance/iaa-token-session-025-layer-down-939f1b0b-reaudit2-20260408.md` (committed at e4155d0)

@@ -71,9 +71,13 @@ Local checks run before Phase 4:
 
 ## IAA Invocation
 
-**iaa_audit_token**: IAA-session-001-wave1-20260408-PASS
+**iaa_audit_token**: IAA-session-025-layer-down-939f1b0b-reaudit2-20260408-PASS
 
-IAA invoked via task tool at Phase 4 Step 4.4. IAA is in PHASE_B_BLOCKING mode. The substantive governance work passed all checks. Ceremony artifacts and commit state are being resolved per REJECTION-PACKAGE before re-invocation. Token will be confirmed after ASSURANCE-TOKEN is received.
+IAA invoked via task tool at Phase 4 Step 4.4. IAA is PHASE_B_BLOCKING.
+- Session-023: REJECTION-PACKAGE (4 failures). All resolved.
+- Session-024: REJECTION-PACKAGE (1 failure: OVL-CG-ADM-001 — governance/CANON_INVENTORY.json stale). Resolved in commit 37bbeae.
+- Session-025: **ASSURANCE-TOKEN ISSUED** — 34 checks PASS, 0 FAIL. Substantive quality: CLEAN.
+- Token file: `.agent-admin/assurance/iaa-token-session-025-layer-down-939f1b0b-reaudit2-20260408.md` (committed at e4155d0).
 
 ---
 
