@@ -2,10 +2,10 @@
     "schema_version": "1.0.0",
     "consumer_repo": "APGI-cmy/app_management_centre",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
-    "last_layer_down_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
-    "last_updated": "2026-04-08T09:38:53Z",
+    "last_layer_down_commit": "b54d57b5864a4df67f5bc44323ebde3807192c39",
+    "last_updated": "2026-04-08T12:28:58Z",
     "alignment_status": "ALIGNED",
-    "total_artifacts": 12,
+    "total_artifacts": 13,
     "artifacts": [
         {
             "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -120,12 +120,12 @@
         {
             "filename": "AGENT_HANDOVER_AUTOMATION.md",
             "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
-            "version": "1.1.5",
+            "version": "1.2.0",
             "type": "canon",
             "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
-            "layered_down_at": "2026-04-08T08:46:30Z",
-            "file_hash_sha256": "cff4158b2646246ea68de535398cc00e60c9c4424cfad7d6e239f51427f01d3c",
+            "canonical_commit": "b54d57b5864a4df67f5bc44323ebde3807192c39",
+            "layered_down_at": "2026-04-08T12:28:58Z",
+            "file_hash_sha256": "84b120c7b19938f43ef16986732e0d4a67c5dbd35fbc92d4494c69b13d4f29f1",
             "action": "UPDATED"
         },
         {
@@ -230,6 +230,18 @@
             "artifacts_updated": 4,
             "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-08",
             "status": "COMPLETE"
+        },
+        {
+            "layer_down_id": "layer-down-2026-04-08-b54d57b5",
+            "canonical_commit": "b54d57b5864a4df67f5bc44323ebde3807192c39",
+            "timestamp": "2026-04-08T12:28:58Z",
+            "trigger": "Merge pull request -1330 from APGI-cmy-copilot-governance-harden-pre-iaa-handover",
+            "artifacts_changed": 4,
+            "artifacts_created": 0,
+            "artifacts_updated": 1,
+            "note": "AGENT_HANDOVER_AUTOMATION.md v1.1.5\u2192v1.2.0 propagated. .github/agents/*.md (3 files) escalated to CS2 per PROHIB-002 \u2014 DRAFT PR only, CS2 merge required.",
+            "issue_ref": "APGI-cmy/app_management_centre#layer-down-b54d57b5",
+            "status": "PARTIAL \u2014 agent files escalated to CS2"
         }
     ]
 }
