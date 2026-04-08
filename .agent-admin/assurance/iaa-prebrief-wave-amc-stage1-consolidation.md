@@ -289,4 +289,4 @@ IAA session number for the assurance invocation will be session-026 (session-025
 **Authority**: CS2 (Johan Ras / @APGI-cmy)  
 **IAA Version**: 6.2.0  
 **Pre-Brief Reference**: IAA-PREBRIEF-wave-amc-stage1-consolidation-20260408  
-**Status**: COMMITTED — pending SHA
+**Status**: COMMITTED — SHA 40533cc
