@@ -2,10 +2,10 @@
     "schema_version": "1.0.0",
     "consumer_repo": "APGI-cmy/app_management_centre",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
-    "last_layer_down_commit": "843cc6dc4dd88bee911ea21d809e72f28e7b93cf",
-    "last_updated": "2026-04-06T09:00:00Z",
+    "last_layer_down_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
+    "last_updated": "2026-04-08T09:38:53Z",
     "alignment_status": "ALIGNED",
-    "total_artifacts": 11,
+    "total_artifacts": 12,
     "artifacts": [
         {
             "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -13,9 +13,9 @@
             "version": "1.0.0",
             "type": "canon",
             "layer_down_status": "INTERNAL",
-            "canonical_commit": "6bbc3bafa07208249f7532898c8e74b8c460cd4d",
-            "layered_down_at": "2026-04-05T11:47:33Z",
-            "file_hash_sha256": "dd1c1ef135e9283aeec28a7e219666f0830b5948dffebe75b95a9df824548d47",
+            "canonical_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
+            "layered_down_at": "2026-04-08T09:38:53Z",
+            "file_hash_sha256": "5c186e929fb3e554941a89a5530885a94e2cd4ecbf6bf97558295ba7e4285f9e",
             "action": "UPDATED"
         },
         {
@@ -120,12 +120,67 @@
         {
             "filename": "AGENT_HANDOVER_AUTOMATION.md",
             "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "type": "canon",
             "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "843cc6dc4dd88bee911ea21d809e72f28e7b93cf",
-            "layered_down_at": "2026-04-06T09:00:00Z",
-            "file_hash_sha256": "39867b98a8d68ceebc3676b8066070e3b410e6f68a954bfd28089e0ef3d24514",
+            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
+            "layered_down_at": "2026-04-08T08:46:30Z",
+            "file_hash_sha256": "cff4158b2646246ea68de535398cc00e60c9c4424cfad7d6e239f51427f01d3c",
+            "action": "UPDATED"
+        },
+        {
+            "filename": "FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
+            "path": "governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
+            "version": "1.1.0",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
+            "layered_down_at": "2026-04-08T08:46:30Z",
+            "file_hash_sha256": "56c2ea0b5f50b479a75d7f1cb05e601c6f971461e3a9dc2a662b9f09a6e306b8",
+            "action": "UPDATED"
+        },
+        {
+            "filename": "MERGE_GATE_PHILOSOPHY.md",
+            "path": "governance/canon/MERGE_GATE_PHILOSOPHY.md",
+            "version": "2.1.0",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
+            "layered_down_at": "2026-04-08T08:46:30Z",
+            "file_hash_sha256": "315ee14f3a8abd882f212463983d3115ace9adbb64f3a77f2cbdc47e2bca5774",
+            "action": "UPDATED"
+        },
+        {
+            "filename": "POLICY-NO-ONLY-LANGUAGE.md",
+            "path": "governance/policy/POLICY-NO-ONLY-LANGUAGE.md",
+            "version": "v1.2",
+            "type": "policy",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
+            "layered_down_at": "2026-04-08T08:46:30Z",
+            "file_hash_sha256": "6d50f484cf2ab84527a8c940d47138657ce81c71f93f51a76e19a74220f5dc09",
+            "action": "UPDATED"
+        },
+        {
+            "filename": "minimizing_language_patterns.json",
+            "path": "governance/policy/minimizing_language_patterns.json",
+            "version": "1.1.0",
+            "type": "policy",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
+            "layered_down_at": "2026-04-08T08:46:30Z",
+            "file_hash_sha256": "80fbe2f6bcc9c4c245e1dd2231fa397d2cd761fdee48a321a38cf87d0ceb39a0",
+            "action": "CREATED"
+        },
+        {
+            "filename": "COMMENT_ONLY_AGENT_SESSION_PROTOCOL.md",
+            "path": "governance/canon/COMMENT_ONLY_AGENT_SESSION_PROTOCOL.md",
+            "version": "1.0.0",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
+            "layered_down_at": "2026-04-08T09:38:53Z",
+            "file_hash_sha256": "3b342b6fa746ad418a767f46c38dca5ff19a5e5f4ee72d766645337e5211b29c",
             "action": "CREATED"
         }
     ],
@@ -163,6 +218,17 @@
             "artifacts_created": 1,
             "artifacts_updated": 0,
             "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-06",
+            "status": "COMPLETE"
+        },
+        {
+            "layer_down_id": "layer-down-2026-04-08-939f1b0b",
+            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
+            "timestamp": "2026-04-08T08:46:30Z",
+            "trigger": "Merge pull request -1326 from APGI-cmy-copilot-opojd-harden-complete-jobs",
+            "artifacts_changed": 5,
+            "artifacts_created": 1,
+            "artifacts_updated": 4,
+            "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-08",
             "status": "COMPLETE"
         }
     ]
