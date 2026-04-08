@@ -2,10 +2,10 @@
     "schema_version": "1.0.0",
     "consumer_repo": "APGI-cmy/app_management_centre",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
-    "last_layer_down_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
-    "last_updated": "2026-04-08T09:38:53Z",
+    "last_layer_down_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+    "last_updated": "2026-04-08T14:38:01Z",
     "alignment_status": "ALIGNED",
-    "total_artifacts": 12,
+    "total_artifacts": 19,
     "artifacts": [
         {
             "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -13,9 +13,9 @@
             "version": "1.0.0",
             "type": "canon",
             "layer_down_status": "INTERNAL",
-            "canonical_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
-            "layered_down_at": "2026-04-08T09:38:53Z",
-            "file_hash_sha256": "5c186e929fb3e554941a89a5530885a94e2cd4ecbf6bf97558295ba7e4285f9e",
+            "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+            "layered_down_at": "2026-04-08T14:38:01Z",
+            "file_hash_sha256": "53c8f4d26178cdc49dd9dc9cb9ec17e26ed0c9171b2d23360b96f27c5fdb1814",
             "action": "UPDATED"
         },
         {
@@ -120,23 +120,23 @@
         {
             "filename": "AGENT_HANDOVER_AUTOMATION.md",
             "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
-            "version": "1.1.5",
+            "version": "1.2.0",
             "type": "canon",
             "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
-            "layered_down_at": "2026-04-08T08:46:30Z",
-            "file_hash_sha256": "cff4158b2646246ea68de535398cc00e60c9c4424cfad7d6e239f51427f01d3c",
+            "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+            "layered_down_at": "2026-04-08T14:38:01Z",
+            "file_hash_sha256": "89b887ced3efb1c508edcf1875aef05f4cc9a75bab3c040c32327bdd1bca3f23",
             "action": "UPDATED"
         },
         {
             "filename": "FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
             "path": "governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "type": "canon",
             "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "939f1b0b7622771b0c290f4feaab4215ee086eac",
-            "layered_down_at": "2026-04-08T08:46:30Z",
-            "file_hash_sha256": "56c2ea0b5f50b479a75d7f1cb05e601c6f971461e3a9dc2a662b9f09a6e306b8",
+            "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+            "layered_down_at": "2026-04-08T14:38:01Z",
+            "file_hash_sha256": "c988e6e56012f890e19b4927eda0bdc249050c23b96864829d36437fcf535865",
             "action": "UPDATED"
         },
         {
@@ -181,6 +181,39 @@
             "canonical_commit": "bfe47f6dec7786620065a33f37cdc3cd974f432a",
             "layered_down_at": "2026-04-08T09:38:53Z",
             "file_hash_sha256": "3b342b6fa746ad418a767f46c38dca5ff19a5e5f4ee72d766645337e5211b29c",
+            "action": "CREATED"
+        },
+        {
+            "filename": "EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
+            "path": "governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
+            "version": "1.0.0",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+            "layered_down_at": "2026-04-08T14:38:01Z",
+            "file_hash_sha256": "8a65c7c556248b5c70f0cecc230c7941e734169a3dbdf85c8358476716309c7f",
+            "action": "CREATED"
+        },
+        {
+            "filename": "IAA_PRE_BRIEF_PROTOCOL.md",
+            "path": "governance/canon/IAA_PRE_BRIEF_PROTOCOL.md",
+            "version": "1.2.1",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+            "layered_down_at": "2026-04-08T14:38:01Z",
+            "file_hash_sha256": "15d220e5bf6167cf8fec640af62db8ec1e67753f00f079028efa48e1ff531a59",
+            "action": "CREATED"
+        },
+        {
+            "filename": "INDEPENDENT_ASSURANCE_AGENT_CANON.md",
+            "path": "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
+            "version": "1.4.0",
+            "type": "canon",
+            "layer_down_status": "PUBLIC_API",
+            "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+            "layered_down_at": "2026-04-08T14:38:01Z",
+            "file_hash_sha256": "6c2b4e2b22d8601db26145c0f091b6afe022005305810885a16544ae9743ddd7",
             "action": "CREATED"
         }
     ],
@@ -228,6 +261,17 @@
             "artifacts_changed": 5,
             "artifacts_created": 1,
             "artifacts_updated": 4,
+            "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-08",
+            "status": "COMPLETE"
+        },
+        {
+            "layer_down_id": "layer-down-2026-04-08-63cdfb06",
+            "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+            "timestamp": "2026-04-08T14:38:01Z",
+            "trigger": "Merge pull request -1332 from APGI-cmy-copilot-create-canon-execution-ceremony-admin",
+            "artifacts_changed": 6,
+            "artifacts_created": 3,
+            "artifacts_updated": 3,
             "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-08",
             "status": "COMPLETE"
         }
