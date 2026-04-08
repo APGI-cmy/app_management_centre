@@ -38,3 +38,4 @@
 | 2026-04-08 | independent-assurance-agent | session-024 | Phase 4 | Liaison layer-down must update governance/CANON_INVENTORY.json alongside GOVERNANCE_ALIGNMENT_INVENTORY.json — both are required | session-024-20260408.md |
 | 2026-04-08 | independent-assurance-agent | session-026 | systemic-fix | CANON_INVENTORY update step missing from governance-liaison layer-down protocol — systemic blocker — upstream hardening required | session-026-20260408.md |
 | 2026-04-08 | independent-assurance-agent | session-026 | ceremony | PHASE_B_BLOCKING misrepresented as PHASE_A_ADVISORY in PREHANDOVER section 7 — standardise IAA invocation section language | session-026-20260408.md |
+| 2026-04-08 | independent-assurance-agent | session-027 | Phase 3 | Add post-layer-down CANON_INVENTORY cross-ref against GOVERNANCE_ALIGNMENT_INVENTORY to catch inherited stale hashes from canonical source | session-027-20260408.md |
