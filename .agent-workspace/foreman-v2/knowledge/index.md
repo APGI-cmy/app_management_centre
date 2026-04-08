@@ -1,8 +1,9 @@
 # Foreman-v2-agent — Tier 2 Knowledge Index
 
-> **Version**: 1.0.0 — AMC Consumer Copy
-> **Last Updated**: 2026-04-06
+> **Version**: 1.1.0 — AMC Consumer Copy
+> **Last Updated**: 2026-04-07
 > **Canon Home**: APGI-cmy/maturion-foreman-governance
+> **Canon Commit**: `038546344e8d67823c63464dc038841bd947405b` (maturion-isms)
 > **Staleness Policy**: Flag for refresh if canon version exceeds this by 1 minor version.
 
 ---
@@ -11,10 +12,12 @@
 
 | File | Purpose | Status |
 |---|---|---|
-| `domain-flag-index.md` | POLC orchestration mode flags per domain | STUB — create from canon |
+| `domain-flag-index.md` | POLC orchestration mode flags per domain | ✅ PRESENT — layered down 2026-04-07 (v1.0.0) |
 | `specialist-registry.md` | Builder agent registry for task delegation | STUB — create from canon |
-| `FAIL-ONLY-ONCE.md` | Breach registry and A-rules for foreman-v2 | STUB — create from canon |
+| `FAIL-ONLY-ONCE.md` | Breach registry and A-rules for foreman-v2 | ✅ PRESENT — layered down 2026-04-07 (v4.1.0) |
 | `session-memory-template.md` | Session memory template | STUB — create from canon |
+| `prehandover-template.md` | PREHANDOVER proof template (v1.7.0) | ✅ PRESENT — layered down 2026-04-07 (v1.7.0) |
+| `wave-reconciliation-checklist.md` | Wave close checklist — incidents, niggles, liveness | ✅ PRESENT — layered down 2026-04-07 (v1.0.0) |
 
 ---
 
@@ -51,7 +54,8 @@
 
 ## Notes
 
-This is a minimum viable Tier 2 stub created during AMC alignment (session-009-20260406).
-Full Tier 2 knowledge sync from `APGI-cmy/maturion-foreman-governance` is required.
-All files above are marked STUB and must be populated from the canon source before
-foreman-v2-agent can operate with full capability in this repository.
+Tier 2 knowledge layer-down executed 2026-04-07 (CodexAdvisor session-013).
+Source commit: `038546344e8d67823c63464dc038841bd947405b` (APGI-cmy/maturion-isms).
+Files layered down: `FAIL-ONLY-ONCE.md` (v4.1.0), `prehandover-template.md` (v1.7.0),
+`wave-reconciliation-checklist.md` (v1.0.0), `domain-flag-index.md` (v1.0.0).
+Remaining stubs: `specialist-registry.md`, `session-memory-template.md` — require separate layer-down.
