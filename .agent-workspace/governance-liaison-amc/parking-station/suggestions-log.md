@@ -11,3 +11,6 @@
 | 2026-04-08 | governance-liaison-amc | session-028 | CI_ENHANCEMENT | Add CI check for ripple-inbox status:processing entries before merge (prevent OVL-LA-003 failures) | session-028-20260408.md |
 | 2026-04-08 | governance-liaison-amc | session-028 | TOOLING | Auto-calculate CANON_INVENTORY total_canons from array length to prevent drift | session-028-20260408.md |
 | 2026-04-08 | governance-liaison-amc | session-028 | TOOLING | Dedicated ripple-inbox archiving script to reduce risk of missing entries | session-028-20260408.md |
+| 2026-04-09 | governance-liaison-amc | session-004 | process | Auto-supersede prior escalations for same target file when new ripple updates same agent contract | session-004-20260409.md |
+| 2026-04-09 | governance-liaison-amc | session-004 | tooling | Add diff-comparison step to ripple processing to show version delta in escalation document | session-004-20260409.md |
+| 2026-04-09 | governance-liaison-amc | session-004 | documentation | GOVERNANCE_ALIGNMENT_INVENTORY supersedes field for PENDING_NOT_APPLIED artifacts linking prior version | session-004-20260409.md |
