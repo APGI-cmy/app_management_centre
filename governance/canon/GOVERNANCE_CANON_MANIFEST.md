@@ -260,12 +260,12 @@ These policies are located in `governance/policy/` and establish constitutional 
 
 ## 4. Governance Public API Summary
 
-**Total Canon Files**: 92  
+**Total Canon Files**: 94  
 **Total Policy Files**: 15  
-**Combined Total**: 107  
-**PUBLIC_API**: 78 files (73%)  
+**Combined Total**: 109  
+**PUBLIC_API**: 79 files (73%)  
 **OPTIONAL**: 16 files (15%)  
-**INTERNAL**: 13 files (12%)  
+**INTERNAL**: 14 files (13%)  
 **DEPRECATED**: 0 files (0%)
 
 ### 4.1 Critical Path Canon (Must-Have for Downstream Repos)
