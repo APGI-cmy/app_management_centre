@@ -1,0 +1,20 @@
+{
+    "session": "session-004-20260409",
+    "ripple_events": [
+        {
+            "dispatch_id": "layer-down-f5b61144-20260409",
+            "event_type": "governance_ripple",
+            "canonical_commit": "f5b61144679b3676f43d056fdb1ec4dea7131937",
+            "inventory_version": "1.0.0",
+            "changed_paths": [
+                ".github/agents/CodexAdvisor-agent.md"
+            ],
+            "sender": "APGI-cmy/maturion-foreman-governance",
+            "timestamp": "2026-04-09T06:45:14Z",
+            "trigger": "Update CodexAdvisor-agent.md",
+            "processing_status": "archived",
+            "processing_result": "PROHIB-002 triggered — agent file escalated to CS2. Proposed consumer artifact created. Ripple archived.",
+            "archived_at": "2026-04-09T13:10:00Z"
+        }
+    ]
+}
