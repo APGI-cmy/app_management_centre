@@ -457,7 +457,9 @@ jobs:
           # Check iaa_audit_token value
           if grep -q 'iaa_audit_token:' "$PREHANDOVER_FILE"; then
             TOKEN_VALUE=$(grep 'iaa_audit_token:' "$PREHANDOVER_FILE" | head -1 | sed 's/.*iaa_audit_token:[[:space:]]*//')
-            if echo "$TOKEN_VALUE" | grep -qi 'PENDING'; then
+            # Strip leading/trailing whitespace for exact comparison
+            TOKEN_TRIMMED=$(echo "$TOKEN_VALUE" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            if echo "$TOKEN_TRIMMED" | grep -qiE '^PENDING$'; then
               echo "token_pending=true" >> "$GITHUB_OUTPUT"
             else
               echo "token_pending=false" >> "$GITHUB_OUTPUT"
