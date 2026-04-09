@@ -213,7 +213,7 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-08
+  last_updated: 2026-04-09
   contract_version: 4.0.0
   change_summary: "Full rewrite for structural correctness, prompt-size compliance, PHASE_B_BLOCKING enforcement, and explicit final-IAA-before-merge-ready rule."
   tier2_knowledge: ".agent-workspace/CodexAdvisor-agent/knowledge/index.md"
