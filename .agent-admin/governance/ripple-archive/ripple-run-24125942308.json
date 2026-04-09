@@ -1,0 +1,18 @@
+{
+  "dispatch_id": "run-24125942308",
+  "event_type": "governance_ripple",
+  "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+  "inventory_version": "1.0.0",
+  "changed_paths": [
+    "governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
+    "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
+    "governance/canon/IAA_PRE_BRIEF_PROTOCOL.md",
+    "governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md"
+  ],
+  "sender": "APGI-cmy/maturion-foreman-governance",
+  "timestamp": "2026-04-08T08:33:34Z",
+  "status": "archived",
+  "archived_at": "2026-04-08T16:15:01Z",
+  "outcome": "auto-merged",
+  "pr_number": 1041
+}

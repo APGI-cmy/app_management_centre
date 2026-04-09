@@ -8,3 +8,6 @@
 | 2026-04-09 | governance-liaison-amc | session-003 | process | Escalation should auto-flag CodexAdvisor review (not just CS2) for agent contract files per AGCFPP-001 §3-§4 | session-003-20260409.md |
 | 2026-04-09 | governance-liaison-amc | session-003 | tooling | Add agent-file layer-down script for consumer-specific path adaptations (this_copy, canon_inventory, scope.repository) | session-003-20260409.md |
 | 2026-04-09 | governance-liaison-amc | session-003 | documentation | GOVERNANCE_ALIGNMENT_INVENTORY.json path should be explicit in issue template (currently no path given) | session-003-20260409.md |
+| 2026-04-08 | governance-liaison-amc | session-028 | CI_ENHANCEMENT | Add CI check for ripple-inbox status:processing entries before merge (prevent OVL-LA-003 failures) | session-028-20260408.md |
+| 2026-04-08 | governance-liaison-amc | session-028 | TOOLING | Auto-calculate CANON_INVENTORY total_canons from array length to prevent drift | session-028-20260408.md |
+| 2026-04-08 | governance-liaison-amc | session-028 | TOOLING | Dedicated ripple-inbox archiving script to reduce risk of missing entries | session-028-20260408.md |
