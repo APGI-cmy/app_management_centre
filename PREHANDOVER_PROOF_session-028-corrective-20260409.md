@@ -46,7 +46,7 @@ nothing to commit, working tree clean
 
 ```
 100644 blob 1ed8ec1466e8f7ed15a8116888d192084adb951e	PREHANDOVER_PROOF_session-028-20260408.md
-100644 blob 598d07d839a0f0fe2173fecaec8830dea8655297	PREHANDOVER_PROOF_session-028-corrective-20260409.md
+100644 blob 26e87402bd6f05a3acaca89caae776cba9d7659a	PREHANDOVER_PROOF_session-028-corrective-20260409.md
 100644 blob 6e08f59d2439d8814eef03093500906844a3ab04	.agent-admin/assurance/iaa-token-session-028-wave-ecap001-layerdown-20260408.md
 100644 blob 01aeeb1dc5c225da46a5c134259c3a1a31c3444d	.agent-admin/assurance/iaa-token-session-029-wave-ecap001-corrective-20260409.md
 100644 blob dc0625c4b86b0c929ded209ea1a47261654dc572	.agent-workspace/governance-liaison-amc/memory/session-028-corrective-20260409.md
@@ -54,7 +54,7 @@ nothing to commit, working tree clean
 
 ### Commit SHA
 
-`afa1d467b1811a9ae6a67f94a7b3f28fb02d61e7`
+`2278fca4f62d604b234bb8e7cedec08cff5a73b0`
 
 ---
 
