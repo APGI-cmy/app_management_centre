@@ -118,7 +118,7 @@ capabilities:
     non_draft_pr_before_final_iaa: PROHIBITED
 
 can_invoke:
-  - agent: governance-liaison-isms-agent
+  - agent: governance-liaison-amc-agent
     when: "Consumer-repo layer-down or cross-repo governance propagation is required."
     how: "Task delegation with documented expected output."
   - agent: foreman-v2-agent
