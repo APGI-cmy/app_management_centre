@@ -45,12 +45,14 @@ nothing to commit, working tree clean
 ### Git ls-tree HEAD — All Corrected Artifacts Present
 
 ```
-[POPULATED AT COMMIT TIME — see commit SHA below]
+100644 blob 6c8d93efbd56deffb996592e030fdf0733e16933	.agent-workspace/governance-liaison-amc/memory/session-028-corrective-20260409.md
+100644 blob b1f2b031b139f750f9c23f4116fda2970ef0cccc	PREHANDOVER_PROOF_session-028-20260408.md
+100644 blob 19dcaeaeeab453780f26cad8990e9f2cd01e68e5	PREHANDOVER_PROOF_session-028-corrective-20260409.md
 ```
 
 ### Commit SHA
 
-`[POPULATED AT COMMIT TIME]`
+`f4eb6337546408829c7fc1c9874bc1ffa557a28d`
 
 ---
 
