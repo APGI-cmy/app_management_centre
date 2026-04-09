@@ -6,6 +6,8 @@
 **HEAD Commit Reviewed**: `a6e00f7a15785340d5cc6663185b82419284bbbb`  
 **Token Reference**: IAA-session-029-wave-ecap001-corrective-20260409-PASS
 
+## PHASE_B_BLOCKING_TOKEN: IAA-session-029-wave-ecap001-corrective-20260409-PASS
+
 ---
 
 ## ═══════════════════════════════════════

@@ -6,6 +6,8 @@
 **Merge Commit**: `24dc14ff97fab4b691e5cd2b017b85c00790a6df`  
 **Token Reference**: IAA-session-028-wave-ecap001-layerdown-20260408-PASS
 
+## PHASE_B_BLOCKING_TOKEN: IAA-session-028-wave-ecap001-layerdown-20260408-PASS
+
 ---
 
 ## Context Note
