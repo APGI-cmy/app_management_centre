@@ -1,9 +1,9 @@
 # IAA ASSURANCE TOKEN — session-003-wave1-20260409
 
-## PHASE_B_BLOCKING_TOKEN: IAA-030-session-003-wave1-20260409-PASS
+## PHASE_B_BLOCKING_TOKEN: IAA-session-003-wave1-20260409-PASS
 
 **IAA Session**: IAA-030 (re-audit of IAA-029 REJECTION-PACKAGE)  
-**Token**: IAA-030-session-003-wave1-20260409-PASS  
+**Token**: IAA-session-003-wave1-20260409-PASS  
 **Issued**: 2026-04-09  
 **Agent Audited**: governance-liaison-amc  
 **Handover Session**: session-003-20260409  
