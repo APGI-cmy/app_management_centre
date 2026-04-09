@@ -45,14 +45,16 @@ nothing to commit, working tree clean
 ### Git ls-tree HEAD — All Corrected Artifacts Present
 
 ```
-100644 blob 6c8d93efbd56deffb996592e030fdf0733e16933	.agent-workspace/governance-liaison-amc/memory/session-028-corrective-20260409.md
-100644 blob b1f2b031b139f750f9c23f4116fda2970ef0cccc	PREHANDOVER_PROOF_session-028-20260408.md
-100644 blob 19dcaeaeeab453780f26cad8990e9f2cd01e68e5	PREHANDOVER_PROOF_session-028-corrective-20260409.md
+100644 blob 1ed8ec1466e8f7ed15a8116888d192084adb951e	PREHANDOVER_PROOF_session-028-20260408.md
+100644 blob 598d07d839a0f0fe2173fecaec8830dea8655297	PREHANDOVER_PROOF_session-028-corrective-20260409.md
+100644 blob 6e08f59d2439d8814eef03093500906844a3ab04	.agent-admin/assurance/iaa-token-session-028-wave-ecap001-layerdown-20260408.md
+100644 blob 01aeeb1dc5c225da46a5c134259c3a1a31c3444d	.agent-admin/assurance/iaa-token-session-029-wave-ecap001-corrective-20260409.md
+100644 blob dc0625c4b86b0c929ded209ea1a47261654dc572	.agent-workspace/governance-liaison-amc/memory/session-028-corrective-20260409.md
 ```
 
 ### Commit SHA
 
-`f4eb6337546408829c7fc1c9874bc1ffa557a28d`
+`afa1d467b1811a9ae6a67f94a7b3f28fb02d61e7`
 
 ---
 
