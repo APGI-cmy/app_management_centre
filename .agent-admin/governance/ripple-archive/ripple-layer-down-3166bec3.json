@@ -8,8 +8,11 @@
   ],
   "sender": "APGI-cmy/maturion-foreman-governance",
   "timestamp": "2026-04-09T06:33:21Z",
-  "status": "processing",
+  "status": "archived",
   "agent_file_detected": true,
   "cs2_escalation_required": true,
-  "pr_mode": "DRAFT"
+  "pr_mode": "DRAFT",
+  "outcome": "DRAFT escalation created \u2014 CS2 approval required \u2014 agent file change reverted per PROHIB-002 \u2014 proposed patch in escalation artifact",
+  "archived_at": "2026-04-09T10:05:53Z",
+  "pr_number": null
 }
