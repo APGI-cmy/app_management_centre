@@ -1,10 +1,11 @@
 {
-  "last_check": "2026-04-08T14:38:01Z",
+  "last_check": "2026-04-09T10:05:53Z",
   "canonical_version": "1.0.0",
-  "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
+  "canonical_commit": "3166bec3a1f9a606a89debf32d83a884508b6c4c",
   "local_version": "1.0.0",
   "local_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
-  "drift_detected": "false",
-  "needs_alignment": "false",
-  "alignment_method": "align-governance.sh"
+  "drift_detected": "true",
+  "needs_alignment": "true",
+  "alignment_method": "align-governance.sh",
+  "alignment_note": "Agent contract file .github/agents/CodexAdvisor-agent.md updated at canonical source. DRAFT PR created. CS2 approval required before merge."
 }
