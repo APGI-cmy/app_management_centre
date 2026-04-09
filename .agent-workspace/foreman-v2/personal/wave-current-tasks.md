@@ -100,7 +100,10 @@ session: session-022
 date: 20260409
 iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-ecap-001-corrective.md
 iaa_prebrief_status: COMMITTED (SHA: 3aca887a7ab4095789642e6c1853608206fda402)
-cs2_authorization: Issue opened by @APGI-cmy — valid wave-start authorization
+cs2_authorization: AUTHORIZED
+cs2_authorization_issue_ref: ISSUE_OR_COMMENT_LINK_REQUIRED
+cs2_authorization_opened_by: @APGI-cmy
+cs2_authorization_scope: valid wave-start authorization
 
 ## Wave Description
 
