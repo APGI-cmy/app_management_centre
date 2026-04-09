@@ -5,8 +5,8 @@
 **Wave**: wave-ecap001-layerdown  
 **Date**: 2026-04-08  
 **Canonical Commit**: 63cdfb06586f567c456641edd7ca464c47b7751e  
-**iaa_audit_token**: IAA-session-002-wave1-20260408-PASS (file: `.agent-admin/assurance/iaa-token-session-028-wave1-20260408.md`)  
-**iaa_token_corrective_note**: Original token reference was `IAA-session-028-wave-ecap001-layerdown-20260408-PASS` (no dedicated file existed under that name). Corrected per CORR-005 — actual token issued as IAA-session-002-wave1-20260408-PASS, stored in `iaa-token-session-028-wave1-20260408.md`. Cross-reference confirmed. CS2 authorized correction via issue "fix(ecap-001): resolve PREHANDOVER evidence defects — AMC corrective follow-up PR #1041".
+**iaa_audit_token**: IAA-session-028-wave-ecap001-layerdown-20260408-PASS (file: `.agent-admin/assurance/iaa-token-session-028-wave-ecap001-layerdown-20260408.md`)  
+**iaa_token_corrective_note**: PREHANDOVER token trail aligned to the dedicated `wave-ecap001-layerdown` IAA token reference required by the ECAP-001 pre-brief. The prior cross-reference to `IAA-session-002-wave1-20260408-PASS` in `iaa-token-session-028-wave1-20260408.md` was removed because it described a different wave/PR and was not the correct evidence record for this PREHANDOVER proof.
 
 ---
 
