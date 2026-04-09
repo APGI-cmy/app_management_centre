@@ -1,5 +1,7 @@
 # IAA ASSURANCE-TOKEN — Session 005 — Wave 1 — 2026-04-09
 
+## PHASE_B_BLOCKING_TOKEN: IAA-session-005-wave1-20260409-PASS
+
 **Token Reference**: IAA-session-005-wave1-20260409-PASS
 **Date**: 2026-04-09
 **IAA Session**: session-005 (IAA internal: audit invocation for governance-liaison-amc session-005-20260409)
