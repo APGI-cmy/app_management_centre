@@ -2,8 +2,8 @@
     "schema_version": "1.0.0",
     "consumer_repo": "APGI-cmy/app_management_centre",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
-    "last_layer_down_commit": "f5b61144679b3676f43d056fdb1ec4dea7131937",
-    "last_updated": "2026-04-09T13:10:00Z",
+    "last_layer_down_commit": "f68b7d993b080cdd721445f1f39e4b77ad0d150f",
+    "last_updated": "2026-04-09T14:04:20Z",
     "alignment_status": "PENDING_CS2_APPROVAL",
     "total_artifacts": 20,
     "artifacts": [
@@ -219,16 +219,16 @@
         {
             "filename": "CodexAdvisor-agent.md",
             "path": ".github/agents/CodexAdvisor-agent.md",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "type": "agent_contract",
             "layer_down_status": "AGENT_FILE_CS2_GATED",
-            "canonical_commit": "f5b61144679b3676f43d056fdb1ec4dea7131937",
-            "layered_down_at": "2026-04-09T13:10:00Z",
-            "file_hash_sha256": "beb11f3b6eb3f9b84f5b7bcbb3a64ccf1092ef6411ceda4604d0814d2284d2d4",
+            "canonical_commit": "f68b7d993b080cdd721445f1f39e4b77ad0d150f",
+            "layered_down_at": "2026-04-09T14:04:20Z",
+            "file_hash_sha256": "11b32200c1d54049641f377e7a3e2ba18108ec12a98824334be50420e55ef250",
             "action": "PENDING_NOT_APPLIED",
             "cs2_approval_required": true,
             "pr_mode": "DRAFT",
-            "notes": "Protected target path only \u2014 this PR does not update .github/agents/CodexAdvisor-agent.md. The 4.0.1 contract content is pending CS2/CodexAdvisor application from the escalation inbox; contract_version remains 3.4.0 in-repo until approval and application.",
+            "notes": "Protected target path only \u2014 this PR does not update .github/agents/CodexAdvisor-agent.md. The 4.0.2 contract content is pending CS2/CodexAdvisor application from the escalation inbox; contract_version remains 4.0.0 in-repo until approval and application.",
             "applied_to_repo": false
         }
     ],
@@ -301,6 +301,18 @@
             "artifacts_updated": 3,
             "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-08",
             "status": "COMPLETE"
+        }
+    ],
+    "history": [
+        {
+            "layer_down_commit": "f68b7d993b080cdd721445f1f39e4b77ad0d150f",
+            "timestamp": "2026-04-09T14:04:20Z",
+            "session": "session-005-20260409",
+            "changed_artifacts": [
+                "CodexAdvisor-agent.md"
+            ],
+            "status": "PENDING_CS2_APPROVAL",
+            "notes": "Agent contract file change \u2014 escalated to CS2 per PROHIB-002/AGCFPP-001. Supersedes f5b61144 (v4.0.1)."
         }
     ]
 }
