@@ -3,7 +3,7 @@
 **Agent**: independent-assurance-agent
 **Pre-Brief Version**: 1.0.0
 **Date**: 2026-04-08
-**Wave**: ecap-001-corrective
+**Wave**: wave-ecap001-corrective
 **Branch (declared in request)**: copilot/fix-ecap-001-resolve-prehandover-evidence-defects
 **Branch (current working HEAD)**: copilot/evidence-defects-prehandover ⚠️ — see §5 Scope Blockers
 **Issue**: fix(ecap-001): resolve PREHANDOVER evidence defects — AMC corrective follow-up PR #1041
