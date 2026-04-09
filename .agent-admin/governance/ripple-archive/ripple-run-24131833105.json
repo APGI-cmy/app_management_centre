@@ -14,5 +14,7 @@
   "trigger": "issues",
   "status": "archived",
   "archived_at": "2026-04-08T12:28:58Z",
-  "processing_notes": "AGENT_HANDOVER_AUTOMATION.md propagated (v1.1.5→v1.2.0). Agent files escalated to CS2 per PROHIB-002. Session: session-002-20260408."
+  "processing_notes": "AGENT_HANDOVER_AUTOMATION.md propagated (v1.1.5\u2192v1.2.0). Agent files escalated to CS2 per PROHIB-002. Session: session-002-20260408.",
+  "pr_number": 1041,
+  "outcome": "escalated-to-cs2"
 }
