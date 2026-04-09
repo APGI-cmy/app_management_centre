@@ -1100,7 +1100,7 @@ Before session ends, verify:
 **Approval**: CS2 (Johan Ras)  
 **Effective Date**: 2026-02-17
 
-## Execution Ceremony Administration Integration (v1.1.6)
+## Execution Ceremony Administration Integration
 
 When the Foreman appoints an `execution-ceremony-admin-agent` for ceremony bundle preparation, the Phase 4 handover sequence is structured as follows:
 
@@ -1164,7 +1164,7 @@ When the `execution-ceremony-admin-agent` returns the ceremony bundle to the For
 - `governance/canon/AGENT_INDUCTION_PROTOCOL.md` - Phase 2 template
 - `governance/canon/AGENT_PRIORITY_SYSTEM.md` - Priority codes
 - `governance/canon/EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md` - Evidence requirements
-- `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` - Execution ceremony admin role and handover sequence (v1.1.6)
+- `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` - Execution ceremony admin role and handover sequence (v1.0.0)
 
 ---
 

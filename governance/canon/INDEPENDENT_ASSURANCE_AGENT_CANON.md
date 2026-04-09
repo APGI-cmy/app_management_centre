@@ -625,7 +625,7 @@ The failure mode this rule prevents: the `execution-ceremony-admin-agent` produc
 - `governance/canon/LIVING_AGENT_SYSTEM.md` v6.2.0 — Living Agent framework
 - `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md` — Knowledge architecture
 - `governance/canon/AGENT_CONTRACT_ARCHITECTURE.md` — Four-phase contract architecture
-- `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md` v1.0.0 — IAA Pre-Brief Protocol (proactive assurance)
+- `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md` v1.2.1 — IAA Pre-Brief Protocol (proactive assurance)
 - `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` v1.0.0 — Ceremony admin role and handover sequence
 - `governance/quality/agent-integrity/` — Agent integrity reference store
 - `governance/CANON_INVENTORY.json` — Canon hash registry

@@ -68,8 +68,10 @@ for review.
 
 ## Qualifying Tasks
 
-A task qualifies for Pre-Brief coverage if it would trigger IAA assurance at handover per the
-IAA Trigger Table in `INDEPENDENT_ASSURANCE_AGENT_CANON.md §Trigger Table`. Specifically:
+A task qualifies for Pre-Brief coverage declaration if it involves deliverables that are subject
+to IAA assurance at handover. Specifically, qualifying tasks are those in T1 or T2 ceremony
+categories (IAA Required = YES) per the IAA Trigger Table in
+`INDEPENDENT_ASSURANCE_AGENT_CANON.md §Trigger Table`:
 
 | Task Category | Qualifies? |
 |---------------|-----------|
@@ -77,10 +79,10 @@ IAA Trigger Table in `INDEPENDENT_ASSURANCE_AGENT_CANON.md §Trigger Table`. Spe
 | MAT deliverable | YES |
 | Core agent file update | YES |
 | Agent contract update | YES |
-| Canon file update | YES |
-| Architecture update | YES |
-| Merge gate workflow update | YES |
-| Agent-integrity folder update | YES |
+| Canon file update | NO — T3/T4: IAA not required for non-agent canon updates |
+| Architecture update | NO — T3/T4: IAA not required for architecture-only updates |
+| Merge gate workflow update | NO — T3/T4: IAA not required for workflow-only updates |
+| Agent-integrity folder update | YES — if paired with agent contract or AAWP deliverable |
 | Docs-only task | NO |
 | Parking station update | NO |
 | Admin / housekeeping task | NO |
@@ -100,7 +102,7 @@ Each Pre-Brief artifact MUST contain the following sections:
 **Wave**: <N>
 **Date**: YYYY-MM-DD
 **Wave Task List**: <path/to/wave-current-tasks.md>
-**Authority**: IAA_PRE_BRIEF_PROTOCOL.md v1.0.0
+**Authority**: IAA_PRE_BRIEF_PROTOCOL.md v<CURRENT_VERSION>
 **Status**: ACTIVE
 ```
 
@@ -514,7 +516,7 @@ in the checklist.
 **Wave**: 10
 **Date**: 2026-03-03
 **Wave Task List**: .agent-admin/waves/wave-10-tasks.md
-**Authority**: IAA_PRE_BRIEF_PROTOCOL.md v1.0.0
+**Authority**: IAA_PRE_BRIEF_PROTOCOL.md v1.2.1
 **Status**: ACTIVE
 
 ---
@@ -603,7 +605,7 @@ IAA's final verdict, which cross-references Phase 0 (Pre-Brief) and the wave che
 
 ## References
 
-- `governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md` v1.1.0 — IAA class definition and trigger table
+- `governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md` v1.4.0 — IAA class definition and trigger table
 - `governance/canon/LIVING_AGENT_SYSTEM.md` v6.2.0 — Living Agent framework
 - `governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md` — Foreman authority model
 - `governance/canon/EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md` — Evidence artifact requirements

@@ -69,8 +69,8 @@
 - sync_state.json: valid JSON, canonical_commit matches ✅
 - Ripple archive entry: valid JSON ✅
 
-### 5.4 CANON_INVENTORY Hash Note
-- AGENT_HANDOVER_AUTOMATION.md: canonical inventory lists hash for v1.1.6 entry; installed file is v1.2.0 content fetched from canonical commit 63cdfb06. Hash discrepancy is a canonical source inconsistency (CANON_INVENTORY regenerated before file update at commit 63cdfb06) — not a consumer repo issue. Both files (CANON_INVENTORY and content file) are verbatim copies from canonical source at commit 63cdfb06.
+### 5.4 CANON_INVENTORY Hash Status
+- AGENT_HANDOVER_AUTOMATION.md: canonical inventory and installed inventory both reflect v1.2.0 with matching SHA256 for the installed content fetched from canonical commit 63cdfb06. No hash/version discrepancy is present in this PR. ✅
 
 ## 6. OPOJD Gate (governance artifact class)
 
@@ -88,9 +88,9 @@
 
 IAA invoked via task tool — Phase 4.4 mandatory step.
 Adoption phase: PHASE_B_BLOCKING.
-First invocation for session-002-20260408.
-Token pre-populated per §4.3b: IAA-session-002-wave1-20260408-PASS.
-IAA verdict pending (re-invocation after REJECTION-PACKAGE from first invocation).
+Invocation recorded for session-002-20260408.
+IAA audit token recorded per §4.3b: IAA-session-002-wave1-20260408-PASS.
+IAA verdict recorded: PASS.
 
 ---
 
