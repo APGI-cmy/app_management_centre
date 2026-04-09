@@ -19,9 +19,9 @@
 
 ## 2. Governance Artifacts Aligned
 
-| Filename | Action | Old Version | New Version | SHA256 (consumer-adapted) |
-|----------|--------|-------------|-------------|---------------------------|
-| .github/agents/CodexAdvisor-agent.md | UPDATED | 3.4.0 | 4.0.0 | 7738510cbc59a5bb2f812c652b9a71c91acaf660f9cdeb0e8b3ed5791aeed426 |
+| Filename | Action | Old Version | New Version | Evidence |
+|----------|--------|-------------|-------------|----------|
+| .github/agents/CodexAdvisor-agent.md | PROPOSED / NOT_APPLIED | 3.4.0 | 4.0.0 (escalation artifact only; committed file remains 3.4.0) | Escalation artifact: `.agent-workspace/governance-liaison-amc/escalation-inbox/blocker-20260409.md` — hash `7738510cbc59a5bb2f812c652b9a71c91acaf660f9cdeb0e8b3ed5791aeed426` |
 
 ## 3. Ancillary Artifacts Updated
 
