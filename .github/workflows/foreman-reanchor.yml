@@ -78,14 +78,10 @@ jobs:
           # For opened/ready_for_review and non-PR events, always allow the post.
           if [ "$EVENT_ACTION" = "synchronize" ]; then
             COMMIT_MSG=$(git log -1 --format="%s %b" 2>/dev/null | tr '[:upper:]' '[:lower:]' || echo "")
-            HANDOVER_KEYWORDS="handover prehandover phase 4 merge gate released session closure opojd"
             SHOULD_POST=false
-            for kw in $HANDOVER_KEYWORDS; do
-              if echo "$COMMIT_MSG" | grep -q "$kw"; then
-                SHOULD_POST=true
-                break
-              fi
-            done
+            if echo "$COMMIT_MSG" | grep -qE 'handover|prehandover|phase.4|merge.gate|released|session.closure|opojd'; then
+              SHOULD_POST=true
+            fi
             echo "should_post=$SHOULD_POST" >> "$GITHUB_OUTPUT"
           else
             echo "should_post=true" >> "$GITHUB_OUTPUT"
