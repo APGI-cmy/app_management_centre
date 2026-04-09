@@ -29,7 +29,7 @@
 |------|--------|
 | governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json | Updated — added CodexAdvisor-agent.md entry, total_artifacts: 19 → 20 |
 | .agent-admin/governance/sync_state.json | Updated — canonical_commit: 3166bec3, drift_detected: true |
-| .agent-admin/governance/ripple-inbox/ripple-layer-down-3166bec3.json | Created — ripple event received |
+| .agent-admin/governance/ripple-archive/ripple-layer-down-3166bec3.json | Created — ripple event received |
 | .agent-workspace/governance-liaison-amc/memory/session-003-20260409.md | Created — session memory |
 | .agent-workspace/governance-liaison-amc/escalation-inbox/blocker-20260409.md | Created — CS2 escalation |
 | .agent-workspace/governance-liaison-amc/parking-station/suggestions-log.md | Updated — 3 new suggestions |
