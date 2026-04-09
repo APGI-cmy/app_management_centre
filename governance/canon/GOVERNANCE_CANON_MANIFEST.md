@@ -80,7 +80,7 @@ It serves to:
 | `COGNITIVE_CAPABILITY_ORCHESTRATION_MODEL.md` | 1.1.0 | PUBLIC_API | FM App | 2026-01-03 |
 | `COGNITIVE_HYGIENE_AUTHORITY_MODEL.md` | 1.0.0 | OPTIONAL | FM App | 2026-01-05 |
 | `COGNITIVE_HYGIENE_MEMORY_INTEGRATION_MODEL.md` | 1.0.0 | OPTIONAL | FM App | 2026-01-05 |
-| `FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md` | 1.1.0 | PUBLIC_API | FM App | 2026-01-03 |
+| `FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md` | 1.2.0 | PUBLIC_API | FM App | 2026-04-08 |
 
 ### 3.2 Architecture & Build Models (PUBLIC_API)
 
@@ -106,6 +106,7 @@ It serves to:
 | `DOMAIN_EVOLUTION_RULES.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `DOMAIN_OWNERSHIP_ACCOUNTABILITY.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `DOMAIN_STATE_ENFORCEMENT_RULE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
+| `EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-08 |
 
 ### 3.4 Gate & Enforcement Models (PUBLIC_API)
 
@@ -117,7 +118,7 @@ It serves to:
 | `FAILURE_PROMOTION_RULE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `FM_PREAUTH_CHECKLIST_CANON.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `GATE_PREDICTIVE_COMPLIANCE_ANALYSIS.md` | 1.0.0 | OPTIONAL | FM App | 2026-01-05 |
-| `IAA_PRE_BRIEF_PROTOCOL.md` | 1.2.0 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-05 |
+| `IAA_PRE_BRIEF_PROTOCOL.md` | 1.2.1 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-08 |
 | `INITIALIZATION_COMPLETENESS_GATE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `PRE_BUILD_REALITY_CHECK_CANON.md` | 1.1.0 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-05 |
 | `PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
@@ -219,6 +220,7 @@ It serves to:
 | `FM_BUILDER_APPOINTMENT_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `FM_GOVERNANCE_LOADING_PROTOCOL.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
 | `GOVERNANCE_BUILDER_SUBMISSION_SURVEY.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
+| `INDEPENDENT_ASSURANCE_AGENT_CANON.md` | 1.4.0 | INTERNAL | N/A | 2026-04-08 |
 | `MATURION_CONCEPTUAL_DOCTRINE.md` | 1.0.0 | OPTIONAL | FM App, SlotMaster | 2026-01-05 |
 | `RESPONSIBILITY_DOMAIN_ENTRY.template.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
 | `RESPONSIBILITY_DOMAIN_REGISTRY.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
@@ -258,12 +260,12 @@ These policies are located in `governance/policy/` and establish constitutional 
 
 ## 4. Governance Public API Summary
 
-**Total Canon Files**: 92  
+**Total Canon Files**: 94  
 **Total Policy Files**: 15  
-**Combined Total**: 107  
-**PUBLIC_API**: 78 files (73%)  
+**Combined Total**: 109  
+**PUBLIC_API**: 79 files (73%)  
 **OPTIONAL**: 16 files (15%)  
-**INTERNAL**: 13 files (12%)  
+**INTERNAL**: 14 files (13%)  
 **DEPRECATED**: 0 files (0%)
 
 ### 4.1 Critical Path Canon (Must-Have for Downstream Repos)
