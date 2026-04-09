@@ -75,7 +75,7 @@
 
 | Entry | Change |
 |-------|--------|
-| total_canons | 160 → 163 (+3 new entries) |
+| total_canons | 160 → 163 (+3 new entries); merged branch state: 199 (PR #1038 had already landed additional canon files) |
 | EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md | NEW: v1.0.0, PUBLIC_API, hash=2f274eb5... |
 | INDEPENDENT_ASSURANCE_AGENT_CANON.md | NEW: v1.4.0, INTERNAL, hash=e43951f6... |
 | IAA_PRE_BRIEF_PROTOCOL.md | NEW: v1.2.1, PUBLIC_API, hash=c72402e4... |
@@ -90,7 +90,7 @@
 | canonical_commit | b54d57b5864a4df67f5bc44323ebde3807192c39 | 63cdfb06586f567c456641edd7ca464c47b7751e |
 | drift_detected | false | false |
 | needs_alignment | false | false |
-| alignment_method | align-governance.sh | layer-down-ecap001 |
+| alignment_method | align-governance.sh | align-governance.sh (unchanged — field not modified by this wave) |
 
 ---
 
@@ -114,8 +114,8 @@
 | governance/canon/IAA_PRE_BRIEF_PROTOCOL.md | c72402e4202de73c6b73b390f5325cd65bc8ad49f183a77b989637100ff06d45 |
 | governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md | b5830736f4b40e4d2b362a1ab84fec22a7a8fa6caa2934457033cbe96dd9a93f |
 | governance/canon/GOVERNANCE_CANON_MANIFEST.md | 7f1c61e2436499239229231aedf899eff519f4f89ac99a0d0d325dd0dd1c7c79 |
-| governance/CANON_INVENTORY.json | 1d946e53fae8242ea839bd343affd2f83877471f2a2204ec646698d11b97eb66 |
-| .agent-admin/governance/sync_state.json | 72e1493c0510da03b57c97caf757379448d697a3cd8ab3227b976b2a5b00d45f |
+| governance/CANON_INVENTORY.json | 5df522115058489e94e23dddcb015d3a67a8d10c3cbe98ac24eb9b4d3dd4c2eb (merged: 199 entries) |
+| .agent-admin/governance/sync_state.json | 806ddb9574e1ae489f81187ae1e52e4c71c4281845aa0ca86821e9ba62bfa5cc |
 
 ---
 

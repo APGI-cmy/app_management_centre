@@ -13,5 +13,6 @@
   "timestamp": "2026-04-07T10:34:56Z",
   "status": "archived",
   "archived_at": "2026-04-08T16:15:01Z",
-  "outcome": "ECAP-001 layer-down completed \u2014 three new canon files created, FOREMAN_AUTHORITY updated to v1.2.0"
+  "outcome": "auto-merged",
+  "pr_number": 1041
 }

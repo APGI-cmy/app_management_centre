@@ -27,8 +27,8 @@ sync_state.json aligned to ECAP-001 canonical commit, and 38 stale ripple-run in
 | `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md` | CREATED | 1.2.1 | c72402e4202de73c6b73b390f5325cd65bc8ad49f183a77b989637100ff06d45 |
 | `governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md` | UPDATED | 1.1.0 → 1.2.0 | b5830736f4b40e4d2b362a1ab84fec22a7a8fa6caa2934457033cbe96dd9a93f |
 | `governance/canon/GOVERNANCE_CANON_MANIFEST.md` | UPDATED | 1.0.0 (entries) | 7f1c61e2436499239229231aedf899eff519f4f89ac99a0d0d325dd0dd1c7c79 |
-| `governance/CANON_INVENTORY.json` | UPDATED | 160 → 163 entries | 1d946e53fae8242ea839bd343affd2f83877471f2a2204ec646698d11b97eb66 |
-| `.agent-admin/governance/sync_state.json` | UPDATED | canonical_commit → ECAP-001 SHA | 72e1493c0510da03b57c97caf757379448d697a3cd8ab3227b976b2a5b00d45f |
+| `governance/CANON_INVENTORY.json` | UPDATED | 160 → 163 entries (wave); merged branch state: 199 entries | 5df522115058489e94e23dddcb015d3a67a8d10c3cbe98ac24eb9b4d3dd4c2eb |
+| `.agent-admin/governance/sync_state.json` | UPDATED | canonical_commit → ECAP-001 SHA | 806ddb9574e1ae489f81187ae1e52e4c71c4281845aa0ca86821e9ba62bfa5cc |
 
 ---
 
@@ -45,7 +45,7 @@ sync_state.json aligned to ECAP-001 canonical commit, and 38 stale ripple-run in
 - **Drift before wave**: YES (3 canon files absent, 1 canon outdated)
 - **Drift after wave**: NO
 - **sync_state.json**: canonical_commit = 63cdfb06586f567c456641edd7ca464c47b7751e, drift_detected = false
-- **Canon count**: 160 → 163
+- **Canon count**: 160 → 163 (wave additions); 199 in merged branch state (PR #1038 had landed additional canon files)
 
 ---
 

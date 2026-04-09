@@ -56,13 +56,6 @@ date: 20260408
 iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-wave-opojd-delivery.md
 iaa_prebrief_status: COMMITTED — SHA 45eda17
 
-wave: wave-opojd-delivery
-agent: foreman-v2-agent
-session: session-020
-date: 20260408
-iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-wave-opojd-delivery.md
-iaa_prebrief_status: COMMITTED — SHA 45eda17
-
 ## Wave Description
 
 Align the repository to a strict comment-only Copilot model so that push errors cannot
