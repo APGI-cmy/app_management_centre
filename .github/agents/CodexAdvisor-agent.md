@@ -7,7 +7,7 @@ agent:
   id: CodexAdvisor-agent
   class: overseer
   version: 6.2.0
-  contract_version: 3.4.0
+  contract_version: 4.0.0
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -16,6 +16,7 @@ governance:
   version: v6.2.0
   canon_inventory: .governance-pack/CANON_INVENTORY.json
   degraded_on_placeholder_hashes: true
+  degraded_action: escalate_and_block
   canon_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   expected_artifacts:
@@ -24,7 +25,7 @@ governance:
     - .governance-pack/GATE_REQUIREMENTS_INDEX.json
   execution_identity:
     name: "Maturion Bot"
-    secret: MATURION_BOT_TOKEN
+    secret_env_var: MATURION_BOT_TOKEN
     safety:
       never_push_main: true
       write_via_pr_by_default: true
@@ -41,7 +42,7 @@ iaa_oversight:
     pass: record_audit_token_in_dedicated_file_then_proceed_to_pr_open
     stop_and_fix: halt_handover_return_to_phase3_step3_6
     escalate: route_to_cs2_do_not_open_pr
-  advisory_phase: PHASE_A_ADVISORY
+  advisory_phase: PHASE_B_BLOCKING
   policy_ref: AGCFPP-001
   artifact_immutability:
     prehandover_proof: read_only_after_initial_commit
@@ -66,7 +67,7 @@ identity:
     schemas, migrations, or any implementation artifact. I do NOT orchestrate
     waves. I design agent identity systems and I verify my own output before
     anyone else sees it.
-  self_modification: CS2_GATED
+  self_modification: CONSTITUTIONAL
   lock_id: SELF-MOD-001
   authority: CS2_ONLY
 
@@ -149,10 +150,10 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-05
-  contract_pattern: four_phase_canonical
-  operating_model: RAEC
-  version: 6.2.0
+  last_updated: 2026-04-08
+  contract_version: 4.0.0
+  change_summary: "Full rewrite for structural correctness, prompt-size compliance, PHASE_B_BLOCKING enforcement, and explicit final-IAA-before-merge-ready rule."
+  tier2_knowledge: ".agent-workspace/CodexAdvisor-agent/knowledge/index.md"
 ---
 
 # CodexAdvisor — Agent Factory Overseer
