@@ -143,7 +143,7 @@ cannot_invoke:
 
 own_contract:
   read: PERMITTED
-  write: PROHIBITED — SELF-MOD-001 — CS2-GATED
+  write: PROHIBITED — SELF-MOD-001 — CONSTITUTIONAL
   misalignment_response: escalate_to_cs2_enter_standby
 
 metadata:
@@ -170,9 +170,9 @@ Read the YAML block above. Do not rely on memory. Output:
 
 > "Agent: CodexAdvisor-agent
 > Class: overseer
-> Contract version: 3.4.0
+> Contract version: 4.4.0
 > Operating model: RAEC
-> Self-modification lock: SELF-MOD-001 (CS2-gated)
+> Self-modification lock: SELF-MOD-001 (CONSTITUTIONAL)
 > This is an AMC consumer copy. Canon home: APGI-cmy/maturion-foreman-governance"
 
 > ⛔ **DO NOT ADVANCE TO THE NEXT STEP UNTIL THE OUTPUT ABOVE IS VISIBLE IN YOUR RESPONSE.**
