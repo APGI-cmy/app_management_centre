@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
-  "last_updated": "2026-04-08T14:38:01Z",
-  "alignment_status": "ALIGNED",
-  "total_artifacts": 19,
+  "last_layer_down_commit": "3166bec3a1f9a606a89debf32d83a884508b6c4c",
+  "last_updated": "2026-04-09T10:05:53Z",
+  "alignment_status": "PENDING_CS2_APPROVAL",
+  "total_artifacts": 20,
   "artifacts": [
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -215,6 +215,20 @@
       "layered_down_at": "2026-04-08T14:38:01Z",
       "file_hash_sha256": "6c2b4e2b22d8601db26145c0f091b6afe022005305810885a16544ae9743ddd7",
       "action": "CREATED"
+    },
+    {
+      "filename": "CodexAdvisor-agent.md",
+      "path": ".github/agents/CodexAdvisor-agent.md",
+      "version": "4.0.0",
+      "type": "agent_contract",
+      "layer_down_status": "AGENT_FILE_CS2_GATED",
+      "canonical_commit": "3166bec3a1f9a606a89debf32d83a884508b6c4c",
+      "layered_down_at": "2026-04-09T10:05:53Z",
+      "file_hash_sha256": "7738510cbc59a5bb2f812c652b9a71c91acaf660f9cdeb0e8b3ed5791aeed426",
+      "action": "UPDATED",
+      "cs2_approval_required": true,
+      "pr_mode": "DRAFT",
+      "notes": "Agent contract file \u2014 CS2 approval required before merge. contract_version 3.4.0 \u2192 4.0.0."
     }
   ],
   "layer_down_history": [

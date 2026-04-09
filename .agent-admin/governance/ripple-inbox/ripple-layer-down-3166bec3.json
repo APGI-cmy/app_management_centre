@@ -1,0 +1,15 @@
+{
+  "dispatch_id": "layer-down-3166bec3-20260409",
+  "event_type": "governance_ripple",
+  "canonical_commit": "3166bec3a1f9a606a89debf32d83a884508b6c4c",
+  "inventory_version": "1.0.0",
+  "changed_paths": [
+    ".github/agents/CodexAdvisor-agent.md"
+  ],
+  "sender": "APGI-cmy/maturion-foreman-governance",
+  "timestamp": "2026-04-09T06:33:21Z",
+  "status": "processing",
+  "agent_file_detected": true,
+  "cs2_escalation_required": true,
+  "pr_mode": "DRAFT"
+}
