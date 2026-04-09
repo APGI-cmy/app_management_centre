@@ -220,6 +220,7 @@ It serves to:
 | `FM_BUILDER_APPOINTMENT_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `FM_GOVERNANCE_LOADING_PROTOCOL.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
 | `GOVERNANCE_BUILDER_SUBMISSION_SURVEY.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
+| `INDEPENDENT_ASSURANCE_AGENT_CANON.md` | 1.4.0 | INTERNAL | N/A | 2026-04-08 |
 | `MATURION_CONCEPTUAL_DOCTRINE.md` | 1.0.0 | OPTIONAL | FM App, SlotMaster | 2026-01-05 |
 | `RESPONSIBILITY_DOMAIN_ENTRY.template.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
 | `RESPONSIBILITY_DOMAIN_REGISTRY.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
@@ -259,12 +260,12 @@ These policies are located in `governance/policy/` and establish constitutional 
 
 ## 4. Governance Public API Summary
 
-**Total Canon Files**: 93  
+**Total Canon Files**: 94  
 **Total Policy Files**: 15  
-**Combined Total**: 108  
+**Combined Total**: 109  
 **PUBLIC_API**: 79 files (73%)  
 **OPTIONAL**: 16 files (15%)  
-**INTERNAL**: 13 files (12%)  
+**INTERNAL**: 14 files (13%)  
 **DEPRECATED**: 0 files (0%)
 
 ### 4.1 Critical Path Canon (Must-Have for Downstream Repos)
