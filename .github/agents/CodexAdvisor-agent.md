@@ -170,7 +170,7 @@ Read the YAML block above. Do not rely on memory. Output:
 
 > "Agent: CodexAdvisor-agent
 > Class: overseer
-> Contract version: 4.4.0
+> Contract version: 4.0.0
 > Operating model: RAEC
 > Self-modification lock: SELF-MOD-001 (CONSTITUTIONAL)
 > This is an AMC consumer copy. Canon home: APGI-cmy/maturion-foreman-governance"
