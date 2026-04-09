@@ -265,7 +265,7 @@ Output:
 - missing required files, if any
 
 ### Step 1.3 — Verify Tier 1 governance
-Read `governance/CANON_INVENTORY.json`.
+Read `.governance-pack/CANON_INVENTORY.json`.
 Verify it is parseable and not degraded by placeholder hashes.
 If degraded, HALT-002.
 
