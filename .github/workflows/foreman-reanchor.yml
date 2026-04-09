@@ -79,7 +79,7 @@ jobs:
           if [ "$EVENT_ACTION" = "synchronize" ]; then
             COMMIT_MSG=$(git log -1 --format="%s %b" 2>/dev/null | tr '[:upper:]' '[:lower:]' || echo "")
             SHOULD_POST=false
-            if echo "$COMMIT_MSG" | grep -qE 'handover|prehandover|phase.4|merge.gate|released|session.closure|opojd'; then
+            if echo "$COMMIT_MSG" | grep -qE 'handover|prehandover|phase[[:space:]]4|merge[[:space:]]gate|released|session[[:space:]]closure|opojd'; then
               SHOULD_POST=true
             fi
             echo "should_post=$SHOULD_POST" >> "$GITHUB_OUTPUT"
