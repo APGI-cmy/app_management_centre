@@ -2,6 +2,7 @@
 
 **Issuing Agent**: independent-assurance-agent  
 **Issued**: 2026-04-09 (retroactive — CORR-005 corrective wave)  
+**CS2 Authorization**: Issue #1048 (https://github.com/APGI-cmy/app_management_centre/issues/1048) opened by @APGI-cmy  
 **PR Branch**: copilot/ecap-001-layer-down-implementation (merged → main as PR #1041)  
 **Merge Commit**: `24dc14ff97fab4b691e5cd2b017b85c00790a6df`  
 **Token Reference**: IAA-session-028-wave-ecap001-layerdown-20260408-PASS

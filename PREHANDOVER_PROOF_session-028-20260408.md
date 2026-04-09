@@ -73,7 +73,7 @@ nothing to commit, working tree clean
 | `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md` | CREATED | N/A → 1.2.1 | c72402e4202de73c6b73b390f5325cd65bc8ad49f183a77b989637100ff06d45 |
 | `governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md` | UPDATED | 1.1.0 → 1.2.0 | b5830736f4b40e4d2b362a1ab84fec22a7a8fa6caa2934457033cbe96dd9a93f |
 | `governance/canon/GOVERNANCE_CANON_MANIFEST.md` | UPDATED | entries updated | 7f1c61e2436499239229231aedf899eff519f4f89ac99a0d0d325dd0dd1c7c79 |
-| `governance/CANON_INVENTORY.json` | UPDATED | 160 → 163 entries | 1d946e53fae8242ea839bd343affd2f83877471f2a2204ec646698d11b97eb66 |
+| `governance/CANON_INVENTORY.json` | UPDATED | 160 → 199 entries (merged state; CORR-003) | 1d946e53fae8242ea839bd343affd2f83877471f2a2204ec646698d11b97eb66 |
 | `.agent-admin/governance/sync_state.json` | UPDATED | b54d57b5→63cdfb06 | 72e1493c0510da03b57c97caf757379448d697a3cd8ab3227b976b2a5b00d45f |
 | `.agent-workspace/governance-liaison-amc/memory/session-028-20260408.md` | CREATED | N/A | [computed at commit] |
 | `.agent-admin/build-evidence/session-028/HANDOVER_SUMMARY.md` | CREATED | N/A | [computed at commit] |

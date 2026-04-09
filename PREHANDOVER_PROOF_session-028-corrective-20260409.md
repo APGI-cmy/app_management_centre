@@ -13,7 +13,7 @@
 
 `phase_1_preflight: PREFLIGHT COMPLETE`
 
-- **CS2 Authorization**: Issue "fix(ecap-001): resolve PREHANDOVER evidence defects — AMC corrective follow-up PR #1041" opened by @APGI-cmy — valid wave-start and A-029 immutability override authorization
+- **CS2 Authorization**: Issue #1048 (https://github.com/APGI-cmy/app_management_centre/issues/1048) opened by @APGI-cmy — valid wave-start and A-029 immutability override authorization
 - **IAA Pre-Brief read**: YES — `.agent-admin/assurance/iaa-prebrief-ecap-001-corrective.md` read in full (trigger: LIAISON_ADMIN)
 - **CANON_INVENTORY hash check**: PASS — 199 entries in .governance-pack, zero bad hashes
 - **FAIL-ONLY-ONCE registry**: CLEAR — no open breaches
@@ -25,7 +25,7 @@
 
 Per A-029, modification of a post-merge PREHANDOVER proof artifact requires explicit CS2 authorization.
 
-**Authorization source**: GitHub issue "fix(ecap-001): resolve PREHANDOVER evidence defects — AMC corrective follow-up PR #1041" opened by @APGI-cmy (CS2).
+**Authorization source**: Issue #1048 (https://github.com/APGI-cmy/app_management_centre/issues/1048) opened by @APGI-cmy (CS2).
 
 **Authorization scope**: Correction of 5 evidence defects (CORR-001 through CORR-005) in `PREHANDOVER_PROOF_session-028-20260408.md` that contained `[TO BE POPULATED]` placeholder values and incorrect CANON_INVENTORY count and alignment_method at time of merge.
 

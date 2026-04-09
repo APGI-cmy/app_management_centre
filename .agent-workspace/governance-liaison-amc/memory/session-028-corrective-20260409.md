@@ -49,12 +49,26 @@ None — no `.github/agents/*.md` files in corrective wave scope.
 ## IAA Invocation
 
 `iaa_prebrief_artifact: .agent-admin/assurance/iaa-prebrief-ecap-001-corrective.md`
-`iaa_audit_token: IAA-session-029-wave-ecap001-corrective-20260409-PASS` (expected — pending IAA invocation)
+`iaa_invocation_result: ASSURANCE-TOKEN — IAA-session-029-wave-ecap001-corrective-20260409-PASS`
+`iaa_token_file: .agent-admin/assurance/iaa-token-session-029-wave-ecap001-corrective-20260409.md`
+`iaa_checks_executed: 14`
+`iaa_checks_passed: 14`
+`iaa_checks_failed: 0`
+`merge_gate_parity_result: PASS`
 
 ---
 
 ## Decisions Made
 
-- A-029 compliance: CS2 authorized correction via issue opened by @APGI-cmy — documented in corrective PREHANDOVER proof
+- A-029 compliance: CS2 authorized correction via Issue #1048 (https://github.com/APGI-cmy/app_management_centre/issues/1048) opened by @APGI-cmy — documented in corrective PREHANDOVER proof
 - Token naming: CORR-005 aligned iaa_audit_token to the dedicated wave-ecap001-layerdown naming convention per IAA pre-brief requirement
 - CORR-003 explanation added explaining PR #1038 context (36 additional canon files merged before ECAP-001 wave)
+
+---
+
+## Suggestions for Improvement
+
+- **Sequence enforcement**: Generate PREHANDOVER proof AFTER the merge commit SHA is known (at commit time), not before, to avoid CORR-001/CORR-002 placeholder defects.
+- **CANON_INVENTORY reference**: Use the post-merge canonical inventory count (from `.governance-pack/CANON_INVENTORY.json`) as the "After" value in PREHANDOVER proofs rather than the branch-local count, to avoid CORR-003-style mismatches.
+- **Token file at IAA invocation**: Issue the dedicated token file immediately at IAA PASS verdict, not deferred, to avoid CORR-005/GC-001 missing-file defects.
+- **Issue #1048 explicit citation**: CS2 authorization records should always reference the Issue number, not only the issue title, to enable machine-checkable traceability.
