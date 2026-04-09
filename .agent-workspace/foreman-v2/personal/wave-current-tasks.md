@@ -89,4 +89,43 @@ CS2 directive (Issue #1024):
 
 - integration-builder: TASK-OPOJD-01, TASK-OPOJD-02 (pending IAA Pre-Brief response)
 
-## Status: IN PROGRESS — IAA Pre-Brief pending
+## Status: COMPLETE — Superseded by wave-ecap001-corrective (this session)
+
+---
+# CURRENT WAVE — wave-ecap001-corrective (Session 022 — 2026-04-09)
+
+wave: wave-ecap001-corrective
+agent: foreman-v2-agent
+session: session-022
+date: 20260409
+iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-ecap-001-corrective.md
+iaa_prebrief_status: COMMITTED (SHA: 3aca887a7ab4095789642e6c1853608206fda402)
+cs2_authorization: AUTHORIZED
+cs2_authorization_issue_ref: ISSUE_OR_COMMENT_LINK_REQUIRED
+cs2_authorization_opened_by: @APGI-cmy
+cs2_authorization_scope: valid wave-start authorization
+
+## Wave Description
+
+Corrective follow-up after PR #1041 (ECAP-001 layer-down) merged into main.
+The PREHANDOVER proof at PREHANDOVER_PROOF_session-028-20260408.md contains legacy
+placeholder and inventory values due to timing of evidence generation prior to merge fix-ups.
+
+Required corrections:
+- CORR-001: Populate `git ls-tree HEAD` block (was `[TO BE POPULATED AFTER COMMIT]`)
+- CORR-002: Populate actual Commit SHA (was `[POPULATED AT COMMIT TIME]`)
+- CORR-003: Correct CANON_INVENTORY evidence — Before: 160, After: 199
+- CORR-004: Correct Sync State `alignment_method` to `align-governance.sh`
+- CORR-005: Add cross-reference to actual IAA token file
+
+## Tasks
+
+- [ ] TASK-ECAP-CORR-001: Correct PREHANDOVER_PROOF_session-028-20260408.md (governance-liaison-amc-agent)
+- [ ] TASK-ECAP-CORR-002: Create corrective PREHANDOVER proof (governance-liaison-amc-agent)
+- [ ] TASK-ECAP-CORR-003: IAA final audit invocation
+
+## Delegated To
+
+- governance-liaison-amc-agent: TASK-ECAP-CORR-001, TASK-ECAP-CORR-002
+
+## Status: IN PROGRESS — Delegating to governance-liaison-amc-agent
