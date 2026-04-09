@@ -23,11 +23,10 @@ authorization. A DRAFT PR has been created. Only CS2 may merge.
 
 | File | Action | SHA256 |
 |------|--------|--------|
-| `.github/agents/CodexAdvisor-agent.md` | UPDATED | 7738510cbc59a5bb2f812c652b9a71c91acaf660f9cdeb0e8b3ed5791aeed426 |
 | `governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json` | UPDATED | (computed at commit) |
 | `.agent-admin/governance/sync_state.json` | UPDATED | (computed at commit) |
-| `.agent-admin/governance/ripple-inbox/ripple-layer-down-3166bec3.json` | CREATED | (computed at commit) |
-| `.agent-workspace/governance-liaison-amc/escalation-inbox/blocker-20260409.md` | CREATED | (computed at commit) |
+| `.agent-admin/governance/ripple-archive/ripple-layer-down-3166bec3.json` | ARCHIVED | (computed at commit) |
+| `.agent-workspace/governance-liaison-amc/escalation-inbox/blocker-20260409.md` | CREATED (proposes `.github/agents/CodexAdvisor-agent.md` contract change for CS2 approval) | (computed at commit) |
 | `.agent-workspace/governance-liaison-amc/memory/session-003-20260409.md` | CREATED | (computed at commit) |
 | `.agent-workspace/governance-liaison-amc/parking-station/suggestions-log.md` | UPDATED | (computed at commit) |
 
