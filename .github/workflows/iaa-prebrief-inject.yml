@@ -1,0 +1,478 @@
+name: IAA Pre-Brief Injection
+
+on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - '.agent-workspace/foreman*/personal/wave-current-tasks*.md'
+  pull_request_target:
+    types: [opened, synchronize, ready_for_review]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual trigger'
+        required: false
+        default: 'Manual activation'
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read
+
+jobs:
+  iaa-prebrief-inject:
+    runs-on: ubuntu-latest
+    outputs:
+      prebrief_existed_at_t0: ${{ steps.wave_tasks.outputs.prebrief_exists }}
+
+    if: >-
+      github.event_name == 'push' ||
+      (github.event_name == 'issue_comment' &&
+       (github.event.comment.body == '/iaa-prebrief' ||
+        startsWith(github.event.comment.body, '/iaa-prebrief '))) ||
+      (github.event_name == 'pull_request_target' &&
+       (startsWith(github.head_ref, 'copilot/') ||
+        github.event.pull_request.user.login == 'Copilot'))
+
+    steps:
+      # ── PUSH path ────────────────────────────────────────────────────────────
+
+      - name: Checkout (push event — read wave-current-tasks.md at pushed SHA)
+        if: github.event_name == 'push'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      # ── PULL_REQUEST_TARGET path ─────────────────────────────────────────────
+      # Fires when a Copilot-authored PR is opened or synchronised.
+      # Files are read via the GitHub API (no checkout) to avoid the
+      # pull_request_target + untrusted-checkout security concern.
+
+      - name: Check for existing IAA Pre-Brief artifact (pull_request_target)
+        id: wave_tasks_pr
+        if: github.event_name == 'pull_request_target'
+        uses: actions/github-script@v7
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        with:
+          script: |
+            const headSha = process.env.PR_HEAD_SHA;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // Read wave-current-tasks.md via API (no filesystem checkout needed)
+            let tasksFound = false;
+            let waveNum = 'unknown';
+            let tasksSnippet = '';
+            try {
+              const { data } = await github.rest.repos.getContent({
+                owner, repo,
+                path: '.agent-workspace/foreman-v2/personal/wave-current-tasks.md',
+                ref: headSha,
+              });
+              const content = Buffer.from(data.content, 'base64').toString('utf8');
+              tasksFound = true;
+              tasksSnippet = content.slice(0, 1500).replace(/`/g, "'");
+              const waveMatch = content.match(/\*\*Wave\*\*:\s*(?:Wave\s+)?(\S+)/);
+              if (waveMatch) waveNum = waveMatch[1];
+            } catch (_e) {
+              // File absent — leave defaults
+            }
+            core.setOutput('tasks_found', String(tasksFound));
+            core.setOutput('wave_num', waveNum);
+            core.setOutput('tasks_snippet', tasksSnippet);
+
+            // Idempotency guard: scan assurance dir for any non-SUPERSEDED pre-brief artifact
+            let prebriefExists = false;
+            try {
+              const { data: assuranceContents } = await github.rest.repos.getContent({
+                owner, repo,
+                path: '.agent-admin/assurance',
+                ref: headSha,
+              });
+              const prebriefFiles = Array.isArray(assuranceContents)
+                ? assuranceContents.filter(
+                    (f) => f.type === 'file' &&
+                           f.name.startsWith('iaa-prebrief-') &&
+                           f.name.endsWith('.md')
+                  )
+                : [];
+              for (const file of prebriefFiles) {
+                const { data: fd } = await github.rest.repos.getContent({
+                  owner, repo, path: file.path, ref: headSha,
+                });
+                const fc = Buffer.from(fd.content, 'base64').toString('utf8');
+                if (!fc.toLowerCase().includes('superseded')) {
+                  prebriefExists = true;
+                  break;
+                }
+              }
+            } catch (_e) {
+              // Assurance directory absent — prebriefExists stays false
+            }
+            core.setOutput('prebrief_exists', String(prebriefExists));
+
+      # ── ISSUE_COMMENT path ───────────────────────────────────────────────────
+      # When /iaa-prebrief is typed on a PR comment, check out the PR head so
+      # wave-current-tasks.md and the idempotency guard read the PR branch state,
+      # not main. Falls back to the default branch if the comment is on a plain
+      # issue (no pull_request association).
+
+      - name: Resolve checkout ref (issue_comment event)
+        id: resolve_ref
+        if: github.event_name == 'issue_comment'
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        with:
+          script: |
+            const issueNumber = parseInt(process.env.ISSUE_NUMBER, 10);
+            // Check if this issue is actually a PR
+            try {
+              const { data: pr } = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: issueNumber,
+              });
+              // It's a PR — use the head SHA so we read the PR branch state
+              core.setOutput('ref', pr.head.sha);
+              core.setOutput('issue_pr_number', String(issueNumber));
+            } catch (e) {
+              // Not a PR (plain issue) — fall back to default branch
+              core.setOutput('ref', '');
+              core.setOutput('issue_pr_number', '');
+            }
+
+      - name: Checkout PR head or default branch (issue_comment event)
+        if: github.event_name == 'issue_comment'
+        uses: actions/checkout@v4
+        with:
+          # If comment is on a PR, check out its head SHA; otherwise default branch
+          ref: ${{ steps.resolve_ref.outputs.ref || github.event.repository.default_branch }}
+          fetch-depth: 1
+
+      - name: Read wave-current-tasks.md and check for existing Pre-Brief (push)
+        id: wave_tasks
+        if: github.event_name == 'push'
+        run: |
+          TASKS_FILE=".agent-workspace/foreman-v2/personal/wave-current-tasks.md"
+          if [ -f "$TASKS_FILE" ]; then
+            SNIPPET=$(head -c 1500 "$TASKS_FILE" | sed "s/\`/'/g")
+            # Normalize wave number — strip "Wave " prefix, capture just the number/slug
+            WAVE_NUM=$(grep -m1 -oP '(?<=\*\*Wave\*\*:\s)(Wave\s+)?\K\S+' "$TASKS_FILE" || echo "unknown")
+            echo "tasks_found=true" >> "$GITHUB_OUTPUT"
+            echo "wave_num=$WAVE_NUM" >> "$GITHUB_OUTPUT"
+            echo "tasks_snippet<<EOF_TASKS" >> "$GITHUB_OUTPUT"
+            echo "$SNIPPET" >> "$GITHUB_OUTPUT"
+            echo "EOF_TASKS" >> "$GITHUB_OUTPUT"
+
+            # Idempotency guard — scoped to THIS wave's pre-brief file
+            ASSURANCE_DIR=".agent-admin/assurance"
+            PREBRIEF_FILE="${ASSURANCE_DIR}/iaa-prebrief-wave${WAVE_NUM}.md"
+            if [ "$WAVE_NUM" != "unknown" ] && [ -f "$PREBRIEF_FILE" ] && ! grep -qi "SUPERSEDED" "$PREBRIEF_FILE" 2>/dev/null; then
+              echo "prebrief_exists=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "tasks_found=false" >> "$GITHUB_OUTPUT"
+            echo "wave_num=unknown" >> "$GITHUB_OUTPUT"
+            echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Read wave-current-tasks.md and check for existing Pre-Brief (issue_comment)
+        id: wave_tasks_comment
+        if: github.event_name == 'issue_comment'
+        run: |
+          TASKS_FILE=".agent-workspace/foreman-v2/personal/wave-current-tasks.md"
+          if [ -f "$TASKS_FILE" ]; then
+            SNIPPET=$(head -c 1500 "$TASKS_FILE" | sed "s/\`/'/g")
+            WAVE_NUM=$(grep -m1 -oP '(?<=\*\*Wave\*\*:\s)(Wave\s+)?\K\S+' "$TASKS_FILE" || echo "unknown")
+            echo "tasks_found=true" >> "$GITHUB_OUTPUT"
+            echo "wave_num=$WAVE_NUM" >> "$GITHUB_OUTPUT"
+            echo "tasks_snippet<<EOF_TASKS" >> "$GITHUB_OUTPUT"
+            echo "$SNIPPET" >> "$GITHUB_OUTPUT"
+            echo "EOF_TASKS" >> "$GITHUB_OUTPUT"
+
+            # Idempotency guard — scoped to THIS wave's pre-brief file
+            ASSURANCE_DIR=".agent-admin/assurance"
+            PREBRIEF_FILE="${ASSURANCE_DIR}/iaa-prebrief-wave${WAVE_NUM}.md"
+            if [ "$WAVE_NUM" != "unknown" ] && [ -f "$PREBRIEF_FILE" ] && ! grep -qi "SUPERSEDED" "$PREBRIEF_FILE" 2>/dev/null; then
+              echo "prebrief_exists=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "tasks_found=false" >> "$GITHUB_OUTPUT"
+            echo "wave_num=unknown" >> "$GITHUB_OUTPUT"
+            echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Skip if Pre-Brief already exists for this wave (push)
+        if: github.event_name == 'push' && steps.wave_tasks.outputs.prebrief_exists == 'true'
+        env:
+          WAVE_NUM_NOTICE: ${{ steps.wave_tasks.outputs.wave_num }}
+        run: |
+          echo "::notice::Pre-Brief already exists for wave ${WAVE_NUM_NOTICE} — skipping auto-invocation. Use /iaa-prebrief-amend to request an amendment."
+
+      - name: Skip if Pre-Brief already exists for this wave (issue_comment)
+        if: github.event_name == 'issue_comment' && steps.wave_tasks_comment.outputs.prebrief_exists == 'true'
+        env:
+          WAVE_NUM_NOTICE: ${{ steps.wave_tasks_comment.outputs.wave_num }}
+        run: |
+          echo "::notice::Pre-Brief already exists for wave ${WAVE_NUM_NOTICE} — skipping auto-invocation. Use /iaa-prebrief-amend to request an amendment."
+
+      - name: Skip if Pre-Brief already exists (pull_request_target)
+        if: github.event_name == 'pull_request_target' && steps.wave_tasks_pr.outputs.prebrief_exists == 'true'
+        run: |
+          echo "::notice::IAA Pre-Brief artifact already exists on this branch — skipping auto-invocation."
+
+      - name: Find associated PR number (push event)
+        id: find_pr
+        if: github.event_name == 'push' && steps.wave_tasks.outputs.tasks_found == 'true' && steps.wave_tasks.outputs.prebrief_exists != 'true'
+        uses: actions/github-script@v7
+        env:
+          GH_REF: ${{ github.ref }}
+        with:
+          script: |
+            const ref = process.env.GH_REF;
+            // ref is refs/heads/<branch>
+            const branch = ref.replace('refs/heads/', '');
+            const { data: pulls } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${context.repo.owner}:${branch}`,
+              per_page: 1,
+            });
+            if (pulls.length > 0) {
+              core.setOutput('pr_number', String(pulls[0].number));
+            } else {
+              core.setOutput('pr_number', '');
+            }
+
+      - name: Post IAA Pre-Brief invocation comment (push)
+        if: github.event_name == 'push' && steps.wave_tasks.outputs.tasks_found == 'true' && steps.wave_tasks.outputs.prebrief_exists != 'true'
+        uses: actions/github-script@v7
+        env:
+          TASKS_FOUND: ${{ steps.wave_tasks.outputs.tasks_found }}
+          TASKS_SNIPPET: ${{ steps.wave_tasks.outputs.tasks_snippet }}
+          WAVE_NUM: ${{ steps.wave_tasks.outputs.wave_num }}
+          PR_NUMBER: ${{ steps.find_pr.outputs.pr_number }}
+          GH_REF: ${{ github.ref }}
+        with:
+          script: |
+            const tasksFound = process.env.TASKS_FOUND === 'true';
+            const tasksSnippet = process.env.TASKS_SNIPPET || '';
+            const waveNum = (process.env.WAVE_NUM || 'unknown').trim();
+            const prNumberEnv = process.env.PR_NUMBER || '';
+            const branchRef = (process.env.GH_REF || '').replace('refs/heads/', '');
+
+            const taskSection = tasksFound
+              ? '\n' + tasksSnippet + '\n...\n'
+              : '> ⚠️ `wave-current-tasks.md` was not found on this branch. Ensure the Foreman has committed it before proceeding.';
+
+            if (!prNumberEnv) {
+              // No open PR — post on the linked issue instead of silently dropping.
+              // Resolve issue number from wave-current-tasks.md **Issue**: field,
+              // or fall back to branch name convention (e.g. fix/NNN-title → issue NNN).
+              const fs = require('fs');
+              let issueNumber = null;
+
+              const tasksFile = '.agent-workspace/foreman-v2/personal/wave-current-tasks.md';
+              if (fs.existsSync(tasksFile)) {
+                const fileContent = fs.readFileSync(tasksFile, 'utf8');
+                const issueMatch = fileContent.match(/\*\*Issue\*\*:\s*#?(\d+)/i);
+                if (issueMatch) {
+                  issueNumber = parseInt(issueMatch[1], 10);
+                }
+              }
+
+              if (!issueNumber) {
+                const branchMatch = branchRef.match(/[\/\-](\d{3,})/);
+                if (branchMatch) {
+                  issueNumber = parseInt(branchMatch[1], 10);
+                }
+              }
+
+              if (issueNumber) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body: [
+                    '## 🔔 IAA Pre-Brief Required — No Open PR Yet',
+                    '',
+                    `@APGI-cmy — \`wave-current-tasks.md\` was pushed to branch \`${branchRef}\` but no open PR exists. The IAA Pre-Brief cannot be auto-confirmed yet.`,
+                    '',
+                    '**Wave tasks detected:**',
+                    taskSection,
+                    '',
+                    '**Action**: Open a PR (DRAFT is acceptable) and the Pre-Brief injection will run automatically.',
+                    '',
+                    '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
+                  ].join('\n'),
+                });
+              }
+              return;
+            }
+
+            const prNumber = parseInt(prNumberEnv, 10);
+
+            // Idempotency: skip if a pre-brief injection comment was already posted for this wave
+            const MARKER = `<!-- iaa-prebrief-inject-wave-${waveNum} -->`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 50,
+            });
+            if (comments.some(c => c.body && c.body.includes(MARKER))) {
+              core.notice(`Pre-Brief injection comment already posted for wave ${waveNum} — skipping.`);
+              return;
+            }
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: [
+                MARKER,
+                `## 🔔 IAA Pre-Brief Required — Wave ${waveNum}`,
+                '',
+                '@copilot — `wave-current-tasks.md` was pushed. The IAA Pre-Brief must be committed before any builder delegation.',
+                '',
+                '### Pre-Brief Invocation Steps (foreman-v2-agent contract Phase 1 Step 1.8)',
+                '',
+                '1. Invoke IAA: `task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: ' + waveNum + ')`',
+                `2. Wait for IAA to publish: \`.agent-admin/assurance/iaa-prebrief-wave${waveNum}.md\``,
+                '3. Read the Pre-Brief in full — it is your QA checklist for this wave',
+                '4. Do NOT delegate to any builder until the Pre-Brief exists on this branch',
+                '',
+                '**Wave tasks (from `wave-current-tasks.md`)**:',
+                taskSection,
+                '',
+                `If no Pre-Brief is committed within 10 minutes, a safety net escalation will be posted to @APGI-cmy.`,
+                '',
+                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
+              ].join('\n'),
+            });
+
+            // Safety net: schedule a follow-up check (this workflow does not re-trigger itself,
+            // but the governance-watchdog Gap 2 covers the ready-for-review path).
+            core.notice(`IAA Pre-Brief injection comment posted for wave ${waveNum} on PR #${prNumber}.`);
+
+      - name: Post IAA Pre-Brief invocation comment (issue_comment / PR)
+        if: github.event_name == 'issue_comment' && steps.wave_tasks_comment.outputs.prebrief_exists != 'true'
+        uses: actions/github-script@v7
+        env:
+          TASKS_FOUND: ${{ steps.wave_tasks_comment.outputs.tasks_found }}
+          TASKS_SNIPPET: ${{ steps.wave_tasks_comment.outputs.tasks_snippet }}
+          WAVE_NUM: ${{ steps.wave_tasks_comment.outputs.wave_num }}
+          PR_NUMBER: ${{ steps.resolve_ref.outputs.issue_pr_number }}
+        with:
+          script: |
+            const tasksFound = process.env.TASKS_FOUND === 'true';
+            const tasksSnippet = process.env.TASKS_SNIPPET || '';
+            const waveNum = (process.env.WAVE_NUM || 'unknown').trim();
+            const prNumberEnv = process.env.PR_NUMBER || '';
+
+            if (!prNumberEnv) {
+              core.notice('No PR number resolved for this issue_comment event — skipping.');
+              return;
+            }
+
+            const prNumber = parseInt(prNumberEnv, 10);
+
+            const taskSection = tasksFound
+              ? '\n' + tasksSnippet + '\n...\n'
+              : '> ⚠️ `wave-current-tasks.md` was not found. Ensure it is committed before invoking Pre-Brief.';
+
+            const MARKER = `<!-- iaa-prebrief-inject-wave-${waveNum} -->`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 50,
+            });
+            if (comments.some(c => c.body && c.body.includes(MARKER))) {
+              core.notice(`Pre-Brief injection comment already posted for wave ${waveNum} — skipping.`);
+              return;
+            }
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: [
+                MARKER,
+                `## 🔔 IAA Pre-Brief Triggered — Wave ${waveNum}`,
+                '',
+                '@copilot — Pre-Brief invocation requested via `/iaa-prebrief` comment.',
+                '',
+                '1. Invoke IAA: `task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: ' + waveNum + ')`',
+                `2. Commit Pre-Brief to: \`.agent-admin/assurance/iaa-prebrief-wave${waveNum}.md\``,
+                '3. Read in full before any builder delegation',
+                '',
+                '**Current wave tasks:**',
+                taskSection,
+                '',
+                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
+              ].join('\n'),
+            });
+
+      - name: Post IAA Pre-Brief invocation comment (pull_request_target)
+        if: github.event_name == 'pull_request_target' && steps.wave_tasks_pr.outputs.prebrief_exists != 'true'
+        uses: actions/github-script@v7
+        env:
+          TASKS_FOUND: ${{ steps.wave_tasks_pr.outputs.tasks_found }}
+          TASKS_SNIPPET: ${{ steps.wave_tasks_pr.outputs.tasks_snippet }}
+          WAVE_NUM: ${{ steps.wave_tasks_pr.outputs.wave_num }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        with:
+          script: |
+            const tasksFound = process.env.TASKS_FOUND === 'true';
+            const tasksSnippet = process.env.TASKS_SNIPPET || '';
+            const waveNum = (process.env.WAVE_NUM || 'unknown').trim();
+            const prNumber = parseInt(process.env.PR_NUMBER, 10);
+
+            const taskSection = tasksFound
+              ? '\n' + tasksSnippet + '\n...\n'
+              : '> ⚠️ `wave-current-tasks.md` was not found on this PR branch.';
+
+            const MARKER = `<!-- iaa-prebrief-inject-wave-${waveNum} -->`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 50,
+            });
+            if (comments.some(c => c.body && c.body.includes(MARKER))) {
+              core.notice('Pre-Brief injection comment already posted — skipping duplicate.');
+              return;
+            }
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: [
+                MARKER,
+                `## 🔔 IAA Pre-Brief Required — Wave ${waveNum}`,
+                '',
+                '@copilot — This PR does not yet have an IAA Pre-Brief artifact.',
+                '',
+                '**Required before builder delegation:**',
+                '1. Invoke IAA: `task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: ' + waveNum + ')`',
+                `2. Commit: \`.agent-admin/assurance/iaa-prebrief-wave${waveNum}.md\``,
+                '',
+                '**Current wave tasks:**',
+                taskSection,
+                '',
+                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
+              ].join('\n'),
+            });
