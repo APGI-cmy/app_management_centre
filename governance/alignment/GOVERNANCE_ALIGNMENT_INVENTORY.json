@@ -224,11 +224,12 @@
       "layer_down_status": "AGENT_FILE_CS2_GATED",
       "canonical_commit": "3166bec3a1f9a606a89debf32d83a884508b6c4c",
       "layered_down_at": "2026-04-09T10:05:53Z",
-      "file_hash_sha256": "7738510cbc59a5bb2f812c652b9a71c91acaf660f9cdeb0e8b3ed5791aeed426",
-      "action": "UPDATED",
+      "file_hash_sha256": "34911113c6afb65c6f6672a5d6b0f5696c905bad65e9400278dc784e982a4933",
+      "action": "PENDING_NOT_APPLIED",
       "cs2_approval_required": true,
       "pr_mode": "DRAFT",
-      "notes": "Agent contract file \u2014 CS2 approval required before merge. contract_version 3.4.0 \u2192 4.0.0."
+      "notes": "Protected target path only \u2014 this PR does not update .github/agents/CodexAdvisor-agent.md. The 4.0.0 contract content is pending CS2/CodexAdvisor application from the escalation inbox; contract_version remains 3.4.0 in-repo until approval and application.",
+      "applied_to_repo": false
     }
   ],
   "layer_down_history": [

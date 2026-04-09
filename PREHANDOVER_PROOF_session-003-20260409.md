@@ -21,7 +21,7 @@
 
 | Filename | Action | Old Version | New Version | Evidence |
 |----------|--------|-------------|-------------|----------|
-| .github/agents/CodexAdvisor-agent.md | PROPOSED / NOT_APPLIED | 3.4.0 | 4.0.0 (escalation artifact only; committed file remains 3.4.0) | Escalation artifact: `.agent-workspace/governance-liaison-amc/escalation-inbox/blocker-20260409.md` — hash `7738510cbc59a5bb2f812c652b9a71c91acaf660f9cdeb0e8b3ed5791aeed426` |
+| .github/agents/CodexAdvisor-agent.md | PROPOSED / NOT_APPLIED | 3.4.0 | 4.0.0 (escalation artifact only; committed file remains 3.4.0) | Escalation artifact: `.agent-workspace/governance-liaison-amc/escalation-inbox/proposed-CodexAdvisor-agent-4.0.0.md` — hash `34911113c6afb65c6f6672a5d6b0f5696c905bad65e9400278dc784e982a4933` |
 
 ## 3. Ancillary Artifacts Updated
 
@@ -60,7 +60,7 @@
 - At commit: 3166bec3a1f9a606a89debf32d83a884508b6c4c
 - CodexAdvisor-agent.md fetched and adapted successfully ✅
 - Canonical SHA256: 43cbb137e066e9a31c394b4a93d0b02154058ad860f19ede2f81407fcd4a1d7f
-- Consumer-adapted SHA256: 7738510cbc59a5bb2f812c652b9a71c91acaf660f9cdeb0e8b3ed5791aeed426
+- Consumer-adapted SHA256: 34911113c6afb65c6f6672a5d6b0f5696c905bad65e9400278dc784e982a4933
 
 ### 6.2 File Content Verification
 - contract_version: 4.0.0 ✅

@@ -14,20 +14,19 @@
 | .governance-pack/CANON_INVENTORY.json version | 1.0.0 | 1.0.0 (unchanged — CANON_INVENTORY not updated in this ripple) |
 | sync_state.json canonical_commit | 63cdfb06... | 3166bec3... |
 | GOVERNANCE_ALIGNMENT_INVENTORY.json total_artifacts | 19 | 20 |
-| .github/agents/CodexAdvisor-agent.md contract_version | 3.4.0 | 4.0.0 |
+| .github/agents/CodexAdvisor-agent.md contract_version | 3.4.0 | 4.0.0 (PROPOSED only — escalation inbox, not yet applied to repo) |
 
 ---
 
 ## File Checksum Validation Results
 
-| File | Action | Consumer SHA256 (updated) | Canonical SHA256 (raw at 3166bec3) |
-|------|--------|--------------------------|-------------------------------------|
-| .github/agents/CodexAdvisor-agent.md | UPDATED | 7738510cbc59a5bb2f812c652b9a71c91acaf660f9cdeb0e8b3ed5791aeed426 | 43cbb137e066e9a31c394b4a93d0b02154058ad860f19ede2f81407fcd4a1d7f |
+| File | Action | Escalation Artifact SHA256 | Canonical SHA256 (raw at 3166bec3) |
+|------|--------|---------------------------|-------------------------------------|
+| .github/agents/CodexAdvisor-agent.md | PENDING_NOT_APPLIED (PROHIB-002) | 34911113c6afb65c6f6672a5d6b0f5696c905bad65e9400278dc784e982a4933 | 43cbb137e066e9a31c394b4a93d0b02154058ad860f19ede2f81407fcd4a1d7f |
 
-**Note**: SHA256 differs between consumer and canonical because consumer-specific adaptations were
-applied (this_copy: consumer, canon_inventory path: .governance-pack/CANON_INVENTORY.json,
-scope.repository: APGI-cmy/app_management_centre, description updated for consumer scope,
-expected_artifacts block added for consumer-specific paths).
+**Note**: The committed `.github/agents/CodexAdvisor-agent.md` remains at contract_version 3.4.0.
+The proposed 4.0.0 consumer-adapted content is in the escalation inbox only (PROHIB-002 active).
+SHA256 is of the escalation artifact `proposed-CodexAdvisor-agent-4.0.0.md`, not the committed file.
 
 ---
 
@@ -53,7 +52,7 @@ expected_artifacts block added for consumer-specific paths).
 6. Agent file detection gate: TRIGGERED — PROHIB-002 active, DRAFT PR required
 7. Fetched canonical CodexAdvisor-agent.md at 3166bec3
 8. Applied consumer-specific adaptations (5 fields adapted)
-9. Updated .github/agents/CodexAdvisor-agent.md (3.4.0 → 4.0.0)
+9. Proposed consumer-adapted .github/agents/CodexAdvisor-agent.md (3.4.0 → 4.0.0) stored in escalation inbox (NOT applied to repo — PROHIB-002 active)
 10. Updated governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json (19 → 20 artifacts)
 11. Updated .agent-admin/governance/sync_state.json (canonical_commit updated, drift_detected: true)
 12. Created ripple inbox entry: ripple-layer-down-3166bec3.json
