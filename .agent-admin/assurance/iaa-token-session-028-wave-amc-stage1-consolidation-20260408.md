@@ -7,6 +7,8 @@
 **Adoption Phase**: PHASE_B_BLOCKING
 **Date**: 2026-04-08
 
+## PHASE_B_BLOCKING_TOKEN: IAA-session-028-wave-amc-stage1-consolidation-20260408-PASS
+
 ---
 
 ## Invocation Context
