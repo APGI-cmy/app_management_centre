@@ -1,0 +1,18 @@
+{
+  "session": "session-005-20260409",
+  "agent": "governance-liaison-amc",
+  "ripple_events": [
+    {
+      "event_type": "governance_ripple",
+      "canonical_commit": "f68b7d993b080cdd721445f1f39e4b77ad0d150f",
+      "inventory_version": "1.0.0",
+      "changed_paths": [".github/agents/CodexAdvisor-agent.md"],
+      "sender": "APGI-cmy/maturion-foreman-governance",
+      "trigger": "Refine CodexAdvisor-agent contract details",
+      "timestamp": "2026-04-09T07:20:31Z",
+      "processed_at": "2026-04-09T14:04:20Z",
+      "processing_status": "ESCALATED_TO_CS2",
+      "outcome": "Proposed consumer-adapted file stored in escalation-inbox. CS2 + CodexAdvisor approval required."
+    }
+  ]
+}
