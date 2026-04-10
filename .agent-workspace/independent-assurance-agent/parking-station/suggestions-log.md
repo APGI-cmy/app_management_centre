@@ -52,3 +52,6 @@
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | Add explicit §4.3c SHA-population gate to pre-brief to prevent post-merge CORR-001/002 patterns | session-030-20260409.md |
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | CANON_INVENTORY count in layer-down PREHANDOVER proofs should record both branch-state and merged-state counts | session-030-20260409.md |
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | Token file creation should be a hard pre-open gate, not a First Invocation Exception at review time | session-030-20260409.md |
+| 2026-04-10 | independent-assurance-agent | session-032 | Phase 3 | CodexAdvisor Phase 4.3a Pre-IAA Commit Gate should include SCOPE_DECLARATION.md update step to prevent A-026 failures | session-032-20260410.md |
+| 2026-04-10 | independent-assurance-agent | session-032 | Phase 3 | Session memory iaa_invocation_result pre-population before IAA invocation creates false state on REJECTION — needs FAIL-ONLY-ONCE rule | session-032-20260410.md |
+| 2026-04-10 | independent-assurance-agent | session-032 | Phase 2 | CodexAdvisor should read latest IAA Pre-Brief artifact in Phase 2 alignment to carry-through declared required fixes | session-032-20260410.md |
