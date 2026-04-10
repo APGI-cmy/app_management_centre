@@ -37,4 +37,5 @@ DRAFT PR created with alignment artifacts. CS2 + CodexAdvisor must apply the age
 
 ## IAA Status
 
-Awaiting IAA invocation (Phase 4.4 — PHASE_B_BLOCKING).
+Phase 4.4 IAA invocation completed — PASS (PHASE_B_BLOCKING cleared).
+Evidence token: `.agent-admin/assurance/iaa-token-session-005-wave1-20260409.md`
