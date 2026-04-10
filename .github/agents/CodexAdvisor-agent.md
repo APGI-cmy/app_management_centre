@@ -91,7 +91,6 @@ scope:
     - ".github/agents/"
     - ".agent-workspace/CodexAdvisor-agent/"
     - ".agent-admin/assurance/"
-    - "governance/quality/agent-integrity/"
     - ".agent-workspace/<target-agent>/"
   protected_paths:
     - ".github/agents/CodexAdvisor-agent.md"
