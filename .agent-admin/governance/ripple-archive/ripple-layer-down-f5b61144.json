@@ -1,0 +1,17 @@
+{
+    "dispatch_id": "layer-down-f5b61144-20260409",
+    "event_type": "governance_ripple",
+    "canonical_commit": "f5b61144679b3676f43d056fdb1ec4dea7131937",
+    "inventory_version": "1.0.0",
+    "changed_paths": [
+        ".github/agents/CodexAdvisor-agent.md"
+    ],
+    "sender": "APGI-cmy/maturion-foreman-governance",
+    "timestamp": "2026-04-09T06:45:14Z",
+    "trigger": "Update CodexAdvisor-agent.md",
+    "status": "archived",
+    "archived_at": "2026-04-09T13:10:00Z",
+    "outcome": "Agent contract file .github/agents/CodexAdvisor-agent.md updated at canonical source to v4.0.1. PROHIB-002 triggered. DRAFT PR created. CS2 approval required before merge. Proposed consumer-adapted artifact stored at .agent-workspace/governance-liaison-amc/escalation-inbox/proposed-CodexAdvisor-agent-4.0.1.md",
+    "pr_number": "DRAFT — pending CS2 merge",
+    "session": "session-004-20260409"
+}
