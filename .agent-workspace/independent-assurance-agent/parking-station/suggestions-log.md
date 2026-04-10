@@ -50,3 +50,6 @@
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | Add explicit §4.3c SHA-population gate to pre-brief to prevent post-merge CORR-001/002 patterns | session-030-20260409.md |
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | CANON_INVENTORY count in layer-down PREHANDOVER proofs should record both branch-state and merged-state counts | session-030-20260409.md |
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | Token file creation should be a hard pre-open gate, not a First Invocation Exception at review time | session-030-20260409.md |
+| 2026-04-10 | independent-assurance-agent | session-032 | Phase 2 | Pre-invocation commit gate: mandatory `git commit` step before IAA invocation in foreman-v2-agent Phase 4 | session-032-20260410.md |
+| 2026-04-10 | independent-assurance-agent | session-032 | Phase 2 | PREHANDOVER proof must be a committed file artifact, not inline invocation text | session-032-20260410.md |
+| 2026-04-10 | independent-assurance-agent | session-032 | Phase 1 | "Initial plan" empty commit pattern in copilot-swe-agent creates deceptive `git diff origin/main HEAD` output — document as known pitfall in foreman-v2-agent session startup | session-032-20260410.md |
