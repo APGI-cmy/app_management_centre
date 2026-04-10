@@ -263,13 +263,10 @@ If unreadable, HALT-001.
 
 ### Step 1.2 — Load Tier 2 knowledge
 Read `.agent-workspace/CodexAdvisor-agent/knowledge/index.md`.
-Then load and confirm existence of all required Tier 2 files:
-- `checklist-registry.md`
-- `agent-creation-template.md`
-- `requirement-mapping.md`
-- `session-memory-template.md`
-- `agent-file-non-negotiables-checklist.md`
+Then load and confirm existence of all required Tier 2 files currently shipped for this agent:
+- `layer-down-changelog.md`
 
+Treat any other files referenced from `index.md` as optional unless they are explicitly added to the required list in this contract.
 If a required Tier 2 file is missing and the current job is not explicitly to restore it, HALT-005.
 
 Output:
