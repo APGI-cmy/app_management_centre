@@ -18,7 +18,7 @@ ASSURANCE-TOKEN
 PR: copilot/layer-down-governance-changes
     feat(governance): process ripple f68b7d99 — CodexAdvisor-agent.md v4.0.2 layer-down (session-005)
 Branch HEAD: a80194d
-Checks: 27 PASS / 0 FAIL
+Checks: 28 PASS / 0 FAIL
 Merge gate parity: PASS
 Merge permitted (subject to CS2 approval).
 Token reference: IAA-session-005-wave1-20260409-PASS
