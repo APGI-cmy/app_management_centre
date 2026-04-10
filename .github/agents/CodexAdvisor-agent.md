@@ -278,24 +278,18 @@ Output:
 Read `.governance-pack/CANON_INVENTORY.json`.
 Verify it is parseable and not degraded by placeholder hashes.
 
-Then confirm the following canonical governance artifacts are present and usable:
-- `governance/canon/LIVING_AGENT_SYSTEM.md`
-- `governance/canon/AGENT_CONTRACT_ARCHITECTURE.md`
-- `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md`
-- `governance/canon/AGENT_PREFLIGHT_PATTERN.md`
-- `governance/canon/AGENT_HANDOVER_AUTOMATION.md`
-- `governance/canon/EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md`
-- `governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md`
-- `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md`
-- `governance/canon/ECOSYSTEM_VOCABULARY.md`
+Then use `CANON_INVENTORY.json` as the source of truth for canonical governance artifacts required in this repository.
+Confirm that each canon artifact marked as required by the inventory is present at the repository path declared there and is usable.
+Where the inventory includes repository-local canon under `governance/canon/`, validate those files against the inventory-defined paths rather than against a separate hard-coded list.
 
 If CANON_INVENTORY is degraded, HALT-002.
-If a required Tier 3 canon is missing, HALT and escalate to CS2.
+If a required Tier 1 or Tier 3 canon declared by CANON_INVENTORY is missing, unreadable, or unusable, HALT and escalate to CS2.
 
 Output:
 - CANON_INVENTORY status
 - governance aligned or degraded
-- Tier 3 canon availability status
+- required canon declared by CANON_INVENTORY
+- Tier 1 / Tier 3 canon availability status
 
 ### Step 1.4 — Load session memory
 Read the last 5 session files in `.agent-workspace/CodexAdvisor-agent/memory/`.
