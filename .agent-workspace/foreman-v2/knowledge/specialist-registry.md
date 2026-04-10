@@ -15,7 +15,7 @@
 |----------|-------------|-------------|------------------|--------|
 | `CodexAdvisor-agent` | overseer | Create/update agent contracts; audit agent files; Tier 2 layer-down | `task(agent_type: "CodexAdvisor-agent")` | ACTIVE |
 | `independent-assurance-agent` | assurance | IAA Pre-Brief, handover audits, ASSURANCE-TOKEN issuance | `task(agent_type: "independent-assurance-agent")` | ACTIVE |
-| `governance-liaison-amc-agent` | administrator | Governance layer-down, canon sync, ripple inbox processing | `task(agent_type: "governance-liaison-amc-agent")` | ACTIVE |
+| `governance-liaison-amc-agent` | liaison | Governance layer-down, canon sync, ripple inbox processing | `task(agent_type: "governance-liaison-amc-agent")` | ACTIVE |
 | `api-builder` | builder | API routes, handlers, business logic, backend services | `task(agent_type: "api-builder")` | ACTIVE |
 | `qa-builder` | builder | Tests, QA suites, coverage verification, red-suite creation | `task(agent_type: "qa-builder")` | ACTIVE |
 | `schema-builder` | builder | Database schemas, models, migrations, RLS policies | `task(agent_type: "schema-builder")` | ACTIVE |
