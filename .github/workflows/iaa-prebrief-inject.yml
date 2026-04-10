@@ -26,7 +26,7 @@ jobs:
   iaa-prebrief-inject:
     runs-on: ubuntu-latest
     outputs:
-      prebrief_existed_at_t0: ${{ steps.wave_tasks.outputs.prebrief_exists }}
+      prebrief_existed_at_t0: ${{ github.event_name == 'push' && steps.wave_tasks.outputs.prebrief_exists || '' }}
 
     if: >-
       github.event_name == 'push' ||
