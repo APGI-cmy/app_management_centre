@@ -26,7 +26,7 @@ governance:
   policy_refs:
     - id: AGCFPP-001
       name: Agent Contract File Protection Policy
-      path: governance/canon/AGENT_CONTRACT_FILE_PROTECTION_POLICY.md
+      path: .github/agents/CodexAdvisor-agent.md
       applies: all_agent_contract_creations_or_updates
   execution_identity:
     name: "Maturion Bot"
