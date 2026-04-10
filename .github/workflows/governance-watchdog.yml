@@ -343,11 +343,20 @@ jobs:
             let prebriefExists = false;
             try {
               if (fs.existsSync('.agent-admin/assurance')) {
-                const result = execSync(
-                  'find .agent-admin/assurance -name "iaa-prebrief-*.md" -print -quit',
+                const allFilesRaw = execSync(
+                  'find .agent-admin/assurance -name "iaa-prebrief-*.md"',
                   { encoding: 'utf8' }
                 ).trim();
-                prebriefExists = result.length > 0;
+                if (allFilesRaw.length > 0) {
+                  const allFiles = allFilesRaw.split('\n').filter(Boolean);
+                  prebriefExists = allFiles.some(f => {
+                    try {
+                      return !fs.readFileSync(f, 'utf8').toLowerCase().includes('superseded');
+                    } catch {
+                      return false;
+                    }
+                  });
+                }
               }
             } catch (e) {
               prebriefExists = false;
@@ -364,7 +373,7 @@ jobs:
             const body = [
               '## ⚠️ GOVERNANCE WATCHDOG — Pre-Brief Missing for Ready PR',
               '',
-              `@copilot You are the **Independent Assurance Agent (IAA)**. This PR is **open for review** but **no IAA pre-brief artifact** was found on branch \`${branch}\`.`,
+              `@copilot **Foreman attention required.** This PR is **open for review** but **no IAA pre-brief artifact** was found on branch \`${branch}\`.`,
               '',
               'Per Phase 0 (Step 1.8) of the foreman-v2-agent contract:',
               '- A pre-wave pre-brief is mandatory **before** wave work begins',
@@ -406,7 +415,9 @@ jobs:
           EVENT_ACTION: ${{ github.event.action }}
         run: |
           ACTION="$EVENT_ACTION"
-          PREHANDOVER_FILE=""
+          # Collect ALL matching PREHANDOVER files rather than stopping at the first match,
+          # so that a compliant first file cannot mask another file that still has PENDING token.
+          declare -a MATCHED_FILES=()
 
           if [[ "$ACTION" == "synchronize" ]]; then
             if [[ "$BEFORE_SHA" =~ ^[0-9a-f]{40}$ ]] && [[ "$AFTER_SHA" =~ ^[0-9a-f]{40}$ ]]; then
@@ -416,12 +427,12 @@ jobs:
               BEFORE_SHA=""
             fi
 
+            # Collect all PREHANDOVER*.md files from the PR diff (both paths)
             while IFS= read -r f; do
+              [ -n "$f" ] || continue
               basename_f=$(basename "$f")
-              # AMC: match both PREHANDOVER*.md and PREHANDOVER_PROOF_*.md patterns
               if [[ "$basename_f" == PREHANDOVER*.md ]]; then
-                PREHANDOVER_FILE="$f"
-                break
+                MATCHED_FILES+=("$f")
               fi
             done < <(
               if [ -n "$BEFORE_SHA" ]; then
@@ -431,42 +442,48 @@ jobs:
               fi
             )
           else
-            # For opened/ready_for_review: scan .agent-workspace/ PREHANDOVER files
-            while IFS= read -r -d '' f; do
-              PREHANDOVER_FILE="$f"
-              break
-            done < <(find .agent-workspace -name "PREHANDOVER*.md" -print0 2>/dev/null)
-
-            # AMC-specific: also scan root-level PREHANDOVER_PROOF_*.md
-            if [ -z "$PREHANDOVER_FILE" ]; then
-              while IFS= read -r -d '' f; do
-                PREHANDOVER_FILE="$f"
-                break
-              done < <(find . -maxdepth 1 -name "PREHANDOVER_PROOF_*.md" -print0 2>/dev/null)
-            fi
+            # For opened/ready_for_review: deterministically collect from both locations
+            # AMC: scan .agent-workspace/ PREHANDOVER files AND root PREHANDOVER_PROOF_*.md
+            while IFS= read -r f; do
+              [ -n "$f" ] || continue
+              MATCHED_FILES+=("$f")
+            done < <(
+              {
+                find .agent-workspace -name "PREHANDOVER*.md" -print 2>/dev/null
+                find . -maxdepth 1 -name "PREHANDOVER_PROOF_*.md" -print 2>/dev/null
+              } | LC_ALL=C sort -u
+            )
           fi
 
-          if [ -z "$PREHANDOVER_FILE" ]; then
+          if [ "${#MATCHED_FILES[@]}" -eq 0 ]; then
             echo "prehandover_changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           echo "prehandover_changed=true" >> "$GITHUB_OUTPUT"
-          echo "prehandover_file=$PREHANDOVER_FILE" >> "$GITHUB_OUTPUT"
+          # Report the first file for reference in the comment step
+          echo "prehandover_file=${MATCHED_FILES[0]}" >> "$GITHUB_OUTPUT"
 
-          # Check iaa_audit_token value
-          if grep -q 'iaa_audit_token:' "$PREHANDOVER_FILE"; then
-            TOKEN_VALUE=$(grep 'iaa_audit_token:' "$PREHANDOVER_FILE" | head -1 | sed 's/.*iaa_audit_token:[[:space:]]*//')
-            # Strip leading/trailing whitespace for exact comparison
-            TOKEN_TRIMMED=$(echo "$TOKEN_VALUE" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-            if echo "$TOKEN_TRIMMED" | grep -qiE '^PENDING$'; then
-              echo "token_pending=true" >> "$GITHUB_OUTPUT"
-            else
-              echo "token_pending=false" >> "$GITHUB_OUTPUT"
+          # Check ALL matched files — any file with iaa_audit_token: PENDING triggers the gap.
+          # Files that do not contain the iaa_audit_token field at all are skipped (not applicable),
+          # to avoid false positives from historical PREHANDOVER docs or templates.
+          TOKEN_PENDING=false
+          for candidate in "${MATCHED_FILES[@]}"; do
+            if grep -q 'iaa_audit_token:' "$candidate"; then
+              TOKEN_VALUE=$(grep 'iaa_audit_token:' "$candidate" | head -1 | sed 's/.*iaa_audit_token:[[:space:]]*//')
+              TOKEN_TRIMMED=$(echo "$TOKEN_VALUE" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+              if echo "$TOKEN_TRIMMED" | grep -qiE '^PENDING$'; then
+                TOKEN_PENDING=true
+                echo "  → PENDING token found in: $candidate"
+                break
+              fi
             fi
-          else
-            # Field entirely absent — also a gap
+          done
+
+          if [ "$TOKEN_PENDING" = true ]; then
             echo "token_pending=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "token_pending=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Check handover keywords and enforce blocking failure if gap detected

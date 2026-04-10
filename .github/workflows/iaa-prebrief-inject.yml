@@ -163,7 +163,11 @@ jobs:
           if [ -f "$TASKS_FILE" ]; then
             SNIPPET=$(head -c 1500 "$TASKS_FILE" | sed "s/\`/'/g")
             # Normalize wave number — strip "Wave " prefix, capture just the number/slug
-            WAVE_NUM=$(grep -m1 -oP '(?<=\*\*Wave\*\*:\s)(Wave\s+)?\K\S+' "$TASKS_FILE" || echo "unknown")
+            # Support both 'wave: <slug>' (current format) and '**Wave**: <slug>' (legacy)
+            WAVE_NUM=$(grep -m1 -E '^(wave|\*\*Wave\*\*):[[:space:]]*(Wave[[:space:]]+)?' "$TASKS_FILE" \
+              | sed -E 's/^(wave|\*\*Wave\*\*):[[:space:]]*(Wave[[:space:]]+)?//' \
+              | awk '{print $1}' || echo "unknown")
+            [ -z "$WAVE_NUM" ] && WAVE_NUM="unknown"
             echo "tasks_found=true" >> "$GITHUB_OUTPUT"
             echo "wave_num=$WAVE_NUM" >> "$GITHUB_OUTPUT"
             echo "tasks_snippet<<EOF_TASKS" >> "$GITHUB_OUTPUT"
@@ -191,7 +195,11 @@ jobs:
           TASKS_FILE=".agent-workspace/foreman-v2/personal/wave-current-tasks.md"
           if [ -f "$TASKS_FILE" ]; then
             SNIPPET=$(head -c 1500 "$TASKS_FILE" | sed "s/\`/'/g")
-            WAVE_NUM=$(grep -m1 -oP '(?<=\*\*Wave\*\*:\s)(Wave\s+)?\K\S+' "$TASKS_FILE" || echo "unknown")
+            # Support both 'wave: <slug>' (current format) and '**Wave**: <slug>' (legacy)
+            WAVE_NUM=$(grep -m1 -E '^(wave|\*\*Wave\*\*):[[:space:]]*(Wave[[:space:]]+)?' "$TASKS_FILE" \
+              | sed -E 's/^(wave|\*\*Wave\*\*):[[:space:]]*(Wave[[:space:]]+)?//' \
+              | awk '{print $1}' || echo "unknown")
+            [ -z "$WAVE_NUM" ] && WAVE_NUM="unknown"
             echo "tasks_found=true" >> "$GITHUB_OUTPUT"
             echo "wave_num=$WAVE_NUM" >> "$GITHUB_OUTPUT"
             echo "tasks_snippet<<EOF_TASKS" >> "$GITHUB_OUTPUT"
@@ -200,7 +208,7 @@ jobs:
 
             # Idempotency guard — scoped to THIS wave's pre-brief file
             ASSURANCE_DIR=".agent-admin/assurance"
-            PREBRIEF_FILE="${ASSURANCE_DIR}/iaa-prebrief-wave${WAVE_NUM}.md"
+            PREBRIEF_FILE="${ASSURANCE_DIR}/iaa-prebrief-wave-${WAVE_NUM}.md"
             if [ "$WAVE_NUM" != "unknown" ] && [ -f "$PREBRIEF_FILE" ] && ! grep -qi "SUPERSEDED" "$PREBRIEF_FILE" 2>/dev/null; then
               echo "prebrief_exists=true" >> "$GITHUB_OUTPUT"
             else
@@ -356,14 +364,12 @@ jobs:
                 '**Wave tasks (from `wave-current-tasks.md`)**:',
                 taskSection,
                 '',
-                `If no Pre-Brief is committed within 10 minutes, a safety net escalation will be posted to @APGI-cmy.`,
+                `The governance-watchdog Gap 2 will block the PR from proceeding to review until the Pre-Brief artifact exists at \`.agent-admin/assurance/iaa-prebrief-<slug>.md\`.`,
                 '',
                 '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
               ].join('\n'),
             });
 
-            // Safety net: schedule a follow-up check (this workflow does not re-trigger itself,
-            // but the governance-watchdog Gap 2 covers the ready-for-review path).
             core.notice(`IAA Pre-Brief injection comment posted for wave ${waveNum} on PR #${prNumber}.`);
 
       - name: Post IAA Pre-Brief invocation comment (issue_comment / PR)
