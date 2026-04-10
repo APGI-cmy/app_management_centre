@@ -53,3 +53,6 @@
 | 2026-04-10 | independent-assurance-agent | session-032 | Phase 2 | Pre-invocation commit gate: mandatory `git commit` step before IAA invocation in foreman-v2-agent Phase 4 | session-032-20260410.md |
 | 2026-04-10 | independent-assurance-agent | session-032 | Phase 2 | PREHANDOVER proof must be a committed file artifact, not inline invocation text | session-032-20260410.md |
 | 2026-04-10 | independent-assurance-agent | session-032 | Phase 1 | "Initial plan" empty commit pattern in copilot-swe-agent creates deceptive `git diff origin/main HEAD` output — document as known pitfall in foreman-v2-agent session startup | session-032-20260410.md |
+| 2026-04-10 | independent-assurance-agent | session-033 | Phase 3 | Formalize session-memory post-token First Invocation Exception in CORE-015 and CORE-018(b) to match CORE-019 precedent | session-033-20260410.md |
+| 2026-04-10 | independent-assurance-agent | session-033 | Phase 3 | Plan governance-liaison-amc-agent bloat remediation wave (30,209 bytes → under 30,000) | session-033-20260410.md |
+| 2026-04-10 | independent-assurance-agent | session-033 | Phase 1 | Close ECAP_UNCOMMITTED_ARTIFACTS systemic blocker in foreman Phase 4 protocol — corrective action confirmed effective session-033 | session-033-20260410.md |
