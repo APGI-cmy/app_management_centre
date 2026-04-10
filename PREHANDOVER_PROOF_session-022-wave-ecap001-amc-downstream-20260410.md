@@ -48,7 +48,7 @@ git ls-tree HEAD .agent-workspace/foreman-v2/knowledge/:
 - iaa_oversight.advisory_phase: PHASE_B_BLOCKING ✅
 - No hardcoded version strings in phase body ✅
 - No embedded Tier 2 bulk content ✅
-- Char count: 30,049 chars (under 30,000 by advisory; change is net-neutral on char count) ✅
+- Char count: 30,049 chars (over 30,000 advisory threshold by 49 chars; change is net-neutral on char count) ✅
 - Blob SHA: d7885475b20962252586181ee67a8905338f39bc
 
 ### CodexAdvisor-agent.md
