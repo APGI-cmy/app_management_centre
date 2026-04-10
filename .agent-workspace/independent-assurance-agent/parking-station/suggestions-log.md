@@ -49,3 +49,6 @@
 | 2026-04-09 | independent-assurance-agent | session-029 | Phase 4 | OVL-LA-003 (ripple not archived) has now appeared in sessions 026 and 029 — if it recurs, promote to FAIL-GL-003 in governance-liaison FAIL-ONLY-ONCE.md and consider CI gate | session-029-20260409.md |
 | 2026-04-09 | independent-assurance-agent | session-031 | governance | Consider wave-level pre-brief for recurring governance liaison layer-down sessions to improve traceability | session-031-20260409.md |
 | 2026-04-09 | independent-assurance-agent | session-031 | process | Supersession automation for DRAFT PRs when newer ripple arrives for same target file | session-031-20260409.md |
+| 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | Add explicit §4.3c SHA-population gate to pre-brief to prevent post-merge CORR-001/002 patterns | session-030-20260409.md |
+| 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | CANON_INVENTORY count in layer-down PREHANDOVER proofs should record both branch-state and merged-state counts | session-030-20260409.md |
+| 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | Token file creation should be a hard pre-open gate, not a First Invocation Exception at review time | session-030-20260409.md |
