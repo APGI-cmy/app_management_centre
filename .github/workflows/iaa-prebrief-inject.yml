@@ -172,7 +172,7 @@ jobs:
 
             # Idempotency guard — scoped to THIS wave's pre-brief file
             ASSURANCE_DIR=".agent-admin/assurance"
-            PREBRIEF_FILE="${ASSURANCE_DIR}/iaa-prebrief-wave${WAVE_NUM}.md"
+            PREBRIEF_FILE="${ASSURANCE_DIR}/iaa-prebrief-wave-${WAVE_NUM}.md"
             if [ "$WAVE_NUM" != "unknown" ] && [ -f "$PREBRIEF_FILE" ] && ! grep -qi "SUPERSEDED" "$PREBRIEF_FILE" 2>/dev/null; then
               echo "prebrief_exists=true" >> "$GITHUB_OUTPUT"
             else
