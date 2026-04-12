@@ -52,3 +52,5 @@
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | Add explicit §4.3c SHA-population gate to pre-brief to prevent post-merge CORR-001/002 patterns | session-030-20260409.md |
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | CANON_INVENTORY count in layer-down PREHANDOVER proofs should record both branch-state and merged-state counts | session-030-20260409.md |
 | 2026-04-09 | independent-assurance-agent | IAA-030 | Phase 4 | Token file creation should be a hard pre-open gate, not a First Invocation Exception at review time | session-030-20260409.md |
+| 2026-04-12 | independent-assurance-agent | session-032 | overlay | OVL-LA-ADM-003 should clarify ALIGNMENT_EVIDENCE.md is required for ALL LIAISON_ADMIN sessions including acknowledgment-only (no consumer artifact changed) | session-032-20260412.md |
+| 2026-04-12 | independent-assurance-agent | session-032 | process | Governance-liaison should include ripple inbox cleanup (archive prior 'complete' items) as a standard housekeeping step in session Phase 1 | session-032-20260412.md |
