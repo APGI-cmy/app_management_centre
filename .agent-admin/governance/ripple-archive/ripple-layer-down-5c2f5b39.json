@@ -1,0 +1,17 @@
+{
+  "dispatch_id": "layer-down-5c2f5b39-20260412",
+  "event_type": "governance_ripple",
+  "canonical_commit": "5c2f5b393592028d107636090ecb791623ccb27f",
+  "inventory_version": "1.0.0",
+  "changed_paths": [
+    "governance/quality/agent-integrity/INTEGRITY_INDEX.md"
+  ],
+  "sender": "APGI-cmy/maturion-foreman-governance",
+  "timestamp": "2026-04-09T08:17:29Z",
+  "trigger": "Update INTEGRITY_INDEX.md",
+  "status": "archived",
+  "archived_at": "2026-04-12T06:55:42Z",
+  "outcome": "Canonical quality maintenance — INTEGRITY_INDEX.md SHA256 baseline updated for CodexAdvisor-agent.md (old: 628850b3..., new: a6aee491...). File is not a PUBLIC_API consumer layer-down target. Ripple acknowledged; no consumer artifact changed. Sync state updated to canonical_commit 5c2f5b39.",
+  "pr_number": "1060",
+  "session": "session-006-20260412"
+}

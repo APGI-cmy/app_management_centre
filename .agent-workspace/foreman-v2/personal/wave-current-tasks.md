@@ -1,11 +1,11 @@
-# Wave Current Tasks — wave-layer-down-iaa-workflows
+# Wave Current Tasks — wave-layer-down-5c2f5b39
 
-wave: layer-down-iaa-workflows
-agent: foreman-v2-agent
-session: session-022
-date: 20260409
-iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-wave-layer-down-iaa-workflows.md
-iaa_prebrief_status: COMMITTED — SHA 7d04f42
+wave: layer-down-5c2f5b39
+agent: governance-liaison-amc
+session: session-006
+date: 20260412
+iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-layer-down-5c2f5b39.md
+iaa_prebrief_status: COMMITTED
 
 ## Wave Description
 
