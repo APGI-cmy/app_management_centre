@@ -1,7 +1,8 @@
 # IAA Verdict — Session 006 — wave-layer-down-5c2f5b39
 
 **Agent**: independent-assurance-agent  
-**IAA Session**: session-032-20260412 (reviewing governance-liaison-amc session-006)  
+**IAA Session**: session-033-20260412 (re-audit — reviewing governance-liaison-amc session-006 after REJECTION-PACKAGE fix)  
+**Prior IAA Session**: session-032-20260412 (REJECTION-PACKAGE — OVL-LA-ADM-003)  
 **Date**: 2026-04-12  
 **PR**: #1060 — [WIP] Propagate governance changes based on integration instructions  
 **Branch**: copilot/layer-down-governance-update  
@@ -15,35 +16,29 @@
 ## Machine-Readable Status
 
 ```
-PHASE_B_BLOCKING_VERDICT: REJECTION-PACKAGE
-IAA_SESSION_ID: IAA-session-032-20260412
+PHASE_B_BLOCKING_TOKEN: IAA-session-006-wave-layer-down-5c2f5b39-20260412-PASS
+IAA_SESSION_ID: IAA-session-033-20260412
 PR_REVIEWED: 1060
 PRODUCING_SESSION: session-006-wave-layer-down-5c2f5b39-20260412
-FAILURE_COUNT: 1
-FAILURE_CATEGORY: CEREMONY
+FAILURE_COUNT: 0
 SUBSTANTIVE_QUALITY_SIGNAL: CLEAN
+RE_AUDIT: true
+PRIOR_REJECTION_SESSION: IAA-session-032-20260412
+PRIOR_REJECTION_RESOLVED: OVL-LA-ADM-003 (ALIGNMENT_EVIDENCE.md — now PRESENT and CORRECT)
 ```
 
 ---
 
 ## ═══════════════════════════════════════
-## REJECTION-PACKAGE
+## ASSURANCE-TOKEN (PASS)
 **PR**: #1060 — [WIP] Propagate governance changes based on integration instructions  
-**1 check FAILED. Merge blocked. STOP-AND-FIX required.**
+**All 21 checks PASS. Merge gate parity: PASS. Merge permitted (subject to CS2 approval).**
 
-### FAILURES
-
-**OVL-LA-ADM-003: Evidence artifact bundle present**  
-— Category: **CEREMONY**  
-— Finding: `ALIGNMENT_EVIDENCE.md` is absent from `.agent-admin/build-evidence/session-006-20260412/`. The evidence bundle contains `HANDOVER_SUMMARY.md` and `RIPPLE_LOG.json` only. The LIAISON_ADMIN overlay (OVL-LA-ADM-003) requires the evidence bundle to contain both `HANDOVER_SUMMARY.md` AND `ALIGNMENT_EVIDENCE.md`. Prior session IAA-031 (ASSURANCE-TOKEN, LIAISON_ADMIN category) explicitly confirmed `ALIGNMENT_EVIDENCE.md` as a mandatory component of the evidence bundle: "HANDOVER_SUMMARY, ALIGNMENT_EVIDENCE, RIPPLE_LOG are all present, accurate, and mutually consistent."  
-— Fix required: Create `.agent-admin/build-evidence/session-006-20260412/ALIGNMENT_EVIDENCE.md`. For an acknowledgment-only session (no consumer artifact changed), this file should document: (1) the canonical commit reviewed (5c2f5b39), (2) the changed canonical file (INTEGRITY_INDEX.md), (3) the alignment decision (INTEGRITY_INDEX.md is not a consumer layer-down target — no consumer artifact changed), (4) the rationale (file not in consumer CANON_INVENTORY), and (5) a reference to RIPPLE_LOG.json for full ripple processing evidence. A brief alignment statement is sufficient.
-
----
-
-**FAILURE CLASSIFICATION**: SUBSTANTIVE: 0 | CEREMONY: 1 | ENVIRONMENT_BOOTSTRAP: 0  
-**Substantive quality signal**: CLEAN — no substantive defects in the governance work. The ripple was correctly processed, sync state correctly updated, and all governance decisions correctly made. The single failure is a missing required evidence artifact file.
-
-This PR must not be merged until the failure is resolved and IAA re-invoked.  
+**Token reference**: IAA-session-033-wave-layer-down-5c2f5b39-20260412-PASS  
+**Re-audit result**: REJECTION-PACKAGE from session-032 fully resolved.  
+**Fixed check**: OVL-LA-ADM-003 — `ALIGNMENT_EVIDENCE.md` committed at `7cb155d` — present, substantive, and correct.  
+**Failure classification**: SUBSTANTIVE: 0 | CEREMONY: 0 | ENVIRONMENT_BOOTSTRAP: 0  
+**Substantive quality signal**: CLEAN  
 **Adoption phase**: PHASE_B_BLOCKING — Hard gate ACTIVE.
 
 ## ═══════════════════════════════════════
@@ -71,18 +66,18 @@ This PR must not be merged until the failure is resolved and IAA re-invoked.
 | OVL-LA-005 | PASS ✅ | Consumer mode compliance confirmed |
 | OVL-LA-ADM-001 | PASS ✅ | PREHANDOVER ceremony complete |
 | OVL-LA-ADM-002 | PASS ✅ | Liaison session memory present |
-| OVL-LA-ADM-003 | **FAIL ❌** | ALIGNMENT_EVIDENCE.md absent from evidence bundle |
+| OVL-LA-ADM-003 | **PASS ✅** | ALIGNMENT_EVIDENCE.md present, substantive, correct — fixed at commit 7cb155d |
 | OVL-INJ-001 | PASS ✅ | Pre-Brief artifact present, non-empty, correct wave reference |
 | OVL-INJ-ADM-001 | PASS ✅ | Pre-Brief non-empty — substantive content confirmed |
 | OVL-INJ-ADM-002 | PASS ✅ | Pre-Brief references correct wave (layer-down-5c2f5b39) |
 
-**Total**: 21 checks evaluated, 20 PASS, **1 FAIL**
+**Total**: 21 checks evaluated, **21 PASS**, 0 FAIL
 
 ---
 
 ## Branch-Reality Gate Result
 
-All artifacts verified in committed HEAD (git ls-tree confirmed):  
+All artifacts verified in committed HEAD (git ls-tree confirmed — re-audit, commit 7cb155d):  
 - `.agent-admin/assurance/iaa-prebrief-layer-down-5c2f5b39.md` ✅  
 - `.agent-admin/governance/ripple-archive/ripple-layer-down-5c2f5b39.json` ✅  
 - `.agent-admin/governance/sync_state.json` ✅  
@@ -91,6 +86,7 @@ All artifacts verified in committed HEAD (git ls-tree confirmed):
 - `PREHANDOVER_PROOF_session-006-20260412.md` ✅  
 - `.agent-admin/build-evidence/session-006-20260412/HANDOVER_SUMMARY.md` ✅  
 - `.agent-admin/build-evidence/session-006-20260412/RIPPLE_LOG.json` ✅  
+- `.agent-admin/build-evidence/session-006-20260412/ALIGNMENT_EVIDENCE.md` ✅ *(fix — commit 7cb155d)*  
 
 Working tree: CLEAN. Invocation-state parity: CONFIRMED.
 
@@ -100,33 +96,21 @@ Working tree: CLEAN. Invocation-state parity: CONFIRMED.
 
 | Check | Local Result |
 |-------|-------------|
-| Merge Gate Interface / merge-gate/verdict | FAIL ❌ (1 failing check) |
+| Merge Gate Interface / merge-gate/verdict | PASS ✅ (21/21 checks pass) |
 | Merge Gate Interface / governance/alignment | PASS ✅ |
-| Merge Gate Interface / stop-and-fix/enforcement | TRIGGERED ✅ |
-| JSON artifact validation | PASS ✅ (all 4 JSON files parse correctly) |
+| Merge Gate Interface / stop-and-fix/enforcement | PASS ✅ (none triggered) |
+| JSON artifact validation | PASS ✅ (all JSON files parse correctly) |
 | CANON_INVENTORY hash verification | PASS ✅ (199 canons, no placeholder hashes) |
 
 ---
 
 ## Substantive Quality Assessment
 
-The governance-liaison-amc session-006 correctly processed the ripple for canonical commit 5c2f5b39. The decision to take no consumer action (INTEGRITY_INDEX.md is a canonical quality file not tracked in consumer CANON_INVENTORY) is **substantively correct**. All governance state was updated correctly: ripple archived, sync state updated to latest canonical_commit, GOVERNANCE_ALIGNMENT_INVENTORY updated with history entry. The persistent drift (CodexAdvisor-agent.md v4.0.2 pending CS2) is correctly documented and the sync state accurately reflects reality — setting drift_detected: false would have been governance fraud.
-
-The single failure is an administrative gap: the evidence bundle is missing the required ALIGNMENT_EVIDENCE.md file. This is a simple, low-effort fix.
+The single failure from session-032 (OVL-LA-ADM-003 — missing `ALIGNMENT_EVIDENCE.md`) has been resolved. The fix commit `7cb155d` adds a substantive, well-formed `ALIGNMENT_EVIDENCE.md` that documents: the canonical commit SHA, changed file, old/new hash values, alignment decision, 3-part rationale (not in CANON_INVENTORY, outside standard consumer paths, exclusive canonical quality tool), governance state updates applied, and cross-references to RIPPLE_LOG.json and HANDOVER_SUMMARY.md. Content is non-placeholder and accurate.
 
 ---
 
-## Required Re-invocation
-
-After resolving OVL-LA-ADM-003:
-1. Create `.agent-admin/build-evidence/session-006-20260412/ALIGNMENT_EVIDENCE.md`
-2. Commit the file to branch `copilot/layer-down-governance-update`
-3. Re-invoke IAA
-
-**STOP-AND-FIX: This PR must not be merged until IAA re-invoked and ASSURANCE-TOKEN issued.**
-
----
-
-*IAA verdict issued by independent-assurance-agent | IAA session-032 | 2026-04-12*  
+*IAA verdict issued by independent-assurance-agent | IAA session-033 (re-audit) | 2026-04-12*  
+*Resolves REJECTION-PACKAGE from IAA session-032 | OVL-LA-ADM-003 FIXED*  
 *Adoption phase: PHASE_B_BLOCKING | Authority: CS2 (@APGI-cmy)*  
 *This file is IAA's dedicated verdict artifact per AGENT_HANDOVER_AUTOMATION.md §4.3b*
