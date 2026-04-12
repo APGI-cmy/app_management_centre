@@ -8,6 +8,14 @@ name: Agent Contract Governance Enforcement
 #   - Missing governance.bindings → Advisory warning
 # Timeout: 5 minutes (validation only)
 # Authority: CS2, Agent Contract Minimalism Framework (PR #895 maturion-foreman-governance)
+#
+# ACTOR-AUTHORITY ALLOWLIST — ECAP-001 downstream normalization (Issue #1052)
+# CS2_EMAILS: johan.ras@apginc.ca
+# CS2_NAMES: APGI-cmy, Johan Ras
+# CODEX_EMAILS: copilot-swe-agent[bot], github-actions[bot]
+# AGENT_IDENTITIES: CodexAdvisor-agent, foreman-v2-agent, independent-assurance-agent,
+#                   governance-liaison-amc-agent, api-builder, qa-builder, schema-builder,
+#                   ui-builder, integration-builder
 
 on:
   pull_request:
