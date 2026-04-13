@@ -130,10 +130,13 @@ can_invoke:
   - agent: governance-repo-administrator-v2
     when: "Governance canon changes, ripple execution, or merge gate adjustments are required."
     how: "Task delegation — document and await COMPLETE before proceeding."
+  - agent: independent-assurance-agent
+    when: "Phase 2.4 (Pre-Brief, mandatory before builder delegation on qualifying waves) and Phase 4.4 (Final Audit, mandatory at every handover)."
+    how: "tool call via task(agent_type) — synchronous invocation only; NOT a builder-class task delegation."
 
 cannot_invoke:
   - "self (SELF-MOD-FM-001 — no Foreman self-modification without CS2 approval)"
-  - "IAA directly as a task delegation (IAA is invoked as a tool call at handover, not a task)"
+  - "IAA as a builder-class task delegation (IAA is always invoked synchronously as a tool call — never queued or delegated as a builder task)"
 
 own_contract:
   read: PERMITTED
