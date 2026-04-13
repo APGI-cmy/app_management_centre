@@ -1,22 +1,11 @@
 {
-<<<<<<< copilot/layer-down-propagate-governance-changes-again
-  "last_check": "2026-04-13T07:22:00Z",
+  "last_check": "2026-04-13T13:07:09Z",
   "canonical_version": "1.0.0",
-  "canonical_commit": "529d541f2fb85ccea544f16dcf25aefcbb840c69",
-=======
-  "last_check": "2026-04-12T06:55:42Z",
-  "canonical_version": "1.0.0",
-  "canonical_commit": "5c2f5b393592028d107636090ecb791623ccb27f",
->>>>>>> main
+  "canonical_commit": "404c78fa15ba6cc82d65132086e3d04ea70c400f",
   "local_version": "1.0.0",
   "local_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
   "drift_detected": "false",
   "needs_alignment": "false",
   "alignment_method": "align-governance.sh",
-<<<<<<< copilot/layer-down-propagate-governance-changes-again
-  "alignment_note": "Layer-down of AGENT_HANDOVER_AUTOMATION.md v1.3.0 from canonical commit 529d541f completed."
+  "alignment_note": "Layer-down of foreman-v2 canonical contract v3.0.0 from canonical commit 404c78fa completed. Consumer copy updated at .github/agents/foreman-v2-agent.md."
 }
-=======
-  "alignment_note": "Agent contract file .github/agents/CodexAdvisor-agent.md updated at canonical source to v4.0.2. DRAFT PR created. CS2 approval required before merge. Ripple 5c2f5b39 (INTEGRITY_INDEX.md quality maintenance) acknowledged and archived — no consumer artifact changed."
-}
->>>>>>> main

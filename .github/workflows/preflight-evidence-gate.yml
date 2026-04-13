@@ -249,13 +249,34 @@ jobs:
           FAIL=false
 
           # ----------------------------------------------------------------
-          # Check 1: wave-current-tasks.md must exist on this branch
+          # Check 1: wave checklist must exist on this branch
+          # Authoritative path: .agent-admin/waves/wave-*-current-tasks.md
+          # Legacy path (backward compat): .agent-workspace/foreman-v2/personal/wave-current-tasks.md
           # ----------------------------------------------------------------
-          WAVE_TASKS_PATH=".agent-workspace/foreman-v2/personal/wave-current-tasks.md"
-          if [ -f "$WAVE_TASKS_PATH" ]; then
-            echo "✅ wave-current-tasks.md found at: $WAVE_TASKS_PATH"
+          LEGACY_WAVE_TASKS_PATH=".agent-workspace/foreman-v2/personal/wave-current-tasks.md"
+          WAVE_TASKS_FOUND=false
+          WAVE_TASKS_PATH=""
+
+          # Check authoritative path first
+          WAVES_DIR=".agent-admin/waves"
+          if [ -d "$WAVES_DIR" ]; then
+            while IFS= read -r -d '' f; do
+              WAVE_TASKS_FOUND=true
+              WAVE_TASKS_PATH="$f"
+              break
+            done < <(find "$WAVES_DIR" -name "wave-*-current-tasks.md" -print0 2>/dev/null)
+          fi
+
+          # Fall back to legacy path if not found in authoritative location
+          if ! $WAVE_TASKS_FOUND && [ -f "$LEGACY_WAVE_TASKS_PATH" ]; then
+            WAVE_TASKS_FOUND=true
+            WAVE_TASKS_PATH="$LEGACY_WAVE_TASKS_PATH"
+          fi
+
+          if $WAVE_TASKS_FOUND; then
+            echo "✅ wave checklist found at: $WAVE_TASKS_PATH"
           else
-            echo "❌ MISSING: $WAVE_TASKS_PATH"
+            echo "❌ MISSING: No wave checklist found in $WAVES_DIR (wave-*-current-tasks.md) or legacy path $LEGACY_WAVE_TASKS_PATH"
             FAIL=true
           fi
 
