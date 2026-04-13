@@ -4,8 +4,8 @@ wave: wave-amc-admin-90-10
 agent: foreman-v2-agent
 session: session-023
 date: 20260413
-iaa_prebrief_path: .agent-admin/wave-records/amc-wave-record-amc-admin-90-10-20260413.md
-iaa_prebrief_status: CONSOLIDATED_INTO_WAVE_RECORD
+governance_evidence_path: .agent-admin/wave-records/amc-wave-record-amc-admin-90-10-20260413.md
+governance_evidence_status: CONSOLIDATED_INTO_WAVE_RECORD
 
 ## Wave Description
 
