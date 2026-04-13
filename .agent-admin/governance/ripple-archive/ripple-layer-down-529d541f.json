@@ -1,0 +1,16 @@
+{
+  "dispatch_id": "layer-down-529d541f-20260409",
+  "event_type": "governance_ripple",
+  "canonical_commit": "529d541f2fb85ccea544f16dcf25aefcbb840c69",
+  "inventory_version": "1.0.0",
+  "changed_paths": [
+    "governance/canon/AGENT_HANDOVER_AUTOMATION.md"
+  ],
+  "sender": "APGI-cmy/maturion-foreman-governance",
+  "timestamp": "2026-04-09T09:10:16Z",
+  "status": "archived",
+  "archived_at": "2026-04-13T07:22:00Z",
+  "pr_number": null,
+  "outcome": "AGENT_HANDOVER_AUTOMATION.md layered down (v1.2.0 → v1.3.0)",
+  "session": "session-006-20260413"
+}

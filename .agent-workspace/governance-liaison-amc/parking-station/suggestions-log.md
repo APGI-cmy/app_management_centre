@@ -16,3 +16,4 @@
 | 2026-04-09 | governance-liaison-amc | session-004 | documentation | GOVERNANCE_ALIGNMENT_INVENTORY supersedes field for PENDING_NOT_APPLIED artifacts linking prior version | session-004-20260409.md |
 | 2026-04-09 | governance-liaison-amc | session-005 | AUTOMATION | Automate "supersedes prior escalation" logic in ripple workflow — archive stale escalations when newer ripple arrives for same artifact | session-005-20260409.md |
 | 2026-04-09 | governance-liaison-amc | session-005 | process | Session-004 DRAFT PR for f5b61144/v4.0.1 should be closed when v4.0.2 PR is opened to avoid CS2 reviewer confusion | session-005-20260409.md |
+| 2026-04-13 | governance-liaison-amc | session-006 | improvement | Create missing Tier 2 knowledge files (layer-down-scripts.md, ripple-processing-scripts.md, drift-detection-scripts.md, session-memory-template.md) | session-006-20260413.md |
