@@ -58,3 +58,4 @@
 | 2026-04-10 | independent-assurance-agent | session-033 | Phase 3 | Formalize session-memory post-token First Invocation Exception in CORE-015 and CORE-018(b) to match CORE-019 precedent | session-033-20260410.md |
 | 2026-04-10 | independent-assurance-agent | session-033 | Phase 3 | Plan governance-liaison-amc-agent bloat remediation wave (30,209 bytes → under 30,000) | session-033-20260410.md |
 | 2026-04-10 | independent-assurance-agent | session-033 | Phase 1 | Close ECAP_UNCOMMITTED_ARTIFACTS systemic blocker in foreman Phase 4 protocol — corrective action confirmed effective session-033 | session-033-20260410.md |
+| 2026-04-13 | independent-assurance-agent | IAA-034 | Phase 3 | Add OVL-CG-005 overlay check for §4.3d Scope-Declaration Parity Gate awareness in future CANON_GOVERNANCE reviews | session-034-20260413.md |
