@@ -1,0 +1,106 @@
+name: Governance Artifact Enforcement
+
+# Authority: AMC 90/10 Admin Protocol v1.0.0, Issue #1063
+# Purpose: Enforce allowed governance artifact paths per the artifact taxonomy.
+#          Block merge if new files are created in deprecated admin paths.
+# Effective: 2026-04-13
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  artifact-path-enforcement:
+    name: "governance/artifact-path-enforcement"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Bypass for layer-down and governance alignment PRs
+        id: bypass_check
+        env:
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ "$PR_LABELS" == *"layer-down"* ]] || \
+             [[ "$PR_BRANCH" == *"layer-down"* ]] || \
+             [[ "$PR_TITLE" == *"layer-down"* ]] || \
+             [[ "$PR_TITLE" == *"Layer-Down"* ]] || \
+             [[ "$PR_BRANCH" == "governance-alignment-auto" ]] || \
+             ( [[ "$PR_LABELS" == *"governance"* ]] && [[ "$PR_LABELS" == *"automated"* ]] && [[ "$PR_LABELS" == *"agent:liaison"* ]] ); then
+            echo "✅ Layer-down / governance alignment PR — bypassing artifact enforcement."
+            echo "bypass=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "bypass=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check for deprecated artifact paths
+        if: steps.bypass_check.outputs.bypass != 'true'
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          echo "=== Governance Artifact Path Enforcement ==="
+          echo "Authority: AMC 90/10 Admin Protocol v1.0.0 (Issue #1063)"
+          echo ""
+
+          # Get list of new files added in this PR
+          NEW_FILES=$(git diff --name-only --diff-filter=A "origin/${BASE_REF}"...HEAD 2>/dev/null || true)
+
+          if [ -z "$NEW_FILES" ]; then
+            echo "✅ No new files added in this PR."
+            exit 0
+          fi
+
+          VIOLATIONS=0
+          VIOLATION_LIST=""
+
+          # Deprecated path patterns — no new files allowed
+          while IFS= read -r file; do
+            case "$file" in
+              .agent-admin/assurance/iaa-prebrief-*.md)
+                VIOLATIONS=$((VIOLATIONS + 1))
+                VIOLATION_LIST="${VIOLATION_LIST}\n  ❌ ${file} — deprecated: use wave record scope section instead"
+                ;;
+              .agent-admin/assurance/iaa-token-*.md)
+                VIOLATIONS=$((VIOLATIONS + 1))
+                VIOLATION_LIST="${VIOLATION_LIST}\n  ❌ ${file} — deprecated: use wave record assurance section instead"
+                ;;
+              .agent-admin/assurance/iaa-rejection-*.md)
+                VIOLATIONS=$((VIOLATIONS + 1))
+                VIOLATION_LIST="${VIOLATION_LIST}\n  ❌ ${file} — deprecated: use wave record failure trail instead"
+                ;;
+              .agent-admin/prehandover/PREHANDOVER_PROOF*.md)
+                VIOLATIONS=$((VIOLATIONS + 1))
+                VIOLATION_LIST="${VIOLATION_LIST}\n  ❌ ${file} — deprecated: use wave record evaluation section instead"
+                ;;
+            esac
+          done <<< "$NEW_FILES"
+
+          echo ""
+          if [ "$VIOLATIONS" -gt 0 ]; then
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            echo "🚨 GOVERNANCE ARTIFACT PATH VIOLATION"
+            echo ""
+            echo "Found ${VIOLATIONS} file(s) in deprecated admin paths:"
+            echo -e "$VIOLATION_LIST"
+            echo ""
+            echo "Per AMC 90/10 Admin Protocol v1.0.0 (Issue #1063):"
+            echo "  - Use a single amc-wave-record-{wave}-{date}.md instead"
+            echo "  - Place in: .agent-admin/wave-records/"
+            echo "  - Template: .agent-admin/templates/amc-wave-record-template.md"
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            exit 1
+          else
+            echo "✅ All new files are in allowed governance artifact paths."
+          fi
