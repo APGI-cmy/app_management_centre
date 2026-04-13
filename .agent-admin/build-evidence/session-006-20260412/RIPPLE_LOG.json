@@ -1,0 +1,16 @@
+{
+  "session": "session-006-20260412",
+  "wave": "wave-layer-down-5c2f5b39",
+  "ripple_received": {
+    "dispatch_id": "layer-down-5c2f5b39-20260412",
+    "canonical_commit": "5c2f5b393592028d107636090ecb791623ccb27f",
+    "canonical_commit_timestamp": "2026-04-09T08:17:29Z",
+    "timestamp": "2026-04-12T06:55:42Z",
+    "changed_paths": ["governance/quality/agent-integrity/INTEGRITY_INDEX.md"],
+    "sender": "APGI-cmy/maturion-foreman-governance",
+    "trigger": "Update INTEGRITY_INDEX.md"
+  },
+  "processing_status": "ACKNOWLEDGED_NO_CONSUMER_ACTION",
+  "archived_at": "2026-04-12T06:55:42Z",
+  "outcome": "Canonical quality maintenance — no consumer artifact changed"
+}

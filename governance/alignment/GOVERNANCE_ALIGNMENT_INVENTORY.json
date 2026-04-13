@@ -301,6 +301,17 @@
             "artifacts_updated": 3,
             "issue_ref": "APGI-cmy/app_management_centre#layer-down-2026-04-08",
             "status": "COMPLETE"
+        },
+        {
+            "layer_down_id": "layer-down-2026-04-12-5c2f5b39",
+            "canonical_commit": "5c2f5b393592028d107636090ecb791623ccb27f",
+            "timestamp": "2026-04-12T06:55:42Z",
+            "trigger": "Acknowledged canonical quality maintenance \u2014 governance/quality/agent-integrity/INTEGRITY_INDEX.md is not a consumer layer-down target",
+            "artifacts_changed": 0,
+            "artifacts_created": 0,
+            "artifacts_updated": 0,
+            "issue_ref": "session-006-20260412",
+            "status": "ACKNOWLEDGED_NO_CHANGES"
         }
     ],
     "history": [
