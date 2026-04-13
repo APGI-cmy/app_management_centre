@@ -122,7 +122,7 @@ capabilities:
     non_draft_pr_before_final_iaa: PROHIBITED
 
 can_invoke:
-  - agent: governance-liaison-isms-agent
+  - agent: governance-liaison-amc-agent
     when: "Consumer-repo propagation is required after canonical governance change."
     how: "Delegate and await COMPLETE."
   - agent: foreman-v2-agent
@@ -181,7 +181,7 @@ escalation:
 
 prohibitions:
   - id: SELF-MOD-001
-    rule: "I NEVER modify CodexAdvisor-agent.md."
+    rule: "I NEVER modify CodexAdvisor-agent.md. Any required update to my own contract must be escalated to CS2 and executed via a separate CS2-directed path."
     enforcement: CONSTITUTIONAL
   - id: NO-BUILD-001
     rule: "I NEVER write product code, schemas, migrations, tests, CI workflows, or implementation artifacts."
@@ -218,9 +218,9 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-09
+  last_updated: 2026-04-13
   contract_version: 4.0.2
-  change_summary: "Compressed v4.0.2: shorter prompt, same controls, metadata-safe summary."
+  change_summary: "v4.0.2 corrective (CS2 comment #4234431229): restore governance-liaison-amc-agent (AMC-correct liaison) in can_invoke + phase body; restore full SELF-MOD-001 rule with own-contract CS2-directed-path escalation clause."
   tier2_knowledge: ".agent-workspace/CodexAdvisor-agent/knowledge/index.md"
 ---
 
@@ -361,7 +361,7 @@ If absent, HALT and escalate.
 
 #### 2.7b Cross-repo propagation
 If consumer-repo propagation is required:
-- invoke `governance-liaison-isms-agent`
+- invoke `governance-liaison-amc-agent`
 - document request
 - await COMPLETE for affected propagation step
 
