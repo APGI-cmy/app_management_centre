@@ -21,13 +21,13 @@ Consumer action: UPDATE agent contract file — CS2 APPROVAL REQUIRED
 
 | ID | Task | Agent | Status |
 |----|------|-------|--------|
-| TASK-LD-404C-001 | Fetch canonical foreman-v2 contract (v3.0.0) from commit 404c78fa | governance-liaison-amc | PENDING |
-| TASK-LD-404C-002 | Update consumer copy at .github/agents/foreman-v2-agent.md | governance-liaison-amc | PENDING |
-| TASK-LD-404C-003 | Resolve merge conflict in sync_state.json | governance-liaison-amc | PENDING |
-| TASK-LD-404C-004 | Update sync_state.json with new canonical commit | governance-liaison-amc | PENDING |
-| TASK-LD-404C-005 | Create/update GOVERNANCE_ALIGNMENT_INVENTORY.json | governance-liaison-amc | PENDING |
-| TASK-LD-404C-006 | Create ripple archive entry for 404c78fa | governance-liaison-amc | PENDING |
-| TASK-LD-404C-007 | Session memory + PREHANDOVER proof | foreman-v2-agent | PENDING |
+| TASK-LD-404C-001 | Fetch canonical foreman-v2 contract (v3.0.0) from commit 404c78fa | governance-liaison-amc | COMPLETE |
+| TASK-LD-404C-002 | Update consumer copy at .github/agents/foreman-v2-agent.md | governance-liaison-amc | COMPLETE |
+| TASK-LD-404C-003 | Resolve merge conflict in sync_state.json | governance-liaison-amc | COMPLETE |
+| TASK-LD-404C-004 | Update sync_state.json with new canonical commit | governance-liaison-amc | COMPLETE |
+| TASK-LD-404C-005 | Create/update GOVERNANCE_ALIGNMENT_INVENTORY.json | governance-liaison-amc | COMPLETE |
+| TASK-LD-404C-006 | Create ripple archive entry for 404c78fa | governance-liaison-amc | COMPLETE |
+| TASK-LD-404C-007 | Session memory + PREHANDOVER proof | foreman-v2-agent | IN PROGRESS |
 | TASK-LD-404C-008 | IAA audit (PHASE_B_BLOCKING) | independent-assurance-agent | PENDING |
 
 ## Agent File Guard
