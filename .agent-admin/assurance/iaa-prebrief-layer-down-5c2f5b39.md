@@ -25,7 +25,7 @@ Change description: SHA256 baseline update for `CodexAdvisor-agent.md`
 |------|--------|-------|
 | `governance/quality/agent-integrity/INTEGRITY_INDEX.md` | NO-OP (canonical quality file — not a consumer layer-down target) | Not in CANON_INVENTORY; consumer repo has no copy |
 | `.agent-admin/governance/ripple-archive/ripple-layer-down-5c2f5b39.json` | CREATED | Ripple acknowledged and archived |
-| `governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json` | UPDATED | canonical_commit pointer → 5c2f5b39 |
+| `governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json` | UPDATED | last_layer_down_commit pointer → 5c2f5b39 |
 | `.agent-admin/governance/sync_state.json` | UPDATED | canonical_commit → 5c2f5b39 |
 | `.agent-workspace/foreman-v2/personal/wave-current-tasks.md` | UPDATED | Current wave metadata updated |
 
