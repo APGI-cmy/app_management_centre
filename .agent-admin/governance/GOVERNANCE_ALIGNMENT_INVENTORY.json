@@ -33,7 +33,7 @@
       "consumer_path": ".github/agents/CodexAdvisor-agent.md",
       "canonical_version": "4.0.2",
       "consumer_version": "4.0.2",
-      "canonical_commit": "f68b7d99",
+      "canonical_commit": "f68b7d993b080cdd721445f1f39e4b77ad0d150f",
       "alignment_status": "DRAFT_PR_PENDING_CS2",
       "last_aligned": "2026-04-09",
       "name_mapping": {
