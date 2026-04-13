@@ -112,7 +112,7 @@ jobs:
             echo "is_governance_auto=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check for PREHANDOVER_PROOF Evidence
+      - name: Check for PREHANDOVER_PROOF or Wave Record Evidence
         id: evidence_check
         if: steps.check_governance.outputs.is_governance_auto != 'true'
         run: |
@@ -124,8 +124,11 @@ jobs:
           elif ls PREHANDOVER_PROOF_*.md 1> /dev/null 2>&1; then
             echo "✅ Found PREHANDOVER_PROOF file"
             EVIDENCE_FOUND="true"
+          elif [ -d ".agent-admin/wave-records" ] && ls .agent-admin/wave-records/amc-wave-record-*.md 1> /dev/null 2>&1; then
+            echo "✅ Found wave record (90/10 model)"
+            EVIDENCE_FOUND="true"
           else
-            echo "ℹ️  No PREHANDOVER_PROOF found - will execute validation gates"
+            echo "ℹ️  No PREHANDOVER_PROOF or wave record found - will execute validation gates"
           fi
           echo "evidence_found=$EVIDENCE_FOUND" >> $GITHUB_OUTPUT
 

@@ -222,12 +222,19 @@ else
   echo "✅ Exists: improvements.md"
 fi
 
-# Check prehandover proof
-if [ -z "$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null)" ]; then
-  echo "⚠️  Missing: Prehandover proof (.md file)"
-  ((EVIDENCE_WARNINGS++))
-else
+# Check prehandover proof or wave record (90/10 model)
+GOVERNANCE_EVIDENCE=false
+if [ -n "$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null)" ]; then
   echo "✅ Exists: Prehandover proof"
+  GOVERNANCE_EVIDENCE=true
+fi
+if [ -n "$(find .agent-admin/wave-records -name 'amc-wave-record-*.md' -type f 2>/dev/null)" ]; then
+  echo "✅ Exists: Wave record (90/10 model)"
+  GOVERNANCE_EVIDENCE=true
+fi
+if [ "$GOVERNANCE_EVIDENCE" = false ]; then
+  echo "⚠️  Missing: Governance evidence (prehandover proof or wave record)"
+  ((EVIDENCE_WARNINGS++))
 fi
 
 echo ""

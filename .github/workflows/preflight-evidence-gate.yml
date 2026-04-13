@@ -260,11 +260,17 @@ jobs:
           fi
 
           # ----------------------------------------------------------------
-          # Check 2: iaa-prebrief-*.md must exist in .agent-admin/assurance/
+          # Check 2: Governance evidence must exist — either:
+          #   (a) iaa-prebrief-*.md in .agent-admin/assurance/ (legacy), OR
+          #   (b) amc-wave-record-*.md in .agent-admin/wave-records/ (90/10 model)
+          # Per AMC 90/10 Admin Protocol v1.0.0 (Issue #1063)
           # ----------------------------------------------------------------
           ASSURANCE_DIR=".agent-admin/assurance"
+          WAVE_RECORDS_DIR=".agent-admin/wave-records"
           PREBRIEF_FOUND=false
           PREBRIEF_PATH=""
+
+          # Check legacy path first
           if [ -d "$ASSURANCE_DIR" ]; then
             while IFS= read -r -d '' f; do
               if ! grep -qi "SUPERSEDED" "$f" 2>/dev/null; then
@@ -275,10 +281,21 @@ jobs:
             done < <(find "$ASSURANCE_DIR" -name "iaa-prebrief-*.md" -print0 2>/dev/null)
           fi
 
+          # Check consolidated wave-record path (90/10 model)
+          if [ "$PREBRIEF_FOUND" = false ] && [ -d "$WAVE_RECORDS_DIR" ]; then
+            while IFS= read -r -d '' f; do
+              PREBRIEF_FOUND=true
+              PREBRIEF_PATH="$f"
+              break
+            done < <(find "$WAVE_RECORDS_DIR" -name "amc-wave-record-*.md" -print0 2>/dev/null)
+          fi
+
           if $PREBRIEF_FOUND; then
-            echo "✅ IAA Pre-Brief artifact found at: $PREBRIEF_PATH"
+            echo "✅ Governance evidence artifact found at: $PREBRIEF_PATH"
           else
-            echo "❌ MISSING: No active iaa-prebrief-*.md in $ASSURANCE_DIR"
+            echo "❌ MISSING: No governance evidence found"
+            echo "   Expected: iaa-prebrief-*.md in $ASSURANCE_DIR (legacy)"
+            echo "         OR: amc-wave-record-*.md in $WAVE_RECORDS_DIR (90/10 model)"
             FAIL=true
           fi
 

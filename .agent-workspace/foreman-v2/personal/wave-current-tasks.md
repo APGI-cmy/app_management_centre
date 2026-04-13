@@ -1,31 +1,42 @@
-# Wave Current Tasks — wave-layer-down-5c2f5b39
+# Wave Current Tasks — wave-amc-admin-90-10
 
-wave: wave-layer-down-5c2f5b39
-agent: governance-liaison-amc
-session: session-006
-date: 20260412
-iaa_prebrief_path: .agent-admin/assurance/iaa-prebrief-layer-down-5c2f5b39.md
-iaa_prebrief_status: COMMITTED
+wave: wave-amc-admin-90-10
+agent: foreman-v2-agent
+session: session-023
+date: 20260413
+iaa_prebrief_path: .agent-admin/wave-records/amc-wave-record-amc-admin-90-10-20260413.md
+iaa_prebrief_status: CONSOLIDATED_INTO_WAVE_RECORD
 
 ## Wave Description
 
-Layer-down ripple acknowledgment for canonical commit `5c2f5b393592028d107636090ecb791623ccb27f`
-from `APGI-cmy/maturion-foreman-governance`.
+Restructure AMC admin artifact/process model to align with 90/10 evaluation-to-admin
+principle per Issue #1063. Consolidates legacy multi-file admin model into single
+wave-record artifacts, reduces session memory from 18+ fields to 6, creates CI enforcement
+for allowed artifact paths, and archives deprecated templates.
 
-Changed canonical file: `governance/quality/agent-integrity/INTEGRITY_INDEX.md`
-Change: SHA256 baseline update for `CodexAdvisor-agent.md` (628850b3… → a6aee491…)
-Consumer action: NONE — file is not a PUBLIC_API consumer layer-down target (not in CANON_INVENTORY.json)
+## Allowed Artifact Paths
+
+Per AMC 90/10 Admin Protocol v1.0.0, this wave may create/modify:
+
+- `.agent-admin/wave-records/amc-wave-record-*.md`
+- `.agent-admin/templates/amc-wave-record-template.md`
+- `.agent-admin/archive/**`
+- `.agent-workspace/foreman-v2/knowledge/session-memory-template.md`
+- `.agent-workspace/foreman-v2/knowledge/index.md`
+- `.agent-workspace/foreman-v2/personal/wave-current-tasks.md`
+- `.github/workflows/governance-artifact-enforcement.yml`
+- `governance/protocols/AMC_90_10_ADMIN_PROTOCOL.md`
 
 ## Task Breakdown
 
 | ID | Task | Agent | Status |
 |----|------|-------|--------|
-| TASK-LD-5C2F-001 | Fetch and assess canonical commit 5c2f5b39 | governance-liaison-amc | COMPLETE |
-| TASK-LD-5C2F-002 | Determine consumer layer-down obligation for INTEGRITY_INDEX.md | governance-liaison-amc | COMPLETE — NO CONSUMER ACTION |
-| TASK-LD-5C2F-003 | Archive ripple in .agent-admin/governance/ripple-archive/ | governance-liaison-amc | COMPLETE |
-| TASK-LD-5C2F-004 | Update sync_state.json (canonical_commit → 5c2f5b39) | governance-liaison-amc | COMPLETE |
-| TASK-LD-5C2F-005 | Update GOVERNANCE_ALIGNMENT_INVENTORY.json (last_layer_down_commit, history) | governance-liaison-amc | COMPLETE |
-| TASK-LD-5C2F-006 | Session memory, evidence bundle, PREHANDOVER proof | governance-liaison-amc | COMPLETE |
-| TASK-LD-5C2F-007 | IAA audit (PHASE_B_BLOCKING) | independent-assurance-agent | COMPLETE — PASS |
+| TASK-9010-001 | Create consolidated wave-record template | foreman-v2-agent | COMPLETE |
+| TASK-9010-002 | Reduce session memory template to 6-field model | foreman-v2-agent | COMPLETE |
+| TASK-9010-003 | Create AMC 90/10 Admin Protocol document | foreman-v2-agent | COMPLETE |
+| TASK-9010-004 | Create CI workflow for artifact path enforcement | foreman-v2-agent | COMPLETE |
+| TASK-9010-005 | Archive deprecated legacy templates | foreman-v2-agent | COMPLETE |
+| TASK-9010-006 | Create wave-records directory with README | foreman-v2-agent | COMPLETE |
+| TASK-9010-007 | Update preflight-evidence-gate for wave-record acceptance | foreman-v2-agent | COMPLETE |
 
-## Status: COMPLETE — IAA ASSURANCE-TOKEN received (IAA-session-033-wave-layer-down-5c2f5b39-20260412-PASS)
+## Status: COMPLETE
