@@ -147,7 +147,7 @@ None. All tasks qualify.
 | Check | Description |
 |-------|-------------|
 | OVL-LA-001 | Layer-down SHA256 integrity — checksums match CANON_INVENTORY |
-| OVL-LA-002 | Sync state correctness — `sync_pending: false`, `drift_detected: false` |
+| OVL-LA-002 | Sync state correctness — `needs_alignment: false`, `drift_detected: false` |
 | OVL-LA-003 | Ripple inbox processed — event archived to `ripple-archive/` |
 | OVL-LA-004 | No canonical source modification — `.governance-pack/` not modified improperly |
 | OVL-LA-005 | Consumer mode compliance — no PROHIB-001 through PROHIB-008 violations |
@@ -168,7 +168,7 @@ None. All tasks qualify.
 | Check | Description |
 |-------|-------------|
 | merge-gate/verdict | Canon hash verification — all hashes valid |
-| governance/alignment | Drift detection — sync_pending false |
+| governance/alignment | Drift detection — needs_alignment false |
 | stop-and-fix/enforcement | Clean working tree at verdict time |
 
 ### 4.8 Estimated Total Checks

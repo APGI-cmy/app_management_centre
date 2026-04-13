@@ -35,7 +35,7 @@
       "consumer_version": "4.0.2",
       "canonical_commit": "f68b7d993b080cdd721445f1f39e4b77ad0d150f",
       "alignment_status": "DRAFT_PR_PENDING_CS2",
-      "last_aligned": "2026-04-09",
+      "last_aligned": "2026-04-09T00:00:00Z",
       "name_mapping": {
         "canonical_id": "CodexAdvisor",
         "consumer_id": "CodexAdvisor-agent",

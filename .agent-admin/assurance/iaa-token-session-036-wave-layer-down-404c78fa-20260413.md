@@ -9,6 +9,8 @@
 **Token reference**: `IAA-session-036-wave-layer-down-404c78fa-20260413-PASS`
 **Adoption phase**: PHASE_B_BLOCKING — Hard gate ACTIVE
 
+## PHASE_B_BLOCKING_TOKEN: IAA-session-036-wave-layer-down-404c78fa-20260413-PASS
+
 ═══════════════════════════════════════
 
 ---
