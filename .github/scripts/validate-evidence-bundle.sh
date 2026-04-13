@@ -84,25 +84,40 @@ for FILE in "${REQUIRED_FILES[@]}"; do
 done
 echo ""
 
-# Check prehandover proof (at least one .md file)
+# Check prehandover proof or wave record (at least one .md file)
+# Per AMC 90/10 Admin Protocol v1.0.0 (Issue #1063): wave-records are accepted
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "Checking Prehandover Proof"
+echo "Checking Governance Evidence (Prehandover Proof or Wave Record)"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-if [ ! -d ".agent-admin/prehandover" ]; then
-  echo "❌ Prehandover directory missing (already reported)"
-elif [ -z "$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null)" ]; then
-  echo "❌ Missing prehandover proof (.md file in .agent-admin/prehandover/)"
-  ((ERRORS++))
-else
+EVIDENCE_FOUND=false
+
+# Check legacy prehandover proof path
+if [ -d ".agent-admin/prehandover" ] && [ -n "$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null)" ]; then
   PROOF_COUNT=$(find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null | wc -l)
   echo "✅ Prehandover proof exists ($PROOF_COUNT file(s))"
-  
-  # List proof files
   find .agent-admin/prehandover -name '*.md' -type f 2>/dev/null | while read -r PROOF; do
     echo "   - $(basename $PROOF)"
   done
+  EVIDENCE_FOUND=true
+fi
+
+# Check consolidated wave-record path (90/10 model)
+if [ -d ".agent-admin/wave-records" ] && [ -n "$(find .agent-admin/wave-records -name 'amc-wave-record-*.md' -type f 2>/dev/null)" ]; then
+  RECORD_COUNT=$(find .agent-admin/wave-records -name 'amc-wave-record-*.md' -type f 2>/dev/null | wc -l)
+  echo "✅ Wave record exists ($RECORD_COUNT file(s)) — 90/10 model"
+  find .agent-admin/wave-records -name 'amc-wave-record-*.md' -type f 2>/dev/null | while read -r RECORD; do
+    echo "   - $(basename $RECORD)"
+  done
+  EVIDENCE_FOUND=true
+fi
+
+if [ "$EVIDENCE_FOUND" = false ]; then
+  echo "❌ Missing governance evidence"
+  echo "   Expected: .md file in .agent-admin/prehandover/ (legacy)"
+  echo "         OR: amc-wave-record-*.md in .agent-admin/wave-records/ (90/10 model)"
+  ((ERRORS++))
 fi
 echo ""
 
