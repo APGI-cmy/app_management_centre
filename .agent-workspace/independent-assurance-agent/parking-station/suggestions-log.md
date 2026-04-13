@@ -61,3 +61,5 @@
 | 2026-04-10 | independent-assurance-agent | session-033 | Phase 3 | Formalize session-memory post-token First Invocation Exception in CORE-015 and CORE-018(b) to match CORE-019 precedent | session-033-20260410.md |
 | 2026-04-10 | independent-assurance-agent | session-033 | Phase 3 | Plan governance-liaison-amc-agent bloat remediation wave (30,209 bytes → under 30,000) | session-033-20260410.md |
 | 2026-04-10 | independent-assurance-agent | session-033 | Phase 1 | Close ECAP_UNCOMMITTED_ARTIFACTS systemic blocker in foreman Phase 4 protocol — corrective action confirmed effective session-033 | session-033-20260410.md |
+| 2026-04-13 | independent-assurance-agent | session-035 | Phase 3 | Add explicit check for consumer-repo agent name correctness in can_invoke blocks (amc vs isms liaison) — substantive correctness, not ceremony | session-035-20260413.md |
+| 2026-04-13 | independent-assurance-agent | session-035 | Phase 3 | Extend CORE-012 to verify SELF-MOD rule body contains escalation mechanism, not just CONSTITUTIONAL enforcement flag | session-035-20260413.md |
