@@ -27,12 +27,12 @@ Consumer action: UPDATE agent contract file — CS2 APPROVAL REQUIRED
 | TASK-LD-404C-004 | Update sync_state.json with new canonical commit | governance-liaison-amc | COMPLETE |
 | TASK-LD-404C-005 | Create/update GOVERNANCE_ALIGNMENT_INVENTORY.json | governance-liaison-amc | COMPLETE |
 | TASK-LD-404C-006 | Create ripple archive entry for 404c78fa | governance-liaison-amc | COMPLETE |
-| TASK-LD-404C-007 | Session memory + PREHANDOVER proof | foreman-v2-agent | IN PROGRESS |
-| TASK-LD-404C-008 | IAA audit (PHASE_B_BLOCKING) | independent-assurance-agent | PENDING |
+| TASK-LD-404C-007 | Session memory + PREHANDOVER proof | foreman-v2-agent | COMPLETE |
+| TASK-LD-404C-008 | IAA audit (PHASE_B_BLOCKING) | independent-assurance-agent | COMPLETE — PASS (56/56 checks) |
 
 ## Agent File Guard
 
 TRIGGERED: `.github/agents/foreman-v2-agent.md` is an agent contract file.
 CS2 approval required. PR must be DRAFT. Only CS2 may merge.
 
-## Status: IN PROGRESS
+## Status: COMPLETE — IAA ASSURANCE-TOKEN received (IAA-session-036-wave-layer-down-404c78fa-20260413-PASS)
