@@ -68,3 +68,4 @@
 | 2026-04-13 | independent-assurance-agent | IAA-034 | Phase 3 | Add OVL-CG-005 overlay check for §4.3d Scope-Declaration Parity Gate awareness in future CANON_GOVERNANCE reviews | session-034-20260413.md |
 | 2026-04-13 | independent-assurance-agent | session-035 | Phase 3 | Add explicit check for consumer-repo agent name correctness in can_invoke blocks (amc vs isms liaison) — substantive correctness, not ceremony | session-035-20260413.md |
 | 2026-04-13 | independent-assurance-agent | session-035 | Phase 3 | Extend CORE-012 to verify SELF-MOD rule body contains escalation mechanism, not just CONSTITUTIONAL enforcement flag | session-035-20260413.md |
+| 2026-04-13 | independent-assurance-agent | session-036 | Phase 3 | LIAISON_ADMIN overlay should document Foreman-orchestrated layer-down pattern for OVL-LA-ADM-002/003 | session-036-20260413.md |
