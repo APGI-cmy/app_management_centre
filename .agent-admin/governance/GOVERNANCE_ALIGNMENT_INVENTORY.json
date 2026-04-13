@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-04-13T13:07:36Z",
+  "description": "Tracks governance artifact alignment state between canonical source and consumer repository",
+  "canonical_source": "APGI-cmy/maturion-foreman-governance",
+  "consumer_repository": "APGI-cmy/app_management_centre",
+  "artifacts": [
+    {
+      "canonical_path": ".github/agents/foreman-v2.agent.md",
+      "consumer_path": ".github/agents/foreman-v2-agent.md",
+      "canonical_version": "3.0.0",
+      "consumer_version": "3.0.0",
+      "canonical_commit": "404c78fa15ba6cc82d65132086e3d04ea70c400f",
+      "alignment_status": "ALIGNED",
+      "last_aligned": "2026-04-13T13:07:36Z",
+      "name_mapping": {
+        "canonical_id": "foreman-v2",
+        "consumer_id": "foreman-v2-agent",
+        "canonical_filename": "foreman-v2.agent.md",
+        "consumer_filename": "foreman-v2-agent.md"
+      },
+      "consumer_adaptations": [
+        "id: foreman-v2 → foreman-v2-agent",
+        "name: foreman-v2 → foreman-v2-agent",
+        "scope.repository: APGI-cmy/maturion-foreman-governance → APGI-cmy/app_management_centre",
+        "metadata.this_copy: canonical → consumer",
+        "governance.canon_inventory: governance/CANON_INVENTORY.json → .governance-pack/CANON_INVENTORY.json",
+        "description: updated for consumer bootstrap pattern"
+      ]
+    },
+    {
+      "canonical_path": ".github/agents/CodexAdvisor.agent.md",
+      "consumer_path": ".github/agents/CodexAdvisor-agent.md",
+      "canonical_version": "4.0.2",
+      "consumer_version": "4.0.2",
+      "canonical_commit": "f68b7d99",
+      "alignment_status": "DRAFT_PR_PENDING_CS2",
+      "last_aligned": "2026-04-09",
+      "name_mapping": {
+        "canonical_id": "CodexAdvisor",
+        "consumer_id": "CodexAdvisor-agent",
+        "canonical_filename": "CodexAdvisor.agent.md",
+        "consumer_filename": "CodexAdvisor-agent.md"
+      }
+    }
+  ]
+}
