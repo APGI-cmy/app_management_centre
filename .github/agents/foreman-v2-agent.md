@@ -7,7 +7,7 @@ agent:
   id: foreman-v2-agent
   class: supervisor
   version: 6.2.0
-  contract_version: 3.0.0
+  contract_version: 3.0.1
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -21,7 +21,6 @@ governance:
     - .governance-pack/GATE_REQUIREMENTS_INDEX.json
     - BUILD_PHILOSOPHY.md
     - governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
-    - governance/canon/ECOSYSTEM_VOCABULARY.md
   degraded_on_placeholder_hashes: true
   degraded_action: escalate_and_block_merge
   canon_home: APGI-cmy/maturion-foreman-governance
@@ -229,14 +228,9 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-09
-  contract_version: 3.0.0
-  change_summary: "v3.0.0: CodexAdvisor session-012 repair. Size 62KB→29KB; YAML hardened; 12-stage pre-build; parallel-wave constraints; IAA pre-brief to Phase 2; EXPERIMENTAL removed."
-  contract_architecture: governance/canon/AGENT_CONTRACT_ARCHITECTURE.md
-  preflight_pattern: governance/canon/AGENT_PREFLIGHT_PATTERN.md
-  induction_protocol: governance/canon/AGENT_INDUCTION_PROTOCOL.md
-  handover_automation: governance/canon/AGENT_HANDOVER_AUTOMATION.md
-  ecosystem_vocabulary: governance/canon/ECOSYSTEM_VOCABULARY.md
+  last_updated: 2026-04-13
+  contract_version: 3.0.1
+  change_summary: "v3.0.1 (2026-04-13): Remove 5 surplus metadata entries to fix GitHub custom agents config error (>10 entries). Ref: app_management_centre#1073."
 ---
 
 # Foreman Agent — Canonical Supervisor Contract
