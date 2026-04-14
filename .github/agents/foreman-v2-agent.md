@@ -21,7 +21,6 @@ governance:
     - .governance-pack/GATE_REQUIREMENTS_INDEX.json
     - BUILD_PHILOSOPHY.md
     - governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md
-    - governance/canon/ECOSYSTEM_VOCABULARY.md
   degraded_on_placeholder_hashes: true
   degraded_action: escalate_and_block_merge
   canon_home: APGI-cmy/maturion-foreman-governance
