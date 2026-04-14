@@ -480,3 +480,280 @@ jobs:
           else
             echo "✅ PASS — All IAA token files pass self-certification guard."
           fi
+  agent-ceremony-artifact-checks:
+    name: "agent-ceremony/artifact-checks"
+    runs-on: ubuntu-latest
+
+    # Always run for copilot/ PRs; the job will early-exit if no agent contract files changed.
+    # We avoid github.event.pull_request.files.*.filename here because that expression
+    # is not reliably populated under pull_request_target and can cause silent skips.
+
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Early exit if no agent contract files changed
+        id: files_check
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          CHANGED_AGENTS=$(git diff "$BASE_SHA" HEAD --name-only 2>/dev/null \
+            | grep "^\.github/agents/.*\.md$" || true)
+          if [ -z "$CHANGED_AGENTS" ]; then
+            echo "ℹ️  No .github/agents/*.md files changed — skipping agent ceremony artifact checks."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Agent contract files changed:"
+            echo "$CHANGED_AGENTS"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bypass for layer-down and governance-alignment PRs
+        id: bypass_check
+        if: steps.files_check.outputs.skip != 'true'
+        env:
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && "$PR_LABELS" == *"agent:liaison"* ) || \
+               "$PR_BRANCH" == "governance-alignment-auto" || \
+               "$PR_LABELS" == *"layer-down"* || \
+               "$PR_BRANCH" == *"layer-down"* || \
+               "$PR_TITLE" == *"Layer-Down"* || \
+               "$PR_TITLE" == *"layer-down"* ]]; then
+            echo "✅ Layer-down / governance alignment PR — bypassing agent ceremony artifact checks."
+            echo "bypass=true" >> $GITHUB_OUTPUT
+          else
+            echo "bypass=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Agent ceremony artifact checks (HFMC-01–06, CORE-013/015/016/018/019, CERT-001–004)
+        if: steps.files_check.outputs.skip != 'true' && steps.bypass_check.outputs.bypass != 'true'
+        env:
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          echo "=== Agent Ceremony Artifact Checks ==="
+          echo "Authority: LIVING_AGENT_SYSTEM.md v6.2.0, IAA contract v2.5.0"
+          echo "Checks: HFMC-01–06, CORE-013/015/016/018/019, CERT-001–004"
+          echo ""
+
+          FAIL=false
+
+          # ----------------------------------------------------------------
+          # Detect agent ID from labels or PR body
+          # ----------------------------------------------------------------
+          AGENT_ID="unknown"
+          KNOWN_AGENTS=(
+            "foreman-v2-agent" "CodexAdvisor-agent" "api-builder" "qa-builder"
+            "schema-builder" "ui-builder" "integration-builder"
+            "governance-liaison-amc-agent" "independent-assurance-agent"
+          )
+          for agent in "${KNOWN_AGENTS[@]}"; do
+            if [[ "$PR_LABELS" == *"agent:${agent}"* ]] || [[ "$PR_LABELS" == *",${agent},"* ]] || [[ "$PR_LABELS" == "${agent},"* ]] || [[ "$PR_LABELS" == *",${agent}" ]] || [[ "$PR_LABELS" == "${agent}" ]] || echo "$PR_BODY" | grep -qiE "(^|[^a-z-])${agent}([^a-z-]|$)"; then
+              AGENT_ID="$agent"
+              break
+            fi
+          done
+          echo "Detected agent: $AGENT_ID"
+          echo ""
+
+          # ----------------------------------------------------------------
+          # HFMC-01 / CERT-001: PREHANDOVER proof exists
+          # ----------------------------------------------------------------
+          PREHANDOVER_FOUND=false
+          # Check repo root for PREHANDOVER_PROOF*.md (underscore pattern per check-evidence.sh)
+          if find . -maxdepth 1 -type f -name "PREHANDOVER_PROOF*.md" 2>/dev/null | grep -q .; then
+            PREHANDOVER_FOUND=true
+          fi
+          # Check agent workspace memory directories for PREHANDOVER-*.md files
+          if ! $PREHANDOVER_FOUND; then
+            if find .agent-workspace -type f -path ".agent-workspace/*/memory/PREHANDOVER-*.md" 2>/dev/null | grep -q .; then
+              PREHANDOVER_FOUND=true
+            fi
+          fi
+          if $PREHANDOVER_FOUND; then
+            echo "✅ HFMC-01 / CERT-001: PREHANDOVER proof exists"
+          else
+            echo "❌ HFMC-01 / CERT-001: PREHANDOVER proof NOT FOUND (expected: PREHANDOVER_PROOF*.md at repo root OR .agent-workspace/*/memory/PREHANDOVER-*.md)"
+            FAIL=true
+          fi
+
+          # ----------------------------------------------------------------
+          # HFMC-02 / CERT-002: Session memory file exists
+          # ----------------------------------------------------------------
+          SESSION_MEMORY_PATH=""
+          if [ "$AGENT_ID" != "unknown" ]; then
+            SESSION_MEMORY_PATH=".agent-workspace/${AGENT_ID}/memory"
+          else
+            SESSION_MEMORY_PATH=".agent-workspace"
+          fi
+          if find "$SESSION_MEMORY_PATH" -name "session-*.md" 2>/dev/null | grep -q .; then
+            echo "✅ HFMC-02 / CERT-002: Session memory file exists in $SESSION_MEMORY_PATH"
+          else
+            echo "❌ HFMC-02 / CERT-002: Session memory file NOT FOUND in $SESSION_MEMORY_PATH"
+            FAIL=true
+          fi
+
+          # ----------------------------------------------------------------
+          # HFMC-03 / CERT-003: phase_1_preflight: PREFLIGHT COMPLETE in session memory
+          # ----------------------------------------------------------------
+          if find "$SESSION_MEMORY_PATH" -name "session-*.md" 2>/dev/null | \
+             xargs grep -qlE "phase_1_preflight:[[:space:]]*PREFLIGHT COMPLETE" 2>/dev/null; then
+            echo "✅ HFMC-03 / CERT-003: phase_1_preflight: PREFLIGHT COMPLETE present in session memory"
+          else
+            echo "❌ HFMC-03 / CERT-003: phase_1_preflight: PREFLIGHT COMPLETE NOT FOUND in session memory"
+            FAIL=true
+          fi
+
+          # ----------------------------------------------------------------
+          # HFMC-04 / CERT-004 / CORE-016: IAA token OR wave-record carrier exists
+          #
+          # Two accepted paths:
+          #   (a) Normal IAA-reviewed PR: .agent-admin/assurance/iaa-token-*.md
+          #   (b) HALT-001 self-amendment PR: .agent-admin/wave-records/amc-wave-record-*.md
+          #       with a PHASE_B_BLOCKING_TOKEN: line (wave record is the carrier)
+          # ----------------------------------------------------------------
+          ASSURANCE_DIR=".agent-admin/assurance"
+          WAVE_RECORDS_DIR=".agent-admin/wave-records"
+          IAA_TOKEN_FOUND=false
+          IAA_TOKEN_PATH=""
+
+          # Check (a): legacy iaa-token-*.md
+          if [ -d "$ASSURANCE_DIR" ]; then
+            while IFS= read -r -d '' f; do
+              IAA_TOKEN_FOUND=true
+              IAA_TOKEN_PATH="$f"
+              break
+            done < <(find "$ASSURANCE_DIR" -name "iaa-token-*.md" -print0 2>/dev/null)
+          fi
+
+          # Check (b): wave record with PHASE_B_BLOCKING_TOKEN (HALT-001 self-amendment path)
+          if ! $IAA_TOKEN_FOUND && [ -d "$WAVE_RECORDS_DIR" ]; then
+            while IFS= read -r -d '' f; do
+              if grep -q "PHASE_B_BLOCKING_TOKEN:" "$f" 2>/dev/null; then
+                TOKEN_VAL=$(grep "PHASE_B_BLOCKING_TOKEN:" "$f" | head -1 \
+                  | sed 's/.*PHASE_B_BLOCKING_TOKEN://;s/^[[:space:]]*//;s/[[:space:]]*$//')
+                if [ -n "$TOKEN_VAL" ] && [ "$TOKEN_VAL" != "PENDING" ]; then
+                  IAA_TOKEN_FOUND=true
+                  IAA_TOKEN_PATH="$f (wave-record HALT-001 carrier, token: $TOKEN_VAL)"
+                  break
+                fi
+              fi
+            done < <(find "$WAVE_RECORDS_DIR" -name "amc-wave-record-*.md" -print0 2>/dev/null)
+          fi
+
+          if $IAA_TOKEN_FOUND; then
+            echo "✅ HFMC-04 / CERT-004 / CORE-016: IAA assurance token exists: $IAA_TOKEN_PATH"
+          else
+            echo "❌ HFMC-04 / CERT-004 / CORE-016: IAA token NOT FOUND — expected either"
+            echo "   (a) $ASSURANCE_DIR/iaa-token-*.md  OR"
+            echo "   (b) $WAVE_RECORDS_DIR/amc-wave-record-*.md with non-PENDING PHASE_B_BLOCKING_TOKEN:"
+            FAIL=true
+          fi
+
+          # ----------------------------------------------------------------
+          # HFMC-05: PHASE_B_BLOCKING_TOKEN present and non-PENDING in token file
+          # (Only check token files NEW to this PR to avoid double-checking with iaa-token-self-cert-check job)
+          # ----------------------------------------------------------------
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          NEW_TOKEN_FILES=$(git diff "$BASE_SHA" HEAD --name-only --diff-filter=A 2>/dev/null \
+            | grep "^${ASSURANCE_DIR}/iaa-token-.*\.md$" | head -5 || true)
+          if [ -n "$NEW_TOKEN_FILES" ]; then
+            while IFS= read -r token_file; do
+              [ -z "$token_file" ] && continue
+              if head -10 "$token_file" 2>/dev/null | grep -qi "REJECTION.PACKAGE"; then
+                echo "  ⏭️  HFMC-05: REJECTION-PACKAGE token file — skipping PHASE_B_BLOCKING_TOKEN check"
+                continue
+              fi
+              if grep -q "PHASE_B_BLOCKING_TOKEN:" "$token_file" 2>/dev/null; then
+                TOKEN_VALUE=$(grep "PHASE_B_BLOCKING_TOKEN:" "$token_file" | head -1 | sed 's/.*PHASE_B_BLOCKING_TOKEN://;s/^[[:space:]]*//;s/[[:space:]]*$//')
+                if [ "$TOKEN_VALUE" = "PENDING" ] || [ -z "$TOKEN_VALUE" ]; then
+                  echo "❌ HFMC-05: PHASE_B_BLOCKING_TOKEN is PENDING or empty in $token_file"
+                  FAIL=true
+                else
+                  echo "✅ HFMC-05: PHASE_B_BLOCKING_TOKEN non-PENDING in $token_file"
+                fi
+              else
+                echo "❌ HFMC-05: PHASE_B_BLOCKING_TOKEN MISSING from $token_file"
+                FAIL=true
+              fi
+            done <<< "$NEW_TOKEN_FILES"
+          else
+            echo "ℹ️  HFMC-05: No new IAA token files in this PR — check skipped"
+          fi
+
+          # ----------------------------------------------------------------
+          # HFMC-06: IAA pre-brief exists for foreman PRs
+          # ----------------------------------------------------------------
+          IS_FOREMAN_PR=false
+          if [[ "$PR_LABELS" == *"foreman-v2-agent"* ]] || echo "$PR_BODY" | grep -qi "foreman"; then
+            IS_FOREMAN_PR=true
+          fi
+          if $IS_FOREMAN_PR; then
+            if find "$ASSURANCE_DIR" -name "iaa-prebrief-wave*.md" 2>/dev/null | grep -q .; then
+              echo "✅ HFMC-06: iaa-prebrief-wave*.md exists for foreman PR"
+            else
+              echo "❌ HFMC-06: iaa-prebrief-wave*.md NOT FOUND in $ASSURANCE_DIR (required for foreman PRs)"
+              FAIL=true
+            fi
+          else
+            echo "ℹ️  HFMC-06: Not a foreman PR — pre-brief check skipped"
+          fi
+
+          # ----------------------------------------------------------------
+          # CORE-013 / CORE-018: Complete evidence artifact sweep
+          # ----------------------------------------------------------------
+          echo ""
+          echo "--- Evidence artifact sweep (CORE-013, CORE-018) ---"
+          if $PREHANDOVER_FOUND; then
+            echo "✅ CORE-013 / CORE-018: PREHANDOVER proof present"
+          else
+            echo "❌ CORE-013 / CORE-018: PREHANDOVER proof absent — sweep FAIL"
+            FAIL=true
+          fi
+          if find "$SESSION_MEMORY_PATH" -name "session-*.md" 2>/dev/null | grep -q .; then
+            echo "✅ CORE-015 / CORE-018: Session memory present"
+          else
+            echo "❌ CORE-015 / CORE-018: Session memory absent — sweep FAIL"
+            FAIL=true
+          fi
+          if $IAA_TOKEN_FOUND; then
+            echo "✅ CORE-016 / CORE-018: IAA token file present"
+          else
+            echo "❌ CORE-016 / CORE-018: IAA token file absent — sweep FAIL"
+            FAIL=true
+          fi
+
+          # ----------------------------------------------------------------
+          # CORE-019: IAA token cross-verification
+          # ----------------------------------------------------------------
+          if $IAA_TOKEN_FOUND; then
+            if grep -qi "ASSURANCE-TOKEN\|PHASE_B_BLOCKING_TOKEN" "$IAA_TOKEN_PATH" 2>/dev/null; then
+              echo "✅ CORE-019: IAA token file contains ASSURANCE-TOKEN or PHASE_B_BLOCKING_TOKEN"
+            else
+              echo "⚠️  CORE-019: IAA token file present but ASSURANCE-TOKEN marker not found (may be first invocation)"
+            fi
+          fi
+
+          # ----------------------------------------------------------------
+          # Result
+          # ----------------------------------------------------------------
+          echo ""
+          echo "=== Agent Ceremony Artifact Checks Result ==="
+          if [ "$FAIL" = true ]; then
+            echo ""
+            echo "❌ FAIL — Agent ceremony artifact checks failed."
+            echo ""
+            echo "All ceremony artifacts must be committed to the PR branch before this check passes."
+            echo "Required artifacts: PREHANDOVER proof, session memory (with PREFLIGHT COMPLETE), IAA token file."
+            echo ""
+            echo "Reference: .agent-workspace/independent-assurance-agent/knowledge/iaa-high-frequency-checks.md"
+            exit 1
+          else
+            echo "✅ PASS — All agent ceremony artifact checks passed."
+          fi
