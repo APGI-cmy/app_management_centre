@@ -1,9 +1,9 @@
 # Independent Assurance Agent — Tier 2 Knowledge Index
 
 **Agent**: independent-assurance-agent
-**Contract Version**: 2.4.0
-**Knowledge Version**: 3.2.0
-**Last Updated**: 2026-04-08
+**Contract Version**: 2.5.0
+**Knowledge Version**: 4.0.0
+**Last Updated**: 2026-04-14
 **Architecture**: `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md`
 
 ---
@@ -12,9 +12,9 @@
 
 | File | Purpose | Version | Status |
 |------|---------|---------|--------|
-| `index.md` (this file) | Knowledge entry point and version reference | 3.2.0 | PRESENT |
+| `index.md` (this file) | Knowledge entry point and version reference | 4.0.0 | PRESENT |
 | `FAIL-ONLY-ONCE.md` | Permanent rules recording governance failures IAA must never repeat | 2.5.0 | PRESENT — Rules A-001 through A-032 active (A-032: Schema Column Compliance Check — IAA must read migration DDL directly for all PRs containing INSERT/SELECT operations; INC-ALCF-001 self-governance closure) |
-| `iaa-core-invariants-checklist.md` | Core checks applied to every IAA invocation regardless of category | 3.0.0 | ACTIVE — CORE-001 to CORE-024; CORE-024 pre-build stage sequence compliance (PS-E); CORE-016 PENDING carve-out updated per A-029 |
+| `iaa-core-invariants-checklist.md` | IAA-retained invariants — CORE-020/021 only; CORE-001–019 and CORE-022–024 moved to CI | 4.0.0 | ACTIVE — CORE-020 (zero partial pass) and CORE-021 (zero-severity-tolerance) only |
 | `iaa-trigger-table.md` | PR category classification table — when IAA activates and when it is exempt | 2.2.0 | ACTIVE — PRE_BUILD_STAGE trigger category added (PS-E); LIAISON_ADMIN trigger category added (PS-F); KNOWLEDGE_GOVERNANCE trigger category present |
 | `iaa-category-overlays.md` | Per-category additional checks (AGENT_CONTRACT, CANON_GOVERNANCE, CI_WORKFLOW, AAWP_MAT, KNOWLEDGE_GOVERNANCE, PRE_BRIEF_ASSURANCE, PRE_BUILD_STAGE, LIAISON_ADMIN) | 4.0.0 | ACTIVE — PRE_BUILD_STAGE overlay OVL-PBG-010–016 added (PS-E); LIAISON_ADMIN overlay OVL-LA-001–005 added (PS-F); OVL-CI-005 Inherent Limitation Exception (v3.3.0, S-033); PRE_BRIEF_ASSURANCE trigger updated to include PRE_BUILD_STAGE |
 | `session-memory-template.md` | Standard session memory template for IAA invocations | 1.0.0 | PRESENT |
@@ -22,6 +22,27 @@
 | `IAA_AGENT_CONTRACT_AUDIT_STANDARD.md` | **AGENT_CONTRACT Audit Standard** — mandatory audit steps, pre-approval doctrine, protected components checklist, tier placement discipline, decision matrix for all agent contract PRs reviewed by IAA | 1.0.0 | ACTIVE — Load at Step 2.4 when PR category is AGENT_CONTRACT |
 | `FUNCTIONAL-BEHAVIOUR-REGISTRY.md` | **Functional Behaviour Registry** — post-merge behavioural failure patterns (niggles) that must never recur; each entry is a permanent mandatory check for BUILD PRs | 1.1.0 | ACTIVE — Read at Step 3.1 for all BUILD/AAWP_MAT PRs; governed by FAIL-ONLY-ONCE A-034; v1.1.0 adds NBR-005 (schema migration column mismatch silently masked by try/catch — INC-ALCF-001) |
 | `niggle-pattern-library.md` | **Niggle Pattern Library** — stack-specific failure patterns for Next.js/Supabase/TanStack Query/Zustand/TypeScript stack; IAA applies relevant patterns to BUILD PR diffs | 1.0.0 | ACTIVE — Read at Step 3.1 for all BUILD/AAWP_MAT PRs; governed by FAIL-ONLY-ONCE A-035 |
+
+---
+
+## Tier 2A — Evaluation Knowledge
+
+| File | Purpose | Version | Status |
+|------|---------|---------|--------|
+| `iaa-core-invariants-checklist.md` | CORE-020/021 only — IAA-retained invariants (judgment checks) | 4.0.0 | PRESENT |
+| `iaa-trigger-table.md` | Trigger classification | 2.2.0 | PRESENT |
+| `iaa-category-overlays.md` | Category overlays (substantive checks) | 4.0.0 | PRESENT |
+| `FUNCTIONAL-BEHAVIOUR-REGISTRY.md` | Behaviour anti-regression | 1.1.0 | PRESENT |
+| `iaa-high-frequency-checks.md` | CI spec for mechanical checks (HFMC, CORE-001–019, CERT) | 1.0.0 | PRESENT |
+
+---
+
+## Tier 2B — Admin Templates
+
+| File | Purpose | Version | Status |
+|------|---------|---------|--------|
+| `FAIL-ONLY-ONCE.md` | Permanent standing rules | 2.5.0 | PRESENT |
+| `wave-record-template.md` | Wave record consolidated template | 1.0.0 | TO-BE-CREATED |
 
 ---
 

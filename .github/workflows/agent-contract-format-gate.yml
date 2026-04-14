@@ -1,0 +1,258 @@
+name: Agent Contract Format Gate
+
+# Authority: LIVING_AGENT_SYSTEM.md v6.2.0, AGCFPP-001
+# Purpose: Enforce CORE-001 through CORE-012 for all agent contract files in .github/agents/
+#          This implements the CI-side mechanical checks moved from IAA procedure (90/10 restructure).
+# Violation class: CORE-001 through CORE-012 failures block PR merge.
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    paths:
+      - ".github/agents/*.md"
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  agent-contract/format-gate:
+    name: "agent-contract/format-gate"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Bypass for layer-down and governance-alignment PRs
+        id: bypass_check
+        env:
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && "$PR_LABELS" == *"agent:liaison"* ) || \
+               "$PR_BRANCH" == "governance-alignment-auto" || \
+               "$PR_LABELS" == *"layer-down"* || \
+               "$PR_BRANCH" == *"layer-down"* || \
+               "$PR_TITLE" == *"Layer-Down"* || \
+               "$PR_TITLE" == *"layer-down"* || \
+               "$PR_TITLE" == *"governance alignment"* ]]; then
+            echo "✅ Layer-down / governance alignment PR — bypassing agent-contract format gate."
+            echo "bypass=true" >> $GITHUB_OUTPUT
+          else
+            echo "bypass=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check agent contract format (CORE-001 through CORE-012)
+        if: steps.bypass_check.outputs.bypass != 'true'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          echo "=== Agent Contract Format Gate (CORE-001 to CORE-012) ==="
+          echo "Authority: LIVING_AGENT_SYSTEM.md v6.2.0, AGCFPP-001"
+          echo ""
+
+          # Get list of modified .github/agents/*.md files
+          MODIFIED_FILES=$(git diff "$BASE_SHA" HEAD --name-only 2>/dev/null \
+            | grep "^\.github/agents/.*\.md$" \
+            | grep -v "_archive/" || true)
+
+          if [ -z "$MODIFIED_FILES" ]; then
+            echo "ℹ️  No agent contract files modified in this PR — skipping format gate."
+            exit 0
+          fi
+
+          echo "Modified agent contract files:"
+          echo "$MODIFIED_FILES"
+          echo ""
+
+          OVERALL_FAIL=false
+
+          while IFS= read -r contract_file; do
+            [ -z "$contract_file" ] && continue
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "Checking: $contract_file"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+            if [ ! -f "$contract_file" ]; then
+              echo "⚠️  File not found (may be deleted) — skipping."
+              continue
+            fi
+
+            FILE_CONTENT=$(cat "$contract_file")
+            FILE_FAIL=false
+
+            # CORE-001: YAML frontmatter valid (between --- delimiters)
+            if echo "$FILE_CONTENT" | head -1 | grep -q "^---"; then
+              FRONTMATTER=$(awk '/^---/{if(p)exit; p=1; next} p' "$contract_file")
+              if [ -n "$FRONTMATTER" ]; then
+                echo "  ✅ CORE-001: YAML frontmatter present"
+              else
+                echo "  ❌ CORE-001: YAML frontmatter empty or malformed"
+                FILE_FAIL=true
+              fi
+            else
+              echo "  ❌ CORE-001: No YAML frontmatter (missing opening ---)"
+              FILE_FAIL=true
+            fi
+
+            # CORE-002: agent.version present
+            if grep -q "^  version:" "$contract_file" || grep -qE "^\s+version:\s+\S" "$contract_file"; then
+              echo "  ✅ CORE-002: agent.version present"
+            else
+              echo "  ❌ CORE-002: agent.version missing or empty"
+              FILE_FAIL=true
+            fi
+
+            # CORE-003: contract_version in semver format
+            if grep -qE "contract_version:\s+[0-9]+\.[0-9]+\.[0-9]+" "$contract_file"; then
+              echo "  ✅ CORE-003: contract_version present in semver format"
+            else
+              echo "  ❌ CORE-003: contract_version missing or not in semver format"
+              FILE_FAIL=true
+            fi
+
+            # CORE-004: identity block complete
+            IDENTITY_FAIL=false
+            for field in "identity:" "role:" "mission:" "class_boundary:"; do
+              if ! grep -q "$field" "$contract_file"; then
+                echo "  ❌ CORE-004: identity field missing: $field"
+                IDENTITY_FAIL=true
+                FILE_FAIL=true
+              fi
+            done
+            [ "$IDENTITY_FAIL" = false ] && echo "  ✅ CORE-004: identity block complete"
+
+            # CORE-005: governance block present
+            GOV_FAIL=false
+            for field in "governance:" "protocol:" "canon_inventory:"; do
+              if ! grep -q "$field" "$contract_file"; then
+                echo "  ❌ CORE-005: governance field missing: $field"
+                GOV_FAIL=true
+                FILE_FAIL=true
+              fi
+            done
+            [ "$GOV_FAIL" = false ] && echo "  ✅ CORE-005: governance block present"
+
+            # CORE-006: expected_artifacts paths exist (check at least one)
+            if grep -q "expected_artifacts:" "$contract_file"; then
+              ARTIFACT_MISSING=false
+              while IFS= read -r artifact_line; do
+                artifact_path=$(echo "$artifact_line" | sed 's/.*- //;s/^[[:space:]]*//' | tr -d '"')
+                if [ -n "$artifact_path" ] && [ ! -f "$artifact_path" ]; then
+                  echo "  ⚠️  CORE-006: expected_artifact not found: $artifact_path (may be in external repo)"
+                fi
+              done < <(grep -A 20 "expected_artifacts:" "$contract_file" | grep "^    - " | head -10)
+              echo "  ✅ CORE-006: expected_artifacts block present"
+            else
+              echo "  ⚠️  CORE-006: expected_artifacts block absent (acceptable for non-AGENT_CONTRACT files)"
+            fi
+
+            # CORE-007: No placeholder content (STUB/TODO/FIXME/TBD)
+            PLACEHOLDER_HITS=$(grep -nE "\b(STUB|TODO:|FIXME:|TBD)\b" "$contract_file" | grep -v "iaa_audit_token" | head -5 || true)
+            if [ -n "$PLACEHOLDER_HITS" ]; then
+              echo "  ❌ CORE-007: Placeholder content found:"
+              echo "$PLACEHOLDER_HITS" | sed 's/^/    /'
+              FILE_FAIL=true
+            else
+              echo "  ✅ CORE-007: No placeholder content"
+            fi
+
+            # CORE-008: prohibitions block with CONSTITUTIONAL enforcement
+            if grep -q "prohibitions:" "$contract_file" && grep -q "enforcement: CONSTITUTIONAL" "$contract_file"; then
+              echo "  ✅ CORE-008: prohibitions block with CONSTITUTIONAL enforcement present"
+            else
+              echo "  ❌ CORE-008: prohibitions block missing or no CONSTITUTIONAL enforcement"
+              FILE_FAIL=true
+            fi
+
+            # CORE-009: merge_gate_interface.required_checks non-empty, parity_required: true
+            if grep -q "merge_gate_interface:" "$contract_file" && \
+               grep -q "required_checks:" "$contract_file" && \
+               grep -q "parity_required: true" "$contract_file"; then
+              echo "  ✅ CORE-009: merge_gate_interface present with required_checks and parity_required: true"
+            else
+              echo "  ❌ CORE-009: merge_gate_interface.required_checks or parity_required: true missing"
+              FILE_FAIL=true
+            fi
+
+            # CORE-010: tier2_knowledge.index path present and index.md exists
+            if grep -q "tier2_knowledge:" "$contract_file"; then
+              TIER2_INDEX=$(grep -A 5 "tier2_knowledge:" "$contract_file" | grep "index:" | head -1 | sed 's/.*index:[[:space:]]*//' | tr -d '"')
+              if [ -n "$TIER2_INDEX" ] && [ -f "$TIER2_INDEX" ]; then
+                echo "  ✅ CORE-010: tier2_knowledge.index present and index.md exists"
+              elif [ -n "$TIER2_INDEX" ]; then
+                echo "  ❌ CORE-010: tier2_knowledge.index points to non-existent file: $TIER2_INDEX"
+                FILE_FAIL=true
+              else
+                echo "  ❌ CORE-010: tier2_knowledge.index path not found"
+                FILE_FAIL=true
+              fi
+            else
+              echo "  ❌ CORE-010: tier2_knowledge block missing"
+              FILE_FAIL=true
+            fi
+
+            # CORE-011: Four-phase structure present (PHASE 1-4)
+            PHASE_FAIL=false
+            for phase in "PHASE 1" "PHASE 2" "PHASE 3" "PHASE 4"; do
+              if ! grep -qi "$phase" "$contract_file"; then
+                echo "  ❌ CORE-011: $phase not found in contract body"
+                PHASE_FAIL=true
+                FILE_FAIL=true
+              fi
+            done
+            [ "$PHASE_FAIL" = false ] && echo "  ✅ CORE-011: All four phases present (PHASE 1-4)"
+
+            # CORE-012: SELF-MOD-* prohibition with CONSTITUTIONAL enforcement
+            if grep -qE "SELF-MOD-" "$contract_file" && grep -q "enforcement: CONSTITUTIONAL" "$contract_file"; then
+              echo "  ✅ CORE-012: SELF-MOD-* prohibition with CONSTITUTIONAL enforcement present"
+            else
+              echo "  ❌ CORE-012: SELF-MOD-* prohibition with CONSTITUTIONAL enforcement missing"
+              FILE_FAIL=true
+            fi
+
+            # BONUS: secret_env_var check (not secret:) — FAIL-ONLY-ONCE A-024
+            if grep -qE "^\s+secret:\s+" "$contract_file"; then
+              echo "  ❌ SECRET-FIELD: 'secret:' field found — must use 'secret_env_var:' (FAIL-ONLY-ONCE A-024)"
+              FILE_FAIL=true
+            else
+              echo "  ✅ SECRET-FIELD: No prohibited 'secret:' field"
+            fi
+
+            # Character count check (≤ 30,000)
+            CHAR_COUNT=$(wc -c < "$contract_file")
+            if [ "$CHAR_COUNT" -gt 30000 ]; then
+              echo "  ❌ CHAR-LIMIT: File exceeds 30,000 char limit: $CHAR_COUNT chars"
+              FILE_FAIL=true
+            else
+              echo "  ✅ CHAR-LIMIT: $CHAR_COUNT chars (≤ 30,000)"
+            fi
+
+            echo ""
+            if [ "$FILE_FAIL" = true ]; then
+              echo "  ❌ RESULT: $contract_file — FAIL"
+              OVERALL_FAIL=true
+            else
+              echo "  ✅ RESULT: $contract_file — PASS"
+            fi
+            echo ""
+
+          done <<< "$MODIFIED_FILES"
+
+          echo "=== Format Gate Summary ==="
+          if [ "$OVERALL_FAIL" = true ]; then
+            echo ""
+            echo "❌ FAIL — One or more agent contract files failed format checks."
+            echo ""
+            echo "CORE-001 to CORE-012 enforce the mechanical format requirements for agent contracts."
+            echo "Fix all flagged issues and push to re-trigger this check."
+            echo ""
+            echo "Reference: .agent-workspace/independent-assurance-agent/knowledge/iaa-high-frequency-checks.md"
+            exit 1
+          else
+            echo "✅ PASS — All modified agent contract files passed format checks (CORE-001 to CORE-012)."
+          fi
