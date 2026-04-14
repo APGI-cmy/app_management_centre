@@ -1,10 +1,12 @@
 # IAA High-Frequency Checks — CI Specification
 
 **Agent**: independent-assurance-agent
-**Version**: 1.0.0
+**Version**: 1.1.0
 **Status**: ACTIVE — Reference Only
 **Last Updated**: 2026-04-14
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
+
+> **Note (v1.1.0)**: CI already implements the dual-path check for HFMC-04 and HFMC-05 — accepting both the legacy standalone token file (pre-90/10 waves) and the wave-record model (post-90/10 waves). The checks below reflect the updated dual-path behaviour.
 
 ---
 
@@ -29,8 +31,8 @@ This document lists all mechanical checks that have been moved from the IAA proc
 | HFMC-01 | PREHANDOVER proof exists | File exists at `.agent-admin/prehandover/` or `.agent-workspace/` |
 | HFMC-02 | Session memory file exists | File exists at `.agent-workspace/<agent>/memory/session-*.md` |
 | HFMC-03 | Phase 1 preflight field present | `phase_1_preflight: PREFLIGHT COMPLETE` present in session memory |
-| HFMC-04 | IAA token file exists | File exists at `.agent-admin/assurance/iaa-token-session-*.md` |
-| HFMC-05 | PHASE_B_BLOCKING_TOKEN non-PENDING | `PHASE_B_BLOCKING_TOKEN` line present and not PENDING in IAA token file |
+| HFMC-04 | IAA assurance carrier exists | Wave record with `PHASE_B_BLOCKING_TOKEN` exists at `.agent-admin/wave-records/amc-wave-record-*.md` (section 5). Legacy path `.agent-admin/assurance/iaa-token-session-*.md` accepted for pre-90/10 waves only. |
+| HFMC-05 | PHASE_B_BLOCKING_TOKEN non-PENDING | `PHASE_B_BLOCKING_TOKEN` line present, non-PENDING, non-empty in wave record section 5 (or legacy token file for pre-90/10 waves) |
 | HFMC-06 | IAA pre-brief exists (foreman PRs) | `iaa-prebrief-wave*.md` exists in `.agent-admin/assurance/` for foreman PRs |
 
 ---
