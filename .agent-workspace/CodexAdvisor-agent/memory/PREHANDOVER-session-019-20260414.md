@@ -47,7 +47,7 @@ Update `independent-assurance-agent.md` from v2.4.0 to v2.5.0 applying the 90/10
 | S5 | No embedded Tier 2 content in contract body | PASS ✅ |
 | S6 | `can_invoke`, `cannot_invoke`, `own_contract` top-level YAML keys | PASS ✅ |
 | S7 | Artifact immutability rules present (§4.3b reference) | PASS ✅ |
-| S8 | IAA token pattern references `.agent-admin/assurance/iaa-token-*` | PASS ✅ |
+| S8 | IAA token pattern references `.agent-admin/assurance/iaa-token-*` | PASS ✅ (contract body check; **HALT-001 note**: this PR is a self-amendment — IAA invocation halted at Phase 2 Step 2.2; no `iaa-token-*` file was created; assurance evidence is in wave record `.agent-admin/wave-records/amc-wave-record-iaa-90-10-2026-04-14.md` §5) |
 | S9 | All write_paths in GOVERNANCE_ARTIFACT_TAXONOMY.md allowlist | PASS ✅ |
 
 ---
@@ -86,6 +86,8 @@ All 4 required artifacts:
 Additional deliverables:
 - ✅ **New CI workflow**: `.github/workflows/agent-contract-format-gate.yml` (CORE-001–012)
 - ✅ **Extended CI workflow**: `.github/workflows/preflight-evidence-gate.yml` (HFMC + CORE-013/015/016/018/019 + CERT-001–004)
+- ✅ **Wave record** (HALT-001 assurance): `.agent-admin/wave-records/amc-wave-record-iaa-90-10-2026-04-14.md` — `PHASE_B_BLOCKING_TOKEN: IAA-session-019-wave1-20260414-HALT001-CS2-REVIEW` in §5 Assurance (replaces deprecated `iaa-token-*.md` per AMC 90/10 Admin Protocol v1.0.0)
+- ✅ **IAA session memory**: `.agent-workspace/independent-assurance-agent/memory/session-037-20260414.md`
 
 ---
 
@@ -94,6 +96,8 @@ Additional deliverables:
 - **IAA required**: YES — agent contract update triggers IAA per trigger table
 - **Self-amendment clause**: Applies — IAA self-review is PROHIBITED (HALT-001). CS2 reviews directly per independence requirements.
 - **iaa_audit_token**: `IAA-session-019-wave1-20260414-HALT001-CS2-REVIEW` (HALT-001 — self-amendment; IAA halted at Phase 2 Step 2.2 per NO-SELF-REVIEW-001; CS2 reviews directly)
+
+> **HALT-001 self-amendment evidence model**: No standard IAA PASS-token file (`iaa-token-*.md`) was created for this PR. The constitutional halt path (HALT-001 → CS2 direct review) is documented in the wave record §5 Assurance (`PHASE_B_BLOCKING_TOKEN: IAA-session-019-wave1-20260414-HALT001-CS2-REVIEW`). The wave record IS the blocking-token carrier for this self-amendment case. S8 QP gate above checks the contract body definition (confirming the standard token-path reference exists in the contract), not the existence of an actual `iaa-token-*` file for this PR.
 
 ---
 
