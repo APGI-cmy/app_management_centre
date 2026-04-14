@@ -80,13 +80,15 @@
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | HALT-001 (constitutional — this PR modifies IAA's own contract; IAA cannot self-review) |
+| iaa_verdict | HALT-001 (constitutional — this PR modifies IAA's own contract; IAA cannot self-review) + PHASE_B_BLOCKING (IAA tool unavailable in session) |
 | iaa_token_ref | IAA-session-020-wave-amc-90-10-complete-alignment-20260414-HALT001-CS2-REVIEW |
 | merge_gate_parity | PASS |
+| cs2_review_required | YES — IAA halted on independence grounds; CS2 reviews this PR directly |
+| merge_authority | CS2 ONLY (@APGI-cmy) |
 
 **PHASE_B_BLOCKING_TOKEN: IAA-session-020-wave-amc-90-10-complete-alignment-20260414-HALT001-CS2-REVIEW**
 
-> **Note on IAA HALT-001**: This wave modifies the independent-assurance-agent.md contract. IAA cannot self-review (NO-SELF-REVIEW-001 / HALT-001). Per task instructions from Foreman, IAA invocation is deferred — CS2 (@APGI-cmy) reviews this PR directly. The PHASE_B_BLOCKING_TOKEN above records this constitutional constraint.
+> **Note on IAA HALT-001 + PHASE_B_BLOCKING**: This wave modifies the independent-assurance-agent.md contract. IAA cannot self-review (NO-SELF-REVIEW-001 / HALT-001). IAA tool call attempted by foreman-v2-agent (session-024) but IAA is not registered as an invocable agent_type in this environment (PHASE_B_BLOCKING — deployment unavailable). Per CS2 Direct Review Track (INDEPENDENT_ASSURANCE_AGENT_CANON.md): CS2 (@APGI-cmy) reviews this PR directly as substitute for IAA Phases 3–4. The PHASE_B_BLOCKING_TOKEN above records this constitutional constraint.
 
 ---
 

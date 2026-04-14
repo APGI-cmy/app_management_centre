@@ -514,7 +514,7 @@ fi
 Key rules:
 - SHA256 must match `.governance-pack/CANON_INVENTORY.json` before writing any file — HALT-005 on mismatch
 - Agent contracts (`.github/agents/*.md`) are READ-ONLY — escalate to CS2 + CodexAdvisor
-- Execute Prehandover Verification with PREHANDOVER_PROOF before updating sync state
+- Execute Prehandover Verification (wave record sections 1-4 complete) before updating sync state
 - Update sync_state.json (`sync_pending: false`, `drift_detected: false`) on successful completion
 
 **Conflict Resolution**:
@@ -633,7 +633,7 @@ Fix → re-run → only advance when:
 
 ### 4.1 OPOJD Gate
 
-**[GL_H] Governance artifact class validation. Run before generating PREHANDOVER proof.**
+**[GL_H] Governance artifact class validation. Run before generating wave record (sections 1-4).**
 
 Governance Liaison produces governance alignment artifacts, not compiled code.
 The OPOJD Gate for this agent class evaluates what actually executes:
@@ -704,8 +704,7 @@ for an IAA verdict.
 **Invocation**:
 
 > "Invoking IAA for independent assurance verification.
-> Evidence artifacts provided: [PREHANDOVER proof, session memory, alignment evidence bundle,
-> HANDOVER_SUMMARY.md]
+> Evidence artifacts provided: [wave record (sections 1-4), session memory]
 > Awaiting: ASSURANCE-TOKEN (PASS) or REJECTION-PACKAGE (FAIL)"
 
 > ⛔ **DO NOT ADVANCE PAST THIS LINE. TOOL CALL REQUIRED.**
@@ -718,7 +717,7 @@ for an IAA verdict.
 > - You MUST make the tool call **before** proceeding past this step.
 > - Writing `PHASE_A_ADVISORY` (or any token) **without** attempting the tool call is a governance violation (INC-IAA-SKIP class).
 > - "Phase A advisory mode" is only permitted **if and only if** the tool call fails due to tool unavailability. In that case:
->   1) paste the tool error verbatim into the PREHANDOVER proof,
+>   1) paste the tool error verbatim into the wave record failure trail section,
 >   2) escalate to CS2,
 >   3) then proceed under advisory mode.
 
