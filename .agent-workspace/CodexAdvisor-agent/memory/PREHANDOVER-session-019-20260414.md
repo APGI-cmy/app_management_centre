@@ -110,4 +110,7 @@ Token file path: `.agent-admin/assurance/iaa-token-session-019-wave1-20260414.md
 
 ## Parking Station
 
-- 0 new entries this session. No in-session improvements identified outside job scope.
+- 2 new entries were added this session to CodexAdvisor-agent's parking-station suggestions log.
+  - Entry 1: CANON_INVENTORY.json contract_version for foreman-v2-agent.md may need sync update (3.0.0→3.0.1) in next ripple cycle — non-blocking housekeeping for governance-liaison.
+  - Entry 2: Consider adding CI check to validate metadata: entry count does not exceed 10 to prevent recurrence of GitHub custom agents config error.
+- Detailed entry text is recorded in `.agent-workspace/CodexAdvisor-agent/parking-station/suggestions-log.md` and should be treated as the authoritative record.

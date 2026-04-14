@@ -1,5 +1,7 @@
 # IAA Assurance Token — session-019 — wave1 — 2026-04-14
 
+## PHASE_B_BLOCKING_TOKEN: IAA-session-019-20260414-PASS
+
 > ⚠️ ARTIFACT IMMUTABILITY: This file is the authoritative IAA verdict record for this invocation. It is write-once. The PREHANDOVER proof (`PREHANDOVER-session-019-20260414.md`) is read-only post-commit and was not modified by IAA per §4.3b.
 
 ## Token Record
