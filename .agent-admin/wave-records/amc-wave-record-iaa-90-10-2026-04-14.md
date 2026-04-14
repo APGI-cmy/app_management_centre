@@ -27,7 +27,7 @@
 | architecture_ref | N/A — governance process restructuring, not application architecture |
 | allowed_artifact_paths | .github/agents/independent-assurance-agent.md, .agent-workspace/independent-assurance-agent/knowledge/*, .github/workflows/agent-contract-format-gate.yml, .github/workflows/preflight-evidence-gate.yml, .agent-workspace/CodexAdvisor-agent/memory/*, .agent-admin/wave-records/* |
 
-**PR**: #1072 — [WIP] Restructure AMC IAA contract to enforce 90/10 evaluation-to-admin ratio
+**PR**: #1072 — Restructure AMC IAA contract to enforce 90/10 evaluation-to-admin ratio
 
 **Deliverables:**
 - `independent-assurance-agent.md` v2.5.0 (20,027 chars — reduced from 37,584)

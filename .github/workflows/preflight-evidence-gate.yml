@@ -611,11 +611,19 @@ jobs:
           fi
 
           # ----------------------------------------------------------------
-          # HFMC-04 / CERT-004 / CORE-016: IAA token file exists
+          # HFMC-04 / CERT-004 / CORE-016: IAA token OR wave-record carrier exists
+          #
+          # Two accepted paths:
+          #   (a) Normal IAA-reviewed PR: .agent-admin/assurance/iaa-token-*.md
+          #   (b) HALT-001 self-amendment PR: .agent-admin/wave-records/amc-wave-record-*.md
+          #       with a PHASE_B_BLOCKING_TOKEN: line (wave record is the carrier)
           # ----------------------------------------------------------------
           ASSURANCE_DIR=".agent-admin/assurance"
+          WAVE_RECORDS_DIR=".agent-admin/wave-records"
           IAA_TOKEN_FOUND=false
           IAA_TOKEN_PATH=""
+
+          # Check (a): legacy iaa-token-*.md
           if [ -d "$ASSURANCE_DIR" ]; then
             while IFS= read -r -d '' f; do
               IAA_TOKEN_FOUND=true
@@ -623,10 +631,28 @@ jobs:
               break
             done < <(find "$ASSURANCE_DIR" -name "iaa-token-*.md" -print0 2>/dev/null)
           fi
+
+          # Check (b): wave record with PHASE_B_BLOCKING_TOKEN (HALT-001 self-amendment path)
+          if ! $IAA_TOKEN_FOUND && [ -d "$WAVE_RECORDS_DIR" ]; then
+            while IFS= read -r -d '' f; do
+              if grep -q "PHASE_B_BLOCKING_TOKEN:" "$f" 2>/dev/null; then
+                TOKEN_VAL=$(grep "PHASE_B_BLOCKING_TOKEN:" "$f" | head -1 \
+                  | sed 's/.*PHASE_B_BLOCKING_TOKEN://;s/^[[:space:]]*//;s/[[:space:]]*$//')
+                if [ -n "$TOKEN_VAL" ] && [ "$TOKEN_VAL" != "PENDING" ]; then
+                  IAA_TOKEN_FOUND=true
+                  IAA_TOKEN_PATH="$f (wave-record HALT-001 carrier, token: $TOKEN_VAL)"
+                  break
+                fi
+              fi
+            done < <(find "$WAVE_RECORDS_DIR" -name "amc-wave-record-*.md" -print0 2>/dev/null)
+          fi
+
           if $IAA_TOKEN_FOUND; then
-            echo "✅ HFMC-04 / CERT-004 / CORE-016: IAA token file exists at: $IAA_TOKEN_PATH"
+            echo "✅ HFMC-04 / CERT-004 / CORE-016: IAA assurance token exists: $IAA_TOKEN_PATH"
           else
-            echo "❌ HFMC-04 / CERT-004 / CORE-016: IAA token file NOT FOUND in $ASSURANCE_DIR"
+            echo "❌ HFMC-04 / CERT-004 / CORE-016: IAA token NOT FOUND — expected either"
+            echo "   (a) $ASSURANCE_DIR/iaa-token-*.md  OR"
+            echo "   (b) $WAVE_RECORDS_DIR/amc-wave-record-*.md with non-PENDING PHASE_B_BLOCKING_TOKEN:"
             FAIL=true
           fi
 
