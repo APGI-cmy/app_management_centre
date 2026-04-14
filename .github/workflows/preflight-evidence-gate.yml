@@ -537,7 +537,7 @@ jobs:
             "governance-liaison-amc-agent" "independent-assurance-agent"
           )
           for agent in "${KNOWN_AGENTS[@]}"; do
-            if [[ "$PR_LABELS" == *"agent:${agent}"* ]] || [[ "$PR_LABELS" == *"${agent}"* ]] || echo "$PR_BODY" | grep -qi "$agent"; then
+            if [[ "$PR_LABELS" == *"agent:${agent}"* ]] || [[ "$PR_LABELS" == *",${agent},"* ]] || [[ "$PR_LABELS" == "${agent},"* ]] || [[ "$PR_LABELS" == *",${agent}" ]] || [[ "$PR_LABELS" == "${agent}" ]] || echo "$PR_BODY" | grep -qiE "(^|[^a-z-])${agent}([^a-z-]|$)"; then
               AGENT_ID="$agent"
               break
             fi
@@ -584,7 +584,7 @@ jobs:
           # HFMC-03 / CERT-003: phase_1_preflight: PREFLIGHT COMPLETE in session memory
           # ----------------------------------------------------------------
           if find "$SESSION_MEMORY_PATH" -name "session-*.md" 2>/dev/null | \
-             xargs grep -qliE "phase_1_preflight.*PREFLIGHT COMPLETE|PREFLIGHT COMPLETE" 2>/dev/null; then
+             xargs grep -qlE "phase_1_preflight:[[:space:]]*PREFLIGHT COMPLETE" 2>/dev/null; then
             echo "✅ HFMC-03 / CERT-003: phase_1_preflight: PREFLIGHT COMPLETE present in session memory"
           else
             echo "❌ HFMC-03 / CERT-003: phase_1_preflight: PREFLIGHT COMPLETE NOT FOUND in session memory"

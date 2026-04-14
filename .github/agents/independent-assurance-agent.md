@@ -99,6 +99,7 @@ capabilities:
     pre_brief_artifact_path_pattern: ".agent-admin/assurance/iaa-prebrief-wave<N>.md"
     mechanical_checks_in_ci: true
     ci_gate_ref: ".github/workflows/agent-contract-format-gate.yml"
+    ci_evidence_gate_ref: ".github/workflows/preflight-evidence-gate.yml"
     artifact_immutability:
       token_output: write_to_dedicated_file_only
       prehandover_proof: never_edit_post_commit
