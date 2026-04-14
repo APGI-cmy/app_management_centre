@@ -93,7 +93,7 @@ Additional deliverables:
 
 - **IAA required**: YES — agent contract update triggers IAA per trigger table
 - **Self-amendment clause**: Applies — IAA self-review is PROHIBITED (HALT-001). CS2 reviews directly per independence requirements.
-- **iaa_audit_token**: `IAA-session-019-20260414-PASS` (expected reference — token file to be created by IAA)
+- **iaa_audit_token**: `IAA-session-019-wave1-20260414-HALT001-CS2-REVIEW` (HALT-001 — self-amendment; IAA halted at Phase 2 Step 2.2 per NO-SELF-REVIEW-001; CS2 reviews directly)
 
 ---
 

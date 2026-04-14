@@ -16,7 +16,7 @@ permissions:
   pull-requests: read
 
 jobs:
-  agent-contract/format-gate:
+  agent-contract-format-gate:
     name: "agent-contract/format-gate"
     runs-on: ubuntu-latest
     steps:
@@ -86,7 +86,11 @@ jobs:
             FILE_FAIL=false
 
             # CORE-001: YAML frontmatter valid (between --- delimiters)
-            if echo "$FILE_CONTENT" | head -1 | grep -q "^---"; then
+            DELIMITER_COUNT=$(grep -c '^---$' "$contract_file" || true)
+            if [ "$DELIMITER_COUNT" -lt 2 ]; then
+              echo "  ❌ CORE-001: YAML frontmatter missing closing --- delimiter (found ${DELIMITER_COUNT} delimiter(s))"
+              FILE_FAIL=true
+            else
               FRONTMATTER=$(awk '/^---/{if(p)exit; p=1; next} p' "$contract_file")
               if [ -n "$FRONTMATTER" ]; then
                 echo "  ✅ CORE-001: YAML frontmatter present"
@@ -94,16 +98,19 @@ jobs:
                 echo "  ❌ CORE-001: YAML frontmatter empty or malformed"
                 FILE_FAIL=true
               fi
-            else
-              echo "  ❌ CORE-001: No YAML frontmatter (missing opening ---)"
-              FILE_FAIL=true
             fi
 
-            # CORE-002: agent.version present
-            if grep -q "^  version:" "$contract_file" || grep -qE "^\s+version:\s+\S" "$contract_file"; then
-              echo "  ✅ CORE-002: agent.version present"
+            # CORE-002: agent.version present in YAML frontmatter (under the agent: block)
+            AGENT_VERSION=$(awk '
+              /^---$/ { if (past_first) exit; past_first=1; next }
+              past_first && /^agent:/ { in_agent=1; next }
+              in_agent && /^[^[:space:]]/ && !/^[[:space:]]/ { in_agent=0 }
+              in_agent && /^[[:space:]]+version:/ { print "found"; exit }
+            ' "$contract_file")
+            if [ "$AGENT_VERSION" = "found" ]; then
+              echo "  ✅ CORE-002: agent.version present in frontmatter"
             else
-              echo "  ❌ CORE-002: agent.version missing or empty"
+              echo "  ❌ CORE-002: agent.version missing from frontmatter agent: block"
               FILE_FAIL=true
             fi
 
@@ -143,10 +150,15 @@ jobs:
               while IFS= read -r artifact_line; do
                 artifact_path=$(echo "$artifact_line" | sed 's/.*- //;s/^[[:space:]]*//' | tr -d '"')
                 if [ -n "$artifact_path" ] && [ ! -f "$artifact_path" ]; then
-                  echo "  ⚠️  CORE-006: expected_artifact not found: $artifact_path (may be in external repo)"
+                  echo "  ❌ CORE-006: expected_artifact not found: $artifact_path"
+                  ARTIFACT_MISSING=true
                 fi
               done < <(grep -A 20 "expected_artifacts:" "$contract_file" | grep "^    - " | head -10)
-              echo "  ✅ CORE-006: expected_artifacts block present"
+              if [ "$ARTIFACT_MISSING" = true ]; then
+                FILE_FAIL=true
+              else
+                echo "  ✅ CORE-006: expected_artifacts block present and all paths exist"
+              fi
             else
               echo "  ⚠️  CORE-006: expected_artifacts block absent (acceptable for non-AGENT_CONTRACT files)"
             fi
@@ -170,12 +182,31 @@ jobs:
             fi
 
             # CORE-009: merge_gate_interface.required_checks non-empty, parity_required: true
+            MERGE_GATE_REQUIRED_CHECKS_NON_EMPTY=$(awk '
+              /^[[:space:]]*#/ { next }
+              /^[[:space:]]*merge_gate_interface:[[:space:]]*(#.*)?$/ {
+                in_merge=1; merge_indent=length($0)-length(ltrim($0)); in_required=0; next
+              }
+              function ltrim(s) { sub(/^[[:space:]]+/, "", s); return s }
+              in_merge {
+                if ($0 ~ /^[[:space:]]*$/) { next }
+                current_indent=length($0)-length(ltrim($0))
+                if (current_indent <= merge_indent && $0 !~ /^[[:space:]]*-/) {
+                  in_merge=0; in_required=0
+                } else if ($0 ~ /^[[:space:]]*required_checks:[[:space:]]*(#.*)?$/) {
+                  in_required=1; required_indent=current_indent; next
+                } else if (in_required) {
+                  if (current_indent <= required_indent) { in_required=0 }
+                  else if ($0 ~ /^[[:space:]]*-[[:space:]]*[^#[:space:]]/) { print "true"; exit }
+                }
+              }
+            ' "$contract_file")
             if grep -q "merge_gate_interface:" "$contract_file" && \
-               grep -q "required_checks:" "$contract_file" && \
+               [ "$MERGE_GATE_REQUIRED_CHECKS_NON_EMPTY" = "true" ] && \
                grep -q "parity_required: true" "$contract_file"; then
-              echo "  ✅ CORE-009: merge_gate_interface present with required_checks and parity_required: true"
+              echo "  ✅ CORE-009: merge_gate_interface present with non-empty required_checks and parity_required: true"
             else
-              echo "  ❌ CORE-009: merge_gate_interface.required_checks or parity_required: true missing"
+              echo "  ❌ CORE-009: merge_gate_interface.required_checks must be non-empty and parity_required: true must be set"
               FILE_FAIL=true
             fi
 
