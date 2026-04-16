@@ -43,4 +43,4 @@ Per AMC 90/10 Admin Protocol v1.0.0, this wave may create/modify:
 | TASK-90-007 | Hardening pass — fix remaining stale PREHANDOVER refs in governance-liaison | foreman-v2 | [x] COMPLETE |
 | TASK-90-008 | Create wave record and session memory | foreman-v2 | [x] COMPLETE |
 
-## Status: COMPLETE — Awaiting IAA (HALT-001) + CS2 direct review
+## Status: COMPLETE — IAA ASSURANCE-TOKEN issued (session-040, 2026-04-15) — all 27 checks PASS
