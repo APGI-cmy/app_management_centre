@@ -36,7 +36,7 @@ iaa_oversight:
   required: true
   trigger: all_agent_contract_creations_or_updates
   mandatory_artifacts:
-    - prehandover_proof
+    - wave_record
     - session_memory
     - agent_contract_bundle
   invocation_step: "Phase 4 — IAA Independent Audit"
@@ -632,7 +632,7 @@ Only invoke IAA after this gate fully passes.
 task(agent_type: "independent-assurance-agent")
 ```
 
-Provide IAA with: prehandover proof path, session memory path, contract bundle.  
+Provide IAA with: wave record path, session memory path, contract bundle.  
 Wait for verdict. Record exactly one of the following before opening PR:
 
 - **ASSURANCE-TOKEN received** → record `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS` in the wave record's section 5 assurance block. No standalone token file. Proceed to §4.5.
@@ -640,7 +640,7 @@ Wait for verdict. Record exactly one of the following before opening PR:
 - **Deployment error / unavailable** → record `PHASE_B_BLOCKING` status; output `PHASE_A_ADVISORY`. Do NOT present PR as merge-ready. Escalate to CS2.
 - **Tool call NOT made** → HALT-007. INC-IAA-SKIP-001. Record in FAIL-ONLY-ONCE. Escalate to CS2.
 
-> ⛔ Do NOT open a PR until IAA tool call response is visible in output AND recorded in prehandover proof.
+> ⛔ Do NOT open a PR until IAA tool call response is visible in output AND recorded in the wave record (section 5).
 
 ### 4.5 Token Ceremony (FM_H)
 

@@ -103,7 +103,7 @@ capabilities:
     ci_gate_ref: ".github/workflows/agent-contract-format-gate.yml"
     ci_evidence_gate_ref: ".github/workflows/preflight-evidence-gate.yml"
     artifact_immutability:
-      token_output: write_to_dedicated_file_only
+      token_output: write_to_wave_record_section_5_only
       prehandover_proof: never_edit_post_commit
       token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md (section 5, PHASE_B_BLOCKING_TOKEN)"
     failure_classification:
