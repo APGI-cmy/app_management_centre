@@ -1,7 +1,7 @@
 # CodexAdvisor-agent — PREHANDOVER Proof — session-022 — 2026-04-17
 
 > ⚠️ IMMUTABILITY RULE: This file is READ-ONLY after initial commit. No agent may edit it post-commit.
-> IAA token is written to a separate dedicated file per AGENT_HANDOVER_AUTOMATION.md §4.3b.
+> IAA assurance token is carried in the wave record Section 5 (AMC 90/10 wave-record model). No standalone iaa-token-*.md file is produced.
 
 ---
 
@@ -81,7 +81,7 @@ All 4 required artifacts present:
 
 `iaa_audit_token`: IAA-session-022-20260417-PASS
 
-Token will be written to dedicated file per §4.3b once IAA verdict is received.
+Token is recorded in wave record Section 5 (`PHASE_B_BLOCKING_TOKEN: IAA-session-022-20260417-PASS`) per the AMC 90/10 wave-record assurance carrier model. No standalone dedicated-token file is produced.
 
 ---
 
