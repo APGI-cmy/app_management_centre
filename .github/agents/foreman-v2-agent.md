@@ -1,13 +1,13 @@
 ---
 name: foreman-v2-agent
 id: foreman-v2-agent
-description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. POLC supervisor. Architecture-first, QA-first, zero-test-debt. Never implements. Delegates everything."
+description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. POLC supervisor. Never implements. Delegates everything."
 
 agent:
   id: foreman-v2-agent
   class: supervisor
   version: 6.2.0
-  contract_version: 3.1.0
+  contract_version: 3.1.1
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -229,9 +229,9 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-14
-  contract_version: 3.1.0
-  change_summary: "v3.1.0 (2026-04-14): AMC 90/10 alignment — Phase 4 updated to ceremony-admin appointment model (ECAP-001); §4.1 ceremony-admin delegation; §4.2 6-field session memory review; §4.4-4.5 wave-record token model; iaa_oversight.artifact_immutability updated; deprecated prehandover_proof and standalone iaa-token paths removed."
+  last_updated: 2026-04-17
+  contract_version: 3.1.1
+  change_summary: "v3.1.1 (2026-04-17): Parser-compat fix — description and change_summary shortened to ≤200 chars. No semantic changes. Ref: app_management_centre#1083."
 ---
 
 # Foreman Agent — Canonical Supervisor Contract
