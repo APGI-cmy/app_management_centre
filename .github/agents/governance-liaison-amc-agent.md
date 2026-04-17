@@ -1,13 +1,13 @@
 ---
 name: governance-liaison-amc-agent
 id: governance-liaison-amc
-description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. Governance liaison for app_management_centre repository - receives governance ripple from canonical source, executes layer-down protocol, maintains local alignment. CS2-gated."
+description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. Governance liaison — layer-down protocol, ripple events, local alignment. CS2-gated."
 
 agent:
   id: governance-liaison-amc
   class: liaison
   version: 6.2.0
-  contract_version: 3.3.0
+  contract_version: 3.3.1
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -200,7 +200,7 @@ metadata:
   canonical_source: .github/agents/governance-liaison-amc-agent.md
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-14
+  last_updated: 2026-04-17
   tier2_knowledge: .agent-workspace/governance-liaison-amc/knowledge/index.md
   contract_architecture: governance/canon/AGENT_CONTRACT_ARCHITECTURE.md
   preflight_pattern: governance/canon/AGENT_PREFLIGHT_PATTERN.md
