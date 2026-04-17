@@ -2,7 +2,7 @@
 
 > ⚠️ IMMUTABILITY RULE: This file is READ-ONLY after initial commit.
 > No agent (including the IAA) may edit this file post-commit.
-> IAA token is written to a separate dedicated file.
+> IAA assurance token is embedded in the wave-record carrier: `.agent-admin/wave-records/amc-wave-record-session-021-wave1-20260417.md`
 
 ---
 
