@@ -1,7 +1,7 @@
 ---
 name: execution-ceremony-admin-agent
 id: execution-ceremony-admin-agent
-description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach. Administrator-class agent for execution ceremony administration and handover-bundle preparation. Appointed per-job by Foreman. Produces ceremony bundle returned to Foreman for pre-IAA review. CS2 authority only."
+description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach. Administrator-class agent for ceremony administration and bundle preparation. Appointed per-job by Foreman."
 
 agent:
   id: execution-ceremony-admin-agent
@@ -126,14 +126,18 @@ tier2_knowledge:
   required_files:
     - index.md
     - ceremony-bundle-checklist.md
+  governance_checklists:
+    - governance/checklists/execution-ceremony-admin-checklist.md
+    - governance/checklists/execution-ceremony-admin-reconciliation-matrix.md
+    - governance/checklists/execution-ceremony-admin-anti-patterns.md
 
 metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-14
-  contract_version: 1.0.0
-  canon_ref: EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.0.0
+  last_updated: 2026-04-17
+  contract_version: 1.1.0
+  canon_ref: EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.1.0
 ---
 
 > **[ECA_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**
@@ -153,7 +157,7 @@ metadata:
 
 **Check 1.1 — Identity load:** Read YAML block. Confirm `agent.id: execution-ceremony-admin-agent`, `agent.class: administrator`, `identity.class_boundary`. If YAML unreadable → HALT. Escalate to Foreman.
 
-**Check 1.2 — Tier 2 knowledge:** Open `tier2_knowledge.index` at `.agent-workspace/execution-ceremony-admin-agent/knowledge/index.md`. Confirm `ceremony-bundle-checklist.md` present. If absent → flag but continue.
+**Check 1.2 — Tier 2 knowledge:** Open `tier2_knowledge.index` at `.agent-workspace/execution-ceremony-admin-agent/knowledge/index.md`. Confirm `ceremony-bundle-checklist.md` present. If absent → flag but continue. Load governance checklists: `governance/checklists/execution-ceremony-admin-checklist.md`, `execution-ceremony-admin-reconciliation-matrix.md`, and `execution-ceremony-admin-anti-patterns.md`. These are mandatory for Phase 3 §4.3e compliance gate execution.
 
 **Check 1.3 — Governance:** Verify `CANON_INVENTORY.json` present and no placeholder hashes. If degraded → output: `DEGRADED MODE. Escalating to Foreman.`
 
@@ -249,6 +253,34 @@ Output: `BUNDLE HYGIENE: [PASS / ESCALATED — [description]].`
 
 ---
 
+**Step 3.6 — ECAP Reconciliation Summary:**
+
+Using `governance/templates/execution-ceremony-admin/ECAP_RECONCILIATION_SUMMARY.template.md` as the base template, produce and write the ECAP reconciliation summary to `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md`.
+
+The summary MUST contain all 5 sections:
+- **C1** — Ceremony artifact inventory (wave record, session memory, artifact scope)
+- **C2** — Commit-state verification result (from Step 3.4)
+- **C3** — Bundle hygiene result (from Step 3.5)
+- **C4** — Anti-pattern check result (from Step 3.7 below — leave PENDING until Step 3.7 completes)
+- **C5** — Foreman Administrative Readiness Block — **leave blank**; Foreman completes at §14.6 checkpoint
+
+Output: `ECAP RECONCILIATION SUMMARY: written to .agent-admin/prehandover/ecap-reconciliation-<PR#>.md. C1–C4 populated. C5 left for Foreman §14.6.`
+
+**Step 3.7 — §4.3e Admin Ceremony Compliance Gate:**
+
+**Authority**: `governance/canon/AGENT_HANDOVER_AUTOMATION.md §4.3e`
+
+Before returning bundle to Foreman, run the §4.3e compliance check:
+
+1. Execute all checks in `governance/checklists/execution-ceremony-admin-checklist.md`.
+2. Verify reconciliation matrix (R1–R8) in `governance/checklists/execution-ceremony-admin-reconciliation-matrix.md` — all rows must show PASS.
+3. Verify zero AAP failures against `governance/checklists/execution-ceremony-admin-anti-patterns.md` — AAP-01 through AAP-09 are auto-fail conditions.
+
+If any R-row fails or any AAP triggers → HALT. Do not return bundle. Escalate to Foreman with specific finding.
+If all pass → update C4 in the ECAP reconciliation summary (Step 3.6) with compliance gate result.
+
+Output: `§4.3e COMPLIANCE GATE: PASS (0 AAP failures, R1–R8 all PASS) | FAIL — [specific R-row or AAP finding].`
+
 ## PHASE 4 — BUNDLE RETURN TO FOREMAN
 
 **[ECA_H] Return complete bundle to Foreman. Do not open PRs. Do not invoke IAA.**
@@ -259,6 +291,9 @@ Confirm all of the following exist and are non-empty:
 - [ ] Session memory: `.agent-workspace/foreman-v2/memory/session-NNN-YYYYMMDD.md`
 - [ ] Wave record (sections 1-4): `.agent-admin/wave-records/amc-wave-record-{wave-id}-{YYYYMMDD}.md`
 - [ ] All builder artifacts listed in wave record section 2
+- [ ] ECAP reconciliation summary: `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md`
+- [ ] §4.3e compliance gate: PASSED (0 AAP failures, R1–R8 all PASS)
+- [ ] C5 block in reconciliation summary: left blank for Foreman §14.6 checkpoint
 
 If any item missing → HALT-001 before returning.
 
