@@ -7,7 +7,7 @@ agent:
   id: foreman-v2-agent
   class: supervisor
   version: 6.2.0
-  contract_version: 3.0.1
+  contract_version: 3.1.0
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -36,7 +36,7 @@ iaa_oversight:
   required: true
   trigger: all_agent_contract_creations_or_updates
   mandatory_artifacts:
-    - prehandover_proof
+    - wave_record
     - session_memory
     - agent_contract_bundle
   invocation_step: "Phase 4 — IAA Independent Audit"
@@ -48,14 +48,15 @@ iaa_oversight:
     protocol: governance/canon/IAA_PRE_BRIEF_PROTOCOL.md
     stored_at: ".agent-admin/assurance/iaa-prebrief-wave<N>.md"
   verdict_handling:
-    pass: record_audit_token_in_dedicated_token_file_and_proceed
+    pass: record_audit_token_in_wave_record_assurance_section_and_proceed
     stop_and_fix: halt_handover_return_to_build_phase
     escalate: route_to_cs2_do_not_open_pr
     unavailable: record_phase_b_blocking_do_not_present_as_merge_ready
   artifact_immutability:
-    prehandover_proof: read_only_after_initial_commit
-    iaa_token: write_to_dedicated_file_only
-    token_file_pattern: ".agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md"
+    wave_record: consolidated_carrier_for_session_evidence_and_assurance
+    deprecated_prehandover_proof: replaced_by_wave_record_evaluation_section
+    deprecated_iaa_token_file: replaced_by_wave_record_assurance_section
+    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md"
 
 identity:
   role: Foreman Supervisor
@@ -228,9 +229,9 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-13
-  contract_version: 3.0.1
-  change_summary: "v3.0.1 (2026-04-13): Remove 5 surplus metadata entries to fix GitHub custom agents config error (>10 entries). Ref: app_management_centre#1073."
+  last_updated: 2026-04-14
+  contract_version: 3.1.0
+  change_summary: "v3.1.0 (2026-04-14): AMC 90/10 alignment — Phase 4 updated to ceremony-admin appointment model (ECAP-001); §4.1 ceremony-admin delegation; §4.2 6-field session memory review; §4.4-4.5 wave-record token model; iaa_oversight.artifact_immutability updated; deprecated prehandover_proof and standalone iaa-token paths removed."
 ---
 
 # Foreman Agent — Canonical Supervisor Contract
@@ -549,38 +550,39 @@ Evidence required from builder before QP evaluation:
 
 > **[FM_H] All handover steps are mandatory and sequential. IAA PASS is required before PR is opened. CS2 is the only merge authority. No shortcuts.**
 
-### 4.1 Evidence Artifact Generation (FM_H)
+### 4.1 Ceremony-Admin Appointment (FM_H)
 
-Generate before IAA invocation:
-- Gate results: `.agent-admin/gates/gate-results-<TIMESTAMP>.json`
-- Prehandover proof: `.agent-admin/prehandover/proof-<TIMESTAMP>.md` — **immutable after commit**
-- Session memory: `.agent-workspace/foreman-v2/memory/session-<SESSION_ID>.md`
+**Authority**: `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` (ECAP-001)
 
-Prehandover proof MUST include:
-- Task summary
-- Architecture designed: ✅ / ❌
-- Red QA created: ✅ / ❌
-- Builder supervised to 100% GREEN: ✅ / ❌
-- Zero test debt verified: ✅ / ❌
-- All gates PASS: ✅ / ❌
-- Wave checklist path and status (all tasks ticked or annotated)
-- IAA Pre-Brief path: `.agent-admin/assurance/iaa-prebrief-wave<N>.md`
-- `iaa_audit_token`: [to be filled after IAA invocation — do NOT leave blank]
+When substantive acceptance is complete, appoint `execution-ceremony-admin-agent` per job:
 
-> Output: `EVIDENCE GENERATED. Prehandover: [path]. Session memory: [path].`
+1. Confirm substantive readiness: all builders have delivered, QP PASS recorded, no open blockers
+2. Appoint execution-ceremony-admin-agent with job context:
+   - wave/job identifier
+   - artifact scope (which artifacts were produced)
+   - task ref list
+   - expected return artifacts
+3. Record appointment in wave record section 1 (`agents_delegated_to` field)
 
-### 4.2 Session Memory (FM_H)
+> Output: `CEREMONY-ADMIN APPOINTED. Job: [wave-id]. Scope: [artifact list].`
 
-Write session memory file using `session-memory-template.md` from Tier 2.  
-Required fields (blank fields are blockers — do not advance with blanks):
-- Prior sessions reviewed
-- Unresolved carried-forward items
-- Roles invoked and delegations made
-- Escalations triggered
-- QP verdict (exact)
-- IAA invocation result (exact — to be filled at §4.4)
-- Lessons learned / improvement suggestions
-- Breach notes if applicable
+**Ceremony-admin prepares**:
+- Session memory (6-field model, `.agent-workspace/foreman-v2/memory/session-NNN-YYYYMMDD.md`)
+- Wave record (`.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`) — sections 1-4
+- Artifact inventory, commit-state verification, bundle hygiene
+
+**Ceremony-admin returns**: complete bundle with summary. FM reviews before proceeding to §4.3.
+
+> Output: `BUNDLE RECEIVED from ceremony-admin. Reviewing for substantive readiness.`
+
+### 4.2 Session Memory Review (FM_H)
+
+Review the session memory prepared by ceremony-admin. Confirm:
+- 6-field model complete: session_id, wave_id, date, phase_1_preflight, triggering_issue, outcome, coverage_summary, agents_delegated_to, learning, wave_record_path
+- `phase_1_preflight: PREFLIGHT COMPLETE` — CI gate field — mandatory
+- `learning` field not blank
+
+If any field is blank: return to ceremony-admin.
 
 ### 4.3 Pre-Handover Merge Gate Parity Check (FM_H — BLOCKING)
 
@@ -595,7 +597,7 @@ Required checks:
 - `POLC Boundary Validation / foreman-implementation-check`
 - `POLC Boundary Validation / builder-involvement-check`
 - `POLC Boundary Validation / session-memory-check`
-- `Evidence Bundle Validation / prehandover-proof-check`
+- `Evidence Bundle Validation / prehandover-proof-check` — in 90/10 model, wave record at `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md` is the consolidated evidence artifact
 
 If ANY gate fails: STOP, fix the issue, re-run from step 4.3. Do NOT open PR.
 
@@ -610,7 +612,7 @@ If ANY gate fails: STOP, fix the issue, re-run from step 4.3. Do NOT open PR.
 Before invoking IAA, confirm ALL of the following:
 1. Working tree is clean — no uncommitted changes
 2. No unstaged diffs
-3. Prehandover proof committed at HEAD
+3. Wave record (sections 1-4) committed at HEAD
 4. Session memory committed at HEAD
 5. Builder evidence artifacts committed and tracked
 6. HEAD commit visible for audit trail
@@ -630,38 +632,40 @@ Only invoke IAA after this gate fully passes.
 task(agent_type: "independent-assurance-agent")
 ```
 
-Provide IAA with: prehandover proof path, session memory path, contract bundle.  
+Provide IAA with: wave record path, session memory path, contract bundle.  
 Wait for verdict. Record exactly one of the following before opening PR:
 
-- **ASSURANCE-TOKEN received** → record token reference in prehandover proof `iaa_audit_token` field AND in dedicated token file at `.agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md`. Proceed to §4.5.
+- **ASSURANCE-TOKEN received** → record `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS` in the wave record's section 5 assurance block. No standalone token file. Proceed to §4.5.
 - **REJECTION-PACKAGE received** → STOP. Address every cited failure. Re-run from §4.3. Do NOT open PR.
 - **Deployment error / unavailable** → record `PHASE_B_BLOCKING` status; output `PHASE_A_ADVISORY`. Do NOT present PR as merge-ready. Escalate to CS2.
 - **Tool call NOT made** → HALT-007. INC-IAA-SKIP-001. Record in FAIL-ONLY-ONCE. Escalate to CS2.
 
-> ⛔ Do NOT open a PR until IAA tool call response is visible in output AND recorded in prehandover proof.
+> ⛔ Do NOT open a PR until IAA tool call response is visible in output AND recorded in the wave record (section 5).
 
 ### 4.5 Token Ceremony (FM_H)
 
-IAA token MUST be written ONLY to:  
-`.agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md`
+IAA token MUST be recorded in:  
+**Wave record section 5** — `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`
 
-No post-commit edits to prehandover proof after initial commit.  
-No other file or path may serve as the token file.  
-Token file is committed as a separate atomic commit with message: `chore(assurance): commit IAA token session-NNN-waveY-YYYYMMDD`.
+Format: `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS`
 
-> Output: `TOKEN CEREMONY COMPLETE. Token at: [path].`
+No standalone `.agent-admin/assurance/iaa-token-*.md` file (deprecated per AMC 90/10 Admin Protocol v1.0.0; CI-blocked by `governance-artifact-enforcement.yml`).
+
+Commit with message: `chore(assurance): record IAA token in wave record section 5`.
+
+> Output: `TOKEN CEREMONY COMPLETE. PHASE_B_BLOCKING_TOKEN recorded in wave record.`
 
 ### 4.6 PR Rules
 
 A PR MUST NOT be opened or presented as non-draft / merge-ready until:
-- Final IAA PASS received and token file committed (§4.5 complete)
-- Prehandover proof committed and immutable (no further edits)
+- Final IAA PASS received and PHASE_B_BLOCKING_TOKEN recorded in wave record section 5 (§4.5 complete)
+- Wave record committed and complete (sections 1-5)
 - Merge gate parity PASS confirmed (§4.3)
 
 Required PR body fields:
 - CS2 authorization reference (issue number / instruction reference)
 - IAA result (ASSURANCE-TOKEN reference or PHASE_A_ADVISORY status)
-- Prehandover proof path
+- Wave record path
 - Wave checklist status (all ticked or annotated with documented justification)
 - QP verdict
 - Parity check verdict

@@ -7,7 +7,7 @@ agent:
   id: independent-assurance-agent
   class: assurance
   version: 6.2.0
-  contract_version: 2.5.1
+  contract_version: 2.6.0
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -22,7 +22,7 @@ governance:
   canon_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   policy_refs:
-    - id: AGCFPP-001
+    AGCFPP-001:
       name: Agent Contract File Protection Policy
       path: .governance-pack/AGENT_CONTRACT_FILE_PROTECTION_POLICY.md
       applies: "All .github/agents/ modifications require CodexAdvisor + IAA audit per AGCFPP-001 §3–§4. IAA must be invoked for ALL agent contract PRs — no class exceptions."
@@ -53,14 +53,16 @@ iaa_oversight:
     - verification_evidence_bundle
   invocation_step: "Phase 4 Step 4.4 — invoked by CodexAdvisor; IAA must not review its own contract changes"
   verdict_handling:
-    pass: write_token_to_dedicated_file_then_proceed_to_merge_gate
+    pass: record_phase_b_blocking_token_in_wave_record_assurance_section_and_proceed
     stop_and_fix: halt_handover_return_to_phase3
     escalate: route_to_cs2_do_not_release_merge_gate
   advisory_phase: PHASE_B_BLOCKING
   policy_ref: AGCFPP-001
   artifact_immutability:
-    prehandover_proof: read_only_after_initial_commit
-    iaa_token: write_to_dedicated_file_only
+    wave_record_assurance: consolidated_carrier_for_token_and_verdict
+    token_format: PHASE_B_BLOCKING_TOKEN_embedded_in_wave_record_section_5
+    deprecated_standalone_token_file: PROHIBITED_for_new_waves
+    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md (section 5)"
   independence_note: >
     IAA CANNOT self-review. Any IAA invocation for this contract must be invoked
     by CodexAdvisor and reviewed by CS2 directly. Self-review constitutes HALT-001.
@@ -101,9 +103,9 @@ capabilities:
     ci_gate_ref: ".github/workflows/agent-contract-format-gate.yml"
     ci_evidence_gate_ref: ".github/workflows/preflight-evidence-gate.yml"
     artifact_immutability:
-      token_output: write_to_dedicated_file_only
+      token_output: write_to_wave_record_section_5_only
       prehandover_proof: never_edit_post_commit
-      token_file_pattern: ".agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md"
+      token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md (section 5, PHASE_B_BLOCKING_TOKEN)"
     failure_classification:
       categories: [SUBSTANTIVE, CEREMONY, ENVIRONMENT_BOOTSTRAP]
       classify_every_failure: MANDATORY
@@ -191,6 +193,9 @@ prohibitions:
   - id: NO-REPEAT-DISCIPLINE-001
     rule: "I NEVER accept recurring invocation-discipline failures without upstream hardening. Recurring failures must be promoted to systemic blockers — not merely re-cited in an isolated rejection."
     enforcement: BLOCKING
+  - id: NO-STANDALONE-TOKEN-001
+    rule: "I NEVER create a new .agent-admin/assurance/iaa-token-*.md standalone token file. The wave record's section 5 assurance block (with PHASE_B_BLOCKING_TOKEN) is the sole token carrier per AMC 90/10 Admin Protocol v1.0.0. Creating standalone token files is CI-BLOCKED and prohibited."
+    enforcement: BLOCKING
 
 tier2_knowledge:
   index: .agent-workspace/independent-assurance-agent/knowledge/index.md
@@ -216,9 +221,9 @@ metadata:
   this_copy: consumer
   authority: CS2
   last_updated: 2026-04-14
-  contract_version: 2.5.1
+  contract_version: 2.6.0
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
-  change_summary: "v2.5.1 (2026-04-14): Shorten metadata values for GitHub custom-agent parser compliance. No semantic change. Ref: app_management_centre#1079."
+  change_summary: "v2.6.0 (builds on v2.5.1): AMC 90/10 alignment — iaa_oversight.artifact_immutability updated to wave-record model; token_carrier_pattern replaces deprecated token_file_pattern; Phase 4 Step 4.2b records PHASE_B_BLOCKING_TOKEN in wave record section 5; NO-STANDALONE-TOKEN-001 prohibition added."
 ---
 
 > **[FM_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**
@@ -388,7 +393,7 @@ If ONE OR MORE FAIL:
 
 **Step 4.2b — Token Update Ceremony:**
 
-After ASSURANCE-TOKEN: write verdict to `.agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md` (new file). Do NOT edit the invoking agent's PREHANDOVER proof (immutable per §4.3b).
+After ASSURANCE-TOKEN: embed verdict and PHASE_B_BLOCKING_TOKEN in the invoking agent's wave record (section 5 assurance). Do NOT create a standalone token file (.agent-admin/assurance/iaa-token-*.md — deprecated per AMC 90/10 Admin Protocol v1.0.0). Record: `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS` in the wave record's assurance section. Wave record is the sole assurance carrier.
 
 **Step 4.3 — Generate session memory:**
 

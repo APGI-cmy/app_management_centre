@@ -1,42 +1,46 @@
-# Wave Current Tasks — wave-amc-admin-90-10
+# Wave Current Tasks — wave-amc-90-10-complete-alignment
 
-wave: wave-amc-admin-90-10
+wave: wave-amc-90-10-complete-alignment
 agent: foreman-v2-agent
-session: session-023
-date: 20260413
-governance_evidence_path: .agent-admin/wave-records/amc-wave-record-amc-admin-90-10-20260413.md
+session: session-024
+date: 20260414
+governance_evidence_path: .agent-admin/wave-records/amc-wave-record-amc-90-10-complete-alignment-20260414.md
 governance_evidence_status: CONSOLIDATED_INTO_WAVE_RECORD
 
 ## Wave Description
 
-Restructure AMC admin artifact/process model to align with 90/10 evaluation-to-admin
-principle per Issue #1063. Consolidates legacy multi-file admin model into single
-wave-record artifacts, reduces session memory from 18+ fields to 6, creates CI enforcement
-for allowed artifact paths, and archives deprecated templates.
+Complete AMC 90/10 operating-model alignment with ISMS standard per Issue #1075.
+Deploy live execution-ceremony-admin-agent, update IAA to wave-record token model,
+wire Foreman Phase 4 to ceremony-admin delegation, align governance-liaison to wave-record model,
+and run cross-contract hardening pass per ECAP-001 and AMC 90/10 Admin Protocol v1.0.0.
 
 ## Allowed Artifact Paths
 
 Per AMC 90/10 Admin Protocol v1.0.0, this wave may create/modify:
 
-- `.agent-admin/wave-records/amc-wave-record-*.md`
-- `.agent-admin/templates/amc-wave-record-template.md`
-- `.agent-admin/archive/**`
-- `.agent-workspace/foreman-v2/knowledge/session-memory-template.md`
-- `.agent-workspace/foreman-v2/knowledge/index.md`
+- `.github/agents/independent-assurance-agent.md`
+- `.github/agents/execution-ceremony-admin-agent.md`
+- `.github/agents/foreman-v2-agent.md`
+- `.github/agents/governance-liaison-amc-agent.md`
+- `.agent-workspace/execution-ceremony-admin-agent/knowledge/index.md`
+- `.agent-workspace/execution-ceremony-admin-agent/knowledge/ceremony-bundle-checklist.md`
+- `.agent-workspace/independent-assurance-agent/knowledge/iaa-high-frequency-checks.md`
+- `.agent-admin/wave-records/amc-wave-record-amc-90-10-complete-alignment-20260414.md`
+- `.agent-workspace/CodexAdvisor-agent/memory/session-020-20260414.md`
+- `.agent-workspace/foreman-v2/memory/session-024-20260414.md`
 - `.agent-workspace/foreman-v2/personal/wave-current-tasks.md`
-- `.github/workflows/governance-artifact-enforcement.yml`
-- `governance/protocols/AMC_90_10_ADMIN_PROTOCOL.md`
 
 ## Task Breakdown
 
 | ID | Task | Agent | Status |
 |----|------|-------|--------|
-| TASK-9010-001 | Create consolidated wave-record template | foreman-v2-agent | COMPLETE |
-| TASK-9010-002 | Reduce session memory template to 6-field model | foreman-v2-agent | COMPLETE |
-| TASK-9010-003 | Create AMC 90/10 Admin Protocol document | foreman-v2-agent | COMPLETE |
-| TASK-9010-004 | Create CI workflow for artifact path enforcement | foreman-v2-agent | COMPLETE |
-| TASK-9010-005 | Archive deprecated legacy templates | foreman-v2-agent | COMPLETE |
-| TASK-9010-006 | Create wave-records directory with README | foreman-v2-agent | COMPLETE |
-| TASK-9010-007 | Update preflight-evidence-gate for wave-record acceptance | foreman-v2-agent | COMPLETE |
+| TASK-90-001 | Update IAA contract to wave-record token model (v2.5.0 → v2.6.0) | CodexAdvisor | [x] COMPLETE |
+| TASK-90-002 | Create execution-ceremony-admin-agent.md (v1.0.0 NEW) | CodexAdvisor | [x] COMPLETE |
+| TASK-90-003 | Create ECA Tier 2 knowledge (index.md, ceremony-bundle-checklist.md) | CodexAdvisor | [x] COMPLETE |
+| TASK-90-004 | Update foreman-v2-agent.md Phase 4 — ceremony-admin delegation (v3.0.1 → v3.1.0) | CodexAdvisor | [x] COMPLETE |
+| TASK-90-005 | Update governance-liaison-amc-agent.md — wave-record model (v3.2.0 → v3.3.0) | CodexAdvisor | [x] COMPLETE |
+| TASK-90-006 | Update iaa-high-frequency-checks.md — HFMC-04/05 dual-path (v1.0.0 → v1.1.0) | CodexAdvisor | [x] COMPLETE |
+| TASK-90-007 | Hardening pass — fix remaining stale PREHANDOVER refs in governance-liaison | foreman-v2 | [x] COMPLETE |
+| TASK-90-008 | Create wave record and session memory | foreman-v2 | [x] COMPLETE |
 
-## Status: COMPLETE
+## Status: COMPLETE — IAA ASSURANCE-TOKEN issued (session-040, 2026-04-15) — all 27 checks PASS

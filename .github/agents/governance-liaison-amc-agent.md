@@ -7,7 +7,7 @@ agent:
   id: governance-liaison-amc
   class: liaison
   version: 6.2.0
-  contract_version: 3.2.0
+  contract_version: 3.3.0
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -58,19 +58,19 @@ iaa_oversight:
   required: true
   trigger: all_wave_handovers_producing_or_modifying_repo_content
   mandatory_artifacts:
-    - prehandover_proof
+    - wave_record
     - session_memory
-    - alignment_evidence_bundle
-  invocation_step: "Phase 4 Step 4.4 (invoke IAA after commit of PREHANDOVER proof)"
+  invocation_step: "Phase 4 Step 4.4 (invoke IAA after wave record sections 1-4 are committed)"
   verdict_handling:
-    pass: write_token_to_dedicated_file_then_proceed_to_merge_gate
+    pass: record_audit_token_in_wave_record_assurance_section_and_proceed
     stop_and_fix: halt_handover_return_to_phase3
     escalate: route_to_cs2_do_not_release_merge_gate
   advisory_phase: PHASE_B_BLOCKING
   policy_ref: AGCFPP-001
   artifact_immutability:
-    prehandover_proof: read_only_after_initial_commit
-    iaa_token: write_to_dedicated_file_only
+    wave_record: consolidated_carrier_per_amc_9010_admin_protocol
+    deprecated_prehandover_proof: replaced_by_wave_record_evaluation_section
+    deprecated_iaa_token_file: replaced_by_wave_record_assurance_section
 
 merge_gate_interface:
   required_checks:
@@ -200,7 +200,7 @@ metadata:
   canonical_source: .github/agents/governance-liaison-amc-agent.md
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-07
+  last_updated: 2026-04-14
   tier2_knowledge: .agent-workspace/governance-liaison-amc/knowledge/index.md
   contract_architecture: governance/canon/AGENT_CONTRACT_ARCHITECTURE.md
   preflight_pattern: governance/canon/AGENT_PREFLIGHT_PATTERN.md
@@ -514,7 +514,7 @@ fi
 Key rules:
 - SHA256 must match `.governance-pack/CANON_INVENTORY.json` before writing any file — HALT-005 on mismatch
 - Agent contracts (`.github/agents/*.md`) are READ-ONLY — escalate to CS2 + CodexAdvisor
-- Execute Prehandover Verification with PREHANDOVER_PROOF before updating sync state
+- Execute Prehandover Verification (wave record sections 1-4 complete) before updating sync state
 - Update sync_state.json (`sync_pending: false`, `drift_detected: false`) on successful completion
 
 **Conflict Resolution**:
@@ -633,7 +633,7 @@ Fix → re-run → only advance when:
 
 ### 4.1 OPOJD Gate
 
-**[GL_H] Governance artifact class validation. Run before generating PREHANDOVER proof.**
+**[GL_H] Governance artifact class validation. Run before generating wave record (sections 1-4).**
 
 Governance Liaison produces governance alignment artifacts, not compiled code.
 The OPOJD Gate for this agent class evaluates what actually executes:
@@ -667,83 +667,28 @@ Output:
 
 **MANDATORY at session end. Cannot be skipped.**
 
-**Canonical Reference**: `governance/canon/AGENT_HANDOVER_AUTOMATION.md` v1.0.0
+Write session memory to `.agent-workspace/governance-liaison-amc/memory/session-NNN-YYYYMMDD.md` using the 6-field model per AMC 90/10 Admin Protocol v1.0.0:
 
-**Execution**:
-```bash
-.github/scripts/session-closure.sh governance-liaison-amc
-```
-
-**Protocol Steps**:
-
-1. **Capture Evidence**:
-   - List all modified files with SHA256 checksums
-   - Document actions taken and decisions made
-   - Record ripple status and alignment state
-
-2. **Create Session Memory**:
-   - File: `.agent-workspace/governance-liaison-amc/memory/session-NNN-YYYYMMDD.md`
-   - Use the session memory template from `.agent-workspace/governance-liaison-amc/knowledge/session-memory-template.md`
-   - Required fields (must all be populated — none may be blank or 'N/A'):
-     - `phase_1_preflight: PREFLIGHT COMPLETE` — **mandatory CI gate field (GOV-BREACH-AIMC-W5-002)**
-     - `prior_sessions_reviewed`, `unresolved_items_from_prior_sessions`
-     - `roles_invoked`, `governance_artifacts_aligned`, `escalations_triggered`
-     - `iaa_invocation_result: [ASSURANCE-TOKEN / REJECTION-PACKAGE / NOT_REQUIRED / PHASE_A_ADVISORY]`
-   - **Suggestions for Improvement (MANDATORY — this field may NEVER be blank)**
-   - **Parking Station**: Append one-line summary per suggestion to `.agent-workspace/governance-liaison-amc/parking-station/suggestions-log.md` (create if absent). Format: `| YYYY-MM-DD | governance-liaison-amc | session-NNN | [type] | <summary> | <session-file> |`
-
-3. **Memory Rotation**:
-   - If >5 sessions exist, move oldest to `memory/.archive/`
-   - Keep 5 most recent sessions in `memory/`
-
-4. **Update Personal Learning**:
-   - Add lessons to `personal/lessons-learned.md`
-   - Add patterns to `personal/patterns.md`
-
-5. **Verify Escalations**:
-   - Check `escalation-inbox/` for unresolved items
-   - Document any new escalations created
-
-6. **Outcome Classification**:
-   - ✅ COMPLETE: All work finished, no blockers
-   - ⚠️ PARTIAL: Some work remaining, escalation created
-   - ❌ ESCALATED: Blocked, awaiting CS2 resolution
+Required fields (none may be blank):
+- `phase_1_preflight: PREFLIGHT COMPLETE` — **mandatory CI gate field**
+- `session_id`, `wave_id`, `date`
+- `triggering_issue`, `outcome`, `coverage_summary`
+- `agents_delegated_to`, `learning` (never blank), `wave_record_path`
 
 ---
 
 ### 4.3 Evidence Artifact Bundle
 
-**Bundle Location**: `.agent-admin/build-evidence/session-NNN/`
+Create consolidated wave record at `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md` using template at `.agent-admin/templates/amc-wave-record-template.md`. This single file replaces the legacy PREHANDOVER_PROOF and evidence bundle (HANDOVER_SUMMARY.md, ALIGNMENT_EVIDENCE.md, RIPPLE_LOG.json).
 
-**Required Artifacts**:
+Wave record sections:
+- Section 1: Wave Identity
+- Section 2: Scope & Classification (allowed artifact paths)
+- Section 3: Evaluation Summary (QP Verdict)
+- Section 4: Outcome & Learning
+- Section 5: Assurance (populated by IAA — PHASE_B_BLOCKING_TOKEN)
 
-1. **HANDOVER_SUMMARY.md**:
-   - Session overview and outcome
-   - Files modified with checksums
-   - Alignment status and drift resolution
-   - Escalations created (if any)
-
-2. **ALIGNMENT_EVIDENCE.md**:
-   - Canonical inventory version comparison
-   - File checksum validation results
-   - Layer-down execution log
-   - Sync state updates
-
-3. **RIPPLE_LOG.json**:
-   - All ripple events received
-   - Processing status for each event
-   - Timestamps and dispatch IDs
-
-4. **PREHANDOVER_PROOF** (if executable artifacts modified):
-   - Test execution results
-   - Validation script outputs
-   - Idempotency verification
-   - Dry-run evidence
-
-**Bundle Generation**:
-```bash
-.github/scripts/generate-evidence-bundle.sh governance-liaison-amc session-NNN
-```
+Commit wave record (sections 1-4) before invoking IAA.
 
 ---
 
@@ -759,8 +704,7 @@ for an IAA verdict.
 **Invocation**:
 
 > "Invoking IAA for independent assurance verification.
-> Evidence artifacts provided: [PREHANDOVER proof, session memory, alignment evidence bundle,
-> HANDOVER_SUMMARY.md]
+> Evidence artifacts provided: [wave record (sections 1-4), session memory]
 > Awaiting: ASSURANCE-TOKEN (PASS) or REJECTION-PACKAGE (FAIL)"
 
 > ⛔ **DO NOT ADVANCE PAST THIS LINE. TOOL CALL REQUIRED.**
@@ -773,7 +717,7 @@ for an IAA verdict.
 > - You MUST make the tool call **before** proceeding past this step.
 > - Writing `PHASE_A_ADVISORY` (or any token) **without** attempting the tool call is a governance violation (INC-IAA-SKIP class).
 > - "Phase A advisory mode" is only permitted **if and only if** the tool call fails due to tool unavailability. In that case:
->   1) paste the tool error verbatim into the PREHANDOVER proof,
+>   1) paste the tool error verbatim into the wave record failure trail section,
 >   2) escalate to CS2,
 >   3) then proceed under advisory mode.
 
@@ -787,11 +731,7 @@ Do not open PR until ASSURANCE-TOKEN is received.
 **If ASSURANCE-TOKEN received** → proceed to §4.4b token ceremony.
 
 **§4.4b — Token Update Ceremony:**
-Per `AGENT_HANDOVER_AUTOMATION.md` v1.1.3 §4.3b: PREHANDOVER proof is read-only post-commit.
-Pre-populate `iaa_audit_token: IAA-session-NNN-waveY-YYYYMMDD-PASS` in PREHANDOVER proof at
-initial commit time. After IAA verdict, IAA writes token to
-`.agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md` (new file only).
-Do NOT edit the PREHANDOVER proof post-commit.
+After IAA ASSURANCE-TOKEN verdict, record `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS` in the wave record's section 5 assurance block. No standalone token file (deprecated per AMC 90/10 Admin Protocol v1.0.0).
 
 **Policy Ref**: AGCFPP-001 | **Ref**: `iaa_oversight` block in this contract's YAML.
 
