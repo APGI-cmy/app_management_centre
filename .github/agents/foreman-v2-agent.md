@@ -231,7 +231,7 @@ metadata:
   authority: CS2
   last_updated: 2026-04-17
   contract_version: 3.1.1
-  change_summary: "v3.1.1 (2026-04-17): Parser-compat fix — description and change_summary shortened to ≤200 chars. No semantic changes. Ref: app_management_centre#1086."
+  change_summary: "v3.1.1 (2026-04-17): Parser-compat fix — description and change_summary shortened to ≤200 chars. No semantic changes. Ref: app_management_centre#1083."
 ---
 
 # Foreman Agent — Canonical Supervisor Contract
