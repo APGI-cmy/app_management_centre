@@ -22,7 +22,7 @@ governance:
   canon_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   policy_refs:
-    - id: AGCFPP-001
+    AGCFPP-001:
       name: Agent Contract File Protection Policy
       path: .governance-pack/AGENT_CONTRACT_FILE_PROTECTION_POLICY.md
       applies: "All .github/agents/ modifications require CodexAdvisor + IAA audit per AGCFPP-001 §3–§4. IAA must be invoked for ALL agent contract PRs — no class exceptions."

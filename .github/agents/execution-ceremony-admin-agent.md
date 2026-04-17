@@ -238,7 +238,7 @@ If not clean → document specific gaps. Return to Foreman for resolution.
 
 Check wave record for:
 - No blank mandatory fields
-- No `STUB`, `TODO`, `FIXME`, `TBD` content
+- No incomplete placeholder markers (stub, tbd, fixme, todo)
 - No deprecated path references
 - Section 5 pre-filled with PENDING (not left blank)
 
