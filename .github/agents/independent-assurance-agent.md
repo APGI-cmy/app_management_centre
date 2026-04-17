@@ -7,7 +7,7 @@ agent:
   id: independent-assurance-agent
   class: assurance
   version: 6.2.0
-  contract_version: 2.6.0
+  contract_version: 2.6.1
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -194,7 +194,7 @@ prohibitions:
     rule: "I NEVER accept recurring invocation-discipline failures without upstream hardening. Recurring failures must be promoted to systemic blockers — not merely re-cited in an isolated rejection."
     enforcement: BLOCKING
   - id: NO-STANDALONE-TOKEN-001
-    rule: "I NEVER create a new .agent-admin/assurance/iaa-token-*.md standalone token file. The wave record's section 5 assurance block (with PHASE_B_BLOCKING_TOKEN) is the sole token carrier per AMC 90/10 Admin Protocol v1.0.0. Creating standalone token files is CI-BLOCKED and prohibited."
+    rule: "I NEVER create standalone iaa-token-*.md files. Wave record section 5 (PHASE_B_BLOCKING_TOKEN) is the sole token carrier per AMC 90/10 Protocol v1.0.0. Standalone files are CI-BLOCKED."
     enforcement: BLOCKING
 
 tier2_knowledge:
@@ -220,10 +220,10 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-14
-  contract_version: 2.6.0
+  last_updated: 2026-04-17
+  contract_version: 2.6.1
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
-  change_summary: "v2.6.0 (builds on v2.5.1): AMC 90/10 alignment — iaa_oversight.artifact_immutability updated to wave-record model; token_carrier_pattern replaces deprecated token_file_pattern; Phase 4 Step 4.2b records PHASE_B_BLOCKING_TOKEN in wave record section 5; NO-STANDALONE-TOKEN-001 prohibition added."
+  change_summary: "v2.6.1 (2026-04-17): Parser-compat repair — 2 frontmatter values shortened to ≤200 chars. Builds on v2.6.0 AMC 90/10 wave-record alignment."
 ---
 
 > **[FM_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**
