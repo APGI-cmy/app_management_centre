@@ -26,35 +26,37 @@ Bring AMC into parity with the newer ISMS hardening standard by delivering five 
 
 ## Task List
 
-- [ ] TASK-PARITY-1 — [Workstream A] Update `.github/agents/foreman-v2-agent.md`
+- [x] TASK-PARITY-1 — [Workstream A] Update `.github/agents/foreman-v2-agent.md`
       builder: CodexAdvisor-agent
-      qp_verdict: PENDING
-      notes: Add HALT-012 (gate-proof truth failure), NO-STALE-GATE-001 prohibition, explicit gate inventory requirement in final-state proof, per-gate final states (PASS/FAIL/N/A with evidence), PENDING=BLOCKED rule, mandatory gate_set_checked field, RCA obligation when gate-truth failures found. Preserve existing §14.6 admin-compliance checkpoint and merge-gate parity rules.
+      qp_verdict: PASS
+      notes: HALT-012, NO-STALE-GATE-001 (CONSTITUTIONAL), gate_set_checked in §4.3, pre-brief path normalized to wave-record-only. Contract v3.2.0 → v3.3.0. IAA QP PASS — session-046-20260419.
 
-- [ ] TASK-PARITY-2 — [Workstream B] Update `.github/agents/independent-assurance-agent.md`
+- [x] TASK-PARITY-2 — [Workstream B] Update `.github/agents/independent-assurance-agent.md`
       builder: CodexAdvisor-agent
-      qp_verdict: PENDING
-      notes: Add ACR-09 (reject when gate set not explicitly identified), ACR-10 (reject when stale pending/in-progress gate wording in final-state proof), ACR-11 (reject when GREEN/PASS claimed without CI-backed gate evidence). Preserve ACR-01 through ACR-08. Remove standalone pre-brief artifact path as an active model reference; make wave record the only authoritative carrier for pre-brief, token, and rejection history.
+      qp_verdict: PASS
+      notes: ACR-09/10/11 added; NO-STANDALONE-PREBRIEF-001 added; pre-brief path carrier updated to wave-record-only. Contract v2.7.0 → v2.8.0. IAA QP PASS — session-046-20260419.
 
-- [ ] TASK-PARITY-3 — [Workstream C] Update `.github/agents/CodexAdvisor-agent.md`
+- [x] TASK-PARITY-3 — [Workstream C] Update `.github/agents/CodexAdvisor-agent.md`
       builder: CodexAdvisor-agent
-      qp_verdict: PENDING
-      notes: Add explicit sole-authority language: CodexAdvisor is the ONLY authorized writer of `.github/agents/*`. Add prohibition NO-AGENT-FILE-WRITE-001: no other agent may create or modify `.github/agents/*.md` files. Update write_paths commentary to reflect exclusive ownership. Add corresponding AGENT_FILE_WRITE_AUTHORITY note for CI enforcement.
+      qp_verdict: PASS
+      notes: AGENT_FILE_WRITE_AUTHORITY sole-authority declaration; NO-AGENT-FILE-WRITE-001 (CONSTITUTIONAL) naming all 9 barred agents; token-path instructions normalized to wave-record section 5 model. Contract v4.1.0 → v4.2.0. IAA QP PASS — session-046-20260419.
 
-- [ ] TASK-PARITY-4 — [Workstream D] Update `.github/agents/execution-ceremony-admin-agent.md`
+- [x] TASK-PARITY-4 — [Workstream D] Update `.github/agents/execution-ceremony-admin-agent.md`
       builder: CodexAdvisor-agent
-      qp_verdict: PENDING
-      notes: Enforce §4.3e against AAP-01 through AAP-09 AND AAP-15 through AAP-16 (new gate-parity anti-patterns). Prohibit standalone assurance-path artifacts explicitly (iaa-prebrief-*.md, iaa-token-*.md as standalone files). Prohibit .github/agents/* edits directly. Reference new AAP-15/AAP-16 entries in the anti-patterns checklist.
+      qp_verdict: PASS
+      notes: AAP-15/16 enforcement in §4.3e; NO-STANDALONE-ASSURANCE-PATHS-001; NO-AGENT-FILE-WRITE-ECA-001 (CONSTITUTIONAL). Contract v1.1.0 → v1.2.0. IAA QP PASS — session-046-20260419.
 
-- [ ] TASK-PARITY-5 — [Workstream D] Normalize Tier 2/Tier 3 artifacts
+- [x] TASK-PARITY-5 — [Workstream D] Normalize Tier 2/Tier 3 artifacts
       builder: CodexAdvisor-agent
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: |
-        (5a) Update `governance/checklists/execution-ceremony-admin-anti-patterns.md` — add AAP-10 through AAP-16 covering gate-parity failures (AAP-10 through AAP-14 bridge gap, AAP-15 = gate set not identified, AAP-16 = stale gate wording in final-state proof, map to ACR-09/10/11).
-        (5b) Update `.agent-workspace/independent-assurance-agent/knowledge/iaa-high-frequency-checks.md` — add HFMC-07 for gate-set explicit identification, remove/deprecate any remaining references to standalone iaa-prebrief-wave*.md path as active model.
-        (5c) Update `.agent-workspace/foreman-v2/knowledge/prehandover-template.md` — add gate_set_checked field to §4.3 gate inventory section; remove any standalone pre-brief path instructions.
-        (5d) Update `.agent-workspace/foreman-v2/knowledge/wave-reconciliation-checklist.md` — add gate inventory verification step.
-        (5e) Add grep-style non-regression validation: script or CI comment that surfaces deprecated standalone iaa-prebrief-*.md / iaa-token-*.md path references if they appear in active instructions.
+        (5a) AAP-10 through AAP-16 added to execution-ceremony-admin-anti-patterns.md with detection methods and ACR cross-reference.
+        (5b) HFMC-07 added to iaa-high-frequency-checks.md; HFMC-06 note verified unambiguous.
+        (5c) gate_set_checked section added to prehandover-template.md; IAA Token Self-Certification Guard updated from standalone-token to PHASE_B_BLOCKING_TOKEN wave-record references.
+        (5d) Gate inventory verification step added to wave-reconciliation-checklist.md.
+        (5e) .github/scripts/check-deprecated-assurance-paths.sh created — passes with 0 violations.
+        Additional: ECA checklist ECA-1.3 normalized; ceremony templates (PREHANDOVER, ECAP_RECONCILIATION_SUMMARY, SESSION_MEMORY) token path fields updated.
+        IAA QP PASS — session-046-20260419.
 
 ---
 
