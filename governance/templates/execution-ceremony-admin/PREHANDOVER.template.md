@@ -31,7 +31,7 @@ admin_ceremony_compliance: PASS             # PASS | FAIL | N/A (ECAP jobs only)
 
 ## IAA Assurance
 iaa_audit_token:        <PHASE_B_BLOCKING_TOKEN>  # e.g., IAA-session-NNN-YYYYMMDD-PASS — from wave record section 5
-iaa_session_reference:  <IAA session ID>           # e.g., IAA-session-NNN-YYYYMMDD-PASS — from wave record section 5
+iaa_session_reference:  <IAA session ID>           # e.g., session-NNN-YYYYMMDD — IAA session identifier (NOT the token value; token goes in iaa_audit_token only)
 iaa_reinvocation_round: 0                   # 0 = first invocation; 1+ = re-invocation round
 iaa_rejection_reference: none               # path to rejection-package file if round >= 1
 

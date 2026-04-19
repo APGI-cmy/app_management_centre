@@ -280,19 +280,24 @@ Before accepting any IAA token as valid, verify the following. A FAILING token i
 
 **Step 1 — Wave record assurance section exists:**
 ```bash
-ls .agent-admin/wave-records/amc-wave-record-*.md
+# Resolve the exact wave record path from session memory (wave_record_path field).
+# Do NOT use a glob — multiple wave records may exist; only the current wave record is authoritative.
+WAVE_RECORD=$(grep "wave_record_path:" .agent-workspace/foreman-v2/memory/session-*.md 2>/dev/null | tail -1 | awk '{print $2}' | tr -d '\r')
+ls "$WAVE_RECORD"
 # MUST exist. Absent = IAA-SKIP-001 violation.
 ```
 
 **Step 2 — PHASE_B_BLOCKING_TOKEN field present:**
 ```bash
-grep "PHASE_B_BLOCKING_TOKEN:" .agent-admin/wave-records/amc-wave-record-*.md
+# Use the exact wave record path resolved in Step 1 (stored in $WAVE_RECORD).
+grep "PHASE_B_BLOCKING_TOKEN:" "$WAVE_RECORD"
 # MUST be present and non-PENDING. Missing or PENDING = IAA-SELF-CERT-001 violation.
 ```
 
 **Step 3 — Token value is not PHASE_A_ADVISORY:**
 ```bash
-grep "PHASE_A_ADVISORY" .agent-admin/wave-records/amc-wave-record-*.md
+# Use the exact wave record path resolved in Step 1 (stored in $WAVE_RECORD).
+grep "PHASE_A_ADVISORY" "$WAVE_RECORD"
 # MUST return NO MATCH. Any match = IAA-PHASE-A-BYPASS-001 violation.
 ```
 

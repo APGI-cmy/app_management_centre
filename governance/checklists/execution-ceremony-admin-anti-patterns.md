@@ -164,7 +164,7 @@ This reference documents the **9 known admin anti-patterns (AAP-01 through AAP-0
 **Description**: Wave record section 5 was left with empty/missing `PHASE_B_BLOCKING_TOKEN` field instead of pre-filled with `PENDING` before IAA invocation.
 
 **IAA Trigger**: ACR-07 (general), ACR-08 (structural gap)  
-**Detection**: `grep "PHASE_B_BLOCKING_TOKEN" .agent-admin/wave-records/amc-wave-record-*.md | grep -v "PENDING\|PASS"`  
+**Detection**: `grep "PHASE_B_BLOCKING_TOKEN:" .agent-admin/wave-records/amc-wave-record-*.md | grep -E ":[[:space:]]*$"` (flags empty/blank value) — OR — verify the field exists at all with `grep -L "PHASE_B_BLOCKING_TOKEN:" .agent-admin/wave-records/amc-wave-record-*.md` (files missing the field). Note: any non-empty terminal value (PENDING, PASS, REJECTION-PACKAGE, etc.) is valid at detection time; only a missing or empty field is an AAP-14 violation.  
 **Resolution**: Pre-fill section 5 `PHASE_B_BLOCKING_TOKEN: PENDING` before IAA invocation. IAA will update to actual token.
 
 ---
@@ -263,11 +263,25 @@ echo "✅ AAP Quick-Check PASSED — no anti-patterns detected"
 
 ```bash
 # AAP-15: Gate set not explicitly identified
+# Sourced from merge_gate_interface.required_checks in foreman-v2-agent.md (all 7 required checks).
 LATEST_WAVE=$(ls -t .agent-admin/wave-records/amc-wave-record-*.md 2>/dev/null | head -1)
 if [ -f "$LATEST_WAVE" ]; then
-  # Check that wave record evaluation section has explicit per-gate entries, not just generic "PASS"
-  if ! grep -q "merge-gate/verdict\|governance/alignment\|stop-and-fix/enforcement" "$LATEST_WAVE"; then
-    FAILS+=("AAP-15: Gate set not explicitly identified in wave record evaluation section")
+  # Check that wave record evaluation section has explicit per-gate entries for ALL required gates.
+  MISSING_GATES=()
+  for gate in \
+    "merge-gate/verdict" \
+    "governance/alignment" \
+    "stop-and-fix/enforcement" \
+    "foreman-implementation-check" \
+    "builder-involvement-check" \
+    "session-memory-check" \
+    "prehandover-proof-check"; do
+    if ! grep -q "$gate" "$LATEST_WAVE"; then
+      MISSING_GATES+=("$gate")
+    fi
+  done
+  if [ ${#MISSING_GATES[@]} -gt 0 ]; then
+    FAILS+=("AAP-15: Gate set not explicitly identified — missing: ${MISSING_GATES[*]}")
   fi
 fi
 

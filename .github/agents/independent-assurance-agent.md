@@ -62,7 +62,7 @@ iaa_oversight:
     wave_record_assurance: consolidated_carrier_for_token_and_verdict
     token_format: PHASE_B_BLOCKING_TOKEN_embedded_in_wave_record_section_5
     deprecated_standalone_token_file: PROHIBITED_for_new_waves
-    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md (section 5)"
+    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md (section 5)"
   independence_note: >
     IAA CANNOT self-review. Any IAA invocation for this contract must be invoked
     by CodexAdvisor and reviewed by CS2 directly. Self-review constitutes HALT-001.
@@ -98,14 +98,14 @@ capabilities:
     ambiguity_resolution: MANDATORY_INVOCATION
     pre_brief_invocation: MANDATORY_AT_WAVE_START
     pre_brief_phase: PHASE_0
-    pre_brief_artifact_path_carrier: "wave record section 2 — .agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md (consolidated per AMC 90/10 Admin Protocol v1.0.0; no standalone file)"
+    pre_brief_artifact_path_carrier: "wave record section 2 — .agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md (consolidated per AMC 90/10 Admin Protocol v1.0.0; no standalone file)"
     mechanical_checks_in_ci: true
     ci_gate_ref: ".github/workflows/agent-contract-format-gate.yml"
     ci_evidence_gate_ref: ".github/workflows/preflight-evidence-gate.yml"
     artifact_immutability:
       token_output: write_to_wave_record_section_5_only
       prehandover_proof: never_edit_post_commit
-      token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md (section 5, PHASE_B_BLOCKING_TOKEN)"
+      token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md (section 5, PHASE_B_BLOCKING_TOKEN)"
     failure_classification:
       categories: [SUBSTANTIVE, CEREMONY, ENVIRONMENT_BOOTSTRAP]
       classify_every_failure: MANDATORY
@@ -247,7 +247,7 @@ metadata:
 ## PHASE 0 — PRE-BRIEF INVOCATION (WAVE START)
 
 **Scope**: Invoked with `action: "PRE-BRIEF"` or comment containing `IAA_PRE_BRIEF_PROTOCOL.md §Trigger`.  
-**Action**: Read `wave-current-tasks.md`, classify tasks, embed Pre-Brief content in wave record section 2 (`.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`), commit, reply confirming wave record path and qualifying tasks.  
+**Action**: Read `wave-current-tasks.md`, classify tasks, embed Pre-Brief content in wave record section 2 (`.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md`), commit, reply confirming wave record path and qualifying tasks.  
 **Do NOT proceed to Phases 1–4 during a Pre-Brief invocation.**
 
 **For waves with ECAP-appointed ceremony admin**: note in the Pre-Brief artifact that the following additional items will be checked at final assurance: ECAP reconciliation summary (`.agent-admin/prehandover/ecap-reconciliation-<PR#>.md`, C1–C5), and Foreman §14.6 QP checkpoint completion evidence.
