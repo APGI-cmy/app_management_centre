@@ -7,7 +7,7 @@
 | Field | Value |
 |-------|-------|
 | wave_id | layer-down-c6c52a63-20260419 |
-| session_id | session-007-20260419 |
+| session_id | session-029-20260419 |
 | agent | governance-liaison-amc |
 | date | 2026-04-19 |
 | triggering_issue | [Layer-Down] Propagate Governance Changes - 2026-04-14 (c6c52a63) |
