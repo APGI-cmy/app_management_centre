@@ -1,6 +1,6 @@
 # PREHANDOVER PROOF — session-024 — 2026-04-17
 
-> ⚠️ **IMMUTABILITY RULE**: This file is READ-ONLY after initial commit. No agent may edit it post-commit. IAA token is written to a separate dedicated file.
+> ⚠️ **IMMUTABILITY RULE**: This file is READ-ONLY after initial commit. No agent may edit it post-commit. IAA token is carried in the wave record (section 5) per AMC 90/10 Admin Protocol v1.0.0 — no standalone token file is created.
 
 ## Agent Identity
 
@@ -85,8 +85,8 @@ YAML validation: PASS ✅ | Character count: all within limit ✅ | Checklist co
 
 ## IAA Audit Token Reference
 
-`iaa_audit_token`: IAA-session-024-20260417-PASS
-(Token will be written by IAA to `.agent-admin/assurance/iaa-token-session-024-wave-ecap002-amc-hardening-20260417.md`)
+`iaa_audit_token`: IAA-session-043-20260419-PASS
+(Token is carried in the wave record section 5 per AMC 90/10 Admin Protocol v1.0.0: `.agent-admin/wave-records/amc-wave-record-wave-ecap002-amc-hardening-20260417.md` — field `PHASE_B_BLOCKING_TOKEN`. No standalone `.agent-admin/assurance/iaa-token-*.md` file is created.)
 
 ## Parking Station Entries
 

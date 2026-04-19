@@ -29,7 +29,7 @@ All substantive deliverables for Workstreams B, C, and D are complete. No PENDIN
 | Artifact | Path | Present | Committed |
 |----------|------|---------|-----------|
 | Wave checklist | `.agent-admin/waves/wave-ecap002-amc-hardening-current-tasks.md` | ✅ | ✅ |
-| IAA Pre-Brief | `.agent-admin/assurance/iaa-prebrief-wave-ecap002-amc-hardening.md` | ✅ | ✅ |
+| IAA Pre-Brief | `.agent-admin/wave-records/amc-wave-record-wave-ecap002-amc-hardening-20260417.md` (§2 IAA Pre-Brief, per AMC 90/10) | ✅ | ✅ |
 | ECAP checklist (B1) | `governance/checklists/execution-ceremony-admin-checklist.md` | ✅ | staged |
 | ECAP reconciliation matrix (B2) | `governance/checklists/execution-ceremony-admin-reconciliation-matrix.md` | ✅ | staged |
 | ECAP anti-patterns (B3) | `governance/checklists/execution-ceremony-admin-anti-patterns.md` | ✅ | staged |
@@ -51,10 +51,10 @@ All substantive deliverables for Workstreams B, C, and D are complete. No PENDIN
 |-----------|--------|--------|--------|
 | Session ID | Session memory `session_id` | Wave record `session_id` | ✅ MATCH: session-025-20260417 |
 | Wave ID | Wave checklist | Wave record | ✅ MATCH: wave-ecap002-amc-hardening |
-| Triggering issue | Session memory | Wave record | ✅ MATCH: #1086 |
+| Triggering issue | Session memory | Wave record | ✅ MATCH: #1085 |
 | Branch | Wave record | `git branch` | ✅ MATCH: copilot/complete-amc-implementation-wave-1085 |
 | CS2 authorization | Wave record | Issue opened by @APGI-cmy | ✅ CONFIRMED |
-| IAA Pre-Brief | `.agent-admin/assurance/iaa-prebrief-wave-ecap002-amc-hardening.md` | Wave record scope | ✅ MATCH |
+| IAA Pre-Brief | `.agent-admin/wave-records/amc-wave-record-wave-ecap002-amc-hardening-20260417.md` §2 | Wave record scope | ✅ MATCH |
 
 No mismatches across ceremony artifacts.
 

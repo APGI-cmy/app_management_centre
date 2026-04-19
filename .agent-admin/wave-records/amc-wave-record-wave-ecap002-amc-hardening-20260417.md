@@ -27,6 +27,18 @@
 | architecture_ref | governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.1.0 |
 | allowed_artifact_paths | See below |
 
+### IAA Pre-Brief (consolidated per AMC 90/10 Admin Protocol v1.0.0)
+
+| Field | Value |
+|-------|-------|
+| iaa_session | IAA-20260417-PREBRIEF-WAVE-ECAP002-AMC-HARDENING |
+| date | 2026-04-17 |
+| authority | IAA_PRE_BRIEF_PROTOCOL.md v1.2.1 |
+| foreman_session | session-025 |
+| wave_task_list | `.agent-admin/waves/wave-ecap002-amc-hardening-current-tasks.md` |
+| status | COMPLETE — pre-brief accepted; IAA invocation authorized |
+| iaa_prebrief_note | Pre-Brief content consolidated into this wave record per AMC 90/10 Admin Protocol v1.0.0. Standalone file path `.agent-admin/assurance/iaa-prebrief-wave-ecap002-amc-hardening.md` is deprecated. |
+
 **Allowed artifact paths (files created or modified this wave)**:
 
 *Workstream B — Agent contract hardening:*
