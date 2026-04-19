@@ -20,7 +20,7 @@ Operational checklist for the `execution-ceremony-admin-agent` to complete the f
 
 - [ ] **ECA-1.1** Receive job appointment from Foreman with: wave/job identifier, artifact scope, task ref list, expected return artifacts
 - [ ] **ECA-1.2** Confirm job is substantively complete (builders have delivered, QP PASS recorded) — do NOT start ceremony before substantive readiness
-- [ ] **ECA-1.3** Confirm the IAA Pre-Brief artifact exists for this wave at `.agent-admin/assurance/iaa-prebrief-<wave-slug>.md`
+- [ ] **ECA-1.3** Confirm the IAA Pre-Brief is present in wave record section 2 (`.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md` — per AMC 90/10 Admin Protocol v1.0.0; no standalone iaa-prebrief-*.md file)
 - [ ] **ECA-1.4** Record appointment in session memory preamble
 
 ---

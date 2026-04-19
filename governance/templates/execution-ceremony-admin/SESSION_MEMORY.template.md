@@ -52,7 +52,7 @@
 |-------|-------|
 | IAA invoked by Foreman | YES / NO / PENDING |
 | IAA result | ASSURANCE-TOKEN / REJECTION-PACKAGE / PENDING |
-| Token file path | `.agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md` |
+| Token reference | `PHASE_B_BLOCKING_TOKEN: IAA-session-NNN-YYYYMMDD-PASS` in wave record section 5 |
 | Token session reference | IAA-YYYYMMDD-NNN |
 | Re-invocation round | 0 (first invocation) |
 

@@ -42,7 +42,7 @@
 | Gate results (JSON) | `.agent-admin/gates/gate-results-<TIMESTAMP>.json` | ✓/✗ | ✓/✗ | ✓/✗ | |
 | ECAP reconciliation summary (this file) | `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md` | ✓/✗ | ✓/✗ | ✓/✗ | |
 | Scope declaration | `governance/scope-declaration.md` | ✓/✗ | ✓/✗ | ✓/✗ | |
-| IAA token file (if assurance completed) | `.agent-admin/assurance/iaa-token-*.md` | ✓/✗/N/A | ✓/✗/N/A | ✓/✗/N/A | |
+| IAA assurance token | wave record section 5 (`PHASE_B_BLOCKING_TOKEN`) — `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md` | ✓/✗/N/A | ✓/✗/N/A | ✓/✗/N/A | |
 
 ---
 
@@ -51,7 +51,7 @@
 | Row | Consistency Dimension | Source Value | Verified Against | Match |
 |-----|-----------------------|-------------|-----------------|-------|
 | Session reference | Session ID | `session-NNN` (PREHANDOVER) | Session memory filename, wave record | ✓/✗ |
-| Token reference | Token path + session | `<token path>` (PREHANDOVER `iaa_audit_token`) | Token file at declared path | ✓/✗ |
+| Token reference | Token ID + session | `PHASE_B_BLOCKING_TOKEN` in wave record section 5 | Wave record section 5 assurance block | ✓/✗ |
 | Issue/PR/wave | Issue #, PR #, wave ID | PREHANDOVER fields | Session memory, scope declaration | ✓/✗ |
 | Version consistency | Each amended file version | File headers | CANON_INVENTORY entries | ✓/✗ |
 | Path consistency | Artifact paths | PREHANDOVER artifact list | `git ls-files` | ✓/✗ |

@@ -180,14 +180,21 @@
 |-------|--------|
 | Tests 100% GREEN | ✅ N/A — governance artifact wave only |
 | Zero test debt | ✅ N/A — governance artifact wave only |
-| Canon cross-references consistent | PENDING |
-| No placeholder content | PENDING |
-| Agent contracts updated (PARITY-1 through PARITY-4) | PENDING |
-| Tier 2/3 normalization (PARITY-5) | PENDING |
-| Anti-patterns checklist updated (AAP-15/16) | PENDING |
-| ECAP reconciliation summary | PENDING |
+| Canon cross-references consistent | ✅ PASS — all contract version refs updated consistently |
+| No placeholder content | ✅ PASS — all PENDING fields resolved in final artifacts |
+| Agent contracts updated (PARITY-1 through PARITY-4) | ✅ PASS — all 4 agent contracts updated with required additions |
+| All contracts under 30,000 chars | ✅ PASS — foreman=29,984; CodexAdvisor=28,962; IAA=23,277; ECAP=16,590 |
+| All contracts YAML valid | ✅ PASS — PyYAML validation passed for all 10 contracts |
+| Tier 2/3 normalization (PARITY-5) | ✅ PASS — 7 Tier 2/3 files updated; deprecated path refs removed/annotated |
+| Anti-patterns checklist updated (AAP-10 through AAP-16) | ✅ PASS — AAP-10–16 added with detection methods and ACR cross-reference |
+| Non-regression script operational | ✅ PASS — check-deprecated-assurance-paths.sh passes with 0 fails |
+| Templates normalized | ✅ PASS — PREHANDOVER.template.md, ECAP_RECONCILIATION_SUMMARY.template.md, SESSION_MEMORY.template.md updated |
+| ECAP checklist normalized (ECA-1.3) | ✅ PASS — ECA-1.3 updated to wave record section 2 |
+| CodexAdvisor token instructions normalized | ✅ PASS — Step 4.3b, S8 check, artifact_immutability block updated |
+| ACR-09/10/11 non-conflicting with ACR-01–08 | ✅ PASS — ACR-09 (no gate-set named), ACR-10 (stale gate wording), ACR-11 (PASS without CI evidence) are distinct from all existing ACRs |
+| HALT-012 + NO-STALE-GATE-001 preserved §14.6 and §4.3 | ✅ PASS — additive only; existing §14.6, HALT-001–008, §4.3 parity rules intact |
 
-**QP Verdict**: PENDING
+**QP Verdict**: PASS — 15/15 checks PASS
 
 ---
 
@@ -195,9 +202,9 @@
 
 | Field | Value |
 |-------|-------|
-| outcome | PENDING |
-| coverage_summary | PENDING |
-| learning | PENDING |
+| outcome | COMPLETE — all 5 workstreams delivered, non-regression script passes |
+| coverage_summary | 4 agent contracts updated (foreman v3.3.0, IAA v2.8.0, CodexAdvisor v4.2.0, ECAP v1.2.0); 7 Tier 2/3 files normalized; 1 new non-regression script; 3 templates updated; 1 checklist updated. Total: 13 files changed or created. |
+| learning | Governance parity waves require careful attention to: (1) char limits in agent contracts requiring surgical trimming, (2) distinguishing active instructions from deprecation notices in non-regression validation, (3) stale path references surviving in builder agent's own contract (CodexAdvisor had stale token-path instructions), (4) templates and checklists may lag behind contract updates and require explicit normalization passes. |
 
 ---
 

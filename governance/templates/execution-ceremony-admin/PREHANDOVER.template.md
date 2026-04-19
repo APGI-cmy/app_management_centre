@@ -30,8 +30,8 @@ scope_declaration_parity: PASS              # PASS | FAIL | N/A
 admin_ceremony_compliance: PASS             # PASS | FAIL | N/A (ECAP jobs only)
 
 ## IAA Assurance
-iaa_audit_token:        <token-file-path>    # e.g., .agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md
-iaa_session_reference:  <IAA session ID>     # e.g., IAA-20260417-042 — from token file
+iaa_audit_token:        <PHASE_B_BLOCKING_TOKEN>  # e.g., IAA-session-NNN-YYYYMMDD-PASS — from wave record section 5
+iaa_session_reference:  <IAA session ID>           # e.g., IAA-session-NNN-YYYYMMDD-PASS — from wave record section 5
 iaa_reinvocation_round: 0                   # 0 = first invocation; 1+ = re-invocation round
 iaa_rejection_reference: none               # path to rejection-package file if round >= 1
 
