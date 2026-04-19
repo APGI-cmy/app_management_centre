@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-04-08",
-  "total_canons": 199,
-  "generation_timestamp": "2026-04-08T10:55:47Z",
+  "last_updated": "2026-04-19",
+  "total_canons": 200,
+  "generation_timestamp": "2026-04-19T10:36:47Z",
   "canon_entry_schema": {
     "description": "Schema for canon entries in CANON_INVENTORY.json",
     "required_fields": [
@@ -110,13 +110,13 @@
     {
       "filename": "AGENT_CONTRACT_ARCHITECTURE.md",
       "version": "1.1.0 | **Authority**: CS2",
-      "file_hash": "7b382a1e2f8654b5511e89906503512877f99226eeaaf73a5ef4506ee578abeb",
+      "file_hash": "c7b0c7ff4af21a14900967a92292363cab98dc3745c47392d1c6dd35981e1f37",
       "effective_date": "unknown",
       "description": "Canonical governance document: AGENT_CONTRACT_ARCHITECTURE",
       "type": "canon",
       "path": "governance/canon/AGENT_CONTRACT_ARCHITECTURE.md",
       "layer_down_status": "PUBLIC_API",
-      "file_hash_sha256": "7b382a1e2f8654b5511e89906503512877f99226eeaaf73a5ef4506ee578abeb"
+      "file_hash_sha256": "c7b0c7ff4af21a14900967a92292363cab98dc3745c47392d1c6dd35981e1f37"
     },
     {
       "filename": "AGENT_CONTRACT_FILE_PROTECTION_POLICY.md",
@@ -259,13 +259,13 @@
     {
       "filename": "AGENT_HANDOVER_AUTOMATION.md",
       "version": "1.2.0",
-      "file_hash": "89b887ced3efb1c508edcf1875aef05f4cc9a75bab3c040c32327bdd1bca3f23",
+      "file_hash": "d3bf61d5e66d1b30688c0d189824232c9ff2988c9c57447faa59bbd5b71da520",
       "effective_date": "2026-04-06",
       "description": "Canonical governance document: AGENT_HANDOVER_AUTOMATION",
       "type": "canon",
       "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
       "layer_down_status": "PUBLIC_API",
-      "file_hash_sha256": "89b887ced3efb1c508edcf1875aef05f4cc9a75bab3c040c32327bdd1bca3f23",
+      "file_hash_sha256": "d3bf61d5e66d1b30688c0d189824232c9ff2988c9c57447faa59bbd5b71da520",
       "ripple_dispatched": "2026-02-24",
       "ripple_log": ".agent-admin/governance/ripple-logs/ripple-agent-handover-parity-20260224.md",
       "ripple_in_repo_status": "COMPLETE",
@@ -1280,13 +1280,13 @@
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
       "version": "1.0.0",
-      "file_hash": "53c8f4d26178cdc49dd9dc9cb9ec17e26ed0c9171b2d23360b96f27c5fdb1814",
+      "file_hash": "3845fc377d6bf413308e29993f73dc50ff0f55368494a3bcaa27d3b4c486d6d7",
       "effective_date": "2026-01-05",
       "description": "This manifest is the **single authoritative index** of all canonical governance standards in the maturion-foreman-governance repository.",
       "type": "canon",
       "path": "governance/canon/GOVERNANCE_CANON_MANIFEST.md",
       "layer_down_status": "INTERNAL",
-      "file_hash_sha256": "53c8f4d26178cdc49dd9dc9cb9ec17e26ed0c9171b2d23360b96f27c5fdb1814",
+      "file_hash_sha256": "3845fc377d6bf413308e29993f73dc50ff0f55368494a3bcaa27d3b4c486d6d7",
       "last_updated": "2026-04-08",
       "change_note": "v1.0.0: Entry added for EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md; totals updated (Canon Files 92\u219293, Combined Total 107\u2192108, PUBLIC_API 78\u219279); FOREMAN_AUTHORITY and IAA_PRE_BRIEF versions updated"
     },
@@ -2338,6 +2338,20 @@
       "path": "governance/canon/scope-declaration.template.md",
       "layer_down_status": "INTERNAL",
       "file_hash_sha256": "06e4173ff8485b6a1af86a91d12484856c5c7f4d193f38ae88e79573e646c5ee"
+    },
+    {
+      "filename": "PARKING_STATION_PATH_STANDARD.md",
+      "version": "1.0.0",
+      "file_hash": "33f671fab2689ff0c3ad0ca38bc1ab960fb9228283db35d8af8d741dfa382e7c",
+      "effective_date": "2026-04-13",
+      "description": "Canonical per-agent parking station path standard; deprecates shared suggestions-log.md",
+      "type": "canon",
+      "path": "governance/canon/PARKING_STATION_PATH_STANDARD.md",
+      "layer_down_status": "PUBLIC_API",
+      "file_hash_sha256": "33f671fab2689ff0c3ad0ca38bc1ab960fb9228283db35d8af8d741dfa382e7c",
+      "last_updated": "2026-04-19",
+      "canonical_version": "1.0.0",
+      "change_note": "v1.0.0: Initial canon \u2014 canonicalizes per-agent parking station path"
     }
   ]
 }

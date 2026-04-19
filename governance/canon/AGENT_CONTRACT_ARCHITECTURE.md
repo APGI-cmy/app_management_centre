@@ -255,7 +255,7 @@ All agent contracts MUST declare `contract_pattern: four_phase_canonical` in met
 **Authority Source**: Living Agent System v6.2.0 (`governance/canon/LIVING_AGENT_SYSTEM.md`)  
 **Prototype Source**: Foreman v2.0.0 (`.github/agents/foreman-v2.agent.md`)  
 **Approval**: CS2 (Johan Ras)  
-**Effective Date**: 2026-02-17
+**Effective Date**: 2026-02-17 *(effective date reflects prior CS2 approval; document date 2026-02-20 is the formal publication date)*
 
 ## Related Canon
 

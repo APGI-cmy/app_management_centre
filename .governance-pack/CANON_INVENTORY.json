@@ -110,13 +110,13 @@
     {
       "filename": "AGENT_CONTRACT_ARCHITECTURE.md",
       "version": "1.1.0",
-      "file_hash": "0adffeeeb3aa35d73af972129402d261144a8bf4850e9c8d333a32ddebd885dc",
+      "file_hash": "c7b0c7ff4af21a14900967a92292363cab98dc3745c47392d1c6dd35981e1f37",
       "effective_date": "2026-02-20",
       "description": "Canonical governance document: AGENT_CONTRACT_ARCHITECTURE",
       "type": "canon",
       "path": "governance/canon/AGENT_CONTRACT_ARCHITECTURE.md",
       "layer_down_status": "PUBLIC_API",
-      "file_hash_sha256": "0adffeeeb3aa35d73af972129402d261144a8bf4850e9c8d333a32ddebd885dc",
+      "file_hash_sha256": "c7b0c7ff4af21a14900967a92292363cab98dc3745c47392d1c6dd35981e1f37",
       "last_updated": "2026-04-19",
       "canonical_version": "1.1.0",
       "change_note": "v1.1.0: Added PARKING_STATION_PATH_STANDARD.md to Related Canon section"
