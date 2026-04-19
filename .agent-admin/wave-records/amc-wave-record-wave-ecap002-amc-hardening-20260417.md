@@ -84,9 +84,16 @@
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING |
-| PHASE_B_BLOCKING_TOKEN | PENDING |
-| merge_gate_parity | PENDING |
+| iaa_verdict | PASS |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-043-20260419-PASS |
+| iaa_session | session-043-20260419 |
+| iaa_date | 2026-04-19 |
+| merge_gate_parity | PASS |
+| merge_authority | CS2 ONLY — AGCFPP-001 (agent contract changes B4/B5/B6 require CS2 sign-off at merge) |
+
+### IAA Non-Blocking Observations
+- OBS-001: Dual-YAML `contract_version` pattern in B4/B5/B6 (established design convention — no action required)
+- OBS-002: C2 artifact table shows "staged" for same-batch committed files — committed truth confirmed correct, no action required
 
 ---
 

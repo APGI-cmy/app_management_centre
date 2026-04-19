@@ -74,10 +74,10 @@ Complete the AMC implementation wave so the repo moves from artifact presence on
       qp_verdict: PENDING
       notes: Documents Foreman administrative readiness check per §14.6 of FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md.
 
-- [ ] TASK-ECAP002-D3 — IAA final review under ACR regime with valid assurance outcome
+- [x] TASK-ECAP002-D3 — IAA final review under ACR regime with valid assurance outcome
       builder: independent-assurance-agent (final assurance)
-      qp_verdict: PENDING
-      notes: IAA reviews under hardened ACR-01 through ACR-08 regime and issues ASSURANCE-TOKEN.
+      qp_verdict: PASS
+      notes: ASSURANCE-TOKEN issued — IAA-session-043-20260419-PASS. All 17 checks PASS (CORE + ACR-01–ACR-08 + OVL-AC-001–007). Merge authority: CS2 ONLY per AGCFPP-001.
 
 ---
 
