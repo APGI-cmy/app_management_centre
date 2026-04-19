@@ -291,9 +291,10 @@ Table in `INDEPENDENT_ASSURANCE_AGENT_CANON.md`: T1 = agent contract changes, T2
 deliverables). This overlay is checked **after** the universal CERT gate and **before** any
 category-specific (AGENT_CONTRACT, CANON_GOVERNANCE, etc.) overlay checks.
 
-**Purpose**: Confirm that an IAA Pre-Brief artifact was committed to `.agent-admin/assurance/`
-before any qualifying builder task was delegated. Artifact existence is the sole evidence
-model — no injection pipeline signature string or CI check run record is required.
+**Purpose**: Confirm that an IAA Pre-Brief was recorded in the wave record (section 2 — Pre-Brief
+scope) before any qualifying builder task was delegated. The wave record is the sole Pre-Brief
+carrier per AMC 90/10 Admin Protocol v1.0.0 — no standalone `.agent-admin/assurance/iaa-prebrief-*.md`
+file is created or required.
 
 **Trigger**: Always applied alongside AGENT_CONTRACT, CANON_GOVERNANCE, CI_WORKFLOW,
 AAWP_MAT, KNOWLEDGE_GOVERNANCE, AGENT_INTEGRITY, or PRE_BUILD_STAGE overlays when the PR is T1 or T2.
@@ -306,28 +307,28 @@ is committed — a missing artifact on an AGENT_CONTRACT PR = dual failure (AGCF
 
 | Check ID | Check Name | What IAA Does |
 |----------|-----------|---------------|
-| OVL-INJ-001 | Pre-Brief Artifact Existence | Confirm that a non-empty, non-placeholder Pre-Brief artifact exists at `.agent-admin/assurance/iaa-prebrief-<slug>.md` or `iaa-prebrief-wave<N>.md`, committed before any builder task artifact on this branch. |
+| OVL-INJ-001 | Pre-Brief Record Existence | Confirm that a non-empty, non-placeholder Pre-Brief record exists in wave record section 2 (`## Section 2 — Pre-Brief Scope`), committed before any builder task artifact on this branch. |
 
 #### Pass Condition
 
-A non-empty, non-placeholder Pre-Brief artifact is present at `.agent-admin/assurance/`
+A non-empty, non-placeholder Pre-Brief record is present in wave record section 2
 and was committed before any builder task artifact on the branch.
 
 #### Fail Condition (triggers REJECTION-PACKAGE)
 
 No Pre-Brief artifact found. IAA states:
 
-> `OVL-INJ-001 FAIL: No IAA Pre-Brief artifact found in .agent-admin/assurance/.`
-> `The Pre-Brief artifact must be committed before any qualifying builder task is delegated.`
-> `Invoke IAA via task(agent_type: "independent-assurance-agent") and commit the artifact.`
-> `Re-invoke IAA at handover once the Pre-Brief artifact is present.`
+> `OVL-INJ-001 FAIL: No IAA Pre-Brief record found in wave record section 2.`
+> `The Pre-Brief record must be committed to the wave record (section 2) before any qualifying builder task is delegated.`
+> `Invoke IAA via task(agent_type: "independent-assurance-agent") and commit the wave record with Pre-Brief content in section 2.`
+> `Re-invoke IAA at handover once the wave record Pre-Brief section is populated.`
 
 ### Admin Checks
 
 | Check ID | Check Name | Pass Condition |
 |----------|-----------|----------------|
-| OVL-INJ-ADM-001 | Pre-Brief artifact non-empty | `.agent-admin/assurance/iaa-prebrief-<slug>.md` contains substantive content — not a blank file, stub, or placeholder-only file. |
-| OVL-INJ-ADM-002 | Pre-Brief references correct wave | Pre-Brief artifact header declares the same wave number or slug as `wave-current-tasks.md` on the branch. Mismatch = cross-wave reuse violation. |
+| OVL-INJ-ADM-001 | Pre-Brief record non-empty | Wave record section 2 (`## Section 2 — Pre-Brief Scope`) contains substantive pre-brief content — not a blank section, stub, or placeholder-only entry. |
+| OVL-INJ-ADM-002 | Pre-Brief references correct wave | Wave record section 2 declares the same wave number or slug as `wave-current-tasks.md` on the branch. Mismatch = cross-wave reuse violation. |
 
 ---
 
@@ -409,6 +410,7 @@ Applied when PR category is `AGENT_INTEGRITY`.
 | 3.5.0 | 2026-03-17 | BD-000 User Journey Trace section added (BD-000-A through BD-000-D) — mandatory for all build PRs impacting app behaviour; user journey declaration, step-by-step trace, edge case declaration and verification checks; issue [IAA functional behaviour strengthening] |
 | 3.6.0 | 2026-03-18 | Orientation Mandate scope note added — clarifies "cross-reference consistency" vs. declared-state integrity; OVL-KG-ADM-002 pass condition sharpened (file header version must match index.md registration AND exceed prior version — mismatch = FAIL); timestamp carve-out note added (stale Last Updated field is observation only, not REJECTION-PACKAGE trigger); issue [clarify audit scope cross-reference consistency and version bump history] |
 | 4.0.0 | 2026-04-07 | PRE_BUILD_STAGE overlay added (OVL-PBG-010–016) — enforces 12-stage pre-build sequence compliance per `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; LIAISON_ADMIN overlay added (OVL-LA-001–005, OVL-LA-ADM-001–003) — governance liaison admin operations require IAA assurance; PRE_BRIEF_ASSURANCE trigger updated to include PRE_BUILD_STAGE; ISMS PS-E/PS-F wave sync (maturion-isms#IAA-TIER2-PSE-PSF) |
+| 4.1.0 | 2026-04-19 | PRE_BRIEF_ASSURANCE overlay updated to AMC 90/10 wave-record carrier model: Pre-Brief is wave record section 2; OVL-INJ-001/OVL-INJ-ADM-001/OVL-INJ-ADM-002 updated to reference wave record section 2 instead of deprecated `.agent-admin/assurance/iaa-prebrief-*.md` standalone file; aligns with AMC 90/10 Admin Protocol v1.0.0 (PR #1090, wave-ecap002-amc-hardening) |
 
 ---
 

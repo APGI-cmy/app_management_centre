@@ -91,15 +91,15 @@ If new NBR entries were added this wave:
 - [ ] Record new NBR IDs in PREHANDOVER proof section `## Post-Wave NBR Entries`
 - [ ] No explicit IAA notification required — IAA reads the registry file directly
 
-**B-3. Token file invalidation audit (if multiple IAA rounds this wave)**
+**B-3. Wave-record assurance token audit (if multiple IAA rounds this wave)**
 
 If this wave triggered more than one IAA invocation round (R2, R3, etc.):
 
-- [ ] Identify all superseded IAA token files in `.agent-admin/assurance/` for this session
-- [ ] Rename each superseded file with `INVALIDATED-` prefix using `git mv`
-- [ ] Add invalidation header to each renamed file per convention
-- [ ] See `.agent-admin/assurance/INVALIDATED-PREFIX-CONVENTION.md` for full procedure
-- [ ] If single IAA round only → state: "Single IAA round — no token invalidation required."
+- [ ] Identify all superseded `PHASE_B_BLOCKING_TOKEN` entries in the wave record section 5
+- [ ] Add a note to the wave record section 5 for each superseded token (e.g. "R1 token superseded by R2 below")
+- [ ] Ensure the final `PHASE_B_BLOCKING_TOKEN` line reflects the most recent round's verdict
+- [ ] No standalone `.agent-admin/assurance/iaa-token-*.md` file is created — wave record section 5 is the sole token carrier per AMC 90/10 Admin Protocol v1.0.0
+- [ ] If single IAA round only → state: "Single IAA round — no token supersession required."
 
 ---
 
