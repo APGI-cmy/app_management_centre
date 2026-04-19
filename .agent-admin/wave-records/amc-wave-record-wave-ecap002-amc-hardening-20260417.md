@@ -61,7 +61,7 @@
 
 *Governance infrastructure:*
 - `.agent-admin/waves/wave-ecap002-amc-hardening-current-tasks.md` — NEW
-- `.agent-admin/assurance/iaa-prebrief-wave-ecap002-amc-hardening.md` — NEW (IAA-published)
+- ~~`.agent-admin/assurance/iaa-prebrief-wave-ecap002-amc-hardening.md`~~ — NOT COMMITTED (deprecated path per AMC 90/10 Admin Protocol v1.0.0; pre-brief content consolidated into this wave record section 2)
 - `.agent-workspace/CodexAdvisor-agent/memory/session-024-20260417.md` — CodexAdvisor session
 - `.agent-workspace/independent-assurance-agent/memory/session-041-20260417.md` — IAA pre-brief session
 - `.agent-workspace/independent-assurance-agent/memory/session-042-20260417.md` — IAA session

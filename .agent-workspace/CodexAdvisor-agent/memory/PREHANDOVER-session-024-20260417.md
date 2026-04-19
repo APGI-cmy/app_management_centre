@@ -15,7 +15,7 @@
 - **Wave**: wave-ecap002-amc-hardening
 - **Foreman Session**: session-025
 - **CS2 Authorization Reference**: Issue opened by @APGI-cmy (CS2) — "Complete AMC implementation wave for #1085: layer-down closure + Workstreams C/D/E + proof-of-operation"
-- **IAA Pre-Brief Reference**: `.agent-admin/assurance/iaa-prebrief-wave-ecap002-amc-hardening.md`
+- **IAA Pre-Brief Reference**: Wave record section 2 — `.agent-admin/wave-records/amc-wave-record-wave-ecap002-amc-hardening-20260417.md` (per AMC 90/10 Admin Protocol v1.0.0; no standalone file)
 - **Task**: Update 3 agent contract files (TASK-ECAP002-B4, B5, B6) to enforce hardened ECAP/Foreman QP/IAA admin-ceremony compliance stack from commit 56d92004
 
 ## Work Summary

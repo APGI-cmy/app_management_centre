@@ -5,7 +5,7 @@
 **Date**: 2026-04-17  
 **Authority**: CS2 — Issue: Complete AMC implementation wave for #1085 (layer-down closure + Workstreams B/C/D + proof-of-operation)  
 **Issue Reference**: app_management_centre#1085 (Complete AMC implementation wave)  
-**IAA Pre-Brief**: `.agent-admin/assurance/iaa-prebrief-wave-ecap002-amc-hardening.md`
+**IAA Pre-Brief**: Wave record section 2 — `.agent-admin/wave-records/amc-wave-record-wave-ecap002-amc-hardening-20260417.md` (per AMC 90/10 Admin Protocol v1.0.0; no standalone file)
 
 ---
 

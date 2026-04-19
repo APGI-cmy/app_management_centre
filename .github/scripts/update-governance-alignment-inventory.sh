@@ -111,12 +111,20 @@ for i in $(seq 0 $((ARTIFACT_COUNT - 1))); do
   fi
 
   # Get version from file header (pattern: **Version**: X.Y.Z or Version: X.Y.Z)
-  FILE_VERSION=$(grep -m1 -oE "\*\*Version\*\*: [0-9]+\.[0-9]+\.[0-9]+" "$ARTIFACT_PATH" 2>/dev/null | \
-    sed 's/\*\*Version\*\*: //' || \
-    grep -m1 -oE "^Version: [0-9]+\.[0-9]+\.[0-9]+" "$ARTIFACT_PATH" 2>/dev/null | \
-    sed 's/Version: //' || \
-    grep -m1 -oE "Status.*Version: [0-9]+\.[0-9]+\.[0-9]+" "$ARTIFACT_PATH" 2>/dev/null | \
-    grep -oE "[0-9]+\.[0-9]+\.[0-9]+" || echo "")
+  # Use explicit sequential checks to avoid pipeline exit-code semantics with ||
+  FILE_VERSION=""
+  if [ -z "$FILE_VERSION" ]; then
+    _v=$(grep -m1 -oE "\*\*Version\*\*: [0-9]+\.[0-9]+\.[0-9]+" "$ARTIFACT_PATH" 2>/dev/null)
+    FILE_VERSION="${_v#\*\*Version\*\*: }"
+  fi
+  if [ -z "$FILE_VERSION" ]; then
+    _v=$(grep -m1 -oE "^Version: [0-9]+\.[0-9]+\.[0-9]+" "$ARTIFACT_PATH" 2>/dev/null)
+    FILE_VERSION="${_v#Version: }"
+  fi
+  if [ -z "$FILE_VERSION" ]; then
+    FILE_VERSION=$(grep -m1 -oE "Status.*Version: [0-9]+\.[0-9]+\.[0-9]+" "$ARTIFACT_PATH" 2>/dev/null | \
+      grep -oE "[0-9]+\.[0-9]+\.[0-9]+")
+  fi
   
   # Get current stored values
   STORED_HASH=$(echo "$CURRENT_INVENTORY" | jq -r ".artifacts[$i].file_hash_sha256 // \"\"")
