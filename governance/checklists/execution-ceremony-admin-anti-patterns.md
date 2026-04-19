@@ -164,7 +164,7 @@ This reference documents the **9 known admin anti-patterns (AAP-01 through AAP-0
 **Description**: Wave record section 5 was left with empty/missing `PHASE_B_BLOCKING_TOKEN` field instead of pre-filled with `PENDING` before IAA invocation.
 
 **IAA Trigger**: ACR-07 (general), ACR-08 (structural gap)  
-**Detection**: `grep "PHASE_B_BLOCKING_TOKEN:" .agent-admin/wave-records/amc-wave-record-*.md | grep -E ":[[:space:]]*$"` (flags empty/blank value) — OR — verify the field exists at all with `grep -L "PHASE_B_BLOCKING_TOKEN:" .agent-admin/wave-records/amc-wave-record-*.md` (files missing the field). Note: any non-empty terminal value (PENDING, PASS, REJECTION-PACKAGE, etc.) is valid at detection time; only a missing or empty field is an AAP-14 violation.  
+**Detection**: Resolve the exact wave record path from session memory (`wave_record_path` field) and run: `grep "PHASE_B_BLOCKING_TOKEN:" "$WAVE_RECORD" | grep -E ":[[:space:]]*$"` (flags empty/blank value) — OR — verify the field exists at all with `grep -c "PHASE_B_BLOCKING_TOKEN:" "$WAVE_RECORD"` (returns 0 if missing). Note: any non-empty terminal value (PENDING, PASS, REJECTION-PACKAGE, etc.) is valid at detection time; only a missing or empty field is an AAP-14 violation.  
 **Resolution**: Pre-fill section 5 `PHASE_B_BLOCKING_TOKEN: PENDING` before IAA invocation. IAA will update to actual token.
 
 ---
@@ -264,8 +264,9 @@ echo "✅ AAP Quick-Check PASSED — no anti-patterns detected"
 ```bash
 # AAP-15: Gate set not explicitly identified
 # Sourced from merge_gate_interface.required_checks in foreman-v2-agent.md (all 7 required checks).
-LATEST_WAVE=$(ls -t .agent-admin/wave-records/amc-wave-record-*.md 2>/dev/null | head -1)
-if [ -f "$LATEST_WAVE" ]; then
+# Resolve the exact wave record path from session memory — do NOT use a glob.
+WAVE_RECORD=$(grep "wave_record_path:" .agent-workspace/foreman-v2/memory/session-*.md 2>/dev/null | tail -1 | awk '{print $2}' | tr -d '\r')
+if [ -n "$WAVE_RECORD" ] && [ -f "$WAVE_RECORD" ]; then
   # Check that wave record evaluation section has explicit per-gate entries for ALL required gates.
   MISSING_GATES=()
   for gate in \
@@ -276,19 +277,21 @@ if [ -f "$LATEST_WAVE" ]; then
     "builder-involvement-check" \
     "session-memory-check" \
     "prehandover-proof-check"; do
-    if ! grep -q "$gate" "$LATEST_WAVE"; then
+    if ! grep -q "$gate" "$WAVE_RECORD"; then
       MISSING_GATES+=("$gate")
     fi
   done
   if [ ${#MISSING_GATES[@]} -gt 0 ]; then
     FAILS+=("AAP-15: Gate set not explicitly identified — missing: ${MISSING_GATES[*]}")
   fi
+else
+  FAILS+=("AAP-15: Cannot resolve current wave record from session memory (wave_record_path not set or file missing)")
 fi
 
 # AAP-16: Stale gate wording (excluding PHASE_B_BLOCKING_TOKEN: PENDING which is valid pre-fill)
-if [ -f "$LATEST_WAVE" ]; then
-  if grep -iE "\bPENDING\b|\bin[ _-]?progress\b|\bverify.gates\b" "$LATEST_WAVE" | grep -qv "PHASE_B_BLOCKING_TOKEN: PENDING"; then
-    FAILS+=("AAP-16: Stale gate wording found in $LATEST_WAVE")
+if [ -n "$WAVE_RECORD" ] && [ -f "$WAVE_RECORD" ]; then
+  if grep -iE "\bPENDING\b|\bin[ _-]?progress\b|\bverify.gates\b" "$WAVE_RECORD" | grep -qv "PHASE_B_BLOCKING_TOKEN: PENDING"; then
+    FAILS+=("AAP-16: Stale gate wording found in $WAVE_RECORD")
   fi
 fi
 ```

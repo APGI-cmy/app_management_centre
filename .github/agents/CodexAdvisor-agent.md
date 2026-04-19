@@ -42,7 +42,7 @@ iaa_oversight:
   artifact_immutability:
     prehandover_proof: read_only_after_initial_commit
     iaa_token: record_in_wave_record_section_5_only
-    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md section 5 PHASE_B_BLOCKING_TOKEN"
+    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md section 5 PHASE_B_BLOCKING_TOKEN"
     rule: "ABSOLUTE — IAA MUST NOT edit PREHANDOVER proof. Token is recorded in wave record section 5 (PHASE_B_BLOCKING_TOKEN) per AMC 90/10 Admin Protocol v1.0.0. No standalone iaa-token-*.md files."
   rationale: >
     IAA QAs CodexAdvisor. Every agent contract modification is a governance
@@ -569,7 +569,7 @@ Format: `| YYYY-MM-DD | CodexAdvisor-agent | session-NNN | [DRAFT-PHASE/SESSION-
 
 > ⚠️ **ABSOLUTE RULE (AMC 90/10 Admin Protocol v1.0.0)**: After initial commit of the PREHANDOVER proof, no agent (including the IAA) may modify that file. IAA records its verdict in the invoking agent's wave record section 5 (`PHASE_B_BLOCKING_TOKEN` line). No standalone token file is created.
 
-Token location: wave record section 5 — `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`  
+Token location: wave record section 5 — `.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md`  
 Format: `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS`
 
 The PREHANDOVER proof `iaa_audit_token` field already recorded the token reference at initial commit time. No update to the PREHANDOVER proof is needed or permitted after commit.

@@ -56,7 +56,7 @@ iaa_oversight:
     wave_record: consolidated_carrier_for_session_evidence_and_assurance
     deprecated_prehandover_proof: replaced_by_wave_record_evaluation_section
     deprecated_iaa_token_file: replaced_by_wave_record_assurance_section
-    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md"
+    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md"
 
 identity:
   role: Foreman Supervisor
@@ -561,7 +561,7 @@ When substantive acceptance is complete, appoint `execution-ceremony-admin-agent
 
 **Ceremony-admin prepares**:
 - Session memory (6-field model, `.agent-workspace/foreman-v2/memory/session-NNN-YYYYMMDD.md`)
-- Wave record (`.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`) — sections 1-4
+- Wave record (`.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md`) — sections 1-4
 - Artifact inventory, commit-state verification, bundle hygiene
 
 **Ceremony-admin returns**: complete bundle with summary. FM reviews before proceeding to §4.3.
@@ -642,7 +642,7 @@ Wait for verdict. Record exactly one of the following before opening PR:
 ### 4.5 Token Ceremony (FM_H)
 
 IAA token MUST be recorded in:  
-**Wave record section 5** — `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`
+**Wave record section 5** — `.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md`
 
 Format: `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS`
 

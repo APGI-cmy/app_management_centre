@@ -42,7 +42,7 @@
 | Gate results (JSON) | `.agent-admin/gates/gate-results-<TIMESTAMP>.json` | ✓/✗ | ✓/✗ | ✓/✗ | |
 | ECAP reconciliation summary (this file) | `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md` | ✓/✗ | ✓/✗ | ✓/✗ | |
 | Scope declaration | `governance/scope-declaration.md` | ✓/✗ | ✓/✗ | ✓/✗ | |
-| IAA assurance token | wave record section 5 (`PHASE_B_BLOCKING_TOKEN`) — `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md` | ✓/✗/N/A | ✓/✗/N/A | ✓/✗/N/A | |
+| IAA assurance token | wave record section 5 (`PHASE_B_BLOCKING_TOKEN`) — `.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md` | ✓/✗/N/A | ✓/✗/N/A | ✓/✗/N/A | |
 
 ---
 
