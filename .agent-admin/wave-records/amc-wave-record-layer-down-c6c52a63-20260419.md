@@ -95,9 +95,12 @@ Merge gate parity: PASS — all 3 required checks pass locally.
 
 ## Section 5: Assurance
 
-*To be populated by IAA after invocation*
+**IAA Session**: session-044-20260419  
+**Verdict**: ASSURANCE-TOKEN — all checks PASS (0 failures)  
+**Overlays applied**: LIAISON_ADMIN (OVL-LA-001–005, OVL-LA-ADM-001–003) + CANON_GOVERNANCE (OVL-CG-001–005, OVL-CG-ADM-001–002)  
+**Date**: 2026-04-19
 
-PHASE_B_BLOCKING_TOKEN: AWAITING
+PHASE_B_BLOCKING_TOKEN: IAA-session-044-20260419-PASS
 
 ---
 
