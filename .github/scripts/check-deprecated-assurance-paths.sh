@@ -43,6 +43,9 @@ ACTIVE_USE_PATTERNS=(
   'write.*iaa-prebrief.*\.md.*commit'
   'Token file path:.*iaa-token-'
   'MUST be written to.*iaa-token-'
+  'IAA writes.*token to.*iaa-token-'
+  'dedicated token to.*iaa-token-'
+  'Look up.*iaa-token-session-.*filename'
 )
 
 for scan_path in "${SCAN_PATHS[@]}"; do
