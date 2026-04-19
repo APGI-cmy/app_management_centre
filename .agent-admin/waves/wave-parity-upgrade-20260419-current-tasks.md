@@ -3,9 +3,10 @@
 **Wave**: wave-parity-upgrade-20260419  
 **Foreman Session**: session-026  
 **Date**: 2026-04-19  
-**Authority**: CS2 — Issue: "Complete AMC parity-upgrade wave: gate-parity ownership, protected agent-file control, and assurance-path normalization"  
-**Issue Reference**: app_management_centre (parity-upgrade wave opened by @APGI-cmy)  
+**Authority**: CS2 — Issue #1092  
+**Issue Reference**: #1092 — "Complete AMC parity-upgrade wave: gate-parity ownership, protected agent-file control, and assurance-path normalization"  
 **IAA Pre-Brief**: Wave record section 2 — `.agent-admin/wave-records/amc-wave-record-wave-parity-upgrade-20260419.md` (per AMC 90/10 Admin Protocol v1.0.0; no standalone file)
+governance_evidence_path: .agent-admin/wave-records/amc-wave-record-wave-parity-upgrade-20260419.md
 
 ---
 

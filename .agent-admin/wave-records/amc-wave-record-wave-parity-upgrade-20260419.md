@@ -1,7 +1,7 @@
 # AMC Wave Record — wave-parity-upgrade-20260419 — 2026-04-19
 
 > **Template Version**: 1.0.0  
-> **Authority**: CS2 (@APGI-cmy) — Issue: Complete AMC parity-upgrade wave  
+> **Authority**: CS2 (@APGI-cmy) — Issue #1092: Complete AMC parity-upgrade wave  
 > **Protocol**: AMC 90/10 Admin Protocol v1.0.0
 
 ---
@@ -183,7 +183,7 @@
 | Canon cross-references consistent | ✅ PASS — all contract version refs updated consistently |
 | No placeholder content | ✅ PASS — all PENDING fields resolved in final artifacts |
 | Agent contracts updated (PARITY-1 through PARITY-4) | ✅ PASS — all 4 agent contracts updated with required additions |
-| All contracts under 30,000 chars | ✅ PASS — foreman=29,984; CodexAdvisor=28,962; IAA=23,277; ECAP=16,590 |
+| All contracts under 30,000 chars | ✅ PASS — foreman=29,871; CodexAdvisor=29,368; IAA=23,802; ECAP=16,750 |
 | All contracts YAML valid | ✅ PASS — PyYAML validation passed for all 10 contracts |
 | Tier 2/3 normalization (PARITY-5) | ✅ PASS — 7 Tier 2/3 files updated; deprecated path refs removed/annotated |
 | Anti-patterns checklist updated (AAP-10 through AAP-16) | ✅ PASS — AAP-10–16 added with detection methods and ACR cross-reference |

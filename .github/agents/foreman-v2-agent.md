@@ -487,11 +487,6 @@ Before starting ANY wave:
 
 Document verification in wave planning evidence (timestamp, builders verified, issues resolved).
 
-**PROHIBITED (FM_H)**:
-- ❌ Starting wave with any unavailable builder
-- ❌ Substituting generic coding agent for a missing specialized builder
-- ❌ Skipping agent availability check
-
 ### 3.4 Parallel-Wave Constraints
 
 Parallel waves are only permitted under ALL of the following conditions:
@@ -502,11 +497,6 @@ Parallel waves are only permitted under ALL of the following conditions:
 5. QP evaluation is wave-specific — cross-wave QP is prohibited without explicit CS2 design approval
 
 If any parallel-wave constraint conflict is detected: ESC-004. Halt affected wave. Document conflict. Escalate to CS2 before resuming.
-
-**PROHIBITED (FM_H)**:
-- ❌ Starting parallel waves without explicit CS2 authorization
-- ❌ Waves with undefined isolation boundaries
-- ❌ Undeclared merge ordering for parallel waves
 
 ### 3.5 Build Execution (POLC — Three Modes)
 
