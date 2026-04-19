@@ -212,11 +212,11 @@
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING |
-| PHASE_B_BLOCKING_TOKEN | PENDING |
-| iaa_session | PENDING |
-| iaa_date | PENDING |
-| merge_gate_parity | PENDING |
+| iaa_verdict | ASSURANCE-TOKEN ISSUED |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-046-20260419-PASS |
+| iaa_session | session-046-20260419 |
+| iaa_date | 2026-04-19 |
+| merge_gate_parity | PASS — all 6 Focus Areas verified; Round 1 REJECTION-PACKAGE finding resolved; non-regression script PASS |
 | merge_authority | CS2 ONLY — AGCFPP-001 (agent contract changes require CS2 sign-off at merge) |
 
 ---
