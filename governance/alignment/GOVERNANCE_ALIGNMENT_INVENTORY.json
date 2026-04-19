@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-  "last_updated": "2026-04-17T14:26:52Z",
+  "last_layer_down_commit": "c6c52a632b8a0d4ae1e0a40057b518bf8b9a9d13",
+  "last_updated": "2026-04-19T09:12:49Z",
   "alignment_status": "ALIGNED",
-  "total_artifacts": 27,
+  "total_artifacts": 29,
   "artifacts": [
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -13,9 +13,9 @@
       "version": "1.0.0",
       "type": "canon",
       "layer_down_status": "INTERNAL",
-      "canonical_commit": "63cdfb06586f567c456641edd7ca464c47b7751e",
-      "layered_down_at": "2026-04-08T14:38:01Z",
-      "file_hash_sha256": "53c8f4d26178cdc49dd9dc9cb9ec17e26ed0c9171b2d23360b96f27c5fdb1814",
+      "canonical_commit": "c6c52a632b8a0d4ae1e0a40057b518bf8b9a9d13",
+      "layered_down_at": "2026-04-19T09:12:49Z",
+      "file_hash_sha256": "3845fc377d6bf413308e29993f73dc50ff0f55368494a3bcaa27d3b4c486d6d7",
       "action": "UPDATED"
     },
     {
@@ -103,7 +103,7 @@
       "layer_down_status": "PUBLIC_API",
       "canonical_commit": "1d91d51a9aac53f6e2e86189ef4ae4b779c00228",
       "layered_down_at": "2026-04-06T07:45:00Z",
-      "file_hash_sha256": "48c677f3e58b014d9599246ce694e12773d29aa4",
+      "file_hash_sha256": "f17ff3d2a9d63c804a519875340927ce32edbe9c66ef10cb56100fa77de54ce0",
       "action": "CREATED"
     },
     {
@@ -114,7 +114,7 @@
       "layer_down_status": "PUBLIC_API",
       "canonical_commit": "1d91d51a9aac53f6e2e86189ef4ae4b779c00228",
       "layered_down_at": "2026-04-06T07:45:00Z",
-      "file_hash_sha256": "64bd4233075dcd4d53cb7a7f5766ab72eb092933",
+      "file_hash_sha256": "0b4b7be650d1b784ccb0f5d62f22f41afb36ec986bf6895947f2c11d3ad11f40",
       "action": "CREATED"
     },
     {
@@ -306,6 +306,28 @@
       "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
       "layered_down_at": "2026-04-17T14:26:52Z",
       "file_hash_sha256": "21bbb1375868fb178d3fb853e9e3e3a0d6088ad66b12868b98f12654cf51c137",
+      "action": "CREATED"
+    },
+    {
+      "filename": "AGENT_CONTRACT_ARCHITECTURE.md",
+      "path": "governance/canon/AGENT_CONTRACT_ARCHITECTURE.md",
+      "version": "1.1.0",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "canonical_commit": "c6c52a632b8a0d4ae1e0a40057b518bf8b9a9d13",
+      "layered_down_at": "2026-04-19T09:12:49Z",
+      "file_hash_sha256": "c7b0c7ff4af21a14900967a92292363cab98dc3745c47392d1c6dd35981e1f37",
+      "action": "CREATED"
+    },
+    {
+      "filename": "PARKING_STATION_PATH_STANDARD.md",
+      "path": "governance/canon/PARKING_STATION_PATH_STANDARD.md",
+      "version": "1.0.0",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "canonical_commit": "c6c52a632b8a0d4ae1e0a40057b518bf8b9a9d13",
+      "layered_down_at": "2026-04-19T09:12:49Z",
+      "file_hash_sha256": "33f671fab2689ff0c3ad0ca38bc1ab960fb9228283db35d8af8d741dfa382e7c",
       "action": "CREATED"
     }
   ],

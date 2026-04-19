@@ -1,0 +1,47 @@
+{
+  "event_type": "governance_layer_down",
+  "canonical_commit": "c6c52a632b8a0d4ae1e0a40057b518bf8b9a9d13",
+  "canonical_date": "2026-04-14T08:20:28Z",
+  "trigger": "Merge pull request #1341 — Canonicalize per-agent parking station paths",
+  "sender": "APGI-cmy/maturion-foreman-governance",
+  "consumer": "APGI-cmy/app_management_centre",
+  "processed_at": "2026-04-19T09:12:49Z",
+  "processed_by": "governance-liaison-amc",
+  "session_id": "session-029-20260419",
+  "status": "COMPLETE",
+  "changed_artifacts": [
+    {
+      "filename": "AGENT_CONTRACT_ARCHITECTURE.md",
+      "action": "CREATED",
+      "version": "1.1.0"
+    },
+    {
+      "filename": "AGENT_HANDOVER_AUTOMATION.md",
+      "action": "ALREADY_CURRENT",
+      "version": "1.4.1",
+      "note": "Local is v1.4.1 (ahead of c6c52a63 v1.3.0) — processed in prior layer-down session-006 and subsequent session"
+    },
+    {
+      "filename": "GOVERNANCE_CANON_MANIFEST.md",
+      "action": "UPDATED",
+      "version": "1.0.0",
+      "change": "Added PARKING_STATION_PATH_STANDARD.md entry to section 3.5"
+    },
+    {
+      "filename": "PARKING_STATION_PATH_STANDARD.md",
+      "action": "CREATED",
+      "version": "1.0.0"
+    }
+  ],
+  "consumer_actions": [
+    "Created governance/canon/AGENT_CONTRACT_ARCHITECTURE.md v1.1.0",
+    "Created governance/canon/PARKING_STATION_PATH_STANDARD.md v1.0.0",
+    "Updated governance/canon/GOVERNANCE_CANON_MANIFEST.md (added PARKING_STATION entry §3.5)",
+    "Created .agent-workspace/execution-ceremony-admin-agent/parking-station/suggestions-log.md",
+    "Created .agent-workspace/foreman-v2-agent/parking-station/suggestions-log.md",
+    "Created .agent-workspace/foreman/parking-station/suggestions-log.md",
+    "Updated .governance-pack/CANON_INVENTORY.json (200 canons)",
+    "Updated governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json (29 artifacts)",
+    "Updated .agent-admin/governance/sync_state.json"
+  ]
+}
