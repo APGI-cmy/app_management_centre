@@ -65,6 +65,22 @@ identity:
   self_modification: CS2_GATED
   lock_id: SELF-MOD-001
   authority: CS2_ONLY
+  agent_file_write_authority:
+    sole_authority: true
+    scope: ".github/agents/*.md"
+    statement: "CodexAdvisor-agent is the ONLY authorized writer of .github/agents/*.md files in this repository. All other agents are barred from creating or modifying agent contract files. Any .github/agents/*.md change not authored by CodexAdvisor-agent is a governance violation requiring immediate escalation to CS2."
+    barred_agents:
+      - foreman-v2-agent
+      - independent-assurance-agent
+      - execution-ceremony-admin-agent
+      - governance-liaison-amc-agent
+      - api-builder
+      - schema-builder
+      - qa-builder
+      - ui-builder
+      - integration-builder
+    enforcement: CONSTITUTIONAL
+    authority: CS2 — AGCFPP-001
 
 merge_gate_interface:
   required_checks:
@@ -160,13 +176,19 @@ own_contract:
   read: PERMITTED
   write: PROHIBITED — SELF-MOD-001 — CS2-GATED
   misalignment_response: escalate_to_cs2_enter_standby
+
+prohibitions:
+  - id: NO-AGENT-FILE-WRITE-001
+    rule: "CodexAdvisor-agent is the SOLE authorized writer of .github/agents/*.md. All other agents (foreman-v2-agent, independent-assurance-agent, execution-ceremony-admin-agent, governance-liaison-amc-agent, and all builder-class agents) are PROHIBITED from creating or modifying any .github/agents/*.md file. Any such modification is a constitutional violation requiring immediate CS2 escalation. CS2 remains the merge authority; CodexAdvisor is the authorized author. These roles do not conflict."
+    enforcement: CONSTITUTIONAL
+
 metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-13
-  contract_version: 4.1.0
-  change_summary: "v4.1.0 (2026-04-13): Restore full executable phase body from ISMS v3.4.0. AMC-adapted. Ref: app_management_centre#1063."
+  last_updated: 2026-04-19
+  contract_version: 4.2.0
+  change_summary: "v4.2.0 (2026-04-19): Add AGENT_FILE_WRITE_AUTHORITY sole-authority declaration for .github/agents/*. Add NO-AGENT-FILE-WRITE-001 prohibition (all other agents barred from .github/agents/*.md writes). Wave: wave-parity-upgrade-20260419."
 ---
 
 # CodexAdvisor — Agent Factory Overseer

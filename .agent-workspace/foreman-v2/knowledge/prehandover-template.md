@@ -186,6 +186,24 @@ Confirms local execution environment matches CI merge gate configuration.
 - [x] §4.3 Merge gate parity check: all required_checks match CI — PASS
 - [x] IAA audit token recorded: [token]
 
+### Gate Inventory (gate_set_checked — REQUIRED)
+
+Complete the following before declaring merge gate parity:
+
+| Gate | Final State | CI Evidence |
+|------|------------|-------------|
+| Merge Gate Interface / merge-gate/verdict | [ ] PASS / FAIL / N/A | [CI run URL or N/A reason] |
+| Merge Gate Interface / governance/alignment | [ ] PASS / FAIL / N/A | [CI run URL or N/A reason] |
+| Merge Gate Interface / stop-and-fix/enforcement | [ ] PASS / FAIL / N/A | [CI run URL or N/A reason] |
+| POLC Boundary Validation / foreman-implementation-check | [ ] PASS / FAIL / N/A | [CI run URL or N/A reason] |
+| POLC Boundary Validation / builder-involvement-check | [ ] PASS / FAIL / N/A | [CI run URL or N/A reason] |
+| POLC Boundary Validation / session-memory-check | [ ] PASS / FAIL / N/A | [CI run URL or N/A reason] |
+| Evidence Bundle Validation / prehandover-proof-check | [ ] PASS / FAIL / N/A | [CI run URL or N/A reason] |
+
+**gate_set_checked**: [ ] true (all gates above show explicit final states — no PENDING entries)
+
+⛔ Any gate showing PENDING = BLOCKED (HALT-012). Do not open PR until all gates show explicit final states.
+
 ---
 
 ## IAA Audit
@@ -258,21 +276,23 @@ After IAA issues ASSURANCE-TOKEN:
 Before accepting any IAA token as valid, verify the following. A FAILING token is a
 **HANDOVER BLOCKER** — do not release the merge gate.
 
-**Step 1 — Token file exists:**
+> ⚠️ **Wave-record-only model**: Wave record section 5 (`PHASE_B_BLOCKING_TOKEN`) is the sole IAA token carrier per AMC 90/10 Admin Protocol v1.0.0. Standalone `.agent-admin/assurance/iaa-token-*.md` files are deprecated — do not create them.
+
+**Step 1 — Wave record assurance section exists:**
 ```bash
-ls .agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md
+ls .agent-admin/wave-records/amc-wave-record-*.md
 # MUST exist. Absent = IAA-SKIP-001 violation.
 ```
 
 **Step 2 — PHASE_B_BLOCKING_TOKEN field present:**
 ```bash
-grep "PHASE_B_BLOCKING_TOKEN:" .agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md
-# MUST be present and non-empty. Missing = IAA-SELF-CERT-001 violation.
+grep "PHASE_B_BLOCKING_TOKEN:" .agent-admin/wave-records/amc-wave-record-*.md
+# MUST be present and non-PENDING. Missing or PENDING = IAA-SELF-CERT-001 violation.
 ```
 
 **Step 3 — Token value is not PHASE_A_ADVISORY:**
 ```bash
-grep "PHASE_A_ADVISORY" .agent-admin/assurance/iaa-token-session-NNN-waveY-YYYYMMDD.md
+grep "PHASE_A_ADVISORY" .agent-admin/wave-records/amc-wave-record-*.md
 # MUST return NO MATCH. Any match = IAA-PHASE-A-BYPASS-001 violation.
 ```
 

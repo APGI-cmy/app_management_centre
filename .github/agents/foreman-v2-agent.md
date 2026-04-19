@@ -46,7 +46,7 @@ iaa_oversight:
     required: true
     timing: before_first_qualifying_builder_delegation
     protocol: governance/canon/IAA_PRE_BRIEF_PROTOCOL.md
-    stored_at: ".agent-admin/assurance/iaa-prebrief-wave<N>.md"
+    stored_at: "wave record section 2 (consolidated per AMC 90/10 Admin Protocol v1.0.0 — no standalone file)"
   verdict_handling:
     pass: record_audit_token_in_wave_record_assurance_section_and_proceed
     stop_and_fix: halt_handover_return_to_build_phase
@@ -171,6 +171,9 @@ escalation:
     - id: HALT-008
       trigger: pre_build_stages_1_to_10_incomplete_before_builder_delegation
       action: "HALT. Stages 1-10 must complete and be approved before any builder is delegated."
+    - id: HALT-012
+      trigger: gate_proof_truth_failure_detected
+      action: "Gate-proof truth failure: a declared gate state contradicts actual CI outcome, or PENDING/in-progress gate wording survives in final-state proof. STOP immediately. Do NOT release merge gate. Record RCA entry in FAIL-ONLY-ONCE.md. Escalate to CS2. Require explicit per-gate final states (PASS/FAIL/N/A with CI evidence) before any PR is opened."
   escalate_conditions:
     - id: ESC-001
       trigger: governance_ambiguity_or_conflicting_canon
@@ -216,6 +219,9 @@ prohibitions:
   - id: NO-IAA-SKIP-001
     rule: "I NEVER open a PR without first invoking IAA and recording the result. Skipping IAA is INC-IAA-SKIP-001 — a constitutional violation."
     enforcement: BLOCKING
+  - id: NO-STALE-GATE-001
+    rule: "I NEVER allow PENDING, in-progress, in_progress, or provisional wording to survive in final-state proof artifacts for any gate entry. Every merge gate in the required_checks list must have an explicit per-gate final state (PASS, FAIL, or N/A with documented reason and CI evidence). A gate showing PENDING = BLOCKED — the PR must not be opened."
+    enforcement: CONSTITUTIONAL
 
 tier2_knowledge:
   index: .agent-workspace/foreman-v2/knowledge/index.md
@@ -229,9 +235,9 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-17
-  contract_version: 3.2.0
-  change_summary: "v3.2.0 (2026-04-17): Add §14.6 Foreman QP Admin-Compliance Checkpoint and §4.3e ECAP reconciliation requirement. Wave: wave-ecap002-amc-hardening."
+  last_updated: 2026-04-19
+  contract_version: 3.3.0
+  change_summary: "v3.3.0 (2026-04-19): Add HALT-012 (gate-proof truth failure), NO-STALE-GATE-001 prohibition (PENDING=BLOCKED for gate entries), gate_set_checked requirement in §4.3, pre-brief path normalized to wave-record-only. Wave: wave-parity-upgrade-20260419."
 ---
 
 # Foreman Agent — Canonical Supervisor Contract
@@ -365,8 +371,8 @@ After creating and populating the wave task list, invoke IAA for Pre-Brief befor
 task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: <N>)
 ```
 
-Store result at `.agent-admin/assurance/iaa-prebrief-wave<N>.md`.  
-Communicate Pre-Brief path to all assigned builders before they begin.
+Embed Pre-Brief content in wave record section 2 (`.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`), commit, reply confirming wave record path.  
+Communicate wave record path to all assigned builders before they begin.
 
 If IAA tool call fails: HALT immediately. Do NOT proceed.  
 Record the error verbatim in session memory and notify CS2 via issue comment.  
@@ -606,6 +612,16 @@ Required checks:
 - `Evidence Bundle Validation / prehandover-proof-check` — in 90/10 model, wave record at `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md` is the consolidated evidence artifact
 
 If ANY gate fails: STOP, fix the issue, re-run from step 4.3. Do NOT open PR.
+
+**Gate inventory requirement (gate_set_checked)**:
+
+Before declaring merge gate parity, produce an explicit gate inventory with per-gate final state for every check in `merge_gate_interface.required_checks`:
+
+| Gate | Final State | CI Evidence |
+|------|------------|-------------|
+| [gate name] | PASS / FAIL / N/A | [link or reference] |
+
+All gates must show a final state. Any gate showing PENDING or in-progress = BLOCKED (HALT-012). Gate inventory must be committed in the wave record evaluation section. `gate_set_checked: true` is only valid when all gates show explicit final states.
 
 For ECAP jobs: confirm `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md` present (§4.3e).
 

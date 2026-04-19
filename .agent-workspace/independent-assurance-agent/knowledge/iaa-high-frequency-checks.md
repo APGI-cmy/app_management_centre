@@ -1,12 +1,14 @@
 # IAA High-Frequency Checks — CI Specification
 
 **Agent**: independent-assurance-agent
-**Version**: 1.2.0
+**Version**: 1.3.0
 **Status**: ACTIVE — Reference Only
 **Last Updated**: 2026-04-19
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
 
 > **Note (v1.1.0)**: CI already implements the dual-path check for HFMC-04 and HFMC-05 — accepting both the legacy standalone token file (pre-90/10 waves) and the wave-record model (post-90/10 waves). The checks below reflect the updated dual-path behaviour.
+
+> **Note (v1.2.0)**: Standalone iaa-prebrief-*.md is DEPRECATED per AMC 90/10 Admin Protocol v1.0.0. For all post-90/10 waves, wave record section 2 is the SOLE pre-brief carrier. HFMC-06 CI check enforces wave-record section 2 population; standalone pre-brief files are no longer accepted for new waves.
 
 ---
 
@@ -34,6 +36,7 @@ This document lists all mechanical checks that have been moved from the IAA proc
 | HFMC-04 | IAA assurance carrier exists | Wave record with `PHASE_B_BLOCKING_TOKEN` exists at `.agent-admin/wave-records/amc-wave-record-*.md` (section 5). Legacy path `.agent-admin/assurance/iaa-token-session-*.md` accepted for pre-90/10 waves only. |
 | HFMC-05 | PHASE_B_BLOCKING_TOKEN non-PENDING | `PHASE_B_BLOCKING_TOKEN` line present, non-PENDING, non-empty in wave record section 5 (or legacy token file for pre-90/10 waves) |
 | HFMC-06 | IAA pre-brief exists (foreman PRs) | Wave record section 2 (`## Section 2 — Pre-Brief Scope`) is populated with substantive pre-brief content for foreman PRs. Legacy path `.agent-admin/assurance/iaa-prebrief-wave*.md` is deprecated per AMC 90/10 Admin Protocol v1.0.0 — wave record section 2 is the sole pre-brief carrier. |
+| HFMC-07 | Gate set explicitly identified | Wave record Section 3 (Evaluation Summary) lists all required gates from `merge_gate_interface.required_checks` by name with per-gate final state (PASS/FAIL/N/A). Generic "all gates pass" without individual gate names is a FAIL condition for ACR-09. |
 
 ---
 
