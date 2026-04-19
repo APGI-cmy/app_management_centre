@@ -134,6 +134,71 @@ jobs:
           fi
 
       # ------------------------------------------------------------------
+      # Step 2b: Update GOVERNANCE_ALIGNMENT_INVENTORY.json (C2 — automation hardening)
+      # Authority: GOVERNANCE_ALIGNMENT_MONITORING_PROTOCOL.md
+      # Purpose: After layer-down, refresh artifact versions and hashes in the
+      #          local alignment inventory so future ripples are not silently missed.
+      # ------------------------------------------------------------------
+      - name: Update governance alignment inventory
+        id: inventory_update
+        if: steps.align.outputs.drift_detected == 'true'
+        run: |
+          CANONICAL_COMMIT="${{ github.event.client_payload.canonical_commit }}"
+          CANONICAL_COMMIT="${CANONICAL_COMMIT:-unknown}"
+
+          echo "Updating GOVERNANCE_ALIGNMENT_INVENTORY.json..."
+          if bash .github/scripts/update-governance-alignment-inventory.sh \
+               --canonical-commit "$CANONICAL_COMMIT"; then
+            echo "inventory_updated=true" >> $GITHUB_OUTPUT
+            echo "✅ GOVERNANCE_ALIGNMENT_INVENTORY.json updated"
+          else
+            echo "inventory_updated=false" >> $GITHUB_OUTPUT
+            echo "⚠️  GOVERNANCE_ALIGNMENT_INVENTORY.json update failed (non-blocking)"
+          fi
+
+      # ------------------------------------------------------------------
+      # Step 2c: Verify ECAP ceremony files present (C1 — templates/checklists gate)
+      # Authority: EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.1.0 (ECAP-001)
+      # Purpose: Confirm governance/templates/execution-ceremony-admin/* and
+      #          governance/checklists/execution-ceremony-admin-* are present after
+      #          every layer-down so they are not silently missed.
+      # ------------------------------------------------------------------
+      - name: Verify ECAP ceremony files present
+        id: ecap_file_check
+        run: |
+          echo "=== ECAP Ceremony File Presence Check ==="
+          MISSING=()
+
+          # Required ECAP ceremony templates
+          for f in \
+            "governance/templates/execution-ceremony-admin/ECAP_RECONCILIATION_SUMMARY.template.md" \
+            "governance/templates/execution-ceremony-admin/FOREMAN_ADMIN_READINESS_HANDBACK.template.md" \
+            "governance/templates/execution-ceremony-admin/PREHANDOVER.template.md" \
+            "governance/templates/execution-ceremony-admin/SESSION_MEMORY.template.md" \
+            "governance/templates/execution-ceremony-admin/SCOPE_DECLARATION.template.md" \
+            "governance/templates/execution-ceremony-admin/CORRECTION_ADDENDUM.template.md" \
+            "governance/templates/execution-ceremony-admin/README.md"; do
+            [ -f "$f" ] || MISSING+=("$f")
+          done
+
+          # Required ECAP ceremony checklists
+          for f in \
+            "governance/checklists/execution-ceremony-admin-checklist.md" \
+            "governance/checklists/execution-ceremony-admin-reconciliation-matrix.md" \
+            "governance/checklists/execution-ceremony-admin-anti-patterns.md"; do
+            [ -f "$f" ] || MISSING+=("$f")
+          done
+
+          if [ ${#MISSING[@]} -gt 0 ]; then
+            echo "⚠️  ECAP ceremony files missing (non-blocking — layer-down may be in progress):"
+            for m in "${MISSING[@]}"; do echo "  - $m"; done
+            echo "ecap_files_present=false" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All ECAP ceremony files are present"
+            echo "ecap_files_present=true" >> $GITHUB_OUTPUT
+          fi
+
+      # ------------------------------------------------------------------
       # Step 3: Detect agent file changes (requires CS2 escalation)
       # ------------------------------------------------------------------
       - name: Detect agent file changes

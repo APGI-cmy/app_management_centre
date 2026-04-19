@@ -221,9 +221,9 @@ metadata:
   this_copy: consumer
   authority: CS2
   last_updated: 2026-04-17
-  contract_version: 2.6.1
+  contract_version: 2.7.0
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
-  change_summary: "v2.6.1 (2026-04-17): Parser-compat repair — 2 frontmatter values shortened to ≤200 chars. Builds on v2.6.0 AMC 90/10 wave-record alignment."
+  change_summary: "v2.7.0 (2026-04-17): Add ACR-01–08 admin-ceremony rejection triggers, ECAP proof bundle req, Phase 0 ECAP note. Wave: wave-ecap002-amc-hardening."
 ---
 
 > **[FM_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**
@@ -246,6 +246,8 @@ metadata:
 **Scope**: Invoked with `action: "PRE-BRIEF"` or comment containing `IAA_PRE_BRIEF_PROTOCOL.md §Trigger`.  
 **Action**: Read `wave-current-tasks.md`, classify tasks, write `iaa-prebrief-waveN.md`, commit, reply confirming artifact path and qualifying tasks.  
 **Do NOT proceed to Phases 1–4 during a Pre-Brief invocation.**
+
+**For waves with ECAP-appointed ceremony admin**: note in the Pre-Brief artifact that the following additional items will be checked at final assurance: ECAP reconciliation summary (`.agent-admin/prehandover/ecap-reconciliation-<PR#>.md`, C1–C5), and Foreman §14.6 QP checkpoint completion evidence.
 
 ---
 
@@ -357,6 +359,34 @@ For CORE-020 (Zero partial pass rule) and CORE-021 (Zero-severity-tolerance):
 For each check in the category overlay:
 > "OVERLAY-[N]: [check name] | Evidence: [found] | Verdict: PASS ✅ / FAIL ❌
 > [If FAIL: Finding: [specific] Fix required: [required action]]"
+
+**Step 3.3a — Admin-Ceremony Rejection Triggers (ECAP-involved sessions):**
+
+**Authority**: `governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md v1.6.0 §Admin-Ceremony Rejection Triggers`
+
+When the session involves an ECAP-appointed ceremony admin, apply ACR-01 through ACR-08. Each is an **auto-fail condition** — one trigger = REJECTION-PACKAGE (classify as CEREMONY failure):
+
+| Trigger | Description |
+|---|---|
+| ACR-01 | Missing required ceremony artifact |
+| ACR-02 | Stale or contradictory final-state wording |
+| ACR-03 | Mismatched session/token/version/path references across artifacts |
+| ACR-04 | Stale scope declaration or declared file count mismatch |
+| ACR-05 | Stale proof/hash/version/amended-date after later edits |
+| ACR-06 | PUBLIC_API ripple required but not assessed, recorded, or completed |
+| ACR-07 | PREHANDOVER/token/session memory/tracker/wave record not coherent |
+| ACR-08 | Artifact references pointing to non-committed or wrong-path files |
+
+For each ACR: verify against the artifact bundle. One FAIL = REJECTION-PACKAGE.
+
+**Step 3.3b — ECAP Proof Bundle Requirements (ECAP-involved sessions):**
+
+When session involves an ECAP-appointed ceremony admin, verify:
+- ECAP reconciliation summary exists at `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md`
+- C1 through C5 are all present and non-blank (C5 must be completed by Foreman per §14.6)
+- Foreman §14.6 QP checkpoint completion evidence is present in C5
+
+If ECAP reconciliation summary is absent or C1–C5 incomplete → REJECTION-PACKAGE per ACR-01.
 
 **Step 3.4 — Tally results and classify failures:**
 

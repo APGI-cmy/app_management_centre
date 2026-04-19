@@ -104,3 +104,71 @@ jobs:
           else
             echo "✅ All new files are in allowed governance artifact paths."
           fi
+
+      # ------------------------------------------------------------------
+      # Verify ECAP ceremony files are present (C1 — templates/checklists gate)
+      # Authority: EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.1.0 (ECAP-001)
+      # Purpose: PRs that touch governance/** must not silently remove or miss
+      #          the required ECAP ceremony templates and checklists.
+      # Note: Only runs if the PR touches governance/ paths to avoid noisy
+      #       false-positives on non-governance PRs.
+      # ------------------------------------------------------------------
+      - name: Verify ECAP ceremony files present
+        if: steps.bypass_check.outputs.bypass != 'true'
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          # Only check if this PR touches governance/ paths
+          GOVERNANCE_CHANGES=$(git diff --name-only "origin/${BASE_REF}"...HEAD 2>/dev/null | \
+            grep '^governance/' | wc -l || echo 0)
+
+          if [ "$GOVERNANCE_CHANGES" -eq 0 ]; then
+            echo "✅ PR does not touch governance/ — ECAP ceremony file check skipped."
+            exit 0
+          fi
+
+          echo "=== ECAP Ceremony File Presence Check ==="
+          echo "(PR touches governance/ — verifying required ECAP ceremony files)"
+          MISSING=()
+
+          # Required ECAP ceremony templates (from ECAP-001 v1.1.0)
+          for f in \
+            "governance/templates/execution-ceremony-admin/ECAP_RECONCILIATION_SUMMARY.template.md" \
+            "governance/templates/execution-ceremony-admin/FOREMAN_ADMIN_READINESS_HANDBACK.template.md" \
+            "governance/templates/execution-ceremony-admin/PREHANDOVER.template.md" \
+            "governance/templates/execution-ceremony-admin/SESSION_MEMORY.template.md" \
+            "governance/templates/execution-ceremony-admin/SCOPE_DECLARATION.template.md" \
+            "governance/templates/execution-ceremony-admin/CORRECTION_ADDENDUM.template.md" \
+            "governance/templates/execution-ceremony-admin/README.md"; do
+            [ -f "$f" ] || MISSING+=("TEMPLATE: $f")
+          done
+
+          # Required ECAP ceremony checklists (from ECAP-001 v1.1.0)
+          for f in \
+            "governance/checklists/execution-ceremony-admin-checklist.md" \
+            "governance/checklists/execution-ceremony-admin-reconciliation-matrix.md" \
+            "governance/checklists/execution-ceremony-admin-anti-patterns.md"; do
+            [ -f "$f" ] || MISSING+=("CHECKLIST: $f")
+          done
+
+          if [ ${#MISSING[@]} -gt 0 ]; then
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            echo "🚨 ECAP CEREMONY FILES MISSING"
+            echo ""
+            echo "The following required ECAP ceremony files are absent from the branch:"
+            for m in "${MISSING[@]}"; do echo "  ❌ $m"; done
+            echo ""
+            echo "Per EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.1.0 (ECAP-001):"
+            echo "  - All 7 templates must exist under governance/templates/execution-ceremony-admin/"
+            echo "  - All 3 checklists must exist under governance/checklists/execution-ceremony-admin-*.md"
+            echo ""
+            echo "If this is a layer-down PR, these files should have been included."
+            echo "If this is a governance PR, restore the missing files before merging."
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            exit 1
+          fi
+
+          echo "✅ All ECAP ceremony files are present."
