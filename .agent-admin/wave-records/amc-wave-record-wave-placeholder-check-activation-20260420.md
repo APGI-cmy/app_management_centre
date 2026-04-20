@@ -142,9 +142,15 @@ confirmed by `python3 yaml.safe_load`.
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING |
-| PHASE_B_BLOCKING_TOKEN | PENDING |
-| merge_authority | CS2 ONLY |
+| iaa_verdict | ASSURANCE-TOKEN — PASS |
+| iaa_session | IAA-session-051-20260420 |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-051-20260420-PASS |
+| checks_run | 13 (CORE-020, CORE-021, OVL-CG-001–005, OVL-CG-ADM-001–002, OVL-CI-001–005, OVL-INJ-001) |
+| checks_passed | 13 |
+| checks_failed | 0 |
+| merge_gate_parity | PASS — merge-gate/verdict ✅ governance/alignment ✅ stop-and-fix/enforcement ✅ |
+| merge_authority | CS2 ONLY — AGCFPP-001 |
+| assurance_date | 2026-04-20 |
 
 ---
 
