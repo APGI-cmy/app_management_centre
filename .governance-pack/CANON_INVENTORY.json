@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "last_updated": "2026-04-20",
-  "total_canons": 202,
+  "total_canons": 203,
   "generation_timestamp": "2026-04-13T07:22:00Z",
   "canon_entry_schema": {
     "description": "Schema for canon entries in CANON_INVENTORY.json",
@@ -2386,6 +2386,20 @@
       "canonical_commit": "a9283eaf4fb216f28cdf4acd2557e98134c9b8c0",
       "layered_down_at": "2026-04-20T07:25:29Z",
       "action": "CREATED"
+    },
+    {
+      "filename": "AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md",
+      "version": "1.0.0",
+      "file_hash": "sha256:f5c9d72ebf2584e10ff09f29fdbc90c6f8251b2ebfbce58983c7db0e45dbac1d",
+      "effective_date": "2026-04-19",
+      "description": "Defines the bounded, reviewable model for when placeholder-like terms (stub, placeholder, TBD, TODO) may be ignored in agent-contract validation. Five exception classes (EXC-001 through EXC-005) map all permitted exemptions to named categories. Consumer repos must bind their placeholder-check workflows to these named classes rather than accumulating ad hoc phrase exclusions.",
+      "type": "canon",
+      "path": "governance/canon/AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md",
+      "layer_down_status": "LAYERED",
+      "file_hash_sha256": "f5c9d72ebf2584e10ff09f29fdbc90c6f8251b2ebfbce58983c7db0e45dbac1d",
+      "canonical_version": "1.0.0",
+      "layer_down_date": "2026-04-20",
+      "layer_down_authority": "APGI-cmy/maturion-foreman-governance#1349"
     }
   ]
 }

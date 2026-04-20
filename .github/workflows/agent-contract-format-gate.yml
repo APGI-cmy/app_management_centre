@@ -10,6 +10,7 @@ on:
     types: [opened, synchronize, reopened]
     paths:
       - ".github/agents/*.md"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -163,14 +164,53 @@ jobs:
               echo "  ⚠️  CORE-006: expected_artifacts block absent (acceptable for non-AGENT_CONTRACT files)"
             fi
 
-            # CORE-007: No placeholder content (STUB/TODO/FIXME/TBD)
-            PLACEHOLDER_HITS=$(grep -nE "\b(STUB|TODO:|FIXME:|TBD)\b" "$contract_file" | grep -v "iaa_audit_token" | head -5 || true)
-            if [ -n "$PLACEHOLDER_HITS" ]; then
-              echo "  ❌ CORE-007: Placeholder content found:"
-              echo "$PLACEHOLDER_HITS" | sed 's/^/    /'
+            # CORE-007: No placeholder content — exceptions mapped to canonical classes
+            # Authority: AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md v1.0.0
+            # (APGI-cmy/maturion-foreman-governance#1349, layered down 2026-04-20)
+            PLACEHOLDER_VIOLATIONS=0
+            PLACEHOLDER_CONTEXT=""
+            while IFS= read -r line; do
+              # EXC-001: governance condition descriptions — term describes a detection state, trigger,
+              # or failure mode (not unresolved contract content)
+              if echo "$line" | grep -qiE "(placeholder|stub|TBD).*(hash|detect|trigger|mode|state|escalat|condition|gate)"; then
+                continue
+              fi
+              if echo "$line" | grep -qiE "(hash|detect|trigger|mode|state|escalat|condition|gate).*(placeholder|stub|TBD)"; then
+                continue
+              fi
+              # EXC-002: checker or output template strings — agent reports on placeholder content
+              # in other artefacts; also covers iaa_audit_token lines (token field reporting template)
+              if echo "$line" | grep -qiE "(echo|print|output|message|report|template).*['\"].*((no )?(placeholder|stub|TBD|TODO)|iaa_audit_token)"; then
+                continue
+              fi
+              if echo "$line" | grep -qiE "iaa_audit_token"; then
+                continue
+              fi
+              # EXC-003: negative assertions — clause asserts absence of placeholder content
+              if echo "$line" | grep -qiE "no (placeholder|stub|TBD|TODO)(.*content|[^a-zA-Z]|$)"; then
+                continue
+              fi
+              # EXC-004: checklist / gate labels — gate name or checklist label using canon vocabulary
+              if echo "$line" | grep -qiE "(gate|check|checklist|step)[^a-zA-Z]+(placeholder|stub|TBD)"; then
+                continue
+              fi
+              if echo "$line" | grep -qiE "(placeholder|stub|TBD)[^a-zA-Z]+(gate|check|checklist|step)"; then
+                continue
+              fi
+              # EXC-005: canon hash-validation terminology — "placeholder" as a detection subject
+              # in hash-integrity or CANON_INVENTORY contexts
+              if echo "$line" | grep -qiE "placeholder.*(hash|api)"; then
+                continue
+              fi
+              PLACEHOLDER_VIOLATIONS=$((PLACEHOLDER_VIOLATIONS + 1))
+              PLACEHOLDER_CONTEXT="${PLACEHOLDER_CONTEXT}\n    ${line}"
+            done < <(grep -niE "(^|[^[:alnum:]_])(placeholder|stub|TBD|TODO:|FIXME:)([^[:alnum:]_]|$)" "$contract_file" || true)
+            if [ "$PLACEHOLDER_VIOLATIONS" -gt 0 ]; then
+              echo "  ❌ CORE-007: Unresolved placeholder content (not covered by canonical exception class EXC-001..EXC-005):"
+              echo -e "${PLACEHOLDER_CONTEXT}" | head -5
               FILE_FAIL=true
             else
-              echo "  ✅ CORE-007: No placeholder content"
+              echo "  ✅ CORE-007: No unresolved placeholder content (canonical exception classes applied — AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md v1.0.0)"
             fi
 
             # CORE-008: prohibitions block with CONSTITUTIONAL enforcement
