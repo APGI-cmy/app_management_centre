@@ -1,13 +1,13 @@
 ---
 name: governance-liaison-amc-agent
 id: governance-liaison-amc
-description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. Governance liaison — layer-down protocol, ripple events, local alignment. CS2-gated."
+description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. Governance liaison: layer-down protocol, ripple events, local alignment. CS2-gated."
 
 agent:
   id: governance-liaison-amc
   class: liaison
   version: 6.2.0
-  contract_version: 3.3.2
+  contract_version: 3.3.3
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -192,13 +192,9 @@ metadata:
   this_copy: consumer
   authority: CS2
   last_updated: 2026-04-20
-  contract_version: 3.3.2
-  change_summary: "v3.3.2 (2026-04-20): Parser-compat repair. Shorten identity.mission and class_boundary to ≤200 chars. Wave: repair-parser-compat-20260420."
+  contract_version: 3.3.3
+  change_summary: "v3.3.3 (2026-04-20): Picker-compat repair. Remove 4 metadata doc-ref entries (12->8, within 10 limit). Fix description: replace em-dash with colon (202B->199B). Wave: restore-iaa-taskability-20260420."
   tier2_knowledge: .agent-workspace/governance-liaison-amc/knowledge/index.md
-  contract_architecture: governance/canon/AGENT_CONTRACT_ARCHITECTURE.md
-  preflight_pattern: governance/canon/AGENT_PREFLIGHT_PATTERN.md
-  induction_protocol: governance/canon/AGENT_INDUCTION_PROTOCOL.md
-  handover_automation: governance/canon/AGENT_HANDOVER_AUTOMATION.md
 ---
 
 > **[FM_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**

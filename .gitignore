@@ -70,6 +70,9 @@ builder-modular-link-validation-evidence.json
 .agent/sessions/
 node_modules/
 mcp-servers/agent-bootstrap/node_modules/
+package.json
+package-lock.json
+check_agents.js
 
 # Ephemeral agent session artifacts (not committed to git)
 .agent-workspace/*/working-contract.md
