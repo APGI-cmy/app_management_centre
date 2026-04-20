@@ -93,13 +93,17 @@
 
 ## Section 5: Assurance
 
-*Populated after IAA invocation.*
-
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING |
-| iaa_token_ref | PENDING |
+| iaa_verdict | ASSURANCE-TOKEN |
+| iaa_token_ref | IAA-session-049-20260420-PASS |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-049-20260420-PASS |
+| checks_run | 12 (CORE-020, CORE-021, OVL-LA-001–005, OVL-LA-ADM-002–003, FAIL-ONLY-ONCE A-001/A-002/A-036) |
+| checks_passed | 12 |
+| checks_failed | 0 |
 | merge_gate_parity | PASS |
+| iaa_session | session-049-20260420 |
+| iaa_date | 2026-04-20 |
 
 ---
 
