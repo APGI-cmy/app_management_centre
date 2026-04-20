@@ -179,11 +179,11 @@ jobs:
                 continue
               fi
               # EXC-002: checker or output template strings — agent reports on placeholder content
-              # in other artefacts; also covers iaa_audit_token lines (token field reporting template)
+              # in other artefacts; also covers iaa_audit_token only in governed meta/template contexts
               if echo "$line" | grep -qiE "(echo|print|output|message|report|template).*['\"].*((no )?(placeholder|stub|TBD|TODO)|iaa_audit_token)"; then
                 continue
               fi
-              if echo "$line" | grep -qiE "iaa_audit_token"; then
+              if echo "$line" | grep -qiE "iaa_audit_token" && echo "$line" | grep -qiE "(field|key|header|metadata|meta|template|report|output|message|example|schema)"; then
                 continue
               fi
               # EXC-003: negative assertions — clause asserts absence of placeholder content
