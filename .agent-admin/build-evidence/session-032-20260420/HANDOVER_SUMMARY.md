@@ -34,7 +34,7 @@ Layer-down of canonical commit e5a76db0 which introduced `AGENT_CONTRACT_PLACEHO
 
 ## IAA Invocation
 
-**Status**: PASS  
+PASS — issued token: `IAA-session-052-20260420-PASS`.
 **IAA session**: session-052-20260420  
 **PHASE_B_BLOCKING_TOKEN**: IAA-session-052-20260420-PASS  
 All 18 checks PASS. Merge gate parity: PASS. Scope parity: PASS (8/8 artifacts).
