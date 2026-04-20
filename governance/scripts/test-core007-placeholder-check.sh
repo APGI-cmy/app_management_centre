@@ -33,6 +33,7 @@ check_line() {
     if echo "$l" | grep -qiE "(placeholder|stub|TBD)[^a-zA-Z]+(gate|check|checklist|step)"; then continue; fi
     # EXC-005: canon hash-validation terminology
     if echo "$l" | grep -qiE "placeholder.*(hash|api)"; then continue; fi
+    if echo "$l" | grep -qiE "(hash|api).*placeholder"; then continue; fi
     violations=$((violations + 1))
   done < <(grep -niE "(^|[^[:alnum:]_])(placeholder|stub|TBD|TODO:|FIXME:)([^[:alnum:]_]|$)" "$tmpfile" || true)
   rm -f "$tmpfile"
