@@ -14,7 +14,7 @@
 | date | 2026-04-20 |
 | agent | foreman-v2-agent (session-027) |
 | session_id | session-027-20260420 |
-| branch | TBD — no branch opened at pre-activation stage |
+| branch | copilot/future-layer-down-canonical-placeholder-check |
 | triggering_issue | Issue #1094 — [Future Layer-Down] Adopt canonical placeholder-check exception model after upstream governance canon is finalized |
 | cs2_authorization | Issue #1094 opened by @APGI-cmy (CS2) — direct wave-start authorization |
 | agents_delegated_to | foreman-v2-agent (TASK-027-01, TASK-027-02 — no builder delegation at pre-activation stage); independent-assurance-agent (TASK-027-03: pre-brief + final assurance) |
@@ -155,28 +155,28 @@ The assessment states CORE-007 uses an ad-hoc `grep -v "iaa_audit_token"` exclus
 
 ## Section 3: Evaluation Summary (QP Verdict)
 
-> **To be completed at wave close (post-PR).**
-
 | Check | Result |
 |-------|--------|
-| Artifact set bounded (no implementation artifacts) | PENDING |
-| Pre-activation plan coherent | PENDING |
-| Trigger conditions documented | PENDING |
-| No AGENT_CONTRACT/CANON_GOVERNANCE/CI_WORKFLOW artifacts in PR | PENDING |
+| Tests 100% GREEN | ✅ N/A — governance scaffolding wave only (no implementation artifacts) |
+| Zero test debt | ✅ N/A — no test files produced |
+| Artifact set bounded (no implementation artifacts) | ✅ PASS — wave record, current-tasks, session memory only |
+| Pre-activation plan coherent | ✅ PASS — TASK-ACTIVATE-01 through TASK-ACTIVATE-05 in dependency order |
+| Trigger conditions documented | ✅ PASS — three conditions explicitly listed with current status |
+| No AGENT_CONTRACT/CANON_GOVERNANCE/CI_WORKFLOW artifacts in PR | ✅ PASS — verified, no such files in diff |
+| CORE-007 baseline accurately recorded | ✅ PASS — ad-hoc `grep -v "iaa_audit_token"` exclusion confirmed at agent-contract-format-gate.yml line 167 |
+| IAA Pre-Brief completed and embedded in Section 2 | ✅ PASS — session-048-20260420, commit 87ed065 |
 
-**QP Verdict**: PENDING
+**QP Verdict**: PASS — 8/8 checks PASS (N/A for test checks — governance scaffolding wave)
 
 ---
 
 ## Section 4: Outcome & Learning
 
-> **To be completed at wave close.**
-
 | Field | Value |
 |-------|-------|
-| outcome | PENDING |
-| coverage_summary | PENDING |
-| learning | PENDING |
+| outcome | COMPLETE — pre-activation governance scaffolding delivered; trigger conditions documented as NOT YET MET |
+| coverage_summary | Delivered wave scaffolding for Issue #1094 future layer-down: trigger condition assessment, pre-activation plan (TASK-ACTIVATE-01 through TASK-ACTIVATE-05), wave record sections 1-4, session memory. IAA Pre-Brief (session-048) confirmed all tasks EXEMPT. No implementation work performed — trigger conditions not yet met. |
+| learning | Future-scoped governance issues require Foreman to: (1) document trigger conditions explicitly and verify current status before doing any work, (2) produce pre-activation governance scaffolding that names the specific tasks and dependencies for when conditions are met, (3) invoke IAA even for EXEMPT waves as governance hygiene when the wave plans future mandatory-trigger work. The pre-activation plan should be referenced by the future activation wave rather than re-invented. |
 
 ---
 
