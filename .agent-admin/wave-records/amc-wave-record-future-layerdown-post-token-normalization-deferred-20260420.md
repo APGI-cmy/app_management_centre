@@ -66,11 +66,16 @@ Final IAA audit is still required per A-010 (wave modifies repo content).
 ## Section 5 — Assurance
 
 **Pre-IAA Commit-State Gate**:
-- [ ] Clean working tree — pending final commit
-- [ ] Wave record sections 1–4 committed at HEAD — pending
-- [ ] Session memory committed at HEAD — pending
-- [ ] Builder evidence artifacts committed — N/A (no builder delegation)
+- [x] Clean working tree — CONFIRMED (git status: clean at 05de0f7)
+- [x] Wave record sections 1–4 committed at HEAD — CONFIRMED (git ls-tree HEAD verified)
+- [x] Session memory committed at HEAD — CONFIRMED (git ls-tree HEAD verified)
+- [x] Builder evidence artifacts committed — N/A (no builder delegation)
 
-**IAA Token**: PENDING — IAA invocation required per A-010 before merge gate release.
+**IAA Token**: ASSURANCE-TOKEN issued.
 
-*This section to be completed after IAA invocation and token recording.*
+**PHASE_B_BLOCKING_TOKEN**: IAA-session-048-20260420-PASS
+
+**IAA Session**: session-048-20260420
+**Verdict**: ALL checks PASS — 0 failures. POLC boundary confirmed. No implementation. No builder delegation. Activation conditions correctly assessed NOT CONFIRMED. Governance documentation complete and traceable.
+**Issued by**: independent-assurance-agent
+**Date**: 2026-04-20
