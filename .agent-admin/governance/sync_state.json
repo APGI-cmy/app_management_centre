@@ -1,11 +1,11 @@
 {
-  "last_check": "2026-04-20T07:25:29Z",
+  "last_check": "2026-04-20T13:26:51Z",
   "canonical_version": "1.0.0",
-  "canonical_commit": "a9283eaf4fb216f28cdf4acd2557e98134c9b8c0",
+  "canonical_commit": "818bab2a3771ff72d6a999e0aaa069304728cc3a",
   "local_version": "1.0.0",
-  "local_commit": "a9283eaf4fb216f28cdf4acd2557e98134c9b8c0",
+  "local_commit": "818bab2a3771ff72d6a999e0aaa069304728cc3a",
   "drift_detected": "false",
   "needs_alignment": "false",
   "alignment_method": "layer-down",
-  "alignment_note": "Layer-down of a9283eaf (2026-04-17) \u2014 AIMC_MMM_CONVERGENCE_BOUNDARY_CANON.md v1.0.0 created, AIMC_SPECIALIST_OPERATING_MODEL.md v1.0.0 created, SPECIALIST_KNOWLEDGE_MANAGEMENT.md v1.1.0 created, GOVERNANCE_CANON_MANIFEST.md updated (\u00a73.15 AIMC models)."
+  "alignment_note": "Layer-down of 818bab2a (2026-04-19) \u2014 foreman-v2.agent.md v3.0.1 (metadata fix). Consumer foreman-v2-agent.md is at v3.3.1 (AHEAD of canonical v3.0.1). No content changes needed. Agent file ripple escalated to CS2 per PROHIB-002/AGCFPP-001."
 }

@@ -2,8 +2,8 @@
   "schema_version": "1.0.0",
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "a9283eaf4fb216f28cdf4acd2557e98134c9b8c0",
-  "last_updated": "2026-04-20T07:25:29Z",
+  "last_layer_down_commit": "818bab2a3771ff72d6a999e0aaa069304728cc3a",
+  "last_updated": "2026-04-20T13:26:51Z",
   "alignment_status": "ALIGNED",
   "total_artifacts": 32,
   "artifacts": [
@@ -468,6 +468,16 @@
       ],
       "status": "PENDING_CS2_APPROVAL",
       "notes": "Agent contract file change \u2014 escalated to CS2 per PROHIB-002/AGCFPP-001. Supersedes f5b61144 (v4.0.1)."
+    },
+    {
+      "layer_down_commit": "818bab2a3771ff72d6a999e0aaa069304728cc3a",
+      "timestamp": "2026-04-20T13:26:51Z",
+      "session": "session-031-20260420",
+      "changed_artifacts": [
+        "foreman-v2.agent.md"
+      ],
+      "status": "CONSUMER_AHEAD_CS2_ESCALATED",
+      "notes": "Agent contract file change \u2014 foreman-v2.agent.md v3.0.1 (removed 5 excess metadata doc-refs). Consumer foreman-v2-agent.md at v3.3.1 (AHEAD). No content changes applied. Escalated to CS2 per PROHIB-002/AGCFPP-001."
     }
   ]
 }
