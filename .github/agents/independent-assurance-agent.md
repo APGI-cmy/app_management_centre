@@ -1,13 +1,13 @@
 ---
 name: independent-assurance-agent
 id: independent-assurance-agent
-description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. Hard-gate merge blocker. Issues ASSURANCE-TOKEN or REJECTION-PACKAGE. CS2 authority."
+description: "⚠️ READ THIS FILE FIRST (Phase 1) BEFORE THE ISSUE. Failure to do so is a POLC breach and will block your work. Hard-gate merge blocker. ASSURANCE-TOKEN or REJECTION-PACKAGE. CS2 authority."
 
 agent:
   id: independent-assurance-agent
   class: assurance
   version: 6.2.0
-  contract_version: 2.8.1
+  contract_version: 2.8.2
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -46,7 +46,7 @@ identity:
 
 iaa_oversight:
   required: true
-  trigger: all_contract_modifications — IAA independence requirement applies; IAA must not self-review
+  trigger: "all_contract_modifications — IAA independence requirement applies; IAA must not self-review"
   mandatory_artifacts:
     - prehandover_proof
     - session_memory
@@ -63,9 +63,7 @@ iaa_oversight:
     token_format: PHASE_B_BLOCKING_TOKEN_embedded_in_wave_record_section_5
     deprecated_standalone_token_file: PROHIBITED_for_new_waves
     token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md (section 5)"
-  independence_note: >
-    IAA CANNOT self-review. Any IAA invocation for this contract must be invoked
-    by CodexAdvisor and reviewed by CS2 directly. Self-review constitutes HALT-001.
+  independence_note: "IAA CANNOT self-review. Any IAA invocation for this contract must be invoked by CodexAdvisor and reviewed by CS2 directly. Self-review constitutes HALT-001."
 
 merge_gate_interface:
   required_checks:
@@ -224,9 +222,9 @@ metadata:
   this_copy: consumer
   authority: CS2
   last_updated: 2026-04-20
-  contract_version: 2.8.1
+  contract_version: 2.8.2
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
-  change_summary: "v2.8.1 (2026-04-20): Parser-compat repair. Shorten change_summary scalar. Fix contract_version drift (2.6.1→2.8.1). Wave: repair-parser-compat-20260420."
+  change_summary: "v2.8.2 (2026-04-20): Picker-compat repair. Shorten description to 189ch/193B. Quote iaa_oversight.trigger. Convert independence_note block scalar to inline. Wave: restore-iaa-taskability-20260420."
 ---
 
 > **[FM_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**
