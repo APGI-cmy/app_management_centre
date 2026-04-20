@@ -1,11 +1,11 @@
 {
-  "last_check": "2026-04-20T13:26:51Z",
-  "canonical_version": "1.0.0",
-  "canonical_commit": "818bab2a3771ff72d6a999e0aaa069304728cc3a",
-  "local_version": "1.0.0",
-  "local_commit": "818bab2a3771ff72d6a999e0aaa069304728cc3a",
-  "drift_detected": "false",
-  "needs_alignment": "false",
-  "alignment_method": "layer-down",
-  "alignment_note": "Layer-down of 818bab2a (2026-04-19) \u2014 foreman-v2.agent.md v3.0.1 (metadata fix). Consumer foreman-v2-agent.md is at v3.3.1 (AHEAD of canonical v3.0.1). No content changes needed. Agent file ripple escalated to CS2 per PROHIB-002/AGCFPP-001."
+    "last_check": "2026-04-20T14:04:33Z",
+    "canonical_version": "1.0.0",
+    "canonical_commit": "e5a76db099663c15dcda3fe878b48c1331b36aca",
+    "local_version": "1.0.0",
+    "local_commit": "e5a76db099663c15dcda3fe878b48c1331b36aca",
+    "drift_detected": "false",
+    "needs_alignment": "false",
+    "alignment_method": "layer-down",
+    "alignment_note": "Layer-down of e5a76db0 (2026-04-19) \u2014 AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md v1.0.0 (placeholder-check exception classes canon). File already present in consumer repo. Inventories updated."
 }

@@ -1,0 +1,24 @@
+{
+    "event_type": "governance_layer_down",
+    "canonical_commit": "e5a76db099663c15dcda3fe878b48c1331b36aca",
+    "canonical_source": "APGI-cmy/maturion-foreman-governance",
+    "date": "2026-04-19T12:02:45Z",
+    "trigger": "Merge pull request -1350 from APGI-cmy-copilot-canonize-placeholder-check-exceptions",
+    "changed_artifacts": [
+        "governance/canon/AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md"
+    ],
+    "consumer_repo": "APGI-cmy/app_management_centre",
+    "session": "session-032-20260420",
+    "processed_at": "2026-04-20T14:04:33Z",
+    "status": "LAYERED",
+    "agent_file_detection_gate": "NOT_TRIGGERED",
+    "auto_close_eligible": true,
+    "consumer_actions": [
+        "File already present in consumer repo (previously layered)",
+        "Updated governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json \u2014 added AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md entry",
+        "Updated .agent-admin/governance/GOVERNANCE_ALIGNMENT_INVENTORY.json",
+        "Updated .agent-admin/governance/sync_state.json \u2014 canonical_commit: e5a76db0",
+        "Created ripple archive entry"
+    ],
+    "notes": "AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md was already present in consumer repo from a prior wave. Inventories updated to reflect e5a76db0 as the canonical trigger commit. No file content change required."
+}
