@@ -6,7 +6,7 @@
 |----------|-----------------------------------|--------------|--------|
 | `governance/canon/AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md` | f5c9d72ebf2584e10ff09f29fdbc90c6f8251b2ebfbce58983c7db0e45dbac1d | c8c8e32256e24a76274f44c1dbc4482fecb24bd2b7523f4bd57a244801bf9c40 | FILE PRESENT |
 
-> **Note**: SHA256 discrepancy between CANON_INVENTORY hash and local file hash. This discrepancy is **pre-existing** (not introduced by this PR) and is **non-blocking for this PR**. It likely reflects different line endings or minor content differences at layer-down time vs. inventory generation. Recommended for future housekeeping reconciliation (verify source vs consumer copy, update CANON_INVENTORY if line-ending normalisation occurred at prior layer-down time).
+> **Note**: SHA256 discrepancy between CANON_INVENTORY hash and local file hash. CANON_INVENTORY was computed from the canonical source file. Local file hash is from the consumer repo copy. File content is version 1.0.0 as expected. This discrepancy likely reflects different line endings or minor content differences at layer-down time vs. inventory generation. CANON_INVENTORY marks the file as LAYERED, so the discrepancy is non-blocking for this layer-down; however, follow-up reconciliation is recommended to keep the evidence bundle wording and recorded hashes aligned across artifacts.
 
 ## Inventory Updates Verified
 
