@@ -1,16 +1,21 @@
 {
     "event_type": "governance_layer_down",
+    "dispatch_id": "session-032-20260420-e5a76db0",
+    "inventory_version": 1,
     "canonical_commit": "e5a76db099663c15dcda3fe878b48c1331b36aca",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
-    "date": "2026-04-19T12:02:45Z",
+    "timestamp": "2026-04-19T12:02:45Z",
+    "sender": "APGI-cmy-copilot",
     "trigger": "Merge pull request -1350 from APGI-cmy-copilot-canonize-placeholder-check-exceptions",
-    "changed_artifacts": [
+    "pr_number": 1350,
+    "changed_paths": [
         "governance/canon/AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md"
     ],
     "consumer_repo": "APGI-cmy/app_management_centre",
     "session": "session-032-20260420",
-    "processed_at": "2026-04-20T14:04:33Z",
-    "status": "LAYERED",
+    "archived_at": "2026-04-20T14:04:33Z",
+    "status": "archived",
+    "outcome": "layered",
     "agent_file_detection_gate": "NOT_TRIGGERED",
     "auto_close_eligible": true,
     "consumer_actions": [
