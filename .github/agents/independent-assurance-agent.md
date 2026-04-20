@@ -7,7 +7,7 @@ agent:
   id: independent-assurance-agent
   class: assurance
   version: 6.2.0
-  contract_version: 2.6.1
+  contract_version: 2.8.1
   contract_pattern: four_phase_canonical
   model: claude-sonnet-4-6
 
@@ -223,10 +223,10 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-19
-  contract_version: 2.8.0
+  last_updated: 2026-04-20
+  contract_version: 2.8.1
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
-  change_summary: "v2.8.0 (2026-04-19): Add ACR-09 (gate set not identified), ACR-10 (stale gate wording), ACR-11 (PASS without CI evidence). Normalize pre-brief path to wave-record-only model. Add NO-STANDALONE-PREBRIEF-001. Wave: wave-parity-upgrade-20260419."
+  change_summary: "v2.8.1 (2026-04-20): Parser-compat repair. Shorten change_summary scalar. Fix contract_version drift (2.6.1→2.8.1). Wave: repair-parser-compat-20260420."
 ---
 
 > **[FM_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**

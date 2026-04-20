@@ -1,11 +1,7 @@
 ---
 name: api-builder
 id: api-builder
-description: >
-  API Builder for Maturion ISMS modules. Implements API routes, handlers, and
-  business logic according to frozen architecture specifications. Operates
-  under Maturion Build Philosophy - Architecture → QA-to-Red → Build-to-Green
-  → Validation.
+description: "API Builder for Maturion ISMS. Implements API routes, handlers, and business logic per frozen architecture specs. Build Philosophy: Architecture→QA-to-Red→Build-to-Green→Validation."
 
 agent:
   id: api-builder
