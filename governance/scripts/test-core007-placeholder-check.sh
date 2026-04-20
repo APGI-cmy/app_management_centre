@@ -22,15 +22,15 @@ check_line() {
   while IFS= read -r l; do
     # EXC-001: governance condition descriptions
     if echo "$l" | grep -qiE "(placeholder|stub|TBD).*(hash|detect|trigger|mode|state|escalat|condition|gate)"; then continue; fi
-    if echo "$l" | grep -qiE "(hash|detect|trigger|mode|state|escalat|condition|gate).*(placeholder|stub|TBD)"; then continue; fi
+    if echo "$l" | grep -qiE "(hash|detect|escalat).*(placeholder|stub|TBD)"; then continue; fi
     # EXC-002: checker or output template strings / iaa_audit_token
     if echo "$l" | grep -qiE "(echo|print|output|message|report|template).*['\"].*((no )?(placeholder|stub|TBD|TODO)|iaa_audit_token)"; then continue; fi
-    if echo "$l" | grep -qiE "iaa_audit_token"; then continue; fi
+    if echo "$l" | grep -qiE "iaa_audit_token" && echo "$l" | grep -qiE "(field|key|header|metadata|meta|template|report|output|message|example|schema)"; then continue; fi
     # EXC-003: negative assertions
     if echo "$l" | grep -qiE "no (placeholder|stub|TBD|TODO)(.*content|[^a-zA-Z]|$)"; then continue; fi
     # EXC-004: checklist / gate labels
-    if echo "$l" | grep -qiE "(gate|check|checklist|step)[^a-zA-Z]+(placeholder|stub|TBD)"; then continue; fi
-    if echo "$l" | grep -qiE "(placeholder|stub|TBD)[^a-zA-Z]+(gate|check|checklist|step)"; then continue; fi
+    if echo "$l" | grep -qiE "(gate|check|checklist).*(placeholder|stub|TBD)[-\[]"; then continue; fi
+    if echo "$l" | grep -qiE "(placeholder|stub|TBD)[^a-zA-Z]+(gate|check|checklist)"; then continue; fi
     # EXC-005: canon hash-validation terminology
     if echo "$l" | grep -qiE "placeholder.*(hash|api)"; then continue; fi
     if echo "$l" | grep -qiE "(hash|api).*placeholder"; then continue; fi
@@ -84,7 +84,7 @@ assert_pass B5 "echo 'No stub content detected in contract body'"               
 
 echo ""
 echo "--- Section C: AMC Continuity (iaa_audit_token must still pass via EXC-002) ---"
-assert_pass C1 "iaa_audit_token: IAA-session-049-20260420-PASS"
+assert_pass C1 "iaa_audit_token schema field: placeholder token format"
 
 echo ""
 echo "--- Section D: Boundary Cases (canon §8.3) ---"
@@ -92,6 +92,8 @@ assert_pass D1 "Detect placeholder hashes and escalate"   # EXC-001
 assert_pass D3 "No TBD content present ✅"                # EXC-003
 assert_fail D4 "TBD: resolve before PR merge"
 assert_pass D5 "Gate name: placeholder-scan"              # EXC-004
+assert_fail D6 "Gate enforcement: TBD"                    # EXC-001 tightening — generic governance word before TBD must not exempt
+assert_fail D7 "Step TBD - complete before merge"         # EXC-004 tightening — step + standalone TBD must not exempt
 
 echo ""
 TOTAL=$((PASS + FAIL))
