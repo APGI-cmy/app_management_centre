@@ -308,12 +308,12 @@ the contract non-operable. Exempting them would suppress genuine defect detectio
 These are legitimate agent-contract expressions that should NOT be flagged:
 
 ```
-PASS: "CANON_INVENTORY placeholder hashes detected → DEGRADED MODE"  ← EXC-001
-PASS: "No placeholder/stub/TODO content: ✅"                          ← EXC-003
-PASS: "Detect placeholder or TBD values in hash fields"               ← EXC-005
-PASS: "Gate: placeholder-check-enforcement"                           ← EXC-004
-PASS: "echo 'No stub content detected in contract body'"              ← EXC-002
-PASS: "select(. == 'placeholder' or . == 'TBD')"  (JQ snippet)       ← EXC-005
+PASS: "CANON_INVENTORY placeholder hashes detected → DEGRADED MODE"    ← EXC-001
+PASS: "No placeholder/stub/TODO content: ✅"                            ← EXC-003
+PASS: "Detect placeholder or TBD values in hash fields"                 ← EXC-005
+PASS: "Gate: placeholder-check-enforcement"                             ← EXC-004
+PASS: "echo 'No stub content detected in contract body'"                ← EXC-002
+PASS: "select(.hash == 'placeholder' or .hash == 'TBD')"  (JQ snippet) ← EXC-005
 ```
 
 **Why**: Each of these is governed meta-language — it describes validation logic, asserts compliance,
