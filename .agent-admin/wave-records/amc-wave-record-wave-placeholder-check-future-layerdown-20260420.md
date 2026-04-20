@@ -182,15 +182,13 @@ The assessment states CORE-007 uses an ad-hoc `grep -v "iaa_audit_token"` exclus
 
 ## Section 5: Assurance
 
-> **To be completed at final assurance invocation.**
-
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING |
-| PHASE_B_BLOCKING_TOKEN | PENDING |
-| iaa_session | PENDING |
-| iaa_date | PENDING |
-| merge_gate_parity | PENDING |
+| iaa_verdict | ASSURANCE-TOKEN — PASS |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-049-20260420-PASS |
+| iaa_session | session-049-20260420 |
+| iaa_date | 2026-04-20 |
+| merge_gate_parity | PASS — governance scaffolding wave; POLC boundary checks PASS; no implementation artifacts; 4/4 substantive focus areas PASS |
 | merge_authority | CS2 ONLY — AGCFPP-001 |
 
 ---
