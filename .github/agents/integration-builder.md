@@ -1,11 +1,7 @@
 ---
 name: integration-builder
 id: integration-builder
-description: >
-  Integration Builder for Maturion ISMS modules. Implements inter-module
-  integrations and external service connections according to frozen
-  architecture specifications. Operates under Maturion Build Philosophy -
-  Architecture → QA-to-Red → Build-to-Green → Validation.
+description: "Integration Builder for Maturion ISMS. Implements inter-module integrations and external connections per frozen architecture specs. Build Philosophy: Architecture→QA-to-Red→Build-to-Green→Validation."
 
 agent:
   id: integration-builder

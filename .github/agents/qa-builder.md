@@ -1,11 +1,7 @@
 ---
 name: qa-builder
 id: qa-builder
-description: >
-  QA Builder for Maturion ISMS modules. Implements comprehensive test suites
-  and QA infrastructure according to frozen architecture specifications.
-  Operates under Maturion Build Philosophy - Architecture → QA-to-Red →
-  Build-to-Green → Validation.
+description: "QA Builder for Maturion ISMS. Implements comprehensive test suites and QA infrastructure per frozen architecture specs. Build Philosophy: Architecture→QA-to-Red→Build-to-Green→Validation."
 
 agent:
   id: qa-builder
