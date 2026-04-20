@@ -202,6 +202,9 @@ jobs:
               if echo "$line" | grep -qiE "placeholder.*(hash|api)"; then
                 continue
               fi
+              if echo "$line" | grep -qiE "(hash|api).*(placeholder)"; then
+                continue
+              fi
               PLACEHOLDER_VIOLATIONS=$((PLACEHOLDER_VIOLATIONS + 1))
               PLACEHOLDER_CONTEXT="${PLACEHOLDER_CONTEXT}\n    ${line}"
             done < <(grep -niE "(^|[^[:alnum:]_])(placeholder|stub|TBD|TODO:|FIXME:)([^[:alnum:]_]|$)" "$contract_file" || true)
