@@ -59,8 +59,8 @@ iaa_oversight:
     assurance_record: wave_record_section_5_only
     rule: "IAA does not rewrite PREHANDOVER. Final assurance goes in wave record section 5."
   rationale: >
-    Agent-contract changes are governance changes. Final IAA PASS is required.
-    No self-approval. No merge-ready state without final IAA PASS.
+    Agent-contract changes are governance changes. No self-approval.
+    Final IAA PASS is required before merge-ready state.
 
 merge_gate_interface:
   required_checks:
@@ -718,7 +718,7 @@ Confirm:
 - contract bundle complete
 - no stale gate-family references
 - no obsolete final-assurance model
-- no frontmatter metadata overflow
+- no frontmatter scalar exceeds platform parser limit
 
 If any fail:
 - stop
