@@ -27,8 +27,9 @@
 - `.agent-admin/governance/sync_state.json` — sync state (updated)
 - `.agent-admin/governance/ripple-archive/ripple-layer-down-e5a76db0.json` — ripple archive (created)
 - `.agent-workspace/governance-liaison-amc/memory/session-032-20260420.md` — session memory
-- `.agent-admin/build-evidence/session-032-20260420/` — evidence bundle
+- `.agent-admin/build-evidence/session-032-20260420/` — evidence bundle (HANDOVER_SUMMARY.md + ALIGNMENT_EVIDENCE.md)
 - `.agent-admin/wave-records/amc-wave-record-layer-down-e5a76db0-20260420.md` — this wave record
+- `.agent-workspace/independent-assurance-agent/memory/session-052-20260420.md` — IAA session memory (assurance record for this wave)
 
 **Changed artifacts from canonical commit e5a76db0**:
 
@@ -106,6 +107,6 @@
 
 **ASSURANCE-TOKEN ISSUED**: IAA-session-052-20260420-PASS  
 **PHASE_B_BLOCKING_TOKEN**: IAA-session-052-20260420-PASS  
-All 18 checks PASS. Merge gate parity: PASS. Scope parity: PASS (8/8 artifacts exact match).
+All 18 checks PASS. Merge gate parity: PASS. Scope parity: PASS (9/9 artifacts exact match).
 
 **Non-blocking observation**: Pre-existing SHA256 hash discrepancy for `governance/canon/AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md` (CANON_INVENTORY: `f5c9d72e...` vs local: `c8c8e322...`). File not modified in this PR; OVL-LA-001 does not apply. Follow-up reconciliation recommended in a future housekeeping wave.
