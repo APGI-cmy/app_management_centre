@@ -1,8 +1,8 @@
 # Execution Ceremony Admin — Anti-Patterns Reference
 
-**Version**: 1.0.0  
+**Version**: 1.1.0  
 **Authority**: AGENT_HANDOVER_AUTOMATION.md v1.4.1 §4.3e + EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.1.0 (ECAP-001)  
-**Effective**: 2026-04-17  
+**Effective**: 2026-04-19  
 **Owner**: Maturion Engineering Lead  
 **Consumer**: execution-ceremony-admin-agent, foreman-v2-agent (§14.6 QP checkpoint), independent-assurance-agent (ACR regime)
 
@@ -119,6 +119,76 @@ This reference documents the **9 known admin anti-patterns (AAP-01 through AAP-0
 
 ---
 
+### AAP-10 — Missing ECAP Reconciliation Summary
+
+**Description**: The ceremony bundle is missing the ECAP reconciliation summary at `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md` when an ECAP ceremony admin was appointed for this job.
+
+**IAA Trigger**: ACR-01 (missing required ceremony artifact)  
+**Detection**: `ls .agent-admin/prehandover/ecap-reconciliation-*.md 2>/dev/null || echo "MISSING"`  
+**Resolution**: Create ECAP reconciliation summary with C1–C5 populated before bundle return.
+
+---
+
+### AAP-11 — Incomplete ECAP Reconciliation Summary (Blank C-Fields)
+
+**Description**: The ECAP reconciliation summary exists but one or more of C1–C5 is blank, has a placeholder, or contains stub content.
+
+**IAA Trigger**: ACR-01 (missing required content), ACR-07 (general coherence)  
+**Detection**: Read C1–C5 fields in `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md`. Any blank or placeholder field → FAIL.  
+**Resolution**: Complete all C1–C5 fields before bundle return. C5 specifically requires Foreman sign-off.
+
+---
+
+### AAP-12 — Foreman §14.6 QP Checkpoint Not Completed
+
+**Description**: C5 in the ECAP reconciliation summary is present but does not contain the Foreman §14.6 QP Admin-Compliance Checkpoint completion evidence.
+
+**IAA Trigger**: ACR-01 (missing required content)  
+**Detection**: Check C5 for Foreman §14.6 checkpoint signature text. Placeholder or "PENDING" in C5 → FAIL.  
+**Resolution**: Foreman must complete C5 via §14.6 before ceremony admin returns bundle.
+
+---
+
+### AAP-13 — Session Memory Wave Record Path Mismatch
+
+**Description**: The `wave_record_path` field in session memory does not point to the actual wave record file committed on the branch.
+
+**IAA Trigger**: ACR-07 (general coherence), ACR-08 (stale path reference)  
+**Detection**: `git ls-files --error-unmatch "$(grep 'wave_record_path:' .agent-workspace/foreman-v2/memory/session-*.md | tail -1 | awk '{print $2}' | tr -d '\r')" 2>&1`  
+**Resolution**: Update `wave_record_path` in session memory to match actual committed wave record path.
+
+---
+
+### AAP-14 — Wave Record Assurance Section Not Pre-Filled
+
+**Description**: Wave record section 5 was left with empty/missing `PHASE_B_BLOCKING_TOKEN` field instead of pre-filled with `PENDING` before IAA invocation.
+
+**IAA Trigger**: ACR-07 (general), ACR-08 (structural gap)  
+**Detection**: Resolve the exact wave record path from session memory (`wave_record_path` field) and run: `grep "PHASE_B_BLOCKING_TOKEN:" "$WAVE_RECORD" | grep -E ":[[:space:]]*$"` (flags empty/blank value) — OR — verify the field exists at all with `grep -c "PHASE_B_BLOCKING_TOKEN:" "$WAVE_RECORD"` (returns 0 if missing). Note: any non-empty terminal value (PENDING, PASS, REJECTION-PACKAGE, etc.) is valid at detection time; only a missing or empty field is an AAP-14 violation.  
+**Resolution**: Pre-fill section 5 `PHASE_B_BLOCKING_TOKEN: PENDING` before IAA invocation. IAA will update to actual token.
+
+---
+
+### AAP-15 — Gate Set Not Explicitly Identified
+
+**Description**: The final-state wave record evaluation section references gate results generically (e.g., "all required gates pass", "merge gate: PASS") without listing each required gate from `merge_gate_interface.required_checks` by name with its individual final state.
+
+**IAA Trigger**: ACR-09  
+**Detection**: Read Section 3 (Evaluation Summary) of the wave record. If the gate inventory does not list each required check from the contract's `merge_gate_interface.required_checks` with per-gate PASS/FAIL/N/A status → FAIL.  
+**Resolution**: Replace generic gate claims with an explicit gate inventory table listing every required check by name with its final state and CI evidence reference.
+
+---
+
+### AAP-16 — Stale Gate Wording in Final-State Proof
+
+**Description**: The final-state wave record evaluation section or session memory contains PENDING, in-progress, in_progress, verify-gates, or equivalent provisional wording for any gate entry. This typically occurs when a pre-IAA draft is committed without replacing all provisional placeholders.
+
+**IAA Trigger**: ACR-10  
+**Detection**: `grep -iE "\bPENDING\b|\bin[ _-]?progress\b|\bverify.gates\b" .agent-admin/wave-records/amc-wave-record-*-<latest>.md | grep -v "PHASE_B_BLOCKING_TOKEN: PENDING"` (the token pre-fill exemption applies — only gate-state fields are in scope)  
+**Resolution**: Replace all provisional gate-state entries with explicit final states (PASS, FAIL, or N/A with reason). Do not commit bundle while any gate entry remains provisional.
+
+---
+
 ## IAA Rejection Trigger Cross-Reference
 
 | AAP | Triggers ACR(s) |
@@ -132,6 +202,13 @@ This reference documents the **9 known admin anti-patterns (AAP-01 through AAP-0
 | AAP-07 | ACR-04, ACR-07 |
 | AAP-08 | ACR-06 |
 | AAP-09 | ACR-05, ACR-07, ACR-08 |
+| AAP-10 | ACR-01 |
+| AAP-11 | ACR-01, ACR-07 |
+| AAP-12 | ACR-01 |
+| AAP-13 | ACR-07, ACR-08 |
+| AAP-14 | ACR-07, ACR-08 |
+| AAP-15 | ACR-09 |
+| AAP-16 | ACR-10 |
 
 ---
 
@@ -182,6 +259,43 @@ fi
 echo "✅ AAP Quick-Check PASSED — no anti-patterns detected"
 ```
 
+### AAP-15 and AAP-16 Detection (append to script above):
+
+```bash
+# AAP-15: Gate set not explicitly identified
+# Sourced from merge_gate_interface.required_checks in foreman-v2-agent.md (all 7 required checks).
+# Resolve the exact wave record path from session memory — do NOT use a glob.
+WAVE_RECORD=$(grep "wave_record_path:" .agent-workspace/foreman-v2/memory/session-*.md 2>/dev/null | tail -1 | awk '{print $2}' | tr -d '\r')
+if [ -n "$WAVE_RECORD" ] && [ -f "$WAVE_RECORD" ]; then
+  # Check that wave record evaluation section has explicit per-gate entries for ALL required gates.
+  MISSING_GATES=()
+  for gate in \
+    "merge-gate/verdict" \
+    "governance/alignment" \
+    "stop-and-fix/enforcement" \
+    "foreman-implementation-check" \
+    "builder-involvement-check" \
+    "session-memory-check" \
+    "prehandover-proof-check"; do
+    if ! grep -q "$gate" "$WAVE_RECORD"; then
+      MISSING_GATES+=("$gate")
+    fi
+  done
+  if [ ${#MISSING_GATES[@]} -gt 0 ]; then
+    FAILS+=("AAP-15: Gate set not explicitly identified — missing: ${MISSING_GATES[*]}")
+  fi
+else
+  FAILS+=("AAP-15: Cannot resolve current wave record from session memory (wave_record_path not set or file missing)")
+fi
+
+# AAP-16: Stale gate wording (excluding PHASE_B_BLOCKING_TOKEN: PENDING which is valid pre-fill)
+if [ -n "$WAVE_RECORD" ] && [ -f "$WAVE_RECORD" ]; then
+  if grep -iE "\bPENDING\b|\bin[ _-]?progress\b|\bverify.gates\b" "$WAVE_RECORD" | grep -qv "PHASE_B_BLOCKING_TOKEN: PENDING"; then
+    FAILS+=("AAP-16: Stale gate wording found in $WAVE_RECORD")
+  fi
+fi
+```
+
 ---
 
-*Reference Version: 1.0.0 | Authority: AGENT_HANDOVER_AUTOMATION.md v1.4.1, ECAP-001 v1.1.0 | Effective: 2026-04-17*
+*Reference Version: 1.1.0 | Authority: AGENT_HANDOVER_AUTOMATION.md v1.4.1, ECAP-001 v1.1.0 | Effective: 2026-04-19*

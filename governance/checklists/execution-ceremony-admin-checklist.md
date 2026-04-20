@@ -20,7 +20,7 @@ Operational checklist for the `execution-ceremony-admin-agent` to complete the f
 
 - [ ] **ECA-1.1** Receive job appointment from Foreman with: wave/job identifier, artifact scope, task ref list, expected return artifacts
 - [ ] **ECA-1.2** Confirm job is substantively complete (builders have delivered, QP PASS recorded) — do NOT start ceremony before substantive readiness
-- [ ] **ECA-1.3** Confirm the IAA Pre-Brief artifact exists for this wave at `.agent-admin/assurance/iaa-prebrief-<wave-slug>.md`
+- [ ] **ECA-1.3** Confirm the IAA Pre-Brief is present in wave record section 2 (`.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md` — per AMC 90/10 Admin Protocol v1.0.0; no standalone iaa-prebrief-*.md file)
 - [ ] **ECA-1.4** Record appointment in session memory preamble
 
 ---
@@ -45,7 +45,7 @@ Operational checklist for the `execution-ceremony-admin-agent` to complete the f
 
 ## Phase 3 — Wave Record Assembly (Sections 1–4)
 
-- [ ] **ECA-3.1** Create or locate wave record at `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`
+- [ ] **ECA-3.1** Create or locate wave record at `.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md`
 - [ ] **ECA-3.2** Section 1 — Job Scope: wave identifier, triggering issue, branch, agents, artifact scope
 - [ ] **ECA-3.3** Section 2 — Substantive Evidence: QP PASS evidence, test results, builder handover evidence
 - [ ] **ECA-3.4** Section 3 — Administrative Evidence: PREHANDOVER proof path, session memory path, scope declaration path

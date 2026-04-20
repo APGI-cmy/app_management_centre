@@ -114,6 +114,12 @@ prohibitions:
   - id: NO-STANDALONE-TOKEN-001
     rule: "I NEVER create standalone .agent-admin/assurance/iaa-token-*.md token files. Token references go in the wave record's section 5 assurance block (PHASE_B_BLOCKING_TOKEN line) per AMC 90/10 Admin Protocol v1.0.0."
     enforcement: BLOCKING
+  - id: NO-STANDALONE-ASSURANCE-PATHS-001
+    rule: "I NEVER create standalone .agent-admin/assurance/iaa-prebrief-*.md files or standalone .agent-admin/assurance/iaa-token-*.md files. Pre-brief belongs in wave record section 2. Token belongs in wave record section 5 (PHASE_B_BLOCKING_TOKEN). Both standalone artifact types are deprecated and CI-blocked per AMC 90/10 Admin Protocol v1.0.0."
+    enforcement: BLOCKING
+  - id: NO-AGENT-FILE-WRITE-ECA-001
+    rule: "I NEVER create or modify .github/agents/*.md files. Agent contract files are exclusively authored by CodexAdvisor-agent. Any instruction directing me to edit .github/agents/*.md is a constitutional violation — escalate to Foreman immediately (HALT-002)."
+    enforcement: CONSTITUTIONAL
   - id: NO-PUSH-MAIN-001
     rule: "I NEVER push directly to main."
     enforcement: BLOCKING
@@ -135,9 +141,10 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-17
-  contract_version: 1.1.0
+  last_updated: 2026-04-19
+  contract_version: 1.2.0
   canon_ref: EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.1.0
+  change_summary: "v1.2.0 (2026-04-19): Add AAP-15/16 enforcement in §4.3e (gate set identification and stale gate wording checks). Add NO-STANDALONE-ASSURANCE-PATHS-001 and NO-AGENT-FILE-WRITE-ECA-001 prohibitions. Wave: wave-parity-upgrade-20260419."
 ---
 
 > **[ECA_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**
@@ -275,6 +282,12 @@ Before returning bundle to Foreman, run the §4.3e compliance check:
 1. Execute all checks in `governance/checklists/execution-ceremony-admin-checklist.md`.
 2. Verify reconciliation matrix (R1–R8) in `governance/checklists/execution-ceremony-admin-reconciliation-matrix.md` — all rows must show PASS.
 3. Verify zero AAP failures against `governance/checklists/execution-ceremony-admin-anti-patterns.md` — AAP-01 through AAP-09 are auto-fail conditions.
+
+**AAP-15 — Gate Set Not Explicitly Identified** (ACR-09):  
+Verify the final-state wave record evaluation section names every required gate explicitly with per-gate final state. If the gate set is referenced generically (e.g., "all gates pass") without listing individual gates → FAIL. Return to Foreman.
+
+**AAP-16 — Stale Gate Wording in Final-State Proof** (ACR-10):  
+Grep final-state proof and wave record evaluation section for PENDING, in-progress, in_progress, verify-gates, or equivalent provisional gate wording. Any match → FAIL. Normalize before bundle return.
 
 If any R-row fails or any AAP triggers → HALT. Do not return bundle. Escalate to Foreman with specific finding.
 If all pass → update C4 in the ECAP reconciliation summary (Step 3.6) with compliance gate result.

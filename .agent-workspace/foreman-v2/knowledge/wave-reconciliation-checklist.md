@@ -134,6 +134,14 @@ If this wave triggered more than one IAA invocation round (R2, R3, etc.):
 - [ ] `wave-current-tasks.md` shows all tasks 🟢 DONE
 - [ ] Wave Completion Gate in `wave-current-tasks.md` confirmed
 
+### Gate Inventory Verification (gate_set_checked)
+
+- [ ] Every gate in `merge_gate_interface.required_checks` is listed by name in the wave record evaluation section
+- [ ] Every listed gate shows an explicit final state: PASS, FAIL, or N/A (with reason)
+- [ ] No gate shows PENDING or in-progress (HALT-012 if found)
+- [ ] CI evidence (run URL or equivalent) is cited for each PASS gate
+- [ ] `gate_set_checked: true` recorded in wave record only after all above pass
+
 ---
 
 ## Recording Completion

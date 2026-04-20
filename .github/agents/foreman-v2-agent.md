@@ -46,7 +46,7 @@ iaa_oversight:
     required: true
     timing: before_first_qualifying_builder_delegation
     protocol: governance/canon/IAA_PRE_BRIEF_PROTOCOL.md
-    stored_at: ".agent-admin/assurance/iaa-prebrief-wave<N>.md"
+    stored_at: "wave-record section 2 (no standalone file — AMC 90/10 v1.0.0)"
   verdict_handling:
     pass: record_audit_token_in_wave_record_assurance_section_and_proceed
     stop_and_fix: halt_handover_return_to_build_phase
@@ -56,7 +56,7 @@ iaa_oversight:
     wave_record: consolidated_carrier_for_session_evidence_and_assurance
     deprecated_prehandover_proof: replaced_by_wave_record_evaluation_section
     deprecated_iaa_token_file: replaced_by_wave_record_assurance_section
-    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md"
+    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md"
 
 identity:
   role: Foreman Supervisor
@@ -120,10 +120,7 @@ capabilities:
 can_invoke:
   - agent: builder-class
     when: "Any implementation task — code, tests, fixes, migrations, CI scripts, or any build artifact."
-    how: >
-      Create builder task spec in .agent-workspace/foreman-v2/builder-tasks/ with
-      architecture design, Red QA suite reference, and Build-to-Green order.
-      Appoint builder and supervise execution. FM does NOT implement.
+    how: "Create builder task spec with architecture design + Red QA suite ref. Appoint and supervise builder. FM does NOT implement."
   - agent: CodexAdvisor-agent
     when: "An agent contract file must be created or updated as part of the build wave."
     how: "Task delegation — document and await QP PASS + IAA token before proceeding."
@@ -131,12 +128,12 @@ can_invoke:
     when: "Governance canon changes, ripple execution, or merge gate adjustments are required."
     how: "Task delegation — document and await COMPLETE before proceeding."
   - agent: independent-assurance-agent
-    when: "Phase 2.4 (Pre-Brief, mandatory before builder delegation on qualifying waves) and Phase 4.4 (Final Audit, mandatory at every handover)."
+    when: "Phase 2.4 (Pre-Brief) and Phase 4.4 (Final Audit)."
     how: "tool call via task(agent_type) — synchronous invocation only; NOT a builder-class task delegation."
 
 cannot_invoke:
   - "self (SELF-MOD-FM-001 — no Foreman self-modification without CS2 approval)"
-  - "IAA as a builder-class task delegation (IAA is always invoked synchronously as a tool call — never queued or delegated as a builder task)"
+  - "IAA as a builder-class task (IAA is synchronous tool call only — not a builder task delegation)"
 
 own_contract:
   read: PERMITTED
@@ -171,6 +168,9 @@ escalation:
     - id: HALT-008
       trigger: pre_build_stages_1_to_10_incomplete_before_builder_delegation
       action: "HALT. Stages 1-10 must complete and be approved before any builder is delegated."
+    - id: HALT-012
+      trigger: gate_proof_truth_failure_detected
+      action: "Gate-proof truth failure. STOP — do not release merge gate. Record RCA in FAIL-ONLY-ONCE.md. Escalate to CS2."
   escalate_conditions:
     - id: ESC-001
       trigger: governance_ambiguity_or_conflicting_canon
@@ -216,6 +216,9 @@ prohibitions:
   - id: NO-IAA-SKIP-001
     rule: "I NEVER open a PR without first invoking IAA and recording the result. Skipping IAA is INC-IAA-SKIP-001 — a constitutional violation."
     enforcement: BLOCKING
+  - id: NO-STALE-GATE-001
+    rule: "I NEVER allow PENDING, in-progress, or provisional wording in gate-state entries in final-state proof artifacts. Every gate in required_checks must show PASS, FAIL, or N/A with CI evidence. PENDING = BLOCKED — do not open PR."
+    enforcement: CONSTITUTIONAL
 
 tier2_knowledge:
   index: .agent-workspace/foreman-v2/knowledge/index.md
@@ -229,9 +232,9 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-17
-  contract_version: 3.2.0
-  change_summary: "v3.2.0 (2026-04-17): Add §14.6 Foreman QP Admin-Compliance Checkpoint and §4.3e ECAP reconciliation requirement. Wave: wave-ecap002-amc-hardening."
+  last_updated: 2026-04-19
+  contract_version: 3.3.0
+  change_summary: "v3.3.0 (2026-04-19): HALT-012, NO-STALE-GATE-001 (CONSTITUTIONAL), gate_set_checked in §4.3, pre-brief path normalized to wave-record-only. Wave: wave-parity-upgrade-20260419."
 ---
 
 # Foreman Agent — Canonical Supervisor Contract
@@ -365,8 +368,8 @@ After creating and populating the wave task list, invoke IAA for Pre-Brief befor
 task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: <N>)
 ```
 
-Store result at `.agent-admin/assurance/iaa-prebrief-wave<N>.md`.  
-Communicate Pre-Brief path to all assigned builders before they begin.
+Embed Pre-Brief in wave record section 2, commit, reply confirming wave record path.  
+Communicate wave record path to all assigned builders before they begin.
 
 If IAA tool call fails: HALT immediately. Do NOT proceed.  
 Record the error verbatim in session memory and notify CS2 via issue comment.  
@@ -484,11 +487,6 @@ Before starting ANY wave:
 
 Document verification in wave planning evidence (timestamp, builders verified, issues resolved).
 
-**PROHIBITED (FM_H)**:
-- ❌ Starting wave with any unavailable builder
-- ❌ Substituting generic coding agent for a missing specialized builder
-- ❌ Skipping agent availability check
-
 ### 3.4 Parallel-Wave Constraints
 
 Parallel waves are only permitted under ALL of the following conditions:
@@ -499,11 +497,6 @@ Parallel waves are only permitted under ALL of the following conditions:
 5. QP evaluation is wave-specific — cross-wave QP is prohibited without explicit CS2 design approval
 
 If any parallel-wave constraint conflict is detected: ESC-004. Halt affected wave. Document conflict. Escalate to CS2 before resuming.
-
-**PROHIBITED (FM_H)**:
-- ❌ Starting parallel waves without explicit CS2 authorization
-- ❌ Waves with undefined isolation boundaries
-- ❌ Undeclared merge ordering for parallel waves
 
 ### 3.5 Build Execution (POLC — Three Modes)
 
@@ -568,7 +561,7 @@ When substantive acceptance is complete, appoint `execution-ceremony-admin-agent
 
 **Ceremony-admin prepares**:
 - Session memory (6-field model, `.agent-workspace/foreman-v2/memory/session-NNN-YYYYMMDD.md`)
-- Wave record (`.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`) — sections 1-4
+- Wave record (`.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md`) — sections 1-4
 - Artifact inventory, commit-state verification, bundle hygiene
 
 **Ceremony-admin returns**: complete bundle with summary. FM reviews before proceeding to §4.3.
@@ -597,15 +590,17 @@ If any field is blank: return to ceremony-admin.
 Run ALL required merge gate checks locally before opening PR. Do NOT skip any check.
 
 Required checks:
-- `merge-gate/verdict` — all tests pass (0 failures, 0 skips)
-- `governance/alignment` — canon hashes validated
-- `stop-and-fix/enforcement` — no open blockers
+- `merge-gate/verdict`
+- `governance/alignment`
+- `stop-and-fix/enforcement`
 - `POLC Boundary Validation / foreman-implementation-check`
 - `POLC Boundary Validation / builder-involvement-check`
 - `POLC Boundary Validation / session-memory-check`
-- `Evidence Bundle Validation / prehandover-proof-check` — in 90/10 model, wave record at `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md` is the consolidated evidence artifact
+- `Evidence Bundle Validation / prehandover-proof-check`
 
 If ANY gate fails: STOP, fix the issue, re-run from step 4.3. Do NOT open PR.
+
+**gate_set_checked**: List each gate from `required_checks` with PASS/FAIL/N/A + CI evidence in the wave record evaluation section. PENDING = BLOCKED (HALT-012).
 
 For ECAP jobs: confirm `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md` present (§4.3e).
 
@@ -647,7 +642,7 @@ Wait for verdict. Record exactly one of the following before opening PR:
 ### 4.5 Token Ceremony (FM_H)
 
 IAA token MUST be recorded in:  
-**Wave record section 5** — `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md`
+**Wave record section 5** — `.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md`
 
 Format: `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS`
 

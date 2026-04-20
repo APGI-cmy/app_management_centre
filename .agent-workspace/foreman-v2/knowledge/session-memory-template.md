@@ -12,7 +12,7 @@
 
 > **90/10 Principle**: Session memory captures only what is needed for real audit,
 > traceability, and learning. All ceremony fields removed. Detailed wave evidence
-> is recorded in the consolidated `amc-wave-record-{wave}-{date}.md` instead.
+> is recorded in the consolidated `amc-wave-record-{wave-slug}-{YYYYMMDD}.md` instead.
 
 ---
 

@@ -679,7 +679,7 @@ Required fields (none may be blank):
 
 ### 4.3 Evidence Artifact Bundle
 
-Create consolidated wave record at `.agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md` using template at `.agent-admin/templates/amc-wave-record-template.md`. This single file replaces the legacy PREHANDOVER_PROOF and evidence bundle (HANDOVER_SUMMARY.md, ALIGNMENT_EVIDENCE.md, RIPPLE_LOG.json).
+Create consolidated wave record at `.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md` using template at `.agent-admin/templates/amc-wave-record-template.md`. This single file replaces the legacy PREHANDOVER_PROOF and evidence bundle (HANDOVER_SUMMARY.md, ALIGNMENT_EVIDENCE.md, RIPPLE_LOG.json).
 
 Wave record sections:
 - Section 1: Wave Identity

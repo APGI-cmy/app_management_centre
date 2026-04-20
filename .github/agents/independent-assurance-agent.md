@@ -62,7 +62,7 @@ iaa_oversight:
     wave_record_assurance: consolidated_carrier_for_token_and_verdict
     token_format: PHASE_B_BLOCKING_TOKEN_embedded_in_wave_record_section_5
     deprecated_standalone_token_file: PROHIBITED_for_new_waves
-    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md (section 5)"
+    token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md (section 5)"
   independence_note: >
     IAA CANNOT self-review. Any IAA invocation for this contract must be invoked
     by CodexAdvisor and reviewed by CS2 directly. Self-review constitutes HALT-001.
@@ -98,14 +98,14 @@ capabilities:
     ambiguity_resolution: MANDATORY_INVOCATION
     pre_brief_invocation: MANDATORY_AT_WAVE_START
     pre_brief_phase: PHASE_0
-    pre_brief_artifact_path_pattern: ".agent-admin/assurance/iaa-prebrief-wave<N>.md"
+    pre_brief_artifact_path_carrier: "wave record section 2 — .agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md (consolidated per AMC 90/10 Admin Protocol v1.0.0; no standalone file)"
     mechanical_checks_in_ci: true
     ci_gate_ref: ".github/workflows/agent-contract-format-gate.yml"
     ci_evidence_gate_ref: ".github/workflows/preflight-evidence-gate.yml"
     artifact_immutability:
       token_output: write_to_wave_record_section_5_only
       prehandover_proof: never_edit_post_commit
-      token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave}-{YYYYMMDD}.md (section 5, PHASE_B_BLOCKING_TOKEN)"
+      token_carrier_pattern: ".agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md (section 5, PHASE_B_BLOCKING_TOKEN)"
     failure_classification:
       categories: [SUBSTANTIVE, CEREMONY, ENVIRONMENT_BOOTSTRAP]
       classify_every_failure: MANDATORY
@@ -196,6 +196,9 @@ prohibitions:
   - id: NO-STANDALONE-TOKEN-001
     rule: "I NEVER create standalone iaa-token-*.md files. Wave record section 5 (PHASE_B_BLOCKING_TOKEN) is the sole token carrier per AMC 90/10 Protocol v1.0.0. Standalone files are CI-BLOCKED."
     enforcement: BLOCKING
+  - id: NO-STANDALONE-PREBRIEF-001
+    rule: "I NEVER create standalone iaa-prebrief-*.md files. Wave record section 2 is the sole pre-brief carrier per AMC 90/10 Admin Protocol v1.0.0. Standalone pre-brief files are deprecated and CI-blocked."
+    enforcement: BLOCKING
 
 tier2_knowledge:
   index: .agent-workspace/independent-assurance-agent/knowledge/index.md
@@ -220,10 +223,10 @@ metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
   this_copy: consumer
   authority: CS2
-  last_updated: 2026-04-17
-  contract_version: 2.7.0
+  last_updated: 2026-04-19
+  contract_version: 2.8.0
   tier2_knowledge: .agent-workspace/independent-assurance-agent/knowledge/index.md
-  change_summary: "v2.7.0 (2026-04-17): Add ACR-01–08 admin-ceremony rejection triggers, ECAP proof bundle req, Phase 0 ECAP note. Wave: wave-ecap002-amc-hardening."
+  change_summary: "v2.8.0 (2026-04-19): Add ACR-09 (gate set not identified), ACR-10 (stale gate wording), ACR-11 (PASS without CI evidence). Normalize pre-brief path to wave-record-only model. Add NO-STANDALONE-PREBRIEF-001. Wave: wave-parity-upgrade-20260419."
 ---
 
 > **[FM_H] BOOTSTRAP DIRECTIVE — ABSOLUTE FIRST ACTION — NO EXCEPTIONS**
@@ -244,7 +247,7 @@ metadata:
 ## PHASE 0 — PRE-BRIEF INVOCATION (WAVE START)
 
 **Scope**: Invoked with `action: "PRE-BRIEF"` or comment containing `IAA_PRE_BRIEF_PROTOCOL.md §Trigger`.  
-**Action**: Read `wave-current-tasks.md`, classify tasks, write `iaa-prebrief-waveN.md`, commit, reply confirming artifact path and qualifying tasks.  
+**Action**: Read `wave-current-tasks.md`, classify tasks, embed Pre-Brief content in wave record section 2 (`.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md`), commit, reply confirming wave record path and qualifying tasks.  
 **Do NOT proceed to Phases 1–4 during a Pre-Brief invocation.**
 
 **For waves with ECAP-appointed ceremony admin**: note in the Pre-Brief artifact that the following additional items will be checked at final assurance: ECAP reconciliation summary (`.agent-admin/prehandover/ecap-reconciliation-<PR#>.md`, C1–C5), and Foreman §14.6 QP checkpoint completion evidence.
@@ -364,7 +367,7 @@ For each check in the category overlay:
 
 **Authority**: `governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md v1.6.0 §Admin-Ceremony Rejection Triggers`
 
-When the session involves an ECAP-appointed ceremony admin, apply ACR-01 through ACR-08. Each is an **auto-fail condition** — one trigger = REJECTION-PACKAGE (classify as CEREMONY failure):
+When the session involves an ECAP-appointed ceremony admin, apply ACR-01 through ACR-11. Each is an **auto-fail condition** — one trigger = REJECTION-PACKAGE (classify as CEREMONY failure):
 
 | Trigger | Description |
 |---|---|
@@ -376,6 +379,9 @@ When the session involves an ECAP-appointed ceremony admin, apply ACR-01 through
 | ACR-06 | PUBLIC_API ripple required but not assessed, recorded, or completed |
 | ACR-07 | PREHANDOVER/token/session memory/tracker/wave record not coherent |
 | ACR-08 | Artifact references pointing to non-committed or wrong-path files |
+| ACR-09 | Gate set not explicitly identified — final-state proof references gate results but does not name the exact gate set reviewed (missing gate_set_checked field or equivalent declaration listing all gates by name) |
+| ACR-10 | Stale PENDING or in-progress gate wording in final-state proof — any gate entry shows PENDING, in-progress, in_progress, or equivalent provisional state in the final-state proof or wave record evaluation section |
+| ACR-11 | GREEN or PASS claimed for a required gate without CI-backed evidence — a gate in required_checks is claimed PASS but no CI workflow run reference, log link, or equivalent CI-backed evidence is provided |
 
 For each ACR: verify against the artifact bundle. One FAIL = REJECTION-PACKAGE.
 
