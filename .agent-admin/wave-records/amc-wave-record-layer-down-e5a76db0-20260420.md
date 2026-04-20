@@ -97,8 +97,15 @@
 
 | Field | Value |
 |-------|-------|
-| iaa_status | AWAITING |
-| iaa_session | — |
-| phase_b_blocking_token | — |
+| iaa_status | PASS |
+| iaa_session | session-052-20260420 |
+| phase_b_blocking_token | IAA-session-052-20260420-PASS |
+| verdict_date | 2026-04-20 |
+| checks_run | 18 |
+| overlay_applied | LIAISON_ADMIN |
 
-*Section 5 will be populated after IAA verdict.*
+**ASSURANCE-TOKEN ISSUED**: IAA-session-052-20260420-PASS  
+**PHASE_B_BLOCKING_TOKEN**: IAA-session-052-20260420-PASS  
+All 18 checks PASS. Merge gate parity: PASS. Scope parity: PASS (8/8 artifacts exact match).
+
+**Non-blocking observation**: Pre-existing SHA256 hash discrepancy for `governance/canon/AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md` (CANON_INVENTORY: `f5c9d72e...` vs local: `c8c8e322...`). File not modified in this PR; OVL-LA-001 does not apply. Follow-up reconciliation recommended in a future housekeeping wave.
