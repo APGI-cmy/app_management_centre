@@ -19,8 +19,5 @@
   ],
   "author": "MaturionISMS",
   "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "js-yaml": "^4.1.1"
-  }
+  "private": true
 }
