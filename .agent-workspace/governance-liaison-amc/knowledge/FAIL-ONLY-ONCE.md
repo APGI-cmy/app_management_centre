@@ -10,7 +10,9 @@ None.
 
 ## Closed Breaches
 
-None.
+| Breach ID | Description | Session | Date | Status | Corrective Action |
+|-----------|-------------|---------|------|--------|-------------------|
+| OVL-LA-ADM-003-030 | Evidence bundle (.agent-admin/build-evidence/session-NNN/) missing before IAA invocation | session-030-20260420 | 2026-04-20 | CLOSED | Created bundle; evidence bundle creation added as explicit mandatory step before IAA invocation in layer-down protocol |
 
 ---
 

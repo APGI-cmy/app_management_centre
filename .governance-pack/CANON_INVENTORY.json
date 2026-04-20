@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-04-13",
-  "total_canons": 200,
+  "last_updated": "2026-04-20",
+  "total_canons": 202,
   "generation_timestamp": "2026-04-13T07:22:00Z",
   "canon_entry_schema": {
     "description": "Schema for canon entries in CANON_INVENTORY.json",
@@ -1290,7 +1290,7 @@
       "type": "canon",
       "path": "governance/canon/GOVERNANCE_CANON_MANIFEST.md",
       "layer_down_status": "INTERNAL",
-      "file_hash_sha256": "3845fc377d6bf413308e29993f73dc50ff0f55368494a3bcaa27d3b4c486d6d7",
+      "file_hash_sha256": "4a56c52cf142f2860b27309252fc41764145065fb4df1c0ed6427026d09ac64a",
       "last_updated": "2026-04-19",
       "change_note": "v1.0.0: Added PARKING_STATION_PATH_STANDARD.md v1.0.0 to \u00a73.5"
     },
@@ -2100,14 +2100,14 @@
     },
     {
       "filename": "SPECIALIST_KNOWLEDGE_MANAGEMENT.md",
-      "version": "1.0.0 | **Authority**: CS2",
+      "version": "1.1.0",
       "file_hash": "dc27a45885426d0b67306ff3ee432d6de0b5814e63b0154492572cd45399d10c",
       "effective_date": "2026-02-21",
       "description": "Canonical governance document: SPECIALIST_KNOWLEDGE_MANAGEMENT",
       "type": "canon",
       "path": "governance/canon/SPECIALIST_KNOWLEDGE_MANAGEMENT.md",
       "layer_down_status": "PUBLIC_API",
-      "file_hash_sha256": "dc27a45885426d0b67306ff3ee432d6de0b5814e63b0154492572cd45399d10c",
+      "file_hash_sha256": "d0e22e5b701fac3406a9c0b03f02fbe9cfc4446b27f8edcc69e28d83138fe9bd",
       "layer_up_status": "INTEGRATED",
       "layer_up_provenance": "First draft layered up from maturion-isms PR APGI-cmy/maturion-foreman-governance#366 (2026-02-21)"
     },
@@ -2356,6 +2356,36 @@
       "last_updated": "2026-04-19",
       "canonical_version": "1.0.0",
       "change_note": "v1.0.0: Initial canon \u2014 canonicalizes per-agent parking station path"
+    },
+    {
+      "filename": "AIMC_MMM_CONVERGENCE_BOUNDARY_CANON.md",
+      "path": "governance/canon/AIMC_MMM_CONVERGENCE_BOUNDARY_CANON.md",
+      "version": "1.0.0",
+      "canonical_version": "1.0.0",
+      "description": "Canonical convergence boundary between MMM and AIMC",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "effective_date": "2026-04-15",
+      "file_hash": "sha256:f163dcebdf03f6608250a7b043744984bb92d7888a40f1e6f0623160920f088b",
+      "file_hash_sha256": "f163dcebdf03f6608250a7b043744984bb92d7888a40f1e6f0623160920f088b",
+      "canonical_commit": "a9283eaf4fb216f28cdf4acd2557e98134c9b8c0",
+      "layered_down_at": "2026-04-20T07:25:29Z",
+      "action": "CREATED"
+    },
+    {
+      "filename": "AIMC_SPECIALIST_OPERATING_MODEL.md",
+      "path": "governance/canon/AIMC_SPECIALIST_OPERATING_MODEL.md",
+      "version": "1.0.0",
+      "canonical_version": "1.0.0",
+      "description": "Specialist operating model for AIMC agents",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "effective_date": "2026-04-15",
+      "file_hash": "sha256:50d60061c6dbbfd93cd2a383951cdafac49761f86c964e8a4f2eca0b7a9a03c3",
+      "file_hash_sha256": "50d60061c6dbbfd93cd2a383951cdafac49761f86c964e8a4f2eca0b7a9a03c3",
+      "canonical_commit": "a9283eaf4fb216f28cdf4acd2557e98134c9b8c0",
+      "layered_down_at": "2026-04-20T07:25:29Z",
+      "action": "CREATED"
     }
   ]
 }

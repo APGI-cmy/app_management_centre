@@ -1,11 +1,11 @@
 {
-  "last_check": "2026-04-19T09:12:49Z",
+  "last_check": "2026-04-20T07:25:29Z",
   "canonical_version": "1.0.0",
-  "canonical_commit": "c6c52a632b8a0d4ae1e0a40057b518bf8b9a9d13",
+  "canonical_commit": "a9283eaf4fb216f28cdf4acd2557e98134c9b8c0",
   "local_version": "1.0.0",
-  "local_commit": "c6c52a632b8a0d4ae1e0a40057b518bf8b9a9d13",
+  "local_commit": "a9283eaf4fb216f28cdf4acd2557e98134c9b8c0",
   "drift_detected": "false",
   "needs_alignment": "false",
   "alignment_method": "layer-down",
-  "alignment_note": "Layer-down of c6c52a63 (2026-04-14) \u2014 AGENT_CONTRACT_ARCHITECTURE.md v1.1.0 created, PARKING_STATION_PATH_STANDARD.md v1.0.0 created, GOVERNANCE_CANON_MANIFEST.md updated (PARKING_STATION entry added), per-agent parking station directories created for all agent workspaces."
+  "alignment_note": "Layer-down of a9283eaf (2026-04-17) \u2014 AIMC_MMM_CONVERGENCE_BOUNDARY_CANON.md v1.0.0 created, AIMC_SPECIALIST_OPERATING_MODEL.md v1.0.0 created, SPECIALIST_KNOWLEDGE_MANAGEMENT.md v1.1.0 created, GOVERNANCE_CANON_MANIFEST.md updated (\u00a73.15 AIMC models)."
 }

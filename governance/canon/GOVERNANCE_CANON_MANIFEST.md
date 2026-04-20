@@ -80,7 +80,7 @@ It serves to:
 | `COGNITIVE_CAPABILITY_ORCHESTRATION_MODEL.md` | 1.1.0 | PUBLIC_API | FM App | 2026-01-03 |
 | `COGNITIVE_HYGIENE_AUTHORITY_MODEL.md` | 1.0.0 | OPTIONAL | FM App | 2026-01-05 |
 | `COGNITIVE_HYGIENE_MEMORY_INTEGRATION_MODEL.md` | 1.0.0 | OPTIONAL | FM App | 2026-01-05 |
-| `FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md` | 1.2.0 | PUBLIC_API | FM App | 2026-04-08 |
+| `FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md` | 1.3.0 | PUBLIC_API | FM App | 2026-04-08 |
 
 ### 3.2 Architecture & Build Models (PUBLIC_API)
 
@@ -118,7 +118,7 @@ It serves to:
 | `FAILURE_PROMOTION_RULE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `FM_PREAUTH_CHECKLIST_CANON.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `GATE_PREDICTIVE_COMPLIANCE_ANALYSIS.md` | 1.0.0 | OPTIONAL | FM App | 2026-01-05 |
-| `IAA_PRE_BRIEF_PROTOCOL.md` | 1.2.1 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-08 |
+| `IAA_PRE_BRIEF_PROTOCOL.md` | 1.2.2 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-08 |
 | `INITIALIZATION_COMPLETENESS_GATE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `PRE_BUILD_REALITY_CHECK_CANON.md` | 1.1.0 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-05 |
 | `PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
@@ -221,7 +221,6 @@ It serves to:
 | `FM_BUILDER_APPOINTMENT_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `FM_GOVERNANCE_LOADING_PROTOCOL.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
 | `GOVERNANCE_BUILDER_SUBMISSION_SURVEY.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
-| `INDEPENDENT_ASSURANCE_AGENT_CANON.md` | 1.4.0 | INTERNAL | N/A | 2026-04-08 |
 | `MATURION_CONCEPTUAL_DOCTRINE.md` | 1.0.0 | OPTIONAL | FM App, SlotMaster | 2026-01-05 |
 | `RESPONSIBILITY_DOMAIN_ENTRY.template.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
 | `RESPONSIBILITY_DOMAIN_REGISTRY.md` | 1.0.0 | INTERNAL | N/A | 2026-01-05 |
@@ -257,16 +256,28 @@ These policies are located in `governance/policy/` and establish constitutional 
 
 **Note**: AUTOMATED_DEPRECATION_DETECTION_GATE is a constitutional policy establishing mandatory pre-commit and CI/CD deprecation detection gates for technical debt prevention. It implements BL-026 and extends the BL-024 Zero Warning Test Debt mandate. See also: Bootstrap Learning BL-026.
 
+### 3.15 AIMC Platform Models (PUBLIC_API)
+
+| Canon File | Version | Layer-Down Status | Downstream Repos | Last Updated |
+|-----------|---------|-------------------|------------------|--------------|
+| `AIMC_STRATEGY.md` | 1.0.0 | PUBLIC_API | maturion-isms | 2026-02-23 |
+| `AIMC_SPECIALIST_OPERATING_MODEL.md` | 1.0.0 | PUBLIC_API | maturion-isms | 2026-04-15 |
+| `AIMC_MMM_CONVERGENCE_BOUNDARY_CANON.md` | 1.0.0 | PUBLIC_API | maturion-isms | 2026-04-15 |
+| `ORCHESTRATOR_SPECIALIST_ARCHITECTURE.md` | 1.0.0 | PUBLIC_API | FM App, maturion-isms | 2026-02-20 |
+| `SPECIALIST_KNOWLEDGE_MANAGEMENT.md` | 1.1.0 | PUBLIC_API | FM App, maturion-isms | 2026-04-15 |
+| `AGENT_DELEGATION_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, maturion-isms | 2026-02-20 |
+| `MULTI_EMBODIMENT_ORCHESTRATION_MODEL.md` | 1.0.0 | PUBLIC_API | FM App | 2026-02-20 |
+
 ---
 
 ## 4. Governance Public API Summary
 
-**Total Canon Files**: 94  
+**Total Canon Files**: 95  
 **Total Policy Files**: 15  
-**Combined Total**: 109  
-**PUBLIC_API**: 79 files (73%)  
+**Combined Total**: 110  
+**PUBLIC_API**: 81 files (73%)  
 **OPTIONAL**: 16 files (15%)  
-**INTERNAL**: 14 files (13%)  
+**INTERNAL**: 13 files (12%)  
 **DEPRECATED**: 0 files (0%)
 
 ### 4.1 Critical Path Canon (Must-Have for Downstream Repos)
@@ -342,6 +353,7 @@ When a breaking change is required:
 | 2026-03-20 | APP_DESCRIPTION_REQUIREMENT_POLICY.md v1.0 → v2.0; added APP_DESCRIPTION_TEMPLATE.md and APP_DESCRIPTION_CREATION_CHECKLIST.md to §3.14; updated totals (97→99) | governance-repo-administrator-v2 (issue #1312, PR #1313) |
 | 2026-04-05 | Added PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0 to §3.2; updated totals (99→101) | governance-repo-administrator-v2 (issue #1319) |
 | 2026-04-05 | Canon documentation updates for 12-stage pre-build model: APP_DESCRIPTION_TEMPLATE.md v1.0→v1.1; PRE_BUILD_REALITY_CHECK_CANON.md v1.0.0→v1.1.0 added to §3.4; new UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md v1.0 and BUILDER_CHECKLIST_TEMPLATE.md v1.0 added to §3.14; APP_DESCRIPTION_CREATION_CHECKLIST.md date updated; totals updated (101→104) | governance-repo-administrator-v2 (issue #1320) |
+| 2026-04-15 | Added §3.15 AIMC Platform Models (7 files); updated totals 93→95 canon files, combined 108→110; SPECIALIST_KNOWLEDGE_MANAGEMENT.md amended with Source Model Governance cross-reference | governance-repo-administrator-v2 (issue #1343) |
 
 ### 7.2 Layer-Down Completion Tracking
 
