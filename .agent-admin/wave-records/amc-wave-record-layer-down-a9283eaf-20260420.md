@@ -94,9 +94,12 @@ Merge gate parity: PASS — all 3 required checks pass locally.
 
 ## Section 5: Assurance
 
-*[To be populated by IAA invocation — Phase 4 §4.4]*
+**IAA Session**: session-048-20260420  
+**Verdict**: ASSURANCE-TOKEN — all checks PASS (0 failures)  
+**Prior Rejection Resolved**: OVL-LA-ADM-003 (evidence bundle absent) — CLOSED  
+**Date**: 2026-04-20
 
-PHASE_B_BLOCKING_TOKEN: AWAITING IAA INVOCATION
+PHASE_B_BLOCKING_TOKEN: IAA-session-048-20260420-PASS
 
 ---
 
