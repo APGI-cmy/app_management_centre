@@ -1114,7 +1114,13 @@ done
 # ─────────────────────────────────────────────────────────────────────────────
 echo "  [J] Cross-artifact final-state consistency (active-bundle scoped)..."
 
-LATEST_PROOF=$(git ls-files .agent-admin/prehandover/proof-*.md 2>/dev/null | sort | tail -1)
+LATEST_PROOF=""
+while IFS= read -r PROOF_FILE; do
+  [ -z "${PROOF_FILE}" ] && continue
+  if [ -z "${SUPERSEDED_SET["${PROOF_FILE}"]+x}" ]; then
+    LATEST_PROOF="${PROOF_FILE}"
+  fi
+done < <(git ls-files .agent-admin/prehandover/proof-*.md 2>/dev/null | sort)
 LATEST_RECONCILIATION=$(git ls-files .agent-admin/prehandover/ecap-reconciliation-*.md 2>/dev/null | sort | tail -1)
 
 if [ -n "${LATEST_PROOF}" ] && [ -n "${LATEST_RECONCILIATION}" ]; then
