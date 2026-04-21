@@ -14,7 +14,7 @@ This registry records governance failures that CodexAdvisor must never repeat.
 Each entry captures a root cause, the permanent rule that prevents recurrence,
 and the incident reference.
 
-CodexAdvisor loads this file in Phase 1 Step 1.5 on every session start.
+CodexAdvisor loads this file in Phase 1 Step 1.2 (Tier 2 knowledge load) on every session start.
 
 **Every session MUST:**
 1. Read this file in full.
