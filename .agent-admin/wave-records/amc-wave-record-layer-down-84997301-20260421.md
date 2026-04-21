@@ -119,12 +119,15 @@ All changed artifacts are within write_access scope. ✅
 
 ## Section 5: Assurance
 
-*(To be populated by IAA after invocation)*
-
 | Field | Value |
 |-------|-------|
-| iaa_invocation_result | PENDING |
-| PHASE_B_BLOCKING_TOKEN | PENDING |
+| iaa_invocation_result | ASSURANCE-TOKEN received |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-055-20260421-PASS |
+| iaa_session | session-055-20260421 |
+| checks_run | 9 (CORE: 2 PASS, Overlay LIAISON_ADMIN: 7 PASS) |
+| re_invocation_rounds | 3 |
+| merge_gate_parity | PASS |
+| adoption_phase | PHASE_B_BLOCKING |
 
 ---
 
