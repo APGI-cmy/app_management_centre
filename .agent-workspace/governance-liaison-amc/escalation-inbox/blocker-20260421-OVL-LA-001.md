@@ -11,7 +11,7 @@
 
 ## Issue Description
 
-During IAA audit (IAA session session-054 REJECTION-PACKAGE), IAA identified a protocol gap: the consumer `.governance-pack/CANON_INVENTORY.json` is not being explicitly updated during layer-down operations. The current layer-down protocol updates:
+During IAA audit (IAA session session-053 REJECTION-PACKAGE), IAA identified a protocol gap: the consumer `.governance-pack/CANON_INVENTORY.json` is not being explicitly updated during layer-down operations. The current layer-down protocol updates:
 - `governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json`
 - `.agent-admin/governance/GOVERNANCE_ALIGNMENT_INVENTORY.json`
 - `.agent-admin/governance/sync_state.json`
@@ -20,7 +20,7 @@ However, `.governance-pack/CANON_INVENTORY.json` (the agent-bootstrap authoritat
 
 ## IAA Citation
 
-IAA session-054 REJECTION-PACKAGE, Failure 4: "OVL-LA-001 — CANON_INVENTORY.json protocol gap: liaison layer-down does not update `.governance-pack/CANON_INVENTORY.json`; escalate to CS2 for decision on whether to incorporate this update into the layer-down protocol."
+IAA session-053 REJECTION-PACKAGE, Failure 4: "OVL-LA-001 — CANON_INVENTORY.json protocol gap: liaison layer-down does not update `.governance-pack/CANON_INVENTORY.json`; escalate to CS2 for decision on whether to incorporate this update into the layer-down protocol."
 
 ## Questions for CS2
 
