@@ -2,8 +2,8 @@
 
 **Agent**: independent-assurance-agent
 **Contract Version**: 2.5.0
-**Knowledge Version**: 4.0.0
-**Last Updated**: 2026-04-14
+**Knowledge Version**: 4.1.0
+**Last Updated**: 2026-04-21
 **Architecture**: `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md`
 
 ---
@@ -12,7 +12,7 @@
 
 | File | Purpose | Version | Status |
 |------|---------|---------|--------|
-| `index.md` (this file) | Knowledge entry point and version reference | 4.0.0 | PRESENT |
+| `index.md` (this file) | Knowledge entry point and version reference | 4.1.0 | PRESENT |
 | `FAIL-ONLY-ONCE.md` | Permanent rules recording governance failures IAA must never repeat | 2.5.0 | PRESENT — Rules A-001 through A-032 active (A-032: Schema Column Compliance Check — IAA must read migration DDL directly for all PRs containing INSERT/SELECT operations; INC-ALCF-001 self-governance closure) |
 | `iaa-core-invariants-checklist.md` | IAA-retained invariants — CORE-020/021 only; CORE-001–019 and CORE-022–024 moved to CI | 4.0.0 | ACTIVE — CORE-020 (zero partial pass) and CORE-021 (zero-severity-tolerance) only |
 | `iaa-trigger-table.md` | PR category classification table — when IAA activates and when it is exempt | 2.2.0 | ACTIVE — PRE_BUILD_STAGE trigger category added (PS-E); LIAISON_ADMIN trigger category added (PS-F); KNOWLEDGE_GOVERNANCE trigger category present |
@@ -48,12 +48,12 @@
 
 ## Constitutional Canon References (Tier 1 — verified via CANON_INVENTORY)
 
-- `governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md` — primary IAA governance canon
+- `governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md` v1.10.0 — primary IAA governance canon (ACR-01 through ACR-16; Authoritative-Source Rule for Current Token/Session; active-bundle scope including wave-current-tasks.md)
 - `governance/canon/LIVING_AGENT_SYSTEM.md` v6.2.0
 - `governance/canon/AGENT_CONTRACT_ARCHITECTURE.md` v1.0.0
 - `governance/canon/AGENT_PREFLIGHT_PATTERN.md` v1.0.0
 - `governance/canon/EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md` v1.0.0
-- `governance/canon/AGENT_HANDOVER_AUTOMATION.md` v1.0.0
+- `governance/canon/AGENT_HANDOVER_AUTOMATION.md` v1.6.0 (Check L / AAP-22 active final-state token/session coherence; wave-current-tasks.md in active-bundle scope)
 - `governance/canon/AGENT_CONTRACT_FILE_PROTECTION_POLICY.md` (AGCFPP-001)
 - `governance/canon/COMBINED_TESTING_PATTERN.md` — CST/CWT canonical pattern (authority for §CST/CWT Orchestration Prompting below)
 
@@ -253,6 +253,7 @@ that produced the work under review. Every invocation is logged in session memor
 | 2.9.0 | 2026-03-11 | iaa-category-overlays.md → v3.4.0 (INJECTION_AUDIT_TRAIL renamed to PRE_BRIEF_ASSURANCE; removed injection pipeline signature string requirement; OVL-INJ-001 artifact-existence-only); INDEPENDENT_ASSURANCE_AGENT_CANON.md → v1.5.0 (same model change); issue #1061 |
 | 3.0.0 | 2026-03-17 | FUNCTIONAL-BEHAVIOUR-REGISTRY.md v1.0.0 added (post-merge niggle registry — NBR-001 through NBR-004; FAIL-ONLY-ONCE A-034); niggle-pattern-library.md v1.0.0 added (stack patterns for TanStack Query, Supabase, Zustand, Next.js, TypeScript — FAIL-ONLY-ONCE A-035); iaa-category-overlays.md → v3.5.0 (BD-000 User Journey Trace — BD-000-A through BD-000-D); FAIL-ONLY-ONCE.md → v2.7.0 (A-034, A-035); IAA contract → v2.3.0 (Step 2.3b liveness signal check; Step 3.1 FUNCTIONAL-BEHAVIOUR-REGISTRY reference); liveness/last-known-good.md baseline created — CS2 IAA functional behaviour strengthening mandate |
 | 3.1.0 | 2026-03-18 | iaa-category-overlays.md → v3.6.0 (Orientation Mandate scope note clarifying cross-reference consistency vs. declared-state integrity; OVL-KG-ADM-002 pass condition sharpened; timestamp carve-out note added); index.md version reference updated; issue [clarify audit scope cross-reference consistency and version bump history] |
+| 4.1.0 | 2026-04-21 | INDEPENDENT_ASSURANCE_AGENT_CANON.md → v1.10.0 (ACR-15 active-wave/tracker contradiction rejection; ACR-16 active final-state token/session incoherence; Authoritative-Source Rule for Current Token/Session; wave-current-tasks.md added to active-bundle scope); AGENT_HANDOVER_AUTOMATION.md → v1.6.0 (Check L; AAP-22; wave-current-tasks.md in active-bundle scope); constitutional canon references updated; AMC/ISMS admin-ceremony hardening parity catch-up |
 
 ---
 
