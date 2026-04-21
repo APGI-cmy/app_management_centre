@@ -846,7 +846,7 @@ The §4.3e gate (defined in `AGENT_HANDOVER_AUTOMATION.md`) is the **ECAP + Fore
 - `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md` — Knowledge architecture
 - `governance/canon/AGENT_CONTRACT_ARCHITECTURE.md` — Four-phase contract architecture
 - `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md` v1.0.0 — IAA Pre-Brief Protocol (proactive assurance)
-- `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` v1.0.0 — Ceremony admin role and handover sequence
+- `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` v1.2.0 — Ceremony admin role and handover sequence
 - `governance/quality/agent-integrity/` — Agent integrity reference store
 - `governance/CANON_INVENTORY.json` — Canon hash registry
 - `governance/GATE_REQUIREMENTS_INDEX.json` — Gate requirements
