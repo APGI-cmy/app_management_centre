@@ -1175,15 +1175,14 @@ done
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CHECK L: Active Final-State Bundle Token/Session Coherence (AAP-22)
-# Verifies that the wave-current-tasks.md checklist (when present) references
-# the same wave/session/job identifier as the active PREHANDOVER proof and
-# wave record. Detects stale or mismatched wave/session tokens across the
-# active-bundle scope.
+# Two sub-checks:
+#   L-ABSENT: wave-current-tasks.md is absent while the active PREHANDOVER proof
+#             or wave record declares a wave_id for an in-progress wave → FAIL
+#   L-MISMATCH: wave-current-tasks.md is present but its wave slug contradicts
+#               the wave_id declared in the PREHANDOVER proof or wave record → FAIL
 #
-# Filename convention: wave-<identifier>-current-tasks.md
-# where <identifier> is the wave slug (e.g., "12", "wave-abc-20260401").
-# The wave slug is everything between the leading "wave-" and the trailing
-# "-current-tasks.md", extracted via a single anchored sed pattern.
+# Filename convention: wave-<slug>-current-tasks.md
+# The slug is extracted via a single anchored sed pattern.
 # ─────────────────────────────────────────────────────────────────────────────
 echo "  [L] Active final-state bundle token/session coherence (wave-current-tasks.md scoped)..."
 
@@ -1192,6 +1191,40 @@ normalize_wave_id() { echo "${1}" | tr '[:upper:]' '[:lower:]' | tr -d ' '; }
 
 # Locate the active wave-current-tasks.md for this job
 WAVE_TASKS_FILE=$(git ls-files ".agent-admin/waves/wave-*-current-tasks.md" 2>/dev/null | sort | tail -1)
+
+# ── L-ABSENT sub-check ───────────────────────────────────────────────────────
+# If the checklist is absent, fail when the PREHANDOVER proof or wave record
+# declares a wave_id (indicating an in-progress wave that should have a checklist).
+if [ -z "${WAVE_TASKS_FILE}" ]; then
+  # Probe PREHANDOVER proof for wave_id
+  ABSENT_WAVE_ID=""
+  if [ -n "${LATEST_PROOF}" ]; then
+    ABSENT_WAVE_ID=$(grep -E "^wave_id:" "${LATEST_PROOF}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+    if [ -z "${ABSENT_WAVE_ID}" ]; then
+      ABSENT_WAVE_ID=$(grep -E "^wave:" "${LATEST_PROOF}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+    fi
+  fi
+  # Probe wave record for wave_id if proof did not declare one
+  if [ -z "${ABSENT_WAVE_ID}" ]; then
+    LATEST_WAVE_RECORD=$(git ls-files ".agent-admin/wave-records/amc-wave-record-*.md" 2>/dev/null | sort | tail -1)
+    if [ -n "${LATEST_WAVE_RECORD}" ]; then
+      ABSENT_WAVE_ID=$(grep -E "^wave_id:" "${LATEST_WAVE_RECORD}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+      if [ -z "${ABSENT_WAVE_ID}" ]; then
+        ABSENT_WAVE_ID=$(grep -E "^wave_slug:" "${LATEST_WAVE_RECORD}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+      fi
+      if [ -z "${ABSENT_WAVE_ID}" ]; then
+        ABSENT_WAVE_ID=$(grep -E "^wave:" "${LATEST_WAVE_RECORD}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+      fi
+    fi
+  fi
+  if [ -n "${ABSENT_WAVE_ID}" ]; then
+    ACC_FAILURES+=("L0: wave-current-tasks.md absent — active bundle declares wave_id '${ABSENT_WAVE_ID}' but no wave-current-tasks.md exists in .agent-admin/waves/ (AAP-22)")
+  fi
+fi
+
+# ── L-MISMATCH sub-check ─────────────────────────────────────────────────────
+# If the checklist is present, verify its wave slug matches the PREHANDOVER proof
+# and wave record wave_id declarations.
 if [ -n "${WAVE_TASKS_FILE}" ]; then
   # Extract wave slug: strip leading "wave-" prefix and trailing "-current-tasks.md" suffix.
   # Format: wave-<slug>-current-tasks.md  →  <slug>
