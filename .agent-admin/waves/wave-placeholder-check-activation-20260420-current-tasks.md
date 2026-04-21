@@ -3,7 +3,7 @@
 > **Authority**: CS2 (@APGI-cmy) — Issue #1094 activation (2026-04-20)
 > **Upstream Canon**: AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md v1.0.0 (maturion-foreman-governance#1349)
 > **Session**: foreman-v2-agent session-028-20260420
-> **governance_evidence_path**: .agent-admin/assurance/iaa-prebrief-wave-layer-down-iaa-workflows.md
+> governance_evidence_path: .agent-admin/assurance/iaa-prebrief-wave-layer-down-iaa-workflows.md
 
 ---
 
