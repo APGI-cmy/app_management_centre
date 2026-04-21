@@ -1108,7 +1108,7 @@ done
   ACC_FAILURES+=("I1: Template instruction leakage / pre-final instruction wording in final-state artifacts: ${INSTRUCTION_LEAK_FILES[*]} (AAP-17, AAP-18, AAP-21)")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# CHECK J: Cross-Artifact Final-State Consistency — Active-Bundle Scoped (AAP-19, AAP-22)
+# CHECK J: Cross-Artifact Final-State Consistency — Active-Bundle Scoped (AAP-19)
 # Compares final_state across PREHANDOVER proof and ECAP reconciliation summary.
 # Scoped to ACTIVE final-state bundle only — historical archive is NOT scanned.
 # ─────────────────────────────────────────────────────────────────────────────
