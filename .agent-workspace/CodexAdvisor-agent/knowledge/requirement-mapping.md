@@ -76,12 +76,14 @@ they may be written. The contract enforces this through:
 
 ### AMC_90_10_ADMIN_PROTOCOL.md Coverage
 
-The 90/10 protocol mandates lean session memory with 6 required fields only.
+The 90/10 protocol contributes the lean session-memory principle, but CodexAdvisor
+is governed by its contract requirement in Phase 4 Step 4.3, which uses a 9-field
+session-memory model for this agent.
 The contract enforces this through:
 
 - `tier2_knowledge.required_files` includes `session-memory-template.md`
-- Phase 4 Step 4.3 references the template for session memory assembly
-- The 6-field model eliminates the legacy 18-field ISMS model
+- Phase 4 Step 4.3 requires the CodexAdvisor session-memory template for assembly
+- The 9-field CodexAdvisor model replaces the legacy 18-field ISMS model for this agent
 
 ---
 
