@@ -148,8 +148,12 @@ prohibitions:
 
 tier2_knowledge:
   index: ".agent-workspace/<agent-id>/knowledge/index.md"
+  requirements_note: "Enumerate all required Tier 2 knowledge files for this agent. Do not leave this list partial."
   required_files:
     - FAIL-ONLY-ONCE.md
+    - <required-tier2-file-2>.md
+    - <required-tier2-file-3>.md
+    - <add-additional-required-tier2-files-until-complete>.md
 
 metadata:
   canonical_home: APGI-cmy/maturion-foreman-governance
