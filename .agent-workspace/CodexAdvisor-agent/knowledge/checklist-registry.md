@@ -82,7 +82,7 @@ No `.github/agents/*.md` files modified.
 | Gate | Name | Description |
 |------|------|-------------|
 | S1 | YAML valid | Any YAML frontmatter in the file parses without error (N/A if no frontmatter) |
-| S3 | Size within limit | File is not bloated; content is proportionate to purpose |
+| S3 | Size within limit | New file <= 30,000 characters; updated file <= 25,000 characters after edit |
 | S4 | No unresolved draft markers | No TODO, PLACEHOLDER, TBD, [FILL IN], stub text, or empty required fields |
 | S5 | No embedded Tier 2 bulk in Tier 1 | Verify the parent Tier 1 contract was not inadvertently modified |
 
