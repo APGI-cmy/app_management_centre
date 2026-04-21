@@ -2,8 +2,8 @@
     "schema_version": "1.0.0",
     "consumer_repo": "APGI-cmy/app_management_centre",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
-    "last_layer_down_commit": "e5a76db099663c15dcda3fe878b48c1331b36aca",
-    "last_updated": "2026-04-20T14:04:33Z",
+    "last_layer_down_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+    "last_updated": "2026-04-21T06:56:45Z",
     "alignment_status": "ALIGNED",
     "total_artifacts": 33,
     "artifacts": [
@@ -120,23 +120,23 @@
         {
             "filename": "AGENT_HANDOVER_AUTOMATION.md",
             "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "type": "canon",
             "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-            "layered_down_at": "2026-04-17T14:26:52Z",
-            "file_hash_sha256": "3fd6007b51ca093c87aa59a02e6c3ce877ba50376c8bdec2b49ddfed21c52614",
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "layered_down_at": "2026-04-21T06:56:45Z",
+            "file_hash_sha256": "e8c55dd687a67a5970126a1616e47e8d5527dfaf957416fcb7398420cf15ff27",
             "action": "UPDATED"
         },
         {
             "filename": "FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
             "path": "governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "type": "canon",
             "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-            "layered_down_at": "2026-04-17T14:26:52Z",
-            "file_hash_sha256": "434868c3821f1084a4a31863ab9d144ce0ebca3678ef7352de3a2e8df26e2251",
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "layered_down_at": "2026-04-21T06:56:45Z",
+            "file_hash_sha256": "e16466d44c2c08e988a616c1038bcf343119f1d24a086219a8404221ef2f8bb9",
             "action": "UPDATED"
         },
         {
@@ -186,12 +186,12 @@
         {
             "filename": "EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
             "path": "governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "type": "canon",
             "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-            "layered_down_at": "2026-04-17T14:26:52Z",
-            "file_hash_sha256": "baff8243253063a31c73b662fbab992cbd8661ad74824415b8557f9cee797885",
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "layered_down_at": "2026-04-21T06:56:45Z",
+            "file_hash_sha256": "1d058dacdf61a0804d5d80bae05a7929922ee3913695b7bfd767f8c59538c620",
             "action": "UPDATED"
         },
         {
@@ -208,12 +208,12 @@
         {
             "filename": "INDEPENDENT_ASSURANCE_AGENT_CANON.md",
             "path": "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "type": "canon",
             "layer_down_status": "INTERNAL",
-            "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-            "layered_down_at": "2026-04-17T14:26:52Z",
-            "file_hash_sha256": "ffa3fecfdd8597c1c8d72c21f44c2852ad5b9618be6e4396ff035085a9520683",
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "layered_down_at": "2026-04-21T06:56:45Z",
+            "file_hash_sha256": "c2a1182e6fc5660ca8625bdfab89d64547677445bbd9a9c940b94a14c0478a6a",
             "action": "UPDATED"
         },
         {
@@ -245,35 +245,35 @@
         {
             "filename": "ECAP_RECONCILIATION_SUMMARY.template.md",
             "path": "governance/templates/execution-ceremony-admin/ECAP_RECONCILIATION_SUMMARY.template.md",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "type": "template",
-            "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-            "layered_down_at": "2026-04-17T14:26:52Z",
-            "file_hash_sha256": "efa8a844bf859104ea70d229a9a80fbf10897bfe4abf59bb25f04b61da456661",
-            "action": "CREATED"
+            "layer_down_status": "INTERNAL",
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "layered_down_at": "2026-04-21T06:56:45Z",
+            "file_hash_sha256": "ae0434c170a3253baca9ae9c99a355af9076c21de7f160fd9ffc60bbf3fa861d",
+            "action": "UPDATED"
         },
         {
             "filename": "FOREMAN_ADMIN_READINESS_HANDBACK.template.md",
             "path": "governance/templates/execution-ceremony-admin/FOREMAN_ADMIN_READINESS_HANDBACK.template.md",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "type": "template",
-            "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-            "layered_down_at": "2026-04-17T14:26:52Z",
-            "file_hash_sha256": "50eb0355444cdbe175ab6926b34a5cfc50f50868a011aa81e05c3c4a4bf84913",
-            "action": "CREATED"
+            "layer_down_status": "INTERNAL",
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "layered_down_at": "2026-04-21T06:56:45Z",
+            "file_hash_sha256": "52fea4be5a0b4b91fdb1ae386db3a3129ad2de3bc4ef59ef7221d40fd9f5f6dd",
+            "action": "UPDATED"
         },
         {
             "filename": "PREHANDOVER.template.md",
             "path": "governance/templates/execution-ceremony-admin/PREHANDOVER.template.md",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "type": "template",
-            "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-            "layered_down_at": "2026-04-17T14:26:52Z",
-            "file_hash_sha256": "c73c05b81a635a807733cfa001f2d53399584a1c1b1a935d4783164f5059e863",
-            "action": "CREATED"
+            "layer_down_status": "INTERNAL",
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "layered_down_at": "2026-04-21T06:56:45Z",
+            "file_hash_sha256": "d5803a53e509528f6d4edbd63b1592fcd73fd099bfde876ce31149bd1ac3f401",
+            "action": "UPDATED"
         },
         {
             "filename": "README.md",
@@ -300,13 +300,13 @@
         {
             "filename": "SESSION_MEMORY.template.md",
             "path": "governance/templates/execution-ceremony-admin/SESSION_MEMORY.template.md",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "type": "template",
-            "layer_down_status": "PUBLIC_API",
-            "canonical_commit": "56d92004d867a8e4148133e007040ca1ff062318",
-            "layered_down_at": "2026-04-17T14:26:52Z",
-            "file_hash_sha256": "21bbb1375868fb178d3fb853e9e3e3a0d6088ad66b12868b98f12654cf51c137",
-            "action": "CREATED"
+            "layer_down_status": "INTERNAL",
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "layered_down_at": "2026-04-21T06:56:45Z",
+            "file_hash_sha256": "eb8bc7aa76d89ed8aac9bd7fa2836e790cb31c93832eec1d8e29de4724952bfa",
+            "action": "UPDATED"
         },
         {
             "filename": "AGENT_CONTRACT_ARCHITECTURE.md",
@@ -501,6 +501,22 @@
             ],
             "status": "LAYERED",
             "notes": "New canon AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md v1.0.0 \u2014 defines exception classes (EXC-001 through EXC-005) for placeholder-check validation. Non-agent file. Auto-close eligible."
+        },
+        {
+            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "date": "2026-04-21T06:56:45Z",
+            "trigger": "Merge pull request -1354 from APGI-cmy-copilot-apply-pre-handover-admin-ceremony-improvements",
+            "changed_artifacts": [
+                "AGENT_HANDOVER_AUTOMATION.md",
+                "EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
+                "FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
+                "INDEPENDENT_ASSURANCE_AGENT_CANON.md",
+                "ECAP_RECONCILIATION_SUMMARY.template.md",
+                "FOREMAN_ADMIN_READINESS_HANDBACK.template.md",
+                "PREHANDOVER.template.md",
+                "SESSION_MEMORY.template.md"
+            ],
+            "session": "session-033-20260421"
         }
     ]
 }

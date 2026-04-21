@@ -42,7 +42,7 @@
 | Gate results (JSON) | `.agent-admin/gates/gate-results-<TIMESTAMP>.json` | ✓/✗ | ✓/✗ | ✓/✗ | |
 | ECAP reconciliation summary (this file) | `.agent-admin/prehandover/ecap-reconciliation-<PR#>.md` | ✓/✗ | ✓/✗ | ✓/✗ | |
 | Scope declaration | `governance/scope-declaration.md` | ✓/✗ | ✓/✗ | ✓/✗ | |
-| IAA assurance token | wave record section 5 (`PHASE_B_BLOCKING_TOKEN`) — `.agent-admin/wave-records/amc-wave-record-{wave-slug}-{YYYYMMDD}.md` | ✓/✗/N/A | ✓/✗/N/A | ✓/✗/N/A | |
+| IAA token file (if assurance completed) | `.agent-admin/assurance/iaa-token-*.md` | ✓/✗/N/A | ✓/✗/N/A | ✓/✗/N/A | |
 
 ---
 
@@ -51,7 +51,7 @@
 | Row | Consistency Dimension | Source Value | Verified Against | Match |
 |-----|-----------------------|-------------|-----------------|-------|
 | Session reference | Session ID | `session-NNN` (PREHANDOVER) | Session memory filename, wave record | ✓/✗ |
-| Token reference | Token ID + session | `PHASE_B_BLOCKING_TOKEN` in wave record section 5 | Wave record section 5 assurance block | ✓/✗ |
+| Token reference | Token path + session | `<token path>` (PREHANDOVER `iaa_audit_token`) | Token file at declared path | ✓/✗ |
 | Issue/PR/wave | Issue #, PR #, wave ID | PREHANDOVER fields | Session memory, scope declaration | ✓/✗ |
 | Version consistency | Each amended file version | File headers | CANON_INVENTORY entries | ✓/✗ |
 | Path consistency | Artifact paths | PREHANDOVER artifact list | `git ls-files` | ✓/✗ |
@@ -98,4 +98,39 @@
 
 ---
 
-*Template Version: 1.0.0 | Authority: ECAP-001 v1.1.0 | Effective: 2026-04-17*
+## C6. Gate Inventory (AAP-15 — required when gate parity claimed)
+
+> **Active-Bundle Only**: Fill this section based on gate results for the current job only.
+
+| Gate | Individual Outcome | Evidence Source |
+|------|--------------------|----------------|
+| merge-gate/verdict | PASS / FAIL | `.agent-admin/gates/gate-results-<TIMESTAMP>.json` |
+| governance/alignment | PASS / FAIL / DEGRADED | gate results JSON |
+| stop-and-fix/enforcement | PASS / FAIL | gate results JSON |
+| *(add additional gates as applicable)* | | |
+
+**Gate inventory source**: `.agent-admin/gates/gate-results-<TIMESTAMP>.json`  
+**Aggregate verdict**: PASS (all above PASS) / FAIL (at least one FAIL)
+
+No provisional gate-pass wording confirmed: ✓/✗
+
+---
+
+## C7. Template Non-Leakage Confirmation (AAP-17, AAP-21)
+
+Template instruction leakage scan (active-bundle only — latest non-superseded proof, latest reconciliation, latest session memory):
+```bash
+ACTIVE_PROOF=$(ls -t .agent-admin/prehandover/proof-*.md 2>/dev/null | grep -v SUPERSEDED | head -1)
+ACTIVE_RECON=$(ls -t .agent-admin/prehandover/ecap-reconciliation-*.md 2>/dev/null | head -1)
+LATEST_SESSION=$(ls -t .agent-workspace/*/memory/session-*.md 2>/dev/null | head -1)
+grep -niE "\[fill in\]|\[instruction\]|replace this with|EXAMPLE TEXT|\[PLACEHOLDER\]|\[YOUR TEXT HERE\]|ASSEMBLY_TIME_ONLY|REMOVE BEFORE COMMIT|TEMPLATE INSTRUCTION" \
+  ${ACTIVE_PROOF} ${ACTIVE_RECON} ${LATEST_SESSION} 2>/dev/null
+```
+
+Result: `[PASTE ACTUAL OUTPUT — empty = PASS]`
+
+Confirmation: No ASSEMBLY_TIME_ONLY blocks, no [fill in] placeholders, no template instruction text in active-bundle artifacts. ✓/✗
+
+---
+
+*Template Version: 1.1.0 | Authority: ECAP-001 v1.2.0 | Effective: 2026-04-19*
