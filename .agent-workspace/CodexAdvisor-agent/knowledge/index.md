@@ -1,23 +1,24 @@
 # CodexAdvisor-agent — Tier 2 Knowledge Index
 
 **Agent**: CodexAdvisor-agent
-**Contract version**: 4.1.0
-**Updated**: 2026-04-13
+**Contract version**: 4.4.0
+**Updated**: 2026-04-21
 **Purpose**: Tier 2 knowledge index for CodexAdvisor-agent — living agent factory overseer
 
 ---
 
 ## Required Tier 2 Files
 
-The following 5 files are mandatory per the contract `tier2_knowledge.required_files`:
+The following 6 files are mandatory per the contract `tier2_knowledge.required_files`:
 
 | # | File | Path | Status |
 |---|---|---|---|
-| 1 | checklist-registry.md | `.agent-workspace/CodexAdvisor-agent/knowledge/checklist-registry.md` | Required |
-| 2 | agent-creation-template.md | `.agent-workspace/CodexAdvisor-agent/knowledge/agent-creation-template.md` | Required |
-| 3 | requirement-mapping.md | `.agent-workspace/CodexAdvisor-agent/knowledge/requirement-mapping.md` | Required |
-| 4 | session-memory-template.md | `.agent-workspace/CodexAdvisor-agent/knowledge/session-memory-template.md` | Required |
-| 5 | agent-file-non-negotiables-checklist.md | `.agent-workspace/CodexAdvisor-agent/knowledge/agent-file-non-negotiables-checklist.md` | Required |
+| 1 | FAIL-ONLY-ONCE.md | `.agent-workspace/CodexAdvisor-agent/knowledge/FAIL-ONLY-ONCE.md` | PRESENT |
+| 2 | checklist-registry.md | `.agent-workspace/CodexAdvisor-agent/knowledge/checklist-registry.md` | PRESENT |
+| 3 | agent-creation-template.md | `.agent-workspace/CodexAdvisor-agent/knowledge/agent-creation-template.md` | PRESENT |
+| 4 | requirement-mapping.md | `.agent-workspace/CodexAdvisor-agent/knowledge/requirement-mapping.md` | PRESENT |
+| 5 | session-memory-template.md | `.agent-workspace/CodexAdvisor-agent/knowledge/session-memory-template.md` | PRESENT |
+| 6 | agent-file-non-negotiables-checklist.md | `.agent-workspace/CodexAdvisor-agent/knowledge/agent-file-non-negotiables-checklist.md` | PRESENT |
 
 ---
 
@@ -32,7 +33,7 @@ The following 5 files are mandatory per the contract `tier2_knowledge.required_f
 
 - **Pattern**: `four_phase_canonical` — all agent contracts must follow this pattern
 - **Character limit**: 30,000 (hard blocking), 25,000 (warning)
-- **QP Gates**: S1–S9 (all must PASS before any file write)
+- **QP Gates**: S1–S12 (all must PASS before any file write)
 - **IAA trigger**: all agent contract creations or updates
 
 ## Session Memory Location
