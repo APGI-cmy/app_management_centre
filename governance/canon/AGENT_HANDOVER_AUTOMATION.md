@@ -1202,6 +1202,8 @@ normalize_wave_id() { echo "${1}" | tr '[:upper:]' '[:lower:]' | tr -d ' '; }
 
 # Helper: extract wave_id from a file — handles both canonical AMC artifact formats:
 #   1) Markdown table row  : | wave_id | VALUE |   (wave records, ECAP reconciliations)
+#      Parsed with awk -F'|' '{print $3}': field 1=empty, field 2=row-key, field 3=value,
+#      field 4=trailing empty — valid for the standard 2-column AMC Section 1 table.
 #   2) Backtick list item  : - `wave_id`: VALUE     (PREHANDOVER proof memory files)
 extract_wave_id() {
   local file="$1" id=""
@@ -1239,11 +1241,13 @@ fi
 
 # ── L1 / L2: checklist present — verify cross-artifact coherence ──────────────
 if [ -n "${WAVE_TASKS_FILE}" ]; then
-  # Extract wave slug from checklist filename: {wave_id}-current-tasks.md → {wave_id}
-  # Strip only the trailing "-current-tasks.md" suffix to preserve the full wave_id
-  # (wave_id values include the "wave-" prefix, e.g. wave-parity-upgrade-20260419)
+  # Extract wave_id from checklist filename: strip only the trailing "-current-tasks.md"
+  # suffix; the full wave_id (including its "wave-" prefix where present) is preserved.
+  # Example: wave-parity-upgrade-20260419-current-tasks.md → wave-parity-upgrade-20260419
   WAVE_TASKS_WAVE_ID=$(basename "${WAVE_TASKS_FILE}" | sed -E 's/-current-tasks\.md$//')
-  [ "${WAVE_TASKS_WAVE_ID}" = "$(basename "${WAVE_TASKS_FILE}")" ] && WAVE_TASKS_WAVE_ID=""
+  # Guard: if sed produced no change (pattern did not match), the filename lacks the
+  # expected suffix — clear the variable rather than using a bogus value
+  [[ "${WAVE_TASKS_WAVE_ID}" == *"-current-tasks.md" ]] && WAVE_TASKS_WAVE_ID=""
 
   # L1: compare checklist wave slug against PREHANDOVER proof wave_id
   # Attempt 1: use the dedicated proof file from the active bundle (set by Check J)
