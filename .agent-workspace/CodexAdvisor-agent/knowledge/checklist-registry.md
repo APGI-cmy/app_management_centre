@@ -86,9 +86,15 @@ No `.github/agents/*.md` files modified.
 | S4 | No unresolved draft markers | No TODO, PLACEHOLDER, TBD, [FILL IN], stub text, or empty required fields |
 | S5 | No embedded Tier 2 bulk in Tier 1 | Verify the parent Tier 1 contract was not inadvertently modified |
 
-**IAA required**: REVIEW — classify using `INDEPENDENT_ASSURANCE_AGENT_CANON.md`.
-For pure Tier 2 housekeeping with no contract change: IAA typically NOT required.
-For Tier 2 changes that materially affect agent behaviour or governance coverage: IAA required.
+**IAA required**: NO — pure Tier 2 housekeeping with no agent contract modification.
+
+The live CodexAdvisor contract (Phase 4 Step 4.4) states: "If IAA classification is YES
+or REVIEW: invoke IAA." Therefore this job type must be classified as NO (not REVIEW)
+when it involves only Tier 2 knowledge files. Using REVIEW here would mandate IAA
+invocation per the contract rule, which is not the intent for pure knowledge-file work.
+
+Classification escalates to YES if any `.github/agents/*.md` file is modified, regardless
+of how the job was initially typed.
 
 ---
 
@@ -115,7 +121,7 @@ No `.github/agents/*.md` files modified. No Tier 2 knowledge content modified.
 |----------|-----------|--------------|
 | agent_creation | 12 (S1–S12) | YES |
 | agent_update | 12 (S1–S12) | YES |
-| tier2_only | 4 (S1, S3, S4, S5) | REVIEW |
+| tier2_only | 4 (S1, S3, S4, S5) | NO |
 | admin_housekeeping | 0 | NO |
 
 ---

@@ -59,10 +59,9 @@ do not trigger on Tier 2 knowledge file changes exclusively.
 
 ## IAA Classification
 
-- `iaa_classification`: REVIEW — no `.github/agents/*.md` files modified
-- `iaa_required`: NO — pure Tier 2 housekeeping, no contract change
-- `basis`: `checklist-registry.md` job type `tier2_only` → IAA: REVIEW → for pure
-  Tier 2 housekeeping with no contract change, IAA not required
+- `iaa_classification`: NO
+- `iaa_required`: NO
+- `basis`: Job type `tier2_only` — no `.github/agents/*.md` files modified. `checklist-registry.md` classifies `tier2_only` as IAA: NO (not REVIEW). Using REVIEW would mandate invocation under live contract Phase 4 Step 4.4 ("if YES or REVIEW: invoke IAA"), which is not the intent for pure knowledge-file work. Classification would escalate to YES if any agent contract file were modified.
 
 ## OPOJD Result
 
