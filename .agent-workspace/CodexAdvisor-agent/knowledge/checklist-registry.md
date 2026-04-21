@@ -109,7 +109,7 @@ No `.github/agents/*.md` files modified. No Tier 2 knowledge content modified.
 
 **Constraints**:
 - Breach registry entries are append-only
-- Session memory files must use the current 6-field AMC template
+- Session memory files must use the current 9-field CodexAdvisor template (Phase 4 Step 4.3)
 - PREHANDOVER proofs are read-only after initial commit
 - No governance content may be altered under this job type classification
 
