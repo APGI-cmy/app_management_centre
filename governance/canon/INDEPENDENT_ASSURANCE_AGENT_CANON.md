@@ -816,7 +816,7 @@ When applying ACR triggers ACR-02, ACR-07, ACR-12, ACR-15, ACR-16, and any other
 3. **ECAP reconciliation summary**: The most recent reconciliation artifact for this PR/job
 4. **Wave record**: The current wave record for this job (if used)
 5. **Token file**: The current IAA token file for this job
-6. **Wave checklist (`wave-current-tasks.md`)**: The active wave checklist for the current wave (most recent file in `.agent-admin/waves/wave-*-current-tasks.md`) — included for ACR-15 and ACR-16 token/session coherence checks
+6. **Wave checklist (`wave-current-tasks.md`)**: The active wave checklist for the current wave, determined by matching the `wave_id` declared in the current wave record (item 4 above) to the corresponding checklist filename in `.agent-admin/waves/` (i.e., `.agent-admin/waves/wave-<wave_id>-current-tasks.md` for the active `wave_id` — not the lexicographically or temporally "most recent" file) — included for ACR-15 and ACR-16 token/session coherence checks
 
 **Explicitly excluded from active-bundle scans**:
 - Superseded PREHANDOVER proofs (i.e., proofs for which a later proof declares `Supersedes: <filename>`)
