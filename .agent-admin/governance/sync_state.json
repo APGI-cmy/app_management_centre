@@ -1,11 +1,11 @@
 {
-    "last_check": "2026-04-20T14:04:33Z",
+    "last_check": "2026-04-21T06:56:45Z",
     "canonical_version": "1.0.0",
-    "canonical_commit": "e5a76db099663c15dcda3fe878b48c1331b36aca",
+    "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
     "local_version": "1.0.0",
-    "local_commit": "e5a76db099663c15dcda3fe878b48c1331b36aca",
+    "local_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
     "drift_detected": "false",
     "needs_alignment": "false",
     "alignment_method": "layer-down",
-    "alignment_note": "Layer-down of e5a76db0 (2026-04-19) \u2014 AGENT_CONTRACT_PLACEHOLDER_CHECK_CANON.md v1.0.0 (placeholder-check exception classes canon). File already present in consumer repo. Inventories updated."
+    "alignment_note": "Layer-down of 84997301 (2026-04-20) \u2014 pre-handover admin ceremony improvements: AGENT_HANDOVER_AUTOMATION v1.5.0, EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL v1.2.0, FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL v1.5.0, INDEPENDENT_ASSURANCE_AGENT_CANON v1.7.0, 4 execution-ceremony-admin templates v1.1.0"
 }

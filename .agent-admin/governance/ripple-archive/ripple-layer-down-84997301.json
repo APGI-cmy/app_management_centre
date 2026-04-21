@@ -1,0 +1,34 @@
+{
+    "event_type": "governance_ripple",
+    "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+    "canonical_commit_short": "84997301",
+    "inventory_version": "1.0.0",
+    "changed_paths": [
+        "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
+        "governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
+        "governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
+        "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
+        "governance/templates/execution-ceremony-admin/ECAP_RECONCILIATION_SUMMARY.template.md",
+        "governance/templates/execution-ceremony-admin/FOREMAN_ADMIN_READINESS_HANDBACK.template.md",
+        "governance/templates/execution-ceremony-admin/PREHANDOVER.template.md",
+        "governance/templates/execution-ceremony-admin/SESSION_MEMORY.template.md"
+    ],
+    "sender": "APGI-cmy/maturion-foreman-governance",
+    "trigger": "Merge pull request -1354 from APGI-cmy-copilot-apply-pre-handover-admin-ceremony-improvements",
+    "dispatch_date": "2026-04-20T07:37:10Z",
+    "processed_date": "2026-04-21T06:56:45Z",
+    "session": "session-033-20260421",
+    "agent_contract_files_detected": false,
+    "auto_close_eligible": true,
+    "layer_down_status": "COMPLETE",
+    "version_changes": {
+        "AGENT_HANDOVER_AUTOMATION.md": {"from": "1.4.1", "to": "1.5.0"},
+        "EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md": {"from": "1.1.0", "to": "1.2.0"},
+        "FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md": {"from": "1.4.0", "to": "1.5.0"},
+        "INDEPENDENT_ASSURANCE_AGENT_CANON.md": {"from": "1.6.0", "to": "1.7.0"},
+        "ECAP_RECONCILIATION_SUMMARY.template.md": {"from": "1.0.0", "to": "1.1.0"},
+        "FOREMAN_ADMIN_READINESS_HANDBACK.template.md": {"from": "1.0.0", "to": "1.1.0"},
+        "PREHANDOVER.template.md": {"from": "1.0.0", "to": "1.1.0"},
+        "SESSION_MEMORY.template.md": {"from": "1.0.0", "to": "1.1.0"}
+    }
+}
