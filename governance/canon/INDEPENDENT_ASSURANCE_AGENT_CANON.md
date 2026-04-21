@@ -1,5 +1,5 @@
 
-**Status**: CANONICAL | **Version**: 1.7.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.10.0 | **Authority**: CS2
 **Date**: 2026-03-03
 **Amended**: 2026-03-03 — v1.1.0: Added §Proactive Assurance — Pre-Brief Protocol
 **Amended**: 2026-03-04 — v1.2.1: Added §CS2 Direct Review Track
@@ -8,6 +8,7 @@
 **Amended**: 2026-04-08 — v1.5.0: Amended §Independence Requirements rule 3 — clarified that Foreman is the authorised IAA invoker at Phase 4 handover (not a self-assurance violation); added §IAA Re-Invocation After Rejection — Foreman Ownership defining Foreman-owned stop-and-fix loop, CS2-only exception classes, canonical re-invocation token/session format, prohibited misleading wording, and worked example; authority: CS2 — Foreman IAA re-invocation ownership canonisation issue.
 **Amended**: 2026-04-17 — v1.6.0: Added §Admin-Ceremony Rejection Triggers — explicit rejection conditions for ceremony-integrity defects (ACR-01 through ACR-08); reinforced non-cleanup-authoring posture relative to ECAP layer; cross-references §4.3e Admin Ceremony Compliance Gate; authority: CS2 — issue: Canonize a 3-layer admin ceremony compliance stack for ECAP, Foreman QP, and IAA.
 **Amended**: 2026-04-19 — v1.7.0: Added ACR-09 through ACR-14 (gate-inventory hardening, post-token normalization, cross-artifact contradiction, carried-forward canonical source parity); added active-bundle scope rule for ACR checks; aligned with governance-repo hardening wave outcomes; authority: CS2 — governance-repo hardening wave.
+**Amended**: 2026-04-21 — v1.10.0: Added ACR-15 (active-wave / tracker contradiction rejection) and ACR-16 (active final-state token/session incoherence); added §Authoritative-Source Rule for Current Token/Session; explicitly included `wave-current-tasks.md` in active-bundle scope; authority: CS2 — AMC/ISMS admin-ceremony hardening parity catch-up (issue: Catch AMC up to ISMS admin-ceremony hardening).
 
 ---
 
@@ -803,16 +804,19 @@ When a job has involved the `execution-ceremony-admin-agent` (ECAP), the IAA MUS
 | ACR-12 | **Cross-artifact final-state contradiction (active-bundle scoped)** — within the active final-state bundle (current PREHANDOVER proof, current session memory, current ECAP reconciliation summary, current wave record), one artifact declares `COMPLETE` / `PASS` / `ACCEPTED` while another artifact declares `PENDING`, `Phase 4`, `in progress`, `BLOCKED`, or any equivalent non-final status for the same dimension. Historical artifacts outside the active bundle (superseded proofs, prior session memories) are **exempt** from this check. | AGENT_HANDOVER_AUTOMATION.md §4.3e Check J; AAP-19 |
 | ACR-13 | **Verbatim IAA-response section blank or instruction-only** — the `iaa_audit_token` or `iaa_session_reference` field in the PREHANDOVER proof is still set to a template placeholder (`<token-file-path>`, `<IAA session ID>`, `[pending]`, `TBD`, `none`) while the proof declares `final_state: COMPLETE`. A COMPLETE final-state proof must reference an actual issued IAA token. | AGENT_HANDOVER_AUTOMATION.md §4.3e Check I; AAP-18 |
 | ACR-14 | **Carried-forward claim with no resolvable canonical source** — a final-state ceremony artifact states that a governance claim was "carried forward from" or is "verbatim from" a named source artifact, but: (a) the named source artifact does not exist as a committed file on the branch, or (b) the source exists but does not contain the stated claim, or (c) the carried-forward text has been modified to change gate authority, gate owner, or approval basis relative to the source | AGENT_HANDOVER_AUTOMATION.md §4.3e Check K; AAP-20 |
+| ACR-15 | **Active-wave / tracker contradiction rejection** — the `wave-current-tasks.md` checklist for the active wave (determined by matching the `wave_id` from the current wave record to the corresponding file in `.agent-admin/waves/`) declares a wave, session, or job identifier that contradicts the wave/session/job identifier declared in the active PREHANDOVER proof (`wave_id` field), wave record, or session memory; or the `wave-current-tasks.md` is present but references a different wave slug from any of the other active-bundle artifacts | AGENT_HANDOVER_AUTOMATION.md §4.3e Check L; AAP-22 |
+| ACR-16 | **Active final-state token/session incoherence** — the active final-state bundle contains two or more artifacts (PREHANDOVER proof, session memory, wave record, or `wave-current-tasks.md`) that declare different IAA token identifiers, session IDs, or wave identifiers for the same job; or the `wave-current-tasks.md` is absent when the active PREHANDOVER proof or wave record declares a wave_id for which an active checklist should exist (i.e., an in-progress wave that was not yet completed) | AGENT_HANDOVER_AUTOMATION.md §4.3e Check L; AAP-22 |
 
-### Active-Bundle Scope Rule for ACR Checks (v1.7.0)
+### Active-Bundle Scope Rule for ACR Checks (v1.7.0; extended v1.10.0)
 
-When applying ACR triggers ACR-02, ACR-07, ACR-12, and any other cross-artifact consistency check, the IAA MUST scope the scan to the **active final-state bundle** for the current job only. The active bundle is defined as:
+When applying ACR triggers ACR-02, ACR-07, ACR-12, ACR-15, ACR-16, and any other cross-artifact consistency check, the IAA MUST scope the scan to the **active final-state bundle** for the current job only. The active bundle is defined as:
 
 1. **PREHANDOVER proof**: The current (non-superseded) proof — the most recent proof, or the proof not declared as superseded by a later proof
 2. **Session memory**: The latest session memory per agent workspace directory (most recent by filename sort order)
 3. **ECAP reconciliation summary**: The most recent reconciliation artifact for this PR/job
 4. **Wave record**: The current wave record for this job (if used)
 5. **Token file**: The current IAA token file for this job
+6. **Wave checklist (`wave-current-tasks.md`)**: The active wave checklist for the current wave, determined by matching the `wave_id` declared in the current wave record (item 4 above) to the corresponding checklist filename in `.agent-admin/waves/` (i.e., `.agent-admin/waves/wave-<wave_id>-current-tasks.md` for the active `wave_id` — not the lexicographically or temporally "most recent" file) — included for ACR-15 and ACR-16 token/session coherence checks
 
 **Explicitly excluded from active-bundle scans**:
 - Superseded PREHANDOVER proofs (i.e., proofs for which a later proof declares `Supersedes: <filename>`)
@@ -821,6 +825,21 @@ When applying ACR triggers ACR-02, ACR-07, ACR-12, and any other cross-artifact 
 - Rejection-package artifacts from prior rounds (these are retained as immutable historical evidence and are expected to contain non-final wording from the round they document)
 
 **Rationale**: The append-only governance model deliberately retains historical artifacts. Scanning historical artifacts for provisional wording creates false positives and would incorrectly block legitimate final-state bundles. The hardened discipline applies only to artifacts that form the current final-state bundle.
+
+### Authoritative-Source Rule for Current Token/Session (v1.10.0)
+
+When the IAA must determine the **current authoritative** IAA token reference or session ID for a job (for example, during ACR-07 or ACR-16 token/session coherence checks), the IAA MUST apply the following precedence order:
+
+1. **Wave record section 5** (`PHASE_B_BLOCKING_TOKEN` field) — this is the **sole authoritative source** for the current token/session reference under the AMC 90/10 wave-record-only assurance model
+2. **PREHANDOVER proof** (`iaa_audit_token` / `iaa_session_reference` fields) — secondary reference; must match wave record section 5
+3. **Session memory** (`outcome` / `iaa_token` fields) — tertiary reference; must match wave record section 5
+4. **`wave-current-tasks.md`** — must not declare a contradicting wave/session identifier
+
+**Conflict resolution rule**: If the wave record section 5 token/session reference and any other active-bundle artifact declare different values, the conflict is an ACR-16 trigger (active final-state token/session incoherence). The IAA does NOT resolve the conflict; it issues a REJECTION-PACKAGE citing ACR-16.
+
+**Absence rule**: If wave record section 5 is absent or blank while any other active-bundle artifact declares a token/session reference, the IAA treats this as an ACR-07 trigger (PREHANDOVER / token / session memory / tracker / wave record not coherent) and issues a REJECTION-PACKAGE.
+
+> **Authority**: AMC 90/10 Admin Protocol v1.0.0 — wave record is the canonical carrier for all session evidence and assurance verdicts.
 
 ### How the IAA Handles Admin-Ceremony Rejection Triggers
 
@@ -853,4 +872,4 @@ The §4.3e gate (defined in `AGENT_HANDOVER_AUTOMATION.md`) is the **ECAP + Fore
 
 ---
 
-*Authority: CS2 (Johan Ras) | Version: 1.7.0 | Effective: 2026-02-24 | Amended: 2026-04-19 (v1.7.0) | Previous: 2026-04-17 (v1.6.0)*
+*Authority: CS2 (Johan Ras) | Version: 1.10.0 | Effective: 2026-02-24 | Amended: 2026-04-21 (v1.10.0) | Previous: 2026-04-19 (v1.7.0)*

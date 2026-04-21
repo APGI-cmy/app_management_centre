@@ -1,7 +1,8 @@
 
-**Status**: CANONICAL | **Version**: 1.5.0 | **Authority**: CS2  
+**Status**: CANONICAL | **Version**: 1.6.0 | **Authority**: CS2  
 **Date**: 2026-02-24  
-**Amended**: 2026-04-19 — v1.5.0: Hardened §4.3e Admin Ceremony Compliance Gate with gate-inventory checks (Check H), pre-final instruction wording denylist (Check I), cross-artifact final-state consistency with active-bundle scoping (Check J), and carried-forward claim verification (Check K); updated auto-fail rule table with AAP-15 through AAP-21; active-bundle scoping rule clarified to prevent false positives from historical archive; authority: CS2 — governance-repo hardening wave (gate-inventory + post-token normalization hardening).  
+**Amended**: 2026-04-21 — v1.6.0: Added §4.3e Check L — active final-state bundle token/session coherence check; added AAP-22 to auto-fail rule table; explicitly included `wave-current-tasks.md` in active-bundle scope for token/session coherence checks; authority: CS2 — AMC/ISMS admin-ceremony hardening parity catch-up (issue: Catch AMC up to ISMS admin-ceremony hardening).  
+**Previous amendment**: 2026-04-19 — v1.5.0: Hardened §4.3e Admin Ceremony Compliance Gate with gate-inventory checks (Check H), pre-final instruction wording denylist (Check I), cross-artifact final-state consistency with active-bundle scoping (Check J), and carried-forward claim verification (Check K); updated auto-fail rule table with AAP-15 through AAP-21; active-bundle scoping rule clarified to prevent false positives from historical archive; authority: CS2 — governance-repo hardening wave (gate-inventory + post-token normalization hardening).  
 **Amended**: 2026-04-17 — v1.4.1: Tightened §4.3e Check C stale-wording scan to final-state artifact set only — superseded pre-token proofs retained immutably under the append-only model are now explicitly exempt; updated AAP-01 auto-fail rule to document final-state scope and superseded-proof exemption; authority: CS2 — PR review feedback on §4.3e canon collision with append-only proof retention.  
 **Previous amendment**: 2026-04-17 — v1.4.0: Added §4.3e Admin Ceremony Compliance Gate (BLOCKING, pre-IAA, ECAP-involved jobs); added auto-fail rules table for 9 known admin anti-patterns (AAP-01 through AAP-09); updated Phase 4 structure and sequencing note; updated Handover Validation Checklist with admin-compliance gate item; authority: CS2 — issue: Canonize a 3-layer admin ceremony compliance stack for ECAP, Foreman QP, and IAA.  
 **Previous amendment**: 2026-04-09 — v1.3.0: Post-ECAP-001 governance quality closure (ECAP-QC-001 through ECAP-QC-004) — added §4.3d Scope-Declaration Parity Gate (blocking, pre-IAA); added mandatory drift evidence and metadata correctness requirements to Administrator evidence checklist; updated validate-canon-hashes.sh to catch version/canonical_version mismatches; codified amended_date and timestamp discipline; authority: CS2 — ECAP-001 follow-up quality closure issue.  
@@ -1173,6 +1174,116 @@ done
   ACC_FAILURES+=("K1: Carried-forward source file(s) not found on branch: ${UNRESOLVABLE_CF[*]} (AAP-20)")
 
 # ─────────────────────────────────────────────────────────────────────────────
+# CHECK L: Active Final-State Bundle Token/Session Coherence (AAP-22)
+# Three sub-checks:
+#   L0: wave-current-tasks.md is absent while the active wave record declares
+#       a wave_id for an in-progress wave → FAIL
+#   L1: wave-current-tasks.md is present but the PREHANDOVER proof declares a
+#       different wave_id → FAIL
+#   L2: wave-current-tasks.md filename wave slug does not match the wave record
+#       wave_id → FAIL
+#
+# Active-wave selection is deterministic:
+#   1. Identify the authoritative wave record (lexicographically last by filename;
+#      AMC wave record filenames include dates so this is convention-aligned).
+#   2. Extract wave_id from its Section 1 Markdown table row.
+#   3. Resolve the matching checklist by exact filename:
+#      .agent-admin/waves/<wave_id>-current-tasks.md
+#
+# Artifact format notes (AMC canonical formats):
+#   - Wave records store wave_id as a Markdown table row: | wave_id | VALUE |
+#   - PREHANDOVER proof memory files store wave_id as a backtick list item:
+#       - `wave_id`: VALUE
+# ─────────────────────────────────────────────────────────────────────────────
+echo "  [L] Active final-state bundle token/session coherence (wave-current-tasks.md scoped)..."
+
+# Helper: normalize a wave/session identifier for comparison (lowercase, trim spaces)
+normalize_wave_id() { echo "${1}" | tr '[:upper:]' '[:lower:]' | tr -d ' '; }
+
+# Helper: extract wave_id from a file — handles both canonical AMC artifact formats:
+#   1) Markdown table row  : | wave_id | VALUE |   (wave records, ECAP reconciliations)
+#      Parsed with awk -F'|' '{print $3}': field 1=empty, field 2=row-key, field 3=value,
+#      field 4=trailing empty — valid for the standard 2-column AMC Section 1 table.
+#   2) Backtick list item  : - `wave_id`: VALUE     (PREHANDOVER proof memory files)
+extract_wave_id() {
+  local file="$1" id=""
+  id=$(grep -E "^\| wave_id \|" "${file}" 2>/dev/null | head -1 | awk -F'|' '{print $3}' | tr -d ' ')
+  if [ -z "${id}" ]; then
+    id=$(grep -E "^- \`wave_id\`:" "${file}" 2>/dev/null | head -1 \
+         | sed 's/^- `wave_id`:[[:space:]]*//' | tr -d '"')
+  fi
+  echo "${id}"
+}
+
+# Step 1: identify the authoritative wave record (lexicographically last by filename)
+ACTIVE_WAVE_RECORD=$(git ls-files ".agent-admin/wave-records/amc-wave-record-*.md" 2>/dev/null | sort | tail -1)
+
+# Step 2: extract the authoritative active wave_id from the wave record's Markdown table
+ACTIVE_WAVE_ID=""
+if [ -n "${ACTIVE_WAVE_RECORD}" ]; then
+  ACTIVE_WAVE_ID=$(extract_wave_id "${ACTIVE_WAVE_RECORD}")
+fi
+
+# Step 3: resolve the matching checklist by exact filename (no glob ambiguity)
+# Convention: the checklist filename is {wave_id}-current-tasks.md
+WAVE_TASKS_FILE=""
+if [ -n "${ACTIVE_WAVE_ID}" ]; then
+  EXPECTED_CHECKLIST=".agent-admin/waves/${ACTIVE_WAVE_ID}-current-tasks.md"
+  if git ls-files --error-unmatch "${EXPECTED_CHECKLIST}" >/dev/null 2>&1; then
+    WAVE_TASKS_FILE="${EXPECTED_CHECKLIST}"
+  fi
+fi
+
+# ── L0: absent checklist while wave record declares active wave_id ────────────
+if [ -n "${ACTIVE_WAVE_ID}" ] && [ -z "${WAVE_TASKS_FILE}" ]; then
+  ACC_FAILURES+=("L0: wave-current-tasks.md absent — active wave record declares wave_id '${ACTIVE_WAVE_ID}' but .agent-admin/waves/${ACTIVE_WAVE_ID}-current-tasks.md does not exist (AAP-22)")
+fi
+
+# ── L1 / L2: checklist present — verify cross-artifact coherence ──────────────
+if [ -n "${WAVE_TASKS_FILE}" ]; then
+  # Extract wave_id from checklist filename: strip only the trailing "-current-tasks.md"
+  # suffix; the full wave_id (including its "wave-" prefix where present) is preserved.
+  # Example: wave-parity-upgrade-20260419-current-tasks.md → wave-parity-upgrade-20260419
+  WAVE_TASKS_WAVE_ID=$(basename "${WAVE_TASKS_FILE}" | sed -E 's/-current-tasks\.md$//')
+  # Guard: if sed produced no change (pattern did not match), the filename lacks the
+  # expected suffix — clear the variable rather than using a bogus value
+  [[ "${WAVE_TASKS_WAVE_ID}" == *"-current-tasks.md" ]] && WAVE_TASKS_WAVE_ID=""
+
+  # L1: compare checklist wave slug against PREHANDOVER proof wave_id
+  # Attempt 1: use the dedicated proof file from the active bundle (set by Check J)
+  PROOF_WAVE_ID=""
+  if [ -n "${LATEST_PROOF}" ]; then
+    PROOF_WAVE_ID=$(extract_wave_id "${LATEST_PROOF}")
+  fi
+  # Attempt 2: scan workspace PREHANDOVER memory files for one that declares the
+  # same wave_id as the active wave (scoped to the current wave to avoid comparing
+  # against historical proofs from other agents or prior waves)
+  if [ -z "${PROOF_WAVE_ID}" ] && [ -n "${ACTIVE_WAVE_ID}" ]; then
+    while IFS= read -r PFILE; do
+      [ -z "${PFILE}" ] && continue
+      CANDIDATE=$(extract_wave_id "${PFILE}")
+      if [ -n "${CANDIDATE}" ] && \
+         [ "$(normalize_wave_id "${CANDIDATE}")" = "$(normalize_wave_id "${ACTIVE_WAVE_ID}")" ]; then
+        PROOF_WAVE_ID="${CANDIDATE}"
+        break
+      fi
+    done < <(git ls-files ".agent-workspace/*/memory/PREHANDOVER-*.md" 2>/dev/null | sort -r)
+  fi
+  if [ -n "${PROOF_WAVE_ID}" ] && [ -n "${WAVE_TASKS_WAVE_ID}" ]; then
+    if [ "$(normalize_wave_id "${PROOF_WAVE_ID}")" != "$(normalize_wave_id "${WAVE_TASKS_WAVE_ID}")" ]; then
+      ACC_FAILURES+=("L1: Active-bundle token/session incoherence — wave-current-tasks.md wave identifier '${WAVE_TASKS_WAVE_ID}' does not match PREHANDOVER proof wave_id '${PROOF_WAVE_ID}' (AAP-22)")
+    fi
+  fi
+
+  # L2: verify the wave record's authoritative wave_id matches the checklist's wave slug
+  if [ -n "${ACTIVE_WAVE_ID}" ] && [ -n "${WAVE_TASKS_WAVE_ID}" ]; then
+    if [ "$(normalize_wave_id "${ACTIVE_WAVE_ID}")" != "$(normalize_wave_id "${WAVE_TASKS_WAVE_ID}")" ]; then
+      ACC_FAILURES+=("L2: Active-bundle token/session incoherence — wave-current-tasks.md wave identifier '${WAVE_TASKS_WAVE_ID}' does not match wave record wave_id '${ACTIVE_WAVE_ID}' (AAP-22)")
+    fi
+  fi
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
 # GATE RESULT
 # ─────────────────────────────────────────────────────────────────────────────
 if [ ${#ACC_FAILURES[@]} -gt 0 ]; then
@@ -1212,12 +1323,13 @@ The following conditions are **auto-fail** for the §4.3e gate regardless of oth
 | AAP-19 | Cross-artifact final-state contradiction | PREHANDOVER `final_state: COMPLETE` but ECAP reconciliation summary or session memory declares a non-final status for the same dimension |
 | AAP-20 | Carried-forward claim silently changes ownership or gate authority | A "carried forward from" claim in a final-state artifact references a source that does not contain the stated claim, or the carried-forward text modifies gate authority/ownership |
 | AAP-21 | ASSEMBLY_TIME_ONLY block not removed | A block explicitly marked `ASSEMBLY_TIME_ONLY`, `REMOVE BEFORE COMMIT`, or `TEMPLATE INSTRUCTION` remains in a committed output artifact |
+| AAP-22 | Active final-state token/session incoherence | The `wave-current-tasks.md` checklist for the active wave declares a wave/session/job identifier that contradicts the wave identifier declared in the active PREHANDOVER proof (`wave_id` field) or wave record; or `wave-current-tasks.md` is absent when a wave record with a declared wave_id exists in the active bundle |
 
 ### Admin Ceremony Compliance Gate in the Handover Validation Checklist
 
 The following item is added to the handover checklist when an ECAP job is involved:
 
-> - [ ] **Admin Ceremony Compliance Gate PASSED** (ECAP jobs): §4.3e gate run — 0 auto-fail conditions (AAP-15 through AAP-21 auto-fail conditions included); ECAP reconciliation summary present; admin-compliance readiness accepted by Foreman QP checkpoint (BLOCKING — IAA must not be invoked until this is ✅) (IAA Token — Append-Only, Dedicated File)
+> - [ ] **Admin Ceremony Compliance Gate PASSED** (ECAP jobs): §4.3e gate run — 0 auto-fail conditions (AAP-15 through AAP-22 auto-fail conditions included); ECAP reconciliation summary present; `wave-current-tasks.md` token/session coherence checked (Check L); admin-compliance readiness accepted by Foreman QP checkpoint (BLOCKING — IAA must not be invoked until this is ✅) (IAA Token — Append-Only, Dedicated File)
 
 **Purpose**: Govern how the IAA writes its assurance verdict. The PREHANDOVER proof is
 **read-only** once committed. The IAA token is written to a new, dedicated artifact file —
@@ -1557,7 +1669,7 @@ Before session ends, verify:
 - [ ] **Pre-handover merge gate parity check PASSED**: All merge gate checks pass locally (BLOCKING — PR must not be opened until this is ✅)
 - [ ] **Pre-IAA commit-state gate PASSED**: Working tree clean, all deliverables committed at HEAD, PREHANDOVER proof and session memory committed (BLOCKING — IAA must not be invoked until this is ✅)
 - [ ] **Scope-declaration parity gate PASSED** (governance PRs only): `governance/scope-declaration.md` file count matches `git diff --name-only origin/main...HEAD` count; scope-declaration committed and not dirty (BLOCKING — IAA must not be invoked until this is ✅)  (ECAP-QC-002)
-- [ ] **Admin Ceremony Compliance Gate PASSED** (ECAP jobs only): §4.3e gate run — 0 auto-fail conditions (AAP-01 through AAP-09); ECAP reconciliation summary present; Foreman QP admin-compliance checkpoint explicitly accepted (BLOCKING — IAA must not be invoked until this is ✅)
+- [ ] **Admin Ceremony Compliance Gate PASSED** (ECAP jobs only): §4.3e gate run — 0 auto-fail conditions (AAP-01 through AAP-09, AAP-15 through AAP-22); ECAP reconciliation summary present; `wave-current-tasks.md` token/session coherence checked (Check L); Foreman QP admin-compliance checkpoint explicitly accepted (BLOCKING — IAA must not be invoked until this is ✅)
 - [ ] **Drift evidence present** (governance/canon PRs): PREHANDOVER proof includes before/after SHA256 for every amended canon file (ECAP-QC-001)
 - [ ] **Metadata correctness**: `version == canonical_version` and `amended_date == today` for all amended CANON_INVENTORY entries (ECAP-QC-003, ECAP-QC-004)
 - [ ] **Compliance checked**: Agent-specific requirements verified; ALL issues fixed before proceeding
@@ -1671,10 +1783,32 @@ When the `execution-ceremony-admin-agent` returns the ceremony bundle to the For
 - `governance/canon/AGENT_PRIORITY_SYSTEM.md` - Priority codes
 - `governance/canon/EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md` - Evidence requirements
 - `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` - Execution ceremony admin role and handover sequence (v1.2.0)
+- `governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md` v1.10.0 - ACR triggers including ACR-15, ACR-16 (cross-reference for §4.3e Check L / AAP-22)
 
 ---
 
-**Version**: 1.4.0  
-**Last Updated**: 2026-04-17  
+## Tracked In-Flight Upstream Scope (ISMS PR #1436)
+
+> **Status**: TRACKING ONLY — items below are in-flight in ISMS PR #1436 and must NOT be declared as AMC-parity until that PR merges and the final upstream artifact set is known.
+
+The following hardening items are being developed in ISMS PR #1436 and will require an AMC follow-on parity wave once merged:
+
+| Item | Description | AMC Parity Status |
+|------|-------------|-------------------|
+| B1 — Universal authoritative-reference truth | AGENT_HANDOVER_AUTOMATION.md hardening that makes authoritative source truth explicit and machine-checkable for all reference types | PENDING — track when #1436 merges |
+| B2 — Wrong-but-existing reference anti-pattern | Anti-pattern / rejection logic for references that look valid (file exists) but point to wrong source/version/session/token | PENDING — track when #1436 merges |
+| B3 — Renumber / rebase / conflict re-reconciliation | Reconciliation-matrix coverage of session/token renumbering and post-conflict re-reconciliation | PENDING — track when #1436 merges |
+| B4 — Foreman QP authoritative-reference hardening | Foreman/QP artifacts requiring stronger authoritative reference table / source-of-truth check set | PENDING — track when #1436 merges |
+| B5 — Liaison / non-ECAP mini-ceremony pack | New liaison/non-ECAP mini-ceremony template and checklist | PENDING — track when #1436 merges |
+| B6 — Validation proof-of-operation | AMC proof-of-operation wave demonstrating the hardened ECAP / Foreman / IAA model works end-to-end | PENDING — schedule as follow-on wave after B1–B5 land |
+
+**Authority for this tracking section**: CS2 — issue: Catch AMC up to ISMS admin-ceremony hardening (ECAP / IAA parity incl PR #1436 in-flight scope)
+
+> **Instruction for AMC follow-on agent**: When ISMS PR #1436 merges, review the final upstream artifact set, compare against items B1–B6 above, and open a new AMC layer-down issue for each item that requires an AMC parity update. Do not rely on the descriptions above as final — always diff against the actual merged upstream artifacts.
+
+---
+
+**Version**: 1.6.0  
+**Last Updated**: 2026-04-21  
 **Authority**: CS2 (Johan Ras)  
 **Living Agent System**: v6.2.0
