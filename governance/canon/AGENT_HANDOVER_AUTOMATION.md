@@ -1179,23 +1179,35 @@ done
 # the same wave/session/job identifier as the active PREHANDOVER proof and
 # wave record. Detects stale or mismatched wave/session tokens across the
 # active-bundle scope.
+#
+# Filename convention: wave-<identifier>-current-tasks.md
+# where <identifier> is the wave slug (e.g., "12", "wave-abc-20260401").
+# The wave slug is everything between the leading "wave-" and the trailing
+# "-current-tasks.md", extracted via a single anchored sed pattern.
 # ─────────────────────────────────────────────────────────────────────────────
 echo "  [L] Active final-state bundle token/session coherence (wave-current-tasks.md scoped)..."
+
+# Helper: normalize a wave/session identifier for comparison (lowercase, trim spaces)
+normalize_wave_id() { echo "${1}" | tr '[:upper:]' '[:lower:]' | tr -d ' '; }
 
 # Locate the active wave-current-tasks.md for this job
 WAVE_TASKS_FILE=$(git ls-files ".agent-admin/waves/wave-*-current-tasks.md" 2>/dev/null | sort | tail -1)
 if [ -n "${WAVE_TASKS_FILE}" ]; then
-  # Extract wave identifier from the wave-current-tasks.md filename (e.g., wave-12 from wave-12-current-tasks.md)
-  WAVE_TASKS_WAVE_ID=$(basename "${WAVE_TASKS_FILE}" | sed -E 's/^(wave-[^-]+-[^-]+)-current-tasks\.md$/\1/' | sed -E 's/^(wave-[0-9]+)-current-tasks\.md$/\1/')
+  # Extract wave slug: strip leading "wave-" prefix and trailing "-current-tasks.md" suffix.
+  # Format: wave-<slug>-current-tasks.md  →  <slug>
+  WAVE_TASKS_WAVE_ID=$(basename "${WAVE_TASKS_FILE}" | sed -E 's/^wave-(.+)-current-tasks\.md$/\1/')
+  # Guard: if extraction produced no change (no match), clear the value to avoid false failures
+  [ "${WAVE_TASKS_WAVE_ID}" = "$(basename "${WAVE_TASKS_FILE}")" ] && WAVE_TASKS_WAVE_ID=""
 
   # Cross-check: if the PREHANDOVER proof declares a wave_id field, it must match
-  if [ -n "${LATEST_PROOF}" ]; then
-    PROOF_WAVE_ID=$(grep -E "^wave_id:|^wave:" "${LATEST_PROOF}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
-    if [ -n "${PROOF_WAVE_ID}" ] && [ -n "${WAVE_TASKS_WAVE_ID}" ]; then
-      # Normalize both for comparison
-      PROOF_WAVE_NORM=$(echo "${PROOF_WAVE_ID}" | tr '[:upper:]' '[:lower:]' | tr -d ' ')
-      TASKS_WAVE_NORM=$(echo "${WAVE_TASKS_WAVE_ID}" | tr '[:upper:]' '[:lower:]' | tr -d ' ')
-      if [ "${PROOF_WAVE_NORM}" != "${TASKS_WAVE_NORM}" ]; then
+  if [ -n "${LATEST_PROOF}" ] && [ -n "${WAVE_TASKS_WAVE_ID}" ]; then
+    # 'wave_id:' is the canonical YAML field name; 'wave:' is an accepted alias
+    PROOF_WAVE_ID=$(grep -E "^wave_id:" "${LATEST_PROOF}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+    if [ -z "${PROOF_WAVE_ID}" ]; then
+      PROOF_WAVE_ID=$(grep -E "^wave:" "${LATEST_PROOF}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+    fi
+    if [ -n "${PROOF_WAVE_ID}" ]; then
+      if [ "$(normalize_wave_id "${PROOF_WAVE_ID}")" != "$(normalize_wave_id "${WAVE_TASKS_WAVE_ID}")" ]; then
         ACC_FAILURES+=("L1: Active-bundle token/session incoherence — wave-current-tasks.md wave identifier '${WAVE_TASKS_WAVE_ID}' does not match PREHANDOVER proof wave_id '${PROOF_WAVE_ID}' (AAP-22)")
       fi
     fi
@@ -1204,11 +1216,16 @@ if [ -n "${WAVE_TASKS_FILE}" ]; then
   # Also verify wave record (if present) references the same wave id
   LATEST_WAVE_RECORD=$(git ls-files ".agent-admin/wave-records/amc-wave-record-*.md" 2>/dev/null | sort | tail -1)
   if [ -n "${LATEST_WAVE_RECORD}" ] && [ -n "${WAVE_TASKS_WAVE_ID}" ]; then
-    WAVE_RECORD_ID=$(grep -E "^wave_id:|^wave_slug:|^wave:" "${LATEST_WAVE_RECORD}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+    # Try canonical field names in preference order: wave_id, wave_slug, then wave
+    WAVE_RECORD_ID=$(grep -E "^wave_id:" "${LATEST_WAVE_RECORD}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+    if [ -z "${WAVE_RECORD_ID}" ]; then
+      WAVE_RECORD_ID=$(grep -E "^wave_slug:" "${LATEST_WAVE_RECORD}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+    fi
+    if [ -z "${WAVE_RECORD_ID}" ]; then
+      WAVE_RECORD_ID=$(grep -E "^wave:" "${LATEST_WAVE_RECORD}" 2>/dev/null | head -1 | awk '{print $2}' | tr -d '"')
+    fi
     if [ -n "${WAVE_RECORD_ID}" ]; then
-      RECORD_WAVE_NORM=$(echo "${WAVE_RECORD_ID}" | tr '[:upper:]' '[:lower:]' | tr -d ' ')
-      TASKS_WAVE_NORM=$(echo "${WAVE_TASKS_WAVE_ID}" | tr '[:upper:]' '[:lower:]' | tr -d ' ')
-      if [ "${RECORD_WAVE_NORM}" != "${TASKS_WAVE_NORM}" ]; then
+      if [ "$(normalize_wave_id "${WAVE_RECORD_ID}")" != "$(normalize_wave_id "${WAVE_TASKS_WAVE_ID}")" ]; then
         ACC_FAILURES+=("L2: Active-bundle token/session incoherence — wave-current-tasks.md wave identifier '${WAVE_TASKS_WAVE_ID}' does not match wave record wave_id '${WAVE_RECORD_ID}' (AAP-22)")
       fi
     fi
