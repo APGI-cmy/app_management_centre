@@ -24,9 +24,10 @@
 
 ### .agent-admin/governance/ripple-archive/ripple-layer-down-e5a76db0.json
 - Created with full ripple event metadata
-- status: LAYERED
-- auto_close_eligible: true
-- agent_file_detection_gate: NOT_TRIGGERED
+- `status: archived`
+- `outcome: layered`
+- `auto_close_eligible: true`
+- `agent_file_detection_gate: NOT_TRIGGERED`
 
 ## CANON_INVENTORY Verification
 
