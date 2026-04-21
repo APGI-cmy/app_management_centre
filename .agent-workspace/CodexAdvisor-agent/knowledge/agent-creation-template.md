@@ -1,7 +1,7 @@
 # CodexAdvisor-agent — Agent Creation Template
 
 **Agent**: CodexAdvisor-agent
-**Version**: 1.0.0
+**Version**: 1.1.0
 **Last Updated**: 2026-04-21
 **Authority**: CS2 (@APGI-cmy)
 **Governance Ref**: AMC Issue #1068, CodexAdvisor contract Phase 3 Step 3.4
@@ -83,7 +83,7 @@ iaa_oversight:
     pass: record_final_iaa_pass_in_wave_record_then_proceed
     stop_and_fix: halt_handover_return_to_phase3_step3_8
     escalate: route_to_cs2_do_not_open_pr
-  advisory_phase: PHASE_A_ADVISORY
+  advisory_phase: PHASE_B_BLOCKING
   policy_ref: AGCFPP-001
 
 merge_gate_interface:
