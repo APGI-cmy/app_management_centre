@@ -875,7 +875,7 @@ Non-governance PRs (application code only, documentation only) are exempt from �
 #!/bin/bash
 # §4.3e Admin Ceremony Compliance Gate (BLOCKING — ECAP-involved jobs)
 # Priority: Producer_H (Foreman or execution-ceremony-admin-agent)
-# Authority: EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.1.0 + AGENT_HANDOVER_AUTOMATION.md v1.4.0
+# Authority: EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md v1.2.0 + AGENT_HANDOVER_AUTOMATION.md v1.4.0
 
 echo "🔍 §4.3e ADMIN CEREMONY COMPLIANCE GATE (BLOCKING)"
 
@@ -1606,7 +1606,7 @@ Before session ends, verify:
 **Approval**: CS2 (Johan Ras)  
 **Effective Date**: 2026-02-17
 
-## Execution Ceremony Administration Integration (v1.1.6)
+## Execution Ceremony Administration Integration (v1.2.0)
 
 When the Foreman appoints an `execution-ceremony-admin-agent` for ceremony bundle preparation, the Phase 4 handover sequence is structured as follows:
 
