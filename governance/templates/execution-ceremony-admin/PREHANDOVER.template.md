@@ -43,7 +43,8 @@ gate_inventory:
   # evidence-bundle/prehandover-proof-check: PASS
 
 ## IAA Assurance
-iaa_audit_token:        <token-file-path>    # REQUIRED — fill with actual token file path; must NOT remain as placeholder if final_state: COMPLETE
+iaa_audit_token:        <IAA audit token ID> # REQUIRED — fill with actual token reference/ID; must NOT remain as placeholder if final_state: COMPLETE
+iaa_token_file:         <token-file-path>    # REQUIRED — fill with actual token file path; must NOT remain as placeholder if final_state: COMPLETE
 iaa_session_reference:  <IAA session ID>     # REQUIRED — fill with actual IAA session ID; must NOT remain as placeholder if final_state: COMPLETE
 iaa_reinvocation_round: 0                   # 0 = first invocation; 1+ = re-invocation round
 iaa_rejection_reference: none               # path to rejection-package file if round >= 1
