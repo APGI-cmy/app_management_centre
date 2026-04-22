@@ -22,6 +22,15 @@
 
 ---
 
+> **⚠️ AUTHORITY TRANSITION NOTE**
+> This document is the **approval target** for AMC Stage 1 and is currently a candidate for CS2 approval.
+> It is **NOT YET** the approved authoritative source for downstream derivation.
+> No downstream artifact (FRS, TRS, Architecture, Build Planning) may treat this document as approved truth until CS2 records explicit approval.
+> **Where approval is recorded**: CS2 approval must be recorded in `modules/amc/00-app-description/app-description-approval.md` (the Stage 1 approval record for this module). The `Approved By`, `Approval Date`, `Approved Version`, and `Canonical Source` fields in that document must all be populated before this document carries authoritative status.
+> Once CS2 approval is recorded there, this file becomes the single authoritative AMC Stage 1 source and all transitional FM-era Stage 1 files in this directory are superseded.
+
+---
+
 ## §1 — Application Identity
 
 ### Application Name
@@ -44,6 +53,22 @@ AMC is intended to be the place from which the overall application estate is wat
 AMC provides a persistent, mobile-accessible, governance-sensitive executive operating surface for the Maturion system, enabling proactive oversight, two-way communication, escalation handling, approval control, and coordinated action across the application estate.
 
 Its value is that Johan does not have to manually interrogate the system to discover problems. AMC, through Maturion and supporting agents, is expected to surface important matters proactively, support rapid governed intervention, and preserve authority boundaries while increasing operational autonomy over time.
+
+### Executive Layer Boundary Definitions
+
+AMC is the executive supervisory application for the **live ISMS and Maturion operating estate**. It operates as the outermost executive surface of the estate. It does not internally implement the AI, knowledge ingestion, or persistent memory capabilities it supervises.
+
+The following layer boundary definitions apply across this document and all downstream derivations:
+
+| Layer | Definition |
+|---|---|
+| **AMC** | Executive supervisory application and operating surface. Provides oversight, alerts, approvals, interventions, and executive visibility. Does not own AI execution, knowledge ingestion, or persistent memory truth. |
+| **AIMC** | AI capability / gateway layer. The sole governed AI execution gateway for the estate. All AI-model interactions must route through AIMC. AMC does not execute AI models directly. |
+| **AIMCC** | Knowledge ingestion + knowledge/memory operating layer. Governs the ingestion, organization, and memory operations of the estate's knowledge base. AIMCC may own workflow-state and ingestion/curation metadata required to run those processes, but the canonical owner of persistent knowledge/memory truth remains the **knowledge / memory system**. AMC may surface or reference knowledge managed through AIMCC-governed workflows, but does not become the canonical owner. |
+| **Knowledge Upload Centre** | Governed ingestion surface. The approved entry point for uploading and submitting knowledge/documents to the estate's knowledge base. Operates within AIMCC governance. |
+| **knowledge / memory system** | Persistent substrate for estate knowledge and memory. This is an **estate capability**, not an AMC-private silo. AMC may present or query it but must not silently duplicate or claim canonical ownership of its contents. |
+
+These boundaries are non-negotiable. All downstream derivation must preserve them. No section of this document or any downstream artifact may imply that AMC internalizes, bypasses, or replaces these governed layers.
 
 ---
 
@@ -80,6 +105,42 @@ Its value is that Johan does not have to manually interrogate the system to disc
 - AMC must not collapse specialist-agent roles into a single undifferentiated AI runtime
 - Operational autonomy may expand over time, but only through explicit governance and approval
 
+### AMC / AIMC / AIMCC Boundary
+
+This subsection makes explicit what AMC owns versus what it supervises, integrates with, or routes through.
+
+**AMC owns:**
+- executive visibility surfaces and dashboards
+- approval and intervention workflow surfaces
+- escalation routing and alerting surfaces
+- executive conversation surfaces with Maturion
+- audit event generation for AMC-originated actions
+- its own operational state (alert records, approval records, intervention records, audit events)
+
+**AMC supervises but does not own:**
+- AI model execution (routed through AIMC)
+- knowledge ingestion and memory operations (routed through AIMCC / Knowledge Upload Centre)
+- persistent knowledge / memory truth (owned by the knowledge / memory system)
+- specialist agent workspaces (supervised, not absorbed)
+
+**AMC explicitly does NOT:**
+- execute AI models directly without routing through AIMC
+- ingest knowledge or documents without routing through AIMCC / Knowledge Upload Centre
+- become the canonical long-term owner of estate knowledge or memory truth
+- present generated text as authoritative memory without provenance attribution
+- silently bypass AIMC for AI actions
+- silently bypass AIMCC or Knowledge Upload Centre for knowledge ingestion
+
+**What AMC supervises within its executive scope:**
+- upload status and governed ingestion outcomes (surfaced from AIMCC)
+- AI action outcomes (routed through AIMC and reported back to AMC)
+- memory-aware operations (referenced from the knowledge / memory system via governed APIs)
+- executive approval of certain knowledge / memory actions where governance requires it
+
+**Explicit prohibitions:**
+- Unmanaged AI bypass: any AI action taken from AMC context that does not route through AIMC is a governance violation
+- Unmanaged knowledge-ingestion bypass: any knowledge upload or ingestion action initiated from AMC context that does not route through AIMCC / Knowledge Upload Centre is a governance violation
+
 ---
 
 ## §3 — Success Criteria
@@ -104,6 +165,40 @@ Its value is that Johan does not have to manually interrogate the system to disc
 The application is considered aligned at Stage 1 when its identity, scope, authority chain, governance boundaries, lifecycle requirements, AI integration model, notification model, and state/audit expectations are clearly defined and approved.
 
 Stage 1 is not complete merely because an outline exists. It is complete only when the product truth is sufficiently clear that downstream requirements and architecture work can proceed without guessing the intent of AMC.
+
+### Measurable Integration and Operating Success Criteria
+
+In addition to the general delivery and operating success measures above, AMC must satisfy the following measurable integration-specific criteria:
+
+**Executive alerting:**
+- alerts are generated and surfaced proactively without requiring manual interrogation
+- critical alerts reach the correct authority within defined SLA
+- alert acknowledgment and escalation are recorded in the audit trail
+
+**Approval / intervention flows:**
+- every governance-sensitive action that requires approval is blocked until approval is explicitly granted
+- approval decisions are recorded with actor, timestamp, basis, and outcome
+- intervention actions are traceable from initiation through to completion or cancellation
+
+**AIMC-routed AI actions:**
+- zero AI model executions occur from AMC context that do not route through AIMC
+- AIMC unavailability is handled gracefully with explicit degraded-mode behavior
+- all AIMC-routed actions are recorded in the audit trail with source and outcome
+
+**AIMCC / Knowledge Upload Centre oversight:**
+- AMC surfaces upload status and ingestion outcomes sourced from AIMCC
+- no unmanaged knowledge ingestion pathway exists within AMC
+- AIMCC unavailability is handled gracefully with explicit degraded-mode behavior
+
+**Memory-aware operational clarity:**
+- AMC surfaces knowledge / memory references with provenance, not as anonymous authoritative facts
+- AMC does not silently cache or duplicate knowledge / memory truth beyond transient presentation state
+- memory retrieval degradation is surfaced, not silently suppressed
+
+**State / audit / provenance clarity:**
+- every consequential action in AMC has a traceable audit event
+- state ownership is explicit: AMC-owned state is distinguishable from AIMCC-owned or knowledge-system-owned state
+- no audit event is orphaned (every event has an identified actor, source system, object, and timestamp)
 
 ---
 
@@ -187,6 +282,20 @@ Because AMC is an executive operating system rather than a simple admin console,
 - controlled integration with specialist and sandboxed AI teams
 - support for real-world intervention scenarios, including client-context decision and execution initiation
 
+### Original AMC Intent Reconciliation
+
+The following AMC capabilities were identified in earlier intent documents and governance records. This subsection explicitly reconciles each with the current strategic framing.
+
+| Original AMC Capability | Status | Current Framing |
+|---|---|---|
+| **ARC Trigger Governance** | ✅ Preserved and expanded | AMC supervises and triggers ARC-related governance actions within the estate. This capability is absorbed into AMC's intervention launch, escalation routing, and approval workflow model. ARC trigger governance is a first-class AMC executive function. |
+| **Dynamic Upload Quota Management** | ✅ Preserved and expanded | AMC surfaces and supervises upload quota state sourced from AIMCC / Knowledge Upload Centre. AMC may execute quota-related governance actions through approved AIMCC pathways. Not silently retired — expanded into the AIMCC oversight model. |
+| **Alert Dashboard** | ✅ Preserved and elevated | The Alert Dashboard is explicitly preserved and elevated as the proactive executive alerting surface of AMC. It is now positioned as a core executive operating commitment, not a secondary utility. |
+| **Audit Trail** | ✅ Preserved and expanded | The Audit Trail is explicitly preserved as a constitutional operating requirement. AMC must produce a comprehensive audit trail covering all consequential actions across its executive, approval, intervention, AIMC, AIMCC, and knowledge-reference pathways. |
+| **Progressive Automation Control** | ✅ Preserved and expanded | Progressive Automation Control is preserved as the progressive autonomy model. AMC must support the progressive delegation of approved operational responsibilities to Maturion and other governed agents, with explicit approval boundaries, rollback capability, and audit traceability at each delegation step. |
+
+No original AMC capability commitment has been silently retired. All five original capabilities are explicitly reconciled and carried forward into the current strategic framing.
+
 
 ## §5 — Build Lifecycle Stages (§AD-01)
 
@@ -259,29 +368,45 @@ This stage shall establish:
 
 Stage 1 is complete only when AMC’s product truth is clear enough for downstream artifacts to derive from it without guesswork.
 
-### Stage 2 — Functional Requirements Specification (FRS)
-The FRS stage translates approved Stage 1 truth into concrete functional capability requirements.
+### Stage 2 — UX Workflow & Wiring Spec
+The UX Workflow & Wiring Spec stage defines the user-facing interaction model and system-level wiring for AMC before functional requirements are formally specified.
+
+For AMC, this means defining:
+- executive user journeys across dashboard, alerts, approvals, and interventions
+- conversation and escalation interaction patterns
+- AIMC-mediated AI interaction surfaces
+- upload / ingestion status surfaces (sourced from AIMCC)
+- mobile and desktop operating patterns
+- how executive actions connect to backend execution pathways
+
+The UX Workflow & Wiring Spec must remain faithful to Stage 1 identity. It may not narrow AMC into a simpler product than was approved. It must be approved before FRS derivation begins.
+
+### Stage 3 — Functional Requirements Specification (FRS)
+The FRS stage translates approved Stage 1 truth and the UX Workflow & Wiring Spec into concrete functional capability requirements.
 
 For AMC, this means deriving requirements for:
 - executive visibility
-- proactive notifications
-- approval flows
+- proactive notifications and alert classes
+- approval flows and intervention launch
 - escalation behavior
 - conversation with Maturion
-- intervention-launch capability
-- oversight of specialist and sandboxed work
+- AIMC-routed AI action results
+- AIMCC / Knowledge Upload Centre oversight surfaces
+- memory-aware operational surfaces
 - wellbeing, maintenance, and assurance reporting
 - continuity across devices and contexts
 
 The FRS must remain faithful to Stage 1 and may not narrow AMC into a simpler product than was approved.
 
-### Stage 3 — Technical Requirements Specification (TRS)
+### Stage 4 — Technical Requirements Specification (TRS)
 The TRS stage translates functional requirements into technical obligations and constraints.
 
 For AMC, the TRS must define the technical requirements needed to preserve:
 - authority separation
 - approval enforcement
-- governed AI integration
+- governed AI integration through AIMC
+- AIMCC / Knowledge Upload Centre integration
+- knowledge / memory system integration
 - notification behavior
 - shared-state continuity
 - authentication and authorization controls
@@ -291,74 +416,115 @@ For AMC, the TRS must define the technical requirements needed to preserve:
 
 TRS may not dilute constitutional significance into vague technical aspiration.
 
-### Stage 4 — Architecture
+### Stage 5 — Architecture
 The Architecture stage defines the structural realization of approved product and technical truth.
 
 For AMC, Architecture must express:
 - how Maturion, Foreman, and other agent layers remain structurally distinct
-- how shared state is organized
+- how AIMC is integrated as the sole governed AI gateway
+- how AIMCC and Knowledge Upload Centre are integrated as governed knowledge pathways
+- how the knowledge / memory system is surfaced without AMC becoming its canonical owner
+- how shared state is organized across AMC, AIMC, AIMCC, and the knowledge / memory system
 - how approvals, escalations, and interventions are routed
-- how AI integration is governed through AIMC pathways
 - how auth, audit, and sandbox boundaries are made real
 - how the executive UX model is technically supported
 
 Architecture is the stage at which the product becomes structurally credible, but it must not become a substitute for upstream product-definition approval.
 
-### Stage 5 — Detailed Design and Build Planning
-This stage decomposes approved architecture into work packages, task structures, implementation sequences, and build coordination artifacts.
+### Stage 6 — QA-to-Red
+The QA-to-Red stage requires that a comprehensive test suite be written and placed in RED (failing) state before any implementation begins.
+
+For AMC, the QA-to-Red suite must include:
+- tests for executive alerting behavior
+- tests for approval and intervention flows
+- tests for AIMC-routed AI action pathways
+- tests for AIMCC / upload oversight surfaces
+- tests for memory-aware retrieval behavior
+- tests for degraded-dependency behavior (AIMC unavailable, AIMCC unavailable, memory degraded)
+- tests for audit event generation
+- tests for authority boundary enforcement
+
+QA-to-Red is signed off by Foreman before any builder is appointed. Implementation must make these tests GREEN.
+
+### Stage 7 — PBFAG
+The Pre-Build Functionality Assessment Gate (PBFAG) is a hard readiness gate that must PASS before any builder is appointed.
+
+For AMC, the PBFAG must confirm:
+- all Stage 1 through 5 artifacts exist, are approved, and are sufficiently stable
+- the Red QA suite (Stage 6) exists and is signed off
+- AIMC integration readiness is confirmed
+- AIMCC / Knowledge Upload Centre integration readiness is confirmed
+- memory-system dependency clarity exists
+- audit model readiness is confirmed
+- state ownership readiness is confirmed
+- no materially unresolved design gaps block implementation
+
+PBFAG is a constitutional gate. It is not a situational advisory review.
+
+### Stage 8 — Implementation Plan
+The Implementation Plan stage decomposes approved architecture into executable work packages and sequencing decisions.
 
 For AMC, build planning must preserve:
 - lifecycle fidelity
 - authority fidelity
 - approval fidelity
 - audit fidelity
-- AI-role fidelity
+- AI-role fidelity (all AI flows through AIMC)
+- knowledge-ingestion fidelity (all ingestion through AIMCC / Knowledge Upload Centre)
 - shared-state fidelity
 - mobile/proactive operating intent
 
 Detailed planning must not optimize away strategically important requirements merely because they are harder to build.
 
-### Stage 6 — Implementation / Build Execution
-Implementation realizes approved design through governed build activity.
+### Stage 9 — Builder Checklist
+The Builder Checklist stage formalizes the specific delivery obligations, acceptance criteria, and evidence requirements that each builder must satisfy.
+
+For AMC, the builder checklist must explicitly include:
+- implementation of all Red QA tests (must be GREEN at handover)
+- AIMC integration evidence
+- AIMCC / Knowledge Upload Centre integration evidence
+- audit trail evidence
+- authority boundary evidence
+- mobile / desktop verification evidence
+
+No builder may be considered done without completing the builder checklist.
+
+### Stage 10 — IAA Pre-Brief
+The IAA Pre-Brief stage requires that the Independent Assurance Agent is briefed before builder work begins on qualifying tasks.
+
+For AMC, the IAA Pre-Brief must cover:
+- the wave scope
+- the artifact bundle expected
+- the authority and boundary checks IAA must verify
+- the AIMC / AIMCC / knowledge integration checks
+- the audit and state ownership checks
+
+IAA Pre-Brief publication is a blocking gate. No qualifying builder work may begin before it is published.
+
+### Stage 11 — Builder Appointment
+The Builder Appointment stage is Foreman issuing the formal "Build to Green" order to the appointed builder, after all gates 1-10 are satisfied.
+
+For AMC, builder appointment must reference:
+- the wave record and pre-brief
+- the approved architecture
+- the Red QA suite (to be made GREEN)
+- the builder checklist obligations
+
+No builder may self-appoint. Foreman appoints after confirming all prerequisite stages are gate-passed.
+
+### Stage 12 — Build
+Build is the stage at which the appointed builder implements approved design under Foreman supervision, turning the Red QA suite GREEN.
 
 For AMC, implementation is subordinate to approved upstream artifacts and must not:
 - invent new product roles
 - silently transfer authority
 - bypass approval significance
 - omit audit-critical behavior
+- bypass AIMC for AI execution
+- bypass AIMCC / Knowledge Upload Centre for knowledge ingestion
 - collapse state, auth, or AI separation for convenience
 
 Where implementation finds contradiction or insufficiency upstream, it must escalate rather than improvise.
-
-### Stage 7 — Verification and Assurance
-Verification and assurance confirm whether the built product remains aligned with approved truth.
-
-For AMC, this stage must evaluate whether the build actually preserves:
-- executive operating purpose
-- authority boundaries
-- approval-gated behavior
-- governed AI behavior
-- auditability
-- shared-state coherence
-- mobile and proactive operating expectations
-- sandbox and specialist boundary discipline
-
-Verification must be able to test against traceable expectations, not vague intent.
-
-### Stage 8 — Deployment and Operationalization
-Deployment and operationalization place AMC into controlled use under governed rollout conditions.
-
-For AMC, this stage must include:
-- deployment discipline
-- operational checks
-- notification checks
-- audit checks
-- escalation readiness
-- rollback readiness
-- authority-aware operational runbooks
-- visibility into what is live, what is approved, and what remains constrained
-
-Operationalization may not introduce new authority assumptions that were not approved upstream.
 
 ### Entry and Exit Logic
 Each lifecycle stage must have an entry condition and an exit condition, whether defined formally in later artifacts or as governance gates.
@@ -375,12 +541,14 @@ For AMC, this is critical because Stage 1 truth is carrying constitutional produ
 AMC shall operate with stage-gate integrity.
 
 This means:
-- unresolved Stage 1 truth blocks reliable Stage 2 derivation
-- unresolved FRS truth blocks reliable TRS derivation
-- unresolved TRS truth blocks reliable Architecture
-- unresolved Architecture blocks reliable build planning
-- unresolved design truth blocks responsible implementation
-- unresolved verification truth blocks responsible deployment confidence
+- unresolved Stage 1 (App Description) truth blocks reliable Stage 2 (UX Workflow & Wiring Spec) derivation
+- unresolved Stage 2 truth blocks reliable Stage 3 (FRS) derivation
+- unresolved Stage 3 (FRS) truth blocks reliable Stage 4 (TRS) derivation
+- unresolved Stage 4 (TRS) truth blocks reliable Stage 5 (Architecture)
+- unresolved Architecture blocks reliable Stage 8 (Implementation Plan) planning
+- unresolved Implementation Plan blocks Stage 9 (Builder Checklist) formalization
+- unresolved pre-build stages (1–9) block Stage 10 (IAA Pre-Brief) and Stage 11 (Builder Appointment)
+- Stage 12 (Build) may not begin until all stages 1–11 are gate-passed
 
 Where overlap occurs for practical workflow reasons, the overlap must not erase gate discipline.
 
@@ -391,12 +559,12 @@ The lifecycle model must explicitly prevent the following failure patterns:
 - build planning weakening audit or approval significance
 - technical convenience collapsing AI role separation
 - frontend convenience replacing shared-state design
-- deployment urgency bypassing readiness gates
+- build or deployment urgency bypassing readiness gates
 
 AMC is particularly vulnerable to these drifts because its most important requirements concern control, authority, and executive behavior rather than simple CRUD functionality.
 
 ### Relationship to PBFAG and Derivation Discipline
-The lifecycle model is coupled to the PBFAG gate and the Requirements Derivation Chain.
+The lifecycle model is coupled to the PBFAG gate (Stage 7) and the Requirements Derivation Chain.
 
 This means:
 - Stage 1 must be pre-build ready before derivation proceeds
@@ -407,18 +575,21 @@ This means:
 The lifecycle section should therefore be read as the operating order of the derivation chain, not as a separate informal planning note.
 
 ### Minimum Lifecycle Checklist
-The following minimum conditions must hold for lifecycle compliance:
+The following minimum conditions must hold for all 12 stages:
 
-- [ ] App Description is approved or sufficiently stabilized for derivation
-- [ ] FRS derives functional behavior from Stage 1 truth
-- [ ] TRS derives technical obligations from approved FRS and governance constraints
-- [ ] Architecture derives structural design from approved upstream truth
-- [ ] Detailed design and build planning do not rewrite product meaning
-- [ ] Implementation remains subordinate to approved design
-- [ ] Verification and assurance test against traceable requirements
-- [ ] Deployment and operationalization inherit governed design and runbook discipline
-- [ ] Contradictions are escalated rather than normalized
-- [ ] Stage completion claims are supported by artifacts and evidence
+- [ ] Stage 1 (App Description) is approved or sufficiently stabilized for derivation
+- [ ] Stage 2 (UX Workflow & Wiring Spec) is approved before FRS derivation begins
+- [ ] Stage 3 (FRS) derives functional behavior from Stage 1 and Stage 2 truth
+- [ ] Stage 4 (TRS) derives technical obligations from approved FRS and governance constraints
+- [ ] Stage 5 (Architecture) derives structural design from approved FRS, TRS, and App Description
+- [ ] Stage 6 (QA-to-Red) exists, is signed off by Foreman, and covers all critical AMC behaviors
+- [ ] Stage 7 (PBFAG) gate has PASSED — no stage 8 or beyond begins without this
+- [ ] Stage 8 (Implementation Plan) does not rewrite product meaning or authority
+- [ ] Stage 9 (Builder Checklist) reflects all acceptance criteria from upstream artifacts
+- [ ] Stage 10 (IAA Pre-Brief) is published before any qualifying builder work begins
+- [ ] Stage 11 (Builder Appointment) is formally issued by Foreman after stages 1–10 are gate-passed
+- [ ] Stage 12 (Build) remains subordinate to approved design; contradictions are escalated, not resolved unilaterally
+- [ ] All stage completion claims are supported by artifacts and evidence
 
 ### Downstream Design Consequence
 All teams and agents contributing to AMC must work as participants in a governed lifecycle, not as independent authors of product meaning.
@@ -468,14 +639,18 @@ If downstream work discovers that Stage 1 is incomplete or contradictory, the co
 ### Authoritative Derivation Order
 The authoritative derivation order for AMC shall be:
 
-1. **App Description**
-2. **UX Workflow & Wiring Spec** (derived from App Description)
-3. **Functional Requirements Specification (FRS)** (derived from App Description and UX Workflow & Wiring Spec)
-4. **Technical Requirements Specification (TRS)** (derived from FRS and App Description technology baseline)
-5. **Architecture** (derived from FRS, TRS, and App Description)
-6. **Detailed design and build planning artifacts**
-7. **Implementation artifacts**
-8. **Verification, assurance, and operationalization artifacts**
+1. **Stage 1 — App Description** (this document — authoritative product truth)
+2. **Stage 2 — UX Workflow & Wiring Spec** (derived from App Description)
+3. **Stage 3 — Functional Requirements Specification (FRS)** (derived from App Description and UX Workflow & Wiring Spec)
+4. **Stage 4 — Technical Requirements Specification (TRS)** (derived from FRS and App Description technology baseline)
+5. **Stage 5 — Architecture** (derived from FRS, TRS, and App Description)
+6. **Stage 6 — QA-to-Red** (derived from Architecture and approved requirements; test suite placed RED before build)
+7. **Stage 7 — PBFAG** (readiness gate — all stages 1–6 must be complete and approved)
+8. **Stage 8 — Implementation Plan** (derived from approved Architecture; decomposes into work packages)
+9. **Stage 9 — Builder Checklist** (derived from Implementation Plan; formalizes acceptance criteria per builder)
+10. **Stage 10 — IAA Pre-Brief** (derived from wave scope; briefing of Independent Assurance Agent before builder work begins)
+11. **Stage 11 — Builder Appointment** (Foreman issues "Build to Green" order after stages 1–10 gate-passed)
+12. **Stage 12 — Build** (builder implements approved design; turns Red QA suite GREEN)
 
 This order is normative. Later artifacts may not leapfrog earlier unresolved truth or treat later-stage assumptions as if they were equivalent to approved upstream intent.
 
@@ -606,7 +781,23 @@ The following may not be introduced downstream as casual assumptions:
 
 If such a change is desired, it must be proposed and approved at the correct upstream layer.
 
-### Contradiction Handling Rule
+### External Integration Derivation Rule
+
+All downstream artifacts that involve external integrations must explicitly derive their integration scope from this App Description.
+
+Specifically, downstream artifacts must explicitly address derivation for:
+
+- **AIMC integration**: the FRS, TRS, Architecture, and Implementation Plan must each derive their AIMC integration scope from this document. No downstream artifact may independently invent AIMC integration scope without traceable derivation from Stage 1.
+- **AIMCC / Knowledge Upload Centre integration**: similarly, all downstream derivation of AIMCC integration scope must trace back to this document's AIMCC boundary definitions.
+- **Knowledge / memory operating model**: downstream artifacts that involve knowledge retrieval, memory surfacing, or knowledge-aware operations must derive from this document's estate-capability model for the knowledge / memory system.
+- **Executive alerts**: FRS and TRS must derive alert classes, priorities, and escalation behavior from Stage 1 success criteria and scope.
+- **Approvals / interventions**: every approval gate and intervention pathway in downstream artifacts must be traceable to a Stage 1 authority or scope declaration.
+- **Audit / provenance**: downstream audit design must derive from Stage 1 audit significance declarations, not be invented independently.
+- **State ownership**: downstream state models must derive from Stage 1 state-boundary declarations. AMC-owned state, AIMCC-owned state, and knowledge-system-owned state must remain distinguishable in all downstream artifacts.
+
+A downstream artifact that introduces new external integration scope without tracing back to this document represents a governance defect and must trigger an upstream amendment request.
+
+### Contradiction / Ambiguity Handling Rule
 If a downstream artifact encounters contradiction, incompleteness, or ambiguity in upstream material, the correct handling path is:
 
 1. identify the ambiguity or contradiction explicitly
@@ -678,6 +869,21 @@ Any derivation process that allows later artifacts to redefine AMC’s role, aut
 | **Notification/UX** | react-hot-toast | Executive feedback surface — see §AD-19 |
 
 AMC shall declare a governed technology-stack baseline that is strong enough to constrain downstream design, but disciplined enough not to pretend that Stage 1 is the final architecture.
+
+### Cross-System Platform Dependencies
+
+AMC depends on the following governed external platform systems. These are not optional integrations. They are constitutional platform dependencies that AMC must interact with through governed interfaces only.
+
+| Platform System | Role in AMC | AMC Constraint |
+|---|---|---|
+| **AIMC Gateway / AIMC services** | Sole governed AI execution pathway | AMC must route all AI model interactions through AIMC. Direct model provider calls from AMC are prohibited. |
+| **AIMCC services** | Knowledge ingestion and memory operations layer | AMC must route all knowledge ingestion and memory operation requests through AIMCC. AMC may surface AIMCC-sourced data but must not become the canonical owner. |
+| **Knowledge Upload Centre** | Governed ingestion surface | All document / knowledge upload actions from AMC context must route through the Knowledge Upload Centre, which operates under AIMCC governance. |
+| **Knowledge / memory system** | Persistent estate knowledge and memory substrate | AMC may query and present knowledge / memory references through governed APIs. AMC must not duplicate or privately cache persistent knowledge truth. |
+
+**Non-bypass rule**: AMC must not circumvent any of the above governed layers, even for operational convenience, degraded-mode workarounds, or implementation efficiency. Any pathway that bypasses a governed layer is a governance violation.
+
+These cross-system dependencies must be explicitly addressed in TRS and Architecture. They are not implementation details to be decided later.
 
 This section exists because AMC is not a neutral technical shell into which any convenient stack may be dropped. AMC is intended to become the executive operating centre of the Maturion estate. Its technical baseline must therefore support authority integrity, AI governance, auditability, shared-state coherence, mobile continuity, proactive notification, sandbox-aware operation, and progressive delegation.
 
@@ -1107,6 +1313,20 @@ At minimum, this includes:
 
 Tracking artifacts must not be treated as cosmetic. They are part of the mechanism by which lifecycle and readiness discipline are enforced.
 
+### Required Cross-System Integration Artifacts
+
+In addition to the standard artifact categories, AMC must produce the following explicitly named integration and operating artifacts:
+
+- **AIMC integration contract**: defines the governed interface between AMC and AIMC, including action types, routing rules, error handling, and audit requirements
+- **AIMCC / Knowledge Upload Centre integration contract**: defines the governed interface between AMC and AIMCC / Knowledge Upload Centre, including upload flows, ingestion status surfacing, quota management, and error handling
+- **Knowledge / memory operating contract**: defines how AMC queries, caches, presents, and attributes knowledge / memory references, and what provenance requirements apply
+- **Executive alert taxonomy**: defines the complete set of alert classes, priorities, escalation routes, acknowledgment requirements, and retry/expiry behavior
+- **Approval / autonomy matrix**: defines which actions require explicit approval, which are delegated, to whom, under what conditions, and with what rollback capability
+- **Audit event model**: defines the complete set of audit event types, required fields (actor, source system, object, action, outcome, timestamp), retention, and provenance requirements
+- **State ownership matrix**: defines which state is owned by AMC, which by AIMCC, which by the knowledge / memory system, and which is transient/cached
+- **Degraded-mode runbooks**: define the fallback behavior for each external dependency (AIMC unavailable, AIMCC unavailable, Knowledge Upload Centre failure, memory retrieval degraded)
+- **Stage 1 source-of-truth / cleanup decision note**: a governance note documenting the transition from FM-era Stage 1 fragments to this consolidated document as the single authoritative source after CS2 approval
+
 ### Artifact Ownership Principle
 Each required artifact must have a clear ownership purpose in the lifecycle.
 
@@ -1432,8 +1652,49 @@ AMC components are done only when they are technically, operationally, and const
 
 Any delivery practice that treats code completion or UI completion as sufficient without authority, audit, state, approval, and integration completeness is non-compliant with the intended purpose of AMC.
 
+### Integration and Executive Component-Family DoD
 
-## §10 — Test-First Guarantee (§AD-06)
+In addition to general component-level DoD, the following component families have specific DoD requirements:
+
+**Executive alerting components:**
+- alert is generated from the correct trigger condition
+- alert is routed to the correct authority
+- alert acknowledgment is recorded
+- alert escalation path is implemented
+- alert retry / expiry behavior is correct
+- audit event is written on alert generation, acknowledgment, escalation, and expiry
+- "renders" alone is not sufficient — behavioral correctness must be verified
+
+**Approval / intervention components:**
+- approval gate blocks the governed action until approval is explicitly granted
+- approval decision is recorded with actor, timestamp, basis, and outcome
+- intervention launch is correctly scoped and authorized
+- rollback or cancellation paths are implemented
+- audit event is written on every approval decision and intervention state change
+
+**AIMC-routed AI action components:**
+- all AI requests route through AIMC gateway
+- AIMC unavailable → graceful degraded mode, not silent failure
+- AIMC response is attributed (not presented as anonymous AMC output)
+- audit event is written for each AIMC-routed action
+
+**AIMCC / upload flow components:**
+- all upload / ingestion requests route through AIMCC / Knowledge Upload Centre
+- upload status is surfaced from AIMCC, not locally fabricated
+- AIMCC unavailable → graceful degraded mode
+- quota state is sourced from AIMCC, not locally guessed
+- audit event is written for each upload / ingestion action
+
+**Memory / knowledge retrieval surfaces:**
+- knowledge / memory references include provenance attribution
+- AMC does not present retrieved knowledge as internally generated facts
+- stale or unavailable memory is surfaced explicitly, not silently suppressed
+- no silent caching of persistent knowledge truth beyond transient presentation state
+
+**Cross-system state components:**
+- state ownership is explicit: AMC-owned vs AIMCC-owned vs knowledge-system-owned
+- cross-system state is sourced from the authoritative owner, not duplicated
+- state staleness or unavailability is handled gracefully
 
 AMC shall adopt a test-first guarantee in which expected behavior is defined before implementation is treated as complete, and in which consequence-bearing flows are verified against approved upstream truth rather than post-hoc intuition.
 
@@ -1686,6 +1947,48 @@ AMC’s test-first guarantee must ensure that consequential behavior is built ag
 
 Any delivery practice that allows authority-sensitive, audit-sensitive, AI-mediated, or executive-operating behavior to become “correct” only because implementation has already hardened is non-compliant with the intended purpose of AMC.
 
+### AMC-Specific Test-First Requirements
+
+The following AMC-specific behaviors must have tests written and RED before any implementation begins:
+
+**Alerting:**
+- alert generation triggers for each defined alert class
+- alert routing to correct authority
+- alert acknowledgment recording
+- alert escalation behavior
+- alert retry / expiry behavior
+
+**Approvals:**
+- approval gate blocks action until approval granted
+- approval decision recording (actor, basis, timestamp)
+- unauthorized approval attempt is rejected
+
+**Interventions:**
+- intervention launch authorization check
+- intervention state tracking
+- intervention cancellation
+
+**AIMC flows:**
+- all AI requests route through AIMC (no direct model calls)
+- AIMC unavailable → degraded mode behavior
+- AIMC response attribution
+
+**AIMCC / upload flows:**
+- upload routes through Knowledge Upload Centre / AIMCC
+- AIMCC unavailable → degraded mode behavior
+- quota state sourced from AIMCC
+
+**Memory-aware retrieval:**
+- knowledge references include provenance
+- memory retrieval degraded → explicit surfacing, not suppression
+
+**Degraded dependency behavior:**
+- AIMC unavailable: AMC enters defined degraded mode, surfaces status
+- AIMCC unavailable: AMC enters defined degraded mode, surfaces status
+- Knowledge / memory system degraded: AMC surfaces explicit degraded status
+
+No AMC component is build-ready if it has no RED tests for the above behaviors relevant to that component.
+
 
 ## §11 — Physical Verification Gate (§AD-07)
 
@@ -1894,6 +2197,18 @@ AMC’s physical verification gate must ensure that the executive operating cent
 
 Any delivery practice that approves high-consequence mobile, approval, escalation, conversation, or intervention behavior without meaningful physical verification is non-compliant with the intended purpose of AMC.
 
+### Executive-Critical Desktop and Mobile Verification Requirements
+
+The following AMC surfaces must be verified on both desktop and mobile device classes before any build is considered complete:
+
+- **Critical alerts**: alert display, priority indication, acknowledgment action, escalation trigger
+- **Approval prompts**: approval presentation, decision recording, unauthorized attempt rejection
+- **Intervention actions**: intervention launch, state visibility, cancellation or rollback
+- **Upload / ingestion status views**: upload status from AIMCC, progress indication, failure surfacing
+- **Memory-aware operational surfaces**: knowledge reference display with provenance, degraded-state surfacing
+
+Mobile verification must confirm that executive actions (approvals, acknowledgments, interventions) are executable from mobile contexts, not just visible.
+
 
 ## §12 — PBFAG Checklist Requirements (§AD-08)
 
@@ -1962,6 +2277,9 @@ The PBFAG gate for AMC shall evaluate readiness across the following mandatory d
 - **sandbox and specialist-boundary readiness**
 - **downstream derivation readiness**
 - **approval-record and tracker readiness**
+- **AIMC integration readiness**
+- **AIMCC / Knowledge Upload Centre integration readiness**
+- **memory-system dependency clarity**
 
 AMC should not be treated as pre-build ready if any one of these domains is materially under-defined.
 
@@ -2103,6 +2421,51 @@ This includes confirmation that:
 - readiness claims can be defended with artifacts, not memory
 
 AMC cannot be credibly positioned as a wellbeing and truth-management platform if its own foundational stage is administratively unclear.
+
+### AIMC Integration Readiness
+The gate must confirm that the AIMC integration model is sufficiently defined for Architecture and build to proceed.
+
+This requires:
+- the AIMC gateway interface is defined in the TRS
+- all AI action pathways are confirmed to route through AIMC
+- AIMC unavailability behavior is explicitly defined
+- AIMC audit requirements are specified
+
+### AIMCC / Knowledge Upload Centre Integration Readiness
+The gate must confirm that the AIMCC / Knowledge Upload Centre integration model is sufficiently defined.
+
+This requires:
+- the AIMCC interface for upload status, quota management, and ingestion outcomes is defined
+- the Knowledge Upload Centre interface for upload submission is defined
+- AIMCC unavailability behavior is explicitly defined
+- upload / ingestion audit requirements are specified
+
+### Memory-System Dependency Clarity
+The gate must confirm that AMC's relationship to the knowledge / memory system is explicitly defined.
+
+This requires:
+- the knowledge / memory retrieval API and provenance model is defined
+- AMC's non-ownership of persistent knowledge / memory truth is explicit
+- memory retrieval degradation behavior is defined
+- no section implies AMC is the canonical private owner of estate knowledge
+
+### Audit Model Readiness
+The gate must confirm that the audit model is sufficiently defined for implementation.
+
+This requires:
+- the audit event taxonomy covers all consequential action types
+- required audit fields (actor, source, object, action, timestamp, outcome) are specified
+- cross-system provenance requirements are defined
+- audit retention requirements are specified
+
+### State Ownership Readiness
+The gate must confirm that the state ownership model is sufficiently explicit.
+
+This requires:
+- AMC-owned state is identified
+- AIMCC-owned state is identified
+- knowledge / memory system-owned state is identified
+- transient / cached state vs persistent state boundaries are defined
 
 ### Minimum PBFAG Checklist
 The following minimum checklist items must be satisfied before AMC may be treated as pre-build ready:
@@ -2288,6 +2651,30 @@ AMC must preserve separation between:
 - builder implementation activity
 
 A design that blurs those layers is non-compliant with the intended AMC operating model.
+
+### Authority Matrix
+
+The following matrix defines read / propose / approve / trigger / ingest / remember / retrieve / act authority boundaries across the key actors in the AMC operating model.
+
+| Actor | Read | Propose | Approve | Trigger | Ingest Knowledge | Remember / Store | Retrieve / Surface | Act (Autonomous) |
+|---|---|---|---|---|---|---|---|---|
+| **Johan / CS2** | All estate state, governance, and artifacts | All governance proposals and escalations | All reserved matters and constitutionally significant decisions | All governed operations | Authorized via AIMCC pathway | Authorized via knowledge/memory system | All estate state and knowledge (with provenance) | Constitutional authority over all domains |
+| **Maturion** | All estate operational state and reporting | Executive proposals (alerts, recommendations, escalations) | Delegated operational matters (explicitly approved domains only) | Delegated operations within approved autonomy | Via AIMCC only | Via knowledge/memory system only | All estate state and knowledge (with provenance) | Within approved autonomy scope only |
+| **Foreman** | Architecture, governance | Build plans | QP/IAA gates only | Build waves | None | Build evidence | Build-relevant knowledge | Orchestration only |
+| **AMC (application)** | Estate operational state | Alerts, escalations | None — surfaces to human/Maturion | Alert triggers, intervention routing | Via AIMCC / KUC only | AMC operational state only | Via governed APIs (with provenance) | Approval-gated executive actions |
+| **AIMC** | AI requests | AI responses | None | AI model execution | None | None | AI model context | AI execution within governed scope |
+| **AIMCC** | Knowledge state and ingestion workflow-state | Ingestion outcomes and curation metadata | Knowledge governance actions within AIMCC scope | Ingestion pipelines | Yes — governs ingestion and owns ingestion metadata/workflow-state; **persistent knowledge/memory truth canonical owner is the knowledge / memory system** | Governs memory operations and owns ingestion/curation metadata; does NOT hold canonical ownership of persistent knowledge/memory truth | Knowledge retrieval via governed API | Within knowledge governance scope |
+| **Knowledge Upload Centre** | Upload submissions | Upload status | None | Ingestion submission to AIMCC | Submission gateway | None | None | Upload submission only |
+| **knowledge / memory system** | Persistent memory | None | None | None | Via AIMCC | **Canonical persistent store — sole canonical owner of persistent knowledge/memory truth** | Retrieval via governed API | None |
+| **Specialist / Builder** | Task-scoped | Implementation proposals | None | Build execution | None | Build artifacts | Task-relevant | Implementation only |
+| **Assurance (IAA)** | All artifacts | Assurance findings | Assurance verdicts | None | None | Assurance records | All (for audit purposes) | None (advisory only) |
+
+**Key rules:**
+- AMC must not approve its own governance actions (approvals route to Johan / Maturion)
+- AMC must not ingest knowledge directly (always via AIMCC / Knowledge Upload Centre)
+- AMC must not store persistent knowledge truth (knowledge / memory system is the sole canonical owner; AIMCC governs ingestion workflows and owns ingestion metadata, not persistent truth)
+- AIMC is the sole AI execution actor — no other actor executes AI models directly
+- AIMCC governs knowledge ingestion and memory operations but does NOT own persistent knowledge/memory truth — the knowledge / memory system is canonical
 
 
 ## §14 — Schema-to-Hook Validation (§AD-10)
@@ -2537,24 +2924,45 @@ Any implementation approach that allows schemas, hooks, selectors, or state path
 
 ## §15 — Table Pathway Audit (§AD-11)
 
-All persistent data pathways used by AMC must be explicitly identified and auditable.
+All persistent data pathways used by AMC must be explicitly identified, declared, and auditable.
 
-This includes pathways for:
+### Required Pathway Declaration
+
+Every AMC data pathway must declare the following before it is considered design-ready:
+
+| Field | Definition |
+|---|---|
+| **Purpose** | Why this pathway exists and what executive or operational function it serves |
+| **Owner** | Which system or layer is the canonical owner of the data (AMC, AIMCC, knowledge/memory system, etc.) |
+| **Source of Truth** | Where the authoritative version of this data lives |
+| **Read Actors** | Which actors are permitted to read this data |
+| **Write Actors** | Which actors are permitted to write this data |
+| **Integration Dependency** | Whether this pathway depends on AIMC, AIMCC, knowledge/memory system, or another external system |
+| **Audit Expectation** | What audit events must be generated for read/write actions on this pathway |
+
+### Pathway Coverage Requirement
+
+This requirement covers all pathways including:
 - user/account state
 - agent/account state
 - conversation history
 - alerts and escalations
 - approvals and decisions
+- interventions
+- AIMC action records
+- upload / ingestion records and status
+- AIMCC-sourced knowledge references
 - audit events
 - sandbox state
 - operational jobs
 - maintenance/assurance reports
 - notification history
-- device continuity or session continuity
+- device / session continuity
+- memory / knowledge references presented by AMC
+- operator conversation or session state where relevant
 
-No table or persistent storage pathway may be introduced without clear purpose, ownership, access rules, and audit awareness.
-
----
+### Non-Negotiable Rule
+No table or persistent storage pathway may be introduced without a complete pathway declaration satisfying all seven fields above. An undeclared or ambiguously owned pathway is a governance defect.
 
 ## §16 — RLS Audit Gate (§AD-12)
 
@@ -2605,6 +3013,12 @@ This includes, where relevant:
 - maintenance or assurance findings
 - state-restoration records
 - any table or equivalent structure containing sensitive role-, scope-, or decision-relevant meaning
+- upload records (who submitted, what was submitted, outcome)
+- ingestion status records (AIMCC-sourced, surfaced in AMC)
+- AIMC action records (AI requests, responses, attribution)
+- memory / knowledge reference data surfaced within AMC
+- executive alert records
+- operator session or conversation state where access boundaries are material
 
 If a record can affect authority, awareness, or action, its access model falls within scope.
 
@@ -2985,6 +3399,21 @@ AMC’s auth wiring checklist must make identity, authority, approval, and bound
 
 Any design that leaves those controls vague, inconsistent across layers, or dependent on implementation convenience is non-compliant with the intended purpose of AMC.
 
+### Auth Boundary Definitions
+
+AMC must explicitly distinguish between the following authentication and authorization contexts:
+
+| Auth Context | Definition |
+|---|---|
+| **Human user auth** | Authentication of Johan Ras or other human principals accessing AMC. JWT-based; must support session continuity across desktop and mobile. |
+| **Executive approval authority** | Authorization model for governance-sensitive decisions that require explicit approval. Must be distinct from general operational access. Must produce audit records. |
+| **AMC internal service auth** | Auth model for AMC backend services communicating internally. Must use service-level credentials, not user JWT. |
+| **AIMC service auth** | Auth model for AMC communicating with AIMC. Must use approved AIMC gateway credentials. AMC must not impersonate a user to AIMC. |
+| **AIMCC / knowledge service auth** | Auth model for AMC communicating with AIMCC and knowledge / memory system. Must use approved AIMCC service credentials. AMC must not impersonate a user to AIMCC. |
+| **Privileged operational actions** | Actions that require elevated authority (e.g., triggering interventions, approving governance actions). Must require explicit approval-authority validation, not just presence of a valid session. |
+
+These distinctions must be preserved in TRS, Architecture, and implementation. Collapsing them is a governance defect.
+
 
 ## §18 — AI Integration Requirements (§AD-14)
 
@@ -3117,6 +3546,29 @@ Therefore the AI integration design must:
 AI in AMC exists to strengthen governed executive capability, not to create an unbounded autonomous black box.
 
 Any AI integration that weakens governance, obscures authority, bypasses AIMC controls, or makes executive accountability harder to determine is non-compliant with AMC’s intended design.
+
+### Multi-Layer AI Integration Model
+
+AMC’s AI integration operates in a strict multi-layer model. This must be explicit in all downstream artifacts.
+
+**Layer definitions:**
+- **AMC (application layer)**: executive supervisory surface. Initiates AI-assisted actions, surfaces AI results, routes requests. Does NOT execute AI models.
+- **AIMC (sole governed AI gateway)**: the only actor permitted to execute AI model requests within the estate. All AI execution from AMC context must route through AIMC. No exceptions.
+- **AIMCC (governed knowledge and memory layer)**: governs knowledge ingestion, knowledge storage, and memory operations. AI-assisted knowledge operations are governed by AIMCC in conjunction with AIMC.
+- **Knowledge Upload Centre (governed ingestion surface)**: the submission gateway for knowledge uploads. Routes to AIMCC.
+- **Knowledge / memory system (persistent substrate)**: the authoritative persistent store for estate knowledge and memory. Not a component of AMC. AMC surfaces it, not owns it.
+
+**Explicit prohibitions:**
+- AMC must NOT execute AI model calls directly, bypassing AIMC
+- AMC must NOT ingest knowledge directly, bypassing AIMCC / Knowledge Upload Centre
+- AMC must NOT present AI-generated or retrieved text as authoritative estate memory without provenance attribution
+- AMC must NOT silently duplicate canonical memory / knowledge truth in AMC-private storage
+- AMC must NOT treat AIMC unavailability as a license to fall back to direct model calls
+
+**Degraded mode requirements:**
+- AIMC unavailable: AMC must surface AIMC degraded status to the operator. AI-dependent features must enter a defined degraded mode, not fail silently.
+- AIMCC unavailable: AMC must surface AIMCC degraded status. Upload and knowledge-reference features must enter a defined degraded mode.
+- Memory / knowledge system degraded: AMC must surface degraded status. Knowledge retrieval surfaces must explicitly indicate stale or unavailable state.
 
 
 ## §19 — Edge Function Registry (§AD-15)
@@ -3393,6 +3845,22 @@ AMC’s Edge Function Registry must make consequential callable behavior visible
 
 Any design that allows important backend execution surfaces to remain hidden, weakly classified, or detached from authority, approval, audit, or boundary meaning is non-compliant with the intended purpose of AMC.
 
+### Required AMC Edge Function Families
+
+The following server-side function families must be defined and registered before build proceeds:
+
+| Function Family | Purpose |
+|---|---|
+| **Alert handlers** | Generate, route, acknowledge, escalate, and expire executive alerts |
+| **Approval / intervention handlers** | Process approval decisions, record outcomes, route interventions, handle cancellation |
+| **AIMC adapters** | Proxy AI requests from AMC to AIMC gateway; handle AIMC responses; record audit events; handle AIMC degraded state |
+| **AIMCC / upload adapters** | Submit uploads to Knowledge Upload Centre; retrieve ingestion status from AIMCC; surface quota state; handle AIMCC degraded state |
+| **Audit write functions** | Write audit events for all consequential AMC actions with required fields (actor, source, object, action, timestamp, outcome) |
+| **Memory-reference / knowledge-resolution services** | Query knowledge / memory system via governed API; attach provenance to returned references; handle memory degraded state |
+| **Degraded-mode handlers** | Implement defined degraded-mode behavior for each external dependency; surface degraded status to operator |
+
+Each function family must have its own QA-to-Red test coverage and must not execute AI or ingest knowledge outside its governed pathway.
+
 
 ## §20 — Deployment Wave (§AD-16)
 
@@ -3635,23 +4103,51 @@ AMC’s deployment wave model must ensure that the executive operating centre of
 
 Any deployment approach that attempts to release broad consequential capability without wave discipline, readiness discipline, and rollback discipline is non-compliant with the intended purpose of AMC.
 
+### Cross-System Commissioning Checks
+
+Before any AMC deployment wave is declared complete, the following commissioning checks must pass:
+
+- **AIMC reachability**: AIMC gateway is reachable from the deployed AMC environment; a test AI request routes correctly
+- **AIMCC / Knowledge Upload Centre reachability**: AIMCC and Knowledge Upload Centre services are reachable; a test upload submission routes correctly
+- **Memory-system availability**: knowledge / memory system is reachable via governed API; a test knowledge query returns with provenance
+- **Audit write integrity**: audit events are being written correctly; at minimum one test event per major event class is verified
+- **Dependency degradation safety**: AIMC simulated unavailability → AMC enters defined degraded mode (NOT silent failure); AIMCC simulated unavailability → AMC enters defined degraded mode
+
+These checks must be recorded in the deployment evidence bundle before the deployment wave is closed.
+
 
 ## §21 — Secret Naming Convention (§AD-17)
 
-AMC will require strict handling of secrets, credentials, tokens, and environment-bound operational keys.
+AMC requires strict secret management. All credentials, tokens, and keys must be classified, named consistently, and bounded by the governed layer they authenticate.
 
-Secret design shall ensure:
-- clear naming conventions
-- separation by environment
-- separation by capability
-- no leakage of provider credentials into client surfaces
-- no direct unmanaged model/provider credentials in app code
-- traceable ownership and usage of privileged secrets
-- compatibility with AIMC and governance controls
+### Core Rule
+AMC must NOT hold unmanaged direct model-provider credentials. When AIMC is the approved AI gateway, all AI execution credentials are held by AIMC, not by AMC. AMC holds only the approved AIMC gateway credentials for routing requests.
 
-Secret naming and handling must be formalized before live integration work proceeds.
+### Secret Classes
 
----
+| CLASS token | Purpose | Owner | Notes |
+|---|---|---|---|
+| `RUNTIME` | AMC application runtime credentials (database connection, session keys, etc.) | AMC | Scoped to AMC's own operational needs |
+| `AIMC` | Credentials for AMC → AIMC gateway communication | AMC (holds); AIMC (issues) | Must NOT be direct model-provider credentials |
+| `AIMCC` | Credentials for AMC → AIMCC, AMC → Knowledge Upload Centre, AMC → knowledge/memory system communication | AMC (holds); AIMCC (issues) | Must not grant write access to canonical knowledge truth |
+| `AUDIT` | Credentials for AMC → audit log or observability platform | AMC | Scoped to write-only audit events |
+
+### Naming Convention
+Secret names must follow the pattern: `AMC_[CLASS]_[PURPOSE]_[ENVIRONMENT]`
+
+Where:
+- `CLASS` = one of the class tokens listed above: `RUNTIME`, `AIMC`, `AIMCC`, or `AUDIT`
+- `PURPOSE` = the specific purpose within the class (e.g., `DATABASE`, `GATEWAY_KEY`, `SERVICE_KEY`, `WRITE_KEY`)
+- `ENVIRONMENT` = deployment environment (e.g., `PROD`, `STAGING`, `DEV`)
+
+Examples:
+- `AMC_RUNTIME_DATABASE_PROD` (CLASS=`RUNTIME`, PURPOSE=`DATABASE`, ENVIRONMENT=`PROD`)
+- `AMC_AIMC_GATEWAY_KEY_PROD` (CLASS=`AIMC`, PURPOSE=`GATEWAY_KEY`, ENVIRONMENT=`PROD`)
+- `AMC_AIMCC_SERVICE_KEY_PROD` (CLASS=`AIMCC`, PURPOSE=`SERVICE_KEY`, ENVIRONMENT=`PROD`)
+- `AMC_AUDIT_WRITE_KEY_PROD` (CLASS=`AUDIT`, PURPOSE=`WRITE_KEY`, ENVIRONMENT=`PROD`)
+
+### Non-Bypass Rule
+Secret design must make it structurally impossible for AMC to call AI model providers directly. If AIMC is the governed gateway, AMC must not hold or use model-provider API keys.
 
 ## §22 — Deployment Runbook (§AD-18)
 
@@ -3667,7 +4163,44 @@ Before live deployment or production-like rollout, AMC must have a deployment ru
 
 Because AMC is itself a control centre, its deployment quality standard must be higher than that of a routine internal dashboard.
 
----
+### Degraded-Mode Runbooks
+
+AMC must maintain specific degraded-mode runbooks for each critical external dependency:
+
+**AIMC Unavailable / Degraded:**
+- AMC enters AI-degraded mode: all AI-assisted features are suspended
+- Operator is notified via alert that AIMC is unavailable
+- AI-dependent approval surfaces display degraded status, not blank or error
+- No direct model calls are attempted as fallback
+- Recovery procedure: confirm AIMC restoration, re-run AIMC commissioning check, exit degraded mode with operator acknowledgment
+
+**AIMCC Unavailable / Degraded:**
+- AMC enters knowledge-ingestion-degraded mode
+- Upload submissions are queued or blocked (not silently failed)
+- Ingestion status surfaces display unavailable status
+- Operator is notified via alert
+- Recovery procedure: confirm AIMCC restoration, flush queued submissions if applicable, re-run AIMCC commissioning check
+
+**Knowledge Upload Centre Failure:**
+- Upload submission pathway is suspended
+- Operator is notified
+- Queued uploads are preserved, not discarded
+- Recovery procedure: confirm KUC restoration, resubmit queued uploads, verify ingestion outcomes
+
+**Memory Retrieval Degraded / Stale:**
+- Knowledge reference surfaces display explicit staleness or unavailability indicator
+- AMC does not silently present stale knowledge as current
+- Operator is notified if memory retrieval is significantly impaired
+- Recovery procedure: confirm knowledge/memory system restoration, invalidate stale cache, re-query
+
+**Alerting or Approval Pipeline Degradation:**
+- If alert generation is impaired, the degradation is itself surfaced as a priority alert via alternative channel
+- Approval pipelines must not silently unblock on degradation — failure must be safe (block, not bypass)
+- Recovery procedure: restore pipeline, replay queued alerts if applicable, verify approval audit integrity
+
+**Operator-Safe Fallback Mode:**
+- In total external-dependency failure, AMC must provide an operator-safe mode in which core executive visibility remains available for AMC-owned state, even when AIMC, AIMCC, and knowledge systems are unavailable
+- Human approval pathways must remain open in degraded mode
 
 ## §23 — Notification/UX Patterns (§AD-19)
 
@@ -3831,6 +4364,40 @@ The following patterns are non-compliant with AMC’s intended operating model:
 AMC notification and UX design must make governed executive awareness faster, clearer, and safer.
 
 If a proposed UX pattern increases ambiguity, weakens authority clarity, hides approval significance, or forces the executive user back into manual system interrogation, it is non-compliant with the purpose of AMC.
+
+### Alert Class and Priority Framework
+
+Proactive executive alerting is a **first-class product commitment** of AMC. The following alert framework must be preserved and implemented:
+
+**Alert Classes:**
+- **Critical**: immediate action required; governance-sensitive or safety-impacting event; routes directly to Johan / Maturion
+- **High**: important operational event requiring attention within a defined SLA; may require approval or intervention
+- **Medium**: monitoring event requiring awareness; no immediate action but must be acknowledged within SLA
+- **Low / Informational**: routine operational event; logged and surfaced but does not require interruption
+
+**Priority Rules:**
+- Critical alerts must interrupt the operator even on mobile
+- High alerts must be visible on the dashboard and trigger notification
+- All alerts must be acknowledged — silent expiry of unacknowledged Critical or High alerts is prohibited
+
+**Escalation:**
+- Unacknowledged Critical alerts escalate after defined timeout
+- Escalation routing is pre-defined and tested (not improvised at runtime)
+- Escalation actions are recorded in the audit trail
+
+**Acknowledgment:**
+- Acknowledgment is an explicit operator action (not implicit on view)
+- Acknowledgment is recorded with actor and timestamp
+- Post-acknowledgment follow-through requirements (e.g., linked approval or intervention) are surfaced
+
+**Retry / Expiry:**
+- Alerts that require delivery confirmation have defined retry behavior
+- Expired unacknowledged alerts are logged with expiry reason
+- Alert expiry does not silently resolve the underlying condition
+
+**Desktop / Mobile Continuity:**
+- Alert state is consistent across desktop and mobile — no alert visible on desktop is invisible on mobile
+- Approval and acknowledgment actions are executable from both contexts
 
 
 ## §24 — Shared State Architecture (§AD-20)
@@ -4113,6 +4680,40 @@ AMC shared state architecture must preserve one coherent governed picture of the
 
 Any design that allows executive context, approvals, alerts, conversations, or interventions to fragment into contradictory local truths is non-compliant with the intended purpose of AMC.
 
+### State Ownership Separation
+
+AMC must maintain explicit separation between the following state ownership classes:
+
+**Local UI state:**
+- transient presentation state held in the browser/app client
+- not persisted beyond the current session
+- must not be treated as authoritative operational state
+
+**AMC-owned persistent operational state:**
+- alert records
+- approval records
+- intervention records
+- audit events generated by AMC
+- operator session state where persisted
+- AMC configuration and operational settings
+- This state is persisted in AMC's own storage and is the canonical source for these records
+
+**AIMCC / knowledge-memory-owned persistent state:**
+- ingested knowledge records
+- memory operations and memory store contents
+- upload records and ingestion outcomes
+- knowledge organization and taxonomy
+- This state is owned by AIMCC and the knowledge / memory system. AMC may cache or present it for display purposes but must not become the silent canonical owner
+
+**Non-ownership rule:**
+AMC may cache or present AIMCC-owned or knowledge/memory-owned state for executive visibility, but it must:
+- clearly source that state from the canonical owner
+- not allow its cached copy to diverge from the canonical owner's state in ways that affect operational truth
+- handle cache invalidation explicitly
+- not write back to AIMCC-owned state through AMC's own persistence layer
+
+Any design where it becomes unclear whether state is AMC-owned or AIMCC/knowledge-system-owned is a governance defect.
+
 
 ## §25 — API Authentication (§AD-21)
 
@@ -4321,6 +4922,20 @@ AMC API authentication must make authority real at the action boundary.
 
 Any design that allows consequential action to enter the estate without clear identity, clear authority evaluation, correct approval enforcement, and trustworthy attribution is non-compliant with the intended purpose of AMC.
 
+### Trust Boundary Definitions
+
+AMC must define explicit trust boundaries for all API interactions:
+
+| Boundary | Trust Model | Requirements |
+|---|---|---|
+| **Human user → AMC** | User JWT via Supabase Auth | Session validation on every request; authority-level checked per action |
+| **AMC internal services** | Service-to-service token | Not user-impersonating; scoped to AMC internal operations |
+| **AMC → AIMC** | AIMC gateway credentials | AMC authenticates to AIMC as a service caller; does not pass raw user JWT to AI models |
+| **AMC → AIMCC / knowledge services** | AIMCC service credentials | AMC authenticates to AIMCC as a service caller; scoped to the specific operations AMC is permitted |
+| **Privileged executive actions** | Elevated approval authority | Actions that require approval-level authority must validate approval authority independently of session presence; session presence alone is not sufficient |
+
+**Non-impersonation rule:** AMC must not impersonate a user to downstream services (AIMC, AIMCC). AMC calls these services as a service principal, with its own identity, and routes user context through metadata where required.
+
 
 ## §26 — Audit Log Design (§AD-22)
 
@@ -4524,6 +5139,38 @@ Audit cannot be added late as a decorative compliance layer.
 AMC audit design must make significant action across the estate attributable, reviewable, and governable.
 
 Any design that allows consequential action, AI-mediated intervention, approval-sensitive change, or authority transfer to occur without a trustworthy audit trail is non-compliant with the intended purpose of AMC.
+
+### Cross-System Provenance Requirements
+
+Every audit event in AMC must include the following fields as a minimum:
+
+| Field | Definition |
+|---|---|
+| **actor** | The human or agent who initiated the action |
+| **source_system** | The system where the action originated (AMC, AIMC, AIMCC, etc.) |
+| **approval_basis** | The approval or authorization basis for the action (where applicable) |
+| **timestamp** | ISO 8601 UTC timestamp |
+| **object** | The entity or record affected by the action |
+| **action** | The specific action type |
+| **state_transition** | The before/after state of the affected object (where applicable) |
+| **outcome** | Success, failure, partial, or pending |
+
+### Required Audit Event Coverage
+
+AMC must generate audit events for all of the following:
+- alert generation, acknowledgment, escalation, expiry
+- approval granted, approval rejected, approval escalated
+- intervention initiated, intervention completed, intervention cancelled
+- AIMC-routed AI action (request, response, error)
+- upload submitted via Knowledge Upload Centre
+- ingestion outcome received from AIMCC
+- memory / knowledge reference retrieved and presented in a decision-support context
+- auth events (login, session expiry, unauthorized access attempt)
+- degraded-mode entry and exit for each external dependency
+- any executive action that changes persisted state
+
+### Cross-System Event Integrity
+Where an audit event spans multiple systems (e.g., AMC initiates an action that AIMC executes), the audit record must contain sufficient provenance to link the AMC-originating event with the downstream execution event. The audit trail must not lose the chain of custody at system boundaries.
 
 
 ## §27 — Tracker Update Requirement (§AD-23)
@@ -4742,6 +5389,35 @@ A sophisticated product built on unreliable trackers is structurally misaligned 
 AMC tracker updates must keep stage truth, artifact truth, approval truth, and readiness truth synchronized with reality.
 
 Any approach that allows stale, optimistic, or materially misleading tracker state to shape executive or delivery decisions is non-compliant with the intended purpose of AMC.
+
+### Stage 1 Authority Migration and Repo Cleanup
+
+As part of the Stage 1 authority transition (from FM-era fragments to this consolidated App Description as the single authoritative source), the following tracker and repo cleanup actions must be executed in the same wave as CS2 approval:
+
+**Source-of-truth stabilization:**
+- Upon CS2 approval of this document, `modules/amc/00-app-description/app-description.md` becomes the single authoritative AMC Stage 1 source
+- All transitional FM-era Stage 1 files in this directory must be deprecated or archived. The files to be treated are:
+  - `AMC_Stage 1_outline.md`
+  - `AMC_ROLE_AUTHORITY_AND_OPERATING_MODEL.md`
+  - `amc-role-authority-and-operating-model.md`
+  - `amc_stage1_filled_skeleton.md`
+  - `amc_stage1_hardened_sections.md`
+  - `amc_stage1_hardened_section5.md` through `amc_stage1_hardened_section28.md` (all individual hardened section files)
+- Deprecation options (choose one per file, document choice in wave record):
+  - **Deprecate in place**: add the following header to the top of the file and leave it in the directory: `> ⚠️ DEPRECATED — This file was a transitional draft. The single authoritative AMC Stage 1 source is now \`modules/amc/00-app-description/app-description.md\` (approved by CS2 on [DATE]). This file must not be used for downstream derivation.`
+  - **Archive**: move to `modules/amc/00-app-description/archive/` and add the same deprecation header
+  - Files must NOT be silently deleted without a trace in the wave record
+
+**Downstream derivation protection:**
+- A repo note or README must be placed in `modules/amc/00-app-description/` clarifying which file is the canonical source after approval
+- Any consolidation scaffolding files used during Stage 1 drafting may be cleaned up after approval, but cleanup must be recorded in the wave record
+
+**Tracker updates required:**
+- The AMC stage tracker must be updated to reflect Stage 1 as in-approval or approved (as appropriate)
+- Any issue or project tracker entries referencing FM-era Stage 1 fragments as authoritative must be updated to point to the canonical source
+- The Stage 1 authority migration must be logged in the wave record of the approval wave
+
+**Note**: This cleanup is out of scope for this amendment wave. It is documented here so that the cleanup obligation is explicit and cannot be silently deferred after approval.
 
 
 ## §28 — State Persistence Specification (§AD-24)
@@ -4992,6 +5668,25 @@ Persistence may not be left to default framework behavior or to incidental datab
 AMC state persistence must preserve the right operational memory of the estate without weakening governance, authority, auditability, or boundary integrity.
 
 Any persistence design that causes AMC to forget materially important executive context too easily, or to retain state in ways that blur authority, boundary, or truth, is non-compliant with the intended purpose of AMC.
+
+### Required Persistence Matrix
+
+AMC must define a persistence matrix covering all stateful data classes before Architecture is finalized:
+
+| Data Class | Canonical Owner | Persistence Layer | AMC Role | Audit Required | Notes |
+|---|---|---|---|---|---|
+| **Alert records** | AMC | AMC database | Create, read, update (status) | Yes — generation, ack, escalation, expiry | Retention policy required |
+| **Approval records** | AMC | AMC database | Create, read | Yes — every approval decision | Immutable once recorded |
+| **Intervention records** | AMC | AMC database | Create, read, update (status) | Yes — initiation, progress, completion, cancellation | |
+| **Upload records** | AIMCC | AIMCC storage | Surface only (read from AIMCC) | Yes — submission event in AMC audit | AMC does not own |
+| **Ingestion status** | AIMCC | AIMCC storage | Surface only (read from AIMCC) | Yes — status change events surfaced | AMC does not own |
+| **Audit events** | AMC | Audit log (AMC-owned or governed audit service) | Write-only (create) | Self-auditing not required — events are the audit | Immutable; retention policy required |
+| **Operator conversation / session state** | AMC | AMC database (or session store) | Manage | Yes — session events where governance-significant | Lifetime / expiry policy required |
+| **Memory / knowledge references** | Knowledge / memory system | Knowledge/memory system storage | Surface only (read via governed API) | Yes — retrieval in decision-support context | AMC does not own; provenance required |
+| **Persistent knowledge / memory truth** | Knowledge / memory system | Knowledge/memory system storage | No direct write access | Not applicable from AMC side | AIMCC governs writes; AMC may not write |
+| **AIMC action records** | AMC (for AMC-originated requests) | AMC audit log | Create | Yes — every AIMC-routed action | Attribution and outcome required |
+
+**Persistence Design Rule**: No data class may be implemented without completing its row in this matrix and having the matrix reviewed by Foreman before Architecture is finalized.
 
 
 ## Optional Sections
