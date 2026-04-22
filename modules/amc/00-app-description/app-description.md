@@ -5689,6 +5689,173 @@ AMC must define a persistence matrix covering all stateful data classes before A
 **Persistence Design Rule**: No data class may be implemented without completing its row in this matrix and having the matrix reviewed by Foreman before Architecture is finalized.
 
 
+## §29 — Cross-System Topology Declaration (§AD-25)
+
+AMC does not operate in isolation. It is the executive control surface of an estate composed of multiple governed subsystems. For AMC to fulfil its purpose, the boundaries between it and adjacent AI management, knowledge, and memory systems must be explicitly declared.
+
+This section exists because boundary ambiguity between AMC, AIMC, AIMCC, the Knowledge Upload Centre, and knowledge/memory subsystems is an approval-critical truth. If these boundaries are not explicit at Stage 1, downstream architecture and integration work will define them by convention, silently collapsing roles or creating ungoverned data flows.
+
+### Purpose of the Cross-System Topology Declaration
+
+The cross-system topology declaration shall exist to:
+- prevent adjacent system roles from being conflated in downstream architecture
+- ensure all capability requests and data flows across system boundaries are explicitly governed
+- prevent any direct, ungoverned integration path from bypassing AIMC Gateway controls
+- establish which system initiates each cross-boundary interaction and who approves it
+- make the topology auditable from Stage 1 onwards
+
+### System Boundary Topology
+
+| System | Role / Ownership | Boundary — Inbound | Boundary — Outbound | Initiating System | Governance Control |
+|--------|-----------------|-------------------|---------------------|-------------------|--------------------|
+| **AMC (App Management Centre)** | Executive control plane. Approval authority and human-in-the-loop escalation surface for the Maturion estate. Owns executive visibility, approval workflows, escalation routing, and intervention launch. | Executive queries, approval prompts, escalation inputs, intervention requests, estate-health reports, and proactive notifications surface here. | Approval decisions, intervention orders, escalation acknowledgements, delegated execution commands, and conversational exchanges with Maturion. | Johan Ras (human) initiates approval and escalation decisions. AMC itself initiates capability requests to AIMC and oversight queries to adjacent systems. | CS2 reserved matters require Johan approval. All AI integration through AIMC Gateway — no direct LLM calls. Authority boundaries enforced by AMC access model. |
+| **AIMC (AI Management Centre)** | AI capability gateway. Provider abstraction and governed AI routing layer for the estate. AIMC is the only authorized path through which AMC may access AI model capabilities. | Capability requests from AMC (and other authorized modules). No direct provider calls. | Governed AI model outputs: advisory, operational, and gated responses classified per AIMC specialist operating model. | AMC initiates all capability requests to AIMC. AIMC does not push unsolicited outputs to AMC. | AIMC Gateway is mandatory. Direct OpenAI, Anthropic, or equivalent provider calls from AMC are prohibited. All AI routing decisions governed by AIMC policy. |
+| **AIMCC (AI Management Centre Core)** | Core AI model selection, specialist routing, and AI execution governance layer within the AIMC stack. AIMCC is internal to AIMC — AMC does not interact with AIMCC directly. | Routed requests from AIMC Gateway after capability-type classification. | Specialist outputs returned to AIMC for delivery to requesting module. Governed memory write operations executed on behalf of authorized requestors via AIMCC-controlled workflows. | AIMC Gateway initiates routing into AIMCC. AMC does not directly initiate requests to AIMCC. | Internal AIMC governance. AMC-level governance does not penetrate AIMCC. Model selection, specialist routing, and governed memory write decisions are AIMCC-governed, not AMC-governed. |
+| **Knowledge Upload Centre** | Knowledge ingestion pipeline and structured knowledge entry point for the estate. Manages controlled ingestion of documents, knowledge artifacts, and structured information into estate memory. AMC supervises but does not own the ingestion pipeline. | Knowledge documents, structured data artifacts, and ingestion requests submitted through governed upload workflows. | Indexed, validated knowledge artifacts made available to downstream knowledge/memory subsystems. | Users / governed agents initiate upload submissions. AMC may surface upload approval prompts but does not initiate ingestion directly. | Upload approval controls: materiality-significant knowledge uploads require governed approval. AMC may surface upload requests for approval but does not own the pipeline mechanics. Schema and classification validation applies at intake. |
+| **knowledge/memory subsystems** | Persistent memory storage and retrieval layer. Stores operational memory, knowledge artifacts, and contextual state that agents and the AI executive draw upon. AMC consumes retrieved knowledge/memory outputs via AIMC-mediated channels. | Governed write requests routed through AIMC-controlled workflows, with write authorization and execution governed by AIMCC. Foreman and governed maintenance agents may submit approved knowledge update requests only through those governed workflows. Read requests from authorized consumers via AIMC-mediated retrieval. | Retrieval responses to authorized consumers. Memory state observations to AMC executive surfaces via AIMC routing. | AIMCC initiates and governs all writes into memory subsystems. AMC does not initiate direct writes. Read retrieval is initiated by AMC (or other authorized modules) via AIMC-mediated channels. | Write authority: AIMCC is the authoritative governance layer for memory writes. AMC does not write directly to memory subsystems. Foreman and governed maintenance agents do not hold independent direct write authority; they may only submit governed requests via AIMC/AIMCC pathways. AMC reads are mediated by AIMC. Direct memory read/write by AMC without AIMC mediation is prohibited. |
+
+### Boundary Confirmation Checklist
+
+- [x] AMC role explicitly defined: executive control plane; no direct AI provider calls; AI integration via AIMC Gateway
+- [x] AIMC role explicitly defined: AI capability gateway; sole authorized AI routing path for AMC
+- [x] AIMCC role explicitly defined: internal AIMC execution governance; AMC does not interact directly; AIMCC governs memory writes
+- [x] Knowledge Upload Centre role explicitly defined: governed ingestion pipeline; AMC supervises approvals, does not own pipeline
+- [x] knowledge/memory role explicitly defined: persistent memory storage; AIMCC governs writes; AMC reads via AIMC mediation; AMC does not write directly
+- [x] Initiating system is stated for each boundary row
+- [x] Governance controls named for each boundary
+- [x] No adjacent system that AMC interacts with is omitted
+
+### Cross-System Topology Principle
+
+AMC is an executive surface, not a universal AI runtime. Every capability it draws upon from adjacent systems must pass through a governed boundary. No capability boundary may be bypassed for convenience without explicit CS2 authorization and a documented governance amendment at this section.
+
+### Downstream Design Consequence
+
+Downstream FRS, TRS, and Architecture work must:
+- respect the AIMC Gateway as the sole AMC ↔ AI capability boundary
+- not introduce direct AMC ↔ AIMCC or AMC ↔ provider paths
+- treat Knowledge Upload Centre ingestion as a supervised pipeline, not an AMC-owned service
+- not introduce direct AMC ↔ memory write paths outside AIMC-mediated flows
+- ensure all cross-system data flows are traceable to this topology section
+
+### Non-Negotiable Principle
+
+The cross-system boundary topology for AMC must be explicit, governed, and stable before downstream architecture commences. Any architectural choice that collapses the AMC / AIMC / AIMCC / Knowledge Upload Centre / knowledge-memory distinctions is non-compliant with the constitutional operating model of AMC.
+
+
+## §30 — Original-Intent Reconciliation (§AD-26)
+
+AMC is the matured successor to the Foreman App / Foreman Office App lineage. This section exists because the positioning of AMC as a broader executive operating system introduces a strategic framing that goes beyond the original Foreman App description. Without explicit reconciliation, CS2 review and downstream artifacts cannot determine what was preserved, what evolved, and what was intentionally superseded.
+
+### Purpose of the Original-Intent Reconciliation
+
+This reconciliation section shall exist to:
+- prevent strategic repositioning from silently discarding earlier committed product behaviors
+- make the relationship between AMC and its predecessors explicit rather than implied
+- ensure CS2 can confirm that no earlier approved capability commitment has been dropped without governance approval
+- provide a stable reference for downstream work that must understand which earlier artifacts are superseded and which remain relevant
+
+### Predecessor Product Descriptions
+
+| Predecessor Artifact | Version / Status | Reconciliation Disposition |
+|---------------------|-----------------|---------------------------|
+| `docs/governance/FM_APP_DESCRIPTION.md` (Foreman Office App) | v2.1 / Active Canonical — Temporary pending CS2 migration decision | Conditional supersession — commitments reconciled below; supersession takes effect only on CS2 approval of this AMC document |
+
+### Commitment Reconciliation Table
+
+| Earlier Commitment | Source Artifact | Disposition | Rationale / Replacement |
+|-------------------|----------------|-------------|--------------------------|
+| Continuous supervisory control system for autonomous AI-driven software construction | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Core Purpose | Preserved and extended | AMC carries this forward as the "executive operating centre" with broader estate scope including Maturion as resident AI executive |
+| Single always-on portal for Johan to oversee, direct, govern, and interact with the automated build factory | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved — scope broadened | AMC preserves the single-portal posture and extends it from build-factory supervision to full estate executive management |
+| One-man operations control centre | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved — authority framing clarified | Johan remains constitutional authority; Maturion is added as resident AI executive operating within AMC, not replacing Johan |
+| Always-on supervisory runtime | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved | Continuous availability is a non-negotiable AMC characteristic |
+| Conversational interface between Johan and Maturion (FM) | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved — role clarity updated | Foreman remains an orchestration layer; Maturion is positioned as the primary AI executive; conversational interface is preserved but framed around Johan ↔ Maturion rather than Johan ↔ Foreman directly |
+| Operational dashboard with drill-down capability | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved | Executive dashboard with drill-down is retained as a core AMC characteristic |
+| Parking Station for continuous improvement | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved | Continuous improvement tracking and parking of improvement items is retained |
+| Platform-wide supervisory authority | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved and clarified | AMC retains estate-wide supervisory authority with added clarity that Maturion, not Foreman, is the primary AI executive layer |
+| Managerial control plane enforcing governance, QA, and escalation | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved | AMC is explicitly a managerial control plane; governance and escalation enforcement remains a core characteristic |
+
+### Carry-Forward Confirmation
+
+The following predecessor commitments are confirmed as carried forward into this App Description, unchanged or materially equivalent, based on the reconciliation table above:
+- Single always-on executive portal for Johan
+- Conversational interface between Johan and the AI executive layer
+- Operational dashboard with drill-down capability
+- Continuous estate-wide supervisory authority
+- Governance, QA, and escalation enforcement capability
+- Parking Station / continuous improvement surface
+
+The following AMC characteristics are retained as current-scope clarifications or extensions of the operating model, but are not asserted here as verbatim predecessor commitments unless separately cited:
+- Mobile-accessible executive operation
+- Proactive awareness surface (system surfaces issues before being asked)
+
+### Explicit Descope Record
+
+No earlier CS2-approved capability from `docs/governance/FM_APP_DESCRIPTION.md` v2.1 has been descoped. Source-supported predecessor commitments are preserved under the AMC framing, with additional AMC clarifications and extensions stated separately where they are not direct predecessor commitments.
+
+The one substantive repositioning is the authority layer: the Foreman App described Foreman as the primary AI executive interface. AMC repositions Maturion as the primary resident AI executive, with Foreman remaining as the supervised orchestration layer beneath Maturion. This is an evolution of the authority framing, not a descoping of capability. The conversational interface, dashboard, supervisory control, and escalation capabilities all remain.
+
+> **Gate condition**: This reconciliation table is complete. No earlier CS2-approved capability commitment from `docs/governance/FM_APP_DESCRIPTION.md` v2.1 has been silently dropped. Foreman / admin ceremony / IAA may confirm this against the predecessor artifact.
+
+### Original-Intent Reconciliation Principle
+
+When AMC's strategic framing is broadened or its authority positioning is updated, the connection to prior commitments must be made explicit rather than left to inference. A broader framing that cannot account for every prior commitment is an incomplete Stage 1 artifact.
+
+
+## §31 — Stage 1 Source-of-Truth and Transition Posture (§AD-27)
+
+This section declares the canonical Stage 1 source-of-truth for AMC, its approval status, and the transition posture relative to predecessor systems. Its purpose is to ensure that downstream derivation begins from an unambiguous, approved upstream source.
+
+### Source-of-Truth Declaration
+
+| Field | Value |
+|-------|-------|
+| **Canonical Stage 1 Artifact** | `modules/amc/00-app-description/app-description.md` |
+| **Version** | 1.0 |
+| **Status** | Consolidated — Pending CS2 Approval |
+| **Approval Date** | Pending CS2 approval |
+| **Transition Posture** | Successor |
+
+### Transition Posture Detail
+
+AMC is a Successor to the Foreman App / Foreman Office App lineage. The prior system and artifacts are as follows:
+
+| Prior System | Prior Artifact Path | Prior Artifact Status | Transition Rule |
+|-------------|-------------------|-----------------------|----------------|
+| Foreman Office App / Foreman App | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 | Active Canonical — Temporary (pending CS2 migration decision) | Conditional supersession: `docs/governance/FM_APP_DESCRIPTION.md` remains the authoritative Stage 1 source until CS2 formally approves this AMC document; upon CS2 approval, it is superseded and must NOT be used as upstream derivation source for any AMC artifact |
+
+The Foreman App description (`docs/governance/FM_APP_DESCRIPTION.md`) currently identifies itself as "Active Canonical — Temporary" and states that it remains the authoritative Stage 1 source until a CS2-approved migration decision is executed. This AMC App Description is that intended successor. Supersession of `docs/governance/FM_APP_DESCRIPTION.md` is therefore conditional on CS2 approving this document. Until that approval, downstream derivation from this document is provisional.
+
+### Authorized Downstream Derivation
+
+The following downstream artifacts are authorized to derive from this document as their Stage 1 upstream source:
+
+| Downstream Artifact | Derives From | Replaces Prior Artifact |
+|--------------------|-------------|------------------------|
+| UX Workflow & Wiring Spec (AMC) | This document v1.0 | N/A — no prior AMC UX Workflow exists |
+| Functional Requirements Specification (FRS) (AMC) | This document v1.0 | N/A — no prior AMC FRS exists |
+| Technical Requirements Specification (TRS) (AMC) | This document v1.0 | N/A — no prior AMC TRS exists |
+| Architecture (AMC) | This document v1.0 | N/A — no prior AMC Architecture exists |
+
+All AMC downstream work must reference this document as its Stage 1 upstream source.
+
+### Prior-System Artifact Status Register
+
+| Prior Artifact | Path | Status | Derivation Authority |
+|---------------|------|--------|---------------------|
+| FM App Description v2.1 | `docs/governance/FM_APP_DESCRIPTION.md` | Active Canonical — Temporary (conditional supersession pending CS2 approval of this document) | Active until CS2 approves this AMC document; upon CS2 approval: superseded — do NOT use as upstream derivation source for AMC work |
+
+### Source-of-Truth Principle
+
+The canonical Stage 1 artifact for AMC is this document. Its approval status transitions through Draft → Consolidated → Authoritative. No downstream AMC artifact may be treated as approved until this document reaches Authoritative status with documented CS2 approval.
+
+Until CS2 approves this document, downstream derivation is provisional. Any provisional downstream artifact must be clearly marked as derived from a pending-approval upstream source.
+
+### Non-Negotiable Principle
+
+The Stage 1 source-of-truth for AMC must be unambiguous. No downstream artifact may use a superseded, provisional, or unofficial document as its upstream source without explicit CS2 authorization recorded at this section.
+
+
 ## Optional Sections
 
 ### High-Level Feature List (non-exhaustive)

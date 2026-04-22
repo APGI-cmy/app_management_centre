@@ -1,11 +1,12 @@
 
 ## Status
 Canonical Governance Policy  
-Version: v2.0  
+Version: v2.1  
 Authority: Johan Ras  
 Applies To: All Applications, All Repositories  
 Required By: Issue - Enforce App Description → FRS Structural Alignment; Issue - Canon Update: Add App Description Template Guidance for Oversight Prevention  
-Updated: 2026-03-20 — Added §5.3 Mandatory Governance Sections (24 sections); §19 App Description Template; §20 Module Creation Checklist Reference
+Updated: 2026-03-20 — Added §5.3 Mandatory Governance Sections (24 sections); §19 App Description Template; §20 Module Creation Checklist Reference  
+Updated: 2026-04-22 — v2.1: Hardened §AD-01 (exact 12-stage mirroring required); added §AD-25 Cross-System Topology Declaration, §AD-26 Original-Intent Reconciliation, §AD-27 Stage 1 Source-of-Truth and Transition Posture — section count 24 → 27. Approved by: CS2 — Issue: Hardening Stage 1 App Description QA (APGI-cmy/app_management_centre#1115).
 
 ---
 
@@ -171,21 +172,35 @@ App Description MAY include:
 
 ### 5.3 Mandatory Governance Sections
 
-> **Origin**: These 24 sections are derived from post-mortem analysis of 55+ governance oversights and process failures documented in the MAT module `modules/mat/BUILD_PROGRESS_TRACKER.md` (compiled 2026-03-09). Each section targets a specific recurring failure class. Every App Description for every module **MUST** include all 24 sections.
+> **Origin**: These 27 sections are derived from post-mortem analysis of 55+ governance oversights and process failures documented in the MAT module `modules/mat/BUILD_PROGRESS_TRACKER.md` (compiled 2026-03-09), supplemented by Stage 1 review failures documented in the hardening wave (2026-04-22). Each section targets a specific recurring failure class. Every App Description for every module **MUST** include all 27 sections.
 
-**Rationale**: Absence of these sections has repeatedly caused partial delivery, ambiguous ownership, missed implementation steps, and non-functional releases despite passing tests. Canonically mandating these sections enables auditability, traceability, test-first rigor, and prevents omission or governance boundary violations in successor builds.
+**Rationale**: Absence of these sections has repeatedly caused partial delivery, ambiguous ownership, missed implementation steps, and non-functional releases despite passing tests. The three additional sections (§AD-25 through §AD-27) address approval-critical truths that must be caught at Stage 1 review — not discovered late during architecture or implementation. Canonically mandating these sections enables auditability, traceability, test-first rigor, and prevents omission or governance boundary violations in successor builds.
 
-Every App Description **MUST** include the following 24 sections. Omission of any section constitutes a governance defect blocking Build Authorization.
+Every App Description **MUST** include the following 27 sections. Omission of any section constitutes a governance defect blocking Build Authorization.
 
 ---
 
 #### §AD-01 — Build Lifecycle Stages
 
-**Requirement**: The App Description MUST define the canonical build lifecycle order.
+**Requirement**: The App Description MUST define the canonical build lifecycle order and MUST mirror it exactly by stage name, number, and sequence.
 
-**Content**: Explicit, ordered list of stages per `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0: App Description → UX Workflow & Wiring Spec → FRS → TRS → Architecture → QA-to-Red → PBFAG → Implementation Plan → Builder Checklist → IAA Pre-Brief → Builder Appointment → Build. A prohibition statement that skipping or reordering stages is forbidden without documented CS2 approval is required.
+**Content**: An explicit, numbered, ordered list of ALL 12 stages per `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 — listed verbatim in sequence:
+1. App Description
+2. UX Workflow & Wiring Spec
+3. Functional Requirements Specification (FRS)
+4. Technical Requirements Specification (TRS)
+5. Architecture
+6. QA-to-Red
+7. Pre-Build Functionality Assessment Gate (PBFAG)
+8. Implementation Plan
+9. Builder Checklist
+10. IAA Pre-Brief
+11. Builder Appointment
+12. Build
 
-**Evidence of Compliance**: All downstream stages reference this section; Foreman gate checks lifecycle order before allocating builders.
+All 12 stages MUST be named. No stage may be omitted, collapsed, renamed, or reordered. A prohibition statement that skipping or reordering stages is forbidden without documented CS2 approval is required. An App Description that paraphrases, abbreviates, or partially lists the stages does NOT satisfy this requirement.
+
+**Evidence of Compliance**: All 12 canonical stage names appear in sequence in the App Description §AD-01 section; Foreman gate checks the stage list for exact mirroring before authorizing downstream artifact derivation.
 
 ---
 
@@ -419,11 +434,70 @@ Every App Description **MUST** include the following 24 sections. Omission of an
 
 ---
 
-> **Checklist Reference**: See `governance/checklists/APP_DESCRIPTION_CREATION_CHECKLIST.md` for the executable checklist format of all 24 mandatory sections above.
+#### §AD-25 — Cross-System Topology Declaration
+
+**Requirement**: The App Description MUST explicitly declare the inter-system boundary topology for any AMC-class application that integrates with, governs, or routes through AI management, knowledge, or memory subsystems.
+
+**Content**: A named topology table or diagram that explicitly maps every adjacent system the application integrates with. For AMC-class applications, this MUST include at minimum:
+- **AMC (App Management Centre)** — role: executive control plane, approval authority, human-in-the-loop escalation surface
+- **AIMC (AI Management Centre)** — role: AI capability gateway, provider abstraction, governed AI routing
+- **AIMCC (AI Management Centre Core)** — role: core AI model selection, specialist routing, AI execution governance
+- **Knowledge Upload Centre** — role: knowledge ingestion pipeline; what enters it, who controls it, what downstream systems consume from it
+- **knowledge/memory subsystems** — role: memory storage and retrieval; which system has write authority vs read-only access
+
+For each boundary, the App Description MUST state: (a) what the system owns, (b) what flows across the boundary, (c) which system initiates the interaction, and (d) which governance controls apply at the boundary.
+
+Omission of any adjacent system that the application interacts with is a blocking defect. Vague boundary descriptions (e.g., "AMC integrates with AIMC") without stating ownership, flow direction, and governance controls do NOT satisfy this requirement.
+
+**Rationale**: Cross-system topology is approval-critical truth. Without explicit boundary declarations, downstream architecture and integration work can unknowingly collapse system roles, create ungoverned data flows, or bypass access controls. These defects cannot be caught by internal-module review alone — they must be declared and approved at Stage 1.
+
+**Evidence of Compliance**: Architecture diagram traces all cross-system data and capability flows back to this topology declaration; no integration code may implement a boundary crossing not declared here; Foreman / admin ceremony / IAA confirm topology coverage during Stage 1 review.
+
+---
+
+#### §AD-26 — Original-Intent Reconciliation
+
+**Requirement**: When an App Description introduces a broader strategic framing or repositions the application beyond the scope of a prior committed product description, it MUST explicitly reconcile all earlier product commitments.
+
+**Content**:
+- Name all predecessor product descriptions or earlier-stage commitments (by artifact path, version, and current status)
+- For each earlier commitment, state whether it is: (a) preserved as-is, (b) superseded with an equivalent replacement, (c) explicitly descoped with documented rationale, or (d) deferred to a later stage with a documented timeline
+- State which behaviors, features, or authority assignments from earlier commitments are carried forward into the new framing
+- State which behaviors, features, or authority assignments are NOT carried forward, and why
+- Confirm that no earlier CS2-approved capability commitment has been silently dropped
+
+An App Description that introduces a broader strategic framing without reconciling predecessor commitments does NOT satisfy this requirement. The reconciliation must be explicit — the reader must be able to determine the fate of every prior commitment without inference.
+
+**Rationale**: Broader strategic repositioning (e.g., from a "supervisory tool" to an "executive operating system of the estate") may inadvertently discard committed product behaviors or capability commitments. Without explicit reconciliation, CS2 review cannot detect silent capability regression. These gaps cannot be caught by reviewing the new framing alone — the connection to prior truth must be made explicit.
+
+**Evidence of Compliance**: Each predecessor commitment is accounted for by name; any capability removal is explicitly flagged; Foreman / admin ceremony / IAA confirm no silent descope occurred during Stage 1 review; downstream artifacts do not reference superseded predecessor documents as upstream truth.
+
+---
+
+#### §AD-27 — Stage 1 Source-of-Truth and Transition Posture
+
+**Requirement**: The App Description MUST explicitly declare which artifact is the canonical Stage 1 source of truth, its approval status, and the transition posture if this application is a successor to or continuation of an earlier system.
+
+**Content**:
+- Identify the canonical Stage 1 source-of-truth artifact by path, version, and approval status
+- State the transition posture: `New Build` | `Successor` | `Extension` | `Replacement`
+- If `Successor`, `Extension`, or `Replacement`: name the prior system(s), state which governance artifacts from the prior system remain active vs superseded, and explicitly declare which prior-system artifacts are no longer valid upstream sources
+- State which downstream artifacts (FRS, TRS, Architecture, UX Workflow & Wiring Spec) are authorized to derive from this document, and which prior-system artifacts they replace
+- Confirm that no prior-system artifact is being used as upstream truth for downstream derivation without explicit CS2 authorization
+
+An App Description that does not state its own canonical status and transition posture does NOT satisfy this requirement. "This document is authoritative" alone is insufficient — the posture relative to prior artifacts must be explicit.
+
+**Rationale**: Without an explicit source-of-truth declaration and transition posture, downstream derivation can inadvertently mix current and superseded upstream artifacts, creating governance drift, ambiguous derivation chains, and uncatchable authority conflicts. The canonical Stage 1 artifact must be unambiguous before any downstream work begins.
+
+**Evidence of Compliance**: All downstream artifacts reference this document as their upstream source by path and version; no prior-system artifact is referenced as upstream truth without documented CS2 authorization; Foreman / admin ceremony / IAA confirm source-of-truth clarity during Stage 1 review.
+
+---
+
+> **Checklist Reference**: See `governance/checklists/APP_DESCRIPTION_CREATION_CHECKLIST.md` for the executable checklist format of all 27 mandatory sections above.
 >
 > **Template Reference**: See `governance/templates/APP_DESCRIPTION_TEMPLATE.md` for the full App Description template incorporating all mandatory sections.
 >
-> **Evidence/Taxonomy Source**: MAT module `modules/mat/BUILD_PROGRESS_TRACKER.md` (55+ errors and process failures, 2026-03-09). The 24 sections above map to the root causes documented in that tracker.
+> **Evidence/Taxonomy Source**: MAT module `modules/mat/BUILD_PROGRESS_TRACKER.md` (55+ errors and process failures, 2026-03-09) and Stage 1 review hardening wave (2026-04-22). The 27 sections above map to the root causes documented in those sources.
 
 ---
 
@@ -600,7 +674,7 @@ This policy does NOT:
 - Modify runtime behavior
 - Change existing approved App Descriptions retroactively
 
-> **Note**: v1.0 of this policy stated "Define App Description content format in detail (deferred to template or schema)" as a non-goal. v2.0 explicitly supersedes that deferral: §5.3 now defines the 24 mandatory governance sections and §19/§20 reference the canonical template and checklist. The remaining non-goal is that this policy does not prescribe the *module-specific content* within placeholder fields — that is the responsibility of the authoring agent/owner.
+> **Note**: v1.0 of this policy stated "Define App Description content format in detail (deferred to template or schema)" as a non-goal. v2.0 explicitly supersedes that deferral: §5.3 now defines the 27 mandatory governance sections and §19/§20 reference the canonical template and checklist. The remaining non-goal is that this policy does not prescribe the *module-specific content* within placeholder fields — that is the responsibility of the authoring agent/owner.
 
 ---
 
@@ -675,7 +749,7 @@ This policy is successful when:
 - Build Authorization Gate validates lineage
 - Traceability is complete and auditable
 - Governance is machine-checkable
-- All 24 mandatory governance sections (§5.3) are present and validated in every App Description
+- All 27 mandatory governance sections (§5.3) are present and validated in every App Description
 
 ---
 
@@ -714,10 +788,12 @@ A checklist artifact for verifying App Description completeness at new module cr
 governance/checklists/APP_DESCRIPTION_CREATION_CHECKLIST.md
 ```
 
-This checklist:
-- Maps every required section (§5.1) and every mandatory governance section (§5.3) to a binary pass/fail check
+This checklist (v1.1):
+- Maps every required section (§5.1) and every mandatory governance section (§5.3) to a binary pass/fail check — covering all 27 sections (§AD-01 through §AD-27)
 - Must be completed and filed before Build Authorization is granted
 - Is the gate artifact for Pre-FRS and Pre-Architecture enforcement (§11.1, §11.2)
+- Includes hard gates for §AD-25 (Cross-System Topology — initiating system must be explicitly stated per row), §AD-26 (Original-Intent Reconciliation — no silent descoping; carry-forward list may not assert unverified predecessor commitments), and §AD-27 (Stage 1 Source-of-Truth — no unconditional supersession while predecessor remains Active Canonical — Temporary)
+- Is enforceable by Foreman, admin ceremony, and IAA as the executable Stage 1 review structure
 
 ---
 
@@ -726,9 +802,9 @@ This checklist:
 ---
 
 **Document Metadata**:
-- Policy ID: APP_DESCRIPTION_REQUIREMENT_POLICY_V2.0
+- Policy ID: APP_DESCRIPTION_REQUIREMENT_POLICY_V2.1
 - Authority: Canonical Governance Policy
-- Required By: Issue - Enforce App Description → FRS Structural Alignment; Issue - Canon Update: Add App Description Template Guidance for Oversight Prevention
-- Enforcement: Architecture Compilation Contract, Build Authorization Gate, Governance Administrator
+- Required By: Issue - Enforce App Description → FRS Structural Alignment; Issue - Canon Update: Add App Description Template Guidance for Oversight Prevention; Issue - Hardening Stage 1 App Description QA (APGI-cmy/app_management_centre#1115)
+- Enforcement: Architecture Compilation Contract, Build Authorization Gate, Governance Administrator, Foreman, admin ceremony, IAA
 - Integration: ARCHITECTURE_COMPILATION_CONTRACT.md, BUILD_AUTHORIZATION_GATE.md, minimum-architecture-template.md, app-description-frs-alignment-checklist.md, APP_DESCRIPTION_TEMPLATE.md, APP_DESCRIPTION_CREATION_CHECKLIST.md
-- Version History: v1.0 — initial; v2.0 — added §5.3 (24 mandatory governance sections), §19 (template reference), §20 (checklist reference)
+- Version History: v1.0 — initial; v2.0 — added §5.3 (24 mandatory governance sections), §19 (template reference), §20 (checklist reference); v2.1 — hardened §AD-01 (exact 12-stage mirroring); added §AD-25/§AD-26/§AD-27 (section count 24→27); APP_DESCRIPTION_CREATION_CHECKLIST.md updated to v1.1 to enforce all 27 sections
