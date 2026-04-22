@@ -3,12 +3,12 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-04-22  
-**Updated By**: foreman-v2-agent (wave: amc-stage2-ux-wiring-spec-20260422 — Stage 2 UX Workflow & Wiring Spec produced approval-ready, issue #1123)
+**Updated By**: foreman-v2-agent (wave: amc-stage2-ux-wiring-spec-20260422 — Stage 2 UX Workflow & Wiring Spec produced approval-ready, issue #1121)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Issue**: [app_management_centre#1123](https://github.com/APGI-cmy/app_management_centre/issues/1123)  
+> **Issue**: [app_management_centre#1121](https://github.com/APGI-cmy/app_management_centre/issues/1121)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 ---
@@ -84,7 +84,7 @@ system behaviour are permitted.
 - [x] `wiring-artifact-index.md` — Wiring artifact inventory: journey-to-wiring map, surface catalog, data object index, external service index, audit event catalog, cross-system boundary invariants, degraded-mode coverage, Stage 1 source references (v1.0, produced 2026-04-22)
 **Wave**: amc-stage2-ux-wiring-spec-20260422  
 **Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)  
-**CS2 Authorization**: issue #1123  
+**CS2 Authorization**: issue #1121  
 **Prerequisites**: ✅ Stage 1 complete  
 **Approval Required**: Yes — CS2 approval required before Stage 3 may begin
 - [ ] CS2 approval pending
@@ -189,7 +189,7 @@ the canonical lifecycle sequence.
 ## Next Action
 
 1. ✅ Stage 1 complete — App Description approved by CS2 (issue #1117, 2026-04-22)
-2. ✅ Stage 2 artifacts produced approval-ready — Awaiting CS2 approval (issue #1123, 2026-04-22)
+2. ✅ Stage 2 artifacts produced approval-ready — Awaiting CS2 approval (issue #1121, 2026-04-22)
 3. ▶️ CS2 to review and approve Stage 2 UX Workflow & Wiring Spec before Stage 3 (FRS) begins
 4. On CS2 approval of Stage 2 → Begin Stage 3 (FRS) derivation
 

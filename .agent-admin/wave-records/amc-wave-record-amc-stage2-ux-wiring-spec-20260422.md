@@ -3,7 +3,7 @@
 **Wave ID**: amc-stage2-ux-wiring-spec-20260422  
 **Module**: App Management Centre (AMC)  
 **Authority**: CS2 (Johan Ras / @APGI-cmy)  
-**CS2 Authorization Reference**: app_management_centre#1123  
+**CS2 Authorization Reference**: app_management_centre#1121  
 **Date**: 2026-04-22  
 **Agent**: foreman-v2-agent  
 
@@ -14,8 +14,8 @@
 | Field | Value |
 |-------|-------|
 | wave_id | amc-stage2-ux-wiring-spec-20260422 |
-| triggering_issue | #1123 — Stage 2 — Create AMC UX Workflow & Wiring Spec |
-| cs2_authorization | Confirmed — Issue #1123 opened by @APGI-cmy (CS2). Issue body specifies Stage 2 production with explicit scope, required outputs, and acceptance criteria. Stage 1 approval (issue #1117) confirmed as precondition met. |
+| triggering_issue | #1121 — Stage 2 — Create AMC UX Workflow & Wiring Spec |
+| cs2_authorization | Confirmed — Issue #1121 opened by @APGI-cmy (CS2). Issue body specifies Stage 2 production with explicit scope, required outputs, and acceptance criteria. Stage 1 approval (issue #1117) confirmed as precondition met. |
 | mode | POLC_ORCHESTRATION — governance specification documentation wave |
 | agents_delegated_to | foreman-v2-agent (governance specification documents — Stage 2 is a pre-build planning artifact; no builder code implementation required) |
 | ceremony_admin | N/A — governance documentation wave, no builder execution |
@@ -46,7 +46,7 @@
 - [x] TASK-030-03 — Update `modules/amc/BUILD_PROGRESS_TRACKER.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION — governance document)
       qp_verdict: PASS
-      notes: Stage 2 status updated from "🟡 ACTIVE — NEXT STAGE" to "🟡 APPROVAL PENDING — Produced approval-ready 2026-04-22. Awaiting CS2 approval." Stage 2 artifacts checked as created. Stage 3 prerequisite updated to "Awaiting Stage 2 CS2 approval." Next Action updated. Issue reference updated to #1123. Last Updated updated to 2026-04-22.
+      notes: Stage 2 status updated from "🟡 ACTIVE — NEXT STAGE" to "🟡 APPROVAL PENDING — Produced approval-ready 2026-04-22. Awaiting CS2 approval." Stage 2 artifacts checked as created. Stage 3 prerequisite updated to "Awaiting Stage 2 CS2 approval." Next Action updated. Issue reference updated to #1121. Last Updated updated to 2026-04-22.
 
 - [x] TASK-030-04 — Create wave record `amc-wave-record-amc-stage2-ux-wiring-spec-20260422.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION — ceremony artifact)
@@ -78,7 +78,7 @@
 
 ### Stage 2 Acceptance Criteria Verification
 
-Per issue #1123 acceptance criteria:
+Per issue #1121 acceptance criteria:
 
 | Acceptance Criterion | Status |
 |---|---|
@@ -96,7 +96,7 @@ Per issue #1123 acceptance criteria:
 
 **IAA Invocation**: N/A — governance specification documentation wave; no builder execution, no qualifying tasks requiring IAA pre-brief or final audit.
 
-**QP Verdict**: PASS — All 6 tasks reviewed. Stage 2 UX Workflow & Wiring Spec is complete, comprehensive, non-contradictory to Stage 1, and explicit enough for FRS derivation. All acceptance criteria from issue #1123 met. No implementation artifacts touched. All cross-system boundaries preserved. All primary journeys have complete wiring tables. Degraded-mode patterns cover all 3 external dependencies.
+**QP Verdict**: PASS — All 6 tasks reviewed. Stage 2 UX Workflow & Wiring Spec is complete, comprehensive, non-contradictory to Stage 1, and explicit enough for FRS derivation. All acceptance criteria from issue #1121 met. No implementation artifacts touched. All cross-system boundaries preserved. All primary journeys have complete wiring tables. Degraded-mode patterns cover all 3 external dependencies.
 
 **Merge Gate Parity**: All changes are documentation/governance artifacts in `modules/amc/`, `.agent-workspace/`, and `.agent-admin/`. No code changes. No CI gate failures anticipated.
 
