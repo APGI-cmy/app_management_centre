@@ -5706,22 +5706,22 @@ The cross-system topology declaration shall exist to:
 
 ### System Boundary Topology
 
-| System | Role / Ownership | Boundary — Inbound | Boundary — Outbound | Governance Control |
-|--------|-----------------|-------------------|---------------------|--------------------|
-| **AMC (App Management Centre)** | Executive control plane. Approval authority and human-in-the-loop escalation surface for the Maturion estate. Owns executive visibility, approval workflows, escalation routing, and intervention launch. | Executive queries, approval prompts, escalation inputs, intervention requests, estate-health reports, and proactive notifications surface here. | Approval decisions, intervention orders, escalation acknowledgements, delegated execution commands, and conversational exchanges with Maturion. | CS2 reserved matters require Johan approval. All AI integration through AIMC Gateway — no direct LLM calls. Authority boundaries enforced by AMC access model. |
-| **AIMC (AI Management Centre)** | AI capability gateway. Provider abstraction and governed AI routing layer for the estate. AIMC is the only authorized path through which AMC may access AI model capabilities. | Capability requests from AMC (and other authorized modules). No direct provider calls. | Governed AI model outputs: advisory, operational, and gated responses classified per AIMC specialist operating model. | AIMC Gateway is mandatory. Direct OpenAI, Anthropic, or equivalent provider calls from AMC are prohibited. All AI routing decisions governed by AIMC policy. |
-| **AIMCC (AI Management Centre Core)** | Core AI model selection, specialist routing, and AI execution governance layer within the AIMC stack. AIMCC is internal to AIMC — AMC does not interact with AIMCC directly. | Routed requests from AIMC Gateway after capability-type classification. | Specialist outputs returned to AIMC for delivery to requesting module. | Internal AIMC governance. AMC-level governance does not penetrate AIMCC. Model selection and specialist routing decisions are AIMC-governed, not AMC-governed. |
-| **Knowledge Upload Centre** | Knowledge ingestion pipeline and structured knowledge entry point for the estate. Manages controlled ingestion of documents, knowledge artifacts, and structured information into estate memory. AMC supervises but does not own the ingestion pipeline. | Knowledge documents, structured data artifacts, and ingestion requests submitted through governed upload workflows. | Indexed, validated knowledge artifacts made available to downstream knowledge/memory subsystems. | Upload approval controls: materiality-significant knowledge uploads require governed approval. AMC may surface upload requests for approval but does not own the pipeline mechanics. Schema and classification validation applies at intake. |
-| **knowledge/memory subsystems** | Persistent memory storage and retrieval layer. Stores operational memory, knowledge artifacts, and contextual state that agents and the AI executive draw upon. AMC consumes retrieved knowledge/memory outputs via AIMC-mediated channels. | Write requests from explicitly authorized systems (AIMC, Foreman, and governed maintenance agents). Read requests from authorized consumers via AIMC-mediated retrieval. | Retrieval responses to authorized consumers. Memory state observations to AMC executive surfaces via AIMC routing. | Write authority: restricted to explicitly authorized systems declared at AIMC governance layer. AMC does not write directly to memory subsystems. AMC reads are mediated by AIMC. Direct memory read/write by AMC without AIMC mediation is prohibited. |
+| System | Role / Ownership | Boundary — Inbound | Boundary — Outbound | Initiating System | Governance Control |
+|--------|-----------------|-------------------|---------------------|-------------------|--------------------|
+| **AMC (App Management Centre)** | Executive control plane. Approval authority and human-in-the-loop escalation surface for the Maturion estate. Owns executive visibility, approval workflows, escalation routing, and intervention launch. | Executive queries, approval prompts, escalation inputs, intervention requests, estate-health reports, and proactive notifications surface here. | Approval decisions, intervention orders, escalation acknowledgements, delegated execution commands, and conversational exchanges with Maturion. | Johan Ras (human) initiates approval and escalation decisions. AMC itself initiates capability requests to AIMC and oversight queries to adjacent systems. | CS2 reserved matters require Johan approval. All AI integration through AIMC Gateway — no direct LLM calls. Authority boundaries enforced by AMC access model. |
+| **AIMC (AI Management Centre)** | AI capability gateway. Provider abstraction and governed AI routing layer for the estate. AIMC is the only authorized path through which AMC may access AI model capabilities. | Capability requests from AMC (and other authorized modules). No direct provider calls. | Governed AI model outputs: advisory, operational, and gated responses classified per AIMC specialist operating model. | AMC initiates all capability requests to AIMC. AIMC does not push unsolicited outputs to AMC. | AIMC Gateway is mandatory. Direct OpenAI, Anthropic, or equivalent provider calls from AMC are prohibited. All AI routing decisions governed by AIMC policy. |
+| **AIMCC (AI Management Centre Core)** | Core AI model selection, specialist routing, and AI execution governance layer within the AIMC stack. AIMCC is internal to AIMC — AMC does not interact with AIMCC directly. | Routed requests from AIMC Gateway after capability-type classification. | Specialist outputs returned to AIMC for delivery to requesting module. Governed memory write operations executed on behalf of authorized requestors via AIMCC-controlled workflows. | AIMC Gateway initiates routing into AIMCC. AMC does not directly initiate requests to AIMCC. | Internal AIMC governance. AMC-level governance does not penetrate AIMCC. Model selection, specialist routing, and governed memory write decisions are AIMCC-governed, not AMC-governed. |
+| **Knowledge Upload Centre** | Knowledge ingestion pipeline and structured knowledge entry point for the estate. Manages controlled ingestion of documents, knowledge artifacts, and structured information into estate memory. AMC supervises but does not own the ingestion pipeline. | Knowledge documents, structured data artifacts, and ingestion requests submitted through governed upload workflows. | Indexed, validated knowledge artifacts made available to downstream knowledge/memory subsystems. | Users / governed agents initiate upload submissions. AMC may surface upload approval prompts but does not initiate ingestion directly. | Upload approval controls: materiality-significant knowledge uploads require governed approval. AMC may surface upload requests for approval but does not own the pipeline mechanics. Schema and classification validation applies at intake. |
+| **knowledge/memory subsystems** | Persistent memory storage and retrieval layer. Stores operational memory, knowledge artifacts, and contextual state that agents and the AI executive draw upon. AMC consumes retrieved knowledge/memory outputs via AIMC-mediated channels. | Governed write requests routed through AIMC-controlled workflows, with write authorization and execution governed by AIMCC. Foreman and governed maintenance agents may submit approved knowledge update requests only through those governed workflows. Read requests from authorized consumers via AIMC-mediated retrieval. | Retrieval responses to authorized consumers. Memory state observations to AMC executive surfaces via AIMC routing. | AIMCC initiates and governs all writes into memory subsystems. AMC does not initiate direct writes. Read retrieval is initiated by AMC (or other authorized modules) via AIMC-mediated channels. | Write authority: AIMCC is the authoritative governance layer for memory writes. AMC does not write directly to memory subsystems. Foreman and governed maintenance agents do not hold independent direct write authority; they may only submit governed requests via AIMC/AIMCC pathways. AMC reads are mediated by AIMC. Direct memory read/write by AMC without AIMC mediation is prohibited. |
 
 ### Boundary Confirmation Checklist
 
 - [x] AMC role explicitly defined: executive control plane; no direct AI provider calls; AI integration via AIMC Gateway
 - [x] AIMC role explicitly defined: AI capability gateway; sole authorized AI routing path for AMC
-- [x] AIMCC role explicitly defined: internal AIMC execution governance; AMC does not interact directly
+- [x] AIMCC role explicitly defined: internal AIMC execution governance; AMC does not interact directly; AIMCC governs memory writes
 - [x] Knowledge Upload Centre role explicitly defined: governed ingestion pipeline; AMC supervises approvals, does not own pipeline
-- [x] knowledge/memory role explicitly defined: persistent memory storage; AMC reads via AIMC mediation; AMC does not write directly
-- [x] All initiating-system responsibilities stated for each boundary
+- [x] knowledge/memory role explicitly defined: persistent memory storage; AIMCC governs writes; AMC reads via AIMC mediation; AMC does not write directly
+- [x] Initiating system is stated for each boundary row
 - [x] Governance controls named for each boundary
 - [x] No adjacent system that AMC interacts with is omitted
 
@@ -5759,41 +5759,43 @@ This reconciliation section shall exist to:
 
 | Predecessor Artifact | Version / Status | Reconciliation Disposition |
 |---------------------|-----------------|---------------------------|
-| `docs/governance/FM_APP_DESCRIPTION.md` (Foreman Office App) | v2.0 / Superseded by this document | Superseded — commitments reconciled below |
+| `docs/governance/FM_APP_DESCRIPTION.md` (Foreman Office App) | v2.1 / Active Canonical — Temporary pending CS2 migration decision | Conditional supersession — commitments reconciled below; supersession takes effect only on CS2 approval of this AMC document |
 
 ### Commitment Reconciliation Table
 
 | Earlier Commitment | Source Artifact | Disposition | Rationale / Replacement |
 |-------------------|----------------|-------------|--------------------------|
-| Continuous supervisory control system for autonomous AI-driven software construction | FM_APP_DESCRIPTION.md v2.0 §Core Purpose | Preserved and extended | AMC carries this forward as the "executive operating centre" with broader estate scope including Maturion as resident AI executive |
-| Single always-on portal for Johan to oversee, direct, govern, and interact with the automated build factory | FM_APP_DESCRIPTION.md v2.0 §Key Characteristics | Preserved — scope broadened | AMC preserves the single-portal posture and extends it from build-factory supervision to full estate executive management |
-| One-man operations control centre | FM_APP_DESCRIPTION.md v2.0 §Key Characteristics | Preserved — authority framing clarified | Johan remains constitutional authority; Maturion is added as resident AI executive operating within AMC, not replacing Johan |
-| Always-on supervisory runtime | FM_APP_DESCRIPTION.md v2.0 §Key Characteristics | Preserved | Continuous availability is a non-negotiable AMC characteristic |
-| Conversational interface between Johan and Maturion (FM) | FM_APP_DESCRIPTION.md v2.0 §Key Characteristics | Preserved — role clarity updated | Foreman remains an orchestration layer; Maturion is positioned as the primary AI executive; conversational interface is preserved but framed around Johan ↔ Maturion rather than Johan ↔ Foreman directly |
-| Operational dashboard with drill-down capability | FM_APP_DESCRIPTION.md v2.0 §Key Characteristics | Preserved | Executive dashboard with drill-down is retained as a core AMC characteristic |
-| Parking Station for continuous improvement | FM_APP_DESCRIPTION.md v2.0 §Key Characteristics | Preserved | Continuous improvement tracking and parking of improvement items is retained |
-| Platform-wide supervisory authority | FM_APP_DESCRIPTION.md v2.0 §Key Characteristics | Preserved and clarified | AMC retains estate-wide supervisory authority with added clarity that Maturion, not Foreman, is the primary AI executive layer |
-| Managerial control plane enforcing governance, QA, and escalation | FM_APP_DESCRIPTION.md v2.0 §Key Characteristics | Preserved | AMC is explicitly a managerial control plane; governance and escalation enforcement remains a core characteristic |
+| Continuous supervisory control system for autonomous AI-driven software construction | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Core Purpose | Preserved and extended | AMC carries this forward as the "executive operating centre" with broader estate scope including Maturion as resident AI executive |
+| Single always-on portal for Johan to oversee, direct, govern, and interact with the automated build factory | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved — scope broadened | AMC preserves the single-portal posture and extends it from build-factory supervision to full estate executive management |
+| One-man operations control centre | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved — authority framing clarified | Johan remains constitutional authority; Maturion is added as resident AI executive operating within AMC, not replacing Johan |
+| Always-on supervisory runtime | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved | Continuous availability is a non-negotiable AMC characteristic |
+| Conversational interface between Johan and Maturion (FM) | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved — role clarity updated | Foreman remains an orchestration layer; Maturion is positioned as the primary AI executive; conversational interface is preserved but framed around Johan ↔ Maturion rather than Johan ↔ Foreman directly |
+| Operational dashboard with drill-down capability | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved | Executive dashboard with drill-down is retained as a core AMC characteristic |
+| Parking Station for continuous improvement | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved | Continuous improvement tracking and parking of improvement items is retained |
+| Platform-wide supervisory authority | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved and clarified | AMC retains estate-wide supervisory authority with added clarity that Maturion, not Foreman, is the primary AI executive layer |
+| Managerial control plane enforcing governance, QA, and escalation | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 §Key Characteristics | Preserved | AMC is explicitly a managerial control plane; governance and escalation enforcement remains a core characteristic |
 
 ### Carry-Forward Confirmation
 
-The following earlier commitments are explicitly carried forward into this App Description unchanged or materially equivalent:
+The following predecessor commitments are confirmed as carried forward into this App Description, unchanged or materially equivalent, based on the reconciliation table above:
 - Single always-on executive portal for Johan
 - Conversational interface between Johan and the AI executive layer
 - Operational dashboard with drill-down capability
 - Continuous estate-wide supervisory authority
 - Governance, QA, and escalation enforcement capability
 - Parking Station / continuous improvement surface
+
+The following AMC characteristics are retained as current-scope clarifications or extensions of the operating model, but are not asserted here as verbatim predecessor commitments unless separately cited:
 - Mobile-accessible executive operation
 - Proactive awareness surface (system surfaces issues before being asked)
 
 ### Explicit Descope Record
 
-No earlier CS2-approved capability from FM_APP_DESCRIPTION.md v2.0 has been descoped. All earlier commitments are either preserved or extended under the AMC framing.
+No earlier CS2-approved capability from `docs/governance/FM_APP_DESCRIPTION.md` v2.1 has been descoped. Source-supported predecessor commitments are preserved under the AMC framing, with additional AMC clarifications and extensions stated separately where they are not direct predecessor commitments.
 
 The one substantive repositioning is the authority layer: the Foreman App described Foreman as the primary AI executive interface. AMC repositions Maturion as the primary resident AI executive, with Foreman remaining as the supervised orchestration layer beneath Maturion. This is an evolution of the authority framing, not a descoping of capability. The conversational interface, dashboard, supervisory control, and escalation capabilities all remain.
 
-> **Gate condition**: This reconciliation table is complete. No earlier CS2-approved capability commitment from the FM_APP_DESCRIPTION.md v2.0 has been silently dropped. Foreman / admin ceremony / IAA may confirm this against the predecessor artifact.
+> **Gate condition**: This reconciliation table is complete. No earlier CS2-approved capability commitment from `docs/governance/FM_APP_DESCRIPTION.md` v2.1 has been silently dropped. Foreman / admin ceremony / IAA may confirm this against the predecessor artifact.
 
 ### Original-Intent Reconciliation Principle
 
@@ -5820,9 +5822,9 @@ AMC is a Successor to the Foreman App / Foreman Office App lineage. The prior sy
 
 | Prior System | Prior Artifact Path | Prior Artifact Status | Transition Rule |
 |-------------|-------------------|-----------------------|----------------|
-| Foreman Office App / Foreman App | `docs/governance/FM_APP_DESCRIPTION.md` v2.0 | Superseded by this document | Superseded: do NOT use as upstream source for AMC FRS, TRS, or Architecture derivation |
+| Foreman Office App / Foreman App | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 | Active Canonical — Temporary (pending CS2 migration decision) | Conditional supersession: `docs/governance/FM_APP_DESCRIPTION.md` remains the authoritative Stage 1 source until CS2 formally approves this AMC document; upon CS2 approval, it is superseded and must NOT be used as upstream derivation source for any AMC artifact |
 
-The Foreman App description (`docs/governance/FM_APP_DESCRIPTION.md`) served as the prior Stage 1 product truth for the Foreman Office application. It is superseded by this AMC App Description for all AMC downstream work. It remains available as a historical reference but may not be used as an upstream derivation source for any AMC artifact.
+The Foreman App description (`docs/governance/FM_APP_DESCRIPTION.md`) currently identifies itself as "Active Canonical — Temporary" and states that it remains the authoritative Stage 1 source until a CS2-approved migration decision is executed. This AMC App Description is that intended successor. Supersession of `docs/governance/FM_APP_DESCRIPTION.md` is therefore conditional on CS2 approving this document. Until that approval, downstream derivation from this document is provisional.
 
 ### Authorized Downstream Derivation
 
@@ -5841,7 +5843,7 @@ All AMC downstream work must reference this document as its Stage 1 upstream sou
 
 | Prior Artifact | Path | Status | Derivation Authority |
 |---------------|------|--------|---------------------|
-| FM App Description v2.0 | `docs/governance/FM_APP_DESCRIPTION.md` | Superseded | Superseded: do NOT use as upstream derivation source for AMC work |
+| FM App Description v2.1 | `docs/governance/FM_APP_DESCRIPTION.md` | Active Canonical — Temporary (conditional supersession pending CS2 approval of this document) | Active until CS2 approves this AMC document; upon CS2 approval: superseded — do NOT use as upstream derivation source for AMC work |
 
 ### Source-of-Truth Principle
 

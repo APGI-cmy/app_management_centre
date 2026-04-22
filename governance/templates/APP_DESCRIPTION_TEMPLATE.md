@@ -11,7 +11,7 @@
 | Last Updated | {YYYY-MM-DD} |
 | Authority | Johan Ras |
 | Canonical Location | `docs/governance/{APP}_APP_DESCRIPTION.md` |
-| Policy Authority | `governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md` v2.0 |
+| Policy Authority | `governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md` v2.1 |
 
 ---
 
@@ -382,21 +382,21 @@ Required items per wave:
 
 ### System Boundary Topology
 
-| System | Role / Ownership | Boundary — Inbound | Boundary — Outbound | Governance Control |
-|--------|-----------------|-------------------|---------------------|--------------------|
-| AMC (App Management Centre) | Executive control plane; approval authority; human-in-the-loop surface | {e.g., executive queries, approval requests, escalation responses} | {e.g., approvals, intervention orders, escalation initiations} | {e.g., CS2 reserved matters; AIMC Gateway required for all AI integration} |
-| AIMC (AI Management Centre) | AI capability gateway; provider abstraction; governed AI routing | {e.g., capability requests from AMC / modules} | {e.g., AI model outputs, classified responses} | {e.g., AIMC Gateway; direct provider calls prohibited} |
-| AIMCC (AI Management Centre Core) | Core AI model selection; specialist routing; AI execution governance | {e.g., routed requests from AIMC Gateway} | {e.g., specialist outputs back to AIMC} | {e.g., internal AIMC governance; model selection rules} |
-| Knowledge Upload Centre | Knowledge ingestion pipeline; structured knowledge entry point | {e.g., knowledge documents, ingestion requests} | {e.g., indexed knowledge to memory/retrieval layer} | {e.g., upload approval controls; schema validation gate} |
-| knowledge/memory subsystems | Memory storage and retrieval; persistent context | {e.g., write requests from authorised systems} | {e.g., retrieval responses to authorised consumers} | Write authority: {named system}; read: {named consumers} |
-| {Other adjacent system} | {role} | {inbound} | {outbound} | {governance control} |
+| System | Role / Ownership | Boundary — Inbound | Boundary — Outbound | Initiating System | Governance Control |
+|--------|-----------------|-------------------|---------------------|-------------------|--------------------|
+| AMC (App Management Centre) | Executive control plane; approval authority; human-in-the-loop surface | {e.g., executive queries, approval requests, escalation responses} | {e.g., approvals, intervention orders, escalation initiations} | {e.g., Johan Ras (human) for approvals; AMC for capability requests to AIMC} | {e.g., CS2 reserved matters; AIMC Gateway required for all AI integration} |
+| AIMC (AI Management Centre) | AI capability gateway; provider abstraction; governed AI routing | {e.g., capability requests from AMC / modules} | {e.g., AI model outputs, classified responses} | {e.g., AMC initiates all capability requests; AIMC does not push unsolicited outputs} | {e.g., AIMC Gateway; direct provider calls prohibited} |
+| AIMCC (AI Management Centre Core) | Core AI model selection; specialist routing; AI execution governance | {e.g., routed requests from AIMC Gateway} | {e.g., specialist outputs back to AIMC; governed memory writes} | {e.g., AIMC Gateway initiates routing into AIMCC; AMC does not directly initiate} | {e.g., internal AIMC governance; model selection and memory write authority} |
+| Knowledge Upload Centre | Knowledge ingestion pipeline; structured knowledge entry point | {e.g., knowledge documents, ingestion requests} | {e.g., indexed knowledge to memory/retrieval layer} | {e.g., users / governed agents initiate upload submissions; AMC may surface approval prompts} | {e.g., upload approval controls; schema validation gate} |
+| knowledge/memory subsystems | Memory storage and retrieval; persistent context | {e.g., governed write requests via AIMC/AIMCC pathways} | {e.g., retrieval responses to authorised consumers} | {e.g., AIMCC initiates and governs all writes; AMC initiates reads via AIMC-mediated channels} | Write authority: {named governance layer — e.g., AIMCC}; read: {named consumers via AIMC mediation} |
+| {Other adjacent system} | {role} | {inbound} | {outbound} | {initiating system} | {governance control} |
 
 ### Boundary Confirmation Checklist
 
 For each row in the topology table above:
 - [ ] System role is explicitly defined (not implied or inferred)
 - [ ] Inbound and outbound data/capability flows are named
-- [ ] Which system initiates each interaction is stated
+- [ ] Initiating system is explicitly stated for each boundary row
 - [ ] Governance control at each boundary is named
 - [ ] No adjacent system that AMC interacts with is omitted
 
@@ -446,7 +446,7 @@ The following earlier commitments are NOT carried forward. CS2-approved descope 
 |-------|-------|
 | **Canonical Stage 1 Artifact** | `{path/to/this/app-description.md}` |
 | **Version** | {VERSION} |
-| **Status** | {Draft / Authoritative / Superseded} |
+| **Status** | {Draft / Consolidated — Pending CS2 Approval / Authoritative / Superseded} |
 | **Approval Date** | {YYYY-MM-DD or Pending CS2 approval} |
 | **Transition Posture** | {New Build / Successor / Extension / Replacement} |
 

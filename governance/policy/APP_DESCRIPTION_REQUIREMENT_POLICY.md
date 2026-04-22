@@ -6,7 +6,7 @@ Authority: Johan Ras
 Applies To: All Applications, All Repositories  
 Required By: Issue - Enforce App Description → FRS Structural Alignment; Issue - Canon Update: Add App Description Template Guidance for Oversight Prevention  
 Updated: 2026-03-20 — Added §5.3 Mandatory Governance Sections (24 sections); §19 App Description Template; §20 Module Creation Checklist Reference  
-Updated: 2026-04-22 — v2.1: Hardened §AD-01 (exact 12-stage mirroring required); added §AD-25 Cross-System Topology Declaration, §AD-26 Original-Intent Reconciliation, §AD-27 Stage 1 Source-of-Truth and Transition Posture — section count 24 → 27. Authority: CS2 — Issue: Hardening Stage 1 App Description QA (APGI-cmy/app_management_centre#1115).
+Updated: 2026-04-22 — v2.1: Hardened §AD-01 (exact 12-stage mirroring required); added §AD-25 Cross-System Topology Declaration, §AD-26 Original-Intent Reconciliation, §AD-27 Stage 1 Source-of-Truth and Transition Posture — section count 24 → 27. Approved by: CS2 — Issue: Hardening Stage 1 App Description QA (APGI-cmy/app_management_centre#1115).
 
 ---
 
