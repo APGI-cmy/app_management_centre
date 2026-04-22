@@ -5745,8 +5745,8 @@ AMC must define a persistence matrix covering all stateful data classes before A
 
 ## Approval Record
 
-- **Prepared by:** ______________________
-- **Reviewed by:** ______________________
-- **Approved by:** ______________________
-- **Approval Date:** ______________________
+- **Prepared by:** CS2: APGI-cmy (Johan Ras)
+- **Reviewed by:** CS2: APGI-cmy (Johan Ras)
+- **Approved by:** CS2: APGI-cmy (Johan Ras)
+- **Approval Date:** 22 April 2026
 - **Approval Reference:** ______________________
