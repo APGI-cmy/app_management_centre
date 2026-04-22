@@ -172,9 +172,10 @@ When a canonical source changes, the reviewer must verify:
 
 ## 6. State-Transition Contradiction Classes
 
-Reviewers must explicitly check for each of the following six contradiction classes. Each
-class corresponds to one ACR trigger (ACR-17 through ACR-20) and one AAP auto-fail rule
-(AAP-23 through AAP-26).
+Reviewers must explicitly check for each of the following six contradiction classes. These
+classes are collectively covered by the relevant ACR triggers (ACR-17 through ACR-20) and
+AAP auto-fail rules (AAP-23 through AAP-26); some triggers or auto-fail rules apply to
+multiple contradiction classes rather than mapping one-to-one with a single class.
 
 | Class ID | Contradiction Type | Description |
 |----------|--------------------|-------------|
@@ -282,7 +283,7 @@ is true of the PR diff:
    `CANONICAL_SOURCE`)
 4. The PREHANDOVER proof declares `pr_category: STAGE1_APPROVAL_ALIGNMENT`
 
-When classified, all four check layers in this protocol apply.
+When classified, all three check layers in this protocol apply.
 
 ---
 

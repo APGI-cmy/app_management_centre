@@ -901,12 +901,12 @@ same non-discretionary character as ACR-01 through ACR-16.
 **ACR-18 — Cross-artifact coherence check**:
 - For each artifact class in the Stage 1 artifact chain (canonical document, approval
   record, tracker, artifact index, realignment note, root pointer files, predecessor files),
-  scan for the stale language denylist from
-  `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §3.1`:
+  scan for the full stale language denylist defined in
+  `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §3.1`, including but not limited to:
   `pending`, `pending approval`, `not yet approved`, `provisional`, `provisional canonical`,
   `temporary canonical`, `candidate for approval`, `future canonical`, `migration pending`,
   blank `approved_by` fields, blank `approval_date` fields
-- If any stale language is found in any artifact: ACR-18 fires
+- If any stale language from the §3.1 denylist is found in any artifact: ACR-18 fires
 
 **ACR-19 — Pointer and predecessor reconciliation check**:
 - Check that root pointer files reference the new canonical document (not the predecessor)

@@ -261,21 +261,21 @@
         },
         {
             "filename": "AGENT_HANDOVER_AUTOMATION.md",
-            "version": "1.7.0",
-            "file_hash": "0f919e8b0c7c72b918c7b746a359328e2546ba5d56ca8ec881f8d9c06ef050eb",
+            "version": "1.7.1",
+            "file_hash": "b96078f882b45f820a72d6c5c4fea92bc25695f4318ae154b24d7b30646d165d",
             "effective_date": "2026-04-06",
             "description": "Canonical governance document: AGENT_HANDOVER_AUTOMATION",
             "type": "canon",
             "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
             "layer_down_status": "PUBLIC_API",
-            "file_hash_sha256": "0f919e8b0c7c72b918c7b746a359328e2546ba5d56ca8ec881f8d9c06ef050eb",
+            "file_hash_sha256": "b96078f882b45f820a72d6c5c4fea92bc25695f4318ae154b24d7b30646d165d",
             "ripple_dispatched": "2026-02-24",
             "ripple_log": ".agent-admin/governance/ripple-logs/ripple-agent-handover-parity-20260224.md",
             "ripple_in_repo_status": "COMPLETE",
             "ripple_consumer_status": "PENDING \u2014 layer-down issues to be created in consumer repos",
             "last_updated": "2026-04-22",
-            "change_note": "v1.7.0: Added \u00a74.3e Check M (Stage 1 approval-alignment sweep) and AAP-23 through AAP-26",
-            "canonical_version": "1.7.0",
+            "change_note": "v1.7.1: Check M CL2 \u2014 stage1 matched anywhere in path (not only as directory component); \b replaced with ERE word boundaries; M1 checklist scoped to PREHANDOVER proof or PR changed files with completeness check; M2 scans full live artifact chain (not only changed files); M4 \"NOT present\" treated as pass evidence",
+            "canonical_version": "1.7.1",
             "amended_date": "2026-04-22"
         },
         {
@@ -1481,9 +1481,9 @@
         },
         {
             "filename": "INDEPENDENT_ASSURANCE_AGENT_CANON.md",
-            "version": "1.11.0",
-            "file_hash": "5f5c029fbebe0031fbbcfb5410d96f44afc2214f062af8e30afbe3a6192a1f49",
-            "file_hash_sha256": "5f5c029fbebe0031fbbcfb5410d96f44afc2214f062af8e30afbe3a6192a1f49",
+            "version": "1.11.1",
+            "file_hash": "4c8032b74b2c1de88c6e932a05c46f016aab245645e3e82e1a2d59bab51c65f1",
+            "file_hash_sha256": "4c8032b74b2c1de88c6e932a05c46f016aab245645e3e82e1a2d59bab51c65f1",
             "effective_date": "2026-02-24",
             "amended_date": "2026-04-22",
             "description": "Defines the Independent Assurance Agent (IAA) class: role, hard-trigger authority, independence requirements, five-phase delivery proof protocol, binary output (ASSURANCE-TOKEN / REJECTION-PACKAGE), and trigger table. v1.1.0: Zero-Severity-Tolerance policy added.",
@@ -1492,8 +1492,8 @@
             "layer_down_status": "INTERNAL",
             "provenance": "CS2-authorised via issue: Create Governance Canon: Independent Assurance Agent (IAA); v1.1.0 amendment: Enforce zero-severity-tolerance \u2014 any finding triggers rejection",
             "last_updated": "2026-04-22",
-            "change_note": "v1.11.0: Added ACR-17 through ACR-20 (Stage 1 approval-alignment QA hardening); added Stage 1 Approval-Alignment Rejection Triggers section",
-            "canonical_version": "1.11.0"
+            "change_note": "v1.11.1: ACR-18 evaluation guidance \u2014 inline stale-language list marked \"including but not limited to\"; full denylist reference remains \u00a73.1 of STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md",
+            "canonical_version": "1.11.1"
         },
         {
             "filename": "INITIALIZATION_COMPLETENESS_GATE.md",
@@ -2407,10 +2407,10 @@
         },
         {
             "filename": "STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md",
-            "version": "1.0.1",
-            "canonical_version": "1.0.1",
-            "file_hash": "c9a46e8726cdd25c015511b98522e9f844bfc048e5639a1ac5a2800944602698",
-            "file_hash_sha256": "c9a46e8726cdd25c015511b98522e9f844bfc048e5639a1ac5a2800944602698",
+            "version": "1.0.2",
+            "canonical_version": "1.0.2",
+            "file_hash": "7b09623fd836a5904f77725a0e5846ce57dc8de84350568351da6801c583e804",
+            "file_hash_sha256": "7b09623fd836a5904f77725a0e5846ce57dc8de84350568351da6801c583e804",
             "effective_date": "2026-04-22",
             "amended_date": "2026-04-22",
             "description": "Canonical governance document: Stage 1 approval-alignment QA protocol \u2014 mandatory whole-document state-transition sweep, cross-artifact coherence, pointer reconciliation, and contradiction-class checks for Stage 1 approval-alignment waves",
@@ -2418,7 +2418,7 @@
             "path": "governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md",
             "layer_down_status": "PUBLIC_API",
             "last_updated": "2026-04-22",
-            "change_note": "v1.0.1: Tightened \u00a71 and \u00a72 \u2014 removed FRS/TRS as Stage 1 examples; Stage 1 = App Description only; added scope note clarifying FRS (Stage 3) and TRS (Stage 4) are out of scope",
+            "change_note": "v1.0.2: \u00a76 reworded \u2014 STC classes are collectively covered by ACR/AAP triggers, not 1:1; \u00a79 corrected \"four check layers\" \u2192 \"three check layers\"",
             "provenance": "CS2-authorised via issue: Hardening \u2014 Stage 1 approval-alignment QA must force whole-document state-transition consistency checks"
         }
     ]

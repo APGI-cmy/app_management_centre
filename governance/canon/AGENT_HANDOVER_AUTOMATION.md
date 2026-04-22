@@ -1313,16 +1313,16 @@ fi
 # M-CL2/3/4: diff-based classification signals
 CHANGED_FILES=$(git diff --name-only origin/main...HEAD 2>/dev/null)
 
-# CL2: Stage 1 document path patterns
-if echo "${CHANGED_FILES}" | grep -qiE "app-description|app_description|/stage1/|/stage-1/|/stage_1/|00-app-description"; then
+# CL2: Stage 1 document path patterns — match stage1 anywhere in path (not only as a directory component)
+if echo "${CHANGED_FILES}" | grep -qiE "app-description|app_description|(^|[^[:alnum:]])stage1([^[:alnum:]]|$)|stage-1|stage_1|00-app-description"; then
   # Additional signal: the diff for that file touches a status or approval field
   while IFS= read -r S1FILE; do
     [ -z "${S1FILE}" ] && continue
-    if git diff origin/main...HEAD -- "${S1FILE}" 2>/dev/null | grep -qiE "^[+-][^-].*\b(status|approved_by|approval_date|approval_status|approval_state)\b"; then
+    if git diff origin/main...HEAD -- "${S1FILE}" 2>/dev/null | grep -qiE "^[+-][^-].*(^|[^[:alnum:]_])(status|approved_by|approval_date|approval_status|approval_state)([^[:alnum:]_]|$)"; then
       S1_CLASSIFIED=1
       break
     fi
-  done < <(echo "${CHANGED_FILES}" | grep -iE "app-description|app_description|/stage1/|/stage-1/|/stage_1/|00-app-description")
+  done < <(echo "${CHANGED_FILES}" | grep -iE "app-description|app_description|(^|[^[:alnum:]])stage1([^[:alnum:]]|$)|stage-1|stage_1|00-app-description")
 fi
 
 # CL3: approval-record file changed
@@ -1351,14 +1351,42 @@ else
     M1_FAIL=1
   fi
 
-  # Also check that a Stage 1 QA Checklist artifact is referenced or committed
-  # Accept: any committed file whose name contains stage1.*qa.*checklist or stage1.*checklist
-  S1_CHECKLIST_FILE=$(git ls-files 2>/dev/null | grep -iE "stage1.*qa.*checklist|stage1.*checklist" | head -1)
+  # Also check that a Stage 1 QA Checklist artifact is explicitly tied to this handover.
+  # Scope resolution to:
+  #   1) a concrete checklist path referenced in the PREHANDOVER proof, or
+  #   2) changed/new files in the current PR wave.
+  # Then require a minimally complete checklist (no unchecked "- [ ]" items).
+  S1_CHECKLIST_FILE=""
+
+  if [ -n "${LATEST_PROOF}" ] && [ -f "${LATEST_PROOF}" ]; then
+    while IFS= read -r CANDIDATE_PATH; do
+      [ -z "${CANDIDATE_PATH}" ] && continue
+      if [ -f "${CANDIDATE_PATH}" ] && printf '%s\n' "${CANDIDATE_PATH}" | grep -qiE 'stage1.*qa.*checklist|stage1.*checklist'; then
+        S1_CHECKLIST_FILE="${CANDIDATE_PATH}"
+        break
+      fi
+    done < <(
+      grep -oE '[A-Za-z0-9._/-]+' "${LATEST_PROOF}" 2>/dev/null \
+        | grep -iE 'stage1.*qa.*checklist|stage1.*checklist' \
+        | sort -u
+    )
+  fi
+
   if [ -z "${S1_CHECKLIST_FILE}" ]; then
-    # Fallback: check if the PREHANDOVER proof references a stage1 checklist artifact
-    if [ -n "${LATEST_PROOF}" ] && ! grep -qiE "stage1.*checklist|stage1.*qa" "${LATEST_PROOF}" 2>/dev/null; then
-      M1_FAIL=1
-    fi
+    while IFS= read -r CANDIDATE_PATH; do
+      [ -z "${CANDIDATE_PATH}" ] && continue
+      if [ -f "${CANDIDATE_PATH}" ] && printf '%s\n' "${CANDIDATE_PATH}" | grep -qiE 'stage1.*qa.*checklist|stage1.*checklist'; then
+        S1_CHECKLIST_FILE="${CANDIDATE_PATH}"
+        break
+      fi
+    done < <(printf '%s\n' "${CHANGED_FILES}")
+  fi
+
+  if [ -z "${S1_CHECKLIST_FILE}" ]; then
+    M1_FAIL=1
+  elif grep -qE '^[[:space:]]*-[[:space:]]*\[[[:space:]]\]' "${S1_CHECKLIST_FILE}" 2>/dev/null; then
+    # Unchecked items (not annotated [~]) remain — checklist is incomplete
+    M1_FAIL=1
   fi
 
   if [ "${M1_FAIL}" -eq 1 ]; then
@@ -1368,14 +1396,21 @@ else
   # ── M2: cross-artifact stale language scan (AAP-24) ──────────────────────
   echo "    [M2] Cross-artifact stale approval-state language scan..."
   STALE_PATTERN="pending approval|not yet approved|approval pending|awaiting approval|provisional canonical|temporary canonical|candidate for approval|future canonical|migration pending|migration decision unresolved|source of truth pending|provisional source of truth"
+  ARTIFACT_CHAIN_PATTERN="app-description|app_description|(^|[^[:alnum:]])stage1([^[:alnum:]]|$)|stage-1|stage_1|00-app-description|approval.?record|root.?pointer|CANONICAL_SOURCE|artifact.?index|pre.?build.?artifact|build.?progress.?tracker|realignment.?note|repo.?realignment"
+  ARTIFACT_CHAIN_EXCLUDE_PATTERN="(^|/)(archive|archives|archived|history|historical|deprecated|superseded|attic|old|legacy|snapshots|backup)(/|$)"
   STALE_FILES=()
+  # Scan the full live artifact chain in the repo (not only changed files) so that
+  # unchanged files carrying stale language — the exact failure mode in PR #1118 — are caught.
+  M2_CANDIDATE_FILES=$(git ls-files 2>/dev/null | grep -iE "${ARTIFACT_CHAIN_PATTERN}" | grep -ivE "${ARTIFACT_CHAIN_EXCLUDE_PATTERN}" || true)
+  if [ -z "${M2_CANDIDATE_FILES}" ]; then
+    M2_CANDIDATE_FILES=$(printf '%s\n' "${CHANGED_FILES}" | grep -iE "${ARTIFACT_CHAIN_PATTERN}" | grep -ivE "${ARTIFACT_CHAIN_EXCLUDE_PATTERN}" || true)
+  fi
   while IFS= read -r AFILE; do
     [ -z "${AFILE}" ] && continue
     if grep -qiE "${STALE_PATTERN}" "${AFILE}" 2>/dev/null; then
       STALE_FILES+=("${AFILE}")
     fi
-  done < <(echo "${CHANGED_FILES}" | grep -iE \
-    "app-description|app_description|stage1|stage-1|stage_1|00-app-description|approval.?record|root.?pointer|CANONICAL_SOURCE|artifact.?index|pre.?build.?artifact|build.?progress.?tracker|realignment.?note|repo.?realignment")
+  done < <(printf '%s\n' "${M2_CANDIDATE_FILES}")
 
   if [ ${#STALE_FILES[@]} -gt 0 ]; then
     ACC_FAILURES+=("M2: Stale approval-state language found in Stage 1 artifact chain files: ${STALE_FILES[*]} — stale terms must be removed after approval event (AAP-24)")
@@ -1431,8 +1466,10 @@ else
     for SF in "${SEARCH_FILES[@]}"; do
       if grep -q "${STC}" "${SF}" 2>/dev/null; then
         STC_FOUND=1
-        # Check if the class is recorded as present/FAIL
-        if grep -A1 "${STC}" "${SF}" 2>/dev/null | grep -qiE "present|FAIL|found|detected"; then
+        # Check if the class is recorded as an explicit failure state; treat "NOT present" as pass evidence.
+        if grep -A1 "${STC}" "${SF}" 2>/dev/null | grep -qiE "NOT[[:space:]]+present"; then
+          :
+        elif grep -A1 "${STC}" "${SF}" 2>/dev/null | grep -qiE ":[[:space:]]*present|:[[:space:]]*FAIL|found|detected"; then
           STC_FAILED=1
         fi
         break
