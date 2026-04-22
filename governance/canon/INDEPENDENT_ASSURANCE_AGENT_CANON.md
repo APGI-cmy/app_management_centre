@@ -1,5 +1,5 @@
 
-**Status**: CANONICAL | **Version**: 1.11.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.11.2 | **Authority**: CS2
 **Date**: 2026-03-03
 **Amended**: 2026-03-03 — v1.1.0: Added §Proactive Assurance — Pre-Brief Protocol
 **Amended**: 2026-03-04 — v1.2.1: Added §CS2 Direct Review Track
@@ -10,6 +10,8 @@
 **Amended**: 2026-04-19 — v1.7.0: Added ACR-09 through ACR-14 (gate-inventory hardening, post-token normalization, cross-artifact contradiction, carried-forward canonical source parity); added active-bundle scope rule for ACR checks; aligned with governance-repo hardening wave outcomes; authority: CS2 — governance-repo hardening wave.
 **Amended**: 2026-04-21 — v1.10.0: Added ACR-15 (active-wave / tracker contradiction rejection) and ACR-16 (active final-state token/session incoherence); added §Authoritative-Source Rule for Current Token/Session; explicitly included `wave-current-tasks.md` in active-bundle scope; authority: CS2 — AMC/ISMS admin-ceremony hardening parity catch-up (issue: Catch AMC up to ISMS admin-ceremony hardening).
 **Amended**: 2026-04-22 — v1.11.0: Added ACR-17 (Stage 1 whole-document state-transition sweep not evidenced), ACR-18 (cross-artifact approval-state incoherence in Stage 1 chain), ACR-19 (canonical-pointer or predecessor-file not reconciled after Stage 1 approval), ACR-20 (Stage 1 contradiction-class sweep not completed); added §Stage 1 Approval-Alignment Rejection Triggers section; canonical basis: `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
+**Amended**: 2026-04-22 — v1.11.1: ACR-18 evaluation guidance — inline stale-language list marked "including but not limited to"; full denylist reference remains §3.1 of `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md`; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
+**Amended**: 2026-04-22 — v1.11.2: ACR-19 — added explicit requirement to verify root pointer target path (not only surrounding wording); clean-wording but wrong-target pointer is an STC-04 contradiction and fires ACR-19; added `stage1_canonical_source` field verification requirement; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
 
 ---
 

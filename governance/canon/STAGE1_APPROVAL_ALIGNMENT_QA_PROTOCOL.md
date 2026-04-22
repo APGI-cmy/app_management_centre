@@ -1,7 +1,9 @@
 
-**Status**: CANONICAL | **Version**: 1.0.1 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.0.3 | **Authority**: CS2
 **Date**: 2026-04-22
-**Amended**: 2026-04-22 — v1.0.1: Tightened §1 and §2 to remove FRS and TRS from "Stage 1 document" examples — FRS is Stage 3 and TRS is Stage 4 in the 12-stage pre-build model; this protocol applies only to the App Description (Stage 1); added clarifying scope note in §1; authority: CS2 — Stage 1 mislabeling correction.
+**Amended**: 2026-04-22 — v1.0.3: §3 evidence requirements — added `stage1_canonical_source: <path>` as a required PREHANDOVER proof field alongside `stage1_sweep_completed: yes`; §5.1 — added machine-verification requirement (root pointer target path must be verified, not only surrounding wording); documented required root-pointer field formats (`canonical_source:`, `canonical_document:`, `points_to:`, `target:`, `source:`, or bold-label Markdown); authority: CS2 — Stage 1 approval-alignment QA hardening issue.
+**Previous amendment**: 2026-04-22 — v1.0.2: §6 reworded — STC classes are collectively covered by ACR/AAP triggers, not 1:1 mapping; §9 corrected "four check layers" → "three check layers"; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
+**Previous amendment**: 2026-04-22 — v1.0.1: Tightened §1 and §2 to remove FRS and TRS from "Stage 1 document" examples — FRS is Stage 3 and TRS is Stage 4 in the 12-stage pre-build model; this protocol applies only to the App Description (Stage 1); added clarifying scope note in §1; authority: CS2 — Stage 1 mislabeling correction.
 
 ---
 
