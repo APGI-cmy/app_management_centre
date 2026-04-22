@@ -3,6 +3,7 @@
 **Wave ID**: amc-stage2-ux-wiring-spec-20260422  
 **Triggering Issue**: #1121 — Stage 2 — Create AMC UX Workflow & Wiring Spec  
 **Wave Record**: `.agent-admin/wave-records/amc-wave-record-amc-stage2-ux-wiring-spec-20260422.md`
+governance_evidence_path: .agent-admin/wave-records/amc-wave-record-amc-stage2-ux-wiring-spec-20260422.md
 
 ---
 
