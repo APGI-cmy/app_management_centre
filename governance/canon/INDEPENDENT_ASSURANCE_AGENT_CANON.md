@@ -909,7 +909,12 @@ same non-discretionary character as ACR-01 through ACR-16.
 - If any stale language from the §3.1 denylist is found in any artifact: ACR-18 fires
 
 **ACR-19 — Pointer and predecessor reconciliation check**:
-- Check that root pointer files reference the new canonical document (not the predecessor)
+- Check that root pointer files reference the new canonical document (not the predecessor);
+  this check must cover the actual declared pointer target path, not only surrounding wording
+- Verify that the `stage1_canonical_source` field in the PREHANDOVER proof names the new
+  canonical Stage 1 document path, and that every live root pointer file's declared target
+  matches that path — a root pointer that uses clean wording but points to the predecessor
+  path is an STC-04 contradiction and ACR-19 fires
 - Check that the predecessor Stage 1 file(s) carry a superseded / historical marker
 - Check that the predecessor file(s) do not assert active canonical authority
 - If any check fails: ACR-19 fires

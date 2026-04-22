@@ -1416,26 +1416,80 @@ else
     ACC_FAILURES+=("M2: Stale approval-state language found in Stage 1 artifact chain files: ${STALE_FILES[*]} — stale terms must be removed after approval event (AAP-24)")
   fi
 
-  # ── M3: predecessor-file and root-pointer reconciliation (AAP-25) ─────────
+  # ── M3: predecessor-file and root-pointer reconciliation (AAP-25 / STC-04) ──
   echo "    [M3] Root pointer and predecessor file reconciliation..."
   M3_FAIL=0
   M3_DETAILS=""
 
-  # Check for changed root pointer files that still reference old/superseded sources
+  # Read the approved canonical Stage 1 source path from the PREHANDOVER proof.
+  # Producing agents must declare this field so M3 can verify the root pointer target:
+  #   stage1_canonical_source: <relative-path-to-new-canonical-stage1-document>
+  S1_CANONICAL_SOURCE=""
+  if [ -n "${LATEST_PROOF}" ] && [ -f "${LATEST_PROOF}" ]; then
+    S1_CANONICAL_SOURCE=$(grep -iE "^[[:space:]]*stage1_canonical_source[[:space:]]*:[[:space:]]*" "${LATEST_PROOF}" \
+      2>/dev/null \
+      | sed -E 's/^[[:space:]]*stage1_canonical_source[[:space:]]*:[[:space:]]*//' \
+      | tr -d '`"'"'"' \
+      | head -1 \
+      | xargs 2>/dev/null || true)
+  fi
+
+  # Scan all live root pointer files in the repo (not only changed ones).
+  RP_EXCLUDE_PATTERN="(^|/)(archive|archives|archived|history|historical|deprecated|superseded|attic|old|legacy|snapshots|backup)(/|$)"
+  RP_CANDIDATE_FILES=$(git ls-files 2>/dev/null \
+    | grep -iE "root.?pointer|CANONICAL_SOURCE" \
+    | grep -ivE "${RP_EXCLUDE_PATTERN}" || true)
+
+  # ── M3a: wording check + target-pointer verification on root pointer files ──
   while IFS= read -r RPFILE; do
     [ -z "${RPFILE}" ] && continue
-    if grep -qiE "superseded|predecessor|prior version" "${RPFILE}" 2>/dev/null; then
-      # Tolerated — the file acknowledges the predecessor exists
-      :
-    fi
-    # Check if the file itself still claims pending or provisional canonical authority
+
+    # (i) Wording check — file must not claim pending/provisional canonical authority
     if grep -qiE "pending canonical|provisional canonical|temporary canonical|not yet canonical" "${RPFILE}" 2>/dev/null; then
       M3_FAIL=1
       M3_DETAILS="${M3_DETAILS} ${RPFILE}(still-provisional-canonical)"
     fi
-  done < <(echo "${CHANGED_FILES}" | grep -iE "root.?pointer|CANONICAL_SOURCE")
 
-  # Check for predecessor / superseded files that do not carry a superseded marker
+    # (ii) Target-pointer check (STC-04): extract the path this root pointer declares as its
+    # canonical source and compare it to the approved canonical Stage 1 source.
+    # Try common key-value field names first.
+    RP_TARGET=$(grep -iE "^[[:space:]]*(canonical_source|canonical_document|points_to|target|source)[[:space:]]*:[[:space:]]*" \
+      "${RPFILE}" 2>/dev/null \
+      | grep -oE '[A-Za-z0-9_./%-]+(\.md|\.json|\.yaml|\.txt)' \
+      | head -1 || true)
+    # Fallback: bold-label Markdown format — **Canonical Source**: path/to/file.md
+    if [ -z "${RP_TARGET}" ]; then
+      RP_TARGET=$(grep -iE "\*\*(canonical[[:space:]]source|canonical[[:space:]]document|source)[[:space:]]*\*\*[[:space:]]*:" \
+        "${RPFILE}" 2>/dev/null \
+        | grep -oE '[A-Za-z0-9_./%-]+(\.md|\.json|\.yaml|\.txt)' \
+        | head -1 || true)
+    fi
+
+    if [ -n "${S1_CANONICAL_SOURCE}" ]; then
+      # Normalise both paths: strip leading ./ for comparison
+      S1_NORM=$(printf '%s' "${S1_CANONICAL_SOURCE}" | sed 's|^\./||')
+      if [ -n "${RP_TARGET}" ]; then
+        RP_NORM=$(printf '%s' "${RP_TARGET}" | sed 's|^\./||')
+        if [ "${RP_NORM}" != "${S1_NORM}" ]; then
+          M3_FAIL=1
+          M3_DETAILS="${M3_DETAILS} ${RPFILE}(points-to:${RP_TARGET},expected:${S1_CANONICAL_SOURCE})"
+        fi
+      else
+        # Could not extract a pointer target from the file — cannot verify; treat as failure
+        M3_FAIL=1
+        M3_DETAILS="${M3_DETAILS} ${RPFILE}(pointer-target-unreadable)"
+      fi
+    else
+      # No stage1_canonical_source in proof — apply heuristic: predecessor-like target paths
+      # are suspicious and must not appear in a live root pointer file
+      if [ -n "${RP_TARGET}" ] && printf '%s' "${RP_TARGET}" | grep -qiE "predecessor|prior.?stage1|stage1.*v[0-9]|superseded"; then
+        M3_FAIL=1
+        M3_DETAILS="${M3_DETAILS} ${RPFILE}(heuristic-predecessor-target:${RP_TARGET})"
+      fi
+    fi
+  done < <(printf '%s\n' "${RP_CANDIDATE_FILES}")
+
+  # ── M3b: predecessor / superseded files must carry a superseded marker ───────
   while IFS= read -r PREDFILE; do
     [ -z "${PREDFILE}" ] && continue
     if ! grep -qiE "superseded|historical|no longer active|replaced by|SUPERSEDED|HISTORICAL" "${PREDFILE}" 2>/dev/null; then
@@ -1445,7 +1499,7 @@ else
   done < <(echo "${CHANGED_FILES}" | grep -iE "predecessor|superseded|prior.?stage1|stage1.*v[0-9]")
 
   if [ "${M3_FAIL}" -eq 1 ]; then
-    ACC_FAILURES+=("M3: Canonical-pointer or predecessor reconciliation failure in Stage 1 artifact chain:${M3_DETAILS} (AAP-25)")
+    ACC_FAILURES+=("M3: Canonical-pointer or predecessor reconciliation failure in Stage 1 artifact chain:${M3_DETAILS} (AAP-25 / STC-04)")
   fi
 
   # ── M4: contradiction-class sweep evidence (AAP-26) ──────────────────────
@@ -1535,7 +1589,7 @@ The following conditions are **auto-fail** for the §4.3e gate regardless of oth
 | AAP-22 | Active final-state token/session incoherence | The `wave-current-tasks.md` checklist for the active wave declares a wave/session/job identifier that contradicts the wave identifier declared in the active PREHANDOVER proof (`wave_id` field) or wave record; or `wave-current-tasks.md` is absent when a wave record with a declared wave_id exists in the active bundle |
 | AAP-23 | Stage 1 approval-alignment wave missing sweep attestation | PR is classified as a Stage 1 approval-alignment wave but the PREHANDOVER proof does not contain `stage1_sweep_completed: yes`, or no Stage 1 Approval-Alignment QA Checklist artifact is committed or referenced in the evidence bundle |
 | AAP-24 | Stale approval-state language in Stage 1 artifact chain | PR is classified as a Stage 1 approval-alignment wave and one or more artifacts in the Stage 1 artifact chain still contain stale approval-state language (`pending approval`, `not yet approved`, `provisional canonical`, `temporary canonical`, `candidate for approval`, `migration pending`, or equivalent) after the approval event has been recorded |
-| AAP-25 | Canonical-pointer or predecessor-file reconciliation failure | PR is classified as a Stage 1 approval-alignment wave and either (a) a root pointer file still claims `pending canonical` or `provisional canonical` authority, or (b) a predecessor Stage 1 file that was changed in this PR does not carry a superseded / historical marker |
+| AAP-25 | Canonical-pointer or predecessor-file reconciliation failure | PR is classified as a Stage 1 approval-alignment wave and any of the following are true: (a) a root pointer file still claims `pending canonical` or `provisional canonical` authority; (b) a root pointer file declares a target path that does not match the `stage1_canonical_source` declared in the PREHANDOVER proof; (c) a root pointer file's pointer target cannot be extracted (unreadable format); (d) a predecessor Stage 1 file that was changed in this PR does not carry a superseded / historical marker |
 | AAP-26 | Contradiction-class sweep missing or contradiction found present | PR is classified as a Stage 1 approval-alignment wave and the evidence bundle does not contain a documented check result for all six contradiction classes (STC-01 through STC-06) per `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §6`, or one or more contradiction classes are recorded as present or FAIL |
 
 ### Admin Ceremony Compliance Gate in the Handover Validation Checklist

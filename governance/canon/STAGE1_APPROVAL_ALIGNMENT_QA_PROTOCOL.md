@@ -109,8 +109,12 @@ The sweep must cover **every section** of the canonical Stage 1 document, includ
 - [ ] All subsections — the sweep is whole-document, not top-section-only
 
 **Evidence required**: The producing agent must explicitly attest in the PREHANDOVER proof
-(field: `stage1_sweep_completed`) that the whole-document sweep was performed, naming the
-canonical Stage 1 document path, the sweep scope, and the result.
+that the whole-document sweep was performed. Two fields are required:
+
+- `stage1_sweep_completed: yes` — attests the sweep was performed
+- `stage1_canonical_source: <path>` — declares the relative path of the new approved
+  canonical Stage 1 document (e.g., `governance/stage1/app-description-v2.md`); this
+  path is used by the ECAP M3 gate to verify root pointer files point to the correct target
 
 ---
 
@@ -149,10 +153,20 @@ For each artifact class in the Stage 1 artifact chain (§2), confirm:
 
 When a canonical source changes, the reviewer must verify:
 
-- [ ] Every root pointer file now points to the new canonical document
-- [ ] No root pointer file still points to the predecessor document
+- [ ] Every root pointer file now declares the new canonical document as its target
+- [ ] No root pointer file still points to the predecessor document, even if its wording is
+  otherwise clean (i.e., it does not use `pending canonical` or `provisional canonical`
+  language — the target path itself must be verified, not only the surrounding text)
 - [ ] If the predecessor document was the canonical source for downstream derivation, a
   migration note exists that redirects derivation to the new canonical source
+
+> **Machine-verification requirement**: For the ECAP M3 gate to verify root pointer targets
+> automatically, the PREHANDOVER proof **must** declare the new canonical source path in the
+> `stage1_canonical_source` field. Root pointer files must declare their target using a
+> recognisable key-value field (`canonical_source:`, `canonical_document:`, `points_to:`,
+> `target:`, or `source:`) or a bold-label Markdown line
+> (`**Canonical Source**: path/to/file.md`). A root pointer file with an unreadable target
+> format is treated as a verification failure by the M3 gate.
 
 ### 5.2 Predecessor File Verification
 
