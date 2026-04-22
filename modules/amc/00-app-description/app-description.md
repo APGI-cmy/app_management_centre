@@ -5777,19 +5777,21 @@ This reconciliation section shall exist to:
 
 ### Carry-Forward Confirmation
 
-The following earlier commitments are explicitly carried forward into this App Description unchanged or materially equivalent:
+The following predecessor commitments are confirmed as carried forward into this App Description, unchanged or materially equivalent, based on the reconciliation table above:
 - Single always-on executive portal for Johan
 - Conversational interface between Johan and the AI executive layer
 - Operational dashboard with drill-down capability
 - Continuous estate-wide supervisory authority
 - Governance, QA, and escalation enforcement capability
 - Parking Station / continuous improvement surface
+
+The following AMC characteristics are retained as current-scope clarifications or extensions of the operating model, but are not asserted here as verbatim predecessor commitments unless separately cited:
 - Mobile-accessible executive operation
 - Proactive awareness surface (system surfaces issues before being asked)
 
 ### Explicit Descope Record
 
-No earlier CS2-approved capability from FM_APP_DESCRIPTION.md v2.0 has been descoped. All earlier commitments are either preserved or extended under the AMC framing.
+No earlier CS2-approved capability from FM_APP_DESCRIPTION.md v2.0 has been descoped. Source-supported predecessor commitments are preserved under the AMC framing, with additional AMC clarifications and extensions stated separately where they are not direct predecessor commitments.
 
 The one substantive repositioning is the authority layer: the Foreman App described Foreman as the primary AI executive interface. AMC repositions Maturion as the primary resident AI executive, with Foreman remaining as the supervised orchestration layer beneath Maturion. This is an evolution of the authority framing, not a descoping of capability. The conversational interface, dashboard, supervisory control, and escalation capabilities all remain.
 
