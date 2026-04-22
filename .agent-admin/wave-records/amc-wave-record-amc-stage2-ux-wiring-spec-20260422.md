@@ -69,8 +69,8 @@
 
 | Artifact | Path | Status |
 |----------|------|--------|
-| Stage 2 UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | ✅ Complete — approval-ready v1.0 |
-| Stage 2 Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | ✅ Complete — approval-ready v1.0 |
+| Stage 2 UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | 🟡 Produced approval-ready v1.0 — CS2 approval pending |
+| Stage 2 Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | 🟡 Produced approval-ready v1.0 — CS2 approval pending |
 | Build Progress Tracker (updated) | `modules/amc/BUILD_PROGRESS_TRACKER.md` | ✅ Updated — Stage 2 status reflects artifacts produced, CS2 approval pending |
 | Session Memory | `.agent-workspace/foreman-v2/memory/session-030-20260422.md` | ✅ Created |
 | Wave Record | `.agent-admin/wave-records/amc-wave-record-amc-stage2-ux-wiring-spec-20260422.md` | ✅ Created |
