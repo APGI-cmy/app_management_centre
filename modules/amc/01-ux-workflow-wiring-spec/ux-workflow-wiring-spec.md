@@ -576,7 +576,7 @@ For each interaction below, the wiring defines: UI trigger → action/route → 
 | UI Event / Trigger | Invoked Action / Route | Data Read/Write Path | External Service | Target Table / State | Approval / Authority | Audit | User-Visible Result |
 |---|---|---|---|---|---|---|---|
 | Knowledge retrieval request | POST /api/knowledge/retrieve (query) | Write: `knowledge_retrieval_log` (query, requestor, timestamp); Read: knowledge/memory system response with provenance | **Knowledge/Memory System** (via governed API) | `knowledge_retrieval_log` | None (read) | AuditEvent: KNOWLEDGE_RETRIEVED (actor, query_summary, source_ref, timestamp) | Knowledge references surfaced with provenance: source, ingestion date, retrieval time |
-| Knowledge system degraded | System health check / failed retrieval | Write: `system_health_events` (KNOWLEDGE_SYSTEM_DEGRADED) | None | `system_health_events` | None (system) | AuditEvent: KNOWLEDGE_DEGRADED (detected_at) | Explicit stale/unavailable indicator on all knowledge surface items |
+| Knowledge system degraded | System health check / failed retrieval | Write: `system_health_events` (KNOWLEDGE_SYSTEM_DEGRADED) | None | `system_health_events` | None (system) | AuditEvent: KNOWLEDGE_SYSTEM_DEGRADED (detected_at) | Explicit stale/unavailable indicator on all knowledge surface items |
 | View provenance detail | GET /api/knowledge/provenance/{ref_id} | Read: `knowledge_retrieval_log`, AIMCC ingestion metadata | **AIMCC** (provenance lookup) | `knowledge_retrieval_log` | None (read) | None | Provenance chain displayed: source → KUC submission → AIMCC ingestion → storage |
 
 ### 7.8 Executive Conversation — Wiring
