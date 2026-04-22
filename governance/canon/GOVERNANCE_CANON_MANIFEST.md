@@ -126,6 +126,7 @@ It serves to:
 | `PR_SCOPE_CONTROL_POLICY.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `QA_CATALOG_ALIGNMENT_GATE_CANON.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `SCOPE_TO_DIFF_RULE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
+| `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-22 |
 
 ### 3.5 Governance & Layerdown Models (PUBLIC_API)
 

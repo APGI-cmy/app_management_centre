@@ -1,5 +1,5 @@
 
-**Status**: CANONICAL | **Version**: 1.10.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.11.0 | **Authority**: CS2
 **Date**: 2026-03-03
 **Amended**: 2026-03-03 — v1.1.0: Added §Proactive Assurance — Pre-Brief Protocol
 **Amended**: 2026-03-04 — v1.2.1: Added §CS2 Direct Review Track
@@ -9,6 +9,7 @@
 **Amended**: 2026-04-17 — v1.6.0: Added §Admin-Ceremony Rejection Triggers — explicit rejection conditions for ceremony-integrity defects (ACR-01 through ACR-08); reinforced non-cleanup-authoring posture relative to ECAP layer; cross-references §4.3e Admin Ceremony Compliance Gate; authority: CS2 — issue: Canonize a 3-layer admin ceremony compliance stack for ECAP, Foreman QP, and IAA.
 **Amended**: 2026-04-19 — v1.7.0: Added ACR-09 through ACR-14 (gate-inventory hardening, post-token normalization, cross-artifact contradiction, carried-forward canonical source parity); added active-bundle scope rule for ACR checks; aligned with governance-repo hardening wave outcomes; authority: CS2 — governance-repo hardening wave.
 **Amended**: 2026-04-21 — v1.10.0: Added ACR-15 (active-wave / tracker contradiction rejection) and ACR-16 (active final-state token/session incoherence); added §Authoritative-Source Rule for Current Token/Session; explicitly included `wave-current-tasks.md` in active-bundle scope; authority: CS2 — AMC/ISMS admin-ceremony hardening parity catch-up (issue: Catch AMC up to ISMS admin-ceremony hardening).
+**Amended**: 2026-04-22 — v1.11.0: Added ACR-17 (Stage 1 whole-document state-transition sweep not evidenced), ACR-18 (cross-artifact approval-state incoherence in Stage 1 chain), ACR-19 (canonical-pointer or predecessor-file not reconciled after Stage 1 approval), ACR-20 (Stage 1 contradiction-class sweep not completed); added §Stage 1 Approval-Alignment Rejection Triggers section; canonical basis: `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
 
 ---
 
@@ -806,6 +807,10 @@ When a job has involved the `execution-ceremony-admin-agent` (ECAP), the IAA MUS
 | ACR-14 | **Carried-forward claim with no resolvable canonical source** — a final-state ceremony artifact states that a governance claim was "carried forward from" or is "verbatim from" a named source artifact, but: (a) the named source artifact does not exist as a committed file on the branch, or (b) the source exists but does not contain the stated claim, or (c) the carried-forward text has been modified to change gate authority, gate owner, or approval basis relative to the source | AGENT_HANDOVER_AUTOMATION.md §4.3e Check K; AAP-20 |
 | ACR-15 | **Active-wave / tracker contradiction rejection** — the `wave-current-tasks.md` checklist for the active wave (determined by matching the `wave_id` from the current wave record to the corresponding file in `.agent-admin/waves/`) declares a wave, session, or job identifier that contradicts the wave/session/job identifier declared in the active PREHANDOVER proof (`wave_id` field), wave record, or session memory; or the `wave-current-tasks.md` is present but references a different wave slug from any of the other active-bundle artifacts | AGENT_HANDOVER_AUTOMATION.md §4.3e Check L; AAP-22 |
 | ACR-16 | **Active final-state token/session incoherence** — the active final-state bundle contains two or more artifacts (PREHANDOVER proof, session memory, wave record, or `wave-current-tasks.md`) that declare different IAA token identifiers, session IDs, or wave identifiers for the same job; or the `wave-current-tasks.md` is absent when the active PREHANDOVER proof or wave record declares a wave_id for which an active checklist should exist (i.e., an in-progress wave that was not yet completed) | AGENT_HANDOVER_AUTOMATION.md §4.3e Check L; AAP-22 |
+| ACR-17 | **Stage 1 whole-document state-transition sweep not evidenced** — the PR is classified as a Stage 1 approval-alignment wave (per `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §9`) and the PREHANDOVER proof does not contain a `stage1_sweep_completed: yes` field, or the Stage 1 Approval-Alignment QA Checklist (§7 of that protocol) is absent from the evidence bundle, or the checklist contains any unchecked `[ ]` item with no `[~]` annotation | STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §3; AGENT_HANDOVER_AUTOMATION.md §4.3e Check M; AAP-23 |
+| ACR-18 | **Cross-artifact approval-state incoherence in Stage 1 artifact chain** — the PR is classified as a Stage 1 approval-alignment wave and one or more artifacts in the Stage 1 artifact chain (canonical Stage 1 document, approval record, build progress tracker, pre-build artifact index, repo realignment note, root pointer file, predecessor file) still contain stale approval-state language (`pending`, `provisional`, `not yet approved`, `temporary canonical`, `candidate for approval`, `migration pending`, blank approval fields) that contradicts the approved state declared in the canonical Stage 1 document | STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §4; AGENT_HANDOVER_AUTOMATION.md §4.3e Check M; AAP-24 |
+| ACR-19 | **Canonical-pointer or predecessor-file not reconciled after Stage 1 approval** — the PR is classified as a Stage 1 approval-alignment wave and either: (a) a root pointer file still points to the predecessor Stage 1 document as the canonical source, or (b) the predecessor Stage 1 document does not carry a superseded / historical header, or (c) the predecessor file still asserts active canonical authority or source-of-truth status after the successor has been approved | STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §5; AGENT_HANDOVER_AUTOMATION.md §4.3e Check M; AAP-25 |
+| ACR-20 | **Stage 1 contradiction-class sweep not completed** — the PR is classified as a Stage 1 approval-alignment wave and the evidence bundle does not contain an explicit check result for every contradiction class STC-01 through STC-06 defined in `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §6`; or one or more contradiction classes were found present (i.e., the checklist records `FAIL` or `STC-XX: present` for any class) | STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §6; AGENT_HANDOVER_AUTOMATION.md §4.3e Check M; AAP-26 |
 
 ### Active-Bundle Scope Rule for ACR Checks (v1.7.0; extended v1.10.0)
 
@@ -859,6 +864,70 @@ The §4.3e gate (defined in `AGENT_HANDOVER_AUTOMATION.md`) is the **ECAP + Fore
 
 ---
 
+## Stage 1 Approval-Alignment Rejection Triggers (v1.11.0)
+
+ACR-17 through ACR-20 are the IAA-layer enforcement of the **Stage 1 Approval-Alignment QA
+Protocol** (`governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0). They apply
+exclusively to PRs classified as Stage 1 approval-alignment waves (per §9 of that protocol).
+
+### Stage 1 Wave Classification (IAA Layer)
+
+Before evaluating ACR-17 through ACR-20, the IAA MUST determine whether the PR is a
+Stage 1 approval-alignment wave. The PR is classified as such if **any** of the following
+is true:
+
+1. The PREHANDOVER proof declares `pr_category: STAGE1_APPROVAL_ALIGNMENT`
+2. The PR diff contains changes to a file whose path includes `app-description`,
+   `app_description`, `stage1`, `stage-1`, `stage_1`, or `00-app-description` alongside
+   changes to a `status` or `approval` field in that file
+3. An approval record file is committed or modified (path contains `approval-record`)
+4. A root pointer file is committed or modified (path contains `root-pointer` or
+   `CANONICAL_SOURCE`)
+
+If the PR is **not** classified as a Stage 1 approval-alignment wave, ACR-17 through ACR-20
+are **not applicable** — the IAA records `NOT APPLICABLE` for each and proceeds.
+
+If the PR **is** classified, ACR-17 through ACR-20 are **mandatory** binary checks with the
+same non-discretionary character as ACR-01 through ACR-16.
+
+### How the IAA Evaluates ACR-17 through ACR-20
+
+**ACR-17 — Sweep evidence check**:
+- Look for `stage1_sweep_completed: yes` in the PREHANDOVER proof
+- Look for the Stage 1 Approval-Alignment QA Checklist (must reference a document with
+  all three sweeps and the contradiction class check)
+- If absent or `stage1_sweep_completed` is not `yes`: ACR-17 fires
+
+**ACR-18 — Cross-artifact coherence check**:
+- For each artifact class in the Stage 1 artifact chain (canonical document, approval
+  record, tracker, artifact index, realignment note, root pointer files, predecessor files),
+  scan for the stale language denylist from
+  `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §3.1`:
+  `pending`, `pending approval`, `not yet approved`, `provisional`, `provisional canonical`,
+  `temporary canonical`, `candidate for approval`, `future canonical`, `migration pending`,
+  blank `approved_by` fields, blank `approval_date` fields
+- If any stale language is found in any artifact: ACR-18 fires
+
+**ACR-19 — Pointer and predecessor reconciliation check**:
+- Check that root pointer files reference the new canonical document (not the predecessor)
+- Check that the predecessor Stage 1 file(s) carry a superseded / historical marker
+- Check that the predecessor file(s) do not assert active canonical authority
+- If any check fails: ACR-19 fires
+
+**ACR-20 — Contradiction-class sweep coverage check**:
+- Verify the evidence bundle contains a result for each of STC-01 through STC-06
+- Verify no class is recorded as `FAIL` or `present`
+- If the sweep is absent or any class is found present: ACR-20 fires
+
+### Non-Discretionary Character
+
+ACR-17 through ACR-20 carry the same non-discretionary character as ACR-01 through ACR-16:
+- They are binary checks (PASS or triggers REJECTION-PACKAGE)
+- The IAA does NOT remediate the gap
+- The IAA does NOT issue partial tokens for waves where only some ACR checks pass
+
+---
+
 ## References
 
 - `governance/canon/LIVING_AGENT_SYSTEM.md` v6.2.0 — Living Agent framework
@@ -866,10 +935,11 @@ The §4.3e gate (defined in `AGENT_HANDOVER_AUTOMATION.md`) is the **ECAP + Fore
 - `governance/canon/AGENT_CONTRACT_ARCHITECTURE.md` — Four-phase contract architecture
 - `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md` v1.2.1 — IAA Pre-Brief Protocol (proactive assurance)
 - `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` v1.2.0 — Ceremony admin role and handover sequence
+- `governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0 — Stage 1 approval-alignment QA protocol (canonical basis for ACR-17 through ACR-20)
 - `governance/quality/agent-integrity/` — Agent integrity reference store
 - `governance/CANON_INVENTORY.json` — Canon hash registry
 - `governance/GATE_REQUIREMENTS_INDEX.json` — Gate requirements
 
 ---
 
-*Authority: CS2 (Johan Ras) | Version: 1.10.0 | Effective: 2026-02-24 | Amended: 2026-04-21 (v1.10.0) | Previous: 2026-04-19 (v1.7.0)*
+*Authority: CS2 (Johan Ras) | Version: 1.11.0 | Effective: 2026-02-24 | Amended: 2026-04-22 (v1.11.0) | Previous: 2026-04-21 (v1.10.0)*
