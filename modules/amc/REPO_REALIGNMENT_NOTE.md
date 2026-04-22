@@ -83,22 +83,24 @@ modules/amc/
 
 ---
 
-## 5. Stage 1 Authority Decision (Pending)
+## 5. Stage 1 Authority Decision (RESOLVED — 2026-04-22)
 
-The Stage 1 App Description currently has two locations:
+The Stage 1 App Description authority migration decision has been made by CS2 via Issue #1117 (2026-04-22).
 
 | Location | Role |
 |----------|------|
-| `docs/governance/FM_APP_DESCRIPTION.md` | **Active authoritative canonical** (v2.1, Phase 4.1 Confirmed) |
-| `modules/amc/00-app-description/app-description.md` | **Intended future canonical** (placeholder, not yet populated) |
+| `modules/amc/00-app-description/app-description.md` | **✅ APPROVED CANONICAL SOURCE** (v1.0, CS2-approved 2026-04-22) |
+| `docs/governance/FM_APP_DESCRIPTION.md` | **📦 Superseded** — retained as historical/provenance reference only |
 
-**Migration Options** (CS2 decision required):
+**Decision**: CS2 approved Option A — `modules/amc/00-app-description/app-description.md` v1.0 is the sole authoritative AMC Stage 1 source. All downstream derivation (FRS, TRS, Architecture, Build Planning) must reference this canonical location.
 
-**Option A — Full Migration**: Migrate content from `FM_APP_DESCRIPTION.md` to `modules/amc/00-app-description/app-description.md`, update all references, and mark `FM_APP_DESCRIPTION.md` as legacy.
+**Approval Reference**: app_management_centre#1117 — "Stage 2 kickoff — create AMC pre-build strategy and progress tracker, and finalize Stage 1 approval record alignment"
 
-**Option B — Pointer Retention**: Keep `FM_APP_DESCRIPTION.md` as the permanent canonical source; add pointer from `modules/amc/00-app-description/app-description.md`. Update `BUILD_PROGRESS_TRACKER.md` to reflect Stage 1 as complete.
+**Follow-on housekeeping** (does not block Stage 2):
+- [ ] Add deprecation marker to `docs/governance/FM_APP_DESCRIPTION.md` — to be completed as follow-on housekeeping
+- [ ] Update `APP_DESCRIPTION.md` root pointer to reference the new canonical location
 
-**Current Decision**: Pending CS2 approval. `FM_APP_DESCRIPTION.md` remains active canonical until explicit migration decision is made and executed.
+**Formal approval record**: See `modules/amc/00-app-description/app-description-approval.md`
 
 ---
 

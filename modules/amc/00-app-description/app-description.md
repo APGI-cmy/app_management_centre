@@ -8,10 +8,10 @@
 | **Application Name** | App Management Centre (AMC) |
 | **Document Type** | Stage 1 App Description |
 | **Version** | 1.0 |
-| **Status** | Consolidated — Pending CS2 Approval |
+| **Status** | ✅ Approved — CS2 Approval Recorded |
 | **Owner** | Johan Ras (CS2) |
-| **Approval Date** | Pending CS2 approval |
-| **Last Updated** | 2026-04-08 |
+| **Approval Date** | 2026-04-22 |
+| **Last Updated** | 2026-04-22 |
 | **Canonical Location** | `modules/amc/00-app-description/app-description.md` |
 | **Policy Authority** | `governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md §5.1` |
 | **Primary AI Executive** | Maturion |
@@ -22,12 +22,11 @@
 
 ---
 
-> **⚠️ AUTHORITY TRANSITION NOTE**
-> This document is the **approval target** for AMC Stage 1 and is currently a candidate for CS2 approval.
-> It is **NOT YET** the approved authoritative source for downstream derivation.
-> No downstream artifact (FRS, TRS, Architecture, Build Planning) may treat this document as approved truth until CS2 records explicit approval.
-> **Where approval is recorded**: CS2 approval must be recorded in `modules/amc/00-app-description/app-description-approval.md` (the Stage 1 approval record for this module). The `Approved By`, `Approval Date`, `Approved Version`, and `Canonical Source` fields in that document must all be populated before this document carries authoritative status.
-> Once CS2 approval is recorded there, this file becomes the single authoritative AMC Stage 1 source and all transitional FM-era Stage 1 files in this directory are superseded.
+> **✅ APPROVED — AUTHORITATIVE SOURCE**
+> This document is the **approved canonical AMC Stage 1 source** as of 2026-04-22.
+> CS2 approval was formally recorded in `modules/amc/00-app-description/app-description-approval.md` (CS2 Reference: app_management_centre#1117).
+> All downstream derivation (FRS, TRS, Architecture, Build Planning) **must** treat this document as the sole authoritative Stage 1 source.
+> The FM-era transitional source (`docs/governance/FM_APP_DESCRIPTION.md`) is superseded as the active canonical authority. It is retained as historical/provenance reference only.
 
 ---
 

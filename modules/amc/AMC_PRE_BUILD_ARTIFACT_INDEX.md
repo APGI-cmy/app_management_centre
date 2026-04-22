@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0)  
-**Last Updated**: 2026-04-08  
+**Last Updated**: 2026-04-22  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -17,11 +17,11 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| FM App Description (authoritative) | `docs/governance/FM_APP_DESCRIPTION.md` | ✅ Active Canonical | v2.1, Phase 4.1 Confirmed. Current Stage 1 authority. |
-| App Description (root pointer) | `APP_DESCRIPTION.md` | 📌 Reference Only | Convenience pointer to canonical location |
-| App Description (stage location) | `modules/amc/00-app-description/app-description.md` | ⬜ Pending | Future canonical location — pending migration decision |
-| AMC Role Authority & Operating Model | `modules/amc/00-app-description/amc-role-authority-and-operating-model.md` | ⬜ Pending | Stage 1 companion artifact |
-| App Description Approval | `modules/amc/00-app-description/app-description-approval.md` | ⬜ Pending | Formal Stage 1 approval record |
+| App Description | `modules/amc/00-app-description/app-description.md` | ✅ Approved Canonical | v1.0, CS2-approved 2026-04-22. Sole authoritative Stage 1 source. Approval ref: #1117. |
+| App Description Approval | `modules/amc/00-app-description/app-description-approval.md` | ✅ Complete | Formal Stage 1 approval record. All fields populated. CS2 ref: #1117. |
+| AMC Role Authority & Operating Model | `modules/amc/00-app-description/amc-role-authority-and-operating-model.md` | ✅ Stage 1 companion artifact | Complete |
+| FM App Description (superseded) | `docs/governance/FM_APP_DESCRIPTION.md` | 📦 Superseded | Retained as historical/provenance reference only. No longer the active canonical Stage 1 source. |
+| App Description (root pointer) | `APP_DESCRIPTION.md` | 📌 Reference Only | Follow-on update to point to new canonical location pending |
 
 ---
 

@@ -1,12 +1,24 @@
 # AMC Build Progress Tracker
 
 **Module**: App Management Centre (AMC)  
-**Lifecycle Model**: Canonical 12-Stage Pre-Build Sequence (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0)  
-**Tracker Authority**: Repo-local — tracks AMC-specific stage completion within this repository  
-**Last Updated**: 2026-04-08  
-**Owner**: Maturion Foreman (Johan Ras / CS2)
+**Module Slug**: AMC  
+**Last Updated**: 2026-04-22  
+**Updated By**: foreman-v2-agent (wave: amc-stage1-approval-alignment-20260422 — Stage 1 CS2 approval recorded, tracker upgraded to MMM-pattern discipline, issue #1117)
 
-> ⚠️ This tracker reflects the AMC repo-local pre-build state. It does not duplicate or replace the ISMS-level module tracker in `maturion-isms`. Both must remain consistent.
+> **Classification**: ACTIVE  
+> **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
+> **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
+> **Issue**: [app_management_centre#1117](https://github.com/APGI-cmy/app_management_centre/issues/1117)  
+> **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
+
+---
+
+## Lifecycle Model
+
+**Canonical 12-Stage Pre-Build Sequence** (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0)  
+**Tracker Authority**: Repo-local — tracks AMC-specific stage completion within this repository
+
+> ⚠️ This tracker reflects the AMC repo-local pre-build state. It does not duplicate or replace any ISMS-level module tracker. Both must remain consistent.
 
 ---
 
@@ -14,9 +26,9 @@
 
 | Stage | Name | Status | Notes |
 |-------|------|--------|-------|
-| 1 | App Description | 🟡 In Progress | `docs/governance/FM_APP_DESCRIPTION.md` is the active canonical source. Migration to `modules/amc/00-app-description/app-description.md` is pending. See REPO_REALIGNMENT_NOTE.md. |
-| 2 | UX Workflow & Wiring Spec | ⬜ Not Started | Awaiting Stage 1 authority clarification and migration completion. |
-| 3 | FRS | ⬜ Not Started | |
+| 1 | App Description | ✅ COMPLETE | CS2-approved 2026-04-22. Canonical source: `modules/amc/00-app-description/app-description.md` v1.0. Approval ref: #1117. |
+| 2 | UX Workflow & Wiring Spec | 🟡 ACTIVE — NEXT STAGE | Stage 1 complete. Entry condition met. Stage 2 wave may begin. |
+| 3 | FRS | ⬜ Not Started | Awaiting Stage 2 completion. |
 | 4 | TRS | ⬜ Not Started | |
 | 5 | Architecture | ⬜ Not Started | Pre-existing FM-era architecture material exists in `docs/architecture/` but is classified as historical/reference only — not active Stage 5 lifecycle input. See Stage Detail below. |
 | 6 | QA-to-Red | ⬜ Not Started | |
@@ -27,7 +39,7 @@
 | 11 | Builder Appointment | ⬜ Not Started | |
 | 12 | Build | ⬜ Not Started | |
 
-**Legend**: ✅ Complete | 🟡 In Progress | ⬜ Not Started | 🔴 Blocked
+**Legend**: ✅ Complete | 🟡 Active / In Progress | ⬜ Not Started | 🔴 Blocked
 
 ---
 
@@ -35,39 +47,145 @@
 
 ### Stage 1 — App Description
 
-**Status**: 🟡 In Progress  
-**Active Canonical Source**: `docs/governance/FM_APP_DESCRIPTION.md` (v2.1, Authoritative Phase 4.1 Confirmed)  
-**Target Canonical Location**: `modules/amc/00-app-description/app-description.md`  
-**Migration Decision**: Pending — see `REPO_REALIGNMENT_NOTE.md` for options and constraints  
-**Stage Completion Condition**: Migration completed and `modules/amc/00-app-description/app-description.md` declared canonical, OR explicit CS2 decision to retain `docs/governance/FM_APP_DESCRIPTION.md` as permanent canonical with pointer from this location.
+**Status**: ✅ COMPLETE — CS2 APPROVED  
+**Location**: `modules/amc/00-app-description/`  
+**Key Artifacts**:
+- [x] `app-description.md` — Authoritative AMC App Description v1.0 (approved 2026-04-22)
+- [x] `app-description-approval.md` — Formal Stage 1 approval record (completed 2026-04-22)
+- [x] `amc-role-authority-and-operating-model.md` — Stage 1 companion artifact
+
+**Completion Date**: 2026-04-22  
+**Approval Required**: Yes
+- [x] Approved by designated authority
+**Approval Date**: 2026-04-22  
+**Approved By**: CS2 (Johan Ras / @APGI-cmy)  
+**Approval Reference**: app_management_centre#1117  
+**Notes**: Stage 1 App Description (`app-description.md` v1.0) formally approved by CS2 via issue #1117
+(2026-04-22). Canonical source decision resolved — `modules/amc/00-app-description/app-description.md`
+is the sole authoritative Stage 1 source for all downstream derivation (FRS, TRS, Architecture,
+Build Planning). The FM-era transitional source (`docs/governance/FM_APP_DESCRIPTION.md`) is
+superseded as active canonical authority and is retained as historical/provenance reference only.
+Stage 1 formally closed. Stage 2 (UX Workflow & Wiring Spec) is authorized to begin.
+
+---
 
 ### Stage 2 — UX Workflow & Wiring Spec
 
+**Status**: 🟡 ACTIVE — NEXT STAGE  
+**Location**: `modules/amc/01-ux-workflow-wiring-spec/`  
+**Entry Condition**: ✅ Stage 1 complete and approved  
+**Objective**: Produce a complete UX workflow and wiring specification that maps all user journeys,
+screen interactions, data flows, and explicit wiring between UI elements, API endpoints, schema
+tables, and reporting outputs. All primary and secondary user paths must be documented with
+explicit wiring between the UI layer and backend. No gaps between stated journeys and wired
+system behaviour are permitted.  
+**Key Artifacts to Create**:
+- [ ] `ux-workflow-wiring-spec.md` — Complete user journey maps, screen interactions, data flows, wiring
+- [ ] `wiring-artifact-index.md` — Wiring artifact inventory
+**Prerequisites**: ✅ Stage 1 complete
+**Approval Required**: Yes — CS2 approval required before Stage 3 may begin
+
+---
+
+### Stage 3 — Functional Requirements Specification (FRS)
+
 **Status**: ⬜ Not Started  
-**Prerequisites**: Stage 1 complete (App Description authority resolved)  
-**Artifacts to Create**: `modules/amc/01-ux-workflow-wiring-spec/`
+**Location**: `modules/amc/02-frs/`  
+**Prerequisites**: Stage 2 complete and approved  
+**Key Artifacts to Create**:
+- [ ] `functional-requirements-specification.md` — Verifiable requirements derived from Stage 1 + Stage 2
+- [ ] `app-description-to-frs-traceability.md` — Traceability matrix
+
+---
+
+### Stage 4 — Technical Requirements Specification (TRS)
+
+**Status**: ⬜ Not Started  
+**Location**: `modules/amc/03-trs/`  
+**Prerequisites**: Stage 3 complete and approved  
+**Key Artifacts to Create**:
+- [ ] `technical-requirements-specification.md`
+- [ ] `frs-to-trs-traceability.md` — Traceability matrix
+
+---
 
 ### Stage 5 — Architecture
 
 **Status**: ⬜ Not Started  
-**Note — Pre-existing FM-era material**: The `docs/architecture/` directory contains architecture documents produced for the FM Office app during the FM-origin era. These artifacts are classified as historical/reference material for the purposes of the new `modules/amc/` 12-stage lifecycle. Their existence does **not** mean Stage 5 is complete or in progress. Stage 5 (Architecture) remains Not Started until CS2 explicitly adopts or commissions architecture artifacts through the canonical lifecycle sequence, which would require a classification decision, migration/adoption note, and tracker update.
+**Location**: `modules/amc/04-architecture/`  
+**Prerequisites**: Stage 4 complete and approved  
+**Note — Pre-existing FM-era material**: The `docs/architecture/` directory contains architecture
+documents produced for the FM Office app during the FM-origin era. These artifacts are classified
+as historical/reference material for the purposes of the new `modules/amc/` 12-stage lifecycle.
+Their existence does **not** mean Stage 5 is complete or in progress. Stage 5 (Architecture)
+remains Not Started until CS2 explicitly adopts or commissions architecture artifacts through
+the canonical lifecycle sequence.
 
-### Stages 3–4 and 6–11
+---
+
+### Stage 6 — QA-to-Red
 
 **Status**: ⬜ Not Started  
-**Prerequisites**: Each stage requires the prior stage to be complete per canonical sequence dependency chain.
+**Location**: `modules/amc/05-qa-to-red/`  
+**Prerequisites**: Stage 5 complete and approved  
+
+---
+
+### Stage 7 — PBFAG
+
+**Status**: ⬜ Not Started  
+**Location**: `modules/amc/06-pbfag/`  
+**Prerequisites**: Stage 6 complete and approved  
+**Note**: PBFAG is a hard gate. It is not situational. It cannot be bypassed without explicit CS2-documented exception.
+
+---
+
+### Stage 8 — Implementation Plan
+
+**Status**: ⬜ Not Started  
+**Location**: `modules/amc/07-implementation-plan/`  
+**Prerequisites**: Stage 7 (PBFAG) gate passed  
+
+---
+
+### Stage 9 — Builder Checklist
+
+**Status**: ⬜ Not Started  
+**Location**: `modules/amc/08-builder-checklist/`  
+**Prerequisites**: Stage 8 complete and approved  
+
+---
+
+### Stage 10 — IAA Pre-Brief
+
+**Status**: ⬜ Not Started  
+**Location**: `modules/amc/09-iaa-pre-brief/`  
+**Prerequisites**: Stage 9 complete and approved  
+
+---
+
+### Stage 11 — Builder Appointment
+
+**Status**: ⬜ Not Started  
+**Location**: `modules/amc/10-builder-appointment/`  
+**Prerequisites**: Stages 1–10 complete. IAA Pre-Brief published.  
+**Note**: No delegation to builders until all Stages 1–10 are complete and gate-passed (HALT-008).
+
+---
 
 ### Stage 12 — Build
 
 **Status**: ⬜ Not Started  
+**Location**: `modules/amc/11-build/`  
+**Prerequisites**: All Stages 1–11 complete. PBFAG PASS.  
 **Note**: Build authorization requires all Stages 1–11 complete and PBFAG gate (Stage 7) passed.
 
 ---
 
 ## Next Action
 
-1. Resolve Stage 1 authority: decide migration path for `FM_APP_DESCRIPTION.md`
-2. Once Stage 1 is complete, begin Stage 2 (UX Workflow & Wiring Spec)
+1. ✅ Stage 1 complete — App Description approved by CS2 (issue #1117, 2026-04-22)
+2. ▶️ Begin Stage 2 — UX Workflow & Wiring Spec (entry condition met)
 3. Progress sequentially through each stage per canonical order
 
 ---
@@ -76,5 +194,7 @@
 
 - [PRE_BUILD_STAGE_MODEL_CANON.md](../../governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md)
 - [APP_DESCRIPTION_REQUIREMENT_POLICY.md](../../governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md)
-- [FM_APP_DESCRIPTION.md](../../docs/governance/FM_APP_DESCRIPTION.md) — active Stage 1 source
+- [app-description.md](./00-app-description/app-description.md) — ✅ approved Stage 1 canonical source
+- [app-description-approval.md](./00-app-description/app-description-approval.md) — Stage 1 formal approval record
+- [AMC_PRE_BUILD_ARTIFACT_INDEX.md](./AMC_PRE_BUILD_ARTIFACT_INDEX.md)
 - [REPO_REALIGNMENT_NOTE.md](./REPO_REALIGNMENT_NOTE.md)
