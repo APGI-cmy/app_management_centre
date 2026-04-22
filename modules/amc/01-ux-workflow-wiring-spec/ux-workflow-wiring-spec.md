@@ -512,7 +512,7 @@ For each interaction below, the wiring defines: UI trigger → action/route → 
 
 | UI Event / Trigger | Invoked Action / Route | Data Read/Write Path | External Service | Target Table / State | Approval / Authority | Audit | User-Visible Result |
 |---|---|---|---|---|---|---|---|
-| Dashboard load (post-auth) | GET /api/estate/summary | Read: health_scores, active_alerts_count, active_approvals_count, active_interventions_count | AIMC (Maturion proactive summary) | `estate_health_scores`, `alerts`, `approvals`, `interventions` | None required | None (read-only) | Estate health tiles + alert count + approval count + Maturion summary loaded |
+| Dashboard load (post-auth) | GET /api/estate/summary | Read: health_scores, active_alerts_count, active_approvals_count, active_interventions_count | None | `estate_health_scores`, `alerts`, `approvals`, `interventions` | None required | None (read-only) | Estate health tiles + alert count + approval count loaded |
 | Health tile click (e.g., Execution Health) | GET /api/health/{domain} | Read: domain-specific health records | None | `health_events`, `execution_records` | None required | None (read-only) | Sub-surface for that health domain opens |
 | Maturion proactive panel load | POST /api/aimc/request (type: proactive_summary) | Write: aimc_action_log (dispatch); Read: AIMC response | **AIMC** | `aimc_action_log` | None required | AuditEvent: AIMC_REQUEST (actor: Maturion, action: proactive_summary, source: AMC) | Maturion estate summary surfaced with response type: Observation |
 | Alert panel item click | GET /api/alerts/{id} | Read: alert detail | None | `alerts` | None required | None | Alert Detail opens |
