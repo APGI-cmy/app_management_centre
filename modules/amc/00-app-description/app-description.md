@@ -4661,7 +4661,7 @@ Shared state may not be left to emerge ad hoc from frontend implementation conve
 ### Non-Negotiable Principle
 AMC shared state architecture must preserve one coherent governed picture of the estate across people, AI roles, devices, workflows, and time.
 
-Any design that allows executive context, approvals, alerts, conversations, or interventions to fragment into contradictory local truths is non-compliant with the intended purpose of AMC.contradictory local truths is non-compliant with the intended purpose of AMC.
+Any design that allows executive context, approvals, alerts, conversations, or interventions to fragment into contradictory local truths is non-compliant with the intended purpose of AMC.
 
 ### State Ownership Separation
 
