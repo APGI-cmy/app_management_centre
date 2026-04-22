@@ -788,10 +788,12 @@ A checklist artifact for verifying App Description completeness at new module cr
 governance/checklists/APP_DESCRIPTION_CREATION_CHECKLIST.md
 ```
 
-This checklist:
-- Maps every required section (§5.1) and every mandatory governance section (§5.3) to a binary pass/fail check
+This checklist (v1.1):
+- Maps every required section (§5.1) and every mandatory governance section (§5.3) to a binary pass/fail check — covering all 27 sections (§AD-01 through §AD-27)
 - Must be completed and filed before Build Authorization is granted
 - Is the gate artifact for Pre-FRS and Pre-Architecture enforcement (§11.1, §11.2)
+- Includes hard gates for §AD-25 (Cross-System Topology — initiating system must be explicitly stated per row), §AD-26 (Original-Intent Reconciliation — no silent descoping; carry-forward list may not assert unverified predecessor commitments), and §AD-27 (Stage 1 Source-of-Truth — no unconditional supersession while predecessor remains Active Canonical — Temporary)
+- Is enforceable by Foreman, admin ceremony, and IAA as the executable Stage 1 review structure
 
 ---
 
@@ -800,9 +802,9 @@ This checklist:
 ---
 
 **Document Metadata**:
-- Policy ID: APP_DESCRIPTION_REQUIREMENT_POLICY_V2.0
+- Policy ID: APP_DESCRIPTION_REQUIREMENT_POLICY_V2.1
 - Authority: Canonical Governance Policy
-- Required By: Issue - Enforce App Description → FRS Structural Alignment; Issue - Canon Update: Add App Description Template Guidance for Oversight Prevention
-- Enforcement: Architecture Compilation Contract, Build Authorization Gate, Governance Administrator
+- Required By: Issue - Enforce App Description → FRS Structural Alignment; Issue - Canon Update: Add App Description Template Guidance for Oversight Prevention; Issue - Hardening Stage 1 App Description QA (APGI-cmy/app_management_centre#1115)
+- Enforcement: Architecture Compilation Contract, Build Authorization Gate, Governance Administrator, Foreman, admin ceremony, IAA
 - Integration: ARCHITECTURE_COMPILATION_CONTRACT.md, BUILD_AUTHORIZATION_GATE.md, minimum-architecture-template.md, app-description-frs-alignment-checklist.md, APP_DESCRIPTION_TEMPLATE.md, APP_DESCRIPTION_CREATION_CHECKLIST.md
-- Version History: v1.0 — initial; v2.0 — added §5.3 (24 mandatory governance sections), §19 (template reference), §20 (checklist reference)
+- Version History: v1.0 — initial; v2.0 — added §5.3 (24 mandatory governance sections), §19 (template reference), §20 (checklist reference); v2.1 — hardened §AD-01 (exact 12-stage mirroring); added §AD-25/§AD-26/§AD-27 (section count 24→27); APP_DESCRIPTION_CREATION_CHECKLIST.md updated to v1.1 to enforce all 27 sections
