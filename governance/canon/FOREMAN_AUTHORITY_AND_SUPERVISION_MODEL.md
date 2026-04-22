@@ -2,7 +2,7 @@
 ## Status
 **Type**: Canonical Governance Definition  
 **Authority**: Supreme - Canonical  
-**Version**: 1.6.0  
+**Version**: 1.6.1  
 **Effective Date**: 2025-12-24  
 **Amended**: 2026-04-08 — v1.1.0: Added §14.3 Review Layer Role Separation — CS2 is not the technical pre-handover auditor; producing agent assembles evidence, IAA audits independently, CI enforces mechanically, CS2 decides to merge. Authority: CS2 — OPOJD hardening issue.  
 **Amended**: 2026-04-08 — v1.2.0: Added §9.6 Relationship to execution-ceremony-admin-agent and §14.4 Updated Handover Sequence — formalises the three-role ceremony model (Foreman orchestrates; ceremony-admin prepares bundle; IAA audits independently). Authority: CS2 — ECAP-001 canon establishment issue.  
@@ -10,6 +10,7 @@
 **Amended**: 2026-04-17 — v1.4.0: Added §14.6 Foreman QP Admin-Compliance Checkpoint — defines the Foreman's Quality-of-Process verification role for admin-ceremony compliance; establishes required checkpoint output (administrative_readiness: ACCEPTED | REJECTED); enforces non-substitution principle (Foreman verifies, does not reconstruct). Authority: CS2 — issue: Canonize a 3-layer admin ceremony compliance stack for ECAP, Foreman QP, and IAA.  
 **Amended**: 2026-04-19 — v1.5.0: Updated §14.6 Foreman QP Admin-Compliance Checkpoint — added gate inventory verification step (Step 4), pre-final instruction wording check step (Step 5), cross-artifact consistency step active-bundle scoped (Step 6), and carried-forward claim spot-check step (Step 7) to the checkpoint procedure; updated Foreman handback summary required fields; authority: CS2 — governance-repo hardening wave.  
 **Amended**: 2026-04-22 — v1.6.0: Updated §14.6 Foreman QP Admin-Compliance Checkpoint — added Step 8 (Stage 1 approval-alignment state-transition check) mandating that Foreman verifies the Stage 1 Approval-Alignment QA Checklist is complete and ALL_PASS for any Stage 1 approval-alignment wave; canonical basis: `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
+**Amended**: 2026-04-22 — v1.6.1: Corrected §14.6 Step 8 Trigger Detection — removed FRS from the Stage 1 document examples (FRS is Stage 3 in the 12-stage model, not Stage 1); Stage 1 = App Description only; authority: CS2 — Stage 1 mislabeling correction.  
 **Owner**: Maturion Engineering Leadership (Johan Ras)  
 **Precedence**: Subordinate only to GOVERNANCE_PURPOSE_AND_SCOPE.md  
 **Applies To**: All Foreman Instances, All Builder Agents, All Repositories
@@ -1432,7 +1433,8 @@ For any "carried forward from" or "verbatim from" claim visible in the active bu
 **Trigger detection**: The Foreman MUST determine whether the current job is a Stage 1
 approval-alignment wave. The wave is so classified if the PREHANDOVER proof declares
 `pr_category: STAGE1_APPROVAL_ALIGNMENT`, or if the diff contains changes to a Stage 1
-document (App Description, FRS), an approval record file, or a root pointer file. If the
+document (App Description — Stage 1 in the 12-stage pre-build model; not FRS, TRS, or any
+other later-stage document), an approval record file, or a root pointer file. If the
 wave is **not** classified, this step records `N/A` and the Foreman proceeds.
 
 **Verification obligations** (all mandatory when classified):
@@ -1498,4 +1500,4 @@ Foreman authority is superior to:
 
 ---
 
-**End of FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md v1.6.0**
+**End of FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md v1.6.1**

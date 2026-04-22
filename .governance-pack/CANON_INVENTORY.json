@@ -1146,17 +1146,17 @@
         },
         {
             "filename": "FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
-            "version": "1.6.0",
-            "file_hash": "6a6b5d96c2596e8b2b06395138e76db1bb6552485585b2bc5b6a1cf7a8f7d6fa",
+            "version": "1.6.1",
+            "file_hash": "46971ca6e2c9585027b211200ba03de7e00e5f93dde947dbf67a7cdcb73310e8",
             "effective_date": "2025-12-24",
             "description": "This document formally defines the **Foreman (FM)** as a **managerial authority** within the Maturion ecosystem, establishing its supervisory responsibilities over builders and the execution process.",
             "type": "canon",
             "path": "governance/canon/FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
             "layer_down_status": "PUBLIC_API",
-            "file_hash_sha256": "6a6b5d96c2596e8b2b06395138e76db1bb6552485585b2bc5b6a1cf7a8f7d6fa",
+            "file_hash_sha256": "46971ca6e2c9585027b211200ba03de7e00e5f93dde947dbf67a7cdcb73310e8",
             "last_updated": "2026-04-22",
-            "change_note": "v1.6.0: Added \u00a714.6 Step 8 (Stage 1 approval-alignment state-transition check)",
-            "canonical_version": "1.6.0",
+            "change_note": "v1.6.1: Corrected \u00a714.6 Step 8 Trigger Detection \u2014 removed FRS from Stage 1 document examples",
+            "canonical_version": "1.6.1",
             "amended_date": "2026-04-22"
         },
         {
@@ -2407,10 +2407,10 @@
         },
         {
             "filename": "STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md",
-            "version": "1.0.0",
-            "canonical_version": "1.0.0",
-            "file_hash": "7a0f01dfdaea911d2711e8c14c32dcae727d8e82325b99ae7e654b4d9bccf35c",
-            "file_hash_sha256": "7a0f01dfdaea911d2711e8c14c32dcae727d8e82325b99ae7e654b4d9bccf35c",
+            "version": "1.0.1",
+            "canonical_version": "1.0.1",
+            "file_hash": "c9a46e8726cdd25c015511b98522e9f844bfc048e5639a1ac5a2800944602698",
+            "file_hash_sha256": "c9a46e8726cdd25c015511b98522e9f844bfc048e5639a1ac5a2800944602698",
             "effective_date": "2026-04-22",
             "amended_date": "2026-04-22",
             "description": "Canonical governance document: Stage 1 approval-alignment QA protocol \u2014 mandatory whole-document state-transition sweep, cross-artifact coherence, pointer reconciliation, and contradiction-class checks for Stage 1 approval-alignment waves",
@@ -2418,7 +2418,7 @@
             "path": "governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md",
             "layer_down_status": "PUBLIC_API",
             "last_updated": "2026-04-22",
-            "change_note": "v1.0.0: Initial canon \u2014 Stage 1 approval-alignment QA hardening issue",
+            "change_note": "v1.0.1: Tightened \u00a71 and \u00a72 \u2014 removed FRS/TRS as Stage 1 examples; Stage 1 = App Description only; added scope note clarifying FRS (Stage 3) and TRS (Stage 4) are out of scope",
             "provenance": "CS2-authorised via issue: Hardening \u2014 Stage 1 approval-alignment QA must force whole-document state-transition consistency checks"
         }
     ]

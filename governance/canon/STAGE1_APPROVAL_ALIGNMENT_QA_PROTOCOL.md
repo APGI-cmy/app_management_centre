@@ -1,6 +1,7 @@
 
-**Status**: CANONICAL | **Version**: 1.0.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.0.1 | **Authority**: CS2
 **Date**: 2026-04-22
+**Amended**: 2026-04-22 — v1.0.1: Tightened §1 and §2 to remove FRS and TRS from "Stage 1 document" examples — FRS is Stage 3 and TRS is Stage 4 in the 12-stage pre-build model; this protocol applies only to the App Description (Stage 1); added clarifying scope note in §1; authority: CS2 — Stage 1 mislabeling correction.
 
 ---
 
@@ -35,11 +36,17 @@ This protocol applies to any PR or wave that:
 
 1. Changes the status of a Stage 1 document from a non-authoritative to an authoritative
    state
-2. Records an approval event for a Stage 1 document (App Description, FRS, TRS, or
-   equivalent Stage 1 artifact)
+2. Records an approval event for a Stage 1 document (App Description — Stage 1 in the
+   12-stage pre-build model per `PRE_BUILD_STAGE_MODEL_CANON.md`)
 3. Transitions a root pointer file from pointing at a predecessor source to the new
    canonical source
 4. Marks a predecessor Stage 1 artifact as superseded
+
+> **Scope note**: "Stage 1" in this protocol refers exclusively to Stage 1 of the
+> 12-stage pre-build model, which is the **App Description**. FRS (Stage 3), TRS (Stage 4),
+> and all other pre-build stage documents are out of scope for this protocol. Approval
+> events for those stages are governed by their own review structures and do not trigger
+> this protocol's classification rules or hard gates.
 
 When **any** of the above conditions is met, the full Stage 1 Approval-Alignment QA
 Protocol is **mandatory** at all three review layers:
@@ -58,7 +65,7 @@ layer may approve the wave.
 
 | Artifact Class | Canonical Examples | State-Transition Obligation |
 |----------------|--------------------|----------------------------|
-| **Canonical Stage 1 document** | App Description, FRS | Whole-document sweep required (§3) |
+| **Canonical Stage 1 document** | App Description (Stage 1 in the 12-stage pre-build model) | Whole-document sweep required (§3) |
 | **Approval record** | `approval-record-*.md`, embedded `## Approval Record` sections | Must not contain blank approval fields or `pending` status |
 | **Build progress tracker** | `build-progress-tracker-*.md`, `*-tracker.md` | Must not reference source-of-truth as pending or provisional |
 | **Pre-build artifact index** | `pre-build-artifact-index-*.md`, `artifact-index-*.md` | Pointer entries must reflect the new canonical source |
@@ -292,4 +299,4 @@ When classified, all four check layers in this protocol apply.
 
 ---
 
-*Authority: CS2 (Johan Ras) | Version: 1.0.0 | Effective: 2026-04-22*
+*Authority: CS2 (Johan Ras) | Version: 1.0.1 | Effective: 2026-04-22 | Amended: 2026-04-22 (v1.0.1)*
