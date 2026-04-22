@@ -2646,8 +2646,8 @@ The following matrix defines read / propose / approve / trigger / ingest / remem
 
 | Actor | Read | Propose | Approve | Trigger | Ingest Knowledge | Remember / Store | Retrieve / Surface | Act (Autonomous) |
 |---|---|---|---|---|---|---|---|---|
-| **Johan / CS2** | All | All | All (reserved matters) | All | Authorized | Authorized | All | Constitutional authority |
-| **Maturion** | All estate | Executive | Delegated operational matters | Delegated operations | Via AIMCC only | Via knowledge/memory system only | All (with provenance) | Within approved autonomy |
+| **Johan / CS2** | All estate state, governance, and artifacts | All governance proposals and escalations | All reserved matters and constitutionally significant decisions | All governed operations | Authorized via AIMCC pathway | Authorized via knowledge/memory system | All estate state and knowledge (with provenance) | Constitutional authority over all domains |
+| **Maturion** | All estate operational state and reporting | Executive proposals (alerts, recommendations, escalations) | Delegated operational matters (explicitly approved domains only) | Delegated operations within approved autonomy | Via AIMCC only | Via knowledge/memory system only | All estate state and knowledge (with provenance) | Within approved autonomy scope only |
 | **Foreman** | Architecture, governance | Build plans | QP/IAA gates only | Build waves | None | Build evidence | Build-relevant knowledge | Orchestration only |
 | **AMC (application)** | Estate operational state | Alerts, escalations | None — surfaces to human/Maturion | Alert triggers, intervention routing | Via AIMCC / KUC only | AMC operational state only | Via governed APIs (with provenance) | Approval-gated executive actions |
 | **AIMC** | AI requests | AI responses | None | AI model execution | None | None | AI model context | AI execution within governed scope |
@@ -4123,11 +4123,16 @@ AMC must NOT hold unmanaged direct model-provider credentials. When AIMC is the 
 ### Naming Convention
 Secret names must follow the pattern: `AMC_[CLASS]_[PURPOSE]_[ENVIRONMENT]`
 
+Where:
+- `CLASS` = the secret class (e.g., `RUNTIME`, `AIMC`, `AIMCC`, `AUDIT`)
+- `PURPOSE` = the specific purpose within the class (e.g., `DATABASE`, `GATEWAY_KEY`, `SERVICE_KEY`, `WRITE_KEY`)
+- `ENVIRONMENT` = deployment environment (e.g., `PROD`, `STAGING`, `DEV`)
+
 Examples:
-- `AMC_RUNTIME_DB_PROD`
-- `AMC_AIMC_GATEWAY_KEY_PROD`
-- `AMC_AIMCC_SERVICE_KEY_PROD`
-- `AMC_AUDIT_WRITE_KEY_PROD`
+- `AMC_RUNTIME_DATABASE_PROD` (CLASS=RUNTIME, PURPOSE=DATABASE, ENVIRONMENT=PROD)
+- `AMC_AIMC_GATEWAY_KEY_PROD` (CLASS=AIMC, PURPOSE=GATEWAY_KEY, ENVIRONMENT=PROD)
+- `AMC_AIMCC_SERVICE_KEY_PROD` (CLASS=AIMCC, PURPOSE=SERVICE_KEY, ENVIRONMENT=PROD)
+- `AMC_AUDIT_WRITE_KEY_PROD` (CLASS=AUDIT, PURPOSE=WRITE_KEY, ENVIRONMENT=PROD)
 
 ### Non-Bypass Rule
 Secret design must make it structurally impossible for AMC to call AI model providers directly. If AIMC is the governed gateway, AMC must not hold or use model-provider API keys.
@@ -5379,10 +5384,17 @@ As part of the Stage 1 authority transition (from FM-era fragments to this conso
 
 **Source-of-truth stabilization:**
 - Upon CS2 approval of this document, `modules/amc/00-app-description/app-description.md` becomes the single authoritative AMC Stage 1 source
-- All transitional FM-era Stage 1 files in this directory (`AMC_Stage 1_outline.md`, `amc_stage1_filled_skeleton.md`, `amc_stage1_hardened_section*.md`, `amc_stage1_hardened_sections.md`, `AMC_ROLE_AUTHORITY_AND_OPERATING_MODEL.md`, `amc-role-authority-and-operating-model.md`) must be:
-  - either deprecated in place (with a deprecation header pointing to the canonical source), or
-  - archived to a `00-app-description/archive/` subdirectory with a deprecation note
-  - NOT silently deleted without a trace in the wave record
+- All transitional FM-era Stage 1 files in this directory must be deprecated or archived. The files to be treated are:
+  - `AMC_Stage 1_outline.md`
+  - `AMC_ROLE_AUTHORITY_AND_OPERATING_MODEL.md`
+  - `amc-role-authority-and-operating-model.md`
+  - `amc_stage1_filled_skeleton.md`
+  - `amc_stage1_hardened_sections.md`
+  - `amc_stage1_hardened_section5.md` through `amc_stage1_hardened_section28.md` (all individual hardened section files)
+- Deprecation options (choose one per file, document choice in wave record):
+  - **Deprecate in place**: add the following header to the top of the file and leave it in the directory: `> ⚠️ DEPRECATED — This file was a transitional draft. The single authoritative AMC Stage 1 source is now \`modules/amc/00-app-description/app-description.md\` (approved by CS2 on [DATE]). This file must not be used for downstream derivation.`
+  - **Archive**: move to `modules/amc/00-app-description/archive/` and add the same deprecation header
+  - Files must NOT be silently deleted without a trace in the wave record
 
 **Downstream derivation protection:**
 - A repo note or README must be placed in `modules/amc/00-app-description/` clarifying which file is the canonical source after approval
