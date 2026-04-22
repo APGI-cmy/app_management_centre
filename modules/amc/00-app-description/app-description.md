@@ -796,6 +796,8 @@ Specifically, downstream artifacts must explicitly address derivation for:
 - **State ownership**: downstream state models must derive from Stage 1 state-boundary declarations. AMC-owned state, AIMCC-owned state, and knowledge-system-owned state must remain distinguishable in all downstream artifacts.
 
 A downstream artifact that introduces new external integration scope without tracing back to this document represents a governance defect and must trigger an upstream amendment request.
+
+### Contradiction / Ambiguity Handling Rule
 If a downstream artifact encounters contradiction, incompleteness, or ambiguity in upstream material, the correct handling path is:
 
 1. identify the ambiguity or contradiction explicitly
