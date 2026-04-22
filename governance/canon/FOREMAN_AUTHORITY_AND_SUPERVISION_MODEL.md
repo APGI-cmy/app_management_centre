@@ -1501,4 +1501,4 @@ Foreman authority is superior to:
 
 ---
 
-**End of FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md v1.6.1**
+**End of FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md v1.6.2**
