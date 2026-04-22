@@ -1,5 +1,5 @@
 
-**Status**: CANONICAL | **Version**: 1.11.2 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.11.3 | **Authority**: CS2
 **Date**: 2026-03-03
 **Amended**: 2026-03-03 — v1.1.0: Added §Proactive Assurance — Pre-Brief Protocol
 **Amended**: 2026-03-04 — v1.2.1: Added §CS2 Direct Review Track
@@ -12,6 +12,7 @@
 **Amended**: 2026-04-22 — v1.11.0: Added ACR-17 (Stage 1 whole-document state-transition sweep not evidenced), ACR-18 (cross-artifact approval-state incoherence in Stage 1 chain), ACR-19 (canonical-pointer or predecessor-file not reconciled after Stage 1 approval), ACR-20 (Stage 1 contradiction-class sweep not completed); added §Stage 1 Approval-Alignment Rejection Triggers section; canonical basis: `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
 **Amended**: 2026-04-22 — v1.11.1: ACR-18 evaluation guidance — inline stale-language list marked "including but not limited to"; full denylist reference remains §3.1 of `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md`; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
 **Amended**: 2026-04-22 — v1.11.2: ACR-19 — added explicit requirement to verify root pointer target path (not only surrounding wording); clean-wording but wrong-target pointer is an STC-04 contradiction and fires ACR-19; added `stage1_canonical_source` field verification requirement; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
+**Amended**: 2026-04-22 — v1.11.3: Updated live cross-references to `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` from v1.0.0 to v1.0.3 in §Stage 1 Approval-Alignment Rejection Triggers intro paragraph and in §Canonical Basis / References list — v1.0.3 is the version that introduced `stage1_canonical_source` and machine-verifiable root-pointer target requirements that ACR-17 through ACR-20 enforce; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
 
 ---
 
@@ -869,7 +870,7 @@ The §4.3e gate (defined in `AGENT_HANDOVER_AUTOMATION.md`) is the **ECAP + Fore
 ## Stage 1 Approval-Alignment Rejection Triggers (v1.11.0)
 
 ACR-17 through ACR-20 are the IAA-layer enforcement of the **Stage 1 Approval-Alignment QA
-Protocol** (`governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0). They apply
+Protocol** (`governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.3). They apply
 exclusively to PRs classified as Stage 1 approval-alignment waves (per §9 of that protocol).
 
 ### Stage 1 Wave Classification (IAA Layer)
@@ -942,7 +943,7 @@ ACR-17 through ACR-20 carry the same non-discretionary character as ACR-01 throu
 - `governance/canon/AGENT_CONTRACT_ARCHITECTURE.md` — Four-phase contract architecture
 - `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md` v1.2.1 — IAA Pre-Brief Protocol (proactive assurance)
 - `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` v1.2.0 — Ceremony admin role and handover sequence
-- `governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0 — Stage 1 approval-alignment QA protocol (canonical basis for ACR-17 through ACR-20)
+- `governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.3 — Stage 1 approval-alignment QA protocol (canonical basis for ACR-17 through ACR-20)
 - `governance/quality/agent-integrity/` — Agent integrity reference store
 - `governance/CANON_INVENTORY.json` — Canon hash registry
 - `governance/GATE_REQUIREMENTS_INDEX.json` — Gate requirements

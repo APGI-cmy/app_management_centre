@@ -2,7 +2,7 @@
 ## Status
 **Type**: Canonical Governance Definition  
 **Authority**: Supreme - Canonical  
-**Version**: 1.6.1  
+**Version**: 1.6.2  
 **Effective Date**: 2025-12-24  
 **Amended**: 2026-04-08 — v1.1.0: Added §14.3 Review Layer Role Separation — CS2 is not the technical pre-handover auditor; producing agent assembles evidence, IAA audits independently, CI enforces mechanically, CS2 decides to merge. Authority: CS2 — OPOJD hardening issue.  
 **Amended**: 2026-04-08 — v1.2.0: Added §9.6 Relationship to execution-ceremony-admin-agent and §14.4 Updated Handover Sequence — formalises the three-role ceremony model (Foreman orchestrates; ceremony-admin prepares bundle; IAA audits independently). Authority: CS2 — ECAP-001 canon establishment issue.  
@@ -11,6 +11,7 @@
 **Amended**: 2026-04-19 — v1.5.0: Updated §14.6 Foreman QP Admin-Compliance Checkpoint — added gate inventory verification step (Step 4), pre-final instruction wording check step (Step 5), cross-artifact consistency step active-bundle scoped (Step 6), and carried-forward claim spot-check step (Step 7) to the checkpoint procedure; updated Foreman handback summary required fields; authority: CS2 — governance-repo hardening wave.  
 **Amended**: 2026-04-22 — v1.6.0: Updated §14.6 Foreman QP Admin-Compliance Checkpoint — added Step 8 (Stage 1 approval-alignment state-transition check) mandating that Foreman verifies the Stage 1 Approval-Alignment QA Checklist is complete and ALL_PASS for any Stage 1 approval-alignment wave; canonical basis: `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
 **Amended**: 2026-04-22 — v1.6.1: Corrected §14.6 Step 8 Trigger Detection — removed FRS from the Stage 1 document examples (FRS is Stage 3 in the 12-stage model, not Stage 1); Stage 1 = App Description only; authority: CS2 — Stage 1 mislabeling correction.  
+**Amended**: 2026-04-22 — v1.6.2: Updated §14.6 Stage 1 QA protocol cross-reference from `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0 to v1.0.3 — v1.0.3 is the version that introduced `stage1_canonical_source` and machine-verifiable root-pointer target requirements that Step 8 now implicitly depends on; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
 **Owner**: Maturion Engineering Leadership (Johan Ras)  
 **Precedence**: Subordinate only to GOVERNANCE_PURPOSE_AND_SCOPE.md  
 **Applies To**: All Foreman Instances, All Builder Agents, All Repositories
@@ -1476,7 +1477,7 @@ does not substitute by performing the sweep itself.
 - **Layer 1 (ECAP obligation)**: `EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md §3.5–§3.9`
 - **Layer 1 gate script**: `AGENT_HANDOVER_AUTOMATION.md §4.3e` (Check M — Stage 1 approval-alignment)
 - **Layer 3 (IAA rejection)**: `INDEPENDENT_ASSURANCE_AGENT_CANON.md §Admin-Ceremony Rejection Triggers` (ACR-17 through ACR-20)
-- **Stage 1 QA protocol**: `governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0
+- **Stage 1 QA protocol**: `governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.3
 - **Checklist**: `governance/checklists/execution-ceremony-admin-checklist.md`
 - **Reconciliation matrix**: `governance/checklists/execution-ceremony-admin-reconciliation-matrix.md`
 

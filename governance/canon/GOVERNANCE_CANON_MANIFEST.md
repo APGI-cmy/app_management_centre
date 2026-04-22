@@ -3,8 +3,9 @@
 ## Status
 **Type**: Canonical Governance Index  
 **Authority**: Supreme - Canonical  
-**Version**: 1.0.0  
+**Version**: 1.0.1  
 **Effective Date**: 2026-01-05  
+**Amended**: 2026-04-22 — v1.0.1: Updated §3.4 entry for `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` from version 1.0.0 to 1.0.3, reflecting the M3 target-pointer verification hardening and `stage1_canonical_source` requirements introduced in this PR; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
 **Owner**: Maturion Engineering Leadership (Johan Ras)  
 **Purpose**: Authoritative index of all canonical governance standards with layer-down status
 
@@ -126,7 +127,7 @@ It serves to:
 | `PR_SCOPE_CONTROL_POLICY.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `QA_CATALOG_ALIGNMENT_GATE_CANON.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `SCOPE_TO_DIFF_RULE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
-| `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-22 |
+| `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` | 1.0.3 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-22 |
 
 ### 3.5 Governance & Layerdown Models (PUBLIC_API)
 
