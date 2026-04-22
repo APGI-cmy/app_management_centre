@@ -2,8 +2,8 @@
 
 **Stage**: 1 — App Description (Companion Artifact)  
 **Module**: App Management Centre (AMC)  
-**Status**: ⬜ Placeholder  
-**Authority**: CS2 (Johan Ras / Maturion)
+**Status**: ⬜ Placeholder — Follow-on work required  
+**Authority**: CS2 (Johan Ras / @APGI-cmy)
 
 ---
 
@@ -15,7 +15,7 @@ This document defines the role authority and operating model for the App Managem
 
 ## Pending Content
 
-This is a placeholder file. Content to be developed as part of Stage 1 completion.
+This is a placeholder file. Content to be developed as follow-on work after Stage 1 approval.
 
 Topics to address:
 - AMC's authority within the Maturion governance hierarchy
@@ -24,10 +24,11 @@ Topics to address:
 - Authority boundaries and escalation paths
 - Operational constraints and guardrails
 
+> **Follow-on note**: This document remains a placeholder and does not block Stage 2. It should be completed as a follow-on housekeeping item. Stage 1 canonical authority is held by `app-description.md` v1.0 (CS2-approved 2026-04-22 — app_management_centre#1117).
+
 ---
 
 ## References
 
-- [App Description](./app-description.md)
-- [FM_APP_DESCRIPTION.md](../../../docs/governance/FM_APP_DESCRIPTION.md) — active Stage 1 canonical
+- [App Description](./app-description.md) — ✅ Approved canonical Stage 1 source (v1.0, CS2-approved 2026-04-22)
 - [BUILD_PROGRESS_TRACKER.md](../BUILD_PROGRESS_TRACKER.md)

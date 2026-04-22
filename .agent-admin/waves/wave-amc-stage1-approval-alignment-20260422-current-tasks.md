@@ -3,6 +3,7 @@
 **Wave ID**: amc-stage1-approval-alignment-20260422  
 **Issue**: app_management_centre#1117  
 **Date**: 2026-04-22  
+**governance_evidence_path**: .agent-admin/wave-records/amc-wave-record-amc-stage1-approval-alignment-20260422.md
 
 ---
 

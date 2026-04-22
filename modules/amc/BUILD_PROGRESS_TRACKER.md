@@ -52,7 +52,7 @@
 **Key Artifacts**:
 - [x] `app-description.md` — Authoritative AMC App Description v1.0 (approved 2026-04-22)
 - [x] `app-description-approval.md` — Formal Stage 1 approval record (completed 2026-04-22)
-- [x] `amc-role-authority-and-operating-model.md` — Stage 1 companion artifact
+- [ ] `amc-role-authority-and-operating-model.md` — Stage 1 companion artifact (⬜ Placeholder — follow-on; does not block Stage 2)
 
 **Completion Date**: 2026-04-22  
 **Approval Required**: Yes

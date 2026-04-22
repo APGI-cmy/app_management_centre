@@ -5811,8 +5811,8 @@ This section declares the canonical Stage 1 source-of-truth for AMC, its approva
 |-------|-------|
 | **Canonical Stage 1 Artifact** | `modules/amc/00-app-description/app-description.md` |
 | **Version** | 1.0 |
-| **Status** | Consolidated — Pending CS2 Approval |
-| **Approval Date** | Pending CS2 approval |
+| **Status** | ✅ Authoritative — CS2 Approved 2026-04-22 |
+| **Approval Date** | 2026-04-22 |
 | **Transition Posture** | Successor |
 
 ### Transition Posture Detail
@@ -5821,9 +5821,9 @@ AMC is a Successor to the Foreman App / Foreman Office App lineage. The prior sy
 
 | Prior System | Prior Artifact Path | Prior Artifact Status | Transition Rule |
 |-------------|-------------------|-----------------------|----------------|
-| Foreman Office App / Foreman App | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 | Active Canonical — Temporary (pending CS2 migration decision) | Conditional supersession: `docs/governance/FM_APP_DESCRIPTION.md` remains the authoritative Stage 1 source until CS2 formally approves this AMC document; upon CS2 approval, it is superseded and must NOT be used as upstream derivation source for any AMC artifact |
+| Foreman Office App / Foreman App | `docs/governance/FM_APP_DESCRIPTION.md` v2.1 | 📦 Superseded — retained as historical/provenance reference only | CS2 approved this AMC document on 2026-04-22 (app_management_centre#1117). `docs/governance/FM_APP_DESCRIPTION.md` is superseded and must NOT be used as upstream derivation source for any AMC artifact. |
 
-The Foreman App description (`docs/governance/FM_APP_DESCRIPTION.md`) currently identifies itself as "Active Canonical — Temporary" and states that it remains the authoritative Stage 1 source until a CS2-approved migration decision is executed. This AMC App Description is that intended successor. Supersession of `docs/governance/FM_APP_DESCRIPTION.md` is therefore conditional on CS2 approving this document. Until that approval, downstream derivation from this document is provisional.
+The Foreman App description (`docs/governance/FM_APP_DESCRIPTION.md`) has been superseded as the active Stage 1 canonical source. CS2 approved this AMC App Description on 2026-04-22 (app_management_centre#1117). This document is the sole authoritative Stage 1 source for all downstream AMC derivation. Downstream derivation from this document is authorized and not provisional.
 
 ### Authorized Downstream Derivation
 
@@ -5842,13 +5842,13 @@ All AMC downstream work must reference this document as its Stage 1 upstream sou
 
 | Prior Artifact | Path | Status | Derivation Authority |
 |---------------|------|--------|---------------------|
-| FM App Description v2.1 | `docs/governance/FM_APP_DESCRIPTION.md` | Active Canonical — Temporary (conditional supersession pending CS2 approval of this document) | Active until CS2 approves this AMC document; upon CS2 approval: superseded — do NOT use as upstream derivation source for AMC work |
+| FM App Description v2.1 | `docs/governance/FM_APP_DESCRIPTION.md` | 📦 Superseded — retained as historical/provenance reference only | Superseded as of 2026-04-22 upon CS2 approval of this document (app_management_centre#1117). Do NOT use as upstream derivation source for any AMC work. |
 
 ### Source-of-Truth Principle
 
-The canonical Stage 1 artifact for AMC is this document. Its approval status transitions through Draft → Consolidated → Authoritative. No downstream AMC artifact may be treated as approved until this document reaches Authoritative status with documented CS2 approval.
+The canonical Stage 1 artifact for AMC is this document. It has reached Authoritative status with documented CS2 approval (app_management_centre#1117, 2026-04-22). All downstream AMC artifacts may derive from this document as approved truth.
 
-Until CS2 approves this document, downstream derivation is provisional. Any provisional downstream artifact must be clearly marked as derived from a pending-approval upstream source.
+Downstream derivation from this document is authorized. All downstream artifacts derive from an approved, authoritative upstream source.
 
 ### Non-Negotiable Principle
 
@@ -5915,4 +5915,4 @@ The Stage 1 source-of-truth for AMC must be unambiguous. No downstream artifact 
 - **Reviewed by:** CS2: APGI-cmy (Johan Ras)
 - **Approved by:** CS2: APGI-cmy (Johan Ras)
 - **Approval Date:** 22 April 2026
-- **Approval Reference:** ______________________
+- **Approval Reference:** app_management_centre#1117

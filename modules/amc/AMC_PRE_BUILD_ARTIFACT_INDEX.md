@@ -19,7 +19,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 |----------|----------|--------|-------|
 | App Description | `modules/amc/00-app-description/app-description.md` | ✅ Approved Canonical | v1.0, CS2-approved 2026-04-22. Sole authoritative Stage 1 source. Approval ref: #1117. |
 | App Description Approval | `modules/amc/00-app-description/app-description-approval.md` | ✅ Complete | Formal Stage 1 approval record. All fields populated. CS2 ref: #1117. |
-| AMC Role Authority & Operating Model | `modules/amc/00-app-description/amc-role-authority-and-operating-model.md` | ✅ Stage 1 companion artifact | Complete |
+| AMC Role Authority & Operating Model | `modules/amc/00-app-description/amc-role-authority-and-operating-model.md` | ⬜ Placeholder | Not complete — document remains a placeholder; authority wording updated to reflect Stage 1 approval. Follow-on work required. Does not block Stage 2. |
 | FM App Description (superseded) | `docs/governance/FM_APP_DESCRIPTION.md` | 📦 Superseded | Retained as historical/provenance reference only. No longer the active canonical Stage 1 source. |
 | App Description (root pointer) | `APP_DESCRIPTION.md` | 📌 Reference Only | Follow-on update to point to new canonical location pending |
 
