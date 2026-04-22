@@ -57,7 +57,7 @@
 
 ## §5 — Build Lifecycle Stages (§AD-01)
 
-> **Rule**: Stages MUST be executed in the canonical order below. Skipping or reordering is **prohibited** without documented CS2 approval.
+> **Rule**: Stages MUST be executed in the canonical order below. ALL 12 stages MUST be listed by name — paraphrasing, abbreviating, or omitting any stage does NOT satisfy §AD-01.
 > **Authority**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 — this is the binding canonical sequence.
 
 1. App Description (this document) — Authoritative before any downstream artifact
@@ -376,6 +376,110 @@ Required items per wave:
 
 ---
 
+## §29 — Cross-System Topology Declaration (§AD-25)
+
+> **Rule**: All cross-system boundaries involving AI management, knowledge, or memory subsystems must be explicitly declared. Vague integration references do NOT satisfy this requirement.
+
+### System Boundary Topology
+
+| System | Role / Ownership | Boundary — Inbound | Boundary — Outbound | Governance Control |
+|--------|-----------------|-------------------|---------------------|--------------------|
+| AMC (App Management Centre) | Executive control plane; approval authority; human-in-the-loop surface | {e.g., executive queries, approval requests, escalation responses} | {e.g., approvals, intervention orders, escalation initiations} | {e.g., CS2 reserved matters; AIMC Gateway required for all AI integration} |
+| AIMC (AI Management Centre) | AI capability gateway; provider abstraction; governed AI routing | {e.g., capability requests from AMC / modules} | {e.g., AI model outputs, classified responses} | {e.g., AIMC Gateway; direct provider calls prohibited} |
+| AIMCC (AI Management Centre Core) | Core AI model selection; specialist routing; AI execution governance | {e.g., routed requests from AIMC Gateway} | {e.g., specialist outputs back to AIMC} | {e.g., internal AIMC governance; model selection rules} |
+| Knowledge Upload Centre | Knowledge ingestion pipeline; structured knowledge entry point | {e.g., knowledge documents, ingestion requests} | {e.g., indexed knowledge to memory/retrieval layer} | {e.g., upload approval controls; schema validation gate} |
+| knowledge/memory subsystems | Memory storage and retrieval; persistent context | {e.g., write requests from authorised systems} | {e.g., retrieval responses to authorised consumers} | Write authority: {named system}; read: {named consumers} |
+| {Other adjacent system} | {role} | {inbound} | {outbound} | {governance control} |
+
+### Boundary Confirmation Checklist
+
+For each row in the topology table above:
+- [ ] System role is explicitly defined (not implied or inferred)
+- [ ] Inbound and outbound data/capability flows are named
+- [ ] Which system initiates each interaction is stated
+- [ ] Governance control at each boundary is named
+- [ ] No adjacent system that AMC interacts with is omitted
+
+---
+
+## §30 — Original-Intent Reconciliation (§AD-26)
+
+> **Rule**: When this App Description introduces a broader strategic framing than a predecessor description, ALL prior product commitments must be explicitly reconciled. Silent descoping is a governance defect blocking Build Authorization.
+
+### Predecessor Product Descriptions
+
+| Predecessor Artifact | Version / Status | Reconciliation Disposition |
+|---------------------|-----------------|---------------------------|
+| {predecessor path} | {version / Superseded / Active} | {Preserved / Superseded / Descoped / Deferred} |
+| {add rows as needed} | | |
+
+### Commitment Reconciliation Table
+
+| Earlier Commitment | Source Artifact | Disposition | Rationale / Replacement |
+|-------------------|----------------|-------------|--------------------------|
+| {earlier committed behavior or feature 1} | {source artifact} | Preserved / Superseded / Descoped / Deferred | {rationale or replacement reference} |
+| {earlier committed behavior or feature 2} | {source artifact} | Preserved / Superseded / Descoped / Deferred | {rationale or replacement reference} |
+| {add rows for all prior commitments} | | | |
+
+### Carry-Forward Confirmation
+
+The following earlier commitments are explicitly carried forward into this App Description unchanged:
+- {commitment 1}
+- {commitment 2}
+
+### Explicit Descope Record
+
+The following earlier commitments are NOT carried forward. CS2-approved descope rationale:
+- {commitment 1}: {rationale}
+
+> **Gate condition**: No earlier CS2-approved capability commitment may be silently dropped. All omissions must appear in this table. An App Description that cannot account for each prior commitment does NOT satisfy §AD-26.
+
+---
+
+## §31 — Stage 1 Source-of-Truth and Transition Posture (§AD-27)
+
+> **Rule**: The canonical Stage 1 source-of-truth artifact and transition posture must be explicitly declared before any downstream artifact is derived.
+
+### Source-of-Truth Declaration
+
+| Field | Value |
+|-------|-------|
+| **Canonical Stage 1 Artifact** | `{path/to/this/app-description.md}` |
+| **Version** | {VERSION} |
+| **Status** | {Draft / Authoritative / Superseded} |
+| **Approval Date** | {YYYY-MM-DD or Pending CS2 approval} |
+| **Transition Posture** | {New Build / Successor / Extension / Replacement} |
+
+### Transition Posture Detail
+
+> *(Complete this section if Transition Posture is Successor, Extension, or Replacement. If New Build, state "Not applicable — new build.")*
+
+| Prior System | Prior Artifact Path | Prior Artifact Status | Transition Rule |
+|-------------|-------------------|-----------------------|----------------|
+| {prior system name} | {path} | {Active / Superseded} | {Superseded by this document / Reference-only / Active for {scope}} |
+| {add rows as needed} | | | |
+
+### Authorized Downstream Derivation
+
+The following downstream artifacts are authorized to derive from this document as their Stage 1 upstream source:
+
+| Downstream Artifact | Derives From | Replaces Prior Artifact |
+|--------------------|-------------|------------------------|
+| UX Workflow & Wiring Spec | This document v{VERSION} | {prior artifact path or N/A} |
+| Functional Requirements Specification (FRS) | This document v{VERSION} | {prior artifact path or N/A} |
+| Technical Requirements Specification (TRS) | This document v{VERSION} | {prior artifact path or N/A} |
+| Architecture | This document v{VERSION} | {prior artifact path or N/A} |
+
+### Prior-System Artifact Status Register
+
+| Prior Artifact | Path | Status | Derivation Authority |
+|---------------|------|--------|---------------------|
+| {prior artifact name} | {path} | Superseded / Active / Reference-only | Superseded: do NOT use as upstream source / Active for: {scope only} |
+
+> **Gate condition**: No prior-system artifact may serve as upstream derivation authority for downstream work unless explicitly listed above as Active. Unauthorized use of superseded artifacts as upstream derivation sources is a governance defect blocking Build Authorization.
+
+---
+
 ## Optional Sections
 
 ### High-Level Feature List (non-exhaustive)
@@ -411,11 +515,11 @@ Required items per wave:
 ---
 
 **Template Metadata**:
-- Template ID: APP_DESCRIPTION_TEMPLATE_V1.0
-- Policy Authority: `governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md` v2.0
-- Required Sections: §5.1 (5 sections) + §5.3 (24 mandatory governance sections)
+- Template ID: APP_DESCRIPTION_TEMPLATE_V1.1
+- Policy Authority: `governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md` v2.1
+- Required Sections: §5.1 (5 sections) + §5.3 (27 mandatory governance sections)
 - Checklist: `governance/checklists/APP_DESCRIPTION_CREATION_CHECKLIST.md`
-- Evidence/Taxonomy: MAT module `modules/mat/BUILD_PROGRESS_TRACKER.md` (55+ errors, 2026-03-09)
+- Evidence/Taxonomy: MAT module `modules/mat/BUILD_PROGRESS_TRACKER.md` (55+ errors, 2026-03-09) + Stage 1 hardening wave (2026-04-22)
 
 ---
 
