@@ -1,12 +1,14 @@
-# Foreman Office App — Application Description
+# AMC — Application Description (Root Pointer)
 
-**NOTICE**: This file is a **convenience reference only**.
+**NOTICE**: This file is a **root-level pointer only**.
 
 ## Canonical Location
 
-The **authoritative, canonical App Description** for the Foreman Office App is located at:
+> ⚠️ **CS2 canonical source decision executed 2026-04-22** (app_management_centre#1117)
 
-**`docs/governance/FM_APP_DESCRIPTION.md`**
+The **authoritative, canonical App Description** for the App Management Centre (AMC) is:
+
+**`modules/amc/00-app-description/app-description.md`** v1.0 — ✅ CS2 Approved 2026-04-22
 
 Please refer to the canonical location for:
 - Current version
@@ -16,50 +18,21 @@ Please refer to the canonical location for:
 
 ---
 
-## Governance Compliance
+## Superseded Reference
 
-Per `governance/policies/APP_DESCRIPTION_REQUIREMENT_POLICY.md`:
+`docs/governance/FM_APP_DESCRIPTION.md` (v2.1 — Foreman Office App / FM App lineage) has been **superseded** as the active Stage 1 canonical source for AMC as of 2026-04-22. It is retained as a historical/provenance record only and must NOT be used as an upstream derivation source for any AMC artifact.
 
-> **Canonical Location**: `docs/governance/{APP}_APP_DESCRIPTION.md`
-> 
-> **Optional Duplicate**: A duplicate copy MAY exist at repository root (`/APP_DESCRIPTION.md`) for convenience, but **governance validation MUST reference the canonical location**.
+See: `modules/amc/REPO_REALIGNMENT_NOTE.md` §5
 
 ---
 
 ## Quick Reference
 
-**Version:** 2.0  
-**Status:** Authoritative (Phase 4.1 Confirmed)  
-**Owner:** Johan Ras  
-**Last Updated:** 2025-12-31
-
-### What is Foreman Office?
-
-Foreman Office is a **continuous supervisory control system** that enables autonomous AI-driven software construction at scale without surrendering human authority, governance discipline, or long-term system integrity.
-
-It is the **single, always-on portal** through which the Human Owner (Johan) oversees, directs, governs, and interacts with the entire automated build factory.
-
-### Core Purpose
-
-> **Autonomous AI systems cannot safely build complex, governed software at scale without continuous supervision, escalation, and decision authority.**
-
-Foreman Office provides that supervision.
-
-### Key Characteristics
-
-- One-man operations control centre
-- Always-on supervisory runtime
-- Managerial control plane enforcing governance, QA, and escalation
-- Conversational interface between Johan and Maturion (FM)
-- Operational dashboard with drill-down capability
-- Parking Station for continuous improvement
-- Platform-wide supervisory authority
-
----
-
-## For Complete Details
-
-**See:** `docs/governance/FM_APP_DESCRIPTION.md`
+**Version:** 1.0  
+**Status:** ✅ Authoritative — CS2 Approved 2026-04-22  
+**Owner:** Johan Ras (CS2 / @APGI-cmy)  
+**Last Updated:** 2026-04-22  
+**CS2 Reference:** app_management_centre#1117
 
 ---
 

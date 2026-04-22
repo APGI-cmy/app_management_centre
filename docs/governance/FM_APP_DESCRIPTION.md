@@ -1,32 +1,29 @@
 # Foreman Office App — Authoritative Application Description
 
 **Version:** 2.1  
-**Status:** Authoritative (Phase 4.1 Confirmed)  
+**Status:** 📦 Superseded — Historical/Provenance Reference Only (see Migration Note below)  
 **Owner:** Johan Ras  
 **Product:** Maturion – Foreman Office (FM Office)  
 **Canonical Location:** `docs/governance/FM_APP_DESCRIPTION.md`  
-**Last Updated:** 2026-04-07  
+**Last Updated:** 2026-04-22  
 **Architecture Reference:** `docs/architecture/TRUE_NORTH_FM_ARCHITECTURE.md`
 
 ---
 
-## Migration Note (2026-04-08)
+## Migration Note — RESOLVED (2026-04-22)
 
-> **AMC 12-Stage Lifecycle Realignment**
+> **AMC 12-Stage Lifecycle Realignment — CS2 Decision Executed**
 >
-> The `modules/amc/` pre-build structure has been established to align AMC with the canonical 12-stage lifecycle model (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0).
+> **This file's status**: **📦 Superseded — Historical/Provenance Reference Only**
 >
-> **This file's status**: **Active Canonical — Temporary**
+> CS2 (Johan Ras / @APGI-cmy) approved the AMC App Description on **2026-04-22** (app_management_centre#1117, resolved in `modules/amc/REPO_REALIGNMENT_NOTE.md` §5).
 >
-> This document remains the authoritative Stage 1 source until a CS2-approved migration decision is executed. The intended future canonical location is `modules/amc/00-app-description/app-description.md`.
+> **The sole authoritative Stage 1 canonical source for AMC is now:**
+> `modules/amc/00-app-description/app-description.md` v1.0
 >
-> **Pending decision options**:
-> - **Option A**: Migrate content from this file to `modules/amc/00-app-description/app-description.md` and mark this file as legacy
-> - **Option B**: Retain this file as permanent canonical; establish `modules/amc/00-app-description/app-description.md` as a pointer
+> **This file is retained as a historical/provenance record only.** It must NOT be used as an upstream derivation source for any AMC artifact. All downstream AMC derivation (UX Workflow, FRS, TRS, Architecture, etc.) must derive from `modules/amc/00-app-description/app-description.md` v1.0.
 >
-> Until CS2 makes and executes this decision, **do not treat either option as resolved**. This file is the active authoritative source.
->
-> See: `modules/amc/REPO_REALIGNMENT_NOTE.md`
+> See: `modules/amc/REPO_REALIGNMENT_NOTE.md` §5 · `modules/amc/00-app-description/app-description-approval.md`
 
 ---
 
