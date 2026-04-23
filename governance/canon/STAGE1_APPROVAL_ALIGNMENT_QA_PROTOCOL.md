@@ -316,4 +316,4 @@ When classified, all three check layers in this protocol apply.
 
 ---
 
-*Authority: CS2 (Johan Ras) | Version: 1.0.1 | Effective: 2026-04-22 | Amended: 2026-04-22 (v1.0.1)*
+*Authority: CS2 (Johan Ras) | Version: 1.0.3 | Effective: 2026-04-22 | Amended: 2026-04-23 (v1.0.3) | Previous: 2026-04-22 (v1.0.2)*

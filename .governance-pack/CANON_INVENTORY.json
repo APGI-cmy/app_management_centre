@@ -2410,15 +2410,15 @@
             "filename": "STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md",
             "version": "1.0.3",
             "canonical_version": "1.0.3",
-            "file_hash": "a2f42f937a273b31a8d7077a527ef2df92309490907ef3723dc2cf54ccd32d50",
-            "file_hash_sha256": "a2f42f937a273b31a8d7077a527ef2df92309490907ef3723dc2cf54ccd32d50",
+            "file_hash": "44cd78f3525d818cfff0df228e250fff0c36f5c649e487cb313a21d7aa3430a5",
+            "file_hash_sha256": "44cd78f3525d818cfff0df228e250fff0c36f5c649e487cb313a21d7aa3430a5",
             "effective_date": "2026-04-22",
             "amended_date": "2026-04-22",
             "description": "Canonical governance document: Stage 1 approval-alignment QA protocol \u2014 mandatory whole-document state-transition sweep, cross-artifact coherence, pointer reconciliation, and contradiction-class checks for Stage 1 approval-alignment waves",
             "type": "canon",
             "path": "governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md",
             "layer_down_status": "PUBLIC_API",
-            "last_updated": "2026-04-22",
+            "last_updated": "2026-04-23",
             "change_note": "v1.0.3: \u00a73 evidence requirements \u2014 added stage1_canonical_source as a required PREHANDOVER proof field for M3 target verification; \u00a75.1 \u2014 added machine-verification requirement (target path check, not just wording); noted required root-pointer field formats",
             "provenance": "CS2-authorised via issue: Hardening \u2014 Stage 1 approval-alignment QA must force whole-document state-transition consistency checks"
         }
