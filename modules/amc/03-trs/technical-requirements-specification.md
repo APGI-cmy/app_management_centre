@@ -988,7 +988,7 @@ All AMC integration and API contracts MUST preserve tenant isolation. Requests, 
 |---|---|
 | **Call direction** | AMC → AIMC: action dispatch, proactive summary request. AIMC → AMC: action result callbacks, conversation callbacks, proactive message pushes |
 | **Transport** | HTTPS REST. AIMC callback endpoints exposed by AMC |
-| **Auth** | AMC outbound: `AIMC_SERVICE_TOKEN`. AIMC inbound callbacks: AMC validates `AIMC_CALLBACK_TOKEN` |
+| **Auth** | AMC outbound: `AIMC_SERVICE_TOKEN`. AIMC inbound callbacks: AMC validates the shared service token using the same `AIMC_SERVICE_TOKEN` env var. `AIMC_CALLBACK_TOKEN` is not a separate AMC configuration variable |
 | **Non-bypass** | AMC must never call any model provider SDK directly. AIMC is the exclusive AI gateway |
 | **Degraded mode** | AIMC health failure → TR-1602 degraded mode; no fallback AI call path |
 | **Audit** | Every AMC→AIMC dispatch generates `AIMC_ACTION_INITIATED`. Every AIMC callback generates `AIMC_ACTION_COMPLETED` |
