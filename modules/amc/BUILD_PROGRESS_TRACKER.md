@@ -3,12 +3,12 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-04-23  
-**Updated By**: foreman-v2-agent (wave: amc-stage3-frs-20260423 — Stage 3 FRS produced approval-ready, issue #1152)
+**Updated By**: foreman-v2-agent (wave: amc-stage3-frs-20260423 — Stage 3 FRS produced approval-ready, issue #1123)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Issue**: [app_management_centre#1152](https://github.com/APGI-cmy/app_management_centre/issues/1152)  
+> **Issue**: [app_management_centre#1123](https://github.com/APGI-cmy/app_management_centre/issues/1123)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 ---
@@ -103,7 +103,7 @@ system behaviour are permitted.
 - [x] `app-description-to-frs-traceability.md` — Stage 1 + Stage 2 to FRS traceability matrix demonstrating derivation coverage, cross-system boundary traceability, and dropped/deferred commitment disclosure (v1.0, produced 2026-04-23)
 **Wave**: amc-stage3-frs-20260423  
 **Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)  
-**CS2 Authorization**: issue #1152  
+**CS2 Authorization**: issue #1123  
 **Prerequisites**: ✅ Stage 1 complete; ✅ Stage 2 complete and CS2-approved (issue #1121)  
 **Approval Required**: Yes — CS2 approval required before Stage 4 (TRS) may begin
 
@@ -197,7 +197,7 @@ the canonical lifecycle sequence.
 
 1. ✅ Stage 1 complete — App Description approved by CS2 (issue #1117, 2026-04-22)
 2. ✅ Stage 2 complete — UX Workflow & Wiring Spec approved by CS2 (issue #1121, 2026-04-22)
-3. ✅ Stage 3 artifacts produced approval-ready — Awaiting CS2 approval (issue #1152, 2026-04-23)
+3. ✅ Stage 3 artifacts produced approval-ready — Awaiting CS2 approval (issue #1123, 2026-04-23)
 4. ▶️ CS2 to review and approve Stage 3 FRS before Stage 4 (TRS) begins
 
 ---

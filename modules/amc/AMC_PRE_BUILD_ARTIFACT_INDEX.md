@@ -38,8 +38,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. CS2 approval required before Stage 4 begins. Issue #1152. |
-| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. Stage 1 + Stage 2 to FRS derivation matrix. Issue #1152. |
+| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. CS2 approval required before Stage 4 begins. Issue #1123. |
+| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. Stage 1 + Stage 2 to FRS derivation matrix. Issue #1123. |
 
 ---
 

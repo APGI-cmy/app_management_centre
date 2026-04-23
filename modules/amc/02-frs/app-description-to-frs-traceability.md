@@ -5,7 +5,7 @@
 **Version**: 1.0
 **Status**: 🟡 Produced Approval-Ready — 2026-04-23
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: app_management_centre#1152
+**CS2 Authorization**: app_management_centre#1123
 **Upstream Sources**:
 - Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.0
 - Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` v1.0
