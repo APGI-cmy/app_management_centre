@@ -1,7 +1,10 @@
 
-**Status**: CANONICAL | **Version**: 1.6.0 | **Authority**: CS2  
+**Status**: CANONICAL | **Version**: 1.7.2 | **Authority**: CS2  
 **Date**: 2026-02-24  
-**Amended**: 2026-04-21 — v1.6.0: Added §4.3e Check L — active final-state bundle token/session coherence check; added AAP-22 to auto-fail rule table; explicitly included `wave-current-tasks.md` in active-bundle scope for token/session coherence checks; authority: CS2 — AMC/ISMS admin-ceremony hardening parity catch-up (issue: Catch AMC up to ISMS admin-ceremony hardening).  
+**Amended**: 2026-04-22 — v1.7.2: M3 — added `stage1_canonical_source` extraction from PREHANDOVER proof; added target-pointer verification (STC-04) for all live root pointer files using key-value and bold-label extraction; added predecessor-like heuristic fallback when no canonical source is declared; scoped M3 root-pointer scan to all live root pointer files (not only changed files); updated AAP-25 description to include target-path verification; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
+**Previous amendment**: 2026-04-22 — v1.7.1: Check M CL2 — `stage1` matched anywhere in path (not only as directory component); replaced with ERE word boundaries; M1 checklist scoped to PREHANDOVER proof or PR changed files with completeness check; M2 scans full live artifact chain (not only changed files); M4 "NOT present" treated as pass evidence; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
+**Previous amendment**: 2026-04-22 — v1.7.0: Added §4.3e Check M — Stage 1 approval-alignment state-transition sweep; added AAP-23 through AAP-26 to auto-fail rule table; canonical basis: `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
+**Previous amendment**: 2026-04-21 — v1.6.0: Added §4.3e Check L — active final-state bundle token/session coherence check; added AAP-22 to auto-fail rule table; explicitly included `wave-current-tasks.md` in active-bundle scope for token/session coherence checks; authority: CS2 — AMC/ISMS admin-ceremony hardening parity catch-up (issue: Catch AMC up to ISMS admin-ceremony hardening).  
 **Previous amendment**: 2026-04-19 — v1.5.0: Hardened §4.3e Admin Ceremony Compliance Gate with gate-inventory checks (Check H), pre-final instruction wording denylist (Check I), cross-artifact final-state consistency with active-bundle scoping (Check J), and carried-forward claim verification (Check K); updated auto-fail rule table with AAP-15 through AAP-21; active-bundle scoping rule clarified to prevent false positives from historical archive; authority: CS2 — governance-repo hardening wave (gate-inventory + post-token normalization hardening).  
 **Amended**: 2026-04-17 — v1.4.1: Tightened §4.3e Check C stale-wording scan to final-state artifact set only — superseded pre-token proofs retained immutably under the append-only model are now explicitly exempt; updated AAP-01 auto-fail rule to document final-state scope and superseded-proof exemption; authority: CS2 — PR review feedback on §4.3e canon collision with append-only proof retention.  
 **Previous amendment**: 2026-04-17 — v1.4.0: Added §4.3e Admin Ceremony Compliance Gate (BLOCKING, pre-IAA, ECAP-involved jobs); added auto-fail rules table for 9 known admin anti-patterns (AAP-01 through AAP-09); updated Phase 4 structure and sequencing note; updated Handover Validation Checklist with admin-compliance gate item; authority: CS2 — issue: Canonize a 3-layer admin ceremony compliance stack for ECAP, Foreman QP, and IAA.  
@@ -1284,6 +1287,268 @@ if [ -n "${WAVE_TASKS_FILE}" ]; then
 fi
 
 # ─────────────────────────────────────────────────────────────────────────────
+# CHECK M: Stage 1 Approval-Alignment State-Transition Sweep (AAP-23 through AAP-26)
+#
+# Applies ONLY to Stage 1 approval-alignment waves. A wave is classified as such
+# if ANY of the following is true in the PR diff:
+#   1. PREHANDOVER proof declares pr_category: STAGE1_APPROVAL_ALIGNMENT
+#   2. A file matching the Stage 1 document path patterns was changed
+#      (app-description, app_description, stage1, stage-1, stage_1, 00-app-description)
+#      AND the diff contains changes to a status or approval field in that file
+#   3. An approval-record file is committed or modified (path contains approval-record)
+#   4. A root pointer file is committed or modified
+#      (path contains root-pointer or CANONICAL_SOURCE)
+#
+# If not classified: this check is skipped (recorded as NOT APPLICABLE).
+# If classified: four sub-checks apply — each maps to one AAP auto-fail rule.
+# ─────────────────────────────────────────────────────────────────────────────
+echo "  [M] Stage 1 approval-alignment state-transition sweep (if applicable)..."
+
+# Stage 1 wave classification heuristics
+S1_CLASSIFIED=0
+
+# M-CL1: pr_category field in PREHANDOVER proof
+if [ -n "${LATEST_PROOF}" ] && grep -qiE "pr_category[[:space:]]*:[[:space:]]*STAGE1_APPROVAL_ALIGNMENT" "${LATEST_PROOF}" 2>/dev/null; then
+  S1_CLASSIFIED=1
+fi
+
+# M-CL2/3/4: diff-based classification signals
+CHANGED_FILES=$(git diff --name-only origin/main...HEAD 2>/dev/null)
+
+# CL2: Stage 1 document path patterns — match stage1 anywhere in path (not only as a directory component)
+if echo "${CHANGED_FILES}" | grep -qiE "app-description|app_description|(^|[^[:alnum:]])stage1([^[:alnum:]]|$)|stage-1|stage_1|00-app-description"; then
+  # Additional signal: the diff for that file touches a status or approval field
+  while IFS= read -r S1FILE; do
+    [ -z "${S1FILE}" ] && continue
+    if git diff origin/main...HEAD -- "${S1FILE}" 2>/dev/null | grep -qiE "^[+-][^-].*(^|[^[:alnum:]_])(status|approved_by|approval_date|approval_status|approval_state)([^[:alnum:]_]|$)"; then
+      S1_CLASSIFIED=1
+      break
+    fi
+  done < <(echo "${CHANGED_FILES}" | grep -iE "app-description|app_description|(^|[^[:alnum:]])stage1([^[:alnum:]]|$)|stage-1|stage_1|00-app-description")
+fi
+
+# CL3: approval-record file changed
+if echo "${CHANGED_FILES}" | grep -qiE "approval.?record"; then
+  S1_CLASSIFIED=1
+fi
+
+# CL4: root pointer file changed
+if echo "${CHANGED_FILES}" | grep -qiE "root.?pointer|CANONICAL_SOURCE"; then
+  S1_CLASSIFIED=1
+fi
+
+if [ "${S1_CLASSIFIED}" -eq 0 ]; then
+  echo "    [M] Not a Stage 1 approval-alignment wave — check M NOT APPLICABLE"
+else
+  echo "    [M] Stage 1 approval-alignment wave DETECTED — running sub-checks..."
+
+  # ── M1: stage1_sweep_completed field (AAP-23) ────────────────────────────
+  echo "    [M1] stage1_sweep_completed attestation..."
+  M1_FAIL=0
+  if [ -n "${LATEST_PROOF}" ]; then
+    if ! grep -qiE "stage1_sweep_completed[[:space:]]*:[[:space:]]*yes" "${LATEST_PROOF}" 2>/dev/null; then
+      M1_FAIL=1
+    fi
+  else
+    M1_FAIL=1
+  fi
+
+  # Also check that a Stage 1 QA Checklist artifact is explicitly tied to this handover.
+  # Scope resolution to:
+  #   1) a concrete checklist path referenced in the PREHANDOVER proof, or
+  #   2) changed/new files in the current PR wave.
+  # Then require a minimally complete checklist (no unchecked "- [ ]" items).
+  S1_CHECKLIST_FILE=""
+
+  if [ -n "${LATEST_PROOF}" ] && [ -f "${LATEST_PROOF}" ]; then
+    while IFS= read -r CANDIDATE_PATH; do
+      [ -z "${CANDIDATE_PATH}" ] && continue
+      if [ -f "${CANDIDATE_PATH}" ] && printf '%s\n' "${CANDIDATE_PATH}" | grep -qiE 'stage1.*qa.*checklist|stage1.*checklist'; then
+        S1_CHECKLIST_FILE="${CANDIDATE_PATH}"
+        break
+      fi
+    done < <(
+      grep -oE '[A-Za-z0-9._/-]+' "${LATEST_PROOF}" 2>/dev/null \
+        | grep -iE 'stage1.*qa.*checklist|stage1.*checklist' \
+        | sort -u
+    )
+  fi
+
+  if [ -z "${S1_CHECKLIST_FILE}" ]; then
+    while IFS= read -r CANDIDATE_PATH; do
+      [ -z "${CANDIDATE_PATH}" ] && continue
+      if [ -f "${CANDIDATE_PATH}" ] && printf '%s\n' "${CANDIDATE_PATH}" | grep -qiE 'stage1.*qa.*checklist|stage1.*checklist'; then
+        S1_CHECKLIST_FILE="${CANDIDATE_PATH}"
+        break
+      fi
+    done < <(printf '%s\n' "${CHANGED_FILES}")
+  fi
+
+  if [ -z "${S1_CHECKLIST_FILE}" ]; then
+    M1_FAIL=1
+  elif grep -qE '^[[:space:]]*-[[:space:]]*\[[[:space:]]\]' "${S1_CHECKLIST_FILE}" 2>/dev/null; then
+    # Unchecked items (not annotated [~]) remain — checklist is incomplete
+    M1_FAIL=1
+  fi
+
+  if [ "${M1_FAIL}" -eq 1 ]; then
+    ACC_FAILURES+=("M1: Stage 1 approval-alignment wave but PREHANDOVER proof missing stage1_sweep_completed:yes or no Stage 1 QA Checklist artifact committed/referenced (AAP-23)")
+  fi
+
+  # ── M2: cross-artifact stale language scan (AAP-24) ──────────────────────
+  echo "    [M2] Cross-artifact stale approval-state language scan..."
+  STALE_PATTERN="pending approval|not yet approved|approval pending|awaiting approval|provisional canonical|temporary canonical|candidate for approval|future canonical|migration pending|migration decision unresolved|source of truth pending|provisional source of truth"
+  ARTIFACT_CHAIN_PATTERN="app-description|app_description|(^|[^[:alnum:]])stage1([^[:alnum:]]|$)|stage-1|stage_1|00-app-description|approval.?record|root.?pointer|CANONICAL_SOURCE|artifact.?index|pre.?build.?artifact|build.?progress.?tracker|realignment.?note|repo.?realignment"
+  ARTIFACT_CHAIN_EXCLUDE_PATTERN="(^|/)(archive|archives|archived|history|historical|deprecated|superseded|attic|old|legacy|snapshots|backup)(/|$)"
+  STALE_FILES=()
+  # Scan the full live artifact chain in the repo (not only changed files) so that
+  # unchanged files carrying stale language — the exact failure mode in PR #1118 — are caught.
+  M2_CANDIDATE_FILES=$(git ls-files 2>/dev/null | grep -iE "${ARTIFACT_CHAIN_PATTERN}" | grep -ivE "${ARTIFACT_CHAIN_EXCLUDE_PATTERN}" || true)
+  if [ -z "${M2_CANDIDATE_FILES}" ]; then
+    M2_CANDIDATE_FILES=$(printf '%s\n' "${CHANGED_FILES}" | grep -iE "${ARTIFACT_CHAIN_PATTERN}" | grep -ivE "${ARTIFACT_CHAIN_EXCLUDE_PATTERN}" || true)
+  fi
+  while IFS= read -r AFILE; do
+    [ -z "${AFILE}" ] && continue
+    if grep -qiE "${STALE_PATTERN}" "${AFILE}" 2>/dev/null; then
+      STALE_FILES+=("${AFILE}")
+    fi
+  done < <(printf '%s\n' "${M2_CANDIDATE_FILES}")
+
+  if [ ${#STALE_FILES[@]} -gt 0 ]; then
+    ACC_FAILURES+=("M2: Stale approval-state language found in Stage 1 artifact chain files: ${STALE_FILES[*]} — stale terms must be removed after approval event (AAP-24)")
+  fi
+
+  # ── M3: predecessor-file and root-pointer reconciliation (AAP-25 / STC-04) ──
+  echo "    [M3] Root pointer and predecessor file reconciliation..."
+  M3_FAIL=0
+  M3_DETAILS=""
+
+  # Read the approved canonical Stage 1 source path from the PREHANDOVER proof.
+  # Producing agents must declare this field so M3 can verify the root pointer target:
+  #   stage1_canonical_source: <relative-path-to-new-canonical-stage1-document>
+  S1_CANONICAL_SOURCE=""
+  if [ -n "${LATEST_PROOF}" ] && [ -f "${LATEST_PROOF}" ]; then
+    S1_CANONICAL_SOURCE=$(grep -iE "^[[:space:]]*stage1_canonical_source[[:space:]]*:[[:space:]]*" "${LATEST_PROOF}" \
+      2>/dev/null \
+      | sed -E 's/^[[:space:]]*stage1_canonical_source[[:space:]]*:[[:space:]]*//' \
+      | tr -d '`"'"'"' \
+      | head -1 \
+      | xargs 2>/dev/null || true)
+  fi
+
+  # Scan all live root pointer files in the repo (not only changed ones).
+  RP_EXCLUDE_PATTERN="(^|/)(archive|archives|archived|history|historical|deprecated|superseded|attic|old|legacy|snapshots|backup)(/|$)"
+  RP_CANDIDATE_FILES=$(git ls-files 2>/dev/null \
+    | grep -iE "root.?pointer|CANONICAL_SOURCE" \
+    | grep -ivE "${RP_EXCLUDE_PATTERN}" || true)
+
+  # ── M3a: wording check + target-pointer verification on root pointer files ──
+  while IFS= read -r RPFILE; do
+    [ -z "${RPFILE}" ] && continue
+
+    # (i) Wording check — file must not claim pending/provisional canonical authority
+    if grep -qiE "pending canonical|provisional canonical|temporary canonical|not yet canonical" "${RPFILE}" 2>/dev/null; then
+      M3_FAIL=1
+      M3_DETAILS="${M3_DETAILS} ${RPFILE}(still-provisional-canonical)"
+    fi
+
+    # (ii) Target-pointer check (STC-04): extract the path this root pointer declares as its
+    # canonical source and compare it to the approved canonical Stage 1 source.
+    # Try common key-value field names first.
+    RP_TARGET=$(grep -iE "^[[:space:]]*(canonical_source|canonical_document|points_to|target|source)[[:space:]]*:[[:space:]]*" \
+      "${RPFILE}" 2>/dev/null \
+      | grep -oE '[A-Za-z0-9_./%-]+(\.md|\.json|\.yaml|\.txt)' \
+      | head -1 || true)
+    # Fallback: bold-label Markdown format — **Canonical Source**: path/to/file.md
+    if [ -z "${RP_TARGET}" ]; then
+      RP_TARGET=$(grep -iE "\*\*(canonical[[:space:]]source|canonical[[:space:]]document|source)[[:space:]]*\*\*[[:space:]]*:" \
+        "${RPFILE}" 2>/dev/null \
+        | grep -oE '[A-Za-z0-9_./%-]+(\.md|\.json|\.yaml|\.txt)' \
+        | head -1 || true)
+    fi
+
+    if [ -n "${S1_CANONICAL_SOURCE}" ]; then
+      # Normalise both paths: strip leading ./ for comparison
+      S1_NORM=$(printf '%s' "${S1_CANONICAL_SOURCE}" | sed 's|^\./||')
+      if [ -n "${RP_TARGET}" ]; then
+        RP_NORM=$(printf '%s' "${RP_TARGET}" | sed 's|^\./||')
+        if [ "${RP_NORM}" != "${S1_NORM}" ]; then
+          M3_FAIL=1
+          M3_DETAILS="${M3_DETAILS} ${RPFILE}(points-to:${RP_TARGET},expected:${S1_CANONICAL_SOURCE})"
+        fi
+      else
+        # Could not extract a pointer target from the file — cannot verify; treat as failure
+        M3_FAIL=1
+        M3_DETAILS="${M3_DETAILS} ${RPFILE}(pointer-target-unreadable)"
+      fi
+    else
+      # No stage1_canonical_source in proof — apply heuristic: predecessor-like target paths
+      # are suspicious and must not appear in a live root pointer file
+      if [ -n "${RP_TARGET}" ] && printf '%s' "${RP_TARGET}" | grep -qiE "predecessor|prior.?stage1|stage1.*v[0-9]|superseded"; then
+        M3_FAIL=1
+        M3_DETAILS="${M3_DETAILS} ${RPFILE}(heuristic-predecessor-target:${RP_TARGET})"
+      fi
+    fi
+  done < <(printf '%s\n' "${RP_CANDIDATE_FILES}")
+
+  # ── M3b: predecessor / superseded files must carry a superseded marker ───────
+  while IFS= read -r PREDFILE; do
+    [ -z "${PREDFILE}" ] && continue
+    if ! grep -qiE "superseded|historical|no longer active|replaced by|SUPERSEDED|HISTORICAL" "${PREDFILE}" 2>/dev/null; then
+      M3_FAIL=1
+      M3_DETAILS="${M3_DETAILS} ${PREDFILE}(missing-superseded-marker)"
+    fi
+  done < <(echo "${CHANGED_FILES}" | grep -iE "predecessor|superseded|prior.?stage1|stage1.*v[0-9]")
+
+  if [ "${M3_FAIL}" -eq 1 ]; then
+    ACC_FAILURES+=("M3: Canonical-pointer or predecessor reconciliation failure in Stage 1 artifact chain:${M3_DETAILS} (AAP-25 / STC-04)")
+  fi
+
+  # ── M4: contradiction-class sweep evidence (AAP-26) ──────────────────────
+  echo "    [M4] Contradiction-class sweep coverage (STC-01 through STC-06)..."
+  M4_FAIL=0
+  STC_CLASSES=("STC-01" "STC-02" "STC-03" "STC-04" "STC-05" "STC-06")
+  MISSING_STC=()
+  FAILED_STC=()
+
+  # Look for STC class evidence in the Stage 1 QA Checklist artifact or PREHANDOVER proof
+  SEARCH_FILES=()
+  if [ -n "${S1_CHECKLIST_FILE}" ]; then SEARCH_FILES+=("${S1_CHECKLIST_FILE}"); fi
+  if [ -n "${LATEST_PROOF}" ]; then SEARCH_FILES+=("${LATEST_PROOF}"); fi
+
+  for STC in "${STC_CLASSES[@]}"; do
+    STC_FOUND=0
+    STC_FAILED=0
+    for SF in "${SEARCH_FILES[@]}"; do
+      if grep -q "${STC}" "${SF}" 2>/dev/null; then
+        STC_FOUND=1
+        # Check if the class is recorded as an explicit failure state; treat "NOT present" as pass evidence.
+        if grep -A1 "${STC}" "${SF}" 2>/dev/null | grep -qiE "NOT[[:space:]]+present"; then
+          :
+        elif grep -A1 "${STC}" "${SF}" 2>/dev/null | grep -qiE ":[[:space:]]*present|:[[:space:]]*FAIL|found|detected"; then
+          STC_FAILED=1
+        fi
+        break
+      fi
+    done
+    if [ "${STC_FOUND}" -eq 0 ]; then
+      MISSING_STC+=("${STC}")
+    elif [ "${STC_FAILED}" -eq 1 ]; then
+      FAILED_STC+=("${STC}")
+    fi
+  done
+
+  if [ ${#MISSING_STC[@]} -gt 0 ]; then
+    M4_FAIL=1
+    ACC_FAILURES+=("M4a: Contradiction-class sweep evidence missing for Stage 1 wave — no result recorded for: ${MISSING_STC[*]} (AAP-26)")
+  fi
+  if [ ${#FAILED_STC[@]} -gt 0 ]; then
+    M4_FAIL=1
+    ACC_FAILURES+=("M4b: Contradiction class(es) found present in Stage 1 artifact chain: ${FAILED_STC[*]} — must be resolved before merge (AAP-26)")
+  fi
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
 # GATE RESULT
 # ─────────────────────────────────────────────────────────────────────────────
 if [ ${#ACC_FAILURES[@]} -gt 0 ]; then
@@ -1324,12 +1589,16 @@ The following conditions are **auto-fail** for the §4.3e gate regardless of oth
 | AAP-20 | Carried-forward claim silently changes ownership or gate authority | A "carried forward from" claim in a final-state artifact references a source that does not contain the stated claim, or the carried-forward text modifies gate authority/ownership |
 | AAP-21 | ASSEMBLY_TIME_ONLY block not removed | A block explicitly marked `ASSEMBLY_TIME_ONLY`, `REMOVE BEFORE COMMIT`, or `TEMPLATE INSTRUCTION` remains in a committed output artifact |
 | AAP-22 | Active final-state token/session incoherence | The `wave-current-tasks.md` checklist for the active wave declares a wave/session/job identifier that contradicts the wave identifier declared in the active PREHANDOVER proof (`wave_id` field) or wave record; or `wave-current-tasks.md` is absent when a wave record with a declared wave_id exists in the active bundle |
+| AAP-23 | Stage 1 approval-alignment wave missing sweep attestation | PR is classified as a Stage 1 approval-alignment wave but the PREHANDOVER proof does not contain `stage1_sweep_completed: yes`, or no Stage 1 Approval-Alignment QA Checklist artifact is committed or referenced in the evidence bundle |
+| AAP-24 | Stale approval-state language in Stage 1 artifact chain | PR is classified as a Stage 1 approval-alignment wave and one or more artifacts in the Stage 1 artifact chain still contain stale approval-state language (`pending approval`, `not yet approved`, `provisional canonical`, `temporary canonical`, `candidate for approval`, `migration pending`, or equivalent) after the approval event has been recorded |
+| AAP-25 | Canonical-pointer or predecessor-file reconciliation failure | PR is classified as a Stage 1 approval-alignment wave and any of the following are true: (a) a root pointer file still claims `pending canonical` or `provisional canonical` authority; (b) a root pointer file declares a target path that does not match the `stage1_canonical_source` declared in the PREHANDOVER proof; (c) a root pointer file's pointer target cannot be extracted (unreadable format); (d) a predecessor Stage 1 file that was changed in this PR does not carry a superseded / historical marker |
+| AAP-26 | Contradiction-class sweep missing or contradiction found present | PR is classified as a Stage 1 approval-alignment wave and the evidence bundle does not contain a documented check result for all six contradiction classes (STC-01 through STC-06) per `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md §6`, or one or more contradiction classes are recorded as present or FAIL |
 
 ### Admin Ceremony Compliance Gate in the Handover Validation Checklist
 
 The following item is added to the handover checklist when an ECAP job is involved:
 
-> - [ ] **Admin Ceremony Compliance Gate PASSED** (ECAP jobs): §4.3e gate run — 0 auto-fail conditions (AAP-15 through AAP-22 auto-fail conditions included); ECAP reconciliation summary present; `wave-current-tasks.md` token/session coherence checked (Check L); admin-compliance readiness accepted by Foreman QP checkpoint (BLOCKING — IAA must not be invoked until this is ✅) (IAA Token — Append-Only, Dedicated File)
+> - [ ] **Admin Ceremony Compliance Gate PASSED** (ECAP jobs): §4.3e gate run — 0 auto-fail conditions (AAP-15 through AAP-26 auto-fail conditions included); ECAP reconciliation summary present; `wave-current-tasks.md` token/session coherence checked (Check L); Stage 1 approval-alignment sweep checked (Check M, if applicable); admin-compliance readiness accepted by Foreman QP checkpoint (BLOCKING — IAA must not be invoked until this is ✅) (IAA Token — Append-Only, Dedicated File)
 
 **Purpose**: Govern how the IAA writes its assurance verdict. The PREHANDOVER proof is
 **read-only** once committed. The IAA token is written to a new, dedicated artifact file —
