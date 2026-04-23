@@ -314,7 +314,7 @@ The following technology constraints are established from approved Stage 1 and S
 |---|---|
 | **Requirement ID** | TR-402 |
 | **FRS Source** | FR-403 |
-| **Technical Requirement** | On dispatch: `POST /api/foreman/dispatch-intervention` (external call) OR `POST /api/specialist-agents/{agent_id}/dispatch` (external call). AMC must: (1) include governed auth token in Authorization header; (2) receive a synchronous acknowledgment (HTTP 202 Accepted) confirming the intervention entered a governed execution path; (3) update `interventions.status` to `in_progress` and set `dispatched_at` and `executing_agent`; (4) write `INTERVENTION_DISPATCHED` audit event. If dispatch returns non-2xx: set `status: dispatch_failed`, write audit event |
+| **Technical Requirement** | On dispatch: `POST {FOREMAN_API_BASE_URL}/api/foreman/dispatch-intervention` (external call) OR `POST {SPECIALIST_AGENTS_API_BASE_URL}/api/specialist-agents/{agent_id}/dispatch` (external call). AMC must: (1) include governed auth token in Authorization header; (2) receive a synchronous acknowledgment (HTTP 202 Accepted) confirming the intervention entered a governed execution path; (3) update `interventions.status` to `in_progress` and set `dispatched_at` and `executing_agent`; (4) write `INTERVENTION_DISPATCHED` audit event. If dispatch returns non-2xx: set `status: dispatch_failed`, write audit event |
 
 ### TR-403 — Intervention Status Callback Contract
 
