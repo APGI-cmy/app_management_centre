@@ -5,7 +5,8 @@
 **Version**: 1.1
 **Status**: 🟡 Produced Approval-Ready — 2026-04-23 (Hardened 2026-04-23)
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: app_management_centre#1127
+**CS2 Authorization**: app_management_centre#1125
+**Hardening Reference**: app_management_centre#1127 (harmonization/hardening wave)
 **Upstream Source**: `modules/amc/02-frs/functional-requirements-specification.md` v1.0 (CS2-approved for Stage 4 progression, ref #1123)
 **TRS Target**: `modules/amc/03-trs/technical-requirements-specification.md` v1.1
 **Canonical Location**: `modules/amc/03-trs/frs-to-trs-traceability.md`

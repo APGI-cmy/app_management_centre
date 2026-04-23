@@ -8,7 +8,7 @@
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Issue**: [app_management_centre#1127](https://github.com/APGI-cmy/app_management_centre/issues/1127)  
+> **Issue**: [app_management_centre#1125](https://github.com/APGI-cmy/app_management_centre/issues/1125)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 ---
@@ -29,7 +29,7 @@
 | 1 | App Description | ✅ COMPLETE | CS2-approved 2026-04-22. Canonical source: `modules/amc/00-app-description/app-description.md` v1.0. Approval ref: #1117. |
 | 2 | UX Workflow & Wiring Spec | ✅ COMPLETE | CS2-approved 2026-04-22 (issue #1121). Canonical source: `modules/amc/01-ux-workflow-wiring-spec/`. |
 | 3 | FRS | ✅ COMPLETE — CS2 APPROVED | CS2-approved for Stage 4 progression (issue #1123). Stage 4 authorized. Canonical source: `modules/amc/02-frs/`. |
-| 4 | TRS | 🟡 APPROVAL PENDING | Produced approval-ready 2026-04-23. Awaiting CS2 approval before Stage 5 may begin. Canonical source: `modules/amc/03-trs/`. Issue #1127. |
+| 4 | TRS | 🟡 APPROVAL PENDING | Produced approval-ready 2026-04-23. Awaiting CS2 approval before Stage 5 may begin. Canonical source: `modules/amc/03-trs/`. Issue #1125 (hardened in #1127). |
 | 5 | Architecture | ⬜ Not Started | 🔴 BLOCKED — requires Stage 4 CS2 approval. Pre-existing FM-era architecture material exists in `docs/architecture/` but is classified as historical/reference only — not active Stage 5 lifecycle input. See Stage Detail below. |
 | 6 | QA-to-Red | ⬜ Not Started | 🔴 BLOCKED — requires Stage 5 complete and approved. |
 | 7 | PBFAG | ⬜ Not Started | 🔴 BLOCKED |
@@ -109,7 +109,7 @@ system behaviour are permitted.
 **Completion Date**: 2026-04-23  
 **Approved By**: CS2 (Johan Ras / @APGI-cmy) — approved for Stage 4 progression  
 **Approval Reference**: app_management_centre#1123  
-**Notes**: Stage 3 FRS artifacts formally treated as CS2-approved for Stage 4 progression per issue #1127. Stage 4 TRS derivation is authorized.
+**Notes**: Stage 3 FRS artifacts formally treated as CS2-approved for Stage 4 progression per issue #1125. Stage 4 TRS derivation is authorized.
 
 ---
 
@@ -124,7 +124,8 @@ system behaviour are permitted.
 - [x] `frs-to-trs-traceability.md` — FRS to TRS traceability matrix v1.1: 17 FRS families + ARC domain traced, 18 business rules realized, no family dropped, 30 Stage-5 deferrals disclosed, ARC and quota console coverage added (v1.1, hardened 2026-04-23)
 **Wave**: amc-stage4-trs-hardening-20260423  
 **Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)  
-**CS2 Authorization**: issue #1127  
+**CS2 Authorization**: issue #1125  
+**Hardening Wave**: issue #1127 (harmonization/hardening follow-on)
 **Prerequisites**: ✅ Stage 1 complete; ✅ Stage 2 complete and CS2-approved; ✅ Stage 3 complete and CS2-approved (issue #1123)  
 **Approval Required**: Yes — CS2 approval required before Stage 5 (Architecture) may begin
 
@@ -208,7 +209,7 @@ the canonical lifecycle sequence.
 1. ✅ Stage 1 complete — App Description approved by CS2 (issue #1117, 2026-04-22)
 2. ✅ Stage 2 complete — UX Workflow & Wiring Spec approved by CS2 (issue #1121, 2026-04-22)
 3. ✅ Stage 3 complete — FRS CS2-approved for Stage 4 progression (issue #1123, 2026-04-23)
-4. ✅ Stage 4 TRS artifacts produced approval-ready and hardened to v1.1 (issue #1127, 2026-04-23)
+4. ✅ Stage 4 TRS artifacts produced approval-ready and hardened to v1.1 (issue #1125, hardened in #1127, 2026-04-23)
 5. ▶️ CS2 to review and approve Stage 4 TRS v1.1 before Stage 5 (Architecture) begins
 
 ---

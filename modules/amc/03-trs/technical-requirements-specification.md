@@ -5,8 +5,8 @@
 **Version**: 1.1
 **Status**: 🟡 Produced Approval-Ready — 2026-04-23 (Hardened 2026-04-23)
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: app_management_centre#1127
-**Hardening Authorization**: Pre-merge hardening wave — ARC explicit domain, Dynamic Upload Quota Management console, alert timing/retry/escalation contract family, audit delivery atomicity, inter-service trust boundary, state ownership contract family declarations
+**CS2 Authorization**: app_management_centre#1125
+**Hardening Authorization**: Pre-merge hardening wave (app_management_centre#1127) — ARC explicit domain, Dynamic Upload Quota Management console, alert timing/retry/escalation contract family, audit delivery atomicity, inter-service trust boundary, state ownership contract family declarations
 **Upstream Sources**:
 - Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.0 (CS2-approved 2026-04-22, ref #1117)
 - Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/` v1.0 (CS2-approved, ref #1121)
@@ -1064,7 +1064,8 @@ The following items are explicitly deferred from Stage 4 TRS to Stage 5 Architec
 | **Version** | 1.1 |
 | **Prepared by** | foreman-v2-agent (POLC_ORCHESTRATION) |
 | **Prepared Date** | 2026-04-23 |
-| **CS2 Authorization for Stage 4** | app_management_centre#1127 |
+| **CS2 Authorization for Stage 4** | app_management_centre#1125 |
+| **Hardening Reference** | app_management_centre#1127 (harmonization/hardening wave) |
 | **Stage 3 Approval Reference** | app_management_centre#1123 (CS2-approved for Stage 4 progression) |
 | **Reviewed by** | *Pending CS2 review* |
 | **Approved by** | *Pending CS2 approval* |
