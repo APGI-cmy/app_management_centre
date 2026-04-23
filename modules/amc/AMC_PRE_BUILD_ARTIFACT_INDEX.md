@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0)  
-**Last Updated**: 2026-04-23  
+**Last Updated**: 2026-04-23 (Stage 4 TRS artifacts produced; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -29,8 +29,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | 🟡 Approval Pending | v1.0, approval pending. Index status held to match current document header until CS2 approval is reflected in the artifact. Issue #1121. |
-| Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | 🟡 Approval Pending | v1.0, approval pending. Index status held to match current document header until CS2 approval is reflected in the artifact. Issue #1121. |
+| UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | ✅ Approved Canonical | v1.0, CS2-approved 2026-04-22. Issue #1121. |
+| Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | ✅ Approved Canonical | v1.0, CS2-approved 2026-04-22. Issue #1121. |
 
 ---
 
@@ -38,8 +38,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. CS2 approval required before Stage 4 begins. Issue #1123. |
-| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. Stage 1 + Stage 2 to FRS derivation matrix. Issue #1123. |
+| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | ✅ Approved Canonical | v1.0, CS2-approved for Stage 4 progression 2026-04-23. Issue #1123. |
+| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | ✅ Approved Canonical | v1.0, CS2-approved for Stage 4 progression 2026-04-23. Issue #1123. |
 
 ---
 
@@ -47,8 +47,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | ⬜ Placeholder | Not started |
-| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | ⬜ Placeholder | Not started |
+| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. CS2 approval required before Stage 5 begins. Issue #1127. |
+| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. FRS family coverage matrix, business rule realization, deferred items register. Issue #1127. |
 
 ---
 
