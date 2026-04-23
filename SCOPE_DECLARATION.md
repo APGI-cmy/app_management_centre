@@ -1,31 +1,35 @@
 # SCOPE_DECLARATION
 
-**Issue**: #1058 — Apply CodexAdvisor-agent.md v4.0.2 via governed path
-**Date**: 2026-04-13 (corrective update — CS2 comment #4234431229)
-**Agent**: CodexAdvisor-agent (session-018-20260413)
+**Issue**: #1129 — Hardening — Foreman/ceremony must enforce governing-issue parity and issue-role separation across the full artifact chain
+**Date**: 2026-04-23
+**Agent**: foreman-v2-agent (session-031-20260423)
+**Wave**: wave-governing-issue-parity-hardening
 
 ## Files Modified / Added
 
-### CodexAdvisor-agent Producing Agent Deliverables
-- `.github/agents/CodexAdvisor-agent.md` — updated from v4.0.0 to v4.0.2, then corrected (CS2 comment #4234431229): restore `governance-liaison-amc-agent` in can_invoke + phase body; restore full SELF-MOD-001 escalation clause
-- `.agent-workspace/CodexAdvisor-agent/memory/session-016-20260410.md` — CodexAdvisor session-016 memory
-- `.agent-workspace/CodexAdvisor-agent/memory/session-017-20260412.md` — CodexAdvisor session-017 corrective memory (merge-align + re-invocation)
-- `.agent-workspace/CodexAdvisor-agent/memory/session-018-20260413.md` — CodexAdvisor session-018 memory (CS2 corrective — liaison + own-contract rule)
-- `PREHANDOVER_PROOF_session-codexadvisor-v4.0.2-20260410.md` — initial PREHANDOVER proof (read-only post-commit per §4.3b)
-- `PREHANDOVER_PROOF_session-016b-20260410.md` — corrected PREHANDOVER proof with Ripple Assessment (read-only)
-- `PREHANDOVER_PROOF_session-017-20260412.md` — corrective PREHANDOVER proof for session-017 (read-only)
-- `PREHANDOVER_PROOF_session-018-20260413.md` — corrective PREHANDOVER proof for session-018
-- `SCOPE_DECLARATION.md` — this file (updated for this PR)
+### Governance Canon (New)
+- `governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md` — New GIPC-001 canon: issue-role separation, governing-issue parity check, labeled authority fields, tracker parity gate, overshadow detection, ceremony enforcement. Authority: CS2 — Issue #1129.
 
-### IAA Ceremony Artifacts (Option A full declaration per A-031)
-- `.agent-admin/assurance/iaa-token-session-016-wave1-20260410.md` — IAA session-032 REJECTION token
-- `.agent-admin/assurance/iaa-token-session-016-wave2-20260412.md` — IAA session-034 PASS token
-- `.agent-workspace/independent-assurance-agent/memory/session-032-20260410.md` — IAA session-032 memory (rejection ceremony)
-- `.agent-workspace/independent-assurance-agent/memory/session-034-20260412.md` — IAA session-034 memory (PASS ceremony)
-- `.agent-workspace/independent-assurance-agent/parking-station/suggestions-log.md` — IAA parking-station updates
+### Governance Templates (Modified)
+- `.agent-admin/templates/amc-wave-record-template.md` — Updated to v1.1.0: added Governing Authority table (§1a) and Governing-Issue Parity Evidence block (§3a) per GIPC-001 §3.3 and §2.4. Authority: CS2 — Issue #1129.
+
+### Tier 2 Operational Knowledge (Modified)
+- `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md` — Added A-036 (GOVERNING-ISSUE-PARITY-MANDATORY), A-037 (OVERSHADOW-DETECTION-MANDATORY), A-038 (CEREMONY-PARITY-EVIDENCE-REQUIRED). Authority: CS2 — Issue #1129.
+
+### Wave Ceremony Artifacts (New)
+- `.agent-admin/waves/wave-governing-issue-parity-hardening-20260423-current-tasks.md` — Wave checklist for this wave.
+- `.agent-admin/wave-records/amc-wave-record-governing-issue-parity-hardening-20260423.md` — Wave record with IAA Pre-Brief in section 2.
+- `.agent-workspace/foreman-v2/memory/session-031-20260423.md` — Session memory.
+- `SCOPE_DECLARATION.md` — This file (cleared and rewritten per A-029).
+
+### Wake-Up Protocol Generated (auto-created by .github/scripts/wake-up-protocol.sh)
+- `.agent-workspace/foreman-v2-agent/personal/lessons-learned.md` — Auto-generated template.
+- `.agent-workspace/foreman-v2-agent/personal/patterns.md` — Auto-generated template.
+
+- `PREHANDOVER_PROOF_session-031-20260423.md` — PREHANDOVER proof for this wave (pre-populated with expected IAA token per A-028)
+
+## Pre-existing Issues (not introduced by this session)
+- `.github/workflows/polc-boundary-gate.yml` — YAML validation warning "Missing required workflow structure (on: or jobs:)" — pre-existing on main branch, not introduced by this session. Evidence: running `validate-yaml-frontmatter.sh` on the stash-cleared working tree produced the same error.
 
 ## IAA Status
-
-IAA session-034 issued ASSURANCE-TOKEN PASS (43/43 checks) for prior ceremony artifacts. CS2 review (comment #4234431229) identified 2 substantive content corrections needed. IAA re-invocation (session-018 round) required after CS2 corrections. New PASS token to be committed.
-
-**Merge authority: CS2 ONLY (@APGI-cmy)**
+PENDING — to be invoked per Phase 4 §4.4.
