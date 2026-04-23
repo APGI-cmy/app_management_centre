@@ -752,7 +752,7 @@ The following technology constraints are established from approved Stage 1 and S
 |---|---|
 | **Requirement ID** | TR-1504 |
 | **FRS Source** | FR-1504 |
-| **Technical Requirement** | AMC must maintain a service-identity token for each external dependency (AIMC, AIMCC, KUC, knowledge/memory system, Foreman, specialist agents). Token configuration: environment variables (`AIMC_SERVICE_TOKEN`, `AIMCC_SERVICE_TOKEN`, `KUC_SERVICE_TOKEN`, `KNOWLEDGE_SERVICE_TOKEN`, `FOREMAN_SERVICE_TOKEN`). Tokens must not be hardcoded in application source. Every outbound API call must include `Authorization: Bearer {service_token}` in headers. If token is absent or invalid: call must be blocked; error written to audit log |
+| **Technical Requirement** | AMC must maintain a service-identity token for each external dependency (AIMC, AIMCC, KUC, knowledge/memory system, Foreman, specialist agents). Token configuration: environment variables (`AIMC_SERVICE_TOKEN`, `AIMCC_SERVICE_TOKEN`, `KUC_SERVICE_TOKEN`, `KNOWLEDGE_SERVICE_TOKEN`, `FOREMAN_SERVICE_TOKEN`, `SPECIALIST_AGENT_SERVICE_TOKEN`). Tokens must not be hardcoded in application source. Every outbound API call must include `Authorization: Bearer {service_token}` in headers. If token is absent or invalid: call must be blocked; error written to audit log |
 
 ### TR-1505 — External API Base URL Configuration
 
