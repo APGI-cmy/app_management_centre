@@ -2,39 +2,53 @@
 
 **Stage**: 4 — Technical Requirements Specification (TRS)
 **Module**: App Management Centre (AMC)
-**Version**: 1.0
-**Status**: 🟡 Produced Approval-Ready — 2026-04-23
+**Version**: 1.1
+**Status**: 🟡 Produced Approval-Ready — 2026-04-23 (Hardened 2026-04-23)
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: harmonization issue (CS2-opened, 2026-04-23)
+**CS2 Authorization**: app_management_centre#1125
+**Hardening Authorization**: Pre-merge hardening wave (app_management_centre#1127) — ARC explicit domain, Dynamic Upload Quota Management console, alert timing/retry/escalation contract family, audit delivery atomicity, inter-service trust boundary, state ownership contract family declarations
+**Harmonization Pass**: 2026-04-23 — upstream source versions updated to reflect Stage 1 v1.1, Stage 2 v1.1, and Stage 3 v1.1 harmonization (harmonization issue)
 **Upstream Sources**:
-- Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.1
-- Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` v1.1
-- Stage 3 FRS: `modules/amc/02-frs/functional-requirements-specification.md` v1.1
+- Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.1 (CS2-approved 2026-04-22; harmonization pass 2026-04-23, ref #1117 + harmonization issue)
+- Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/` v1.1 (CS2-approved, ref #1121; harmonization pass 2026-04-23)
+- Stage 3 FRS: `modules/amc/02-frs/functional-requirements-specification.md` v1.1 (CS2-approved, ref #1123 + harmonization issue; FR-1800 ARC family + FR-606/FR-607 quota added)
 **Canonical Location**: `modules/amc/03-trs/technical-requirements-specification.md`
 
 ---
 
 > **DERIVATION DECLARATION**
-> This document derives from the approved Stage 3 FRS, Stage 2 UX Wiring Spec, and Stage 1 App Description. It translates functional requirements into explicit technical obligations and constraints. No technical obligation may be introduced without a traceable upstream FRS source. All technology stack choices are constrained by Stage 1 §8.1 Technology Stack Baseline.
+> This document derives directly from the approved Stage 3 FRS (`modules/amc/02-frs/functional-requirements-specification.md` v1.0), the approved Stage 2 UX Workflow & Wiring Spec, and the approved Stage 1 App Description. It translates approved functional requirements into explicit technical requirements, interface constraints, data structures, state rules, integration contracts, and implementation-constraining decisions. It does not invent product truth. No technical requirement may be introduced here without traceable derivation from Stage 1, 2, or 3 approved truth. The TRS does not replace Architecture (Stage 5) — it defines the technical boundaries that Architecture must realize.
 
 ---
 
 ## Table of Contents
 
 1. [Purpose & Scope](#1-purpose--scope)
-2. [Technology Stack Baseline](#2-technology-stack-baseline)
-3. [TR-100: Frontend Technical Requirements](#3-tr-100-frontend-technical-requirements)
-4. [TR-200: Backend API Technical Requirements](#4-tr-200-backend-api-technical-requirements)
-5. [TR-300: ARC Technical Domain](#5-tr-300-arc-technical-domain)
-6. [TR-400: Alert Timing & Escalation Technical Contracts](#6-tr-400-alert-timing--escalation-technical-contracts)
-7. [TR-500: Audit Technical Contracts](#7-tr-500-audit-technical-contracts)
-8. [TR-600: State & Persistence Technical Contracts](#8-tr-600-state--persistence-technical-contracts)
-9. [TR-700: Authentication & Authorization Technical Contracts](#9-tr-700-authentication--authorization-technical-contracts)
-10. [TR-800: Operational Quota Management Technical Contracts](#10-tr-800-operational-quota-management-technical-contracts)
-11. [TR-900: Cross-System Integration Technical Contracts](#11-tr-900-cross-system-integration-technical-contracts)
-12. [TR-1000: Degraded-Mode Technical Requirements](#12-tr-1000-degraded-mode-technical-requirements)
-13. [TR-1100: Mobile Technical Requirements](#13-tr-1100-mobile-technical-requirements)
-14. [Technical Non-Negotiables Summary](#14-technical-non-negotiables-summary)
+2. [Cross-System Technical Boundary Map](#2-cross-system-technical-boundary-map)
+3. [Technology Stack Constraints](#3-technology-stack-constraints)
+4. [TR-100: Executive Estate Oversight — Technical Requirements](#4-tr-100-executive-estate-oversight--technical-requirements)
+5. [TR-200: Alert Management — Technical Requirements](#5-tr-200-alert-management--technical-requirements)
+6. [TR-300: Approval Workflow — Technical Requirements](#6-tr-300-approval-workflow--technical-requirements)
+7. [TR-400: Intervention — Technical Requirements](#7-tr-400-intervention--technical-requirements)
+8. [TR-500: AI-Routed Actions (AIMC) — Technical Requirements](#8-tr-500-ai-routed-actions-aimc--technical-requirements)
+9. [TR-600: AIMCC / Knowledge Upload Centre Supervision — Technical Requirements](#9-tr-600-aimcc--knowledge-upload-centre-supervision--technical-requirements)
+10. [TR-700: Memory-Aware / Knowledge-Aware View — Technical Requirements](#10-tr-700-memory-aware--knowledge-aware-view--technical-requirements)
+11. [TR-800: Executive Conversation — Technical Requirements](#11-tr-800-executive-conversation--technical-requirements)
+12. [TR-900: Specialist Agent Workspace Oversight — Technical Requirements](#12-tr-900-specialist-agent-workspace-oversight--technical-requirements)
+13. [TR-1000: Maintenance & Assurance Reporting — Technical Requirements](#13-tr-1000-maintenance--assurance-reporting--technical-requirements)
+14. [TR-1100: Estate Configuration & Wellbeing — Technical Requirements](#14-tr-1100-estate-configuration--wellbeing--technical-requirements)
+15. [TR-1200: Mobile Continuity — Technical Requirements](#15-tr-1200-mobile-continuity--technical-requirements)
+16. [TR-1300: Audit & Provenance — Technical Requirements](#16-tr-1300-audit--provenance--technical-requirements)
+17. [TR-1400: Authentication & Authorization — Technical Requirements](#17-tr-1400-authentication--authorization--technical-requirements)
+18. [TR-1500: Cross-System Integration — Technical Requirements](#18-tr-1500-cross-system-integration--technical-requirements)
+19. [TR-1600: Degraded-Mode — Technical Requirements](#19-tr-1600-degraded-mode--technical-requirements)
+20. [TR-1700: State & Persistence — Technical Requirements](#20-tr-1700-state--persistence--technical-requirements)
+21. [TR-1800: ARC Technical Domain — Technical Requirements](#21-tr-1800-arc-technical-domain--technical-requirements)
+22. [API / Interface Contract Summary](#22-api--interface-contract-summary)
+23. [Data Schema Requirements Summary](#23-data-schema-requirements-summary)
+24. [Integration Contract Definitions](#24-integration-contract-definitions)
+25. [Deferred-to-Stage-5 Declarations](#25-deferred-to-stage-5-declarations)
+26. [Sign-Off / Approval Record](#26-sign-off--approval-record)
 
 ---
 
@@ -42,455 +56,1053 @@
 
 ### 1.1 Purpose
 
-The TRS translates the approved FRS into explicit technical obligations and constraints. It defines what the AMC system must do technically — including infrastructure constraints, API contracts, data contracts, timing contracts, security contracts, and integration contracts — to correctly implement the functional requirements.
+This Technical Requirements Specification translates the approved Stage 3 Functional Requirements Specification into explicit technical requirements, interface definitions, data structures, state rules, and integration contracts for the App Management Centre (AMC).
+
+The TRS defines **how the system must be technically structured and constrained** — without yet becoming a full architecture document. It establishes the technical boundaries that must be honored in Stage 5 Architecture and all downstream stages.
+
+Every technical requirement stated here is bounded so that downstream Architecture (Stage 5) and QA-to-Red (Stage 6) agents can derive their work without guessing technical intent.
 
 ### 1.2 Scope
 
-This TRS covers: frontend (React 18/TypeScript/Vite), backend API (Supabase Edge Functions), ARC Governance Console technical domain (TR-300), alert timing/escalation contracts (TR-400), audit contracts (TR-500), state/persistence contracts (TR-600), auth/authorization contracts (TR-700), operational quota management contracts (TR-800), cross-system integration contracts (TR-900), degraded-mode technical requirements (TR-1000), mobile technical requirements (TR-1100).
+**In scope for Stage 4 TRS:**
+- API and interface-level requirements (endpoint contracts, request/response shape requirements, transport security)
+- Event and action contract definitions (action types, required fields, callback patterns)
+- Data and state ownership rules at the schema-requirement level
+- Schema-facing technical requirements (table names, required columns, index constraints, append-only enforcement)
+- Integration requirements for AMC ↔ AIMC ↔ AIMCC ↔ KUC ↔ knowledge/memory system ↔ Foreman/agents
+- Authentication and authorization enforcement requirements (Supabase Auth, JWT, RLS, token patterns)
+- Degraded-mode technical behavior (what the system must do at the API/data/UI layer when dependencies are unavailable)
+- Audit/provenance technical requirements (schema fields, append-only enforcement, cross-system linkage)
+- State consistency and cross-device continuity requirements
+- Mobile and real-time delivery requirements at the technical level
 
-### 1.3 Non-Negotiable Derivation Rule
+**Explicitly out of scope for Stage 4 TRS:**
+- Full database schema definitions with column types and index DDL (Stage 5 Architecture / schema-builder)
+- API code implementation (Stage 12 Build)
+- Deployment infrastructure definitions (Stage 5 Architecture)
+- Test specifications (Stage 6 QA-to-Red)
+- UI component tree design (Stage 5 Architecture)
+- CI/CD pipeline definitions (Stage 5 Architecture)
 
-The TRS must not dilute upstream FRS requirements into vague technical aspiration. Every technical contract must be specific enough to be tested and verified.
+> FRS Traceability: §1 Purpose & Scope
 
 ---
 
-## 2. Technology Stack Baseline
+## 2. Cross-System Technical Boundary Map
 
-> Stage 1 Traceability: §8.1 Technology Stack Baseline, §8.2 Cross-System Platform Dependencies
+These boundaries are non-negotiable. They are reproduced here from Stage 1 and Stage 3 with technical elaboration. No TRS requirement may contradict or soften these boundaries.
 
-| Layer | Technology | Constraint |
+> FRS Traceability: §2 Cross-System Boundary Rules; Stage 1 §1 Executive Layer Boundary Definitions
+
+| System Layer | Technical Role | AMC Technical Interaction Pattern |
 |---|---|---|
-| **Frontend Framework** | React 18 + Vite | React 18.x; Vite latest stable |
-| **Language** | TypeScript 5.x | All frontend and edge code |
-| **State Management** | React Context / Zustand | Auth state and UI state |
-| **Database** | Supabase (PostgreSQL 15+) | Tenant-isolated; RLS required |
-| **Auth** | Supabase Auth | JWT-based; identity separation required |
-| **Backend Logic** | Supabase Edge Functions (Deno) | Serverless orchestration boundary |
-| **AI Integration** | AIMC Gateway only | Direct provider calls prohibited |
-| **Deployment** | Vercel | Governed deployment |
-| **CI/CD** | GitHub Actions | Foreman-governed pipeline |
-| **Notification/UX** | react-hot-toast | Executive feedback surface |
+| **AMC** | React front-end + API layer. Owns executive state (alerts, approvals, interventions, audit, conversation, health events). Does not execute AI models. Does not own persistent knowledge truth | Writes to AMC-owned tables. Reads from external systems via governed API calls |
+| **AIMC** | AI execution gateway service. Sole authorized AI model router | AMC calls AIMC REST/WebSocket API only. No direct model provider SDK calls from AMC application code |
+| **AIMCC** | Knowledge ingestion and memory operations service | AMC calls AIMCC read API for status and provenance. AMC calls KUC API for upload submission — never AIMCC ingestion endpoints directly |
+| **Knowledge Upload Centre (KUC)** | Governed knowledge upload entry point. REST API surface | AMC POSTs upload submissions exclusively to KUC API. AMC does not call AIMCC ingestion endpoints directly |
+| **Knowledge / Memory System** | Persistent estate knowledge substrate | AMC calls governed knowledge query API with provenance requirement. AMC does not write to or cache knowledge records beyond transient session display |
+| **Foreman** | Orchestration agent. Reporting source, intervention dispatch target | AMC reads Foreman reporting feed (read-only). AMC dispatches intervention orders to Foreman dispatch API |
+| **Specialist Agents** | Domain-specific sandboxed workers | AMC receives status callbacks from specialist agents. AMC may dispatch termination orders through governed pathway |
 
-**Inviolable constraint**: No AMC component may call an AI model provider directly. All AI interactions must route through AIMC. This is a technical enforcement requirement.
+**Non-bypass technical enforcement rules:**
+
+| Rule | Technical Constraint |
+|---|---|
+| **TR-BOUNDARY-001** | AMC application code MUST NOT import or instantiate any AI model SDK (e.g., OpenAI SDK, Anthropic SDK). All AI calls must use the AIMC API client. Architecture must enforce this at the dependency level |
+| **TR-BOUNDARY-002** | AMC application code MUST NOT call AIMCC internal ingestion endpoints. Upload submissions must POST to the KUC API base URL exclusively |
+| **TR-BOUNDARY-003** | AMC MUST NOT maintain a local write-primary copy of knowledge/memory records. Transient display cache is permitted only with stale-detection TTL |
+| **TR-BOUNDARY-004** | All external API calls from AMC MUST include a governed service-identity auth token in the Authorization header |
 
 ---
 
-## 3. TR-100: Frontend Technical Requirements
+## 3. Technology Stack Constraints
 
-> FRS Traceability: FR-100 to FR-1200, FR-1400
+The following technology constraints are established from approved Stage 1 and Stage 2 sources and confirmed at Stage 4. These constraints must be honored throughout Architecture (Stage 5) and Build (Stage 12).
 
-### TR-101 — React Component Architecture
+| Layer | Constraint | Source Authority |
+|---|---|---|
+| **Authentication** | Supabase Auth. JWT-based session tokens. MFA capability required | FRS FR-1401; Stage 1 §25 |
+| **Database** | Supabase (PostgreSQL). Row-Level Security (RLS) must be enabled for all tables containing executive or actor-specific data | FRS FR-1402; Stage 1 §25 |
+| **Frontend framework** | React (inferred from estate stack; must be confirmed at Architecture stage) | Stage 1 §25; Deferred confirmation: §24 |
+| **API pattern** | REST API with JSON payloads. HTTPS only. No unencrypted API calls | FRS FR-1504 |
+| **Real-time / push** | WebSocket or Supabase Realtime subscription for live state updates (alert acknowledgments, intervention status, conversation messages). Polling fallback permitted for health data only | FRS FR-1204, FR-404, FR-803 |
+| **Push notifications** | Native mobile push (FCM/APNs) or Progressive Web App push API for Critical alert interrupts | FRS FR-1202 |
+| **Audit log persistence** | Append-only write pattern. No UPDATE on audit_events rows. Corrections are additive records | FRS FR-1301 |
+| **Token storage** | JWT stored in secure, httpOnly cookie (preferred) or Supabase Auth session store. Not in localStorage for production | FRS FR-1401, FR-1402 |
+
+---
+
+## 4. TR-100: Executive Estate Oversight — Technical Requirements
+
+> FRS Traceability: FR-101 to FR-104
+
+### TR-101 — Dashboard API Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-101 |
-| **Technical Obligation** | AMC frontend implemented as a single React 18 + Vite + TypeScript 5.x application. No plain JS files in src/. Each named AMC domain from Stage 1 §4 AMC Technical/Operating Domain Declaration (including ARC Governance Console and Quota Management Console) must have a corresponding named TypeScript surface component. No domain surface absorbs another domain silently. |
-| **Verification** | All named AMC surfaces implemented as named TypeScript components. |
+| **FRS Source** | FR-101 |
+| **Technical Requirement** | AMC backend must expose a `GET /api/dashboard/summary` endpoint. The response payload must include: (1) `health_domains[]` — array of five health domain objects, each with: `domain_id`, `label` (System Health / Execution Health / Governance Health / Security / Compliance), `status` (ok / warning / critical / unavailable), `updated_at`; (2) `alert_panel` — `critical_count`, `high_count`, `pending_acknowledgment_count`; (3) `approval_summary` — `pending_count`; (4) `intervention_summary` — `active_count`; (5) `proactive_panel` — `available` (boolean), `summary` (nullable string), `response_type`, `linked_action_ref` (nullable) |
+| **Transport / Auth** | HTTPS. JWT auth required. No unauthenticated access |
+| **Error Response** | On partial data fetch failure: return available fields with `status: "unavailable"` for missing domains; do not return HTTP 200 with incomplete data unmarked as partial. Return `partial: true` flag when any domain data is unavailable |
+| **Deferred to Stage 5** | Health data aggregation logic (how each domain computes its status) |
 
-### TR-102 — Authority-Aware UI State
+### TR-102 — Health Domain Drill-Down API
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-102 |
-| **Technical Obligation** | All UI actions with an authority constraint must perform an authority check before the action is surfaced as available. Actions outside the current actor's authority must be rendered disabled/hidden — not rejected after submission. Authority state derives from authenticated session JWT. |
-| **Verification** | Component authority check tests. Unauthorized actor cannot access action buttons. |
+| **FRS Source** | FR-102 |
+| **Technical Requirement** | AMC backend must expose `GET /api/dashboard/health/{domain_id}` returning domain-specific records for the selected health domain. If the domain data is unavailable: response must return `{ status: "unavailable", reason: "<explicit reason>" }` — not an empty array |
+| **Transport / Auth** | HTTPS. JWT auth required |
+| **Deferred to Stage 5** | Per-domain health record schema details |
 
-### TR-103 — Response Type Labeling
+### TR-103 — Proactive Summary AIMC Request Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-103 |
-| **Technical Obligation** | All AI-generated content rendered in AMC UI must carry a visible response type label: `Observation`, `Recommendation`, `Request`, `Decision`, or `Alert` (FR-803). `response_type` is a non-nullable field on `conversation_messages`. Missing response type renders explicit "unlabeled" indicator — not neutral text. |
-| **Verification** | `response_type` non-nullable. Labels rendered for all response types in UI tests. |
+| **FRS Source** | FR-103 |
+| **Technical Requirement** | AMC must dispatch a governed request to AIMC with action type `proactive_summary` on dashboard load and on background polling cycle (polling interval: configurable, default 60 seconds). Request payload to AIMC must include: `action_type: "proactive_summary"`, `session_id`, `requesting_actor: "system"`, `context: { surface: "executive_dashboard" }`. AIMC response must be surfaced with response type label "Observation". If AIMC returns an error or is unreachable: AMC must render the explicit "Maturion communication unavailable — AIMC unreachable" string — not an empty panel |
+| **Audit Event** | `AIMC_REQUEST` with fields: actor, action_type, source, timestamp |
+| **Deferred to Stage 5** | AIMC routing logic internal to AIMC |
 
-### TR-104 — Degraded-Mode Banner Enforcement
+### TR-104 — Navigation State Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-104 |
-| **Technical Obligation** | When any upstream dependency (AIMC, AIMCC, Knowledge/Memory System, ARC execution endpoint) is in degraded state, the relevant UI surface must render a mandatory, persistent degraded-mode banner until recovery event is received. Degraded mode state tracked via centralized `system_health_events` observable. |
-| **Verification** | Health state simulation tests confirm banners render on degradation and clear on recovery. |
+| **FRS Source** | FR-104 |
+| **Technical Requirement** | AMC frontend router must define explicit named routes for each primary surface: `/dashboard`, `/alerts`, `/approvals`, `/interventions`, `/ai-actions`, `/aimcc-supervision`, `/knowledge`, `/conversation`, `/agent-oversight`, `/maintenance-reports`, `/estate-config`. Navigation must not depend on AIMC or AIMCC availability — routing failures must not silently leave the user on a blank route |
+| **Deferred to Stage 5** | Route guard implementation details |
 
 ---
 
-## 4. TR-200: Backend API Technical Requirements
+## 5. TR-200: Alert Management — Technical Requirements
 
-> FRS Traceability: All FR families with API routes in Stage 2 §7
+> FRS Traceability: FR-201 to FR-209
 
-### TR-201 — Edge Function API Architecture
+### TR-201 — Alerts Table Schema Requirements
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-201 |
-| **Technical Obligation** | All AMC backend API routes implemented as Supabase Edge Functions (Deno). No server-side routes in Vercel serverless functions or client-side code. All routes defined in Stage 2 §7 Wiring Model must have corresponding Edge Function implementations. Routes must enforce auth token validation before any data access or mutation. |
-| **Verification** | All Stage 2 §7 wiring routes have Edge Function implementations. Route-level auth check tests pass. |
+| **FRS Source** | FR-201 to FR-209 |
+| **Technical Requirement** | AMC database must define an `alerts` table with at minimum the following columns: `id` (UUID, primary key), `alert_class` (enum: critical / high / medium / low / informational), `source_system` (text), `summary` (text, NOT NULL), `created_at` (timestamptz, NOT NULL), `acknowledged_at` (timestamptz, nullable), `acknowledged_by` (text / actor ref, nullable), `escalated_at` (timestamptz, nullable), `escalation_target` (text, nullable), `escalation_type` (enum: manual / timeout, nullable), `dismissed_at` (timestamptz, nullable), `dismissed_by` (text, nullable), `dismiss_reason` (text, nullable), `linked_approval_id` (UUID, nullable FK → approvals), `linked_intervention_id` (UUID, nullable FK → interventions), `status` (enum: active / acknowledged / escalated / dismissed / resolved). RLS policy: only authenticated executive actor may read/write. Informational only: index on `alert_class` + `status` for priority ordering |
+| **API Endpoint** | `GET /api/alerts` — ordered by: critical → high → medium → low → informational, then by `created_at` DESC. Must return `status: "error"` and explicit message if fetch fails — must not return empty array silently |
+| **Real-Time** | Alert status changes (acknowledgment, escalation, dismissal) must be propagated via Supabase Realtime or WebSocket broadcast to connected AMC sessions |
 
-### TR-202 — API Auth Enforcement
+### TR-202 — Alert Acknowledgment Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-202 |
-| **Technical Obligation** | Every API route that reads or mutates data must validate the caller's JWT before processing. Unauthenticated → 401 Unauthorized. Unauthorized (authenticated but insufficient authority) → 403 Forbidden with no data disclosure. |
-| **Verification** | API integration tests confirm 401/403 on all routes. |
+| **FRS Source** | FR-203 |
+| **Technical Requirement** | `POST /api/alerts/{alert_id}/acknowledge`. Request body: `{ actor_id, actor_type, basis }`. Endpoint must: (1) verify actor is authorized (Johan Ras or authorized Maturion delegate); (2) set `acknowledged_at` and `acknowledged_by` on the alert row; (3) write `ALERT_ACKNOWLEDGED` audit event; (4) return success with `{ acknowledged_at, audit_ref }`. If write fails: return HTTP 4xx/5xx — acknowledgment must not be shown as complete. If actor is unauthorized: return HTTP 403 with explicit rejection |
 
-### TR-203 — Audit Event Atomicity
+### TR-203 — Alert Escalation Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-203 |
-| **Technical Obligation** | Every mutating API endpoint for consequential actions must produce an audit event record in `audit_events` as part of the same database transaction. Audit event and data mutation succeed or fail together — partial writes are not permitted. |
-| **Verification** | Transactional tests verify atomicity. Rollback simulation confirms no partial commits. |
+| **FRS Source** | FR-204, FR-208 |
+| **Technical Requirement** | `POST /api/alerts/{alert_id}/escalate`. Request body: `{ actor_id, actor_type, escalation_target, escalation_type }`. For manual escalation: write `ALERT_ESCALATED` audit event. For auto-escalation: background job fires at configurable timeout (default: 30 minutes for unacknowledged Critical alerts); writes `ALERT_ESCALATED_TIMEOUT` audit event with `escalation_type: "timeout"`. Background job must generate a system-level error alert if it itself fails |
+
+### TR-204 — Alert Dismissal Enforcement Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-204 |
+| **FRS Source** | FR-205 |
+| **Technical Requirement** | `POST /api/alerts/{alert_id}/dismiss`. Server-side enforcement: if `alert_class` is critical, high, or medium — return HTTP 422 with body `{ error: "dismissal_not_permitted", reason: "Critical/High/Medium alerts may not be dismissed — must be acknowledged then resolved" }`. No client-side-only enforcement: server must reject independently of client-side UI hiding. Dismiss action requires non-empty `dismiss_reason` field |
+
+### TR-205 — Alert-to-Approval Link Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-205 |
+| **FRS Source** | FR-206 |
+| **Technical Requirement** | `POST /api/alerts/{alert_id}/link-approval`. Creates approval record in `approvals` table with `source_alert_id` populated. Writes audit event `APPROVAL_CREATED_FROM_ALERT`. Returns `{ approval_id, approval_queue_url }`. If approval creation fails: HTTP 500 with explicit error — alert state must not be altered |
+
+### TR-206 — Auto-Escalation Scheduler Technical Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-206 |
+| **FRS Source** | FR-208 |
+| **Technical Requirement** | A background scheduled job (Supabase Edge Function, cron, or equivalent) must run at minimum every 5 minutes. Query: SELECT alerts WHERE `alert_class = 'critical' AND acknowledged_at IS NULL AND created_at < (now() - escalation_timeout_interval)`. For each matched alert: execute escalation (write escalation fields, write `ALERT_ESCALATED_TIMEOUT` audit event). Scheduler failure must generate a new Critical alert in the `alerts` table with `source_system: "amc_scheduler"` |
+
+### TR-207 — Alert Generation & Delivery Timing Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-207 |
+| **FRS Source** | FR-201, FR-204; Stage 1 §3 Executive Alerting Success Criteria |
+| **Technical Requirement** | Alert persistence timing SLAs: (1) any event that triggers alert creation (scheduler, AIMC callback, system health check, intervention failure, boundary bypass) must result in the alert being persisted to the `alerts` table within 5 seconds of trigger event detection; (2) alert delivery to connected sessions via Supabase Realtime must occur within 2 seconds of the INSERT commit; (3) for critical alerts: push notification dispatch (TR-1202) must begin within 5 seconds of INSERT commit — not batched or deferred. Timing SLA summary: trigger → INSERT ≤5 s; INSERT → Realtime broadcast ≤2 s; INSERT → push dispatch begin ≤5 s. If a timing SLA breach is detected via system self-monitoring: AMC must write an `ALERT_DELIVERY_DELAYED` audit event with `severity: warning` |
+| **Deferred to Stage 5** | System self-monitoring implementation for SLA breach detection |
+
+### TR-208 — Alert Write Retry & Durability Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-208 |
+| **FRS Source** | FR-201, FR-203 |
+| **Technical Requirement** | If an alert INSERT fails (database write error): AMC backend must retry up to 3 times with exponential back-off (retry 1: 1 s, retry 2: 3 s, retry 3: 10 s). If all 3 retries fail: (1) write an `ALERT_WRITE_FAILED` event to a durable fallback store or secondary audit sink (cannot write to the same failing table); (2) surface an error to the UI surface that triggered the alert if human-initiated; (3) do NOT silently suppress the failure. For system-generated alerts (scheduler, health monitors): if all retries fail, the originating component must surface a `SYSTEM_ERROR` audit event and generate a new highest-severity alert when the table becomes available. Acknowledgment write failures (TR-202): no partial update — if the row update and audit write cannot both complete, the acknowledgment must be rolled back and an explicit error returned to the API caller |
+
+### TR-209 — Alert Escalation Chain Technical Definition
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-209 |
+| **FRS Source** | FR-204, FR-208 |
+| **Technical Requirement** | Escalation chain levels: (1) Level 0 — alert created, awaiting acknowledgment; (2) Level 1 — alert unacknowledged after `escalation_timeout_level_1_minutes` (configurable, default: 30 minutes for Critical) → auto-escalation target `"maturion"` (Maturion AI executive); (3) Level 2 — alert still unacknowledged after `escalation_timeout_level_2_minutes` (configurable, default: 60 minutes) → escalation target `"johan_ras_direct"` — push notification delivery mandatory. Level skipping is prohibited: auto-escalation must traverse levels sequentially. Manual escalation by Johan Ras may jump directly to any level. Each level transition writes a distinct audit event: `ALERT_ESCALATED_LEVEL_1`, `ALERT_ESCALATED_LEVEL_2`. Once at Level 2, no further auto-escalation fires — the alert remains at Level 2 until acknowledged or resolved. Escalation state is stored in the `alerts` table columns `escalated_at`, `escalation_target`, `escalation_type` (enum expanded to include `timeout_level_1` and `timeout_level_2`) |
 
 ---
 
-## 5. TR-300: ARC Technical Domain
+## 6. TR-300: Approval Workflow — Technical Requirements
 
-> FRS Traceability: FR-1801 to FR-1807
-> Stage 1 Traceability: §4 AMC Technical/Operating Domain Declaration (ARC Governance Console)
-> Stage 2 Traceability: §4.4.1 ARC Governance Console Journey, §7.4.1 ARC Governance Console Wiring
+> FRS Traceability: FR-301 to FR-307
 
-> **ARC is an explicitly named, technically distinct AMC domain.** ARC is NOT implemented as a subset of the generic intervention system. It has its own data schema, API routes, and UI surface.
-
-### TR-301 — ARC Data Schema
+### TR-301 — Approvals Table Schema Requirements
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-301 |
-| **Technical Obligation** | `arc_events` table implemented as a separate named table (not a `type` field on `interventions`). Required columns: `arc_event_id` (UUID PK), `triggering_condition` (text, not null), `proposed_response` (text, not null), `current_state` (enum: pending_review/approved/rejected/escalated/deferred, not null), `priority_level` (enum: critical/high/medium/low, not null), `detected_at` (timestamptz, not null), `decided_by` (UUID FK, nullable), `decided_at` (timestamptz, nullable), `decision_basis` (text, nullable — required when decided_by not null), `impact_scope` (jsonb, not null), `arc_service_ref` (text, nullable). |
-| **Constraint** | RLS enabled. Only service role and authenticated Johan sessions may write. |
-| **Verification** | Migration creates table with all required columns. RLS policy tests pass. |
+| **FRS Source** | FR-301 to FR-307 |
+| **Technical Requirement** | AMC database must define an `approvals` table with at minimum: `id` (UUID, primary key), `approval_type` (text), `source_type` (enum: ai_action / governance_action / intervention / reserved_matter / aimcc_governance / manual), `source_alert_id` (UUID, nullable FK → alerts), `source_intervention_id` (UUID, nullable FK → interventions), `source_aimc_action_id` (UUID, nullable FK → aimc_action_log), `aimcc_context_id` (text, nullable), `authority_boundary_type` (enum: reserved_matter / delegated / operational), `status` (enum: pending / approved / rejected / deferred / cancelled), `deciding_actor` (text, nullable), `decided_at` (timestamptz, nullable), `approval_basis` (text, nullable — required on approve), `rejection_reason` (text, nullable — required on reject), `deferred_by` (text, nullable), `deferred_at` (timestamptz, nullable), `deferral_note` (text, nullable — required on defer), `follow_up_at` (timestamptz, nullable), `deadline` (timestamptz, nullable), `created_at` (timestamptz, NOT NULL), `downstream_action_ref` (text, nullable — reference to unblocked action) |
 
-### TR-302 — ARC Audit Log Schema
+### TR-302 — Approval Decision API Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-302 |
-| **Technical Obligation** | `arc_audit_log` table: `arc_audit_id` (UUID PK), `arc_event_id` (UUID FK → arc_events), `action_type` (enum: ARC_ACTION_APPROVED/ARC_ACTION_REJECTED/ARC_EVENT_ESCALATED/ARC_EVENT_DEFERRED, not null), `actor` (UUID, not null), `timestamp` (timestamptz, not null), `detail` (jsonb). Append-only: no UPDATE or DELETE permitted. |
-| **Constraint** | RLS: authenticated users may SELECT; only service role may INSERT. UPDATE/DELETE blocked. |
-| **Verification** | UPDATE/DELETE attempts on arc_audit_log fail in tests. |
+| **FRS Source** | FR-303, FR-304 |
+| **Technical Requirement** | `POST /api/approvals/{approval_id}/decide`. Request body: `{ decision: "approved" | "rejected" | "deferred", actor_id, actor_type, basis?, reason?, deferral_note?, follow_up_at? }`. Server-side enforcement rules: (1) `approval_basis` must be non-empty for `approved` decisions — return HTTP 422 if empty; (2) `rejection_reason` must be non-empty for `rejected` decisions — return HTTP 422 if empty; (3) `deferral_note` must be non-empty for `deferred` decisions; (4) `reserved_matter` authority boundary requires actor to be Johan Ras — return HTTP 403 if actor type is non-Johan on reserved matters; (5) decision must be idempotent against race condition: if already decided, return HTTP 409 with current decision state |
 
-### TR-303 — ARC API Routes
+### TR-303 — Post-Approval Action Dispatch
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-303 |
-| **Technical Obligation** | The following ARC API routes implemented as dedicated Edge Functions (not reusing intervention endpoints): `GET /api/arc/events`, `GET /api/arc/events/{id}/detail`, `POST /api/arc/events/{id}/decide`, `POST /api/arc/events/{id}/escalate`, `POST /api/arc/events/{id}/defer`. Each validates auth, checks authority, produces audit event. |
-| **Verification** | All 5 ARC routes exist as distinct Edge Functions. Integration tests for 200/401/403/422. |
+| **FRS Source** | FR-303 |
+| **Technical Requirement** | On successful `approved` decision: AMC backend must dispatch the unblocked downstream action to the appropriate external service (AIMC, Foreman dispatch API, AIMCC governance endpoint) within the same transaction or in an atomic post-commit step. If downstream dispatch fails after the approval record is committed: the approval record must remain persisted with `status: approved`; a `downstream_dispatch_failed` flag must be set; an explicit error response returned to the user. The approval decision must not be rolled back due to downstream service unavailability |
 
-### TR-304 — ARC Execution Integration
+### TR-304 — Approval Blocking Rule Enforcement
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-304 |
-| **Technical Obligation** | On ARC action approval: AMC notifies ARC execution endpoint via governed API call. Payload includes: `arc_event_id`, `approved_by`, `approved_at`, `decision_basis`. AMC records response status as `execution_notification_status` on `arc_events`. AIMCC execution endpoint unavailability does NOT prevent approval from being recorded — approval stands; execution is queued pending recovery. |
-| **Verification** | ARC execution notification tests. Degraded execution endpoint test confirms approval still recorded. |
+| **FRS Source** | FR-307 |
+| **Technical Requirement** | Any API endpoint that dispatches a governance-sensitive action must check for the existence of a pending or approved approval record before proceeding. Check implementation: query `approvals` table WHERE `downstream_action_ref = <action_id>` AND `status = 'pending'`. If pending approval exists: return HTTP 423 (Locked) with `{ blocked_by_approval: true, approval_id }`. This check must execute server-side — not client-side only |
 
 ---
 
-## 6. TR-400: Alert Timing & Escalation Technical Contracts
+## 7. TR-400: Intervention — Technical Requirements
 
-> FRS Traceability: FR-201 to FR-209, BR-ALERT-001 to BR-ALERT-004
+> FRS Traceability: FR-401 to FR-407
 
-### TR-401 — Alert Severity Enum
+### TR-401 — Interventions Table Schema Requirements
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-401 |
-| **Technical Obligation** | `alerts.severity` column enforces enum at database level: `critical`, `high`, `medium`, `low`, `informational`. No free-text severity. Any severity change must be recorded in audit trail. |
-| **Verification** | Schema migration enforces enum. Invalid severity values fail with constraint error. |
+| **FRS Source** | FR-401 to FR-407 |
+| **Technical Requirement** | AMC database must define an `interventions` table with at minimum: `id` (UUID, primary key), `intervention_type` (text — from predefined catalogue or custom), `scope_target` (text — target system/agent/module), `scope_description` (text), `intended_outcome` (text), `authority_level` (enum: reserved_matter / delegated / operational), `initiator_actor` (text), `initiator_type` (enum: human / ai_executive / system), `status` (enum: pending_approval / queued / in_progress / completed / failed / cancelled / dispatch_failed), `approval_required` (boolean), `linked_approval_id` (UUID, nullable FK → approvals), `dispatched_at` (timestamptz, nullable), `executing_agent` (text, nullable), `dispatch_failed_at` (timestamptz, nullable), `completed_at` (timestamptz, nullable), `outcome` (text, nullable), `failed_at` (timestamptz, nullable), `failure_reason` (text, nullable), `cancelled_by` (text, nullable), `cancel_reason` (text, nullable — required on cancel), `cancelled_at` (timestamptz, nullable), `created_at` (timestamptz, NOT NULL), `source_alert_id` (UUID, nullable FK → alerts), `source_report_id` (text, nullable) |
 
-### TR-402 — Auto-Escalation Timing Contract
+### TR-402 — Intervention Dispatch API Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-402 |
-| **Technical Obligation** | Unacknowledged Critical alerts auto-escalate after configurable timeout (default: 30 minutes, via `amc_config.critical_alert_escalation_timeout_minutes`). Background job fires within timeout + 5 minutes acceptable jitter. Auto-escalation creates record in `escalations` with `source: auto_escalation`. Must NOT fire if alert acknowledged before timeout. |
-| **Verification** | Scheduler tests confirm auto-escalation fires within timeout window. Acknowledged alert test confirms no auto-escalation. |
+| **FRS Source** | FR-403 |
+| **Technical Requirement** | On dispatch: `POST {FOREMAN_API_BASE_URL}/api/foreman/dispatch-intervention` (external call) OR `POST {SPECIALIST_AGENT_API_BASE_URL}/api/specialist-agents/{agent_id}/dispatch` (external call). AMC must: (1) include governed auth token in Authorization header; (2) receive a synchronous acknowledgment (HTTP 202 Accepted) confirming the intervention entered a governed execution path; (3) update `interventions.status` to `in_progress` and set `dispatched_at` and `executing_agent`; (4) write `INTERVENTION_DISPATCHED` audit event. If dispatch returns non-2xx: set `status: dispatch_failed`, write audit event |
 
-### TR-403 — Alert State Machine
+### TR-403 — Intervention Status Callback Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-403 |
-| **Technical Obligation** | `alerts.status` enforces valid state machine at API layer: `active → acknowledged`, `active → escalated`, `acknowledged → resolved`, `acknowledged → escalated`, `escalated → resolved`. `active → dismissed` only permitted for `informational` and `low` severity. Invalid transitions rejected (422 Unprocessable Entity). |
-| **Verification** | State machine transition tests. Invalid transitions return 422. |
+| **FRS Source** | FR-404, FR-405, FR-406 |
+| **Technical Requirement** | AMC must expose a callback endpoint: `POST /api/interventions/{intervention_id}/status-update`. Payload: `{ status: "in_progress" | "completed" | "failed", executing_agent, step_description?, outcome?, failure_reason?, timestamp }`. On receipt: (1) update `interventions` table row; (2) broadcast status update via Supabase Realtime to connected sessions viewing that intervention; (3) write relevant audit event (`INTERVENTION_COMPLETED` or `INTERVENTION_FAILED`). Callback endpoint must validate that the calling agent is the registered `executing_agent` for this intervention |
 
-### TR-404 — Alert Expiry Non-Resolution Contract
+### TR-404 — Cancel Intervention Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-404 |
-| **Technical Obligation** | Expired alerts must NOT transition to `resolved`. Expiry moves alert to `expired` status (terminal, distinct from `resolved`). `resolved` requires explicit resolution action with recorded source. No background job may set `status = resolved` without a resolution source. |
-| **Verification** | Expired alert tests confirm not shown as resolved. Resolution requires explicit source. |
-
-### TR-405 — Quota Threshold Alert Technical Contract
-
-| Field | Value |
-|---|---|
-| **Requirement ID** | TR-405 |
-| **Technical Obligation** | Quota threshold proactive alerts (FR-606) generated by background monitor polling AIMCC quota state at configurable interval (default 15 minutes). Threshold breach creates alert in `alerts` with `source: quota_threshold_monitor`. Severity mapping: Warning → medium, Critical → high, Exceeded → critical. Deduplication: no duplicate active alert for same threshold level if one already exists. |
-| **Verification** | Monitor polling tests. Deduplication tests. |
+| **FRS Source** | FR-407 |
+| **Technical Requirement** | `POST /api/interventions/{intervention_id}/cancel`. Request body: `{ actor_id, actor_type, cancel_reason }`. Server-side: `cancel_reason` must be non-empty — return HTTP 422 if empty. On success: (1) update `status: cancelled`, set `cancelled_by`, `cancel_reason`, `cancelled_at`; (2) dispatch abort signal to `executing_agent` if intervention is in_progress; (3) write `INTERVENTION_CANCELLED` audit event. If abort signal to executing agent fails: cancellation record must still be persisted; abort failure recorded as a separate `INTERVENTION_ABORT_SIGNAL_FAILED` event |
 
 ---
 
-## 7. TR-500: Audit Technical Contracts
+## 8. TR-500: AI-Routed Actions (AIMC) — Technical Requirements
 
-> FRS Traceability: FR-1301 to FR-1304, BR-AUDIT-001, BR-AUDIT-002
+> FRS Traceability: FR-501 to FR-504
 
-### TR-501 — Audit Event Schema
+### TR-501 — AIMC Action Log Schema Requirements
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-501 |
-| **Technical Obligation** | All audit events stored in `audit_events` table. Mandatory fields: `audit_event_id` (UUID PK), `event_type` (text, not null), `actor` (UUID or 'system', not null), `actor_role` (text, not null), `occurred_at` (timestamptz, not null, default now()), `subject_type` (text, not null), `subject_id` (text, not null), `detail` (jsonb, not null), `session_id` (UUID, nullable), `ip_address` (text, nullable). |
-| **Constraint** | Append-only. No UPDATE or DELETE permitted. RLS: service role INSERT only. |
-| **Verification** | Schema migration verified. UPDATE/DELETE rejected in DB policy tests. |
+| **FRS Source** | FR-501 to FR-504 |
+| **Technical Requirement** | AMC database must define an `aimc_action_log` table with at minimum: `id` (UUID, primary key), `action_type` (text — e.g., `proactive_summary`, `conversation_message`, `governance_action`, `specialist_task`), `originating_actor` (text), `originating_actor_type` (enum: human / ai_executive / system / specialist_agent), `aimc_route_target` (text), `approval_required` (boolean), `linked_approval_id` (UUID, nullable FK → approvals), `dispatch_status` (enum: pending / dispatched / completed / failed / blocked_by_approval), `dispatched_at` (timestamptz, nullable), `aimc_ref` (text, nullable — AIMC-side reference), `result_summary` (text, nullable), `outcome` (enum: success / failure / error / pending, nullable), `completed_at` (timestamptz, nullable), `error_detail` (text, nullable), `created_at` (timestamptz, NOT NULL) |
 
-### TR-502 — Audit Atomicity
+### TR-502 — AIMC API Call Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-502 |
-| **Technical Obligation** | Audit event INSERT is part of same database transaction as data mutation. Transaction rollback on audit INSERT failure — no partial commits. |
-| **Verification** | Rollback simulation confirms no data-without-audit partial state. |
+| **FRS Source** | FR-501, FR-503 |
+| **Technical Requirement** | All AI action dispatches from AMC must call the AIMC base API URL (configurable environment variable `AIMC_API_BASE_URL`). AMC must NOT contain any import or invocation of direct model provider SDKs (OpenAI, Anthropic, Google Gemini, etc.). The Architecture stage must enforce this as a linting/dependency rule. AMC AIMC request format: `POST {AIMC_API_BASE_URL}/actions`. Headers: `Authorization: Bearer {service_token}`, `Content-Type: application/json`. Payload: `{ action_type, originating_actor, originating_actor_type, context, approval_status, amc_action_id }` |
 
-### TR-503 — Audit Retention
+### TR-503 — AIMC Callback Endpoint Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-503 |
-| **Technical Obligation** | Audit events retained minimum 24 months. No automated purge within retention window without CS2 authorization. |
-| **Verification** | Retention policy documented. No automated deletion within window. |
+| **FRS Source** | FR-502 |
+| **Technical Requirement** | AMC must expose `POST /api/aimc/callback`. Payload: `{ amc_action_id, aimc_ref, outcome, result_summary, completed_at, error_detail? }`. On receipt: (1) update `aimc_action_log` row; (2) write `AIMC_ACTION_COMPLETED` audit event; (3) broadcast result to relevant surfaces via Supabase Realtime. AIMC callback endpoint must validate the calling service identity via shared service token before accepting |
+
+### TR-504 — AIMC Non-Bypass Enforcement Technical Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-504 |
+| **FRS Source** | FR-503 |
+| **Technical Requirement** | Architecture must enforce: (1) `package.json` (or equivalent) must not list any model-provider SDK as a dependency; (2) any attempt to add such a dependency must be flagged by dependency scanning (enforceable via CI dependency gate); (3) if AMC detects a bypass attempt at runtime (e.g., an unexpected direct model call), it must write a `BOUNDARY_BYPASS_ATTEMPTED` event to `audit_events` with `severity: critical` and surface a Critical alert |
 
 ---
 
-## 8. TR-600: State & Persistence Technical Contracts
+## 9. TR-600: AIMCC / Knowledge Upload Centre Supervision — Technical Requirements
 
-> FRS Traceability: FR-1701 to FR-1703, §23.4 State/Persistence Expectations Summary
+> FRS Traceability: FR-601 to FR-605
 
-### TR-601 — RLS Enforcement
+### TR-601 — AIMCC Status Read API Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-601 |
-| **Technical Obligation** | All AMC data tables must have PostgreSQL RLS enabled with default-deny policies. Service role key never used in frontend. Frontend uses user JWT only. |
-| **Verification** | RLS policy migration tests. Unauthorized JWT access returns no data. |
+| **FRS Source** | FR-601, FR-602, FR-603 |
+| **Technical Requirement** | AMC must call `GET {AIMCC_API_BASE_URL}/uploads/status` to fetch active and recent upload items. The AIMCC API response must provide per-upload: `id`, `document_name`, `submitter`, `submitted_at`, `kuc_receipt_status`, `ingestion_state`, `outcome`, `aimcc_tracking_ref`. AMC must surface this as read-only; AMC must not write to AIMCC upload records. If AIMCC is unreachable: AMC surfaces previously-fetched data with `stale: true` indicator and `stale_since: <timestamp>` — not silently presenting stale data as current |
 
-### TR-602 — Tenant Isolation
+### TR-602 — Quota Data Read Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-602 |
-| **Technical Obligation** | All multi-tenant tables include non-nullable `organisation_id` (UUID FK). RLS policies enforce `organisation_id = auth.jwt() → 'organisation_id'`. Cross-tenant leakage prevented at RLS level. |
-| **Verification** | Cross-tenant access tests confirm no data returned for another organisation's records. |
+| **FRS Source** | FR-603 |
+| **Technical Requirement** | AMC must call `GET {AIMCC_API_BASE_URL}/quota/current` to fetch upload quota state. Expected response fields: `current_quota`, `used`, `usage_percentage`, `threshold_warning_level` (enum: ok / warning / critical), `approved_change_pending` (boolean). AMC must store last-known quota values locally with a TTL cache; on AIMCC degraded mode: display last-known values with explicit stale indicator |
 
-### TR-603 — External State Ownership
+### TR-603 — AIMCC Governance Action Creation Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-603 |
-| **Technical Obligation** | AMC must not cache or claim canonical ownership of data owned by external systems (AIMCC, Knowledge/Memory System). Cached representations must have explicit staleness metadata and expiry. Stale data must NEVER be served as current without explicit indicator. |
-| **Verification** | Data ownership audit. Every external-system cache table has staleness metadata. |
+| **FRS Source** | FR-604 |
+| **Technical Requirement** | When a governance action is required (quota change request, content flag): `POST /api/approvals` with `source_type: "aimcc_governance"` and `aimcc_context_id` populated. On approval decision: `POST {AIMCC_API_BASE_URL}/governance/decision` with `{ aimcc_context_id, decision, decided_by, decided_at, basis }`. Headers: governed service token. If AIMCC is unavailable: governance action approval decision must be queued; AIMCC must be notified on recovery — not auto-processed |
+
+### TR-604 — KUC Non-Bypass Technical Enforcement
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-604 |
+| **FRS Source** | FR-605 |
+| **Technical Requirement** | Any knowledge upload submission from AMC context must POST to `{KUC_API_BASE_URL}/submit` exclusively. Architecture must prevent any direct call to AIMCC ingestion endpoints from AMC code. If a bypass is detected at runtime: write `BOUNDARY_BYPASS_ATTEMPTED` event to `audit_events` |
+
+### TR-605 — Quota Adjustment Request Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-605 |
+| **FRS Source** | FR-603, FR-604; Stage 1 §4 Dynamic Upload Quota Management reconciliation |
+| **Technical Requirement** | AMC must expose `POST /api/aimcc/quota/request-adjustment` as a hands-on quota management console action. Request body: `{ requested_quota, current_quota, adjustment_reason, requested_by: actor_id, adjustment_type: "increase" \| "decrease" \| "temporary_override" }`. On submission: (1) validate `adjustment_reason` is non-empty — return HTTP 422 if absent; (2) create an approval record with `source_type: "aimcc_quota_adjustment"`, `authority_boundary_type: "reserved_matter"`, `aimcc_context_id` populated; (3) write `QUOTA_ADJUSTMENT_REQUESTED` audit event with fields: `actor`, `current_quota`, `requested_quota`, `adjustment_type`, `timestamp`; (4) return `{ approval_id, approval_status: "pending", current_quota, requested_quota }`. If approval record creation fails: return HTTP 500 with explicit error — no quota operation may proceed without an approval record. This endpoint is the sole quota-change initiation path from AMC |
+
+### TR-606 — Quota Override Technical Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-606 |
+| **FRS Source** | FR-603, FR-604; Stage 1 §4 Dynamic Upload Quota Management |
+| **Technical Requirement** | Temporary quota override (`adjustment_type: "temporary_override"`) requires the following additional enforcement: (1) request body must include `override_expiry_at` (timestamptz) — return HTTP 422 if absent for override type; (2) approval record must capture `override_expiry_at` in its approval metadata; (3) on AIMCC governance decision notification (TR-603 pattern): include `override_expiry_at` in the decision payload so AIMCC can enforce expiry; (4) write `QUOTA_OVERRIDE_ACTIVATED` audit event when the approved decision is sent to AIMCC; (5) schedule a pre-expiry reminder alert (configurable lead time, default: 24 hours) — alert summary text: "Temporary upload quota override expires at {override_expiry_at}"; (6) on expiry notification from AIMCC: write `QUOTA_OVERRIDE_EXPIRED` audit event. AIMCC is responsible for reverting the quota on expiry; AMC records the event |
+
+### TR-607 — Quota Threshold State Machine Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-607 |
+| **FRS Source** | FR-603; Stage 1 §4 Dynamic Upload Quota Management |
+| **Technical Requirement** | Quota threshold state machine states: `ok` (usage < warning threshold), `warning` (usage ≥ warning threshold AND < critical threshold), `critical` (usage ≥ critical threshold). Default thresholds (all configurable via environment variables): warning at 75%, critical at 90%. State transitions must trigger: `ok → warning`: write `QUOTA_WARNING_THRESHOLD_ENTERED` audit event + create Medium alert in `alerts`; `warning → critical`: write `QUOTA_CRITICAL_THRESHOLD_ENTERED` audit event + create Critical alert in `alerts`; `critical → warning` or `warning → ok` (quota relieved): write `QUOTA_THRESHOLD_RECOVERED` audit event. Threshold configuration values must be environment-variable-configurable (`QUOTA_WARNING_THRESHOLD_PERCENT`, `QUOTA_CRITICAL_THRESHOLD_PERCENT`) — hardcoded threshold values are prohibited. Quota state check must run after every upload operation completion callback received from AIMCC |
+
+### TR-608 — Quota Authorization Rules Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-608 |
+| **FRS Source** | FR-603, FR-604; Stage 1 §4 Dynamic Upload Quota Management |
+| **Technical Requirement** | Quota management authorization rules — all server-side enforcement: (1) Quota read (`GET {AIMCC_API_BASE_URL}/quota/current`): accessible to any authenticated executive actor (Johan Ras or authorized Maturion delegate); (2) Quota adjustment request (TR-605): `reserved_matter` authority boundary — Johan Ras (`human` actor) is the authorized submitter; Maturion-initiated submissions require explicit delegated authority for quota management configured in the authority-domain system; (3) Quota override (TR-606): same as adjustment — `reserved_matter`; (4) AIMCC governance decision notification (TR-603): service-role token only — never via user JWT; (5) Quota audit log access: executive actors may filter `audit_events` by quota-related event types. Any quota operation that bypasses the approval gate (TR-302, TR-304) must be rejected with HTTP 403 and an `UNAUTHORIZED_ACCESS_ATTEMPT` audit event |
+
+### TR-609 — Quota Audit & Observability Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-609 |
+| **FRS Source** | FR-603, FR-604; Stage 1 §4 Dynamic Upload Quota Management |
+| **Technical Requirement** | Required quota-specific audit events (additions to TR-1302 required event type list): `QUOTA_ADJUSTMENT_REQUESTED`, `QUOTA_ADJUSTMENT_APPROVED`, `QUOTA_ADJUSTMENT_REJECTED`, `QUOTA_OVERRIDE_ACTIVATED`, `QUOTA_OVERRIDE_EXPIRED`, `QUOTA_WARNING_THRESHOLD_ENTERED`, `QUOTA_CRITICAL_THRESHOLD_ENTERED`, `QUOTA_THRESHOLD_RECOVERED`. All quota audit events must include mandatory fields: `actor`, `current_quota`, `requested_quota` (where applicable), `threshold_state`, `aimcc_context_id`, `timestamp`. The full quota change history must be reconstructable from `audit_events` by filtering on quota event types — AMC must not maintain a separate quota-history table. Quota panel read calls do not require audit events |
 
 ---
 
-## 9. TR-700: Authentication & Authorization Technical Contracts
+## 10. TR-700: Memory-Aware / Knowledge-Aware View — Technical Requirements
 
-> FRS Traceability: FR-1401 to FR-1403, BR-AUTH-001 to BR-AUTH-004
+> FRS Traceability: FR-701 to FR-703
 
-### TR-701 — JWT-Based Authentication
+### TR-701 — Knowledge Retrieval API Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-701 |
-| **Technical Obligation** | Supabase Auth for all authentication. JWT includes: `sub`, `email`, `role`, `organisation_id`. JWT expiry ≤ 1 hour. Refresh tokens maintain sessions. No session cookies. |
-| **Verification** | Auth flow tests confirm JWT structure. Expired token → 401. |
+| **FRS Source** | FR-701 |
+| **Technical Requirement** | AMC must call `POST {KNOWLEDGE_API_BASE_URL}/retrieve` with payload: `{ query, requesting_actor, requesting_actor_type, session_id, require_provenance: true }`. Response must include per-result: `id`, `content_summary`, `source_document`, `ingestion_date`, `aimcc_tracking_ref`, `confidence_indicator`, `retrieval_timestamp`. AMC must enforce `require_provenance: true` — anonymous knowledge references without provenance are prohibited from rendering. AMC must write `KNOWLEDGE_RETRIEVED` audit event |
 
-### TR-702 — Role-Based Authority
+### TR-702 — Knowledge Retrieval Log Schema Requirements
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-702 |
-| **Technical Obligation** | Role-authority model: `cs2` (Johan Ras — full authority including reserved matters), `maturion_delegate` (delegated authority only). Authority check at Edge Function level before database access. |
-| **Verification** | `maturion_delegate` attempting reserved-matter approval → 403. |
+| **FRS Source** | FR-701, FR-702 |
+| **Technical Requirement** | AMC database must define a `knowledge_retrieval_log` table with: `id` (UUID, primary key), `actor` (text), `actor_type` (text), `query_summary` (text), `result_count` (integer), `source_refs` (jsonb — array of source refs), `retrieval_timestamp` (timestamptz), `knowledge_system_ref` (text, nullable). No write access to the knowledge/memory system by AMC — read only |
 
-### TR-703 — Session Isolation
+### TR-703 — Knowledge Non-Ownership Enforcement
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-703 |
-| **Technical Obligation** | Sessions isolated by user and organisation. Every Edge Function extracts `organisation_id` from JWT and applies it as filter on all database queries. No query omits `organisation_id` filtering on multi-tenant tables. |
-| **Verification** | Cross-organisation session isolation tests. |
-
-### TR-704 — Auth-Failure Behavior
-
-| Field | Value |
-|---|---|
-| **Requirement ID** | TR-704 |
-| **Technical Obligation** | Auth failure → 401 with no data disclosure. Authorization failure → 403 with no record IDs or field values in response. |
-| **Verification** | Auth failure response body tests confirm no data disclosure. |
+| **FRS Source** | FR-703 |
+| **Technical Requirement** | AMC MUST NOT define any database table that stores persistent knowledge/memory content as AMC-canonical truth. The `knowledge_retrieval_log` stores retrieval metadata only, not knowledge content. Any in-memory or Redis-style cache of retrieved knowledge must have a maximum TTL of 5 minutes and must include stale-at timestamp. Cache invalidation on knowledge system degradation: immediately mark all cached items as stale. Architecture must enforce: no table with column names implying knowledge ownership (e.g., no `knowledge_content`, `memory_record`, `fact_store` tables owned by AMC) |
 
 ---
 
-## 10. TR-800: Operational Quota Management Technical Contracts
+## 11. TR-800: Executive Conversation — Technical Requirements
 
-> FRS Traceability: FR-603, FR-606, FR-607, BR-QUOTA-001, BR-QUOTA-002
-> Stage 1 Traceability: §4 AMC Technical/Operating Domain Declaration (Dynamic Upload Quota Management)
-> Stage 2 Traceability: §4.6.1 Dynamic Upload Quota Management Console Journey, §7.6.1 Quota Management Console Wiring
+> FRS Traceability: FR-801 to FR-807
 
-> **Quota Management is an operationally distinct AMC domain** with its own data schema, API routes, and AIMCC integration.
-
-### TR-801 — Quota State Schema
+### TR-801 — Conversation Messages Table Schema Requirements
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-801 |
-| **Technical Obligation** | `quota_state` table (transient AIMCC cache): `quota_state_id` (UUID PK), `organisation_id` (UUID FK, not null), `current_limit` (bigint bytes, not null), `current_usage` (bigint bytes, not null), `usage_percent` (numeric(5,2) computed), `warning_threshold_percent` (numeric(5,2), not null, default 75.0), `critical_threshold_percent` (numeric(5,2), not null, default 90.0), `last_fetched_at` (timestamptz, not null), `is_stale` (boolean, not null, default false), `stale_since` (timestamptz, nullable). |
-| **Constraint** | `is_stale` set true when AIMCC unavailable or `last_fetched_at` older than `amc_config.quota_stale_threshold_minutes`. Stale quota NEVER served without `is_stale: true`. |
-| **Verification** | Schema migration. Staleness indicator tests. |
+| **FRS Source** | FR-801 to FR-807 |
+| **Technical Requirement** | AMC database must define a `conversation_messages` table with: `id` (UUID, primary key), `session_id` (text — ties to auth session or conversation thread), `message_text` (text, NOT NULL), `sender_actor` (text), `sender_actor_type` (enum: human / ai_executive / system), `response_type` (enum: Observation / Recommendation / Request / Decision / Alert — required for AI messages, nullable for human messages), `aimc_ref` (text, nullable), `linked_approval_id` (UUID, nullable FK → approvals), `linked_alert_id` (UUID, nullable FK → alerts), `linked_intervention_id` (UUID, nullable FK → interventions), `acknowledged_at` (timestamptz, nullable), `acknowledged_by` (text, nullable), `is_proactive` (boolean, default false), `priority` (enum: normal / high / critical, nullable), `created_at` (timestamptz, NOT NULL). Index: `session_id` + `created_at` for conversation load |
 
-### TR-802 — Quota Change Request Schema
+### TR-802 — Conversation API Contracts
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-802 |
-| **Technical Obligation** | `quota_change_requests` table: `request_id` (UUID PK), `organisation_id` (UUID FK, not null), `requested_by` (UUID FK, not null), `requested_at` (timestamptz, not null), `new_limit` (bigint, not null), `justification` (text, not null — non-empty enforced), `urgency` (enum: normal/high, not null), `status` (enum: pending/approved/rejected/deferred, not null), `decided_by` (UUID FK, nullable), `decided_at` (timestamptz, nullable), `decision_basis` (text, nullable — required on approval), `rejection_reason` (text, nullable — required on rejection), `aimcc_notification_status` (enum: not_sent/pending/sent/failed, not null, default not_sent), `aimcc_notified_at` (timestamptz, nullable). |
-| **Verification** | Schema migration. Validation tests: empty justification rejected; decision_basis required on approval; rejection_reason required on rejection. |
+| **FRS Source** | FR-801, FR-802 |
+| **Technical Requirement** | `GET /api/conversation/messages?limit=N&before=<timestamp>` — paginated conversation history load. `POST /api/conversation/messages` — send user message. Payload: `{ message_text, session_id, actor_id, actor_type }`. On success: (1) persist to `conversation_messages`; (2) dispatch to AIMC via `TR-502` AIMC API call with action_type `conversation_message`; (3) return `{ message_id, dispatched_to_aimc: boolean, aimc_dispatch_error? }`. If AIMC dispatch fails: message is persisted; response includes `{ dispatched_to_aimc: false, aimc_dispatch_error: "<reason>" }` |
 
-### TR-803 — Quota Change AIMCC Notification
+### TR-803 — AIMC Conversation Callback Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-803 |
-| **Technical Obligation** | On quota change approval: AMC sends `POST /api/aimcc/quota/apply` with `{request_id, organisation_id, new_limit, approved_by, approved_at, decision_basis}`. Records HTTP response status as `aimcc_notification_status`. AIMCC notification failure does NOT rollback approval decision. Failed notifications enter retry queue. Console surfaces pending notification status. |
-| **Verification** | AIMCC notification tests. Failure simulation confirms `aimcc_notification_status = failed` and decision still recorded. Retry queue test. |
+| **FRS Source** | FR-803, FR-806 |
+| **Technical Requirement** | AIMC delivers Maturion conversation responses to `POST /api/aimc/conversation-callback`. Payload must include: `{ amc_message_id, response_text, response_type, aimc_ref, linked_action_refs?: [] }`. `response_type` must be one of: Observation / Recommendation / Request / Decision / Alert. If `response_type` is absent or unrecognized: AMC must persist the message with `response_type: "unknown"` and render it with explicit "type unavailable" indicator — not suppress or default to "Decision" |
 
-### TR-804 — Quota Polling Technical Contract
+### TR-804 — Proactive Message Push Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-804 |
-| **Technical Obligation** | Background quota polling function fetches AIMCC quota state at configurable interval (default 15 minutes). Success: update `quota_state` with `is_stale = false`. Failure: set `is_stale = true`, `stale_since = now()`. Polling jitter ≤ 5 minutes. AIMCC failures handled gracefully. |
-| **Verification** | Polling schedule tests. AIMCC unavailability confirms stale state set. |
+| **FRS Source** | FR-804 |
+| **Technical Requirement** | AIMC may push proactive Maturion messages to AMC via `POST /api/aimc/proactive-message`. Payload: `{ message_text, response_type, priority, linked_action_refs?: [], alert_class? }`. AMC must: (1) persist to `conversation_messages` with `is_proactive: true`; (2) if `alert_class` is present: also create an alert record in `alerts` table; (3) broadcast to connected sessions via Supabase Realtime; (4) write `PROACTIVE_MESSAGE_RECEIVED` audit event |
+
+### TR-805 — Cross-Device Conversation Continuity
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-805 |
+| **FRS Source** | FR-805 |
+| **Technical Requirement** | Conversation state must be stored server-side in `conversation_messages` table (not client-local state only). Any connected session (mobile or desktop) must subscribe to the same `conversation_messages` Supabase Realtime channel filtered by `session_id`. Realtime subscription must deliver message acknowledgment events across devices within 2 seconds of the write |
 
 ---
 
-## 11. TR-900: Cross-System Integration Technical Contracts
+## 12. TR-900: Specialist Agent Workspace Oversight — Technical Requirements
 
-> FRS Traceability: FR-1501 to FR-1504, §23.3 Cross-System Interaction Requirements Summary
+> FRS Traceability: FR-901 to FR-904
 
-### TR-901 — AIMC Integration Contract
+### TR-901 — Workspace Status API Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-901 |
-| **Technical Obligation** | All AMC → AIMC calls: (1) use governed URL from `amc_config.aimc_api_url` — no hardcoded URLs, (2) include governed auth token (not user JWT), (3) include `organisation_id`, (4) record dispatch in `aimc_action_log` before call, (5) record response outcome in `aimc_action_log`. No direct AI model provider calls from AMC — CI lint check enforced. |
-| **Verification** | AIMC integration tests. CI lint check for direct AI provider URLs. |
+| **FRS Source** | FR-901, FR-902 |
+| **Technical Requirement** | AMC must call `GET {SPECIALIST_AGENT_API_BASE_URL}/workspaces` for workspace status (or equivalent Foreman reporting feed). Per-workspace response: `id`, `name`, `agent_type`, `scope_boundary`, `current_status` (enum: idle / active / error / terminated), `active_tasks_count`, `last_reporting_event`, `sandbox_isolation_indicator` (boolean — must always be present). AMC must display sandbox_isolation_indicator on all workspace list and detail views. AMC must not request or display internal specialist agent state — only outcomes |
 
-### TR-902 — AIMCC Integration Contract
+### TR-902 — Workspace Termination Approval Gate
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-902 |
-| **Technical Obligation** | AMC → AIMCC permitted endpoints only: `GET /api/aimcc/uploads`, `GET /api/aimcc/uploads/{id}`, `GET /api/aimcc/quota/summary`, `POST /api/aimcc/quota/apply`, `GET /api/aimcc/health`. AMC must not call AIMCC internal ingestion endpoints. Uses governed URL from `amc_config.aimcc_api_url`. |
-| **Verification** | AIMCC integration tests for each permitted endpoint. |
-
-### TR-903 — Foreman Integration Contract
-
-| Field | Value |
-|---|---|
-| **Requirement ID** | TR-903 |
-| **Technical Obligation** | Intervention dispatch: `POST /api/execute/intervention` on Foreman API (URL from `amc_config.foreman_api_url`). Foreman callback received at `POST /api/amc/execution-callback/{intervention_id}`. Callback validates Foreman auth token. Build status: read-only GET only. |
-| **Verification** | Foreman dispatch and callback integration tests. |
-
-### TR-904 — ARC Execution Integration Contract
-
-| Field | Value |
-|---|---|
-| **Requirement ID** | TR-904 |
-| **Technical Obligation** | ARC execution notification: `POST /api/arc/execute/{arc_event_id}` on ARC execution endpoint (URL from `amc_config.arc_execution_api_url`). Payload signed with governed service token. ARC execution is a distinct integration — not routed through Foreman or AIMC. Missing config → explicit error (not silent failure). |
-| **Verification** | ARC execution integration tests. Missing config test. |
+| **FRS Source** | FR-904 |
+| **Technical Requirement** | `POST /api/workspaces/{workspace_id}/terminate` must first check `authority_level` of the workspace. If reserved-matter or authority-sensitive: create an approval record (`source_type: "workspace_termination"`) and return `{ blocked_by_approval: true, approval_id }` — do not dispatch termination until approval is recorded. On approval: `POST {SPECIALIST_AGENT_API_BASE_URL}/workspaces/{workspace_id}/terminate` with governed auth token |
 
 ---
 
-## 12. TR-1000: Degraded-Mode Technical Requirements
+## 13. TR-1000: Maintenance & Assurance Reporting — Technical Requirements
 
-> FRS Traceability: FR-1601 to FR-1603, BR-DEGRADE-001, BR-DEGRADE-002
+> FRS Traceability: FR-1001 to FR-1004
 
-### TR-1001 — Dependency Health Check Architecture
+### TR-1001 — Reports Surface API Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-1001 |
-| **Technical Obligation** | Health check polling for each external dependency: AIMC, AIMCC, Knowledge/Memory System, ARC execution endpoint. Polls at configurable interval (default 60 seconds). Results written to `system_health_events`. Health state is per-dependency — one degraded dependency does not automatically mark others degraded. Frontend subscribes via Supabase Realtime. |
-| **Verification** | Health check tests. Per-dependency degradation isolation confirmed. |
+| **FRS Source** | FR-1001, FR-1002 |
+| **Technical Requirement** | `GET /api/reports` — returns all maintenance and assurance report items. Per-item required fields: `id`, `report_type` (enum: maintenance / iaa_assurance), `agent_id`, `findings_summary`, `severity` (enum: all_clear / advisory / warning / critical), `recommended_action`, `evidence_ref`, `run_at` (timestamptz). IAA reports (report_type: iaa_assurance) must be returnable as a filtered subset separately from maintenance reports — API must support `?type=iaa_assurance` and `?type=maintenance` query parameters |
 
-### TR-1002 — AIMC Degraded Mode
+### TR-1002 — Critical Finding Alert Auto-Generation
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-1002 |
-| **Technical Obligation** | AIMC degraded: (1) AIMC dispatch routes return 503 `{error: "AIMC_UNAVAILABLE"}`, (2) AIMC degraded banner on Conversation/AI Action Monitor/proactive summary surfaces, (3) no fallback to direct model provider calls. AIMC degradation must not cascade to Alert Centre, Approval Queue, Intervention Manager, ARC Console, Quota Console. |
-| **Verification** | AIMC degraded mode tests. Non-AIMC surfaces operational during AIMC degradation. |
-
-### TR-1003 — AIMCC Degraded Mode
-
-| Field | Value |
-|---|---|
-| **Requirement ID** | TR-1003 |
-| **Technical Obligation** | AIMCC degraded: (1) quota state served from cache with `is_stale = true`, (2) upload status served from last-fetch cache with stale indicator, (3) new quota change requests blocked at API level (503), (4) AIMCC degraded banner on AIMCC Supervision and Quota Console. Stale data must NEVER render without explicit `is_stale` flag. |
-| **Verification** | AIMCC degraded mode tests. Stale flag propagation tests. Quota change request blocking at API level confirmed. |
-
-### TR-1004 — Knowledge System Degraded Mode
-
-| Field | Value |
-|---|---|
-| **Requirement ID** | TR-1004 |
-| **Technical Obligation** | Knowledge/Memory System degraded: (1) retrieval requests return 503, (2) Knowledge Reference surface renders degraded indicator on all items, (3) cached knowledge rendered with explicit "may be outdated" label — not as current. Degradation must not affect Alert Centre, Approval Queue, Intervention, ARC, Quota. |
-| **Verification** | Knowledge degraded mode tests. Non-knowledge surface availability confirmed. |
+| **FRS Source** | FR-1003 |
+| **Technical Requirement** | On receipt of any report with `severity: critical`: AMC backend must automatically create an alert record in `alerts` with `alert_class: critical`, `source_system: <originating_agent_id>`, `summary: <findings_summary>`, `linked_report_id: <report.id>`. If alert creation fails: write `REPORT_ALERT_CREATION_FAILED` system error event to audit log — critical finding must remain visible in reports surface |
 
 ---
 
-## 13. TR-1100: Mobile Technical Requirements
+## 14. TR-1100: Estate Configuration & Wellbeing — Technical Requirements
 
-> FRS Traceability: FR-1201 to FR-1204
+> FRS Traceability: FR-1101 to FR-1103
 
-### TR-1101 — Responsive Design Contract
+### TR-1101 — Foreman Reporting Feed Contract
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-1101 |
-| **Technical Obligation** | All AMC surfaces responsive from 375px (mobile) to 1920px (desktop). Critical executive actions (acknowledge alert, approve/reject, escalate) performable on mobile without zoom or horizontal scroll. Responsive layout via CSS media queries — shared React codebase, no separate mobile app. |
-| **Verification** | Responsive layout tests at 375px, 768px, 1024px, 1440px. |
+| **FRS Source** | FR-1101, FR-1103 |
+| **Technical Requirement** | AMC reads Foreman reporting data from `GET {FOREMAN_API_BASE_URL}/reporting/build-status` (or equivalent Foreman event feed). AMC renders this data read-only — AMC must not call any Foreman command endpoint (no start build, no build control). Response expected: `active_jobs[]`, each with: `job_id`, `stage`, `status`, `started_at`, `assigned_agent`. If Foreman feed is unavailable: display `{ status: "unavailable", last_known_at: <timestamp> }` per job — not empty or silently stale |
 
-### TR-1102 — Cross-Device Session Continuity
+### TR-1102 — Configuration Change Approval Enforcement
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | TR-1102 |
-| **Technical Obligation** | Conversation, alert, approval, intervention, and ARC event state synchronized across devices via Supabase Realtime. Action taken on mobile reflected on desktop within 5 seconds without page refresh. Supabase Realtime subscriptions required on: `alerts`, `approvals`, `interventions`, `conversation_messages`, `arc_events`. |
-| **Verification** | Cross-device synchronization tests. Propagation latency < 5 seconds. |
+| **FRS Source** | FR-1102 |
+| **Technical Requirement** | Configuration values are read-only in the database from AMC's perspective — no `UPDATE` on estate configuration rows is permitted without a completed approval record. API: `POST /api/estate-config/request-change` creates an approval record with `authority_boundary_type: reserved_matter`. On approval: dispatch configuration change to appropriate governed service. Configuration must remain unchanged if approval is outstanding |
 
 ---
 
-## 14. Technical Non-Negotiables Summary
+## 15. TR-1200: Mobile Continuity — Technical Requirements
 
-| Non-Negotiable | Technical Enforcement | Source |
+> FRS Traceability: FR-1201 to FR-1204
+
+### TR-1201 — Mobile Responsive Layout Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1201 |
+| **FRS Source** | FR-1201 |
+| **Technical Requirement** | AMC frontend must implement responsive breakpoints that produce a distinct mobile layout at ≤768px viewport width. Mobile layout must: (1) surface critical and high alerts immediately on load without scroll; (2) render Approve/Reject controls without horizontal scroll; (3) not hide functional surfaces behind scrollable containers that obscure active alerts. Mobile layout is not a visual mirror of desktop — it must expose executive actions |
+
+### TR-1202 — Critical Alert Push Notification Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1202 |
+| **FRS Source** | FR-1202 |
+| **Technical Requirement** | On `alert_class: critical` alert creation: AMC backend must dispatch a push notification via configured push provider (FCM for Android, APNs for iOS, or PWA Push API for web). Push notification payload: `{ title: "Critical Alert", body: <summary>, deep_link: "/alerts/{alert_id}" }`. If push notification dispatch fails: the failure must be recorded but must not block alert creation. On next AMC app open: in-app alert banner must display outstanding unacknowledged critical alerts — this fallback is mandatory |
+
+### TR-1203 — Cross-Device State Synchronization Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1203 |
+| **FRS Source** | FR-1204 |
+| **Technical Requirement** | All state writes that affect shared executive context (alert acknowledgment, approval decision, intervention status change, conversation messages) must propagate via Supabase Realtime to all connected sessions authenticated as the same user. Realtime subscription channel: `amc_executive_state_{user_id}`. Contradictory state between sessions must produce a client-side stale detection: if local state diverges from a received Realtime event, the Realtime event is authoritative and the UI must update |
+
+---
+
+## 16. TR-1300: Audit & Provenance — Technical Requirements
+
+> FRS Traceability: FR-1301 to FR-1304
+
+> **CONTRACT FAMILY DECLARATION — Audit & Provenance**: This section is the authoritative **Audit & Provenance Contract Family** for AMC. It defines the complete technical contract for all audit event generation, required fields, append-only enforcement, accessibility rules, cross-system linkage, and delivery atomicity. All other TRS sections that reference audit events derive from and must comply with this contract family. TR-1305 defines the delivery atomicity rule that governs every audit write across the system.
+
+### TR-1301 — Audit Events Table Schema Requirements
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1301 |
+| **FRS Source** | FR-1301 |
+| **Technical Requirement** | AMC database must define an `audit_events` table with at minimum: `id` (UUID, primary key), `event_type` (text, NOT NULL — see TR-1302 required event types), `actor` (text, NOT NULL), `actor_type` (enum: human / ai_executive / orchestration / assurance / specialist / system / service), `source_system` (text, NOT NULL), `object_type` (text — entity type affected), `object_id` (text — entity ID affected), `action` (text, NOT NULL), `state_before` (jsonb, nullable), `state_after` (jsonb, nullable), `state_transition` (text, nullable), `outcome` (enum: success / failure / partial / pending, NOT NULL), `approval_basis` (text, nullable), `timestamp` (timestamptz, NOT NULL), `cross_system_ref` (text, nullable — TR-1304), `session_id` (text, nullable), `metadata` (jsonb, nullable). **Hard constraint**: NO UPDATE or DELETE is permitted on this table. RLS policy: audit_events are append-only. Corrections must insert a new row with `event_type: correction_record` referencing the original `id` |
+
+### TR-1302 — Required Audit Event Types
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1302 |
+| **FRS Source** | FR-1302 |
+| **Technical Requirement** | The `audit_events` table must receive events for the following event_type values (minimum). Architecture must confirm all are wired before Stage 6 QA-to-Red: `ALERT_ACKNOWLEDGED`, `ALERT_ESCALATED`, `ALERT_ESCALATED_TIMEOUT`, `ALERT_ESCALATED_LEVEL_1`, `ALERT_ESCALATED_LEVEL_2`, `ALERT_DISMISSED`, `ALERT_DELIVERY_DELAYED`, `ALERT_WRITE_FAILED`, `APPROVAL_CREATED_FROM_ALERT`, `INTERVENTION_CREATED_FROM_ALERT`, `APPROVAL_DECIDED`, `APPROVAL_DEFERRED`, `CLARIFICATION_REQUESTED`, `INTERVENTION_INITIATED`, `INTERVENTION_DISPATCHED`, `INTERVENTION_COMPLETED`, `INTERVENTION_CANCELLED`, `INTERVENTION_FAILED`, `INTERVENTION_ABORT_SIGNAL_FAILED`, `AIMC_REQUEST`, `AIMC_ACTION_INITIATED`, `AIMC_ACTION_COMPLETED`, `AIMC_DEGRADED`, `AIMC_RECOVERED`, `AIMCC_DEGRADED`, `AIMCC_GOVERNANCE_ACTION_CREATED`, `KNOWLEDGE_RETRIEVED`, `KNOWLEDGE_SYSTEM_DEGRADED`, `AUTH_LOGIN`, `AUTH_LOGIN_FAILED`, `AUTH_SESSION_EXPIRED`, `UNAUTHORIZED_ACCESS_ATTEMPT`, `PROACTIVE_MESSAGE_RECEIVED`, `CONVERSATION_MESSAGE_SENT`, `CONVERSATION_RESPONSE_RECEIVED`, `MESSAGE_ACKNOWLEDGED`, `BOUNDARY_BYPASS_ATTEMPTED`, `REPORT_ALERT_CREATION_FAILED`, `QUOTA_ADJUSTMENT_REQUESTED`, `QUOTA_ADJUSTMENT_APPROVED`, `QUOTA_ADJUSTMENT_REJECTED`, `QUOTA_OVERRIDE_ACTIVATED`, `QUOTA_OVERRIDE_EXPIRED`, `QUOTA_WARNING_THRESHOLD_ENTERED`, `QUOTA_CRITICAL_THRESHOLD_ENTERED`, `QUOTA_THRESHOLD_RECOVERED`, `ARC_ITEM_CLASSIFIED`, `ARC_ITEM_STATE_CHANGED`, `ARC_ITEM_RESOLVED`, `ARC_ITEM_EXTERNALLY_ESCALATED`, `AUDIT_WRITE_FAILED`, `CORRECTION_RECORD` |
+
+### TR-1303 — Audit Accessibility API Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1303 |
+| **FRS Source** | FR-1303 |
+| **Technical Requirement** | `GET /api/audit-events` must support query parameters: `?actor=<actor>`, `?event_type=<type>`, `?source_system=<system>`, `?from=<ISO8601>`, `?to=<ISO8601>`, `?object_id=<id>`. Response must be paginated (default page size: 50, max: 200). RLS: Johan Ras and IAA-type actors may query audit_events within their authorized scope. Service-system-only events must require elevated service role — not accessible via user JWT |
+
+### TR-1304 — Cross-System Audit Linkage
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1304 |
+| **FRS Source** | FR-1304 |
+| **Technical Requirement** | For any AMC event that triggers downstream execution in AIMC, AIMCC, Foreman, or specialist agents: the AMC-side audit event must populate `cross_system_ref` with the external service reference ID (e.g., AIMC action ID, Foreman job ID, AIMCC tracking ref). If cross-system reference is not available at audit write time: write event with `cross_system_ref: null` and `event_type` suffix `_CROSS_REF_PENDING`. When the cross-system ref becomes available (via callback): write a `CORRECTION_RECORD` event referencing the original and providing `cross_system_ref` |
+
+### TR-1305 — Audit Event Delivery Atomicity Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1305 |
+| **FRS Source** | FR-1301; Stage 1 §3 State/Audit/Provenance Success Criteria |
+| **Technical Requirement** | Audit event delivery atomicity rules: (1) For any API endpoint that both mutates state AND must write an audit event: both operations must be treated as an atomic unit. If the state mutation succeeds but the audit event write fails: the state mutation must be rolled back, or the audit failure must surface as a blocking error — the system must never leave state mutated without a corresponding audit record; (2) Required implementation approach: the audit event INSERT must execute within the same database transaction as the state mutation, or the transaction must be designed so that an audit write failure triggers a compensating rollback; (3) Exception — physically separated systems: where state mutation and audit write span different systems (e.g., AIMC callback updates AMC state and audit event): if audit write fails after state update, AMC must write an `AUDIT_WRITE_FAILED` compensating event on the next available cycle and surface a warning to the executive surface. Silent audit omission is a governance violation (BR-AUDIT-001) |
+
+---
+
+## 17. TR-1400: Authentication & Authorization — Technical Requirements
+
+> FRS Traceability: FR-1401 to FR-1403
+
+> **CONTRACT FAMILY DECLARATION — Authentication, Authorization & Trust-Boundary**: This section is the authoritative **Authentication, Authorization & Trust-Boundary Contract Family** for AMC. It defines the complete technical contract for actor authentication, authority-domain enforcement, identity separation, and inter-service trust boundary enforcement. TR-1405 defines the inter-service trust anchor that governs all inbound callbacks and outbound service calls across AMC's external boundaries.
+
+### TR-1401 — Supabase Auth Configuration Requirements
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1401 |
+| **FRS Source** | FR-1401 |
+| **Technical Requirement** | Authentication must use Supabase Auth. Required configuration: (1) email/password provider enabled; (2) MFA (TOTP) support enabled — not mandatory per-session, but must be configurable per-user; (3) JWT expiry: configurable, default ≤4 hours for executive sessions; (4) JWT stored in httpOnly cookie (not localStorage) for web sessions; (5) failed login must trigger `AUTH_LOGIN_FAILED` audit event; (6) session expiry must trigger `AUTH_SESSION_EXPIRED` audit event; (7) unauthorized access attempt must trigger `UNAUTHORIZED_ACCESS_ATTEMPT` audit event. Auth service unavailability must not produce a fallback that allows unauthenticated access — explicit "service unavailable" must be shown |
+
+### TR-1402 — Row-Level Security Policy Requirements
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1402 |
+| **FRS Source** | FR-1402 |
+| **Technical Requirement** | All AMC tables containing executive-visible or actor-specific data must have Supabase RLS policies enabled. Required RLS policies (minimum): (1) `alerts`: readable by authenticated executive actor within authorized tenant/scope; writable by authenticated executive actor within authorized tenant/scope; insert/update also permitted for `service_role` / `system` execution paths used by documented automation flows (including scheduler auto-escalation, critical alert creation from reports, and proactive message → alert promotion), provided every write is explicitly scoped by `organisation_id` (or equivalent tenant isolation key) and must not permit cross-tenant access; (2) `approvals`: readable only by authorized actor; writable only by authorized deciding actor; (3) `interventions`: readable/writable by authorized actor; (4) `audit_events`: insert permitted for service role; SELECT for executive actors (filtered by scope); no DELETE, no UPDATE; (5) `conversation_messages`: readable/writable by session owner. Service-to-service calls (AIMC callbacks, Foreman callbacks) must use Supabase service_role token — not user JWT |
+
+### TR-1403 — Identity Separation Technical Enforcement
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1403 |
+| **FRS Source** | FR-1403 |
+| **Technical Requirement** | The following actor identity types must be distinguishable in all database records and audit events via `actor_type` column: `human` (Johan Ras human login), `ai_executive` (Maturion via AIMC), `orchestration` (Foreman), `assurance` (IAA agents), `specialist` (specialist agents), `system` (AMC background jobs, scheduler), `service` (external service callbacks). No single-actor-type `user` field that collapses all types. Actor identity is resolved at the API layer based on JWT claims or service token metadata — not passed freely by callers |
+
+### TR-1404 — Authority-Domain Enforcement Technical Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1404 |
+| **FRS Source** | FR-1402 |
+| **Technical Requirement** | AMC backend must implement authority-domain checks as middleware or service-layer guards that execute server-side for every consequential action endpoint. Required checks: (1) `reserved_matter` authority boundary → actor must resolve to `human` type with Johan Ras identity claim; (2) `delegated` authority boundary → actor must resolve to `ai_executive` type within approved delegated scope configuration; (3) `operational` boundary → authenticated executive actor permitted. These checks must be enforced independently of client-side UI visibility — server must reject regardless of what the UI presented to the actor |
+
+### TR-1405 — Inter-Service Trust Boundary Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1405 |
+| **FRS Source** | FR-1403, FR-1504; Stage 1 §1 Explicit Prohibitions |
+| **Technical Requirement** | Inter-service trust anchor rules: (1) AMC is the sole authorized writer to AMC-owned tables — no external service (AIMC, AIMCC, Foreman, KUC, Specialist Agents) may write to AMC-owned tables directly; all incoming writes from external services must arrive via AMC callback endpoints that validate service identity before accepting; (2) Service identity validation: every inbound callback endpoint (TR-503, TR-803, TR-804, TR-403) must validate the `Authorization: Bearer` header against the registered service token for that caller before processing the payload — invalid or absent token returns HTTP 401; mismatched service identity returns HTTP 403 + `UNAUTHORIZED_ACCESS_ATTEMPT` audit event; (3) Token rotation: all service tokens must be environment-variable-configurable and rotatable without application code changes; (4) Trust escalation prohibition: no external service may request or receive elevated trust beyond its defined service token scope — an AIMC service token must not be usable to access Foreman endpoints or AMC admin operations; (5) Cross-service impersonation: no callback may claim to originate from a different service than its registered token — `actor_type` in callback payloads must match the token's registered service identity or the callback must be rejected |
+
+---
+
+## 18. TR-1500: Cross-System Integration — Technical Requirements
+
+> FRS Traceability: FR-1501 to FR-1504
+
+### TR-1501 — AIMC Health Check Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1501 |
+| **FRS Source** | FR-1501 |
+| **Technical Requirement** | AMC must poll `GET {AIMC_API_BASE_URL}/health` at configurable interval (default: 30 seconds). Expected response: HTTP 200 with `{ status: "healthy" | "degraded" | "unavailable" }`. On non-200 or unavailable status: enter AIMC degraded mode immediately (write `AIMC_DEGRADED` audit event, update `system_health_events`, broadcast via Supabase Realtime). On recovery detection (next successful health check): write `AIMC_RECOVERED` event; exit degraded mode |
+
+### TR-1502 — AIMCC Health Check Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1502 |
+| **FRS Source** | FR-1502 |
+| **Technical Requirement** | AMC must poll `GET {AIMCC_API_BASE_URL}/health` at configurable interval (default: 30 seconds). On non-200 or unavailable: enter AIMCC degraded mode (write `AIMCC_DEGRADED` audit event). Recovery detection: as per AIMC pattern |
+
+### TR-1503 — Knowledge System Health Check Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1503 |
+| **FRS Source** | FR-1503 |
+| **Technical Requirement** | AMC must poll `GET {KNOWLEDGE_API_BASE_URL}/health` at configurable interval (default: 30 seconds). On non-200 or unavailable: enter knowledge system degraded mode (write `KNOWLEDGE_SYSTEM_DEGRADED` audit event). All cached knowledge items must be immediately marked stale |
+
+### TR-1504 — Service Token Management for External Calls
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1504 |
+| **FRS Source** | FR-1504 |
+| **Technical Requirement** | AMC must maintain a service-identity token for each external dependency (AIMC, AIMCC, KUC, knowledge/memory system, Foreman, specialist agents). Token configuration: environment variables (`AIMC_SERVICE_TOKEN`, `AIMCC_SERVICE_TOKEN`, `KUC_SERVICE_TOKEN`, `KNOWLEDGE_SERVICE_TOKEN`, `FOREMAN_SERVICE_TOKEN`, `SPECIALIST_AGENT_SERVICE_TOKEN`). Tokens must not be hardcoded in application source. Every outbound API call must include `Authorization: Bearer {service_token}` in headers. If token is absent or invalid: call must be blocked; error written to audit log |
+
+### TR-1505 — External API Base URL Configuration
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1505 |
+| **FRS Source** | FR-1501 to FR-1504 |
+| **Technical Requirement** | All external service base URLs must be environment-variable-configured: `AIMC_API_BASE_URL`, `AIMCC_API_BASE_URL`, `KUC_API_BASE_URL`, `KNOWLEDGE_API_BASE_URL`, `FOREMAN_API_BASE_URL`, `SPECIALIST_AGENT_API_BASE_URL`. Hardcoded service URLs are prohibited. Architecture must confirm that URL injection is validated at startup — missing required URL configuration must prevent application startup with explicit startup error |
+
+---
+
+## 19. TR-1600: Degraded-Mode — Technical Requirements
+
+> FRS Traceability: FR-1601 to FR-1603
+
+### TR-1601 — System Health Events Table Schema Requirements
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1601 |
+| **FRS Source** | FR-1601 to FR-1603 |
+| **Technical Requirement** | AMC database must define a `system_health_events` table with: `id` (UUID, primary key), `dependency` (enum: aimc / aimcc / knowledge_system / foreman / specialist_agents / amc_scheduler), `event_type` (enum: degraded / recovered / health_check_failed), `detected_at` (timestamptz, NOT NULL), `recovered_at` (timestamptz, nullable), `impact_summary` (text), `audit_event_ref` (UUID, FK → audit_events). RLS: executive-readable, system-writable |
+
+### TR-1602 — AIMC Degraded Mode Technical Behavior
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1602 |
+| **FRS Source** | FR-1601 |
+| **Technical Requirement** | On AIMC degraded mode entry: (1) `system_health_events` row inserted; (2) `AIMC_DEGRADED` audit event written; (3) Supabase Realtime broadcast to all connected sessions: `{ event: "system_degraded", dependency: "aimc", detected_at }`; (4) all pending `aimc_action_log` dispatch attempts must return `{ blocked: true, reason: "aimc_degraded" }` — no queue overflow into fallback paths; (5) `POST /api/aimc/*` endpoints must return HTTP 503 with body `{ error: "aimc_unavailable" }` while degraded; (6) Maturion Proactive Panel must render the required exact string: "Maturion communication unavailable — AIMC unreachable" |
+
+### TR-1603 — AIMCC Degraded Mode Technical Behavior
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1603 |
+| **FRS Source** | FR-1602 |
+| **Technical Requirement** | On AIMCC degraded mode entry: (1) `system_health_events` row inserted; (2) `AIMCC_DEGRADED` audit event written; (3) Realtime broadcast to sessions; (4) all AIMCC quota/upload read calls return last cached data with `stale: true, stale_since: <detected_at>`; (5) AIMCC governance actions that require AIMCC availability remain in `pending` state — no auto-approval or auto-rejection; (6) Upload submission attempts via KUC must be queued locally with `{ queued_for_retry: true, reason: "aimcc_degraded" }` — not silently dropped |
+
+### TR-1604 — Knowledge System Degraded Mode Technical Behavior
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1604 |
+| **FRS Source** | FR-1603 |
+| **Technical Requirement** | On knowledge system degraded mode entry: (1) `system_health_events` row inserted; (2) `KNOWLEDGE_SYSTEM_DEGRADED` audit event written; (3) all cached knowledge items' stale flags set immediately; (4) knowledge retrieval endpoints return HTTP 503 with `{ error: "knowledge_system_unavailable" }` — not empty arrays; (5) any surface showing knowledge references must display the stale/unavailable indicator |
+
+---
+
+## 20. TR-1700: State & Persistence — Technical Requirements
+
+> FRS Traceability: FR-1701 to FR-1703
+
+> **CONTRACT FAMILY DECLARATION — State Ownership & Cross-Device Consistency**: This section is the authoritative **State Ownership & Cross-Device Consistency Contract Family** for AMC. It defines the authoritative rules for which system owns which state domain, how state mutations must propagate across connected sessions and devices, and what the session restore contract requires. TR-1701 is the canonical state ownership table — it is architecture-binding and must not be altered by any downstream stage without CS2 approval.
+
+### TR-1701 — Canonical State Ownership Table
+
+The following table defines the authoritative technical state ownership for AMC. Architecture and schema-builder must enforce this.
+
+| State Domain | Canonical Owner | AMC Write Access | AMC Read Access | Notes |
+|---|---|---|---|---|
+| `alerts` table | AMC | Full (INSERT, UPDATE) | Full | RLS enforced |
+| `approvals` table | AMC | Full (INSERT, UPDATE) | Full | RLS enforced |
+| `interventions` table | AMC | Full (INSERT, UPDATE) | Full | RLS enforced |
+| `audit_events` table | AMC | Append-only (INSERT only) | Filtered SELECT | No UPDATE, no DELETE. Corrections via insert only |
+| `conversation_messages` table | AMC | Full (INSERT, UPDATE for ack) | Full | Session-scoped |
+| `aimc_action_log` table | AMC | Full (INSERT, UPDATE on callback) | Full | |
+| `knowledge_retrieval_log` table | AMC | Full (INSERT) | Full | No knowledge content stored |
+| `system_health_events` table | AMC | Full (INSERT, UPDATE on recovery) | Full | |
+| `knowledge_upload_records` (AIMCC) | AIMCC | None (read via AIMCC API) | AIMCC read API only | AMC does not write to this |
+| `knowledge/memory content` (Knowledge/Memory System) | Knowledge/Memory System | None | Governed read API only | AMC does not store canonical knowledge |
+
+### TR-1702 — State Consistency Technical Enforcement
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1702 |
+| **FRS Source** | FR-1702 |
+| **Technical Requirement** | All state mutations (alert acknowledgment, approval decision, intervention status change) must propagate via Supabase Realtime to all connected sessions. Realtime channel: `amc_executive_state_{user_id}`. Frontend must subscribe on mount and unsubscribe on unmount. On receiving a Realtime update: the local state in all affected components must be updated immediately — no stale-while-revalidate pattern that could surface contradictory states without explicit staleness indicator |
+
+### TR-1703 — Session Restore Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1703 |
+| **FRS Source** | FR-1703 |
+| **Technical Requirement** | On session restore (user returns to AMC): AMC frontend must fetch current state from server APIs (not local cache only): (1) `GET /api/dashboard/summary` for current health state; (2) `GET /api/alerts?status=active` for current alert state; (3) `GET /api/approvals?status=pending` for approval queue; (4) `GET /api/interventions?status=active` for intervention state; (5) `GET /api/conversation/messages?limit=20` for conversation history. If any fetch fails: explicit error indicator — not silently using last-known local state as current |
+
+---
+
+## 21. TR-1800: ARC Technical Domain — Technical Requirements
+
+> FRS Traceability: Stage 1 §4 ARC Trigger Governance Reconciliation; FRS FR-201 to FR-209 (Alert family), FR-301 to FR-307 (Approval family), FR-401 to FR-407 (Intervention family)
+
+> **DOMAIN DECLARATION**: ARC (Action Resolution Centre) is explicitly declared in Stage 1 §4 as a first-class AMC executive function. ARC is not a separate system from AMC — it is a defined technical sub-domain within AMC that provides a distinct surface, data model, and audit trail for collecting, classifying, routing, and tracking resolution of governance-blocked or escalated items that require explicit executive decision. ARC does not replace the alert, approval, or intervention pipelines — it is the resolution-tracking layer that ensures no governance-sensitive item can age without traceable executive resolution.
+
+### TR-1801 — ARC Technical Domain Scope Declaration
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1801 |
+| **FRS Source** | Stage 1 §4 ARC Trigger Governance; FR-204, FR-208, FR-302, FR-407 |
+| **Technical Requirement** | ARC must be architecturally recognizable as a distinct technical domain within AMC — not silently absorbed as generic columns on the alerts or interventions table. ARC items are logical aggregations over the existing alert, approval, and intervention objects, classified as ARC-eligible when they enter a resolution-requiring state. AMC must expose an ARC surface at route `/arc` accessible from the executive navigation sidebar. The ARC surface is a curated resolution workspace — it shows only items that have entered the ARC-eligible state and have not yet been resolved. The ARC domain has its own API namespace (`/api/arc/`), its own table (`arc_classifications`), and its own audit event family (TR-1805) |
+
+### TR-1802 — ARC Triggering Model Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1802 |
+| **FRS Source** | Stage 1 §4; FR-204, FR-208, FR-302, FR-407 |
+| **Technical Requirement** | The following conditions trigger ARC classification for an item (server-side logic — classification must be written to the `arc_classifications` table, not enforced client-side only): (1) **Critical alert escalated to Level 2 and unresolved** (TR-209 escalation chain Level 2 reached) — the alert becomes ARC-classified; (2) **Reserved-matter approval item without decision past ARC timeout** — `approvals` row with `authority_boundary_type: "reserved_matter"` AND `status: "pending"` past configurable ARC timeout (default: 120 minutes); (3) **Intervention with `status: "dispatch_failed"` requiring executive re-authorization** — where the intervention type requires human decision; (4) **AIMCC governance action approval frozen past ARC timeout** — AIMCC governance approval item in `pending` state past configurable ARC timeout; (5) **Boundary-bypass event requiring executive acknowledgment** — `BOUNDARY_BYPASS_ATTEMPTED` audit event without a corresponding resolution record within configurable ARC timeout (default: 30 minutes). Each ARC classification must be written to the `arc_classifications` table with fields: `arc_item_id` (UUID, PK), `source_type` (enum: alert / approval / intervention / boundary_event), `source_id` (text — ID of the originating object), `classified_at` (timestamptz), `classification_trigger` (text — which of the five conditions triggered classification), `arc_status` (enum: open / in_resolution / resolved / externally_escalated). Write `ARC_ITEM_CLASSIFIED` audit event on classification |
+
+### TR-1803 — ARC Authority Path Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1803 |
+| **FRS Source** | Stage 1 §4; FR-302, FR-303; FRS §3 Actor Model |
+| **Technical Requirement** | ARC authority path rules — server-side enforcement on all ARC resolution endpoints: (1) ARC items derived from reserved-matter approvals (`authority_boundary_type: "reserved_matter"`) require Johan Ras (`human` actor) to resolve — Maturion may not resolve reserved-matter ARC items; (2) ARC items derived from boundary-bypass events require Johan Ras acknowledgment and resolution — cannot be auto-resolved or Maturion-resolved; (3) ARC items derived from operational-scope interventions may be resolved by Maturion within approved delegated authority (same authority-domain check as TR-1404); (4) ARC resolution must produce an `ARC_ITEM_RESOLVED` audit event with mandatory fields: `arc_item_id`, `source_type`, `source_id`, `resolved_by`, `resolved_by_type` (actor_type enum), `resolution_action`, `resolution_basis`, `timestamp`. ARC resolution is an explicit actor act — no item may be auto-resolved without a logged resolution record and actor identity |
+
+### TR-1804 — ARC State Machine Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1804 |
+| **FRS Source** | Stage 1 §4; FR-204, FR-302, FR-407 |
+| **Technical Requirement** | ARC item state machine: `open` → `in_resolution` → `resolved`. Alternate exit: `open` or `in_resolution` → `externally_escalated`. State transition rules: (1) `open` → `in_resolution`: when a deciding actor opens the ARC item (`POST /api/arc/{arc_item_id}/begin-resolution`); (2) `in_resolution` → `resolved`: when the resolution action is completed (`POST /api/arc/{arc_item_id}/resolve`), request body: `{ resolution_action, resolution_basis, resolved_by, resolved_by_type }`; (3) `open` or `in_resolution` → `externally_escalated`: when item is explicitly escalated outside AMC scope (`POST /api/arc/{arc_item_id}/escalate-externally`); (4) `resolved` is a terminal state — no further transitions. Each state transition must write an `ARC_ITEM_STATE_CHANGED` audit event with `from_state`, `to_state`, `actor`, `timestamp`. Stale ARC items (in state `open` or `in_resolution` past configurable SLA, default: 240 minutes) must generate a new Medium alert referencing the ARC item — ARC items must not silently age without visibility |
+
+### TR-1805 — ARC Audit Requirements Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1805 |
+| **FRS Source** | Stage 1 §4; FR-1301, FR-1302 |
+| **Technical Requirement** | ARC-specific required audit events (additions to TR-1302 required event type list — listed there): `ARC_ITEM_CLASSIFIED`, `ARC_ITEM_STATE_CHANGED`, `ARC_ITEM_RESOLVED`, `ARC_ITEM_EXTERNALLY_ESCALATED`. All ARC audit events must include mandatory fields: `arc_item_id`, `source_type`, `source_id`, `arc_status`, `actor`, `actor_type`, `timestamp`. Cross-system reference: if an ARC item resolution dispatches an action to an external system (e.g., intervention re-dispatch to Foreman), the `cross_system_ref` field must be populated per TR-1304. ARC audit events must never be orphaned — every ARC item must be traceable from classification through to resolution in `audit_events`. ARC events are governed by the audit delivery atomicity rule (TR-1305) |
+
+### TR-1806 — ARC Architecture Implications
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1806 |
+| **FRS Source** | Stage 1 §4 |
+| **Technical Requirement** | ARC architecture requirements that Stage 5 must fulfill: (1) AMC database must define an `arc_classifications` table — implementing ARC as only a UI-layer filter over `alerts` or `approvals` is prohibited; (2) required `arc_classifications` columns (minimum): `id` (UUID, PK), `source_type` (enum: alert / approval / intervention / boundary_event), `source_id` (text), `classified_at` (timestamptz, NOT NULL), `classification_trigger` (text), `arc_status` (enum: open / in_resolution / resolved / externally_escalated), `resolved_by` (text, nullable), `resolved_at` (timestamptz, nullable), `resolution_action` (text, nullable), `resolution_basis` (text, nullable); RLS: executive-readable, service-writable; (3) ARC endpoints under `/api/arc/` namespace (see §22 API Summary); (4) ARC surface must subscribe to Supabase Realtime for underlying source object changes — if a referenced alert is acknowledged, the ARC surface must reflect this within 2 seconds; (5) ARC `arc_classifications` table DDL, ARC Realtime wiring, and ARC surface design are declared as deferred to Stage 5 Architecture (see §25 Deferred Items) |
+
+---
+
+## 22. API / Interface Contract Summary
+
+This section summarises all API endpoints defined in this TRS. Architecture (Stage 5) must implement every endpoint in this list. Deviations require CS2 approval.
+
+### 22.1 AMC Internal API Endpoints
+
+| Endpoint | Method | TR Reference | Purpose |
+|---|---|---|---|
+| `/api/dashboard/summary` | GET | TR-101 | Executive dashboard data |
+| `/api/dashboard/health/{domain_id}` | GET | TR-102 | Health domain drill-down |
+| `/api/alerts` | GET | TR-201 | Alert list (priority-ordered) |
+| `/api/alerts/{id}/acknowledge` | POST | TR-202 | Acknowledge alert |
+| `/api/alerts/{id}/escalate` | POST | TR-203 | Escalate alert |
+| `/api/alerts/{id}/dismiss` | POST | TR-204 | Dismiss alert (Low/Info only) |
+| `/api/alerts/{id}/link-approval` | POST | TR-205 | Link alert to approval |
+| `/api/approvals` | GET | TR-301 | Approval queue |
+| `/api/approvals` | POST | TR-303, TR-603 | Create approval |
+| `/api/approvals/{id}/decide` | POST | TR-302 | Approve/reject/defer |
+| `/api/interventions` | GET | TR-401 | Intervention list |
+| `/api/interventions` | POST | TR-401 | Create intervention |
+| `/api/interventions/{id}/cancel` | POST | TR-404 | Cancel intervention |
+| `/api/aimcc/quota/request-adjustment` | POST | TR-605 | Quota adjustment / override request |
+| `/api/workspaces/{id}/terminate` | POST | TR-902 | Terminate workspace (approval-gated) |
+| `/api/estate-config/request-change` | POST | TR-1102 | Request config change (approval-gated) |
+| `/api/conversation/messages` | GET | TR-802 | Conversation history |
+| `/api/conversation/messages` | POST | TR-802 | Send user message |
+| `/api/reports` | GET | TR-1001 | Maintenance/assurance reports |
+| `/api/audit-events` | GET | TR-1303 | Audit log access |
+| `/api/arc` | GET | TR-1801 | ARC item list (open/in_resolution items) |
+| `/api/arc/{id}/begin-resolution` | POST | TR-1804 | Mark ARC item in_resolution |
+| `/api/arc/{id}/resolve` | POST | TR-1804 | Resolve ARC item |
+| `/api/arc/{id}/escalate-externally` | POST | TR-1804 | Escalate ARC item externally |
+
+### 22.2 AMC Inbound Callback Endpoints
+
+| Endpoint | Method | TR Reference | Caller |
+|---|---|---|---|
+| `/api/aimc/callback` | POST | TR-503 | AIMC |
+| `/api/aimc/conversation-callback` | POST | TR-803 | AIMC |
+| `/api/aimc/proactive-message` | POST | TR-804 | AIMC |
+| `/api/interventions/{id}/status-update` | POST | TR-403 | Foreman / Specialist Agent |
+
+### 22.3 AMC Outbound API Calls
+
+| Target | Endpoint Pattern | TR Reference | Purpose |
+|---|---|---|---|
+| AIMC | `POST {AIMC_API_BASE_URL}/actions` | TR-502 | All AI action dispatches |
+| AIMC | `GET {AIMC_API_BASE_URL}/health` | TR-1501 | Health polling |
+| AIMCC | `GET {AIMCC_API_BASE_URL}/uploads/status` | TR-601 | Upload status read |
+| AIMCC | `GET {AIMCC_API_BASE_URL}/quota/current` | TR-602, TR-608 | Quota read |
+| AIMCC | `POST {AIMCC_API_BASE_URL}/governance/decision` | TR-603 | Governance decision notification |
+| AIMCC | `GET {AIMCC_API_BASE_URL}/health` | TR-1502 | Health polling |
+| KUC | `POST {KUC_API_BASE_URL}/submit` | TR-604 | Upload submission |
+| Knowledge System | `POST {KNOWLEDGE_API_BASE_URL}/retrieve` | TR-701 | Knowledge retrieval |
+| Knowledge System | `GET {KNOWLEDGE_API_BASE_URL}/health` | TR-1503 | Health polling |
+| Foreman | `GET {FOREMAN_API_BASE_URL}/reporting/build-status` | TR-1101 | Build status read |
+| Foreman | `POST {FOREMAN_API_BASE_URL}/api/foreman/dispatch-intervention` | TR-402 | Intervention dispatch (Foreman path) |
+| Specialist Agent | `POST {SPECIALIST_AGENT_API_BASE_URL}/api/specialist-agents/{agent_id}/dispatch` | TR-402 | Intervention dispatch (specialist agent path) |
+| Specialist Agent | `POST {SPECIALIST_AGENT_API_BASE_URL}/workspaces/{id}/terminate` | TR-902 | Workspace termination |
+
+---
+
+## 23. Data Schema Requirements Summary
+
+This section summarises all tables AMC must own. Column types and index DDL are deferred to Stage 5 Architecture (schema-builder). Notwithstanding that deferral, every AMC-owned table MUST include an `organisation_id` tenant-isolation key in alignment with the repo-global database architecture, and every table containing tenant data MUST enforce tenant-scoped RLS policies keyed by `organisation_id` so AMC never permits cross-tenant reads or writes.
+
+| Table | AMC Write Rule | Key Constraints | TR Reference |
+|---|---|---|---|
+| `alerts` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: alert_class, status; escalation_type expanded (timeout_level_1, timeout_level_2) | TR-201, TR-209 |
+| `approvals` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: authority_boundary_type, status; approval_basis required on approved | TR-301 |
+| `interventions` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; cancel_reason required on cancelled | TR-401 |
+| `audit_events` | INSERT only (append-only) | `organisation_id` required; tenant-scoped RLS; No UPDATE, no DELETE | TR-1301 |
+| `conversation_messages` | INSERT + UPDATE (ack only) | `organisation_id` required; tenant-scoped RLS; response_type required for AI messages | TR-801 |
+| `aimc_action_log` | INSERT + UPDATE (on callback) | `organisation_id` required; tenant-scoped RLS; FK → approvals | TR-501 |
+| `knowledge_retrieval_log` | INSERT only | `organisation_id` required; tenant-scoped RLS; No knowledge content columns | TR-702 |
+| `system_health_events` | INSERT + UPDATE (on recovery) | `organisation_id` required; tenant-scoped RLS; FK → audit_events | TR-1601 |
+| `arc_classifications` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: source_type, arc_status; resolved_by, resolution_basis required on resolved | TR-1806 |
+
+---
+
+## 24. Integration Contract Definitions
+
+All AMC integration and API contracts MUST preserve tenant isolation. Requests, callbacks, and internal service-to-service exchanges MUST carry sufficient tenant context for AMC to resolve and enforce `organisation_id` on every read/write path, and no contract may permit cross-tenant access, processing, or persistence. Where transport payloads do not expose raw database fields directly, the contract MUST still require tenant context that deterministically maps to `organisation_id` for authorisation, RLS evaluation, and auditability.
+
+### 24.1 AMC ↔ AIMC Integration Contract
+
+| Dimension | Requirement |
+|---|---|
+| **Call direction** | AMC → AIMC: action dispatch, proactive summary request. AIMC → AMC: action result callbacks, conversation callbacks, proactive message pushes |
+| **Transport** | HTTPS REST. AIMC callback endpoints exposed by AMC |
+| **Auth** | AMC outbound: `AIMC_SERVICE_TOKEN`. AIMC inbound callbacks: AMC validates the shared service token using the same `AIMC_SERVICE_TOKEN` env var. `AIMC_CALLBACK_TOKEN` is not a separate AMC configuration variable |
+| **Non-bypass** | AMC must never call any model provider SDK directly. AIMC is the exclusive AI gateway |
+| **Degraded mode** | AIMC health failure → TR-1602 degraded mode; no fallback AI call path |
+| **Audit** | Every AMC→AIMC dispatch generates `AIMC_ACTION_INITIATED`. Every AIMC callback generates `AIMC_ACTION_COMPLETED` |
+
+### 24.2 AMC ↔ AIMCC / KUC Integration Contract
+
+| Dimension | Requirement |
+|---|---|
+| **Call direction** | AMC → AIMCC: status reads, quota reads, governance decision notifications. AMC → KUC: upload submissions only |
+| **Upload enforcement** | All upload submissions POST to `KUC_API_BASE_URL/submit`. Never to AIMCC internal ingestion endpoints |
+| **Auth** | `AIMCC_SERVICE_TOKEN` for AIMCC calls; `KUC_SERVICE_TOKEN` for KUC calls |
+| **Degraded mode** | AIMCC health failure → TR-1603 degraded mode; governance actions frozen |
+
+### 24.3 AMC ↔ Knowledge/Memory System Integration Contract
+
+| Dimension | Requirement |
+|---|---|
+| **Call direction** | AMC → Knowledge System: retrieval queries only (read-only) |
+| **Non-ownership** | AMC does not write to knowledge/memory system. No local caching of knowledge content beyond 5-minute TTL |
+| **Provenance enforcement** | Every retrieval must request provenance metadata. Anonymous knowledge display is prohibited |
+| **Degraded mode** | Knowledge system health failure → TR-1604 degraded mode; stale indicators applied immediately |
+
+### 24.4 AMC ↔ Foreman Integration Contract
+
+| Dimension | Requirement |
+|---|---|
+| **Call direction** | AMC → Foreman: intervention dispatch, build status reads. Foreman → AMC: intervention status callbacks |
+| **Read-only reporting** | AMC reads Foreman reporting feed only. AMC does not issue build commands |
+| **Callback security** | Foreman callback to `POST /api/interventions/{id}/status-update` must include Foreman service token in Authorization header |
+
+### 24.5 AMC ↔ Specialist Agents Integration Contract
+
+| Dimension | Requirement |
+|---|---|
+| **Call direction** | AMC → Specialist Agent: workspace termination orders. Specialist Agent → AMC: status callbacks |
+| **Surface rule** | AMC surfaces outcomes only — not internal specialist agent state |
+| **Sandbox isolation** | `sandbox_isolation_indicator` must be present on all workspace data surfaces |
+
+---
+
+## 25. Deferred-to-Stage-5 Declarations
+
+The following items are explicitly deferred from Stage 4 TRS to Stage 5 Architecture. Deferral does not indicate descoping — these are Stage 5 responsibilities.
+
+| Deferred Item | Reason for Deferral | Stage 5 Owner |
 |---|---|---|
-| No direct AI model provider calls from AMC | CI lint check + no provider URLs in config | FR-503, Stage 1 §2, BR-SYS-001 |
-| No direct AIMCC internal ingestion from AMC | TR-902 permitted endpoints only | FR-605, BR-SYS-001 |
-| ARC-gated actions must not auto-execute past approval gate | TR-304 — execution only after approval recorded | FR-1807, BR-ARC-001 |
-| Audit events atomic with data mutations | TR-502 — transactional | FR-1301, BR-AUDIT-001 |
-| Audit records are append-only | TR-501 — RLS, no UPDATE/DELETE | BR-AUDIT-002 |
-| Stale quota data never served without indicator | TR-801 — is_stale flag mandatory | FR-603, BR-QUOTA-001 |
-| Quota change basis required on approval | TR-802 — non-null constraint | FR-607, BR-QUOTA-002 |
-| RLS enabled on all tables | TR-601 — default-deny policies | FR-1701, FR-1702 |
-| Tenant isolation via organisation_id | TR-602 — RLS + JWT claim | Stage 1 privacy guardrails |
-| JWT-based auth; service_role key never in frontend | TR-701 — frontend uses user JWT only | FR-1401 |
-| Alert auto-escalation within timeout + 5 min jitter | TR-402 — scheduler contract | FR-208, BR-ALERT-003 |
-| ARC is a named, separate technical domain | TR-301 to TR-304 — own table/routes/surface | FR-1801 to FR-1807, Stage 1 §4 |
-| Dynamic Upload Quota Management is an operational control | TR-801 to TR-804 — own schema/routes/AIMCC integration | FR-603, FR-606, FR-607, Stage 1 §4 |
+| Database column types and index DDL | Schema design details require Architecture-level decisions | schema-builder |
+| Frontend React component tree | UI architecture specifics are Architecture-stage decisions | ui-builder |
+| API server framework selection (e.g., Next.js API routes, dedicated REST server) | Deployment architecture decision | Architecture stage |
+| Realtime channel subscription implementation details | Implementation-level WebSocket/Supabase Realtime wiring | api-builder |
+| CI/CD pipeline and deployment infrastructure | Infrastructure architecture | Architecture stage |
+| Push notification service provider selection (FCM vs APNs vs PWA) | Platform-specific integration decision | Architecture / integration-builder |
+| AIMC health check failure retry logic specifics | Implementation detail | api-builder |
+| Per-domain health status computation algorithm | Business logic within health domain services | Architecture stage |
+| Authority delegated-domain configuration storage format | Configuration system architecture | Architecture stage |
+| Foreman reporting event feed format details | Foreman-side API contract detail | Foreman / integration-builder |
+| Background scheduler implementation (cron, Supabase Edge Function, etc.) | Infrastructure architecture | Architecture stage |
+| `arc_classifications` table DDL (column types, index design) | Schema design details | schema-builder |
+| ARC surface UI/UX design and component tree | Architecture-stage decision | ui-builder |
+| ARC Realtime subscription wiring for underlying source object changes | Implementation-level Realtime wiring | api-builder |
+| Alert timing SLA breach self-monitoring implementation | System observability infrastructure | Architecture / api-builder |
+| Quota threshold configuration storage and runtime reload mechanism | Configuration system architecture | Architecture stage |
+| ARC stale-item alert scheduling implementation | Infrastructure architecture | Architecture stage |
 
 ---
 
-*End of Technical Requirements Specification — Stage 4 v1.0. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2 approval required before Stage 5 (Architecture) may begin.*
+## 26. Sign-Off / Approval Record
+
+| Field | Value |
+|---|---|
+| **Document** | AMC Technical Requirements Specification — Stage 4 |
+| **Version** | 1.1 |
+| **Prepared by** | foreman-v2-agent (POLC_ORCHESTRATION) |
+| **Prepared Date** | 2026-04-23 |
+| **CS2 Authorization for Stage 4** | app_management_centre#1125 |
+| **Hardening Reference** | app_management_centre#1127 (harmonization/hardening wave) |
+| **Stage 3 Approval Reference** | app_management_centre#1123 (CS2-approved for Stage 4 progression) |
+| **Reviewed by** | *Pending CS2 review* |
+| **Approved by** | *Pending CS2 approval* |
+| **Approval Date** | *Pending* |
+| **Approval Reference** | *To be assigned by CS2 on approval* |
+| **Stage** | Stage 4 of 12 — TRS |
+| **Next Stage** | Stage 5 — Architecture (blocked until CS2 approves Stage 4) |
+
+### Version History
+
+| Version | Date | Change Summary |
+|---|---|---|
+| 1.0 | 2026-04-23 | Initial production — 17 TR families, API contracts, schema requirements, integration contracts, sign-off section |
+| 1.1 | 2026-04-23 | Pre-merge hardening: ARC explicit technical domain (TR-1800 family §21, TR-1801–TR-1806); Dynamic Upload Quota Management console (TR-605–TR-609); Alert timing/retry/escalation contract family (TR-207, TR-208, TR-209); Audit delivery atomicity (TR-1305); Inter-service trust boundary (TR-1405); State ownership contract family declaration added to §20; Auth & Trust-Boundary contract family declaration added to §17; Audit & Provenance contract family declaration added to §16; TR-1302 audit event types expanded; §22 API summary updated; §23 schema summary updated; §25 deferred items updated |
+
+### Approval Basis Required
+
+CS2 approval of this document confirms:
+1. The TRS is technically explicit, comprehensive, and non-contradictory
+2. All FRS requirement families are technically realized or explicitly deferred to Stage 5
+3. Cross-system boundaries from Stages 1–3 are preserved and technically enforced
+4. ARC technical domain is explicitly defined and architecture-binding
+5. Dynamic Upload Quota Management is defined as an operational management console
+6. Alert timing, retry, and escalation contract family is explicitly defined
+7. Audit & Provenance, Auth & Trust-Boundary, and State Ownership contract families are explicitly declared
+8. The TRS is sufficient for Stage 5 Architecture derivation
+9. Stage 5 Architecture is authorized to commence following this approval
+
+### CS2 Approval Instruction
+
+To formally approve this TRS:
+- Record approval in a Stage 4 approval artifact at `modules/amc/03-trs/trs-approval.md`
+- Reference this document: `modules/amc/03-trs/technical-requirements-specification.md` v1.1
+- Update `modules/amc/BUILD_PROGRESS_TRACKER.md` Stage 4 status to `✅ COMPLETE — CS2 APPROVED`
+- Authorize commencement of Stage 5 Architecture
+
+---
+
+*End of Technical Requirements Specification — Stage 4 v1.1. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2 approval required before Architecture (Stage 5) derivation begins.*
