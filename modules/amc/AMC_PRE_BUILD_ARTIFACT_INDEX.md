@@ -29,8 +29,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | ✅ Approved Canonical | v1.0, CS2-approved (issue #1121). Stage 2 complete. |
-| Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | ✅ Approved Canonical | v1.0, CS2-approved (issue #1121). Stage 2 complete. |
+| UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | 🟡 Approval Pending | v1.0, approval pending. Index status held to match current document header until CS2 approval is reflected in the artifact. Issue #1121. |
+| Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | 🟡 Approval Pending | v1.0, approval pending. Index status held to match current document header until CS2 approval is reflected in the artifact. Issue #1121. |
 
 ---
 

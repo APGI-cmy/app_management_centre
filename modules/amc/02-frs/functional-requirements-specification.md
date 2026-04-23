@@ -713,7 +713,7 @@ These boundaries are non-negotiable and must be preserved in all requirements st
 | **Requirement ID** | FR-803 |
 | **Actor** | AIMC (callback), Maturion (response source) |
 | **Trigger / Precondition** | AIMC returns Maturion response to AMC |
-| **Required System Behavior** | AMC receives and stores the Maturion response in `conversation_messages`. Response is rendered in the conversation thread with: response text, response type indicator (Observation | Recommendation | Request | Decision | Alert), source/reasoning summary where applicable, linked actions (link to approval item, intervention, or alert where applicable) |
+| **Required System Behavior** | AMC receives and stores the Maturion response in `conversation_messages`. Response is rendered in the conversation thread with: response text, response type indicator (Observation \| Recommendation \| Request \| Decision \| Alert), source/reasoning summary where applicable, linked actions (link to approval item, intervention, or alert where applicable) |
 | **User-Visible Result** | Maturion response visible with type indicator and linked actions |
 | **Required State / Audit Effect** | AuditEvent: `CONVERSATION_RESPONSE_RECEIVED` (actor: Maturion, response_type, aimc_ref, timestamp) |
 | **Approval / Authority Constraint** | None |

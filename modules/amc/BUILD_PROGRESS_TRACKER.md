@@ -27,7 +27,7 @@
 | Stage | Name | Status | Notes |
 |-------|------|--------|-------|
 | 1 | App Description | ✅ COMPLETE | CS2-approved 2026-04-22. Canonical source: `modules/amc/00-app-description/app-description.md` v1.0. Approval ref: #1117. |
-| 2 | UX Workflow & Wiring Spec | ✅ COMPLETE | CS2-approved (issue #1121). Canonical source: `modules/amc/01-ux-workflow-wiring-spec/`. Stage 3 authorized to proceed. |
+| 2 | UX Workflow & Wiring Spec | 🟡 APPROVAL PENDING | Produced approval-ready 2026-04-22. Awaiting CS2 approval. Canonical source: `modules/amc/01-ux-workflow-wiring-spec/`. Stage 3 blocked until CS2 approval is recorded in artifact headers. Issue #1121. |
 | 3 | FRS | 🟡 APPROVAL PENDING — Produced approval-ready 2026-04-23. Awaiting CS2 approval before Stage 4 may begin. | Stage 3 artifacts produced by foreman-v2-agent (wave: amc-stage3-frs-20260423). CS2 approval required before TRS derivation begins. |
 | 4 | TRS | ⬜ Not Started | |
 | 5 | Architecture | ⬜ Not Started | Pre-existing FM-era architecture material exists in `docs/architecture/` but is classified as historical/reference only — not active Stage 5 lifecycle input. See Stage Detail below. |
