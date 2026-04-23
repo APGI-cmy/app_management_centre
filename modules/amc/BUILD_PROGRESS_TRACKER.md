@@ -3,7 +3,7 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-04-23  
-**Updated By**: foreman-v2-agent (wave: amc-stage4-trs-20260423 — Stage 4 TRS produced approval-ready, issue #1127; Stage 3 marked CS2-approved)
+**Updated By**: foreman-v2-agent (wave: amc-stage4-trs-hardening-20260423 — Stage 4 TRS hardened to v1.1: ARC explicit domain, quota management console, alert contract family, audit/auth/state contract family declarations; issue #1127)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
@@ -115,14 +115,14 @@ system behaviour are permitted.
 
 ### Stage 4 — Technical Requirements Specification (TRS)
 
-**Status**: 🟡 APPROVAL PENDING — Produced approval-ready 2026-04-23. Awaiting CS2 approval.  
+**Status**: 🟡 APPROVAL PENDING — Produced approval-ready 2026-04-23, hardened to v1.1 2026-04-23. Awaiting CS2 approval.  
 **Location**: `modules/amc/03-trs/`  
 **Entry Condition**: ✅ Stage 3 complete and CS2-approved  
 **Objective**: Translate the approved Stage 3 FRS into explicit technical requirements without drifting from upstream truth. Define the technical realization constraints for AMC, including API/interface requirements, event and action contracts, data/state ownership and persistence rules, schema-facing technical requirements, integration requirements for AMC ↔ AIMC ↔ AIMCC ↔ KUC ↔ knowledge/memory system ↔ Foreman/agents, authentication/authorization enforcement requirements, degraded-mode technical behavior, audit/provenance technical requirements, and state consistency and cross-device continuity requirements.  
 **Key Artifacts Created**:
-- [x] `technical-requirements-specification.md` — Complete TRS with 17 TR families (TR-100 to TR-1700), API contract definitions, schema requirements, integration contracts, deferred items register, and CS2 sign-off section (v1.0, produced 2026-04-23)
-- [x] `frs-to-trs-traceability.md` — FRS to TRS traceability matrix: 17 FRS families traced, 18 business rules realized, no family dropped, 21 Stage-5 deferrals disclosed (v1.0, produced 2026-04-23)
-**Wave**: amc-stage4-trs-20260423  
+- [x] `technical-requirements-specification.md` — Complete TRS v1.1 with 18 TR domain families (TR-100 to TR-1800), API contract definitions, schema requirements, integration contracts, ARC technical domain, dynamic upload quota management console, alert timing/retry/escalation contract family, audit delivery atomicity, inter-service trust boundary, state/auth/audit contract family declarations, deferred items register, and CS2 sign-off section (v1.1, hardened 2026-04-23)
+- [x] `frs-to-trs-traceability.md` — FRS to TRS traceability matrix v1.1: 17 FRS families + ARC domain traced, 18 business rules realized, no family dropped, 30 Stage-5 deferrals disclosed, ARC and quota console coverage added (v1.1, hardened 2026-04-23)
+**Wave**: amc-stage4-trs-hardening-20260423  
 **Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)  
 **CS2 Authorization**: issue #1127  
 **Prerequisites**: ✅ Stage 1 complete; ✅ Stage 2 complete and CS2-approved; ✅ Stage 3 complete and CS2-approved (issue #1123)  
@@ -208,8 +208,8 @@ the canonical lifecycle sequence.
 1. ✅ Stage 1 complete — App Description approved by CS2 (issue #1117, 2026-04-22)
 2. ✅ Stage 2 complete — UX Workflow & Wiring Spec approved by CS2 (issue #1121, 2026-04-22)
 3. ✅ Stage 3 complete — FRS CS2-approved for Stage 4 progression (issue #1123, 2026-04-23)
-4. ✅ Stage 4 TRS artifacts produced approval-ready (issue #1127, 2026-04-23)
-5. ▶️ CS2 to review and approve Stage 4 TRS before Stage 5 (Architecture) begins
+4. ✅ Stage 4 TRS artifacts produced approval-ready and hardened to v1.1 (issue #1127, 2026-04-23)
+5. ▶️ CS2 to review and approve Stage 4 TRS v1.1 before Stage 5 (Architecture) begins
 
 ---
 

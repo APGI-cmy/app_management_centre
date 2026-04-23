@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0)  
-**Last Updated**: 2026-04-23 (Stage 4 TRS artifacts produced; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved)  
+**Last Updated**: 2026-04-23 (Stage 4 TRS hardened to v1.1; traceability updated to v1.1; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -47,8 +47,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. CS2 approval required before Stage 5 begins. Issue #1127. |
-| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. FRS family coverage matrix, business rule realization, deferred items register. Issue #1127. |
+| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | 🟡 Approval Pending | v1.1, hardened approval-ready 2026-04-23. ARC domain (TR-1800), quota console (TR-605–TR-609), alert contract family (TR-207–TR-209), audit/auth/state contract family declarations added. CS2 approval required before Stage 5 begins. Issue #1127. |
+| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | 🟡 Approval Pending | v1.1, hardened 2026-04-23. 18 domain families traced (17 FRS + ARC), 30 deferred items disclosed, quota console and ARC coverage added. Issue #1127. |
 
 ---
 

@@ -2,12 +2,12 @@
 
 **Stage**: 4 — Traceability Artifact
 **Module**: App Management Centre (AMC)
-**Version**: 1.0
-**Status**: 🟡 Produced Approval-Ready — 2026-04-23
+**Version**: 1.1
+**Status**: 🟡 Produced Approval-Ready — 2026-04-23 (Hardened 2026-04-23)
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
 **CS2 Authorization**: app_management_centre#1127
 **Upstream Source**: `modules/amc/02-frs/functional-requirements-specification.md` v1.0 (CS2-approved for Stage 4 progression, ref #1123)
-**TRS Target**: `modules/amc/03-trs/technical-requirements-specification.md` v1.0
+**TRS Target**: `modules/amc/03-trs/technical-requirements-specification.md` v1.1
 **Canonical Location**: `modules/amc/03-trs/frs-to-trs-traceability.md`
 
 ---
@@ -35,24 +35,25 @@ This matrix shows every FRS requirement family from Stage 3 and confirms it is t
 | FRS Family | FRS IDs | TRS Section | TRS Requirement IDs | Status |
 |---|---|---|---|---|
 | Executive Estate Oversight | FR-101 to FR-104 | §4 TR-100 | TR-101, TR-102, TR-103, TR-104 | ✅ Realized |
-| Alert Management | FR-201 to FR-209 | §5 TR-200 | TR-201, TR-202, TR-203, TR-204, TR-205, TR-206 | ✅ Realized |
+| Alert Management | FR-201 to FR-209 | §5 TR-200 | TR-201, TR-202, TR-203, TR-204, TR-205, TR-206, TR-207, TR-208, TR-209 | ✅ Realized |
 | Approval Workflow | FR-301 to FR-307 | §6 TR-300 | TR-301, TR-302, TR-303, TR-304 | ✅ Realized |
 | Intervention | FR-401 to FR-407 | §7 TR-400 | TR-401, TR-402, TR-403, TR-404 | ✅ Realized |
 | AI-Routed Actions (AIMC) | FR-501 to FR-504 | §8 TR-500 | TR-501, TR-502, TR-503, TR-504 | ✅ Realized |
-| AIMCC / KUC Supervision | FR-601 to FR-605 | §9 TR-600 | TR-601, TR-602, TR-603, TR-604 | ✅ Realized |
+| AIMCC / KUC Supervision | FR-601 to FR-605 | §9 TR-600 | TR-601, TR-602, TR-603, TR-604, TR-605, TR-606, TR-607, TR-608, TR-609 | ✅ Realized |
 | Memory-Aware / Knowledge-Aware View | FR-701 to FR-703 | §10 TR-700 | TR-701, TR-702, TR-703 | ✅ Realized |
 | Executive Conversation | FR-801 to FR-807 | §11 TR-800 | TR-801, TR-802, TR-803, TR-804, TR-805 | ✅ Realized |
 | Specialist Agent Workspace Oversight | FR-901 to FR-904 | §12 TR-900 | TR-901, TR-902 | ✅ Realized |
 | Maintenance & Assurance Reporting | FR-1001 to FR-1004 | §13 TR-1000 | TR-1001, TR-1002 | ✅ Realized |
 | Estate Configuration & Wellbeing | FR-1101 to FR-1103 | §14 TR-1100 | TR-1101, TR-1102 | ✅ Realized |
 | Mobile Continuity | FR-1201 to FR-1204 | §15 TR-1200 | TR-1201, TR-1202, TR-1203 | ✅ Realized |
-| Audit & Provenance | FR-1301 to FR-1304 | §16 TR-1300 | TR-1301, TR-1302, TR-1303, TR-1304 | ✅ Realized |
-| Authentication & Authorization | FR-1401 to FR-1403 | §17 TR-1400 | TR-1401, TR-1402, TR-1403, TR-1404 | ✅ Realized |
+| Audit & Provenance | FR-1301 to FR-1304 | §16 TR-1300 | TR-1301, TR-1302, TR-1303, TR-1304, TR-1305 | ✅ Realized |
+| Authentication & Authorization | FR-1401 to FR-1403 | §17 TR-1400 | TR-1401, TR-1402, TR-1403, TR-1404, TR-1405 | ✅ Realized |
 | Cross-System Integration | FR-1501 to FR-1504 | §18 TR-1500 | TR-1501, TR-1502, TR-1503, TR-1504, TR-1505 | ✅ Realized |
 | Degraded-Mode Behavior | FR-1601 to FR-1603 | §19 TR-1600 | TR-1601, TR-1602, TR-1603, TR-1604 | ✅ Realized |
 | State & Persistence | FR-1701 to FR-1703 | §20 TR-1700 | TR-1701, TR-1702, TR-1703 | ✅ Realized |
+| **ARC Technical Domain** | **Stage 1 §4 ARC Trigger Governance** | **§21 TR-1800** | **TR-1801, TR-1802, TR-1803, TR-1804, TR-1805, TR-1806** | **✅ Realized** |
 
-**Result: 17 FRS requirement families. 17 realized in Stage 4 TRS. 0 silently dropped.**
+**Result: 17 FRS requirement families + 1 Stage 1 §4 ARC domain. 18 families realized in Stage 4 TRS v1.1. 0 silently dropped.**
 
 ---
 
@@ -75,13 +76,14 @@ This section traces every individual FRS requirement to its Stage 4 TRS realizat
 |---|---|---|---|
 | FR-201 | Alert Centre Load | TR-201: `alerts` table schema requirements; `GET /api/alerts` priority ordering contract; explicit error on fetch failure | None |
 | FR-202 | Alert Detail View | TR-201: `alerts` table FK columns (linked_approval_id, linked_intervention_id) support alert detail context | Alert detail UI layout deferred to Stage 5 |
-| FR-203 | Alert Acknowledgment | TR-202: `POST /api/alerts/{id}/acknowledge` contract; actor authorization check; audit event requirement; write-failure behavior | None |
-| FR-204 | Alert Escalation | TR-203: `POST /api/alerts/{id}/escalate` contract; manual and timeout escalation; `ALERT_ESCALATED` and `ALERT_ESCALATED_TIMEOUT` audit events | None |
+| FR-203 | Alert Acknowledgment | TR-202: `POST /api/alerts/{id}/acknowledge` contract; actor authorization check; audit event requirement; write-failure behavior; TR-208: retry policy on write failure | None |
+| FR-204 | Alert Escalation | TR-203: `POST /api/alerts/{id}/escalate` contract; manual and timeout escalation; `ALERT_ESCALATED` and `ALERT_ESCALATED_TIMEOUT` audit events; TR-209: escalation chain two-level model with distinct event types per level | None |
 | FR-205 | Alert Dismissal | TR-204: Server-side class enforcement (HTTP 422 for Critical/High/Medium); non-empty `dismiss_reason` required | None |
 | FR-206 | Link Alert to Approval | TR-205: `POST /api/alerts/{id}/link-approval`; audit event `APPROVAL_CREATED_FROM_ALERT`; alert state not altered on failure | None |
 | FR-207 | Link Alert to Intervention | TR-401: `interventions` table `source_alert_id` FK column; intervention creation from alert context | None |
-| FR-208 | Critical Alert Auto-Escalation | TR-206: Background scheduler contract; query pattern; scheduler failure alert requirement | Scheduler implementation mechanism deferred to Stage 5 |
+| FR-208 | Critical Alert Auto-Escalation | TR-206: Background scheduler contract; query pattern; scheduler failure alert requirement; TR-209: two-level escalation chain definition | Scheduler implementation mechanism deferred to Stage 5 |
 | FR-209 | Alert History | TR-201: `alerts` table retains dismissed/resolved records for history | History view API endpoint deferred to Stage 5 (extend GET /api/alerts with status filter) |
+| — | Alert Timing & Retry (Stage 1 §3 Success Criteria) | TR-207: Alert generation and delivery timing SLA contract (trigger→INSERT ≤5s; INSERT→Realtime ≤2s; INSERT→push ≤5s); TR-208: Retry policy (3 retries with exponential back-off) on write failure; durability contract | Alert timing SLA self-monitoring deferred to Stage 5 |
 
 ### FR-300 Family: Approval Workflow
 
@@ -122,9 +124,10 @@ This section traces every individual FRS requirement to its Stage 4 TRS realizat
 |---|---|---|---|
 | FR-601 | AIMCC/Knowledge Supervision Surface Load | TR-601: AIMCC read API call contract; stale indicator on degraded | None |
 | FR-602 | Upload Detail View | TR-601: Full provenance chain fields in AIMCC API response requirement | Provenance chain UI layout deferred to Stage 5 |
-| FR-603 | Knowledge Upload Quota Supervision | TR-602: Quota read API contract; last-known cache with stale indicator | None |
-| FR-604 | AIMCC Governance Action | TR-603: Approval creation with `aimcc_governance` source type; AIMCC governance decision notification on approval; queued pending on AIMCC degraded | None |
+| FR-603 | Knowledge Upload Quota Supervision | TR-602: Quota read API contract; last-known cache with stale indicator; TR-607: quota threshold state machine (ok/warning/critical) with automated alert generation on threshold transitions; TR-608: quota authorization rules | None |
+| FR-604 | AIMCC Governance Action | TR-603: Approval creation with `aimcc_governance` source type; AIMCC governance decision notification on approval; queued pending on AIMCC degraded; TR-605: quota adjustment request console action; TR-606: temporary quota override contract with expiry handling; TR-609: quota audit event catalog | None |
 | FR-605 | AIMCC Non-Bypass Rule | TR-604: KUC-only upload submission enforcement; `BOUNDARY_BYPASS_ATTEMPTED` on violation; TR-BOUNDARY-002 | None |
+| — | Dynamic Upload Quota Management Console (Stage 1 §4 reconciliation) | TR-605: `POST /api/aimcc/quota/request-adjustment` with adjustment_reason enforcement and approval gate; TR-606: temporary override with `override_expiry_at` enforcement, pre-expiry alert, AIMCC notification; TR-607: three-state threshold machine (ok/warning/critical) with automated alert generation; TR-608: reserved_matter authorization enforcement; TR-609: quota audit event catalog with full observability | None |
 
 ### FR-700 Family: Memory-Aware / Knowledge-Aware View
 
@@ -186,9 +189,10 @@ This section traces every individual FRS requirement to its Stage 4 TRS realizat
 | FRS ID | FRS Title | TRS Realization | Deferred Item (if any) |
 |---|---|---|---|
 | FR-1301 | Mandatory Audit Event Fields | TR-1301: `audit_events` table schema with all mandatory fields; append-only constraint; correction-record pattern | None |
-| FR-1302 | Required Audit Event Coverage | TR-1302: Complete list of required `event_type` values defined; all wired across TRS sections | Wiring verification deferred to Stage 6 QA-to-Red |
+| FR-1302 | Required Audit Event Coverage | TR-1302: Complete list of required `event_type` values defined (expanded in v1.1 to include quota and ARC events); all wired across TRS sections | Wiring verification deferred to Stage 6 QA-to-Red |
 | FR-1303 | Audit Accessibility | TR-1303: `GET /api/audit-events` query parameters defined; pagination; RLS scope | Audit review surface UI deferred to Stage 5 |
 | FR-1304 | Cross-System Event Integrity | TR-1304: `cross_system_ref` column; `_CROSS_REF_PENDING` suffix pattern; correction-record update flow | None |
+| — | Audit Delivery Atomicity (Stage 1 §3 State/Audit/Provenance Success Criteria) | TR-1305: Audit event delivery atomicity contract — state mutation and audit write must be atomic; compensating `AUDIT_WRITE_FAILED` event on cross-system failure | None |
 
 ### FR-1400 Family: Authentication & Authorization
 
@@ -197,6 +201,7 @@ This section traces every individual FRS requirement to its Stage 4 TRS realizat
 | FR-1401 | User Authentication | TR-1401: Supabase Auth configuration requirements; JWT expiry; httpOnly cookie; auth event audit requirements; service-unavailable behavior | MFA per-user configuration flow deferred to Stage 5 |
 | FR-1402 | Authority-Aware Action Enforcement | TR-1404: Server-side authority-domain middleware; reserved_matter → human actor check; delegated → ai_executive within scope; independent of client UI | Delegated-domain scope configuration storage deferred to Stage 5 |
 | FR-1403 | Identity Separation | TR-1403: `actor_type` enum in all tables and audit events; actor resolution at API layer from JWT claims or service token | None |
+| — | Inter-Service Trust Boundary (Stage 1 §1 Explicit Prohibitions) | TR-1405: Inter-service trust anchor — AMC sole writer to AMC tables; all callback endpoints validate service token; trust escalation prohibition; cross-service impersonation rejection | None |
 
 ### FR-1500 Family: Cross-System Integration
 
@@ -222,6 +227,19 @@ This section traces every individual FRS requirement to its Stage 4 TRS realizat
 | FR-1701 | State Domain Ownership | TR-1701: Canonical state ownership table with all state domains; AMC write access rules per table; external system read-only enforcement | None |
 | FR-1702 | State Consistency Across Surfaces | TR-1702: Realtime channel for state mutations; authoritative Realtime event pattern; stale indicator on synchronization failure | None |
 | FR-1703 | Session Continuity | TR-1703: Server-fetch sequence on session restore; five required API fetches; explicit error on fetch failure | None |
+
+### ARC Technical Domain: Stage 1 §4 ARC Trigger Governance
+
+> **Traceability Note**: ARC (Action Resolution Centre) is not an FRS requirement family — it is a first-class AMC executive function declared in Stage 1 §4 ARC Trigger Governance reconciliation. The Stage 3 FRS absorbed ARC trigger governance into the alert, approval, and intervention families. Stage 4 TRS v1.1 restores ARC as an explicitly recognizable technical domain with its own section (§21 TR-1800), API namespace, data table, and audit family as mandated by Stage 1.
+
+| Stage 1 Source | TRS Realization | Deferred Item (if any) |
+|---|---|---|
+| Stage 1 §4: ARC Trigger Governance — "first-class AMC executive function"; absorbed into intervention, escalation routing, and approval workflow | TR-1801: ARC domain scope declaration; distinct surface at `/arc`, API namespace `/api/arc/`, `arc_classifications` table | `arc_classifications` DDL and ARC surface design deferred to Stage 5 |
+| Stage 1 §4: ARC items require executive resolution tracking | TR-1802: ARC triggering model — five classified trigger conditions; server-side classification written to `arc_classifications` | ARC stale-item alert scheduling deferred to Stage 5 |
+| Stage 1 §3: Authority boundaries on escalated items | TR-1803: ARC authority path — reserved-matter items require Johan Ras; `ARC_ITEM_RESOLVED` audit event with full actor identity | None |
+| Stage 1 §4: Escalated items must not silently age without resolution | TR-1804: ARC state machine — open/in_resolution/resolved/externally_escalated; explicit API actions for each transition; stale alert generation | ARC Realtime subscription wiring deferred to Stage 5 |
+| Stage 1 §3: Audit significance of all consequential actions | TR-1805: ARC audit event catalog — four required event types with mandatory fields; cross-system ref requirement | None |
+| Stage 1 §4: ARC as architecturally recognizable domain | TR-1806: Architecture implications — `arc_classifications` table required; ARC not implementable as UI filter; Realtime subscription requirement; Stage 5 obligations listed | As listed in TR-1806 |
 
 ---
 
@@ -280,6 +298,12 @@ The following items were identified in Stage 4 TRS but explicitly deferred to St
 | Background scheduler implementation mechanism | FR-208 | Infrastructure mechanism (cron/Edge Function) | Architecture stage |
 | Audit review surface UI | FR-1303 | UI component design | ui-builder |
 | CI/CD and deployment infrastructure | Stage 4 scope | Infrastructure decisions are Architecture stage | Architecture stage |
+| `arc_classifications` table DDL (column types, index design) | Stage 1 §4 / TR-1806 | Schema design details | schema-builder |
+| ARC surface UI/UX design and component tree | Stage 1 §4 / TR-1801 | Architecture-stage decision | ui-builder |
+| ARC Realtime subscription wiring for underlying source object changes | Stage 1 §4 / TR-1806 | Implementation-level Realtime wiring | api-builder |
+| ARC stale-item alert scheduling implementation | Stage 1 §4 / TR-1804 | Infrastructure mechanism | Architecture stage |
+| Alert timing SLA breach self-monitoring implementation | FR-201 / TR-207 | System observability infrastructure | Architecture / api-builder |
+| Quota threshold configuration storage and runtime reload mechanism | FR-603 / TR-607 | Configuration system architecture | Architecture stage |
 
 ---
 
@@ -288,13 +312,20 @@ The following items were identified in Stage 4 TRS but explicitly deferred to St
 | Check | Result |
 |---|---|
 | Total FRS requirement families covered | 17 of 17 — ✅ No family dropped |
-| Total FRS individual requirements mapped | 60+ individual FRs mapped — see §2 |
+| Stage 1 §4 ARC domain explicitly realized | 1 of 1 — ✅ TR-1800 family added in v1.1 |
+| Total FRS individual requirements mapped | 60+ individual FRs mapped + ARC domain + quota console — see §2 |
 | FRS families silently dropped | 0 |
 | Business rules technically realized | 18 of 18 — ✅ All realized |
-| Deferred items disclosed | 21 items — all explicitly documented in §4 |
+| Deferred items disclosed | 30 items (21 original + 9 added in v1.1) — all explicitly documented in §4 |
 | Cross-system boundaries preserved | ✅ All 5 boundaries preserved — see §6 |
 | Stage 5 deferred items clearly bounded | ✅ All deferred items assigned to Stage 5 owner |
 | TRS contains no vague technical wording | ✅ All TRS requirements specify explicit API contracts, schema fields, or enforcement mechanisms |
+| ARC technical domain explicitly defined | ✅ TR-1801–TR-1806; distinct domain, table, API namespace, audit family |
+| Dynamic Upload Quota Management as operational console | ✅ TR-605–TR-609; adjustment, override, threshold state machine, authorization, audit |
+| Alert timing/retry/escalation contract family explicit | ✅ TR-207, TR-208, TR-209 |
+| Audit & Provenance declared as contract family | ✅ TR-1300 section — explicit contract family declaration + TR-1305 atomicity |
+| Auth & Trust-Boundary declared as contract family | ✅ TR-1400 section — explicit contract family declaration + TR-1405 trust anchor |
+| State Ownership declared as contract family | ✅ TR-1700 section — explicit contract family declaration |
 
 ---
 
@@ -314,4 +345,4 @@ This section confirms that all approved cross-system boundaries from Stages 1–
 
 ---
 
-*End of FRS-to-TRS Traceability — Stage 4. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2 approval required alongside the Technical Requirements Specification before Architecture (Stage 5) derivation begins.*
+*End of FRS-to-TRS Traceability — Stage 4 v1.1. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2 approval required alongside the Technical Requirements Specification before Architecture (Stage 5) derivation begins.*

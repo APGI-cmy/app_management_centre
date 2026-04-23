@@ -2,10 +2,11 @@
 
 **Stage**: 4 — Technical Requirements Specification (TRS)
 **Module**: App Management Centre (AMC)
-**Version**: 1.0
-**Status**: 🟡 Produced Approval-Ready — 2026-04-23
+**Version**: 1.1
+**Status**: 🟡 Produced Approval-Ready — 2026-04-23 (Hardened 2026-04-23)
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
 **CS2 Authorization**: app_management_centre#1127
+**Hardening Authorization**: Pre-merge hardening wave — ARC explicit domain, Dynamic Upload Quota Management console, alert timing/retry/escalation contract family, audit delivery atomicity, inter-service trust boundary, state ownership contract family declarations
 **Upstream Sources**:
 - Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.0 (CS2-approved 2026-04-22, ref #1117)
 - Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/` v1.0 (CS2-approved, ref #1121)
@@ -41,11 +42,12 @@
 18. [TR-1500: Cross-System Integration — Technical Requirements](#18-tr-1500-cross-system-integration--technical-requirements)
 19. [TR-1600: Degraded-Mode — Technical Requirements](#19-tr-1600-degraded-mode--technical-requirements)
 20. [TR-1700: State & Persistence — Technical Requirements](#20-tr-1700-state--persistence--technical-requirements)
-21. [API / Interface Contract Summary](#21-api--interface-contract-summary)
-22. [Data Schema Requirements Summary](#22-data-schema-requirements-summary)
-23. [Integration Contract Definitions](#23-integration-contract-definitions)
-24. [Deferred-to-Stage-5 Declarations](#24-deferred-to-stage-5-declarations)
-25. [Sign-Off / Approval Record](#25-sign-off--approval-record)
+21. [TR-1800: ARC Technical Domain — Technical Requirements](#21-tr-1800-arc-technical-domain--technical-requirements)
+22. [API / Interface Contract Summary](#22-api--interface-contract-summary)
+23. [Data Schema Requirements Summary](#23-data-schema-requirements-summary)
+24. [Integration Contract Definitions](#24-integration-contract-definitions)
+25. [Deferred-to-Stage-5 Declarations](#25-deferred-to-stage-5-declarations)
+26. [Sign-Off / Approval Record](#26-sign-off--approval-record)
 
 ---
 
@@ -229,6 +231,31 @@ The following technology constraints are established from approved Stage 1 and S
 | **FRS Source** | FR-208 |
 | **Technical Requirement** | A background scheduled job (Supabase Edge Function, cron, or equivalent) must run at minimum every 5 minutes. Query: SELECT alerts WHERE `alert_class = 'critical' AND acknowledged_at IS NULL AND created_at < (now() - escalation_timeout_interval)`. For each matched alert: execute escalation (write escalation fields, write `ALERT_ESCALATED_TIMEOUT` audit event). Scheduler failure must generate a new Critical alert in the `alerts` table with `source_system: "amc_scheduler"` |
 
+### TR-207 — Alert Generation & Delivery Timing Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-207 |
+| **FRS Source** | FR-201, FR-204; Stage 1 §3 Executive Alerting Success Criteria |
+| **Technical Requirement** | Alert persistence timing SLAs: (1) any event that triggers alert creation (scheduler, AIMC callback, system health check, intervention failure, boundary bypass) must result in the alert being persisted to the `alerts` table within 5 seconds of trigger event detection; (2) alert delivery to connected sessions via Supabase Realtime must occur within 2 seconds of the INSERT commit; (3) for critical alerts: push notification dispatch (TR-1202) must begin within 5 seconds of INSERT commit — not batched or deferred. Timing SLA summary: trigger → INSERT ≤5 s; INSERT → Realtime broadcast ≤2 s; INSERT → push dispatch begin ≤5 s. If a timing SLA breach is detected via system self-monitoring: AMC must write an `ALERT_DELIVERY_DELAYED` audit event with `severity: warning` |
+| **Deferred to Stage 5** | System self-monitoring implementation for SLA breach detection |
+
+### TR-208 — Alert Write Retry & Durability Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-208 |
+| **FRS Source** | FR-201, FR-203 |
+| **Technical Requirement** | If an alert INSERT fails (database write error): AMC backend must retry up to 3 times with exponential back-off (retry 1: 1 s, retry 2: 3 s, retry 3: 10 s). If all 3 retries fail: (1) write an `ALERT_WRITE_FAILED` event to a durable fallback store or secondary audit sink (cannot write to the same failing table); (2) surface an error to the UI surface that triggered the alert if human-initiated; (3) do NOT silently suppress the failure. For system-generated alerts (scheduler, health monitors): if all retries fail, the originating component must surface a `SYSTEM_ERROR` audit event and generate a new highest-severity alert when the table becomes available. Acknowledgment write failures (TR-202): no partial update — if the row update and audit write cannot both complete, the acknowledgment must be rolled back and an explicit error returned to the API caller |
+
+### TR-209 — Alert Escalation Chain Technical Definition
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-209 |
+| **FRS Source** | FR-204, FR-208 |
+| **Technical Requirement** | Escalation chain levels: (1) Level 0 — alert created, awaiting acknowledgment; (2) Level 1 — alert unacknowledged after `escalation_timeout_level_1_minutes` (configurable, default: 30 minutes for Critical) → auto-escalation target `"maturion"` (Maturion AI executive); (3) Level 2 — alert still unacknowledged after `escalation_timeout_level_2_minutes` (configurable, default: 60 minutes) → escalation target `"johan_ras_direct"` — push notification delivery mandatory. Level skipping is prohibited: auto-escalation must traverse levels sequentially. Manual escalation by Johan Ras may jump directly to any level. Each level transition writes a distinct audit event: `ALERT_ESCALATED_LEVEL_1`, `ALERT_ESCALATED_LEVEL_2`. Once at Level 2, no further auto-escalation fires — the alert remains at Level 2 until acknowledged or resolved. Escalation state is stored in the `alerts` table columns `escalated_at`, `escalation_target`, `escalation_type` (enum expanded to include `timeout_level_1` and `timeout_level_2`) |
+
 ---
 
 ## 6. TR-300: Approval Workflow — Technical Requirements
@@ -380,6 +407,46 @@ The following technology constraints are established from approved Stage 1 and S
 | **Requirement ID** | TR-604 |
 | **FRS Source** | FR-605 |
 | **Technical Requirement** | Any knowledge upload submission from AMC context must POST to `{KUC_API_BASE_URL}/submit` exclusively. Architecture must prevent any direct call to AIMCC ingestion endpoints from AMC code. If a bypass is detected at runtime: write `BOUNDARY_BYPASS_ATTEMPTED` event to `audit_events` |
+
+### TR-605 — Quota Adjustment Request Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-605 |
+| **FRS Source** | FR-603, FR-604; Stage 1 §4 Dynamic Upload Quota Management reconciliation |
+| **Technical Requirement** | AMC must expose `POST /api/aimcc/quota/request-adjustment` as a hands-on quota management console action. Request body: `{ requested_quota, current_quota, adjustment_reason, requested_by: actor_id, adjustment_type: "increase" \| "decrease" \| "temporary_override" }`. On submission: (1) validate `adjustment_reason` is non-empty — return HTTP 422 if absent; (2) create an approval record with `source_type: "aimcc_quota_adjustment"`, `authority_boundary_type: "reserved_matter"`, `aimcc_context_id` populated; (3) write `QUOTA_ADJUSTMENT_REQUESTED` audit event with fields: `actor`, `current_quota`, `requested_quota`, `adjustment_type`, `timestamp`; (4) return `{ approval_id, approval_status: "pending", current_quota, requested_quota }`. If approval record creation fails: return HTTP 500 with explicit error — no quota operation may proceed without an approval record. This endpoint is the sole quota-change initiation path from AMC |
+
+### TR-606 — Quota Override Technical Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-606 |
+| **FRS Source** | FR-603, FR-604; Stage 1 §4 Dynamic Upload Quota Management |
+| **Technical Requirement** | Temporary quota override (`adjustment_type: "temporary_override"`) requires the following additional enforcement: (1) request body must include `override_expiry_at` (timestamptz) — return HTTP 422 if absent for override type; (2) approval record must capture `override_expiry_at` in its approval metadata; (3) on AIMCC governance decision notification (TR-603 pattern): include `override_expiry_at` in the decision payload so AIMCC can enforce expiry; (4) write `QUOTA_OVERRIDE_ACTIVATED` audit event when the approved decision is sent to AIMCC; (5) schedule a pre-expiry reminder alert (configurable lead time, default: 24 hours) — alert summary text: "Temporary upload quota override expires at {override_expiry_at}"; (6) on expiry notification from AIMCC: write `QUOTA_OVERRIDE_EXPIRED` audit event. AIMCC is responsible for reverting the quota on expiry; AMC records the event |
+
+### TR-607 — Quota Threshold State Machine Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-607 |
+| **FRS Source** | FR-603; Stage 1 §4 Dynamic Upload Quota Management |
+| **Technical Requirement** | Quota threshold state machine states: `ok` (usage < warning threshold), `warning` (usage ≥ warning threshold AND < critical threshold), `critical` (usage ≥ critical threshold). Default thresholds (all configurable via environment variables): warning at 75%, critical at 90%. State transitions must trigger: `ok → warning`: write `QUOTA_WARNING_THRESHOLD_ENTERED` audit event + create Medium alert in `alerts`; `warning → critical`: write `QUOTA_CRITICAL_THRESHOLD_ENTERED` audit event + create Critical alert in `alerts`; `critical → warning` or `warning → ok` (quota relieved): write `QUOTA_THRESHOLD_RECOVERED` audit event. Threshold configuration values must be environment-variable-configurable (`QUOTA_WARNING_THRESHOLD_PERCENT`, `QUOTA_CRITICAL_THRESHOLD_PERCENT`) — hardcoded threshold values are prohibited. Quota state check must run after every upload operation completion callback received from AIMCC |
+
+### TR-608 — Quota Authorization Rules Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-608 |
+| **FRS Source** | FR-603, FR-604; Stage 1 §4 Dynamic Upload Quota Management |
+| **Technical Requirement** | Quota management authorization rules — all server-side enforcement: (1) Quota read (`GET {AIMCC_API_BASE_URL}/quota/current`): accessible to any authenticated executive actor (Johan Ras or authorized Maturion delegate); (2) Quota adjustment request (TR-605): `reserved_matter` authority boundary — Johan Ras (`human` actor) is the authorized submitter; Maturion-initiated submissions require explicit delegated authority for quota management configured in the authority-domain system; (3) Quota override (TR-606): same as adjustment — `reserved_matter`; (4) AIMCC governance decision notification (TR-603): service-role token only — never via user JWT; (5) Quota audit log access: executive actors may filter `audit_events` by quota-related event types. Any quota operation that bypasses the approval gate (TR-302, TR-304) must be rejected with HTTP 403 and an `UNAUTHORIZED_ACCESS_ATTEMPT` audit event |
+
+### TR-609 — Quota Audit & Observability Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-609 |
+| **FRS Source** | FR-603, FR-604; Stage 1 §4 Dynamic Upload Quota Management |
+| **Technical Requirement** | Required quota-specific audit events (additions to TR-1302 required event type list): `QUOTA_ADJUSTMENT_REQUESTED`, `QUOTA_ADJUSTMENT_APPROVED`, `QUOTA_ADJUSTMENT_REJECTED`, `QUOTA_OVERRIDE_ACTIVATED`, `QUOTA_OVERRIDE_EXPIRED`, `QUOTA_WARNING_THRESHOLD_ENTERED`, `QUOTA_CRITICAL_THRESHOLD_ENTERED`, `QUOTA_THRESHOLD_RECOVERED`. All quota audit events must include mandatory fields: `actor`, `current_quota`, `requested_quota` (where applicable), `threshold_state`, `aimcc_context_id`, `timestamp`. The full quota change history must be reconstructable from `audit_events` by filtering on quota event types — AMC must not maintain a separate quota-history table. Quota panel read calls do not require audit events |
 
 ---
 
@@ -559,6 +626,8 @@ The following technology constraints are established from approved Stage 1 and S
 
 > FRS Traceability: FR-1301 to FR-1304
 
+> **CONTRACT FAMILY DECLARATION — Audit & Provenance**: This section is the authoritative **Audit & Provenance Contract Family** for AMC. It defines the complete technical contract for all audit event generation, required fields, append-only enforcement, accessibility rules, cross-system linkage, and delivery atomicity. All other TRS sections that reference audit events derive from and must comply with this contract family. TR-1305 defines the delivery atomicity rule that governs every audit write across the system.
+
 ### TR-1301 — Audit Events Table Schema Requirements
 
 | Field | Value |
@@ -573,7 +642,7 @@ The following technology constraints are established from approved Stage 1 and S
 |---|---|
 | **Requirement ID** | TR-1302 |
 | **FRS Source** | FR-1302 |
-| **Technical Requirement** | The `audit_events` table must receive events for the following event_type values (minimum). Architecture must confirm all are wired before Stage 6 QA-to-Red: `ALERT_ACKNOWLEDGED`, `ALERT_ESCALATED`, `ALERT_ESCALATED_TIMEOUT`, `ALERT_DISMISSED`, `APPROVAL_CREATED_FROM_ALERT`, `INTERVENTION_CREATED_FROM_ALERT`, `APPROVAL_DECIDED`, `APPROVAL_DEFERRED`, `CLARIFICATION_REQUESTED`, `INTERVENTION_INITIATED`, `INTERVENTION_DISPATCHED`, `INTERVENTION_COMPLETED`, `INTERVENTION_CANCELLED`, `INTERVENTION_FAILED`, `INTERVENTION_ABORT_SIGNAL_FAILED`, `AIMC_REQUEST`, `AIMC_ACTION_INITIATED`, `AIMC_ACTION_COMPLETED`, `AIMC_DEGRADED`, `AIMC_RECOVERED`, `AIMCC_DEGRADED`, `AIMCC_GOVERNANCE_ACTION_CREATED`, `KNOWLEDGE_RETRIEVED`, `KNOWLEDGE_SYSTEM_DEGRADED`, `AUTH_LOGIN`, `AUTH_LOGIN_FAILED`, `AUTH_SESSION_EXPIRED`, `UNAUTHORIZED_ACCESS_ATTEMPT`, `PROACTIVE_MESSAGE_RECEIVED`, `CONVERSATION_MESSAGE_SENT`, `CONVERSATION_RESPONSE_RECEIVED`, `MESSAGE_ACKNOWLEDGED`, `BOUNDARY_BYPASS_ATTEMPTED`, `REPORT_ALERT_CREATION_FAILED`, `CORRECTION_RECORD` |
+| **Technical Requirement** | The `audit_events` table must receive events for the following event_type values (minimum). Architecture must confirm all are wired before Stage 6 QA-to-Red: `ALERT_ACKNOWLEDGED`, `ALERT_ESCALATED`, `ALERT_ESCALATED_TIMEOUT`, `ALERT_ESCALATED_LEVEL_1`, `ALERT_ESCALATED_LEVEL_2`, `ALERT_DISMISSED`, `ALERT_DELIVERY_DELAYED`, `ALERT_WRITE_FAILED`, `APPROVAL_CREATED_FROM_ALERT`, `INTERVENTION_CREATED_FROM_ALERT`, `APPROVAL_DECIDED`, `APPROVAL_DEFERRED`, `CLARIFICATION_REQUESTED`, `INTERVENTION_INITIATED`, `INTERVENTION_DISPATCHED`, `INTERVENTION_COMPLETED`, `INTERVENTION_CANCELLED`, `INTERVENTION_FAILED`, `INTERVENTION_ABORT_SIGNAL_FAILED`, `AIMC_REQUEST`, `AIMC_ACTION_INITIATED`, `AIMC_ACTION_COMPLETED`, `AIMC_DEGRADED`, `AIMC_RECOVERED`, `AIMCC_DEGRADED`, `AIMCC_GOVERNANCE_ACTION_CREATED`, `KNOWLEDGE_RETRIEVED`, `KNOWLEDGE_SYSTEM_DEGRADED`, `AUTH_LOGIN`, `AUTH_LOGIN_FAILED`, `AUTH_SESSION_EXPIRED`, `UNAUTHORIZED_ACCESS_ATTEMPT`, `PROACTIVE_MESSAGE_RECEIVED`, `CONVERSATION_MESSAGE_SENT`, `CONVERSATION_RESPONSE_RECEIVED`, `MESSAGE_ACKNOWLEDGED`, `BOUNDARY_BYPASS_ATTEMPTED`, `REPORT_ALERT_CREATION_FAILED`, `QUOTA_ADJUSTMENT_REQUESTED`, `QUOTA_ADJUSTMENT_APPROVED`, `QUOTA_ADJUSTMENT_REJECTED`, `QUOTA_OVERRIDE_ACTIVATED`, `QUOTA_OVERRIDE_EXPIRED`, `QUOTA_WARNING_THRESHOLD_ENTERED`, `QUOTA_CRITICAL_THRESHOLD_ENTERED`, `QUOTA_THRESHOLD_RECOVERED`, `ARC_ITEM_CLASSIFIED`, `ARC_ITEM_STATE_CHANGED`, `ARC_ITEM_RESOLVED`, `ARC_ITEM_EXTERNALLY_ESCALATED`, `AUDIT_WRITE_FAILED`, `CORRECTION_RECORD` |
 
 ### TR-1303 — Audit Accessibility API Contract
 
@@ -591,11 +660,21 @@ The following technology constraints are established from approved Stage 1 and S
 | **FRS Source** | FR-1304 |
 | **Technical Requirement** | For any AMC event that triggers downstream execution in AIMC, AIMCC, Foreman, or specialist agents: the AMC-side audit event must populate `cross_system_ref` with the external service reference ID (e.g., AIMC action ID, Foreman job ID, AIMCC tracking ref). If cross-system reference is not available at audit write time: write event with `cross_system_ref: null` and `event_type` suffix `_CROSS_REF_PENDING`. When the cross-system ref becomes available (via callback): write a `CORRECTION_RECORD` event referencing the original and providing `cross_system_ref` |
 
+### TR-1305 — Audit Event Delivery Atomicity Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1305 |
+| **FRS Source** | FR-1301; Stage 1 §3 State/Audit/Provenance Success Criteria |
+| **Technical Requirement** | Audit event delivery atomicity rules: (1) For any API endpoint that both mutates state AND must write an audit event: both operations must be treated as an atomic unit. If the state mutation succeeds but the audit event write fails: the state mutation must be rolled back, or the audit failure must surface as a blocking error — the system must never leave state mutated without a corresponding audit record; (2) Required implementation approach: the audit event INSERT must execute within the same database transaction as the state mutation, or the transaction must be designed so that an audit write failure triggers a compensating rollback; (3) Exception — physically separated systems: where state mutation and audit write span different systems (e.g., AIMC callback updates AMC state and audit event): if audit write fails after state update, AMC must write an `AUDIT_WRITE_FAILED` compensating event on the next available cycle and surface a warning to the executive surface. Silent audit omission is a governance violation (BR-AUDIT-001) |
+
 ---
 
 ## 17. TR-1400: Authentication & Authorization — Technical Requirements
 
 > FRS Traceability: FR-1401 to FR-1403
+
+> **CONTRACT FAMILY DECLARATION — Authentication, Authorization & Trust-Boundary**: This section is the authoritative **Authentication, Authorization & Trust-Boundary Contract Family** for AMC. It defines the complete technical contract for actor authentication, authority-domain enforcement, identity separation, and inter-service trust boundary enforcement. TR-1405 defines the inter-service trust anchor that governs all inbound callbacks and outbound service calls across AMC's external boundaries.
 
 ### TR-1401 — Supabase Auth Configuration Requirements
 
@@ -628,6 +707,14 @@ The following technology constraints are established from approved Stage 1 and S
 | **Requirement ID** | TR-1404 |
 | **FRS Source** | FR-1402 |
 | **Technical Requirement** | AMC backend must implement authority-domain checks as middleware or service-layer guards that execute server-side for every consequential action endpoint. Required checks: (1) `reserved_matter` authority boundary → actor must resolve to `human` type with Johan Ras identity claim; (2) `delegated` authority boundary → actor must resolve to `ai_executive` type within approved delegated scope configuration; (3) `operational` boundary → authenticated executive actor permitted. These checks must be enforced independently of client-side UI visibility — server must reject regardless of what the UI presented to the actor |
+
+### TR-1405 — Inter-Service Trust Boundary Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1405 |
+| **FRS Source** | FR-1403, FR-1504; Stage 1 §1 Explicit Prohibitions |
+| **Technical Requirement** | Inter-service trust anchor rules: (1) AMC is the sole authorized writer to AMC-owned tables — no external service (AIMC, AIMCC, Foreman, KUC, Specialist Agents) may write to AMC-owned tables directly; all incoming writes from external services must arrive via AMC callback endpoints that validate service identity before accepting; (2) Service identity validation: every inbound callback endpoint (TR-503, TR-803, TR-804, TR-403) must validate the `Authorization: Bearer` header against the registered service token for that caller before processing the payload — invalid or absent token returns HTTP 401; mismatched service identity returns HTTP 403 + `UNAUTHORIZED_ACCESS_ATTEMPT` audit event; (3) Token rotation: all service tokens must be environment-variable-configurable and rotatable without application code changes; (4) Trust escalation prohibition: no external service may request or receive elevated trust beyond its defined service token scope — an AIMC service token must not be usable to access Foreman endpoints or AMC admin operations; (5) Cross-service impersonation: no callback may claim to originate from a different service than its registered token — `actor_type` in callback payloads must match the token's registered service identity or the callback must be rejected |
 
 ---
 
@@ -719,6 +806,8 @@ The following technology constraints are established from approved Stage 1 and S
 
 > FRS Traceability: FR-1701 to FR-1703
 
+> **CONTRACT FAMILY DECLARATION — State Ownership & Cross-Device Consistency**: This section is the authoritative **State Ownership & Cross-Device Consistency Contract Family** for AMC. It defines the authoritative rules for which system owns which state domain, how state mutations must propagate across connected sessions and devices, and what the session restore contract requires. TR-1701 is the canonical state ownership table — it is architecture-binding and must not be altered by any downstream stage without CS2 approval.
+
 ### TR-1701 — Canonical State Ownership Table
 
 The following table defines the authoritative technical state ownership for AMC. Architecture and schema-builder must enforce this.
@@ -754,11 +843,67 @@ The following table defines the authoritative technical state ownership for AMC.
 
 ---
 
-## 21. API / Interface Contract Summary
+## 21. TR-1800: ARC Technical Domain — Technical Requirements
+
+> FRS Traceability: Stage 1 §4 ARC Trigger Governance Reconciliation; FRS FR-201 to FR-209 (Alert family), FR-301 to FR-307 (Approval family), FR-401 to FR-407 (Intervention family)
+
+> **DOMAIN DECLARATION**: ARC (Action Resolution Centre) is explicitly declared in Stage 1 §4 as a first-class AMC executive function. ARC is not a separate system from AMC — it is a defined technical sub-domain within AMC that provides a distinct surface, data model, and audit trail for collecting, classifying, routing, and tracking resolution of governance-blocked or escalated items that require explicit executive decision. ARC does not replace the alert, approval, or intervention pipelines — it is the resolution-tracking layer that ensures no governance-sensitive item can age without traceable executive resolution.
+
+### TR-1801 — ARC Technical Domain Scope Declaration
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1801 |
+| **FRS Source** | Stage 1 §4 ARC Trigger Governance; FR-204, FR-208, FR-302, FR-407 |
+| **Technical Requirement** | ARC must be architecturally recognizable as a distinct technical domain within AMC — not silently absorbed as generic columns on the alerts or interventions table. ARC items are logical aggregations over the existing alert, approval, and intervention objects, classified as ARC-eligible when they enter a resolution-requiring state. AMC must expose an ARC surface at route `/arc` accessible from the executive navigation sidebar. The ARC surface is a curated resolution workspace — it shows only items that have entered the ARC-eligible state and have not yet been resolved. The ARC domain has its own API namespace (`/api/arc/`), its own table (`arc_classifications`), and its own audit event family (TR-1805) |
+
+### TR-1802 — ARC Triggering Model Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1802 |
+| **FRS Source** | Stage 1 §4; FR-204, FR-208, FR-302, FR-407 |
+| **Technical Requirement** | The following conditions trigger ARC classification for an item (server-side logic — classification must be written to the `arc_classifications` table, not enforced client-side only): (1) **Critical alert escalated to Level 2 and unresolved** (TR-209 escalation chain Level 2 reached) — the alert becomes ARC-classified; (2) **Reserved-matter approval item without decision past ARC timeout** — `approvals` row with `authority_boundary_type: "reserved_matter"` AND `status: "pending"` past configurable ARC timeout (default: 120 minutes); (3) **Intervention with `status: "dispatch_failed"` requiring executive re-authorization** — where the intervention type requires human decision; (4) **AIMCC governance action approval frozen past ARC timeout** — AIMCC governance approval item in `pending` state past configurable ARC timeout; (5) **Boundary-bypass event requiring executive acknowledgment** — `BOUNDARY_BYPASS_ATTEMPTED` audit event without a corresponding resolution record within configurable ARC timeout (default: 30 minutes). Each ARC classification must be written to the `arc_classifications` table with fields: `arc_item_id` (UUID, PK), `source_type` (enum: alert / approval / intervention / boundary_event), `source_id` (text — ID of the originating object), `classified_at` (timestamptz), `classification_trigger` (text — which of the five conditions triggered classification), `arc_status` (enum: open / in_resolution / resolved / externally_escalated). Write `ARC_ITEM_CLASSIFIED` audit event on classification |
+
+### TR-1803 — ARC Authority Path Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1803 |
+| **FRS Source** | Stage 1 §4; FR-302, FR-303; FRS §3 Actor Model |
+| **Technical Requirement** | ARC authority path rules — server-side enforcement on all ARC resolution endpoints: (1) ARC items derived from reserved-matter approvals (`authority_boundary_type: "reserved_matter"`) require Johan Ras (`human` actor) to resolve — Maturion may not resolve reserved-matter ARC items; (2) ARC items derived from boundary-bypass events require Johan Ras acknowledgment and resolution — cannot be auto-resolved or Maturion-resolved; (3) ARC items derived from operational-scope interventions may be resolved by Maturion within approved delegated authority (same authority-domain check as TR-1404); (4) ARC resolution must produce an `ARC_ITEM_RESOLVED` audit event with mandatory fields: `arc_item_id`, `source_type`, `source_id`, `resolved_by`, `resolved_by_type` (actor_type enum), `resolution_action`, `resolution_basis`, `timestamp`. ARC resolution is an explicit actor act — no item may be auto-resolved without a logged resolution record and actor identity |
+
+### TR-1804 — ARC State Machine Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1804 |
+| **FRS Source** | Stage 1 §4; FR-204, FR-302, FR-407 |
+| **Technical Requirement** | ARC item state machine: `open` → `in_resolution` → `resolved`. Alternate exit: `open` or `in_resolution` → `externally_escalated`. State transition rules: (1) `open` → `in_resolution`: when a deciding actor opens the ARC item (`POST /api/arc/{arc_item_id}/begin-resolution`); (2) `in_resolution` → `resolved`: when the resolution action is completed (`POST /api/arc/{arc_item_id}/resolve`), request body: `{ resolution_action, resolution_basis, resolved_by, resolved_by_type }`; (3) `open` or `in_resolution` → `externally_escalated`: when item is explicitly escalated outside AMC scope (`POST /api/arc/{arc_item_id}/escalate-externally`); (4) `resolved` is a terminal state — no further transitions. Each state transition must write an `ARC_ITEM_STATE_CHANGED` audit event with `from_state`, `to_state`, `actor`, `timestamp`. Stale ARC items (in state `open` or `in_resolution` past configurable SLA, default: 240 minutes) must generate a new Medium alert referencing the ARC item — ARC items must not silently age without visibility |
+
+### TR-1805 — ARC Audit Requirements Contract
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1805 |
+| **FRS Source** | Stage 1 §4; FR-1301, FR-1302 |
+| **Technical Requirement** | ARC-specific required audit events (additions to TR-1302 required event type list — listed there): `ARC_ITEM_CLASSIFIED`, `ARC_ITEM_STATE_CHANGED`, `ARC_ITEM_RESOLVED`, `ARC_ITEM_EXTERNALLY_ESCALATED`. All ARC audit events must include mandatory fields: `arc_item_id`, `source_type`, `source_id`, `arc_status`, `actor`, `actor_type`, `timestamp`. Cross-system reference: if an ARC item resolution dispatches an action to an external system (e.g., intervention re-dispatch to Foreman), the `cross_system_ref` field must be populated per TR-1304. ARC audit events must never be orphaned — every ARC item must be traceable from classification through to resolution in `audit_events`. ARC events are governed by the audit delivery atomicity rule (TR-1305) |
+
+### TR-1806 — ARC Architecture Implications
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | TR-1806 |
+| **FRS Source** | Stage 1 §4 |
+| **Technical Requirement** | ARC architecture requirements that Stage 5 must fulfill: (1) AMC database must define an `arc_classifications` table — implementing ARC as only a UI-layer filter over `alerts` or `approvals` is prohibited; (2) required `arc_classifications` columns (minimum): `id` (UUID, PK), `source_type` (enum: alert / approval / intervention / boundary_event), `source_id` (text), `classified_at` (timestamptz, NOT NULL), `classification_trigger` (text), `arc_status` (enum: open / in_resolution / resolved / externally_escalated), `resolved_by` (text, nullable), `resolved_at` (timestamptz, nullable), `resolution_action` (text, nullable), `resolution_basis` (text, nullable); RLS: executive-readable, service-writable; (3) ARC endpoints under `/api/arc/` namespace (see §22 API Summary); (4) ARC surface must subscribe to Supabase Realtime for underlying source object changes — if a referenced alert is acknowledged, the ARC surface must reflect this within 2 seconds; (5) ARC `arc_classifications` table DDL, ARC Realtime wiring, and ARC surface design are declared as deferred to Stage 5 Architecture (see §25 Deferred Items) |
+
+---
+
+## 22. API / Interface Contract Summary
 
 This section summarises all API endpoints defined in this TRS. Architecture (Stage 5) must implement every endpoint in this list. Deviations require CS2 approval.
 
-### 21.1 AMC Internal API Endpoints
+### 22.1 AMC Internal API Endpoints
 
 | Endpoint | Method | TR Reference | Purpose |
 |---|---|---|---|
@@ -776,14 +921,19 @@ This section summarises all API endpoints defined in this TRS. Architecture (Sta
 | `/api/interventions` | POST | TR-401 | Create intervention |
 | `/api/interventions/{id}/cancel` | POST | TR-404 | Cancel intervention |
 | `/api/interventions/{id}/status-update` | POST | TR-403 | Status callback (from executing agent) |
+| `/api/aimcc/quota/request-adjustment` | POST | TR-605 | Quota adjustment / override request |
 | `/api/workspaces/{id}/terminate` | POST | TR-902 | Terminate workspace (approval-gated) |
 | `/api/estate-config/request-change` | POST | TR-1102 | Request config change (approval-gated) |
 | `/api/conversation/messages` | GET | TR-802 | Conversation history |
 | `/api/conversation/messages` | POST | TR-802 | Send user message |
 | `/api/reports` | GET | TR-1001 | Maintenance/assurance reports |
 | `/api/audit-events` | GET | TR-1303 | Audit log access |
+| `/api/arc` | GET | TR-1801 | ARC item list (open/in_resolution items) |
+| `/api/arc/{id}/begin-resolution` | POST | TR-1804 | Mark ARC item in_resolution |
+| `/api/arc/{id}/resolve` | POST | TR-1804 | Resolve ARC item |
+| `/api/arc/{id}/escalate-externally` | POST | TR-1804 | Escalate ARC item externally |
 
-### 21.2 AMC Inbound Callback Endpoints
+### 22.2 AMC Inbound Callback Endpoints
 
 | Endpoint | Method | TR Reference | Caller |
 |---|---|---|---|
@@ -792,14 +942,14 @@ This section summarises all API endpoints defined in this TRS. Architecture (Sta
 | `/api/aimc/proactive-message` | POST | TR-804 | AIMC |
 | `/api/interventions/{id}/status-update` | POST | TR-403 | Foreman / Specialist Agent |
 
-### 21.3 AMC Outbound API Calls
+### 22.3 AMC Outbound API Calls
 
 | Target | Endpoint Pattern | TR Reference | Purpose |
 |---|---|---|---|
 | AIMC | `POST {AIMC_API_BASE_URL}/actions` | TR-502 | All AI action dispatches |
 | AIMC | `GET {AIMC_API_BASE_URL}/health` | TR-1501 | Health polling |
 | AIMCC | `GET {AIMCC_API_BASE_URL}/uploads/status` | TR-601 | Upload status read |
-| AIMCC | `GET {AIMCC_API_BASE_URL}/quota/current` | TR-602 | Quota read |
+| AIMCC | `GET {AIMCC_API_BASE_URL}/quota/current` | TR-602, TR-608 | Quota read |
 | AIMCC | `POST {AIMCC_API_BASE_URL}/governance/decision` | TR-603 | Governance decision notification |
 | AIMCC | `GET {AIMCC_API_BASE_URL}/health` | TR-1502 | Health polling |
 | KUC | `POST {KUC_API_BASE_URL}/submit` | TR-604 | Upload submission |
@@ -811,13 +961,13 @@ This section summarises all API endpoints defined in this TRS. Architecture (Sta
 
 ---
 
-## 22. Data Schema Requirements Summary
+## 23. Data Schema Requirements Summary
 
 This section summarises all tables AMC must own. Column types and index DDL are deferred to Stage 5 Architecture (schema-builder).
 
 | Table | AMC Write Rule | Key Constraints | TR Reference |
 |---|---|---|---|
-| `alerts` | INSERT + UPDATE | RLS; enum: alert_class, status | TR-201 |
+| `alerts` | INSERT + UPDATE | RLS; enum: alert_class, status; escalation_type expanded (timeout_level_1, timeout_level_2) | TR-201, TR-209 |
 | `approvals` | INSERT + UPDATE | RLS; enum: authority_boundary_type, status; approval_basis required on approved | TR-301 |
 | `interventions` | INSERT + UPDATE | RLS; cancel_reason required on cancelled | TR-401 |
 | `audit_events` | INSERT only (append-only) | No UPDATE, no DELETE; RLS | TR-1301 |
@@ -825,10 +975,11 @@ This section summarises all tables AMC must own. Column types and index DDL are 
 | `aimc_action_log` | INSERT + UPDATE (on callback) | FK → approvals | TR-501 |
 | `knowledge_retrieval_log` | INSERT only | No knowledge content columns | TR-702 |
 | `system_health_events` | INSERT + UPDATE (on recovery) | FK → audit_events | TR-1601 |
+| `arc_classifications` | INSERT + UPDATE | RLS; enum: source_type, arc_status; resolved_by, resolution_basis required on resolved | TR-1806 |
 
 ---
 
-## 23. Integration Contract Definitions
+## 24. Integration Contract Definitions
 
 ### 23.1 AMC ↔ AIMC Integration Contract
 
@@ -877,7 +1028,7 @@ This section summarises all tables AMC must own. Column types and index DDL are 
 
 ---
 
-## 24. Deferred-to-Stage-5 Declarations
+## 25. Deferred-to-Stage-5 Declarations
 
 The following items are explicitly deferred from Stage 4 TRS to Stage 5 Architecture. Deferral does not indicate descoping — these are Stage 5 responsibilities.
 
@@ -894,15 +1045,21 @@ The following items are explicitly deferred from Stage 4 TRS to Stage 5 Architec
 | Authority delegated-domain configuration storage format | Configuration system architecture | Architecture stage |
 | Foreman reporting event feed format details | Foreman-side API contract detail | Foreman / integration-builder |
 | Background scheduler implementation (cron, Supabase Edge Function, etc.) | Infrastructure architecture | Architecture stage |
+| `arc_classifications` table DDL (column types, index design) | Schema design details | schema-builder |
+| ARC surface UI/UX design and component tree | Architecture-stage decision | ui-builder |
+| ARC Realtime subscription wiring for underlying source object changes | Implementation-level Realtime wiring | api-builder |
+| Alert timing SLA breach self-monitoring implementation | System observability infrastructure | Architecture / api-builder |
+| Quota threshold configuration storage and runtime reload mechanism | Configuration system architecture | Architecture stage |
+| ARC stale-item alert scheduling implementation | Infrastructure architecture | Architecture stage |
 
 ---
 
-## 25. Sign-Off / Approval Record
+## 26. Sign-Off / Approval Record
 
 | Field | Value |
 |---|---|
 | **Document** | AMC Technical Requirements Specification — Stage 4 |
-| **Version** | 1.0 |
+| **Version** | 1.1 |
 | **Prepared by** | foreman-v2-agent (POLC_ORCHESTRATION) |
 | **Prepared Date** | 2026-04-23 |
 | **CS2 Authorization for Stage 4** | app_management_centre#1127 |
@@ -914,23 +1071,34 @@ The following items are explicitly deferred from Stage 4 TRS to Stage 5 Architec
 | **Stage** | Stage 4 of 12 — TRS |
 | **Next Stage** | Stage 5 — Architecture (blocked until CS2 approves Stage 4) |
 
+### Version History
+
+| Version | Date | Change Summary |
+|---|---|---|
+| 1.0 | 2026-04-23 | Initial production — 17 TR families, API contracts, schema requirements, integration contracts, sign-off section |
+| 1.1 | 2026-04-23 | Pre-merge hardening: ARC explicit technical domain (TR-1800 family §21, TR-1801–TR-1806); Dynamic Upload Quota Management console (TR-605–TR-609); Alert timing/retry/escalation contract family (TR-207, TR-208, TR-209); Audit delivery atomicity (TR-1305); Inter-service trust boundary (TR-1405); State ownership contract family declaration added to §20; Auth & Trust-Boundary contract family declaration added to §17; Audit & Provenance contract family declaration added to §16; TR-1302 audit event types expanded; §22 API summary updated; §23 schema summary updated; §25 deferred items updated |
+
 ### Approval Basis Required
 
 CS2 approval of this document confirms:
 1. The TRS is technically explicit, comprehensive, and non-contradictory
 2. All FRS requirement families are technically realized or explicitly deferred to Stage 5
 3. Cross-system boundaries from Stages 1–3 are preserved and technically enforced
-4. The TRS is sufficient for Stage 5 Architecture derivation
-5. Stage 5 Architecture is authorized to commence following this approval
+4. ARC technical domain is explicitly defined and architecture-binding
+5. Dynamic Upload Quota Management is defined as an operational management console
+6. Alert timing, retry, and escalation contract family is explicitly defined
+7. Audit & Provenance, Auth & Trust-Boundary, and State Ownership contract families are explicitly declared
+8. The TRS is sufficient for Stage 5 Architecture derivation
+9. Stage 5 Architecture is authorized to commence following this approval
 
 ### CS2 Approval Instruction
 
 To formally approve this TRS:
 - Record approval in a Stage 4 approval artifact at `modules/amc/03-trs/trs-approval.md`
-- Reference this document: `modules/amc/03-trs/technical-requirements-specification.md` v1.0
+- Reference this document: `modules/amc/03-trs/technical-requirements-specification.md` v1.1
 - Update `modules/amc/BUILD_PROGRESS_TRACKER.md` Stage 4 status to `✅ COMPLETE — CS2 APPROVED`
 - Authorize commencement of Stage 5 Architecture
 
 ---
 
-*End of Technical Requirements Specification — Stage 4. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2 approval required before Architecture (Stage 5) derivation begins.*
+*End of Technical Requirements Specification — Stage 4 v1.1. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2 approval required before Architecture (Stage 5) derivation begins.*
