@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0)  
-**Last Updated**: 2026-04-22  
+**Last Updated**: 2026-04-23  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -29,8 +29,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | ⬜ Placeholder | Not started — awaiting Stage 1 completion |
-| Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | ⬜ Placeholder | Not started |
+| UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | ✅ Approved Canonical | v1.0, CS2-approved (issue #1121). Stage 2 complete. |
+| Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | ✅ Approved Canonical | v1.0, CS2-approved (issue #1121). Stage 2 complete. |
 
 ---
 
@@ -38,8 +38,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | ⬜ Placeholder | Not started |
-| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | ⬜ Placeholder | Not started |
+| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. CS2 approval required before Stage 4 begins. Issue #1152. |
+| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. Stage 1 + Stage 2 to FRS derivation matrix. Issue #1152. |
 
 ---
 
