@@ -3,7 +3,7 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-04-23  
-**Updated By**: foreman-v2-agent (wave: amc-stage3-frs-20260423 — Stage 3 FRS produced approval-ready, issue #1123)
+**Updated By**: foreman-v2-agent (wave: amc-harmonize-stages1-4-20260423 — Stages 1–4 harmonization; Stage 3 CS2-approved; Stage 4 TRS produced approval-ready)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
@@ -27,9 +27,9 @@
 | Stage | Name | Status | Notes |
 |-------|------|--------|-------|
 | 1 | App Description | ✅ COMPLETE | CS2-approved 2026-04-22. Canonical source: `modules/amc/00-app-description/app-description.md` v1.0. Approval ref: #1117. |
-| 2 | UX Workflow & Wiring Spec | 🟡 APPROVAL PENDING | Produced approval-ready 2026-04-22. Awaiting CS2 approval. Canonical source: `modules/amc/01-ux-workflow-wiring-spec/`. Stage 3 blocked until CS2 approval is recorded in artifact headers. Issue #1121. |
-| 3 | FRS | 🟡 APPROVAL PENDING — Produced approval-ready 2026-04-23. Awaiting CS2 approval before Stage 4 may begin. | Stage 3 artifacts produced by foreman-v2-agent (wave: amc-stage3-frs-20260423). CS2 approval required before TRS derivation begins. |
-| 4 | TRS | ⬜ Not Started | |
+| 2 | UX Workflow & Wiring Spec | ✅ COMPLETE | CS2-approved 2026-04-22 (issue #1121). Canonical source: `modules/amc/01-ux-workflow-wiring-spec/`. Harmonization pass applied 2026-04-23 (explicit ARC and quota management console journeys added). |
+| 3 | FRS | ✅ COMPLETE | CS2-approved 2026-04-23 (harmonization issue). Canonical source: `modules/amc/02-frs/`. Harmonization pass applied 2026-04-23 (FR-1800 ARC Governance Console family added; operational quota management requirements enhanced). |
+| 4 | TRS | 🟡 APPROVAL PENDING | Produced approval-ready 2026-04-23. Awaiting CS2 approval before Stage 5 may begin. Canonical source: `modules/amc/03-trs/`. Harmonization issue. |
 | 5 | Architecture | ⬜ Not Started | Pre-existing FM-era architecture material exists in `docs/architecture/` but is classified as historical/reference only — not active Stage 5 lifecycle input. See Stage Detail below. |
 | 6 | QA-to-Red | ⬜ Not Started | |
 | 7 | PBFAG | ⬜ Not Started | |
@@ -80,7 +80,7 @@ tables, and reporting outputs. All primary and secondary user paths must be docu
 explicit wiring between the UI layer and backend. No gaps between stated journeys and wired
 system behaviour are permitted.  
 **Key Artifacts Created**:
-- [x] `ux-workflow-wiring-spec.md` — Complete user journey maps, screen/surface model, wiring tables, cross-system integration wiring, degraded-mode patterns, Stage 1 traceability index (v1.0, produced 2026-04-22)
+- [x] `ux-workflow-wiring-spec.md` — Complete user journey maps, screen/surface model, wiring tables, cross-system integration wiring, degraded-mode patterns, Stage 1 traceability index (v1.0, produced 2026-04-22). Harmonization pass v1.1 applied 2026-04-23: explicit ARC Governance Console journey and Dynamic Upload Quota Management Console journey added.
 - [x] `wiring-artifact-index.md` — Wiring artifact inventory: journey-to-wiring map, surface catalog, data object index, external service index, audit event catalog, cross-system boundary invariants, degraded-mode coverage, Stage 1 source references (v1.0, produced 2026-04-22)
 **Wave**: amc-stage2-ux-wiring-spec-20260422  
 **Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)  
@@ -94,29 +94,37 @@ system behaviour are permitted.
 
 ### Stage 3 — Functional Requirements Specification (FRS)
 
-**Status**: 🟡 APPROVAL PENDING — Produced approval-ready 2026-04-23. Awaiting CS2 approval.  
-**Location**: `modules/amc/02-frs/`  
-**Entry Condition**: ✅ Stage 2 complete and CS2-approved  
-**Objective**: Translate the approved Stage 1 App Description and Stage 2 UX Workflow & Wiring Spec into explicit, verifiable, architecture-ready functional requirements. Define what AMC must do, under what conditions, for which actors, with what constraints, and with what required outcomes. Produce a complete traceability artifact showing Stage 1 and Stage 2 derivation.  
+**Status**: ✅ COMPLETE — CS2 APPROVED (harmonization issue 2026-04-23)
+**Location**: `modules/amc/02-frs/`
+**Entry Condition**: ✅ Stage 2 complete and CS2-approved
+**Objective**: Translate the approved Stage 1 App Description and Stage 2 UX Workflow & Wiring Spec into explicit, verifiable, architecture-ready functional requirements. Define what AMC must do, under what conditions, for which actors, with what constraints, and with what required outcomes. Produce a complete traceability artifact showing Stage 1 and Stage 2 derivation.
 **Key Artifacts Created**:
-- [x] `functional-requirements-specification.md` — Complete FRS with 17 requirement families (FR-100 to FR-1700), 60+ individual requirements, actor model, authority constraints, business rules, and downstream derivation groupings (v1.0, produced 2026-04-23)
+- [x] `functional-requirements-specification.md` — Complete FRS with 18 requirement families (FR-100 to FR-1800), 65+ individual requirements, actor model, authority constraints, business rules, and downstream derivation groupings (v1.0 produced 2026-04-23; harmonization pass v1.1 applied 2026-04-23: FR-1800 ARC Governance Console family added; operational quota management requirements enhanced)
 - [x] `app-description-to-frs-traceability.md` — Stage 1 + Stage 2 to FRS traceability matrix demonstrating derivation coverage, cross-system boundary traceability, and dropped/deferred commitment disclosure (v1.0, produced 2026-04-23)
-**Wave**: amc-stage3-frs-20260423  
-**Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)  
-**CS2 Authorization**: issue #1123  
-**Prerequisites**: ✅ Stage 1 complete; ✅ Stage 2 complete and CS2-approved (issue #1121)  
-**Approval Required**: Yes — CS2 approval required before Stage 4 (TRS) may begin
+**Wave**: amc-stage3-frs-20260423; harmonization pass: amc-harmonize-stages1-4-20260423
+**Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)
+**CS2 Authorization**: issue #1123 (original); harmonization issue (approval + harmonization pass)
+**Prerequisites**: ✅ Stage 1 complete; ✅ Stage 2 complete and CS2-approved (issue #1121)
+**Completion Date**: 2026-04-23
+**Approved By**: CS2 (Johan Ras / @APGI-cmy)
+**Approval Reference**: harmonization issue (CS2-opened, 2026-04-23)
 
 ---
 
 ### Stage 4 — Technical Requirements Specification (TRS)
 
-**Status**: ⬜ Not Started  
-**Location**: `modules/amc/03-trs/`  
-**Prerequisites**: Stage 3 complete and approved  
-**Key Artifacts to Create**:
-- [ ] `technical-requirements-specification.md`
-- [ ] `frs-to-trs-traceability.md` — Traceability matrix
+**Status**: 🟡 APPROVAL PENDING — Produced approval-ready 2026-04-23. Awaiting CS2 approval before Stage 5 may begin.
+**Location**: `modules/amc/03-trs/`
+**Entry Condition**: ✅ Stage 3 complete and CS2-approved
+**Objective**: Translate the approved FRS into explicit technical obligations and constraints. Define the technical realization of AMC — including ARC technical domain, operational quota management, alert timing contracts, escalation contracts, audit contracts, state/persistence contracts, and authentication/authorization contracts.
+**Key Artifacts Created**:
+- [x] `technical-requirements-specification.md` — Complete TRS with ARC technical domain, operational quota management, alert timing/escalation contracts, audit contracts, state/persistence contracts, auth contracts, cross-system integration technical contracts (v1.0, produced 2026-04-23)
+- [x] `frs-to-trs-traceability.md` — FRS to TRS traceability matrix (v1.0, produced 2026-04-23)
+**Wave**: amc-harmonize-stages1-4-20260423
+**Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)
+**CS2 Authorization**: harmonization issue (CS2-opened, 2026-04-23)
+**Prerequisites**: ✅ Stage 3 complete and CS2-approved
+**Approval Required**: Yes — CS2 approval required before Stage 5 (Architecture) may begin
 
 ---
 
@@ -195,10 +203,11 @@ the canonical lifecycle sequence.
 
 ## Next Action
 
-1. ✅ Stage 1 complete — App Description approved by CS2 (issue #1117, 2026-04-22)
-2. ✅ Stage 2 complete — UX Workflow & Wiring Spec approved by CS2 (issue #1121, 2026-04-22)
-3. ✅ Stage 3 artifacts produced approval-ready — Awaiting CS2 approval (issue #1123, 2026-04-23)
-4. ▶️ CS2 to review and approve Stage 3 FRS before Stage 4 (TRS) begins
+1. ✅ Stage 1 complete — App Description approved by CS2 (issue #1117, 2026-04-22). Harmonization pass applied 2026-04-23 (explicit ARC domain + operational quota management framing).
+2. ✅ Stage 2 complete — UX Workflow & Wiring Spec approved by CS2 (issue #1121, 2026-04-22). Harmonization pass applied 2026-04-23 (ARC Governance Console journey + Dynamic Upload Quota Management Console journey).
+3. ✅ Stage 3 complete — FRS CS2-approved (harmonization issue, 2026-04-23). Harmonization pass applied (FR-1800 ARC Governance Console family added; operational quota management requirements enhanced).
+4. ▶️ Stage 4 artifacts produced approval-ready — Awaiting CS2 approval (harmonization issue, 2026-04-23)
+5. ▶️ CS2 to review and approve Stage 4 TRS before Stage 5 (Architecture) begins
 
 ---
 
@@ -206,11 +215,13 @@ the canonical lifecycle sequence.
 
 - [PRE_BUILD_STAGE_MODEL_CANON.md](../../governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md)
 - [APP_DESCRIPTION_REQUIREMENT_POLICY.md](../../governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md)
-- [app-description.md](./00-app-description/app-description.md) — ✅ approved Stage 1 canonical source
+- [app-description.md](./00-app-description/app-description.md) — ✅ approved Stage 1 canonical source (harmonization pass v1.1 applied 2026-04-23)
 - [app-description-approval.md](./00-app-description/app-description-approval.md) — Stage 1 formal approval record
-- [ux-workflow-wiring-spec.md](./01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md) — ✅ Stage 2 artifact (CS2-approved, issue #1121)
+- [ux-workflow-wiring-spec.md](./01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md) — ✅ Stage 2 artifact (CS2-approved, issue #1121; harmonization pass v1.1 applied 2026-04-23)
 - [wiring-artifact-index.md](./01-ux-workflow-wiring-spec/wiring-artifact-index.md) — ✅ Stage 2 artifact (CS2-approved, issue #1121)
-- [functional-requirements-specification.md](./02-frs/functional-requirements-specification.md) — 🟡 Stage 3 artifact (pending CS2 approval)
-- [app-description-to-frs-traceability.md](./02-frs/app-description-to-frs-traceability.md) — 🟡 Stage 3 artifact (pending CS2 approval)
+- [functional-requirements-specification.md](./02-frs/functional-requirements-specification.md) — ✅ Stage 3 artifact (CS2-approved, harmonization issue 2026-04-23; harmonization pass v1.1 applied)
+- [app-description-to-frs-traceability.md](./02-frs/app-description-to-frs-traceability.md) — ✅ Stage 3 artifact (CS2-approved, harmonization issue 2026-04-23)
+- [technical-requirements-specification.md](./03-trs/technical-requirements-specification.md) — 🟡 Stage 4 artifact (pending CS2 approval)
+- [frs-to-trs-traceability.md](./03-trs/frs-to-trs-traceability.md) — 🟡 Stage 4 artifact (pending CS2 approval)
 - [AMC_PRE_BUILD_ARTIFACT_INDEX.md](./AMC_PRE_BUILD_ARTIFACT_INDEX.md)
 - [REPO_REALIGNMENT_NOTE.md](./REPO_REALIGNMENT_NOTE.md)

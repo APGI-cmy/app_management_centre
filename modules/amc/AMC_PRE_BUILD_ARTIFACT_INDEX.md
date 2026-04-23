@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0)  
-**Last Updated**: 2026-04-23  
+**Last Updated**: 2026-04-23
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -29,8 +29,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | 🟡 Approval Pending | v1.0, approval pending. Index status held to match current document header until CS2 approval is reflected in the artifact. Issue #1121. |
-| Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | 🟡 Approval Pending | v1.0, approval pending. Index status held to match current document header until CS2 approval is reflected in the artifact. Issue #1121. |
+| UX Workflow & Wiring Spec | `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` | ✅ Approved | v1.0 CS2-approved (issue #1121, 2026-04-22). Harmonization pass v1.1 applied 2026-04-23: ARC Governance Console journey and Dynamic Upload Quota Management Console journey added. |
+| Wiring Artifact Index | `modules/amc/01-ux-workflow-wiring-spec/wiring-artifact-index.md` | ✅ Approved | v1.0 CS2-approved (issue #1121, 2026-04-22). |
 
 ---
 
@@ -38,8 +38,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. CS2 approval required before Stage 4 begins. Issue #1123. |
-| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. Stage 1 + Stage 2 to FRS derivation matrix. Issue #1123. |
+| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | ✅ Approved | v1.0 produced 2026-04-23; CS2-approved via harmonization issue 2026-04-23. Harmonization pass v1.1 applied: FR-1800 ARC Governance Console family added; operational quota management requirements enhanced. |
+| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | ✅ Approved | v1.0 produced 2026-04-23; CS2-approved via harmonization issue 2026-04-23. Stage 1 + Stage 2 to FRS derivation matrix. |
 
 ---
 
@@ -47,8 +47,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | ⬜ Placeholder | Not started |
-| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | ⬜ Placeholder | Not started |
+| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. Includes ARC technical domain, operational quota management, alert timing/escalation contracts, audit contracts, state/persistence contracts, auth contracts. CS2 approval required before Stage 5 begins. Harmonization issue. |
+| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | 🟡 Approval Pending | v1.0, produced approval-ready 2026-04-23. Full FRS to TRS traceability matrix. Harmonization issue. |
 
 ---
 

@@ -1,18 +1,18 @@
 # UX Workflow & Wiring Spec — Stage 2
 
-**Stage**: 2 — UX Workflow & Wiring Spec  
-**Module**: App Management Centre (AMC)  
-**Version**: 1.0  
-**Status**: 🟡 Approval Pending — Produced approval-ready 2026-04-22  
-**Author**: foreman-v2-agent (POLC_ORCHESTRATION)  
-**CS2 Authorization**: app_management_centre#1121  
-**Upstream Source**: `modules/amc/00-app-description/app-description.md` v1.0 (approved 2026-04-22)  
+**Stage**: 2 — UX Workflow & Wiring Spec
+**Module**: App Management Centre (AMC)
+**Version**: 1.1
+**Status**: ✅ Approved — CS2-approved (issue #1121, 2026-04-22). Harmonization pass 2026-04-23.
+**Author**: foreman-v2-agent (POLC_ORCHESTRATION)
+**CS2 Authorization**: app_management_centre#1121 (original); harmonization issue (harmonization pass)
+**Upstream Source**: `modules/amc/00-app-description/app-description.md` v1.1 (approved 2026-04-22; harmonization pass 2026-04-23)
 **Canonical Location**: `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md`
 
 ---
 
-> **DERIVATION DECLARATION**  
-> This document derives directly from the approved Stage 1 App Description (`modules/amc/00-app-description/app-description.md` v1.0, CS2-approved 2026-04-22). It does not invent product truth. Every major section is traceable to a corresponding Stage 1 section. No downstream stage (FRS, TRS, Architecture) may start until this document is CS2-approved.
+> **DERIVATION DECLARATION**
+> This document derives directly from the approved Stage 1 App Description (`modules/amc/00-app-description/app-description.md` v1.1, CS2-approved 2026-04-22, harmonization pass 2026-04-23). It does not invent product truth. Every major section is traceable to a corresponding Stage 1 section. **Harmonization pass (2026-04-23)**: Explicit ARC Governance Console journey (§4.4.1) and Dynamic Upload Quota Management Console journey (§4.6.1) added to reflect Stage 1 v1.1 AMC Technical/Operating Domain Declaration and §2 In Scope additions.
 
 ---
 
@@ -26,8 +26,10 @@
    - 4.2 Alert Review & Handling
    - 4.3 Approval Workflow
    - 4.4 Intervention Launch & Monitoring
+     - 4.4.1 ARC Governance Console Journey
    - 4.5 AI-Routed Actions (AIMC)
    - 4.6 Knowledge Upload / Ingestion Supervision (AIMCC / KUC)
+     - 4.6.1 Dynamic Upload Quota Management Console Journey
    - 4.7 Memory-Aware / Knowledge-Aware Operating View
    - 4.8 Executive Conversation with Maturion
 5. [Secondary User Journeys](#5-secondary-user-journeys)
@@ -257,7 +259,51 @@ These boundaries are non-negotiable and must be preserved in all surfaces and wi
 
 ---
 
-### 4.5 Journey: AI-Routed Actions (AIMC)
+### 4.4.1 ARC Governance Console Journey
+
+> Stage 1 Traceability: §4 Original AMC Intent Reconciliation (ARC Trigger Governance), §4 AMC Technical/Operating Domain Declaration (ARC Governance Console), §2 In Scope (ARC governance console)
+> **Harmonization Pass 2026-04-23**: Added to make ARC explicitly recognizable as a first-class named AMC technical operating domain.
+
+**Purpose**: Provide a dedicated, explicitly named ARC Governance Console surface through which Johan Ras can initiate, review, approve, and audit ARC (Automated Response Control) triggered governance actions. ARC actions are distinct from generic interventions — they are automated-response-triggered governance events that require human executive decision and audit trail.
+
+**Primary Actor**: Johan Ras (all ARC approvals and decisions); Maturion (ARC detection and surface triggering)
+**Entry Point**: ARC Governance Console (dedicated nav item; also reachable from Alert Centre when an ARC-triggered alert surfaces)
+
+**Journey Steps**:
+
+1. User opens ARC Governance Console surface
+2. Console shows: active ARC-triggered governance events, their detected condition, proposed automated response, current state (pending review / approved / rejected / escalated), and timestamps
+3. Each ARC event entry shows:
+   - Triggering condition (what ARC detected)
+   - Proposed automated response
+   - Current state
+   - Priority level
+   - Time since detection
+4. User selects an ARC event → ARC Event Detail opens
+5. ARC Event Detail shows:
+   - Full trigger description and detection metadata
+   - Proposed automated response (e.g., suppress, escalate, approve, reject, route)
+   - Impact scope (which systems, agents, or data are affected)
+   - Prior ARC actions in same context (audit chain)
+   - Approval requirement and authority level
+6. User decides:
+   - **Approve ARC action**: ARC response is authorized; execution routed through governed pathway; audit event created
+   - **Reject ARC action**: ARC response blocked; rejection reason required; audit event created
+   - **Escalate**: ARC event escalated to Johan if not already at highest authority; escalation record created
+   - **Defer**: ARC event deferred with note; follow-up scheduled
+7. Decision recorded with: decision, decided_by, decided_at, basis/reason (required), audit reference
+8. ARC event state updated; downstream ARC execution notified of outcome
+9. All ARC events regardless of outcome are retained in the ARC audit history — never silently discarded
+
+**Non-bypass invariant**: ARC actions requiring human approval must not auto-execute past the approval gate. ARC-triggered governance actions are not a bypass of AMC's approval model.
+
+**Wiring summary**: See §7.4 ARC Governance Console wiring (appended to §7.4 table).
+
+**UX Requirements derived from Stage 1**:
+- ARC is an explicitly named, first-class AMC domain — not absorbed into generic intervention flows (§4 AMC Technical/Operating Domain Declaration)
+- All ARC governance actions require explicit decision — no silent auto-execution past human gate (§3 Authority Constraints)
+- ARC audit history is permanent and append-only (§26 Audit Log Design)
+- ARC surface is accessible as a dedicated console, not buried in generic intervention list (§4 AMC Domain Declaration)
 
 > Stage 1 Traceability: §18 AI Integration Requirements, §18 Multi-Layer AI Integration Model, §2 AMC/AIMC Boundary
 
@@ -324,7 +370,48 @@ These boundaries are non-negotiable and must be preserved in all surfaces and wi
 
 ---
 
-### 4.7 Journey: Memory-Aware / Knowledge-Aware Operating View
+### 4.6.1 Dynamic Upload Quota Management Console Journey
+
+> Stage 1 Traceability: §4 Original AMC Intent Reconciliation (Dynamic Upload Quota Management), §4 AMC Technical/Operating Domain Declaration (Dynamic Upload Quota Management), §2 In Scope (Dynamic Upload Quota Management console)
+> **Harmonization Pass 2026-04-23**: Added to make the quota management console explicitly recognizable as a first-class operational control surface, not merely a supervisory view within the AIMCC overview.
+
+**Purpose**: Provide a dedicated, explicitly named Dynamic Upload Quota Management Console through which Johan Ras can view live quota state, initiate quota adjustment requests, approve or reject quota change proposals, receive proactive threshold warnings, and maintain a complete audit trail of all quota governance actions. This is a hands-on operational control surface — not a read-only display.
+
+**Primary Actor**: Johan Ras (all quota decisions and approvals); Maturion (proactive quota alert surfacing)
+**Entry Point**: Quota Management Console (accessible as a named panel within AIMCC/Knowledge Supervision surface AND as a dedicated nav item from the Executive Dashboard quota indicator)
+
+**Journey Steps**:
+
+1. User opens Quota Management Console (or navigates to the quota panel within AIMCC Supervision)
+2. Console shows:
+   - Current quota limit (total allocated quota in MB/GB)
+   - Current usage (absolute and percentage)
+   - Usage trend (last 7 days visual)
+   - Threshold warning levels: Warning (configurable %, e.g. 75%), Critical (configurable %, e.g. 90%), Exceeded
+   - Status of any pending quota change requests
+   - Recent quota governance action history
+3. Proactive threshold alerts: if usage crosses a configured threshold, a proactive alert surfaces automatically in the Alert Centre and in the Quota Management Console header
+4. User can initiate a quota change request:
+   - Specifies: new quota limit, justification, urgency
+   - Request enters Approval Queue (FR-604/FR-1802 — approval required for quota changes)
+   - If user IS the authority (Johan Ras): can approve own request on the spot with audit trail
+5. User reviews pending quota change requests in the console:
+   - Approve: quota change authorized; AIMCC notified; audit event created
+   - Reject: quota change blocked; rejection reason required; audit event created
+   - Defer with note: follow-up scheduled
+6. All quota governance actions (approve, reject, defer) create a complete audit record:
+   - actor, action_type, old_quota, new_quota (if approved), basis/reason, timestamp, aimcc_notification_status
+7. If AIMCC is unavailable: quota panel shows stale indicator with last-known values; new quota change submissions are blocked pending AIMCC recovery; stale data is NEVER served as current without explicit indicator
+
+**Non-bypass invariant**: All quota change executions route through AIMCC. AMC records the decision and notifies AIMCC — it does not directly modify quota values in AIMCC storage.
+
+**Wiring summary**: See §7.6 Quota Management Console wiring (appended to §7.6 table).
+
+**UX Requirements derived from Stage 1**:
+- Quota management is an operational console, not a read-only supervisory view (§4 AMC Technical/Operating Domain Declaration)
+- All quota governance actions require explicit decision with audit trail (§26 Audit Log Design)
+- Proactive threshold warnings must surface before explicit user inquiry (§3 Operating Success Measures)
+- Quota data sourced from AIMCC — AMC does not own or locally manage quota values (§2 AMC/AIMC/AIMCC Boundary)
 
 > Stage 1 Traceability: §2 Knowledge/Memory System, §3 Memory-Aware Operational Clarity, §24 Shared State Architecture
 
@@ -493,6 +580,8 @@ These boundaries are non-negotiable and must be preserved in all surfaces and wi
 | **Intervention Detail** | Full lifecycle view of a single intervention | Johan Ras | From Intervention Manager list | Timeline component, current step indicator, executing agent, error state, action buttons | Status at each lifecycle stage, executing agent, audit reference | Cancel, Add note, Escalate, View completion/failure record | Returns to Intervention Manager. Escalation → Escalation flow. |
 | **AI Action Monitor** | Visibility into AIMC-routed AI actions | Johan Ras, Maturion | From Executive Dashboard, Conversation surface, sidebar nav | Action list, AIMC route indicator, status per action, audit reference | Active AI actions, outcome, AIMC route, audit reference, degraded mode indicator if AIMC unavailable | View detail, Escalate if stalled | Approval-required actions → Approval Queue. AIMC degraded mode → explicit status message shown. |
 | **AIMCC / Knowledge Supervision** | Supervise knowledge upload and ingestion pipelines | Johan Ras, Maturion | From Executive Dashboard, sidebar nav | Upload list, ingestion pipeline status, quota panel, governance action panel | Upload items with KUC/AIMCC status, quota state, governance action items | Filter, view upload detail, take governance action (→ Approval Queue), review quota | Governance actions → Approval Queue. Upload detail panel inline. AIMCC degraded mode → explicit status shown. |
+| **ARC Governance Console** | Dedicated surface for ARC (Automated Response Control) governance events — review, approve, reject, escalate, and audit ARC-triggered governance actions | Johan Ras | From Alert Centre (ARC-triggered alerts), sidebar nav (dedicated ARC nav item) | ARC event list, ARC event detail panel, decision buttons, audit history panel | Active ARC-triggered events, proposed automated responses, current state, priority, prior ARC actions | Approve, Reject, Escalate, Defer, View ARC audit history | Approved ARC actions → downstream ARC execution (governed). Rejected → blocked with audit record. Escalation → Alert Centre / Intervention Manager. |
+| **Quota Management Console** | Operational console for hands-on management of upload quota — view live quota state, initiate quota change requests, approve/reject changes, monitor threshold warnings | Johan Ras | From AIMCC/Knowledge Supervision surface (quota panel), sidebar nav (dedicated quota nav item), Executive Dashboard quota indicator | Quota state panel (usage, threshold, trend), pending change requests list, approve/reject controls, quota audit history | Current quota limit, usage %, threshold warning levels, pending quota change requests, quota governance action history | Initiate quota change request, Approve quota change, Reject quota change, Defer, View quota audit history | Quota change requests → Approval Queue (or inline approval for Johan). AIMCC notification on approval. Full audit record on every quota decision. AIMCC degraded → stale indicator, no new quota changes. |
 | **Knowledge Reference** | Surface knowledge/memory references with provenance | Johan Ras, Maturion | From Conversation, contextual surface, sidebar nav | Reference list, provenance metadata per item, retrieval status, degraded indicator | Knowledge references with source, ingestion path, retrieval timestamp | View detail, follow provenance, ask Maturion to synthesize | Memory degraded → explicit stale/unavailable indicator on all items. |
 | **Conversation** | Two-way executive dialogue with Maturion | Johan Ras | Persistent panel on dashboard; full-screen mode from nav | Message thread, response type indicators, linked action buttons, proactive message indicator | Full conversation history, unread messages, message type labels, linked items | Reply, Acknowledge, Take linked action, Escalate, Mark for follow-up | Linked actions → Approval Queue or Intervention Manager. Full-screen conversation from nav. |
 | **Specialist Agent Oversight** | Visibility into specialist agent workspaces | Johan Ras, Maturion | From Executive Dashboard, sidebar nav | Workspace list, sandbox isolation indicator, workspace detail panel | Active workspaces, status, scope, last reporting event, escalations | View output, Escalate, Initiate intervention, Terminate (approval-gated) | Termination → Approval Queue if approval required. Escalation → Alert Centre / Intervention Manager. |
@@ -553,6 +642,19 @@ For each interaction below, the wiring defines: UI trigger → action/route → 
 | Intervention completes | System event: executing agent returns completion | Write: `interventions` (status: completed, completed_at, outcome) | Foreman / Specialist agent → AMC callback | `interventions`, `execution_records` | System | AuditEvent: INTERVENTION_COMPLETED (agent, intervention_id, outcome, timestamp) | Completion record shown; outcome surfaced to user |
 | Intervention fails | System event: executing agent returns failure | Write: `interventions` (status: failed, failed_at, failure_reason) | Foreman / Specialist agent → AMC callback | `interventions`, `execution_records` | System | AuditEvent: INTERVENTION_FAILED (agent, intervention_id, reason, timestamp) | Failure shown; user prompted: retry / escalate / close with note |
 
+#### 7.4.1 ARC Governance Console — Wiring
+
+> Harmonization Pass 2026-04-23: ARC Governance Console wiring added as a named slice of §7.4.
+
+| UI Event / Trigger | Invoked Action / Route | Data Read/Write Path | External Service | Target Table / State | Approval / Authority | Audit | User-Visible Result |
+|---|---|---|---|---|---|---|---|
+| Open ARC Governance Console | GET /api/arc/events (list with status) | Read: `arc_events` (triggering_condition, proposed_response, current_state, priority, detected_at) | None | `arc_events` | None (read) | None | ARC events listed with triggering condition, proposed response, and current state |
+| Select ARC event | GET /api/arc/events/{id}/detail | Read: full ARC event record, audit chain, impact scope | None | `arc_events`, `arc_audit_log` | None (read) | None | ARC Event Detail opens with full trigger description, proposed response, impact scope, prior actions |
+| Approve ARC action | POST /api/arc/events/{id}/decide (body: {decision: "approved", basis: "..."}) | Write: `arc_events` (decision: approved, decided_by, decided_at, basis); trigger downstream ARC execution | ARC execution endpoint (governed) | `arc_events`, `arc_audit_log`, `approvals` | Johan Ras (constitutional authority on ARC governance actions) | AuditEvent: ARC_ACTION_APPROVED (actor, arc_event_id, basis, timestamp) | ARC event approved; downstream execution triggered; approval audit record created |
+| Reject ARC action | POST /api/arc/events/{id}/decide (body: {decision: "rejected", reason: "..."}) | Write: `arc_events` (decision: rejected, decided_by, decided_at, reason) | None | `arc_events`, `arc_audit_log` | Johan Ras | AuditEvent: ARC_ACTION_REJECTED (actor, arc_event_id, reason, timestamp) | ARC event rejected; execution blocked; rejection audit record created |
+| Escalate ARC event | POST /api/arc/events/{id}/escalate | Write: `arc_events` (escalated_at, escalated_by, escalation_target); create `escalations` record | None | `arc_events`, `escalations`, `arc_audit_log` | Authorized actor | AuditEvent: ARC_EVENT_ESCALATED (actor, arc_event_id, target, timestamp) | Escalation record created; escalation target notified |
+| Defer ARC event | POST /api/arc/events/{id}/defer | Write: `arc_events` (deferred_at, deferred_by, note, follow_up_at) | None | `arc_events`, `arc_audit_log` | Authorized actor | AuditEvent: ARC_EVENT_DEFERRED (actor, arc_event_id, note, follow_up_at, timestamp) | ARC event deferred; follow-up reminder scheduled |
+
 ### 7.5 AI-Routed Actions (AIMC) — Wiring
 
 | UI Event / Trigger | Invoked Action / Route | Data Read/Write Path | External Service | Target Table / State | Approval / Authority | Audit | User-Visible Result |
@@ -570,6 +672,19 @@ For each interaction below, the wiring defines: UI trigger → action/route → 
 | View upload detail | GET /api/aimcc/uploads/{id} | Read: full upload record including KUC routing, AIMCC ingestion progress/outcome, knowledge-system confirmation | **AIMCC** | `knowledge_upload_records` | None (read) | None | Upload Detail panel opens with full provenance chain |
 | Governance action required (quota/flag) | POST /api/approvals (create from AIMCC governance context) | Write: `approvals` (new record, aimcc_context_id) | None | `approvals`, `knowledge_upload_records` | Johan (quota approval, content governance) | AuditEvent: AIMCC_GOVERNANCE_ACTION_CREATED (actor, context_id, action_type, timestamp) | Approval item created in Approval Queue with AIMCC context |
 | AIMCC unavailable detected | System health check / failed AIMCC call | Write: `system_health_events` (AIMCC_DEGRADED) | None | `system_health_events` | None (system) | AuditEvent: AIMCC_DEGRADED (detected_at) | Explicit AIMCC degraded banner; knowledge upload/reference features enter degraded state |
+
+#### 7.6.1 Dynamic Upload Quota Management Console — Wiring
+
+> Harmonization Pass 2026-04-23: Quota Management Console wiring added as an explicitly named operational control slice of §7.6.
+
+| UI Event / Trigger | Invoked Action / Route | Data Read/Write Path | External Service | Target Table / State | Approval / Authority | Audit | User-Visible Result |
+|---|---|---|---|---|---|---|---|
+| Open Quota Management Console | GET /api/aimcc/quota/summary | Read: `quota_state` (current_limit, current_usage, usage_percent, warning_threshold, critical_threshold, pending_change_requests) | **AIMCC** | `quota_state` | None (read) | None | Quota Console loaded: current usage, threshold levels, trend, pending change requests |
+| Quota threshold warning triggered | System event: usage crosses configured threshold | Write: `alerts` (new QUOTA_THRESHOLD alert, severity based on level: Warning/Critical/Exceeded); Write: `quota_state` (threshold_triggered_at) | None | `alerts`, `quota_state` | None (system) | AuditEvent: QUOTA_THRESHOLD_TRIGGERED (level, current_usage_percent, threshold_value, timestamp) | Alert surfaced in Alert Centre and in Quota Console header with current usage level |
+| Initiate quota change request | POST /api/aimcc/quota/change-request (body: {new_limit, justification, urgency}) | Write: `quota_change_requests` (new request: requested_by, new_limit, justification, urgency, status: pending); create `approvals` record | None | `quota_change_requests`, `approvals` | Johan Ras (if self-approving: approve inline with basis); otherwise standard approval gate | AuditEvent: QUOTA_CHANGE_REQUESTED (actor, requested_limit, justification, timestamp) | Quota change request created; appears in Approval Queue and in Quota Console pending section |
+| Approve quota change | POST /api/approvals/{id}/decide (body: {decision: "approved", basis: "..."}) | Write: `approvals` (decision, decided_by, decided_at, basis); Write: `quota_change_requests` (approved_at, new_limit); notify AIMCC via POST /api/aimcc/quota/apply | **AIMCC** (quota update notification) | `approvals`, `quota_change_requests`, `quota_state` | Johan Ras | AuditEvent: QUOTA_CHANGE_APPROVED (actor, old_limit, new_limit, basis, aimcc_notification_status, timestamp) | Quota change approved; AIMCC notified; quota state updated in console; full audit record created |
+| Reject quota change | POST /api/approvals/{id}/decide (body: {decision: "rejected", reason: "..."}) | Write: `approvals` (decision, decided_by, decided_at, reason); Write: `quota_change_requests` (rejected_at, reason) | None | `approvals`, `quota_change_requests` | Johan Ras | AuditEvent: QUOTA_CHANGE_REJECTED (actor, requested_limit, reason, timestamp) | Quota change rejected; reason recorded; request moves to rejected history |
+| AIMCC quota state unavailable | System event: AIMCC degraded / failed quota fetch | Write: `quota_state` (stale_since, last_known values retained) | None | `quota_state`, `system_health_events` | None (system) | AuditEvent: QUOTA_STATE_STALE (detected_at, last_known_usage) | Quota Console shows explicit stale indicator; last-known values displayed clearly as stale; new quota change requests blocked until AIMCC recovery |
 
 ### 7.7 Knowledge-Aware Operating View — Wiring
 
