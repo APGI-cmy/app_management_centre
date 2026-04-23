@@ -964,23 +964,24 @@ This section summarises all API endpoints defined in this TRS. Architecture (Sta
 ## 23. Data Schema Requirements Summary
 
 This section summarises all tables AMC must own. Column types and index DDL are deferred to Stage 5 Architecture (schema-builder).
+This section summarises all tables AMC must own. Column types and index DDL are deferred to Stage 5 Architecture (schema-builder). Notwithstanding that deferral, every AMC-owned table MUST include an `organisation_id` tenant-isolation key in alignment with the repo-global database architecture, and every table containing tenant data MUST enforce tenant-scoped RLS policies keyed by `organisation_id` so AMC never permits cross-tenant reads or writes.
 
 | Table | AMC Write Rule | Key Constraints | TR Reference |
 |---|---|---|---|
-| `alerts` | INSERT + UPDATE | RLS; enum: alert_class, status; escalation_type expanded (timeout_level_1, timeout_level_2) | TR-201, TR-209 |
-| `approvals` | INSERT + UPDATE | RLS; enum: authority_boundary_type, status; approval_basis required on approved | TR-301 |
-| `interventions` | INSERT + UPDATE | RLS; cancel_reason required on cancelled | TR-401 |
-| `audit_events` | INSERT only (append-only) | No UPDATE, no DELETE; RLS | TR-1301 |
-| `conversation_messages` | INSERT + UPDATE (ack only) | response_type required for AI messages | TR-801 |
-| `aimc_action_log` | INSERT + UPDATE (on callback) | FK → approvals | TR-501 |
-| `knowledge_retrieval_log` | INSERT only | No knowledge content columns | TR-702 |
-| `system_health_events` | INSERT + UPDATE (on recovery) | FK → audit_events | TR-1601 |
-| `arc_classifications` | INSERT + UPDATE | RLS; enum: source_type, arc_status; resolved_by, resolution_basis required on resolved | TR-1806 |
+| `alerts` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: alert_class, status | TR-201 |
+| `approvals` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: authority_boundary_type, status; approval_basis required on approved | TR-301 |
+| `interventions` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; cancel_reason required on cancelled | TR-401 |
+| `audit_events` | INSERT only (append-only) | `organisation_id` required; tenant-scoped RLS; No UPDATE, no DELETE | TR-1301 |
+| `conversation_messages` | INSERT + UPDATE (ack only) | `organisation_id` required; tenant-scoped RLS; response_type required for AI messages | TR-801 |
+| `aimc_action_log` | INSERT + UPDATE (on callback) | `organisation_id` required; tenant-scoped RLS; FK → approvals | TR-501 |
+| `knowledge_retrieval_log` | INSERT only | `organisation_id` required; tenant-scoped RLS; No knowledge content columns | TR-702 |
+| `system_health_events` | INSERT + UPDATE (on recovery) | `organisation_id` required; tenant-scoped RLS; FK → audit_events | TR-1601 |
 
 ---
 
-## 24. Integration Contract Definitions
+## 23. Integration Contract Definitions
 
+All AMC integration and API contracts MUST preserve tenant isolation. Requests, callbacks, and internal service-to-service exchanges MUST carry sufficient tenant context for AMC to resolve and enforce `organisation_id` on every read/write path, and no contract may permit cross-tenant access, processing, or persistence. Where transport payloads do not expose raw database fields directly, the contract MUST still require tenant context that deterministically maps to `organisation_id` for authorisation, RLS evaluation, and auditability.
 ### 23.1 AMC ↔ AIMC Integration Contract
 
 | Dimension | Requirement |
