@@ -760,7 +760,7 @@ The following technology constraints are established from approved Stage 1 and S
 |---|---|
 | **Requirement ID** | TR-1505 |
 | **FRS Source** | FR-1501 to FR-1504 |
-| **Technical Requirement** | All external service base URLs must be environment-variable-configured: `AIMC_API_BASE_URL`, `AIMCC_API_BASE_URL`, `KUC_API_BASE_URL`, `KNOWLEDGE_API_BASE_URL`, `FOREMAN_API_BASE_URL`. Hardcoded service URLs are prohibited. Architecture must confirm that URL injection is validated at startup — missing required URL configuration must prevent application startup with explicit startup error |
+| **Technical Requirement** | All external service base URLs must be environment-variable-configured: `AIMC_API_BASE_URL`, `AIMCC_API_BASE_URL`, `KUC_API_BASE_URL`, `KNOWLEDGE_API_BASE_URL`, `FOREMAN_API_BASE_URL`, `SPECIALIST_AGENT_API_BASE_URL`. Hardcoded service URLs are prohibited. Architecture must confirm that URL injection is validated at startup — missing required URL configuration must prevent application startup with explicit startup error |
 
 ---
 
