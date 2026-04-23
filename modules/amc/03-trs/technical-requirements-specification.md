@@ -314,7 +314,7 @@ The following technology constraints are established from approved Stage 1 and S
 |---|---|
 | **Requirement ID** | TR-402 |
 | **FRS Source** | FR-403 |
-| **Technical Requirement** | On dispatch: `POST {FOREMAN_API_BASE_URL}/api/foreman/dispatch-intervention` (external call) OR `POST {SPECIALIST_AGENTS_API_BASE_URL}/api/specialist-agents/{agent_id}/dispatch` (external call). AMC must: (1) include governed auth token in Authorization header; (2) receive a synchronous acknowledgment (HTTP 202 Accepted) confirming the intervention entered a governed execution path; (3) update `interventions.status` to `in_progress` and set `dispatched_at` and `executing_agent`; (4) write `INTERVENTION_DISPATCHED` audit event. If dispatch returns non-2xx: set `status: dispatch_failed`, write audit event |
+| **Technical Requirement** | On dispatch: `POST {FOREMAN_API_BASE_URL}/api/foreman/dispatch-intervention` (external call) OR `POST {SPECIALIST_AGENT_API_BASE_URL}/api/specialist-agents/{agent_id}/dispatch` (external call). AMC must: (1) include governed auth token in Authorization header; (2) receive a synchronous acknowledgment (HTTP 202 Accepted) confirming the intervention entered a governed execution path; (3) update `interventions.status` to `in_progress` and set `dispatched_at` and `executing_agent`; (4) write `INTERVENTION_DISPATCHED` audit event. If dispatch returns non-2xx: set `status: dispatch_failed`, write audit event |
 
 ### TR-403 — Intervention Status Callback Contract
 
@@ -920,7 +920,6 @@ This section summarises all API endpoints defined in this TRS. Architecture (Sta
 | `/api/interventions` | GET | TR-401 | Intervention list |
 | `/api/interventions` | POST | TR-401 | Create intervention |
 | `/api/interventions/{id}/cancel` | POST | TR-404 | Cancel intervention |
-| `/api/interventions/{id}/status-update` | POST | TR-403 | Status callback (from executing agent) |
 | `/api/aimcc/quota/request-adjustment` | POST | TR-605 | Quota adjustment / override request |
 | `/api/workspaces/{id}/terminate` | POST | TR-902 | Terminate workspace (approval-gated) |
 | `/api/estate-config/request-change` | POST | TR-1102 | Request config change (approval-gated) |
@@ -956,19 +955,19 @@ This section summarises all API endpoints defined in this TRS. Architecture (Sta
 | Knowledge System | `POST {KNOWLEDGE_API_BASE_URL}/retrieve` | TR-701 | Knowledge retrieval |
 | Knowledge System | `GET {KNOWLEDGE_API_BASE_URL}/health` | TR-1503 | Health polling |
 | Foreman | `GET {FOREMAN_API_BASE_URL}/reporting/build-status` | TR-1101 | Build status read |
-| Foreman | `POST {FOREMAN_API_BASE_URL}/dispatch-intervention` | TR-402 | Intervention dispatch |
+| Foreman | `POST {FOREMAN_API_BASE_URL}/api/foreman/dispatch-intervention` | TR-402 | Intervention dispatch (Foreman path) |
+| Specialist Agent | `POST {SPECIALIST_AGENT_API_BASE_URL}/api/specialist-agents/{agent_id}/dispatch` | TR-402 | Intervention dispatch (specialist agent path) |
 | Specialist Agent | `POST {SPECIALIST_AGENT_API_BASE_URL}/workspaces/{id}/terminate` | TR-902 | Workspace termination |
 
 ---
 
 ## 23. Data Schema Requirements Summary
 
-This section summarises all tables AMC must own. Column types and index DDL are deferred to Stage 5 Architecture (schema-builder).
 This section summarises all tables AMC must own. Column types and index DDL are deferred to Stage 5 Architecture (schema-builder). Notwithstanding that deferral, every AMC-owned table MUST include an `organisation_id` tenant-isolation key in alignment with the repo-global database architecture, and every table containing tenant data MUST enforce tenant-scoped RLS policies keyed by `organisation_id` so AMC never permits cross-tenant reads or writes.
 
 | Table | AMC Write Rule | Key Constraints | TR Reference |
 |---|---|---|---|
-| `alerts` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: alert_class, status | TR-201 |
+| `alerts` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: alert_class, status; escalation_type expanded (timeout_level_1, timeout_level_2) | TR-201, TR-209 |
 | `approvals` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: authority_boundary_type, status; approval_basis required on approved | TR-301 |
 | `interventions` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; cancel_reason required on cancelled | TR-401 |
 | `audit_events` | INSERT only (append-only) | `organisation_id` required; tenant-scoped RLS; No UPDATE, no DELETE | TR-1301 |
@@ -976,13 +975,15 @@ This section summarises all tables AMC must own. Column types and index DDL are 
 | `aimc_action_log` | INSERT + UPDATE (on callback) | `organisation_id` required; tenant-scoped RLS; FK → approvals | TR-501 |
 | `knowledge_retrieval_log` | INSERT only | `organisation_id` required; tenant-scoped RLS; No knowledge content columns | TR-702 |
 | `system_health_events` | INSERT + UPDATE (on recovery) | `organisation_id` required; tenant-scoped RLS; FK → audit_events | TR-1601 |
+| `arc_classifications` | INSERT + UPDATE | `organisation_id` required; tenant-scoped RLS; enum: source_type, arc_status; resolved_by, resolution_basis required on resolved | TR-1806 |
 
 ---
 
-## 23. Integration Contract Definitions
+## 24. Integration Contract Definitions
 
 All AMC integration and API contracts MUST preserve tenant isolation. Requests, callbacks, and internal service-to-service exchanges MUST carry sufficient tenant context for AMC to resolve and enforce `organisation_id` on every read/write path, and no contract may permit cross-tenant access, processing, or persistence. Where transport payloads do not expose raw database fields directly, the contract MUST still require tenant context that deterministically maps to `organisation_id` for authorisation, RLS evaluation, and auditability.
-### 23.1 AMC ↔ AIMC Integration Contract
+
+### 24.1 AMC ↔ AIMC Integration Contract
 
 | Dimension | Requirement |
 |---|---|
@@ -993,7 +994,7 @@ All AMC integration and API contracts MUST preserve tenant isolation. Requests, 
 | **Degraded mode** | AIMC health failure → TR-1602 degraded mode; no fallback AI call path |
 | **Audit** | Every AMC→AIMC dispatch generates `AIMC_ACTION_INITIATED`. Every AIMC callback generates `AIMC_ACTION_COMPLETED` |
 
-### 23.2 AMC ↔ AIMCC / KUC Integration Contract
+### 24.2 AMC ↔ AIMCC / KUC Integration Contract
 
 | Dimension | Requirement |
 |---|---|
@@ -1002,7 +1003,7 @@ All AMC integration and API contracts MUST preserve tenant isolation. Requests, 
 | **Auth** | `AIMCC_SERVICE_TOKEN` for AIMCC calls; `KUC_SERVICE_TOKEN` for KUC calls |
 | **Degraded mode** | AIMCC health failure → TR-1603 degraded mode; governance actions frozen |
 
-### 23.3 AMC ↔ Knowledge/Memory System Integration Contract
+### 24.3 AMC ↔ Knowledge/Memory System Integration Contract
 
 | Dimension | Requirement |
 |---|---|
@@ -1011,7 +1012,7 @@ All AMC integration and API contracts MUST preserve tenant isolation. Requests, 
 | **Provenance enforcement** | Every retrieval must request provenance metadata. Anonymous knowledge display is prohibited |
 | **Degraded mode** | Knowledge system health failure → TR-1604 degraded mode; stale indicators applied immediately |
 
-### 23.4 AMC ↔ Foreman Integration Contract
+### 24.4 AMC ↔ Foreman Integration Contract
 
 | Dimension | Requirement |
 |---|---|
@@ -1019,7 +1020,7 @@ All AMC integration and API contracts MUST preserve tenant isolation. Requests, 
 | **Read-only reporting** | AMC reads Foreman reporting feed only. AMC does not issue build commands |
 | **Callback security** | Foreman callback to `POST /api/interventions/{id}/status-update` must include Foreman service token in Authorization header |
 
-### 23.5 AMC ↔ Specialist Agents Integration Contract
+### 24.5 AMC ↔ Specialist Agents Integration Contract
 
 | Dimension | Requirement |
 |---|---|
