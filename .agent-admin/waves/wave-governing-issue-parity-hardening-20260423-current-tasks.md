@@ -24,20 +24,20 @@ drift and start citing a later hardening/harmonization issue as the governing au
 
 ## Task List
 
-- [ ] TASK-GIP-001 — Create `governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md` (GIPC-001)
+- [x] TASK-GIP-001 — Create `governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md` (GIPC-001)
       builder: foreman-v2-agent (governance specification — POLC-Orchestration write path)
-      qp_verdict: PENDING
-      notes: New canon defining issue-role separation, governing-issue parity check, labeled authority fields, overshadow detection, and ceremony enforcement requirements.
+      qp_verdict: PASS
+      notes: New canon created with 6 sections + Appendix A (quick-reference parity check card) + Appendix B (violation classes). IAA OVERLAY-10 verified consistency. Filed under Canon ID GIPC-001.
 
-- [ ] TASK-GIP-002 — Update `.agent-admin/templates/amc-wave-record-template.md` with labeled authority fields and parity check items
+- [x] TASK-GIP-002 — Update `.agent-admin/templates/amc-wave-record-template.md` with labeled authority fields and parity check items
       builder: foreman-v2-agent (governance template update — POLC-Orchestration write path)
-      qp_verdict: PENDING
-      notes: Add governing_stage_issue, related_hardening_issue, approval_reference, and parity check section.
+      qp_verdict: PASS
+      notes: Updated to v1.1.0 — added Governing Authority table (§1a) and Governing-Issue Parity Evidence block (§3a). IAA OVERLAY-4 verified all parity surfaces.
 
-- [ ] TASK-GIP-003 — Add A-036, A-037, A-038 to `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md`
+- [x] TASK-GIP-003 — Add A-036, A-037, A-038 to `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md`
       builder: foreman-v2-agent (Tier 2 operational knowledge update — POLC-Orchestration write path)
-      qp_verdict: PENDING
-      notes: Machine-binding rules for governing-issue parity, overshadow detection, and ceremony evidence requirements.
+      qp_verdict: PASS
+      notes: A-036 (GOVERNING-ISSUE-PARITY-MANDATORY), A-037 (OVERSHADOW-DETECTION-MANDATORY), A-038 (CEREMONY-PARITY-EVIDENCE-REQUIRED) added. IAA OVERLAY-10 verified full consistency with GIPC-001.
 
 ---
 

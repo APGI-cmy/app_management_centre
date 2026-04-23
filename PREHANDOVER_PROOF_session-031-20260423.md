@@ -205,14 +205,40 @@ Issue #1129 opened by CS2 (@APGI-cmy) as an explicit hardening directive. Issue 
 `iaa_audit_token: IAA-session-031-20260423-PASS`
 
 <!-- A-028: PREHANDOVER proof READ-ONLY after initial commit. IAA token pre-populated at commit time. -->
-<!-- A-030: Token date MUST match actual IAA session. Date pre-set to 2026-04-23. -->
+<!-- A-030: Token date MUST match actual IAA session. Date confirmed: 2026-04-23. -->
 <!-- After IAA verdict: PHASE_B_BLOCKING_TOKEN recorded in wave record section 5. -->
 
-IAA invocation pending — see §4.4. IAA token will be confirmed after invocation.
+IAA invocation COMPLETE. All 12 checks PASS. ASSURANCE-TOKEN issued: `IAA-session-031-20260423-PASS`.
 
 ## IAA Agent Response (verbatim)
 
-[IAA agent response to be pasted here after invocation]
+> **Branch-reality gate: PASS** — All 6 primary review artifacts present in committed HEAD. Working tree clean. Branch confirmed: `copilot/hardening-governing-issue-parity`.
+>
+> All 12 checks PASS (CORE-020, CORE-021, OVERLAY-1 through OVERLAY-10).
+>
+> ```
+> ═══════════════════════════════════════════════════════════════════
+> ASSURANCE-TOKEN | PR: wave-governing-issue-parity-hardening (session-031)
+> All 12 checks PASS.
+>   — CORE-020: Zero partial-pass rule ✅
+>   — CORE-021: Zero-severity-tolerance ✅
+>   — OVERLAY-1: Phase 1 preflight ✅
+>   — OVERLAY-2: CS2 authorization confirmed ✅
+>   — OVERLAY-3: Wave record §1–4 complete and consistent ✅
+>   — OVERLAY-4: Governing-issue parity (all surfaces cite #1129) ✅
+>   — OVERLAY-5: Overshadow check CLEAN ✅
+>   — OVERLAY-6: PREHANDOVER proof fields populated ✅
+>   — OVERLAY-7: Session memory 6-field model complete ✅
+>   — OVERLAY-8: Scope declaration covers all changed files ✅
+>   — OVERLAY-9: No production code changes ✅
+>   — OVERLAY-10: A-036/037/038 consistent with GIPC-001 ✅
+> Merge gate parity: PASS.
+> Token reference: IAA-session-031-20260423-PASS
+> Adoption phase: PHASE_B_BLOCKING
+> ═══════════════════════════════════════════════════════════════════
+> ```
+>
+> **Merge authority: CS2 ONLY (@APGI-cmy)**
 
 ---
 

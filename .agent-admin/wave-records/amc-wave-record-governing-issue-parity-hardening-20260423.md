@@ -121,9 +121,9 @@ control_surfaces_updated:
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING |
-| PHASE_B_BLOCKING_TOKEN | PENDING — awaiting IAA invocation |
-| merge_gate_parity | PENDING |
+| iaa_verdict | PASS |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-031-20260423-PASS |
+| merge_gate_parity | PASS |
 
 ---
 
