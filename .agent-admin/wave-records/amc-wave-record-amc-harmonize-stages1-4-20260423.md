@@ -3,7 +3,7 @@
 **Wave ID**: amc-harmonize-stages1-4-20260423
 **Module**: App Management Centre (AMC)
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
-**CS2 Authorization Reference**: Harmonization issue — "Harmonization — Align AMC Stages 1–4 to explicit ARC domain, operational quota-management intent, and contract-level control surfaces" (opened by @APGI-cmy)
+**CS2 Authorization Reference**: app_management_centre#1127
 **Date**: 2026-04-23
 **Agent**: foreman-v2-agent
 
@@ -14,8 +14,8 @@
 | Field | Value |
 |-------|-------|
 | wave_id | amc-harmonize-stages1-4-20260423 |
-| triggering_issue | Harmonization issue — Align AMC Stages 1–4 to explicit ARC domain, operational quota-management intent, and contract-level control surfaces |
-| cs2_authorization | Confirmed — Harmonization issue opened by @APGI-cmy (CS2). Issue body specifies harmonization of Stages 1–4, explicit ARC domain treatment, operational quota management console, contract-level control surfaces, and tracker/sign-off alignment. CS2 authorization to produce Stage 4 TRS is implied by the directive to "Confirm the TRS reflects..." and the explicit required outcomes for Stage 4. Stage 3 CS2 approval is confirmed by this issue commissioning Stage 4 derivation. |
+| triggering_issue | app_management_centre#1127 — Harmonization — Align AMC Stages 1–4 to explicit ARC domain, operational quota-management intent, and contract-level control surfaces |
+| cs2_authorization | Confirmed — app_management_centre#1127 (opened by @APGI-cmy, CS2). Issue body specifies harmonization of Stages 1–4, explicit ARC domain treatment, operational quota management console, contract-level control surfaces, and tracker/sign-off alignment. CS2 authorization to produce Stage 4 TRS is implied by the directive to "Confirm the TRS reflects..." and the explicit required outcomes for Stage 4. Stage 3 CS2 approval is confirmed by this issue commissioning Stage 4 derivation. |
 | mode | POLC_ORCHESTRATION — governance specification documentation wave |
 | agents_delegated_to | foreman-v2-agent (all tasks — governance specification documents; pre-build planning artifacts; no builder code implementation required) |
 | ceremony_admin | N/A — governance documentation wave, no builder execution |

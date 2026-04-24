@@ -2,7 +2,7 @@
 
 **Wave ID**: amc-harmonize-stages1-4-20260423
 **Session**: session-031
-**CS2 Authorization**: Harmonization issue opened by @APGI-cmy
+**CS2 Authorization**: app_management_centre#1127
 **Mode**: POLC_ORCHESTRATION — governance specification documentation
 **Date**: 2026-04-23
 
