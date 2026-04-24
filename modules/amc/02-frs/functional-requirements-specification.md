@@ -2,19 +2,19 @@
 
 **Stage**: 3 — Functional Requirements Specification (FRS)
 **Module**: App Management Centre (AMC)
-**Version**: 1.0
-**Status**: 🟡 Produced Approval-Ready — 2026-04-23
+**Version**: 1.1
+**Status**: ✅ Approved — CS2-approved 2026-04-23. Harmonization pass applied 2026-04-23 (wave: amc-harmonize-stages1-4-20260423).
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: app_management_centre#1123
+**CS2 Authorization**: app_management_centre#1123 (original Stage 3 approval and harmonization pass trace reference; harmonization wave: amc-harmonize-stages1-4-20260423)
 **Upstream Sources**:
-- Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.0 (CS2-approved 2026-04-22)
-- Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` v1.0 (CS2-approved via issue #1121)
+- Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.1 (CS2-approved 2026-04-22; harmonization pass 2026-04-23)
+- Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` v1.1 (CS2-approved via issue #1121; harmonization pass 2026-04-23)
 **Canonical Location**: `modules/amc/02-frs/functional-requirements-specification.md`
 
 ---
 
 > **DERIVATION DECLARATION**
-> This document derives directly from the approved Stage 1 App Description (`modules/amc/00-app-description/app-description.md` v1.0) and the approved Stage 2 UX Workflow & Wiring Spec (`modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` v1.0). It does not invent product truth. Every requirement family is traceable to one or more Stage 1 and Stage 2 sections. No requirement may be introduced here without a traceable upstream source.
+> This document derives directly from the approved Stage 1 App Description (`modules/amc/00-app-description/app-description.md` v1.1) and the approved Stage 2 UX Workflow & Wiring Spec (`modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` v1.1). It does not invent product truth. Every requirement family is traceable to one or more Stage 1 and Stage 2 sections. No requirement may be introduced here without a traceable upstream source. **Harmonization Pass (2026-04-23)**: FR-1800 ARC Governance Console family added; FR-606 and FR-607 operational quota management requirements added; §22 groupings updated.
 
 ---
 
@@ -28,7 +28,7 @@
 6. [FR-300: Approval Workflow](#6-fr-300-approval-workflow)
 7. [FR-400: Intervention Launch & Monitoring](#7-fr-400-intervention-launch--monitoring)
 8. [FR-500: AI-Routed Actions (AIMC)](#8-fr-500-ai-routed-actions-aimc)
-9. [FR-600: AIMCC / Knowledge Upload Centre Supervision](#9-fr-600-aimcc--knowledge-upload-centre-supervision)
+9. [FR-600: AIMCC / Knowledge Upload Centre Supervision & Operational Quota Management](#9-fr-600-aimcc--knowledge-upload-centre-supervision--operational-quota-management)
 10. [FR-700: Memory-Aware / Knowledge-Aware Operating View](#10-fr-700-memory-aware--knowledge-aware-operating-view)
 11. [FR-800: Executive Conversation with Maturion](#11-fr-800-executive-conversation-with-maturion)
 12. [FR-900: Specialist Agent Workspace Oversight](#12-fr-900-specialist-agent-workspace-oversight)
@@ -40,8 +40,9 @@
 18. [FR-1500: Cross-System Integration & Boundary Enforcement](#18-fr-1500-cross-system-integration--boundary-enforcement)
 19. [FR-1600: Degraded-Mode Behavior](#19-fr-1600-degraded-mode-behavior)
 20. [FR-1700: State & Persistence](#20-fr-1700-state--persistence)
-21. [Business Rules & Decision Rules Summary](#21-business-rules--decision-rules-summary)
-22. [Requirement Groupings for Downstream Derivation](#22-requirement-groupings-for-downstream-derivation)
+21. [FR-1800: ARC Governance Console](#21-fr-1800-arc-governance-console)
+22. [Business Rules & Decision Rules Summary](#22-business-rules--decision-rules-summary)
+23. [Requirement Groupings for Downstream Derivation](#23-requirement-groupings-for-downstream-derivation)
 
 ---
 
@@ -557,10 +558,12 @@ These boundaries are non-negotiable and must be preserved in all requirements st
 
 ---
 
-## 9. FR-600: AIMCC / Knowledge Upload Centre Supervision
+## 9. FR-600: AIMCC / Knowledge Upload Centre Supervision & Operational Quota Management
 
-> Stage 1 Traceability: §2 AIMCC/KUC Boundary, §18 Multi-Layer AI Integration Model, §3 AIMCC/KUC Oversight Success Criteria
-> Stage 2 Traceability: §4.6 Knowledge Upload/Ingestion Supervision Journey, §7.6 AIMCC/KUC Supervision Wiring, §8.2 AMC ↔ AIMCC/KUC
+> Stage 1 Traceability: §2 AIMCC/KUC Boundary, §18 Multi-Layer AI Integration Model, §3 AIMCC/KUC Oversight Success Criteria, §4 Original AMC Intent Reconciliation (Dynamic Upload Quota Management), §4 AMC Technical/Operating Domain Declaration (Dynamic Upload Quota Management)
+> Stage 2 Traceability: §4.6 Knowledge Upload/Ingestion Supervision Journey, §4.6.1 Dynamic Upload Quota Management Console Journey, §7.6 AIMCC/KUC Supervision Wiring, §7.6.1 Quota Management Console Wiring, §8.2 AMC ↔ AIMCC/KUC
+
+> **Harmonization Note**: This section now explicitly covers both AIMCC/KUC supervision (FR-601 to FR-605) and the Operational Quota Management Console (FR-606, FR-607) as a named first-class requirement slice per Stage 1 v1.1 §4 AMC Technical/Operating Domain Declaration.
 
 ### FR-601 — AIMCC/Knowledge Supervision Surface Load
 
@@ -588,18 +591,18 @@ These boundaries are non-negotiable and must be preserved in all requirements st
 | **Approval / Authority Constraint** | None for read |
 | **Failure / Degraded Expectation** | If provenance lookup fails: explicit failure indicator; partial available provenance still shown |
 
-### FR-603 — Knowledge Upload Quota Supervision
+### FR-603 — Operational Upload Quota Management Console
 
 | Field | Value |
 |---|---|
 | **Requirement ID** | FR-603 |
 | **Actor** | Johan Ras, Maturion |
-| **Trigger / Precondition** | AIMCC/Knowledge Supervision surface loaded |
-| **Required System Behavior** | AMC surfaces dynamic upload quota state sourced from AIMCC: current quota, usage percentage, threshold warnings, approved quota change status |
-| **User-Visible Result** | Quota panel visible with current usage and threshold warnings |
-| **Required State / Audit Effect** | Read-only; no audit event |
-| **Approval / Authority Constraint** | Quota changes require approval through FR-604 |
-| **Failure / Degraded Expectation** | If AIMCC unavailable: quota panel shows stale indicator and last-known values |
+| **Trigger / Precondition** | User navigates to Quota Management Console (dedicated panel within AIMCC/Knowledge Supervision surface, or dedicated nav item) |
+| **Required System Behavior** | AMC surfaces a Quota Management Console — an operational control surface (not a read-only view) — showing: current quota limit, current usage (absolute and %), usage trend (last 7 days), threshold warning levels (Warning / Critical / Exceeded), status of any pending quota change requests, recent quota governance action history. Console enables direct interaction — not passive display. |
+| **User-Visible Result** | Quota Management Console loaded with live quota state, thresholds, trend, and pending change request status |
+| **Required State / Audit Effect** | Read-only load; no audit event on passive view |
+| **Approval / Authority Constraint** | Quota changes require request/approval handling per FR-607; where an AIMCC governance approval record must be routed through the standard approval queue, FR-604 governs that routing mechanism |
+| **Failure / Degraded Expectation** | If AIMCC unavailable: quota panel shows explicit stale indicator and last-known values; new quota change requests blocked; stale data must NEVER be served without explicit indicator |
 
 ### FR-604 — AIMCC Governance Action (Approval Routing)
 
@@ -626,6 +629,32 @@ These boundaries are non-negotiable and must be preserved in all requirements st
 | **Required State / Audit Effect** | Any bypass attempt must generate a system error event |
 | **Approval / Authority Constraint** | No bypass permitted |
 | **Failure / Degraded Expectation** | AIMCC unavailability does not authorize direct ingestion bypass |
+
+### FR-606 — Quota Threshold Proactive Alerting
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-606 |
+| **Actor** | System (proactive threshold monitor) |
+| **Trigger / Precondition** | Upload quota usage crosses a configured threshold level (Warning: configurable %, default 75%; Critical: configurable %, default 90%; Exceeded: 100%) |
+| **Required System Behavior** | AMC generates a proactive quota threshold alert automatically: creates an alert record of appropriate severity (Warning alert for Warning threshold; High alert for Critical threshold; Critical alert for Exceeded threshold). Alert surfaces in Alert Centre. Quota Management Console header shows threshold state. Maturion is notified via AIMC (proactive awareness). No user action required to trigger — this is a system-generated proactive event |
+| **User-Visible Result** | Alert surfaced in Alert Centre with threshold level, current usage, and link to Quota Management Console |
+| **Required State / Audit Effect** | AuditEvent: `QUOTA_THRESHOLD_TRIGGERED` (level, current_usage_percent, threshold_value, timestamp) |
+| **Approval / Authority Constraint** | None for alert generation |
+| **Failure / Degraded Expectation** | If AIMCC is unavailable and quota state is stale: threshold alerting is paused with a system note that quota state is unavailable. Alerts must not fire against stale data without explicit stale-data flag |
+
+### FR-607 — Quota Change Request and Approval
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-607 |
+| **Actor** | Johan Ras (initiates and approves), Maturion (may surface proactive quota change recommendation) |
+| **Trigger / Precondition** | User initiates a quota change request from the Quota Management Console, or Maturion surfaces a proactive quota change recommendation |
+| **Required System Behavior** | AMC creates a quota change request record: requested_by, new_limit, justification (required), urgency. Request enters Approval Queue if authority gate required. If Johan Ras is initiating the request AND has self-approval authority: inline approval is permitted with explicit basis/reason field (required). On approval: AMC notifies AIMCC via governed API with new quota limit. AIMCC acknowledgment is recorded. AMC updates quota state in Quota Management Console. On rejection: rejection reason is required; AIMCC is not notified; request is closed with rejection record. All outcomes (approve, reject, defer) produce an audit record with: actor, old_limit, new_limit (if approved), basis/reason, aimcc_notification_status (if approved), timestamp |
+| **User-Visible Result** | Quota change request visible in Approval Queue (or inline approval confirmation); outcome surfaced in Quota Management Console with audit reference |
+| **Required State / Audit Effect** | AuditEvent: `QUOTA_CHANGE_REQUESTED` (actor, requested_limit, justification, timestamp); AuditEvent: `QUOTA_CHANGE_APPROVED` or `QUOTA_CHANGE_REJECTED` (actor, old_limit, new_limit, basis/reason, aimcc_notification_status, timestamp) |
+| **Approval / Authority Constraint** | Quota changes require Johan Ras approval. Self-approval is permitted for Johan with explicit basis. Maturion may recommend but not self-approve |
+| **Failure / Degraded Expectation** | If AIMCC is unavailable when quota change approval is given: approval is recorded in AMC; AIMCC notification is queued pending AIMCC recovery; console shows "AIMCC notification pending" status; quota state in AIMCC is not updated until notification delivered |
 
 ---
 
@@ -1252,7 +1281,107 @@ These boundaries are non-negotiable and must be preserved in all requirements st
 
 ---
 
-## 21. Business Rules & Decision Rules Summary
+## 21. FR-1800: ARC Governance Console
+
+> Stage 1 Traceability: §4 Original AMC Intent Reconciliation (ARC Trigger Governance — Preserved as explicit named domain), §4 AMC Technical/Operating Domain Declaration (ARC Governance Console), §2 In Scope (ARC governance console)
+> Stage 2 Traceability: §4.4.1 ARC Governance Console Journey, §7.4.1 ARC Governance Console Wiring, §6 Screen/Surface Model (ARC Governance Console surface)
+
+> **Harmonization Note (2026-04-23)**: This requirement family was added in the harmonization pass to explicitly name ARC (Automated Response Control) as a first-class AMC technical operating domain with its own requirement family. ARC was previously only preserved through generic intervention and escalation framing. Per Stage 1 v1.1, ARC must be explicitly recognizable in all downstream artifacts including TRS, Architecture, and UI surfaces.
+
+### FR-1801 — ARC Governance Console Load
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-1801 |
+| **Actor** | Johan Ras |
+| **Trigger / Precondition** | User navigates to ARC Governance Console (dedicated nav item, or from Alert Centre via ARC-triggered alert link) |
+| **Required System Behavior** | AMC loads the ARC Governance Console as a named, dedicated surface (not a subset of the generic Intervention Manager). Console displays: active ARC-triggered governance events with triggering condition, proposed automated response, current state (pending review / approved / rejected / escalated), priority level, time since detection. Console is explicitly labeled "ARC Governance Console" — not as a generic list |
+| **User-Visible Result** | ARC Governance Console loaded with active ARC events, each showing triggering condition, proposed response, and current state |
+| **Required State / Audit Effect** | Read-only; no audit event on passive load |
+| **Approval / Authority Constraint** | None for read |
+| **Failure / Degraded Expectation** | If ARC event data cannot be fetched: explicit error; no silent empty state served as "no events" |
+
+### FR-1802 — ARC Event Detail View
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-1802 |
+| **Actor** | Johan Ras |
+| **Trigger / Precondition** | User selects an ARC event from the ARC Governance Console list |
+| **Required System Behavior** | AMC opens ARC Event Detail panel showing: full trigger description and detection metadata, proposed automated response (what ARC intends to do), impact scope (which systems, agents, or data are affected), authority requirement (approval required? Reserved matter?), prior ARC actions in same context (full audit chain), decision buttons |
+| **User-Visible Result** | ARC Event Detail panel open with full trigger, proposed response, impact scope, audit chain |
+| **Required State / Audit Effect** | Read-only; no audit event |
+| **Approval / Authority Constraint** | None for read |
+| **Failure / Degraded Expectation** | If detail fetch fails: explicit error; partial available data still shown |
+
+### FR-1803 — ARC Action Approval
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-1803 |
+| **Actor** | Johan Ras |
+| **Trigger / Precondition** | User approves an ARC-triggered governance action from the ARC Governance Console |
+| **Required System Behavior** | AMC records approval decision: arc_event_id, decided_by, decided_at, basis (required field — approval basis must be stated). AMC routes ARC response execution through the governed ARC execution pathway (not via generic intervention dispatch). ARC event state updated to: approved. Downstream ARC execution triggered. Confirmation shown to user with audit reference |
+| **User-Visible Result** | ARC event marked approved; execution triggered; confirmation with audit reference shown |
+| **Required State / Audit Effect** | AuditEvent: `ARC_ACTION_APPROVED` (actor, arc_event_id, basis, timestamp) |
+| **Approval / Authority Constraint** | Johan Ras is the constitutional authority for ARC governance actions. No bypass of the approval gate is permitted |
+| **Failure / Degraded Expectation** | If ARC execution endpoint is unavailable: approval is still recorded; execution queued pending recovery; user is shown "execution pending ARC service recovery" status |
+
+### FR-1804 — ARC Action Rejection
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-1804 |
+| **Actor** | Johan Ras |
+| **Trigger / Precondition** | User rejects an ARC-triggered governance action |
+| **Required System Behavior** | AMC records rejection: arc_event_id, decided_by, decided_at, rejection_reason (required). ARC event state updated to: rejected. ARC automated response is blocked. Rejection record is permanent — cannot be deleted or overwritten |
+| **User-Visible Result** | ARC event marked rejected; rejection reason shown; execution blocked |
+| **Required State / Audit Effect** | AuditEvent: `ARC_ACTION_REJECTED` (actor, arc_event_id, reason, timestamp) |
+| **Approval / Authority Constraint** | Johan Ras. Rejection reason is a required field |
+| **Failure / Degraded Expectation** | Rejection record must persist even if connectivity lost during recording |
+
+### FR-1805 — ARC Event Escalation
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-1805 |
+| **Actor** | Johan Ras, Maturion (for surfacing to Johan) |
+| **Trigger / Precondition** | User escalates an ARC event that requires escalation (e.g., complex impact scope, uncertain authority, time-sensitive) |
+| **Required System Behavior** | AMC creates an escalation record linked to the arc_event_id. ARC event state updated to: escalated. Escalation is visible in both Alert Centre and ARC Governance Console. Escalation target is notified (as per escalation routing config). ARC event remains in escalated state until Johan decides |
+| **User-Visible Result** | ARC event shows escalated state; escalation record visible in Alert Centre |
+| **Required State / Audit Effect** | AuditEvent: `ARC_EVENT_ESCALATED` (actor, arc_event_id, target, timestamp) |
+| **Approval / Authority Constraint** | Authorized actor |
+| **Failure / Degraded Expectation** | Escalation record persists independently of ARC event if ARC event data is temporarily unavailable |
+
+### FR-1806 — ARC Audit History
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-1806 |
+| **Actor** | Johan Ras |
+| **Trigger / Precondition** | User opens ARC audit history view within the ARC Governance Console |
+| **Required System Behavior** | AMC surfaces the complete ARC audit history: all ARC events, decisions, outcomes, approval bases, rejection reasons, escalation records, execution outcomes. History is append-only — no record may be deleted or silently modified. History is filterable by: date range, event type, decision outcome, actor |
+| **User-Visible Result** | ARC audit history visible with full record chain; filterable |
+| **Required State / Audit Effect** | Read-only; no audit event |
+| **Approval / Authority Constraint** | None for read |
+| **Failure / Degraded Expectation** | If history fetch fails: explicit error; partial history still shown if available |
+
+### FR-1807 — ARC Non-Bypass Rule
+
+| Field | Value |
+|---|---|
+| **Requirement ID** | FR-1807 |
+| **Actor** | System (enforcement rule) |
+| **Trigger / Precondition** | Any ARC-triggered governance action reaches AMC for decision |
+| **Required System Behavior** | ARC-triggered governance actions requiring human approval must not auto-execute past the AMC approval gate. ARC is not a bypass of AMC's authority model. Every ARC action requiring approval must surface in the ARC Governance Console and wait for explicit human decision. No silent auto-execution of ARC responses that fall within the authority-gate boundary |
+| **User-Visible Result** | N/A (enforcement constraint) |
+| **Required State / Audit Effect** | Any auto-execution attempt past the gate must generate a system error event and an audit record |
+| **Approval / Authority Constraint** | Hard enforcement — not overridable |
+| **Failure / Degraded Expectation** | ARC service unavailability does not authorize auto-execution of approval-gated ARC actions |
+
+---
+
+## 22. Business Rules & Decision Rules Summary
 
 The following table consolidates the key business rules referenced throughout this FRS for downstream reference:
 
@@ -1276,14 +1405,19 @@ The following table consolidates the key business rules referenced throughout th
 | **BR-STATE-002** | Degraded mode must never cause AMC to serve stale data as current data without an explicit indicator | Hard enforcement | FR-1601, FR-1602, FR-1603 |
 | **BR-DEGRADE-001** | AIMC unavailability does not authorize fallback to direct model calls | Hard enforcement | FR-1601, FR-503 |
 | **BR-DEGRADE-002** | AIMCC unavailability does not authorize direct knowledge ingestion bypass | Hard enforcement | FR-1602, FR-605 |
+| **BR-ARC-001** | ARC-triggered governance actions requiring approval must not auto-execute past the AMC authority gate | Hard enforcement | FR-1807, FR-1803 |
+| **BR-ARC-002** | ARC approval basis is a required field on all ARC governance decisions | Hard enforcement | FR-1803 |
+| **BR-ARC-003** | ARC rejection reason is a required field on all ARC rejection decisions | Hard enforcement | FR-1804 |
+| **BR-QUOTA-001** | Upload quota state sourced from AIMCC must never be served as current data when stale without an explicit stale indicator | Hard enforcement | FR-603, FR-607 |
+| **BR-QUOTA-002** | Quota change approval must be explicitly recorded with basis and AIMCC notification status | Hard enforcement | FR-607 |
 
 ---
 
-## 22. Requirement Groupings for Downstream Derivation
+## 23. Requirement Groupings for Downstream Derivation
 
 The following groupings are provided to assist TRS (Stage 4), Architecture (Stage 5), and QA-to-Red (Stage 6) derivation:
 
-### 22.1 Functional Requirement Families
+### 23.1 Functional Requirement Families
 
 | Family | Requirements | Primary Downstream Owner |
 |---|---|---|
@@ -1292,7 +1426,7 @@ The following groupings are provided to assist TRS (Stage 4), Architecture (Stag
 | Approval Workflow | FR-301 to FR-307 | UI, API, Data, Auth |
 | Intervention | FR-401 to FR-407 | UI, API, Data, Auth |
 | AI-Routed Actions (AIMC) | FR-501 to FR-504 | API, AIMC Integration, Data |
-| AIMCC/KUC Supervision | FR-601 to FR-605 | UI, API, AIMCC Integration, Data |
+| AIMCC/KUC Supervision & Operational Quota Management | FR-601 to FR-607 | UI, API, AIMCC Integration, Data |
 | Memory-Aware View | FR-701 to FR-703 | UI, API, Knowledge System Integration, Data |
 | Executive Conversation | FR-801 to FR-807 | UI, API, AIMC Integration, Data |
 | Specialist Agent Oversight | FR-901 to FR-904 | UI, API, Data |
@@ -1305,17 +1439,19 @@ The following groupings are provided to assist TRS (Stage 4), Architecture (Stag
 | Degraded-Mode Behavior | FR-1601 to FR-1603 | All layers |
 | State & Persistence | FR-1701 to FR-1703 | Data, State Management |
 
-### 22.2 Business Rules Groupings
+### 23.2 Business Rules Groupings
 
 | Group | Rules |
 |---|---|
 | System boundary / non-bypass rules | BR-SYS-001, BR-DEGRADE-001, BR-DEGRADE-002 |
 | Authority and approval rules | BR-AUTH-001, BR-AUTH-002, BR-AUTH-003, BR-AUTH-004, BR-APPROVAL-001, BR-APPROVAL-002, BR-APPROVAL-003 |
 | Alerting rules | BR-ALERT-001, BR-ALERT-002, BR-ALERT-003, BR-ALERT-004 |
+| ARC governance rules | BR-ARC-001, BR-ARC-002, BR-ARC-003 |
+| Quota management rules | BR-QUOTA-001, BR-QUOTA-002 |
 | Audit / provenance rules | BR-AUDIT-001, BR-AUDIT-002 |
 | State / ownership rules | BR-STATE-001, BR-STATE-002 |
 
-### 22.3 Cross-System Interaction Requirements Summary
+### 23.3 Cross-System Interaction Requirements Summary
 
 | Interaction | AMC Action | Required Pathway | Enforcement |
 |---|---|---|---|
@@ -1326,31 +1462,38 @@ The following groupings are provided to assist TRS (Stage 4), Architecture (Stag
 | Knowledge retrieval | Queries knowledge/memory system | Governed knowledge API | FR-701 |
 | Provenance lookup | Queries AIMCC provenance | AIMCC provenance API | FR-702 |
 | Intervention dispatch | Routes to Foreman/specialist agents | Foreman API / Specialist Agent API | FR-403 |
+| ARC action execution | Approves and routes ARC governance action | Governed ARC execution endpoint | FR-1803, BR-ARC-001 |
+| Quota state fetch | Reads live quota state from AIMCC | AIMCC quota read API | FR-603 |
+| Quota change notification | Notifies AIMCC of approved quota change | AIMCC quota update API | FR-607, BR-QUOTA-002 |
 | Build status | Reads Foreman reporting | Foreman reporting event feed (read-only) | FR-1103 |
 
-### 22.4 State / Persistence Expectations Summary
+### 23.4 State / Persistence Expectations Summary
 
 | State Domain | Canonical Owner | AMC Write Access | Notes |
 |---|---|---|---|
 | Alert records | AMC | Full | Created, updated by AMC |
 | Approval records | AMC | Full | Created, updated by AMC |
 | Intervention records | AMC | Full | Created, updated by AMC |
+| ARC event records | AMC | Full | Created, decision-updated by AMC; append-only audit chain |
+| ARC audit log | AMC | Append-only | FR-1806 |
 | Audit events | AMC | Append-only | FR-1301 |
 | Conversation messages | AMC | Full | Includes Maturion responses |
 | AIMC action log | AMC | Full | Records dispatches and outcomes |
 | Knowledge retrieval log | AMC | Full | Records retrieval requests |
 | System health events | AMC | Full | Degraded/recovered events |
+| Quota state | AIMCC (canonical) | Read-only (status surface) + write via governed API notification | AMC reads state; notifies AIMCC of changes; does not directly write quota values |
+| Quota change requests | AMC | Full | AMC records requests, decisions, AIMCC notification status |
 | Knowledge upload records | AIMCC (canonical) | Read-only (status surface) | AMC surfaces, does not own |
 | Persistent knowledge/memory | Knowledge/memory system (canonical) | None | AMC surfaces with provenance only |
 
-### 22.5 Degraded-Mode Coverage Summary
+### 23.5 Degraded-Mode Coverage Summary
 
 | Dependency | Degraded Mode ID | Key Behavioral Rule |
 |---|---|---|
 | AIMC unavailable | FR-1601 | Explicit banner; no AI dispatch; no direct model fallback; Johan can still approve manually |
-| AIMCC unavailable | FR-1602 | Explicit banner; stale data indicator; governance actions frozen pending |
+| AIMCC unavailable | FR-1602 | Explicit banner; stale data indicator; governance actions frozen pending; quota console shows stale indicator; quota change requests blocked |
 | Knowledge/memory degraded | FR-1603 | Explicit stale indicator; no silent staleness; no cached data served as current |
 
 ---
 
-*End of Functional Requirements Specification — Stage 3. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2 approval required before TRS (Stage 4) derivation begins.*
+*End of Functional Requirements Specification — Stage 3 v1.1. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2-approved (ref #1123; harmonization wave: amc-harmonize-stages1-4-20260423, 2026-04-23). TRS (Stage 4) derivation authorized.*

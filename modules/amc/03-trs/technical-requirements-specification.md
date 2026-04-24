@@ -7,16 +7,17 @@
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
 **CS2 Authorization**: app_management_centre#1125
 **Hardening Authorization**: Pre-merge hardening wave (app_management_centre#1127) — ARC explicit domain, Dynamic Upload Quota Management console, alert timing/retry/escalation contract family, audit delivery atomicity, inter-service trust boundary, state ownership contract family declarations
+**Harmonization Pass**: 2026-04-23 — upstream source versions updated to reflect Stage 1 v1.1, Stage 2 v1.1, and Stage 3 v1.1 harmonization (wave: amc-harmonize-stages1-4-20260423; CS2 authorization: @APGI-cmy)
 **Upstream Sources**:
-- Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.0 (CS2-approved 2026-04-22, ref #1117)
-- Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/` v1.0 (CS2-approved, ref #1121)
-- Stage 3 FRS: `modules/amc/02-frs/functional-requirements-specification.md` v1.0 (CS2-approved for Stage 4 progression, ref #1123)
+- Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.1 (CS2-approved 2026-04-22; harmonization pass 2026-04-23, ref #1117)
+- Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/` v1.1 (CS2-approved, ref #1121; harmonization pass 2026-04-23)
+- Stage 3 FRS: `modules/amc/02-frs/functional-requirements-specification.md` v1.1 (CS2-approved, ref #1123; FR-1800 ARC family + FR-606/FR-607 quota added in harmonization wave)
 **Canonical Location**: `modules/amc/03-trs/technical-requirements-specification.md`
 
 ---
 
 > **DERIVATION DECLARATION**
-> This document derives directly from the approved Stage 3 FRS (`modules/amc/02-frs/functional-requirements-specification.md` v1.0), the approved Stage 2 UX Workflow & Wiring Spec, and the approved Stage 1 App Description. It translates approved functional requirements into explicit technical requirements, interface constraints, data structures, state rules, integration contracts, and implementation-constraining decisions. It does not invent product truth. No technical requirement may be introduced here without traceable derivation from Stage 1, 2, or 3 approved truth. The TRS does not replace Architecture (Stage 5) — it defines the technical boundaries that Architecture must realize.
+> This document derives directly from the approved Stage 3 FRS (`modules/amc/02-frs/functional-requirements-specification.md` v1.1), the approved Stage 2 UX Workflow & Wiring Spec, and the approved Stage 1 App Description. It translates approved functional requirements into explicit technical requirements, interface constraints, data structures, state rules, integration contracts, and implementation-constraining decisions. It does not invent product truth. No technical requirement may be introduced here without traceable derivation from Stage 1, 2, or 3 approved truth. The TRS does not replace Architecture (Stage 5) — it defines the technical boundaries that Architecture must realize.
 
 ---
 
