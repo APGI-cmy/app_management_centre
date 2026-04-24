@@ -3,9 +3,9 @@
 **Stage**: 3 — Functional Requirements Specification (FRS)
 **Module**: App Management Centre (AMC)
 **Version**: 1.1
-**Status**: ✅ Approved — CS2-approved via harmonization issue (2026-04-23)
+**Status**: ✅ Approved — CS2-approved 2026-04-23. Harmonization pass applied 2026-04-23 (wave: amc-harmonize-stages1-4-20260423).
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: app_management_centre#1123 (original); harmonization issue (approval + harmonization pass 2026-04-23)
+**CS2 Authorization**: app_management_centre#1123 (original Stage 3 approval and harmonization pass trace reference; harmonization wave: amc-harmonize-stages1-4-20260423)
 **Upstream Sources**:
 - Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.1 (CS2-approved 2026-04-22; harmonization pass 2026-04-23)
 - Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md` v1.1 (CS2-approved via issue #1121; harmonization pass 2026-04-23)
@@ -1496,4 +1496,4 @@ The following groupings are provided to assist TRS (Stage 4), Architecture (Stag
 
 ---
 
-*End of Functional Requirements Specification — Stage 3 v1.1. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2-approved via harmonization issue (2026-04-23). TRS (Stage 4) derivation authorized.*
+*End of Functional Requirements Specification — Stage 3 v1.1. Produced by foreman-v2-agent under POLC_ORCHESTRATION. CS2-approved (ref #1123; harmonization wave: amc-harmonize-stages1-4-20260423, 2026-04-23). TRS (Stage 4) derivation authorized.*

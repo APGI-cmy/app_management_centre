@@ -103,7 +103,7 @@ system behaviour are permitted.
 - [x] `app-description-to-frs-traceability.md` — Stage 1 + Stage 2 to FRS traceability matrix demonstrating derivation coverage, cross-system boundary traceability, and dropped/deferred commitment disclosure (v1.0, produced 2026-04-23)
 **Wave**: amc-stage3-frs-20260423; harmonization pass: amc-harmonize-stages1-4-20260423
 **Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: issue #1123 (original); harmonization issue (harmonization pass 2026-04-23)
+**CS2 Authorization**: issue #1123 (original Stage 3 approval and harmonization pass trace reference; harmonization wave: amc-harmonize-stages1-4-20260423)
 **Prerequisites**: ✅ Stage 1 complete; ✅ Stage 2 complete and CS2-approved (issue #1121)
 **Approval Required**: Yes — CS2-approved for Stage 4 (TRS) progression
 **Completion Date**: 2026-04-23
@@ -124,7 +124,7 @@ system behaviour are permitted.
 - [x] `frs-to-trs-traceability.md` — FRS to TRS traceability matrix v1.1: 17 FRS families + ARC domain traced, 18 business rules realized, no family dropped, 30 Stage-5 deferrals disclosed, ARC and quota console coverage added (v1.1, hardened 2026-04-23)
 **Wave**: amc-harmonize-stages1-4-20260423; amc-stage4-trs-hardening-20260423
 **Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: issue #1125; harmonization issue
+**CS2 Authorization**: issue #1125; harmonization wave: amc-harmonize-stages1-4-20260423
 **Hardening Wave**: issue #1127 (harmonization/hardening follow-on)
 **Prerequisites**: ✅ Stage 1 complete; ✅ Stage 2 complete and CS2-approved; ✅ Stage 3 complete and CS2-approved (issue #1123)
 **Approval Required**: Yes — CS2 approval required before Stage 5 (Architecture) may begin

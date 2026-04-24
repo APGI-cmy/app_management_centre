@@ -5,7 +5,7 @@
 **Version**: 1.1
 **Status**: ✅ Approved — CS2-approved (issue #1121, 2026-04-22). Harmonization pass 2026-04-23.
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
-**CS2 Authorization**: app_management_centre#1121 (original); harmonization issue (harmonization pass)
+**CS2 Authorization**: app_management_centre#1121 (original approval and harmonization pass trace reference; harmonization wave: amc-harmonize-stages1-4-20260423)
 **Upstream Source**: `modules/amc/00-app-description/app-description.md` v1.1 (approved 2026-04-22; harmonization pass 2026-04-23)
 **Canonical Location**: `modules/amc/01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md`
 

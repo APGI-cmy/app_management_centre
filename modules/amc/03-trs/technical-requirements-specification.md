@@ -7,11 +7,11 @@
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
 **CS2 Authorization**: app_management_centre#1125
 **Hardening Authorization**: Pre-merge hardening wave (app_management_centre#1127) — ARC explicit domain, Dynamic Upload Quota Management console, alert timing/retry/escalation contract family, audit delivery atomicity, inter-service trust boundary, state ownership contract family declarations
-**Harmonization Pass**: 2026-04-23 — upstream source versions updated to reflect Stage 1 v1.1, Stage 2 v1.1, and Stage 3 v1.1 harmonization (harmonization issue)
+**Harmonization Pass**: 2026-04-23 — upstream source versions updated to reflect Stage 1 v1.1, Stage 2 v1.1, and Stage 3 v1.1 harmonization (wave: amc-harmonize-stages1-4-20260423; CS2 authorization: @APGI-cmy)
 **Upstream Sources**:
-- Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.1 (CS2-approved 2026-04-22; harmonization pass 2026-04-23, ref #1117 + harmonization issue)
+- Stage 1 App Description: `modules/amc/00-app-description/app-description.md` v1.1 (CS2-approved 2026-04-22; harmonization pass 2026-04-23, ref #1117)
 - Stage 2 UX Workflow & Wiring Spec: `modules/amc/01-ux-workflow-wiring-spec/` v1.1 (CS2-approved, ref #1121; harmonization pass 2026-04-23)
-- Stage 3 FRS: `modules/amc/02-frs/functional-requirements-specification.md` v1.1 (CS2-approved, ref #1123 + harmonization issue; FR-1800 ARC family + FR-606/FR-607 quota added)
+- Stage 3 FRS: `modules/amc/02-frs/functional-requirements-specification.md` v1.1 (CS2-approved, ref #1123; FR-1800 ARC family + FR-606/FR-607 quota added in harmonization wave)
 **Canonical Location**: `modules/amc/03-trs/technical-requirements-specification.md`
 
 ---
