@@ -32,12 +32,12 @@ drift and start citing a later hardening/harmonization issue as the governing au
 - [x] TASK-GIP-002 — Update `.agent-admin/templates/amc-wave-record-template.md` with labeled authority fields and parity check items
       builder: foreman-v2-agent (governance template update — POLC-Orchestration write path)
       qp_verdict: PASS
-      notes: Updated to v1.1.0 — added Governing Authority table (§1a) and Governing-Issue Parity Evidence block (§3a). IAA OVERLAY-4 verified all parity surfaces.
+      notes: Updated to v1.2.0 — §1a Governing Authority table, §3a Governing-Issue Parity Evidence block, and §3b Ceremony Evidence Fields (dedicated labeled-field section for all 7 GIPC-001 §6.1 fields). Corrected from v1.1.0 after CS2 comment #4311314513: §3b separates ceremony evidence fields into an unambiguous labeled-field structure for A-038 validation.
 
 - [x] TASK-GIP-003 — Add A-036, A-037, A-038 to `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md`
       builder: foreman-v2-agent (Tier 2 operational knowledge update — POLC-Orchestration write path)
       qp_verdict: PASS
-      notes: A-036 (GOVERNING-ISSUE-PARITY-MANDATORY), A-037 (OVERSHADOW-DETECTION-MANDATORY), A-038 (CEREMONY-PARITY-EVIDENCE-REQUIRED) added. IAA OVERLAY-10 verified full consistency with GIPC-001.
+      notes: A-036 (GOVERNING-ISSUE-PARITY-MANDATORY), A-037 (OVERSHADOW-DETECTION-MANDATORY), A-038 (CEREMONY-PARITY-EVIDENCE-REQUIRED) added. A-038 corrected after CS2 comment #4311314513: now correctly states "seven" fields and includes `control_surfaces_verified` matching GIPC-001 §6.1 cardinality. Template reference updated to v1.2.0.
 
 ---
 

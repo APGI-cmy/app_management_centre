@@ -1,8 +1,9 @@
 # AMC Wave Record — [wave-slug] — [YYYY-MM-DD]
 
-> **Template Version**: 1.1.0
+> **Template Version**: 1.2.0
 > **Authority**: CS2 (@APGI-cmy) — Issue #1063
 > **Protocol**: AMC 90/10 Admin Protocol v1.0.0
+> **Amended**: 2026-04-24 — v1.2.0: Added §3b Ceremony Evidence Fields section with all 7 GIPC-001 §6.1 labeled fields as explicit rows; replaced evaluation-row representation with canonical labeled-field structure for unambiguous A-038 validation. Authority: CS2 — Issue #1129.
 > **Amended**: 2026-04-23 — v1.1.0: Added Governing Authority table (GIPC-001 §3.3) and parity/overshadow check fields in Evaluation Summary (GIPC-001 §2.4, §5.3, §6.1). Authority: CS2 — Issue #1129.
 
 ---
@@ -55,9 +56,6 @@
 | Architecture followed | [✅ / ❌] |
 | Zero deprecation warnings | [✅ / ❌] |
 | Zero linter warnings | [✅ / ❌] |
-| Governing-issue parity check | [✅ PASS / ❌ FAIL — see §3a] |
-| Overshadow detection check | [✅ CLEAN / ❌ DETECTED — see §3a] |
-| Control surfaces updated | [✅ / ❌ / N/A — see §3a] |
 
 **QP Verdict**: [PASS / FAIL]
 
@@ -86,6 +84,21 @@ control_surfaces_updated:
   artifact_index: [UPDATED / NOT_APPLICABLE — reason]
   sign_off_record: [UPDATED / NOT_APPLICABLE — reason]
 ```
+
+## 3b. Ceremony Evidence Fields
+
+> **Required per GIPC-001 §6.1 and A-038** — all 7 fields MUST be populated before QP PASS.
+> A ceremony package with any field blank is a handover blocker (GIP-CEREMONY-INCOMPLETE).
+
+| Field | Value |
+|-------|-------|
+| governing_stage_issue | [#NNN — must match triggering_issue in §1 and governing_stage_issue in §1a] |
+| related_hardening_issue | [#NNN or N/A] |
+| related_harmonization_issue | [#NNN or N/A] |
+| approval_exists | [YES / NO / PENDING] |
+| parity_check_performed | [PASS / FAIL / N/A — result of §3a parity check] |
+| overshadow_check_performed | [CLEAN / DETECTED / N/A — result of §3a overshadow check] |
+| control_surfaces_verified | [YES / N/A — whether tracker/artifact-index/sign-off were checked for parity] |
 
 ## 4. Outcome & Learning
 

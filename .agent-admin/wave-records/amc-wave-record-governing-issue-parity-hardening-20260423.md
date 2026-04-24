@@ -75,9 +75,6 @@
 | Architecture followed | ✅ — canon structure follows ECAP-001 and STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md patterns |
 | Zero deprecation warnings | ✅ N/A |
 | Zero linter warnings | ✅ N/A |
-| Governing-issue parity check | ✅ PASS — see §3a |
-| Overshadow detection check | ✅ CLEAN — see §3a |
-| Control surfaces updated | ✅ N/A — governance hardening wave; no stage tracker or artifact index applies |
 
 **QP Verdict**: PASS
 
@@ -105,6 +102,20 @@ control_surfaces_updated:
   sign_off_record: NOT_APPLICABLE — no approval required for governance hardening
 ```
 
+## 3b. Ceremony Evidence Fields
+
+> **Required per GIPC-001 §6.1 and A-038** — all 7 fields mandatory; blank = GIP-CEREMONY-INCOMPLETE.
+
+| Field | Value |
+|-------|-------|
+| governing_stage_issue | #1129 |
+| related_hardening_issue | N/A — this IS the hardening issue |
+| related_harmonization_issue | N/A |
+| approval_exists | NO — governance hardening wave; no approval gating required |
+| parity_check_performed | PASS — see §3a |
+| overshadow_check_performed | CLEAN — see §3a |
+| control_surfaces_verified | N/A — governance hardening wave; no stage tracker or artifact index applies |
+
 ---
 
 ## 4. Outcome & Learning
@@ -112,7 +123,7 @@ control_surfaces_updated:
 | Field | Value |
 |-------|-------|
 | outcome | COMPLETE |
-| coverage_summary | Created GIPC-001 governing-issue parity protocol (6 sections), updated wave record template with labeled authority fields + parity check section, added A-036/A-037/A-038 to FAIL-ONLY-ONCE.md. Closes issue #1129 hardening requirements. |
+| coverage_summary | Created GIPC-001 governing-issue parity protocol (6 sections), updated wave record template to v1.2.0 (labeled authority fields + parity evidence block + dedicated §3b ceremony evidence fields table), added A-036/A-037/A-038 to FAIL-ONLY-ONCE.md with A-038 corrected to enumerate all 7 §6.1 fields. Closes issue #1129 hardening requirements. |
 | learning | Governing-issue drift is structurally preventable by adding machine-checkable labeled fields at the ceremony layer and explicit overshadow detection in agent rules. The three-layer enforcement (labeled fields + GIPC-001 canon + new A-rules) mirrors the successful pattern from ECAP-001's three-layer admin-control stack. |
 
 ---
