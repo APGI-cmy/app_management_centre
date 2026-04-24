@@ -6,6 +6,7 @@
 **Authority**: CS2 — Issue #1129 (Hardening — Foreman/ceremony must enforce governing-issue parity and issue-role separation)
 **Issue Reference**: app_management_centre#1129
 **IAA Pre-Brief**: Wave record section 2 — `.agent-admin/wave-records/amc-wave-record-governing-issue-parity-hardening-20260423.md` (per AMC 90/10 Admin Protocol v1.0.0; no standalone file)
+governance_evidence_path: .agent-admin/wave-records/amc-wave-record-governing-issue-parity-hardening-20260423.md
 
 ---
 
