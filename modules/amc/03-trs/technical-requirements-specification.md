@@ -17,7 +17,7 @@
 ---
 
 > **DERIVATION DECLARATION**
-> This document derives directly from the approved Stage 3 FRS (`modules/amc/02-frs/functional-requirements-specification.md` v1.0), the approved Stage 2 UX Workflow & Wiring Spec, and the approved Stage 1 App Description. It translates approved functional requirements into explicit technical requirements, interface constraints, data structures, state rules, integration contracts, and implementation-constraining decisions. It does not invent product truth. No technical requirement may be introduced here without traceable derivation from Stage 1, 2, or 3 approved truth. The TRS does not replace Architecture (Stage 5) — it defines the technical boundaries that Architecture must realize.
+> This document derives directly from the approved Stage 3 FRS (`modules/amc/02-frs/functional-requirements-specification.md` v1.1), the approved Stage 2 UX Workflow & Wiring Spec, and the approved Stage 1 App Description. It translates approved functional requirements into explicit technical requirements, interface constraints, data structures, state rules, integration contracts, and implementation-constraining decisions. It does not invent product truth. No technical requirement may be introduced here without traceable derivation from Stage 1, 2, or 3 approved truth. The TRS does not replace Architecture (Stage 5) — it defines the technical boundaries that Architecture must realize.
 
 ---
 
