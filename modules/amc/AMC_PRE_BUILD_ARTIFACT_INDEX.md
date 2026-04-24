@@ -38,8 +38,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | ✅ Approved Canonical | v1.1, CS2-approved for Stage 4 progression 2026-04-23. Harmonization pass applied 2026-04-23: FR-1800 ARC Governance Console family added; FR-606/FR-607 operational quota management requirements added. Issue #1123. |
-| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | ✅ Approved Canonical | v1.0, CS2-approved for Stage 4 progression 2026-04-23. Issue #1123. |
+| Functional Requirements Specification | `modules/amc/02-frs/functional-requirements-specification.md` | ✅ Approved Canonical | v1.1, CS2-approved for Stage 4 progression 2026-04-23. Harmonization pass applied 2026-04-23: FR-1800 ARC Governance Console family added; FR-606/FR-607 operational quota management requirements added. Approval ref: #1123. |
+| App Description to FRS Traceability | `modules/amc/02-frs/app-description-to-frs-traceability.md` | ✅ Approved Canonical | v1.0, CS2-approved for Stage 4 progression 2026-04-23. Approval ref: #1123. |
 
 ---
 
