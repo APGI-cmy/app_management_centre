@@ -1,10 +1,15 @@
 # PREHANDOVER Proof — Session 031 | Wave governing-issue-parity-hardening | 2026-04-23
 
-**Session ID**: 031
+**Agent**: foreman-v2-agent
+**PR**: #1130
+**Branch**: copilot/hardening-governing-issue-parity
 **Date**: 2026-04-23
+**Latest Commit**: 1a99d6d
+**Protocol Version**: 2.0.0+
+**Session ID**: 031
 **Agent Version**: foreman-v2-agent v6.2.0 (contract v2.5.0)
 **Triggering Issue**: #1129 — Hardening — Foreman/ceremony must enforce governing-issue parity and issue-role separation across the full artifact chain
-**Branch**: copilot/hardening-governing-issue-parity
+**governing_stage_issue**: #1129
 
 ---
 
@@ -35,7 +40,7 @@ scripts are modified.
 - Zero compiler/linter warnings: ✅ N/A
 - Governing-issue parity check (A-036): ✅ PASS — all surfaces cite #1129
 - Overshadow detection (A-037): ✅ CLEAN — no overshadow detected
-- Ceremony evidence complete (A-038): ✅ All 6 ceremony fields populated in wave record §1a
+- Ceremony evidence complete (A-038): ✅ All 7 ceremony fields populated in wave record §3b
 
 **QP VERDICT: PASS**
 
@@ -239,6 +244,26 @@ IAA invocation COMPLETE. All 12 checks PASS. ASSURANCE-TOKEN issued: `IAA-sessio
 > ```
 >
 > **Merge authority: CS2 ONLY (@APGI-cmy)**
+
+---
+
+## Category 0: N/A — governance-only wave, no execution artifacts
+
+This wave modifies only governance Markdown documents (canon, template, A-rules, ceremony artifacts). No executable code, GitHub Actions workflows, scripts, or CI configurations are modified. Category 0 Execution Bootstrap Protocol is not applicable.
+
+---
+
+## Agent Attestation
+
+I, foreman-v2-agent (session-031, 2026-04-23), attest that:
+
+- All deliverables are committed and present in the branch.
+- The governing-issue parity check (A-036) was performed — all surfaces cite #1129.
+- Overshadow detection (A-037) was performed — no overshadow detected.
+- All 7 ceremony evidence fields (A-038) are populated in wave record §3b.
+- This PREHANDOVER proof is complete, accurate, and submitted before merge.
+
+**Merge authority: CS2 ONLY (@APGI-cmy)**
 
 ---
 

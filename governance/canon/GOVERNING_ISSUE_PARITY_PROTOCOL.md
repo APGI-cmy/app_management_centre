@@ -144,7 +144,7 @@ or significantly updated stage artifact header MUST use the following explicitly
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `governing_stage_issue` | **MANDATORY** | The Stage Kickoff Issue number (e.g., `#1129`). Never blank. Never a hardening/harmonization issue. |
+| `governing_stage_issue` | **MANDATORY** | The Stage Kickoff Issue number (e.g., `#1129`). Never blank. Must be the issue that authorized this specific wave. A kickoff issue with a "Hardening —" or "Harmonization —" title is valid when it is the issue that opened this wave. What is prohibited is substituting a *later follow-on* hardening/harmonization issue (opened after the wave started) in place of the original kickoff issue — that constitutes overshadow (§5). |
 | `triggering_wave_issue` | **MANDATORY** | Same as `governing_stage_issue` unless an explicit supersession rule applies. |
 | `current_stage` | **MANDATORY** | The 12-stage pre-build stage this artifact belongs to (e.g., `Stage 1 — App Description`). |
 | `next_stage_blocked_by` | Conditional | What must be true before the next stage begins. Blank if no explicit blocker. |
@@ -307,7 +307,7 @@ the following for every wave:
 
 A wave ceremony package is incomplete if any of the following are absent or unverified:
 
-- `governing_stage_issue` is blank or points to a hardening/harmonization issue
+- `governing_stage_issue` is blank or points to a *later follow-on* hardening/harmonization issue instead of the issue that authorized this wave
 - `parity_check_performed` is blank or PENDING
 - `overshadow_check_performed` is blank or not recorded
 - `control_surfaces_verified` is blank when control surfaces exist for this stage
@@ -333,9 +333,9 @@ IAA MUST, as part of its standard audit, verify:
 
 1. The `governing_stage_issue` field is present and non-blank in: wave record, PREHANDOVER proof.
 2. The issue number in `governing_stage_issue` matches the issue that authorized the wave.
-3. The issue is classified as a Stage Kickoff Issue, not a hardening or harmonization issue.
+3. The issue in `governing_stage_issue` is the one that authorized this specific wave — it is not a *later related* issue (hardening, harmonization, or CI) that was opened after this wave was kicked off.
 4. The §2.4 parity check evidence block is present in the PREHANDOVER proof.
-5. No hardening/harmonization/CI issue is used as the governing authority anywhere in the chain.
+5. No *later* hardening/harmonization/CI issue (opened after wave kickoff) is used as the governing authority anywhere in the chain.
 
 If any of these checks FAIL: IAA MUST issue REJECTION-PACKAGE citing GIP-PARITY-FAIL.
 
