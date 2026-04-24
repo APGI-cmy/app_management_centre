@@ -32,4 +32,4 @@
 - `.github/workflows/polc-boundary-gate.yml` — YAML validation warning "Missing required workflow structure (on: or jobs:)" — pre-existing on main branch, not introduced by this session. Evidence: running `validate-yaml-frontmatter.sh` on the stash-cleared working tree produced the same error.
 
 ## IAA Status
-PENDING — to be invoked per Phase 4 §4.4.
+PASS — IAA-session-031-20260423-PASS.
