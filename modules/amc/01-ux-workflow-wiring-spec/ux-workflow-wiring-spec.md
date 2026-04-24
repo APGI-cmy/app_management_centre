@@ -393,7 +393,7 @@ These boundaries are non-negotiable and must be preserved in all surfaces and wi
 3. Proactive threshold alerts: if usage crosses a configured threshold, a proactive alert surfaces automatically in the Alert Centre and in the Quota Management Console header
 4. User can initiate a quota change request:
    - Specifies: new quota limit, justification, urgency
-   - Request enters Approval Queue (FR-604/FR-1802 — approval required for quota changes)
+   - Request enters Approval Queue (FR-604/FR-607 — approval required for quota changes)
    - If user IS the authority (Johan Ras): can approve own request on the spot with audit trail
 5. User reviews pending quota change requests in the console:
    - Approve: quota change authorized; AIMCC notified; audit event created
