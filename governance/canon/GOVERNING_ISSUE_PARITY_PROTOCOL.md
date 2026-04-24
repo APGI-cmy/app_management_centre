@@ -68,7 +68,7 @@ Overshadow is prohibited. The following artifact fields MUST contain the Stage K
 number, not a later related issue:
 
 - `governing_stage_issue` in wave records, stage artifact headers, PREHANDOVER proofs
-- `triggering_issue` in wave records
+- `triggering_wave_issue` in wave records
 - The CS2 authorization field in wave checklists
 - The governing issue in PR body "CS2 authorization reference"
 
