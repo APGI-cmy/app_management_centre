@@ -601,7 +601,7 @@ These boundaries are non-negotiable and must be preserved in all requirements st
 | **Required System Behavior** | AMC surfaces a Quota Management Console — an operational control surface (not a read-only view) — showing: current quota limit, current usage (absolute and %), usage trend (last 7 days), threshold warning levels (Warning / Critical / Exceeded), status of any pending quota change requests, recent quota governance action history. Console enables direct interaction — not passive display. |
 | **User-Visible Result** | Quota Management Console loaded with live quota state, thresholds, trend, and pending change request status |
 | **Required State / Audit Effect** | Read-only load; no audit event on passive view |
-| **Approval / Authority Constraint** | Quota changes require approval through FR-604 |
+| **Approval / Authority Constraint** | Quota changes require request/approval handling per FR-607; where an AIMCC governance approval record must be routed through the standard approval queue, FR-604 governs that routing mechanism |
 | **Failure / Degraded Expectation** | If AIMCC unavailable: quota panel shows explicit stale indicator and last-known values; new quota change requests blocked; stale data must NEVER be served without explicit indicator |
 
 ### FR-604 — AIMCC Governance Action (Approval Routing)
