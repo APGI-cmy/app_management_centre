@@ -7,11 +7,11 @@
 | **Document Title** | AMC App Description |
 | **Application Name** | App Management Centre (AMC) |
 | **Document Type** | Stage 1 App Description |
-| **Version** | 1.0 |
-| **Status** | ✅ Approved — CS2 Approval Recorded |
+| **Version** | 1.1 |
+| **Status** | ✅ Approved — CS2 Approval Recorded (harmonization pass 2026-04-23) |
 | **Owner** | Johan Ras (CS2) |
-| **Approval Date** | 2026-04-22 |
-| **Last Updated** | 2026-04-22 |
+| **Approval Date** | 2026-04-22 (v1.0); harmonization pass 2026-04-23 |
+| **Last Updated** | 2026-04-23 |
 | **Canonical Location** | `modules/amc/00-app-description/app-description.md` |
 | **Policy Authority** | `governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md §5.1` |
 | **Primary AI Executive** | Maturion |
@@ -79,6 +79,8 @@ These boundaries are non-negotiable. All downstream derivation must preserve the
 - Proactive two-way communication between Johan and Maturion
 - Visibility into system health, execution health, governance health, security posture, compliance posture, and operational alerts
 - Governance-sensitive approval and intervention workflows
+- **ARC (Automated Response Control) governance console** — first-class AMC technical operating domain for initiating, routing, monitoring, approving, and auditing ARC-triggered governance actions across the estate
+- **Dynamic Upload Quota Management console** — hands-on operational management surface for viewing, adjusting, approving, and escalating upload quota state sourced from AIMCC; this is an operational control surface, not a read-only supervisory view
 - Oversight of specialist-agent ecosystems and sandboxed AI workspaces
 - Support for maintenance, assurance, compliance, and operational reporting
 - Controlled build/job initiation and execution visibility
@@ -287,16 +289,40 @@ The following AMC capabilities were identified in earlier intent documents and g
 
 | Original AMC Capability | Status | Current Framing |
 |---|---|---|
-| **ARC Trigger Governance** | ✅ Preserved and expanded | AMC supervises and triggers ARC-related governance actions within the estate. This capability is absorbed into AMC's intervention launch, escalation routing, and approval workflow model. ARC trigger governance is a first-class AMC executive function. |
-| **Dynamic Upload Quota Management** | ✅ Preserved and expanded | AMC surfaces and supervises upload quota state sourced from AIMCC / Knowledge Upload Centre. AMC may execute quota-related governance actions through approved AIMCC pathways. Not silently retired — expanded into the AIMCC oversight model. |
+| **ARC Trigger Governance** | ✅ Preserved as explicit named domain | ARC (Automated Response Control) remains an explicitly named, first-class AMC technical and operating domain. AMC provides a dedicated ARC Governance Console — a named technical slice with its own surface, journey, approval pathways, escalation routing, and audit trail. ARC is not generically absorbed into intervention flows; it is explicitly recognizable as its own domain in all downstream artifacts including FRS, TRS, Architecture, and UI surfaces. |
+| **Dynamic Upload Quota Management** | ✅ Preserved as operational console | Dynamic Upload Quota Management is an operational console capability within AMC — not merely a supervisory view. AMC provides a hands-on Quota Management Console that surfaces live quota state, enables direct quota adjustment and approval routing, tracks threshold warnings with proactive alerts, and records all quota governance actions with full audit trail. This is a first-class operational control surface, not a read-only display panel. |
 | **Alert Dashboard** | ✅ Preserved and elevated | The Alert Dashboard is explicitly preserved and elevated as the proactive executive alerting surface of AMC. It is now positioned as a core executive operating commitment, not a secondary utility. |
 | **Audit Trail** | ✅ Preserved and expanded | The Audit Trail is explicitly preserved as a constitutional operating requirement. AMC must produce a comprehensive audit trail covering all consequential actions across its executive, approval, intervention, AIMC, AIMCC, and knowledge-reference pathways. |
 | **Progressive Automation Control** | ✅ Preserved and expanded | Progressive Automation Control is preserved as the progressive autonomy model. AMC must support the progressive delegation of approved operational responsibilities to Maturion and other governed agents, with explicit approval boundaries, rollback capability, and audit traceability at each delegation step. |
 
 No original AMC capability commitment has been silently retired. All five original capabilities are explicitly reconciled and carried forward into the current strategic framing.
 
+### AMC Technical/Operating Domain Declaration
 
-## §5 — Build Lifecycle Stages (§AD-01)
+AMC is composed of the following explicitly named technical and operating domains. Each domain is a first-class AMC slice that must remain recognizable and traceable across all downstream artifacts (FRS, TRS, Architecture, UI surfaces).
+
+| AMC Technical/Operating Domain | Definition | Downstream Recognition Required |
+|---|---|---|
+| **Executive Estate Oversight** | Executive dashboard, health tiles, proactive awareness surface | FRS FR-100 family, TRS, Architecture, UI |
+| **Alert Management** | Alert Centre, alert review, escalation, acknowledgment, auto-escalation | FRS FR-200 family, TRS (timing contracts), Architecture, UI |
+| **Approval Workflow** | Approval Queue, approval/rejection/deferral decisions, authority gates | FRS FR-300 family, TRS (auth contracts), Architecture, UI |
+| **Intervention Launch & Monitoring** | Intervention Manager, initiation, dispatch, status, cancellation | FRS FR-400 family, TRS, Architecture, UI |
+| **ARC Governance Console** | Dedicated ARC (Automated Response Control) governance surface — initiating, routing, approving, and auditing ARC-triggered governance actions. ARC is not a subset of general intervention flows; it is a named domain with its own surface and wiring | FRS FR-1800 family, TRS TR-1800, Architecture, UI |
+| **AI-Routed Actions (AIMC)** | AI action dispatch, AIMC routing, result surfacing, non-bypass enforcement | FRS FR-500 family, TRS, Architecture, Integration |
+| **AIMCC / Knowledge Upload Centre Supervision** | Upload status, ingestion pipeline visibility, governance action routing | FRS FR-600 family, TRS, Architecture, Integration |
+| **Dynamic Upload Quota Management** | Operational quota console — live quota state, quota adjustment approvals, threshold alerts, full audit trail. This is an operational control surface, not a read-only view | FRS FR-603/FR-606/FR-607, TRS TR-600 family, Architecture, UI |
+| **Memory-Aware Operating View** | Knowledge reference surfacing with provenance, memory-aware context | FRS FR-700 family, TRS, Architecture, Integration |
+| **Executive Conversation with Maturion** | Two-way conversational surface, proactive AI messaging, linked actions | FRS FR-800 family, TRS, Architecture, AI Integration |
+| **Specialist Agent Oversight** | Specialist workspace status, read-only sandboxed agent visibility | FRS FR-900 family, TRS, Architecture |
+| **Maintenance & Assurance Reporting** | Health check reports, maintenance summaries, assurance findings | FRS FR-1000 family, TRS, Architecture |
+| **Estate Configuration & Wellbeing** | Estate config visibility, build status, Foreman reporting integration | FRS FR-1100 family, TRS, Architecture, Integration |
+| **Audit & Provenance** | Comprehensive audit trail for all consequential actions | FRS FR-1300 family, TRS (audit contracts), Architecture |
+| **Authentication & Authorization** | JWT-based auth, authority-aware session, actor isolation | FRS FR-1400 family, TRS (auth contracts), Architecture |
+
+> **Downstream derivation rule**: Every domain listed here MUST be explicitly recognizable by name in FRS, TRS, and Architecture artifacts. Silent absorption of a named domain into generic umbrella sections is not permitted.
+
+
+
 
 AMC shall follow a governed lifecycle in which each major artifact stage establishes truth that the next stage is required to inherit, preserve, and deepen.
 
