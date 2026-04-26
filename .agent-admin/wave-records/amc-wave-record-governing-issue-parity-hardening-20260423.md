@@ -1,6 +1,6 @@
 # AMC Wave Record — governing-issue-parity-hardening — 2026-04-23
 
-> **Template Version**: 1.1.0
+> **Template Version**: 1.2.0
 > **Authority**: CS2 (@APGI-cmy) — Issue #1129
 > **Protocol**: AMC 90/10 Admin Protocol v1.0.0
 
