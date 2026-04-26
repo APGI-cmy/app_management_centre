@@ -297,7 +297,7 @@ Request → [Auth Middleware] → [Actor Resolution] → [Authority-Domain Check
 | `amc_executive_state_{user_id}` | User-scoped | All connected AMC sessions for this user | Alert status changes, approval decisions, intervention status changes, system health events |
 | `amc_conversation_{session_id}` | Session-scoped | All devices for this conversation session | New conversation messages, message acknowledgments, proactive message delivery |
 | `amc_arc_{user_id}` | User-scoped | ARC surface subscribers | ARC item classifications, state changes, resolutions |
-| `amc_health_broadcast` | System-level | All authenticated sessions | System dependency degraded/recovered events |
+| `amc_health_events` | System-level | All authenticated sessions | System dependency degraded/recovered events |
 
 **Real-time delivery SLAs** (architecture must support):
 - Alert status changes → connected sessions: ≤2 seconds of INSERT commit (TRS TR-207)
