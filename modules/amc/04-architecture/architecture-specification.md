@@ -845,6 +845,8 @@ If any fetch fails: explicit error indicator rendered — no silent fallback to 
 
 The following architectural decisions have been made at Stage 5 that shape the deployment and build approach for Stage 12. These are binding decisions.
 
+> **TRS §25 Deferral Resolution Summary**: TRS §25 listed 16 items deferred from Stage 4 to Stage 5 Architecture. This section resolves 9 of those 16 items (API framework, background scheduler, push notification provider, deployment platform, authority domain config storage, per-domain health computation, approval queue ordering, alert history endpoint, deferral reminder scheduling, and Foreman reporting feed format). The remaining 7 TRS §25 items (column DDL, React component tree, Realtime subscription implementation, ARC table DDL, ARC Realtime wiring, alert timing SLA monitor implementation, and ARC stale-item scheduling implementation) are correctly deferred onward to schema-builder, ui-builder, and api-builder as implementation-stage responsibilities. See `trs-to-architecture-traceability.md` §4 for full resolution status.
+
 | Decision | Value | Rationale | TRS Deferral Resolved |
 |---|---|---|---|
 | **API Framework** | Next.js App Router API Routes | Unified deployment with React frontend; native Supabase integration; no separate REST server process required | TRS §25 (API server framework) |
