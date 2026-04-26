@@ -125,48 +125,73 @@ When this wave produces a PR for final IAA assurance, IAA will apply:
 
 ## Section 3 — Wave Task List
 
-> *To be completed by foreman-v2-agent during wave execution.*
+> *Updated by foreman-v2-agent during wave execution.*
 
 ### Task Checklist
 
-- [ ] TASK-5-01 — Create `modules/amc/04-architecture/architecture-specification.md`
+- [x] TASK-5-01 — Create `modules/amc/04-architecture/architecture-specification.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION — governance architecture specification)
-      qp_verdict: PENDING
-      notes:
+      qp_verdict: PASS — substantive, non-contradictory, architecturally explicit
+      notes: Complete v1.0 produced 2026-04-26. Covers all 5 mandatory architecture inclusion areas. CS2 sign-off section included. Canonical identity established.
 
-- [ ] TASK-5-02 — Create `modules/amc/04-architecture/trs-to-architecture-traceability.md`
+- [x] TASK-5-02 — Create `modules/amc/04-architecture/trs-to-architecture-traceability.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION — governance traceability document)
-      qp_verdict: PENDING
-      notes:
+      qp_verdict: PASS — 18/18 TRS families covered; 0 silently dropped; Stage 6 deferrals disclosed
+      notes: Complete v1.0 produced 2026-04-26. TRS §25 deferral resolution status documented. Cross-system boundary preservation verified. Acceptance criteria verification included.
 
-- [ ] TASK-5-03 — Update `modules/amc/BUILD_PROGRESS_TRACKER.md`
+- [x] TASK-5-03 — Update `modules/amc/BUILD_PROGRESS_TRACKER.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION — progress tracker update)
-      qp_verdict: PENDING
-      notes:
+      qp_verdict: PASS — Stage 4 updated to "treated as approved"; Stage 5 set to active; Stage 6 blocked
+      notes: IAA Risk Flag 2 addressed. Stage 4 references #1131 progression authorization. Stage 5 detail section updated with full artifact listing. Stage 6 BLOCKED pending Stage 5 CS2 approval.
 
-- [ ] TASK-5-04 — Create wave record `amc-wave-record-amc-stage5-architecture-20260426.md`
+- [x] TASK-5-04 — Create wave record `amc-wave-record-amc-stage5-architecture-20260426.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION — ceremony artifact)
-      qp_verdict: PENDING
-      notes:
+      qp_verdict: PASS — sections 1-4 complete; section 5 pending IAA final assurance
+      notes: IAA Pre-Brief committed to section 2 before qualifying artifacts produced (OVL-INJ-001 compliant).
 
-- [ ] TASK-5-05 — Create session memory `session-032-20260426.md`
+- [x] TASK-5-05 — Create session memory `session-032-20260426.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION — ceremony artifact)
-      qp_verdict: PENDING
-      notes:
+      qp_verdict: PASS — 6-field model complete
+      notes: Created at `.agent-workspace/foreman-v2/memory/session-032-20260426.md`
+
+- [x] TASK-5-RF1 — Resolve IAA Risk Flag 1: update `architecture.md` stub with superseded notice
+      builder: foreman-v2-agent (POLC_ORCHESTRATION)
+      qp_verdict: PASS — `architecture.md` now clearly marked SUPERSEDED; canonical identity unambiguous
+      notes: `architecture-specification.md` is the unambiguous canonical Stage 5 artifact.
 
 ---
 
 ## Section 4 — Evidence & Artifacts Produced
 
-> *To be completed by foreman-v2-agent at wave close.*
+> *Updated by foreman-v2-agent at wave close.*
 
 | Artifact | Path | Status |
 |----------|------|--------|
-| Stage 5 Architecture Specification | `modules/amc/04-architecture/architecture-specification.md` | ⬜ PENDING |
-| Stage 5 TRS-to-Architecture Traceability | `modules/amc/04-architecture/trs-to-architecture-traceability.md` | ⬜ PENDING |
-| Build Progress Tracker (updated) | `modules/amc/BUILD_PROGRESS_TRACKER.md` | ⬜ PENDING |
-| Session Memory | `.agent-workspace/foreman-v2/memory/session-032-20260426.md` | ⬜ PENDING |
-| Wave Record | `.agent-admin/wave-records/amc-wave-record-amc-stage5-architecture-20260426.md` | ✅ Created (this document — Pre-Brief section complete) |
+| Stage 5 Architecture Specification | `modules/amc/04-architecture/architecture-specification.md` | ✅ COMPLETE — v1.0, 2026-04-26 |
+| Stage 5 TRS-to-Architecture Traceability | `modules/amc/04-architecture/trs-to-architecture-traceability.md` | ✅ COMPLETE — v1.0, 2026-04-26 |
+| Build Progress Tracker (updated) | `modules/amc/BUILD_PROGRESS_TRACKER.md` | ✅ COMPLETE — Stage 4 updated (treated as approved per #1131); Stage 5 active; Stage 6 BLOCKED |
+| architecture.md placeholder | `modules/amc/04-architecture/architecture.md` | ✅ COMPLETE — Updated with SUPERSEDED notice pointing to canonical artifact |
+| Session Memory | `.agent-workspace/foreman-v2/memory/session-032-20260426.md` | ✅ COMPLETE — 6-field model |
+| Wave Checklist | `.agent-admin/waves/wave-amc-stage5-architecture-20260426-current-tasks.md` | ✅ COMPLETE |
+| Wave Record | `.agent-admin/wave-records/amc-wave-record-amc-stage5-architecture-20260426.md` | ✅ COMPLETE (sections 1-4; section 5 pending IAA final assurance) |
+
+### IAA Risk Flags Addressed
+
+| Risk Flag | Status | Resolution |
+|-----------|--------|------------|
+| Risk Flag 1 — architecture.md ambiguity | ✅ RESOLVED | `architecture.md` updated with SUPERSEDED notice. `architecture-specification.md` is the unambiguous canonical Stage 5 artifact. |
+| Risk Flag 2 — Tracker Stage 4 stale state | ✅ RESOLVED | `BUILD_PROGRESS_TRACKER.md` Stage 4 updated to "TREATED AS APPROVED" with ref #1131. Stage 5 set to active. |
+
+### Governing Issue Parity (GIPC-001 §2.2)
+
+| Surface | Issue Reference | Status |
+|---------|----------------|--------|
+| PR body | #1131 | ✅ (to be included in PR) |
+| Wave record triggering_issue | #1131 | ✅ Section 1 |
+| Wave checklist authority | #1131 | ✅ `.agent-admin/waves/wave-amc-stage5-architecture-20260426-current-tasks.md` |
+| architecture-specification.md header | #1131 | ✅ CS2 Authorization field |
+| trs-to-architecture-traceability.md header | #1131 | ✅ CS2 Authorization field |
+| Session memory triggering_issue | #1131 | ✅ |
 
 ---
 
