@@ -197,9 +197,10 @@ When this wave produces a PR for final IAA assurance, IAA will apply:
 
 ## Section 5 — Assurance
 
-> *To be completed by IAA at final assurance invocation.*
-
 **IAA Pre-Brief**: COMPLETE — section 2 above — session-055-20260426 — 2026-04-26  
-**IAA Final Assurance**: PENDING — to be conducted at handover  
-**PHASE_B_BLOCKING_TOKEN**: PENDING — issued at final assurance upon ASSURANCE-TOKEN verdict  
+**IAA Final Assurance**: COMPLETE — session-056-20260426 — 2026-04-26  
+**Verdict**: ASSURANCE-TOKEN  
+**PHASE_B_BLOCKING_TOKEN**: IAA-session-056-20260426-PASS  
+**Checks Run**: CORE-020, CORE-021, OVL-PBG-010, OVL-PBG-011, OVL-PBG-012, OVL-PBG-013, OVL-PBG-014, OVL-PBG-016, OVL-PBG-ADM-003 — 9 PASS / 0 FAIL  
+**IAA Risk Flags**: Risk Flag 1 (architecture.md ambiguity) — RESOLVED ✅ | Risk Flag 2 (tracker Stage 4 stale state) — RESOLVED ✅  
 **Merge Authority**: CS2 ONLY (@APGI-cmy)
