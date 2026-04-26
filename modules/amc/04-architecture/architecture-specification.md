@@ -320,7 +320,7 @@ Request → [Auth Middleware] → [Actor Resolution] → [Authority-Domain Check
 | `amc-alert-escalation-scheduler` | Every 5 minutes | Auto-escalate Critical unacknowledged alerts per two-level escalation chain (default: Level 1 at 30 min, Level 2 at 60 min) | TR-206, TR-209 |
 | `amc-health-poll-scheduler` | Every 30 seconds | Poll AIMC, AIMCC, Knowledge System health endpoints; detect degraded/recovered transitions; write system_health_events; broadcast via Realtime | TR-1501, TR-1502, TR-1503 |
 | `amc-arc-staleness-scheduler` | Every 15 minutes | Detect ARC items in `open` or `in_resolution` state past SLA (default: 240 min); generate Medium alerts referencing the ARC item | TR-1804 |
-| `amc-quota-threshold-monitor` | After every upload completion callback | Check quota threshold state machine transitions; write audit events; generate alerts on threshold entry | TR-607 |
+| `amc-quota-threshold-monitor` | Event-driven (invoked from upload-status completion callback handler) | On each upload completion callback, check quota threshold state machine transitions; write audit events; generate alerts on threshold entry | TR-607 |
 | `amc-quota-override-reminder` | Every 60 minutes | Check approved temporary quota overrides for pre-expiry (default: 24h lead time); generate reminder alert | TR-606 |
 | `amc-approval-arc-timeout-checker` | Every 10 minutes | Detect reserved-matter approval items past ARC timeout (default: 120 min) for ARC classification | TR-1802 |
 | `amc-alert-timing-sla-monitor` | Continuous (event-driven) | Detect SLA breach between trigger event and INSERT, INSERT and Realtime broadcast, INSERT and push dispatch; write `ALERT_DELIVERY_DELAYED` audit event on breach | TR-207 |
