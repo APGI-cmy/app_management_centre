@@ -21,7 +21,7 @@ scripts are modified.
 
 **Deliverables**:
 1. `governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md` — GIPC-001 canon (new)
-2. `.agent-admin/templates/amc-wave-record-template.md` — Updated to v1.1.0 with labeled authority fields
+2. `.agent-admin/templates/amc-wave-record-template.md` — Updated to v1.2.0 with labeled authority fields, §3a parity evidence block, and §3b ceremony evidence fields table
 3. `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md` — Added A-036, A-037, A-038
 
 **Builders involved**: None — POLC-Orchestration governance specification written directly by Foreman per Phase 3 §3.5 POLC_ORCHESTRATION mode. No implementation code produced.
@@ -97,7 +97,7 @@ No CANON_INVENTORY entries are modified by this wave. GOVERNING_ISSUE_PARITY_PRO
 | # | Deliverable | Path | Status |
 |---|---|---|---|
 | 1 | GOVERNING_ISSUE_PARITY_PROTOCOL.md (GIPC-001) | `governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md` | ✅ Created |
-| 2 | Wave record template v1.1.0 | `.agent-admin/templates/amc-wave-record-template.md` | ✅ Updated |
+| 2 | Wave record template v1.2.0 | `.agent-admin/templates/amc-wave-record-template.md` | ✅ Updated |
 | 3 | FAIL-ONLY-ONCE.md A-036/A-037/A-038 | `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md` | ✅ Updated |
 | 4 | Wave checklist | `.agent-admin/waves/wave-governing-issue-parity-hardening-20260423-current-tasks.md` | ✅ Created |
 | 5 | Wave record | `.agent-admin/wave-records/amc-wave-record-governing-issue-parity-hardening-20260423.md` | ✅ Created |
@@ -114,7 +114,7 @@ Stale content from session-018 removed. New scope written for wave-governing-iss
 
 Scope files declared:
 - `governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md` — new GIPC-001 canon
-- `.agent-admin/templates/amc-wave-record-template.md` — updated to v1.1.0
+- `.agent-admin/templates/amc-wave-record-template.md` — updated to v1.2.0
 - `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md` — A-036/A-037/A-038 added
 - `.agent-admin/waves/wave-governing-issue-parity-hardening-20260423-current-tasks.md` — wave checklist
 - `.agent-admin/wave-records/amc-wave-record-governing-issue-parity-hardening-20260423.md` — wave record
