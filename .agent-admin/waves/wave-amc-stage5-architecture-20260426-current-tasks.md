@@ -16,32 +16,32 @@ governance_evidence_path: .agent-admin/wave-records/amc-wave-record-amc-stage5-a
 - [x] TASK-5-01 — Create Stage 5 architecture specification at `modules/amc/04-architecture/architecture-specification.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION — architecture design is Foreman Plan phase work)
       qp_verdict: PASS
-      notes: Complete v1.0 produced 2026-04-26. Covers all 5 mandatory architecture inclusion areas. CS2 sign-off section included. Canonical identity established.
+      notes: Must cover all 5 mandatory architecture inclusion areas per issue requirements
 
 - [x] TASK-5-02 — Create TRS-to-architecture traceability artifact at `modules/amc/04-architecture/trs-to-architecture-traceability.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
       qp_verdict: PASS
-      notes: Complete v1.0 produced 2026-04-26. 18/18 TRS families covered; 0 silently dropped. TRS §25 resolution status documented (9 of 16 items resolved in Stage 5; 8 deferred onward to schema-builder/ui-builder/api-builder). Stage 6 deferrals disclosed.
+      notes: Must show all 18 TRS domain families realized; no silent drop; Stage 6 deferrals disclosed
 
 - [x] TASK-5-03 — Update `modules/amc/BUILD_PROGRESS_TRACKER.md` to reflect Stage 5 active state
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
       qp_verdict: PASS
-      notes: Stage 4 updated to "TREATED AS APPROVED" per CS2 issue #1131. Stage 5 set to active/approval-pending. Stage 6 explicitly blocked pending Stage 5 CS2 approval.
+      notes: Stage 4 treated as approved per CS2; Stage 5 active; Stage 6 blocked pending Stage 5 approval
 
 - [x] TASK-5-04 — Create wave record (sections 1–4) at `.agent-admin/wave-records/amc-wave-record-amc-stage5-architecture-20260426.md`
       builder: foreman-v2-agent (ceremony admin)
       qp_verdict: PASS
-      notes: Sections 1–5 complete. IAA PHASE_B_BLOCKING_TOKEN recorded in section 5.
+      notes: Wave record is the consolidated carrier for session evidence
 
 - [x] TASK-5-05 — Create session memory at `.agent-workspace/foreman-v2/memory/session-032-20260426.md`
       builder: foreman-v2-agent (ceremony admin)
       qp_verdict: PASS
-      notes: 6-field model complete. phase_1_preflight: PREFLIGHT COMPLETE.
+      notes: 6-field model; phase_1_preflight required
 
 - [x] TASK-5-06 — Invoke IAA Pre-Brief before wave execution
       builder: N/A — IAA is synchronous tool call
       qp_verdict: PASS
-      notes: IAA session-055-20260426. Embedded in wave record section 2. OVL-INJ-001 compliant (pre-brief committed before qualifying artifacts produced).
+      notes: Embed in wave record section 2
 
 - [x] TASK-5-07 — Invoke IAA Final Audit (Phase 4.4)
       builder: N/A — IAA is synchronous tool call
