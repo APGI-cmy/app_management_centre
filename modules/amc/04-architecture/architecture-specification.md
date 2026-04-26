@@ -208,7 +208,7 @@ AMC is structured as a full-stack web application with the following major compo
 - `amc_executive_state_{user_id}` — alert, approval, intervention, health domain state changes
 - `amc_conversation_{session_id}` — conversation message events
 - `amc_arc_{user_id}` — ARC item classification and state change events
-- `amc_health_events` — system health event broadcasts
+- `amc_health_broadcast` — system health event broadcasts
 
 On receiving a Realtime update, affected component state must be updated immediately — no stale-while-revalidate that surfaces contradictory states without explicit staleness indicator (TRS TR-1702).
 
