@@ -477,7 +477,7 @@ Dynamic Upload Quota Management is architecturally defined as a hands-on operati
 
 **Quota management architectural rules**:
 - `POST /api/aimcc/quota/request-adjustment` is the sole quota-change initiation path from AMC
-- All quota adjustment requests create `reservedmatter` approval records
+- All quota adjustment requests create `reserved_matter` approval records
 - No quota change takes effect without a completed approval record
 - AIMCC is notified of approved quota changes via `POST {AIMCC_API_BASE_URL}/governance/decision`
 - Temporary overrides require `override_expiry_at`; AIMCC enforces expiry; AMC records events
