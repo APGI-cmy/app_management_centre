@@ -223,6 +223,26 @@ on this branch.
 ## Section 5 — Assurance
 
 **IAA Pre-Brief**: COMPLETE — section 2 above — session-057-20260426 — 2026-04-26  
-**IAA Final Assurance**: PENDING — to be completed before PR merge  
-**PHASE_B_BLOCKING_TOKEN**: PENDING — awaiting IAA final assurance invocation  
+**IAA Final Assurance**: COMPLETE — session-057-20260426 — 2026-04-26  
+**PHASE_B_BLOCKING_TOKEN**: IAA-session-057-20260426-PASS  
 **Merge Authority**: CS2 ONLY (@APGI-cmy)
+
+### IAA Final Assurance Summary
+
+| Check | Description | Verdict |
+|-------|-------------|---------|
+| CORE-020 | Zero partial pass rule | PASS ✅ |
+| CORE-021 | Zero-severity-tolerance | PASS ✅ |
+| GOV-001 | Oversight record completeness — all 5 scopes (A-E) addressed | PASS ✅ |
+| GOV-002 | Stage 5a definition completeness — placement rationale, entry conditions, 8 DES fields, anti-drift rules | PASS ✅ |
+| GOV-003 | Tracker consistency — Stage 5a row present, Stage 6/8/9/11/12 blocking updated | PASS ✅ |
+| GOV-004 | Index consistency — Stage 5a section present, Stage 5 canonical status updated | PASS ✅ |
+| GOV-005 | Governing issue parity — issue #1133 cited across all artifact surfaces | PASS ✅ |
+| GOV-006 | No canon modification — PRE_BUILD_STAGE_MODEL_CANON.md unmodified in this wave | PASS ✅ |
+
+**Total**: 8 checks — 8 PASS / 0 FAIL  
+**Failure classification**: SUBSTANTIVE: 0 | CEREMONY: 0 | ENVIRONMENT_BOOTSTRAP: 0  
+**Pre-Brief Risk Flag 1** (stale Stage 5 data): ✅ RESOLVED — confirmed  
+**Pre-Brief Risk Flag 2** (Stage 5a path consistency): ✅ RESOLVED — confirmed across all 3 documents  
+**Independence**: Confirmed — IAA produced none of the reviewed artifacts  
+**Merge gate parity**: PASS — merge-gate/verdict ✅ | governance/alignment ✅ | stop-and-fix/enforcement ✅
