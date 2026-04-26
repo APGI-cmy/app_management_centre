@@ -7,6 +7,7 @@
 **Wave Type**: Stage 5 Architecture — documentation/governance artifacts only; no builder delegation
 **Date**: 2026-04-26
 **IAA Pre-Brief**: Embedded in wave record section 2 (AMC 90/10 v1.0.0)
+governance_evidence_path: .agent-admin/wave-records/amc-wave-record-amc-stage5-architecture-20260426.md
 
 ---
 
