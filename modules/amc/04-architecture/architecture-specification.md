@@ -181,7 +181,7 @@ AMC is structured as a full-stack web application with the following major compo
 
 **Framework**: React (SPA) with server-side rendering support via Next.js.
 
-**Routing architecture**: Next.js App Router with named routes matching TRS TR-104 route list:
+**Routing architecture**: Next.js App Router with named routes that include the TRS TR-104 route list, with `/arc` added to satisfy ARC requirements from TR-1801:
 
 | Route | Surface | TRS Source |
 |---|---|---|
