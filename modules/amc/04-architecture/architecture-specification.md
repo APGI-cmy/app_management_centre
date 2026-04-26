@@ -309,11 +309,11 @@ Request → [Auth Middleware] → [Actor Resolution] → [Authority-Domain Check
 
 ### 3.6 Background Scheduler Architecture
 
-**Technology**: Supabase Edge Functions with scheduled invocation (cron triggers). This decision is made at Architecture stage (was deferred from TRS §25).
+**Technology**: Supabase Edge Functions used in two invocation modes: scheduled invocation (cron triggers) for time-based jobs, and event-driven invocation via API routes/callback handlers for background processing that must run in response to platform events. This decision is made at Architecture stage (was deferred from TRS §25).
 
-**Rationale**: Supabase Edge Functions provide native integration with the Supabase database and Realtime layer, eliminating the need for an external scheduler service. Cron-trigger Edge Functions are the architectural choice for all background scheduled jobs.
+**Rationale**: Supabase Edge Functions provide native integration with the Supabase database and Realtime layer, eliminating the need for an external scheduler service. Cron-trigger Edge Functions are the architectural choice for all background scheduled jobs, while event-driven Edge Functions are used for callback- or API-initiated background automation that is not time-based.
 
-**Scheduler functions and their cadences**:
+**Background functions and their invocation cadences**:
 
 | Function | Cadence | Responsibility | TRS Source |
 |---|---|---|---|
