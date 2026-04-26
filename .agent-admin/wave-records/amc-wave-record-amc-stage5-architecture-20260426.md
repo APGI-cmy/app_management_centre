@@ -26,6 +26,7 @@
 
 **IAA Pre-Brief Status**: COMPLETE — Issued 2026-04-26  
 **IAA Session**: session-055-20260426  
+**wave_task_list**: .agent-admin/waves/wave-amc-stage5-architecture-20260426-current-tasks.md  
 **Wave Classification**: PRE_BUILD_STAGE — IAA final assurance MANDATORY at handover
 
 ---
