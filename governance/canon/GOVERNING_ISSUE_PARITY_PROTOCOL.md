@@ -368,6 +368,29 @@ Before every QP PASS, verify:
 
 ---
 
+## Appendix C: Relationship to EWCS-001 (End-of-Wave Closeout Sweep Canon)
+
+This protocol (GIPC-001) and `END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` (EWCS-001) are
+**complementary and both required**. They govern different but related failure modes:
+
+| Concern | Governed By |
+|---------|------------|
+| Governing issue consistent across all artifact surfaces | **GIPC-001 §2** |
+| Tracker references correct governing issue | **GIPC-001 §4** |
+| Tracker header/body **internal** parity | **EWCS-001 §2** |
+| Wave checklist kickoff-state retirement | **EWCS-001 §3** |
+| Explicit closeout sweep as a named mandatory step | **EWCS-001 §1** |
+| Ceremony evidence fields for closeout sweep | **EWCS-001 §5** |
+| Partial control-surface completion fail conditions | **EWCS-001 §6** |
+
+GIPC-001 governs **cross-artifact governing-issue consistency**.
+EWCS-001 governs **intra-artifact consistency and closeout-state finalization**.
+
+Both MUST PASS before QP PASS is declared. They are not alternatives.
+
+---
+
 **Canon ID**: GIPC-001
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-23
 **Authority**: CS2 — Issue #1129
+**See also**: `governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` (EWCS-001) — Issue #1134

@@ -144,6 +144,60 @@ If this wave triggered more than one IAA invocation round (R2, R3, etc.):
 
 ---
 
+### Section E — End-of-Wave Closeout Sweep (EWCS-001 §1)
+
+> ⚠️ **MANDATORY** — The closeout sweep is an explicit, sequential, single-pass review over
+> all control surfaces. It MUST be completed before QP PASS is declared.
+> Authority: `governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` (EWCS-001)
+
+**E-1. Run the closeout sweep (§1.3 — minimum required surfaces)**
+
+For each surface below, verify in order. Record PASS / FAIL / N/A.
+A single FAIL blocks the sweep — correct the failing surface and re-run from E-1.
+> ⚠️ CS-01, CS-06, CS-07, CS-08 are **MANDATORY** — they apply to every wave and MUST NOT be marked N/A.
+
+- [ ] **CS-01 PR body** *(MANDATORY — N/A not permitted)* — governing issue correct; status fields reflect final wave state; no kickoff-state text
+- [ ] **CS-02 Primary stage artifact header** — governing issue + stage fields current (or N/A with reason)
+- [ ] **CS-03 Traceability artifact header** — matches primary artifact header (or N/A with reason)
+- [ ] **CS-04 Tracker header** — `Issue:`, `Last Updated:`, `Updated By:` reflect current wave and issue (or N/A with reason)
+- [ ] **CS-05 Tracker body** — stage summary row matches detail section; no header/body mismatch (or N/A with reason)
+- [ ] **CS-06 Wave checklist** *(MANDATORY — N/A not permitted)* — all tasks ticked `[x]`; no `qp_verdict: PENDING`; wave-close summary appended
+- [ ] **CS-07 Wave record** *(MANDATORY — N/A not permitted)* — §1a, §3a, §3b, §3c all populated
+- [ ] **CS-08 Session memory** *(MANDATORY — N/A not permitted)* — all fields populated; outcome reflects final result
+- [ ] **CS-09 Sign-off / approval surface** — aligned to current wave (or N/A with reason)
+- [ ] **CS-10 Artifact index** — stage row updated (or N/A with reason)
+
+**E-2. Tracker Header/Body Parity Gate (EWCS-001 §2)**
+
+- [ ] Tracker `Issue:` field = current governing wave issue ← not an old stage reference
+- [ ] Tracker `Updated By:` = current wave ← not an old wave reference
+- [ ] Tracker stage summary row for active stage matches the stage detail section
+- [ ] Tracker header posture matches body blocker/next-action posture
+- [ ] **Tracker Header/Body Parity Gate Verdict**: PASS | FAIL
+
+**E-3. Kickoff-State Retirement (EWCS-001 §3)**
+
+- [ ] All wave checklist tasks ticked `[x]`
+- [ ] All `qp_verdict` fields show PASS or DESCOPED (none show PENDING)
+- [ ] Wave-close summary annotation appended to wave checklist (see §3.3 template)
+- [ ] No template placeholders remain in the wave checklist
+- [ ] **Kickoff-State Retirement Status**: COMPLETE | INCOMPLETE
+
+**E-4. Record closeout sweep evidence in wave record §3c**
+
+Before declaring QP PASS, populate all 5 fields in wave record §3c (per EWCS-001 §5.1):
+
+- [ ] `closeout_sweep_performed` = YES
+- [ ] `tracker_header_parity_verified` = PASS | N/A (with reason)
+- [ ] `tracker_body_parity_verified` = PASS | N/A (with reason)
+- [ ] `wave_checklist_retired_from_kickoff_state` = YES
+- [ ] `control_surfaces_finalized` = YES
+
+> ⛔ A wave record with any §3c field blank, FAIL, or PARTIAL is a QP PASS blocker
+> (EWCS-CLOSEOUT-INCOMPLETE). The Foreman MUST NOT declare QP PASS until all 5 fields pass.
+
+---
+
 ## Recording Completion
 
 Add the following block to the PREHANDOVER proof under `## Wave Reconciliation Checklist`:
@@ -171,6 +225,12 @@ Add the following block to the PREHANDOVER proof under `## Wave Reconciliation C
 ### D — Evidence Completeness
 - D-1 Evidence bundle: [COMPLETE / INCOMPLETE — list missing items]
 
+### E — End-of-Wave Closeout Sweep (EWCS-001)
+- E-1 Closeout sweep surfaces: [PASS — all CS-01..CS-10 verified / FAIL — surface list]
+- E-2 Tracker header/body parity: [PASS / FAIL / N/A — reason]
+- E-3 Kickoff-state retirement: [COMPLETE / INCOMPLETE — reason if incomplete]
+- E-4 Wave record §3c evidence fields: [ALL 5 POPULATED / MISSING — field names]
+
 **Checklist verdict: [PASS — proceed to PR open / BLOCKED — [reason]]**
 ```
 
@@ -182,12 +242,14 @@ Add the following block to the PREHANDOVER proof under `## Wave Reconciliation C
 |---------|------|--------|
 | 1.0.0 | 2026-03-18 | Initial checklist — CS2 mandate from issue #[wave-19-20-retro] closing post-wave registry and liveness automation gaps identified in PR #1142 review |
 | 1.1.0 | 2026-03-18 | WAVE-RECONCIL-001 + GOV-CONCERN-B follow-up: added B-3 (token file invalidation audit); added B-3 evidence field; cross-reference to INVALIDATED-PREFIX-CONVENTION.md |
+| 1.2.0 | 2026-04-26 | EWCS-001 hardening: added Section E (End-of-Wave Closeout Sweep) covering §1.3 surfaces, tracker header/body parity gate, kickoff-state retirement rule, and wave record §3c evidence recording. Authority: CS2 — Issue #1134. |
 
 ---
 
 **Authority**: CS2 (Johan Ras / @APGI-cmy)
 **Governed by**: LIVING_AGENT_SYSTEM v6.2.0
 **Used by**: foreman-v2-agent (Phase 4), CodexAdvisor-agent (NBR creation)
+**Canon ref**: `governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` (EWCS-001) — Section E
 **See also**: `.agent-workspace/independent-assurance-agent/knowledge/FUNCTIONAL-BEHAVIOUR-REGISTRY.md`
 **See also**: `.agent-workspace/liveness/last-known-good.md`
 **See also**: `.github/workflows/update-liveness.yml`
