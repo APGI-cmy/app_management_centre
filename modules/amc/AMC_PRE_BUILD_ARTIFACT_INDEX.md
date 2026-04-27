@@ -47,8 +47,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | 🟡 Approval Pending | v1.1, hardened approval-ready 2026-04-23. ARC domain (TR-1800), quota console (TR-605–TR-609), alert contract family (TR-207–TR-209), audit/auth/state contract family declarations added. Upstream sources updated to v1.1 per harmonization pass. CS2 approval required before Stage 5 begins. Issue #1125 (hardened in #1127). |
-| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | 🟡 Approval Pending | v1.1, hardened 2026-04-23. 18 domain families traced (17 FRS + ARC), 30 deferred items disclosed, quota console and ARC coverage added. Issue #1125 (hardened in #1127). |
+| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | 🟠 Treated as Approved | v1.1, hardened approval-ready 2026-04-23. ARC domain (TR-1800), quota console (TR-605–TR-609), alert contract family (TR-207–TR-209), audit/auth/state contract family declarations added. Upstream sources updated to v1.1 per harmonization pass. Stage 4 treated as approved for Stage 5 progression per CS2 #1131. Formal CS2 approval pending. Issue #1125 (hardened in #1127). |
+| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | 🟠 Treated as Approved | v1.1, hardened 2026-04-23. 18 domain families traced (17 FRS + ARC), 30 deferred items disclosed, quota console and ARC coverage added. Stage 4 treated as approved for Stage 5 progression per CS2 #1131. Issue #1125 (hardened in #1127). |
 
 ---
 
