@@ -209,18 +209,19 @@
 
 ## Section 5 — IAA Final Assurance
 
-> *Last updated by independent-assurance-agent — session-061 — 2026-04-27.*
-> *Prior sessions: session-059 REJECTION-PACKAGE (2 SUBSTANTIVE), session-060 REJECTION-PACKAGE (ENVIRONMENT_BOOTSTRAP).*
+> *Final assurance: independent-assurance-agent — session-062 — 2026-04-27. ASSURANCE-TOKEN ISSUED.*
+> *Prior sessions: session-059 REJECTION-PACKAGE (2 SUBSTANTIVE), session-060 REJECTION-PACKAGE (ENVIRONMENT_BOOTSTRAP), session-061 REJECTION-PACKAGE (CEREMONY — arithmetic).*
 
 | Field | Value |
 |-------|-------|
-| iaa_final_assurance_session | session-061-20260427 |
-| verdict | 🔴 REJECTION-PACKAGE |
-| phase_b_blocking_token | IAA-session-061-20260427-FAIL |
+| iaa_final_assurance_session | session-062-20260427 |
+| verdict | ✅ ASSURANCE-TOKEN ISSUED |
+| phase_b_blocking_token | **PHASE_B_BLOCKING_TOKEN: IAA-session-062-20260427-PASS** |
 | checks_run | 9 — CORE-020, CORE-021, OVL-PBG-010, OVL-PBG-011, OVL-PBG-012, OVL-PBG-013, OVL-PBG-014, OVL-PBG-016, OVL-PBG-ADM-003 |
-| failures | 1 CEREMONY (see below) |
+| failures | 0 |
 | session_059_finding_1_status | ✅ RESOLVED — QA-RT/CONFIG/SCHED sections J/K/L present, all 10 tests complete |
 | session_059_finding_2_status | ✅ RESOLVED — DES consistency (Option B) applied; QA-DES005-001 correctly numbered |
+| session_061_finding_status | ✅ RESOLVED — Catalog summary HIGH corrected 56→54 |
 
 ### 5.1 — Failures Requiring Fix-and-Resubmit
 
