@@ -147,7 +147,7 @@ Before `db-migrate.yml` executes Supabase CLI migration:
 | CS2 approval | `production` environment reviewer approval | GitHub Actions pauses; migration steps do not execute |
 | `SUPABASE_ACCESS_TOKEN` present | Non-empty environment secret | Workflow step fails with explicit error |
 | `SUPABASE_PROJECT_REF` present | Non-empty; matches production project reference | Workflow step fails with explicit error |
-| Migration files present | `supabase/migrations/` non-empty | Workflow logs warning; skips `supabase db push` if no pending migrations |
+| Migration files present | `supabase/migrations/` non-empty | Workflow logs warning; skips `supabase db push` if `supabase/migrations/` is missing or empty |
 | Supabase CLI version pinned | Version check in workflow setup step | Workflow fails if pinned version unavailable |
 
 ### 4.3 Network Assumptions
