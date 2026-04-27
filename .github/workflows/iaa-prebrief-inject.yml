@@ -176,11 +176,22 @@ jobs:
             echo "$SNIPPET" >> "$GITHUB_OUTPUT"
             echo "EOF_TASKS" >> "$GITHUB_OUTPUT"
 
-            # Idempotency guard — check wave records dir for pre-brief in wave record section 2
+            # Idempotency guard — check only the current wave record for a pre-brief in section 2
             # (AMC 90/10 Protocol — Issue #1063: pre-brief now lives in wave record section 2)
             WAVE_RECORDS_DIR=".agent-admin/wave-records"
-            if [ -d "$WAVE_RECORDS_DIR" ] && \
-               grep -rl "section 2" "$WAVE_RECORDS_DIR"/amc-wave-record-*.md 2>/dev/null | xargs grep -li "pre-brief" 2>/dev/null | head -1 | grep -q .; then
+            WAVE_ID=$(printf '%s' "$WAVE_NUM" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+//; s/-+$//')
+            WAVE_RECORD_FILE=""
+            if [ -d "$WAVE_RECORDS_DIR" ] && [ -n "$WAVE_ID" ] && [ "$WAVE_ID" != "unknown" ]; then
+              WAVE_RECORD_FILE=$(find "$WAVE_RECORDS_DIR" -maxdepth 1 -type f -name "amc-wave-record-*${WAVE_ID}*.md" | head -1)
+            fi
+            if [ -n "$WAVE_RECORD_FILE" ] && \
+               awk '
+                 BEGIN { in_section_2=0; found=0 }
+                 /^[[:space:]]*#+[[:space:]]*section[[:space:]]*2([[:space:]:-]|$)/ { in_section_2=1; next }
+                 in_section_2 && /^[[:space:]]*#+[[:space:]]*section[[:space:]]*[0-9]+([[:space:]:-]|$)/ { in_section_2=0 }
+                 in_section_2 && tolower($0) ~ /pre-brief/ { found=1 }
+                 END { exit(found ? 0 : 1) }
+               ' "$WAVE_RECORD_FILE"; then
               echo "prebrief_exists=true" >> "$GITHUB_OUTPUT"
             else
               echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
