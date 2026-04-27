@@ -189,9 +189,10 @@ GitHub-hosted runners are authorized for CI (PR checks) and for triggering Verce
 
 **Execution details:**
 
-- Command: `supabase db push --linked`
-- Authentication: `SUPABASE_ACCESS_TOKEN` (environment variable; never hardcoded)
-- Project targeting: `SUPABASE_PROJECT_REF` (environment variable; per-environment value)
+- Command: `supabase db push --project-ref $SUPABASE_PROJECT_REF`
+- Authentication: `SUPABASE_ACCESS_TOKEN` (environment variable; never hardcoded; consumed automatically by the Supabase CLI)
+- Project targeting: `--project-ref $SUPABASE_PROJECT_REF` — the target Supabase project reference is passed directly on the command line, sourced from the per-environment GitHub secret (`SUPABASE_PROJECT_REF`). No prior `supabase link` step is required or permitted; the CLI targets the intended project statelessly on each run.
+- Project-ref isolation: staging jobs supply the staging project ref; production jobs supply the production project ref (scoped to the `production` GitHub environment secret). Cross-environment contamination is prevented by secret scoping (see DES-008 and `runner-and-environment-constraints.md`).
 - Workflow: `db-migrate.yml` (GitHub Actions)
 - Migration files location: `supabase/migrations/` directory in the AMC repository
 - Migration ordering: Supabase CLI executes migrations in filename-timestamp order (standard Supabase CLI behavior)
@@ -206,6 +207,8 @@ GitHub-hosted runners are authorized for CI (PR checks) and for triggering Verce
 | Migration scripts run from a local developer machine | Uncontrolled environment; not reproducible |
 | Any migration mechanism other than Supabase CLI | Introduces migration tracking inconsistency |
 | Running `supabase db push` without `SUPABASE_ACCESS_TOKEN` | Authentication bypass; prohibited |
+| Using `supabase db push --linked` without a preceding `supabase link --project-ref $SUPABASE_PROJECT_REF` step | Project targeting is undefined; CLI may target the wrong project or fail with no linked project; stateful link model is not permitted in CI |
+| Hardcoding a Supabase project reference in the workflow file | Bypasses per-environment secret scoping; creates cross-environment contamination risk |
 
 **Prohibition enforcement**: Any builder PR that introduces an alternative migration mechanism is a deployment-strategy drift violation and must cause a QP FAIL verdict. See §5 (Anti-Drift Rules).
 

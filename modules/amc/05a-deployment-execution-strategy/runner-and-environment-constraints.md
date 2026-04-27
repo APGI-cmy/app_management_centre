@@ -163,7 +163,7 @@ Before `db-migrate.yml` executes Supabase CLI migration:
 
 ## 5. Downstream Stage Inheritance Note
 
-- **Stage 6 (QA-to-Red)**: Must include test cases that verify runner type is GitHub-hosted for all CI and deploy surfaces; must test that production environment secrets are not accessible from PR/staging jobs; must test that `deploy-frontend.yml` cannot execute production steps without `production` environment approval; must test that `supabase db push` is the only migration command present in `db-migrate.yml`.
+- **Stage 6 (QA-to-Red)**: Must include test cases that verify runner type is GitHub-hosted for all CI and deploy surfaces; must test that production environment secrets are not accessible from PR/staging jobs; must test that `deploy-frontend.yml` cannot execute production steps without `production` environment approval; must test that `supabase db push --project-ref $SUPABASE_PROJECT_REF` is the only migration command form present in `db-migrate.yml` and that no `supabase link` step precedes it.
 
 - **Stage 7 (PBFAG)**: Must verify this document is present at its canonical path, is consistent with `deployment-execution-strategy.md`, and that no self-hosted runner label appears in any AMC workflow file without an approved Stage 5a amendment.
 
