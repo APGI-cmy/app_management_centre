@@ -104,9 +104,10 @@ jobs:
                   )
                 : [];
               // Scope to the current wave by matching the normalised wave ID in the filename
+              // Use startsWith to avoid prefix false positives (e.g., "wave-1" matching "wave-10")
               const waveId = waveNum.toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '');
               const currentWaveFiles = waveId && waveId !== 'unknown'
-                ? waveRecordFiles.filter((f) => f.name.includes(waveId))
+                ? waveRecordFiles.filter((f) => f.name.startsWith(`amc-wave-record-${waveId}-`))
                 : [];
               for (const file of currentWaveFiles) {
                 const { data: fd } = await github.rest.repos.getContent({
@@ -197,7 +198,7 @@ jobs:
             WAVE_ID=$(printf '%s' "$WAVE_NUM" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+//; s/-+$//')
             WAVE_RECORD_FILE=""
             if [ -d "$WAVE_RECORDS_DIR" ] && [ -n "$WAVE_ID" ] && [ "$WAVE_ID" != "unknown" ]; then
-              WAVE_RECORD_FILE=$(find "$WAVE_RECORDS_DIR" -maxdepth 1 -type f -name "amc-wave-record-*${WAVE_ID}*.md" | head -1)
+              WAVE_RECORD_FILE=$(find "$WAVE_RECORDS_DIR" -maxdepth 1 -type f -name "amc-wave-record-${WAVE_ID}-*.md" | head -1)
             fi
             if [ -n "$WAVE_RECORD_FILE" ] && \
                awk '
@@ -242,7 +243,7 @@ jobs:
             WAVE_ID=$(printf '%s' "$WAVE_NUM" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+//; s/-+$//')
             WAVE_RECORD_FILE=""
             if [ -d "$WAVE_RECORDS_DIR" ] && [ -n "$WAVE_ID" ] && [ "$WAVE_ID" != "unknown" ]; then
-              WAVE_RECORD_FILE=$(find "$WAVE_RECORDS_DIR" -maxdepth 1 -type f -name "amc-wave-record-*${WAVE_ID}*.md" | head -1)
+              WAVE_RECORD_FILE=$(find "$WAVE_RECORDS_DIR" -maxdepth 1 -type f -name "amc-wave-record-${WAVE_ID}-*.md" | head -1)
             fi
             if [ -n "$WAVE_RECORD_FILE" ] && \
                awk '
