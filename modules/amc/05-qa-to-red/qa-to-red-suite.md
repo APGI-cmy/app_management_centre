@@ -1,18 +1,26 @@
 # QA-to-Red Suite — Stage 6
 
-**Stage**: 6 — QA-to-Red  
-**Module**: App Management Centre (AMC)  
-**Status**: ⬜ Not Started  
-**Prerequisite**: Stage 5 (Architecture) complete
+**Stage**: 6 — QA-to-Red
+**Module**: App Management Centre (AMC)
+**Status**: ⛔ SUPERSEDED
+**Superseded By**: `modules/amc/05-qa-to-red/qa-to-red-specification.md` v1.0
+**Governing Delivery Issue**: app_management_centre#1141
+**Date Superseded**: 2026-04-27
 
 ---
 
-## Purpose
+## Notice
 
-This document contains the full test suite written to red (failing) before any implementation begins. Tests must cover all FRS acceptance criteria.
+This placeholder file has been superseded by the Stage 6 QA-to-Red pack produced in wave
+`amc-stage6-qa-to-red-20260427` (issue #1141, 2026-04-27).
 
----
+The canonical Stage 6 QA-to-Red artifacts are:
 
-## Status
+| Artifact | Path |
+|----------|------|
+| QA-to-Red Specification (core) | `modules/amc/05-qa-to-red/qa-to-red-specification.md` v1.0 |
+| Architecture and DES to QA Traceability | `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` v1.0 |
+| Red Test Catalog | `modules/amc/05-qa-to-red/red-test-catalog.md` v1.0 |
 
-Placeholder. Not started.
+This file is retained for path continuity only. Do not derive from this file. Refer to the
+canonical artifacts listed above for all Stage 6 QA-to-Red authority.

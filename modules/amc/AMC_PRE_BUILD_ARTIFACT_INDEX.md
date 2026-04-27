@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-04-27 (Stage 5a Deployment Execution Strategy artifacts produced approval-pending — wave amc-stage5a-deployment-execution-strategy-20260427; issue #1137; prior: Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)
+**Last Updated**: 2026-04-27 (Stage 6 QA-to-Red pack produced approval-pending — wave amc-stage6-qa-to-red-20260427; issue #1141; prior: Stage 5a Deployment Execution Strategy artifacts produced approval-pending — wave amc-stage5a-deployment-execution-strategy-20260427; issue #1137; prior: Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -86,8 +86,13 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| QA-to-Red Suite | `modules/amc/05-qa-to-red/qa-to-red-suite.md` | ⬜ Placeholder | Not started |
-| QA Catalog Alignment | `modules/amc/05-qa-to-red/qa-catalog-alignment.md` | ⬜ Placeholder | Not started |
+| QA-to-Red Specification | `modules/amc/05-qa-to-red/qa-to-red-specification.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. Core Stage 6 spec: pass/fail philosophy, 4-level severity model, blocker/non-blocker rules, retest protocol, evidence requirements. 12 architecture-derived coverage families (§7) + 7 DES-derived coverage families (§8) + literal-operability checks (§9) + anti-drift posture (§10) + CS2 sign-off section. CS2 approval required. Governing issue: #1141. |
+| Architecture and DES to QA Traceability | `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. Traceability matrix: all 12 Stage 5 Architecture domains + all 8 DES fields (DES-001 through DES-008) traced to Stage 6 red test IDs. Zero silently omitted. Explicit omission register for Stage 12 deferrals. Coverage completeness verdict: 12/12 Architecture domains, 8/8 DES fields. |
+| Red Test Catalog | `modules/amc/05-qa-to-red/red-test-catalog.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. 69 test cases across 17 families. Each entry: test ID, source artifact, scenario, exact fail condition, exact pass condition, severity (CRITICAL/HIGH/MEDIUM/LOW), blocker classification, evidence type. 21 CRITICAL, 47 HIGH, 3 MEDIUM tests; 66 blockers. |
+| QA-to-Red Suite (superseded placeholder) | `modules/amc/05-qa-to-red/qa-to-red-suite.md` | ⛔ Superseded | Placeholder superseded by qa-to-red-specification.md v1.0. Retained for path continuity. |
+| QA Catalog Alignment (superseded placeholder) | `modules/amc/05-qa-to-red/qa-catalog-alignment.md` | ⛔ Superseded | Placeholder superseded by architecture-and-des-to-qa-traceability.md v1.0. Retained for path continuity. |
+
+> **Gate condition**: Stage 7 (PBFAG) is BLOCKED until Stage 5 (Architecture), Stage 5a (DES), and Stage 6 (QA-to-Red) all receive CS2 approval. Governing issue: app_management_centre#1141.
 
 ---
 

@@ -2,8 +2,8 @@
 
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
-**Last Updated**: 2026-04-27  
-**Updated By**: foreman-v2-agent (wave: amc-stage5a-deployment-execution-strategy-20260427 — Stage 5a artifacts produced approval-pending; all 8 DES fields answered; issue #1137; prior: amc-governance-deployment-oversight-20260426 — Stage 5a defined; amc-stage5-architecture-20260426 — Stage 5 Architecture produced)
+**Last Updated**: 2026-04-27
+**Updated By**: foreman-v2-agent (wave: amc-stage6-qa-to-red-20260427 — Stage 6 QA-to-Red pack produced approval-pending; issue #1141; prior: amc-stage5a-deployment-execution-strategy-20260427 — Stage 5a artifacts produced approval-pending; all 8 DES fields answered; issue #1137; prior: amc-governance-deployment-oversight-20260426 — Stage 5a defined; amc-stage5-architecture-20260426 — Stage 5 Architecture produced)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
@@ -40,8 +40,8 @@
 | 4 | TRS | ✅ TREATED AS APPROVED | Produced approval-ready 2026-04-23, hardened to v1.1 2026-04-23. CS2 authorized Stage 5 progression per issue #1131 ("Stage 4 is now being treated as approved by CS2 and Stage 5 becomes the active governed stage"). Canonical source: `modules/amc/03-trs/`. |
 | 5 | Architecture | 🟡 IN PROGRESS — Produced Approval-Pending | Stage 5 Architecture Specification v1.0 produced 2026-04-26. Awaiting CS2 approval. Canonical artifact: `modules/amc/04-architecture/architecture-specification.md`. |
 | **5a** | **Deployment Execution Strategy** | **🟡 IN PROGRESS — Produced Approval-Pending** | Stage 5a artifacts produced 2026-04-27 (wave amc-stage5a-deployment-execution-strategy-20260427, issue #1137). All 8 DES fields answered. Awaiting CS2 approval. Artifacts: `modules/amc/05a-deployment-execution-strategy/`. |
-| 6 | QA-to-Red | ⬜ Not Started | 🔴 BLOCKED — requires Stage 5 complete and approved, **and Stage 5a complete and approved**. |
-| 7 | PBFAG | ⬜ Not Started | 🔴 BLOCKED |
+| 6 | QA-to-Red | 🟡 IN PROGRESS — Produced Approval-Pending | Stage 6 QA-to-Red pack produced 2026-04-27 (wave amc-stage6-qa-to-red-20260427, issue #1141). Awaiting CS2 approval. Artifacts: `modules/amc/05-qa-to-red/`. **GATE CONDITION**: Stage 7 remains BLOCKED until Stage 6, Stage 5, and Stage 5a all receive CS2 approval. |
+| 7 | PBFAG | ⬜ Not Started | 🔴 BLOCKED — requires Stage 5, Stage 5a, AND Stage 6 complete and CS2-approved |
 | 8 | Implementation Plan | ⬜ Not Started | 🔴 BLOCKED — must reference approved Stage 5a Deployment Execution Strategy. |
 | 9 | Builder Checklist | ⬜ Not Started | 🔴 BLOCKED |
 | 10 | IAA Pre-Brief | ⬜ Not Started | 🔴 BLOCKED |
@@ -185,10 +185,22 @@ deployment execution strategy must also be frozen.
 
 ### Stage 6 — QA-to-Red
 
-**Status**: ⬜ Not Started  
-**Location**: `modules/amc/05-qa-to-red/`  
-**Prerequisites**: Stage 5 complete and **CS2 approved** AND Stage 5a complete and **CS2 approved** — 🔴 BLOCKED pending Stage 5 and Stage 5a CS2 approval  
-**Note**: QA-to-Red must cover deployment-surface boundary violations per the approved Stage 5a strategy.
+**Status**: 🟡 IN PROGRESS — Produced Approval-Pending
+**Location**: `modules/amc/05-qa-to-red/`
+**Prerequisites**: Stage 5 complete and **CS2 approved** AND Stage 5a complete and **CS2 approved** — ⚠️ GATE CONDITION ACTIVE — Stage 6 artifacts produced conditionally per CS2 authorization in issue #1141 while Stage 5 and Stage 5a await approval. Stage 7 remains BLOCKED until all three approvals are received.
+**Key Artifacts**:
+- [x] `qa-to-red-specification.md` v1.0 — Core Stage 6 spec: pass/fail philosophy, 4-level severity model, blocker/non-blocker rules, retest protocol, evidence requirements, 12 architecture-derived coverage families (§7), 7 DES-derived coverage families (§8), literal-operability checks (§9), anti-drift posture (§10), CS2 sign-off section. Produced 2026-04-27.
+- [x] `architecture-and-des-to-qa-traceability.md` v1.0 — Traceability matrix: all 12 Stage 5 Architecture domains and all 8 DES fields (DES-001 through DES-008) traced to Stage 6 red test IDs. Zero silently omitted. Explicit omission register for Stage 12 deferrals. Produced 2026-04-27.
+- [x] `red-test-catalog.md` v1.0 — 69 test cases across 17 families. Each entry: test ID, source artifact, scenario, exact fail condition, exact pass condition, severity, blocker classification, evidence type. Produced 2026-04-27.
+- [x] `qa-to-red-suite.md` — Superseded notice (canonical artifacts listed above)
+- [x] `qa-catalog-alignment.md` — Superseded notice (traceability covered by architecture-and-des-to-qa-traceability.md)
+
+**Completion Date**: Pending CS2 approval
+**Approval Required**: Yes — CS2 approval required before Stage 7 (PBFAG) may begin
+**Governing Issue**: app_management_centre#1141
+**Wave**: amc-stage6-qa-to-red-20260427
+
+**Note**: QA-to-Red covers deployment-surface boundary violations per the approved Stage 5a strategy. All 8 DES fields are explicitly represented in the red test catalog (QA-DES family). All Stage 5 architecture commitments are represented (QA-ARCH, QA-ARC, QA-QUOTA, QA-STATE, QA-AUDIT, QA-AUTH, QA-DEGRADE, QA-ALERT, QA-SESSION, QA-RT, QA-CONFIG, QA-SCHED families). Literal-operability failure modes are explicitly represented (QA-LITOP family).
 
 ---
 
@@ -254,7 +266,8 @@ deployment execution strategy must also be frozen.
 5. 🟡 Stage 5 Architecture Specification v1.0 produced approval-pending (wave amc-stage5-architecture-20260426, 2026-04-26).
 6. 🟡 Stage 5a Deployment Execution Strategy artifacts produced approval-pending (wave amc-stage5a-deployment-execution-strategy-20260427, 2026-04-27, issue #1137). All 8 DES fields answered. See `modules/amc/05a-deployment-execution-strategy/`.
 7. ▶️ CS2 to review and approve Stage 5 Architecture and Stage 5a Deployment Execution Strategy.
-8. ▶️ After Stage 5 and Stage 5a approval: Stage 6 (QA-to-Red) may begin.
+8. 🟡 Stage 6 QA-to-Red pack produced approval-pending (wave amc-stage6-qa-to-red-20260427, 2026-04-27, issue #1141). 69 red test cases across 17 families. CS2 conditionally authorized Stage 6 artifact production while Stage 5 and Stage 5a await approval. Stage 7 BLOCKED until Stage 5, Stage 5a, and Stage 6 all receive CS2 approval.
+9. ▶️ CS2 to review and approve Stage 5, Stage 5a, and Stage 6 (may be concurrent or sequential at CS2 discretion).
 
 ---
 
