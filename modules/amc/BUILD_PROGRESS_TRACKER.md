@@ -266,7 +266,7 @@ deployment execution strategy must also be frozen.
 5. 🟡 Stage 5 Architecture Specification v1.0 produced approval-pending (wave amc-stage5-architecture-20260426, 2026-04-26).
 6. 🟡 Stage 5a Deployment Execution Strategy artifacts produced approval-pending (wave amc-stage5a-deployment-execution-strategy-20260427, 2026-04-27, issue #1137). All 8 DES fields answered. See `modules/amc/05a-deployment-execution-strategy/`.
 7. ▶️ CS2 to review and approve Stage 5 Architecture and Stage 5a Deployment Execution Strategy.
-8. 🟡 Stage 6 QA-to-Red pack produced approval-pending (wave amc-stage6-qa-to-red-20260427, 2026-04-27, issue #1141). 69 red test cases across 17 families. CS2 conditionally authorized Stage 6 artifact production while Stage 5 and Stage 5a await approval. Stage 7 BLOCKED until Stage 5, Stage 5a, and Stage 6 all receive CS2 approval.
+8. 🟡 Stage 6 QA-to-Red pack produced approval-pending (wave amc-stage6-qa-to-red-20260427, 2026-04-27, issue #1141). 79 red test cases across 20 families. CS2 conditionally authorized Stage 6 artifact production while Stage 5 and Stage 5a await approval. Stage 7 BLOCKED until Stage 5, Stage 5a, and Stage 6 all receive CS2 approval.
 9. ▶️ CS2 to review and approve Stage 5, Stage 5a, and Stage 6 (may be concurrent or sequential at CS2 discretion).
 
 ---
