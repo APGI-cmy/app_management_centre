@@ -1,7 +1,7 @@
 # Foreman-v2-agent — Tier 2 Knowledge Index
 
-> **Version**: 1.1.0 — AMC Consumer Copy
-> **Last Updated**: 2026-04-07
+> **Version**: 1.2.0 — AMC Consumer Copy
+> **Last Updated**: 2026-04-26
 > **Canon Home**: APGI-cmy/maturion-foreman-governance
 > **Canon Commit**: `038546344e8d67823c63464dc038841bd947405b` (maturion-isms)
 > **Staleness Policy**: Flag for refresh if canon version exceeds this by 1 minor version.
@@ -17,7 +17,7 @@
 | `FAIL-ONLY-ONCE.md` | Breach registry and A-rules for foreman-v2 | ✅ PRESENT — layered down 2026-04-07 (v4.1.0) |
 | `session-memory-template.md` | Session memory template (reduced 6-field model per 90/10 principle) | ✅ PRESENT — v2.0.0 (updated 2026-04-13, Issue #1063) |
 | `prehandover-template.md` | PREHANDOVER proof template (v1.7.0) | ✅ PRESENT — layered down 2026-04-07 (v1.7.0) |
-| `wave-reconciliation-checklist.md` | Wave close checklist — incidents, niggles, liveness | ✅ PRESENT — layered down 2026-04-07 (v1.0.0) |
+| `wave-reconciliation-checklist.md` | Wave close checklist — incidents, niggles, liveness, closeout sweep | ✅ PRESENT — v1.2.0 (updated 2026-04-26, Issue #1134 — Section E closeout sweep added) |
 
 ---
 
