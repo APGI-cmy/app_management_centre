@@ -314,11 +314,12 @@ A wave with any of the following conditions MUST NOT be declared QP PASS or hand
 
 When ECAP prepares the ceremony bundle, it MUST additionally:
 
-1. Verify the wave record §3c contains all five labeled fields (§5.1) as non-blank entries
+1. Verify the wave record §3c contains all labeled fields required by §5.1 as non-blank entries, including both parity fields
 2. Verify `closeout_sweep_performed = YES`
 3. Verify `tracker_header_parity_verified = PASS` (or N/A with documented reason)
-4. Verify `wave_checklist_retired_from_kickoff_state = YES`
-5. Verify `control_surfaces_finalized = YES`
+4. Verify `tracker_body_parity_verified = PASS` (or N/A with documented reason)
+5. Verify `wave_checklist_retired_from_kickoff_state = YES`
+6. Verify `control_surfaces_finalized = YES`
 
 If any field is blank, FAIL, or PARTIAL: record as C1 failure in the ECAP reconciliation
 summary and return the bundle to the producing agent for correction.
