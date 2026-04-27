@@ -19,9 +19,10 @@
 ---
 
 > **DERIVATION DECLARATION**
-> This Deployment Execution Strategy derives from the approved Stage 5 Architecture Specification
-> (`modules/amc/04-architecture/architecture-specification.md` v1.0) and all approved upstream truth
-> (Stages 1–4). It translates architectural deployment-shaping decisions into a frozen, explicit,
+> This Deployment Execution Strategy derives from the Stage 5 Architecture Specification
+> (`modules/amc/04-architecture/architecture-specification.md` v1.0, produced approval-pending per
+> CS2 authorization #1131) and all upstream truth (Stages 1–4, treated as approved per #1131).
+> It translates architectural deployment-shaping decisions into a frozen, explicit,
 > non-contradictory operational deployment model. It does not invent new product behavior. No
 > deployment execution decision may contradict or silently soften any Architecture or TRS constraint.
 > This document defines the deployment execution boundaries that Stage 6 QA-to-Red, Stage 7 PBFAG,
@@ -118,7 +119,7 @@ Each deployment surface has exactly one owning workflow or manual process. No su
 |---|---|---|---|
 | **Frontend deploy** | `deploy-frontend.yml` (GitHub Actions) | Push to `main` (automatic); manual dispatch | Deploys the Next.js application to Vercel production. Triggered after CI pass on `main`. Includes Next.js API routes (unified deployment unit — §3.8 Architecture). |
 | **Backend / API routes deploy** | `deploy-frontend.yml` (same workflow as frontend) | Push to `main` (automatic); manual dispatch | Next.js API routes are deployed as part of the unified Next.js application on Vercel. There is no separate backend deploy workflow — backend and frontend ship as one Vercel deployment unit. |
-| **DB migration** | `db-migrate.yml` (GitHub Actions) | Manual dispatch only; optionally triggered after deploy-frontend on `main` | Executes Supabase CLI migration against the target Supabase project. Requires protected environment approval before execution. Never runs on PR. Never runs automatically on `main` push without explicit CS2 authorization of that trigger mode. |
+| **DB migration** | `db-migrate.yml` (GitHub Actions) | Manual dispatch only | Executes Supabase CLI migration against the target Supabase project. Requires protected environment approval before execution. Never runs on PR. Never runs automatically on `main` push. Must always be manually dispatched by CS2. |
 | **Schema verification** | `ci.yml` (GitHub Actions, CI gate) | Pull request (automatic) | Verifies schema expectations as part of the CI gate (lint, type check, dependency scan, unit, integration, E2E). Does not mutate the database. Runs on GitHub-hosted runners. |
 | **Live operational validation** | Manual process (CS2 or designated operator) | Post-deployment manual execution | Post-deploy health check confirming the deployed application is live and operational. Not automated. CS2 or a designated operator performs this check after each production deployment. |
 
@@ -134,8 +135,8 @@ Each deployment surface has exactly one owning workflow or manual process. No su
 
 GitHub-hosted runners are authorized for CI (PR checks) and for triggering Vercel deployments to the **staging** and **production** environments. However:
 
-- **GitHub-hosted runners may NOT directly access or mutate the production Supabase database** (no direct `psql`, no Supabase service role key usage against production).
-- **GitHub-hosted runners may NOT run database migrations against production without a GitHub protected environment approval gate** (`production` environment, §3.7).
+- **GitHub-hosted runners may NOT access the production Supabase database directly** (no bare `psql`, no direct service role key usage outside of the gated migration workflow).
+- **GitHub-hosted runners may execute `db-migrate.yml` against production only through the `production` protected environment approval gate** — this gated migration workflow is the sole authorized path for any GitHub-hosted runner to interact with the production Supabase database.
 - **GitHub-hosted runners ARE authorized** to execute the `deploy-frontend.yml` workflow to Vercel production, subject to the `production` protected environment approval gate.
 - **GitHub-hosted runners ARE authorized** to execute `db-migrate.yml` against the staging Supabase project (no approval gate required for staging).
 - **GitHub-hosted runners ARE authorized** for all CI gate activities on PRs: lint, type check, dependency scan, unit tests, integration tests, E2E smoke tests, schema verification.
@@ -224,7 +225,8 @@ The CI workflow (`ci.yml`) runs automatically on every PR targeting `main`:
 4. Unit tests
 5. Integration tests (staging Supabase project; read patterns only; no production DB access)
 6. E2E smoke tests (staging environment)
-7. Vercel preview deploy (automatic; preview URL attached to PR)
+
+Vercel preview deployments on PRs are triggered by Vercel's GitHub integration (not by `ci.yml`). When a PR commit is pushed, Vercel automatically builds and deploys a preview using its native GitHub App. The preview URL is posted back to the PR by the Vercel GitHub App. No GitHub Actions step in `ci.yml` triggers or manages Vercel preview deployments.
 
 **What does NOT run on PRs:**
 - Production frontend deployment
@@ -245,11 +247,13 @@ After a PR is merged to `main`, the following runs in order:
 
 #### Vercel Preview Deploys (PR)
 
-- Triggered automatically by Vercel on every PR commit
-- Targets the Vercel preview environment (ephemeral URL per PR)
-- Does NOT connect to the production Supabase project
-- Preview environments use staging Supabase project or a seeded preview environment
-- No DB mutations against production
+Vercel preview deployments are managed by Vercel's native GitHub App integration, not by GitHub Actions workflows:
+
+- Triggered automatically by the Vercel GitHub App on every PR commit push
+- Vercel builds the Next.js application and deploys it to an ephemeral preview URL
+- The Vercel GitHub App posts the preview URL back to the PR as a deployment status check
+- Preview deployments use the staging Supabase project (separate from production); production Supabase credentials are not present in preview builds
+- No DB mutations against the production Supabase project
 
 #### Manual Workflow Dispatch
 
@@ -364,7 +368,7 @@ The `db-migrate.yml` workflow must perform the following pre-flight checks befor
 | Supabase CLI version pinned | Verify Supabase CLI is installed at the pinned version | Abort migration; log error |
 | `SUPABASE_ACCESS_TOKEN` present | Check env var is non-empty | Abort migration; fail workflow |
 | `SUPABASE_PROJECT_REF` present and matches target environment | Check env var is non-empty and matches expected project reference for target tier | Abort migration; fail workflow |
-| Migration files present | Verify `supabase/migrations/` directory contains at least one pending migration | Abort migration if no files; log warning |
+| Migration files present | Verify `supabase/migrations/` directory exists and is non-empty | Log warning and skip `supabase db push` if directory is missing or empty; workflow exits with success (empty migration run is a no-op, not an error) |
 | Network connectivity to Supabase | Supabase CLI performs implicit connectivity check on `supabase db push` | Supabase CLI aborts with error if unreachable |
 
 **Deploy pre-flight (`deploy-frontend.yml`, before Vercel deploy):**

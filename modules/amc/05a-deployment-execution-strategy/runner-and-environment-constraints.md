@@ -66,7 +66,7 @@ The `production` GitHub environment is the primary approval gate for all live AM
 |---|---|---|
 | Environment name | `production` | Referenced by `deploy-frontend.yml` and `db-migrate.yml` |
 | Required reviewer | CS2 (@APGI-cmy) | Human approval before any production job step executes |
-| Auto-approve | Disabled | Prevents automated production deployments |
+| Required reviewers setting | Enabled — at least 1 required reviewer configured | Prevents automated production deployments; no workflow job in the `production` environment runs until the reviewer approves |
 | Deployment branch policy | `main` branch only | Prevents production deployment from feature/PR branches |
 | Wait timer | 0 (no delay after approval) | CS2 approval is sufficient; no additional timer required |
 | Environment secrets | `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `SUPABASE_ACCESS_TOKEN` (production value), `SUPABASE_PROJECT_REF` (production value) | Production-scoped secrets; not available in other environments |
@@ -87,7 +87,7 @@ The `staging` GitHub environment (or repository-level secrets for staging) is us
 | Supabase service role key | Staging value only — never production |
 | `SUPABASE_PROJECT_REF` | Staging project reference |
 | Vercel project | Vercel preview project (or same Vercel project with preview flag) |
-| Auto-approve | Yes for staging surfaces (no CS2 gate required) |
+| Required reviewers setting | No required reviewers — staging surfaces have no approval gate; secrets stored at repository level or in a `staging` environment without reviewers |
 
 ### 2.3 Environment Isolation Invariants
 
@@ -147,7 +147,7 @@ Before `db-migrate.yml` executes Supabase CLI migration:
 | CS2 approval | `production` environment reviewer approval | GitHub Actions pauses; migration steps do not execute |
 | `SUPABASE_ACCESS_TOKEN` present | Non-empty environment secret | Workflow step fails with explicit error |
 | `SUPABASE_PROJECT_REF` present | Non-empty; matches production project reference | Workflow step fails with explicit error |
-| Migration files present | `supabase/migrations/` non-empty | Workflow logs warning; skips `supabase db push` if no pending migrations |
+| Migration files present | `supabase/migrations/` directory exists and is non-empty | Workflow logs warning and skips `supabase db push` if directory is missing or empty; no failure — empty migration run is a no-op |
 | Supabase CLI version pinned | Version check in workflow setup step | Workflow fails if pinned version unavailable |
 
 ### 4.3 Network Assumptions
