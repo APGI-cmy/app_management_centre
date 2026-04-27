@@ -1,6 +1,7 @@
 
-**Status**: CANONICAL | **Version**: 1.0.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.1.0 | **Authority**: CS2
 **Date**: 2026-04-27
+**Amended**: 2026-04-27 — v1.1.0: Added `wrcc_pre_pr_checker_verdict` to §4.1 required evidence fields and §4.2 blocking rule; added coherence-state prerequisite for `pre_pr_blocking_gate_verdict: PASS`; added WRCC-001 cross-reference in Appendix A; authority: CS2 — Issue #1143.
 **Canon ID**: PHCP-001
 **Issue**: app_management_centre#1139 — Hardening — PR handover must enforce governing-issue role separation, retire stale handover injectors, and block partial handover state
 
@@ -50,6 +51,7 @@ the PR body. Fields marked MANDATORY may not be blank, N/A, or placeholder.
 | iaa_result               | PHASE_B_BLOCKING_TOKEN: IAA-[session]-[date]-PASS          |
 | parity_check_verdict     | PASS                                                       |
 | closeout_sweep_verdict   | PASS                                                       |
+| wrcc_pre_pr_checker_verdict | PASS                                                    |
 | pre_pr_blocking_gate     | PASS                                                       |
 | entry_condition_status   | NORMAL / EXCEPTION — [see §5 schema]                       |
 ```
@@ -66,6 +68,7 @@ the PR body. Fields marked MANDATORY may not be blank, N/A, or placeholder.
 | `parity_check_verdict` | MANDATORY — must be PASS |
 | `closeout_sweep_verdict` | MANDATORY — must be PASS |
 | `pre_pr_blocking_gate` | MANDATORY — must be PASS |
+| `wrcc_pre_pr_checker_verdict` | MANDATORY — must be PASS (WRCC-001 §5 pre-PR checker) |
 | `entry_condition_status` | MANDATORY — NORMAL or EXCEPTION with fields per §5 |
 | `stage_definition_issue` | Conditional — if stage definition issue differs from delivery issue |
 | `related_hardening_issue` | Conditional — cite if a hardening issue directly relates |
@@ -140,6 +143,7 @@ pre_pr_blocking_gate:
   stale_injector_check_performed: "CLEAN"  # CLEAN / STALE — [list stale injectors found]
   entry_condition_status: "NORMAL"         # NORMAL / EXCEPTION — [see §5]
   operational_sanity_check_performed: "YES / N/A"   # for strategy docs; N/A otherwise
+  wrcc_pre_pr_checker_verdict: "PASS"      # PASS / FAIL — WRCC-001 §5 producer-side checker; PASS only if §1+§2+§3+§4 all pass
   pre_pr_blocking_gate_verdict: "PASS"     # PASS / FAIL — PASS only if all sub-fields above are YES/PASS/CLEAN
 ```
 
@@ -153,6 +157,12 @@ A PR MUST NOT be opened as review-ready if any of the following are absent or no
 - `governing_issue_role_registry_completed` is not `YES`
 - `stale_injector_check_performed` is absent or `STALE`
 - `pre_pr_blocking_gate_verdict` is not `PASS`
+- `wrcc_pre_pr_checker_verdict` is absent or not `PASS` (WRCC-001 §5 — added v1.1.0)
+
+In addition, the wave record Section 5 MUST be in a coherent final-assurance state
+(ASSURANCE_TOKEN_ISSUED or REJECTION_PACKAGE_ACTIVE — not both simultaneously) before
+`pre_pr_blocking_gate_verdict: PASS` may be set. See `WAVE_RESULT_COHERENCE_CANON.md`
+(WRCC-001) §1 for the exact coherence definition and detection patterns.
 
 Partial handover state MUST fail at this gate — not be discovered during external review.
 
@@ -290,10 +300,12 @@ Record it in `STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md` and correct or ret
 | Wave record model and 90/10 principle | `AMC_90_10_ADMIN_PROTOCOL.md` |
 | Token ceremony | `INDEPENDENT_ASSURANCE_AGENT_CANON.md` |
 | ECAP ceremony administration | `EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` |
+| **Wave-result coherence (Section 5 coherence, checklist linter, §3c truth, cross-surface checks)** | **`WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001) — added v1.1.0** |
 
 ---
 
 **Canon ID**: PHCP-001
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-27
 **Authority**: CS2 — Issue #1139
+**Amended**: 2026-04-27 — v1.1.0 — Issue #1143
 **See also**: All canons listed in Appendix A
