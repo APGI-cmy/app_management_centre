@@ -87,7 +87,7 @@ The `staging` GitHub environment (or repository-level secrets for staging) is us
 | Supabase service role key | Staging value only — never production |
 | `SUPABASE_PROJECT_REF` | Staging project reference |
 | Vercel project | Vercel preview project (or same Vercel project with preview flag) |
-| Auto-approve | Yes for staging surfaces (no CS2 gate required) |
+| Required reviewers / approval gate | None for staging surfaces (no CS2 gate required); if repository-level secrets are used for staging, no GitHub environment approval gate applies |
 
 ### 2.3 Environment Isolation Invariants
 
