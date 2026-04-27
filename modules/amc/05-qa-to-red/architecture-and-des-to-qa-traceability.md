@@ -199,95 +199,113 @@ This traceability matrix demonstrates that:
 
 ### 2.1 DES Fields Coverage Summary
 
-| DES Field | DES Reference | Stage 6 Coverage Family | Red Test IDs | Covered? |
+| DES Field | DES Reference | Stage 6 Coverage Family | Red Test IDs in Stage 6 Catalog | Covered? |
 |---|---|---|---|---|
-| DES-001 — Workflow Surface Ownership | §3.1 | §8.1 (Surface Ownership Boundaries) | QA-DES001-001 to QA-DES001-005 | ✅ Covered |
-| DES-002 — GitHub-Hosted Runner Authorization | §3.2 | §8.2 (Runner Authorization Boundaries) | QA-DES002-001 to QA-DES002-003 | ✅ Covered |
-| DES-003 — Self-Hosted Runner Prohibition | §3.3 | §8.2 (Runner Authorization Boundaries) | QA-DES003-001 to QA-DES003-002 | ✅ Covered |
-| DES-004 — Migration Execution Path | §3.4 | §8.3 (Migration Execution Path) | QA-DES004-001 to QA-DES004-008 | ✅ Covered |
-| DES-005 — CI/Preview/Production Execution Boundaries | §3.5 | §8.4 (Trigger Boundaries) | QA-DES005-001 to QA-DES005-005 | ✅ Covered |
-| DES-006 — Safety Classification | §3.6 | §8.5 (Frontend Workflow DB Mutation Prohibition) | QA-DES006-001 to QA-DES006-005 | ✅ Covered |
-| DES-007 — Manual/Protected Approval Boundaries | §3.7 | §8.6 (Protected Environment Approval) | QA-DES007-001 to QA-DES007-005 | ✅ Covered |
-| DES-008 — Environment/Network Assumption Validation | §3.8 | §8.7 (Pre-Flight Fail-Safe Behavior) | QA-DES008-001 to QA-DES008-007 | ✅ Covered |
+| DES-001 — Workflow Surface Ownership | §3.1 | §8.1 (Surface Ownership Boundaries) | QA-DES001-001, QA-DES001-002 (2 catalog entries; DES001-003 to -005 planned Stage 12) | ✅ Covered |
+| DES-002 — GitHub-Hosted Runner Authorization | §3.2 | §8.2 (Runner Authorization Boundaries) | QA-DES002-001 (1 catalog entry; DES002-002 to -003 planned Stage 12) | ✅ Covered |
+| DES-003 — Self-Hosted Runner Prohibition | §3.3 | §8.2 (Runner Authorization Boundaries) | QA-DES003-001 (1 catalog entry; DES003-002 planned Stage 12) | ✅ Covered |
+| DES-004 — Migration Execution Path | §3.4 | §8.3 (Migration Execution Path) | QA-DES004-001 (1 catalog entry; DES004-002 to -008 planned Stage 12) | ✅ Covered |
+| DES-005 — CI/Preview/Production Execution Boundaries | §3.5 | §8.4 (Trigger Boundaries) | QA-DES005-001 (1 catalog entry; DES005-002 to -005 planned Stage 12) | ✅ Covered |
+| DES-006 — Safety Classification | §3.6 | §8.5 (Frontend Workflow DB Mutation Prohibition) | QA-DES006-001 (1 catalog entry; DES006-002 to -005 planned Stage 12) | ✅ Covered |
+| DES-007 — Manual/Protected Approval Boundaries | §3.7 | §8.6 (Protected Environment Approval) | QA-DES007-001 (1 catalog entry; DES007-002 to -005 planned Stage 12) | ✅ Covered |
+| DES-008 — Environment/Network Assumption Validation | §3.8 | §8.7 (Pre-Flight Fail-Safe Behavior) | QA-DES008-001 (1 catalog entry; DES008-002 to -007 planned Stage 12) | ✅ Covered |
 
 **Total DES fields: 8. Covered: 8. Not covered: 0.**
+
+> **Note on Stage 6 catalog scope vs Stage 12 full implementation**: The DES-family test IDs marked "planned Stage 12" in this table are listed in the detailed tables below (§2.2) and represent the full requirements scope for each DES field. These requirements ARE covered by Stage 6 (their failure conditions are derived from the DES commitments), but the Stage 6 QA-to-Red catalog records one representative test entry per DES field per coverage family. qa-builder in Stage 12 MUST implement all test IDs listed in the detailed tables (§2.2) before the full red suite passes. No DES requirement listed here may be silently omitted from the Stage 12 test implementation.
 
 ### 2.2 Detailed DES Traceability
 
 #### DES-001 — Workflow Surface Ownership
 
+#### DES-001 — Workflow Surface Ownership
+
+> **Stage 6 catalog entries**: QA-DES001-001, QA-DES001-002. Additional test IDs (QA-DES001-003 to -005) are defined below and MUST be implemented by qa-builder in Stage 12.
+
 | DES Commitment | DES Reference | Stage 6 Test IDs | Notes |
 |---|---|---|---|
-| `deploy-frontend.yml` owns frontend deploy; no other workflow deploys frontend | §3.1 | QA-DES001-001 | Single owner per surface |
-| `db-migrate.yml` owns DB migration; no other workflow migrates DB | §3.1 | QA-DES001-002 | Single owner per surface |
-| `ci.yml` owns schema verification on PRs | §3.1 | QA-DES001-003 | Read-only verification |
-| Live operational validation is manual (no automated workflow) | §3.1 | QA-DES001-004 | Manual process only |
-| No surface owned by more than one workflow | §3.1 (Ownership Invariant) | QA-DES001-005 | Ownership invariant enforcement |
+| `deploy-frontend.yml` owns frontend deploy; no other workflow deploys frontend | §3.1 | QA-DES001-001 *(in Stage 6 catalog)* | Single owner per surface |
+| `db-migrate.yml` owns DB migration; no other workflow migrates DB | §3.1 | QA-DES001-002 *(in Stage 6 catalog)* | Single owner per surface |
+| `ci.yml` owns schema verification on PRs | §3.1 | QA-DES001-003 *(planned Stage 12)* | Read-only verification |
+| Live operational validation is manual (no automated workflow) | §3.1 | QA-DES001-004 *(planned Stage 12)* | Manual process only |
+| No surface owned by more than one workflow | §3.1 (Ownership Invariant) | QA-DES001-005 *(planned Stage 12)* | Ownership invariant enforcement |
 
 #### DES-002/DES-003 — Runner Authorization
 
+> **Stage 6 catalog entries**: QA-DES002-001, QA-DES003-001. Additional test IDs are defined below and MUST be implemented by qa-builder in Stage 12.
+
 | DES Commitment | DES Reference | Stage 6 Test IDs | Notes |
 |---|---|---|---|
-| `ci.yml` uses `runs-on: ubuntu-latest` | §3.2, §3.3 | QA-DES002-001 | GitHub-hosted only |
-| `deploy-frontend.yml` uses `runs-on: ubuntu-latest` | §3.2, §3.3 | QA-DES002-002 | GitHub-hosted only |
-| `db-migrate.yml` uses `runs-on: ubuntu-latest` | §3.2, §3.3 | QA-DES002-003 | GitHub-hosted only |
-| No self-hosted runner label in any workflow file | §3.3 | QA-DES003-001 | Explicit prohibition |
-| Introducing self-hosted runner detected and fails CI | §3.3 | QA-DES003-002 | Configuration check |
+| `ci.yml` uses `runs-on: ubuntu-latest` | §3.2, §3.3 | QA-DES002-001 *(in Stage 6 catalog)* | GitHub-hosted only |
+| `deploy-frontend.yml` uses `runs-on: ubuntu-latest` | §3.2, §3.3 | QA-DES002-002 *(planned Stage 12)* | GitHub-hosted only |
+| `db-migrate.yml` uses `runs-on: ubuntu-latest` | §3.2, §3.3 | QA-DES002-003 *(planned Stage 12)* | GitHub-hosted only |
+| No self-hosted runner label in any workflow file | §3.3 | QA-DES003-001 *(in Stage 6 catalog)* | Explicit prohibition |
+| Introducing self-hosted runner detected and fails CI | §3.3 | QA-DES003-002 *(planned Stage 12)* | Configuration check |
 
 #### DES-004 — Migration Execution Path
 
+> **Stage 6 catalog entry**: QA-DES004-001. Additional test IDs (QA-DES004-002 to -008) are defined below and MUST be implemented by qa-builder in Stage 12.
+
 | DES Commitment | DES Reference | Stage 6 Test IDs | Notes |
 |---|---|---|---|
-| `db-migrate.yml` uses `supabase db push --project-ref $SUPABASE_PROJECT_REF` | §3.4 | QA-DES004-001 | Exact approved command |
-| No `psql` direct connection in any workflow | §3.4 | QA-DES004-002 | Prohibited mechanism |
-| No manual SQL execution step in `db-migrate.yml` | §3.4 | QA-DES004-003 | Prohibited mechanism |
-| No local developer machine migration script path | §3.4 | QA-DES004-004 | Prohibited mechanism |
-| `SUPABASE_ACCESS_TOKEN` from env var; not hardcoded | §3.4 | QA-DES004-005 | Secret hygiene |
-| `SUPABASE_PROJECT_REF` from env secret; not hardcoded | §3.4 | QA-DES004-006 | Env scoping |
-| `supabase db push --linked` flag NOT used | §3.4 | QA-DES004-007 | Stateful link prohibited |
-| Migrations live under `supabase/migrations/` only | §3.4 | QA-DES004-008 | Standard path |
+| `db-migrate.yml` uses `supabase db push --project-ref $SUPABASE_PROJECT_REF` | §3.4 | QA-DES004-001 *(in Stage 6 catalog)* | Exact approved command |
+| No `psql` direct connection in any workflow | §3.4 | QA-DES004-002 *(planned Stage 12)* | Prohibited mechanism |
+| No manual SQL execution step in `db-migrate.yml` | §3.4 | QA-DES004-003 *(planned Stage 12)* | Prohibited mechanism |
+| No local developer machine migration script path | §3.4 | QA-DES004-004 *(planned Stage 12)* | Prohibited mechanism |
+| `SUPABASE_ACCESS_TOKEN` from env var; not hardcoded | §3.4 | QA-DES004-005 *(planned Stage 12)* | Secret hygiene |
+| `SUPABASE_PROJECT_REF` from env secret; not hardcoded | §3.4 | QA-DES004-006 *(planned Stage 12)* | Env scoping |
+| `supabase db push --linked` flag NOT used | §3.4 | QA-DES004-007 *(planned Stage 12)* | Stateful link prohibited |
+| Migrations live under `supabase/migrations/` only | §3.4 | QA-DES004-008 *(planned Stage 12)* | Standard path |
 
 #### DES-005 — Execution Boundaries
 
+> **Stage 6 catalog entry**: QA-DES005-001. Additional test IDs (QA-DES005-002 to -005) are defined below and MUST be implemented by qa-builder in Stage 12.
+
 | DES Commitment | DES Reference | Stage 6 Test IDs | Notes |
 |---|---|---|---|
-| `ci.yml` triggered on `pull_request` | §3.5 | QA-DES005-001 | CI gate on PRs |
-| `deploy-frontend.yml` NOT triggered on `pull_request` | §3.5 | QA-DES005-002 | No PR deployment |
-| `db-migrate.yml` uses `workflow_dispatch` only (no auto-trigger) | §3.5 | QA-DES005-003 | Manual-only trigger |
-| DB migration does NOT run on PR under any workflow | §3.5 | QA-DES005-004 | Trigger boundary |
-| `deploy-frontend.yml` depends on `ci.yml` success | §3.5 | QA-DES005-005 | Workflow dependency |
+| `db-migrate.yml` uses `workflow_dispatch` only (no auto-trigger) | §3.5 | QA-DES005-001 *(in Stage 6 catalog)* | Manual-only trigger |
+| `ci.yml` triggered on `pull_request` | §3.5 | QA-DES005-002 *(planned Stage 12)* | CI gate on PRs |
+| `deploy-frontend.yml` NOT triggered on `pull_request` | §3.5 | QA-DES005-003 *(planned Stage 12)* | No PR deployment |
+| DB migration does NOT run on PR under any workflow | §3.5 | QA-DES005-004 *(planned Stage 12)* | Trigger boundary |
+| `deploy-frontend.yml` depends on `ci.yml` success | §3.5 | QA-DES005-005 *(planned Stage 12)* | Workflow dependency |
 
 #### DES-006 — Safety Classification / Frontend DB Mutation Prohibition
 
+> **Stage 6 catalog entry**: QA-DES006-001. Additional test IDs (QA-DES006-002 to -005) are defined below and MUST be implemented by qa-builder in Stage 12.
+
 | DES Commitment | DES Reference | Stage 6 Test IDs | Notes |
 |---|---|---|---|
-| `deploy-frontend.yml` contains NO `supabase db push` step | §3.6 | QA-DES006-001 | Mutation prohibition |
-| `deploy-frontend.yml` contains NO `psql` step | §3.6 | QA-DES006-002 | Mutation prohibition |
-| `deploy-frontend.yml` does NOT reference `SUPABASE_SERVICE_ROLE_KEY` | §3.6 | QA-DES006-003 | Production DB write prohibition |
-| `ci.yml` schema verification is read-only (no DB mutation) | §3.6 | QA-DES006-004 | CI-safe classification |
-| PR adding DB mutation to `deploy-frontend.yml` fails CI and QP | §3.6 | QA-DES006-005 | Anti-drift enforcement |
+| `deploy-frontend.yml` contains NO `supabase db push` step | §3.6 | QA-DES006-001 *(in Stage 6 catalog)* | Mutation prohibition |
+| `deploy-frontend.yml` contains NO `psql` step | §3.6 | QA-DES006-002 *(planned Stage 12)* | Mutation prohibition |
+| `deploy-frontend.yml` does NOT reference `SUPABASE_SERVICE_ROLE_KEY` | §3.6 | QA-DES006-003 *(planned Stage 12)* | Production DB write prohibition |
+| `ci.yml` schema verification is read-only (no DB mutation) | §3.6 | QA-DES006-004 *(planned Stage 12)* | CI-safe classification |
+| PR adding DB mutation to `deploy-frontend.yml` fails CI and QP | §3.6 | QA-DES006-005 *(planned Stage 12)* | Anti-drift enforcement |
 
 #### DES-007 — Protected Environment Approval
 
+> **Stage 6 catalog entry**: QA-DES007-001. Additional test IDs (QA-DES007-002 to -005) are defined below and MUST be implemented by qa-builder in Stage 12.
+
 | DES Commitment | DES Reference | Stage 6 Test IDs | Notes |
 |---|---|---|---|
-| `deploy-frontend.yml` production job references `environment: production` | §3.7 | QA-DES007-001 | Protected env gate |
-| `db-migrate.yml` production job references `environment: production` | §3.7 | QA-DES007-002 | Protected env gate |
-| Removing `environment: production` is detected and fails | §3.7 | QA-DES007-003 | Anti-drift gate |
-| No un-gated automated production deployment occurs | §3.7 | QA-DES007-004 | Gate invariant |
-| No rollback of production environment without human gate | §3.7 | QA-DES007-005 | Automation prohibition |
+| `deploy-frontend.yml` production job references `environment: production` | §3.7 | QA-DES007-001 *(in Stage 6 catalog)* | Protected env gate |
+| `db-migrate.yml` production job references `environment: production` | §3.7 | QA-DES007-002 *(planned Stage 12)* | Protected env gate |
+| Removing `environment: production` is detected and fails | §3.7 | QA-DES007-003 *(planned Stage 12)* | Anti-drift gate |
+| No un-gated automated production deployment occurs | §3.7 | QA-DES007-004 *(planned Stage 12)* | Gate invariant |
+| No rollback of production environment without human gate | §3.7 | QA-DES007-005 *(planned Stage 12)* | Automation prohibition |
 
 #### DES-008 — Environment / Network Pre-Flight Fail-Safe
 
+> **Stage 6 catalog entry**: QA-DES008-001. Additional test IDs (QA-DES008-002 to -007) are defined below and MUST be implemented by qa-builder in Stage 12.
+
 | DES Commitment | DES Reference | Stage 6 Test IDs | Notes |
 |---|---|---|---|
-| Startup: missing `NEXT_PUBLIC_SUPABASE_URL` → explicit error | §3.8 | QA-DES008-001 | Names the missing variable |
-| Startup: missing `AIMC_API_BASE_URL` → explicit error | §3.8 | QA-DES008-002 | Names the missing variable |
-| `db-migrate.yml`: missing `SUPABASE_ACCESS_TOKEN` → abort immediately | §3.8 | QA-DES008-003 | No DB connection attempted |
-| `db-migrate.yml`: missing `SUPABASE_PROJECT_REF` → abort immediately | §3.8 | QA-DES008-004 | No DB connection attempted |
-| `deploy-frontend.yml`: missing `VERCEL_TOKEN` → abort immediately | §3.8 | QA-DES008-005 | No deploy attempted |
-| No silent-continue past any failed pre-flight check | §3.8 | QA-DES008-006 | "Fail loudly, fail early" |
-| Project ref mismatch → migration aborts | §3.8 | QA-DES008-007 | Cross-environment contamination prevention |
+| Startup: missing `NEXT_PUBLIC_SUPABASE_URL` → explicit error | §3.8 | QA-DES008-001 *(in Stage 6 catalog)* | Names the missing variable |
+| Startup: missing `AIMC_API_BASE_URL` → explicit error | §3.8 | QA-DES008-002 *(planned Stage 12)* | Names the missing variable |
+| `db-migrate.yml`: missing `SUPABASE_ACCESS_TOKEN` → abort immediately | §3.8 | QA-DES008-003 *(planned Stage 12)* | No DB connection attempted |
+| `db-migrate.yml`: missing `SUPABASE_PROJECT_REF` → abort immediately | §3.8 | QA-DES008-004 *(planned Stage 12)* | No DB connection attempted |
+| `deploy-frontend.yml`: missing `VERCEL_TOKEN` → abort immediately | §3.8 | QA-DES008-005 *(planned Stage 12)* | No deploy attempted |
+| No silent-continue past any failed pre-flight check | §3.8 | QA-DES008-006 *(planned Stage 12)* | "Fail loudly, fail early" |
+| Project ref mismatch → migration aborts | §3.8 | QA-DES008-007 *(planned Stage 12)* | Cross-environment contamination prevention |
 
 ---
 
@@ -371,16 +389,16 @@ The following items are intentionally deferred beyond Stage 6 and are NOT omissi
 
 | DES Field | Coverage | Finding |
 |---|---|---|
-| DES-001 (Surface Ownership) | ✅ COVERED — QA-DES001-001 to QA-DES001-005 | All 5 surfaces traced |
-| DES-002 (GitHub-Hosted Runner Authorization) | ✅ COVERED — QA-DES002-001 to QA-DES002-003 | All 3 workflows covered |
-| DES-003 (Self-Hosted Runner Prohibition) | ✅ COVERED — QA-DES003-001 to QA-DES003-002 | Prohibition and detection |
-| DES-004 (Migration Execution Path) | ✅ COVERED — QA-DES004-001 to QA-DES004-008 | All 8 migration constraints |
-| DES-005 (Execution Boundaries) | ✅ COVERED — QA-DES005-001 to QA-DES005-005 | All trigger boundary rules |
-| DES-006 (Safety Classification) | ✅ COVERED — QA-DES006-001 to QA-DES006-005 | Frontend mutation prohibition |
-| DES-007 (Protected Approval Boundaries) | ✅ COVERED — QA-DES007-001 to QA-DES007-005 | Protected env gate for both production workflows |
-| DES-008 (Environment/Network Validation) | ✅ COVERED — QA-DES008-001 to QA-DES008-007 | All pre-flight checks |
+| DES-001 (Surface Ownership) | ✅ COVERED — QA-DES001-001, QA-DES001-002 (Stage 6 catalog; DES001-003 to -005 planned Stage 12) | Surface ownership traced; additional surface tests in Stage 12 |
+| DES-002 (GitHub-Hosted Runner Authorization) | ✅ COVERED — QA-DES002-001 (Stage 6 catalog; DES002-002 to -003 planned Stage 12) | Runner authorization traced; per-workflow tests in Stage 12 |
+| DES-003 (Self-Hosted Runner Prohibition) | ✅ COVERED — QA-DES003-001 (Stage 6 catalog; DES003-002 planned Stage 12) | Prohibition traced; detection test in Stage 12 |
+| DES-004 (Migration Execution Path) | ✅ COVERED — QA-DES004-001 (Stage 6 catalog; DES004-002 to -008 planned Stage 12) | Migration command traced; full constraint set in Stage 12 |
+| DES-005 (Execution Boundaries) | ✅ COVERED — QA-DES005-001 (Stage 6 catalog; DES005-002 to -005 planned Stage 12) | Manual-only trigger traced; full boundary set in Stage 12 |
+| DES-006 (Safety Classification) | ✅ COVERED — QA-DES006-001 (Stage 6 catalog; DES006-002 to -005 planned Stage 12) | Frontend mutation prohibition traced; full prohibition set in Stage 12 |
+| DES-007 (Protected Approval Boundaries) | ✅ COVERED — QA-DES007-001 (Stage 6 catalog; DES007-002 to -005 planned Stage 12) | Protected env gate traced; full boundary set in Stage 12 |
+| DES-008 (Environment/Network Validation) | ✅ COVERED — QA-DES008-001 (Stage 6 catalog; DES008-002 to -007 planned Stage 12) | Pre-flight fail-safe traced; full pre-flight set in Stage 12 |
 
-**Stage 5a DES coverage: 8/8 fields covered. Zero silently omitted.**
+**Stage 5a DES coverage: 8/8 fields covered. Zero silently omitted. Stage 6 catalog holds representative tests; full test set for each DES field is defined in Section 2.2 and must be implemented by qa-builder in Stage 12.**
 
 ### 5.3 Overall Verdict
 

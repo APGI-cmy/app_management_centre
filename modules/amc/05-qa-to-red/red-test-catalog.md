@@ -956,7 +956,179 @@ Each test entry contains:
 
 ---
 
-## Section J — Deployment Strategy Tests (QA-DES family)
+## Section J — Real-Time Architecture Tests (QA-RT family)
+
+---
+
+### QA-RT-001 — Alert Changes Broadcast via Realtime Within ≤2 Seconds
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-RT-001 |
+| **Source Requirement** | Architecture §3.5, §6.1 |
+| **Source Artifact** | `architecture-specification.md` §3.5 |
+| **Scenario** | Alert status is changed (e.g., acknowledged) via the API; elapsed time to Realtime broadcast receipt on a subscribed client is measured |
+| **Expected Fail Condition** | Realtime broadcast does not arrive within 2 seconds of the INSERT/UPDATE commit; or broadcast is never sent |
+| **Expected Pass Condition** | Supabase Realtime subscription receives the alert status change event within ≤2 seconds of the database commit in an integration test environment |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | integration (Realtime SLA timing test) |
+
+---
+
+### QA-RT-002 — ARC Surface Updates Broadcast Within ≤2 Seconds
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-RT-002 |
+| **Source Requirement** | Architecture §3.5, §4.1 |
+| **Source Artifact** | `architecture-specification.md` §3.5 |
+| **Scenario** | An alert is acknowledged; the resulting ARC surface state change is measured for Realtime broadcast latency on `amc_arc_{user_id}` channel |
+| **Expected Fail Condition** | ARC surface Realtime broadcast does not arrive within 2 seconds of the triggering acknowledgment commit |
+| **Expected Pass Condition** | `amc_arc_{user_id}` subscription receives the ARC surface update event within ≤2 seconds of the database commit |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | integration (Realtime SLA timing test) |
+
+---
+
+### QA-RT-003 — Realtime Subscriptions Cleaned Up on Unmount
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-RT-003 |
+| **Source Requirement** | Architecture §3.5 |
+| **Source Artifact** | `architecture-specification.md` §3.5 |
+| **Scenario** | A component that subscribes to a Realtime channel is mounted, then unmounted; channel subscription state is inspected |
+| **Expected Fail Condition** | The Realtime subscription remains active after the component unmounts (subscription leak); a second mount creates a duplicate subscription |
+| **Expected Pass Condition** | Component subscribes on mount; subscription is unsubscribed and cleaned up on unmount; no active subscription exists after unmount |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | unit (Realtime subscription lifecycle test) |
+
+---
+
+### QA-RT-004 — Component State Updates Immediately on Realtime Event
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-RT-004 |
+| **Source Requirement** | Architecture §3.5 |
+| **Source Artifact** | `architecture-specification.md` §3.5 |
+| **Scenario** | A Realtime event is received; local component state is inspected before the next server-side fetch |
+| **Expected Fail Condition** | Component does not update local state on receipt of Realtime event; or renders a stale state alongside the new event without an explicit staleness indicator |
+| **Expected Pass Condition** | Component state updates immediately on Realtime event receipt; no contradictory (stale vs current) states are displayed simultaneously without an explicit indicator |
+| **Severity** | MEDIUM |
+| **Blocker** | NO |
+| **Required Evidence Type** | unit (Realtime event state update test) |
+
+---
+
+## Section K — Configuration Validation Tests (QA-CONFIG family)
+
+---
+
+### QA-CONFIG-001 — Startup Fails on Any Missing Required Environment Variable
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-CONFIG-001 |
+| **Source Requirement** | Architecture §3.3, TR-1505 |
+| **Source Artifact** | `architecture-specification.md` §3.3 |
+| **Scenario** | Application is started with one required environment variable unset (each variable tested in turn) |
+| **Expected Fail Condition** | Application starts and serves traffic despite the missing required variable |
+| **Expected Pass Condition** | Application startup fails immediately (non-zero exit or unrecoverable error) when any required environment variable is absent; no traffic is served |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | integration (startup validation test) |
+
+---
+
+### QA-CONFIG-002 — Startup Error Explicitly Names the Missing Variable
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-CONFIG-002 |
+| **Source Requirement** | Architecture §3.3 |
+| **Source Artifact** | `architecture-specification.md` §3.3 |
+| **Scenario** | Application is started with `AIMC_API_BASE_URL` unset; startup error output is inspected |
+| **Expected Fail Condition** | Startup error message is generic (e.g., "Configuration error", "Missing environment variable") without naming the specific missing variable |
+| **Expected Pass Condition** | Startup error message contains the exact variable name `AIMC_API_BASE_URL`; operators can identify the missing variable from the error alone |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | integration (startup error message test) |
+
+---
+
+### QA-CONFIG-003 — All 12 Required Environment Variables Cause Startup Failure if Absent
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-CONFIG-003 |
+| **Source Requirement** | Architecture §3.3 |
+| **Source Artifact** | `architecture-specification.md` §3.3 |
+| **Scenario** | Each of the 12 required environment variables is individually unset; startup behavior is tested for each |
+| **Expected Fail Condition** | Any of the 12 required variables does not cause startup failure when absent |
+| **Expected Pass Condition** | Startup fails with variable-naming error for each of the 12 required variables: `AIMC_API_BASE_URL`, `AIMC_SERVICE_TOKEN`, `AIMCC_API_BASE_URL`, `AIMCC_SERVICE_TOKEN`, `KUC_API_BASE_URL`, `KUC_SERVICE_TOKEN`, `KNOWLEDGE_API_BASE_URL`, `KNOWLEDGE_SERVICE_TOKEN`, `FOREMAN_API_BASE_URL`, `FOREMAN_SERVICE_TOKEN`, `SPECIALIST_AGENT_API_BASE_URL`, `SPECIALIST_AGENT_SERVICE_TOKEN` |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | integration (full required-variable coverage startup test) |
+
+---
+
+## Section L — Background Scheduler Tests (QA-SCHED family)
+
+---
+
+### QA-SCHED-001 — Scheduled Jobs Implemented as Supabase Edge Functions
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-SCHED-001 |
+| **Source Requirement** | Architecture §3.6 |
+| **Source Artifact** | `architecture-specification.md` §3.6 |
+| **Scenario** | AMC codebase is inspected for scheduled recurring operations (staleness detection, health poll, alert SLA monitoring, escalation) to confirm they exist as Edge Functions |
+| **Expected Fail Condition** | Any scheduled recurring operation is implemented inline in an API route handler, a React component lifecycle, or a client-side timer rather than as a Supabase Edge Function |
+| **Expected Pass Condition** | Each scheduled operation (`amc-arc-staleness-scheduler`, `amc-health-poll-scheduler`, `amc-alert-escalation-scheduler`) exists as a Supabase Edge Function in the `supabase/functions/` directory |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | static-analysis (Edge Function existence check) |
+
+---
+
+### QA-SCHED-002 — Scheduler Failure Generates Critical Alert With Function Name
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-SCHED-002 |
+| **Source Requirement** | Architecture §3.6 |
+| **Source Artifact** | `architecture-specification.md` §3.6 |
+| **Scenario** | A scheduled Edge Function is triggered and throws an unhandled exception; alert generation is verified |
+| **Expected Fail Condition** | Scheduler failure does not generate an alert; or generates an alert without the function name or `source_system: "amc_scheduler"` field |
+| **Expected Pass Condition** | On Edge Function failure: Critical alert inserted with `source_system: "amc_scheduler"` and `function_name: "<function-name>"` fields |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | integration (scheduler failure alert test) |
+
+---
+
+### QA-SCHED-003 — Scheduler Threshold and Timeout Values from Environment Variables
+
+| Field | Value |
+|---|---|
+| **Test ID** | QA-SCHED-003 |
+| **Source Requirement** | Architecture §3.6 |
+| **Source Artifact** | `architecture-specification.md` §3.6 |
+| **Scenario** | Scheduled Edge Function source code is inspected for hardcoded threshold or timeout values |
+| **Expected Fail Condition** | Any scheduler Edge Function contains hardcoded threshold values (e.g., `const STALENESS_THRESHOLD_HOURS = 24`) instead of reading from environment variables |
+| **Expected Pass Condition** | All scheduler threshold and timeout values are read from environment variables (e.g., `Deno.env.get('ARC_STALENESS_THRESHOLD_HOURS')`); unit test confirms different env values produce different threshold behavior |
+| **Severity** | HIGH |
+| **Blocker** | YES |
+| **Required Evidence Type** | unit (scheduler configuration test) |
+
+---
+
+## Section M — Deployment Strategy Tests (QA-DES family)
 
 ### QA-DES001-001 — `deploy-frontend.yml` Owns Frontend Deploy Exclusively
 
@@ -1038,11 +1210,11 @@ Each test entry contains:
 
 ---
 
-### QA-DES005-003 — `db-migrate.yml` Uses `workflow_dispatch` Only
+### QA-DES005-001 — `db-migrate.yml` Uses `workflow_dispatch` Only
 
 | Field | Value |
 |---|---|
-| **Test ID** | QA-DES005-003 |
+| **Test ID** | QA-DES005-001 |
 | **Source Requirement** | DES-005 |
 | **Source Artifact** | `deployment-execution-strategy.md` §3.5 |
 | **Scenario** | `db-migrate.yml` `on:` trigger block is inspected |
@@ -1102,7 +1274,7 @@ Each test entry contains:
 
 ---
 
-## Section K — Literal-Operability Tests (QA-LITOP family)
+## Section N — Literal-Operability Tests (QA-LITOP family)
 
 ---
 
@@ -1199,15 +1371,18 @@ Each test entry contains:
 | QA-DEGRADE (Degraded Mode) | QA-DEGRADE-001 to QA-DEGRADE-008 | 8 | 1 | 7 | 0 | 0 | 8 |
 | QA-ALERT (Alert Delivery) | QA-ALERT-001 to QA-ALERT-005 | 5 | 0 | 4 | 1 | 0 | 4 |
 | QA-SESSION (Session Restore) | QA-SESSION-001 to QA-SESSION-003 | 3 | 0 | 3 | 0 | 0 | 3 |
+| QA-RT (Real-Time) | QA-RT-001 to QA-RT-004 | 4 | 0 | 3 | 1 | 0 | 3 |
+| QA-CONFIG (Configuration Validation) | QA-CONFIG-001 to QA-CONFIG-003 | 3 | 0 | 3 | 0 | 0 | 3 |
+| QA-SCHED (Background Scheduler) | QA-SCHED-001 to QA-SCHED-003 | 3 | 0 | 3 | 0 | 0 | 3 |
 | QA-DES001 (Surface Ownership) | QA-DES001-001 to QA-DES001-002 | 2 | 0 | 2 | 0 | 0 | 2 |
 | QA-DES002/003 (Runner) | QA-DES002-001, QA-DES003-001 | 2 | 0 | 2 | 0 | 0 | 2 |
 | QA-DES004 (Migration) | QA-DES004-001 | 1 | 0 | 1 | 0 | 0 | 1 |
-| QA-DES005 (Trigger Boundaries) | QA-DES005-003 | 1 | 1 | 0 | 0 | 0 | 1 |
+| QA-DES005 (Trigger Boundaries) | QA-DES005-001 | 1 | 1 | 0 | 0 | 0 | 1 |
 | QA-DES006 (DB Mutation Prohibition) | QA-DES006-001 | 1 | 1 | 0 | 0 | 0 | 1 |
 | QA-DES007 (Protected Env) | QA-DES007-001 | 1 | 1 | 0 | 0 | 0 | 1 |
 | QA-DES008 (Pre-Flight Fail-Safe) | QA-DES008-001 | 1 | 0 | 1 | 0 | 0 | 1 |
 | QA-LITOP (Literal Operability) | QA-LITOP-001 to QA-LITOP-005 | 5 | 1 | 3 | 1 | 0 | 4 |
-| **TOTAL** | | **69** | **21** | **47** | **3** | **0** | **66** |
+| **TOTAL** | | **79** | **21** | **56** | **4** | **0** | **75** |
 
 > **Note**: This catalog presents representative test cases for each coverage family. Additional test cases will be defined by qa-builder when implementing the full test suite in Stage 12. The test IDs defined here are the minimum required set. Stage 12 qa-builder may add additional tests within each family but may not remove or skip any test case listed here without a CS2-approved deferral.
 
