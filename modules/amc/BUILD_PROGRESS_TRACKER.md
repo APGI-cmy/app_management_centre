@@ -191,7 +191,7 @@ deployment execution strategy must also be frozen.
 **Key Artifacts**:
 - [x] `qa-to-red-specification.md` v1.0 — Core Stage 6 spec: pass/fail philosophy, 4-level severity model, blocker/non-blocker rules, retest protocol, evidence requirements, 12 architecture-derived coverage families (§7), 7 DES-derived coverage families (§8), literal-operability checks (§9), anti-drift posture (§10), CS2 sign-off section. Produced 2026-04-27.
 - [x] `architecture-and-des-to-qa-traceability.md` v1.0 — Traceability matrix: all 12 Stage 5 Architecture domains and all 8 DES fields (DES-001 through DES-008) traced to Stage 6 red test IDs. Zero silently omitted. Explicit omission register for Stage 12 deferrals. Produced 2026-04-27.
-- [x] `red-test-catalog.md` v1.0 — 69 test cases across 17 families. Each entry: test ID, source artifact, scenario, exact fail condition, exact pass condition, severity, blocker classification, evidence type. Produced 2026-04-27.
+- [x] `red-test-catalog.md` v1.0 — 79 test cases across 20 families (21 CRITICAL / 54 HIGH / 4 MEDIUM; 75 blockers). Each entry: test ID, source artifact, scenario, exact fail condition, exact pass condition, severity, blocker classification, evidence type. Produced 2026-04-27.
 - [x] `qa-to-red-suite.md` — Superseded notice (canonical artifacts listed above)
 - [x] `qa-catalog-alignment.md` — Superseded notice (traceability covered by architecture-and-des-to-qa-traceability.md)
 
