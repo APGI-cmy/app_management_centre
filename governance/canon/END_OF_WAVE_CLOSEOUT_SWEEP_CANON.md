@@ -330,10 +330,11 @@ IAA MUST, as part of its standard audit, verify:
 
 1. The wave record §3c contains all five labeled fields from §5.1
 2. `closeout_sweep_performed = YES` — not blank, not FAIL
-3. `wave_checklist_retired_from_kickoff_state = YES` — not NO, not blank
-4. No surface in §1.3 Mandatory surfaces (CS-01, CS-06, CS-07, CS-08) shows FAIL or N/A
+3. `tracker_body_parity_verified` is present and set to `PASS`, `FAIL`, or `N/A`; if `N/A` is used, a documented reason MUST be provided; blank is a rejection condition
+4. `wave_checklist_retired_from_kickoff_state = YES` — not NO, not blank
+5. No surface in §1.3 Mandatory surfaces (CS-01, CS-06, CS-07, CS-08) shows FAIL or N/A
 
-If any check FAILS: IAA MUST issue REJECTION-PACKAGE citing EWCS-CLOSEOUT-INCOMPLETE.
+If any check FAILS, or if `tracker_body_parity_verified` is blank or uses `N/A` without a documented reason: IAA MUST issue REJECTION-PACKAGE citing EWCS-CLOSEOUT-INCOMPLETE.
 
 ---
 
