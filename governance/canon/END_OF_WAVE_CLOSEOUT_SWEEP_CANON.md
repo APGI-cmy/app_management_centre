@@ -75,7 +75,7 @@ Each surface produces a PASS or FAIL result. A single FAIL blocks the sweep.
 | CS-04 | **BUILD_PROGRESS_TRACKER header** | Top-of-file control fields (`Issue:`, `Last Updated`, `Updated By`) reflect the current governing wave and issue — see §2 for tracker header/body parity requirement |
 | CS-05 | **BUILD_PROGRESS_TRACKER stage rows** | Stage summary row for the active stage matches the stage detail section; no mismatch between summary status and detail status |
 | CS-06 | **Wave checklist** | All tasks ticked `[x]`; `qp_verdict` fields all show PASS (not PENDING); kickoff-state items retired per §3 |
-| CS-07 | **Wave record** | Sections 1–4 fully populated; governing issue consistent with §1a; §3a parity evidence complete; §3b ceremony evidence complete |
+| CS-07 | **Wave record** | Sections 1–4 fully populated; governing issue consistent with §1a; §3a parity evidence complete; §3b ceremony evidence complete; §3c closeout sweep evidence complete |
 | CS-08 | **Session memory** | `triggering_issue`, `outcome`, `coverage_summary`, `learning`, `wave_record_path` all populated; outcome reflects final result |
 | CS-09 | **Sign-off / approval surface** | If applicable: approval record updated; `approval_reference` field in wave record populated if approval was obtained this wave |
 | CS-10 | **AMC artifact index** | `AMC_PRE_BUILD_ARTIFACT_INDEX.md` or equivalent: stage row for the active stage updated to match tracker; governing issue aligned |
