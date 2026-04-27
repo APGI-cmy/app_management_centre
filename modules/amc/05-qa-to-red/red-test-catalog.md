@@ -1382,7 +1382,7 @@ Each test entry contains:
 | QA-DES007 (Protected Env) | QA-DES007-001 | 1 | 1 | 0 | 0 | 0 | 1 |
 | QA-DES008 (Pre-Flight Fail-Safe) | QA-DES008-001 | 1 | 0 | 1 | 0 | 0 | 1 |
 | QA-LITOP (Literal Operability) | QA-LITOP-001 to QA-LITOP-005 | 5 | 1 | 3 | 1 | 0 | 4 |
-| **TOTAL** | | **79** | **21** | **56** | **4** | **0** | **75** |
+| **TOTAL** | | **79** | **21** | **54** | **4** | **0** | **75** |
 
 > **Note**: This catalog presents representative test cases for each coverage family. Additional test cases will be defined by qa-builder when implementing the full test suite in Stage 12. The test IDs defined here are the minimum required set. Stage 12 qa-builder may add additional tests within each family but may not remove or skip any test case listed here without a CS2-approved deferral.
 
