@@ -1,7 +1,7 @@
 # Foreman-v2-agent — Tier 2 Knowledge Index
 
-> **Version**: 1.1.0 — AMC Consumer Copy
-> **Last Updated**: 2026-04-07
+> **Version**: 1.2.0 — AMC Consumer Copy
+> **Last Updated**: 2026-04-26
 > **Canon Home**: APGI-cmy/maturion-foreman-governance
 > **Canon Commit**: `038546344e8d67823c63464dc038841bd947405b` (maturion-isms)
 > **Staleness Policy**: Flag for refresh if canon version exceeds this by 1 minor version.

@@ -154,17 +154,18 @@ If this wave triggered more than one IAA invocation round (R2, R3, etc.):
 
 For each surface below, verify in order. Record PASS / FAIL / N/A.
 A single FAIL blocks the sweep — correct the failing surface and re-run from E-1.
+> ⚠️ CS-01, CS-06, CS-07, CS-08 are **MANDATORY** — they apply to every wave and MUST NOT be marked N/A.
 
-- [ ] **CS-01 PR body** — governing issue correct; status fields reflect final wave state; no kickoff-state text
-- [ ] **CS-02 Primary stage artifact header** — governing issue + stage fields current
-- [ ] **CS-03 Traceability artifact header** — matches primary artifact header (or N/A)
-- [ ] **CS-04 Tracker header** — `Issue:`, `Last Updated:`, `Updated By:` reflect current wave and issue
-- [ ] **CS-05 Tracker body** — stage summary row matches detail section; no header/body mismatch
-- [ ] **CS-06 Wave checklist** — all tasks ticked `[x]`; no `qp_verdict: PENDING`; wave-close summary appended
-- [ ] **CS-07 Wave record** — §1a, §3a, §3b, §3c all populated
-- [ ] **CS-08 Session memory** — all fields populated; outcome reflects final result
-- [ ] **CS-09 Sign-off / approval surface** — aligned to current wave (or N/A)
-- [ ] **CS-10 Artifact index** — stage row updated (or N/A)
+- [ ] **CS-01 PR body** *(MANDATORY — N/A not permitted)* — governing issue correct; status fields reflect final wave state; no kickoff-state text
+- [ ] **CS-02 Primary stage artifact header** — governing issue + stage fields current (or N/A with reason)
+- [ ] **CS-03 Traceability artifact header** — matches primary artifact header (or N/A with reason)
+- [ ] **CS-04 Tracker header** — `Issue:`, `Last Updated:`, `Updated By:` reflect current wave and issue (or N/A with reason)
+- [ ] **CS-05 Tracker body** — stage summary row matches detail section; no header/body mismatch (or N/A with reason)
+- [ ] **CS-06 Wave checklist** *(MANDATORY — N/A not permitted)* — all tasks ticked `[x]`; no `qp_verdict: PENDING`; wave-close summary appended
+- [ ] **CS-07 Wave record** *(MANDATORY — N/A not permitted)* — §1a, §3a, §3b, §3c all populated
+- [ ] **CS-08 Session memory** *(MANDATORY — N/A not permitted)* — all fields populated; outcome reflects final result
+- [ ] **CS-09 Sign-off / approval surface** — aligned to current wave (or N/A with reason)
+- [ ] **CS-10 Artifact index** — stage row updated (or N/A with reason)
 
 **E-2. Tracker Header/Body Parity Gate (EWCS-001 §2)**
 
