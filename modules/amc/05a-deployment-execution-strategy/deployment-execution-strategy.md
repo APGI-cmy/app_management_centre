@@ -19,11 +19,12 @@
 ---
 
 > **DERIVATION DECLARATION**
-> This Deployment Execution Strategy derives from the approved Stage 5 Architecture Specification
-> (`modules/amc/04-architecture/architecture-specification.md` v1.0) and all approved upstream truth
-> (Stages 1–4). It translates architectural deployment-shaping decisions into a frozen, explicit,
-> non-contradictory operational deployment model. It does not invent new product behavior. No
-> deployment execution decision may contradict or silently soften any Architecture or TRS constraint.
+> This Deployment Execution Strategy derives from the produced approval-pending Stage 5 Architecture
+> Specification (`modules/amc/04-architecture/architecture-specification.md` v1.0, awaiting CS2
+> approval) and all approved upstream truth (Stages 1–4). It translates architectural
+> deployment-shaping decisions into a frozen, explicit, non-contradictory operational deployment
+> model. It does not invent new product behavior. No deployment execution decision may contradict or
+> silently soften any Architecture or TRS constraint.
 > This document defines the deployment execution boundaries that Stage 6 QA-to-Red, Stage 7 PBFAG,
 > and Stage 8 Implementation Plan must honor. Decisions made here are binding on all downstream
 > stages unless explicitly amended with CS2 approval.
