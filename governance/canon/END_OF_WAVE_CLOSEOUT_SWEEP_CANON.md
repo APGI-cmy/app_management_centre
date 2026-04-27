@@ -305,7 +305,8 @@ fields below MUST be populated in the wave record **before QP PASS is declared**
 A wave with any of the following conditions MUST NOT be declared QP PASS or handover-ready:
 
 - `closeout_sweep_performed` is blank or shows FAIL
-- `tracker_header_parity_verified` is blank or PENDING
+- `tracker_header_parity_verified` is blank, PENDING, or FAIL
+- `tracker_body_parity_verified` is blank, PENDING, or FAIL
 - `wave_checklist_retired_from_kickoff_state` is NO or blank
 - `control_surfaces_finalized` is PARTIAL
 
