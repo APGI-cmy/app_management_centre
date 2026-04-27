@@ -59,7 +59,7 @@
 
 ### 1.1 Purpose
 
-This QA-to-Red Specification defines the exact red-test discipline, verification scope, fail conditions, and coverage model for the App Management Centre (AMC) Stage 6 QA-to-Red pack. It converts the approved Stage 5 Architecture and Stage 5a Deployment Execution Strategy into an approval-ready set of red test cases that must fail before any implementation begins and must pass to green after correct implementation.
+This QA-to-Red Specification defines the exact red-test discipline, verification scope, fail conditions, and coverage model for the App Management Centre (AMC) Stage 6 QA-to-Red pack. It converts the Stage 5 Architecture and Stage 5a Deployment Execution Strategy commitments, produced approval-pending, into an approval-ready set of red test cases that must fail before any implementation begins and must pass to green after correct implementation.
 
 The specification is the governing authority for:
 - What must be tested before AMC builders are appointed (Stage 11)
