@@ -1,6 +1,7 @@
 
-**Status**: CANONICAL | **Version**: 1.0.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.1.0 | **Authority**: CS2
 **Date**: 2026-04-26
+**Amended**: 2026-04-27 — v1.1.0: Added §8 Pre-PR Blocking Gate (producer-side prerequisite); added extended evidence fields `handover_bundle_self_consistent`, `governing_issue_role_registry_completed`, `stale_injector_check_performed`, `entry_condition_status`, `operational_sanity_check_performed` to wave record §3c requirements; added EWCS-PRE-PR-GATE-FAIL and EWCS-BUNDLE-INCONSISTENT violation classes; authority: CS2 — Issue #1139.
 **Canon ID**: EWCS-001
 **Issue**: app_management_centre#1134 — Hardening — Foreman/ceremony must enforce end-of-wave closeout sweep, tracker/header parity, and kickoff-state retirement
 
@@ -452,9 +453,72 @@ Wave record §3c evidence:
 | EWCS-CHECKLIST-KICKOFF-STATE | Wave checklist left in kickoff state (unchecked tasks or PENDING verdicts) at handover |
 | EWCS-SURFACE-PARTIAL | One or more control surfaces incomplete while others show final state |
 | EWCS-CEREMONY-EVIDENCE-MISSING | Wave record §3c not populated with all five labeled closeout evidence fields |
+| EWCS-PRE-PR-GATE-FAIL | Pre-PR blocking gate fields absent or non-pass when PR is opened as review-ready |
+| EWCS-BUNDLE-INCONSISTENT | Handover bundle fields are inconsistent — a surface shows finalized but a dependent surface does not |
+
+---
+
+## 8. Pre-PR Blocking Gate (Producer-Side Prerequisite)
+**Added**: v1.1.0 — Issue #1139
+
+### 8.1 Purpose
+
+This section hardens §5 by making the end-of-wave closeout discipline a **producer-side
+prerequisite to PR-open / ready-for-review** — not only something discovered during external
+review. Partial handover state MUST fail before the PR is opened.
+
+### 8.2 Extended Pre-PR Evidence Fields
+
+In addition to the five fields in §5.1, the wave record §3c MUST also contain the following
+fields before the PR may be opened as review-ready:
+
+| Field | Location | Required Value |
+|-------|----------|----------------|
+| `handover_bundle_self_consistent` | Wave record §3c | YES / NO — [list inconsistencies if NO] |
+| `governing_issue_role_registry_completed` | Wave record §3c | YES / NO |
+| `stale_injector_check_performed` | Wave record §3c | CLEAN / STALE — [list stale injectors found] |
+| `entry_condition_status` | Wave record §3c | NORMAL / EXCEPTION — [ref SECC-001] |
+| `operational_sanity_check_performed` | Wave record §3c | YES / N/A — [N/A only if no strategy docs in wave] |
+
+### 8.3 Blocking Rule
+
+A PR **MUST NOT** be opened as review-ready if any of the following are absent or non-pass:
+
+- Any of the five §5.1 fields is absent, blank, PENDING, or FAIL
+- `handover_bundle_self_consistent` is NO
+- `governing_issue_role_registry_completed` is NO
+- `entry_condition_status` is absent
+- `operational_sanity_check_performed` is absent (when strategy docs were produced)
+
+This rule applies **before** PR creation — not as a post-open check. An agent that opens
+a PR while the pre-PR blocking gate has not passed is in violation of EWCS-PRE-PR-GATE-FAIL.
+
+### 8.4 Relationship to PHCP-001
+
+`PR_HANDOVER_CANONICAL_PACKAGE.md` (PHCP-001) §4 is the canonical definition of the
+pre-PR blocking gate. This section (EWCS-001 §8) is the EWCS-specific enforcement of
+that gate, binding the closeout sweep evidence fields to the PHCP-001 blocking gate.
+
+Both PHCP-001 §4 and EWCS-001 §8 apply. They are not alternatives.
+
+### 8.5 ECAP and IAA Duty for Pre-PR Gate
+
+**ECAP** MUST verify:
+1. All §5.1 evidence fields are present and PASS
+2. All §8.2 extended fields are present and non-absent
+3. `handover_bundle_self_consistent: YES`
+4. `governing_issue_role_registry_completed: YES`
+5. `entry_condition_status` is populated
+
+If any field is absent or FAIL: record as C1 failure in the ECAP reconciliation summary
+and return to producing agent before the bundle is signed off.
+
+**IAA** MUST verify the same fields as part of its standard audit. If any field fails:
+IAA issues REJECTION-PACKAGE citing `EWCS-PRE-PR-GATE-FAIL`.
 
 ---
 
 **Canon ID**: EWCS-001
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-26
 **Authority**: CS2 — Issue #1134
+**Amended**: 2026-04-27 — v1.1.0: Added §8 Pre-PR Blocking Gate (producer-side prerequisite) with extended evidence fields `handover_bundle_self_consistent`, `governing_issue_role_registry_completed`, `stale_injector_check_performed`, `entry_condition_status`, `operational_sanity_check_performed`; added EWCS-PRE-PR-GATE-FAIL and EWCS-BUNDLE-INCONSISTENT to violation classes; authority: CS2 — Issue #1139.

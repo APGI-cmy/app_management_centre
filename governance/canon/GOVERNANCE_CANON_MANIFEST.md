@@ -3,9 +3,10 @@
 ## Status
 **Type**: Canonical Governance Index  
 **Authority**: Supreme - Canonical  
-**Version**: 1.0.1  
+**Version**: 1.0.2  
 **Effective Date**: 2026-01-05  
 **Amended**: 2026-04-22 — v1.0.1: Updated §3.4 entry for `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` from version 1.0.0 to 1.0.3, reflecting the M3 target-pointer verification hardening and `stage1_canonical_source` requirements introduced in this PR; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
+**Amended**: 2026-04-27 — v1.0.2: Added 7 new canon entries (PHCP-001, PHIRR-001, SHIRR-001, SECC-001, OSSCP-001, GIPC-001, EWCS-001); amended EWCS-001 v1.0.0→v1.1.0; updated §3.4, §4 totals, §7.1 audit trail; authority: CS2 — Issue #1139.  
 **Owner**: Maturion Engineering Leadership (Johan Ras)  
 **Purpose**: Authoritative index of all canonical governance standards with layer-down status
 
@@ -116,18 +117,25 @@ It serves to:
 | `CASCADING_FAILURE_CIRCUIT_BREAKER.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `CI_CONFIRMATORY_NOT_DIAGNOSTIC.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `COMMENT_ONLY_AGENT_SESSION_PROTOCOL.md` | 1.0.0 | PUBLIC_API | All Repos | 2026-04-08 |
+| `END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` | 1.1.0 | PUBLIC_API | FM App, All Repos | 2026-04-27 |
 | `FAILURE_PROMOTION_RULE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `FM_PREAUTH_CHECKLIST_CANON.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `GATE_PREDICTIVE_COMPLIANCE_ANALYSIS.md` | 1.0.0 | OPTIONAL | FM App | 2026-01-05 |
+| `GOVERNING_ISSUE_PARITY_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, All Repos | 2026-04-26 |
 | `IAA_PRE_BRIEF_PROTOCOL.md` | 1.2.2 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-08 |
 | `INITIALIZATION_COMPLETENESS_GATE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
-| `PRE_BUILD_REALITY_CHECK_CANON.md` | 1.1.0 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-05 |
+| `OPERATIONAL_STRATEGY_SANITY_CHECK_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, All Repos | 2026-04-27 |
 | `PR_GATE_EVALUATION_AND_ROLE_PROTOCOL.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `PR_GATE_PRECONDITION_RULE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
+| `PR_HANDOVER_CANONICAL_PACKAGE.md` | 1.0.0 | PUBLIC_API | FM App, All Repos | 2026-04-27 |
+| `PR_HANDOVER_ISSUE_ROLE_REGISTRY.md` | 1.0.0 | PUBLIC_API | FM App, All Repos | 2026-04-27 |
 | `PR_SCOPE_CONTROL_POLICY.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `QA_CATALOG_ALIGNMENT_GATE_CANON.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `SCOPE_TO_DIFF_RULE.md` | 1.0.0 | PUBLIC_API | FM App, SlotMaster | 2026-01-05 |
 | `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` | 1.0.3 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-22 |
+| `STAGE_ENTRY_CONDITION_EXCEPTION_CANON.md` | 1.0.0 | PUBLIC_API | FM App, All Repos | 2026-04-27 |
+| `STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md` | 1.0.0 | INTERNAL | N/A | 2026-04-27 |
+| `PRE_BUILD_REALITY_CHECK_CANON.md` | 1.1.0 | PUBLIC_API | FM App, SlotMaster, All Repos | 2026-04-05 |
 
 ### 3.5 Governance & Layerdown Models (PUBLIC_API)
 
@@ -274,12 +282,12 @@ These policies are located in `governance/policy/` and establish constitutional 
 
 ## 4. Governance Public API Summary
 
-**Total Canon Files**: 95  
+**Total Canon Files**: 102
 **Total Policy Files**: 15  
-**Combined Total**: 110  
-**PUBLIC_API**: 81 files (73%)  
-**OPTIONAL**: 16 files (15%)  
-**INTERNAL**: 13 files (12%)  
+**Combined Total**: 117  
+**PUBLIC_API**: 88 files (75%)  
+**OPTIONAL**: 16 files (14%)  
+**INTERNAL**: 14 files (11%)  
 **DEPRECATED**: 0 files (0%)
 
 ### 4.1 Critical Path Canon (Must-Have for Downstream Repos)
@@ -356,6 +364,7 @@ When a breaking change is required:
 | 2026-04-05 | Added PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0 to §3.2; updated totals (99→101) | governance-repo-administrator-v2 (issue #1319) |
 | 2026-04-05 | Canon documentation updates for 12-stage pre-build model: APP_DESCRIPTION_TEMPLATE.md v1.0→v1.1; PRE_BUILD_REALITY_CHECK_CANON.md v1.0.0→v1.1.0 added to §3.4; new UX_WORKFLOW_WIRING_SPEC_TEMPLATE.md v1.0 and BUILDER_CHECKLIST_TEMPLATE.md v1.0 added to §3.14; APP_DESCRIPTION_CREATION_CHECKLIST.md date updated; totals updated (101→104) | governance-repo-administrator-v2 (issue #1320) |
 | 2026-04-15 | Added §3.15 AIMC Platform Models (7 files); updated totals 93→95 canon files, combined 108→110; SPECIALIST_KNOWLEDGE_MANAGEMENT.md amended with Source Model Governance cross-reference | governance-repo-administrator-v2 (issue #1343) |
+| 2026-04-27 | Added §3.4 entries: PR_HANDOVER_CANONICAL_PACKAGE.md (PHCP-001), PR_HANDOVER_ISSUE_ROLE_REGISTRY.md (PHIRR-001), STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md (SHIRR-001), STAGE_ENTRY_CONDITION_EXCEPTION_CANON.md (SECC-001), OPERATIONAL_STRATEGY_SANITY_CHECK_PROTOCOL.md (OSSCP-001); also registered GOVERNING_ISSUE_PARITY_PROTOCOL.md (GIPC-001) and END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md (EWCS-001); EWCS-001 amended v1.0.0→v1.1.0 (pre-PR blocking gate §8); updated totals 95→102 canon files, combined 110→117 | foreman-v2-agent (issue #1139) |
 
 ### 7.2 Layer-Down Completion Tracking
 

@@ -151,15 +151,16 @@ jobs:
               : '\n\n> ℹ️ No `wave-current-tasks.md` found — read `.agent-workspace/foreman-v2/memory/` latest session for wave state.';
 
             const obligationLines = [
-              '1. ✅ **IAA Invocation** (Phase 4 Step 4.3b): Has this PR received an `ASSURANCE-TOKEN`?',
-              '   - If NO → invoke IAA now: `task(agent_type: "independent-assurance-agent")` — provide PREHANDOVER proof + session memory + evidence bundle',
-              '   - If you received a `REJECTION-PACKAGE` → fix all cited findings, regenerate PREHANDOVER proof (new commit), re-invoke IAA directly (you own this loop)',
-              '2. ✅ **Token Ceremony** (Phase 4 Step 4.3c): Is the IAA token committed at `.agent-admin/assurance/iaa-token-*.md` with a non-empty `PHASE_B_BLOCKING_TOKEN:`?',
-              '3. ✅ **Pre-IAA Commit Gate** (Phase 4 Step 4.3a): Are PREHANDOVER proof, session memory, SCOPE_DECLARATION, and parking station all committed before IAA invocation?',
-              '4. ✅ **§4.3 Parity**: Has the merge gate parity check been run locally? All required checks must pass before Phase 4.',
-              '5. ✅ **QP**: Has any builder returned a delivery requiring Quality-Professor review? If yes → execute QP gate now (Phase 3 Step 3.5).',
-              '6. 🚫 **NEVER write production code, schemas, migrations, or tests** — if you find yourself editing source files, STOP and delegate to the correct builder (NO-IMPLEMENT-001).',
-              `7. ✅ **OPOJD**: One pass, one job done. If this wave is complete → write session memory, update \`wave-current-tasks.md\` to DONE, and close cleanly.${tasksSection}`,
+              '1. ✅ **IAA Invocation** (Phase 4 §4.4): Has this PR received an `ASSURANCE-TOKEN`?',
+              '   - If NO → invoke IAA now: `task(agent_type: "independent-assurance-agent")` — provide wave record path + session memory path + evidence bundle',
+              '   - If you received a `REJECTION-PACKAGE` → fix all cited findings, re-commit, re-invoke IAA directly (you own this loop)',
+              '2. ✅ **Token Ceremony** (Phase 4 §4.5): Is the `PHASE_B_BLOCKING_TOKEN` recorded in **wave record section 5** (`.agent-admin/wave-records/amc-wave-record-{slug}-{date}.md`)? ⚠️ Do NOT create a standalone `.agent-admin/assurance/iaa-token-*.md` file — that artifact location is retired (AMC 90/10 Protocol — Issue #1063). Token lives in wave record section 5 only.',
+              '3. ✅ **Pre-IAA Commit-State Gate** (Phase 4 §4.3a): Are the wave record (sections 1–4), session memory, and evidence artifacts all committed before IAA invocation?',
+              '4. ✅ **Pre-PR Blocking Gate** (PHCP-001 §4): Are `closeout_sweep_performed`, `wave_checklist_retired_from_kickoff_state`, `control_surfaces_finalized`, `handover_bundle_self_consistent`, and `governing_issue_role_registry_completed` all `YES` in the wave record §3c? A PR MUST NOT be opened as review-ready if these are absent or non-pass.',
+              '5. ✅ **§4.3 Parity**: Has the merge gate parity check been run locally? All required checks must pass before Phase 4.',
+              '6. ✅ **QP**: Has any builder returned a delivery requiring Quality-Professor review? If yes → execute QP gate now (Phase 3 Step 3.5).',
+              '7. 🚫 **NEVER write production code, schemas, migrations, or tests** — if you find yourself editing source files, STOP and delegate to the correct builder (NO-IMPLEMENT-001).',
+              `8. ✅ **OPOJD**: One pass, one job done. If this wave is complete → write session memory, ensure wave record sections 1–5 complete, and close cleanly.${tasksSection}`,
             ].join('\n');
 
             const body = [

@@ -86,33 +86,35 @@ jobs:
             core.setOutput('wave_num', waveNum);
             core.setOutput('tasks_snippet', tasksSnippet);
 
-            // Idempotency guard: scan assurance dir for any non-SUPERSEDED pre-brief artifact
+            // Idempotency guard: scan wave-records dir for a wave record containing this wave's pre-brief
+            // (AMC 90/10 Protocol — Issue #1063: pre-brief now lives in wave record section 2, not standalone file)
             let prebriefExists = false;
             try {
-              const { data: assuranceContents } = await github.rest.repos.getContent({
+              const { data: waveRecordsContents } = await github.rest.repos.getContent({
                 owner, repo,
-                path: '.agent-admin/assurance',
+                path: '.agent-admin/wave-records',
                 ref: headSha,
               });
-              const prebriefFiles = Array.isArray(assuranceContents)
-                ? assuranceContents.filter(
+              const waveRecordFiles = Array.isArray(waveRecordsContents)
+                ? waveRecordsContents.filter(
                     (f) => f.type === 'file' &&
-                           f.name.startsWith('iaa-prebrief-') &&
+                           f.name.startsWith('amc-wave-record-') &&
                            f.name.endsWith('.md')
                   )
                 : [];
-              for (const file of prebriefFiles) {
+              for (const file of waveRecordFiles) {
                 const { data: fd } = await github.rest.repos.getContent({
                   owner, repo, path: file.path, ref: headSha,
                 });
                 const fc = Buffer.from(fd.content, 'base64').toString('utf8');
-                if (!fc.toLowerCase().includes('superseded')) {
+                // Pre-brief exists if wave record has a section 2 with pre-brief content
+                if (fc.toLowerCase().includes('section 2') && fc.toLowerCase().includes('pre-brief')) {
                   prebriefExists = true;
                   break;
                 }
               }
             } catch (_e) {
-              // Assurance directory absent — prebriefExists stays false
+              // Wave records directory absent — prebriefExists stays false
             }
             core.setOutput('prebrief_exists', String(prebriefExists));
 
@@ -174,10 +176,11 @@ jobs:
             echo "$SNIPPET" >> "$GITHUB_OUTPUT"
             echo "EOF_TASKS" >> "$GITHUB_OUTPUT"
 
-            # Idempotency guard — scoped to THIS wave's pre-brief file
-            ASSURANCE_DIR=".agent-admin/assurance"
-            PREBRIEF_FILE="${ASSURANCE_DIR}/iaa-prebrief-wave-${WAVE_NUM}.md"
-            if [ "$WAVE_NUM" != "unknown" ] && [ -f "$PREBRIEF_FILE" ] && ! grep -qi "SUPERSEDED" "$PREBRIEF_FILE" 2>/dev/null; then
+            # Idempotency guard — check wave records dir for pre-brief in wave record section 2
+            # (AMC 90/10 Protocol — Issue #1063: pre-brief now lives in wave record section 2)
+            WAVE_RECORDS_DIR=".agent-admin/wave-records"
+            if [ -d "$WAVE_RECORDS_DIR" ] && \
+               grep -rl "section 2" "$WAVE_RECORDS_DIR"/amc-wave-record-*.md 2>/dev/null | xargs grep -li "pre-brief" 2>/dev/null | head -1 | grep -q .; then
               echo "prebrief_exists=true" >> "$GITHUB_OUTPUT"
             else
               echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
@@ -206,10 +209,11 @@ jobs:
             echo "$SNIPPET" >> "$GITHUB_OUTPUT"
             echo "EOF_TASKS" >> "$GITHUB_OUTPUT"
 
-            # Idempotency guard — scoped to THIS wave's pre-brief file
-            ASSURANCE_DIR=".agent-admin/assurance"
-            PREBRIEF_FILE="${ASSURANCE_DIR}/iaa-prebrief-wave-${WAVE_NUM}.md"
-            if [ "$WAVE_NUM" != "unknown" ] && [ -f "$PREBRIEF_FILE" ] && ! grep -qi "SUPERSEDED" "$PREBRIEF_FILE" 2>/dev/null; then
+            # Idempotency guard — check wave records dir for pre-brief in wave record section 2
+            # (AMC 90/10 Protocol — Issue #1063: pre-brief now lives in wave record section 2)
+            WAVE_RECORDS_DIR=".agent-admin/wave-records"
+            if [ -d "$WAVE_RECORDS_DIR" ] && \
+               grep -rl "section 2" "$WAVE_RECORDS_DIR"/amc-wave-record-*.md 2>/dev/null | xargs grep -li "pre-brief" 2>/dev/null | head -1 | grep -q .; then
               echo "prebrief_exists=true" >> "$GITHUB_OUTPUT"
             else
               echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
@@ -219,8 +223,6 @@ jobs:
             echo "wave_num=unknown" >> "$GITHUB_OUTPUT"
             echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
           fi
-
-      - name: Skip if Pre-Brief already exists for this wave (push)
         if: github.event_name == 'push' && steps.wave_tasks.outputs.prebrief_exists == 'true'
         env:
           WAVE_NUM_NOTICE: ${{ steps.wave_tasks.outputs.wave_num }}
@@ -357,16 +359,14 @@ jobs:
                 '### Pre-Brief Invocation Steps (foreman-v2-agent contract Phase 1 Step 1.8)',
                 '',
                 '1. Invoke IAA: `task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: ' + waveNum + ')`',
-                `2. Wait for IAA to publish: \`.agent-admin/assurance/iaa-prebrief-wave${waveNum}.md\``,
-                '3. Read the Pre-Brief in full — it is your QA checklist for this wave',
-                '4. Do NOT delegate to any builder until the Pre-Brief exists on this branch',
+                '2. IAA publishes the Pre-Brief in **wave record section 2** (`.agent-admin/wave-records/amc-wave-record-{slug}-{date}.md`). ⚠️ Do NOT create a standalone `.agent-admin/assurance/iaa-prebrief-*.md` file — that artifact location is retired (AMC 90/10 Protocol — Issue #1063).',
+                '3. Read the Pre-Brief (wave record section 2) in full — it is your QA checklist for this wave',
+                '4. Do NOT delegate to any builder until the Pre-Brief is recorded in the wave record',
                 '',
                 '**Wave tasks (from `wave-current-tasks.md`)**:',
                 taskSection,
                 '',
-                `The governance-watchdog Gap 2 will block the PR from proceeding to review until the Pre-Brief artifact exists at \`.agent-admin/assurance/iaa-prebrief-<slug>.md\`.`,
-                '',
-                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
+                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 2 §2.4 | PHCP-001*',
               ].join('\n'),
             });
 
@@ -421,7 +421,7 @@ jobs:
                 '@copilot — Pre-Brief invocation requested via `/iaa-prebrief` comment.',
                 '',
                 '1. Invoke IAA: `task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: ' + waveNum + ')`',
-                `2. Commit Pre-Brief to: \`.agent-admin/assurance/iaa-prebrief-wave${waveNum}.md\``,
+                '2. IAA records the Pre-Brief in **wave record section 2** (`.agent-admin/wave-records/amc-wave-record-{slug}-{date}.md`). ⚠️ Do NOT commit a standalone `.agent-admin/assurance/iaa-prebrief-*.md` — that location is retired.',
                 '3. Read in full before any builder delegation',
                 '',
                 '**Current wave tasks:**',
@@ -474,7 +474,7 @@ jobs:
                 '',
                 '**Required before builder delegation:**',
                 '1. Invoke IAA: `task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: ' + waveNum + ')`',
-                `2. Commit: \`.agent-admin/assurance/iaa-prebrief-wave${waveNum}.md\``,
+                '2. IAA records the Pre-Brief in **wave record section 2** (`.agent-admin/wave-records/amc-wave-record-{slug}-{date}.md`). ⚠️ Do NOT create a standalone `.agent-admin/assurance/iaa-prebrief-*.md` — that location is retired (AMC 90/10 Protocol — Issue #1063).',
                 '',
                 '**Current wave tasks:**',
                 taskSection,
