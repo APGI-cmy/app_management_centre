@@ -2,13 +2,13 @@
 
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
-**Last Updated**: 2026-04-26  
-**Updated By**: foreman-v2-agent (wave: amc-governance-deployment-oversight-20260426 — Stage 5a Deployment Execution Strategy defined; governance oversight recorded; issue #1133; prior: amc-stage5-architecture-20260426 — Stage 5 Architecture produced; Stage 4 TRS treated as approved per CS2 #1131; issue #1131)
+**Last Updated**: 2026-04-27  
+**Updated By**: foreman-v2-agent (wave: amc-stage5a-deployment-execution-strategy-20260427 — Stage 5a artifacts produced approval-pending; all 8 DES fields answered; issue #1137; prior: amc-governance-deployment-oversight-20260426 — Stage 5a defined; amc-stage5-architecture-20260426 — Stage 5 Architecture produced)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Issue**: [app_management_centre#1133](https://github.com/APGI-cmy/app_management_centre/issues/1133)  
+> **Issue**: [app_management_centre#1137](https://github.com/APGI-cmy/app_management_centre/issues/1137)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 > ⚠️ **GOVERNANCE OVERSIGHT NOTE (issue #1133, 2026-04-26)**: A mandatory deployment execution
@@ -39,7 +39,7 @@
 | 3 | FRS | ✅ COMPLETE — CS2 APPROVED | CS2-approved for Stage 4 progression (issue #1123). Harmonization pass v1.1 applied 2026-04-23 (FR-1800 ARC Governance Console family; FR-606/FR-607 quota management). Canonical source: `modules/amc/02-frs/`. |
 | 4 | TRS | ✅ TREATED AS APPROVED | Produced approval-ready 2026-04-23, hardened to v1.1 2026-04-23. CS2 authorized Stage 5 progression per issue #1131 ("Stage 4 is now being treated as approved by CS2 and Stage 5 becomes the active governed stage"). Canonical source: `modules/amc/03-trs/`. |
 | 5 | Architecture | 🟡 IN PROGRESS — Produced Approval-Pending | Stage 5 Architecture Specification v1.0 produced 2026-04-26. Awaiting CS2 approval. Canonical artifact: `modules/amc/04-architecture/architecture-specification.md`. |
-| **5a** | **Deployment Execution Strategy** | **📋 DEFINED — Awaiting Stage 5 Approval** | Stage 5a formally defined 2026-04-26 (issue #1133). Definition: `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md`. 🔴 BLOCKED — requires Stage 5 complete and CS2-approved. |
+| **5a** | **Deployment Execution Strategy** | **🟡 IN PROGRESS — Produced Approval-Pending** | Stage 5a artifacts produced 2026-04-27 (wave amc-stage5a-deployment-execution-strategy-20260427, issue #1137). All 8 DES fields answered. Awaiting CS2 approval. Artifacts: `modules/amc/05a-deployment-execution-strategy/`. |
 | 6 | QA-to-Red | ⬜ Not Started | 🔴 BLOCKED — requires Stage 5 complete and approved, **and Stage 5a complete and approved**. |
 | 7 | PBFAG | ⬜ Not Started | 🔴 BLOCKED |
 | 8 | Implementation Plan | ⬜ Not Started | 🔴 BLOCKED — must reference approved Stage 5a Deployment Execution Strategy. |
@@ -160,9 +160,9 @@ system behaviour are permitted.
 
 ### Stage 5a — Deployment Execution Strategy
 
-**Status**: 📋 DEFINED — Awaiting Stage 5 CS2 Approval  
+**Status**: 🟡 IN PROGRESS — Produced Approval-Pending (2026-04-27)  
 **Location**: `modules/amc/05a-deployment-execution-strategy/`  
-**Entry Condition**: Stage 5 complete and **CS2 approved**  
+**Entry Condition**: Stage 5 complete and **CS2 approved** — ⚠️ Stage 5 approval still pending; Stage 5a produced in parallel per CS2 authorization (issue #1133)  
 **Definition Authority**: `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` (AMC-GOV-OVERSIGHT-001 v1.0, 2026-04-26, issue #1133)  
 **Objective**: Freeze the deployment execution strategy for AMC before QA-to-Red begins. Produce
 a CS2-approved artifact that explicitly defines: workflow surface ownership, runner authorization
@@ -170,13 +170,16 @@ boundaries, migration execution path, CI/preview/production execution boundaries
 classification of each surface, manual/protected approval requirements, and environment/network
 assumption validation approach. Architecture/platform topology alone is insufficient — the
 deployment execution strategy must also be frozen.  
-**Key Artifacts Required**:
-- [ ] `deployment-execution-strategy.md` — Primary Stage 5a artifact: all 8 mandatory DES fields answered (DES-001 through DES-008), no TBD fields, CS2 sign-off section
-- [ ] `deployment-surface-ownership-table.md` — Supporting artifact: surface ownership matrix for frontend deploy, backend deploy, DB migration, schema verification, live operational validation
-- [ ] `runner-and-environment-constraints.md` — Supporting artifact: runner type requirements per surface; protected environment configuration
-**Prerequisites**: Stage 5 complete and **CS2 approved** — 🔴 BLOCKED pending Stage 5 CS2 approval  
+**Key Artifacts Created**:
+- [x] `deployment-execution-strategy.md` — Primary Stage 5a artifact v1.0 (produced 2026-04-27): all 8 mandatory DES fields answered (DES-001 through DES-008), no TBD fields, CS2 sign-off section. DES-001: 5 surfaces owned. DES-002: GitHub-hosted runner authorization defined. DES-003: No self-hosted runners required. DES-004: Supabase CLI (`supabase db push`) frozen as sole migration mechanism. DES-005: PR/preview/production/manual dispatch boundaries defined. DES-006: CI-safe/preview-safe/live-only classification table. DES-007: Production environment approval gate, manual validation. DES-008: Pre-flight env var, Supabase CLI, Vercel credential checks.
+- [x] `deployment-surface-ownership-table.md` — Supporting artifact v1.0 (produced 2026-04-27): 5-surface ownership matrix; SURF-001–005; trigger class; environment scope; approval requirement; runner type. No unowned surface.
+- [x] `runner-and-environment-constraints.md` — Supporting artifact v1.0 (produced 2026-04-27): runner type (GitHub-hosted only); protected environment configuration; CI-safe/preview-safe/live-only safety table; environment prerequisites and network assumptions.
+**Wave**: amc-stage5a-deployment-execution-strategy-20260427  
+**Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)  
+**CS2 Authorization**: issue #1133  
+**Prerequisites**: Stage 5 complete and **CS2 approved** — Stage 5 approval pending; Stage 5a produced per authorized issue scope  
 **Approval Required**: Yes — CS2 approval required before Stage 6 (QA-to-Red) may begin  
-**Note — Mandatory Content**: See §3.1 of `DEPLOYMENT_STRATEGY_OVERSIGHT.md` for the 8 mandatory fields. No field may be left TBD. A deployment execution strategy with any TBD mandatory field is a blocking defect and will cause QP FAIL.
+**Note — Mandatory Content**: All 8 DES fields answered per §3.1 of `DEPLOYMENT_STRATEGY_OVERSIGHT.md`. No field left TBD. Single approved migration mechanism: Supabase CLI.
 
 ---
 
@@ -249,10 +252,9 @@ deployment execution strategy must also be frozen.
 3. ✅ Stage 3 complete — FRS CS2-approved for Stage 4 progression (issue #1123, 2026-04-23). Harmonization pass v1.1 applied 2026-04-23.
 4. ✅ Stage 4 TRS artifacts produced approval-ready and hardened to v1.1 (issue #1125, hardened in #1127, 2026-04-23). CS2 authorized Stage 5 progression per issue #1131 — Stage 4 treated as approved.
 5. 🟡 Stage 5 Architecture Specification v1.0 produced approval-pending (wave amc-stage5-architecture-20260426, 2026-04-26).
-6. 📋 Stage 5a Deployment Execution Strategy formally defined (wave amc-governance-deployment-oversight-20260426, 2026-04-26, issue #1133). See `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md`.
-7. ▶️ CS2 to review and approve Stage 5 Architecture before Stage 5a (Deployment Execution Strategy) production begins.
-8. ▶️ After Stage 5 approval: produce Stage 5a Deployment Execution Strategy artifacts per `DEPLOYMENT_STRATEGY_OVERSIGHT.md` §2 and §3.
-9. ▶️ After Stage 5a approval: Stage 6 (QA-to-Red) may begin.
+6. 🟡 Stage 5a Deployment Execution Strategy artifacts produced approval-pending (wave amc-stage5a-deployment-execution-strategy-20260427, 2026-04-27, issue #1137). All 8 DES fields answered. See `modules/amc/05a-deployment-execution-strategy/`.
+7. ▶️ CS2 to review and approve Stage 5 Architecture and Stage 5a Deployment Execution Strategy.
+8. ▶️ After Stage 5 and Stage 5a approval: Stage 6 (QA-to-Red) may begin.
 
 ---
 
@@ -260,7 +262,10 @@ deployment execution strategy must also be frozen.
 
 - [PRE_BUILD_STAGE_MODEL_CANON.md](../../governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md)
 - [APP_DESCRIPTION_REQUIREMENT_POLICY.md](../../governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md)
-- [DEPLOYMENT_STRATEGY_OVERSIGHT.md](./governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md) — 📋 Stage 5a definition, oversight record, anti-drift rules (issue #1133, 2026-04-26)
+- [DEPLOYMENT_STRATEGY_OVERSIGHT.md](./governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md) — ✅ Stage 5a definition, oversight record, anti-drift rules (issue #1133, 2026-04-26)
+- [deployment-execution-strategy.md](./05a-deployment-execution-strategy/deployment-execution-strategy.md) — 🟡 Stage 5a primary artifact (produced approval-pending, 2026-04-27; all 8 DES fields; wave amc-stage5a-deployment-execution-strategy-20260427; governing delivery issue: #1137; CS2 authorization: #1133)
+- [deployment-surface-ownership-table.md](./05a-deployment-execution-strategy/deployment-surface-ownership-table.md) — 🟡 Stage 5a supporting artifact (produced approval-pending, 2026-04-27)
+- [runner-and-environment-constraints.md](./05a-deployment-execution-strategy/runner-and-environment-constraints.md) — 🟡 Stage 5a supporting artifact (produced approval-pending, 2026-04-27)
 - [app-description.md](./00-app-description/app-description.md) — ✅ approved Stage 1 canonical source (harmonization pass v1.1 applied 2026-04-23)
 - [app-description-approval.md](./00-app-description/app-description-approval.md) — Stage 1 formal approval record
 - [ux-workflow-wiring-spec.md](./01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md) — ✅ Stage 2 artifact (CS2-approved, issue #1121; harmonization pass v1.1 applied 2026-04-23)
