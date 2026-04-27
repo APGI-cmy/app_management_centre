@@ -135,7 +135,7 @@ Each deployment surface has exactly one owning workflow or manual process. No su
 
 GitHub-hosted runners are authorized for CI (PR checks) and for triggering Vercel deployments to the **staging** and **production** environments. However:
 
-- **GitHub-hosted runners may NOT directly access or mutate the production Supabase database** (no direct `psql`, no Supabase service role key usage against production).
+- **GitHub-hosted runners may NOT directly access or mutate the production Supabase database except via the explicitly authorized, approval-gated production migration workflow** (no direct `psql`, no ad hoc production queries, no Supabase service role key usage against production outside `db-migrate.yml` approved through the `production` protected environment).
 - **GitHub-hosted runners may NOT run database migrations against production without a GitHub protected environment approval gate** (`production` environment, §3.7).
 - **GitHub-hosted runners ARE authorized** to execute the `deploy-frontend.yml` workflow to Vercel production, subject to the `production` protected environment approval gate.
 - **GitHub-hosted runners ARE authorized** to execute `db-migrate.yml` against the staging Supabase project (no approval gate required for staging).
