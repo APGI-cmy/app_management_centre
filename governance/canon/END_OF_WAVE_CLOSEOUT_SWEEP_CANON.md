@@ -55,9 +55,9 @@ The sweep is:
 ### 1.2 When to Execute
 
 The closeout sweep is executed by the Foreman (or ECAP acting as ceremony admin) at:
+- **After the wave checklist has been completed and retired into close state** (all items ticked; no `PENDING` items remain)
 - **Before QP verdict is recorded** in the wave record
-- **Before the wave checklist is marked complete** (all items ticked)
-- **Before the PR is opened or presented as merge-ready**
+- **Before the wave is declared handover-ready or the PR is opened/presented as merge-ready**
 
 The sweep is executed once per wave at wave close. If any sweep item FAILS, the failing
 surface must be corrected and the sweep re-run from the beginning.
