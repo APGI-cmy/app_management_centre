@@ -209,42 +209,30 @@
 
 ## Section 5 — IAA Final Assurance
 
-> *Populated by independent-assurance-agent — session-059 — 2026-04-27.*
+> *Last updated by independent-assurance-agent — session-061 — 2026-04-27.*
+> *Prior sessions: session-059 REJECTION-PACKAGE (2 SUBSTANTIVE), session-060 REJECTION-PACKAGE (ENVIRONMENT_BOOTSTRAP).*
 
 | Field | Value |
 |-------|-------|
-| iaa_final_assurance_session | session-059-20260427 |
+| iaa_final_assurance_session | session-061-20260427 |
 | verdict | 🔴 REJECTION-PACKAGE |
-| phase_b_blocking_token | IAA-session-059-20260427-FAIL |
-| checks_run | 13 — CORE-020, CORE-021, OVL-INJ-001, OVL-INJ-ADM-001, OVL-INJ-ADM-002, OVL-PBG-010–016, OVL-PBG-ADM-003, Merge Gate Parity (3 gates) |
-| failures | 2 SUBSTANTIVE (see below) |
+| phase_b_blocking_token | IAA-session-061-20260427-FAIL |
+| checks_run | 9 — CORE-020, CORE-021, OVL-PBG-010, OVL-PBG-011, OVL-PBG-012, OVL-PBG-013, OVL-PBG-014, OVL-PBG-016, OVL-PBG-ADM-003 |
+| failures | 1 CEREMONY (see below) |
+| session_059_finding_1_status | ✅ RESOLVED — QA-RT/CONFIG/SCHED sections J/K/L present, all 10 tests complete |
+| session_059_finding_2_status | ✅ RESOLVED — DES consistency (Option B) applied; QA-DES005-001 correctly numbered |
 
 ### 5.1 — Failures Requiring Fix-and-Resubmit
 
-**FINDING 1 — CORE-020 / OVL-PBG-013 (SUBSTANTIVE)**
+**FINDING 1 — OVL-PBG-013 / CORE-020 / CORE-021 (CEREMONY — arithmetic error)**
 
-`red-test-catalog.md` is missing 3 complete architecture coverage families defined in `qa-to-red-specification.md`:
-- §7.10 Real-Time Architecture: QA-RT-001 to QA-RT-004 — **ABSENT from catalog** (4 tests)
-- §7.11 Configuration Validation at Startup: QA-CONFIG-001 to QA-CONFIG-003 — **ABSENT from catalog** (3 tests)
-- §7.12 Background Scheduler: QA-SCHED-001 to QA-SCHED-003 — **ABSENT from catalog** (3 tests)
+`red-test-catalog.md` catalog summary TOTAL row states **HIGH = 56**. Independent arithmetic verification confirms the sum of HIGH values across all 20 data rows = **54**. Internal inconsistency: CRITICAL(21) + HIGH(56) + MEDIUM(4) + LOW(0) = 81 ≠ 79 (stated TOTAL). Correct value: 79 − 21 − 4 − 0 = **54**.
 
-The catalog's 11 sections (A–K) jump from Section I (QA-SESSION / §7.9) to Section J (QA-DES / §8), silently omitting §7.10–§7.12. `architecture-and-des-to-qa-traceability.md` claims "✅ Covered" for all three with specific test IDs that do not exist in the catalog. This is a false coverage claim. The "12/12 architecture domains" completeness verdict is not supported by the catalog for domains §7.10, §7.11, §7.12.
-
-**Fix required**: Add the 10 missing test entries (full fields: scenario, fail condition, pass condition, severity, blocker, evidence type) using the descriptions in `architecture-and-des-to-qa-traceability.md` §1.2 detail tables. Update catalog summary table (total: 69 → 79; update severity/blocker counts).
-
----
-
-**FINDING 2 — OVL-PBG-013 (SUBSTANTIVE)**
-
-`architecture-and-des-to-qa-traceability.md` claims DES test ID ranges that are inconsistent with the catalog. The traceability references ~40 DES test IDs; the catalog contains only 9. Referenced test IDs absent from catalog include: QA-DES001-003–005; QA-DES002-002–003; QA-DES003-002; QA-DES004-002–008; QA-DES005-001, -002, -004, -005; QA-DES006-002–005; QA-DES007-002–005; QA-DES008-002–007. QA-DES005-003 has an anomalous numbering (starts at -003 with no -001 or -002 in the catalog).
-
-**Fix required** — choose one consistent resolution path:
-- **Option A**: Add all missing DES test entries to the catalog with full fields. Correct QA-DES005 numbering. Update catalog summary.
-- **Option B**: Correct the traceability's DES coverage claims to reflect only test IDs that actually exist in the catalog. Remove or revise the false range claims (e.g., "QA-DES001-001 to QA-DES001-005" → "QA-DES001-001 to QA-DES001-002"). Acknowledge the "representative minimum" model in the traceability. Resolve QA-DES005 numbering either way.
+**Fix required**: In `red-test-catalog.md`, change the TOTAL row HIGH column value from `56` to `54`. No other changes required. Both session-059 substantive findings are resolved.
 
 ### 5.2 — Resubmission Instruction
 
-Both findings must be resolved before re-invocation. After foreman-v2-agent implements fixes, re-invoke `independent-assurance-agent` for a new Final Assurance session. A new session number (session-060 or next) will be assigned. This REJECTION-PACKAGE does not expire — it remains the gate record until superseded by an ASSURANCE-TOKEN.
+One single-character fix required. After foreman-v2-agent applies the correction, re-invoke `independent-assurance-agent` for session-062. This REJECTION-PACKAGE does not expire until superseded by an ASSURANCE-TOKEN.
 
 ---
 
