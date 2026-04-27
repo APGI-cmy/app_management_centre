@@ -20,11 +20,12 @@
 
 > **DERIVATION DECLARATION**
 > This Deployment Execution Strategy derives from the Stage 5 Architecture Specification
-> (`modules/amc/04-architecture/architecture-specification.md` v1.0, produced approval-pending per
-> CS2 authorization #1131) and all upstream truth (Stages 1–4, treated as approved per #1131).
-> It translates architectural deployment-shaping decisions into a frozen, explicit,
-> non-contradictory operational deployment model. It does not invent new product behavior. No
-> deployment execution decision may contradict or silently soften any Architecture or TRS constraint.
+> (`modules/amc/04-architecture/architecture-specification.md` v1.0, produced approval-pending
+> awaiting CS2 approval, per authorization #1131) and all upstream truth (Stages 1–4, treated as
+> approved per #1131). It translates architectural deployment-shaping decisions into a frozen,
+> explicit, non-contradictory operational deployment model. It does not invent new product behavior.
+> No deployment execution decision may contradict or silently soften any Architecture or TRS
+> constraint.
 > This document defines the deployment execution boundaries that Stage 6 QA-to-Red, Stage 7 PBFAG,
 > and Stage 8 Implementation Plan must honor. Decisions made here are binding on all downstream
 > stages unless explicitly amended with CS2 approval.
@@ -135,8 +136,7 @@ Each deployment surface has exactly one owning workflow or manual process. No su
 
 GitHub-hosted runners are authorized for CI (PR checks) and for triggering Vercel deployments to the **staging** and **production** environments. However:
 
-- **GitHub-hosted runners may NOT access the production Supabase database directly** (no bare `psql`, no direct service role key usage outside of the gated migration workflow).
-- **GitHub-hosted runners may execute `db-migrate.yml` against production only through the `production` protected environment approval gate** — this gated migration workflow is the sole authorized path for any GitHub-hosted runner to interact with the production Supabase database.
+- **GitHub-hosted runners may NOT directly access or mutate the production Supabase database except via the explicitly authorized, approval-gated production migration workflow** (no direct `psql`, no ad hoc production queries, no Supabase service role key usage against production outside `db-migrate.yml` approved through the `production` protected environment). This gated migration workflow is the sole authorized path for any GitHub-hosted runner to interact with the production Supabase database.
 - **GitHub-hosted runners ARE authorized** to execute the `deploy-frontend.yml` workflow to Vercel production, subject to the `production` protected environment approval gate.
 - **GitHub-hosted runners ARE authorized** to execute `db-migrate.yml` against the staging Supabase project (no approval gate required for staging).
 - **GitHub-hosted runners ARE authorized** for all CI gate activities on PRs: lint, type check, dependency scan, unit tests, integration tests, E2E smoke tests, schema verification.
@@ -266,8 +266,7 @@ Vercel preview deployments are managed by Vercel's native GitHub App integration
 #### Protected Environment (`production`)
 
 The GitHub `production` environment is configured with:
-- Required reviewer: CS2 (@APGI-cmy)
-- No auto-approve; reviewer must explicitly approve before workflow job execution proceeds
+- Required reviewers: CS2 (@APGI-cmy) — at least 1 required reviewer configured; the workflow job is paused until the reviewer approves
 
 Workflows that reference the `production` environment cannot execute their production-targeting steps until the required reviewer approves. This is the sole mechanism preventing automated production deployments and migrations from running without CS2 sign-off.
 
