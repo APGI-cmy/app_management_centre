@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-04-26 (Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)
+**Last Updated**: 2026-04-27 (Stage 5a Deployment Execution Strategy artifacts produced approval-pending — wave amc-stage5a-deployment-execution-strategy-20260427; issue #1133; prior: Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -68,15 +68,15 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 > **Stage 5a Definition Authority**: `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` (AMC-GOV-OVERSIGHT-001 v1.0)  
 > **CS2 Authorization**: app_management_centre#1133  
-> **Status**: 📋 Stage defined — artifacts not yet produced  
-> **Entry Condition**: Stage 5 complete and CS2-approved  
+> **Status**: 🟡 Artifacts produced — CS2 approval pending  
+> **Entry Condition**: Stage 5 complete and CS2-approved (Stage 5 approval still pending)  
 > **Blocks**: Stage 6 (QA-to-Red) and all subsequent stages
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Deployment Execution Strategy | `modules/amc/05a-deployment-execution-strategy/deployment-execution-strategy.md` | ⬜ Not Started | Primary Stage 5a artifact. Must answer all 8 DES mandatory fields (DES-001 through DES-008). No TBD fields permitted. CS2 approval required. |
-| Deployment Surface Ownership Table | `modules/amc/05a-deployment-execution-strategy/deployment-surface-ownership-table.md` | ⬜ Not Started | Supporting artifact. Surface ownership matrix: frontend deploy, backend deploy, DB migration, schema verification, live operational validation. |
-| Runner and Environment Constraints | `modules/amc/05a-deployment-execution-strategy/runner-and-environment-constraints.md` | ⬜ Not Started | Supporting artifact. Runner type requirements per surface; protected environment configuration. |
+| Deployment Execution Strategy | `modules/amc/05a-deployment-execution-strategy/deployment-execution-strategy.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. All 8 DES mandatory fields answered (DES-001 through DES-008). No TBD fields. Single approved migration mechanism: Supabase CLI. CS2 sign-off section included. CS2 approval required. Wave: amc-stage5a-deployment-execution-strategy-20260427. |
+| Deployment Surface Ownership Table | `modules/amc/05a-deployment-execution-strategy/deployment-surface-ownership-table.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. 5-surface ownership matrix (SURF-001–005). All surfaces owned. No ownership gaps. CS2 approval required. |
+| Runner and Environment Constraints | `modules/amc/05a-deployment-execution-strategy/runner-and-environment-constraints.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. GitHub-hosted runners only (ubuntu-latest). Protected environment configuration. CI-safe/preview-safe/live-only safety table. Environment prerequisites and network assumptions. CS2 approval required. |
 | Governance Oversight Record | `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` | ✅ COMPLETE — v1.0 | Formal oversight record: gap declaration, Stage 5a definition, required content specification (8 mandatory fields), implementation-plan requirements, anti-drift governance language, corrective action roadmap. CS2 auth: #1133. |
 
 ---
@@ -154,4 +154,4 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 ---
 
-**Legend**: ✅ Active/Complete | 📌 Reference Only | ⬜ Placeholder/Not Started | 📦 Legacy Area
+**Legend**: ✅ Active/Complete | 🟡 Approval Pending | 🟠 Treated as Approved | 📌 Reference Only | ⬜ Placeholder/Not Started | 📦 Legacy Area
