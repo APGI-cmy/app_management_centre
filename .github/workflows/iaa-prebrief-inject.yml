@@ -262,6 +262,8 @@ jobs:
             echo "wave_num=unknown" >> "$GITHUB_OUTPUT"
             echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Skip if Pre-Brief already exists for this wave (push)
         if: github.event_name == 'push' && steps.wave_tasks.outputs.prebrief_exists == 'true'
         env:
           WAVE_NUM_NOTICE: ${{ steps.wave_tasks.outputs.wave_num }}
@@ -363,7 +365,7 @@ jobs:
                     '',
                     '**Action**: Open a PR (DRAFT is acceptable) and the Pre-Brief injection will run automatically.',
                     '',
-                    '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
+                    '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 2 §2.4 | PHCP-001*',
                   ].join('\n'),
                 });
               }
@@ -395,7 +397,7 @@ jobs:
                 '',
                 '@copilot — `wave-current-tasks.md` was pushed. The IAA Pre-Brief must be committed before any builder delegation.',
                 '',
-                '### Pre-Brief Invocation Steps (foreman-v2-agent contract Phase 1 Step 1.8)',
+                '### Pre-Brief Invocation Steps (foreman-v2-agent contract Phase 2 §2.4 | PHCP-001)',
                 '',
                 '1. Invoke IAA: `task(agent_type: "independent-assurance-agent", action: "PRE-BRIEF", wave: ' + waveNum + ')`',
                 '2. IAA publishes the Pre-Brief in **wave record section 2** (`.agent-admin/wave-records/amc-wave-record-{slug}-{date}.md`). ⚠️ Do NOT create a standalone `.agent-admin/assurance/iaa-prebrief-*.md` file — that artifact location is retired (AMC 90/10 Protocol — Issue #1063).',
@@ -466,7 +468,7 @@ jobs:
                 '**Current wave tasks:**',
                 taskSection,
                 '',
-                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
+                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 2 §2.4 | PHCP-001*',
               ].join('\n'),
             });
 
@@ -518,6 +520,6 @@ jobs:
                 '**Current wave tasks:**',
                 taskSection,
                 '',
-                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 1 Step 1.8*',
+                '*IAA Pre-Brief Injection — AMC | Authority: foreman-v2-agent contract Phase 2 §2.4 | PHCP-001*',
               ].join('\n'),
             });
