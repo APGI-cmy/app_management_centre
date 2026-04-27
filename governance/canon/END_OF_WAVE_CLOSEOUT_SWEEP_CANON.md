@@ -487,6 +487,7 @@ A PR **MUST NOT** be opened as review-ready if any of the following are absent o
 - Any of the five §5.1 fields is absent, blank, PENDING, or FAIL
 - `handover_bundle_self_consistent` is NO
 - `governing_issue_role_registry_completed` is NO
+- `stale_injector_check_performed` is absent or STALE
 - `entry_condition_status` is absent
 - `operational_sanity_check_performed` is absent (when strategy docs were produced)
 

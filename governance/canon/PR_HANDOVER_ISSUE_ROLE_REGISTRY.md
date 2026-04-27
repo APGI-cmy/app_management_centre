@@ -14,9 +14,13 @@
 ## Purpose
 
 This canon defines the **machine-checkable issue-role registry** that MUST be embedded in
-every wave record and PREHANDOVER proof. It ensures that every GitHub issue cited in the
-PR artifact chain is assigned an explicit, unambiguous role — preventing silent substitution
-of one issue role for another.
+every wave record, including the wave record evaluation section where prehandover evidence
+is recorded. Where a legacy standalone PREHANDOVER proof already exists from an earlier
+process, the same registry MAY also appear there for backward traceability, but this canon
+does not require or authorize creation of new standalone PREHANDOVER proof artifacts.
+
+It ensures that every GitHub issue cited in the PR artifact chain is assigned an explicit,
+unambiguous role — preventing silent substitution of one issue role for another.
 
 This registry complements `GOVERNING_ISSUE_PARITY_PROTOCOL.md` (GIPC-001), which defines
 the *rules* for governing-issue consistency. PHIRR-001 defines the *artifact format* that
@@ -58,7 +62,7 @@ Apply these heuristics when classifying an issue:
 
 ### 2.1 Required Registry Block
 
-Every wave record and PREHANDOVER proof MUST include the following registry block. This block
+Every wave record MUST include the following registry block. This block
 MUST be populated at artifact-generation time — not deferred to post-generation review.
 
 ```yaml

@@ -2,7 +2,7 @@
     "version": "1.0.0",
     "last_updated": "2026-04-27",
     "total_canons": 211,
-    "generation_timestamp": "2026-04-13T07:22:00Z",
+    "generation_timestamp": "2026-04-27T07:22:00Z",
     "canon_entry_schema": {
         "description": "Schema for canon entries in CANON_INVENTORY.json",
         "required_fields": [
@@ -2493,7 +2493,7 @@
             "canonical_version": "1.0.0",
             "file_hash": "0000c7ca9120dfcbb028c2cd4f8c84732f89575270aa7659fc30277082edfa4f",
             "file_hash_sha256": "0000c7ca9120dfcbb028c2cd4f8c84732f89575270aa7659fc30277082edfa4f",
-            "effective_date": "2026-04-27",
+            "effective_date": "2026-04-23",
             "description": "Governing-Issue Parity Protocol (GIPC-001) \u2014 mandatory parity checks and labeled authority fields for governing-issue identity integrity across the full artifact chain of a stage wave; defines overshadow prohibition, binary parity gate, control-surface update obligation, and ceremony evidence requirements",
             "type": "canon",
             "path": "governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md",

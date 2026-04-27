@@ -43,7 +43,7 @@ the PR body. Fields marked MANDATORY may not be blank, N/A, or placeholder.
 | related_hardening_issue  | #NNN or N/A                                                |
 | related_harmonization_issue | #NNN or N/A                                             |
 | related_oversight_issue  | #NNN or N/A                                                |
-| approval_reference       | #NNN or N/A (blank until approval exists)                  |
+| approval_reference       | #NNN or N/A                                                |
 | wave_record_path         | .agent-admin/wave-records/amc-wave-record-{slug}-{date}.md |
 | wave_checklist_status    | ALL TICKED / [documented exceptions]                       |
 | qp_verdict               | PASS                                                       |
@@ -123,8 +123,10 @@ review after the fact.
 
 ### 4.1 Required Evidence Fields
 
-The following fields MUST be populated in the wave record §3c before QP PASS is declared and
-before the PR is opened:
+The following fields MUST be populated in the wave record §3c as a fenced YAML block labelled
+`pre_pr_blocking_gate` before QP PASS is declared and before the PR is opened. This fenced
+YAML block is required in addition to (not instead of) any existing Markdown table entries in
+§3c. Automation and IAA MUST parse the fenced YAML block as the authoritative evidence record:
 
 ```yaml
 pre_pr_blocking_gate:
@@ -138,6 +140,7 @@ pre_pr_blocking_gate:
   stale_injector_check_performed: "CLEAN"  # CLEAN / STALE — [list stale injectors found]
   entry_condition_status: "NORMAL"         # NORMAL / EXCEPTION — [see §5]
   operational_sanity_check_performed: "YES / N/A"   # for strategy docs; N/A otherwise
+  pre_pr_blocking_gate_verdict: "PASS"     # PASS / FAIL — PASS only if all sub-fields above are YES/PASS/CLEAN
 ```
 
 ### 4.2 Blocking Rule
@@ -148,7 +151,8 @@ A PR MUST NOT be opened as review-ready if any of the following are absent or no
 - `control_surfaces_finalized` is not `YES`
 - `handover_bundle_self_consistent` is not `YES`
 - `governing_issue_role_registry_completed` is not `YES`
-- `pre_pr_blocking_gate` overall verdict is not `PASS`
+- `stale_injector_check_performed` is absent or `STALE`
+- `pre_pr_blocking_gate_verdict` is not `PASS`
 
 Partial handover state MUST fail at this gate — not be discovered during external review.
 
@@ -170,6 +174,7 @@ entry_condition_exception:
   exception_reason: "[Why the exception was granted]"
   parallel_production_authorized: "YES / NO"
   exception_changes_next_stage_gate: "YES — [how] / NO"
+  exception_recorded_in_artifact_chain: "YES"
 ```
 
 When `entry_condition_status: NORMAL`, this block is omitted or recorded as N/A.

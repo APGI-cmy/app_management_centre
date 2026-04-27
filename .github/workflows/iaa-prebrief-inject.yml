@@ -86,8 +86,9 @@ jobs:
             core.setOutput('wave_num', waveNum);
             core.setOutput('tasks_snippet', tasksSnippet);
 
-            // Idempotency guard: scan wave-records dir for a wave record containing this wave's pre-brief
+            // Idempotency guard: check only the current wave's record for a pre-brief in section 2
             // (AMC 90/10 Protocol — Issue #1063: pre-brief now lives in wave record section 2, not standalone file)
+            // Scoped to the current wave to avoid false positives from historical wave records.
             let prebriefExists = false;
             try {
               const { data: waveRecordsContents } = await github.rest.repos.getContent({
@@ -102,15 +103,29 @@ jobs:
                            f.name.endsWith('.md')
                   )
                 : [];
-              for (const file of waveRecordFiles) {
+              // Scope to the current wave by matching the normalised wave ID in the filename
+              const waveId = waveNum.toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '');
+              const currentWaveFiles = waveId && waveId !== 'unknown'
+                ? waveRecordFiles.filter((f) => f.name.includes(waveId))
+                : [];
+              for (const file of currentWaveFiles) {
                 const { data: fd } = await github.rest.repos.getContent({
                   owner, repo, path: file.path, ref: headSha,
                 });
                 const fc = Buffer.from(fd.content, 'base64').toString('utf8');
-                // Pre-brief exists if wave record has a section 2 with pre-brief content
-                if (fc.toLowerCase().includes('section 2') && fc.toLowerCase().includes('pre-brief')) {
-                  prebriefExists = true;
-                  break;
+                // Pre-brief exists only if the section-2 block of this wave record contains "pre-brief"
+                const sec2Match = fc.match(/^#{1,6}\s+[Ss]ection\s+2\b[^\n]*/m);
+                if (sec2Match) {
+                  const sec2Start = fc.indexOf(sec2Match[0]);
+                  const afterSec2 = fc.slice(sec2Start + sec2Match[0].length);
+                  const nextSecMatch = afterSec2.match(/^#{1,6}\s+[Ss]ection\s+\d+\b/m);
+                  const sec2Content = nextSecMatch
+                    ? afterSec2.slice(0, afterSec2.indexOf(nextSecMatch[0])).toLowerCase()
+                    : afterSec2.toLowerCase();
+                  if (sec2Content.includes('pre-brief')) {
+                    prebriefExists = true;
+                    break;
+                  }
                 }
               }
             } catch (_e) {
@@ -220,11 +235,23 @@ jobs:
             echo "$SNIPPET" >> "$GITHUB_OUTPUT"
             echo "EOF_TASKS" >> "$GITHUB_OUTPUT"
 
-            # Idempotency guard — check wave records dir for pre-brief in wave record section 2
+            # Idempotency guard — check only the current wave record for a pre-brief in section 2
             # (AMC 90/10 Protocol — Issue #1063: pre-brief now lives in wave record section 2)
+            # Scoped to the current wave to avoid false positives from historical wave records.
             WAVE_RECORDS_DIR=".agent-admin/wave-records"
-            if [ -d "$WAVE_RECORDS_DIR" ] && \
-               grep -rl "section 2" "$WAVE_RECORDS_DIR"/amc-wave-record-*.md 2>/dev/null | xargs grep -li "pre-brief" 2>/dev/null | head -1 | grep -q .; then
+            WAVE_ID=$(printf '%s' "$WAVE_NUM" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+//; s/-+$//')
+            WAVE_RECORD_FILE=""
+            if [ -d "$WAVE_RECORDS_DIR" ] && [ -n "$WAVE_ID" ] && [ "$WAVE_ID" != "unknown" ]; then
+              WAVE_RECORD_FILE=$(find "$WAVE_RECORDS_DIR" -maxdepth 1 -type f -name "amc-wave-record-*${WAVE_ID}*.md" | head -1)
+            fi
+            if [ -n "$WAVE_RECORD_FILE" ] && \
+               awk '
+                 BEGIN { in_section_2=0; found=0 }
+                 /^[[:space:]]*#+[[:space:]]*section[[:space:]]*2([[:space:]:-]|$)/ { in_section_2=1; next }
+                 in_section_2 && /^[[:space:]]*#+[[:space:]]*section[[:space:]]*[0-9]+([[:space:]:-]|$)/ { in_section_2=0 }
+                 in_section_2 && tolower($0) ~ /pre-brief/ { found=1 }
+                 END { exit(found ? 0 : 1) }
+               ' "$WAVE_RECORD_FILE"; then
               echo "prebrief_exists=true" >> "$GITHUB_OUTPUT"
             else
               echo "prebrief_exists=false" >> "$GITHUB_OUTPUT"
