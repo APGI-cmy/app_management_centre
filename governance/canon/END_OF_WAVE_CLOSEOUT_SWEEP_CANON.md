@@ -2,7 +2,7 @@
 **Status**: CANONICAL | **Version**: 1.0.0 | **Authority**: CS2
 **Date**: 2026-04-26
 **Canon ID**: EWCS-001
-**Issue**: app_management_centre#1143 — Hardening — Foreman/ceremony must enforce end-of-wave closeout sweep, tracker/header parity, and kickoff-state retirement
+**Issue**: app_management_centre#1134 — Hardening — Foreman/ceremony must enforce end-of-wave closeout sweep, tracker/header parity, and kickoff-state retirement
 
 > **Amendment Authority**: Only CS2 (Johan Ras / repo owner) may amend this canon.
 > Any PR modifying this file without CS2 sign-off is auto-FAIL at the merge gate.
@@ -457,4 +457,4 @@ Wave record §3c evidence:
 
 **Canon ID**: EWCS-001
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-26
-**Authority**: CS2 — Issue #1143
+**Authority**: CS2 — Issue #1134

@@ -17,7 +17,7 @@
 | `FAIL-ONLY-ONCE.md` | Breach registry and A-rules for foreman-v2 | ✅ PRESENT — layered down 2026-04-07 (v4.1.0) |
 | `session-memory-template.md` | Session memory template (reduced 6-field model per 90/10 principle) | ✅ PRESENT — v2.0.0 (updated 2026-04-13, Issue #1063) |
 | `prehandover-template.md` | PREHANDOVER proof template (v1.7.0) | ✅ PRESENT — layered down 2026-04-07 (v1.7.0) |
-| `wave-reconciliation-checklist.md` | Wave close checklist — incidents, niggles, liveness, closeout sweep | ✅ PRESENT — v1.2.0 (updated 2026-04-26, Issue #1143 — Section E closeout sweep added) |
+| `wave-reconciliation-checklist.md` | Wave close checklist — incidents, niggles, liveness, closeout sweep | ✅ PRESENT — v1.2.0 (updated 2026-04-26, Issue #1134 — Section E closeout sweep added) |
 
 ---
 

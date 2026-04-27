@@ -393,4 +393,4 @@ Both MUST PASS before QP PASS is declared. They are not alternatives.
 **Canon ID**: GIPC-001
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-23
 **Authority**: CS2 — Issue #1129
-**See also**: `governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` (EWCS-001) — Issue #1143
+**See also**: `governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` (EWCS-001) — Issue #1134

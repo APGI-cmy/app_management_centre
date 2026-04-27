@@ -3,7 +3,7 @@
 > **Template Version**: 1.3.0
 > **Authority**: CS2 (@APGI-cmy) — Issue #1063
 > **Protocol**: AMC 90/10 Admin Protocol v1.0.0
-> **Amended**: 2026-04-26 — v1.3.0: Added §3c Closeout Sweep Evidence Fields section with all 5 EWCS-001 §5.1 labeled fields as explicit rows; closeout sweep is now a mandatory blocking step before QP PASS. Authority: CS2 — Issue #1143.
+> **Amended**: 2026-04-26 — v1.3.0: Added §3c Closeout Sweep Evidence Fields section with all 5 EWCS-001 §5.1 labeled fields as explicit rows; closeout sweep is now a mandatory blocking step before QP PASS. Authority: CS2 — Issue #1134.
 > **Amended**: 2026-04-24 — v1.2.0: Added §3b Ceremony Evidence Fields section with all 7 GIPC-001 §6.1 labeled fields as explicit rows; replaced evaluation-row representation with canonical labeled-field structure for unambiguous A-038 validation. Authority: CS2 — Issue #1129.
 > **Amended**: 2026-04-23 — v1.1.0: Added Governing Authority table (GIPC-001 §3.3) and parity/overshadow check fields in Evaluation Summary (GIPC-001 §2.4, §5.3, §6.1). Authority: CS2 — Issue #1129.
 

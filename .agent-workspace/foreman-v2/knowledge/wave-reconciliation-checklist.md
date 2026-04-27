@@ -242,7 +242,7 @@ Add the following block to the PREHANDOVER proof under `## Wave Reconciliation C
 |---------|------|--------|
 | 1.0.0 | 2026-03-18 | Initial checklist — CS2 mandate from issue #[wave-19-20-retro] closing post-wave registry and liveness automation gaps identified in PR #1142 review |
 | 1.1.0 | 2026-03-18 | WAVE-RECONCIL-001 + GOV-CONCERN-B follow-up: added B-3 (token file invalidation audit); added B-3 evidence field; cross-reference to INVALIDATED-PREFIX-CONVENTION.md |
-| 1.2.0 | 2026-04-26 | EWCS-001 hardening: added Section E (End-of-Wave Closeout Sweep) covering §1.3 surfaces, tracker header/body parity gate, kickoff-state retirement rule, and wave record §3c evidence recording. Authority: CS2 — Issue #1143. |
+| 1.2.0 | 2026-04-26 | EWCS-001 hardening: added Section E (End-of-Wave Closeout Sweep) covering §1.3 surfaces, tracker header/body parity gate, kickoff-state retirement rule, and wave record §3c evidence recording. Authority: CS2 — Issue #1134. |
 
 ---
 
