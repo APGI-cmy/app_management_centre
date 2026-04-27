@@ -3,13 +3,21 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-04-26  
-**Updated By**: foreman-v2-agent (wave: amc-stage5-architecture-20260426 — Stage 5 Architecture produced; Stage 4 TRS treated as approved per CS2 #1131; issue #1131)
+**Updated By**: foreman-v2-agent (wave: amc-governance-deployment-oversight-20260426 — Stage 5a Deployment Execution Strategy defined; governance oversight recorded; issue #1133; prior: amc-stage5-architecture-20260426 — Stage 5 Architecture produced; Stage 4 TRS treated as approved per CS2 #1131; issue #1131)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Issue**: [app_management_centre#1131](https://github.com/APGI-cmy/app_management_centre/issues/1131)  
+> **Issue**: [app_management_centre#1133](https://github.com/APGI-cmy/app_management_centre/issues/1133)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
+
+> ⚠️ **GOVERNANCE OVERSIGHT NOTE (issue #1133, 2026-04-26)**: A mandatory deployment execution
+> planning stage has been added as Stage 5a between Stage 5 (Architecture) and Stage 6 (QA-to-Red).
+> Architecture/platform topology alone is insufficient — the deployment execution strategy must be
+> frozen and CS2-approved before build execution begins. See
+> `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` for the formal oversight
+> record, Stage 5a definition, required content specification, anti-drift rules, and corrective
+> action roadmap. Stage 6 (QA-to-Red) is BLOCKED until Stage 5a is complete and CS2-approved.
 
 ---
 
@@ -31,15 +39,16 @@
 | 3 | FRS | ✅ COMPLETE — CS2 APPROVED | CS2-approved for Stage 4 progression (issue #1123). Harmonization pass v1.1 applied 2026-04-23 (FR-1800 ARC Governance Console family; FR-606/FR-607 quota management). Canonical source: `modules/amc/02-frs/`. |
 | 4 | TRS | ✅ TREATED AS APPROVED | Produced approval-ready 2026-04-23, hardened to v1.1 2026-04-23. CS2 authorized Stage 5 progression per issue #1131 ("Stage 4 is now being treated as approved by CS2 and Stage 5 becomes the active governed stage"). Canonical source: `modules/amc/03-trs/`. |
 | 5 | Architecture | 🟡 IN PROGRESS — Produced Approval-Pending | Stage 5 Architecture Specification v1.0 produced 2026-04-26. Awaiting CS2 approval. Canonical artifact: `modules/amc/04-architecture/architecture-specification.md`. |
-| 6 | QA-to-Red | ⬜ Not Started | 🔴 BLOCKED — requires Stage 5 complete and approved. |
+| **5a** | **Deployment Execution Strategy** | **📋 DEFINED — Awaiting Stage 5 Approval** | Stage 5a formally defined 2026-04-26 (issue #1133). Definition: `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md`. 🔴 BLOCKED — requires Stage 5 complete and CS2-approved. |
+| 6 | QA-to-Red | ⬜ Not Started | 🔴 BLOCKED — requires Stage 5 complete and approved, **and Stage 5a complete and approved**. |
 | 7 | PBFAG | ⬜ Not Started | 🔴 BLOCKED |
-| 8 | Implementation Plan | ⬜ Not Started | 🔴 BLOCKED |
+| 8 | Implementation Plan | ⬜ Not Started | 🔴 BLOCKED — must reference approved Stage 5a Deployment Execution Strategy. |
 | 9 | Builder Checklist | ⬜ Not Started | 🔴 BLOCKED |
 | 10 | IAA Pre-Brief | ⬜ Not Started | 🔴 BLOCKED |
 | 11 | Builder Appointment | ⬜ Not Started | 🔴 BLOCKED |
-| 12 | Build | ⬜ Not Started | 🔴 BLOCKED |
+| 12 | Build | ⬜ Not Started | 🔴 BLOCKED — all builders bound to approved Stage 5a deployment execution strategy. |
 
-**Legend**: ✅ Complete | 🟡 Active / In Progress | ⬜ Not Started | 🔴 Blocked
+**Legend**: ✅ Complete | 🟡 Active / In Progress | ⬜ Not Started | 🔴 Blocked | 📋 Defined (awaiting prerequisites)
 
 ---
 
@@ -144,8 +153,30 @@ system behaviour are permitted.
 **Produced By**: foreman-v2-agent (POLC_ORCHESTRATION)
 **CS2 Authorization**: issue #1131 (Stage 5 kickoff; Stage 4 treated as approved for Stage 5 progression)
 **Prerequisites**: ✅ Stage 4 TRS v1.1 produced and treated as approved per CS2 (#1131)
-**Approval Required**: Yes — CS2 approval required before Stage 6 (QA-to-Red) may begin
+**Approval Required**: Yes — CS2 approval required before Stage 5a (Deployment Execution Strategy) may begin
 **Note — Pre-existing FM-era material**: The `docs/architecture/` directory contains architecture documents from the FM-origin era. These remain classified as historical/reference material only. The canonical Stage 5 architecture is `modules/amc/04-architecture/architecture-specification.md` v1.0. The `architecture.md` placeholder stub has been updated with a superseded notice pointing to the canonical artifact.
+
+---
+
+### Stage 5a — Deployment Execution Strategy
+
+**Status**: 📋 DEFINED — Awaiting Stage 5 CS2 Approval  
+**Location**: `modules/amc/05a-deployment-execution-strategy/`  
+**Entry Condition**: Stage 5 complete and **CS2 approved**  
+**Definition Authority**: `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` (AMC-GOV-OVERSIGHT-001 v1.0, 2026-04-26, issue #1133)  
+**Objective**: Freeze the deployment execution strategy for AMC before QA-to-Red begins. Produce
+a CS2-approved artifact that explicitly defines: workflow surface ownership, runner authorization
+boundaries, migration execution path, CI/preview/production execution boundaries, safety
+classification of each surface, manual/protected approval requirements, and environment/network
+assumption validation approach. Architecture/platform topology alone is insufficient — the
+deployment execution strategy must also be frozen.  
+**Key Artifacts Required**:
+- [ ] `deployment-execution-strategy.md` — Primary Stage 5a artifact: all 8 mandatory DES fields answered (DES-001 through DES-008), no TBD fields, CS2 sign-off section
+- [ ] `deployment-surface-ownership-table.md` — Supporting artifact: surface ownership matrix for frontend deploy, backend deploy, DB migration, schema verification, live operational validation
+- [ ] `runner-and-environment-constraints.md` — Supporting artifact: runner type requirements per surface; protected environment configuration
+**Prerequisites**: Stage 5 complete and **CS2 approved** — 🔴 BLOCKED pending Stage 5 CS2 approval  
+**Approval Required**: Yes — CS2 approval required before Stage 6 (QA-to-Red) may begin  
+**Note — Mandatory Content**: See §3.1 of `DEPLOYMENT_STRATEGY_OVERSIGHT.md` for the 8 mandatory fields. No field may be left TBD. A deployment execution strategy with any TBD mandatory field is a blocking defect and will cause QP FAIL.
 
 ---
 
@@ -153,7 +184,8 @@ system behaviour are permitted.
 
 **Status**: ⬜ Not Started  
 **Location**: `modules/amc/05-qa-to-red/`  
-**Prerequisites**: Stage 5 complete and **CS2 approved** — 🔴 BLOCKED pending Stage 5 CS2 approval
+**Prerequisites**: Stage 5 complete and **CS2 approved** AND Stage 5a complete and **CS2 approved** — 🔴 BLOCKED pending Stage 5 and Stage 5a CS2 approval  
+**Note**: QA-to-Red must cover deployment-surface boundary violations per the approved Stage 5a strategy.
 
 ---
 
@@ -162,7 +194,7 @@ system behaviour are permitted.
 **Status**: ⬜ Not Started  
 **Location**: `modules/amc/06-pbfag/`  
 **Prerequisites**: Stage 6 complete and approved  
-**Note**: PBFAG is a hard gate. It is not situational. It cannot be bypassed without explicit CS2-documented exception.
+**Note**: PBFAG is a hard gate. It is not situational. It cannot be bypassed without explicit CS2-documented exception. PBFAG must verify that Stage 5a (Deployment Execution Strategy) is present, complete, and non-contradictory with Stage 5 (Architecture).
 
 ---
 
@@ -171,6 +203,7 @@ system behaviour are permitted.
 **Status**: ⬜ Not Started  
 **Location**: `modules/amc/07-implementation-plan/`  
 **Prerequisites**: Stage 7 (PBFAG) gate passed  
+**Mandatory Requirement**: The Implementation Plan must include a dedicated section referencing the approved Stage 5a Deployment Execution Strategy document by path and version. An Implementation Plan that lacks this section or proposes a deployment model inconsistent with Stage 5a is a blocking defect. See `DEPLOYMENT_STRATEGY_OVERSIGHT.md` §4.1.
 
 ---
 
@@ -179,6 +212,7 @@ system behaviour are permitted.
 **Status**: ⬜ Not Started  
 **Location**: `modules/amc/08-builder-checklist/`  
 **Prerequisites**: Stage 8 complete and approved  
+**Mandatory Requirement**: Must include an attestation confirming builder(s) have read and will implement only the approved Stage 5a deployment execution strategy.
 
 ---
 
@@ -194,8 +228,8 @@ system behaviour are permitted.
 
 **Status**: ⬜ Not Started  
 **Location**: `modules/amc/10-builder-appointment/`  
-**Prerequisites**: Stages 1–10 complete. IAA Pre-Brief published.  
-**Note**: No delegation to builders until all Stages 1–10 are complete and gate-passed (HALT-008).
+**Prerequisites**: Stages 1–10 complete (including Stage 5a). IAA Pre-Brief published.  
+**Note**: No delegation to builders until all Stages 1–10 (including Stage 5a) are complete and gate-passed (HALT-008).
 
 ---
 
@@ -215,7 +249,10 @@ system behaviour are permitted.
 3. ✅ Stage 3 complete — FRS CS2-approved for Stage 4 progression (issue #1123, 2026-04-23). Harmonization pass v1.1 applied 2026-04-23.
 4. ✅ Stage 4 TRS artifacts produced approval-ready and hardened to v1.1 (issue #1125, hardened in #1127, 2026-04-23). CS2 authorized Stage 5 progression per issue #1131 — Stage 4 treated as approved.
 5. 🟡 Stage 5 Architecture Specification v1.0 produced approval-pending (wave amc-stage5-architecture-20260426, 2026-04-26).
-6. ▶️ CS2 to review and approve Stage 5 Architecture before Stage 6 (QA-to-Red) begins.
+6. 📋 Stage 5a Deployment Execution Strategy formally defined (wave amc-governance-deployment-oversight-20260426, 2026-04-26, issue #1133). See `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md`.
+7. ▶️ CS2 to review and approve Stage 5 Architecture before Stage 5a (Deployment Execution Strategy) production begins.
+8. ▶️ After Stage 5 approval: produce Stage 5a Deployment Execution Strategy artifacts per `DEPLOYMENT_STRATEGY_OVERSIGHT.md` §2 and §3.
+9. ▶️ After Stage 5a approval: Stage 6 (QA-to-Red) may begin.
 
 ---
 
@@ -223,6 +260,7 @@ system behaviour are permitted.
 
 - [PRE_BUILD_STAGE_MODEL_CANON.md](../../governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md)
 - [APP_DESCRIPTION_REQUIREMENT_POLICY.md](../../governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md)
+- [DEPLOYMENT_STRATEGY_OVERSIGHT.md](./governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md) — 📋 Stage 5a definition, oversight record, anti-drift rules (issue #1133, 2026-04-26)
 - [app-description.md](./00-app-description/app-description.md) — ✅ approved Stage 1 canonical source (harmonization pass v1.1 applied 2026-04-23)
 - [app-description-approval.md](./00-app-description/app-description-approval.md) — Stage 1 formal approval record
 - [ux-workflow-wiring-spec.md](./01-ux-workflow-wiring-spec/ux-workflow-wiring-spec.md) — ✅ Stage 2 artifact (CS2-approved, issue #1121; harmonization pass v1.1 applied 2026-04-23)

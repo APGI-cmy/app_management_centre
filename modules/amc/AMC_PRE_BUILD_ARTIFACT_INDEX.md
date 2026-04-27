@@ -1,8 +1,8 @@
 # AMC Pre-Build Artifact Index
 
 **Module**: App Management Centre (AMC)  
-**Lifecycle Model**: 12-Stage Pre-Build Sequence (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0)  
-**Last Updated**: 2026-04-23 (Stage 4 TRS hardened to v1.1; traceability updated to v1.1; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)
+**Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0; AMC-GOV-OVERSIGHT-001)  
+**Last Updated**: 2026-04-26 (Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -47,8 +47,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | 🟡 Approval Pending | v1.1, hardened approval-ready 2026-04-23. ARC domain (TR-1800), quota console (TR-605–TR-609), alert contract family (TR-207–TR-209), audit/auth/state contract family declarations added. Upstream sources updated to v1.1 per harmonization pass. CS2 approval required before Stage 5 begins. Issue #1125 (hardened in #1127). |
-| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | 🟡 Approval Pending | v1.1, hardened 2026-04-23. 18 domain families traced (17 FRS + ARC), 30 deferred items disclosed, quota console and ARC coverage added. Issue #1125 (hardened in #1127). |
+| Technical Requirements Specification | `modules/amc/03-trs/technical-requirements-specification.md` | 🟠 Treated as Approved | v1.1, hardened approval-ready 2026-04-23. ARC domain (TR-1800), quota console (TR-605–TR-609), alert contract family (TR-207–TR-209), audit/auth/state contract family declarations added. Upstream sources updated to v1.1 per harmonization pass. Stage 4 treated as approved for Stage 5 progression per CS2 #1131. Formal CS2 approval pending. Issue #1125 (hardened in #1127). |
+| FRS to TRS Traceability | `modules/amc/03-trs/frs-to-trs-traceability.md` | 🟠 Treated as Approved | v1.1, hardened 2026-04-23. 18 domain families traced (17 FRS + ARC), 30 deferred items disclosed, quota console and ARC coverage added. Stage 4 treated as approved for Stage 5 progression per CS2 #1131. Issue #1125 (hardened in #1127). |
 
 ---
 
@@ -56,11 +56,28 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Architecture | `modules/amc/04-architecture/architecture.md` | ⬜ Placeholder | Not started |
+| Architecture Specification | `modules/amc/04-architecture/architecture-specification.md` | 🟡 Approval Pending | v1.0, produced 2026-04-26. Canonical Stage 5 artifact. CS2 approval required. Wave: amc-stage5-architecture-20260426. CS2 auth: #1131. |
+| TRS-to-Architecture Traceability | `modules/amc/04-architecture/trs-to-architecture-traceability.md` | 🟡 Approval Pending | v1.0, produced 2026-04-26. 18/18 TRS families realized. CS2 auth: #1131. |
+| Architecture (superseded placeholder) | `modules/amc/04-architecture/architecture.md` | 📦 Superseded | Updated 2026-04-26 with SUPERSEDED notice. `architecture-specification.md` is the canonical Stage 5 artifact. |
 | Architecture Decision Records | `modules/amc/04-architecture/architecture-decision-records.md` | ⬜ Placeholder | Not started |
 | Architecture Completeness Checklist | `modules/amc/04-architecture/architecture-completeness-checklist.md` | ⬜ Placeholder | Not started |
 
-> **Note — Pre-existing FM-era architecture material**: `docs/architecture/` contains architecture documents produced for the FM Office app during the FM-origin era. These artifacts are classified as **FM-era / pre-12-stage reference material** and are preserved for historical context and traceability only. They have **not** been adopted as the canonical Stage 5 architecture for the new `modules/amc/` lifecycle. Stage 5 therefore remains **Not Started**. Any adoption or migration of those artifacts into the AMC 12-stage lifecycle requires explicit classification, a migration/adoption note, a tracker update, and CS2-approved lifecycle interpretation.
+---
+
+## Stage 5a — Deployment Execution Strategy *(AMC-local mandatory stage)*
+
+> **Stage 5a Definition Authority**: `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` (AMC-GOV-OVERSIGHT-001 v1.0)  
+> **CS2 Authorization**: app_management_centre#1133  
+> **Status**: 📋 Stage defined — artifacts not yet produced  
+> **Entry Condition**: Stage 5 complete and CS2-approved  
+> **Blocks**: Stage 6 (QA-to-Red) and all subsequent stages
+
+| Artifact | Location | Status | Notes |
+|----------|----------|--------|-------|
+| Deployment Execution Strategy | `modules/amc/05a-deployment-execution-strategy/deployment-execution-strategy.md` | ⬜ Not Started | Primary Stage 5a artifact. Must answer all 8 DES mandatory fields (DES-001 through DES-008). No TBD fields permitted. CS2 approval required. |
+| Deployment Surface Ownership Table | `modules/amc/05a-deployment-execution-strategy/deployment-surface-ownership-table.md` | ⬜ Not Started | Supporting artifact. Surface ownership matrix: frontend deploy, backend deploy, DB migration, schema verification, live operational validation. |
+| Runner and Environment Constraints | `modules/amc/05a-deployment-execution-strategy/runner-and-environment-constraints.md` | ⬜ Not Started | Supporting artifact. Runner type requirements per surface; protected environment configuration. |
+| Governance Oversight Record | `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` | ✅ COMPLETE — v1.0 | Formal oversight record: gap declaration, Stage 5a definition, required content specification (8 mandatory fields), implementation-plan requirements, anti-drift governance language, corrective action roadmap. CS2 auth: #1133. |
 
 ---
 
