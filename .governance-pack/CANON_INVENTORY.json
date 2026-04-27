@@ -1,8 +1,8 @@
 {
     "version": "1.0.0",
-    "last_updated": "2026-04-22",
-    "total_canons": 204,
-    "generation_timestamp": "2026-04-13T07:22:00Z",
+    "last_updated": "2026-04-27",
+    "total_canons": 211,
+    "generation_timestamp": "2026-04-27T07:22:00Z",
     "canon_entry_schema": {
         "description": "Schema for canon entries in CANON_INVENTORY.json",
         "required_fields": [
@@ -2421,6 +2421,97 @@
             "last_updated": "2026-04-23",
             "change_note": "v1.0.3: \u00a73 evidence requirements \u2014 added stage1_canonical_source as a required PREHANDOVER proof field for M3 target verification; \u00a75.1 \u2014 added machine-verification requirement (target path check, not just wording); noted required root-pointer field formats",
             "provenance": "CS2-authorised via issue: Hardening \u2014 Stage 1 approval-alignment QA must force whole-document state-transition consistency checks"
+        },
+        {
+            "filename": "PR_HANDOVER_CANONICAL_PACKAGE.md",
+            "version": "1.0.0",
+            "canonical_version": "1.0.0",
+            "file_hash": "250d046552e002dbd6d2a42ef7e8e0a92ba7f72dd435d3674b1837982acb49c3",
+            "file_hash_sha256": "250d046552e002dbd6d2a42ef7e8e0a92ba7f72dd435d3674b1837982acb49c3",
+            "effective_date": "2026-04-27",
+            "description": "Canonical PR handover source package (PHCP-001) \u2014 defines PR body schema, governing-issue role mapping, handover bundle requirements, token-carrier rule, wave checklist retirement rule, tracker/index parity requirements, exception-handling schema, and wave-context source of truth for all AMC PR handovers",
+            "type": "canon",
+            "path": "governance/canon/PR_HANDOVER_CANONICAL_PACKAGE.md",
+            "layer_down_status": "PUBLIC_API",
+            "provenance": "CS2-authorised via issue: Hardening \u2014 PR handover must enforce governing-issue role separation, retire stale handover injectors, and block partial handover state (#1139)"
+        },
+        {
+            "filename": "PR_HANDOVER_ISSUE_ROLE_REGISTRY.md",
+            "version": "1.0.0",
+            "canonical_version": "1.0.0",
+            "file_hash": "fad6f4c0cd462e32e89411148d9455658cab7e15f549a83297f5433c47cf5b8f",
+            "file_hash_sha256": "fad6f4c0cd462e32e89411148d9455658cab7e15f549a83297f5433c47cf5b8f",
+            "effective_date": "2026-04-27",
+            "description": "Machine-checkable issue-role registry (PHIRR-001) \u2014 defines role taxonomy, registry schema (YAML block), machine-checkable rules PHIRR-R01 through PHIRR-R05, and violation codes for governing-delivery-issue vs hardening/harmonization/oversight issue classification in PR artifact chains",
+            "type": "canon",
+            "path": "governance/canon/PR_HANDOVER_ISSUE_ROLE_REGISTRY.md",
+            "layer_down_status": "PUBLIC_API",
+            "provenance": "CS2-authorised via issue: Hardening \u2014 PR handover must enforce governing-issue role separation, retire stale handover injectors, and block partial handover state (#1139)"
+        },
+        {
+            "filename": "STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md",
+            "version": "1.0.0",
+            "canonical_version": "1.0.0",
+            "file_hash": "b70f643edf092f0733a91b53fe8a04a1878b40a6a5d3c657a72b1e177b320767",
+            "file_hash_sha256": "b70f643edf092f0733a91b53fe8a04a1878b40a6a5d3c657a72b1e177b320767",
+            "effective_date": "2026-04-27",
+            "description": "Stale handover injector retirement register (SHIRR-001) \u2014 audits all PR-handover injection sources, documents retired artifact locations, classifies each workflow/template/comment as CURRENT or STALE, and maps stale elements to their canonical replacements",
+            "type": "canon",
+            "path": "governance/canon/STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md",
+            "layer_down_status": "INTERNAL",
+            "provenance": "CS2-authorised via issue: Hardening \u2014 PR handover must enforce governing-issue role separation, retire stale handover injectors, and block partial handover state (#1139)"
+        },
+        {
+            "filename": "STAGE_ENTRY_CONDITION_EXCEPTION_CANON.md",
+            "version": "1.0.0",
+            "canonical_version": "1.0.0",
+            "file_hash": "02b48665cdbe91cce5e0250a372b03a17c84f7bfdf1de30aa0ccceca2ef7c99b",
+            "file_hash_sha256": "02b48665cdbe91cce5e0250a372b03a17c84f7bfdf1de30aa0ccceca2ef7c99b",
+            "effective_date": "2026-04-27",
+            "description": "Stage entry-condition exception canon (SECC-001) \u2014 mandatory schema and rules for recording when CS2 authorizes a stage to begin before its normal entry condition is satisfied; defines exception fields (normal_entry_condition, exception_authorized_by, exception_scope, exception_reason, parallel_production_authorized, exception_changes_next_stage_gate) and violation codes SECC-VIOLATION-001 through SECC-VIOLATION-004",
+            "type": "canon",
+            "path": "governance/canon/STAGE_ENTRY_CONDITION_EXCEPTION_CANON.md",
+            "layer_down_status": "PUBLIC_API",
+            "provenance": "CS2-authorised via issue: Hardening \u2014 PR handover must enforce governing-issue role separation, retire stale handover injectors, and block partial handover state (#1139)"
+        },
+        {
+            "filename": "OPERATIONAL_STRATEGY_SANITY_CHECK_PROTOCOL.md",
+            "version": "1.0.0",
+            "canonical_version": "1.0.0",
+            "file_hash": "bc2103b4c4c890652ef374c06b838714bb1be5cbdea6b21b672e99c99e606a54",
+            "file_hash_sha256": "bc2103b4c4c890652ef374c06b838714bb1be5cbdea6b21b672e99c99e606a54",
+            "effective_date": "2026-04-27",
+            "description": "Operational strategy sanity-check protocol (OSSCP-001) \u2014 defines six literal-implementation sanity-check dimensions (literal executability, no hidden state, no cross-workflow violation, no trigger contradiction, single interpretation, migration/deploy/runner consistency) that must pass before a strategy document is declared handover-ready; defines evidence block schema and violation codes OSSCP-SKIP-001, OSSCP-FAIL-001 through OSSCP-FAIL-006",
+            "type": "canon",
+            "path": "governance/canon/OPERATIONAL_STRATEGY_SANITY_CHECK_PROTOCOL.md",
+            "layer_down_status": "PUBLIC_API",
+            "provenance": "CS2-authorised via issue: Hardening \u2014 PR handover must enforce governing-issue role separation, retire stale handover injectors, and block partial handover state (#1139)"
+        },
+        {
+            "filename": "GOVERNING_ISSUE_PARITY_PROTOCOL.md",
+            "version": "1.0.0",
+            "canonical_version": "1.0.0",
+            "file_hash": "0000c7ca9120dfcbb028c2cd4f8c84732f89575270aa7659fc30277082edfa4f",
+            "file_hash_sha256": "0000c7ca9120dfcbb028c2cd4f8c84732f89575270aa7659fc30277082edfa4f",
+            "effective_date": "2026-04-23",
+            "description": "Governing-Issue Parity Protocol (GIPC-001) \u2014 mandatory parity checks and labeled authority fields for governing-issue identity integrity across the full artifact chain of a stage wave; defines overshadow prohibition, binary parity gate, control-surface update obligation, and ceremony evidence requirements",
+            "type": "canon",
+            "path": "governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md",
+            "layer_down_status": "PUBLIC_API",
+            "provenance": "CS2-authorised"
+        },
+        {
+            "filename": "END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md",
+            "version": "1.1.0",
+            "canonical_version": "1.1.0",
+            "file_hash": "d3af173b85d0df76a548f1aac76913b6fa3750693eeef982935c7a430f2cc5fd",
+            "file_hash_sha256": "d3af173b85d0df76a548f1aac76913b6fa3750693eeef982935c7a430f2cc5fd",
+            "effective_date": "2026-04-27",
+            "description": "End-of-wave closeout sweep canon (EWCS-001) \u2014 defines mandatory end-of-wave closeout sweep as a named blocking step, tracker header/body parity binary gate, kickoff-state retirement for wave checklists, control-surface closeout checklist, and ceremony evidence fields; v1.1.0 adds pre-PR blocking gate with extended evidence fields",
+            "type": "canon",
+            "path": "governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md",
+            "layer_down_status": "PUBLIC_API",
+            "provenance": "CS2-authorised"
         }
     ]
 }
