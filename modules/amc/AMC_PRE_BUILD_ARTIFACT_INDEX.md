@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-04-27 (Stage 5a Deployment Execution Strategy artifacts produced approval-pending — wave amc-stage5a-deployment-execution-strategy-20260427; issue #1133; prior: Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)
+**Last Updated**: 2026-04-27 (Stage 5a Deployment Execution Strategy artifacts produced approval-pending — wave amc-stage5a-deployment-execution-strategy-20260427; issue #1137; prior: Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -68,6 +68,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 > **Stage 5a Definition Authority**: `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` (AMC-GOV-OVERSIGHT-001 v1.0)  
 > **CS2 Authorization**: app_management_centre#1133  
+> **Governing Delivery Issue**: app_management_centre#1137  
 > **Status**: 🟡 Artifacts produced — CS2 approval pending  
 > **Entry Condition**: Stage 5 complete and CS2-approved (Stage 5 approval still pending)  
 > **Blocks**: Stage 6 (QA-to-Red) and all subsequent stages

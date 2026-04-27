@@ -6,7 +6,7 @@
 **Status**: 🟡 Produced — Approval Pending (CS2)  
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)  
 **CS2 Authorization**: app_management_centre#1133 (Stage 5a definition authority)  
-**Governing Issue**: app_management_centre#1133 (this issue)  
+**Governing Delivery Issue**: app_management_centre#1137  
 **Wave**: amc-stage5a-deployment-execution-strategy-20260427  
 **Date**: 2026-04-27  
 **Upstream Sources**:
@@ -483,6 +483,7 @@ If a legitimate requirement arises that conflicts with any DES field in this doc
 | **Prepared by** | foreman-v2-agent (POLC_ORCHESTRATION) |
 | **Prepared Date** | 2026-04-27 |
 | **CS2 Authorization for Stage 5a** | app_management_centre#1133 |
+| **Governing Delivery Issue** | app_management_centre#1137 |
 | **Stage 5 Architecture Reference** | `modules/amc/04-architecture/architecture-specification.md` v1.0 (produced approval-pending, ref #1131) |
 | **Stage 4 TRS Reference** | `modules/amc/03-trs/technical-requirements-specification.md` v1.1 (treated as approved per #1131) |
 | **Wave** | amc-stage5a-deployment-execution-strategy-20260427 |
@@ -497,7 +498,7 @@ If a legitimate requirement arises that conflicts with any DES field in this doc
 
 | Version | Date | Change Summary |
 |---|---|---|
-| 1.0 | 2026-04-27 | Initial production — complete Stage 5a artifact answering all 8 DES mandatory fields; derived from Architecture §3.8 and §8; consistent with TRS TR-1505, TR-1504, TR-607; CS2 authorization: app_management_centre#1133 |
+| 1.0 | 2026-04-27 | Initial production — complete Stage 5a artifact answering all 8 DES mandatory fields; derived from Architecture §3.8 and §8; consistent with TRS TR-1505, TR-1504, TR-607; governing delivery issue: app_management_centre#1137; CS2 authorization: app_management_centre#1133 |
 
 ### Approval Basis Required
 
@@ -513,4 +514,4 @@ CS2 approval of this document confirms:
 
 ---
 
-*AMC Deployment Execution Strategy v1.0 — 2026-04-27 — CS2 authorization: app_management_centre#1133*
+*AMC Deployment Execution Strategy v1.0 — 2026-04-27 — governing delivery issue: app_management_centre#1137 — CS2 authorization: app_management_centre#1133*

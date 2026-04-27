@@ -3,12 +3,12 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-04-27  
-**Updated By**: foreman-v2-agent (wave: amc-stage5a-deployment-execution-strategy-20260427 — Stage 5a artifacts produced approval-pending; all 8 DES fields answered; issue #1133; prior: amc-governance-deployment-oversight-20260426 — Stage 5a defined; amc-stage5-architecture-20260426 — Stage 5 Architecture produced)
+**Updated By**: foreman-v2-agent (wave: amc-stage5a-deployment-execution-strategy-20260427 — Stage 5a artifacts produced approval-pending; all 8 DES fields answered; issue #1137; prior: amc-governance-deployment-oversight-20260426 — Stage 5a defined; amc-stage5-architecture-20260426 — Stage 5 Architecture produced)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Issue**: [app_management_centre#1133](https://github.com/APGI-cmy/app_management_centre/issues/1133)  
+> **Issue**: [app_management_centre#1137](https://github.com/APGI-cmy/app_management_centre/issues/1137)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 > ⚠️ **GOVERNANCE OVERSIGHT NOTE (issue #1133, 2026-04-26)**: A mandatory deployment execution
@@ -39,7 +39,7 @@
 | 3 | FRS | ✅ COMPLETE — CS2 APPROVED | CS2-approved for Stage 4 progression (issue #1123). Harmonization pass v1.1 applied 2026-04-23 (FR-1800 ARC Governance Console family; FR-606/FR-607 quota management). Canonical source: `modules/amc/02-frs/`. |
 | 4 | TRS | ✅ TREATED AS APPROVED | Produced approval-ready 2026-04-23, hardened to v1.1 2026-04-23. CS2 authorized Stage 5 progression per issue #1131 ("Stage 4 is now being treated as approved by CS2 and Stage 5 becomes the active governed stage"). Canonical source: `modules/amc/03-trs/`. |
 | 5 | Architecture | 🟡 IN PROGRESS — Produced Approval-Pending | Stage 5 Architecture Specification v1.0 produced 2026-04-26. Awaiting CS2 approval. Canonical artifact: `modules/amc/04-architecture/architecture-specification.md`. |
-| **5a** | **Deployment Execution Strategy** | **🟡 IN PROGRESS — Produced Approval-Pending** | Stage 5a artifacts produced 2026-04-27 (wave amc-stage5a-deployment-execution-strategy-20260427, issue #1133). All 8 DES fields answered. Awaiting CS2 approval. Artifacts: `modules/amc/05a-deployment-execution-strategy/`. |
+| **5a** | **Deployment Execution Strategy** | **🟡 IN PROGRESS — Produced Approval-Pending** | Stage 5a artifacts produced 2026-04-27 (wave amc-stage5a-deployment-execution-strategy-20260427, issue #1137). All 8 DES fields answered. Awaiting CS2 approval. Artifacts: `modules/amc/05a-deployment-execution-strategy/`. |
 | 6 | QA-to-Red | ⬜ Not Started | 🔴 BLOCKED — requires Stage 5 complete and approved, **and Stage 5a complete and approved**. |
 | 7 | PBFAG | ⬜ Not Started | 🔴 BLOCKED |
 | 8 | Implementation Plan | ⬜ Not Started | 🔴 BLOCKED — must reference approved Stage 5a Deployment Execution Strategy. |
@@ -252,7 +252,7 @@ deployment execution strategy must also be frozen.
 3. ✅ Stage 3 complete — FRS CS2-approved for Stage 4 progression (issue #1123, 2026-04-23). Harmonization pass v1.1 applied 2026-04-23.
 4. ✅ Stage 4 TRS artifacts produced approval-ready and hardened to v1.1 (issue #1125, hardened in #1127, 2026-04-23). CS2 authorized Stage 5 progression per issue #1131 — Stage 4 treated as approved.
 5. 🟡 Stage 5 Architecture Specification v1.0 produced approval-pending (wave amc-stage5-architecture-20260426, 2026-04-26).
-6. 🟡 Stage 5a Deployment Execution Strategy artifacts produced approval-pending (wave amc-stage5a-deployment-execution-strategy-20260427, 2026-04-27, issue #1133). All 8 DES fields answered. See `modules/amc/05a-deployment-execution-strategy/`.
+6. 🟡 Stage 5a Deployment Execution Strategy artifacts produced approval-pending (wave amc-stage5a-deployment-execution-strategy-20260427, 2026-04-27, issue #1137). All 8 DES fields answered. See `modules/amc/05a-deployment-execution-strategy/`.
 7. ▶️ CS2 to review and approve Stage 5 Architecture and Stage 5a Deployment Execution Strategy.
 8. ▶️ After Stage 5 and Stage 5a approval: Stage 6 (QA-to-Red) may begin.
 
@@ -263,7 +263,7 @@ deployment execution strategy must also be frozen.
 - [PRE_BUILD_STAGE_MODEL_CANON.md](../../governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md)
 - [APP_DESCRIPTION_REQUIREMENT_POLICY.md](../../governance/policy/APP_DESCRIPTION_REQUIREMENT_POLICY.md)
 - [DEPLOYMENT_STRATEGY_OVERSIGHT.md](./governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md) — ✅ Stage 5a definition, oversight record, anti-drift rules (issue #1133, 2026-04-26)
-- [deployment-execution-strategy.md](./05a-deployment-execution-strategy/deployment-execution-strategy.md) — 🟡 Stage 5a primary artifact (produced approval-pending, 2026-04-27; all 8 DES fields; wave amc-stage5a-deployment-execution-strategy-20260427; CS2 authorization: issue #1133)
+- [deployment-execution-strategy.md](./05a-deployment-execution-strategy/deployment-execution-strategy.md) — 🟡 Stage 5a primary artifact (produced approval-pending, 2026-04-27; all 8 DES fields; wave amc-stage5a-deployment-execution-strategy-20260427; governing delivery issue: #1137; CS2 authorization: #1133)
 - [deployment-surface-ownership-table.md](./05a-deployment-execution-strategy/deployment-surface-ownership-table.md) — 🟡 Stage 5a supporting artifact (produced approval-pending, 2026-04-27)
 - [runner-and-environment-constraints.md](./05a-deployment-execution-strategy/runner-and-environment-constraints.md) — 🟡 Stage 5a supporting artifact (produced approval-pending, 2026-04-27)
 - [app-description.md](./00-app-description/app-description.md) — ✅ approved Stage 1 canonical source (harmonization pass v1.1 applied 2026-04-23)
