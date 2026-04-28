@@ -20,7 +20,7 @@
 | agents_delegated_to | foreman-v2-agent (POLC_ORCHESTRATION — governance documentation; no builder code execution required) |
 | ceremony_admin | N/A — governance documentation wave, no builder execution, no ECAP appointment |
 | phase_1_preflight | PREFLIGHT COMPLETE |
-| status | COMPLETE |
+| status | COMPLETE — IAA-session-059-20260428-PASS |
 
 ### 1a. Governing Authority
 
@@ -138,13 +138,6 @@ control_surfaces_verified: "YES"
 
 ### §3c — Pre-PR Blocking Gate Evidence
 
-> **Note**: This §3c block is pre-IAA state. The `wrcc_pre_pr_checker_verdict` and
-> `pre_pr_blocking_gate_verdict` fields are PENDING until IAA invocation completes and
-> Section 5 is updated with a valid PHASE_B_BLOCKING_TOKEN. This is correct per
-> WRCC-001 §1.4 — a pre-IAA state is REJECTION_PACKAGE_ACTIVE / awaiting-token, which
-> is a coherent state (not incoherent). These fields MUST be updated to PASS after IAA
-> token is received.
-
 ```yaml
 pre_pr_blocking_gate:
   closeout_sweep_performed: "YES"
@@ -152,21 +145,23 @@ pre_pr_blocking_gate:
   tracker_body_parity_verified: "N/A — no BUILD_PROGRESS_TRACKER modified in this wave"
   wave_checklist_retired_from_kickoff_state: "YES"
   control_surfaces_finalized: "YES"
-  handover_bundle_self_consistent: "YES — pending IAA token in Section 5"
+  handover_bundle_self_consistent: "YES"
   governing_issue_role_registry_completed: "YES"
   stale_injector_check_performed: "CLEAN"
   entry_condition_status: "NORMAL"
   operational_sanity_check_performed: "N/A — no strategy docs in this wave"
-  wrcc_pre_pr_checker_verdict: "PENDING — awaiting IAA PHASE_B_BLOCKING_TOKEN in Section 5"
-  pre_pr_blocking_gate_verdict: "PENDING — awaiting IAA PASS"
+  wrcc_pre_pr_checker_verdict: "PASS"
+  pre_pr_blocking_gate_verdict: "PASS"
 ```
 
-**WRCC Pre-PR Checker Pre-Results** (WRCC-001 §5.2 — will be re-run after IAA token):
+**WRCC Pre-PR Checker Results** (WRCC-001 §5.2 — executed after IAA-session-059-20260428-PASS):
 
-- Step 1 — Final-Assurance State Coherence: PENDING — Section 5 awaiting PHASE_B_BLOCKING_TOKEN
-- Step 2 — Kickoff-State Checklist Linter: PASS — all tasks [x], no PENDING, wave-close summary present
-- Step 3 — §3c Evidence Truth-Validation: PASS (conditional on Section 5 token) — all other fields truthful
-- Step 4 — Cross-Surface Contradiction Check: PASS — wave record, checklist, session memory agree on all core facts (completion state, QP status)
+- Step 1 — Final-Assurance State Coherence: ✅ PASS — Section 5 contains `PHASE_B_BLOCKING_TOKEN: IAA-session-059-20260428-PASS`; no rejection-residue patterns present in Section 5
+- Step 2 — Kickoff-State Checklist Linter: ✅ PASS — all tasks [x], no `qp_verdict: PENDING`, wave-close summary block present at end of checklist
+- Step 3 — §3c Evidence Truth-Validation: ✅ PASS — all YES/PASS/CLEAN claims verified against actual artifact state; no anti-patterns 3.3.1–3.3.4 present
+- Step 4 — Cross-Surface Contradiction Check: ✅ PASS — wave record (PASS token + COMPLETE), checklist (all [x] + PASS), session memory (outcome: COMPLETE) are mutually consistent on all CC-01–CC-08 facts
+
+**WAVE_RESULT_COHERENCE_PASS**
 
 ---
 
@@ -185,14 +180,23 @@ pre_pr_blocking_gate:
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING — IAA invocation required before PR may be opened as review-ready |
-| PHASE_B_BLOCKING_TOKEN | PENDING — to be populated after IAA PASS |
-| iaa_session | PENDING |
-| iaa_date | PENDING |
-| merge_gate_parity | PENDING — after IAA PASS |
+| iaa_verdict | PASS |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-059-20260428-PASS |
+| iaa_session | session-059-20260428 |
+| iaa_date | 2026-04-28 |
+| merge_gate_parity | PASS |
 | merge_authority | CS2 ONLY |
 
-> **Note**: This wave record will be updated with the IAA token after IAA invocation per Phase 4 §4.4. The Section 5 is in REJECTION_PACKAGE_ACTIVE / pre-IAA state — this is coherent per WRCC-001 §1.4 (no token yet, not claiming PASS). Do NOT update `wrcc_pre_pr_checker_verdict` to PASS in §3c until Section 5 receives a valid PHASE_B_BLOCKING_TOKEN.
+### IAA Session History
+
+| Session | Result | Finding |
+|---------|--------|---------|
+| session-058-20260428 | REJECTION-PACKAGE | OVL-CG-ADM-001: CANON_INVENTORY.json not updated to register WRCC-001 |
+| session-059-20260428 | **ASSURANCE-TOKEN ISSUED — IAA-session-059-20260428-PASS** | All 15 checks PASS. Corrective fix (918e403) confirmed: WRCC-001 registered in CANON_INVENTORY.json. |
+
+### IAA Checks Summary (session-059)
+
+All 15 checks PASS: CORE-020 ✅ CORE-021 ✅ OVL-CG-001 ✅ OVL-CG-002 ✅ OVL-CG-003 ✅ OVL-CG-004 ✅ OVL-CG-005 [N/A] ✅ OVL-CG-ADM-001 ✅ OVL-CG-ADM-002 ✅ OVL-KG-001 ✅ OVL-KG-002 ✅ OVL-KG-003 ✅ OVL-KG-004 ✅ OVL-KG-ADM-002 ✅ OVL-KG-ADM-003 ✅ OVL-INJ-001 ✅
 
 ---
 
