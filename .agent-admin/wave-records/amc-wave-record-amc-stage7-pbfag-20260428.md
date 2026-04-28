@@ -173,7 +173,7 @@
 |-------|-------|
 | handover_bundle_self_consistent | ✅ YES — all 7 tasks complete; all artifacts committed; session memory created; wave record updated |
 | governing_issue_role_registry_completed | Governing issue #1152 consistent across all artifact headers, wave record, tracker, index, session memory |
-| stale_injector_check_performed | ✅ YES — no stale injector patterns; governing issue #1152 consistent across all Stage 7 artifact headers |
+| stale_injector_check_performed | ⚠️ NON-CLEAN — Artifact headers are clean (governing issue #1152 consistent across all Stage 7 artifact headers). However, the live PR thread contains an automated handover/pre-brief injection from prior wave `wave-amc-wave-result-coherence-hardening-20260427`, not this Stage 7 PBFAG wave. This is an administrative stale-injection residual on the PR surface. Governing artifacts committed to HEAD are unaffected. Route: retire prior-wave injector source or log via hardening path. This wave record accurately records the PR-surface stale injection rather than claiming clean. |
 | entry_condition_status | EXCEPTION — Stage 7 opened before Stage 5/5a/6 CS2 approval per issue #1152 CS2 authorization; all artifacts carry "Produced — Approval Pending" status; Stage 8 BLOCKED preserved |
 | operational_sanity_check_performed | ✅ YES — all artifact paths verified; tracker and index consistent; gate conditions preserved |
 
@@ -214,7 +214,7 @@
 |-------|-------|
 | iaa_final_assurance_session | session-064-20260428 |
 | verdict | ASSURANCE-TOKEN — 11/11 checks PASS (CORE-020 ✅, CORE-021 ✅, OVL-PBG-010–016 ✅, OVL-PBG-ADM-003 ✅). CONDITIONAL PASS posture confirmed. Stage 8 BLOCKED gate preserved. Exception posture (#1152) verified across all committed artifacts. Merge gate parity: PASS. |
-| phase_b_blocking_token | IAA-064-20260428-PASS |
+| phase_b_blocking_token | IAA-session-064-20260428-PASS |
 
 ---
 
