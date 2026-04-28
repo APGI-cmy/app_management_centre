@@ -86,7 +86,7 @@ Wave Result Coherence Check:
 [ ] CC-03: Session memory triggering_issue matches wave record triggering_issue (AAEV-005)
 [ ] CC-04: QP verdict in wave checklist matches qp_verdict in wave record
 [ ] CC-05: IAA token format valid and recorded in wave record §5 (AAEV-002)
-[ ] CC-06: No PENDING/TBD/in-progress fields in any final-state artifact (ECAP CCI-03)
+[ ] CC-06: No PENDING/TBD/in-progress fields in any final-state artifact (ECAP-CCI-03)
 [ ] CC-07: ac_evidence_matrix present and verdict PASS (if qualifying delivery — EFIA-001 §2)
 [ ] CC-08: protected_path_ecap_ceremony present and verdict PASS (if protected-path PR — PPEIA-001 §2.2)
 [ ] CC-09: All AAEV validators (AAEV-001 through AAEV-009) show PASS or N/A (AAEV-001)

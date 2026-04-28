@@ -81,10 +81,29 @@ that requires E1–E4, IAA MUST issue a REJECTION-PACKAGE citing EFIA-AGENT-CLAI
 
 ## 2. Acceptance-Criteria Evidence Matrix
 
-### 2.1 Matrix Requirement
+### 2.1 Matrix Requirement — Scope and Applicability
 
-Every PR submitted to IAA for a PASS token MUST include an **acceptance-criteria evidence matrix**
-embedded in the wave record §3c as a fenced YAML block labelled `ac_evidence_matrix`.
+**Qualifying deliveries** are PRs that produce, modify, or retire executable code, schema,
+CI workflows, or runtime-sensitive artifacts. The `ac_evidence_matrix` is MANDATORY for
+qualifying deliveries.
+
+**Non-qualifying deliveries** (where `ac_evidence_matrix_populated: N/A` is a valid gate
+state) are limited to:
+- Pure governance canon specification waves where the sole output is governance documents
+  reviewed at E4 (STATIC_ANALYSIS) — e.g., a wave that only adds or amends governance/*.md
+  files with no executable, schema, or CI logic changes
+- Waves explicitly classified as `GOVERNANCE_CANON_HARDENING` with no code/schema/workflow
+  diff in the PR
+
+When a PR is non-qualifying, ECAP and Foreman MUST record `ac_evidence_matrix_populated: N/A`
+with an explicit classification reason in wave record §3c. IAA MUST independently verify
+the non-qualifying classification before accepting the N/A state; if the diff contains
+any executable, schema, or CI content, the wave is re-classified as qualifying and the
+matrix is required.
+
+Every **qualifying** PR submitted to IAA for a PASS token MUST include an
+**acceptance-criteria evidence matrix** embedded in the wave record §3c as a fenced YAML
+block labelled `ac_evidence_matrix`.
 
 The matrix maps each acceptance criterion from the governing delivery issue to:
 - The evidence type submitted

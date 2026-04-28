@@ -143,6 +143,9 @@ present in the PR body and non-blank/non-placeholder. Specifically:
 | `closeout_sweep_verdict` | `PASS` | blank, `PENDING`, any non-PASS value |
 | `pre_pr_blocking_gate` | `PASS` | blank, `PENDING`, any non-PASS value |
 | `wave_checklist_status` | `ALL TICKED` or documented exceptions | blank, `PENDING`, `IN PROGRESS` |
+| `ecap_ceremony_status` | `COMPLETED`, `N/A`, or `WAIVED — [CS2 reference]` | blank, `PENDING`, free-form text without one of the three states |
+| `wave_result_coherence` | `PASS` | blank, `PENDING`, any non-PASS value |
+| `aaev_validators` | `PASS` | blank, `PENDING`, any non-PASS value |
 
 **Machine check** (CI automation pattern):
 ```bash
@@ -261,6 +264,10 @@ pre_pr_blocking_gate:
   # EFIA-001 fields:
   ac_evidence_matrix_populated: "YES | N/A"
   evidence_type_downgrade_check: "CLEAN"
+  # AAEV-001: required for all waves (PHCP-001 v1.1.0):
+  aaev_validators_verdict: "PASS | FAIL — [validator failures]"
+  # WRCC-001: required for all waves (PHCP-001 v1.1.0):
+  wave_result_coherence_verdict: "PASS | FAIL — [coherence failures]"
   pre_pr_blocking_gate_verdict: "PASS"
 ```
 
@@ -324,7 +331,7 @@ ECAP MUST record validator results in the reconciliation summary:
 ```yaml
 aaev_validator_results:
   AAEV-001_governing_issue_cross_surface: "PASS | FAIL — [mismatch details]"
-  AAEV-002_token_format: "PASS | FAIL — [token found]"
+  AAEV-002_token_format: "PASS | FAIL | N/A — [token found, or 'IAA not yet invoked' when pre-PR]"
   AAEV-003_wave_record_completeness: "PASS | FAIL — [missing sections]"
   AAEV-004_pr_body_fields: "PASS | FAIL — [invalid fields]"
   AAEV-005_wave_session_consistency: "PASS | FAIL — [mismatch fields]"
@@ -332,7 +339,7 @@ aaev_validator_results:
   AAEV-007_tracker_index_match: "PASS | FAIL | N/A — [mismatch details]"
   AAEV-008_pre_pr_gate_completeness: "PASS | FAIL — [missing fields]"
   AAEV-009_session_memory_completeness: "PASS | FAIL — [missing fields]"
-  aaev_overall_verdict: "PASS | FAIL — PASS only if all applicable validators show PASS"
+  aaev_overall_verdict: "PASS | FAIL — PASS only if all applicable validators show PASS; N/A with reason is acceptable for AAEV-002 (pre-IAA), AAEV-006/007 (N/A where no tracker/unlabeled artifacts)"
 ```
 
 IAA MUST verify `aaev_overall_verdict: PASS` before issuing an ASSURANCE-TOKEN.

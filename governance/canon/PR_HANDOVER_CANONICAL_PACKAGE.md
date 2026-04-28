@@ -156,7 +156,7 @@ pre_pr_blocking_gate:
   aaev_validators_verdict: "PASS / FAIL — [validator failures]"
   # WRCC-001: required for all waves
   wave_result_coherence_verdict: "PASS / FAIL — [coherence failures]"
-  pre_pr_blocking_gate_verdict: "PASS"     # PASS / FAIL — PASS only if all sub-fields above are YES/PASS/CLEAN
+  pre_pr_blocking_gate_verdict: "PASS"     # PASS / FAIL — PASS only if every sub-field is in its allowed pass-state: YES, PASS, CLEAN, or NORMAL; N/A only where that field explicitly permits N/A (e.g., tracker fields for governance waves, ac_evidence_matrix_populated for non-qualifying deliveries); WAIVED only for protected_path_ecap_ceremony_completed with a documented CS2 reference per PPEIA-001 §3
 ```
 
 ### 4.2 Blocking Rule

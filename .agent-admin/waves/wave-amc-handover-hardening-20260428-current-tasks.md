@@ -1,10 +1,11 @@
 # Wave Checklist — AMC Handover Hardening Umbrella
 **Wave**: amc-handover-hardening-20260428
-**Authority**: CS2 — Issue #[umbrella issue]
-**Governing Delivery Issue**: app_management_centre — Umbrella: Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny
+**Authority**: CS2 — Issue #1145
+**Governing Delivery Issue**: app_management_centre#1145 — Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny
 **Date**: 2026-04-28
 **IAA Pre-Brief**: Wave record section 2
-**Status**: IN PROGRESS
+**Status**: COMPLETE — all tasks ticked; pending IAA invocation and wave close
+**governance_evidence_path**: .agent-admin/wave-records/amc-wave-record-amc-handover-hardening-20260428.md
 
 ---
 
@@ -59,6 +60,20 @@
       builder: foreman-v2-agent (governance amendment — POLC planning artifact)
       qp_verdict: PASS
       notes: Added A-039 (PROTECTED-PATH-ECAP-BEFORE-IAA), A-040 (EVIDENCE-TYPE-DOWNGRADE-PROHIBITION), A-041 (AAEV-VALIDATORS-MANDATORY) — COMPLETE
+
+---
+
+## Wave-Close Summary
+
+| Field | Value |
+|-------|-------|
+| total_tasks | 10 (TASK-1-0 through TASK-1-9) |
+| tasks_complete | 10 / 10 |
+| tasks_pending | 0 |
+| qp_verdicts_all_pass | YES |
+| checklist_retire_state | RETIRED FROM KICKOFF STATE — all tasks `[x]` |
+| wave_record_path | .agent-admin/wave-records/amc-wave-record-amc-handover-hardening-20260428.md |
+| next_step | IAA invocation — pending resolution of ECAP/protected-path gate and authority-field corrections per CS2 feedback |
 
 ---
 
