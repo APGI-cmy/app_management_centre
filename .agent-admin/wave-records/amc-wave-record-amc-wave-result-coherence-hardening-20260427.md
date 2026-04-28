@@ -158,7 +158,7 @@ pre_pr_blocking_gate:
 
 - Step 1 — Final-Assurance State Coherence: ✅ PASS — Section 5 contains `PHASE_B_BLOCKING_TOKEN: IAA-session-059-20260428-PASS`; no rejection-residue patterns present in Section 5
 - Step 2 — Kickoff-State Checklist Linter: ✅ PASS — all tasks [x], no `qp_verdict: PENDING`, wave-close summary block present at end of checklist
-- Step 3 — §3c Evidence Truth-Validation: ✅ PASS — all YES/PASS/CLEAN claims verified against actual artifact state; no anti-patterns 3.3.1–3.3.4 present
+- Step 3 — §3c Evidence Truth-Validation: ✅ PASS — all YES/PASS/CLEAN claims verified against actual artifact state; `stale_injector_check_performed: "CLEAN"` is accurate after retiring the stale `.agent-workspace/foreman-v2/personal/wave-current-tasks.md` injector (was anchored to wave-amc-90-10-complete-alignment/session-024; updated to current wave in this PR review cycle); STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md §3.7 updated to record finding and correction; no anti-patterns 3.3.1–3.3.4 present
 - Step 4 — Cross-Surface Contradiction Check: ✅ PASS — wave record (PASS token + COMPLETE), checklist (all [x] + PASS), session memory (outcome: COMPLETE) are mutually consistent on all CC-01–CC-08 facts
 
 **WAVE_RESULT_COHERENCE_PASS**

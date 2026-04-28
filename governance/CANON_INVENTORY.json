@@ -2287,7 +2287,7 @@
       "version": "1.0.0",
       "file_hash": "bb360209e9b51d66407cf79c633952764ef13f42b7e8c346cb40930be65157d3",
       "effective_date": "2026-04-27",
-      "description": "Defines wave-result-state coherence invariants: final-assurance state coherence gate (Section 5 must resolve to exactly one of ASSURANCE_TOKEN_ISSUED or REJECTION_PACKAGE_ACTIVE), kickoff-state checklist linter (exact kickoff-residue detection patterns), \u00a73c evidence truth-validation against actual file state, cross-surface contradiction check table (CC-01\u2013CC-08), and producer-side pre-PR checker combining all four gates. Operationalizes EWCS-001 \u00a76 and PHCP-001 \u00a74 into machine-checkable coherence gates. Introduces wrcc_pre_pr_checker_verdict \u00a73c field. Authority: CS2 \u2014 Issue #1143.",
+      "description": "Defines wave-result-state coherence invariants: final-assurance state coherence gate (Section 5 must resolve to exactly one of ASSURANCE_TOKEN_ISSUED, REJECTION_PACKAGE_ACTIVE, or ASSURANCE_PENDING — see §1.2 for three-state definitions; ASSURANCE_PENDING covers pre-IAA/awaiting-token with no rejection language, and is still blocking for PR handover until resolved), kickoff-state checklist linter (exact kickoff-residue detection patterns), §3c evidence truth-validation against actual file state, cross-surface contradiction check table (CC-01\u2013CC-08), and producer-side pre-PR checker combining all four gates. Operationalizes EWCS-001 \u00a76 and PHCP-001 \u00a74 into machine-checkable coherence gates. Introduces wrcc_pre_pr_checker_verdict \u00a73c field. Authority: CS2 \u2014 Issue #1143.",
       "type": "canon",
       "path": "governance/canon/WAVE_RESULT_COHERENCE_CANON.md",
       "layer_down_status": "INTERNAL",
