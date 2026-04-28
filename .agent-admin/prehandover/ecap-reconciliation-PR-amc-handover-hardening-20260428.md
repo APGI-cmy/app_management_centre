@@ -132,17 +132,15 @@ protected_path_ceremony:
 
 ## C5. Foreman Administrative Readiness Block
 
-> To be completed by the Foreman at the QP Admin-Compliance Checkpoint (§14.6):
-
 | Field | Value |
 |-------|-------|
-| substantive_readiness | |
-| administrative_readiness | |
-| QP admin-compliance check completed | |
-| IAA invocation authorized | |
-| Rejection reason (if REJECTED) | |
-| Foreman Session | |
-| Checkpoint Date | |
+| substantive_readiness | ACCEPTED — all 10 wave tasks complete; QP verdicts PASS; no substantive defects |
+| administrative_readiness | ACCEPTED — ECAP ceremony complete; ceremony bundle committed; pre_pr_blocking_gate PASS (ceremony-admin scope) |
+| QP admin-compliance check completed | YES — §14.6 checkpoint completed by foreman-v2-agent (POLC-Orchestration) 2026-04-28 |
+| IAA invocation authorized | YES — all ceremony blockers resolved; ECAP ceremony complete; wave result coherence PASS; AAEV validators PASS |
+| Rejection reason (if REJECTED) | N/A |
+| Foreman Session | session-035-20260428 |
+| Checkpoint Date | 2026-04-28 |
 
 ---
 
@@ -201,3 +199,21 @@ Confirmation: No ASSEMBLY_TIME_ONLY blocks, no [fill in] placeholders, no templa
 ---
 
 *ECAP Reconciliation Summary Version: 1.1.0 | Authority: ECAP-001 v1.3.0 | Wave: amc-handover-hardening-20260428 | Date: 2026-04-28*
+
+---
+
+## C8. AAEV Validator Results (ACR-24 — AAEV-001 §3.3)
+
+```yaml
+aaev_validator_results:
+  AAEV-001_governing_issue_cross_surface: "PASS — #1145 machine-exact across all surfaces (wave record, checklist, artifact headers, session memory)"
+  AAEV-002_token_format: "N/A — IAA not yet invoked at ceremony-bundle time; token to be recorded in wave record §5 after IAA PASS"
+  AAEV-003_wave_record_completeness: "PASS — sections 1-5 present and non-blank; §5 PENDING is valid pre-IAA state"
+  AAEV-004_pr_body_fields: "N/A (ceremony-admin scope) — PR body governing_delivery_issue and iaa_result fields to be finalized after IAA token issued"
+  AAEV-005_wave_session_consistency: "PASS — wave_id and triggering_issue consistent across all artifacts"
+  AAEV-006_artifact_header_authority: "PASS — all new canon documents use labeled authority format; CS2 authority declared"
+  AAEV-007_tracker_index_match: "N/A — governance canon wave; no module tracker or index applies"
+  AAEV-008_pre_pr_gate_completeness: "PASS — pre_pr_blocking_gate_verdict: PASS (ceremony-admin scope); all fields populated"
+  AAEV-009_session_memory_completeness: "PASS — session-035-20260428 created; all required fields populated"
+  aaev_overall_verdict: "PASS (ceremony-admin scope) — AAEV-002 and AAEV-004 are IAA-gated and will be finalized after IAA token issued"
+```

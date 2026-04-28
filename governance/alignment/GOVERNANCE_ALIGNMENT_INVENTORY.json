@@ -5,7 +5,7 @@
   "last_layer_down_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
   "last_updated": "2026-04-28",
   "alignment_status": "ALIGNED",
-  "total_artifacts": 36,
+  "total_artifacts": 38,
   "artifacts": [
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -405,6 +405,28 @@
       "canonical_commit": "cf6ae59",
       "file_hash_sha256": "8a495e0bef73901ff24612bb360eff86a4093a5409e71ee2cded6dbdec1348c6",
       "action": "NEW"
+    },
+    {
+      "filename": "PR_HANDOVER_CANONICAL_PACKAGE.md",
+      "path": "governance/canon/PR_HANDOVER_CANONICAL_PACKAGE.md",
+      "version": "1.2.0",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "canonical_commit": "c184c3b",
+      "layered_down_at": "2026-04-28T00:00:00Z",
+      "file_hash_sha256": "3a9afdf248fd95055329191a38fba91478e81351d1c7a27af12d74350e6647ac",
+      "action": "UPDATED"
+    },
+    {
+      "filename": "END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md",
+      "path": "governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md",
+      "version": "1.3.0",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "canonical_commit": "c184c3b",
+      "layered_down_at": "2026-04-28T00:00:00Z",
+      "file_hash_sha256": "b5e34febfd26d1cd254b0f5c5de8e51bcc47722f397eec65793e30d12df825f3",
+      "action": "UPDATED"
     }
   ],
   "layer_down_history": [
