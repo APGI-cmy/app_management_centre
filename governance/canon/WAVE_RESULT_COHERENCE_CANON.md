@@ -39,20 +39,25 @@ both into explicit, machine-checkable coherence gates for the three critical sur
 
 ### 1.1 Purpose
 
-The wave-record Section 5 (Assurance) MUST resolve to exactly **one** valid final state
-before the PR may be opened as review-ready. A Section 5 that simultaneously exhibits PASS
-and REJECTION posture is a **coherence violation** and a blocking defect.
+The wave-record Section 5 (Assurance) MUST resolve to exactly **one** valid assurance
+state before the PR may be opened as review-ready. A Section 5 that simultaneously
+exhibits PASS and REJECTION posture is a **coherence violation** and a blocking defect.
 
-### 1.2 Allowed Final States (Exactly One Must Be Active)
+### 1.2 Allowed Assurance States (Exactly One Must Be Active)
 
 | State | Indicator | Description |
 |-------|-----------|-------------|
 | `ASSURANCE_TOKEN_ISSUED` | `PHASE_B_BLOCKING_TOKEN: IAA-session-NNN-YYYYMMDD-PASS` present | IAA issued PASS; no rejection language active |
 | `REJECTION_PACKAGE_ACTIVE` | Rejection/fix-required language present; no valid token | IAA issued rejection or fix required; re-invocation pending |
+| `ASSURANCE_PENDING` | No valid `PHASE_B_BLOCKING_TOKEN` present and no rejection/fix-required language present | Pre-IAA or awaiting IAA completion/token issuance; still blocking for PR handover until resolved |
 
-A Section 5 that contains indicators from **both** states simultaneously is an
-incoherent final-assurance state and is prohibited.
+A Section 5 that contains indicators from **more than one** state simultaneously is an
+incoherent assurance state and is prohibited.
 
+For machine-checking purposes, **missing token alone does not activate**
+`REJECTION_PACKAGE_ACTIVE`. A no-token Section 5 MUST be classified as
+`ASSURANCE_PENDING` unless rejection/fix-required language is also present, in which
+case it MUST be classified as `REJECTION_PACKAGE_ACTIVE`.
 ### 1.3 Coherence Rule — PASS State
 
 If Section 5 claims `ASSURANCE_TOKEN_ISSUED` (i.e., a valid `PHASE_B_BLOCKING_TOKEN` is
