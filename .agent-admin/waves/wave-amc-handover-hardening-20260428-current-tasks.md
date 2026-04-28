@@ -59,7 +59,7 @@
 - [x] TASK-1-9 — Update FAIL-ONLY-ONCE.md with new permanent invariants
       builder: foreman-v2-agent (governance amendment — POLC planning artifact)
       qp_verdict: PASS
-      notes: Added A-039 (PROTECTED-PATH-ECAP-BEFORE-IAA), A-040 (EVIDENCE-TYPE-DOWNGRADE-PROHIBITION), A-041 (AAEV-VALIDATORS-MANDATORY) — COMPLETE
+      notes: Added A-040 (PROTECTED-PATH-ECAP-BEFORE-IAA), A-041 (EVIDENCE-TYPE-DOWNGRADE-PROHIBITION), A-042 (AAEV-VALIDATORS-MANDATORY) — renumbered from A-039/040/041 to avoid collision with A-039 (WAVE-RESULT-COHERENCE-MANDATORY) merged from main at #1143 — COMPLETE
 
 ---
 
