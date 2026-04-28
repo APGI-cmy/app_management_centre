@@ -212,9 +212,9 @@
 
 | Field | Value |
 |-------|-------|
-| iaa_final_assurance_session | PENDING |
-| verdict | PENDING |
-| phase_b_blocking_token | PENDING |
+| iaa_final_assurance_session | session-064-20260428 |
+| verdict | ASSURANCE-TOKEN — 11/11 checks PASS (CORE-020 ✅, CORE-021 ✅, OVL-PBG-010–016 ✅, OVL-PBG-ADM-003 ✅). CONDITIONAL PASS posture confirmed. Stage 8 BLOCKED gate preserved. Exception posture (#1152) verified across all committed artifacts. Merge gate parity: PASS. |
+| phase_b_blocking_token | IAA-064-20260428-PASS |
 
 ---
 
