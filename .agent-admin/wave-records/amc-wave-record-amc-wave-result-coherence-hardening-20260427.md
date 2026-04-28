@@ -110,7 +110,7 @@
 | No placeholder content | ✅ No STUB/TODO/FIXME/TBD in delivered artifacts |
 | No production code changes | ✅ Governance documentation only |
 
-**QP Verdict**: PENDING — governance hardening deliverables are complete, but final QP PASS is deferred until §3c pre-PR blocking gate evidence and Section 5 assurance are complete and PASS
+**QP Verdict**: PASS — all governance hardening deliverables complete; §3c pre-PR blocking gate PASS; Section 5 assurance complete (IAA-session-059-20260428-PASS)
 
 ### §3a — Governing-Issue Parity Evidence (GIPC-001 §2.4)
 
@@ -141,15 +141,15 @@ control_surfaces_verified: "YES"
 ```yaml
 pre_pr_blocking_gate:
   closeout_sweep_performed: "YES"
-  tracker_header_parity_verified: "N/A — no BUILD_PROGRESS_TRACKER modified in this wave"
-  tracker_body_parity_verified: "N/A — no BUILD_PROGRESS_TRACKER modified in this wave"
+  tracker_header_parity_verified: "N/A"
+  tracker_body_parity_verified: "N/A"
   wave_checklist_retired_from_kickoff_state: "YES"
   control_surfaces_finalized: "YES"
   handover_bundle_self_consistent: "YES"
   governing_issue_role_registry_completed: "YES"
   stale_injector_check_performed: "CLEAN"
   entry_condition_status: "NORMAL"
-  operational_sanity_check_performed: "N/A — no strategy docs in this wave"
+  operational_sanity_check_performed: "N/A"
   wrcc_pre_pr_checker_verdict: "PASS"
   pre_pr_blocking_gate_verdict: "PASS"
 ```

@@ -288,9 +288,13 @@ Step 1 — Final-Assurance State Coherence (§1)
   1.1 Locate wave record Section 5
   1.2 Check: is PHASE_B_BLOCKING_TOKEN present?
       YES → proceed to 1.3
-      NO  → state is REJECTION_PACKAGE_ACTIVE
-            → if PR is being opened as review-ready: FAIL (wave not IAA-PASS)
-            → HALT — do not open PR
+      NO  → Check for rejection/fix-required language (§1.5 patterns):
+            FOUND     → state is REJECTION_PACKAGE_ACTIVE
+                        → FAIL: wave blocked — rejection not resolved; re-invoke IAA
+                        → HALT — do not open PR
+            NOT FOUND → state is ASSURANCE_PENDING
+                        → FAIL: wave blocked — IAA not yet invoked or token not issued
+                        → HALT — do not open PR
   1.3 Check: does Section 5 contain any rejection-residue patterns from §1.5?
       NO  → Section 5 is COHERENT (ASSURANCE_TOKEN_ISSUED state) — proceed to Step 2
       YES → FAIL: WRCC-INCOHERENT-ASSURANCE-STATE
@@ -327,7 +331,8 @@ Step 4 — Cross-Surface Contradiction Check (§4)
 Step 5 — Checker Verdict
   ALL STEPS PASS → WAVE_RESULT_COHERENCE_PASS
                    → Record: "WRCC pre-PR checker: PASS — all four coherence gates passed"
-                   → Record this verdict in wave record §3c or evaluation section
+                   → Record this verdict in wave record §3c fenced YAML block (§5.3);
+                     an optional human-readable copy may be placed in the evaluation section
                    → PR may be opened as review-ready (subject to all other pre-PR gates)
   ANY STEP FAILED → WAVE_RESULT_COHERENCE_FAIL
                     → Record: "WRCC pre-PR checker: FAIL — [list of failed gates]"
@@ -337,11 +342,20 @@ Step 5 — Checker Verdict
 
 ### 5.3 Recording the Checker Verdict
 
-The checker verdict MUST be recorded in the wave record §3c fenced YAML block as:
+The checker verdict MUST be recorded in the wave record §3c fenced YAML block,
+nested under the `pre_pr_blocking_gate:` object, as follows:
 
 ```yaml
-wrcc_pre_pr_checker_verdict: "PASS"   # PASS / FAIL — [list failing checks if FAIL]
+pre_pr_blocking_gate:
+  # ... all existing PHCP-001 §4.1 fields ...
+  wrcc_pre_pr_checker_verdict: "PASS"   # PASS / FAIL — [list failing checks if FAIL]
+  pre_pr_blocking_gate_verdict: "PASS"  # PASS only if wrcc_pre_pr_checker_verdict is PASS
 ```
+
+The `wrcc_pre_pr_checker_verdict` field MUST appear at the same nesting level as all
+other `pre_pr_blocking_gate` sub-fields. A top-level (un-nested) recording of this
+field is **not** the authoritative location and MUST NOT be treated as satisfying this
+requirement.
 
 This field is **additive** — it does not replace any existing §3c fields. All existing
 PHCP-001 §4.1 and EWCS-001 §8.2 fields MUST still be present.
