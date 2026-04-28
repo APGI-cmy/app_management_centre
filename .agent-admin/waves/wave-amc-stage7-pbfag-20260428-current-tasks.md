@@ -17,34 +17,34 @@
       qp_verdict: PASS
       notes: Stage 7 posture set to IN PROGRESS — Parallel Production (wave-start). Exception posture recorded per CS2 issue #1152 authorization.
 
-- [ ] TASK-035-02 — Create `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` v1.0
+- [x] TASK-035-02 — Create `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` v1.0
       builder: foreman-v2-agent (QUALITY_PROFESSOR)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Master PBFAG gate artifact — scope, approach, upstream artifact list, evaluator identity, overall gate status, exception posture, CS2 sign-off section.
 
-- [ ] TASK-035-03 — Create `modules/amc/06-pbfag/pbfag-evidence-matrix.md` v1.0
+- [x] TASK-035-03 — Create `modules/amc/06-pbfag/pbfag-evidence-matrix.md` v1.0
       builder: foreman-v2-agent (QUALITY_PROFESSOR)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Structured evidence matrix — check ID, source artifacts, requirement/invariant, evidence reviewed, result (PASS/FAIL/BLOCKED/N/A), finding ref, downstream consequence. Covers all 10 mandatory PBFAG check categories from issue #1152.
 
-- [ ] TASK-035-04 — Create `modules/amc/06-pbfag/pbfag-findings-and-verdict.md` v1.0
+- [x] TASK-035-04 — Create `modules/amc/06-pbfag/pbfag-findings-and-verdict.md` v1.0
       builder: foreman-v2-agent (QUALITY_PROFESSOR)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Findings and verdict artifact — PBFAG verdict, blocking findings, non-blocking observations, valid deferrals, Stage 8 gate condition, CS2 approval required statement.
 
-- [ ] TASK-035-05 — Update `modules/amc/06-pbfag/pbfag-checklist.md` — active wave posture
+- [x] TASK-035-05 — Update `modules/amc/06-pbfag/pbfag-checklist.md` — active wave posture
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Supersede placeholder with active wave status reference.
 
-- [ ] TASK-035-06 — Update `modules/amc/BUILD_PROGRESS_TRACKER.md` — wave-close
+- [x] TASK-035-06 — Update `modules/amc/BUILD_PROGRESS_TRACKER.md` — wave-close
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Stage 7 status: produced approval-pending. Stage 8 gate conditions preserved. Artifact paths recorded.
 
-- [ ] TASK-035-07 — Update `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
+- [x] TASK-035-07 — Update `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Stage 7 artifacts cataloged with correct status (approval-pending). Fix discrepancy: red-test-catalog.md actual count is 79 tests (not 69 as previously recorded). Stage 8 gate condition preserved.
 
 ---
