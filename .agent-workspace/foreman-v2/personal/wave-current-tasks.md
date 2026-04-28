@@ -1,46 +1,47 @@
-# Wave Current Tasks — wave-amc-90-10-complete-alignment
+# Wave Current Tasks — wave-amc-wave-result-coherence-hardening-20260427
 
-wave: wave-amc-90-10-complete-alignment
+wave: wave-amc-wave-result-coherence-hardening-20260427
 agent: foreman-v2-agent
-session: session-024
-date: 20260414
-governance_evidence_path: .agent-admin/wave-records/amc-wave-record-amc-90-10-complete-alignment-20260414.md
+session: session-034
+date: 20260427
+governance_evidence_path: .agent-admin/wave-records/amc-wave-record-amc-wave-result-coherence-hardening-20260427.md
 governance_evidence_status: CONSOLIDATED_INTO_WAVE_RECORD
 
 ## Wave Description
 
-Complete AMC 90/10 operating-model alignment with ISMS standard per Issue #1075.
-Deploy live execution-ceremony-admin-agent, update IAA to wave-record token model,
-wire Foreman Phase 4 to ceremony-admin delegation, align governance-liaison to wave-record model,
-and run cross-contract hardening pass per ECAP-001 and AMC 90/10 Admin Protocol v1.0.0.
+Hardening — pre-PR gate must enforce wave-result coherence, checklist close-state, and truthful §3c
+handover evidence. Introduces WRCC-001 (Wave Result Coherence Canon), A-039 WAVE-RESULT-COHERENCE-MANDATORY
+in FAIL-ONLY-ONCE.md v4.2.0, and amendments to EWCS-001 v1.2.0 and PHCP-001 v1.1.0.
+Authority: CS2 — Issue #1143.
 
 ## Allowed Artifact Paths
 
-Per AMC 90/10 Admin Protocol v1.0.0, this wave may create/modify:
-
-- `.github/agents/independent-assurance-agent.md`
-- `.github/agents/execution-ceremony-admin-agent.md`
-- `.github/agents/foreman-v2-agent.md`
-- `.github/agents/governance-liaison-amc-agent.md`
-- `.agent-workspace/execution-ceremony-admin-agent/knowledge/index.md`
-- `.agent-workspace/execution-ceremony-admin-agent/knowledge/ceremony-bundle-checklist.md`
-- `.agent-workspace/independent-assurance-agent/knowledge/iaa-high-frequency-checks.md`
-- `.agent-admin/wave-records/amc-wave-record-amc-90-10-complete-alignment-20260414.md`
-- `.agent-workspace/CodexAdvisor-agent/memory/session-020-20260414.md`
-- `.agent-workspace/foreman-v2/memory/session-024-20260414.md`
+- `governance/canon/WAVE_RESULT_COHERENCE_CANON.md` (new)
+- `governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` (amended)
+- `governance/canon/PR_HANDOVER_CANONICAL_PACKAGE.md` (amended)
+- `governance/CANON_INVENTORY.json` (updated)
+- `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md` (amended)
+- `.agent-workspace/foreman-v2/knowledge/index.md` (updated)
+- `.agent-workspace/foreman-v2/memory/session-034-20260427.md`
 - `.agent-workspace/foreman-v2/personal/wave-current-tasks.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-058-20260428.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-059-20260428.md`
+- `.agent-admin/wave-records/amc-wave-record-amc-wave-result-coherence-hardening-20260427.md`
+- `.agent-admin/waves/wave-amc-wave-result-coherence-hardening-20260427-current-tasks.md`
 
 ## Task Breakdown
 
 | ID | Task | Agent | Status |
 |----|------|-------|--------|
-| TASK-90-001 | Update IAA contract to wave-record token model (v2.5.0 → v2.6.0) | CodexAdvisor | [x] COMPLETE |
-| TASK-90-002 | Create execution-ceremony-admin-agent.md (v1.0.0 NEW) | CodexAdvisor | [x] COMPLETE |
-| TASK-90-003 | Create ECA Tier 2 knowledge (index.md, ceremony-bundle-checklist.md) | CodexAdvisor | [x] COMPLETE |
-| TASK-90-004 | Update foreman-v2-agent.md Phase 4 — ceremony-admin delegation (v3.0.1 → v3.1.0) | CodexAdvisor | [x] COMPLETE |
-| TASK-90-005 | Update governance-liaison-amc-agent.md — wave-record model (v3.2.0 → v3.3.0) | CodexAdvisor | [x] COMPLETE |
-| TASK-90-006 | Update iaa-high-frequency-checks.md — HFMC-04/05 dual-path (v1.0.0 → v1.1.0) | CodexAdvisor | [x] COMPLETE |
-| TASK-90-007 | Hardening pass — fix remaining stale PREHANDOVER refs in governance-liaison | foreman-v2 | [x] COMPLETE |
-| TASK-90-008 | Create wave record and session memory | foreman-v2 | [x] COMPLETE |
+| TASK-WRCC-001 | Create WAVE_RESULT_COHERENCE_CANON.md v1.0.0 | foreman-v2 | [x] COMPLETE |
+| TASK-WRCC-002 | Amend EWCS-001 to v1.2.0 (§7.4 WRCC-001 relationship, EWCS-COHERENCE-VIOLATION class) | foreman-v2 | [x] COMPLETE |
+| TASK-WRCC-003 | Lock A-039 in FAIL-ONLY-ONCE.md v4.2.0 | foreman-v2 | [x] COMPLETE |
+| TASK-WRCC-004 | Amend PHCP-001 to v1.1.0 (wrcc_pre_pr_checker_verdict field) | foreman-v2 | [x] COMPLETE |
+| TASK-WRCC-005 | Register WRCC-001 in CANON_INVENTORY.json | foreman-v2 | [x] COMPLETE |
+| TASK-WRCC-006 | Create wave record and session memory | foreman-v2 | [x] COMPLETE |
+| TASK-WRCC-007 | IAA Pre-Brief (session-058-20260428) | IAA | [x] COMPLETE |
+| TASK-WRCC-008 | IAA Final Assurance (session-059-20260428) — ASSURANCE-TOKEN issued | IAA | [x] COMPLETE |
+| TASK-WRCC-009 | Retire stale wave-current-tasks.md injector (wave-amc-90-10/session-024) | foreman-v2 | [x] COMPLETE |
+| TASK-WRCC-010 | Align A-039 and CANON_INVENTORY.json WRCC description to three-state model | foreman-v2 | [x] COMPLETE |
 
-## Status: COMPLETE — IAA ASSURANCE-TOKEN issued (session-040, 2026-04-15) — all 27 checks PASS
+## Status: COMPLETE — IAA ASSURANCE-TOKEN issued (IAA-session-059-20260428-PASS — all 15 checks PASS)

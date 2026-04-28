@@ -3,9 +3,9 @@
 **Agent**: foreman-v2-agent  
 **Authority**: CS2  
 **Governance Ref**: maturion-foreman-governance#1195, maturion-isms#496  
-**Version**: 4.1.0  
+**Version**: 4.2.1  
 **Created**: 2026-02-24  
-**Updated**: 2026-04-06  
+**Updated**: 2026-04-28  
 **Architecture**: `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md`
 
 ---
@@ -76,6 +76,8 @@ These rules are **absolute** and may never be overridden, relaxed, or waived wit
 | A-037 | OVERSHADOW-DETECTION-MANDATORY (CS2 — 2026-04-23): Before issuing any QP PASS verdict, the Foreman MUST run the Overshadow Detection check defined in `governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md` (GIPC-001) §5.3. If a newer related issue is found that is titled or classified as "Hardening", "Harmonization", "Alignment", or "Continuous Improvement", and the original Stage Kickoff Issue does NOT explicitly state it is superseded by that issue, the Foreman MUST declare OVERSHADOW DETECTED and halt the wave. The producing agent must correct all affected artifacts to cite the Stage Kickoff Issue before the wave may proceed. An overshadow finding that is silently accepted or ignored is a POLC governance failure equivalent to a QP PASS on a defective delivery. Violation class: GIP-OVERSHADOW-001. | CS2 — app_management_centre#1129 (2026-04-23) |
 
 | A-038 | CEREMONY-PARITY-EVIDENCE-REQUIRED (CS2 — 2026-04-23): Every wave ceremony package (wave record + wave checklist + PREHANDOVER proof) MUST explicitly record all seven ceremony evidence fields defined in `governance/canon/GOVERNING_ISSUE_PARITY_PROTOCOL.md` (GIPC-001) §6.1: governing_stage_issue, related_hardening_issue, related_harmonization_issue, approval_exists, parity_check_performed, overshadow_check_performed, and control_surfaces_verified. A ceremony package with any of these fields blank or absent is incomplete (GIPC-001 §6.2 ceremony completeness invariant) and is a handover blocker equivalent to a missing PREHANDOVER proof. The wave record template (`.agent-admin/templates/amc-wave-record-template.md`) has been updated (v1.2.0) to include a dedicated §3b Ceremony Evidence Fields section with all seven fields as explicitly labeled rows — any wave record not using this template structure is non-conforming. Violation class: GIP-CEREMONY-INCOMPLETE. | CS2 — app_management_centre#1129 (2026-04-23) |
+
+| A-039 | WAVE-RESULT-COHERENCE-MANDATORY (CS2 — 2026-04-27): Before QP PASS or PR-open, the wave MUST satisfy all three wave-result-state coherence invariants defined in `governance/canon/WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001): (1) Final-assurance state coherence — wave record Section 5 MUST resolve to exactly one valid state: ASSURANCE_TOKEN_ISSUED (PASS token present, no rejection language), REJECTION_PACKAGE_ACTIVE (rejection/fix-required language present, no valid token), or ASSURANCE_PENDING (no token and no rejection language — pre-IAA or awaiting token resolution; still blocking for PR handover until resolved). A Section 5 that simultaneously contains a PASS token and active rejection/fix-required/re-invocation language is INCOHERENT and a blocking defect. Missing token alone does NOT activate REJECTION_PACKAGE_ACTIVE — a no-token Section 5 with no rejection language MUST be classified as ASSURANCE_PENDING. (2) Kickoff-state checklist close-state — the wave checklist MUST have no `[ ]` unchecked tasks, no `qp_verdict: PENDING`, and MUST include the wave-close summary block before the wave record may claim QP PASS, outcome COMPLETE, or handover bundle self-consistent. (3) §3c evidence truthfulness — every §3c field set to YES/PASS/CLEAN MUST be true against the actual artifact state; `pre_pr_blocking_gate_verdict: PASS` MUST NOT be set while any of the coherence invariants is violated. The WRCC-001 §5 producer-side pre-PR checker MUST be run and `wrcc_pre_pr_checker_verdict: PASS` recorded in §3c before any PR is opened as review-ready. Any contradiction between PASS/resubmit state, checklist state, or handover evidence is an automatic FAIL. Violation classes: WRCC-INCOHERENT-ASSURANCE-STATE / WRCC-CHECKLIST-KICKOFF-RESIDUE / WRCC-3C-TRUTH-VIOLATION / WRCC-CROSS-SURFACE-CONTRADICTION. | CS2 — app_management_centre#1143 (2026-04-27; three-state model aligned 2026-04-28) |
 
 > **OVL-CI-006 CANDIDATE (PENDING CS2 APPROVAL — next available ID after A-031)**: Every GitHub Actions workflow job must declare an explicit `permissions:` block. This is pending formalisation as A-032. Until CS2 approves: treat as a STRONG RECOMMENDATION. Any PR that adds or modifies workflow files without explicit `permissions:` on every job should be flagged at QP evaluation. Builder task spec: add `permissions: contents: read` (or more specific) to jobs missing explicit permissions.
 
@@ -884,7 +886,7 @@ When completing PREFLIGHT §1.3, record the following block in the **session mem
 
 ```
 fail_only_once_attested: true
-fail_only_once_version: 4.0.0
+fail_only_once_version: 4.2.1
 unresolved_breaches: [list incident IDs with OPEN or IN_PROGRESS status, or 'none']
 open_improvements_reviewed: [S-001, S-002, S-003, S-004, S-005, S-006, S-007, S-008, S-009, S-010, S-011, S-012, S-013, S-014, S-015, S-016, S-017, S-018, S-019, S-020, S-021, S-022, S-023, S-024, S-025, S-026, S-027, S-028, S-032, S-033, S-034, S-035]
 ```
@@ -896,7 +898,7 @@ open_improvements_reviewed: [S-001, S-002, S-003, S-004, S-005, S-006, S-007, S-
 ---
 
 *Authority: CS2 (Johan Ras) | Governance Ref: maturion-foreman-governance#1195, maturion-isms#496, maturion-isms#523, maturion-isms#855, maturion-isms#856, maturion-isms#1013, maturion-isms#999, maturion-isms#1003 | LIVING_AGENT_SYSTEM.md v6.2.0*  
-*Last Updated: 2026-03-18 | Version: 4.0.0 | Status: ACTIVE*
+*Last Updated: 2026-04-28 | Version: 4.2.1 | Status: ACTIVE*
 
 ---
 
@@ -904,6 +906,9 @@ open_improvements_reviewed: [S-001, S-002, S-003, S-004, S-005, S-006, S-007, S-
 
 | Version | Date | Change |
 |---------|------|--------|
+| 4.2.1 | 2026-04-28 | A-039 corrected to three-state model per WRCC-001 §1.2: ASSURANCE_PENDING added as third valid final-assurance state (no token + no rejection language — pre-IAA or awaiting token; still blocking). Two-state summary was incorrect after the canon was corrected. Authority: CS2 — app_management_centre#1143 |
+| 4.2.0 | 2026-04-27 | A-039 WAVE-RESULT-COHERENCE-MANDATORY locked in (CS2 — app_management_centre#1143); references WRCC-001 `governance/canon/WAVE_RESULT_COHERENCE_CANON.md`; attestation block version bumped to 4.2.0 |
+| 4.1.0 | 2026-04-06 | A-036 GOVERNING-ISSUE-PARITY-MANDATORY locked in (CS2 — app_management_centre#1129); A-037 OVERSHADOW-DETECTION-MANDATORY locked in (CS2 — app_management_centre#1129); A-038 CEREMONY-PARITY-EVIDENCE-REQUIRED locked in (CS2 — app_management_centre#1129) |
 | 4.0.1 | 2026-03-18 | INC-BLANK-FRONTEND-PREBRIEF-001 registered (IAA Pre-Brief skipped and IAA token not obtained before handover: blank frontend fix session on PR copilot/fix-blank-frontend-page; eleventh occurrence of A-031 + A-014 violation class; CS2 corrective directive issued 2026-03-18; retroactive IAA Pre-Brief committed; RCA performed; learning loop activated); A-035 candidate COPILOT-BUILDER-ROLE-LABEL-BYPASS-PROHIBITION documented; S-035 improvement suggestion added; attestation block updated to v4.0.1 |
 | 4.0.0 | 2026-03-18 | INC-CI-LIVENESS-FIX-001 registered (Foreman IAA Pre-Brief skipped and IAA token not obtained before handover: CI liveness workflow fix session on PR copilot/fix-ci-update-liveness-workflow; eleventh occurrence of A-031 + A-014 violation class; CS2 re-alignment issued 2026-03-18; RCA completed; lessons learned file committed; A-034 CI-FIX-NO-EXEMPTION formally locked in as mandatory rule; S-035 CI-PREBRIEF-GATE-WORKFLOW-PATH-EXTENSION added; version bumped to 4.0.0 — major version due to formal lock-in of A-034 after candidate status at v3.8.0) |
 | 3.9.0 | 2026-03-15 | INC-W18-CRITERIA-PIPELINE-001 registered (8 critical production gaps in MAT Criteria Parsing Pipeline confirmed by CS2 live testing — maturion-isms#1114; Wave 18 remediation in progress); S-034 END-TO-END-CONTENT-ASSERTION-MANDATORY added; attestation block updated to v3.9.0 |
