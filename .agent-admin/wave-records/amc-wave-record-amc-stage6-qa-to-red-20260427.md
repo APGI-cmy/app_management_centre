@@ -223,17 +223,19 @@
 | session_059_finding_2_status | ✅ RESOLVED — DES consistency (Option B) applied; QA-DES005-001 correctly numbered |
 | session_061_finding_status | ✅ RESOLVED — Catalog summary HIGH corrected 56→54 |
 
-### 5.1 — Failures Requiring Fix-and-Resubmit
+### 5.1 — Failure Status
 
-**FINDING 1 — OVL-PBG-013 / CORE-020 / CORE-021 (CEREMONY — arithmetic error)**
+No failures remain requiring fix-and-resubmit.
 
-`red-test-catalog.md` catalog summary TOTAL row states **HIGH = 56**. Independent arithmetic verification confirms the sum of HIGH values across all 20 data rows = **54**. Internal inconsistency: CRITICAL(21) + HIGH(56) + MEDIUM(4) + LOW(0) = 81 ≠ 79 (stated TOTAL). Correct value: 79 − 21 − 4 − 0 = **54**.
+All previously raised findings are fully resolved:
 
-**Fix required**: In `red-test-catalog.md`, change the TOTAL row HIGH column value from `56` to `54`. No other changes required. Both session-059 substantive findings are resolved.
+- **session-059 finding 1** — QA-RT/CONFIG/SCHED sections J/K/L present; all 10 tests complete ✅
+- **session-059 finding 2** — DES consistency (Option B) applied; QA-DES005-001 correctly numbered ✅
+- **session-061 finding** — Catalog summary HIGH corrected from `56` to `54` ✅
 
-### 5.2 — Resubmission Instruction
+### 5.2 — Assurance Outcome
 
-One single-character fix required. After foreman-v2-agent applies the correction, re-invoke `independent-assurance-agent` for session-062. This REJECTION-PACKAGE does not expire until superseded by an ASSURANCE-TOKEN.
+PASS confirmed. ASSURANCE-TOKEN issued for this wave. No resubmission or REJECTION-PACKAGE is active. Wave is ready for CS2 merge review.
 
 ---
 

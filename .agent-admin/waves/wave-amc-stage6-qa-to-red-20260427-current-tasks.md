@@ -12,39 +12,39 @@
 
 ## Task List
 
-- [ ] TASK-034-01 — Create `modules/amc/05-qa-to-red/qa-to-red-specification.md` v1.0
+- [x] TASK-034-01 — Create `modules/amc/05-qa-to-red/qa-to-red-specification.md` v1.0
       builder: foreman-v2-agent (POLC_ORCHESTRATION — governance planning artifact)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Core Stage 6 specification. Defines QA-to-Red purpose, scope, pass/fail philosophy, severity model, blocker classification, retest expectations, evidence expectations. Derived from Architecture v1.0 and DES v1.0.
 
-- [ ] TASK-034-02 — Create `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` v1.0
+- [x] TASK-034-02 — Create `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` v1.0
       builder: foreman-v2-agent (POLC_ORCHESTRATION — governance planning artifact)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Traceability matrix: Stage 5 Architecture commitments → Stage 6 red tests; Stage 5a DES fields (DES-001 through DES-008) → Stage 6 red tests. No critical family silently omitted. Deferred items disclosed.
 
-- [ ] TASK-034-03 — Create `modules/amc/05-qa-to-red/red-test-catalog.md` v1.0
+- [x] TASK-034-03 — Create `modules/amc/05-qa-to-red/red-test-catalog.md` v1.0
       builder: foreman-v2-agent (POLC_ORCHESTRATION — governance planning artifact)
-      qp_verdict: PENDING
-      notes: Full test catalog with test IDs, source requirement, scenario, fail condition, pass condition, severity, blocker classification, required evidence type.
+      qp_verdict: PASS
+      notes: Full test catalog. 79 test cases across 20 families. 21 CRITICAL / 54 HIGH / 4 MEDIUM / 0 LOW; 75 blockers. Each entry: test ID, source requirement, scenario, fail condition, pass condition, severity, blocker classification, required evidence type.
 
-- [ ] TASK-034-04 — Update `modules/amc/05-qa-to-red/qa-to-red-suite.md` (superseded notice)
+- [x] TASK-034-04 — Update `modules/amc/05-qa-to-red/qa-to-red-suite.md` (superseded notice)
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Placeholder superseded by qa-to-red-specification.md
 
-- [ ] TASK-034-05 — Update `modules/amc/05-qa-to-red/qa-catalog-alignment.md` (superseded notice)
+- [x] TASK-034-05 — Update `modules/amc/05-qa-to-red/qa-catalog-alignment.md` (superseded notice)
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Placeholder superseded by red-test-catalog.md and architecture-and-des-to-qa-traceability.md
 
-- [ ] TASK-034-06 — Update `modules/amc/BUILD_PROGRESS_TRACKER.md`
+- [x] TASK-034-06 — Update `modules/amc/BUILD_PROGRESS_TRACKER.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Stage 6 status: produced approval-pending; Stage 7 remains blocked. Gate condition preserved.
 
-- [ ] TASK-034-07 — Update `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
+- [x] TASK-034-07 — Update `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
       builder: foreman-v2-agent (POLC_ORCHESTRATION)
-      qp_verdict: PENDING
+      qp_verdict: PASS
       notes: Stage 6 artifacts cataloged with correct status (approval-pending). Gate condition preserved.
 
 ---
