@@ -1,5 +1,5 @@
 
-**Status**: CANONICAL | **Version**: 1.11.3 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.12.0 | **Authority**: CS2
 **Date**: 2026-03-03
 **Amended**: 2026-03-03 — v1.1.0: Added §Proactive Assurance — Pre-Brief Protocol
 **Amended**: 2026-03-04 — v1.2.1: Added §CS2 Direct Review Track
@@ -13,6 +13,7 @@
 **Amended**: 2026-04-22 — v1.11.1: ACR-18 evaluation guidance — inline stale-language list marked "including but not limited to"; full denylist reference remains §3.1 of `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md`; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
 **Amended**: 2026-04-22 — v1.11.2: ACR-19 — added explicit requirement to verify root pointer target path (not only surrounding wording); clean-wording but wrong-target pointer is an STC-04 contradiction and fires ACR-19; added `stage1_canonical_source` field verification requirement; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
 **Amended**: 2026-04-22 — v1.11.3: Updated live cross-references to `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` from v1.0.0 to v1.0.3 in §Stage 1 Approval-Alignment Rejection Triggers intro paragraph and in §Canonical Basis / References list — v1.0.3 is the version that introduced `stage1_canonical_source` and machine-verifiable root-pointer target requirements that ACR-17 through ACR-20 enforce; authority: CS2 — Stage 1 approval-alignment QA hardening issue.
+**Amended**: 2026-04-28 — v1.12.0: Added ACR-21 (protected-path PR reached IAA without ECAP ceremony and without CS2 waiver), ACR-22 (evidence-type downgrade detected — required E1–E4 evidence satisfied by E5 agent attestation only), ACR-23 (agent-claim used as evidence without required hard evidence), ACR-24 (AAEV validators not run or overall verdict not PASS); added §Protected-Path and Evidence-First Rejection Triggers section; added §Diff-First Audit Requirement; added §AAEV Validator Pre-Condition; updated Trigger Table to reference PPEIA-001 and EFIA-001 protected-path path patterns; authority: CS2 — Umbrella: Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny.
 
 ---
 
@@ -936,18 +937,97 @@ ACR-17 through ACR-20 carry the same non-discretionary character as ACR-01 throu
 
 ---
 
+## Protected-Path and Evidence-First Rejection Triggers (ACR-21 through ACR-24)
+
+**Canonical basis**: `PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md` (PPEIA-001) v1.0.0 and
+`AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` (EFIA-001) v1.0.0.
+
+These rejection triggers activate when a PR touches protected paths (PPEIA-001 §1.1) or
+when evidence requirements for qualifying deliveries are not met (EFIA-001).
+
+**ACR-21 — Protected-path PR reached IAA without ECAP/admin ceremony**:
+- Before evaluating any other criterion, IAA MUST determine whether the PR diff touches
+  any protected path pattern defined in PPEIA-001 §1.1 (PP-01 through PP-08)
+- If any protected path is identified: verify that ECAP was appointed and completed
+  ceremony including the §4.2 `protected_path_ceremony` section in the ECAP reconciliation
+  summary, OR that a CS2 waiver is documented per PPEIA-001 §3
+- If ECAP was not appointed, OR the reconciliation summary lacks the
+  `protected_path_ceremony` section, OR no CS2 waiver exists: ACR-21 fires
+- Resolution: appoint ECAP, complete protected-path ceremony, obtain Foreman §14.6
+  CHECKPOINT: ACCEPTED, re-invoke IAA
+
+**ACR-22 — Evidence-type downgrade detected**:
+- For every acceptance criterion in the `ac_evidence_matrix` (EFIA-001 §2.1), verify
+  that `evidence_meets_minimum: YES`
+- If any criterion shows `evidence_meets_minimum: NO`: ACR-22 fires
+- If any criterion requiring E1–E4 shows `evidence_type_submitted: E5` without a
+  CS2 evidence-type exception (EFIA-001 §6.3): ACR-22 fires
+- If `ac_evidence_matrix` is present but `ac_evidence_matrix_verdict` is not `PASS`: ACR-22 fires
+
+**ACR-23 — Agent claim used as evidence without required hard evidence**:
+- For any acceptance criterion where the `evidence_reference` field contains only an
+  agent's session transcript, assertion, or self-attestation — and no E1–E4 artifact is
+  cited — and the criterion requires E1 through E4: ACR-23 fires
+- The ACNER (Agent-Claim Non-Evidence Rule) from EFIA-001 §1.3 is the canonical source
+  for what constitutes E5 vs E1–E4 evidence
+- Resolution: provide hard evidence of the required type; agent attestation may supplement
+  but cannot substitute for required evidence
+
+**ACR-24 — AAEV validators not run or overall verdict not PASS**:
+- IAA MUST verify that the ECAP reconciliation summary contains the `aaev_validator_results`
+  block with `aaev_overall_verdict: PASS` (per AMC_AUTHORITY_EXACTNESS_VALIDATORS.md §3.3)
+- If the `aaev_validator_results` block is absent: ACR-24 fires
+- If any individual validator in the block shows `FAIL`: ACR-24 fires
+- If `aaev_overall_verdict` is not `PASS`: ACR-24 fires
+- This check supersedes individual cross-surface checks where AAEV provides a machine-checkable
+  verdict; IAA does not re-run validators but verifies they were run and passed
+
+### Diff-First Audit Requirement (v1.12.0)
+
+Before reading any producing agent narrative or handover summary, IAA MUST:
+
+1. Independently review the PR diff
+2. Classify all changed files by path (protected path? governance? CI? code?)
+3. Independently determine the risk class per PPEIA-001 §4.3
+4. Record the independently derived risk class in the assurance output
+5. Compare with the producing agent's declared risk class
+6. If the producing agent under-classified the risk by two or more tiers: fire EFIA-RISK-UNDERCLASSIFIED
+7. Only then read the producing agent's narrative
+
+This diff-first audit prevents IAA from being anchored to the producing agent's framing of the work.
+
+### AAEV Validator Pre-Condition (v1.12.0)
+
+Before issuing any ASSURANCE-TOKEN, IAA MUST verify that the AAEV validator suite was
+completed by ECAP with `aaev_overall_verdict: PASS`. If the AAEV pre-condition is not met,
+IAA MUST issue a REJECTION-PACKAGE citing ACR-24. IAA does not re-run AAEV validators
+independently — it verifies they were run and the results are coherent.
+
+### Non-Discretionary Character
+
+ACR-21 through ACR-24 carry the same non-discretionary character as all preceding ACRs:
+- They are binary checks (PASS or triggers REJECTION-PACKAGE)
+- The IAA does NOT remediate the gap
+- The IAA does NOT issue partial tokens
+
+---
+
 ## References
 
 - `governance/canon/LIVING_AGENT_SYSTEM.md` v6.2.0 — Living Agent framework
 - `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md` — Knowledge architecture
 - `governance/canon/AGENT_CONTRACT_ARCHITECTURE.md` — Four-phase contract architecture
 - `governance/canon/IAA_PRE_BRIEF_PROTOCOL.md` v1.2.1 — IAA Pre-Brief Protocol (proactive assurance)
-- `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` v1.2.0 — Ceremony admin role and handover sequence
+- `governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` v1.3.0 — Ceremony admin role and handover sequence
 - `governance/canon/STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.3 — Stage 1 approval-alignment QA protocol (canonical basis for ACR-17 through ACR-20)
+- `governance/canon/PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md` v1.0.0 — Protected-path ECAP-before-IAA (canonical basis for ACR-21)
+- `governance/canon/AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` v1.0.0 — Evidence-first IAA assurance (canonical basis for ACR-22, ACR-23)
+- `governance/canon/AMC_AUTHORITY_EXACTNESS_VALIDATORS.md` v1.0.0 — AMC authority exactness validators (canonical basis for ACR-24)
+- `governance/canon/WAVE_RESULT_COHERENCE_CANON.md` v1.0.0 — Wave result coherence canon
 - `governance/quality/agent-integrity/` — Agent integrity reference store
 - `governance/CANON_INVENTORY.json` — Canon hash registry
 - `governance/GATE_REQUIREMENTS_INDEX.json` — Gate requirements
 
 ---
 
-*Authority: CS2 (Johan Ras) | Version: 1.11.3 | Effective: 2026-02-24 | Amended: 2026-04-22 (v1.11.3) | Previous: 2026-04-22 (v1.11.2)*
+*Authority: CS2 (Johan Ras) | Version: 1.12.0 | Effective: 2026-02-24 | Amended: 2026-04-28 (v1.12.0) | Previous: 2026-04-22 (v1.11.3)*

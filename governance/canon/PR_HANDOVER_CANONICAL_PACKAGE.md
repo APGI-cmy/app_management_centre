@@ -1,6 +1,7 @@
 
-**Status**: CANONICAL | **Version**: 1.0.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.1.0 | **Authority**: CS2
 **Date**: 2026-04-27
+**Amended**: 2026-04-28 — v1.1.0: Added `protected_path_ecap_ceremony_completed` and `ac_evidence_matrix_populated`/`evidence_type_downgrade_check` fields to §4.1 Pre-PR Blocking Gate YAML block (PPEIA-001 and EFIA-001 integration); updated §1 PR Body Schema with `ecap_ceremony_status` field; updated Appendix A cross-references; authority: CS2 — Umbrella: Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny.
 **Canon ID**: PHCP-001
 **Issue**: app_management_centre#1139 — Hardening — PR handover must enforce governing-issue role separation, retire stale handover injectors, and block partial handover state
 
@@ -52,6 +53,9 @@ the PR body. Fields marked MANDATORY may not be blank, N/A, or placeholder.
 | closeout_sweep_verdict   | PASS                                                       |
 | pre_pr_blocking_gate     | PASS                                                       |
 | entry_condition_status   | NORMAL / EXCEPTION — [see §5 schema]                       |
+| ecap_ceremony_status     | COMPLETED / N/A — not required / WAIVED — [CS2 reference]  |
+| wave_result_coherence    | PASS                                                       |
+| aaev_validators          | PASS                                                       |
 ```
 
 ### 1.1 Mandatory vs Conditional Fields
@@ -67,6 +71,9 @@ the PR body. Fields marked MANDATORY may not be blank, N/A, or placeholder.
 | `closeout_sweep_verdict` | MANDATORY — must be PASS |
 | `pre_pr_blocking_gate` | MANDATORY — must be PASS |
 | `entry_condition_status` | MANDATORY — NORMAL or EXCEPTION with fields per §5 |
+| `ecap_ceremony_status` | Conditional — COMPLETED if ECAP was appointed for this wave; WAIVED if CS2 waiver per PPEIA-001 §3; N/A if no ECAP was required |
+| `wave_result_coherence` | MANDATORY for waves using WRCC-001 — must be PASS |
+| `aaev_validators` | MANDATORY — must be PASS; records AAEV-001 overall verdict |
 | `stage_definition_issue` | Conditional — if stage definition issue differs from delivery issue |
 | `related_hardening_issue` | Conditional — cite if a hardening issue directly relates |
 | `related_harmonization_issue` | Conditional — cite if a harmonization issue directly relates |
@@ -140,6 +147,15 @@ pre_pr_blocking_gate:
   stale_injector_check_performed: "CLEAN"  # CLEAN / STALE — [list stale injectors found]
   entry_condition_status: "NORMAL"         # NORMAL / EXCEPTION — [see §5]
   operational_sanity_check_performed: "YES / N/A"   # for strategy docs; N/A otherwise
+  # PPEIA-001: required for protected-path PRs; N/A otherwise
+  protected_path_ecap_ceremony_completed: "YES / N/A / WAIVED — [CS2 reference]"
+  # EFIA-001: required for qualifying deliveries; N/A otherwise
+  ac_evidence_matrix_populated: "YES / N/A"
+  evidence_type_downgrade_check: "CLEAN / FAIL — [criteria affected]"
+  # AAEV-001: required for all waves
+  aaev_validators_verdict: "PASS / FAIL — [validator failures]"
+  # WRCC-001: required for all waves
+  wave_result_coherence_verdict: "PASS / FAIL — [coherence failures]"
   pre_pr_blocking_gate_verdict: "PASS"     # PASS / FAIL — PASS only if all sub-fields above are YES/PASS/CLEAN
 ```
 
@@ -152,6 +168,11 @@ A PR MUST NOT be opened as review-ready if any of the following are absent or no
 - `handover_bundle_self_consistent` is not `YES`
 - `governing_issue_role_registry_completed` is not `YES`
 - `stale_injector_check_performed` is absent or `STALE`
+- `protected_path_ecap_ceremony_completed` is not `YES`, `N/A`, or `WAIVED` with documented CS2 reference (PPEIA-001)
+- `ac_evidence_matrix_populated` is not `YES` or `N/A` for qualifying deliveries (EFIA-001)
+- `evidence_type_downgrade_check` is not `CLEAN` (EFIA-001)
+- `aaev_validators_verdict` is not `PASS` (AAEV-001)
+- `wave_result_coherence_verdict` is not `PASS` (WRCC-001)
 - `pre_pr_blocking_gate_verdict` is not `PASS`
 
 Partial handover state MUST fail at this gate — not be discovered during external review.
@@ -290,6 +311,10 @@ Record it in `STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md` and correct or ret
 | Wave record model and 90/10 principle | `AMC_90_10_ADMIN_PROTOCOL.md` |
 | Token ceremony | `INDEPENDENT_ASSURANCE_AGENT_CANON.md` |
 | ECAP ceremony administration | `EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` |
+| Protected-path ECAP-before-IAA | `PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md` (PPEIA-001) |
+| Evidence-first IAA assurance | `AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` (EFIA-001) |
+| Machine-checkable authority validators | `AMC_AUTHORITY_EXACTNESS_VALIDATORS.md` (AAEV-001) |
+| Wave result coherence | `WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001) |
 
 ---
 
