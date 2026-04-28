@@ -1,7 +1,8 @@
 
-**Status**: CANONICAL | **Version**: 1.1.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.2.0 | **Authority**: CS2
 **Date**: 2026-04-27
-**Amended**: 2026-04-28 — v1.1.0: Added `protected_path_ecap_ceremony_completed` and `ac_evidence_matrix_populated`/`evidence_type_downgrade_check` fields to §4.1 Pre-PR Blocking Gate YAML block (PPEIA-001 and EFIA-001 integration); updated §1 PR Body Schema with `ecap_ceremony_status` field; updated Appendix A cross-references; authority: CS2 — Umbrella: Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny.
+**Amended**: 2026-04-27 — v1.1.0: Added `wrcc_pre_pr_checker_verdict` to §4.1 required evidence fields and §4.2 blocking rule; added coherence-state prerequisite for `pre_pr_blocking_gate_verdict: PASS`; added WRCC-001 cross-reference in Appendix A; authority: CS2 — Issue #1143.
+**Amended**: 2026-04-28 — v1.2.0: Added `protected_path_ecap_ceremony_completed` and `ac_evidence_matrix_populated`/`evidence_type_downgrade_check` fields to §4.1 Pre-PR Blocking Gate YAML block (PPEIA-001 and EFIA-001 integration); updated §1 PR Body Schema with `ecap_ceremony_status` field; updated Appendix A cross-references; authority: CS2 — Issue #1145.
 **Canon ID**: PHCP-001
 **Issue**: app_management_centre#1139 — Hardening — PR handover must enforce governing-issue role separation, retire stale handover injectors, and block partial handover state
 
@@ -51,6 +52,7 @@ the PR body. Fields marked MANDATORY may not be blank, N/A, or placeholder.
 | iaa_result               | PHASE_B_BLOCKING_TOKEN: IAA-[session]-[date]-PASS          |
 | parity_check_verdict     | PASS                                                       |
 | closeout_sweep_verdict   | PASS                                                       |
+| wrcc_pre_pr_checker_verdict | PASS                                                    |
 | pre_pr_blocking_gate     | PASS                                                       |
 | entry_condition_status   | NORMAL / EXCEPTION — [see §5 schema]                       |
 | ecap_ceremony_status     | COMPLETED / N/A — not required / WAIVED — [CS2 reference]  |
@@ -70,6 +72,7 @@ the PR body. Fields marked MANDATORY may not be blank, N/A, or placeholder.
 | `parity_check_verdict` | MANDATORY — must be PASS |
 | `closeout_sweep_verdict` | MANDATORY — must be PASS |
 | `pre_pr_blocking_gate` | MANDATORY — must be PASS |
+| `wrcc_pre_pr_checker_verdict` | MANDATORY — must be PASS (WRCC-001 §5 pre-PR checker) |
 | `entry_condition_status` | MANDATORY — NORMAL or EXCEPTION with fields per §5 |
 | `ecap_ceremony_status` | Conditional — COMPLETED if ECAP was appointed for this wave; WAIVED if CS2 waiver per PPEIA-001 §3; N/A if no ECAP was required |
 | `wave_result_coherence` | MANDATORY for waves using WRCC-001 — must be PASS |
@@ -156,6 +159,7 @@ pre_pr_blocking_gate:
   aaev_validators_verdict: "PASS / FAIL — [validator failures]"
   # WRCC-001: required for all waves
   wave_result_coherence_verdict: "PASS / FAIL — [coherence failures]"
+  wrcc_pre_pr_checker_verdict: "PASS"      # PASS / FAIL — WRCC-001 §5 producer-side checker; PASS only if §1+§2+§3+§4 all pass
   pre_pr_blocking_gate_verdict: "PASS"     # PASS / FAIL — PASS only if every sub-field is in its allowed pass-state: YES, PASS, CLEAN, or NORMAL; N/A only where that field explicitly permits N/A (e.g., tracker fields for governance waves, ac_evidence_matrix_populated for non-qualifying deliveries); WAIVED only for protected_path_ecap_ceremony_completed with a documented CS2 reference per PPEIA-001 §3
 ```
 
@@ -174,6 +178,12 @@ A PR MUST NOT be opened as review-ready if any of the following are absent or no
 - `aaev_validators_verdict` is not `PASS` (AAEV-001)
 - `wave_result_coherence_verdict` is not `PASS` (WRCC-001)
 - `pre_pr_blocking_gate_verdict` is not `PASS`
+- `wrcc_pre_pr_checker_verdict` is absent or not `PASS` (WRCC-001 §5 — added v1.1.0)
+
+In addition, the wave record Section 5 MUST be in a coherent final-assurance state
+(ASSURANCE_TOKEN_ISSUED or REJECTION_PACKAGE_ACTIVE — not both simultaneously) before
+`pre_pr_blocking_gate_verdict: PASS` may be set. See `WAVE_RESULT_COHERENCE_CANON.md`
+(WRCC-001) §1 for the exact coherence definition and detection patterns.
 
 Partial handover state MUST fail at this gate — not be discovered during external review.
 
@@ -314,11 +324,12 @@ Record it in `STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md` and correct or ret
 | Protected-path ECAP-before-IAA | `PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md` (PPEIA-001) |
 | Evidence-first IAA assurance | `AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` (EFIA-001) |
 | Machine-checkable authority validators | `AMC_AUTHORITY_EXACTNESS_VALIDATORS.md` (AAEV-001) |
-| Wave result coherence | `WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001) |
+| **Wave-result coherence (Section 5 coherence, checklist linter, §3c truth, cross-surface checks)** | **`WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001)** |
 
 ---
 
 **Canon ID**: PHCP-001
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-27
 **Authority**: CS2 — Issue #1139
+**Amended**: 2026-04-27 — v1.1.0 — Issue #1143
 **See also**: All canons listed in Appendix A

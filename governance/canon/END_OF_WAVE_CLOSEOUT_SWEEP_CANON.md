@@ -1,8 +1,9 @@
 
-**Status**: CANONICAL | **Version**: 1.2.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.3.0 | **Authority**: CS2
 **Date**: 2026-04-26
 **Amended**: 2026-04-27 — v1.1.0: Added §8 Pre-PR Blocking Gate (producer-side prerequisite); added extended evidence fields `handover_bundle_self_consistent`, `governing_issue_role_registry_completed`, `stale_injector_check_performed`, `entry_condition_status`, `operational_sanity_check_performed` to wave record §3c requirements; added EWCS-PRE-PR-GATE-FAIL and EWCS-BUNDLE-INCONSISTENT violation classes; authority: CS2 — Issue #1139.
-**Amended**: 2026-04-28 — v1.2.0: Added CS-11 (ECAP protected-path ceremony gate for protected-path PRs per PPEIA-001), CS-12 (evidence matrix completeness gate for qualifying deliveries per EFIA-001), CS-13 (AAEV validator results — mandatory), CS-14 (wave result coherence — mandatory); updated mandatory/conditional note to include CS-13 and CS-14 as mandatory; added §9 Evidence-Field and ECAP Coherence Gate; added EWCS-ECAP-ABSENT, EWCS-EVIDENCE-MATRIX-ABSENT, EWCS-AAEV-FAIL, EWCS-COHERENCE-FAIL to violation classes; authority: CS2 — Umbrella: Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny.
+**Amended**: 2026-04-27 — v1.2.0: Added §7.4 cross-reference to WRCC-001 (Wave Result Coherence Canon); added EWCS-COHERENCE-VIOLATION to Appendix B violation classes table; authority: CS2 — Issue #1143.
+**Amended**: 2026-04-28 — v1.3.0: Added CS-11 (ECAP protected-path ceremony gate for protected-path PRs per PPEIA-001), CS-12 (evidence matrix completeness gate for qualifying deliveries per EFIA-001), CS-13 (AAEV validator results — mandatory), CS-14 (wave result coherence — mandatory); updated mandatory/conditional note to include CS-13 and CS-14 as mandatory; added §9 Evidence-Field and ECAP Coherence Gate; added EWCS-ECAP-ABSENT, EWCS-EVIDENCE-MATRIX-ABSENT, EWCS-AAEV-FAIL violation classes; authority: CS2 — Issue #1145.
 **Canon ID**: EWCS-001
 **Issue**: app_management_centre#1134 — Hardening — Foreman/ceremony must enforce end-of-wave closeout sweep, tracker/header parity, and kickoff-state retirement
 
@@ -422,6 +423,31 @@ control-surface finalization.
 The WRC Section E (added per EWCS-001) integrates both the closeout sweep and the
 tracker/header parity check into the unified wave-close workflow.
 
+### 7.4 Relationship to WRCC-001 (Wave Result Coherence Canon)
+
+`WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001) is the **specialized coherence enforcement
+layer** built on top of EWCS-001 §3, §5, and §8.
+
+| Concern | Governed By |
+|---------|------------|
+| Closeout sweep as a named step | EWCS-001 §1 |
+| Kickoff-state retirement rules | EWCS-001 §3 |
+| Pre-PR blocking gate fields | EWCS-001 §8 / PHCP-001 §4 |
+| **Final-assurance state coherence (Section 5 contradiction detection)** | **WRCC-001 §1** |
+| **Exact kickoff-residue patterns (linter specification)** | **WRCC-001 §2** |
+| **§3c truth-validation against actual file state** | **WRCC-001 §3** |
+| **Cross-surface contradiction detection table** | **WRCC-001 §4** |
+| **Producer-side pre-PR checker combining §1+§2+§3** | **WRCC-001 §5** |
+
+WRCC-001 operationalizes EWCS-001's existing rules into machine-checkable coherence gates.
+Both must be satisfied — WRCC-001 does not replace EWCS-001, it adds the precise detection
+patterns and enforcement mechanism for the coherence-specific failure class.
+
+WRCC-001 adds one new §3c field to the evidence record:
+```yaml
+wrcc_pre_pr_checker_verdict: "PASS"   # PASS / FAIL — required before PR-open
+```
+
 ---
 
 ## Appendix A: Closeout Sweep Quick Reference
@@ -468,7 +494,7 @@ Wave record §3c evidence:
 | EWCS-ECAP-ABSENT | Protected-path PR (CS-11) claims review-ready posture but ECAP ceremony absent and no waiver |
 | EWCS-EVIDENCE-MATRIX-ABSENT | Qualifying delivery (CS-12) claims review-ready posture but ac_evidence_matrix absent or FAIL |
 | EWCS-AAEV-FAIL | AAEV validator results (CS-13) missing or aaev_overall_verdict ≠ PASS |
-| EWCS-COHERENCE-FAIL | Wave result coherence check (CS-14) missing or wave_result_coherence_verdict ≠ PASS |
+| EWCS-COHERENCE-VIOLATION | Wave-result-state coherence invariant violated — see `WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001) for specific violation sub-classes: WRCC-INCOHERENT-ASSURANCE-STATE, WRCC-CHECKLIST-KICKOFF-RESIDUE, WRCC-3C-TRUTH-VIOLATION, WRCC-CROSS-SURFACE-CONTRADICTION |
 
 ---
 

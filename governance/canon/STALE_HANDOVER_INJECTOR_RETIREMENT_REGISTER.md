@@ -122,6 +122,17 @@ The following artifact locations have been retired and MUST NOT be used by any a
 
 **Remediation Required**: `AGENT_HANDOVER_AUTOMATION.md` §4.3b needs amendment to reflect that AMC repositories use wave record section 5 as the token carrier. This amendment requires a separate CS2-authorized wave.
 
+### 3.7 `.agent-workspace/foreman-v2/personal/wave-current-tasks.md`
+
+| Item | Pre-Hardening State | Post-Hardening State | Status |
+|------|---------------------|---------------------|--------|
+| Wave identity | `wave-amc-90-10-complete-alignment` / `session-024` / `20260414` — a closed, COMPLETE wave from Issue #1075 | `wave-amc-wave-result-coherence-hardening-20260427` / `session-034` / `20260427` — the current active wave (Issue #1143) | ✅ CORRECTED — Issue #1143 |
+| Injection risk | File still contained the closed wave-amc-90-10-complete-alignment task bundle; any automated system reading this file would inject pre-brief/handover content anchored to an unrelated, long-closed wave | File now reflects the current WRCC hardening wave as COMPLETE, with the correct task list and IAA token reference | ✅ RETIRED — Issue #1143 |
+
+**Finding**: Identified during the WRCC-001 wave (Issue #1143) WRCC §3 truth-validation — the PR for this wave received automated injection comments from the stale wave-amc-90-10-complete-alignment/session-024 bundle, making the `stale_injector_check_performed: "CLEAN"` §3c claim false at initial check. Corrected by updating this file in commit during the WRCC hardening PR review cycle.
+
+**Current Status**: ✅ CORRECTED — Issue #1143
+
 ---
 
 ## 4. Known Outstanding Stale Injectors (Requires Follow-On Wave)
