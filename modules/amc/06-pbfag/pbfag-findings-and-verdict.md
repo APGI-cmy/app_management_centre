@@ -217,7 +217,7 @@ This PBFAG pack requires CS2 (@APGI-cmy) formal approval before Stage 8 may proc
 | Field | Value |
 |-------|-------|
 | **Prepared By** | foreman-v2-agent (session-035-20260428) |
-| **Reviewed By** | independent-assurance-agent (Pre-Brief: session-063-20260428; Final Audit: session-064-20260428 — ASSURANCE-TOKEN IAA-session-064-20260428-PASS) |
+| **Reviewed By** | independent-assurance-agent (Pre-Brief: session-063-20260428; Final Audit: session-065-20260429 — ASSURANCE-TOKEN IAA-session-065-20260429-PASS (re-run on corrected head; supersedes session-064)) |
 | **Approved By** | *(CS2 approval required — @APGI-cmy)* |
 | **Approval Date** | *(Pending CS2 review)* |
 | **Approval Reference** | app_management_centre#1150 |
