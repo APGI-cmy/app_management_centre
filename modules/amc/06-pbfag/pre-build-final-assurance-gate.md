@@ -5,8 +5,8 @@
 **Version**: 1.0
 **Status**: 🟡 Produced — Approval Pending (CS2)
 **Author**: foreman-v2-agent (QUALITY_PROFESSOR / POLC_ORCHESTRATION)
-**CS2 Authorization**: app_management_centre#1152 — "Stage 7 — Create AMC PBFAG pack and update progress tracker first" (opened by CS2 @APGI-cmy)
-**Governing Delivery Issue**: app_management_centre#1152
+**CS2 Authorization**: app_management_centre#1150 — "Stage 7 — Create AMC PBFAG pack and update progress tracker first" (opened by CS2 @APGI-cmy)
+**Governing Delivery Issue**: app_management_centre#1150
 **Wave**: amc-stage7-pbfag-20260428
 **Session**: session-035
 **Date**: 2026-04-28
@@ -17,7 +17,7 @@
 
 > **EXCEPTION POSTURE (CS2 AUTHORIZED)**
 > Stage 7 PBFAG artifacts are produced before Stages 5, 5a, and 6 receive formal CS2 approval.
-> CS2 explicitly authorized parallel production per issue #1152.
+> CS2 explicitly authorized parallel production per issue #1150.
 > This exception posture is recorded in all Stage 7 artifacts, the wave record, the tracker, and the
 > artifact index. Stage 8 (Implementation Plan) is **BLOCKED** and must remain BLOCKED until:
 > (1) Stage 5 Architecture receives CS2 approval;
@@ -83,7 +83,7 @@ This PBFAG covers:
 **Operating Mode**: QUALITY_PROFESSOR — independent evaluation of the upstream pre-build artifact chain
 **Authority Basis**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; `PRE_BUILD_REALITY_CHECK_CANON.md` v1.1.0; foreman-v2-agent contract v3.3.1 §3.5 (Quality Professor mode)
 **IAA Oversight**: IAA pre-brief completed — session-063-20260428. IAA final audit mandatory at handover.
-**CS2 Authorization**: issue #1152
+**CS2 Authorization**: issue #1150
 
 **Governing Issue Role Separation**:
 | Role | Issue |
@@ -92,10 +92,10 @@ This PBFAG covers:
 | Stage 5a DES definition authority | #1133 |
 | Stage 5a DES delivery | #1137 |
 | Stage 6 QA-to-Red delivery | #1141 |
-| Stage 7 PBFAG delivery (this issue) | #1152 |
+| Stage 7 PBFAG delivery (this issue) | #1150 |
 | Hardening umbrella (related, not governing Stage 7) | #1145, #1146, #1147, #1149 |
 
-Related hardening issues (#1145, #1146, #1147, #1149) are **not** governing delivery issues for Stage 7. They are referenced as context only. Stage 7 governing authority is exclusively #1152.
+Related hardening issues (#1145, #1146, #1147, #1149) are **not** governing delivery issues for Stage 7. They are referenced as context only. Stage 7 governing authority is exclusively #1150.
 
 ---
 
@@ -214,7 +214,7 @@ All explicit deferrals are recorded in `architecture-and-des-to-qa-traceability.
 
 **Verdict**: PASS
 
-All Stage 1–4 artifacts cite their correct governing delivery issues. Stage 5 artifacts cite #1131. Stage 5a artifacts cite #1137 (delivery) and #1133 (definition authority). Stage 6 artifacts cite #1141. This Stage 7 pack cites #1152. Related hardening issues (#1145, #1146, #1147, #1149) are not used as governing delivery issues for any stage artifact. Issue-role separation is maintained.
+All Stage 1–4 artifacts cite their correct governing delivery issues. Stage 5 artifacts cite #1131. Stage 5a artifacts cite #1137 (delivery) and #1133 (definition authority). Stage 6 artifacts cite #1141. This Stage 7 pack cites #1150. Related hardening issues (#1145, #1146, #1147, #1149) are not used as governing delivery issues for any stage artifact. Issue-role separation is maintained.
 
 ### Check 8 — Approval Posture and Gate Conditions
 
@@ -256,7 +256,7 @@ The AMC pre-build artifact chain (Stages 1–6) is:
 1. CS2 formal approval of Stage 5 Architecture (issue #1131)
 2. CS2 formal approval of Stage 5a DES (issue #1137)
 3. CS2 formal approval of Stage 6 QA-to-Red (issue #1141)
-4. CS2 formal approval of Stage 7 PBFAG — this pack (issue #1152)
+4. CS2 formal approval of Stage 7 PBFAG — this pack (issue #1150)
 
 **Stage 8 status**: ⛔ BLOCKED — awaiting Stage 7 CS2 approval and upstream approvals
 
@@ -268,7 +268,7 @@ At time of this wave (2026-04-28), the following hardening rules are verified as
 
 | Rule | Status | Applied? |
 |------|--------|----------|
-| GIPC-001 — Governing Issue Parity Check | Live | ✅ Applied — issue #1152 parity verified across all surfaces |
+| GIPC-001 — Governing Issue Parity Check | Live | ✅ Applied — issue #1150 parity verified across all surfaces |
 | EWCS-001 — End-of-Wave Closeout Sweep | Live | ✅ Applied — closeout sweep performed |
 | PHCP-001 — PR Handover Canonical Package | Live | ✅ Applied — PR body will include required fields |
 | WRCC-001 — Wave-Result Coherence and Checklist Close-State | Live | ✅ Applied — wave checklist ticked after QP PASS only |
@@ -285,8 +285,8 @@ At time of this wave (2026-04-28), the following hardening rules are verified as
 | **Reviewed By** | independent-assurance-agent (Pre-Brief: session-063-20260428; Final Audit: session-064-20260428 — ASSURANCE-TOKEN IAA-session-064-20260428-PASS) |
 | **Approved By** | *(CS2 approval required — @APGI-cmy)* |
 | **Approval Date** | *(Pending CS2 review)* |
-| **Approval Reference** | app_management_centre#1152 |
+| **Approval Reference** | app_management_centre#1150 |
 
 ---
 
-*AMC Pre-Build Functionality Assessment Gate v1.0 — 2026-04-28 — governing delivery issue: app_management_centre#1152 — CS2 authorization: app_management_centre#1152*
+*AMC Pre-Build Functionality Assessment Gate v1.0 — 2026-04-28 — governing delivery issue: app_management_centre#1150 — CS2 authorization: app_management_centre#1150*

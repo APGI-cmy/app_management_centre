@@ -4,9 +4,9 @@
 **Module**: App Management Centre (AMC)
 **Status**: 🟡 Produced — Approval Pending (wave amc-stage7-pbfag-20260428 closed; Stage 8 BLOCKED)
 **Wave**: amc-stage7-pbfag-20260428 (CLOSED — production complete)
-**Governing Delivery Issue**: app_management_centre#1152
+**Governing Delivery Issue**: app_management_centre#1150
 **Gate Authority**: Governed by `PRE_BUILD_REALITY_CHECK_CANON.md` v1.1.0
-**Prerequisite**: Stages 1–6 complete (exception posture: CS2 authorized parallel production per #1152)
+**Prerequisite**: Stages 1–6 complete (exception posture: CS2 authorized parallel production per #1150)
 
 ---
 
@@ -48,7 +48,7 @@ This is the PBFAG gate checklist — an independent review confirming that all p
 - [ ] CS2 approval — Stage 5 Architecture (#1131)
 - [ ] CS2 approval — Stage 5a DES (#1137)
 - [ ] CS2 approval — Stage 6 QA-to-Red (#1141)
-- [ ] CS2 approval — Stage 7 PBFAG (this pack, #1152)
+- [ ] CS2 approval — Stage 7 PBFAG (this pack, #1150)
 - [ ] Stage 8 authorization — BLOCKED until all four CS2 approvals above are granted
 
 ---

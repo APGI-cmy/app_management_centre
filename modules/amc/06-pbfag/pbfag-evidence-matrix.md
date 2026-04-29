@@ -5,8 +5,8 @@
 **Version**: 1.0
 **Status**: 🟡 Produced — Approval Pending (CS2)
 **Author**: foreman-v2-agent (QUALITY_PROFESSOR)
-**CS2 Authorization**: app_management_centre#1152
-**Governing Delivery Issue**: app_management_centre#1152
+**CS2 Authorization**: app_management_centre#1150
+**Governing Delivery Issue**: app_management_centre#1150
 **Wave**: amc-stage7-pbfag-20260428
 **Session**: session-035
 **Date**: 2026-04-28
@@ -17,7 +17,7 @@
 
 > **EXCEPTION POSTURE (CS2 AUTHORIZED)**
 > Stage 7 PBFAG artifacts are produced before Stages 5, 5a, and 6 receive formal CS2 approval.
-> CS2 explicitly authorized parallel production per issue #1152. Stage 8 is **BLOCKED** until
+> CS2 explicitly authorized parallel production per issue #1150. Stage 8 is **BLOCKED** until
 > Stages 5, 5a, 6, and 7 all receive CS2 approval.
 
 ---
@@ -141,7 +141,7 @@ Each row contains:
 | PBFAG-AUTH-003 | Stage 5 Architecture artifacts | Stage 5 artifacts cite #1131 as governing delivery issue | Architecture artifact headers: CS2 Authorization #1131, Governing Issue #1131 — confirmed | CONDITIONAL | F-001 | Conditional on Stage 5 CS2 approval |
 | PBFAG-AUTH-004 | Stage 5a DES artifacts | Stage 5a artifacts cite #1137 as governing delivery issue and #1133 as definition authority | DES artifacts: CS2 Authorization #1133 (definition authority), Governing Delivery Issue #1137 — confirmed in headers | CONDITIONAL | F-002 | Conditional on Stage 5a CS2 approval |
 | PBFAG-AUTH-005 | Stage 6 QA artifacts | Stage 6 artifacts cite #1141 as governing delivery issue | QA artifacts: CS2 Authorization #1141, Governing Delivery Issue #1141 — confirmed. IAA Pre-Brief (session-058) identified and corrected a prior #1140 reference — confirmed resolved | CONDITIONAL | F-003 | Conditional on Stage 6 CS2 approval |
-| PBFAG-AUTH-006 | Stage 7 PBFAG artifacts | Stage 7 artifacts cite #1152 as governing delivery issue | This pack: all three Stage 7 artifacts carry CS2 Authorization #1152, Governing Delivery Issue #1152 | ✅ PASS | — | No impact |
+| PBFAG-AUTH-006 | Stage 7 PBFAG artifacts | Stage 7 artifacts cite #1150 as governing delivery issue | This pack: all three Stage 7 artifacts carry CS2 Authorization #1150, Governing Delivery Issue #1150 | ✅ PASS | — | No impact |
 | PBFAG-AUTH-007 | Hardening issues #1145, #1146, #1147, #1149 | Hardening issues are NOT used as governing delivery issues for any stage | Verified: none of #1145, #1146, #1147, #1149 appear as governing delivery issue in any canonical stage artifact header | ✅ PASS | — | No impact |
 | PBFAG-AUTH-008 | Wave records for stages 5, 5a, 6 | Governing issue in wave records matches artifact headers | Stage 5 wave record: #1131 ✅; Stage 5a wave record: #1137 ✅; Stage 6 wave record: #1141 (corrected from #1140 per IAA Risk Flag 1) ✅ | ✅ PASS | — | No impact |
 
@@ -209,4 +209,4 @@ Each row contains:
 
 ---
 
-*AMC PBFAG Evidence Matrix v1.0 — 2026-04-28 — governing delivery issue: app_management_centre#1152 — CS2 authorization: app_management_centre#1152*
+*AMC PBFAG Evidence Matrix v1.0 — 2026-04-28 — governing delivery issue: app_management_centre#1150 — CS2 authorization: app_management_centre#1150*

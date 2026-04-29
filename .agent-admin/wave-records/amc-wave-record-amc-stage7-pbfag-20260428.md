@@ -4,7 +4,7 @@
 **Session**: session-035
 **Date**: 2026-04-28
 **Producing Agent**: foreman-v2-agent (QUALITY_PROFESSOR / POLC_ORCHESTRATION)
-**Governing Delivery Issue**: [app_management_centre#1152](https://github.com/APGI-cmy/app_management_centre/issues/1152) — "Stage 7 — Create AMC PBFAG pack and update progress tracker first" (opened by CS2 @APGI-cmy)
+**Governing Delivery Issue**: [app_management_centre#1150](https://github.com/APGI-cmy/app_management_centre/issues/1150) — "Stage 7 — Create AMC PBFAG pack and update progress tracker first" (opened by CS2 @APGI-cmy)
 **Repository**: APGI-cmy/app_management_centre
 
 ---
@@ -18,13 +18,13 @@
 | date | 2026-04-28 |
 | producing_agent | foreman-v2-agent |
 | agent_class | QUALITY_PROFESSOR / POLC_ORCHESTRATION |
-| governing_issue | app_management_centre#1152 |
+| governing_issue | app_management_centre#1150 |
 | governing_issue_author | @APGI-cmy (CS2 / OWNER) |
 | wave_type | PRE_BUILD_STAGE — Stage 7 PBFAG (Pre-Build Functionality Assessment Gate) |
 | task_count | 7 |
 | ecap_ceremony_admin | NONE |
 | iaa_pre_brief_session | session-063-20260428 — IAA Pre-Brief COMPLETE |
-| exception_posture | CS2 authorized Stage 7 parallel production per issue #1152; Stages 5/5a/6 approval-pending; exception must be consistently recorded across all artifacts |
+| exception_posture | CS2 authorized Stage 7 parallel production per issue #1150; Stages 5/5a/6 approval-pending; exception must be consistently recorded across all artifacts |
 
 ---
 
@@ -70,12 +70,12 @@
 
 | Field | Value |
 |-------|-------|
-| issue_number | #1152 |
+| issue_number | #1150 |
 | declared_title | "Stage 7 — Create AMC PBFAG pack and update progress tracker first" |
 | declared_author | @APGI-cmy (OWNER / CS2) |
 | declared_purpose | CS2-issued kickoff for Stage 7 PBFAG wave; explicit CS2 authorization for parallel production exception |
-| github_api_verification | ADVISORY — GitHub API returned 404 for issue #1152 (private repo API access scope). Not a blocking finding at Pre-Brief stage. At final assurance, OVL-PBG-011 requires the CS2 waiver to be cited in committed Stage 7 artifact headers. |
-| wave_record_consistency | CONSISTENT — issue #1152 referenced in wave record Section 1, wave checklist, and all artifact header declarations. |
+| github_api_verification | ADVISORY — GitHub API returned 404 for issue #1150 (private repo API access scope). Not a blocking finding at Pre-Brief stage. At final assurance, OVL-PBG-011 requires the CS2 waiver to be cited in committed Stage 7 artifact headers. |
+| wave_record_consistency | CONSISTENT — issue #1150 referenced in wave record Section 1, wave checklist, and all artifact header declarations. |
 | cs2_authorization_posture | ✅ CONFIRMED via wave record, checklist, and exception posture declarations. CS2 identity (@APGI-cmy = OWNER) corroborated by governance record pattern across prior IAA sessions. |
 
 ### 2.4 — Risk Flags
@@ -83,8 +83,8 @@
 **Risk Flag 1 — OVL-PBG-015 / PARALLEL PRODUCTION EXCEPTION EVIDENCE (HIGH — requires explicit evidence at final assurance)**
 
 - **Issue**: OVL-PBG-015 requires IAA to verify all prior stages (1–6) are confirmed complete before granting ASSURANCE-TOKEN for Stage 7. Stages 5, 5a, and 6 carry individual ASSURANCE-TOKENs (IAA sessions 055–056, 058–062) but formal CS2 approval (merge) is still pending at time of Pre-Brief.
-- **Exception**: CS2 authorized parallel production via issue #1152 — constitutes documented exception under `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 §4.2.
-- **Required Foreman Mitigation**: (a) All Stage 7 artifact headers must reference issue #1152 as CS2 authorization source. (b) `pre-build-final-assurance-gate.md` must declare exception posture explicitly. (c) Stage 8 BLOCKED gate condition must be stated in findings/verdict — Stage 8 requires CS2 formal approval of Stages 5, 5a, 6, AND 7. (d) No artifact may claim or imply Stage 8 is currently authorized.
+- **Exception**: CS2 authorized parallel production via issue #1150 — constitutes documented exception under `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 §4.2.
+- **Required Foreman Mitigation**: (a) All Stage 7 artifact headers must reference issue #1150 as CS2 authorization source. (b) `pre-build-final-assurance-gate.md` must declare exception posture explicitly. (c) Stage 8 BLOCKED gate condition must be stated in findings/verdict — Stage 8 requires CS2 formal approval of Stages 5, 5a, 6, AND 7. (d) No artifact may claim or imply Stage 8 is currently authorized.
 - **IAA Verification at Final Assurance**: OVL-PBG-011 verifies CS2 waiver cited in committed artifacts. OVL-PBG-015 checks CONDITIONAL PASS posture, exception posture consistency, and Stage 8 blocked gate preservation across all three substantive artifacts.
 
 **Risk Flag 2 — APPROVAL POSTURE LANGUAGE CONSISTENCY (MEDIUM)**
@@ -112,12 +112,12 @@
 | CORE-020 | Zero partial pass rule | YES | IAA-retained |
 | CORE-021 | Zero-severity tolerance | YES | IAA-retained |
 | OVL-PBG-010 | Stage declaration present | YES | Stage 7 must be explicitly declared in all artifacts |
-| OVL-PBG-011 | Stage dependency chain verified | YES — CRITICAL | Stages 1–6 must be verifiably complete OR CS2 waiver documented. CS2 waiver = issue #1152. Must be cited in committed artifacts. |
+| OVL-PBG-011 | Stage dependency chain verified | YES — CRITICAL | Stages 1–6 must be verifiably complete OR CS2 waiver documented. CS2 waiver = issue #1150. Must be cited in committed artifacts. |
 | OVL-PBG-012 | Stage artifact existence | YES | All three PBFAG artifacts must be present on committed HEAD |
 | OVL-PBG-013 | Stage artifact completeness | YES | No stubs, TODOs, or skeleton-only content in any of the three substantive artifacts |
 | OVL-PBG-014 | Canon alignment | YES | Artifacts must conform to `PRE_BUILD_REALITY_CHECK_CANON.md` v1.1.0 structural requirements |
 | OVL-PBG-015 | PBFAG gate compliance (Stage 7) | YES — HIGHEST WEIGHT | Stage 7 is being delivered. All sub-requirements apply: stages 1–6 confirmed (or waiver cited), PBFAG gate report at canonical path, governed by `PRE_BUILD_REALITY_CHECK_CANON.md` v1.1.0, CONDITIONAL PASS posture, Stage 8 blocked gate condition preserved. |
-| OVL-PBG-016 | No skip or reorder | YES | Stage 7 follows Stage 6. CS2 parallel production exception documented in issue #1152. |
+| OVL-PBG-016 | No skip or reorder | YES | Stage 7 follows Stage 6. CS2 parallel production exception documented in issue #1150. |
 | OVL-PBG-ADM-003 | Build Progress Tracker updated | YES — note-level | Tracker must reflect Stage 7 completion at wave-close with correct artifact paths |
 
 **Total checks at final assurance**: 11 (CORE-020, CORE-021, OVL-PBG-010–016, OVL-PBG-ADM-003)
@@ -129,7 +129,7 @@
 |-------|-------|
 | wave_category | PRE_BUILD_STAGE |
 | iaa_triggered_at_handover | YES — MANDATORY |
-| governing_issue | #1152 (CS2 @APGI-cmy — OWNER — CONFIRMED via wave record and checklist; API verification advisory due to access scope) |
+| governing_issue | #1150 (CS2 @APGI-cmy — OWNER — CONFIRMED via wave record and checklist; API verification advisory due to access scope) |
 | qualifying_tasks | TASK-035-02, 03, 04 (substantive — 90% review effort); TASK-035-01, 05, 06, 07 (ceremony / alignment) |
 | risk_flags | 4 total — Risk Flag 1 (HIGH): OVL-PBG-015 exception posture evidence; Risk Flag 2 (MEDIUM): approval posture language; Risk Flag 3 (LOW): index red test count; Risk Flag 4 (LOW): Section 3 pre-population advisory |
 | ecap_ceremony_admin | NONE |
@@ -172,9 +172,9 @@
 | Field | Value |
 |-------|-------|
 | handover_bundle_self_consistent | ✅ YES — all 7 tasks complete; all artifacts committed; session memory created; wave record updated |
-| governing_issue_role_registry_completed | Governing issue #1152 consistent across all artifact headers, wave record, tracker, index, session memory |
-| stale_injector_check_performed | ⚠️ NON-CLEAN — Artifact headers are clean (governing issue #1152 consistent across all Stage 7 artifact headers). However, the live PR thread contains an automated handover/pre-brief injection from prior wave `wave-amc-wave-result-coherence-hardening-20260427`, not this Stage 7 PBFAG wave. This is an administrative stale-injection residual on the PR surface. Governing artifacts committed to HEAD are unaffected. Route: retire prior-wave injector source or log via hardening path. This wave record accurately records the PR-surface stale injection rather than claiming clean. |
-| entry_condition_status | EXCEPTION — Stage 7 opened before Stage 5/5a/6 CS2 approval per issue #1152 CS2 authorization; all artifacts carry "Produced — Approval Pending" status; Stage 8 BLOCKED preserved |
+| governing_issue_role_registry_completed | Governing issue #1150 consistent across all artifact headers, wave record, tracker, index, session memory |
+| stale_injector_check_performed | ⚠️ NON-CLEAN — Artifact headers are clean (governing issue #1150 consistent across all Stage 7 artifact headers). However, the live PR thread contains an automated handover/pre-brief injection from prior wave `wave-amc-wave-result-coherence-hardening-20260427`, not this Stage 7 PBFAG wave. This is an administrative stale-injection residual on the PR surface. Governing artifacts committed to HEAD are unaffected. Route: retire prior-wave injector source or log via hardening path. This wave record accurately records the PR-surface stale injection rather than claiming clean. |
+| entry_condition_status | EXCEPTION — Stage 7 opened before Stage 5/5a/6 CS2 approval per issue #1150 CS2 authorization; all artifacts carry "Produced — Approval Pending" status; Stage 8 BLOCKED preserved |
 | operational_sanity_check_performed | ✅ YES — all artifact paths verified; tracker and index consistent; gate conditions preserved |
 
 ---
@@ -187,21 +187,21 @@
 |------|-----------|---------|
 | TASK-035-01 | ✅ PASS | BUILD_PROGRESS_TRACKER.md wave-start: Stage 7 IN PROGRESS (parallel production). Exception posture and CS2 authorization reference present. |
 | TASK-035-02 | ✅ PASS | `pre-build-final-assurance-gate.md` v1.0: complete scope statement, upstream artifact list, evaluator identity, exception posture clearly stated, CS2 sign-off section present. All required PBFAG checks referenced. |
-| TASK-035-03 | ✅ PASS | `pbfag-evidence-matrix.md` v1.0: 81 checks across 10 categories. All mandatory PBFAG checks from issue #1152 covered. Each row: check ID, source artifact(s), requirement/invariant, evidence reviewed, result, finding ref, downstream consequence. Results clearly distinguish between "artifact present/fit" and "awaiting formal approval." |
+| TASK-035-03 | ✅ PASS | `pbfag-evidence-matrix.md` v1.0: 81 checks across 10 categories. All mandatory PBFAG checks from issue #1150 covered. Each row: check ID, source artifact(s), requirement/invariant, evidence reviewed, result, finding ref, downstream consequence. Results clearly distinguish between "artifact present/fit" and "awaiting formal approval." |
 | TASK-035-04 | ✅ PASS | `pbfag-findings-and-verdict.md` v1.0: CONDITIONAL PASS verdict stated clearly. Stage 8 gate conditions unambiguous (requires CS2 approval of Stages 5, 5a, 6, AND 7). No false implication of Stage 8 being unblocked. CS2 sign-off section present. |
 | TASK-035-05 | ✅ PASS | `pbfag-checklist.md` updated: active wave reference and pointer to canonical artifacts. No stale placeholder content presented as authoritative. |
 | TASK-035-06 | ✅ PASS | BUILD_PROGRESS_TRACKER.md wave-close: Stage 7 "Produced Approval-Pending". Artifact paths listed. Stage 8 BLOCKED preserved. |
 | TASK-035-07 | ✅ PASS | AMC_PRE_BUILD_ARTIFACT_INDEX.md: Stage 7 section updated with 3 canonical PBFAG artifacts (approval-pending). Red test count corrected from 69→79 in Stage 6 entry. Stage 8 gate condition preserved. |
 
 **QP Governing-Issue Parity Check (A-036)**:
-- Wave checklist: #1152 ✅
-- Wave record triggering_issue: #1152 ✅
-- All Stage 7 artifact headers: #1152 ✅
-- Session memory triggering_issue: #1152 ✅
+- Wave checklist: #1150 ✅
+- Wave record triggering_issue: #1150 ✅
+- All Stage 7 artifact headers: #1150 ✅
+- Session memory triggering_issue: #1150 ✅
 - PARITY: PASS
 
 **QP Overshadow Detection (A-037)**:
-- Related issues checked: #1145 (hardening umbrella), #1146, #1147, #1149 (child hardenings). None of these are governing delivery issues for Stage 7. Stage 7 governing delivery issue is #1152. No overshadow detected.
+- Related issues checked: #1145 (hardening umbrella), #1146, #1147, #1149 (child hardenings). None of these are governing delivery issues for Stage 7. Stage 7 governing delivery issue is #1150. No overshadow detected.
 - OVERSHADOW: NONE
 
 ---
@@ -213,7 +213,7 @@
 | Field | Value |
 |-------|-------|
 | iaa_final_assurance_session | session-064-20260428 |
-| verdict | ASSURANCE-TOKEN — 11/11 checks PASS (CORE-020 ✅, CORE-021 ✅, OVL-PBG-010–016 ✅, OVL-PBG-ADM-003 ✅). CONDITIONAL PASS posture confirmed. Stage 8 BLOCKED gate preserved. Exception posture (#1152) verified across all committed artifacts. Merge gate parity: PASS. |
+| verdict | ASSURANCE-TOKEN — 11/11 checks PASS (CORE-020 ✅, CORE-021 ✅, OVL-PBG-010–016 ✅, OVL-PBG-ADM-003 ✅). CONDITIONAL PASS posture confirmed. Stage 8 BLOCKED gate preserved. Exception posture (#1150) verified across all committed artifacts. Merge gate parity: PASS. |
 | phase_b_blocking_token | IAA-session-064-20260428-PASS |
 
 ---

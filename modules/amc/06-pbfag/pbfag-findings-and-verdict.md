@@ -5,8 +5,8 @@
 **Version**: 1.0
 **Status**: 🟡 Produced — Approval Pending (CS2)
 **Author**: foreman-v2-agent (QUALITY_PROFESSOR)
-**CS2 Authorization**: app_management_centre#1152
-**Governing Delivery Issue**: app_management_centre#1152
+**CS2 Authorization**: app_management_centre#1150
+**Governing Delivery Issue**: app_management_centre#1150
 **Wave**: amc-stage7-pbfag-20260428
 **Session**: session-035
 **Date**: 2026-04-28
@@ -17,7 +17,7 @@
 
 > **EXCEPTION POSTURE (CS2 AUTHORIZED)**
 > Stage 7 PBFAG artifacts are produced before Stages 5, 5a, and 6 receive formal CS2 approval.
-> CS2 explicitly authorized parallel production per issue #1152. Stage 8 is **BLOCKED** until
+> CS2 explicitly authorized parallel production per issue #1150. Stage 8 is **BLOCKED** until
 > Stages 5, 5a, 6, and 7 all receive CS2 approval.
 
 ---
@@ -134,7 +134,7 @@ All 27 CONDITIONAL results are gated exclusively on formal CS2 approval of Stage
 
 ### OB-004 — Hardening Issues #1145–#1149 Not Live at PBFAG Production Time
 
-**Observation**: Issues #1145 (hardening umbrella), #1146, #1147, and #1149 (child hardenings) were referenced in issue #1152 as potentially applicable. At time of PBFAG production (2026-04-28), none of these hardening issues have merged outputs that alter the mandatory PBFAG governance requirements. The current hardening stack (GIPC-001, EWCS-001, PHCP-001, WRCC-001) has been applied as live governance.
+**Observation**: Issues #1145 (hardening umbrella), #1146, #1147, and #1149 (child hardenings) were referenced in issue #1150 as potentially applicable. At time of PBFAG production (2026-04-28), none of these hardening issues have merged outputs that alter the mandatory PBFAG governance requirements. The current hardening stack (GIPC-001, EWCS-001, PHCP-001, WRCC-001) has been applied as live governance.
 
 **Status**: No live hardening outputs from #1145–#1149 are currently in effect that would change the PBFAG artifacts or handover requirements. The Foreman will verify this before opening the PR and apply any merged hardening outputs if they become live before handover.
 
@@ -167,7 +167,7 @@ The following items are valid downstream deferrals — they are not missing cont
 1. ✅ CS2 formal approval of **Stage 5 Architecture** — `modules/amc/04-architecture/architecture-specification.md` v1.0 — governing issue: app_management_centre#1131
 2. ✅ CS2 formal approval of **Stage 5a Deployment Execution Strategy** — all three DES artifacts (`deployment-execution-strategy.md`, `deployment-surface-ownership-table.md`, `runner-and-environment-constraints.md`) v1.0 — governing issue: app_management_centre#1137
 3. ✅ CS2 formal approval of **Stage 6 QA-to-Red** — all three QA-to-Red artifacts (`qa-to-red-specification.md`, `architecture-and-des-to-qa-traceability.md`, `red-test-catalog.md`) v1.0 — governing issue: app_management_centre#1141
-4. ✅ CS2 formal approval of **Stage 7 PBFAG** — this pack (`pre-build-final-assurance-gate.md`, `pbfag-evidence-matrix.md`, `pbfag-findings-and-verdict.md`) v1.0 — governing issue: app_management_centre#1152
+4. ✅ CS2 formal approval of **Stage 7 PBFAG** — this pack (`pre-build-final-assurance-gate.md`, `pbfag-evidence-matrix.md`, `pbfag-findings-and-verdict.md`) v1.0 — governing issue: app_management_centre#1150
 
 ### 5.2 Current Gate Status
 
@@ -220,8 +220,8 @@ This PBFAG pack requires CS2 (@APGI-cmy) formal approval before Stage 8 may proc
 | **Reviewed By** | independent-assurance-agent (Pre-Brief: session-063-20260428; Final Audit: session-064-20260428 — ASSURANCE-TOKEN IAA-session-064-20260428-PASS) |
 | **Approved By** | *(CS2 approval required — @APGI-cmy)* |
 | **Approval Date** | *(Pending CS2 review)* |
-| **Approval Reference** | app_management_centre#1152 |
+| **Approval Reference** | app_management_centre#1150 |
 
 ---
 
-*AMC PBFAG Findings and Verdict v1.0 — 2026-04-28 — governing delivery issue: app_management_centre#1152 — CS2 authorization: app_management_centre#1152*
+*AMC PBFAG Findings and Verdict v1.0 — 2026-04-28 — governing delivery issue: app_management_centre#1150 — CS2 authorization: app_management_centre#1150*
