@@ -8,6 +8,7 @@
 **Wave Purpose**: Produce Stage 7 PBFAG (Pre-Build Final Assurance Gate) pack for AMC — pre-build-final-assurance-gate.md, pbfag-evidence-matrix.md, pbfag-findings-and-verdict.md; update pbfag-checklist.md placeholder; keep BUILD_PROGRESS_TRACKER.md and AMC_PRE_BUILD_ARTIFACT_INDEX.md aligned. Exception posture: CS2 authorized Stage 7 parallel production with Stages 5/5a/6 still approval-pending.
 **Gate Condition**: Stage 7 artifacts produced approval-pending. Stage 8 remains BLOCKED until Stage 7, Stage 5, Stage 5a, and Stage 6 all receive CS2 approval.
 **governance_evidence_path**: `.agent-admin/wave-records/amc-wave-record-amc-stage7-pbfag-20260428.md`
+**governance_evidence_path**: `.agent-admin/wave-records/amc-wave-record-amc-stage7-pbfag-20260428.md`
 
 ---
 
