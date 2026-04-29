@@ -43,10 +43,11 @@ gate_inventory:
   # evidence-bundle/prehandover-proof-check: PASS
 
 ## IAA Assurance
-iaa_audit_token:        <token-file-path>    # REQUIRED — fill with actual token file path; must NOT remain as placeholder if final_state: COMPLETE
-iaa_session_reference:  <IAA session ID>     # REQUIRED — fill with actual IAA session ID; must NOT remain as placeholder if final_state: COMPLETE
-iaa_reinvocation_round: 0                   # 0 = first invocation; 1+ = re-invocation round
-iaa_rejection_reference: none               # path to rejection-package file if round >= 1
+iaa_audit_token:        IAA-session-NNN-YYYYMMDD-PASS  # REQUIRED — fill with actual canonical IAA token reference; must NOT remain as placeholder if final_state: COMPLETE
+iaa_audit_token_file:   <token-file-path>              # OPTIONAL — path to the issued IAA token artifact if one exists
+iaa_session_reference:  <IAA session ID>               # REQUIRED — fill with actual IAA session ID; must NOT remain as placeholder if final_state: COMPLETE
+iaa_reinvocation_round: 0                              # 0 = first invocation; 1+ = re-invocation round
+iaa_rejection_reference: none                          # path to rejection-package file if round >= 1
 active_bundle_iaa_coherence: <VERIFIED|NOT-APPLICABLE>  # ALWAYS REQUIRED — must never be blank or a placeholder if final_state: COMPLETE; set to VERIFIED after §4.3e Check L passes; set to NOT-APPLICABLE only for non-ECAP jobs where IAA assurance was not invoked (e.g., T6 docs-only, CS2-direct-review track)
 
 ## Artifacts Committed
