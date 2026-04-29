@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-04-27 (Stage 6 QA-to-Red pack produced approval-pending — wave amc-stage6-qa-to-red-20260427; issue #1141; prior: Stage 5a Deployment Execution Strategy artifacts produced approval-pending — wave amc-stage5a-deployment-execution-strategy-20260427; issue #1137; prior: Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)  
+**Last Updated**: 2026-04-28 (Stage 7 PBFAG artifacts produced approval-pending — wave amc-stage7-pbfag-20260428; issue #1152; Stage 6 red test count corrected to 79 tests/20 families; prior: Stage 6 QA-to-Red pack produced approval-pending — wave amc-stage6-qa-to-red-20260427; issue #1141; prior: Stage 5a Deployment Execution Strategy artifacts produced approval-pending — wave amc-stage5a-deployment-execution-strategy-20260427; issue #1137; prior: Stage 5a Deployment Execution Strategy defined; Stage 5 Architecture artifacts updated to canonical — wave amc-stage5-architecture-20260426; Stage 4 treated as approved for Stage 5 progression per issue #1131; Stage 3 marked CS2-approved; Stage 2 confirmed CS2-approved; Stages 1–3 harmonization pass applied)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -88,7 +88,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 |----------|----------|--------|-------|
 | QA-to-Red Specification | `modules/amc/05-qa-to-red/qa-to-red-specification.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. Core Stage 6 spec: pass/fail philosophy, 4-level severity model, blocker/non-blocker rules, retest protocol, evidence requirements. 12 architecture-derived coverage families (§7) + 7 DES-derived coverage families (§8) + literal-operability checks (§9) + anti-drift posture (§10) + CS2 sign-off section. CS2 approval required. Governing issue: #1141. |
 | Architecture and DES to QA Traceability | `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. Traceability matrix: all 12 Stage 5 Architecture domains + all 8 DES fields (DES-001 through DES-008) traced to Stage 6 red test IDs. Zero silently omitted. Explicit omission register for Stage 12 deferrals. Coverage completeness verdict: 12/12 Architecture domains, 8/8 DES fields. |
-| Red Test Catalog | `modules/amc/05-qa-to-red/red-test-catalog.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. 69 test cases across 17 families. Each entry: test ID, source artifact, scenario, exact fail condition, exact pass condition, severity (CRITICAL/HIGH/MEDIUM/LOW), blocker classification, evidence type. 21 CRITICAL, 47 HIGH, 3 MEDIUM tests; 66 blockers. |
+| Red Test Catalog | `modules/amc/05-qa-to-red/red-test-catalog.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. **79 test cases across 20 families** (corrected from prior erroneous count of 69/17). Each entry: test ID, source artifact, scenario, exact fail condition, exact pass condition, severity (CRITICAL/HIGH/MEDIUM/LOW), blocker classification, evidence type. 21 CRITICAL, 54 HIGH, 4 MEDIUM tests; 75 blockers. |
 | QA-to-Red Suite (superseded placeholder) | `modules/amc/05-qa-to-red/qa-to-red-suite.md` | ⛔ Superseded | Placeholder superseded by qa-to-red-specification.md v1.0. Retained for path continuity. |
 | QA Catalog Alignment (superseded placeholder) | `modules/amc/05-qa-to-red/qa-catalog-alignment.md` | ⛔ Superseded | Placeholder superseded by architecture-and-des-to-qa-traceability.md v1.0. Retained for path continuity. |
 
@@ -98,11 +98,21 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 ## Stage 7 — PBFAG
 
+> **Stage 7 Governing Delivery Issue**: app_management_centre#1152
+> **CS2 Authorization**: app_management_centre#1152 (CS2 authorized parallel production while Stages 5/5a/6 are approval-pending)
+> **Wave**: amc-stage7-pbfag-20260428
+> **Status**: 🟡 Artifacts produced — CS2 approval pending
+> **Entry Condition**: EXCEPTION — Stages 5, 5a, and 6 still approval-pending; CS2 authorized Stage 7 parallel production per #1152
+> **Blocks**: Stage 8 (Implementation Plan) and all subsequent stages
+
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| PBFAG Checklist | `modules/amc/06-pbfag/pbfag-checklist.md` | ⬜ Placeholder | Gate artifact — not started |
-| Golden Path Verification Pack | `modules/amc/06-pbfag/golden-path-verification-pack.md` | ⬜ Placeholder | Not started |
-| Runtime Deployment Contract | `modules/amc/06-pbfag/runtime-deployment-contract.md` | ⬜ Placeholder | Not started |
+| Pre-Build Final Assurance Gate | `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` | 🟡 Approval Pending | v1.0, produced 2026-04-28. Master PBFAG gate artifact. 10-category evaluation of Stages 1–6. CONDITIONAL PASS verdict. Stage 8 gate conditions explicit. CS2 sign-off section included. CS2 approval required. |
+| PBFAG Evidence Matrix | `modules/amc/06-pbfag/pbfag-evidence-matrix.md` | 🟡 Approval Pending | v1.0, produced 2026-04-28. 81 checks across 10 categories. PASS: 53, PASS-WITH-NOTE: 1, CONDITIONAL: 27, FAIL: 0. All checks verified against canonical upstream artifacts. CS2 approval required. |
+| PBFAG Findings and Verdict | `modules/amc/06-pbfag/pbfag-findings-and-verdict.md` | 🟡 Approval Pending | v1.0, produced 2026-04-28. Verdict: CONDITIONAL PASS. 0 blocking findings. Stage 8 gate condition: 4 CS2 approvals required (Stages 5, 5a, 6, 7). CS2 approval required. |
+| PBFAG Checklist | `modules/amc/06-pbfag/pbfag-checklist.md` | 🟡 Active Wave | Updated to active wave posture; references canonical PBFAG artifacts. |
+
+> **Gate condition**: Stage 8 (Implementation Plan) is BLOCKED until Stage 5 (Architecture), Stage 5a (DES), Stage 6 (QA-to-Red), AND Stage 7 (PBFAG) all receive CS2 approval. Governing issue: app_management_centre#1152.
 
 ---
 

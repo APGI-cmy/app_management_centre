@@ -2,8 +2,8 @@
 
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
-**Last Updated**: 2026-04-27
-**Updated By**: foreman-v2-agent (wave: amc-stage6-qa-to-red-20260427 — Stage 6 QA-to-Red pack produced approval-pending; issue #1141; prior: amc-stage5a-deployment-execution-strategy-20260427 — Stage 5a artifacts produced approval-pending; all 8 DES fields answered; issue #1137; prior: amc-governance-deployment-oversight-20260426 — Stage 5a defined; amc-stage5-architecture-20260426 — Stage 5 Architecture produced)
+**Last Updated**: 2026-04-28
+**Updated By**: foreman-v2-agent (wave: amc-stage7-pbfag-20260428 — Stage 7 PBFAG pack produced approval-pending; issue #1152; 3 canonical PBFAG artifacts created; CONDITIONAL PASS verdict; Stage 8 BLOCKED until CS2 approvals; prior (wave-start): Stage 7 posture set to IN PROGRESS; prior: amc-stage6-qa-to-red-20260427 — Stage 6 QA-to-Red pack produced approval-pending; issue #1141; prior: amc-stage5a-deployment-execution-strategy-20260427 — Stage 5a artifacts produced approval-pending; all 8 DES fields answered; issue #1137; prior: amc-governance-deployment-oversight-20260426 — Stage 5a defined; amc-stage5-architecture-20260426 — Stage 5 Architecture produced)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
@@ -41,7 +41,7 @@
 | 5 | Architecture | 🟡 IN PROGRESS — Produced Approval-Pending | Stage 5 Architecture Specification v1.0 produced 2026-04-26. Awaiting CS2 approval. Canonical artifact: `modules/amc/04-architecture/architecture-specification.md`. |
 | **5a** | **Deployment Execution Strategy** | **🟡 IN PROGRESS — Produced Approval-Pending** | Stage 5a artifacts produced 2026-04-27 (wave amc-stage5a-deployment-execution-strategy-20260427, issue #1137). All 8 DES fields answered. Awaiting CS2 approval. Artifacts: `modules/amc/05a-deployment-execution-strategy/`. |
 | 6 | QA-to-Red | 🟡 IN PROGRESS — Produced Approval-Pending | Stage 6 QA-to-Red pack produced 2026-04-27 (wave amc-stage6-qa-to-red-20260427, issue #1141). Awaiting CS2 approval. Artifacts: `modules/amc/05-qa-to-red/`. **GATE CONDITION**: Stage 7 remains BLOCKED until Stage 6, Stage 5, and Stage 5a all receive CS2 approval. |
-| 7 | PBFAG | ⬜ Not Started | 🔴 BLOCKED — requires Stage 5, Stage 5a, AND Stage 6 complete and CS2-approved |
+| 7 | PBFAG | 🟡 IN PROGRESS — Produced Approval-Pending | Stage 7 PBFAG pack produced 2026-04-28 (wave amc-stage7-pbfag-20260428, issue #1152). Verdict: CONDITIONAL PASS. Stage 8 BLOCKED until Stages 5, 5a, 6, AND 7 all receive CS2 approval. Artifacts: `modules/amc/06-pbfag/`. IAA Pre-Brief: session-063-20260428. |
 | 8 | Implementation Plan | ⬜ Not Started | 🔴 BLOCKED — must reference approved Stage 5a Deployment Execution Strategy. |
 | 9 | Builder Checklist | ⬜ Not Started | 🔴 BLOCKED |
 | 10 | IAA Pre-Brief | ⬜ Not Started | 🔴 BLOCKED |
@@ -206,10 +206,19 @@ deployment execution strategy must also be frozen.
 
 ### Stage 7 — PBFAG
 
-**Status**: ⬜ Not Started  
-**Location**: `modules/amc/06-pbfag/`  
-**Prerequisites**: Stage 6 complete and approved  
-**Note**: PBFAG is a hard gate. It is not situational. It cannot be bypassed without explicit CS2-documented exception. PBFAG must verify that Stage 5a (Deployment Execution Strategy) is present, complete, and non-contradictory with Stage 5 (Architecture).
+**Status**: 🟡 IN PROGRESS — Produced Approval-Pending
+**Location**: `modules/amc/06-pbfag/`
+**CS2 Authorization**: app_management_centre#1152 (Stage 7 kickoff; CS2 authorized parallel production while Stages 5/5a/6 await approval)
+**Wave**: amc-stage7-pbfag-20260428 (session-035, 2026-04-28)
+**Entry Condition**: EXCEPTION posture — CS2 authorized Stage 7 production before Stages 5, 5a, 6 formal approval per issue #1152. Exception posture recorded in all PBFAG artifacts.
+**Verdict**: CONDITIONAL PASS — artifact chain present, complete, consistent. Stage 8 gate requires 4 CS2 approvals.
+**Key Artifacts Created**:
+- [x] `pre-build-final-assurance-gate.md` v1.0 — Master PBFAG gate artifact. Canonical. Approval pending. 81 checks across 10 categories. CONDITIONAL PASS verdict.
+- [x] `pbfag-evidence-matrix.md` v1.0 — Structured evidence matrix. 81 checks. PASS: 53, PASS-WITH-NOTE: 1, CONDITIONAL: 27, FAIL: 0.
+- [x] `pbfag-findings-and-verdict.md` v1.0 — Findings and verdict. 0 blocking findings. CONDITIONAL PASS. Stage 8 gate conditions explicit.
+- [x] `pbfag-checklist.md` — Updated with active wave posture and canonical artifact references.
+**Approval Required**: Yes — CS2 approval required before Stage 8 (Implementation Plan) may begin
+**Note**: PBFAG is a hard gate. Stage 8 remains BLOCKED until all four CS2 approvals are in place (Stages 5, 5a, 6, and 7).
 
 ---
 
@@ -265,9 +274,10 @@ deployment execution strategy must also be frozen.
 4. ✅ Stage 4 TRS artifacts produced approval-ready and hardened to v1.1 (issue #1125, hardened in #1127, 2026-04-23). CS2 authorized Stage 5 progression per issue #1131 — Stage 4 treated as approved.
 5. 🟡 Stage 5 Architecture Specification v1.0 produced approval-pending (wave amc-stage5-architecture-20260426, 2026-04-26).
 6. 🟡 Stage 5a Deployment Execution Strategy artifacts produced approval-pending (wave amc-stage5a-deployment-execution-strategy-20260427, 2026-04-27, issue #1137). All 8 DES fields answered. See `modules/amc/05a-deployment-execution-strategy/`.
-7. ▶️ CS2 to review and approve Stage 5 Architecture and Stage 5a Deployment Execution Strategy.
-8. 🟡 Stage 6 QA-to-Red pack produced approval-pending (wave amc-stage6-qa-to-red-20260427, 2026-04-27, issue #1141). 79 red test cases across 20 families. CS2 conditionally authorized Stage 6 artifact production while Stage 5 and Stage 5a await approval. Stage 7 BLOCKED until Stage 5, Stage 5a, and Stage 6 all receive CS2 approval.
-9. ▶️ CS2 to review and approve Stage 5, Stage 5a, and Stage 6 (may be concurrent or sequential at CS2 discretion).
+7. 🟡 Stage 6 QA-to-Red pack produced approval-pending (wave amc-stage6-qa-to-red-20260427, 2026-04-27, issue #1141). 79 red test cases across 20 families. CS2 conditionally authorized Stage 6 artifact production while Stage 5 and Stage 5a await approval.
+8. 🟡 Stage 7 PBFAG pack produced approval-pending (wave amc-stage7-pbfag-20260428, 2026-04-28, issue #1152). CONDITIONAL PASS verdict. CS2 authorized parallel production while Stages 5/5a/6 await approval.
+9. ▶️ **CS2 to review and approve Stages 5, 5a, 6, and 7** (may be concurrent or sequential at CS2 discretion). All four approvals required before Stage 8 may begin.
+10. ⛔ Stage 8 (Implementation Plan) BLOCKED until all four approvals above are in place.
 
 ---
 
