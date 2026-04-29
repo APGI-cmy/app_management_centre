@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-04-28",
-  "total_canons": 204,
+  "last_updated": "2026-04-29",
+  "total_canons": 206,
   "generation_timestamp": "2026-04-28T05:34:19Z",
   "canon_entry_schema": {
     "description": "Schema for canon entries in CANON_INVENTORY.json",
@@ -2409,6 +2409,36 @@
       "last_updated": "2026-04-28",
       "amended_date": "2026-04-28",
       "change_note": "New canon \u2014 wave amc-handover-hardening-20260428 (Issue #1145 child #1149)"
+    },
+    {
+      "filename": "PR_HANDOVER_CANONICAL_PACKAGE.md",
+      "version": "1.2.0",
+      "canonical_version": "1.2.0",
+      "file_hash": "3a9afdf248fd95055329191a38fba91478e81351d1c7a27af12d74350e6647ac",
+      "file_hash_sha256": "3a9afdf248fd95055329191a38fba91478e81351d1c7a27af12d74350e6647ac",
+      "effective_date": "2026-04-28",
+      "description": "PHCP-001: Canonical PR handover source package \u2014 defines PR body schema (\u00a71 governance handover table), governing-issue role mapping (\u00a72), handover bundle requirements, token-carrier rule, wave checklist retirement rule, tracker/index parity requirements, exception-handling schema, wave-context source of truth, and PPEIA-001/EFIA-001/AAEV-001 integration for all AMC PR handovers.",
+      "type": "canon",
+      "path": "governance/canon/PR_HANDOVER_CANONICAL_PACKAGE.md",
+      "layer_down_status": "PUBLIC_API",
+      "last_updated": "2026-04-28",
+      "amended_date": "2026-04-28",
+      "change_note": "v1.1.0 (Issue #1139/#1143): governing-issue role separation, stale handover injector retirement; v1.2.0 (Issue #1145): PPEIA-001/EFIA-001/AAEV-001 integration, ecap_ceremony_status and aaev_validators fields added to \u00a71 and \u00a74.1"
+    },
+    {
+      "filename": "END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md",
+      "version": "1.3.0",
+      "canonical_version": "1.3.0",
+      "file_hash": "b5e34febfd26d1cd254b0f5c5de8e51bcc47722f397eec65793e30d12df825f3",
+      "file_hash_sha256": "b5e34febfd26d1cd254b0f5c5de8e51bcc47722f397eec65793e30d12df825f3",
+      "effective_date": "2026-04-28",
+      "description": "EWCS-001: End-of-wave closeout sweep canon \u2014 defines mandatory end-of-wave closeout sweep as a named blocking step, tracker header/body parity binary gate, kickoff-state retirement for wave checklists, control-surface closeout checklist, ceremony evidence fields, ECAP-before-IAA requirement, and evidence-field coherence gate.",
+      "type": "canon",
+      "path": "governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md",
+      "layer_down_status": "PUBLIC_API",
+      "last_updated": "2026-04-28",
+      "amended_date": "2026-04-28",
+      "change_note": "v1.1.0 (Issue #1143): ECAP-before-IAA requirement added; v1.3.0 (Issue #1145): evidence-field coherence gate and PPEIA-001/EFIA-001/AAEV-001/WRCC-001 cross-references added"
     }
   ]
 }

@@ -2,8 +2,8 @@
   "schema_version": "1.0.0",
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
-  "last_updated": "2026-04-28",
+  "last_layer_down_commit": "c8312745821e40d2108a874a67d8be0f08cb450d",
+  "last_updated": "2026-04-29",
   "alignment_status": "ALIGNED",
   "total_artifacts": 38,
   "artifacts": [
@@ -427,6 +427,17 @@
       "layered_down_at": "2026-04-28T00:00:00Z",
       "file_hash_sha256": "b5e34febfd26d1cd254b0f5c5de8e51bcc47722f397eec65793e30d12df825f3",
       "action": "UPDATED"
+    },
+    {
+      "filename": "WAVE_RESULT_COHERENCE_CANON.md",
+      "path": "governance/canon/WAVE_RESULT_COHERENCE_CANON.md",
+      "version": "1.0.0",
+      "type": "canon",
+      "layer_down_status": "INTERNAL",
+      "canonical_commit": "c8312745821e40d2108a874a67d8be0f08cb450d",
+      "layered_down_at": "2026-04-28T00:00:00Z",
+      "file_hash_sha256": "3d72b4e59dcff725a529cc230ed29baa6fa0d75bdd5c1324759600166e0c68ed",
+      "action": "AMENDED"
     }
   ],
   "layer_down_history": [

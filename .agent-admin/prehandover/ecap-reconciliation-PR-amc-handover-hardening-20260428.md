@@ -23,7 +23,7 @@
 | Substantive readiness | ACCEPTED by Foreman — all 10 wave tasks complete; QP verdicts PASS |
 | Administrative readiness | ACCEPTED (this summary — ECAP ceremony complete) |
 | IAA assurance verdict | PENDING — IAA not yet invoked; Foreman to invoke per §4.4 |
-| Ripple status | COMPLETED — CANON_INVENTORY.json and GOVERNANCE_ALIGNMENT_INVENTORY.json updated (ECAP-001 v1.3.0, IAA v1.12.0, PPEIA-001/EFIA-001/AAEV-001 added) |
+| Ripple status | COMPLETED — CANON_INVENTORY.json and GOVERNANCE_ALIGNMENT_INVENTORY.json updated (ECAP-001 v1.3.0, IAA v1.12.0, PPEIA-001/EFIA-001/AAEV-001 added; PHCP-001 v1.2.0/EWCS-001 v1.3.0 added to CANON_INVENTORY; WRCC-001 added to GOVERNANCE_ALIGNMENT_INVENTORY per corrective commit session-064) |
 | Admin-compliance result | PASS — §4.3e gate passed; 0 AAP failures; R1–R8 all PASS |
 
 All substantive deliverables (10 tasks) are complete. ECAP ceremony completed per ECAP-001 §3 including §3.10 Protected-Path Ceremony Duty and §3.11 Evidence-First Preparation Duty. No PENDING fields in ceremony-admin scope.
@@ -209,11 +209,11 @@ aaev_validator_results:
   AAEV-001_governing_issue_cross_surface: "PASS — #1145 machine-exact across all surfaces (wave record, checklist, artifact headers, session memory)"
   AAEV-002_token_format: "N/A — IAA not yet invoked at ceremony-bundle time; token to be recorded in wave record §5 after IAA PASS"
   AAEV-003_wave_record_completeness: "PASS — sections 1-5 present and non-blank; §5 PENDING is valid pre-IAA state"
-  AAEV-004_pr_body_fields: "N/A (ceremony-admin scope) — PR body governing_delivery_issue and iaa_result fields to be finalized after IAA token issued"
+  AAEV-004_pr_body_fields: "PASS — PR body governance handover table (PHCP-001 §1 schema) added to PR #1148 body with all available pre-IAA fields: governing_delivery_issue: #1145; ecap_ceremony_status: COMPLETED; wave_checklist_status: ALL TICKED; qp_verdict: PASS; parity_check_verdict: PASS; closeout_sweep_verdict: PASS; pre_pr_blocking_gate: PASS; entry_condition_status: NORMAL; wave_result_coherence: PASS; aaev_validators: PASS; iaa_result: PENDING IAA INVOCATION (Foreman §4.4)"
   AAEV-005_wave_session_consistency: "PASS — wave_id and triggering_issue consistent across all artifacts"
   AAEV-006_artifact_header_authority: "PASS — all new canon documents use labeled authority format; CS2 authority declared"
   AAEV-007_tracker_index_match: "N/A — governance canon wave; no module tracker or index applies"
   AAEV-008_pre_pr_gate_completeness: "PASS — pre_pr_blocking_gate_verdict: PASS (ceremony-admin scope); all fields populated"
   AAEV-009_session_memory_completeness: "PASS — session-035-20260428 created; all required fields populated"
-  aaev_overall_verdict: "PASS (ceremony-admin scope) — AAEV-002 and AAEV-004 are IAA-gated and will be finalized after IAA token issued"
+  aaev_overall_verdict: "PASS — AAEV-004 resolved (PR body governance handover table added); AAEV-002 IAA-gated (token to be recorded in wave record §5 after IAA PASS)"
 ```
