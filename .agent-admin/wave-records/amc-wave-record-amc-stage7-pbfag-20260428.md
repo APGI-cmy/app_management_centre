@@ -212,7 +212,7 @@
 
 | Field | Value |
 |-------|-------|
-| iaa_final_assurance_session | session-065-20260429 (re-run on corrected head b992ded; supersedes session-064-20260428 per delta-assurance protocol) |
+| iaa_final_assurance_session | session-065-20260429 (re-run on corrected head b992ded; delta-assurance addendum binds token to final head caa7bfb; supersedes session-064-20260428) |
 | verdict | ASSURANCE-TOKEN — 11/11 checks PASS (CORE-020 ✅, CORE-021 ✅, OVL-PBG-010–016 ✅, OVL-PBG-ADM-003 ✅). CONDITIONAL PASS posture confirmed. Stage 8 BLOCKED gate preserved. Exception posture (#1150) verified across all committed artifacts including Foreman session memory. Merge gate parity: PASS. |
 | phase_b_blocking_token | IAA-session-065-20260429-PASS |
 
