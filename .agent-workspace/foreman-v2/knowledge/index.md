@@ -14,7 +14,7 @@
 |---|---|---|
 | `domain-flag-index.md` | POLC orchestration mode flags per domain | ✅ PRESENT — layered down 2026-04-07 (v1.0.0) |
 | `specialist-registry.md` | Builder agent registry for task delegation | ✅ PRESENT — created 2026-04-10 (v1.0.0) |
-| `FAIL-ONLY-ONCE.md` | Breach registry and A-rules for foreman-v2 | ✅ PRESENT — layered down 2026-04-07 (v4.1.0); amended 2026-04-27 (v4.2.0 — A-039 WAVE-RESULT-COHERENCE-MANDATORY added, Issue #1143) |
+| `FAIL-ONLY-ONCE.md` | Breach registry and A-rules for foreman-v2 | ✅ PRESENT — layered down 2026-04-07 (v4.1.0); amended 2026-04-27 (v4.3.0 — A-039 WAVE-RESULT-COHERENCE-MANDATORY (Issue #1143) + A-040/A-041/A-042 (Issue #1145) added) |
 | `session-memory-template.md` | Session memory template (reduced 6-field model per 90/10 principle) | ✅ PRESENT — v2.0.0 (updated 2026-04-13, Issue #1063) |
 | `prehandover-template.md` | PREHANDOVER proof template (v1.7.0) | ✅ PRESENT — layered down 2026-04-07 (v1.7.0) |
 | `wave-reconciliation-checklist.md` | Wave close checklist — incidents, niggles, liveness, closeout sweep | ✅ PRESENT — v1.2.0 (updated 2026-04-26, Issue #1134 — Section E closeout sweep added) |

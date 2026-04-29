@@ -3,7 +3,7 @@
 **Agent**: foreman-v2-agent  
 **Authority**: CS2  
 **Governance Ref**: maturion-foreman-governance#1195, maturion-isms#496  
-**Version**: 4.2.1  
+**Version**: 4.3.0  
 **Created**: 2026-02-24  
 **Updated**: 2026-04-28  
 **Architecture**: `governance/canon/THREE_TIER_AGENT_KNOWLEDGE_ARCHITECTURE.md`
@@ -82,6 +82,12 @@ These rules are **absolute** and may never be overridden, relaxed, or waived wit
 > **OVL-CI-006 CANDIDATE (PENDING CS2 APPROVAL — next available ID after A-031)**: Every GitHub Actions workflow job must declare an explicit `permissions:` block. This is pending formalisation as A-032. Until CS2 approves: treat as a STRONG RECOMMENDATION. Any PR that adds or modifies workflow files without explicit `permissions:` on every job should be flagged at QP evaluation. Builder task spec: add `permissions: contents: read` (or more specific) to jobs missing explicit permissions.
 
 > **A-032 CANDIDATE (LAYER-UP — PENDING IAA/CS2 APPROVAL)**: EDGE-FUNCTION-AS-DELIVERABLE: Any `supabase.functions.invoke(fn-name)` call in the frontend MUST have a corresponding deployed Edge Function listed as a named deliverable in the implementation plan and PREHANDOVER proof. If the Edge Function does not exist at wave close, the wave MUST NOT be declared COMPLETE. This mirrors RCA-MAT-API-GATEWAY-001 (Wave 6): "Serverless API proxy is a mandatory wave deliverable whenever provider keys are required." Applied to Edge Functions: if the frontend calls `supabase.functions.invoke(fn-name)`, the function must be in the wave task list, in the PREHANDOVER proof artifacts table, and confirmed deployed before the PREHANDOVER proof is committed. Triggered by: INC-POST-FCWT-EDGE-FN-001. Layer-up candidate for IAA review per Section 1 IAA delegation protocol.
+
+| A-040 | PROTECTED-PATH-ECAP-BEFORE-IAA (CS2 — 2026-04-28): Any PR whose diff touches a protected path (PPEIA-001 §1.1: `.github/workflows/**`, `.github/scripts/**`, `governance/**`, `.agent-admin/**`, `.github/agents/**`, schema/migration paths, stage tracker/index/control surfaces, `.governance-pack/**`) MUST have ECAP/admin ceremony completed — including the `protected_path_ceremony` section in the ECAP reconciliation summary with `protected_path_ceremony_verdict: PASS` — before IAA may be invoked. A PR that reaches IAA without this ceremony and without a documented CS2 waiver (PPEIA-001 §3) is a constitutional violation (PPEIA-001). IAA MUST reject such a PR (ACR-21). The Foreman MUST verify ECAP completion before invoking IAA. This rule permanently closes the failure mode: "governance/workflow PRs reaching IAA without ceremony." Violation class: PPEIA-001. | CS2 — app_management_centre#1145 (2026-04-28) |
+
+| A-041 | EVIDENCE-TYPE-DOWNGRADE-PROHIBITION (CS2 — 2026-04-28): For any acceptance criterion that requires E1 (LIVE_RUNTIME), E2 (LIVE_E2E), E3 (CI_TEST), or E4 (STATIC_ANALYSIS) evidence per `AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` (EFIA-001) §1.2, agent attestation (E5) MUST NOT be submitted as the sole evidence. Evidence-type downgrade — substituting a lower-quality evidence type for the required type without CS2 explicit authorization of an evidence-type exception — is a wave blocker. IAA MUST reject (ACR-22). The `ac_evidence_matrix` YAML block MUST be present in wave record §3c before QP PASS is declared. This rule permanently closes the failure mode: "IAA PASS issued based on ceremony artifacts or agent claims without hard evidence." Violation class: EFIA-EVIDENCE-GAP, EFIA-AGENT-CLAIM, EFIA-DOWNGRADE. | CS2 — app_management_centre#1145 (2026-04-28) |
+
+| A-042 | AAEV-VALIDATORS-MANDATORY (CS2 — 2026-04-28): Before any wave may be declared COMPLETE and before IAA is invoked, ECAP MUST run all applicable AMC authority exactness validators (AAEV-001 through AAEV-009 per `AMC_AUTHORITY_EXACTNESS_VALIDATORS.md`) and record `aaev_overall_verdict: PASS` in the ECAP reconciliation summary. A wave where AAEV validators were not run — or where any validator returned FAIL — MUST NOT be declared COMPLETE. IAA MUST verify AAEV pre-condition before issuing ASSURANCE-TOKEN (ACR-24). This rule permanently closes the failure mode: "PR body, wave record, tracker, artifact index, session memory, or artifact headers disagree on core authority facts." Violation class: AAEV-ISSUE-MISMATCH, AAEV-TOKEN-MALFORMED, AAEV-WAVE-RECORD-INCOMPLETE, and all AAEV failure classes. | CS2 — app_management_centre#1145 (2026-04-28) |
 
 ---
 
@@ -886,7 +892,7 @@ When completing PREFLIGHT §1.3, record the following block in the **session mem
 
 ```
 fail_only_once_attested: true
-fail_only_once_version: 4.2.1
+fail_only_once_version: 4.3.0
 unresolved_breaches: [list incident IDs with OPEN or IN_PROGRESS status, or 'none']
 open_improvements_reviewed: [S-001, S-002, S-003, S-004, S-005, S-006, S-007, S-008, S-009, S-010, S-011, S-012, S-013, S-014, S-015, S-016, S-017, S-018, S-019, S-020, S-021, S-022, S-023, S-024, S-025, S-026, S-027, S-028, S-032, S-033, S-034, S-035]
 ```
@@ -898,7 +904,7 @@ open_improvements_reviewed: [S-001, S-002, S-003, S-004, S-005, S-006, S-007, S-
 ---
 
 *Authority: CS2 (Johan Ras) | Governance Ref: maturion-foreman-governance#1195, maturion-isms#496, maturion-isms#523, maturion-isms#855, maturion-isms#856, maturion-isms#1013, maturion-isms#999, maturion-isms#1003 | LIVING_AGENT_SYSTEM.md v6.2.0*  
-*Last Updated: 2026-04-28 | Version: 4.2.1 | Status: ACTIVE*
+*Last Updated: 2026-04-28 | Version: 4.3.0 | Status: ACTIVE*
 
 ---
 
@@ -906,6 +912,7 @@ open_improvements_reviewed: [S-001, S-002, S-003, S-004, S-005, S-006, S-007, S-
 
 | Version | Date | Change |
 |---------|------|--------|
+| 4.3.0 | 2026-04-28 | A-040 PROTECTED-PATH-ECAP-BEFORE-IAA locked in (CS2 — app_management_centre#1145); A-041 EVIDENCE-TYPE-DOWNGRADE-PROHIBITION locked in (CS2 — app_management_centre#1145); A-042 AAEV-VALIDATORS-MANDATORY locked in (CS2 — app_management_centre#1145); these three rules were originally A-039/A-040/A-041 in the feature branch; renumbered to A-040/A-041/A-042 to avoid collision with A-039 (WAVE-RESULT-COHERENCE-MANDATORY, app_management_centre#1143, merged to main at 4.2.1) |
 | 4.2.1 | 2026-04-28 | A-039 corrected to three-state model per WRCC-001 §1.2: ASSURANCE_PENDING added as third valid final-assurance state (no token + no rejection language — pre-IAA or awaiting token; still blocking). Two-state summary was incorrect after the canon was corrected. Authority: CS2 — app_management_centre#1143 |
 | 4.2.0 | 2026-04-27 | A-039 WAVE-RESULT-COHERENCE-MANDATORY locked in (CS2 — app_management_centre#1143); references WRCC-001 `governance/canon/WAVE_RESULT_COHERENCE_CANON.md`; attestation block version bumped to 4.2.0 |
 | 4.1.0 | 2026-04-06 | A-036 GOVERNING-ISSUE-PARITY-MANDATORY locked in (CS2 — app_management_centre#1129); A-037 OVERSHADOW-DETECTION-MANDATORY locked in (CS2 — app_management_centre#1129); A-038 CEREMONY-PARITY-EVIDENCE-REQUIRED locked in (CS2 — app_management_centre#1129) |

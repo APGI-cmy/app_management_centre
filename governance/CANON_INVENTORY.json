@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-04-28",
-  "total_canons": 201,
+  "last_updated": "2026-04-29",
+  "total_canons": 206,
   "generation_timestamp": "2026-04-28T05:34:19Z",
   "canon_entry_schema": {
     "description": "Schema for canon entries in CANON_INVENTORY.json",
@@ -1028,17 +1028,17 @@
     },
     {
       "filename": "EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
-      "version": "1.2.0",
-      "file_hash": "1d058dacdf61a0804d5d80bae05a7929922ee3913695b7bfd767f8c59538c620",
-      "file_hash_sha256": "1d058dacdf61a0804d5d80bae05a7929922ee3913695b7bfd767f8c59538c620",
+      "version": "1.3.0",
+      "file_hash": "be8455afc50db962ef900d16fb6f48f56ca9d16a5ac2ef26e8479ce9c799777f",
+      "file_hash_sha256": "be8455afc50db962ef900d16fb6f48f56ca9d16a5ac2ef26e8479ce9c799777f",
       "effective_date": "2026-04-08",
       "description": "Canonical protocol for the execution-ceremony-admin-agent role, authority boundaries, the seven-step canonical handover sequence, and three-part readiness model (substantive, administrative, independent assurance verdict). Formalises ECAS-001 strategy into binding governance.",
       "type": "canon",
       "path": "governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
       "layer_down_status": "PUBLIC_API",
-      "last_updated": "2026-04-21",
-      "change_note": "v1.2.0 parity confirmed: \u00a73.5a Template Non-Leakage Duty, \u00a73.5b Active-Bundle Scope for Status Normalization, \u00a73.7a Carried-Forward Claim Resolution Duty, \u00a73.8a Gate Evidence Inventory Duty; CANON_INVENTORY entry updated to reflect actual file version",
-      "amended_date": "2026-04-21"
+      "last_updated": "2026-04-28",
+      "change_note": "v1.3.0: Updated in wave amc-handover-hardening-20260428 (Issue #1145)",
+      "amended_date": "2026-04-28"
     },
     {
       "filename": "FAILURE_PROMOTION_RULE.md",
@@ -1476,18 +1476,18 @@
     },
     {
       "filename": "INDEPENDENT_ASSURANCE_AGENT_CANON.md",
-      "version": "1.10.0",
-      "file_hash": "1f67d365afecfeb460c221d890b928e98109aa39bbf7c27eedaca689f105cd12",
-      "file_hash_sha256": "1f67d365afecfeb460c221d890b928e98109aa39bbf7c27eedaca689f105cd12",
+      "version": "1.12.0",
+      "file_hash": "cf1e94e2a7db1137a9f726fba65f63074e7e47488fb514a025768db69adf6900",
+      "file_hash_sha256": "cf1e94e2a7db1137a9f726fba65f63074e7e47488fb514a025768db69adf6900",
       "effective_date": "2026-02-24",
-      "amended_date": "2026-04-21",
+      "amended_date": "2026-04-28",
       "description": "Defines the Independent Assurance Agent (IAA) class: role, hard-trigger authority, independence requirements, five-phase delivery proof protocol, binary output (ASSURANCE-TOKEN / REJECTION-PACKAGE), and trigger table. v1.1.0: Zero-Severity-Tolerance policy added.",
       "type": "canon",
       "path": "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
       "layer_down_status": "INTERNAL",
       "provenance": "CS2-authorised via issue: Create Governance Canon: Independent Assurance Agent (IAA); v1.1.0 amendment: Enforce zero-severity-tolerance \u2014 any finding triggers rejection",
-      "last_updated": "2026-04-21",
-      "change_note": "v1.10.0: Added ACR-15 (active-wave/tracker contradiction rejection) and ACR-16 (active final-state token/session incoherence); added Authoritative-Source Rule for Current Token/Session; added wave-current-tasks.md to active-bundle scope; AMC/ISMS hardening parity catch-up"
+      "last_updated": "2026-04-28",
+      "change_note": "v1.12.0: Updated in wave amc-handover-hardening-20260428 (Issue #1145)"
     },
     {
       "filename": "INITIALIZATION_COMPLETENESS_GATE.md",
@@ -2285,14 +2285,15 @@
     {
       "filename": "WAVE_RESULT_COHERENCE_CANON.md",
       "version": "1.0.0",
-      "file_hash": "bb360209e9b51d66407cf79c633952764ef13f42b7e8c346cb40930be65157d3",
+      "file_hash": "3d72b4e59dcff725a529cc230ed29baa6fa0d75bdd5c1324759600166e0c68ed",
       "effective_date": "2026-04-27",
-      "description": "Defines wave-result-state coherence invariants: final-assurance state coherence gate (Section 5 must resolve to exactly one of ASSURANCE_TOKEN_ISSUED, REJECTION_PACKAGE_ACTIVE, or ASSURANCE_PENDING — see §1.2 for three-state definitions; ASSURANCE_PENDING covers pre-IAA/awaiting-token with no rejection language, and is still blocking for PR handover until resolved), kickoff-state checklist linter (exact kickoff-residue detection patterns), §3c evidence truth-validation against actual file state, cross-surface contradiction check table (CC-01\u2013CC-08), and producer-side pre-PR checker combining all four gates. Operationalizes EWCS-001 \u00a76 and PHCP-001 \u00a74 into machine-checkable coherence gates. Introduces wrcc_pre_pr_checker_verdict \u00a73c field. Authority: CS2 \u2014 Issue #1143.",
+      "description": "Defines wave-result-state coherence invariants: final-assurance state coherence gate (Section 5 must resolve to exactly one of ASSURANCE_TOKEN_ISSUED, REJECTION_PACKAGE_ACTIVE, or ASSURANCE_PENDING \u2014 see \u00a71.2 for three-state definitions; ASSURANCE_PENDING covers pre-IAA/awaiting-token with no rejection language, and is still blocking for PR handover until resolved), kickoff-state checklist linter (exact kickoff-residue detection patterns), \u00a73c evidence truth-validation against actual file state, cross-surface contradiction check table (CC-01\u2013CC-08), and producer-side pre-PR checker combining all four gates. Operationalizes EWCS-001 \u00a76 and PHCP-001 \u00a74 into machine-checkable coherence gates. Introduces wrcc_pre_pr_checker_verdict \u00a73c field. Authority: CS2 \u2014 Issue #1143.",
       "type": "canon",
       "path": "governance/canon/WAVE_RESULT_COHERENCE_CANON.md",
       "layer_down_status": "INTERNAL",
       "amended_date": "2026-04-28",
-      "file_hash_sha256": "bb360209e9b51d66407cf79c633952764ef13f42b7e8c346cb40930be65157d3"
+      "file_hash_sha256": "3d72b4e59dcff725a529cc230ed29baa6fa0d75bdd5c1324759600166e0c68ed",
+      "last_updated": "2026-04-28"
     },
     {
       "filename": "WE_ONLY_FAIL_ONCE_DOCTRINE.md",
@@ -2366,6 +2367,78 @@
       "last_updated": "2026-04-19",
       "canonical_version": "1.0.0",
       "change_note": "v1.0.0: Initial canon \u2014 canonicalizes per-agent parking station path"
+    },
+    {
+      "filename": "PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md",
+      "version": "1.0.0",
+      "file_hash": "ef515ffea0bcd34f760fdc16a0951c0602b2ca5bf10d1995d7a972ddfb77fa7f",
+      "file_hash_sha256": "ef515ffea0bcd34f760fdc16a0951c0602b2ca5bf10d1995d7a972ddfb77fa7f",
+      "effective_date": "2026-04-28",
+      "description": "PPEIA-001: Defines mandatory ECAP-before-IAA ceremony requirement for protected-path PRs. Lists protected-path patterns (PP-01 through PP-08), ECAP completion evidence requirements, IAA rejection trigger (ACR-21), and CS2 waiver schema.",
+      "type": "canon",
+      "path": "governance/canon/PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md",
+      "layer_down_status": "PUBLIC_API",
+      "last_updated": "2026-04-28",
+      "amended_date": "2026-04-28",
+      "change_note": "New canon \u2014 wave amc-handover-hardening-20260428 (Issue #1145 child #1146)"
+    },
+    {
+      "filename": "AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md",
+      "version": "1.0.0",
+      "file_hash": "c8ca2ec5e07a1a95a5e333a159b8c6fcc40ce82cab9c3e4f0bc985cf2651514c",
+      "file_hash_sha256": "c8ca2ec5e07a1a95a5e333a159b8c6fcc40ce82cab9c3e4f0bc985cf2651514c",
+      "effective_date": "2026-04-28",
+      "description": "EFIA-001: Defines evidence-first IAA assurance requirements. Evidence type hierarchy (E1-E5), acceptance-criteria evidence matrix, build-correctness review, no-downgrade rule, diff-first audit, agent-claim non-evidence rule, and independent risk challenge.",
+      "type": "canon",
+      "path": "governance/canon/AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md",
+      "layer_down_status": "PUBLIC_API",
+      "last_updated": "2026-04-28",
+      "amended_date": "2026-04-28",
+      "change_note": "New canon \u2014 wave amc-handover-hardening-20260428 (Issue #1145 child #1147)"
+    },
+    {
+      "filename": "AMC_AUTHORITY_EXACTNESS_VALIDATORS.md",
+      "version": "1.0.0",
+      "file_hash": "8a495e0bef73901ff24612bb360eff86a4093a5409e71ee2cded6dbdec1348c6",
+      "file_hash_sha256": "8a495e0bef73901ff24612bb360eff86a4093a5409e71ee2cded6dbdec1348c6",
+      "effective_date": "2026-04-28",
+      "description": "AAEV-001: Defines machine-checkable field-level authority validators for AMC artifact surfaces (wave record, PR body, tracker, index, session memory, artifact headers). AAEV-001 through AAEV-009 validators.",
+      "type": "canon",
+      "path": "governance/canon/AMC_AUTHORITY_EXACTNESS_VALIDATORS.md",
+      "layer_down_status": "INTERNAL",
+      "last_updated": "2026-04-28",
+      "amended_date": "2026-04-28",
+      "change_note": "New canon \u2014 wave amc-handover-hardening-20260428 (Issue #1145 child #1149)"
+    },
+    {
+      "filename": "PR_HANDOVER_CANONICAL_PACKAGE.md",
+      "version": "1.2.0",
+      "canonical_version": "1.2.0",
+      "file_hash": "80d184aa04c8a919b76c322ba0e2935e7477199f7457ebeca4dab6ac9bf6d531",
+      "file_hash_sha256": "80d184aa04c8a919b76c322ba0e2935e7477199f7457ebeca4dab6ac9bf6d531",
+      "effective_date": "2026-04-28",
+      "description": "PHCP-001: Canonical PR handover source package \u2014 defines PR body schema (\u00a71 governance handover table), governing-issue role mapping (\u00a72), handover bundle requirements, token-carrier rule, wave checklist retirement rule, tracker/index parity requirements, exception-handling schema, wave-context source of truth, and PPEIA-001/EFIA-001/AAEV-001 integration for all AMC PR handovers.",
+      "type": "canon",
+      "path": "governance/canon/PR_HANDOVER_CANONICAL_PACKAGE.md",
+      "layer_down_status": "PUBLIC_API",
+      "last_updated": "2026-04-28",
+      "amended_date": "2026-04-28",
+      "change_note": "v1.1.0 (Issue #1139/#1143): governing-issue role separation, stale handover injector retirement; v1.2.0 (Issue #1145): PPEIA-001/EFIA-001/AAEV-001 integration, ecap_ceremony_status and aaev_validators fields added to \u00a71 and \u00a74.1"
+    },
+    {
+      "filename": "END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md",
+      "version": "1.3.0",
+      "canonical_version": "1.3.0",
+      "file_hash": "e56ec415ab7b32dba894b0e087edab304e1daeadfcd3e00abccdf5d766543734",
+      "file_hash_sha256": "e56ec415ab7b32dba894b0e087edab304e1daeadfcd3e00abccdf5d766543734",
+      "effective_date": "2026-04-28",
+      "description": "EWCS-001: End-of-wave closeout sweep canon \u2014 defines mandatory end-of-wave closeout sweep as a named blocking step, tracker header/body parity binary gate, kickoff-state retirement for wave checklists, control-surface closeout checklist, ceremony evidence fields, ECAP-before-IAA requirement, and evidence-field coherence gate.",
+      "type": "canon",
+      "path": "governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md",
+      "layer_down_status": "PUBLIC_API",
+      "last_updated": "2026-04-28",
+      "amended_date": "2026-04-28",
+      "change_note": "v1.1.0 (Issue #1143): ECAP-before-IAA requirement added; v1.3.0 (Issue #1145): evidence-field coherence gate and PPEIA-001/EFIA-001/AAEV-001/WRCC-001 cross-references added"
     }
   ]
 }
