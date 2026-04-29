@@ -201,11 +201,15 @@ gate_inventory:
 
 ## Section 5 — Assurance Token
 
-**Status**: PENDING IAA INVOCATION
+**Status**: ASSURANCE-TOKEN ISSUED — session-066-20260429
 
-> This section will be populated with the PHASE_B_BLOCKING_TOKEN after IAA invocation and
-> ASSURANCE-TOKEN receipt. Per Phase 4 §4.5 of the Foreman contract, the token is recorded
-> here in the format: `PHASE_B_BLOCKING_TOKEN: IAA-[session-ID]-[date]-PASS`
+`PHASE_B_BLOCKING_TOKEN: IAA-session-066-20260429-PASS`
+
+**IAA Session**: session-066-20260429
+**Verdict Date**: 2026-04-29
+**Checks**: 28 PASS / 0 FAIL
+**Adoption Phase**: PHASE_B_BLOCKING — Hard gate ACTIVE
+**Token Reference**: IAA-session-066-20260429-PASS
 
 ---
 

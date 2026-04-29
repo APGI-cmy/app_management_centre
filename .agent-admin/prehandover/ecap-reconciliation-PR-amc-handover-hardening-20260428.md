@@ -22,7 +22,7 @@
 |-----------|--------|
 | Substantive readiness | ACCEPTED by Foreman — all 10 wave tasks complete; QP verdicts PASS |
 | Administrative readiness | ACCEPTED (this summary — ECAP ceremony complete) |
-| IAA assurance verdict | PENDING — IAA not yet invoked; Foreman to invoke per §4.4 |
+| IAA assurance verdict | PASS — session-066-20260429 — PHASE_B_BLOCKING_TOKEN: IAA-session-066-20260429-PASS |
 | Ripple status | COMPLETED — CANON_INVENTORY.json and GOVERNANCE_ALIGNMENT_INVENTORY.json updated (ECAP-001 v1.3.0, IAA v1.12.0, PPEIA-001/EFIA-001/AAEV-001 added; PHCP-001 v1.2.0/EWCS-001 v1.3.0 added to CANON_INVENTORY; WRCC-001 added to GOVERNANCE_ALIGNMENT_INVENTORY per corrective commit session-064) |
 | Admin-compliance result | PASS — §4.3e gate passed; 0 AAP failures; R1–R8 all PASS |
 
