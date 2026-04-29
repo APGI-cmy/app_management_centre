@@ -1,7 +1,7 @@
 # AMC Wave Record — Stage 7 PBFAG
 
 **Wave Slug**: amc-stage7-pbfag-20260428
-**Session**: session-035
+**Session**: session-036
 **Date**: 2026-04-28
 **Producing Agent**: foreman-v2-agent (QUALITY_PROFESSOR / POLC_ORCHESTRATION)
 **Governing Delivery Issue**: [app_management_centre#1150](https://github.com/APGI-cmy/app_management_centre/issues/1150) — "Stage 7 — Create AMC PBFAG pack and update progress tracker first" (opened by CS2 @APGI-cmy)
@@ -14,7 +14,7 @@
 | Field | Value |
 |-------|-------|
 | wave_slug | amc-stage7-pbfag-20260428 |
-| session | session-035 |
+| session | session-036 |
 | date | 2026-04-28 |
 | producing_agent | foreman-v2-agent |
 | agent_class | QUALITY_PROFESSOR / POLC_ORCHESTRATION |
@@ -33,7 +33,7 @@
 > **Pre-Brief Delivered By**: independent-assurance-agent
 > **Session**: session-063-20260428
 > **Authority**: Phase 0 of IAA contract v6.2.0; `INDEPENDENT_ASSURANCE_AGENT_CANON.md` §Pre-Brief
-> **Invoked By**: foreman-v2-agent (session-035) — PRE-BRIEF request
+> **Invoked By**: foreman-v2-agent (session-036) — PRE-BRIEF request
 > **Status**: ✅ COMPLETE — 2026-04-28
 
 ### 2.1 — Wave Classification
@@ -141,7 +141,7 @@
 
 ## Section 3 — Execution Evidence
 
-> *Populated by foreman-v2-agent — session-035-20260428.*
+> *Populated by foreman-v2-agent — session-036-20260428.*
 
 ### 3a — Task Completion Log
 
@@ -165,7 +165,7 @@
 | PBFAG Checklist (updated) | `modules/amc/06-pbfag/pbfag-checklist.md` | updated | ✅ Updated — active wave reference |
 | Build Progress Tracker (wave-close) | `modules/amc/BUILD_PROGRESS_TRACKER.md` | current | ✅ Updated |
 | AMC Pre-Build Artifact Index (updated) | `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md` | current | ✅ Updated |
-| Session Memory | `.agent-workspace/foreman-v2/memory/session-035-20260428.md` | 1.0 | ✅ Created |
+| Session Memory | `.agent-workspace/foreman-v2/memory/session-036-20260428.md` | 1.0 | ✅ Created |
 
 ### 3c — Wave Record Evidence Fields
 
@@ -181,7 +181,7 @@
 
 ## Section 4 — Foreman QP Checkpoint
 
-> *Completed by foreman-v2-agent — session-035-20260428.*
+> *Completed by foreman-v2-agent — session-036-20260428.*
 
 | Task | QP Verdict | Evidence |
 |------|-----------|---------|
