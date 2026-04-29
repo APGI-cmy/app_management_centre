@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "last_updated": "2026-04-21T06:56:45Z",
+    "last_updated": "2026-04-29T12:00:00Z",
     "description": "Tracks governance artifact alignment state between canonical source and consumer repository",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
     "consumer_repository": "APGI-cmy/app_management_centre",
@@ -58,13 +58,14 @@
         {
             "canonical_path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
             "consumer_path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
-            "canonical_version": "1.5.0",
-            "consumer_version": "1.5.0",
-            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
-            "alignment_status": "ALIGNED",
-            "last_aligned": "2026-04-21T06:56:45Z",
-            "file_hash_sha256": "e8c55dd687a67a5970126a1616e47e8d5527dfaf957416fcb7398420cf15ff27",
-            "layer_down_status": "PUBLIC_API"
+            "canonical_version": "1.6.0",
+            "consumer_version": "1.7.2",
+            "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+            "alignment_status": "CONSUMER_AHEAD",
+            "last_aligned": "2026-04-29T12:00:00Z",
+            "file_hash_sha256": "c916049ae2faff9c6eed83242260d5b44888fe30e518cbd24e1fa7cba20f0d77",
+            "layer_down_status": "PUBLIC_API",
+            "ripple_notes": "Canonical v1.6.0 (commit 2ba1d6a3): added §4.3e Check L (active-bundle token/session coherence). Consumer already at v1.7.2 (AHEAD). No content changes applied."
         },
         {
             "canonical_path": "governance/canon/EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md",
@@ -91,13 +92,14 @@
         {
             "canonical_path": "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
             "consumer_path": "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
-            "canonical_version": "1.7.0",
-            "consumer_version": "1.7.0",
-            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
-            "alignment_status": "ALIGNED",
-            "last_aligned": "2026-04-21T06:56:45Z",
-            "file_hash_sha256": "c2a1182e6fc5660ca8625bdfab89d64547677445bbd9a9c940b94a14c0478a6a",
-            "layer_down_status": "INTERNAL"
+            "canonical_version": "1.8.0",
+            "consumer_version": "1.12.0",
+            "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+            "alignment_status": "CONSUMER_AHEAD",
+            "last_aligned": "2026-04-29T12:00:00Z",
+            "file_hash_sha256": "cf1e94e2a7db1137a9f726fba65f63074e7e47488fb514a025768db69adf6900",
+            "layer_down_status": "INTERNAL",
+            "ripple_notes": "Canonical v1.8.0 (commit 2ba1d6a3): added ACR-09 through ACR-14 (gate-inventory hardening, post-token normalization, cross-artifact contradiction, carried-forward canonical source parity). Consumer already at v1.12.0 (AHEAD). No content changes applied."
         },
         {
             "canonical_path": "governance/templates/execution-ceremony-admin/ECAP_RECONCILIATION_SUMMARY.template.md",
@@ -124,12 +126,12 @@
         {
             "canonical_path": "governance/templates/execution-ceremony-admin/PREHANDOVER.template.md",
             "consumer_path": "governance/templates/execution-ceremony-admin/PREHANDOVER.template.md",
-            "canonical_version": "1.1.0",
-            "consumer_version": "1.1.0",
-            "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+            "canonical_version": "1.2.0",
+            "consumer_version": "1.2.0",
+            "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
             "alignment_status": "ALIGNED",
-            "last_aligned": "2026-04-21T06:56:45Z",
-            "file_hash_sha256": "d5803a53e509528f6d4edbd63b1592fcd73fd099bfde876ce31149bd1ac3f401",
+            "last_aligned": "2026-04-29T12:00:00Z",
+            "file_hash_sha256": "910c785643fa6d643ba4e41154e8c9dcd666d4799f214e2aa05773712e7d4808",
             "layer_down_status": "INTERNAL"
         },
         {

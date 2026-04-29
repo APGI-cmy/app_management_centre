@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "c8312745821e40d2108a874a67d8be0f08cb450d",
+  "last_layer_down_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
   "last_updated": "2026-04-29",
   "alignment_status": "ALIGNED",
   "total_artifacts": 38,
@@ -120,13 +120,13 @@
     {
       "filename": "AGENT_HANDOVER_AUTOMATION.md",
       "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
-      "version": "1.5.0",
+      "version": "1.7.2",
       "type": "canon",
       "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
-      "layered_down_at": "2026-04-21T06:56:45Z",
-      "file_hash_sha256": "e8c55dd687a67a5970126a1616e47e8d5527dfaf957416fcb7398420cf15ff27",
-      "action": "UPDATED"
+      "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+      "layered_down_at": "2026-04-29T12:00:00Z",
+      "file_hash_sha256": "c916049ae2faff9c6eed83242260d5b44888fe30e518cbd24e1fa7cba20f0d77",
+      "action": "CONSUMER_AHEAD"
     },
     {
       "filename": "FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
@@ -211,10 +211,10 @@
       "version": "1.12.0",
       "type": "canon",
       "layer_down_status": "INTERNAL",
-      "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
-      "layered_down_at": "2026-04-21T06:56:45Z",
+      "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+      "layered_down_at": "2026-04-29T12:00:00Z",
       "file_hash_sha256": "cf1e94e2a7db1137a9f726fba65f63074e7e47488fb514a025768db69adf6900",
-      "action": "UPDATED"
+      "action": "CONSUMER_AHEAD"
     },
     {
       "filename": "CodexAdvisor-agent.md",
@@ -267,12 +267,12 @@
     {
       "filename": "PREHANDOVER.template.md",
       "path": "governance/templates/execution-ceremony-admin/PREHANDOVER.template.md",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "type": "template",
       "layer_down_status": "INTERNAL",
-      "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
-      "layered_down_at": "2026-04-21T06:56:45Z",
-      "file_hash_sha256": "d5803a53e509528f6d4edbd63b1592fcd73fd099bfde876ce31149bd1ac3f401",
+      "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+      "layered_down_at": "2026-04-29T12:00:00Z",
+      "file_hash_sha256": "910c785643fa6d643ba4e41154e8c9dcd666d4799f214e2aa05773712e7d4808",
       "action": "UPDATED"
     },
     {
@@ -532,6 +532,19 @@
       "issue_ref": "APGI-cmy/app_management_centre#layer-down-56d92004",
       "pr_ref": "APGI-cmy/app_management_centre#1088",
       "status": "COMPLETE"
+    },
+    {
+      "layer_down_id": "layer-down-2026-04-29-2ba1d6a3",
+      "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+      "timestamp": "2026-04-29T12:00:00Z",
+      "trigger": "Merge pull request -1358 from APGI-cmy-copilot-catch-up-governance-repo-hardening",
+      "artifacts_changed": 3,
+      "artifacts_created": 0,
+      "artifacts_updated": 1,
+      "consumer_ahead": 2,
+      "issue_ref": "APGI-cmy/app_management_centre#layer-down-2ba1d6a3",
+      "status": "COMPLETE",
+      "notes": "AGENT_HANDOVER_AUTOMATION.md (consumer AHEAD v1.7.2 > canonical v1.6.0), INDEPENDENT_ASSURANCE_AGENT_CANON.md (consumer AHEAD v1.12.0 > canonical v1.8.0), PREHANDOVER.template.md (updated v1.1.0 -> v1.2.0)"
     }
   ],
   "history": [
@@ -580,6 +593,17 @@
         "SESSION_MEMORY.template.md"
       ],
       "session": "session-033-20260421"
+    },
+    {
+      "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+      "date": "2026-04-29T12:00:00Z",
+      "trigger": "Merge pull request -1358 from APGI-cmy-copilot-catch-up-governance-repo-hardening",
+      "changed_artifacts": [
+        "AGENT_HANDOVER_AUTOMATION.md",
+        "INDEPENDENT_ASSURANCE_AGENT_CANON.md",
+        "PREHANDOVER.template.md"
+      ],
+      "session": "session-034-20260429"
     }
   ]
 }
