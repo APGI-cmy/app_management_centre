@@ -8,8 +8,8 @@
 **Branch**: copilot/upgrade-amc-pr-handover-assurance
 **ECAP Session**: ecap-session-035
 **Foreman Session**: session-035-20260428
-**Final IAA Session Reference**: pending
-**Final Token Reference**: pending
+**Final IAA Session Reference**: session-066-20260429
+**Final Token Reference**: IAA-session-066-20260429-PASS
 **Date**: 2026-04-28
 
 ---
@@ -34,10 +34,10 @@ All substantive deliverables (10 tasks) are complete. ECAP ceremony completed pe
 
 | Artifact Class | Required Path | Present | Committed | Final-State Normalized | Notes |
 |---------------|--------------|---------|-----------|----------------------|-------|
-| Wave record | `.agent-admin/wave-records/amc-wave-record-amc-handover-hardening-20260428.md` | ✓ | ✓ | ✓ | Sections 1–4 populated; §5 PENDING (awaiting IAA) |
+| Wave record | `.agent-admin/wave-records/amc-wave-record-amc-handover-hardening-20260428.md` | ✓ | ✓ | ✓ | Sections 1–5 populated; §5 ASSURANCE_TOKEN_ISSUED — IAA-session-066-20260429-PASS |
 | Wave checklist | `.agent-admin/waves/wave-amc-handover-hardening-20260428-current-tasks.md` | ✓ | ✓ | ✓ | All 10 tasks [x]; COMPLETE header |
 | Session memory | `.agent-workspace/foreman-v2/memory/session-035-20260428.md` | ✓ | staged | ✓ | Created this ceremony session |
-| ECAP reconciliation summary (this file) | `.agent-admin/prehandover/ecap-reconciliation-PR-amc-handover-hardening-20260428.md` | ✓ | staged | ✓ | C1–C6 populated; C5 left for Foreman §14.6 |
+| ECAP reconciliation summary (this file) | `.agent-admin/prehandover/ecap-reconciliation-PR-amc-handover-hardening-20260428.md` | ✓ | ✓ | ✓ | C1–C8 fully populated and final-state normalized; IAA token recorded |
 | IAA Pre-Brief | `.agent-admin/wave-records/amc-wave-record-amc-handover-hardening-20260428.md §2` | ✓ | ✓ | ✓ | Embedded in wave record per AMC 90/10 Protocol |
 | New canon PPEIA-001 | `governance/canon/PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md` | ✓ | ✓ | ✓ | v1.0.0 |
 | New canon EFIA-001 | `governance/canon/AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` | ✓ | ✓ | ✓ | v1.0.0 |
@@ -48,8 +48,8 @@ All substantive deliverables (10 tasks) are complete. ECAP ceremony completed pe
 | Amended canon EWCS-001 | `governance/canon/END_OF_WAVE_CLOSEOUT_SWEEP_CANON.md` | ✓ | ✓ | ✓ | v1.3.0 |
 | Amended canon WRCC-001 | `governance/canon/WAVE_RESULT_COHERENCE_CANON.md` | ✓ | ✓ | ✓ | v1.0.0 (§7 added) |
 | Tier 2 knowledge update | `.agent-workspace/foreman-v2/knowledge/FAIL-ONLY-ONCE.md` | ✓ | ✓ | ✓ | v4.3.0 (A-040/A-041/A-042 added) |
-| CANON_INVENTORY update | `governance/CANON_INVENTORY.json` | ✓ | staged | ✓ | Updated ECAP-001/IAA versions; added PPEIA-001/EFIA-001/AAEV-001 |
-| GOVERNANCE_ALIGNMENT_INVENTORY update | `governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json` | ✓ | staged | ✓ | Updated ECAP-001/IAA versions; added PPEIA-001/EFIA-001/AAEV-001 |
+| CANON_INVENTORY update | `governance/CANON_INVENTORY.json` | ✓ | ✓ | ✓ | Updated ECAP-001/IAA versions; added PPEIA-001/EFIA-001/AAEV-001; added PHCP-001 v1.2.0/EWCS-001 v1.3.0; hashes recomputed |
+| GOVERNANCE_ALIGNMENT_INVENTORY update | `governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json` | ✓ | ✓ | ✓ | Updated ECAP-001/IAA versions; added PPEIA-001/EFIA-001/AAEV-001/WRCC-001; PHCP-001/EWCS-001 hashes updated |
 
 **Artifact count**: 16 artifacts (13 wave-produced, 3 ceremony-admin additions)
 
@@ -67,7 +67,7 @@ All substantive deliverables (10 tasks) are complete. ECAP ceremony completed pe
 | Authority | CS2 authorization | Issue #1145 opened by @APGI-cmy | Wave record cs2_authorization | ✓ |
 | Canon version consistency | ECAP-001 | v1.3.0 (file header) | CANON_INVENTORY.json entry | ✓ (updated in ceremony) |
 | Canon version consistency | IAA | v1.12.0 (file header) | CANON_INVENTORY.json entry | ✓ (updated in ceremony) |
-| PHASE_B_BLOCKING_TOKEN | Wave record §5 | `PENDING` (pre-fill) | Wave record §5 | ✓ (valid pre-fill state) |
+| PHASE_B_BLOCKING_TOKEN | Wave record §5 | `IAA-session-066-20260429-PASS` | Wave record §5 | ✓ (token issued and recorded) |
 
 ---
 
@@ -126,7 +126,7 @@ protected_path_ceremony:
 
 **Follow-on action required**: The `iaa-prebrief-inject.yml` active-wave config must be updated. This requires a CS2-authorized corrective wave. Escalated via wave record learning note.
 
-**Status**: `stale_injector_check_performed: CLEAN` — stale injection documented and confirmed non-authoritative; no agent-action confusion risk from this ceremony bundle forward.
+**Status**: `stale_injector_check_performed: NON-CLEAN` — stale injection documented as non-authoritative and routed as a follow-on residual; no agent-action confusion risk from this ceremony bundle forward; corrective wave required to update `iaa-prebrief-inject.yml` active-wave config.
 
 ---
 
@@ -150,7 +150,7 @@ protected_path_ceremony:
 
 | Gate | Individual Outcome | Evidence Source |
 |------|--------------------|----------------|
-| Merge Gate Interface / merge-gate/verdict | BLOCKED — IAA PHASE_B_BLOCKING_TOKEN required before merge gate can pass; ceremony bundle complete and ready for Foreman §14.6 → IAA invocation | CI gate — requires IAA token in PR body before passing |
+| Merge Gate Interface / merge-gate/verdict | PASS — IAA-session-066-20260429-PASS issued; PHASE_B_BLOCKING_TOKEN recorded in wave record §5 and PR body | CI gate — IAA token present in PR body; gate passed |
 | Merge Gate Interface / governance/alignment | N/A — this PR IS the governance alignment wave; canon additions/amendments are the deliverable | Wave classification: GOVERNANCE_CANON_HARDENING |
 | Merge Gate Interface / stop-and-fix/enforcement | PASS — no stop-and-fix conditions raised in PR review thread; no S&F trigger comments found | PR comment review (CI gate comment not present indicating no S&F block) |
 | POLC Boundary Validation / foreman-implementation-check | PASS — Foreman acted as POLC-Orchestration throughout; 10/10 tasks complete; all implementations via Foreman governance specification role; no builder delegation to non-Foreman agents | Wave checklist: 10/10 [x]; wave record section 1 agents: foreman-v2-agent only |
@@ -159,9 +159,9 @@ protected_path_ceremony:
 | Evidence Bundle Validation / prehandover-proof-check | PASS — ECAP reconciliation summary committed in this ceremony bundle; constitutes the evidence bundle for this governance wave | `.agent-admin/prehandover/ecap-reconciliation-PR-amc-handover-hardening-20260428.md` |
 
 **Gate inventory source**: CI workflow runs on PR #1148 + wave artifact verification
-**Aggregate verdict**: BLOCKED — pending IAA invocation only; all ceremony-admin gates PASS or N/A
+**Aggregate verdict**: PASS — IAA token issued; all gates PASS or N/A
 
-No provisional gate-pass wording confirmed: ✓ (merge-gate/verdict explicitly BLOCKED pending IAA token, not PENDING)
+No provisional gate-pass wording confirmed: ✓ (merge-gate/verdict explicitly PASS with IAA token evidence)
 
 ---
 
@@ -188,12 +188,12 @@ Confirmation: No ASSEMBLY_TIME_ONLY blocks, no [fill in] placeholders, no templa
 | Anti-pattern AAP-01 through AAP-16 | PASS — 0 failures |
 
 **R1 Session Reference Consistency**: PASS — session-035-20260428 consistent across session memory, wave record update, and this summary
-**R2 Token Reference Consistency**: N/A at bundle-return time — PHASE_B_BLOCKING_TOKEN: PENDING is the valid pre-IAA state (exempt per AAP-14 detection rule)
+**R2 Token Reference Consistency**: PASS — PHASE_B_BLOCKING_TOKEN: IAA-session-066-20260429-PASS recorded in wave record §5, ECAP reconciliation C1, and PR body iaa_result field
 **R3 Issue/PR/Wave Reference Consistency**: PASS — #1145, #1148, amc-handover-hardening-20260428 consistent across all artifacts
 **R4 Artifact Path Consistency**: PASS — all declared paths verified as committed at HEAD (post-ceremony commit)
 **R5 Version and Hash Consistency**: PASS — CANON_INVENTORY.json and GOVERNANCE_ALIGNMENT_INVENTORY.json updated with correct versions and hashes
 **R6 Scope Declaration Parity**: N/A — `governance/scope-declaration.md` not used for this governance canon wave
-**R7 Final-State Normalization**: PASS — session memory outcome: COMPLETE; this summary final_state: COMPLETE; wave record §3c ceremony items resolved; §5 PHASE_B_BLOCKING_TOKEN: PENDING (valid pre-IAA state)
+**R7 Final-State Normalization**: PASS — session memory outcome: COMPLETE; this summary final_state: COMPLETE; wave record §3c ceremony items resolved; §5 ASSURANCE_TOKEN_ISSUED: IAA-session-066-20260429-PASS
 **R8 Ripple / Registry Obligation**: PASS — ECAP-001 (PUBLIC_API) updated in both inventories; PPEIA-001/EFIA-001 (PUBLIC_API) added to both inventories; C4 ripple assessment block present and complete
 
 ---
@@ -207,13 +207,13 @@ Confirmation: No ASSEMBLY_TIME_ONLY blocks, no [fill in] placeholders, no templa
 ```yaml
 aaev_validator_results:
   AAEV-001_governing_issue_cross_surface: "PASS — #1145 machine-exact across all surfaces (wave record, checklist, artifact headers, session memory)"
-  AAEV-002_token_format: "N/A — IAA not yet invoked at ceremony-bundle time; token to be recorded in wave record §5 after IAA PASS"
-  AAEV-003_wave_record_completeness: "PASS — sections 1-5 present and non-blank; §5 PENDING is valid pre-IAA state"
-  AAEV-004_pr_body_fields: "PASS — PR body governance handover table (PHCP-001 §1 schema) added to PR #1148 body with all available pre-IAA fields: governing_delivery_issue: #1145; ecap_ceremony_status: COMPLETED; wave_checklist_status: ALL TICKED; qp_verdict: PASS; parity_check_verdict: PASS; closeout_sweep_verdict: PASS; pre_pr_blocking_gate: PASS; entry_condition_status: NORMAL; wave_result_coherence: PASS; aaev_validators: PASS; iaa_result: PENDING IAA INVOCATION (Foreman §4.4)"
+  AAEV-002_token_format: "PASS — token format verified: IAA-session-066-20260429-PASS matches required pattern PHASE_B_BLOCKING_TOKEN: IAA-[session]-[date]-PASS; recorded in wave record §5"
+  AAEV-003_wave_record_completeness: "PASS — sections 1-5 present and non-blank; §5 ASSURANCE_TOKEN_ISSUED: IAA-session-066-20260429-PASS"
+  AAEV-004_pr_body_fields: "PASS — PR body governance handover table (PHCP-001 §1 schema) present with all fields: governing_delivery_issue: #1145; ecap_ceremony_status: COMPLETED; wave_checklist_status: ALL TICKED; qp_verdict: PASS; parity_check_verdict: PASS; closeout_sweep_verdict: PASS; pre_pr_blocking_gate: PASS; entry_condition_status: NORMAL; wave_result_coherence: PASS; aaev_validators: PASS; iaa_result: PASS — session-066-20260429 — PHASE_B_BLOCKING_TOKEN: IAA-session-066-20260429-PASS"
   AAEV-005_wave_session_consistency: "PASS — wave_id and triggering_issue consistent across all artifacts"
   AAEV-006_artifact_header_authority: "PASS — all new canon documents use labeled authority format; CS2 authority declared"
   AAEV-007_tracker_index_match: "N/A — governance canon wave; no module tracker or index applies"
   AAEV-008_pre_pr_gate_completeness: "PASS — pre_pr_blocking_gate_verdict: PASS (ceremony-admin scope); all fields populated"
   AAEV-009_session_memory_completeness: "PASS — session-035-20260428 created; all required fields populated"
-  aaev_overall_verdict: "PASS — AAEV-004 resolved (PR body governance handover table added); AAEV-002 IAA-gated (token to be recorded in wave record §5 after IAA PASS)"
+  aaev_overall_verdict: "PASS — all applicable validators PASS including AAEV-002 (token format verified: IAA-session-066-20260429-PASS)"
 ```

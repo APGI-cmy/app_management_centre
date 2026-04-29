@@ -4,7 +4,7 @@
 **Governing Delivery Issue**: app_management_centre#1145 — Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny
 **Date**: 2026-04-28
 **IAA Pre-Brief**: Wave record section 2
-**Status**: COMPLETE — all tasks ticked; pending IAA invocation and wave close
+**Status**: COMPLETE — all tasks ticked; IAA token issued (IAA-session-066-20260429-PASS); wave closed; pending CS2 review and merge
 **governance_evidence_path**: .agent-admin/wave-records/amc-wave-record-amc-handover-hardening-20260428.md
 
 ---
@@ -73,7 +73,7 @@
 | qp_verdicts_all_pass | YES |
 | checklist_retire_state | RETIRED FROM KICKOFF STATE — all tasks `[x]` |
 | wave_record_path | .agent-admin/wave-records/amc-wave-record-amc-handover-hardening-20260428.md |
-| next_step | IAA invocation — pending resolution of ECAP/protected-path gate and authority-field corrections per CS2 feedback |
+| next_step | CS2 review and merge — all governance corrections complete; IAA token issued; no pre-merge governance correction remaining |
 
 ---
 
