@@ -2,9 +2,10 @@
 ## Status
 **Type**: Canonical Governance Definition  
 **Authority**: Supreme — Canonical  
-**Version**: 1.2.0  
+**Version**: 1.3.0  
 **Effective Date**: 2026-04-08  
 **Amended**: 2026-04-19 — v1.2.0: Added §3.5a Template Non-Leakage Duty — ECAP must verify no ASSEMBLY_TIME_ONLY/pre-final instruction blocks remain in committed output artifacts; added §3.5b Active-Bundle Scope for Status Normalization; added §3.7a Carried-Forward Claim Resolution Duty — ECAP must verify any carried-forward claim resolves to its named source; added §3.8a Gate Evidence Inventory Duty; authority: CS2 — governance-repo hardening wave.  
+**Amended**: 2026-04-28 — v1.3.0: Added §3.10 Protected-Path Ceremony Duty — ECAP must perform additional protected-path identification, evidence-first material verification, diff-scope audit, governance impact assessment, risk declaration, and §4.2 protected_path_ceremony section population for PRs touching protected paths per PPEIA-001; added §3.11 Evidence-First Preparation Duty — ECAP must extract acceptance criteria, map minimum evidence types, collect/verify evidence artifacts, and populate ac_evidence_matrix in wave record §3c for qualifying deliveries per EFIA-001; authority: CS2 — Umbrella: Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny.  
 **Amended**: 2026-04-17 — v1.1.0: Added §3.5 Final-State Normalization Duty, §3.6 Ceremony Completeness Invariants, §3.7 Cross-Artifact Reconciliation Duty, §3.8 Commit-State Truth Rule, §3.9 Ripple / Registry Administration Duty, §4.5 Non-Substitution Rule. These sections canonize the closed 3-layer admin-control stack (ECAP self-normalization, Foreman QP admin-compliance verification, IAA binary rejection). Authority: CS2 — issue: Canonize a 3-layer admin ceremony compliance stack for ECAP, Foreman QP, and IAA.  
 **Owner**: Maturion Engineering Lead  
 **Canon ID**: ECAP-001  
@@ -259,6 +260,78 @@ Where the job's scope includes changes governed by `PUBLIC_API` or inventory-gov
 
 Silent omission of ripple or registry obligations is an ECAP-001 violation.
 
+### 3.10 Protected-Path Ceremony Duty (v1.3.0)
+
+When the PR diff touches any protected path defined in `PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md`
+(PPEIA-001) §1.1 (PP-01 through PP-08), the `execution-ceremony-admin-agent` MUST:
+
+1. **Identify all protected paths** in the PR diff and list them in the ECAP reconciliation summary
+2. **Verify evidence-first material** — confirm each acceptance criterion has evidence of the
+   required type per `AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` (EFIA-001) §1.2
+3. **Conduct diff-scope audit** — verify the PR diff matches the declared scope; flag any
+   undeclared changes in protected paths
+4. **Assess governance/workflow impact** — for `.github/workflows/**` and `governance/**`
+   changes, determine whether any existing gate, ACR, or authority binding is affected
+5. **Declare operational risk class** — explicitly declare LOW / MEDIUM / HIGH / CRITICAL
+   per PPEIA-001 §4.3
+6. **Populate §4.2 protected-path ceremony section** — add the following block to the ECAP
+   reconciliation summary:
+
+```yaml
+protected_path_ceremony:
+  protected_paths_identified:
+    - "[PP-NN pattern: actual file path]"
+  ecap_waiver_applicable: "NO | YES — [waiver reference]"
+  evidence_first_material_verified: "PASS | FAIL — [details]"
+  diff_scope_matches_declared_scope: "PASS | FAIL — [undeclared changes]"
+  governance_impact_assessed: "PASS | N/A — [gates/ACRs affected]"
+  operational_risk_class: "LOW | MEDIUM | HIGH | CRITICAL — [justification]"
+  protected_path_ceremony_verdict: "PASS | FAIL"
+```
+
+If a CS2 waiver applies (PPEIA-001 §3), ECAP MUST verify and record the waiver reference
+rather than performing the full ceremony. Absent a waiver, this section is mandatory and
+its absence is an ECAP-001 violation.
+
+### 3.11 Evidence-First Preparation Duty (v1.3.0)
+
+For qualifying deliveries where `AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` (EFIA-001) applies,
+the `execution-ceremony-admin-agent` MUST:
+
+1. **Extract all acceptance criteria** from the governing delivery issue
+2. **Determine minimum evidence type** for each criterion per EFIA-001 §1.2
+3. **Collect or verify evidence artifacts** — confirm each criterion's evidence is committed
+   and accessible
+4. **Populate `ac_evidence_matrix`** in wave record §3c:
+
+```yaml
+ac_evidence_matrix:
+  - criterion: "[Exact criterion text]"
+    minimum_evidence_required: "E1 | E2 | E3 | E4"
+    evidence_type_submitted: "E1 | E2 | E3 | E4 | E5"
+    evidence_reference: "[URL, file path, or CI run link]"
+    evidence_meets_minimum: "YES | NO — [reason if NO]"
+    iaa_verdict: "ACCEPTED | REJECTED"
+  ...
+ac_evidence_matrix_verdict: "PASS | FAIL"
+```
+
+5. **Flag E5-only criteria** — if any criterion requiring E1–E4 has only E5 evidence, flag
+   this as a gap and return to the producing agent before completing handback
+6. **Complete evidence matrix completeness check**:
+
+```yaml
+evidence_matrix_completeness_check:
+  all_criteria_mapped: "YES | NO — [missing criteria]"
+  all_evidence_references_accessible: "YES | NO — [inaccessible references]"
+  no_e5_only_criteria_requiring_higher: "YES | NO — [criteria with E5-only violation]"
+  evidence_matrix_completeness_verdict: "PASS | FAIL"
+```
+
+ECAP MUST NOT substitute its own attestation for required E1–E4 evidence. ECAP's role is to
+verify that evidence exists, not to generate it. If evidence is missing, ECAP MUST return
+the bundle to the producing agent.
+
 ---
 
 ## 4. Authority Boundary Model
@@ -322,7 +395,7 @@ The specific obligations of each layer are:
 
 | Layer | Role | Obligation | Prohibited |
 |-------|------|-----------|-----------|
-| **Layer 1 — ECAP** | `execution-ceremony-admin-agent` | Performs full administrative normalization and reconciliation before handback (§3.5–§3.9) | May NOT skip normalization and rely on Foreman or IAA to find defects |
+| **Layer 1 — ECAP** | `execution-ceremony-admin-agent` | Performs full administrative normalization and reconciliation before handback (§3.5–§3.11) | May NOT skip normalization and rely on Foreman or IAA to find defects |
 | **Layer 2 — Foreman / QP** | Foreman (Quality-of-Process role) | Verifies ECAP completed the full admin-compliance gate; does NOT re-absorb the admin workload; does NOT invoke IAA until admin-compliance readiness is explicitly accepted | May NOT substitute for ECAP normalization by redoing the entire bundle; may NOT invoke IAA before admin-compliance acceptance |
 | **Layer 3 — IAA** | Independent Assurance Agent | Remains binary and independent; issues `ASSURANCE-TOKEN` or `REJECTION-PACKAGE`; rejects on residual ceremony defects | May NOT become a cleanup actor; may NOT author administrative corrections; may NOT accept bundles with unresolved ceremony defects |
 

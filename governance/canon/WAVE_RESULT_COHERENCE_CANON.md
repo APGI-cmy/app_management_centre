@@ -3,6 +3,7 @@
 **Date**: 2026-04-27
 **Canon ID**: WRCC-001
 **Issue**: app_management_centre#1143 — Hardening — pre-PR gate must enforce wave-result coherence, checklist close-state, and truthful §3c handover evidence
+**Amended**: 2026-04-28 — v1.0.0 (amendment): Added §7 ECAP/Evidence Field Coherence Rule (PPEIA-001 and EFIA-001 integration), extended Appendix A violation classes (WRCC-ECAP-ABSENT, WRCC-EVIDENCE-GAP, WRCC-AAEV-FAIL), extended Appendix C cross-references (PPEIA-001, EFIA-001, AAEV-001, ECAP-001), added CC-01–CC-10 recording schema in §5.6; authority: CS2 — Issue #1145.
 
 > **Amendment Authority**: Only CS2 (Johan Ras / repo owner) may amend this canon.
 > Any PR modifying this file without CS2 sign-off is auto-FAIL at the merge gate.
@@ -248,14 +249,12 @@ a blocking defect:
 
 | Contradiction ID | Wave Record Says | Peer Surface Says | Blocked By |
 |-----------------|-----------------|-------------------|------------|
-| CC-01 | `QP Verdict: PASS` | Checklist has `qp_verdict: PENDING` | WRCC-CROSS-SURFACE-CONTRADICTION |
-| CC-02 | `outcome: COMPLETE` | Checklist has `[ ]` unchecked tasks | WRCC-CROSS-SURFACE-CONTRADICTION |
-| CC-03 | `iaa_verdict: PASS` + token present | Wave record §5 retains active rejection language | WRCC-INCOHERENT-ASSURANCE-STATE |
-| CC-04 | `handover_bundle_self_consistent: YES` | Wave record §5 still has open findings | WRCC-3C-TRUTH-VIOLATION |
-| CC-05 | `wave_checklist_retired_from_kickoff_state: YES` | Checklist still has `[ ]` or `qp_verdict: PENDING` | WRCC-3C-TRUTH-VIOLATION |
-| CC-06 | §5 PASS token present | Session memory `outcome: ESCALATED` or `outcome: PARTIAL` | WRCC-CROSS-SURFACE-CONTRADICTION |
-| CC-07 | Session memory `outcome: COMPLETE` | Wave record §5 has active rejection / no token | WRCC-CROSS-SURFACE-CONTRADICTION |
-| CC-08 | PR body implies ready-for-review | Wave record §5 still requires IAA re-invocation | WRCC-CROSS-SURFACE-CONTRADICTION |
+| CS-CONT-01 | `outcome: COMPLETE` | Checklist has one or more `[ ]` unchecked tasks | WRCC-001 §4 / WRCC-001 §2.2 |
+| CS-CONT-02 | `QP Verdict: PASS` | Checklist has one or more `qp_verdict: PENDING` | WRCC-001 §4 / WRCC-001 §2.4 |
+| CS-CONT-03 | `handover_bundle_self_consistent: YES` | Checklist is not in close-state (§2.3 fail) | WRCC-001 §4 / WRCC-001 §3 |
+| CS-CONT-04 | `PHASE_B_BLOCKING_TOKEN: IAA-session-*-PASS` present | Section 5 contains active rejection/fix-required language | WRCC-001 §1 |
+| CS-CONT-05 | `outcome: COMPLETE` in wave record | Session memory `outcome` ≠ `COMPLETE` | WRCC-001 §4 |
+| CS-CONT-06 | `wave_checklist_retired_from_kickoff_state: YES` | Checklist still has kickoff residue per §2.2 | WRCC-001 §4 / WRCC-001 §2 |
 
 ### 4.4 Blocking Classification
 
@@ -265,80 +264,22 @@ Violation class: **WRCC-CROSS-SURFACE-CONTRADICTION** (see Appendix A).
 
 ---
 
-## 5. Producer-Side Pre-PR Checker
+## 5. WRCC Pre-PR Checker (Producer-Side)
 
 ### 5.1 Purpose
 
-This section defines the **producer-side pre-PR checker** that MUST be run before a PR
-is opened as review-ready. The checker combines all three coherence gates (§1, §2, §3)
-and the cross-surface contradiction check (§4) into one explicit pass.
+This section specifies the **WRCC pre-PR coherence checker** — the producer-side
+procedure that combines §1, §2, §3, and §4 into a single sequenced check that MUST
+be run before any PR is opened as review-ready.
 
-The checker must catch exactly the class of defect where one surface was updated but
-another was left behind.
+### 5.2 When to Run
 
-### 5.2 Checker Execution Sequence
+The WRCC pre-PR checker MUST be run:
 
-The producer-side pre-PR checker MUST execute the following checks in order. A FAIL at
-any step blocks the entire checker — do NOT continue to the next step after a FAIL.
-
-```
-WRCC Pre-PR Checker — Execution Sequence
-
-Step 1 — Final-Assurance State Coherence (§1)
-  1.1 Locate wave record Section 5
-  1.2 Check: is PHASE_B_BLOCKING_TOKEN present?
-      YES → proceed to 1.3
-      NO  → Check for rejection/fix-required language (§1.5 patterns):
-            FOUND     → state is REJECTION_PACKAGE_ACTIVE
-                        → FAIL: wave blocked — rejection not resolved; re-invoke IAA
-                        → HALT — do not open PR
-            NOT FOUND → state is ASSURANCE_PENDING
-                        → FAIL: wave blocked — IAA not yet invoked or token not issued
-                        → HALT — do not open PR
-  1.3 Check: does Section 5 contain any rejection-residue patterns from §1.5?
-      NO  → Section 5 is COHERENT (ASSURANCE_TOKEN_ISSUED state) — proceed to Step 2
-      YES → FAIL: WRCC-INCOHERENT-ASSURANCE-STATE
-            → Record finding: list all contradictory patterns found
-            → Do NOT open PR — resolve coherence before proceeding
-
-Step 2 — Kickoff-State Checklist Linter (§2)
-  2.1 Locate the wave checklist file for this wave
-  2.2 Check §2.2 patterns — does any kickoff residue remain?
-      ANY FOUND → FAIL: WRCC-CHECKLIST-KICKOFF-RESIDUE
-                  → Record finding: list all residue patterns found
-                  → Do NOT open PR
-  2.3 Check §2.3 minimum close-state requirements — all satisfied?
-      ALL PASS → proceed to Step 3
-      ANY FAIL → FAIL: WRCC-CHECKLIST-KICKOFF-RESIDUE
-                 → Record finding: list unsatisfied requirements
-
-Step 3 — §3c Evidence Truth-Validation (§3)
-  3.1 Locate §3c block in wave record
-  3.2 For each field in §3.2 that is set to YES/PASS/CLEAN:
-      Verify the truth requirement is satisfied against actual artifact state
-      ANY truth requirement violated → FAIL: WRCC-3C-TRUTH-VIOLATION
-                                        → Record finding: field name + contradiction
-  3.3 Check §3.3 anti-patterns — any present?
-      ANY FOUND → FAIL: WRCC-3C-TRUTH-VIOLATION
-                  → Record finding: anti-pattern ID + location
-
-Step 4 — Cross-Surface Contradiction Check (§4)
-  4.1 Check all CC-01 through CC-08 rows in §4.3
-  4.2 Any contradiction detected?
-      ANY FOUND → FAIL: WRCC-CROSS-SURFACE-CONTRADICTION
-                  → Record finding: contradiction ID + surfaces involved
-
-Step 5 — Checker Verdict
-  ALL STEPS PASS → WAVE_RESULT_COHERENCE_PASS
-                   → Record: "WRCC pre-PR checker: PASS — all four coherence gates passed"
-                   → Record this verdict in wave record §3c fenced YAML block (§5.3);
-                     an optional human-readable copy may be placed in the evaluation section
-                   → PR may be opened as review-ready (subject to all other pre-PR gates)
-  ANY STEP FAILED → WAVE_RESULT_COHERENCE_FAIL
-                    → Record: "WRCC pre-PR checker: FAIL — [list of failed gates]"
-                    → Do NOT open PR until all findings are resolved
-                    → Re-run checker from Step 1 after corrections
-```
+- **Before** QP PASS is declared
+- **Before** the PR is opened as review-ready or non-draft
+- **After any correction** to Section 5, the checklist, or §3c (the checker must re-run
+  from Step 1 whenever any of these surfaces is modified)
 
 ### 5.3 Recording the Checker Verdict
 
@@ -385,6 +326,38 @@ reconciliation summary and return to producing agent.
 **IAA** MUST verify `wrcc_pre_pr_checker_verdict: PASS` as part of its standard audit.
 If the field is absent or FAIL: IAA issues REJECTION-PACKAGE citing WRCC-CHECKER-ABSENT.
 
+### 5.6 CC-01–CC-10 Wave Record Coherence Check Recording Schema
+
+In addition to the `wrcc_pre_pr_checker_verdict` field, agents MUST record the detailed
+per-check results in wave record §3c using the following YAML block:
+
+```yaml
+wave_result_coherence_check:
+  CC-01_wave_record_complete: "PASS | FAIL"
+  CC-02_governing_issue_pr_match: "PASS | FAIL"
+  CC-03_session_memory_issue_match: "PASS | FAIL"
+  CC-04_qp_verdict_consistent: "PASS | FAIL"
+  CC-05_iaa_token_valid: "PASS | FAIL | N/A"
+  CC-06_no_pending_fields: "PASS | FAIL"        # (ECAP-CCI-03)
+  CC-07_evidence_matrix_pass: "PASS | FAIL | N/A"
+  CC-08_protected_path_ecap_pass: "PASS | FAIL | N/A"
+  CC-09_aaev_validators_pass: "PASS | FAIL"
+  CC-10_tracker_index_match: "PASS | FAIL | N/A"
+  wave_result_coherence_verdict: "PASS | FAIL — PASS only if all non-N/A items show PASS"
+```
+
+**CC descriptions:**
+- CC-01: All wave record sections 1–5 populated with non-placeholder values
+- CC-02: Wave record `triggering_issue` matches PR body `governing_delivery_issue` (AAEV-001)
+- CC-03: Session memory `triggering_issue` matches wave record `triggering_issue` (AAEV-005)
+- CC-04: QP verdict in wave checklist matches `qp_verdict` in wave record
+- CC-05: IAA token format valid and recorded in wave record §5 (AAEV-002)
+- CC-06: No PENDING/TBD/in-progress fields in any final-state artifact (ECAP-CCI-03)
+- CC-07: `ac_evidence_matrix` present and verdict PASS (if qualifying delivery — EFIA-001 §2)
+- CC-08: `protected_path_ecap_ceremony` present and verdict PASS (if protected-path PR — PPEIA-001 §2.2)
+- CC-09: All AAEV validators (AAEV-001 through AAEV-009) show PASS or N/A (AAEV-001)
+- CC-10: Tracker/index governing issue matches wave record (AAEV-007)
+
 ---
 
 ## 6. Registration as a Fail-Only-Once Hardening Rule
@@ -406,6 +379,45 @@ entry.
 
 ---
 
+## 7. ECAP / Evidence Field Coherence Rule (v1.0.0 Amendment — Issue #1145)
+
+### 7.1 Definition
+
+A wave is in a **coherence failure state** with respect to ECAP and evidence fields when:
+
+1. The wave record §1 does not list `execution-ceremony-admin-agent` in `agents_delegated_to`
+   for a job where ECAP appointment was required (per PPEIA-001 §2.1 or any wave requiring
+   ECAP per ECAP-001 §1), **AND** the PR body claims `pre_pr_blocking_gate: PASS`.
+
+2. The ECAP reconciliation summary is absent when the wave record declares ECAP was
+   appointed and a protected-path is involved.
+
+3. The `ac_evidence_matrix_verdict` in wave record §3c is absent or FAIL when the wave
+   record declares the delivery is a qualifying EFIA-001 delivery.
+
+### 7.2 Review-Ready Posture Prohibition
+
+A wave MUST NOT claim review-ready posture (PR marked ready-for-review, `pre_pr_blocking_gate:
+PASS`, or any equivalent declaration) if any of the following are true:
+
+- Required ECAP ceremony was not completed (PPEIA-001)
+- `ac_evidence_matrix` is missing or has FAIL verdict (EFIA-001)
+- Any AAEV validator returned FAIL (AAEV-001)
+- EWCS-001 closeout sweep has not been completed
+- GIPC-001 parity check has not been completed
+
+A review-ready posture claim under any of these conditions is a WRCC-ECAP-ABSENT or
+WRCC-EVIDENCE-GAP failure and must be corrected before the PR is presented for human review.
+
+### 7.3 ECAP Coherence Duty
+
+ECAP MUST, as part of its cross-artifact reconciliation duty (ECAP-001 §3.7), run the
+wave-result coherence check (§5.6 above) before returning the ceremony bundle to the Foreman.
+A bundle returned with a WRCC FAIL is a non-compliant bundle regardless of whether individual
+artifacts appear complete.
+
+---
+
 ## Appendix A: Violation Classes
 
 | Violation Class | Description | Blocking? |
@@ -415,6 +427,9 @@ entry.
 | WRCC-3C-TRUTH-VIOLATION | §3c handover evidence block claims YES/PASS/CLEAN while the actual artifact state contradicts that claim | YES — PR-open blocked |
 | WRCC-CROSS-SURFACE-CONTRADICTION | Wave record, wave checklist, and/or session memory disagree on a core handover fact (completion state, QP status, IAA final state, rejection vs PASS) | YES — PR-open blocked |
 | WRCC-CHECKER-ABSENT | `wrcc_pre_pr_checker_verdict` field is absent or blank in §3c when PR is opened as review-ready | YES — IAA rejection trigger |
+| WRCC-ECAP-ABSENT | Protected-path PR (PP-01 through PP-08 per PPEIA-001 §1.1) claims review-ready posture but ECAP ceremony is absent and no CS2 waiver is on record | YES — PR-open blocked; IAA ACR-21 |
+| WRCC-EVIDENCE-GAP | A PASS is declared for an acceptance criterion that requires E1–E4 evidence but only E5 (AGENT_ATTESTATION) is present (EFIA-001 §1.2) | YES — PR-open blocked; IAA ACR-22/23 |
+| WRCC-AAEV-FAIL | Any AAEV validator (AAEV-001 through AAEV-009) returned FAIL; overall `aaev_overall_verdict` is not PASS | YES — PR-open blocked; IAA ACR-24 |
 
 ---
 
@@ -462,7 +477,12 @@ Step 4 — Cross-Surface Contradiction Check
 | **§3c evidence truth-validation against file state** | **WRCC-001 §3 (this canon)** |
 | **Cross-surface contradiction checks** | **WRCC-001 §4 (this canon)** |
 | **Producer-side pre-PR checker (§1+§2+§3 combined)** | **WRCC-001 §5 (this canon)** |
+| **ECAP/Evidence field coherence rule** | **WRCC-001 §7 (this canon)** |
 | FAIL-ONLY-ONCE hardening rule registration | A-039 in FAIL-ONLY-ONCE.md |
+| Protected-path ECAP-before-IAA | `PROTECTED_PATH_ECAP_BEFORE_IAA_CANON.md` (PPEIA-001) |
+| Evidence-first IAA assurance and ac_evidence_matrix | `AMC_EVIDENCE_FIRST_IAA_ASSURANCE_CANON.md` (EFIA-001) |
+| Machine-checkable authority exactness validators | `AMC_AUTHORITY_EXACTNESS_VALIDATORS.md` (AAEV-001) |
+| ECAP ceremony administration and protected-path duty | `EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md` (ECAP-001) |
 
 WRCC-001 is **additive** to all listed canons. It does not supersede or replace them.
 
@@ -471,4 +491,5 @@ WRCC-001 is **additive** to all listed canons. It does not supersede or replace 
 **Canon ID**: WRCC-001
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-27
 **Authority**: CS2 — Issue #1143
-**See also**: EWCS-001, PHCP-001, GIPC-001, FAIL-ONLY-ONCE.md A-039
+**Amended**: 2026-04-28 — Issue #1145 (§7, extended Appendix A/C, §5.6 CC recording schema)
+**See also**: EWCS-001, PHCP-001, GIPC-001, FAIL-ONLY-ONCE.md A-039, PPEIA-001, EFIA-001, AAEV-001, ECAP-001

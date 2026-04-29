@@ -1,8 +1,9 @@
 
-**Status**: CANONICAL | **Version**: 1.2.0 | **Authority**: CS2
+**Status**: CANONICAL | **Version**: 1.3.0 | **Authority**: CS2
 **Date**: 2026-04-26
 **Amended**: 2026-04-27 — v1.1.0: Added §8 Pre-PR Blocking Gate (producer-side prerequisite); added extended evidence fields `handover_bundle_self_consistent`, `governing_issue_role_registry_completed`, `stale_injector_check_performed`, `entry_condition_status`, `operational_sanity_check_performed` to wave record §3c requirements; added EWCS-PRE-PR-GATE-FAIL and EWCS-BUNDLE-INCONSISTENT violation classes; authority: CS2 — Issue #1139.
 **Amended**: 2026-04-27 — v1.2.0: Added §7.4 cross-reference to WRCC-001 (Wave Result Coherence Canon); added EWCS-COHERENCE-VIOLATION to Appendix B violation classes table; authority: CS2 — Issue #1143.
+**Amended**: 2026-04-28 — v1.3.0: Added CS-11 (ECAP protected-path ceremony gate for protected-path PRs per PPEIA-001), CS-12 (evidence matrix completeness gate for qualifying deliveries per EFIA-001), CS-13 (AAEV validator results — mandatory), CS-14 (wave result coherence — mandatory); updated mandatory/conditional note to include CS-13 and CS-14 as mandatory; added §9 Evidence-Field and ECAP Coherence Gate; added EWCS-ECAP-ABSENT, EWCS-EVIDENCE-MATRIX-ABSENT, EWCS-AAEV-FAIL violation classes; authority: CS2 — Issue #1145.
 **Canon ID**: EWCS-001
 **Issue**: app_management_centre#1134 — Hardening — Foreman/ceremony must enforce end-of-wave closeout sweep, tracker/header parity, and kickoff-state retirement
 
@@ -81,10 +82,15 @@ Each surface produces a PASS or FAIL result. A single FAIL blocks the sweep.
 | CS-08 | **Session memory** | `triggering_issue`, `outcome`, `coverage_summary`, `learning`, `wave_record_path` all populated; outcome reflects final result |
 | CS-09 | **Sign-off / approval surface** | If applicable: approval record updated; `approval_reference` field in wave record populated if approval was obtained this wave |
 | CS-10 | **AMC artifact index** | `AMC_PRE_BUILD_ARTIFACT_INDEX.md` or equivalent: stage row for the active stage updated to match tracker; governing issue aligned |
+| CS-11 | **ECAP protected-path ceremony** | If PR diff matches any PP-01 through PP-08 protected path pattern (PPEIA-001 §1.1): ECAP reconciliation summary present with `protected_path_ceremony` section showing `protected_path_ceremony_verdict: PASS`; OR CS2 waiver documented per PPEIA-001 §3. N/A if no protected path touched. |
+| CS-12 | **Evidence matrix completeness** | If qualifying delivery (EFIA-001): wave record §3c contains `ac_evidence_matrix` YAML block with `ac_evidence_matrix_verdict: PASS`. N/A if EFIA-001 does not apply. |
+| CS-13 | **AAEV validator results** | ECAP reconciliation summary contains `aaev_validator_results` block with `aaev_overall_verdict: PASS` (AAEV-001 §3.3). Mandatory for all waves. |
+| CS-14 | **Wave result coherence** | Wave record §3c contains `wave_result_coherence_check` YAML block with `wave_result_coherence_verdict: PASS` (WRCC-001 §2.4). Mandatory for all waves. |
 
 > **Note**: Surfaces CS-02, CS-03, CS-04, CS-05, CS-09, CS-10 are conditional — mark N/A
 > (with reason) if the artifact does not exist or is explicitly out of scope for the current wave.
-> CS-01, CS-06, CS-07, CS-08 are MANDATORY for every wave — they may not be N/A.
+> CS-01, CS-06, CS-07, CS-08, CS-13, CS-14 are MANDATORY for every wave — they may not be N/A.
+> CS-11 and CS-12 are conditional on protected-path / qualifying-delivery status.
 
 ### 1.4 Sweep Verdict
 
@@ -459,6 +465,10 @@ CS-07 ✅ Wave record — §1a, §3a, §3b, §3c all populated
 CS-08 ✅ Session memory — all fields populated; outcome reflects final result
 CS-09 ✅ Sign-off surface — aligned (if applicable)
 CS-10 ✅ Artifact index — stage row updated (if applicable)
+CS-11 ✅ ECAP protected-path ceremony — present with PASS, OR CS2 waiver (if protected-path PR)
+CS-12 ✅ Evidence matrix — ac_evidence_matrix present and PASS (if qualifying delivery)
+CS-13 ✅ AAEV validators — aaev_overall_verdict: PASS (MANDATORY — all waves)
+CS-14 ✅ Wave result coherence — wave_result_coherence_verdict: PASS (MANDATORY — all waves)
 
 Wave record §3c evidence:
 ✅ closeout_sweep_performed: YES
@@ -481,6 +491,9 @@ Wave record §3c evidence:
 | EWCS-CEREMONY-EVIDENCE-MISSING | Wave record §3c not populated with all five labeled closeout evidence fields |
 | EWCS-PRE-PR-GATE-FAIL | Pre-PR blocking gate fields absent or non-pass when PR is opened as review-ready |
 | EWCS-BUNDLE-INCONSISTENT | Handover bundle fields are inconsistent — a surface shows finalized but a dependent surface does not |
+| EWCS-ECAP-ABSENT | Protected-path PR (CS-11) claims review-ready posture but ECAP ceremony absent and no waiver |
+| EWCS-EVIDENCE-MATRIX-ABSENT | Qualifying delivery (CS-12) claims review-ready posture but ac_evidence_matrix absent or FAIL |
+| EWCS-AAEV-FAIL | AAEV validator results (CS-13) missing or aaev_overall_verdict ≠ PASS |
 | EWCS-COHERENCE-VIOLATION | Wave-result-state coherence invariant violated — see `WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001) for specific violation sub-classes: WRCC-INCOHERENT-ASSURANCE-STATE, WRCC-CHECKLIST-KICKOFF-RESIDUE, WRCC-3C-TRUTH-VIOLATION, WRCC-CROSS-SURFACE-CONTRADICTION |
 
 ---
@@ -546,7 +559,58 @@ IAA issues REJECTION-PACKAGE citing `EWCS-PRE-PR-GATE-FAIL`.
 
 ---
 
+## 9. Evidence-Field and ECAP Coherence Gate (v1.2.0)
+
+### 9.1 Purpose
+
+This gate formalizes the requirement that missing ECAP ceremony evidence or missing
+acceptance-criteria evidence is treated as a **closeout coherence failure** — equivalent
+in severity to a missing PREHANDOVER proof — when the PR claims review-ready posture.
+
+### 9.2 Coherence Gate Definition
+
+A wave fails the evidence-field and ECAP coherence gate if any of the following are true
+when the PR is presented as review-ready:
+
+1. **ECAP absent for protected-path PR** (CS-11): The PR diff touches a protected path
+   (PPEIA-001 §1.1) and the ECAP reconciliation summary is absent or lacks the
+   `protected_path_ceremony` section with `protected_path_ceremony_verdict: PASS`, and
+   no CS2 waiver exists per PPEIA-001 §3.
+
+2. **Evidence matrix absent for qualifying delivery** (CS-12): The wave record §3c lacks
+   the `ac_evidence_matrix` YAML block or the block shows `ac_evidence_matrix_verdict: FAIL`,
+   for a delivery where EFIA-001 applies.
+
+3. **AAEV validators not run** (CS-13): The ECAP reconciliation summary lacks the
+   `aaev_validator_results` block, or any individual validator shows FAIL, or
+   `aaev_overall_verdict` is not PASS.
+
+4. **Wave result coherence check not run** (CS-14): The wave record §3c lacks the
+   `wave_result_coherence_check` YAML block, or `wave_result_coherence_verdict` is not PASS.
+
+### 9.3 Enforcement
+
+The evidence-field coherence gate is enforced at three layers:
+
+| Layer | Enforcer | Action on Failure |
+|-------|---------|-------------------|
+| Layer 1 — ECAP | execution-ceremony-admin-agent | Record C1 failure in ECAP reconciliation summary; return to producing agent |
+| Layer 2 — Foreman QP §14.6 | Foreman | Reject bundle; do not invoke IAA; return to ECAP |
+| Layer 3 — IAA | Independent Assurance Agent | Issue REJECTION-PACKAGE citing EWCS-ECAP-ABSENT / EWCS-EVIDENCE-MATRIX-ABSENT / EWCS-AAEV-FAIL / EWCS-COHERENCE-FAIL |
+
+A review-ready PR that fails this gate MUST be corrected before merge.
+
+### 9.4 Relationship to WRCC-001
+
+`WAVE_RESULT_COHERENCE_CANON.md` (WRCC-001) §3.2 defines the prohibition on review-ready
+posture when ECAP or evidence requirements are unmet. EWCS-001 §9 is the closeout-sweep
+enforcement layer for WRCC-001 §3.2. Both apply.
+
+---
+
 **Canon ID**: EWCS-001
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-26
 **Authority**: CS2 — Issue #1134
 **Amended**: 2026-04-27 — v1.1.0: Added §8 Pre-PR Blocking Gate (producer-side prerequisite) with extended evidence fields `handover_bundle_self_consistent`, `governing_issue_role_registry_completed`, `stale_injector_check_performed`, `entry_condition_status`, `operational_sanity_check_performed`; added EWCS-PRE-PR-GATE-FAIL and EWCS-BUNDLE-INCONSISTENT to violation classes; authority: CS2 — Issue #1139.
+**Amended**: 2026-04-27 — v1.2.0: Added §7.4 cross-reference to WRCC-001 (Wave Result Coherence Canon); added EWCS-COHERENCE-VIOLATION to Appendix B violation classes table; authority: CS2 — Issue #1143.
+**Amended**: 2026-04-28 — v1.3.0: Added CS-11 through CS-14 to closeout sweep checklist; added §9 Evidence-Field and ECAP Coherence Gate; added EWCS-ECAP-ABSENT, EWCS-EVIDENCE-MATRIX-ABSENT, EWCS-AAEV-FAIL, EWCS-COHERENCE-FAIL to violation classes; authority: CS2 — Issue #1145.
