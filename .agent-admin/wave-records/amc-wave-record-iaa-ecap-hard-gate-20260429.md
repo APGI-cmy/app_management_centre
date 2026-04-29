@@ -1,0 +1,131 @@
+# AMC Wave Record — iaa-ecap-hard-gate — 2026-04-29
+
+**Wave ID**: iaa-ecap-hard-gate-20260429
+**Module**: App Management Centre (AMC)
+**Authority**: CS2 (Johan Ras / @APGI-cmy)
+**CS2 Authorization Reference**: app_management_centre#1154 — Port ISMS IAA and ECAP hard merge gates into AMC
+**Date**: 2026-04-29
+**Agent**: foreman-v2-agent
+
+---
+
+## Section 1 — Wave Identity & Delegation
+
+| Field | Value |
+|-------|-------|
+| wave_id | iaa-ecap-hard-gate-20260429 |
+| triggering_issue | #1154 — Port ISMS IAA and ECAP hard merge gates into AMC |
+| cs2_authorization | Confirmed — Issue #1154 opened by @APGI-cmy (CS2). Issue body defines AC1–AC10 acceptance criteria and references ISMS maturion-isms#1504 as source reference. |
+| mode | POLC_ORCHESTRATION — governance hardening / CI gate implementation |
+| agents_delegated_to | foreman-v2-agent (POLC_ORCHESTRATION — CI gate script specification and implementation) |
+| phase_1_preflight | PREFLIGHT COMPLETE |
+| status | COMPLETE — all 5 tasks delivered; 55 tests GREEN; IAA/ECAP hard gates operational |
+
+### 1a. Governing Authority
+
+| Field | Value |
+|-------|-------|
+| governing_stage_issue | #1154 — Port ISMS IAA and ECAP hard merge gates into AMC |
+| triggering_wave_issue | Same as governing_stage_issue (#1154) |
+| current_stage | Governance Hardening — IAA/ECAP Hard Gate CI Implementation |
+| related_hardening_issue | ISMS maturion-isms#1504 (source reference); AMC #1148 (prerequisite foundation) |
+
+---
+
+## Section 2 — IAA Pre-Brief
+
+**IAA Pre-Brief Status**: EMBEDDED
+**Wave Classification**: GOVERNANCE_CI_HARDENING — CI gate scripts + workflow + tests
+**AMC 90/10 Admin Protocol**: v1.0.0 — wave record is sole Pre-Brief carrier
+
+### 2.1 — Wave Scope Classification
+
+| Field | Value |
+|-------|-------|
+| pr_category | GOVERNANCE_CI_HARDENING — CI gate scripts + GitHub workflow + test suite |
+| iaa_triggered | YES — MANDATORY (protected paths touched: .github/scripts/, .github/workflows/) |
+| ecap_ceremony_admin | Required per PPEIA-001 §2.1 — protected paths PP-01 and PP-02 touched |
+| qualifying_artifact | validate-iaa-final-assurance.py, validate-ecap-ceremony.py, iaa-ecap-hard-gate.yml, test_iaa_ecap_gates.py |
+
+---
+
+## Section 3 — Evidence and Gate Results
+
+### §3a Governing Issue Parity Check
+
+```
+governing_issue_parity_check:
+  governing_stage_issue: "#1154 — Port ISMS IAA and ECAP hard merge gates into AMC"
+  parity_verdict: PASS
+  overshadow_detected: NO
+```
+
+### §3b Ceremony Evidence Fields
+
+| Field | Value |
+|-------|-------|
+| governing_stage_issue | #1154 |
+| parity_check_performed | PASS |
+| overshadow_check_performed | CLEAN |
+
+### §3c Pre-PR Blocking Gate Evidence
+
+```yaml
+pre_pr_blocking_gate:
+  closeout_sweep_performed: "YES"
+  wave_checklist_retired_from_kickoff_state: "YES — all 5 tasks [x]"
+  protected_path_ecap_ceremony_completed: "PENDING — ECAP ceremony and IAA invocation required before merge (protected paths: .github/scripts/, .github/workflows/)"
+  ac_evidence_matrix_populated: "YES — CI_TEST evidence: 55 tests GREEN (pytest run)"
+  evidence_type_downgrade_check: "CLEAN — E3 (CI_TEST) evidence for test coverage; E4 (STATIC_ANALYSIS) for governance scripts"
+  pre_pr_blocking_gate_verdict: "PENDING IAA INVOCATION — ECAP ceremony and IAA token required"
+```
+
+---
+
+## Section 4 — Build Evidence
+
+### Task Results
+
+| Task | Status | Evidence |
+|------|--------|---------|
+| TASK-1-1: validate-iaa-final-assurance.py | COMPLETE | File committed; 29 unit tests GREEN |
+| TASK-1-2: validate-ecap-ceremony.py | COMPLETE | File committed; 26 unit tests GREEN |
+| TASK-1-3: iaa-ecap-hard-gate.yml | COMPLETE | Workflow committed; 3 jobs wired |
+| TASK-1-4: test_iaa_ecap_gates.py | COMPLETE | 55 tests GREEN (0 failures) |
+| TASK-1-5: Wave record + checklist | COMPLETE | This file + checklist committed |
+
+### Test Evidence
+
+```
+pytest tests/test_iaa_ecap_gates.py
+55 passed in 0.19s
+```
+
+All AC9 minimum fixture coverage satisfied:
+- ✅ missing IAA token fails
+- ✅ token with wrong PR fails
+- ✅ token with wrong issue fails
+- ✅ token with missing reviewed SHA fails
+- ✅ token reviewed SHA older than current head fails
+- ✅ protected-path change without ECAP evidence fails
+- ✅ ECAP self-certification without committed bundle fails
+- ✅ ECAP waived with valid CS2 waiver passes
+- ✅ valid IAA + ECAP evidence passes
+- ✅ stale post-IAA PENDING wording in ECAP/checklist fails
+
+---
+
+## Section 5 — Assurance Token
+
+**Status**: PENDING IAA INVOCATION
+
+`PHASE_B_BLOCKING_TOKEN: PENDING`
+
+*Token will be recorded here after IAA final assurance is issued.*
+
+---
+
+**Canon ID**: Wave Record
+**Filed by**: foreman-v2-agent (POLC-Orchestration) | **Date**: 2026-04-29
+**Authority**: CS2 — Issue #1154 — Port ISMS IAA and ECAP hard merge gates into AMC
+**Wave Checklist**: .agent-admin/waves/wave-iaa-ecap-hard-gate-20260429-current-tasks.md
