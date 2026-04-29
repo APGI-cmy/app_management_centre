@@ -119,9 +119,13 @@ control_surfaces_updated:
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING — awaiting IAA invocation |
-| iaa_token_ref | PENDING |
-| merge_gate_parity | PENDING |
+| iaa_verdict | ASSURANCE-TOKEN — all checks PASS |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-068-20260429-PASS |
+| iaa_session | session-068-20260429 |
+| checks_run | 9 PASS / 0 FAIL / 1 N/A (CORE: 2 PASS; Overlay LIAISON_ADMIN: 7 PASS / 1 N/A) |
+| re_invocation_rounds | 1 (round 0: REJECTION-PACKAGE OVL-LA-ADM-003 — resolved) |
+| merge_gate_parity | PASS |
+| adoption_phase | PHASE_B_BLOCKING |
 
 ---
 
