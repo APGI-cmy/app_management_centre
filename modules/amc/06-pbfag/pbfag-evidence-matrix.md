@@ -1,6 +1,6 @@
 # PBFAG Evidence Matrix — Stage 7
 
-**Stage**: 7 — PBFAG (Pre-Build Final Assurance Gate)
+**Stage**: 7 — PBFAG (Pre-Build Functionality Assessment Gate)
 **Module**: App Management Centre (AMC)
 **Version**: 1.0
 **Status**: 🟡 Produced — Approval Pending (CS2)
@@ -203,9 +203,9 @@ Each row contains:
 | 10 — Stage 8 Readiness | 4 | 1 | 0 | 3 | 0 | 0 |
 | **TOTAL** | **81** | **53** | **1** | **27** | **0** | **0** |
 
-> **No FAIL results.** All 27 CONDITIONAL results are gated exclusively on CS2 formal approval of Stages 5, 5a, and 6 — not on artifact quality, completeness, or consistency defects.
+> **No FAIL results.** All 27 CONDITIONAL results are gated exclusively on CS2 formal approval of Stages 5, 5a, and 6 — not on artifact quality, completeness, or consistency defects. Stage 8 authorization additionally requires CS2 approval of Stage 7 (this PBFAG pack), for a total of four required approvals before Stage 8 may begin.
 >
-> **PBFAG SUMMARY: CONDITIONAL PASS** — Artifact chain is present, complete, and consistent. Stage 8 gate requires three CS2 approvals.
+> **PBFAG SUMMARY: CONDITIONAL PASS** — Artifact chain is present, complete, and consistent. Stage 8 gate requires four CS2 approvals: Stages 5, 5a, 6, and 7.
 
 ---
 

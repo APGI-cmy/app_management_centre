@@ -1,6 +1,6 @@
 # PBFAG Findings and Verdict — Stage 7
 
-**Stage**: 7 — PBFAG (Pre-Build Final Assurance Gate)
+**Stage**: 7 — PBFAG (Pre-Build Functionality Assessment Gate)
 **Module**: App Management Centre (AMC)
 **Version**: 1.0
 **Status**: 🟡 Produced — Approval Pending (CS2)

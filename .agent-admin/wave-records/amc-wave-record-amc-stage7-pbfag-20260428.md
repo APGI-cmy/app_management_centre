@@ -20,7 +20,7 @@
 | agent_class | QUALITY_PROFESSOR / POLC_ORCHESTRATION |
 | governing_issue | app_management_centre#1152 |
 | governing_issue_author | @APGI-cmy (CS2 / OWNER) |
-| wave_type | PRE_BUILD_STAGE — Stage 7 PBFAG (Pre-Build Final Assurance Gate) |
+| wave_type | PRE_BUILD_STAGE — Stage 7 PBFAG (Pre-Build Functionality Assessment Gate) |
 | task_count | 7 |
 | ecap_ceremony_admin | NONE |
 | iaa_pre_brief_session | session-063-20260428 — IAA Pre-Brief COMPLETE |
@@ -159,7 +159,7 @@
 
 | Artifact | Path | Version | Status |
 |----------|------|---------|--------|
-| Pre-Build Final Assurance Gate | `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` | v1.0 | ✅ Committed — approval pending |
+| Pre-Build Functionality Assessment Gate | `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` | v1.0 | ✅ Committed — approval pending |
 | PBFAG Evidence Matrix | `modules/amc/06-pbfag/pbfag-evidence-matrix.md` | v1.0 | ✅ Committed — approval pending |
 | PBFAG Findings and Verdict | `modules/amc/06-pbfag/pbfag-findings-and-verdict.md` | v1.0 | ✅ Committed — approval pending |
 | PBFAG Checklist (updated) | `modules/amc/06-pbfag/pbfag-checklist.md` | updated | ✅ Updated — active wave reference |
