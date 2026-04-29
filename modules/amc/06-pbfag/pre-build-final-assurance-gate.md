@@ -1,6 +1,6 @@
-# Pre-Build Final Assurance Gate — Stage 7
+# Pre-Build Functionality Assessment Gate — Stage 7
 
-**Stage**: 7 — PBFAG (Pre-Build Final Assurance Gate)
+**Stage**: 7 — PBFAG (Pre-Build Functionality Assessment Gate)
 **Module**: App Management Centre (AMC)
 **Version**: 1.0
 **Status**: 🟡 Produced — Approval Pending (CS2)
@@ -45,7 +45,7 @@
 
 ### 1.1 Purpose
 
-This document is the master gate artifact for Stage 7 — Pre-Build Final Assurance Gate (PBFAG) for the App Management Centre (AMC) module. Its purpose is to confirm that all AMC pre-build artifacts (Stages 1–6 inclusive) are:
+This document is the master gate artifact for Stage 7 — Pre-Build Functionality Assessment Gate (PBFAG) for the App Management Centre (AMC) module. Its purpose is to confirm that all AMC pre-build artifacts (Stages 1–6 inclusive) are:
 
 - **Present**: all canonical artifacts exist in their designated locations;
 - **Complete**: no mandatory content is missing or deferred without explicit downstream-deferral justification;
@@ -123,7 +123,7 @@ Related hardening issues (#1145, #1146, #1147, #1149) are **not** governing deli
 | 6 | QA-to-Red Specification | `modules/amc/05-qa-to-red/qa-to-red-specification.md` | 🟡 Approval Pending (v1.0, #1141) | 12 arch families + 7 DES families |
 | 6 | Architecture and DES to QA Traceability | `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` | 🟡 Approval Pending (v1.0, #1141) | 12/12 arch domains + 8/8 DES fields |
 | 6 | Red Test Catalog | `modules/amc/05-qa-to-red/red-test-catalog.md` | 🟡 Approval Pending (v1.0, #1141) | 79 tests, 20 families, 75 blockers |
-| 7 | Pre-Build Final Assurance Gate | `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` | 🟡 This document | Being produced |
+| 7 | Pre-Build Functionality Assessment Gate | `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` | 🟡 This document | Being produced |
 | 7 | PBFAG Evidence Matrix | `modules/amc/06-pbfag/pbfag-evidence-matrix.md` | 🟡 Being produced | |
 | 7 | PBFAG Findings and Verdict | `modules/amc/06-pbfag/pbfag-findings-and-verdict.md` | 🟡 Being produced | |
 | — | Build Progress Tracker | `modules/amc/BUILD_PROGRESS_TRACKER.md` | ✅ Live (updated) | Updated at wave-start |
@@ -289,4 +289,4 @@ At time of this wave (2026-04-28), the following hardening rules are verified as
 
 ---
 
-*AMC Pre-Build Final Assurance Gate v1.0 — 2026-04-28 — governing delivery issue: app_management_centre#1152 — CS2 authorization: app_management_centre#1152*
+*AMC Pre-Build Functionality Assessment Gate v1.0 — 2026-04-28 — governing delivery issue: app_management_centre#1152 — CS2 authorization: app_management_centre#1152*

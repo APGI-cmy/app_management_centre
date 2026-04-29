@@ -82,7 +82,7 @@ None of the CONDITIONAL results in the evidence matrix represent a quality defec
 
 There are **no blocking findings** in this PBFAG evaluation.
 
-All 27 CONDITIONAL results are gated exclusively on formal CS2 approval of Stages 5, 5a, 6, and 7. These are approval-state conditions, not quality defects.
+All 27 CONDITIONAL results are gated exclusively on formal CS2 approval of Stages 5, 5a, and 6. These are approval-state conditions, not quality defects.
 
 **There is no blocking defect, contradiction, silent omission, authority drift, gate-condition ambiguity, or unresolved incompleteness that prevents the pre-build artifact chain from being used as the basis for Stage 8 Implementation Planning upon receipt of the required approvals.**
 
@@ -90,7 +90,7 @@ All 27 CONDITIONAL results are gated exclusively on formal CS2 approval of Stage
 
 ## 3. Non-Blocking Observations
 
-### F-004 — Artifact Index Red Test Count Discrepancy (CORRECTED)
+### F-005 — Artifact Index Red Test Count Discrepancy (CORRECTED)
 
 **Observation**: `AMC_PRE_BUILD_ARTIFACT_INDEX.md` previously recorded "69 test cases across 17 families" for `red-test-catalog.md`. The canonical file (`modules/amc/05-qa-to-red/red-test-catalog.md` v1.0, catalog summary table) has **79 test cases across 20 families** (21 CRITICAL, 54 HIGH, 4 MEDIUM, 0 LOW; 75 blockers).
 
@@ -203,11 +203,12 @@ This PBFAG pack requires CS2 (@APGI-cmy) formal approval before Stage 8 may proc
 | F-001 | Approval Posture | Stage 5 Architecture is produced approval-pending. PBFAG cannot grant unconditional approval. | CONDITIONAL | Active — awaiting CS2 approval | Stage 8 BLOCKED until Stage 5 approved |
 | F-002 | Approval Posture | Stage 5a DES is produced approval-pending. PBFAG cannot grant unconditional approval. | CONDITIONAL | Active — awaiting CS2 approval | Stage 8 BLOCKED until Stage 5a approved |
 | F-003 | Approval Posture | Stage 6 QA-to-Red is produced approval-pending. PBFAG cannot grant unconditional approval. | CONDITIONAL | Active — awaiting CS2 approval | Stage 8 BLOCKED until Stage 6 approved |
-| F-004 | Index Discrepancy | Artifact index had incorrect Stage 6 red test count (69→79). | LOW | ✅ RESOLVED — corrected in TASK-035-07 | None |
+| F-004 | Approval Posture | Stage 7 PBFAG pack is produced approval-pending. PBFAG remains conditional until this pack receives CS2 approval. | CONDITIONAL | Active — awaiting CS2 approval | Stage 8 BLOCKED until Stage 7 approved |
+| F-005 | Index Discrepancy | Artifact index had incorrect Stage 6 red test count (69→79). | LOW | ✅ RESOLVED — corrected in TASK-035-07 | None |
 
 **Blocking findings**: 0
-**Non-blocking findings resolved**: 1 (F-004)
-**CONDITIONAL findings (approval-state only)**: 3 (F-001, F-002, F-003)
+**Non-blocking findings resolved**: 1 (F-005)
+**CONDITIONAL findings (approval-state only)**: 4 (F-001, F-002, F-003, F-004)
 
 ---
 

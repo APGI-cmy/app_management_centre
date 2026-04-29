@@ -114,7 +114,7 @@ Each row contains:
 | PBFAG-QA-004 | Catalog | Deployment-surface boundary violations are covered | QA-DES001: surface ownership violation; QA-DES002/003: runner authorization; QA-DES006: DB mutation prohibition in CI | CONDITIONAL | F-003 | Conditional on Stage 6 CS2 approval |
 | PBFAG-QA-005 | Catalog | Literal-operability failure modes are represented | QA-LITOP family present (QA-LITOP-001 through QA-LITOP-005); covers workflow name/key consistency, trigger spec, step names, environment variable availability, DES field literal compliance | CONDITIONAL | F-003 | Conditional on Stage 6 CS2 approval |
 | PBFAG-QA-006 | Catalog summary | Red-test counts are internally consistent | Catalog summary table: 79 total (21 CRITICAL, 54 HIGH, 4 MEDIUM, 0 LOW), 75 blockers. Column totals verified: 21+54+4+0=79 ✅; blocker count per family sums to 75 ✅ | CONDITIONAL | F-003 | Conditional on Stage 6 CS2 approval |
-| PBFAG-QA-007 | Index vs catalog | Artifact index count matches actual catalog count | Index previously stated 69 tests/17 families (incorrect). Canonical catalog has 79 tests/20 families. **Discrepancy corrected in TASK-035-07.** | ✅ PASS-WITH-NOTE | F-004 | Index corrected — no Stage 8 impact |
+| PBFAG-QA-007 | Index vs catalog | Artifact index count matches actual catalog count | Index previously stated 69 tests/17 families (incorrect). Canonical catalog has 79 tests/20 families. **Discrepancy corrected in TASK-035-07.** | ✅ PASS-WITH-NOTE | F-005 | Index corrected — no Stage 8 impact |
 | PBFAG-QA-008 | `05-qa-to-red/qa-to-red-suite.md` + `qa-catalog-alignment.md` | Superseded placeholder files are marked as superseded, not treated as canonical | Both files carry explicit superseded notices pointing to canonical replacements | ✅ PASS | — | No impact |
 
 ---
@@ -154,7 +154,7 @@ Each row contains:
 | PBFAG-AP-001 | `BUILD_PROGRESS_TRACKER.md` | Stage 5 shown as approval-pending in tracker | Tracker Stage 5 row: "🟡 IN PROGRESS — Produced Approval-Pending" | ✅ PASS | — | No impact |
 | PBFAG-AP-002 | `BUILD_PROGRESS_TRACKER.md` | Stage 5a shown as approval-pending in tracker | Tracker Stage 5a row: "🟡 IN PROGRESS — Produced Approval-Pending" | ✅ PASS | — | No impact |
 | PBFAG-AP-003 | `BUILD_PROGRESS_TRACKER.md` | Stage 6 shown as approval-pending in tracker | Tracker Stage 6 row: "🟡 IN PROGRESS — Produced Approval-Pending" | ✅ PASS | — | No impact |
-| PBFAG-AP-004 | `BUILD_PROGRESS_TRACKER.md` | Stage 7 shown correctly (IN PROGRESS, parallel production) in tracker | Tracker Stage 7 row: "🟡 IN PROGRESS — Parallel Production" (updated this wave) | ✅ PASS | — | No impact |
+| PBFAG-AP-004 | `BUILD_PROGRESS_TRACKER.md` | Stage 7 shown correctly as IN PROGRESS with approval-pending production status in tracker | Tracker Stage 7 row: "🟡 IN PROGRESS — Produced Approval-Pending" (updated this wave) | ✅ PASS | — | No impact |
 | PBFAG-AP-005 | `BUILD_PROGRESS_TRACKER.md` | Stage 8 shown as BLOCKED in tracker | Tracker Stage 8 row: "⬜ Not Started — 🔴 BLOCKED" | ✅ PASS | — | No impact |
 | PBFAG-AP-006 | All Stage 5/5a/6 artifact headers | No artifact falsely marks pending-approval stage as approved | Stage 5 artifacts: "🟡 Produced — Approval Pending" ✅; Stage 5a artifacts: "🟡 Produced — Approval Pending" ✅; Stage 6 artifacts: "🟡 Produced — Approval Pending" ✅ | ✅ PASS | — | No impact |
 | PBFAG-AP-007 | Stage 7 PBFAG verdict | PBFAG verdict correctly uses CONDITIONAL PASS (not unconditional PASS) | `pbfag-findings-and-verdict.md`: verdict declared as CONDITIONAL PASS with explicit 4-condition gate | ✅ PASS | — | No impact |
@@ -169,7 +169,7 @@ Each row contains:
 | PBFAG-TI-001 | Tracker + index | Tracker and index agree on Stage 1–4 status | Both show Stages 1–3 CS2-approved, Stage 4 treated as approved | ✅ PASS | — | No impact |
 | PBFAG-TI-002 | Tracker + index | Tracker and index agree on Stage 5 status | Both show Stage 5: approval-pending | ✅ PASS | — | No impact |
 | PBFAG-TI-003 | Tracker + index | Tracker and index agree on Stage 5a status | Both show Stage 5a: approval-pending, 3 canonical artifacts | ✅ PASS | — | No impact |
-| PBFAG-TI-004 | Tracker + index | Tracker and index agree on Stage 6 status | Both show Stage 6: approval-pending. Red test count corrected from 69→79 in index (TASK-035-07) | ✅ PASS | F-004 | Index corrected |
+| PBFAG-TI-004 | Tracker + index | Tracker and index agree on Stage 6 status | Both show Stage 6: approval-pending. Red test count corrected from 69→79 in index (TASK-035-07) | ✅ PASS | F-005 | Index corrected |
 | PBFAG-TI-005 | Tracker + index | Stage 7 is updated at wave-close in both documents | Tracker wave-close update: Stage 7 "Produced Approval-Pending"; Index: Stage 7 artifacts cataloged. Both updated in TASK-035-06/07 | ✅ PASS | — | No impact |
 | PBFAG-TI-006 | Tracker + index | Stage 8 remains BLOCKED in both documents | Tracker Stage 8: BLOCKED; Index Stage 8: placeholder/not started | ✅ PASS | — | No impact |
 | PBFAG-TI-007 | Index | Index does not list superseded artifacts as canonical | Index explicitly marks superseded artifacts (architecture.md, qa-to-red-suite.md, qa-catalog-alignment.md) with ⛔ Superseded status | ✅ PASS | — | No impact |
@@ -203,9 +203,9 @@ Each row contains:
 | 10 — Stage 8 Readiness | 4 | 1 | 0 | 3 | 0 | 0 |
 | **TOTAL** | **81** | **53** | **1** | **27** | **0** | **0** |
 
-> **No FAIL results.** All 27 CONDITIONAL results are gated exclusively on CS2 formal approval of Stages 5, 5a, 6, and 7 — not on artifact quality, completeness, or consistency defects.
+> **No FAIL results.** All 27 CONDITIONAL results are gated exclusively on CS2 formal approval of Stages 5, 5a, and 6 — not on artifact quality, completeness, or consistency defects.
 >
-> **PBFAG SUMMARY: CONDITIONAL PASS** — Artifact chain is present, complete, and consistent. Stage 8 gate requires four CS2 approvals.
+> **PBFAG SUMMARY: CONDITIONAL PASS** — Artifact chain is present, complete, and consistent. Stage 8 gate requires three CS2 approvals.
 
 ---
 

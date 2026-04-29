@@ -149,7 +149,7 @@
 |------|--------|-----------------|
 | TASK-035-01 | ✅ COMPLETE | `BUILD_PROGRESS_TRACKER.md` wave-start update: Stage 7 set to "🟡 IN PROGRESS — Parallel Production (wave-start)". Exception posture recorded. |
 | TASK-035-02 | ✅ COMPLETE | `pre-build-final-assurance-gate.md` v1.0 created 2026-04-28. Master PBFAG gate artifact: scope, approach, upstream artifact list, evaluator identity, exception posture, CS2 sign-off section. |
-| TASK-035-03 | ✅ COMPLETE | `pbfag-evidence-matrix.md` v1.0 created 2026-04-28. 10-category evidence matrix covering all mandatory PBFAG checks. 37 check rows. Results: PASS with conditions on approval. |
+| TASK-035-03 | ✅ COMPLETE | `pbfag-evidence-matrix.md` v1.0 created 2026-04-28. 10-category evidence matrix covering all mandatory PBFAG checks. 81 checks. Results: PASS with conditions on approval. |
 | TASK-035-04 | ✅ COMPLETE | `pbfag-findings-and-verdict.md` v1.0 created 2026-04-28. PBFAG CONDITIONAL PASS verdict. Stage 8 gate conditions clearly stated. CS2 approval required. |
 | TASK-035-05 | ✅ COMPLETE | `pbfag-checklist.md` updated with active wave posture reference and pointer to canonical PBFAG artifacts. |
 | TASK-035-06 | ✅ COMPLETE | `BUILD_PROGRESS_TRACKER.md` wave-close update: Stage 7 set to "🟡 IN PROGRESS — Produced Approval-Pending". Artifact paths recorded. Stage 8 BLOCKED preserved. |
@@ -187,7 +187,7 @@
 |------|-----------|---------|
 | TASK-035-01 | ✅ PASS | BUILD_PROGRESS_TRACKER.md wave-start: Stage 7 IN PROGRESS (parallel production). Exception posture and CS2 authorization reference present. |
 | TASK-035-02 | ✅ PASS | `pre-build-final-assurance-gate.md` v1.0: complete scope statement, upstream artifact list, evaluator identity, exception posture clearly stated, CS2 sign-off section present. All required PBFAG checks referenced. |
-| TASK-035-03 | ✅ PASS | `pbfag-evidence-matrix.md` v1.0: 37 check rows across 10 categories. All mandatory PBFAG checks from issue #1152 covered. Each row: check ID, source artifact(s), requirement/invariant, evidence reviewed, result, finding ref, downstream consequence. Results clearly distinguish between "artifact present/fit" and "awaiting formal approval." |
+| TASK-035-03 | ✅ PASS | `pbfag-evidence-matrix.md` v1.0: 81 checks across 10 categories. All mandatory PBFAG checks from issue #1152 covered. Each row: check ID, source artifact(s), requirement/invariant, evidence reviewed, result, finding ref, downstream consequence. Results clearly distinguish between "artifact present/fit" and "awaiting formal approval." |
 | TASK-035-04 | ✅ PASS | `pbfag-findings-and-verdict.md` v1.0: CONDITIONAL PASS verdict stated clearly. Stage 8 gate conditions unambiguous (requires CS2 approval of Stages 5, 5a, 6, AND 7). No false implication of Stage 8 being unblocked. CS2 sign-off section present. |
 | TASK-035-05 | ✅ PASS | `pbfag-checklist.md` updated: active wave reference and pointer to canonical artifacts. No stale placeholder content presented as authoritative. |
 | TASK-035-06 | ✅ PASS | BUILD_PROGRESS_TRACKER.md wave-close: Stage 7 "Produced Approval-Pending". Artifact paths listed. Stage 8 BLOCKED preserved. |
