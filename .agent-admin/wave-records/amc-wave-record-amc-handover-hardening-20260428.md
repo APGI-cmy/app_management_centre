@@ -217,3 +217,9 @@ gate_inventory:
 **Filed by**: foreman-v2-agent (POLC-Orchestration) | **Date**: 2026-04-28
 **Authority**: CS2 — Issue #1145 — Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny
 **Wave Checklist**: .agent-admin/waves/wave-amc-handover-hardening-20260428-current-tasks.md
+
+### Amendment Log
+
+| Date | Change | Authority |
+|------|--------|-----------|
+| 2026-04-29 | PR body governance handover table restored to PHCP-canonical form (table had been regressed to checklist-only by prior report_progress call; restored to full machine-readable table with all mandatory PHCP-001 v1.2.0 fields populated to final IAA-issued state) | copilot — #1145 |
