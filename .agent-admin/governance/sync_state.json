@@ -1,11 +1,11 @@
 {
-    "last_check": "2026-04-21T06:56:45Z",
+    "last_check": "2026-04-29T12:00:00Z",
     "canonical_version": "1.0.0",
-    "canonical_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+    "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
     "local_version": "1.0.0",
-    "local_commit": "849973019a8054d749ab58b2a233728193b3bbf3",
+    "local_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
     "drift_detected": "false",
     "needs_alignment": "false",
     "alignment_method": "layer-down",
-    "alignment_note": "Layer-down of 84997301 (2026-04-20) \u2014 pre-handover admin ceremony improvements: AGENT_HANDOVER_AUTOMATION v1.5.0, EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL v1.2.0, FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL v1.5.0, INDEPENDENT_ASSURANCE_AGENT_CANON v1.7.0, 4 execution-ceremony-admin templates v1.1.0"
+    "alignment_note": "Layer-down of 2ba1d6a3 (2026-04-29) \u2014 catch-up governance repo hardening: AGENT_HANDOVER_AUTOMATION v1.6.0 (consumer AHEAD at v1.7.2), INDEPENDENT_ASSURANCE_AGENT_CANON v1.8.0 (consumer AHEAD at v1.12.0), PREHANDOVER.template.md v1.2.0 (updated from v1.1.0)"
 }
