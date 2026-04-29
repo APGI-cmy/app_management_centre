@@ -332,4 +332,5 @@ Record it in `STALE_HANDOVER_INJECTOR_RETIREMENT_REGISTER.md` and correct or ret
 **Filed by**: foreman-v2-agent (POLC-Orchestration governance specification) | **Date**: 2026-04-27
 **Authority**: CS2 — Issue #1139
 **Amended**: 2026-04-27 — v1.1.0 — Issue #1143
+**Amended**: 2026-04-28 — v1.2.0: Added `protected_path_ecap_ceremony_completed` and `ac_evidence_matrix_populated`/`evidence_type_downgrade_check` fields to §4.1 Pre-PR Blocking Gate YAML block (PPEIA-001 and EFIA-001 integration); updated §1 PR Body Schema with `ecap_ceremony_status` and `aaev_validators` fields; updated Appendix A cross-references; authority: CS2 — Issue #1145.
 **See also**: All canons listed in Appendix A
