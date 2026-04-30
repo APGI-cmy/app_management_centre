@@ -1,0 +1,19 @@
+{
+    "dispatch_id": "layer-down-2ba1d6a3",
+    "event_type": "governance_ripple",
+    "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+    "inventory_version": "1.0.0",
+    "changed_paths": [
+        "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
+        "governance/canon/INDEPENDENT_ASSURANCE_AGENT_CANON.md",
+        "governance/templates/execution-ceremony-admin/PREHANDOVER.template.md"
+    ],
+    "sender": "APGI-cmy/maturion-foreman-governance",
+    "trigger": "Merge pull request -1358 from APGI-cmy-copilot-catch-up-governance-repo-hardening",
+    "timestamp": "2026-04-29T07:34:29Z",
+    "processed_at": "2026-04-29T12:00:00Z",
+    "status": "archived",
+    "archived_at": "2026-04-29T12:00:00Z",
+    "processing_notes": "AGENT_HANDOVER_AUTOMATION.md — canonical v1.6.0, consumer AHEAD at v1.7.2 (no overwrite). INDEPENDENT_ASSURANCE_AGENT_CANON.md — canonical v1.8.0, consumer AHEAD at v1.12.0 (no overwrite). PREHANDOVER.template.md propagated v1.1.0 -> v1.2.0 (active_bundle_iaa_coherence field added, Ripple/Cross-Agent Assessment section added). Session: session-034-20260429.",
+    "outcome": "partial-update"
+}
