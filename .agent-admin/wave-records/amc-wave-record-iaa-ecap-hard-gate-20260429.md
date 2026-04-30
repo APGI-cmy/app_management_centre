@@ -19,7 +19,7 @@
 | mode | POLC_ORCHESTRATION — governance hardening / CI gate implementation |
 | agents_delegated_to | foreman-v2-agent (POLC_ORCHESTRATION — CI gate script specification and implementation) |
 | phase_1_preflight | PREFLIGHT COMPLETE |
-| status | IN_PROGRESS — all 5 implementation tasks delivered; 63 tests GREEN; IAA/ECAP hard gates operational; merge-blocked pending ECAP ceremony and IAA token issuance |
+| status | COMPLETE — all 5 implementation tasks delivered; 63 tests GREEN; IAA/ECAP hard gates operational; ECAP ceremony complete (ecap-reconciliation-1157.md); IAA token issued (session-069-20260430) |
 
 ### 1a. Governing Authority
 
@@ -124,11 +124,13 @@ All AC9 minimum fixture coverage satisfied (extended — now 63 tests):
 
 ## Section 5 — Assurance Token
 
-**Status**: PENDING IAA INVOCATION
+**Status**: ASSURANCE_TOKEN_ISSUED
+**PR**: #1157 — Port ISMS IAA and ECAP hard merge gates into AMC
+**IAA Session**: session-069-20260430
+**Reviewed SHA**: 16277cf293fe104d5f5b43eb13e6bea2a8424409
+**ECAP Bundle**: `.agent-admin/prehandover/ecap-reconciliation-1157.md`
 
-`PHASE_B_BLOCKING_TOKEN: PENDING`
-
-*Token will be recorded here after IAA final assurance is issued.*
+`PHASE_B_BLOCKING_TOKEN: IAA-session-069-20260430-PASS`
 
 ---
 
