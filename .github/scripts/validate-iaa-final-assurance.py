@@ -445,23 +445,22 @@ def run_iaa_gate(
                 f"but governing issue for this PR is #{governing_issue}."
             )
     else:
-        # No governing issue supplied externally — attempt to derive from evidence
-        if best_ev.issue_number is None:
-            result.fail(
-                "AC2-GOVERNING-ISSUE-REQUIRED: No governing issue provided to gate and "
-                "none found in evidence. Governing-issue linkage is mandatory (AC1/AC2 "
-                "require positive PR/issue/SHA binding). Supply --governing-issue <N> "
-                "or ensure the PR body contains 'governing_delivery_issue: #NNN' "
-                "and the evidence file references the same issue."
-            )
-        else:
-            # Issue derived from evidence — warn but do not fail
-            result.warn(
-                f"AC2-ISSUE-DERIVED: Governing issue not supplied externally; "
-                f"derived #{best_ev.issue_number} from evidence ({best_ev.source_path}). "
-                f"For full AC2 compliance, include 'governing_delivery_issue: "
-                f"#{best_ev.issue_number}' in the PR body."
-            )
+    if governing_issue is None:
+        result.fail(
+            "AC2-GOVERNING-ISSUE-REQUIRED: No governing issue provided to gate; "
+            "issue linkage cannot be independently verified. Supply --governing-issue "
+            "and ensure the evidence contains an exact matching issue reference."
+        )
+    elif best_ev.issue_number is None:
+        result.fail(
+            f"AC1-ISSUE-NOT-LINKED: Evidence ({best_ev.source_path}) does not "
+            f"contain governing issue reference (#)."
+        )
+    elif best_ev.issue_number != governing_issue:
+        result.fail(
+            f"AC2-WRONG-ISSUE: Token evidence references issue #{best_ev.issue_number} "
+            f"but governing issue for this PR is #{governing_issue}."
+        )
 
     # -----------------------------------------------------------------------
     # Step 6: Reviewed SHA (AC1, AC7)
