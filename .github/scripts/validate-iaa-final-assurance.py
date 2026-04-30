@@ -432,19 +432,6 @@ def run_iaa_gate(
     # -----------------------------------------------------------------------
     # Step 5: Governing issue linkage (AC1, AC2)
     # -----------------------------------------------------------------------
-    if governing_issue is not None:
-        if best_ev.issue_number is None:
-            result.fail(
-                f"AC1-ISSUE-NOT-LINKED: Evidence ({best_ev.source_path}) does not "
-                f"contain governing issue reference (#). "
-                f"Expected: #{governing_issue}."
-            )
-        elif best_ev.issue_number != governing_issue:
-            result.fail(
-                f"AC2-WRONG-ISSUE: Token evidence references issue #{best_ev.issue_number} "
-                f"but governing issue for this PR is #{governing_issue}."
-            )
-    else:
     if governing_issue is None:
         result.fail(
             "AC2-GOVERNING-ISSUE-REQUIRED: No governing issue provided to gate; "

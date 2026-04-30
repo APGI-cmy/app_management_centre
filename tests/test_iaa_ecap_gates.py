@@ -966,8 +966,8 @@ Verdict: PASS
         assert not result.passed
         assert any("GOVERNING" in f or "REQUIRED" in f for f in result.failures)
 
-    def test_no_governing_issue_but_evidence_has_issue_warns_not_fails(self, tmp_path):
-        """No governing issue supplied but evidence contains one → warn only (derived)."""
+    def test_no_governing_issue_always_fails_regardless_of_evidence(self, tmp_path):
+        """governing_issue=None is always a hard fail (AC2), even when evidence has an issue."""
         wr_dir = tmp_path / ".agent-admin" / "wave-records"
         wr_dir.mkdir(parents=True)
         (wr_dir / "amc-wave-record-test-20260429.md").write_text(
@@ -977,11 +977,11 @@ Verdict: PASS
         result = run_iaa_gate(
             pr_number=PR_NUMBER,
             head_sha=HEAD_SHA,
-            governing_issue=None,   # not supplied; evidence has Issue: #1154
+            governing_issue=None,   # not supplied — always hard fail per reviewer AC2
             repo_root=tmp_path,
         )
-        assert result.passed, f"Expected PASS when issue derived from evidence: {result.failures}"
-        assert any("DERIVED" in w for w in result.warnings)
+        assert not result.passed
+        assert any("GOVERNING" in f or "REQUIRED" in f for f in result.failures)
 
 
 class TestIaaGateMultipleWaveRecords:
