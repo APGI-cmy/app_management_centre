@@ -5,6 +5,7 @@
 **Date**: 2026-04-29
 **Status**: COMPLETE
 **governance_evidence_path**: .agent-admin/wave-records/amc-wave-record-iaa-ecap-hard-gate-20260429.md
+**governance_evidence_path**: .agent-admin/wave-records/amc-wave-record-iaa-ecap-hard-gate-20260429.md
 
 ---
 
