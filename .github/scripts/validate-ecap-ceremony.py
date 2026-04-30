@@ -184,7 +184,7 @@ class GateResult:
         self.failures: list[str] = []
         self.warnings: list[str] = []
         self.protected_path_hits: list[ProtectedPathHit] = []
-        self.evidence: Optional[EcapEvidence] = None
+        self.evidence: EcapEvidence | None = None
 
     def fail(self, reason: str) -> None:
         self.failures.append(reason)
@@ -250,7 +250,7 @@ def classify_protected_paths(
 def find_ecap_evidence(
     repo_root: Path,
     pr_number: int,
-) -> Optional[EcapEvidence]:
+) -> EcapEvidence | None:
     """
     Find and parse the ECAP reconciliation bundle for this PR.
     Returns None if no evidence found.
@@ -562,7 +562,7 @@ def _build_arg_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[list[str]] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = _build_arg_parser()
     args = parser.parse_args(argv)
 

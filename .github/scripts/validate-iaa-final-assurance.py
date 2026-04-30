@@ -151,8 +151,8 @@ class AssuranceEvidence:
     def __init__(self) -> None:
         self.source_path: str = ""
         self.token: str = ""
-        self.pr_number: Optional[int] = None
-        self.issue_number: Optional[int] = None
+        self.pr_number: int | None = None
+        self.issue_number: int | None = None
         self.reviewed_sha: str = ""
         self.verdict_present: bool = False
         self.phase_b_token_present: bool = False
@@ -172,7 +172,7 @@ class GateResult:
         self.passed = False
         self.failures: list[str] = []
         self.warnings: list[str] = []
-        self.evidence: Optional[AssuranceEvidence] = None
+        self.evidence: AssuranceEvidence | None = None
 
     def fail(self, reason: str) -> None:
         self.failures.append(reason)
@@ -346,7 +346,7 @@ def _sha_prefix_match(sha_a: str, sha_b: str) -> bool:
 def run_iaa_gate(
     pr_number: int,
     head_sha: str,
-    governing_issue: Optional[int],
+    governing_issue: int | None,
     repo_root: Path,
 ) -> GateResult:
     """
@@ -570,7 +570,7 @@ def _build_arg_parser() -> argparse.ArgumentParser:
     return p
 
 
-def main(argv: Optional[list[str]] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = _build_arg_parser()
     args = parser.parse_args(argv)
 
