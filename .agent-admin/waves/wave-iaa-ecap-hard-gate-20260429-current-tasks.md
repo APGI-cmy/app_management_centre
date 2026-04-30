@@ -5,7 +5,6 @@
 **Date**: 2026-04-29
 **Status**: COMPLETE
 **governance_evidence_path**: .agent-admin/wave-records/amc-wave-record-iaa-ecap-hard-gate-20260429.md
-**governance_evidence_path**: .agent-admin/wave-records/amc-wave-record-iaa-ecap-hard-gate-20260429.md
 
 ---
 
@@ -29,7 +28,7 @@
 - [x] TASK-1-4 — Create test suite
       builder: foreman-v2-agent
       qp_verdict: PASS
-      notes: tests/test_iaa_ecap_gates.py — 55 tests GREEN; AC9 minimum fixture coverage satisfied
+      notes: tests/test_iaa_ecap_gates.py — 63 tests GREEN; AC9 minimum fixture coverage satisfied
 
 - [x] TASK-1-5 — Create wave record and checklist
       builder: foreman-v2-agent

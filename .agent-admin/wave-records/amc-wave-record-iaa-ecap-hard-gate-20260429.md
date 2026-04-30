@@ -74,10 +74,10 @@ governing_issue_parity_check:
 pre_pr_blocking_gate:
   closeout_sweep_performed: "YES"
   wave_checklist_retired_from_kickoff_state: "YES — all 5 tasks [x]"
-  protected_path_ecap_ceremony_completed: "PENDING — ECAP ceremony and IAA invocation required before merge (protected paths: .github/scripts/, .github/workflows/)"
-  ac_evidence_matrix_populated: "YES — CI_TEST evidence: 55 tests GREEN (pytest run)"
+  protected_path_ecap_ceremony_completed: "PASS — ecap-reconciliation-1157.md committed (.agent-admin/prehandover/); C1–C8 complete; protected_path_ceremony_verdict: PASS"
+  ac_evidence_matrix_populated: "YES — CI_TEST evidence: 63 tests GREEN (pytest run)"
   evidence_type_downgrade_check: "CLEAN — E3 (CI_TEST) evidence for test coverage; E4 (STATIC_ANALYSIS) for governance scripts"
-  pre_pr_blocking_gate_verdict: "PENDING IAA INVOCATION — ECAP ceremony and IAA token required"
+  pre_pr_blocking_gate_verdict: "PASS — ECAP ceremony complete (ecap-reconciliation-1157.md); IAA token IAA-session-069-20260430-PASS issued; delta assurance PASS (token-recording-only delta 16277cf → fbe8d1e)"
 ```
 
 ---
