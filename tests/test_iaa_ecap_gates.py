@@ -115,6 +115,46 @@ Verdict: PASS
 """
 
 
+def _make_valid_wave_record_with_delta(
+    pr: int = PR_NUMBER,
+    issue: int = ISSUE_NUM,
+    reviewed_sha: str = OLD_SHA,
+    final_head: str = HEAD_SHA,
+    delta_classification: str = "token-recording-only",
+    delta_verdict: str = "PASS",
+    token: str = CANONICAL_TOKEN,
+) -> str:
+    """Wave record with a delta-assurance block (AC7)."""
+    return f"""\
+# AMC Wave Record — test-wave — 2026-04-29
+
+**Wave ID**: test-wave-20260429
+**Authority**: CS2 — Issue #{issue}
+**triggering_issue**: #{issue}
+
+## Section 5 — Assurance Token
+
+`PHASE_B_BLOCKING_TOKEN: {token}`
+
+**IAA Session**: session-066-20260429
+**Verdict Date**: 2026-04-29
+**Adoption Phase**: PHASE_B_BLOCKING
+
+PR: #{pr}
+Issue: #{issue}
+Reviewed SHA: {reviewed_sha}
+Verdict: PASS
+
+## Delta Assurance (AC7)
+
+base_head: {reviewed_sha}
+final_head: {final_head}
+delta_classification: {delta_classification}
+delta_assurance_verdict: {delta_verdict}
+final_token_binding: {token}
+"""
+
+
 def _make_valid_ecap_reconciliation(
     pr: int = PR_NUMBER,
     issue: int = ISSUE_NUM,
@@ -628,7 +668,7 @@ class TestEcapGateFailConditions:
         assert any("ECAP" in f for f in result.failures)
 
     def test_self_certified_ecap_fails(self, tmp_path):
-        """AC9: ECAP self-certification without committed bundle fails."""
+        """AC9/AC4: ECAP self-certification without committed bundle fails end-to-end."""
         # Only wave record has ECAP assertions — no committed reconciliation bundle
         wr_dir = tmp_path / ".agent-admin" / "wave-records"
         wr_dir.mkdir(parents=True)
@@ -646,6 +686,15 @@ ecap_verdict: PASS
 
         # has_only_self_certified_ecap should return True
         assert has_only_self_certified_ecap(tmp_path, PR_NUMBER) is True
+
+        # run_ecap_gate must also FAIL with AC4 (end-to-end enforcement)
+        result = run_ecap_gate(
+            pr_number=PR_NUMBER,
+            changed_files=["governance/canon/SOME_CANON.md"],
+            repo_root=tmp_path,
+        )
+        assert not result.passed, "Expected FAIL for self-certified ECAP"
+        assert any("AC4" in f or "SELF" in f or "self" in f.lower() for f in result.failures)
 
     def test_missing_ecap_fields_fails(self, tmp_path):
         """AC3: ECAP evidence with missing required fields fails."""
@@ -799,6 +848,204 @@ class TestEcapGateAc5WaiverPath:
 # ===========================================================================
 # Integration tests: both gates together
 # ===========================================================================
+
+
+class TestIaaGateAc7DeltaAssurance:
+    """AC7 — Delta-assurance block support."""
+
+    def test_stale_sha_without_delta_assurance_fails(self, tmp_path):
+        """Stale reviewed SHA with no delta-assurance block fails (AC7)."""
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+        (wr_dir / "amc-wave-record-test-20260429.md").write_text(
+            _make_valid_wave_record(pr=PR_NUMBER, sha=OLD_SHA)  # old SHA, no delta block
+        )
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=ISSUE_NUM,
+            repo_root=tmp_path,
+        )
+        assert not result.passed
+        assert any("SHA" in f or "STALE" in f for f in result.failures)
+
+    def test_valid_token_recording_only_delta_passes(self, tmp_path):
+        """Token-recording-only delta with matching final_head passes (AC7)."""
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+        (wr_dir / "amc-wave-record-test-20260429.md").write_text(
+            _make_valid_wave_record_with_delta(
+                pr=PR_NUMBER,
+                reviewed_sha=OLD_SHA,
+                final_head=HEAD_SHA,
+                delta_classification="token-recording-only",
+                delta_verdict="PASS",
+            )
+        )
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=ISSUE_NUM,
+            repo_root=tmp_path,
+        )
+        assert result.passed, f"Expected PASS with valid delta assurance: {result.failures}"
+
+    def test_substantive_delta_requires_iaa_rerun_fails(self, tmp_path):
+        """Substantive delta without IAA re-run fails (AC7)."""
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+        (wr_dir / "amc-wave-record-test-20260429.md").write_text(
+            _make_valid_wave_record_with_delta(
+                pr=PR_NUMBER,
+                reviewed_sha=OLD_SHA,
+                final_head=HEAD_SHA,
+                delta_classification="substantive",  # requires IAA re-run
+                delta_verdict="PASS",
+            )
+        )
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=ISSUE_NUM,
+            repo_root=tmp_path,
+        )
+        assert not result.passed
+        assert any("SUBSTANTIVE" in f or "substantive" in f.lower() for f in result.failures)
+
+    def test_delta_final_head_mismatch_fails(self, tmp_path):
+        """Delta assurance final_head pointing to wrong SHA fails (AC7)."""
+        wrong_final = "ffffffff000000000000000000000000ffffffff"
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+        (wr_dir / "amc-wave-record-test-20260429.md").write_text(
+            _make_valid_wave_record_with_delta(
+                pr=PR_NUMBER,
+                reviewed_sha=OLD_SHA,
+                final_head=wrong_final,  # does not match HEAD_SHA
+                delta_classification="token-recording-only",
+                delta_verdict="PASS",
+            )
+        )
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=ISSUE_NUM,
+            repo_root=tmp_path,
+        )
+        assert not result.passed
+        assert any("FINAL" in f or "MISMATCH" in f for f in result.failures)
+
+
+class TestIaaGateGoverningIssueMandatory:
+    """AC2 — Governing issue linkage is mandatory."""
+
+    def test_no_governing_issue_no_evidence_issue_fails(self, tmp_path):
+        """No governing issue provided AND evidence has no issue → hard fail."""
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+        # Wave record with token and PR ref but NO issue reference
+        text = f"""\
+# Wave Record
+PHASE_B_BLOCKING_TOKEN: {CANONICAL_TOKEN}
+PR: #{PR_NUMBER}
+Reviewed SHA: {HEAD_SHA}
+Verdict: PASS
+"""
+        (wr_dir / "amc-wave-record-test-20260429.md").write_text(text)
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=None,   # not supplied
+            repo_root=tmp_path,
+        )
+        assert not result.passed
+        assert any("GOVERNING" in f or "REQUIRED" in f for f in result.failures)
+
+    def test_no_governing_issue_but_evidence_has_issue_warns_not_fails(self, tmp_path):
+        """No governing issue supplied but evidence contains one → warn only (derived)."""
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+        (wr_dir / "amc-wave-record-test-20260429.md").write_text(
+            _make_valid_wave_record(pr=PR_NUMBER, sha=HEAD_SHA)
+        )
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=None,   # not supplied; evidence has Issue: #1154
+            repo_root=tmp_path,
+        )
+        assert result.passed, f"Expected PASS when issue derived from evidence: {result.failures}"
+        assert any("DERIVED" in w for w in result.warnings)
+
+
+class TestIaaGateMultipleWaveRecords:
+    """Evidence selection with multiple historical wave records."""
+
+    def test_selects_pr_specific_evidence_ignores_unrelated_token(self, tmp_path):
+        """Gate selects PR-specific evidence even when an unrelated wave record has a token."""
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+
+        # Unrelated historical wave record — has a token but linked to a different PR
+        (wr_dir / "amc-wave-record-other-20260101.md").write_text(
+            f"""\
+# AMC Wave Record — other-wave — 2026-01-01
+PHASE_B_BLOCKING_TOKEN: IAA-session-001-20260101-PASS
+PR: #9999
+Issue: #9999
+Reviewed SHA: {OLD_SHA}
+Verdict: PASS
+"""
+        )
+
+        # Correct PR-specific evidence record
+        (wr_dir / "amc-wave-record-test-20260429.md").write_text(
+            _make_valid_wave_record(pr=PR_NUMBER, sha=HEAD_SHA)
+        )
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=ISSUE_NUM,
+            repo_root=tmp_path,
+        )
+        assert result.passed, f"Expected PASS selecting PR-specific evidence: {result.failures}"
+        assert result.evidence is not None
+        assert result.evidence.pr_number == PR_NUMBER
+
+    def test_unrelated_token_only_wave_record_not_selected(self, tmp_path):
+        """Wave record linked to a different PR is not selected for the current PR (AC1)."""
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+
+        # Only unrelated wave record exists — linked to PR #9999, not PR_NUMBER
+        (wr_dir / "amc-wave-record-other-20260101.md").write_text(
+            f"""\
+# AMC Wave Record — other-wave — 2026-01-01
+PHASE_B_BLOCKING_TOKEN: IAA-session-001-20260101-PASS
+PR: #9999
+Issue: #9999
+Reviewed SHA: {OLD_SHA}
+Verdict: PASS
+"""
+        )
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=ISSUE_NUM,
+            repo_root=tmp_path,
+        )
+        # Should fail — no evidence linked to PR_NUMBER
+        assert not result.passed
+        assert any("MISSING" in f for f in result.failures)
+
 
 class TestCombinedGates:
     """Integration tests for both gates on the same PR fixture."""

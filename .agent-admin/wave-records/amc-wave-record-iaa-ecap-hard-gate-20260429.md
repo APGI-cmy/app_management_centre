@@ -19,7 +19,7 @@
 | mode | POLC_ORCHESTRATION — governance hardening / CI gate implementation |
 | agents_delegated_to | foreman-v2-agent (POLC_ORCHESTRATION — CI gate script specification and implementation) |
 | phase_1_preflight | PREFLIGHT COMPLETE |
-| status | COMPLETE — all 5 tasks delivered; 55 tests GREEN; IAA/ECAP hard gates operational |
+| status | IN_PROGRESS — all 5 implementation tasks delivered; 63 tests GREEN; IAA/ECAP hard gates operational; merge-blocked pending ECAP ceremony and IAA token issuance |
 
 ### 1a. Governing Authority
 
@@ -90,28 +90,35 @@ pre_pr_blocking_gate:
 |------|--------|---------|
 | TASK-1-1: validate-iaa-final-assurance.py | COMPLETE | File committed; 29 unit tests GREEN |
 | TASK-1-2: validate-ecap-ceremony.py | COMPLETE | File committed; 26 unit tests GREEN |
-| TASK-1-3: iaa-ecap-hard-gate.yml | COMPLETE | Workflow committed; 3 jobs wired |
-| TASK-1-4: test_iaa_ecap_gates.py | COMPLETE | 55 tests GREEN (0 failures) |
+| TASK-1-3: iaa-ecap-hard-gate.yml | COMPLETE | Workflow committed; 4 jobs wired |
+| TASK-1-4: test_iaa_ecap_gates.py | COMPLETE | 63 tests GREEN (0 failures) |
 | TASK-1-5: Wave record + checklist | COMPLETE | This file + checklist committed |
 
 ### Test Evidence
 
 ```
 pytest tests/test_iaa_ecap_gates.py
-55 passed in 0.19s
+63 passed in 0.16s
 ```
 
-All AC9 minimum fixture coverage satisfied:
+All AC9 minimum fixture coverage satisfied (extended — now 63 tests):
 - ✅ missing IAA token fails
 - ✅ token with wrong PR fails
 - ✅ token with wrong issue fails
 - ✅ token with missing reviewed SHA fails
-- ✅ token reviewed SHA older than current head fails
-- ✅ protected-path change without ECAP evidence fails
-- ✅ ECAP self-certification without committed bundle fails
-- ✅ ECAP waived with valid CS2 waiver passes
+- ✅ token reviewed SHA older than current head fails (AC7)
+- ✅ valid token-recording-only delta assurance passes (AC7)
+- ✅ substantive delta without IAA re-run fails (AC7)
+- ✅ delta final_head mismatch fails (AC7)
+- ✅ no governing issue + no evidence issue → hard fail (AC2)
+- ✅ no governing issue but evidence has issue → derived warn, not fail (AC2)
+- ✅ multiple historical wave records → selects PR-specific (AC1)
+- ✅ unrelated token-only wave record not selected (AC1)
+- ✅ protected-path change without ECAP evidence fails (AC3)
+- ✅ ECAP self-certification (wave record only) run_ecap_gate fails end-to-end (AC4)
+- ✅ ECAP waived with valid CS2 waiver passes (AC5)
 - ✅ valid IAA + ECAP evidence passes
-- ✅ stale post-IAA PENDING wording in ECAP/checklist fails
+- ✅ stale post-IAA PENDING wording in ECAP/checklist fails (AC8)
 
 ---
 

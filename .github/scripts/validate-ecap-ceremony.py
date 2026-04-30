@@ -275,23 +275,10 @@ def find_ecap_evidence(
                 except OSError:
                     pass
 
-    # Also search wave records for ECAP section
-    wave_dir = repo_root / ".agent-admin" / "wave-records"
-    if wave_dir.exists():
-        for p in sorted(wave_dir.glob("amc-wave-record-*.md")):
-            try:
-                text = p.read_text(encoding="utf-8", errors="replace")
-                if re.search(rf"#?{pr_number}\b", text) and re.search(
-                    r"ecap|protected.path.ceremony|ceremony.admin", text, re.IGNORECASE
-                ):
-                    candidates.append(p)
-            except OSError:
-                pass
-
     if not candidates:
         return None
 
-    # Use the best candidate: prefer ECAP reconciliation over wave record
+    # Use the best candidate (first = most specific: ecap-reconciliation-<PR>.md)
     best_path = candidates[0]
     try:
         text = best_path.read_text(encoding="utf-8", errors="replace")
@@ -300,7 +287,12 @@ def find_ecap_evidence(
 
     ev = EcapEvidence()
     ev.source_path = str(best_path)
-    ev.is_committed_bundle = True  # It exists as a file (committed)
+    # Only files inside .agent-admin/prehandover/ are committed ECAP bundles (AC4).
+    # Wave records that assert ecap_invoked/ecap_verdict are self-certification, not evidence.
+    ev.is_committed_bundle = (
+        ".agent-admin" in str(best_path)
+        and "prehandover" in str(best_path)
+    )
 
     # Check required fields
     for field_name, field_re in REQUIRED_ECAP_FIELDS:
@@ -411,20 +403,30 @@ def run_ecap_gate(
     result.evidence = ev
 
     if ev is None:
-        # No ECAP evidence found at all — check for CS2 waiver first
-        # (AC5): Check PR body or wave record for explicit waiver
+        # No ECAP reconciliation bundle found — check for CS2 waiver first (AC5)
         waiver_found = _find_cs2_waiver(repo_root, pr_number)
         if waiver_found:
             print(f"✅ CS2 waiver found: {waiver_found}")
             result.passed = True
             return result
 
-        result.fail(
-            f"AC3-ECAP-MISSING: PR #{pr_number} touches protected paths "
-            f"({', '.join(h.path for h in hits[:3])}) but no ECAP ceremony evidence "
-            f"found at .agent-admin/prehandover/ecap-reconciliation-*.md. "
-            f"Protected-path PRs MUST have a committed ECAP bundle before merge."
-        )
+        # Distinguish AC4 self-certification from AC3 missing evidence (AC4)
+        if has_only_self_certified_ecap(repo_root, pr_number):
+            result.fail(
+                f"AC4-SELF-CERTIFIED: PR #{pr_number} touches protected paths "
+                f"({', '.join(h.path for h in hits[:3])}) but has only wave-record "
+                f"ECAP field assertions (ecap_invoked: true / ecap_verdict: PASS) "
+                f"without an independent committed ECAP reconciliation bundle. "
+                f"Wave-record assertions alone are self-certification — blocked per AC4. "
+                f"Commit .agent-admin/prehandover/ecap-reconciliation-{pr_number}.md."
+            )
+        else:
+            result.fail(
+                f"AC3-ECAP-MISSING: PR #{pr_number} touches protected paths "
+                f"({', '.join(h.path for h in hits[:3])}) but no ECAP ceremony evidence "
+                f"found at .agent-admin/prehandover/ecap-reconciliation-*.md. "
+                f"Protected-path PRs MUST have a committed ECAP bundle before merge."
+            )
         return result
 
     # -----------------------------------------------------------------------
@@ -444,10 +446,10 @@ def run_ecap_gate(
     # Step 4: Validate required fields (AC3)
     # -----------------------------------------------------------------------
     if ev.fields_missing:
-        # Check if there's a CS2 waiver that covers the missing fields
+        # Check if there's a valid CS2 waiver covering the missing fields (AC5)
         waiver = _find_cs2_waiver(repo_root, pr_number)
-        if waiver and "ecap_waiver_applicable" in (ev.waiver_ref or "").lower():
-            print(f"✅ CS2 waiver: {waiver}")
+        if waiver:
+            print(f"✅ CS2 waiver covers missing ECAP fields: {waiver}")
         else:
             result.fail(
                 f"AC3-ECAP-FIELDS-MISSING: ECAP evidence ({ev.source_path}) is missing "

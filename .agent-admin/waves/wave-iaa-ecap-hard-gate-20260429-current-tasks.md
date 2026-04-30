@@ -4,6 +4,7 @@
 **Authority**: CS2 — Issue #1154 — Port ISMS IAA and ECAP hard merge gates into AMC
 **Date**: 2026-04-29
 **Status**: COMPLETE
+**governance_evidence_path**: .agent-admin/wave-records/amc-wave-record-iaa-ecap-hard-gate-20260429.md
 
 ---
 

@@ -104,6 +104,34 @@ STALE_WORDING_RE = re.compile(
 )
 
 # ---------------------------------------------------------------------------
+# Delta-assurance block patterns (AC7)
+# ---------------------------------------------------------------------------
+
+# delta_assurance_verdict: PASS
+DELTA_ASSURANCE_VERDICT_RE = re.compile(
+    r"delta_assurance_verdict\s*[:\s]+PASS",
+    re.IGNORECASE,
+)
+
+# final_head: <sha>  — the PR head SHA this delta assurance binds to
+DELTA_FINAL_HEAD_RE = re.compile(
+    r"final_head\s*[:\s]+([0-9a-f]{7,40})\b",
+    re.IGNORECASE,
+)
+
+# delta_classification: token-recording-only | substantive | …
+DELTA_CLASSIFICATION_RE = re.compile(
+    r"delta_classification\s*[:\s]+([\w-]+)",
+    re.IGNORECASE,
+)
+
+# base_head: <sha>  — the SHA that was originally reviewed by IAA
+DELTA_BASE_HEAD_RE = re.compile(
+    r"base_head\s*[:\s]+([0-9a-f]{7,40})\b",
+    re.IGNORECASE,
+)
+
+# ---------------------------------------------------------------------------
 # Evidence path patterns (AC1)
 # ---------------------------------------------------------------------------
 
@@ -130,6 +158,11 @@ class AssuranceEvidence:
         self.phase_b_token_present: bool = False
         self.stale_wording: list[str] = []
         self.raw_text: str = ""
+        # Delta-assurance block (AC7)
+        self.delta_assurance_verdict: str = ""   # "PASS" when delta_assurance_verdict: PASS
+        self.delta_final_head: str = ""           # final_head field SHA
+        self.delta_classification: str = ""       # e.g. "token-recording-only" or "substantive"
+        self.delta_base_head: str = ""            # base_head field SHA
 
 
 class GateResult:
@@ -206,6 +239,19 @@ def _extract_evidence_from_text(text: str, source_path: str) -> AssuranceEvidenc
         for m in re.finditer(STALE_WORDING_RE, text)
     ]
 
+    # Delta-assurance block (AC7)
+    if DELTA_ASSURANCE_VERDICT_RE.search(text):
+        ev.delta_assurance_verdict = "PASS"
+    da_final = DELTA_FINAL_HEAD_RE.search(text)
+    if da_final:
+        ev.delta_final_head = da_final.group(1).strip()
+    da_class = DELTA_CLASSIFICATION_RE.search(text)
+    if da_class:
+        ev.delta_classification = da_class.group(1).strip()
+    da_base = DELTA_BASE_HEAD_RE.search(text)
+    if da_base:
+        ev.delta_base_head = da_base.group(1).strip()
+
     return ev
 
 
@@ -268,11 +314,10 @@ def find_pr_specific_evidence(
         except OSError:
             continue
 
-        # Filter: must reference this PR in some way, or contain a token (wave records may not have PR field if older)
+        # Require explicit PR reference — files that have a token but no PR linkage
+        # could be historical wave records for other PRs and must not be selected.
         has_pr_ref = bool(pr_pattern.search(text))
-        has_token  = _file_has_any_token(text)
-
-        if not (has_pr_ref or has_token):
+        if not has_pr_ref:
             continue
 
         ev = _extract_evidence_from_text(text, str(path))
@@ -325,15 +370,15 @@ def run_iaa_gate(
         )
         return result
 
-    # Use the most recent / most complete evidence (first one with PHASE_B token preferred)
-    best_ev: Optional[AssuranceEvidence] = None
-    for ev in evidences:
-        if ev.phase_b_token_present:
-            best_ev = ev
-            break
-    if best_ev is None:
-        best_ev = evidences[0]
+    # Select the best evidence: prefer (1) PR match, (2) issue match, (3) SHA match, (4) PHASE_B token
+    def _score_evidence(ev: AssuranceEvidence) -> tuple[int, int, int, int]:
+        pr_match    = 1 if ev.pr_number == pr_number else 0
+        issue_match = 1 if (governing_issue and ev.issue_number == governing_issue) else 0
+        sha_match   = 1 if _sha_prefix_match(ev.reviewed_sha, head_sha) else 0
+        has_pb_tok  = 1 if ev.phase_b_token_present else 0
+        return (pr_match, issue_match, sha_match, has_pb_tok)
 
+    best_ev: AssuranceEvidence = max(evidences, key=_score_evidence)
     result.evidence = best_ev
 
     # -----------------------------------------------------------------------
@@ -391,7 +436,8 @@ def run_iaa_gate(
         if best_ev.issue_number is None:
             result.fail(
                 f"AC1-ISSUE-NOT-LINKED: Evidence ({best_ev.source_path}) does not "
-                f"contain governing issue reference (#)."
+                f"contain governing issue reference (#). "
+                f"Expected: #{governing_issue}."
             )
         elif best_ev.issue_number != governing_issue:
             result.fail(
@@ -399,10 +445,22 @@ def run_iaa_gate(
                 f"but governing issue for this PR is #{governing_issue}."
             )
     else:
+        # No governing issue supplied externally — attempt to derive from evidence
         if best_ev.issue_number is None:
+            result.fail(
+                "AC2-GOVERNING-ISSUE-REQUIRED: No governing issue provided to gate and "
+                "none found in evidence. Governing-issue linkage is mandatory (AC1/AC2 "
+                "require positive PR/issue/SHA binding). Supply --governing-issue <N> "
+                "or ensure the PR body contains 'governing_delivery_issue: #NNN' "
+                "and the evidence file references the same issue."
+            )
+        else:
+            # Issue derived from evidence — warn but do not fail
             result.warn(
-                "AC1-ISSUE-UNVERIFIED: No governing issue provided to gate; "
-                "issue linkage not independently verified."
+                f"AC2-ISSUE-DERIVED: Governing issue not supplied externally; "
+                f"derived #{best_ev.issue_number} from evidence ({best_ev.source_path}). "
+                f"For full AC2 compliance, include 'governing_delivery_issue: "
+                f"#{best_ev.issue_number}' in the PR body."
             )
 
     # -----------------------------------------------------------------------
@@ -415,12 +473,38 @@ def run_iaa_gate(
         )
     else:
         if not _sha_prefix_match(best_ev.reviewed_sha, head_sha):
-            result.fail(
-                f"AC7-STALE-SHA: Evidence ({best_ev.source_path}) records "
-                f"'Reviewed SHA: {best_ev.reviewed_sha}' but current PR head is "
-                f"'{head_sha}'. IAA must be re-run on the current head, or a "
-                f"machine-readable delta assurance block must be present."
-            )
+            # AC7: SHA mismatch — check for a valid machine-readable delta-assurance block
+            if best_ev.delta_assurance_verdict.upper() == "PASS":
+                if not best_ev.delta_final_head:
+                    result.fail(
+                        f"AC7-DELTA-MISSING-FINAL-HEAD: Delta assurance verdict is PASS "
+                        f"({best_ev.source_path}) but no 'final_head' SHA is recorded. "
+                        f"The delta_assurance block must include 'final_head: <sha>' "
+                        f"binding the token to the current PR head."
+                    )
+                elif not _sha_prefix_match(best_ev.delta_final_head, head_sha):
+                    result.fail(
+                        f"AC7-DELTA-FINAL-HEAD-MISMATCH: Delta assurance final_head "
+                        f"'{best_ev.delta_final_head}' does not match current PR head "
+                        f"'{head_sha}'. Delta assurance must bind to the current head SHA."
+                    )
+                elif best_ev.delta_classification.lower() == "substantive":
+                    result.fail(
+                        f"AC7-SUBSTANTIVE-DELTA: Delta assurance classification is "
+                        f"'substantive' ({best_ev.source_path}). A substantive change "
+                        f"after IAA review requires a full IAA re-run — delta assurance "
+                        f"is only valid for non-substantive (e.g. token-recording-only) "
+                        f"changes between the reviewed SHA and the current head."
+                    )
+                # else: valid non-substantive delta with matching final_head — AC7 satisfied
+            else:
+                result.fail(
+                    f"AC7-STALE-SHA: Evidence ({best_ev.source_path}) records "
+                    f"'Reviewed SHA: {best_ev.reviewed_sha}' but current PR head is "
+                    f"'{head_sha}'. IAA must be re-run on the current head, or a "
+                    f"machine-readable delta assurance block must be present "
+                    f"(delta_assurance_verdict: PASS, final_head: <current-sha>)."
+                )
 
     # -----------------------------------------------------------------------
     # Step 7: Stale wording (AC8)
@@ -456,10 +540,11 @@ def run_iaa_gate(
             best_ev.source_path.endswith(".md") and
             "wave-record" in best_ev.source_path
         ):
-            result.warn(
+            result.fail(
                 f"AC2-TOKEN-NOT-IN-WAVE-RECORD: Token '{token}' not found in any "
-                f"wave record. Per AMC 90/10 Protocol, PHASE_B_BLOCKING_TOKEN "
-                f"should be recorded in wave record Section 5."
+                f"wave record under {wave_record_dir}. Per AMC 90/10 Protocol, "
+                f"PHASE_B_BLOCKING_TOKEN must be recorded in wave record Section 5 "
+                f"before this gate may PASS."
             )
 
     # -----------------------------------------------------------------------
