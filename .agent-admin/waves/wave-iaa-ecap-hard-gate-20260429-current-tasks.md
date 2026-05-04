@@ -28,7 +28,7 @@
 - [x] TASK-1-4 — Create test suite
       builder: foreman-v2-agent
       qp_verdict: PASS
-      notes: tests/test_iaa_ecap_gates.py — 63 tests GREEN; AC9 minimum fixture coverage satisfied
+      notes: tests/test_iaa_ecap_gates.py — 64 tests GREEN; AC9 minimum fixture coverage satisfied
 
 - [x] TASK-1-5 — Create wave record and checklist
       builder: foreman-v2-agent
