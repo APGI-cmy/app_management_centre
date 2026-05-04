@@ -16,7 +16,7 @@
 |------|------------------|-----------------|----------------|------------------------|-----------------|
 | SCOPE_DECLARATION_SCHEMA.md | v2.0.0 | v1 | v2.0.0 | 4c41a837aed825f4a0aa24e193de717aa | UPDATED |
 | scope-declaration.template.md | v2.0.0 | (empty) | v2.0.0 | f233e0bd21d745f5e2df0d0c9625913 | UPDATED |
-| AGENT_HANDOVER_AUTOMATION.md | 1.7.0 (canonical) | 1.7.2 (consumer ahead) | 1.7.3 | f660b9d0e6f2f22cacf446e95445b8e3 | UPDATED (CONSUMER_AHEAD — merged per-PR changes) |
+| AGENT_HANDOVER_AUTOMATION.md | 1.7.0 (canonical) | 1.7.2 (consumer ahead) | 1.7.3 | 144b4edb74ba707276b9e43efc449d04 | UPDATED (CONSUMER_AHEAD — merged per-PR changes) |
 
 ## Drift Evidence
 
@@ -24,7 +24,7 @@
 |------|-------------------------------|------------------------------|
 | governance/canon/SCOPE_DECLARATION_SCHEMA.md | 96c0374ac4ee8d0c | 4c41a837aed825f4 |
 | governance/canon/scope-declaration.template.md | 06e4173ff8485b6a | f233e0bd21d745f5 |
-| governance/canon/AGENT_HANDOVER_AUTOMATION.md | c916049ae2faff9c | f660b9d0e6f2f22c |
+| governance/canon/AGENT_HANDOVER_AUTOMATION.md | c916049ae2faff9c | 144b4edb74ba7072 |
 
 ## Change Summary
 
