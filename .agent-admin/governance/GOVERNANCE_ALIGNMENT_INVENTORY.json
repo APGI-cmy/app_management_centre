@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "last_updated": "2026-04-29T12:00:00Z",
+    "last_updated": "2026-05-04T15:56:11Z",
     "description": "Tracks governance artifact alignment state between canonical source and consumer repository",
     "canonical_source": "APGI-cmy/maturion-foreman-governance",
     "consumer_repository": "APGI-cmy/app_management_centre",
@@ -144,6 +144,18 @@
             "last_aligned": "2026-04-21T06:56:45Z",
             "file_hash_sha256": "eb8bc7aa76d89ed8aac9bd7fa2836e790cb31c93832eec1d8e29de4724952bfa",
             "layer_down_status": "INTERNAL"
+        },
+        {
+            "canonical_path": "governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md",
+            "consumer_path": "governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md",
+            "canonical_version": "1.0.0",
+            "consumer_version": "1.0.0",
+            "canonical_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
+            "alignment_status": "ALIGNED",
+            "last_aligned": "2026-05-04T15:56:11Z",
+            "file_hash_sha256": "39d1ee7b51f8d797e163fafe45d29f1a17eb59d2b3655f0c28020225af9cf976",
+            "layer_down_status": "PUBLIC_API",
+            "ripple_notes": "New governance canon MMM_SIMPLE_PR_ADMIN_MODEL.md v1.0.0 (commit 44218bcd): simple PR admin model replacing legacy ceremony for MMM product-fix PRs. .admin/pr.json inaugurated as AMC-side support per CS2 instruction."
         }
     ]
 }

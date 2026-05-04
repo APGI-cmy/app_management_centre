@@ -1,0 +1,18 @@
+{
+    "dispatch_id": "layer-down-44218bcd",
+    "event_type": "governance_ripple",
+    "canonical_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
+    "inventory_version": "1.0.0",
+    "changed_paths": [
+        "governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md"
+    ],
+    "sender": "APGI-cmy/maturion-foreman-governance",
+    "trigger": "Merge pull request -1362 from APGI-cmy-copilot-simplify-mmm-governance",
+    "timestamp": "2026-05-04T15:13:59Z",
+    "processed_at": "2026-05-04T15:56:11Z",
+    "status": "archived",
+    "archived_at": "2026-05-04T15:56:11Z",
+    "processing_notes": "MMM_SIMPLE_PR_ADMIN_MODEL.md v1.0.0 — new governance canon. Propagated from upstream. Also created .admin/pr.json as AMC-side support per CS2 instruction. Session: session-035-20260504.",
+    "outcome": "full-update",
+    "pr_number": null
+}

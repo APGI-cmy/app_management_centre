@@ -1,11 +1,11 @@
 {
-    "last_check": "2026-04-29T12:00:00Z",
+    "last_check": "2026-05-04T15:56:11Z",
     "canonical_version": "1.0.0",
-    "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+    "canonical_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
     "local_version": "1.0.0",
-    "local_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+    "local_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
     "drift_detected": "false",
     "needs_alignment": "false",
     "alignment_method": "layer-down",
-    "alignment_note": "Layer-down of 2ba1d6a3 (2026-04-29) \u2014 catch-up governance repo hardening: AGENT_HANDOVER_AUTOMATION v1.6.0 (consumer AHEAD at v1.7.2), INDEPENDENT_ASSURANCE_AGENT_CANON v1.8.0 (consumer AHEAD at v1.12.0), PREHANDOVER.template.md v1.2.0 (updated from v1.1.0)"
+    "alignment_note": "Layer-down of 44218bcd (2026-05-04) \u2014 simplify-mmm-governance: MMM_SIMPLE_PR_ADMIN_MODEL.md v1.0.0 (new governance canon, propagated from upstream); .admin/pr.json created (AMC-side support per CS2 instruction)"
 }

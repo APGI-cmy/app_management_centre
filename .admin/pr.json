@@ -1,0 +1,27 @@
+{
+  "pr": 0,
+  "issue": 0,
+  "type": "governance-change",
+  "owner": "Copilot",
+  "scope": [
+    "governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md",
+    ".admin/pr.json",
+    "governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json",
+    ".agent-admin/governance/GOVERNANCE_ALIGNMENT_INVENTORY.json",
+    ".agent-admin/governance/sync_state.json",
+    ".agent-admin/governance/ripple-archive/ripple-layer-down-44218bcd.json",
+    ".agent-admin/waves/wave-layer-down-44218bcd-20260504-current-tasks.md",
+    ".agent-admin/wave-records/amc-wave-record-layer-down-44218bcd-20260504.md",
+    ".agent-workspace/governance-liaison-amc/memory/session-035-20260504.md"
+  ],
+  "risk": "low",
+  "requires_iaa": true,
+  "requires_ecap": false,
+  "evidence_required": [
+    "IAA ASSURANCE-TOKEN recorded in wave record section 5",
+    "governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md matches upstream canonical at 44218bcd",
+    "GOVERNANCE_ALIGNMENT_INVENTORY.json updated with new artifact version and canonical commit"
+  ],
+  "merge_authority": "CS2",
+  "_note": "pr and issue fields will be updated to actual numbers when this PR is created. This is the first use of .admin/pr.json in the AMC repo — inaugurating the simple PR admin model per MMM_SIMPLE_PR_ADMIN_MODEL.md v1.0.0. Implementation of AMC/MMM product fixes will happen in separate product-fix PRs using .admin/pr.json."
+}

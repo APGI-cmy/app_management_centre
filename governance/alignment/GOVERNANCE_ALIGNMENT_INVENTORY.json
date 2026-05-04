@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
-  "last_updated": "2026-04-29",
+  "last_layer_down_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
+  "last_updated": "2026-05-04",
   "alignment_status": "ALIGNED",
-  "total_artifacts": 38,
+  "total_artifacts": 39,
   "artifacts": [
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -438,6 +438,17 @@
       "layered_down_at": "2026-04-28T00:00:00Z",
       "file_hash_sha256": "3d72b4e59dcff725a529cc230ed29baa6fa0d75bdd5c1324759600166e0c68ed",
       "action": "AMENDED"
+    },
+    {
+      "filename": "MMM_SIMPLE_PR_ADMIN_MODEL.md",
+      "path": "governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md",
+      "version": "1.0.0",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "canonical_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
+      "layered_down_at": "2026-05-04T15:56:11Z",
+      "file_hash_sha256": "39d1ee7b51f8d797e163fafe45d29f1a17eb59d2b3655f0c28020225af9cf976",
+      "action": "CREATED"
     }
   ],
   "layer_down_history": [
@@ -545,6 +556,18 @@
       "issue_ref": "APGI-cmy/app_management_centre#layer-down-2ba1d6a3",
       "status": "COMPLETE",
       "notes": "AGENT_HANDOVER_AUTOMATION.md (consumer AHEAD v1.7.2 > canonical v1.6.0), INDEPENDENT_ASSURANCE_AGENT_CANON.md (consumer AHEAD v1.12.0 > canonical v1.8.0), PREHANDOVER.template.md (updated v1.1.0 -> v1.2.0)"
+    },
+    {
+      "layer_down_id": "layer-down-2026-05-04-44218bcd",
+      "canonical_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
+      "timestamp": "2026-05-04T15:56:11Z",
+      "trigger": "Merge pull request -1362 from APGI-cmy-copilot-simplify-mmm-governance",
+      "artifacts_changed": 1,
+      "artifacts_created": 1,
+      "artifacts_updated": 0,
+      "issue_ref": "APGI-cmy/app_management_centre#layer-down-44218bcd",
+      "status": "PENDING_CS2_MERGE",
+      "notes": "MMM_SIMPLE_PR_ADMIN_MODEL.md v1.0.0 (new governance canon). .admin/pr.json created as AMC-side support per CS2 instruction. No agent contract files modified. Auto-close eligible."
     }
   ],
   "history": [
@@ -604,6 +627,15 @@
         "PREHANDOVER.template.md"
       ],
       "session": "session-034-20260429"
+    },
+    {
+      "canonical_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
+      "date": "2026-05-04T15:56:11Z",
+      "trigger": "Merge pull request -1362 from APGI-cmy-copilot-simplify-mmm-governance",
+      "changed_artifacts": [
+        "MMM_SIMPLE_PR_ADMIN_MODEL.md"
+      ],
+      "session": "session-035-20260504"
     }
   ]
 }
