@@ -120,12 +120,12 @@ control_surfaces_updated:
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING |
-| PHASE_B_BLOCKING_TOKEN | PENDING |
-| iaa_session | PENDING |
-| checks_run | PENDING |
-| re_invocation_rounds | PENDING |
-| merge_gate_parity | PENDING |
+| iaa_verdict | ASSURANCE-TOKEN |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-071-20260504-PASS |
+| iaa_session | session-071-20260504 |
+| checks_run | 13 PASS / 0 FAIL / 2 N/A (CORE-020, CORE-021, OVL-LA-001–005, OVL-LA-ADM-001–003, OVL-CG-001–005, OVL-CG-ADM-001–002) |
+| re_invocation_rounds | 0 |
+| merge_gate_parity | PASS |
 | adoption_phase | PHASE_B_BLOCKING |
 
 ---
