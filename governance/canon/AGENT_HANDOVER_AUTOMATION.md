@@ -957,19 +957,22 @@ PER_PR_SCOPE_FILE=""
 if [ -n "${PR_NUMBER:-}" ]; then
   PER_PR_SCOPE_FILE=".agent-admin/scope-declarations/pr-${PR_NUMBER}.md"
 else
-  # Fallback: discover from committed files when PR_NUMBER is unavailable
-  PER_PR_SCOPE_FILE=$(git ls-files '.agent-admin/scope-declarations/pr-*.md' 2>/dev/null | sort -V | tail -1 || echo "")
+  ACC_FAILURES+=("B0: PR_NUMBER is not set; cannot resolve per-PR scope declaration safely (ECAP-CCI-05)")
 fi
 
-if [ -n "${PER_PR_SCOPE_FILE}" ] && [ -f "${PER_PR_SCOPE_FILE}" ]; then
-  DECLARED_COUNT=$(grep -E "^FILES_CHANGED:" "${PER_PR_SCOPE_FILE}" | awk '{print $2}')
-  BULLET_COUNT=$(awk '/^## FILES_CHANGED/{found=1; next} found && /^- /{count++} found && /^##/{if(!/FILES_CHANGED/)found=0} END{print count+0}' "${PER_PR_SCOPE_FILE}")
-  ACTUAL_COUNT=$(git diff --name-only origin/main...HEAD | wc -l | tr -d ' ')
-  if [ -n "${DECLARED_COUNT}" ] && [ "${DECLARED_COUNT}" != "${ACTUAL_COUNT}" ]; then
-    ACC_FAILURES+=("B1: Scope declaration FILES_CHANGED=${DECLARED_COUNT} but actual changed files=${ACTUAL_COUNT} (ECAP-CCI-05)")
-  fi
-  if [ -n "${DECLARED_COUNT}" ] && [ "${DECLARED_COUNT}" != "${BULLET_COUNT}" ]; then
-    ACC_FAILURES+=("B2: Scope declaration FILES_CHANGED=${DECLARED_COUNT} does not match bullet entry count=${BULLET_COUNT} (ECAP-CCI-05)")
+if [ -n "${PER_PR_SCOPE_FILE}" ]; then
+  if [ ! -f "${PER_PR_SCOPE_FILE}" ]; then
+    ACC_FAILURES+=("B0: Expected per-PR scope declaration not found or not committed at ${PER_PR_SCOPE_FILE} (ECAP-CCI-05)")
+  else
+    DECLARED_COUNT=$(grep -E "^FILES_CHANGED:" "${PER_PR_SCOPE_FILE}" | awk '{print $2}')
+    BULLET_COUNT=$(awk '/^## FILES_CHANGED/{found=1; next} found && /^- /{count++} found && /^##/{if(!/FILES_CHANGED/)found=0} END{print count+0}' "${PER_PR_SCOPE_FILE}")
+    ACTUAL_COUNT=$(git diff --name-only origin/main...HEAD | wc -l | tr -d ' ')
+    if [ -n "${DECLARED_COUNT}" ] && [ "${DECLARED_COUNT}" != "${ACTUAL_COUNT}" ]; then
+      ACC_FAILURES+=("B1: Scope declaration FILES_CHANGED=${DECLARED_COUNT} but actual changed files=${ACTUAL_COUNT} (ECAP-CCI-05)")
+    fi
+    if [ -n "${DECLARED_COUNT}" ] && [ "${DECLARED_COUNT}" != "${BULLET_COUNT}" ]; then
+      ACC_FAILURES+=("B2: Scope declaration FILES_CHANGED=${DECLARED_COUNT} does not match bullet entry count=${BULLET_COUNT} (ECAP-CCI-05)")
+    fi
   fi
 fi
 
