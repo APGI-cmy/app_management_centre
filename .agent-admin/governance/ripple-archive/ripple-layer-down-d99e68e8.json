@@ -1,0 +1,18 @@
+{
+  "dispatch_id": "layer-down-d99e68e8",
+  "inventory_version": "1.0.0",
+  "sender": "APGI-cmy/maturion-foreman-governance",
+  "timestamp": "2026-04-29T13:21:54Z",
+  "changed_paths": [
+    "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
+    "governance/canon/SCOPE_DECLARATION_SCHEMA.md",
+    "governance/canon/scope-declaration.template.md"
+  ],
+  "canonical_commit": "d99e68e8759af5f619851116e583d768c4f4c1e1",
+  "trigger": "Merge pull request -1360 from APGI-cmy-copilot-replace-global-scope-declaration",
+  "status": "archived",
+  "archived_at": "2026-05-04T09:43:51Z",
+  "outcome": "LAYERED \u2014 SCOPE_DECLARATION_SCHEMA.md updated v1\u2192v2.0.0; scope-declaration.template.md updated v1\u2192v2.0.0; AGENT_HANDOVER_AUTOMATION.md updated v1.7.2\u2192v1.7.3 (\u00a74.3d/\u00a74.3e per-PR scope model)",
+  "pr_number": 1162,
+  "session": "session-035-20260504"
+}
