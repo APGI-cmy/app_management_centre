@@ -178,6 +178,16 @@ jobs:
           if [ -n "$ISSUE_MATCH" ]; then
             GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
             echo "Extracted governing issue: #$ISSUE_MATCH"
+          else
+            # Fallback: find the wave record that references this PR and extract its governing_issue
+            WR_FILE=$(grep -rl "^PR: #${PR_NUMBER}\b" .agent-admin/wave-records/ 2>/dev/null | head -1 || true)
+            if [ -n "$WR_FILE" ]; then
+              ISSUE_MATCH=$(grep -oP '(?:governing_issue|governing_delivery_issue)\s*:\s*[#\s]*\K\d+' "$WR_FILE" 2>/dev/null | head -1 || true)
+              if [ -n "$ISSUE_MATCH" ]; then
+                GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
+                echo "Extracted governing issue from wave record: #$ISSUE_MATCH"
+              fi
+            fi
           fi
 
           python3 .github/scripts/validate-iaa-final-assurance.py \

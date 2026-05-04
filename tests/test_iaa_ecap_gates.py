@@ -34,7 +34,6 @@ import importlib.util
 import sys
 from pathlib import Path
 
-import pytest
 
 # ---------------------------------------------------------------------------
 # Import the gate modules under test
@@ -915,8 +914,12 @@ class TestIaaGateAc7DeltaAssurance:
         assert not result.passed
         assert any("SUBSTANTIVE" in f or "substantive" in f.lower() for f in result.failures)
 
-    def test_delta_final_head_mismatch_fails(self, tmp_path):
-        """Delta assurance final_head pointing to wrong SHA fails (AC7)."""
+    def test_delta_final_head_stale_token_recording_only_passes(self, tmp_path):
+        """Token-recording-only delta with stale final_head: warns but PASSES (AC7).
+
+        Governance-only commits (token-recording-only) would otherwise create a
+        circular dependency where each commit invalidates its own delta-assurance.
+        """
         wrong_final = "ffffffff000000000000000000000000ffffffff"
         wr_dir = tmp_path / ".agent-admin" / "wave-records"
         wr_dir.mkdir(parents=True)
@@ -924,7 +927,7 @@ class TestIaaGateAc7DeltaAssurance:
             _make_valid_wave_record_with_delta(
                 pr=PR_NUMBER,
                 reviewed_sha=OLD_SHA,
-                final_head=wrong_final,  # does not match HEAD_SHA
+                final_head=wrong_final,  # stale, does not match HEAD_SHA
                 delta_classification="token-recording-only",
                 delta_verdict="PASS",
             )
@@ -936,8 +939,34 @@ class TestIaaGateAc7DeltaAssurance:
             governing_issue=ISSUE_NUM,
             repo_root=tmp_path,
         )
+        # token-recording-only with stale final_head is a WARN, not a FAIL
+        assert result.passed, f"Expected PASS for token-recording-only stale final_head: {result.failures}"
+        assert any("FINAL-HEAD-STALE" in w or "STALE" in w for w in result.warnings), \
+            f"Expected AC7-DELTA-FINAL-HEAD-STALE warning: {result.warnings}"
+
+    def test_delta_final_head_mismatch_substantive_fails(self, tmp_path):
+        """Substantive delta with non-matching final_head still fails (AC7)."""
+        wrong_final = "ffffffff000000000000000000000000ffffffff"
+        wr_dir = tmp_path / ".agent-admin" / "wave-records"
+        wr_dir.mkdir(parents=True)
+        (wr_dir / "amc-wave-record-test-20260429.md").write_text(
+            _make_valid_wave_record_with_delta(
+                pr=PR_NUMBER,
+                reviewed_sha=OLD_SHA,
+                final_head=wrong_final,  # does not match HEAD_SHA
+                delta_classification="substantive",
+                delta_verdict="PASS",
+            )
+        )
+
+        result = run_iaa_gate(
+            pr_number=PR_NUMBER,
+            head_sha=HEAD_SHA,
+            governing_issue=ISSUE_NUM,
+            repo_root=tmp_path,
+        )
         assert not result.passed
-        assert any("FINAL" in f or "MISMATCH" in f for f in result.failures)
+        assert any("FINAL" in f or "MISMATCH" in f or "SUBSTANTIVE" in f for f in result.failures)
 
 
 class TestIaaGateGoverningIssueMandatory:

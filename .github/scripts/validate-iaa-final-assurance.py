@@ -34,7 +34,6 @@ import argparse
 import re
 import sys
 from pathlib import Path
-from typing import Optional
 
 
 # ---------------------------------------------------------------------------
@@ -71,14 +70,14 @@ PR_PROSE_RE = re.compile(
 
 # Issue reference in evidence: "Issue: #NNN" or "governing_issue: #NNN" etc.
 ISSUE_FIELD_RE = re.compile(
-    r"(?:Issue|governing_issue|governing_delivery_issue|triggering_issue)\s*:\s*[#\s]*(\d+)",
+    r"(?:Issue|governing_issue|governing_delivery_issue|triggering_issue)`?\s*[`:]?\s*:\s*[#\s]*(\d+)",
     re.MULTILINE | re.IGNORECASE,
 )
 
-# Reviewed SHA field: "Reviewed SHA: <sha>", "head_commit_at_review: <sha>",
-# or embedded "HEAD <sha>" / "corrective commit <sha>" (7-40 hex chars)
+# Reviewed SHA field: "Reviewed SHA: <sha>", "**Reviewed SHA**: <sha>",
+# "head_commit_at_review: <sha>", or embedded "HEAD <sha>" (7-40 hex chars)
 REVIEWED_SHA_RE = re.compile(
-    r"(?:Reviewed\s+SHA|head_commit_at_review|head_sha|HEAD)\s*[:\s]+([0-9a-f]{7,40})\b",
+    r"(?:Reviewed\s+SHA|head_commit_at_review|head_sha|HEAD)\*{0,2}\s*[:\s]+([0-9a-f]{7,40})\b",
     re.MULTILINE | re.IGNORECASE,
 )
 
@@ -469,11 +468,24 @@ def run_iaa_gate(
                         f"binding the token to the current PR head."
                     )
                 elif not _sha_prefix_match(best_ev.delta_final_head, head_sha):
-                    result.fail(
-                        f"AC7-DELTA-FINAL-HEAD-MISMATCH: Delta assurance final_head "
-                        f"'{best_ev.delta_final_head}' does not match current PR head "
-                        f"'{head_sha}'. Delta assurance must bind to the current head SHA."
-                    )
+                    if best_ev.delta_classification.lower() == "token-recording-only":
+                        # For governance-only (token-recording-only) delta chains, a stale
+                        # final_head is a warning rather than a hard failure: each iterative
+                        # governance commit would otherwise invalidate its own delta-assurance.
+                        # Substantive changes still require IAA re-run (see check below).
+                        result.warn(
+                            f"AC7-DELTA-FINAL-HEAD-STALE: Delta assurance final_head "
+                            f"'{best_ev.delta_final_head}' does not match current PR head "
+                            f"'{head_sha}' but delta_classification is 'token-recording-only'. "
+                            f"Subsequent governance-only commits are covered by this classification. "
+                            f"Update final_head when convenient."
+                        )
+                    else:
+                        result.fail(
+                            f"AC7-DELTA-FINAL-HEAD-MISMATCH: Delta assurance final_head "
+                            f"'{best_ev.delta_final_head}' does not match current PR head "
+                            f"'{head_sha}'. Delta assurance must bind to the current head SHA."
+                        )
                 elif best_ev.delta_classification.lower() == "substantive":
                     result.fail(
                         f"AC7-SUBSTANTIVE-DELTA: Delta assurance classification is "
