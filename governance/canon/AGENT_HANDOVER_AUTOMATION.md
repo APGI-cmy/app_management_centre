@@ -851,7 +851,7 @@ if [ -f "${SCOPE_FILE}" ]; then
   # Check 4b: Validate numeric FILES_CHANGED: N field matches bullet count
   NUMERIC_FIELD=$(grep -E "^FILES_CHANGED:" "${SCOPE_FILE}" | awk '{print $2}' | tr -d ' ')
   if [ -z "${NUMERIC_FIELD}" ]; then
-    SCOPE_FAILURES+=("FILES_CHANGED: N field missing from ## FILES_CHANGED section")
+    SCOPE_FAILURES+=("FILES_CHANGED: N numeric field declaration missing from scope file header (must be `FILES_CHANGED: N` where N is the file count)")
     echo "  ❌ Numeric field: FILES_CHANGED: N not found in ${SCOPE_FILE}"
   elif [ "${NUMERIC_FIELD}" != "${SCOPE_COUNT}" ]; then
     SCOPE_FAILURES+=("numeric field mismatch: FILES_CHANGED: ${NUMERIC_FIELD} does not match bullet count ${SCOPE_COUNT}")
