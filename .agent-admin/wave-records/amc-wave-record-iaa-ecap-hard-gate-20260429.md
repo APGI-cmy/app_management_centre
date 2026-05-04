@@ -138,6 +138,14 @@ governing_issue: #1154
 Reviewed SHA: 24b49a5a42dfa4a44b3ba431bde7e12249a72279
 Verdict: PASS
 
+delta_assurance:
+  base_head: 24b49a5a42dfa4a44b3ba431bde7e12249a72279
+  final_head: d99048f6af4510c32c74a1b4023217e63d97494c
+  delta_classification: token-recording-only
+  delta_assurance_verdict: PASS
+  final_token_binding: IAA-session-070-20260504-PASS binds to d99048f6af4510c32c74a1b4023217e63d97494c
+  delta_rationale: Post-IAA commit chain 24b49a5→70575a7→9eb0d789→d99048f6 adds only governance artifacts (session-070 memory, ECAP bundle normalization, wave record/checklist normalization, delta-assurance extensions). No gate scripts, workflow, or tests modified. delta_classification: token-recording-only. AC7 satisfied without IAA re-run.
+
 ---
 
 **Canon ID**: Wave Record
