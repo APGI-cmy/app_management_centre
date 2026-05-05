@@ -15,7 +15,7 @@ These templates minimize freeform authorship and maximize deterministic field co
 | `PREHANDOVER.template.md` | PREHANDOVER proof for ECAP-involved jobs | execution-ceremony-admin-agent |
 | `SESSION_MEMORY.template.md` | Session memory for ECAP sessions | execution-ceremony-admin-agent |
 | `ECAP_RECONCILIATION_SUMMARY.template.md` | Full ECAP reconciliation summary (Tier 3 per-wave proof artifact) | execution-ceremony-admin-agent |
-| `SCOPE_DECLARATION.template.md` | `governance/scope-declaration.md` generation | execution-ceremony-admin-agent |
+| `SCOPE_DECLARATION.template.md` | `.agent-admin/scope-declarations/pr-<PR_NUMBER>.md` generation (per-PR immutable model v2.0.0) | execution-ceremony-admin-agent |
 | `CORRECTION_ADDENDUM.template.md` | Administrative correction addendum (when error found in committed artifact) | execution-ceremony-admin-agent |
 | `FOREMAN_ADMIN_READINESS_HANDBACK.template.md` | Foreman QP admin-compliance checkpoint output | Foreman |
 
@@ -26,7 +26,7 @@ These templates minimize freeform authorship and maximize deterministic field co
 1. **Never submit a template with unfilled placeholders.** Every `<placeholder>` and `[bracket value]` must be replaced with a real value before committing.
 2. **PREHANDOVER proof is immutable once committed.** Use `CORRECTION_ADDENDUM.template.md` + a new PREHANDOVER proof for any correction cycle.
 3. **Session memory is append-only.** Do not edit a committed session memory; create a new one for the next session.
-4. **Scope declaration is regenerated as the last committed file before IAA invocation** per ECAP-QC-002.
+4. **Scope declaration is regenerated as the last committed file before IAA invocation** per ECAP-QC-002. The output file is `.agent-admin/scope-declarations/pr-<PR_NUMBER>.md` (per-PR immutable model v2.0.0). The deprecated shared `governance/scope-declaration.md` must not be used as per-PR scope evidence.
 5. **ECAP_RECONCILIATION_SUMMARY** must be committed before or embedded in the PREHANDOVER proof.
 6. **FOREMAN_ADMIN_READINESS_HANDBACK** must be completed and recorded before IAA is invoked.
 

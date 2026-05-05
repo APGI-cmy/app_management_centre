@@ -555,8 +555,8 @@ python .github/scripts/check_governance_alignment.py \
   --local-inventory GOVERNANCE_ARTIFACT_INVENTORY.md
 # Exit 0 required
 
-# Gate 2: Scope (if applicable)
-if [ -f "governance/scope-declaration.md" ]; then
+# Gate 2: Scope (if applicable — per-PR immutable model)
+if [ -n "${PR_NUMBER:-}" ] && [ -f ".agent-admin/scope-declarations/pr-${PR_NUMBER}.md" ]; then
   .github/scripts/validate-scope-to-diff.sh main
 fi
 

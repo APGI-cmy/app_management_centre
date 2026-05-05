@@ -5,7 +5,7 @@
   "last_layer_down_commit": "44218bcd28d5e02f800362c6f052402146301e3d",
   "last_updated": "2026-05-04",
   "alignment_status": "ALIGNED",
-  "total_artifacts": 39,
+  "total_artifacts": 42,
   "artifacts": [
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -120,13 +120,13 @@
     {
       "filename": "AGENT_HANDOVER_AUTOMATION.md",
       "path": "governance/canon/AGENT_HANDOVER_AUTOMATION.md",
-      "version": "1.7.2",
+      "version": "1.7.3",
       "type": "canon",
       "layer_down_status": "PUBLIC_API",
-      "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
-      "layered_down_at": "2026-04-29T12:00:00Z",
-      "file_hash_sha256": "c916049ae2faff9c6eed83242260d5b44888fe30e518cbd24e1fa7cba20f0d77",
-      "action": "CONSUMER_AHEAD"
+      "canonical_commit": "d99e68e8759af5f619851116e583d768c4f4c1e1",
+      "layered_down_at": "2026-05-04T09:43:51Z",
+      "file_hash_sha256": "144b4edb74ba707276b9e43efc449d040f361e7caf5ee5403ff1418444e0a92e",
+      "action": "UPDATED"
     },
     {
       "filename": "FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md",
@@ -440,6 +440,28 @@
       "action": "AMENDED"
     },
     {
+      "filename": "SCOPE_DECLARATION_SCHEMA.md",
+      "path": "governance/canon/SCOPE_DECLARATION_SCHEMA.md",
+      "version": "v2.0.0",
+      "type": "canon",
+      "layer_down_status": "INTERNAL",
+      "canonical_commit": "d99e68e8759af5f619851116e583d768c4f4c1e1",
+      "layered_down_at": "2026-05-04T09:43:51Z",
+      "file_hash_sha256": "4c41a837aed825f4a0aa24e193de717aa2bf173fa01ecfd40b6256b40fa7942a",
+      "action": "UPDATED"
+    },
+    {
+      "filename": "scope-declaration.template.md",
+      "path": "governance/canon/scope-declaration.template.md",
+      "version": "v2.0.0",
+      "type": "template",
+      "layer_down_status": "INTERNAL",
+      "canonical_commit": "d99e68e8759af5f619851116e583d768c4f4c1e1",
+      "layered_down_at": "2026-05-04T09:43:51Z",
+      "file_hash_sha256": "f233e0bd21d745f5e2df0d0c9625913168a2ff94baa77e790084485c78afdf53",
+      "action": "UPDATED"
+    },
+    {
       "filename": "MMM_SIMPLE_PR_ADMIN_MODEL.md",
       "path": "governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md",
       "version": "1.0.0",
@@ -556,6 +578,17 @@
       "issue_ref": "APGI-cmy/app_management_centre#layer-down-2ba1d6a3",
       "status": "COMPLETE",
       "notes": "AGENT_HANDOVER_AUTOMATION.md (consumer AHEAD v1.7.2 > canonical v1.6.0), INDEPENDENT_ASSURANCE_AGENT_CANON.md (consumer AHEAD v1.12.0 > canonical v1.8.0), PREHANDOVER.template.md (updated v1.1.0 -> v1.2.0)"
+    },
+    {
+      "commit": "d99e68e8759af5f619851116e583d768c4f4c1e1",
+      "date": "2026-05-04T09:43:51Z",
+      "session": "session-035-20260504",
+      "changed_artifacts": [
+        "AGENT_HANDOVER_AUTOMATION.md",
+        "SCOPE_DECLARATION_SCHEMA.md",
+        "scope-declaration.template.md"
+      ],
+      "note": "Layer-down d99e68e8: per-PR immutable scope declaration model (\u00a74.3d updated, SCOPE_DECLARATION_SCHEMA v1\u2192v2.0.0, scope-declaration.template.md v2.0.0, AGENT_HANDOVER_AUTOMATION.md v1.7.2\u2192v1.7.3)"
     },
     {
       "layer_down_id": "layer-down-2026-05-04-44218bcd",
