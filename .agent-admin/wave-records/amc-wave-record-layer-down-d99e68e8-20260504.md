@@ -39,7 +39,7 @@
 | wave_verb | layer-down (propagate) |
 | classification | POLC-Orchestration (governance sync) |
 | architecture_ref | N/A — governance-only wave |
-| allowed_artifact_paths | governance/canon/SCOPE_DECLARATION_SCHEMA.md, governance/canon/scope-declaration.template.md, governance/canon/AGENT_HANDOVER_AUTOMATION.md, .governance-pack/CANON_INVENTORY.json, governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json, .agent-admin/governance/sync_state.json, .agent-admin/governance/ripple-archive/, .agent-admin/wave-records/, .agent-workspace/governance-liaison-amc/memory/, .agent-admin/scope-declarations/pr-1162.md, .agent-admin/build-evidence/session-035-20260504/, .agent-workspace/independent-assurance-agent/memory/ |
+| allowed_artifact_paths | governance/canon/SCOPE_DECLARATION_SCHEMA.md, governance/canon/scope-declaration.template.md, governance/canon/AGENT_HANDOVER_AUTOMATION.md, .governance-pack/CANON_INVENTORY.json, governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json, .agent-admin/governance/sync_state.json, .agent-admin/governance/ripple-archive/, .agent-admin/wave-records/, .agent-workspace/governance-liaison-amc/memory/, .agent-admin/scope-declarations/pr-1162.md, .agent-admin/build-evidence/session-035-20260504/, .agent-workspace/independent-assurance-agent/memory/, .github/scripts/validate-scope-to-diff.sh, governance/baselines/agent-files/governance-liaison.md, governance/templates/execution-ceremony-admin/PREHANDOVER.template.md, governance/templates/execution-ceremony-admin/README.md, governance/templates/execution-ceremony-admin/SCOPE_DECLARATION.template.md |
 | governance_evidence_path | .agent-admin/wave-records/amc-wave-record-layer-down-d99e68e8-20260504.md |
 
 ## 3. Evaluation Summary
