@@ -423,4 +423,4 @@ control_surfaces_updated:
 
 > To be populated after IAA Final Audit.
 
-`PHASE_B_BLOCKING_TOKEN: PENDING — IAA invocation pending`
+`PHASE_B_BLOCKING_TOKEN: IAA-session-037-20260505-PASS`
