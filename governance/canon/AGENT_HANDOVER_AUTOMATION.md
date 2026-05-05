@@ -1679,7 +1679,7 @@ For product-fix PRs where `.admin/pr.json` declares `type: product-fix`, `requir
   agent-contract-format, agent-boundary, agent-bootstrap-inject)
 
 **Forced-ceremony override**: If the PR diff touches any forced-ceremony path defined in
-SPAM-001 §6, full Phase 4 ceremony is reinstated regardless of `.admin/pr.json` declarations.
+SPAM-001 §5, full Phase 4 ceremony is reinstated regardless of `.admin/pr.json` declarations.
 The Foreman and ECAP must verify this before proceeding without ceremony.
 
 **Authority**: SPAM-001 (`governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md`)

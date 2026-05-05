@@ -71,7 +71,7 @@ ECAP appointment is **NOT required** for product-fix PRs where all three conditi
 For such PRs, `.admin/pr.json` itself serves as the ceremony declaration. The Foreman does NOT
 need to appoint `execution-ceremony-admin-agent`.
 
-**Forced-ceremony override**: If any forced-ceremony path (SPAM-001 §6) appears in the PR diff,
+**Forced-ceremony override**: If any forced-ceremony path (SPAM-001 §5) appears in the PR diff,
 ECAP appointment is reinstated regardless of `.admin/pr.json` declarations. The Foreman MUST
 verify forced-ceremony path status before proceeding without ECAP.
 
