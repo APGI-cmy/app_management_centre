@@ -1,7 +1,8 @@
 
-**Status**: CANONICAL | **Version**: 1.7.3 | **Authority**: CS2  
+**Status**: CANONICAL | **Version**: 1.7.4 | **Authority**: CS2  
 **Date**: 2026-02-24  
-**Amended**: 2026-05-04 — v1.7.3: Updated §4.3d Scope-Declaration Parity Gate — Required Checks table split into two rows (diff count vs bullet entries, numeric field integrity); gate script extended with Check 4b validating FILES_CHANGED: N numeric field against bullet entry count; §4.3e Check B updated to use per-PR scope file (.agent-admin/scope-declarations/pr-${PR_NUMBER}.md) with fallback discovery, removing deprecated governance/scope-declaration.md check; AAP-04 updated to reference per-PR path and include numeric field check; authority: CS2 — issue #1359 (per-PR immutable scope declaration model — layer-down from canonical d99e68e8).  
+**Amended**: 2026-05-05 — v1.7.4: Added §4.3f Simple Admin Model Exception — waives Phase 4 ceremony requirements (§4.3c, §4.3d, §4.3e, §4.4, §4.5) for product-fix PRs where .admin/pr.json declares type=product-fix, requires_iaa=false, requires_ecap=false, and no forced-ceremony paths are touched; defines what remains required for Simple Admin PRs; forced-ceremony override rule cited from SPAM-001; authority: CS2 — issue #1163.  
+**Previous amendment**: 2026-05-04 — v1.7.3: Updated §4.3d Scope-Declaration Parity Gate — Required Checks table split into two rows (diff count vs bullet entries, numeric field integrity); gate script extended with Check 4b validating FILES_CHANGED: N numeric field against bullet entry count; §4.3e Check B updated to use per-PR scope file (.agent-admin/scope-declarations/pr-${PR_NUMBER}.md) with fallback discovery, removing deprecated governance/scope-declaration.md check; AAP-04 updated to reference per-PR path and include numeric field check; authority: CS2 — issue #1359 (per-PR immutable scope declaration model — layer-down from canonical d99e68e8).  
 **Previous amendment**: 2026-04-22 — v1.7.2: M3 — added `stage1_canonical_source` extraction from PREHANDOVER proof; added target-pointer verification (STC-04) for all live root pointer files using key-value and bold-label extraction; added predecessor-like heuristic fallback when no canonical source is declared; scoped M3 root-pointer scan to all live root pointer files (not only changed files); updated AAP-25 description to include target-path verification; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
 **Previous amendment**: 2026-04-22 — v1.7.1: Check M CL2 — `stage1` matched anywhere in path (not only as directory component); replaced with ERE word boundaries; M1 checklist scoped to PREHANDOVER proof or PR changed files with completeness check; M2 scans full live artifact chain (not only changed files); M4 "NOT present" treated as pass evidence; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
 **Previous amendment**: 2026-04-22 — v1.7.0: Added §4.3e Check M — Stage 1 approval-alignment state-transition sweep; added AAP-23 through AAP-26 to auto-fail rule table; canonical basis: `STAGE1_APPROVAL_ALIGNMENT_QA_PROTOCOL.md` v1.0.0; authority: CS2 — Stage 1 approval-alignment QA hardening issue.  
@@ -65,6 +66,7 @@ Phase 4 consists of five mandatory sections:
 ### 4.3c Pre-IAA Commit-State Gate (mandatory, BLOCKING)
 ### 4.3d Scope-Declaration Parity Gate (mandatory, BLOCKING — governance PRs)
 ### 4.3e Admin Ceremony Compliance Gate (mandatory, BLOCKING — ECAP-involved jobs)
+### 4.3f Simple Admin Model Exception (SPAM-001 — product-fix PRs only)
 ### 4.4 Compliance Check & Escalation (if needed)
 ```
 
@@ -783,7 +785,7 @@ documentation only, no governance-path files) are exempt.
 ```markdown
 ### 4.3d Scope-Declaration Parity Gate (<Agent>_H — BLOCKING for governance PRs)
 
-**Authority**: `governance/canon/AGENT_HANDOVER_AUTOMATION.md` v1.7.3
+**Authority**: `governance/canon/AGENT_HANDOVER_AUTOMATION.md` v1.7.4
 
 > **ABSOLUTE RULE (ECAP-QC-002)**: `.agent-admin/scope-declarations/pr-${PR_NUMBER}.md` must be
 > the final committed file before IAA invocation. Its FILES_CHANGED count must match
@@ -1657,6 +1659,30 @@ The following conditions are **auto-fail** for the §4.3e gate regardless of oth
 The following item is added to the handover checklist when an ECAP job is involved:
 
 > - [ ] **Admin Ceremony Compliance Gate PASSED** (ECAP jobs): §4.3e gate run — 0 auto-fail conditions (AAP-15 through AAP-26 auto-fail conditions included); ECAP reconciliation summary present; `wave-current-tasks.md` token/session coherence checked (Check L); Stage 1 approval-alignment sweep checked (Check M, if applicable); admin-compliance readiness accepted by Foreman QP checkpoint (BLOCKING — IAA must not be invoked until this is ✅) (IAA Token — Append-Only, Dedicated File)
+
+### 4.3f Simple Admin Model Exception (SPAM-001)
+
+For product-fix PRs where `.admin/pr.json` declares `type: product-fix`, `requires_iaa: false`,
+`requires_ecap: false`, AND no forced-ceremony paths are present in the PR diff:
+
+**Waived Phase 4 steps** (not required):
+- §4.3c Pre-IAA Commit-State Gate
+- §4.3d Scope-Declaration Parity Gate
+- §4.3e Admin Ceremony Compliance Gate
+- §4.4 IAA Invocation
+- §4.5 Token Ceremony
+
+**Required for Simple Admin PRs**:
+- §4.1 Evidence: `.admin/pr.json` serves as the evidence manifest
+- §4.2 Session Memory: Optional (recommended for agent-authored PRs)
+- Merge gate parity check: All preserved-control gates still apply (POLC boundary, build-to-green,
+  agent-contract-format, agent-boundary, agent-bootstrap-inject)
+
+**Forced-ceremony override**: If the PR diff touches any forced-ceremony path defined in
+SPAM-001 §6, full Phase 4 ceremony is reinstated regardless of `.admin/pr.json` declarations.
+The Foreman and ECAP must verify this before proceeding without ceremony.
+
+**Authority**: SPAM-001 (`governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md`)
 
 **Purpose**: Govern how the IAA writes its assurance verdict. The PREHANDOVER proof is
 **read-only** once committed. The IAA token is written to a new, dedicated artifact file —
