@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/APGI-cmy/app_management_centre/blob/main/.admin/pr.json.schema.json",
+  "$id": "https://github.com/APGI-cmy/app_management_centre/.admin/pr.json.schema.json",
   "title": "AMC PR Admin Manifest",
   "description": "Single source of truth for PR ceremony level per AMC Simple PR Admin Model (SPAM-001). Authority: CS2 — Issue #1163.",
   "type": "object",

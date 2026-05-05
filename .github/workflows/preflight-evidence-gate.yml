@@ -234,6 +234,8 @@ jobs:
               echo "⚠️  WARNING (non-blocking): No Phase 1 preflight evidence found, but SPAM-001 Simple Admin mode is active."
               echo "   Session-memory check downgraded to informational for product-fix/docs-only PRs per SPAM-001 §4."
               echo "   Authority: MMM_SIMPLE_PR_ADMIN_MODEL.md (SPAM-001)"
+              echo ""
+              echo "✅ PASS (SPAM-001 Simple Admin) — session-memory check non-blocking for this PR type."
             else
               exit 1
             fi
