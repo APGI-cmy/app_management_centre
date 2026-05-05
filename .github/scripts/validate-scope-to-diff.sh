@@ -3,8 +3,9 @@
 # Authority: MERGE_GATE_PHILOSOPHY.md v2.0, SCOPE_TO_DIFF_RULE.md
 # Living Agent System: v6.2.0
 #
-# Purpose: Validates that the declared scope (SCOPE_DECLARATION.md or
-#          governance/scope/*.md) matches the actual git diff for this PR/branch.
+# Purpose: Validates that the declared scope matches the actual git diff for this PR/branch.
+#          Lookup order: .agent-admin/scope-declarations/pr-${PR_NUMBER}.md (per-PR immutable
+#          model, v2.0.0), then SCOPE_DECLARATION.md, then governance/scope/*.md (legacy).
 #          Implements BL-027: scope declaration must be accurate.
 #
 # Usage: bash validate-scope-to-diff.sh [--base <ref>]
@@ -40,8 +41,12 @@ echo ""
 ERRORS=0
 
 # Step 1: Locate scope declaration
+# Per-PR immutable model (SCOPE_DECLARATION_SCHEMA v2.0.0 / §4.3d) takes highest priority.
+# PR_NUMBER must be exported in the CI environment for BL-027 to resolve the correct file.
 SCOPE_FILE=""
-if [ -f "SCOPE_DECLARATION.md" ]; then
+if [ -n "${PR_NUMBER:-}" ] && [ -f ".agent-admin/scope-declarations/pr-${PR_NUMBER}.md" ]; then
+  SCOPE_FILE=".agent-admin/scope-declarations/pr-${PR_NUMBER}.md"
+elif [ -f "SCOPE_DECLARATION.md" ]; then
   SCOPE_FILE="SCOPE_DECLARATION.md"
 elif ls governance/scope/*.md 1>/dev/null 2>&1; then
   SCOPE_FILE=$(ls governance/scope/*.md 2>/dev/null | sort | tail -1)

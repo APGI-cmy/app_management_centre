@@ -1,11 +1,11 @@
 {
-    "last_check": "2026-04-29T12:00:00Z",
+    "last_check": "2026-05-04T09:43:51Z",
     "canonical_version": "1.0.0",
-    "canonical_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+    "canonical_commit": "d99e68e8759af5f619851116e583d768c4f4c1e1",
     "local_version": "1.0.0",
-    "local_commit": "2ba1d6a3cf9c97dd67fff483ca04a90549cba293",
+    "local_commit": "d99e68e8759af5f619851116e583d768c4f4c1e1",
     "drift_detected": "false",
     "needs_alignment": "false",
     "alignment_method": "layer-down",
-    "alignment_note": "Layer-down of 2ba1d6a3 (2026-04-29) \u2014 catch-up governance repo hardening: AGENT_HANDOVER_AUTOMATION v1.6.0 (consumer AHEAD at v1.7.2), INDEPENDENT_ASSURANCE_AGENT_CANON v1.8.0 (consumer AHEAD at v1.12.0), PREHANDOVER.template.md v1.2.0 (updated from v1.1.0)"
+    "alignment_note": "Layer-down of d99e68e8 (2026-04-29) \u2014 per-PR immutable scope declaration model: SCOPE_DECLARATION_SCHEMA v1\u2192v2.0.0, scope-declaration.template.md v1\u2192v2.0.0, AGENT_HANDOVER_AUTOMATION v1.7.2\u2192v1.7.3 (\u00a74.3d/\u00a74.3e per-PR scope model)"
 }
