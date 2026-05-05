@@ -74,6 +74,19 @@ jobs:
           echo "pr_type=$PR_TYPE" >> $GITHUB_OUTPUT
           echo "PR Type: $PR_TYPE"
 
+          # ------------------------------------------------------------------
+          # Simple Admin Model: check .admin/pr.json for product-fix type
+          # Authority: SPAM-001 (MMM_SIMPLE_PR_ADMIN_MODEL.md §4)
+          # ------------------------------------------------------------------
+          if [ -f ".admin/pr.json" ]; then
+            ADMIN_TYPE=$(python3 -c "import json; d=json.load(open('.admin/pr.json')); print(d.get('type',''))" 2>/dev/null || echo "")
+            if [[ "$ADMIN_TYPE" == "product-fix" || "$ADMIN_TYPE" == "docs-only" ]]; then
+              PR_TYPE="$ADMIN_TYPE"
+              echo "pr_type=$PR_TYPE" >> $GITHUB_OUTPUT
+              echo "PR Type (SPAM-001 override): $PR_TYPE"
+            fi
+          fi
+
   # ============================================================================
   # JOB 2: Merge Gate Verdict
   # ============================================================================

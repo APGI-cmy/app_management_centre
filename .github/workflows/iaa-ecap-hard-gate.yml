@@ -75,6 +75,53 @@ jobs:
           fi
 
           # ------------------------------------------------------------------
+          # Simple Admin Model bypass: .admin/pr.json with type=product-fix
+          # Authority: SPAM-001 (MMM_SIMPLE_PR_ADMIN_MODEL.md §4)
+          # ------------------------------------------------------------------
+          if [ -f ".admin/pr.json" ]; then
+            SA_TYPE=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(d.get('type',''))" 2>/dev/null || echo "")
+            SA_REQ_IAA=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_iaa',True)).lower())" 2>/dev/null || echo "true")
+            SA_REQ_ECAP=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_ecap',True)).lower())" 2>/dev/null || echo "true")
+
+            if [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && \
+               [[ "$SA_REQ_IAA" == "false" ]] && \
+               [[ "$SA_REQ_ECAP" == "false" ]]; then
+              # Check for forced-ceremony paths (SPAM-001 §5)
+              BASE_REF_SA="${{ github.event.pull_request.base.ref }}"
+              CHANGED_SA=$(git diff --name-only "origin/${BASE_REF_SA}"...HEAD 2>/dev/null || echo "")
+              HAS_FORCED_PATHS=false
+              FORCED_PATHS_LIST=""
+              FORCED_PATTERNS=("^\.github/agents/" "^governance/" "^\.governance-pack/"
+                               "^\.agent-workspace/.*/knowledge/" "supabase/migrations/"
+                               "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
+              while IFS= read -r fpath; do
+                [ -z "$fpath" ] && continue
+                for pattern in "${FORCED_PATTERNS[@]}"; do
+                  if echo "$fpath" | grep -qE "$pattern"; then
+                    HAS_FORCED_PATHS=true
+                    FORCED_PATHS_LIST="${FORCED_PATHS_LIST}   - ${fpath}"$'\n'
+                    break
+                  fi
+                done
+              done <<< "$CHANGED_SA"
+
+              if [ "$HAS_FORCED_PATHS" = "false" ]; then
+                echo "✅ Simple Admin Model (SPAM-001): .admin/pr.json type=${SA_TYPE}, requires_iaa=false, requires_ecap=false"
+                echo "   No forced-ceremony paths detected — SIMPLE_ADMIN bypass activated."
+                echo "   Authority: SPAM-001 (MMM_SIMPLE_PR_ADMIN_MODEL.md §4)"
+                echo "is_auto_bypass=true"          >> $GITHUB_OUTPUT
+                echo "is_protected_path_pr=false"   >> $GITHUB_OUTPUT
+                echo "requires_iaa=false"           >> $GITHUB_OUTPUT
+                exit 0
+              else
+                echo "⚠️  Simple Admin override BLOCKED: .admin/pr.json requests simple admin, but forced-ceremony paths detected:"
+                echo -e "$FORCED_PATHS_LIST"
+                echo "   Full ceremony reinstated per SPAM-001 §5 Forced-Ceremony Override rule."
+              fi
+            fi
+          fi
+
+          # ------------------------------------------------------------------
           # Detect changed files
           # ------------------------------------------------------------------
           BASE_REF="${{ github.event.pull_request.base.ref }}"

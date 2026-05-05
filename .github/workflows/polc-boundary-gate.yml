@@ -498,6 +498,45 @@ jobs:
             exit 0
           fi
 
+          # ------------------------------------------------------------------
+          # SPAM-001: Simple Admin Model — downgrade session-memory-check to
+          # informational for product-fix/docs-only PRs.
+          # Authority: MMM_SIMPLE_PR_ADMIN_MODEL.md §4 (SPAM-001)
+          # NOTE: foreman-implementation-check and builder-involvement-check
+          #       are PRESERVED and remain fully enforced (POLC boundary).
+          # ------------------------------------------------------------------
+          SIMPLE_ADMIN=false
+          if [ -f ".admin/pr.json" ]; then
+            SA_TYPE=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(d.get('type',''))" 2>/dev/null || echo "")
+            SA_REQ_IAA=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_iaa',True)).lower())" 2>/dev/null || echo "true")
+            SA_REQ_ECAP=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_ecap',True)).lower())" 2>/dev/null || echo "true")
+            if [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && \
+               [[ "$SA_REQ_IAA" == "false" ]] && [[ "$SA_REQ_ECAP" == "false" ]]; then
+              BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+              CHANGED_SA=$(git diff --name-only "origin/${BASE_BRANCH}"...HEAD 2>/dev/null || echo "")
+              SA_HAS_FORCED=false
+              SA_FORCED_PATTERNS=("^\.github/agents/" "^governance/" "^\.governance-pack/"
+                                  "^\.agent-workspace/.*/knowledge/" "supabase/migrations/"
+                                  "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
+              while IFS= read -r fpath; do
+                [ -z "$fpath" ] && continue
+                for pattern in "${SA_FORCED_PATTERNS[@]}"; do
+                  if echo "$fpath" | grep -qE "$pattern"; then
+                    SA_HAS_FORCED=true
+                    break 2
+                  fi
+                done
+              done <<< "$CHANGED_SA"
+              if [ "$SA_HAS_FORCED" = "false" ]; then
+                echo "ℹ️  SPAM-001: Simple Admin Model active (type=${SA_TYPE}) — session-memory-check downgraded to informational."
+                echo "   Note: foreman-implementation-check and builder-involvement-check remain fully enforced."
+                SIMPLE_ADMIN=true
+              else
+                echo "⚠️  SPAM-001: Forced-ceremony paths detected — Simple Admin bypass NOT active. Full ceremony applies."
+              fi
+            fi
+          fi
+
           # Check for Foreman session memory
           SESSION_MEMORY_FOUND=false
 
@@ -528,7 +567,13 @@ jobs:
             echo ""
             echo "Per Living Agent System v6.2.0."
             echo ""
-            exit 1
+            if [ "$SIMPLE_ADMIN" = "true" ]; then
+              echo "⚠️  WARNING (non-blocking): Session memory not found, but SPAM-001 Simple Admin mode is active."
+              echo "   session-memory-check downgraded to informational for product-fix/docs-only PRs per SPAM-001 §4."
+              echo "   Authority: MMM_SIMPLE_PR_ADMIN_MODEL.md (SPAM-001)"
+            else
+              exit 1
+            fi
           fi
 
           echo "✅ Session memory present"

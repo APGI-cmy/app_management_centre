@@ -56,6 +56,41 @@ jobs:
           fi
 
           # ----------------------------------------------------------------
+          # SPAM-001: Simple Admin Model — downgrade session-memory to informational
+          # Authority: MMM_SIMPLE_PR_ADMIN_MODEL.md §4 (SPAM-001)
+          # ----------------------------------------------------------------
+          SIMPLE_ADMIN=false
+          if [ -f ".admin/pr.json" ]; then
+            SA_TYPE=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(d.get('type',''))" 2>/dev/null || echo "")
+            SA_REQ_IAA=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_iaa',True)).lower())" 2>/dev/null || echo "true")
+            SA_REQ_ECAP=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_ecap',True)).lower())" 2>/dev/null || echo "true")
+            if [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && \
+               [[ "$SA_REQ_IAA" == "false" ]] && [[ "$SA_REQ_ECAP" == "false" ]]; then
+              BASE_REF_SA="${{ github.event.pull_request.base.ref }}"
+              CHANGED_SA=$(git diff --name-only "origin/${BASE_REF_SA}"...HEAD 2>/dev/null || echo "")
+              SA_HAS_FORCED=false
+              SA_FORCED_PATTERNS=("^\.github/agents/" "^governance/" "^\.governance-pack/"
+                                  "^\.agent-workspace/.*/knowledge/" "supabase/migrations/"
+                                  "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
+              while IFS= read -r fpath; do
+                [ -z "$fpath" ] && continue
+                for pattern in "${SA_FORCED_PATTERNS[@]}"; do
+                  if echo "$fpath" | grep -qE "$pattern"; then
+                    SA_HAS_FORCED=true
+                    break 2
+                  fi
+                done
+              done <<< "$CHANGED_SA"
+              if [ "$SA_HAS_FORCED" = "false" ]; then
+                echo "ℹ️  SPAM-001: Simple Admin Model active (type=${SA_TYPE}) — session-memory check downgraded to informational."
+                SIMPLE_ADMIN=true
+              else
+                echo "⚠️  SPAM-001: Forced-ceremony paths detected — Simple Admin bypass NOT active. Full ceremony applies."
+              fi
+            fi
+          fi
+
+          # ----------------------------------------------------------------
           # Detect which agent submitted this PR (from labels or PR body)
           # ----------------------------------------------------------------
           AGENT_ID="unknown"
@@ -195,7 +230,13 @@ jobs:
             echo "  - AGENT_PREFLIGHT_PATTERN.md v1.0.0"
             echo "  - copilot-instructions.md (repo-root enforcement)"
             echo ""
-            exit 1
+            if [ "$SIMPLE_ADMIN" = "true" ]; then
+              echo "⚠️  WARNING (non-blocking): No Phase 1 preflight evidence found, but SPAM-001 Simple Admin mode is active."
+              echo "   Session-memory check downgraded to informational for product-fix/docs-only PRs per SPAM-001 §4."
+              echo "   Authority: MMM_SIMPLE_PR_ADMIN_MODEL.md (SPAM-001)"
+            else
+              exit 1
+            fi
           fi
 
 
@@ -245,6 +286,41 @@ jobs:
           echo "Authority: IAA_PRE_BRIEF_PROTOCOL.md v1.2.0"
           echo "Violation class: HALT-008 (prebrief_or_wavetasks_absent)"
           echo ""
+
+          # ----------------------------------------------------------------
+          # SPAM-001: Simple Admin Model — downgrade HALT-008 to informational
+          # Authority: MMM_SIMPLE_PR_ADMIN_MODEL.md §4 (SPAM-001)
+          # ----------------------------------------------------------------
+          SIMPLE_ADMIN=false
+          if [ -f ".admin/pr.json" ]; then
+            SA_TYPE=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(d.get('type',''))" 2>/dev/null || echo "")
+            SA_REQ_IAA=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_iaa',True)).lower())" 2>/dev/null || echo "true")
+            SA_REQ_ECAP=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_ecap',True)).lower())" 2>/dev/null || echo "true")
+            if [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && \
+               [[ "$SA_REQ_IAA" == "false" ]] && [[ "$SA_REQ_ECAP" == "false" ]]; then
+              BASE_REF_SA="${{ github.event.pull_request.base.ref }}"
+              CHANGED_SA=$(git diff --name-only "origin/${BASE_REF_SA}"...HEAD 2>/dev/null || echo "")
+              SA_HAS_FORCED=false
+              SA_FORCED_PATTERNS=("^\.github/agents/" "^governance/" "^\.governance-pack/"
+                                  "^\.agent-workspace/.*/knowledge/" "supabase/migrations/"
+                                  "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
+              while IFS= read -r fpath; do
+                [ -z "$fpath" ] && continue
+                for pattern in "${SA_FORCED_PATTERNS[@]}"; do
+                  if echo "$fpath" | grep -qE "$pattern"; then
+                    SA_HAS_FORCED=true
+                    break 2
+                  fi
+                done
+              done <<< "$CHANGED_SA"
+              if [ "$SA_HAS_FORCED" = "false" ]; then
+                echo "ℹ️  SPAM-001: Simple Admin Model active (type=${SA_TYPE}) — HALT-008 wave/prebrief check downgraded to informational."
+                SIMPLE_ADMIN=true
+              else
+                echo "⚠️  SPAM-001: Forced-ceremony paths detected — Simple Admin bypass NOT active. Full ceremony applies."
+              fi
+            fi
+          fi
 
           FAIL=false
 
@@ -365,7 +441,13 @@ jobs:
             echo ""
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
             echo ""
-            exit 1
+            if [ "$SIMPLE_ADMIN" = "true" ]; then
+              echo "⚠️  WARNING (non-blocking): HALT-008 pre-brief check failed, but SPAM-001 Simple Admin mode is active."
+              echo "   Wave task list / IAA pre-brief check downgraded to informational for product-fix/docs-only PRs."
+              echo "   Authority: MMM_SIMPLE_PR_ADMIN_MODEL.md (SPAM-001)"
+            else
+              exit 1
+            fi
           else
             echo "✅ PASS — IAA Pre-Brief gate passed. All pre-brief artifacts present."
             echo ""
