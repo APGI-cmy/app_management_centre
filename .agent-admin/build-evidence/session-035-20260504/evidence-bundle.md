@@ -35,10 +35,10 @@
 
 ## Pre-IAA Commit-State Gate
 
-- [ ] Clean working tree verified (no uncommitted changes)
-- [ ] Wave record sections 1-4 committed at HEAD
-- [ ] Session memory committed at HEAD
-- [ ] All builder evidence artifacts committed and tracked
+- [x] Clean working tree verified (no uncommitted changes)
+- [x] Wave record sections 1-4 committed at HEAD
+- [x] Session memory committed at HEAD
+- [x] All builder evidence artifacts committed and tracked
 - [x] governance_evidence_path present in wave checklist: `.agent-admin/wave-records/amc-wave-record-layer-down-44218bcd-20260504.md`
 
 ---
