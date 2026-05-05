@@ -66,7 +66,7 @@ This is a **strengthening** move. It does not dilute any existing authority. It 
 ECAP appointment is **NOT required** for product-fix PRs where all three conditions hold:
 1. `.admin/pr.json` exists and is valid per SPAM-001 schema
 2. `.admin/pr.json` declares `type: product-fix` AND `requires_ecap: false`
-3. The PR diff does NOT touch any forced-ceremony path (SPAM-001 §6)
+3. The PR diff does NOT touch any forced-ceremony path (SPAM-001 §5)
 
 For such PRs, `.admin/pr.json` itself serves as the ceremony declaration. The Foreman does NOT
 need to appoint `execution-ceremony-admin-agent`.
