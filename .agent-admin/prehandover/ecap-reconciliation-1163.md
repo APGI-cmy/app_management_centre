@@ -96,17 +96,17 @@
 
 ## C5. Foreman Administrative Readiness Block
 
-> **Left blank — Foreman to complete at §14.6 QP Admin-Compliance Checkpoint before invoking IAA Final Audit.**
+> **Completed at §14.6 QP Admin-Compliance Checkpoint — foreman-v2-agent — session-037 — 2026-05-05.**
 
 | Field | Value |
 |-------|-------|
-| substantive_readiness | |
-| administrative_readiness | |
-| QP admin-compliance check completed | |
-| IAA invocation authorized | |
-| Rejection reason (if REJECTED) | |
-| Foreman Session | |
-| Checkpoint Date | |
+| substantive_readiness | ACCEPTED — all 9 tasks QP PASS, 12 ACs verified by Foreman QP evaluation (session-037) |
+| administrative_readiness | ACCEPTED — ECAP ceremony bundle complete (C1–C4 verified); 17 artifacts committed at HEAD; working tree clean |
+| QP admin-compliance check completed | YES — §4.3e PASS (0 AAP failures, R1–R8 all PASS) |
+| IAA invocation authorized | YES — Pre-IAA commit-state gate PASS; ECAP reconciliation C1–C4 complete; no uncommitted changes |
+| Rejection reason (if REJECTED) | N/A — ACCEPTED |
+| Foreman Session | session-037-20260505 |
+| Checkpoint Date | 2026-05-05 |
 
 ---
 
