@@ -90,9 +90,19 @@ All tasks complete. Scope compliant with CS2 clarification. Governance propagati
 
 ## Section 5 — IAA Assurance
 
-**PHASE_B_BLOCKING_TOKEN**: AWAITING IAA INVOCATION
+**PHASE_B_BLOCKING_TOKEN**: IAA-session-071-20260505-PASS
 
-*(To be populated after IAA invocation in Phase 4.4)*
+| Field | Value |
+|---|---|
+| iaa_session | session-071-20260505 |
+| iaa_token | IAA-session-071-20260505-PASS |
+| verdict | ASSURANCE-TOKEN |
+| checks_run | 10 (CORE-020, CORE-021, OVL-LA-001–005, OVL-LA-ADM-001–003) |
+| checks_passed | 10 |
+| checks_failed | 0 |
+| merge_gate_parity | PASS |
+| reviewed_sha | 1b39f5ac23b99eb1a1a90992c6763ee407cbc9dc |
+| date | 2026-05-05 |
 
 ---
 
