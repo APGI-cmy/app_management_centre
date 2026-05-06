@@ -421,6 +421,17 @@ control_surfaces_updated:
 
 ## Section 5. Assurance
 
-> To be populated after IAA Final Audit.
+> IAA Final Audit completed — session-073-20260506.
+> IAA bound to PR #1167 | Issue #1163 | HEAD SHA d7788b875b0e500820ebb1c76b156fb24727de18
 
-`PHASE_B_BLOCKING_TOKEN: IAA-session-037-20260505-PASS`
+`PHASE_B_BLOCKING_TOKEN: IAA-session-073-20260506-PASS`
+
+| Field | Value |
+|-------|-------|
+| iaa_session | session-073-20260506 |
+| pr_reviewed | #1167 |
+| governing_issue | #1163 |
+| reviewed_sha | d7788b875b0e500820ebb1c76b156fb24727de18 |
+| verdict | ASSURANCE-TOKEN — all checks PASS |
+| overlay_applied | MIXED: OVL-CG-001–005 + OVL-CG-ADM-001–002 + OVL-CI-001–005 + OVL-KG-001–004 + CERT-001–004 + ACR-01–11 + CORE-020 + CORE-021 |
+| date | 2026-05-06 |
