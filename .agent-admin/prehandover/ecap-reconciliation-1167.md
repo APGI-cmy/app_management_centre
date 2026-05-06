@@ -10,6 +10,14 @@
 **Final Token Reference**: IAA-session-073-20260506-PASS (PR #1167, issue #1163, HEAD d7788b875b0e500820ebb1c76b156fb24727de18)  
 **Date**: 2026-05-05
 
+<!-- machine-readable validator fields (AC3) -->
+protected_path_touched: true
+ecap_required: true
+ecap_invoked: true
+ecap_verdict: PASS
+ceremony_admin_appointed: true
+protected_path_ceremony_verdict: PASS
+
 ---
 
 ## C1. Final-State Declaration
