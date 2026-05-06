@@ -292,29 +292,44 @@ jobs:
           # ----------------------------------------------------------------
           # SPAM-001: Simple Admin Model — downgrade HALT-008 to informational
           # Authority: MMM_SIMPLE_PR_ADMIN_MODEL.md §4 (SPAM-001)
+          # BR-04: missing fields or non-boolean requires_iaa/requires_ecap → full ceremony
           # ----------------------------------------------------------------
           SIMPLE_ADMIN=false
           if [ -f ".admin/pr.json" ]; then
+            SA_VALID=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); req=['type','requires_iaa','requires_ecap','governing_issue','scope_summary']; vtypes=['product-fix','docs-only','governance-control','agent-contract','migration','deployment','high-risk']; all(f in d for f in req) or sys.exit(1); isinstance(d['requires_iaa'],bool) and isinstance(d['requires_ecap'],bool) or sys.exit(1); d['type'] in vtypes or sys.exit(1); print('true')" 2>/dev/null || echo "false")
+            SA_VALID="${SA_VALID:-false}"
             SA_TYPE=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(d.get('type',''))" 2>/dev/null || echo "")
             SA_REQ_IAA=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_iaa',True)).lower())" 2>/dev/null || echo "true")
             SA_REQ_ECAP=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_ecap',True)).lower())" 2>/dev/null || echo "true")
-            if [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && \
+            if [[ "$SA_VALID" == "true" ]] && \
+               [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && \
                [[ "$SA_REQ_IAA" == "false" ]] && [[ "$SA_REQ_ECAP" == "false" ]]; then
               BASE_REF_SA="${{ github.event.pull_request.base.ref }}"
-              CHANGED_SA=$(git diff --name-only "origin/${BASE_REF_SA}"...HEAD 2>/dev/null || echo "")
+              CHANGED_SA=""
+              DIFF_OK=true
+              if ! CHANGED_SA=$(git diff --name-only "origin/${BASE_REF_SA}"...HEAD 2>/dev/null); then
+                echo "⚠️  git diff failed — treating as forced-ceremony paths present (safe default)."
+                DIFF_OK=false
+              fi
               SA_HAS_FORCED=false
-              SA_FORCED_PATTERNS=("^\.github/agents/" "^governance/" "^\.governance-pack/"
-                                  "^\.agent-workspace/.*/knowledge/" "supabase/migrations/"
-                                  "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
-              while IFS= read -r fpath; do
-                [ -z "$fpath" ] && continue
-                for pattern in "${SA_FORCED_PATTERNS[@]}"; do
-                  if echo "$fpath" | grep -qE "$pattern"; then
-                    SA_HAS_FORCED=true
-                    break 2
-                  fi
-                done
-              done <<< "$CHANGED_SA"
+              if [ "$DIFF_OK" = "false" ]; then
+                SA_HAS_FORCED=true
+              else
+                SA_FORCED_PATTERNS=("^\.github/agents/" "^\.github/workflows/" "^\.github/scripts/"
+                                    "^governance/" "^\.governance-pack/"
+                                    "^\.agent-workspace/.*/knowledge/" "^\.agent-admin/"
+                                    "supabase/migrations/"
+                                    "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
+                while IFS= read -r fpath; do
+                  [ -z "$fpath" ] && continue
+                  for pattern in "${SA_FORCED_PATTERNS[@]}"; do
+                    if echo "$fpath" | grep -qE "$pattern"; then
+                      SA_HAS_FORCED=true
+                      break 2
+                    fi
+                  done
+                done <<< "$CHANGED_SA"
+              fi
               if [ "$SA_HAS_FORCED" = "false" ]; then
                 echo "ℹ️  SPAM-001: Simple Admin Model active (type=${SA_TYPE}) — HALT-008 wave/prebrief check downgraded to informational."
                 SIMPLE_ADMIN=true

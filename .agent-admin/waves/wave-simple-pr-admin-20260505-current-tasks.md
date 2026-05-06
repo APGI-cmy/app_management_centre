@@ -7,14 +7,8 @@
 > **Agent**: foreman-v2-agent
 > **Branch**: copilot/align-tier-1-tier-2-agent-artifacts
 
-## governance_evidence_path
-
-`.agent-admin/waves/wave-simple-pr-admin-20260505-current-tasks.md`
-
-## iaa_prebrief_path
-
-`.agent-admin/wave-records/amc-wave-record-wave-simple-pr-admin-20260505-20260505.md` — Section 2, IAA Pre-Brief (Section 2)
-Pre-Brief Reference: `IAA-PRE-BRIEF-session-037-20260505`
+governance_evidence_path: .agent-admin/waves/wave-simple-pr-admin-20260505-current-tasks.md
+iaa_prebrief_path: .agent-admin/wave-records/amc-wave-record-wave-simple-pr-admin-20260505-20260505.md
 
 ---
 

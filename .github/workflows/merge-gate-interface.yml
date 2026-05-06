@@ -77,13 +77,52 @@ jobs:
           # ------------------------------------------------------------------
           # Simple Admin Model: check .admin/pr.json for product-fix type
           # Authority: SPAM-001 (MMM_SIMPLE_PR_ADMIN_MODEL.md §4)
+          # Only override PR_TYPE when ALL activation conditions are met:
+          #   type is product-fix/docs-only + requires_iaa/ecap=false (actual booleans)
+          #   + no forced-ceremony paths touched (BR-04, SPAM-001 §5)
           # ------------------------------------------------------------------
           if [ -f ".admin/pr.json" ]; then
+            SA_VALID=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); req=['type','requires_iaa','requires_ecap','governing_issue','scope_summary']; vtypes=['product-fix','docs-only','governance-control','agent-contract','migration','deployment','high-risk']; all(f in d for f in req) or sys.exit(1); isinstance(d['requires_iaa'],bool) and isinstance(d['requires_ecap'],bool) or sys.exit(1); d['type'] in vtypes or sys.exit(1); print('true')" 2>/dev/null || echo "false")
+            SA_VALID="${SA_VALID:-false}"
             ADMIN_TYPE=$(python3 -c "import json; d=json.load(open('.admin/pr.json')); print(d.get('type',''))" 2>/dev/null || echo "")
-            if [[ "$ADMIN_TYPE" == "product-fix" || "$ADMIN_TYPE" == "docs-only" ]]; then
-              PR_TYPE="$ADMIN_TYPE"
-              echo "pr_type=$PR_TYPE" >> $GITHUB_OUTPUT
-              echo "PR Type (SPAM-001 override): $PR_TYPE"
+            ADMIN_REQ_IAA=$(python3 -c "import json; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_iaa',True)).lower())" 2>/dev/null || echo "true")
+            ADMIN_REQ_ECAP=$(python3 -c "import json; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_ecap',True)).lower())" 2>/dev/null || echo "true")
+            if [[ "$SA_VALID" == "true" ]] && \
+               [[ "$ADMIN_TYPE" == "product-fix" || "$ADMIN_TYPE" == "docs-only" ]] && \
+               [[ "$ADMIN_REQ_IAA" == "false" ]] && [[ "$ADMIN_REQ_ECAP" == "false" ]]; then
+              # Verify no forced-ceremony paths in diff (SPAM-001 §5)
+              ADMIN_HAS_FORCED=false
+              ADMIN_CHANGED=""
+              ADMIN_DIFF_OK=true
+              if ! ADMIN_CHANGED=$(git diff --name-only "origin/${BASE_REF}"...HEAD 2>/dev/null); then
+                echo "⚠️  git diff failed — treating as forced-ceremony paths present (safe default)."
+                ADMIN_DIFF_OK=false
+              fi
+              if [ "$ADMIN_DIFF_OK" = "false" ]; then
+                ADMIN_HAS_FORCED=true
+              else
+                ADMIN_FORCED_PATTERNS=("^\.github/agents/" "^\.github/workflows/" "^\.github/scripts/"
+                                       "^governance/" "^\.governance-pack/"
+                                       "^\.agent-workspace/.*/knowledge/" "^\.agent-admin/"
+                                       "supabase/migrations/"
+                                       "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
+                while IFS= read -r fpath; do
+                  [ -z "$fpath" ] && continue
+                  for pattern in "${ADMIN_FORCED_PATTERNS[@]}"; do
+                    if echo "$fpath" | grep -qE "$pattern"; then
+                      ADMIN_HAS_FORCED=true
+                      break 2
+                    fi
+                  done
+                done <<< "$ADMIN_CHANGED"
+              fi
+              if [ "$ADMIN_HAS_FORCED" = "false" ]; then
+                PR_TYPE="$ADMIN_TYPE"
+                echo "pr_type=$PR_TYPE" >> $GITHUB_OUTPUT
+                echo "PR Type (SPAM-001 override): $PR_TYPE"
+              else
+                echo "⚠️  SPAM-001: Forced-ceremony paths detected — PR_TYPE override NOT applied. Keeping: $PR_TYPE"
+              fi
             fi
           fi
 
