@@ -146,7 +146,7 @@ These controls remain active and blocking for all PRs regardless of ceremony lev
 | BR-01 | `requires_iaa` MUST be `true` if `type` is `governance-control`, `agent-contract`, `migration`, `deployment`, or `high-risk`. |
 | BR-02 | `requires_ecap` MUST be `true` if `type` is `governance-control`, `agent-contract`, `migration`, `deployment`, or `high-risk`. |
 | BR-03 | If `.admin/pr.json` is absent → full ceremony (same as current behavior). |
-| BR-04 | If `.admin/pr.json` is present but fails JSON parse, is missing required fields, or has non-boolean values for `requires_iaa`/`requires_ecap` → treat as absent → full ceremony. CI gates MUST validate field types, not just parse JSON. |
+| BR-04 | If `.admin/pr.json` is present but fails JSON parse, is missing any required field (`type`, `requires_iaa`, `requires_ecap`, `governing_issue`, `scope_summary`), has non-boolean values for `requires_iaa`/`requires_ecap`, or has a `type` value outside the recognised enum (`product-fix`, `docs-only`, `governance-control`, `agent-contract`, `migration`, `deployment`, `high-risk`) → treat as absent → full ceremony. CI gates MUST validate field types, not just parse JSON. |
 | BR-05 | If `.admin/pr.json` declares `requires_iaa: false` but forced-ceremony paths are detected in the diff → full ceremony reinstated; CI gate must log an override warning. |
 | BR-06 | CI gates must use `python3` or `jq` to parse `.admin/pr.json`. String matching on the raw file content is prohibited. |
 
