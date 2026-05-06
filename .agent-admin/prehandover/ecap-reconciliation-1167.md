@@ -7,7 +7,7 @@
 **ECAP Session**: session-eca-001-20260505  
 **Foreman Session**: session-037  
 **Final IAA Session Reference**: session-073-20260506  
-**Final Token Reference**: IAA-session-037-20260506-PASS (PR #1167, issue #1163, HEAD d7788b875b0e500820ebb1c76b156fb24727de18)  
+**Final Token Reference**: IAA-session-073-20260506-PASS (PR #1167, issue #1163, HEAD d7788b875b0e500820ebb1c76b156fb24727de18)  
 **Date**: 2026-05-05
 
 ---
@@ -20,7 +20,7 @@
 |-----------|--------|
 | Substantive readiness | ACCEPTED by Foreman — QP PASS, all 12 ACs verified, session-037 |
 | Administrative readiness | ACCEPTED — ceremony bundle complete (this summary) |
-| IAA assurance verdict | PASS — IAA-session-037-20260506-PASS (bound to PR #1167, issue #1163, HEAD d7788b875b0e500820ebb1c76b156fb24727de18) |
+| IAA assurance verdict | PASS — IAA-session-073-20260506-PASS (bound to PR #1167, issue #1163, HEAD d7788b875b0e500820ebb1c76b156fb24727de18) |
 | Ripple status | DEFERRED — PUBLIC_API files changed; ripple obligations recorded in C4; layer-down issues to be raised by Foreman post-merge |
 | Admin-compliance result | PASS — §4.3e gate: 0 AAP failures, R1–R8 verified |
 
@@ -64,7 +64,7 @@
 | Wave ID | Wave slug | `wave-simple-pr-admin-20260505` | Wave record filename, session memory wave_id, tasks file | ✓ |
 | Issue reference | Triggering issue | `#1163` | Wave record triggering_issue, session memory triggering_issue, all canon file headers | ✓ |
 | Branch | Current branch | `copilot/align-tier-1-tier-2-agent-artifacts` | `git rev-parse --abbrev-ref HEAD` | ✓ |
-| Token pre-fill | PHASE_B_BLOCKING_TOKEN | `PENDING` (pre-fill) | Wave record §5 | ✓ — pre-fill present, not blank |
+| Token pre-fill | PHASE_B_BLOCKING_TOKEN | `IAA-session-073-20260506-PASS` | Wave record §5 | ✓ — token recorded by IAA session-073 |
 | Committed-state parity | All bundle artifacts | See C2 table | `git ls-files --error-unmatch` (13 pre-existing + 4 new this session) | ✓ |
 | Version consistency | AGENT_HANDOVER_AUTOMATION.md | v1.7.4 | File header | ✓ |
 | Version consistency | EXECUTION_CEREMONY_ADMINISTRATION_PROTOCOL.md | v1.3.1 | File header | ✓ |

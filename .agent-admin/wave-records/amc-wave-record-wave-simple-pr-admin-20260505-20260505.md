@@ -337,7 +337,7 @@ Foreman must complete all items and record evidence in wave record Section 3 bef
 | foreman-implementation-check | PASS | Foreman QP evaluation — session-037-20260505 |
 | builder-involvement-check | PASS | governance-liaison-amc-agent (TASKS 037-01/02/03), integration-builder (TASKS 037-04/05/06/07/08) |
 | session-memory-check | PASS | .agent-workspace/foreman-v2/memory/session-037-20260505.md committed |
-| prehandover-proof-check | PASS | ECAP reconciliation summary at .agent-admin/prehandover/ecap-reconciliation-1163.md |
+| prehandover-proof-check | PASS | ECAP reconciliation summary at .agent-admin/prehandover/ecap-reconciliation-1167.md (PR #1167) |
 
 ## Section 3a. Governing-Issue Parity Evidence
 
