@@ -23,7 +23,7 @@ Also inaugurated `.admin/pr.json` in the AMC repo as AMC-side support per explic
 |---|---|---|---|---|
 | 1 | MMM_SIMPLE_PR_ADMIN_MODEL.md | CREATED | governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md | v1.0.0 — SHA256: 39d1ee7b51f8d797e163fafe45d29f1a17eb59d2b3655f0c28020225af9cf976 |
 | 2 | .admin/pr.json | CREATED | .admin/pr.json | Inaugural AMC simple PR admin manifest — governance-change type |
-| 3 | GOVERNANCE_ALIGNMENT_INVENTORY.json (main) | UPDATED | governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json | total_artifacts: 38→39; last_layer_down_commit: 44218bcd |
+| 3 | GOVERNANCE_ALIGNMENT_INVENTORY.json (main) | UPDATED | governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json | total_artifacts: 41→42; last_layer_down_commit: 44218bcd |
 | 4 | GOVERNANCE_ALIGNMENT_INVENTORY.json (admin) | UPDATED | .agent-admin/governance/GOVERNANCE_ALIGNMENT_INVENTORY.json | New entry for MMM_SIMPLE_PR_ADMIN_MODEL.md |
 | 5 | sync_state.json | UPDATED | .agent-admin/governance/sync_state.json | canonical_commit: 44218bcd |
 | 6 | ripple archive | CREATED | .agent-admin/governance/ripple-archive/ripple-layer-down-44218bcd.json | status: archived |
