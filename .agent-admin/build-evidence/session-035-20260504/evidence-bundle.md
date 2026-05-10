@@ -13,7 +13,7 @@
 |---|---|---|---|
 | 1 | MMM_SIMPLE_PR_ADMIN_MODEL.md | governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md | CREATED — SHA256: 39d1ee7b51f8d797e163fafe45d29f1a17eb59d2b3655f0c28020225af9cf976 |
 | 2 | .admin/pr.json | .admin/pr.json | CREATED — governance-change type, requires_iaa: true |
-| 3 | GOVERNANCE_ALIGNMENT_INVENTORY.json (main) | governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json | UPDATED — total_artifacts 38→39 |
+| 3 | GOVERNANCE_ALIGNMENT_INVENTORY.json (main) | governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json | UPDATED — total_artifacts 41→42 |
 | 4 | GOVERNANCE_ALIGNMENT_INVENTORY.json (admin) | .agent-admin/governance/GOVERNANCE_ALIGNMENT_INVENTORY.json | UPDATED — MMM_SIMPLE_PR_ADMIN_MODEL.md entry added |
 | 5 | sync_state.json | .agent-admin/governance/sync_state.json | UPDATED — canonical_commit: 44218bcd |
 | 6 | ripple archive entry | .agent-admin/governance/ripple-archive/ripple-layer-down-44218bcd.json | CREATED |
