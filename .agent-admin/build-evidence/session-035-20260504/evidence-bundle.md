@@ -18,7 +18,7 @@
 | 5 | sync_state.json | .agent-admin/governance/sync_state.json | UPDATED — canonical_commit: 44218bcd |
 | 6 | ripple archive entry | .agent-admin/governance/ripple-archive/ripple-layer-down-44218bcd.json | CREATED |
 | 7 | wave checklist | .agent-admin/waves/wave-layer-down-44218bcd-20260504-current-tasks.md | CREATED — all tasks QP PASS |
-| 8 | wave record (sections 1-4) | .agent-admin/wave-records/amc-wave-record-layer-down-44218bcd-20260504.md | CREATED |
+| 8 | wave record (sections 1-5) | .agent-admin/wave-records/amc-wave-record-layer-down-44218bcd-20260504.md | CREATED |
 | 9 | session memory | .agent-workspace/governance-liaison-amc/memory/session-035-20260504.md | CREATED |
 
 ---
