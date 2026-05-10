@@ -2,9 +2,10 @@
 ## Status
 **Type**: Canonical Governance Definition  
 **Authority**: Supreme — Canonical  
-**Version**: 1.3.0  
+**Version**: 1.3.1  
 **Effective Date**: 2026-04-08  
 **Amended**: 2026-04-19 — v1.2.0: Added §3.5a Template Non-Leakage Duty — ECAP must verify no ASSEMBLY_TIME_ONLY/pre-final instruction blocks remain in committed output artifacts; added §3.5b Active-Bundle Scope for Status Normalization; added §3.7a Carried-Forward Claim Resolution Duty — ECAP must verify any carried-forward claim resolves to its named source; added §3.8a Gate Evidence Inventory Duty; authority: CS2 — governance-repo hardening wave.  
+**Amended**: 2026-05-05 — v1.3.1: Added §2.4 Product-Fix PR Exception — ECAP appointment not required for product-fix PRs where .admin/pr.json declares type=product-fix, requires_ecap=false, and no forced-ceremony paths are present; authority: CS2 — issue #1163 (SPAM-001).  
 **Amended**: 2026-04-28 — v1.3.0: Added §3.10 Protected-Path Ceremony Duty — ECAP must perform additional protected-path identification, evidence-first material verification, diff-scope audit, governance impact assessment, risk declaration, and §4.2 protected_path_ceremony section population for PRs touching protected paths per PPEIA-001; added §3.11 Evidence-First Preparation Duty — ECAP must extract acceptance criteria, map minimum evidence types, collect/verify evidence artifacts, and populate ac_evidence_matrix in wave record §3c for qualifying deliveries per EFIA-001; authority: CS2 — Umbrella: Upgrade AMC PR handover assurance to ISMS-level evidence-first protected-path scrutiny.  
 **Amended**: 2026-04-17 — v1.1.0: Added §3.5 Final-State Normalization Duty, §3.6 Ceremony Completeness Invariants, §3.7 Cross-Artifact Reconciliation Duty, §3.8 Commit-State Truth Rule, §3.9 Ripple / Registry Administration Duty, §4.5 Non-Substitution Rule. These sections canonize the closed 3-layer admin-control stack (ECAP self-normalization, Foreman QP admin-compliance verification, IAA binary rejection). Authority: CS2 — issue: Canonize a 3-layer admin ceremony compliance stack for ECAP, Foreman QP, and IAA.  
 **Owner**: Maturion Engineering Lead  
@@ -59,6 +60,22 @@ This protocol introduces a **dedicated administrator-class agent** — `executio
 | **IAA** | Independent assurance and verdict |
 
 This is a **strengthening** move. It does not dilute any existing authority. It separates modes of work that were previously conflated in a single role.
+
+### 2.4 Product-Fix PR Exception (SPAM-001)
+
+ECAP appointment is **NOT required** for product-fix PRs where all three conditions hold:
+1. `.admin/pr.json` exists and is valid per SPAM-001 schema
+2. `.admin/pr.json` declares `type: product-fix` AND `requires_ecap: false`
+3. The PR diff does NOT touch any forced-ceremony path (SPAM-001 §5)
+
+For such PRs, `.admin/pr.json` itself serves as the ceremony declaration. The Foreman does NOT
+need to appoint `execution-ceremony-admin-agent`.
+
+**Forced-ceremony override**: If any forced-ceremony path (SPAM-001 §5) appears in the PR diff,
+ECAP appointment is reinstated regardless of `.admin/pr.json` declarations. The Foreman MUST
+verify forced-ceremony path status before proceeding without ECAP.
+
+**Authority**: SPAM-001 (`governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md`)
 
 ---
 
