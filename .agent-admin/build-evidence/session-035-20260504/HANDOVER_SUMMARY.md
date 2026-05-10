@@ -28,7 +28,7 @@ Also inaugurated `.admin/pr.json` in the AMC repo as AMC-side support per explic
 | 5 | sync_state.json | UPDATED | .agent-admin/governance/sync_state.json | canonical_commit: 44218bcd |
 | 6 | ripple archive | CREATED | .agent-admin/governance/ripple-archive/ripple-layer-down-44218bcd.json | status: archived |
 | 7 | wave checklist | CREATED | .agent-admin/waves/wave-layer-down-44218bcd-20260504-current-tasks.md | All tasks QP PASS |
-| 8 | wave record (sections 1-4) | CREATED | .agent-admin/wave-records/amc-wave-record-layer-down-44218bcd-20260504.md | Section 5 to be updated after IAA |
+| 8 | wave record (sections 1-5) | CREATED | .agent-admin/wave-records/amc-wave-record-layer-down-44218bcd-20260504.md | Section 5 committed — PHASE_B_BLOCKING_TOKEN: IAA-session-071-20260505-PASS |
 | 9 | session memory | CREATED | .agent-workspace/governance-liaison-amc/memory/session-035-20260504.md | 6-field model complete |
 
 ---
