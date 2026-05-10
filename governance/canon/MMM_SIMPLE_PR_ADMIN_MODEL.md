@@ -194,17 +194,17 @@ If a governance PR fails more than 3 fix cycles after first review, close it and
 
 ## Validator
 
-The validator script `.github/scripts/validate-simple-pr-admin.sh`:
+This canon requires an active repository validator or CI validation step for MMM simple PR admin enforcement. That validator must:
 
-- Fails if `.admin/pr.json` is missing
-- Validates all required JSON fields exist
-- Validates `issue` is a number
-- Validates `scope` is a non-empty list
-- Validates changed files are within the declared scope
-- Validates `type` is one of the accepted values
-- Validates `risk` is one of `low`, `medium`, `high`
-- Fails if governance-control files are changed and `requires_iaa`/`requires_ecap` are not `true`
-- Fails if `merge_authority` is missing or not `CS2`
+- Fail if `.admin/pr.json` is missing
+- Validate all required JSON fields exist
+- Validate `issue` is a number
+- Validate `scope` is a non-empty list
+- Validate changed files are within the declared scope
+- Validate `type` is one of the accepted values
+- Validate `risk` is one of `low`, `medium`, `high`
+- Fail if governance-control files are changed and `requires_iaa`/`requires_ecap` are not `true`
+- Fail if `merge_authority` is missing or not `CS2`
 
 The validator does **not**:
 - Parse PR body prose
