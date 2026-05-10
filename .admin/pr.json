@@ -12,7 +12,11 @@
     ".agent-admin/governance/ripple-archive/ripple-layer-down-44218bcd.json",
     ".agent-admin/waves/wave-layer-down-44218bcd-20260504-current-tasks.md",
     ".agent-admin/wave-records/amc-wave-record-layer-down-44218bcd-20260504.md",
-    ".agent-workspace/governance-liaison-amc/memory/session-035-20260504.md"
+    ".agent-workspace/governance-liaison-amc/memory/session-035-20260504.md",
+    ".agent-admin/build-evidence/session-035-20260504/evidence-bundle.md",
+    ".agent-admin/build-evidence/session-035-20260504/HANDOVER_SUMMARY.md",
+    ".agent-admin/build-evidence/session-035-20260504/ALIGNMENT_EVIDENCE.md",
+    ".agent-workspace/independent-assurance-agent/memory/session-071-20260505.md"
   ],
   "risk": "low",
   "requires_iaa": true,
