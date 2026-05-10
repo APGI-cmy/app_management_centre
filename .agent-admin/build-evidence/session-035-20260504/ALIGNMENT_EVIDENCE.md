@@ -29,7 +29,7 @@
 
 | Inventory | Before | After | Change |
 |---|---|---|---|
-| governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json | total_artifacts: 38, last_commit: 2ba1d6a3 | total_artifacts: 39, last_commit: 44218bcd | +1 artifact, commit updated |
+| governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json | total_artifacts: 41, last_layer_down_commit: d99e68e8 | total_artifacts: 42, last_layer_down_commit: 44218bcd | +1 artifact, commit updated |
 | .agent-admin/governance/GOVERNANCE_ALIGNMENT_INVENTORY.json | 11 entries | 12 entries | +1 entry (MMM_SIMPLE_PR_ADMIN_MODEL.md) |
 | .agent-admin/governance/sync_state.json | canonical_commit: 2ba1d6a3 | canonical_commit: 44218bcd | commit updated |
 
