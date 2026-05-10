@@ -10,7 +10,7 @@
 
 ## Purpose
 
-Replace repeated markdown ceremony and brittle PR-body parsing with a **single machine-readable PR admin manifest** (`**.admin/pr.json**`) and one simple validator.
+Replace repeated markdown ceremony and brittle PR-body parsing with a **single machine-readable PR admin manifest** (`.admin/pr.json`) and one simple validator.
 
 The current MMM governance/admin model became too complex, self-referential, and fragile. Agents repeatedly failed simple admin jobs because the system had too many duplicated sources of truth. This model resets that.
 
