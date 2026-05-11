@@ -24,14 +24,16 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo ""
 echo "🔍 Reading agent identity..."
 
-# Try versioned contract first, then fall back to unversioned
+# Try versioned contract first, then fall back to unversioned, then to -agent suffix convention
 if [ -f ".github/agents/${AGENT_ID}-v2.md" ]; then
   CONTRACT_FILE=".github/agents/${AGENT_ID}-v2.md"
 elif [ -f ".github/agents/${AGENT_ID}.md" ]; then
   CONTRACT_FILE=".github/agents/${AGENT_ID}.md"
+elif [ -f ".github/agents/${AGENT_ID}-agent.md" ]; then
+  CONTRACT_FILE=".github/agents/${AGENT_ID}-agent.md"
 else
   echo "❌ ERROR: Agent contract not found"
-  echo "Expected: .github/agents/${AGENT_ID}-v2.md or .github/agents/${AGENT_ID}.md"
+  echo "Expected: .github/agents/${AGENT_ID}-v2.md, .github/agents/${AGENT_ID}.md, or .github/agents/${AGENT_ID}-agent.md"
   exit 1
 fi
 

@@ -1,8 +1,9 @@
 # Foreman-v2-agent — Tier 2 Knowledge Index
 
-> **Version**: 1.3.0 — AMC Consumer Copy
-> **Last Updated**: 2026-05-05
-> **Amendment**: v1.3.0 — Added SPAM-001 reference (MMM_SIMPLE_PR_ADMIN_MODEL.md); added behavioral guidance for simple-admin PRs; authority: CS2 — Issue #1163.
+> **Version**: 1.4.0 — AMC Consumer Copy
+> **Last Updated**: 2026-05-11
+> **Amendment**: v1.4.0 — Added `builder-task-template.md` and `pre-build-stage-model-reference.md` to resolve Tier 2 parity with contract v3.3.1 required_files; authority: CS2 — Issue #1172 (startup-parity fix PR).
+> **Previous**: v1.3.0 — Added SPAM-001 reference (MMM_SIMPLE_PR_ADMIN_MODEL.md); added behavioral guidance for simple-admin PRs; authority: CS2 — Issue #1163.
 > **Canon Home**: APGI-cmy/maturion-foreman-governance
 > **Canon Commit**: `038546344e8d67823c63464dc038841bd947405b` (maturion-isms)
 > **Staleness Policy**: Flag for refresh if canon version exceeds this by 1 minor version.
@@ -19,6 +20,8 @@
 | `session-memory-template.md` | Session memory template (reduced 6-field model per 90/10 principle) | ✅ PRESENT — v2.0.0 (updated 2026-04-13, Issue #1063) |
 | `prehandover-template.md` | PREHANDOVER proof template (v1.7.0) | ✅ PRESENT — layered down 2026-04-07 (v1.7.0) |
 | `wave-reconciliation-checklist.md` | Wave close checklist — incidents, niggles, liveness, closeout sweep | ✅ PRESENT — v1.2.0 (updated 2026-04-26, Issue #1134 — Section E closeout sweep added) |
+| `builder-task-template.md` | Standard template for delegating tasks to builder-class agents | ✅ PRESENT — v1.0.0 (created 2026-05-11 — startup-parity fix, Issue #1172) |
+| `pre-build-stage-model-reference.md` | Quick-reference card for the 12-stage pre-build model and HALT-008 gate | ✅ PRESENT — v1.0.0 (created 2026-05-11 — startup-parity fix, Issue #1172) |
 
 ---
 
@@ -44,12 +47,12 @@
 
 ---
 
-## Required Files (from `tier2_knowledge.required_files` in contract)
+## Required Files (from `tier2_knowledge.required_files` in contract v3.3.1)
 
-- `domain-flag-index.md`
-- `specialist-registry.md`
-- `FAIL-ONLY-ONCE.md`
-- `session-memory-template.md`
+- `FAIL-ONLY-ONCE.md` ✅ PRESENT
+- `session-memory-template.md` ✅ PRESENT
+- `builder-task-template.md` ✅ PRESENT (v1.0.0 — created 2026-05-11)
+- `pre-build-stage-model-reference.md` ✅ PRESENT (v1.0.0 — created 2026-05-11)
 
 ---
 
