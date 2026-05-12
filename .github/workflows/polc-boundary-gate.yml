@@ -119,9 +119,26 @@ except Exception:
               echo "ℹ️  execution_model=foreman-orchestrated — Foreman orchestrated, builder implemented."
               echo "   foreman-implementation-check continues to verify Foreman did not implement."
             elif [[ "$EXEC_MODEL" == "cs2-hotfix-override" ]]; then
-              echo "✅ execution_model=cs2-hotfix-override — CS2-authorised override."
-              echo "   foreman-implementation-check is not applicable."
-              exit 0
+              CS2_SIGNOFF_LABEL="cs2-signoff-approved"
+              PR_LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
+              HAS_CS2_SIGNOFF_LABEL=false
+              IFS=',' read -ra LABEL_ARRAY <<< "$PR_LABELS"
+              for label in "${LABEL_ARRAY[@]}"; do
+                if [[ "$label" == "$CS2_SIGNOFF_LABEL" ]]; then
+                  HAS_CS2_SIGNOFF_LABEL=true
+                  break
+                fi
+              done
+
+              if [[ "$HAS_CS2_SIGNOFF_LABEL" == "true" ]]; then
+                echo "✅ execution_model=cs2-hotfix-override with explicit CS2 sign-off label: $CS2_SIGNOFF_LABEL"
+                echo "   foreman-implementation-check is not applicable."
+                exit 0
+              fi
+
+              echo "❌ execution_model=cs2-hotfix-override requires explicit CS2 sign-off."
+              echo "   Missing required PR label: $CS2_SIGNOFF_LABEL"
+              exit 1
             fi
             # Non-empty but unrecognised value: fall through to label check (validator caught it in Check 0)
           fi
