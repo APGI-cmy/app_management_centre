@@ -23,15 +23,17 @@ protected_path_ceremony_verdict: PASS
 ## C1. Final-State Declaration
 
 **Final State**: `COMPLETE`
-*(Ceremony bundle complete. IAA invocation required. Bundle returned to Foreman.)*
+*(Ceremony bundle complete. Final IAA assurance recorded and bundle returned to Foreman.)*
 
 | Dimension | Status |
 |-----------|--------|
 | Substantive readiness | ACCEPTED by Foreman — 9 tasks QP PASS (TASK-036-01 through TASK-036-09), 145 tests GREEN (81+64) |
 | Administrative readiness | ACCEPTED — ceremony bundle complete (this summary) |
-| IAA assurance verdict | PENDING — new IAA session required after OVL-CG-003/004/005 + OVL-LA-ADM-003 fixes |
+| IAA assurance verdict | PASS — final IAA session `session-076-20260512`; token `IAA-076-20260512-PASS` |
 | Ripple status | COMPLETED — this PR IS the layer-down propagation for POLC_EXECUTION_MODEL_CANON v1.0.0 and MMM_SIMPLE_PR_ADMIN_MODEL v1.2.0 |
 | Admin-compliance result | PASS — §4.3e gate: 0 AAP failures, R1–R8 all PASS |
+
+**Historical note**: The prior status `PENDING — new IAA session required after OVL-CG-003/004/005 + OVL-LA-ADM-003 fixes` applied before completion of final IAA session `session-076-20260512` and is retained here only as audit history.
 
 ---
 
