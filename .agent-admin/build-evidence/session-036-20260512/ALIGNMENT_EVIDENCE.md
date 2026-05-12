@@ -42,6 +42,11 @@
 - `.github/scripts/validate-simple-pr-admin.sh` created with Check 13 (execution_model
   enforcement). Implements all checks from SPAM-001 v1.2.0 §9 Validator specification.
 
+### CI Gate Wiring
+- `.github/workflows/polc-boundary-gate.yml` updated so Check 0 uses `execution_model`
+  as the primary signal, satisfying the mandatory layer-down operationalization
+  requirement in POLC_EXECUTION_MODEL_CANON.md §7.
+
 ### Tests — All 6 CS2 AC categories passing
 ```
 AC1  — missing execution_model fails for implementation paths   ✅
