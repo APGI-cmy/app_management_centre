@@ -197,12 +197,18 @@ control_surfaces_updated:
 
 `PHASE_B_BLOCKING_TOKEN: IAA-session-074-20260512-PASS`
 
+Reviewed SHA: f32fa8fe9ff720e7203e282a67d7697becfbdd73
+delta_assurance_verdict: PASS
+base_head: f32fa8fe9ff720e7203e282a67d7697becfbdd73
+final_head: f32fa8fe9ff720e7203e282a67d7697becfbdd73
+delta_classification: token-recording-only
+
 | Field | Value |
 |-------|-------|
 | iaa_session | session-074-20260512 |
 | pr_reviewed | #1176 |
 | governing_issue | #1172 |
-| reviewed_sha | c093398216a2f47ebbad94c964c3c3c758592e8d |
+| reviewed_sha | f32fa8fe9ff720e7203e282a67d7697becfbdd73 |
 | verdict | ASSURANCE-TOKEN — all checks PASS |
 | overlay_applied | GOVERNANCE_CONTROL: OVL-CG-ADM-001–002 + KNOWLEDGE_GOVERNANCE: OVL-KG-001–004 + CI_SCRIPT: OVL-CI-001–005 + CERT-001–004 + ACR-01–11 + CORE-020 + CORE-021 |
 | date | 2026-05-12 |
