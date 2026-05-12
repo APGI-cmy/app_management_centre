@@ -63,8 +63,15 @@ jobs:
           BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
 
           # Build changed-files list for validator
+          # Fail closed if the diff cannot be computed so the validator does not
+          # receive an empty/incomplete file list and pass incorrectly.
           CHANGED_FILES_PATH=$(mktemp)
-          git diff --name-only "origin/${BASE_BRANCH}"...HEAD > "$CHANGED_FILES_PATH" 2>/dev/null || true
+          if ! git diff --name-only "origin/${BASE_BRANCH}"...HEAD > "$CHANGED_FILES_PATH" 2>/dev/null; then
+            echo "❌ Check 0 FAILED — unable to determine changed files for validation."
+            echo "   git diff against origin/${BASE_BRANCH}...HEAD did not complete successfully."
+            echo "   Failing closed to avoid passing with an incomplete changed-files list."
+            exit 1
+          fi
 
           # Run the validator
           if bash .github/scripts/validate-simple-pr-admin.sh \
