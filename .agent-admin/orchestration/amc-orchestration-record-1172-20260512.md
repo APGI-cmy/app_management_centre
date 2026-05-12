@@ -68,7 +68,7 @@ Read FAIL-ONLY-ONCE.md v4.3.0 in full. Self-attesting against all A-rules:
 
 Post-fix wake-up result:
 
-> `WAKE-UP COMPLETE. Canon: CLEAN. Memories: 0 (fresh session). Escalations: 0.`
+> `WAKE-UP COMPLETE. Canon: CLEAN. Memories: 5 (recent sessions found). Escalations: 0.`
 
 ### 1.5 Merge Gate Requirements
 
