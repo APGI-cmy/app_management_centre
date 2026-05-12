@@ -201,17 +201,29 @@ control_surfaces_updated:
 
 ## Section 5. Assurance
 
-> IAA invocation pending — to be completed before PR is presented as merge-ready.
+> IAA Final Assurance — REJECTION-PACKAGE issued. STOP-AND-FIX required before merge-ready.
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | AWAITING |
-| PHASE_B_BLOCKING_TOKEN | PENDING |
-| iaa_session | PENDING |
-| reviewed_sha | PENDING |
-| verdict | AWAITING |
+| iaa_verdict | REJECTION-PACKAGE |
+| PHASE_B_BLOCKING_TOKEN | IAA-075-20260512-REJECT |
+| iaa_session | session-075-20260512 |
+| reviewed_sha | 8c6467ed48e03770c8f98c363e71e1effd21d4ba |
+| verdict | REJECTION-PACKAGE |
 | adoption_phase | PHASE_B_BLOCKING |
+
+### Rejection Failures (4 checks FAILED)
+
+| # | Check | Classification | Finding | Fix Required |
+|---|-------|---------------|---------|-------------|
+| 1 | OVL-CG-003 | SUBSTANTIVE | `validate-simple-pr-admin.sh` created but NOT wired into any CI workflow. `polc-boundary-gate.yml` `foreman-implementation-check` and `builder-involvement-check` still use `copilot-builder-role` label as primary bypass signal. POLC_EXECUTION_MODEL_CANON.md §6.3 explicitly prohibits label-based role inference; §7 items 2–3 require these validators to be updated to use `execution_model` as primary signal. | Wire validator into CI pipeline. Update `foreman-implementation-check` and `builder-involvement-check` in `polc-boundary-gate.yml` to read `execution_model` from `.admin/pr.json` as primary classification signal. |
+| 2 | OVL-CG-004 | SUBSTANTIVE | Ripple impact of POLC layer-down is incomplete. Wave record task list (TASK-036-01–08) omitted the mandatory CI gate update declared in POLC_EXECUTION_MODEL_CANON.md §7 items 2–3. No CS2-approved deferral on record. | Complete the gate update (same fix as OVL-CG-003). Document scope amendment in wave record. |
+| 3 | OVL-CG-005 | SUBSTANTIVE | Wave record `allowed_artifact_paths` does not include `.github/workflows/polc-boundary-gate.yml`. Scope declaration is incomplete relative to canon §7 requirements. | After completing gate update, add `polc-boundary-gate.yml` to allowed artifact paths and update wave record scope declaration. |
+| 4 | OVL-LA-ADM-003 | CEREMONY | `requires_ecap: true` declared in both `.admin/pr.json` and wave record QP entry. No `ecap-reconciliation-1177.md` produced. No execution-ceremony-admin-agent appointed. Pattern from prior governance-control PRs (#1157, #1163, #1167, #1176) shows ECAP reconciliation is required. | Appoint execution-ceremony-admin-agent and produce `ecap-reconciliation-1177.md` per ECAP canon. OR obtain CS2 clarification that ECAP appointment is structurally inapplicable to governance-liaison-only sessions without Foreman orchestration and update `requires_ecap` accordingly. |
+
+**FAILURE CLASSIFICATION: SUBSTANTIVE: 3 | CEREMONY: 1 | ENVIRONMENT_BOOTSTRAP: 0**
 
 ---
 
-**Filed by**: governance-liaison-amc-agent | **Date**: 2026-05-12
+**Filed by**: governance-liaison-amc-agent | **Date**: 2026-05-12  
+**IAA verdict filed by**: independent-assurance-agent | **Session**: session-075-20260512 | **Date**: 2026-05-12
