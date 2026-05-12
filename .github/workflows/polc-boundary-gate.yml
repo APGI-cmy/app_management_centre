@@ -48,9 +48,13 @@ jobs:
           echo ""
 
           if [ ! -f ".admin/pr.json" ]; then
-            echo "ℹ️  No .admin/pr.json found — validator skipped (pre-SPAM-001 PR)."
-            echo "   Full POLC boundary checks apply (Checks 1–3 below)."
-            exit 0
+            echo "❌ Check 0 FAILED — required PR admin manifest is missing."
+            echo ""
+            echo ".admin/pr.json is mandatory because execution_model is the"
+            echo "primary machine-checkable signal for POLC role classification."
+            echo "Add .admin/pr.json and make it comply with"
+            echo "POLC_EXECUTION_MODEL_CANON.md and MMM_SIMPLE_PR_ADMIN_MODEL.md v1.2.0."
+            exit 1
           fi
 
           # Wire validate-simple-pr-admin.sh as CI gate step
