@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://github.com/APGI-cmy/app_management_centre/.admin/pr.json.schema.json",
   "title": "AMC PR Admin Manifest",
-  "description": "Single source of truth for PR ceremony level per AMC Simple PR Admin Model (SPAM-001). Authority: CS2 — Issue #1163.",
+  "description": "Single source of truth for PR ceremony level per AMC Simple PR Admin Model (SPAM-001 v1.2.0). Authority: CS2 — Issue #1163. Extended with execution_model per POLC_EXECUTION_MODEL_CANON.md.",
   "type": "object",
   "required": ["type", "requires_iaa", "requires_ecap", "governing_issue", "scope_summary"],
   "properties": {
@@ -38,6 +38,26 @@
       "type": "string",
       "format": "date-time",
       "description": "ISO-8601 timestamp when this manifest was created."
+    },
+    "execution_model": {
+      "type": "string",
+      "enum": ["builder-governed", "foreman-orchestrated", "cs2-hotfix-override"],
+      "description": "Execution control model. REQUIRED when implementation files (apps/, src/, modules/, lib/, packages/) are changed. Authority: governance/canon/POLC_EXECUTION_MODEL_CANON.md."
+    },
+    "implementing_agent": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Agent ID executing the implementation. Required when execution_model is 'builder-governed' or 'foreman-orchestrated'."
+    },
+    "orchestrating_agent": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Foreman agent ID scoping and supervising the work. Required when execution_model is 'foreman-orchestrated'."
+    },
+    "cs2_justification": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Explicit CS2 justification text or issue/PR reference. Required when execution_model is 'cs2-hotfix-override'."
     }
   },
   "additionalProperties": false
