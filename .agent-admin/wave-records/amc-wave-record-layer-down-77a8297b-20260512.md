@@ -204,14 +204,18 @@ control_surfaces_updated:
 
 ## Section 5. Assurance
 
-> **Current IAA Cycle**: PENDING — fixes applied per OVL-CG-003/004/005 + OVL-LA-ADM-003. New IAA invocation required.
-
 | Field | Value |
 |-------|-------|
-| iaa_verdict | PENDING |
-| PHASE_B_BLOCKING_TOKEN | PENDING |
-| iaa_session | PENDING |
-| reviewed_sha | PENDING |
+| iaa_verdict | ASSURANCE-TOKEN |
+| PHASE_B_BLOCKING_TOKEN | IAA-076-20260512-PASS |
+| iaa_session | session-076-20260512 |
+| reviewed_sha | 6d6434d2fb613365d3ad82877306e3cff0776422 |
+| verdict | ASSURANCE-TOKEN — all 45 checks PASS |
+| overlay_applied | CORE-020, CORE-021, CERT-001–004, OVL-CG-001–005, OVL-CI-001–005, OVL-LA-001–005, OVL-LA-ADM-002–003, ACR-01–11 |
+| re_invocation_rounds | 1 (REJECTION-PACKAGE on round 1 — OVL-CG-003/004/005 + OVL-LA-ADM-003; all resolved) |
+| merge_gate_parity | PASS |
+| adoption_phase | PHASE_B_BLOCKING |
+| date | 2026-05-12 |
 
 ### Prior IAA Cycle — SUPERSEDED (session-075-20260512 — REJECTION-PACKAGE)
 
@@ -237,4 +241,4 @@ control_surfaces_updated:
 
 **Filed by**: governance-liaison-amc-agent | **Date**: 2026-05-12
 **Prior IAA verdict filed by**: independent-assurance-agent | **Session**: session-075-20260512 | **Date**: 2026-05-12
-**Section 5 reset by**: execution-ceremony-admin-agent | **Session**: session-eca-036-20260512 | **Date**: 2026-05-12 | **Authority**: AAP-14 hygiene
+**IAA PASS filed by**: independent-assurance-agent | **Session**: session-076-20260512 | **Date**: 2026-05-12

@@ -6,8 +6,8 @@
 **Branch**: copilot/propagate-governance-changes
 **ECAP Session**: session-eca-036-20260512
 **Governing Session**: session-036-20260512 (governance-liaison-amc-agent)
-**Final IAA Session Reference**: PENDING
-**Final Token Reference**: PENDING
+**Final IAA Session Reference**: session-076-20260512
+**Final Token Reference**: IAA-076-20260512-PASS
 **Date**: 2026-05-12
 
 <!-- machine-readable validator fields (AC3) -->
