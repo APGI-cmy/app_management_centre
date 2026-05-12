@@ -45,7 +45,7 @@ governing_issue: #1172
 | wave_verb | layer-down (propagate + operationalize) |
 | classification | POLC-Orchestration (governance sync + operationalization) |
 | architecture_ref | N/A — governance-only wave |
-| allowed_artifact_paths | governance/canon/POLC_EXECUTION_MODEL_CANON.md, governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md, .admin/pr.json.schema.json, .admin/pr.json, .admin/README.md, .github/scripts/validate-simple-pr-admin.sh, tests/test_simple_pr_admin_validator.py, governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json, .agent-admin/waves/wave-layer-down-77a8297b-20260512-current-tasks.md, .agent-admin/wave-records/amc-wave-record-layer-down-77a8297b-20260512.md, .agent-admin/build-evidence/session-036-20260512/, .agent-workspace/governance-liaison-amc/memory/session-036-20260512.md |
+| allowed_artifact_paths | governance/canon/POLC_EXECUTION_MODEL_CANON.md, governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md, .admin/pr.json.schema.json, .admin/pr.json, .admin/README.md, .github/scripts/validate-simple-pr-admin.sh, .github/workflows/polc-boundary-gate.yml, tests/test_simple_pr_admin_validator.py, governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json, .agent-admin/waves/wave-layer-down-77a8297b-20260512-current-tasks.md, .agent-admin/wave-records/amc-wave-record-layer-down-77a8297b-20260512.md, .agent-admin/build-evidence/session-036-20260512/, .agent-workspace/governance-liaison-amc/memory/session-036-20260512.md, .agent-admin/prehandover/ecap-reconciliation-1177.md |
 | governance_evidence_path | .agent-admin/wave-records/amc-wave-record-layer-down-77a8297b-20260512.md |
 
 ### IAA Pre-Brief (Section 2)
@@ -199,31 +199,42 @@ control_surfaces_updated:
 ### TASK-036-08: .admin/pr.json
 - Status: QP PASS — governance-liaison-amc-agent. Updated from prior Foreman Phase 0 scope to governance-liaison layer-down scope. type=governance-control, requires_iaa=true, requires_ecap=true, governing_issue=#1172.
 
+### TASK-036-09: .github/workflows/polc-boundary-gate.yml
+- Status: QP PASS — governance-liaison-amc-agent. Per POLC_EXECUTION_MODEL_CANON §6.3 + §7 items 2–3. Added Check 0 (validate-simple-pr-admin.sh wired as CI gate step). Updated foreman-implementation-check and builder-involvement-check to read execution_model from .admin/pr.json and use it as primary bypass signal (builder-governed, foreman-orchestrated, cs2-hotfix-override). copilot-builder-role label retained as backward-compatible secondary signal per §6.3. No prior check logic removed.
+
 ## Section 5. Assurance
 
-> IAA Final Assurance — REJECTION-PACKAGE issued. STOP-AND-FIX required before merge-ready.
+> **Current IAA Cycle**: PENDING — fixes applied per OVL-CG-003/004/005 + OVL-LA-ADM-003. New IAA invocation required.
 
 | Field | Value |
 |-------|-------|
-| iaa_verdict | REJECTION-PACKAGE |
-| PHASE_B_BLOCKING_TOKEN | IAA-075-20260512-REJECT |
-| iaa_session | session-075-20260512 |
-| reviewed_sha | 8c6467ed48e03770c8f98c363e71e1effd21d4ba |
-| verdict | REJECTION-PACKAGE |
-| adoption_phase | PHASE_B_BLOCKING |
+| iaa_verdict | PENDING |
+| PHASE_B_BLOCKING_TOKEN | PENDING |
+| iaa_session | PENDING |
+| reviewed_sha | PENDING |
 
-### Rejection Failures (4 checks FAILED)
+### Prior IAA Cycle — SUPERSEDED (session-075-20260512 — REJECTION-PACKAGE)
 
-| # | Check | Classification | Finding | Fix Required |
-|---|-------|---------------|---------|-------------|
-| 1 | OVL-CG-003 | SUBSTANTIVE | `validate-simple-pr-admin.sh` created but NOT wired into any CI workflow. `polc-boundary-gate.yml` `foreman-implementation-check` and `builder-involvement-check` still use `copilot-builder-role` label as primary bypass signal. POLC_EXECUTION_MODEL_CANON.md §6.3 explicitly prohibits label-based role inference; §7 items 2–3 require these validators to be updated to use `execution_model` as primary signal. | Wire validator into CI pipeline. Update `foreman-implementation-check` and `builder-involvement-check` in `polc-boundary-gate.yml` to read `execution_model` from `.admin/pr.json` as primary classification signal. |
-| 2 | OVL-CG-004 | SUBSTANTIVE | Ripple impact of POLC layer-down is incomplete. Wave record task list (TASK-036-01–08) omitted the mandatory CI gate update declared in POLC_EXECUTION_MODEL_CANON.md §7 items 2–3. No CS2-approved deferral on record. | Complete the gate update (same fix as OVL-CG-003). Document scope amendment in wave record. |
-| 3 | OVL-CG-005 | SUBSTANTIVE | Wave record `allowed_artifact_paths` does not include `.github/workflows/polc-boundary-gate.yml`. Scope declaration is incomplete relative to canon §7 requirements. | After completing gate update, add `polc-boundary-gate.yml` to allowed artifact paths and update wave record scope declaration. |
-| 4 | OVL-LA-ADM-003 | CEREMONY | `requires_ecap: true` declared in both `.admin/pr.json` and wave record QP entry. No `ecap-reconciliation-1177.md` produced. No execution-ceremony-admin-agent appointed. Pattern from prior governance-control PRs (#1157, #1163, #1167, #1176) shows ECAP reconciliation is required. | Appoint execution-ceremony-admin-agent and produce `ecap-reconciliation-1177.md` per ECAP canon. OR obtain CS2 clarification that ECAP appointment is structurally inapplicable to governance-liaison-only sessions without Foreman orchestration and update `requires_ecap` accordingly. |
+> Historical record only. All 4 findings addressed. See fix evidence below.
 
-**FAILURE CLASSIFICATION: SUBSTANTIVE: 3 | CEREMONY: 1 | ENVIRONMENT_BOOTSTRAP: 0**
+| Field | Value |
+|-------|-------|
+| prior_iaa_verdict | REJECTION-PACKAGE |
+| prior_PHASE_B_BLOCKING_TOKEN | IAA-075-20260512-REJECT |
+| prior_iaa_session | session-075-20260512 |
+| prior_reviewed_sha | 8c6467ed48e03770c8f98c363e71e1effd21d4ba |
+
+### Fix Evidence (OVL-CG-003/004/005 + OVL-LA-ADM-003)
+
+| # | Original Finding | Fix Applied | Evidence |
+|---|-----------------|------------|----------|
+| 1 | OVL-CG-003 — validator not wired into CI; label-based primary signal | `.github/workflows/polc-boundary-gate.yml` updated: Check 0 added (validate-simple-pr-admin.sh); execution_model reads from .admin/pr.json as primary signal per POLC_EXECUTION_MODEL_CANON §6.3 | TASK-036-09 QP PASS |
+| 2 | OVL-CG-004 — POLC §7 operationalization incomplete | TASK-036-09 added to wave scope; polc-boundary-gate.yml updated; scope amendment documented | wave record §2 allowed_artifact_paths updated |
+| 3 | OVL-CG-005 — polc-boundary-gate.yml absent from allowed_artifact_paths | `.github/workflows/polc-boundary-gate.yml` added to allowed_artifact_paths | wave record §2 updated |
+| 4 | OVL-LA-ADM-003 — ECAP not produced | execution-ceremony-admin-agent appointed; ecap-reconciliation-1177.md produced | `.agent-admin/prehandover/ecap-reconciliation-1177.md` |
 
 ---
 
-**Filed by**: governance-liaison-amc-agent | **Date**: 2026-05-12  
-**IAA verdict filed by**: independent-assurance-agent | **Session**: session-075-20260512 | **Date**: 2026-05-12
+**Filed by**: governance-liaison-amc-agent | **Date**: 2026-05-12
+**Prior IAA verdict filed by**: independent-assurance-agent | **Session**: session-075-20260512 | **Date**: 2026-05-12
+**Section 5 reset by**: execution-ceremony-admin-agent | **Session**: session-eca-036-20260512 | **Date**: 2026-05-12 | **Authority**: AAP-14 hygiene

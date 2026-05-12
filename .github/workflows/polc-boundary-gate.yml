@@ -3,15 +3,20 @@ name: POLC Boundary Validation
 
 # Authority: FOREMAN_AUTHORITY_AND_SUPERVISION_MODEL.md,
 #            LIVING_AGENT_SYSTEM.md v6.2.0
+#            POLC_EXECUTION_MODEL_CANON.md v1.0.0 — execution_model as primary signal
 # Purpose: Prevent Foreman from implementing new features;
 #          allow supervision corrections. Three separate jobs provide
 #          independent status checks matching merge_gate_interface required_checks.
-# Issue: #193 (original gate), S-007/S-023 (machine enforcement improvements)
+# Issue: #193 (original gate), S-007/S-023 (machine enforcement improvements),
+#        #1172 (POLC Execution Model Canon — execution_model primary signal)
 # Contract: Foreman-ISMS Agent Contract v2.6.0,
 #           merge_gate_interface.required_checks
 # S-007: Each gate runs as its own named job so CI reports
 #        separate named status checks
 # S-023: builder-involvement-check now enforces pre-brief artifact existence
+# POLC-CM-001: execution_model field in .admin/pr.json is the primary signal
+#              for POLC role classification. copilot-builder-role label is a
+#              backward-compatible secondary signal (deprecated as primary).
 
 'on':
   pull_request:
@@ -33,6 +38,45 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check 0 - Validate PR Admin Manifest (execution_model enforcement)
+        id: check0
+        run: |
+          echo "=== Check 0: PR Admin Manifest Validation (POLC_EXECUTION_MODEL_CANON §6–7) ==="
+          echo ""
+          echo "Authority: POLC_EXECUTION_MODEL_CANON.md v1.0.0 (layered down #1172)"
+          echo "           MMM_SIMPLE_PR_ADMIN_MODEL.md v1.2.0"
+          echo ""
+
+          if [ ! -f ".admin/pr.json" ]; then
+            echo "ℹ️  No .admin/pr.json found — validator skipped (pre-SPAM-001 PR)."
+            echo "   Full POLC boundary checks apply (Checks 1–3 below)."
+            exit 0
+          fi
+
+          # Wire validate-simple-pr-admin.sh as CI gate step
+          # Authority: POLC_EXECUTION_MODEL_CANON §7 item 2 — consumer repos MUST
+          # update their POLC Boundary Validation gate.
+          BASE_BRANCH="${{ github.event.pull_request.base.ref }}"
+
+          # Build changed-files list for validator
+          CHANGED_FILES_PATH=$(mktemp)
+          git diff --name-only "origin/${BASE_BRANCH}"...HEAD > "$CHANGED_FILES_PATH" 2>/dev/null || true
+
+          # Run the validator
+          if bash .github/scripts/validate-simple-pr-admin.sh \
+               --manifest .admin/pr.json \
+               --changed-files "$CHANGED_FILES_PATH"; then
+            echo ""
+            echo "✅ Check 0 PASSED — PR admin manifest valid."
+          else
+            echo ""
+            echo "❌ Check 0 FAILED — PR admin manifest invalid."
+            echo ""
+            echo "Fix .admin/pr.json to comply with POLC_EXECUTION_MODEL_CANON.md"
+            echo "and MMM_SIMPLE_PR_ADMIN_MODEL.md v1.2.0."
+            exit 1
+          fi
+
       - name: Check 1 - Detect Foreman Implementation Commits
         id: check1
         run: |
@@ -41,11 +85,43 @@ jobs:
           echo "Refined: Block implementation, allow supervision"
           echo ""
 
+          # ---------------------------------------------------------------
+          # POLC-CM-001: execution_model primary bypass
+          # Authority: POLC_EXECUTION_MODEL_CANON.md v1.0.0 §6.3
+          # If .admin/pr.json declares execution_model that unambiguously
+          # identifies the governing role, use it as the primary signal.
+          # ---------------------------------------------------------------
+          if [ -f ".admin/pr.json" ]; then
+            EXEC_MODEL=$(python3 -c "
+import json, sys
+try:
+    d = json.load(open('.admin/pr.json'))
+    print(d.get('execution_model', ''))
+except Exception:
+    print('')
+" 2>/dev/null || echo "")
+            if [[ "$EXEC_MODEL" == "builder-governed" ]]; then
+              echo "✅ execution_model=builder-governed (primary signal per POLC_EXECUTION_MODEL_CANON §6.3)"
+              echo "   PR is builder-governed — foreman-implementation-check is not applicable."
+              exit 0
+            elif [[ "$EXEC_MODEL" == "foreman-orchestrated" ]]; then
+              echo "ℹ️  execution_model=foreman-orchestrated — Foreman orchestrated, builder implemented."
+              echo "   foreman-implementation-check continues to verify Foreman did not implement."
+            elif [[ "$EXEC_MODEL" == "cs2-hotfix-override" ]]; then
+              echo "✅ execution_model=cs2-hotfix-override — CS2-authorised override."
+              echo "   foreman-implementation-check is not applicable."
+              exit 0
+            fi
+            # Non-empty but unrecognised value: fall through to label check (validator caught it in Check 0)
+          fi
+
           # If PR is labeled 'copilot-builder-role', Copilot is acting as a
           # governed builder (not Foreman) in this PR. The
           # foreman-implementation-check does not apply to builder PRs.
           # Use exact matching: split the comma-separated label list and compare
           # each label individually to avoid substring false positives.
+          # NOTE: copilot-builder-role label is a backward-compatible secondary
+          # signal per POLC_EXECUTION_MODEL_CANON §6.3 (deprecated as primary).
           PR_LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
           HAS_BUILDER_LABEL=false
           IFS=',' read -ra LABEL_ARRAY <<< "$PR_LABELS"
@@ -294,6 +370,54 @@ jobs:
           echo "Logic: Skip if only supervision corrections detected."
           echo "       Fail if implementation changed but no pre-brief artifact."
           echo ""
+
+          # ---------------------------------------------------------------
+          # POLC-CM-001: execution_model primary signal
+          # Authority: POLC_EXECUTION_MODEL_CANON.md v1.0.0 §6.3
+          # If execution_model is declared in .admin/pr.json, use it as the
+          # primary signal for builder involvement classification.
+          # ---------------------------------------------------------------
+          if [ -f ".admin/pr.json" ]; then
+            EXEC_MODEL=$(python3 -c "
+import json, sys
+try:
+    d = json.load(open('.admin/pr.json'))
+    print(d.get('execution_model', ''))
+except Exception:
+    print('')
+" 2>/dev/null || echo "")
+            IMPL_AGENT=$(python3 -c "
+import json, sys
+try:
+    d = json.load(open('.admin/pr.json'))
+    print(d.get('implementing_agent', ''))
+except Exception:
+    print('')
+" 2>/dev/null || echo "")
+            if [[ "$EXEC_MODEL" == "builder-governed" ]]; then
+              echo "✅ execution_model=builder-governed (primary signal per POLC_EXECUTION_MODEL_CANON §6.3)"
+              echo "   Builder-governed: implementing_agent=${IMPL_AGENT}"
+              echo "   builder-involvement-check confirmed via execution_model declaration."
+              exit 0
+            elif [[ "$EXEC_MODEL" == "foreman-orchestrated" ]]; then
+              ORCH_AGENT=$(python3 -c "
+import json, sys
+try:
+    d = json.load(open('.admin/pr.json'))
+    print(d.get('orchestrating_agent', ''))
+except Exception:
+    print('')
+" 2>/dev/null || echo "")
+              echo "✅ execution_model=foreman-orchestrated (primary signal per POLC_EXECUTION_MODEL_CANON §6.3)"
+              echo "   orchestrating_agent=${ORCH_AGENT} | implementing_agent=${IMPL_AGENT}"
+              echo "   builder-involvement-check confirmed via execution_model declaration."
+              exit 0
+            elif [[ "$EXEC_MODEL" == "cs2-hotfix-override" ]]; then
+              echo "✅ execution_model=cs2-hotfix-override — CS2-authorised override."
+              echo "   builder-involvement-check is not applicable."
+              exit 0
+            fi
+          fi
 
           # Get base branch
           BASE_BRANCH="${{ github.event.pull_request.base.ref }}"

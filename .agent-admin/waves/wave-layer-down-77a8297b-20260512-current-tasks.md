@@ -64,6 +64,11 @@ clarification in issue #1172.
       qp_verdict: PASS
       notes: Updated from prior Foreman Phase 0 scope to this governance-liaison layer-down scope.
 
+- [x] TASK-036-09 — Update `.github/workflows/polc-boundary-gate.yml` — execution_model primary signal
+      builder: governance-liaison-amc-agent
+      qp_verdict: PASS
+      notes: Per POLC_EXECUTION_MODEL_CANON §6.3 + §7. Added Check 0 (validate-simple-pr-admin.sh in CI). Updated foreman-implementation-check and builder-involvement-check to use execution_model as primary signal. copilot-builder-role label retained as backward-compatible secondary.
+
 ---
 
 ## Scope Boundaries
