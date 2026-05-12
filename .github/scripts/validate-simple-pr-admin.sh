@@ -280,7 +280,12 @@ elif [[ -n "$CHANGED_FILES_INPUT" ]]; then
         warn "Changed files input file not found: ${CHANGED_FILES_INPUT} — skipping diff check"
     else
         DIFF_CHANGED_FILES=$(cat "$CHANGED_FILES_INPUT")
-        DIFF_AVAILABLE=true
+        if [[ "$DIFF_CHANGED_FILES" =~ [^[:space:]] ]]; then
+            DIFF_AVAILABLE=true
+        else
+            warn "Changed files input file is empty: ${CHANGED_FILES_INPUT} — skipping diff check"
+            DIFF_AVAILABLE=false
+        fi
     fi
 else
     # Derive from git diff
