@@ -1,0 +1,9 @@
+{
+  "type": "governance-control",
+  "requires_iaa": true,
+  "requires_ecap": true,
+  "governing_issue": "#1172",
+  "scope_summary": "Foreman Phase 0: orchestration record for AMC governance alignment program (#1168-#1171). Startup parity fixes: wake-up-protocol.sh -agent.md fallback, missing Tier 2 knowledge files (builder-task-template.md, pre-build-stage-model-reference.md), and index.md v1.4.0.",
+  "created_by": "foreman-v2-agent",
+  "created_at": "2026-05-12T06:45:00Z"
+}
