@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "d99e68e8759af5f619851116e583d768c4f4c1e1",
-  "last_updated": "2026-05-04",
+  "last_layer_down_commit": "77a8297bc2408bbc1c224083fd6028affb052107",
+  "last_updated": "2026-05-12",
   "alignment_status": "ALIGNED",
-  "total_artifacts": 41,
+  "total_artifacts": 43,
   "artifacts": [
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -460,6 +460,28 @@
       "layered_down_at": "2026-05-04T09:43:51Z",
       "file_hash_sha256": "f233e0bd21d745f5e2df0d0c9625913168a2ff94baa77e790084485c78afdf53",
       "action": "UPDATED"
+    },
+    {
+      "filename": "MMM_SIMPLE_PR_ADMIN_MODEL.md",
+      "path": "governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md",
+      "version": "1.2.0",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "canonical_commit": "77a8297bc2408bbc1c224083fd6028affb052107",
+      "layered_down_at": "2026-05-12T11:56:36Z",
+      "file_hash_sha256": "d58b4608511eeeed9c40619dd675220b8d2ecf3fcd4b6d3b09653f4d5106bd65",
+      "action": "UPDATED"
+    },
+    {
+      "filename": "POLC_EXECUTION_MODEL_CANON.md",
+      "path": "governance/canon/POLC_EXECUTION_MODEL_CANON.md",
+      "version": "1.0.0",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "canonical_commit": "77a8297bc2408bbc1c224083fd6028affb052107",
+      "layered_down_at": "2026-05-12T11:56:36Z",
+      "file_hash_sha256": "bfc27875f6d79cc6bd2e368b1809e60daf37042f52ea9a48f930a00bf35c2f33",
+      "action": "CREATED"
     }
   ],
   "layer_down_history": [
