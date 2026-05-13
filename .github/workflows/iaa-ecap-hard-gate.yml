@@ -240,6 +240,7 @@ jobs:
           #   2) wave record linked to this PR
           #   3) PR body (compatibility fallback)
           GOVERNING_ISSUE=""
+          ISSUE_MATCH=""
 
           # 1) Manifest-first resolution
           if [ -f ".admin/pr.json" ]; then
@@ -265,10 +266,10 @@ jobs:
           # 3) PR body compatibility fallback
           if [ -z "$GOVERNING_ISSUE" ]; then
             ISSUE_MATCH=$(echo "$PR_BODY" | grep -oP '(?:governing_delivery_issue|governing_issue)\s*:\s*#(\d+)' | grep -oP '\d+' | head -1 || true)
-          fi
-          if [ -z "$GOVERNING_ISSUE" ] && [ -n "$ISSUE_MATCH" ]; then
-            GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
-            echo "Resolved governing issue from PR body fallback: #$ISSUE_MATCH"
+            if [ -n "$ISSUE_MATCH" ]; then
+              GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
+              echo "Resolved governing issue from PR body fallback: #$ISSUE_MATCH"
+            fi
           fi
 
           python3 .github/scripts/validate-iaa-final-assurance.py \
