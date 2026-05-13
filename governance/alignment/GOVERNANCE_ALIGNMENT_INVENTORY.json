@@ -3,8 +3,15 @@
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
   "last_layer_down_commit": "77a8297bc2408bbc1c224083fd6028affb052107",
-  "last_updated": "2026-05-12",
+  "last_updated": "2026-05-13",
   "alignment_status": "ALIGNED",
+  "watch_pending_design_inputs": [
+    {
+      "issue_ref": "APGI-cmy/app_management_centre#1436",
+      "status": "WATCH_PENDING_DESIGN_INPUT",
+      "notes": "Future ISMS execution_model hardening input is tracked as watch-only until merged/accepted as canonical. Not part of current baseline parity."
+    }
+  ],
   "total_artifacts": 43,
   "artifacts": [
     {
@@ -225,10 +232,10 @@
       "canonical_commit": "f68b7d993b080cdd721445f1f39e4b77ad0d150f",
       "layered_down_at": "2026-04-09T14:04:20Z",
       "file_hash_sha256": "11b32200c1d54049641f377e7a3e2ba18108ec12a98824334be50420e55ef250",
-      "action": "PENDING_NOT_APPLIED",
+      "action": "WATCH_PENDING_CS2_CODEXADVISOR",
       "cs2_approval_required": true,
       "pr_mode": "DRAFT",
-      "notes": "Protected target path only \u2014 this PR does not update .github/agents/CodexAdvisor-agent.md. The 4.0.2 contract content is pending CS2/CodexAdvisor application from the escalation inbox; contract_version remains 4.0.0 in-repo until approval and application.",
+      "notes": "Protected target path only \u2014 this PR does not update .github/agents/CodexAdvisor-agent.md. The 4.0.2 contract content is tracked in the CS2/CodexAdvisor watch queue; contract_version remains 4.0.0 in-repo until explicit approval/application.",
       "applied_to_repo": false
     },
     {
@@ -494,8 +501,8 @@
       "artifacts_created": 0,
       "artifacts_updated": 1,
       "issue_ref": "APGI-cmy/app_management_centre#layer-down-f5b61144",
-      "pr_ref": "DRAFT \u2014 pending CS2 merge",
-      "status": "PENDING_CS2_APPROVAL"
+      "pr_ref": "CS2/CodexAdvisor watch queue",
+      "status": "WATCH_PENDING_CS2_CODEXADVISOR"
     },
     {
       "layer_down_id": "layer-down-2026-04-05-6bbc3baf",
@@ -610,8 +617,8 @@
       "changed_artifacts": [
         "CodexAdvisor-agent.md"
       ],
-      "status": "PENDING_CS2_APPROVAL",
-      "notes": "Agent contract file change \u2014 escalated to CS2 per PROHIB-002/AGCFPP-001. Supersedes f5b61144 (v4.0.1)."
+      "status": "WATCH_PENDING_CS2_CODEXADVISOR",
+      "notes": "Agent contract file change remains CS2/CodexAdvisor-gated per PROHIB-002/AGCFPP-001. Tracked in watch bucket; not baseline parity drift."
     },
     {
       "layer_down_commit": "818bab2a3771ff72d6a999e0aaa069304728cc3a",
@@ -620,8 +627,8 @@
       "changed_artifacts": [
         "foreman-v2.agent.md"
       ],
-      "status": "CONSUMER_AHEAD_CS2_ESCALATED",
-      "notes": "Agent contract file change \u2014 foreman-v2.agent.md v3.0.1 (removed 5 excess metadata doc-refs). Consumer foreman-v2-agent.md at v3.3.1 (AHEAD). No content changes applied. Escalated to CS2 per PROHIB-002/AGCFPP-001."
+      "status": "WATCH_PENDING_CS2_CODEXADVISOR",
+      "notes": "Agent contract delta remains CS2/CodexAdvisor-gated. Consumer foreman-v2-agent.md remains ahead; tracked as watch-only until canonical decision."
     },
     {
       "layer_down_commit": "e5a76db099663c15dcda3fe878b48c1331b36aca",

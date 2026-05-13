@@ -235,22 +235,40 @@ jobs:
           echo "Authority: PPEIA-001, EFIA-001, AAEV-001 | AC1, AC2, AC6, AC7, AC8"
           echo ""
 
-          # Extract governing issue from PR body (look for "governing_delivery_issue: #NNN")
+          # Resolve governing issue with authority priority:
+          #   1) .admin/pr.json (manifest source of truth)
+          #   2) wave record linked to this PR
+          #   3) PR body (compatibility fallback)
           GOVERNING_ISSUE=""
-          ISSUE_MATCH=$(echo "$PR_BODY" | grep -oP '(?:governing_delivery_issue|governing_issue)\s*:\s*#(\d+)' | grep -oP '\d+' | head -1 || true)
-          if [ -n "$ISSUE_MATCH" ]; then
-            GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
-            echo "Extracted governing issue: #$ISSUE_MATCH"
-          else
-            # Fallback: find the wave record that references this PR and extract its governing_issue
+
+          # 1) Manifest-first resolution
+          if [ -f ".admin/pr.json" ]; then
+            ISSUE_MATCH=$(python3 -c "import json,re; d=json.load(open('.admin/pr.json')); gi=str(d.get('governing_issue','')); m=re.search(r'#?(\\d+)', gi); print(m.group(1) if m else '')" 2>/dev/null || true)
+            if [ -n "$ISSUE_MATCH" ]; then
+              GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
+              echo "Resolved governing issue from .admin/pr.json: #$ISSUE_MATCH"
+            fi
+          fi
+
+          # 2) Wave record fallback (authoritative evidence carrier)
+          if [ -z "$GOVERNING_ISSUE" ]; then
             WR_FILE=$(grep -rl "^PR: #${PR_NUMBER}\b" .agent-admin/wave-records/ 2>/dev/null | head -1 || true)
             if [ -n "$WR_FILE" ]; then
               ISSUE_MATCH=$(grep -oP '(?:governing_issue|governing_delivery_issue)\s*:\s*[#\s]*\K\d+' "$WR_FILE" 2>/dev/null | head -1 || true)
               if [ -n "$ISSUE_MATCH" ]; then
                 GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
-                echo "Extracted governing issue from wave record: #$ISSUE_MATCH"
+                echo "Resolved governing issue from wave record: #$ISSUE_MATCH"
               fi
             fi
+          fi
+
+          # 3) PR body compatibility fallback
+          if [ -z "$GOVERNING_ISSUE" ]; then
+            ISSUE_MATCH=$(echo "$PR_BODY" | grep -oP '(?:governing_delivery_issue|governing_issue)\s*:\s*#(\d+)' | grep -oP '\d+' | head -1 || true)
+          fi
+          if [ -z "$GOVERNING_ISSUE" ] && [ -n "$ISSUE_MATCH" ]; then
+            GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
+            echo "Resolved governing issue from PR body fallback: #$ISSUE_MATCH"
           fi
 
           python3 .github/scripts/validate-iaa-final-assurance.py \

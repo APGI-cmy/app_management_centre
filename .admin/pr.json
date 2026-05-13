@@ -2,8 +2,8 @@
   "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1172",
-  "scope_summary": "Layer-down POLC execution model canon (v1.0.0) and update AMC Simple PR Admin Model to v1.2.0 per upstream governance commit 77a8297b. Adds execution_model enforcement (Check 13), schema fields, validator, tests, and GOVERNANCE_ALIGNMENT_INVENTORY updates.",
-  "created_by": "governance-liaison-amc-agent",
-  "created_at": "2026-05-12T08:36:45Z"
+  "governing_issue": "#1177",
+  "scope_summary": "Follow-up parity sweep after #1177: verify execution_model authority flow, normalize governance inventory/status wording, and capture controlled proof-of-operation evidence.",
+  "created_by": "foreman-v2-agent",
+  "created_at": "2026-05-13T15:52:39Z"
 }
