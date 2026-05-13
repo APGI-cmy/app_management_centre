@@ -204,12 +204,23 @@ control_surfaces_updated:
 
 ## Section 5. Assurance
 
+<!-- machine-readable final assurance fields -->
+PR: #1177
+governing_issue: #1172
+Verdict: PASS
+Reviewed SHA: c45a2dee6ab456b99ea8999dc98988e5cf0b296a
+PHASE_B_BLOCKING_TOKEN: IAA-session-076-20260512-PASS
+delta_assurance_verdict: PASS
+delta_classification: token-recording-only
+base_head: 6d6434d2fb613365d3ad82877306e3cff0776422
+final_head: c45a2dee6ab456b99ea8999dc98988e5cf0b296a
+
 | Field | Value |
 |-------|-------|
 | iaa_verdict | ASSURANCE-TOKEN |
-| PHASE_B_BLOCKING_TOKEN | IAA-076-20260512-PASS |
+| PHASE_B_BLOCKING_TOKEN | IAA-session-076-20260512-PASS |
 | iaa_session | session-076-20260512 |
-| reviewed_sha | 6d6434d2fb613365d3ad82877306e3cff0776422 |
+| reviewed_sha | c45a2dee6ab456b99ea8999dc98988e5cf0b296a |
 | verdict | ASSURANCE-TOKEN — all 45 checks PASS |
 | overlay_applied | CORE-020, CORE-021, CERT-001–004, OVL-CG-001–005, OVL-CI-001–005, OVL-LA-001–005, OVL-LA-ADM-002–003, ACR-01–11 |
 | re_invocation_rounds | 1 (REJECTION-PACKAGE on round 1 — OVL-CG-003/004/005 + OVL-LA-ADM-003; all resolved) |

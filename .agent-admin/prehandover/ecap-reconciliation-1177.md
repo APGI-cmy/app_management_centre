@@ -7,14 +7,14 @@
 **ECAP Session**: session-eca-036-20260512
 **Governing Session**: session-036-20260512 (governance-liaison-amc-agent)
 **Final IAA Session Reference**: session-076-20260512
-**Final Token Reference**: IAA-076-20260512-PASS
+**Final Token Reference**: IAA-session-076-20260512-PASS
 **Date**: 2026-05-12
 
 <!-- machine-readable validator fields (AC3) -->
 protected_path_touched: true
 ecap_required: true
 ecap_invoked: true
-ecap_verdict: BUNDLE_PREPARED
+ecap_verdict: PASS
 ceremony_admin_appointed: true
 protected_path_ceremony_verdict: PASS
 
@@ -51,11 +51,11 @@ protected_path_ceremony_verdict: PASS
 | Regression tests (81) | `tests/test_simple_pr_admin_validator.py` | ✓ | ✓ | TASK-036-05 — 81 tests GREEN |
 | Governance alignment inventory | `governance/alignment/GOVERNANCE_ALIGNMENT_INVENTORY.json` | ✓ | ✓ | TASK-036-07 — 41→43 artifacts |
 | Wave tasks checklist | `.agent-admin/waves/wave-layer-down-77a8297b-20260512-current-tasks.md` | ✓ | ✓ | TASK-036-09 added post-IAA-rejection |
-| Wave record | `.agent-admin/wave-records/amc-wave-record-layer-down-77a8297b-20260512.md` | ✓ | ✓ | §2 scope + §4 TASK-036-09 + §5 reset to PENDING |
+| Wave record | `.agent-admin/wave-records/amc-wave-record-layer-down-77a8297b-20260512.md` | ✓ | ✓ | §2 scope + §4 TASK-036-09 + §5 token recorded |
 | Governing session memory | `.agent-workspace/governance-liaison-amc/memory/session-036-20260512.md` | ✓ | ✓ | GL session — 8 tasks (pre-TASK-036-09; note C3 row 7) |
 | ECA session memory | `.agent-workspace/foreman-v2/memory/session-eca-036-20260512.md` | ✓ | ✓ | ECA ceremony record |
 | ECAP reconciliation summary | `.agent-admin/prehandover/ecap-reconciliation-1177.md` | ✓ | ✓ | This file |
-| IAA session memory | pending | N/A | N/A | New IAA cycle required |
+| IAA session memory | `.agent-workspace/independent-assurance-agent/memory/session-076-20260512.md` | ✓ | ✓ | Final IAA PASS session memory committed |
 
 ---
 
@@ -70,7 +70,7 @@ protected_path_ceremony_verdict: PASS
 | 5 | PR reference | `#1177` | Wave record §1 `pr_number`, ECAP header | ✓ |
 | 6 | Branch | `copilot/propagate-governance-changes` | `git rev-parse --abbrev-ref HEAD` | ✓ |
 | 7 | GL session outcome | `COMPLETE — all 8 tasks` | Wave record §4 (9 tasks post-amendment) | ⚠ Minor: GL session memory written before TASK-036-09 was added. Records 8 tasks; wave record §4 records 9. ECA session memory notes this discrepancy. ECA write-scope does not include GL memory path — escalation to Foreman for optional update. |
-| 8 | Token reference (new cycle) | `PENDING` | Wave record §5 `PHASE_B_BLOCKING_TOKEN` | ✓ — pre-filled PENDING per AAP-14 |
+| 8 | Token reference (new cycle) | `IAA-session-076-20260512-PASS` | Wave record §5 `PHASE_B_BLOCKING_TOKEN` | ✓ — final token recorded |
 | 9 | Prior token | `IAA-075-20260512-REJECT` | Wave record §5 prior cycle archive | ✓ — preserved as historical record |
 | 10 | HEAD SHA (post-fix) | `13148edcaad8bf09b975cd1dc95c9183e1774195` | `git rev-parse HEAD` | ✓ |
 | 11 | Committed-state parity | All 14 artifacts listed in C2 | `git ls-files --error-unmatch` for each | ✓ — all confirmed committed (see Step 3.3 artifact inventory) |
@@ -156,12 +156,12 @@ Confirmation: No ASSEMBLY_TIME_ONLY blocks, no [fill in] placeholders, no templa
 **Checked by**: execution-ceremony-admin-agent — session-eca-036-20260512 — 2026-05-12
 
 **AAP quick-check summary**:
-- AAP-01 (provisional wording in final-state): PASS — wave record §3/§4 finalized; §5 correctly shows PENDING token pre-fill only
+- AAP-01 (provisional wording in final-state): PASS — wave record §3/§4 finalized; §5 records final IAA token
 - AAP-02 (mixed version labels): PASS — no mixed versions within any single ceremony artifact
 - AAP-03 (stale artifact paths): PASS — all 14 artifacts in C2 confirmed committed via git ls-files
 - AAP-04 (scope declaration parity): N/A — governance/scope-declaration.md is stale from prior batch; wave record §2 allowed_artifact_paths is the authoritative scope declaration for this governance-only wave. No FILES_CHANGED mismatch applicable.
 - AAP-05 (stale hash): PASS — no SHA256 hashes declared in ceremony artifacts (hash computation not required for this wave type)
-- AAP-06 (session mismatch): PASS — new IAA cycle PENDING; no prior session cross-reference issue
+- AAP-06 (session mismatch): PASS — final IAA session/token cross-reference is consistent
 - AAP-07 (declared count mismatch): PASS — 9 tasks in wave record §4 (TASK-036-01 through TASK-036-09), 14 artifacts in C2, all consistent; GL session memory 8-task discrepancy documented in C3 row 7
 - AAP-08 (PUBLIC_API ripple omitted): PASS — C4 fully populated for both PUBLIC_API files; ripple completed in-wave
 - AAP-09 (committed truth mismatch): PASS — all committed artifact paths verified at HEAD 13148edcaad8bf09b975cd1dc95c9183e1774195
@@ -169,9 +169,9 @@ Confirmation: No ASSEMBLY_TIME_ONLY blocks, no [fill in] placeholders, no templa
 - AAP-11 (blank C-fields): PASS — C1–C4, C6, C7 fully populated; C5 correctly blank for Foreman §14.6
 - AAP-12 (Foreman §14.6 not completed): N/A at bundle-return time — C5 left blank per protocol for Foreman to complete
 - AAP-13 (session memory wave record path mismatch): PASS — ECA session memory `wave_record_path` matches committed wave record path
-- AAP-14 (wave record §5 not pre-filled): PASS — §5 `PHASE_B_BLOCKING_TOKEN: PENDING` confirmed after §5 reset
+- AAP-14 (wave record §5 token recording): PASS — §5 `PHASE_B_BLOCKING_TOKEN: IAA-session-076-20260512-PASS` recorded
 - AAP-15 (gate set not explicitly identified): PASS — C6 lists all 7 required gates with per-gate outcome
-- AAP-16 (stale gate wording): PASS — no PENDING/in-progress in §3/§4 wave record evaluation; §5 PENDING confined to PHASE_B_BLOCKING_TOKEN pre-fill (AAP-16 exempt)
+- AAP-16 (stale gate wording): PASS — no pending/in-progress wording in final-state gate evidence fields
 
 ---
 
@@ -184,7 +184,7 @@ Confirmation: No ASSEMBLY_TIME_ONLY blocks, no [fill in] placeholders, no templa
 2. `.agent-admin/wave-records/amc-wave-record-layer-down-77a8297b-20260512.md` (M) — TASK-036-09 + scope amendment
 3. `.agent-admin/waves/wave-layer-down-77a8297b-20260512-current-tasks.md` (M) — TASK-036-09 entry
 
-**Resolution**: All 3 files are within the wave's `allowed_artifact_paths`. ECA committed these as part of ceremony bundle assembly (commit `13148edcaad8bf09b975cd1dc95c9183e1774195`). Wave record §5 subsequently reset to PENDING for new IAA cycle (same commit).
+**Resolution**: All 3 files are within the wave's `allowed_artifact_paths`. ECA committed these as part of ceremony bundle assembly (commit `13148edcaad8bf09b975cd1dc95c9183e1774195`). Final IAA token was then recorded in wave record §5.
 
 **Working tree status at bundle finalization**: `git status` clean for all ceremony artifacts.
 
