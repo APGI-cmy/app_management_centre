@@ -2,7 +2,7 @@
   "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1177",
+  "governing_issue": "#1178",
   "scope_summary": "Follow-up parity sweep after #1177: verify execution_model authority flow, normalize governance inventory/status wording, and capture controlled proof-of-operation evidence.",
   "created_by": "foreman-v2-agent",
   "created_at": "2026-05-13T15:52:39Z"
