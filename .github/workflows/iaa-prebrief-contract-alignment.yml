@@ -1,0 +1,58 @@
+name: IAA Pre-Brief Contract Alignment
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  iaa-prebrief-contract-alignment:
+    name: "preflight/iaa-prebrief-contract-alignment"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Verify AMC canonical pre-brief guidance
+        shell: bash
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha || '' }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          test -f .agent-admin/control/schemas/iaa-preflight-brief.schema.json
+          test -f .agent-admin/control/protocols/IAA_PREFLIGHT_BRIEF_PROTOCOL.md
+          active_path_regex='^(\.github/workflows/iaa-prebrief-contract-alignment\.yml|\.agent-admin/control/(protocols|overlays|templates|checklists)/)'
+          changed_active=false
+          targets=()
+          if [ "${EVENT_NAME}" = "pull_request" ] && [ -n "${PR_BASE_SHA:-}" ] && [ -n "${PR_HEAD_SHA:-}" ]; then
+            changed_files=$(git diff --name-only "${PR_BASE_SHA}...${PR_HEAD_SHA}" || true)
+            active_changed=$(printf '%s\n' "$changed_files" | grep -E "$active_path_regex" || true)
+            if [ -n "$active_changed" ]; then
+              changed_active=true
+              while IFS= read -r file; do
+                [ -z "$file" ] && continue
+                [ "$file" = ".github/workflows/iaa-prebrief-contract-alignment.yml" ] && continue
+                [ -f "$file" ] && targets+=("$file")
+              done <<< "$active_changed"
+            fi
+          else
+            changed_active=true
+            mapfile -t targets < <(find .agent-admin/control -type f 2>/dev/null | sort)
+          fi
+          if [ "$changed_active" = true ] && [ "${#targets[@]}" -gt 0 ]; then
+            matches=$(grep -InE '(Generate|Create|Write|Persist|File|Save|commit).*(iaa-prebrief-[^[:space:]]*\.md|iaa-prebrief-\*)' "${targets[@]}" 2>/dev/null | grep -viE '(do not|must not|prohibit|prohibited|legacy|example|archive|older|supersedes|superseded|instead|not a standalone)' || true)
+            if [ -n "$matches" ]; then
+              printf '%s\n' "$matches"
+              echo "::error::Active guidance still instructs agents to create standalone iaa-prebrief artifacts."
+              exit 1
+            fi
+          else
+            echo "No changed non-self active IAA guidance to legacy-scan."
+          fi
+          if ! grep -RInE 'IAA_PREFLIGHT_BRIEF' .agent-admin/control/protocols .agent-admin/control/overlays 2>/dev/null | grep -v '.github/workflows/iaa-prebrief-contract-alignment.yml'; then
+            echo "::error::No canonical IAA_PREFLIGHT_BRIEF references found in active AMC guidance."
+            exit 1
+          fi
+          echo "IAA pre-brief contract alignment gate completed."
