@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "repository": "APGI-cmy/app_management_centre",
+  "alignment_target": "ISMS PR #1800 gate model",
+  "required_checks": [
+    "preflight/iaa-prebrief-contract-alignment",
+    "preflight/foreman-prehandover-lane-gate",
+    "preflight/delegation-order-gate",
+    "preflight/ecap-admin-boundary-gate",
+    "preflight/merge-gate-required-checks-alignment",
+    "preflight/wave7-governance-validation",
+    "preflight/evidence-gate",
+    "POLC Boundary Validation / foreman-implementation-check",
+    "POLC Boundary Validation / builder-involvement-check",
+    "POLC Boundary Validation / session-memory-check"
+  ],
+  "workflow_backed_required_checks": [
+    "preflight/iaa-prebrief-contract-alignment",
+    "preflight/foreman-prehandover-lane-gate",
+    "preflight/delegation-order-gate",
+    "preflight/ecap-admin-boundary-gate",
+    "preflight/merge-gate-required-checks-alignment",
+    "preflight/wave7-governance-validation"
+  ],
+  "mapped_legacy_or_external_required_checks": [
+    {
+      "check": "preflight/evidence-gate",
+      "reason": "existing AMC preflight evidence gate retained during transition"
+    },
+    {
+      "check": "POLC Boundary Validation / foreman-implementation-check",
+      "reason": "existing AMC POLC gate retained during transition"
+    },
+    {
+      "check": "POLC Boundary Validation / builder-involvement-check",
+      "reason": "existing AMC POLC gate retained during transition"
+    },
+    {
+      "check": "POLC Boundary Validation / session-memory-check",
+      "reason": "existing AMC POLC gate retained during transition"
+    }
+  ],
+  "wave7_validation_required": true,
+  "final_build_ready": false,
+  "note": "AMC remains build-blocked until Stage 5/5a/6/7 CS2 dispositions and Stage 8-11 artifacts are complete."
+}
