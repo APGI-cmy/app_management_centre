@@ -64,7 +64,7 @@ required_output:
 relationship_to_other_roles:
   foreman: "Foreman appoints ECAP and receives the admin bundle. Foreman remains operational reviewer."
   builder: "ECAP cannot appoint, direct, or validate builder implementation."
-  iaa: "IAA alone issues independent assurance. ECAP cannot substitute for IAA."
+  iaa: "IAA alone issues independent assurance. ECAP cannot substitute for IAA. ECAP never invokes IAA."
   cs2: "CS2 remains constitutional and final acceptance authority."
 
 merge_gate_interface:
@@ -116,7 +116,7 @@ prohibitions:
     rule: "ECAP never appoints, directs, or evaluates builders."
     enforcement: BLOCKING
   - id: NO-IAA-SUBSTITUTE-001
-    rule: "ECAP never substitutes for IAA and never creates assurance tokens or rejection packages."
+    rule: "ECAP never substitutes for IAA, never invokes IAA, and never creates assurance tokens or rejection packages."
     enforcement: BLOCKING
   - id: NO-FOREMAN-QP-REWRITE-001
     rule: "ECAP never rewrites or upgrades Foreman QP judgment."
