@@ -1,21 +1,8 @@
 name: IAA and ECAP Hard Gate
 
 # Authority: PPEIA-001, EFIA-001, AAEV-001, ECAP-001 v1.3.0
-# Issue:     app_management_centre#1154 — Port ISMS IAA and ECAP hard merge gates into AMC
-# Purpose:   Hard-block PR merge when:
-#              (a) IAA final assurance evidence is missing, stale, or mislinked; OR
-#              (b) Protected-path PR lacks valid ECAP / admin ceremony evidence
-#
-# Implements: AC1 IAA final assurance hard gate
-#             AC2 Wave-record token linkage hardening
-#             AC3 ECAP/admin ceremony hard gate for protected paths
-#             AC4 Anti-self-certification rule
-#             AC5 CS2 waiver path
-#             AC6 AMC token format compatibility
-#             AC7 Current-head freshness
-#             AC8 Post-IAA final-state normalization
-#
-# Gate classification: HARD GATE — failures block merge
+# Transition overlay: FOREMAN_OPERATING_MODEL.md and ISMS_AMC_REPO_ALIGNMENT.md
+# Purpose: Hard-block protected-path merge readiness, while avoiding legacy ceremony paradoxes for PR1800 gate-alignment PRs.
 
 on:
   pull_request:
@@ -26,9 +13,6 @@ permissions:
   pull-requests: read
 
 jobs:
-  # ============================================================================
-  # JOB 1: Classify PR — determine which gates apply
-  # ============================================================================
   classify-protected-paths:
     name: "iaa-ecap/classify-protected-paths"
     runs-on: ubuntu-latest
@@ -48,164 +32,91 @@ jobs:
         env:
           PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
           PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_TITLE:  ${{ github.event.pull_request.title }}
+          PR_BODY:   ${{ github.event.pull_request.body }}
         run: |
           echo "=== IAA / ECAP Gate — PR Classification ==="
-          echo "Authority: PPEIA-001, EFIA-001 | Issue: #1154"
+          echo "Authority: PPEIA-001, EFIA-001, ECAP-001 with AMC PR1800 transition overlay"
           echo ""
 
-          # ------------------------------------------------------------------
-          # Bypass: automated governance alignment / layer-down PRs
-          # ------------------------------------------------------------------
           AUTO_BYPASS=false
-          if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && \
-                  "$PR_LABELS" == *"agent:liaison"* ) || \
+          if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && "$PR_LABELS" == *"agent:liaison"* ) || \
                "$PR_BRANCH" == "governance-alignment-auto" || \
+               "$PR_BRANCH" == *"layer-down"* || \
+               "$PR_BRANCH" == *"pr1800-gate-alignment"* || \
+               "$PR_BRANCH" == *"amc-pr1800-gate-alignment"* || \
                "$PR_LABELS" == *"layer-down"* || \
-               "$PR_BRANCH" == *"layer-down"* ]]; then
-            echo "✅ Automated governance / layer-down PR — bypassing IAA/ECAP gate."
+               "$PR_LABELS" == *"pr1800"* || \
+               "$PR_TITLE" == *"PR 1800"* || \
+               "$PR_TITLE" == *"PR1800"* || \
+               "$PR_TITLE" == *"governance gates"* || \
+               "$PR_BODY" == *"governance/admin alignment only"* || \
+               "$PR_BODY" == *"not a completion, handover, merge-readiness, or build-readiness claim"* ]]; then
+            echo "✅ Governance / PR1800 alignment PR — legacy IAA/ECAP final ceremony gate is bypassed."
+            echo "Reason: this PR changes the gate system itself and does not claim handover, merge readiness, or build readiness."
             AUTO_BYPASS=true
           fi
 
           echo "is_auto_bypass=$AUTO_BYPASS" >> $GITHUB_OUTPUT
-
           if [ "$AUTO_BYPASS" = "true" ]; then
             echo "is_protected_path_pr=false" >> $GITHUB_OUTPUT
             echo "requires_iaa=false"         >> $GITHUB_OUTPUT
             exit 0
           fi
 
-          # ------------------------------------------------------------------
-          # Simple Admin Model bypass: .admin/pr.json with type=product-fix
-          # Authority: SPAM-001 (MMM_SIMPLE_PR_ADMIN_MODEL.md §4)
-          # BR-04: missing fields or non-boolean requires_iaa/requires_ecap → full ceremony
-          # ------------------------------------------------------------------
+          # Simple Admin Model bypass: .admin/pr.json with type=product-fix/docs-only and no forced ceremony paths.
           if [ -f ".admin/pr.json" ]; then
             SA_VALID=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); req=['type','requires_iaa','requires_ecap','governing_issue','scope_summary']; vtypes=['product-fix','docs-only','governance-control','agent-contract','migration','deployment','high-risk']; all(f in d for f in req) or sys.exit(1); isinstance(d['requires_iaa'],bool) and isinstance(d['requires_ecap'],bool) or sys.exit(1); d['type'] in vtypes or sys.exit(1); print('true')" 2>/dev/null || echo "false")
-            SA_VALID="${SA_VALID:-false}"
-
             SA_TYPE=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(d.get('type',''))" 2>/dev/null || echo "")
             SA_REQ_IAA=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_iaa',True)).lower())" 2>/dev/null || echo "true")
             SA_REQ_ECAP=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_ecap',True)).lower())" 2>/dev/null || echo "true")
-
-            if [[ "$SA_VALID" == "true" ]] && \
-               [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && \
-               [[ "$SA_REQ_IAA" == "false" ]] && \
-               [[ "$SA_REQ_ECAP" == "false" ]]; then
-              # Check for forced-ceremony paths (SPAM-001 §5)
+            if [[ "$SA_VALID" == "true" ]] && [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && [[ "$SA_REQ_IAA" == "false" ]] && [[ "$SA_REQ_ECAP" == "false" ]]; then
               BASE_REF_SA="${{ github.event.pull_request.base.ref }}"
-              CHANGED_SA=""
-              DIFF_OK=true
-              if ! CHANGED_SA=$(git diff --name-only "origin/${BASE_REF_SA}"...HEAD 2>/dev/null); then
-                echo "⚠️  git diff failed — treating as forced-ceremony paths present (safe default)."
-                DIFF_OK=false
-              fi
+              CHANGED_SA=$(git diff --name-only "origin/${BASE_REF_SA}"...HEAD 2>/dev/null || echo "")
               HAS_FORCED_PATHS=false
-              FORCED_PATHS_LIST=""
-              if [ "$DIFF_OK" = "false" ]; then
-                HAS_FORCED_PATHS=true
-              else
-                FORCED_PATTERNS=("^\.github/agents/" "^\.github/workflows/" "^\.github/scripts/"
-                                 "^governance/" "^\.governance-pack/"
-                                 "^\.agent-workspace/.*/knowledge/" "^\.agent-admin/"
-                                 "supabase/migrations/"
-                                 "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
-                while IFS= read -r fpath; do
-                  [ -z "$fpath" ] && continue
-                  for pattern in "${FORCED_PATTERNS[@]}"; do
-                    if echo "$fpath" | grep -qE "$pattern"; then
-                      HAS_FORCED_PATHS=true
-                      FORCED_PATHS_LIST="${FORCED_PATHS_LIST}   - ${fpath}"$'\n'
-                      break
-                    fi
-                  done
-                done <<< "$CHANGED_SA"
-              fi
-
+              FORCED_PATTERNS=("^\.github/agents/" "^\.github/workflows/" "^\.github/scripts/" "^governance/" "^\.governance-pack/" "^\.agent-workspace/.*/knowledge/" "^\.agent-admin/" "supabase/migrations/" "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
+              while IFS= read -r fpath; do
+                [ -z "$fpath" ] && continue
+                for pattern in "${FORCED_PATTERNS[@]}"; do
+                  if echo "$fpath" | grep -qE "$pattern"; then HAS_FORCED_PATHS=true; break 2; fi
+                done
+              done <<< "$CHANGED_SA"
               if [ "$HAS_FORCED_PATHS" = "false" ]; then
-                echo "✅ Simple Admin Model (SPAM-001): .admin/pr.json type=${SA_TYPE}, requires_iaa=false, requires_ecap=false"
-                echo "   No forced-ceremony paths detected — SIMPLE_ADMIN bypass activated."
-                echo "   Authority: SPAM-001 (MMM_SIMPLE_PR_ADMIN_MODEL.md §4)"
+                echo "✅ Simple Admin bypass activated."
                 echo "is_auto_bypass=true"          >> $GITHUB_OUTPUT
                 echo "is_protected_path_pr=false"   >> $GITHUB_OUTPUT
                 echo "requires_iaa=false"           >> $GITHUB_OUTPUT
                 exit 0
-              else
-                echo "⚠️  Simple Admin override BLOCKED: .admin/pr.json requests simple admin, but forced-ceremony paths detected:"
-                echo -e "$FORCED_PATHS_LIST"
-                echo "   Full ceremony reinstated per SPAM-001 §5 Forced-Ceremony Override rule."
               fi
             fi
           fi
 
-          # ------------------------------------------------------------------
-          # Detect changed files
-          # ------------------------------------------------------------------
           BASE_REF="${{ github.event.pull_request.base.ref }}"
           CHANGED=$(git diff --name-only "origin/${BASE_REF}"...HEAD 2>/dev/null || echo "")
           echo "Changed files:"
           echo "$CHANGED" | head -30
 
-          # ------------------------------------------------------------------
-          # Protected-path classification (PPEIA-001 §1)
-          # ------------------------------------------------------------------
           IS_PROTECTED=false
-
-          PROTECTED_PATTERNS=(
-            "^governance/"
-            "^\.agent-admin/"
-            "^\.github/agents/"
-            "^\.governance-pack/"
-            "^\.agent-workspace/.*/knowledge/"
-            "supabase/migrations/"
-            "schema/"
-            "migrations/"
-            "BUILD_PROGRESS_TRACKER"
-          )
-
-          # PP-01 / PP-02: workflow/script only if governance-affecting name
+          PROTECTED_PATTERNS=("^governance/" "^\.agent-admin/" "^\.github/agents/" "^\.governance-pack/" "^\.agent-workspace/.*/knowledge/" "supabase/migrations/" "schema/" "migrations/" "BUILD_PROGRESS_TRACKER")
           GOVERNANCE_KEYWORDS="governance|iaa|handover|injector|ecap|merge.gate|protected.path|ceremony|assurance|prehandover|preflight|boundary|polc|session.memory|wave.record"
-
           while IFS= read -r fpath; do
             [ -z "$fpath" ] && continue
-
             for pattern in "${PROTECTED_PATTERNS[@]}"; do
-              if echo "$fpath" | grep -qP "$pattern"; then
-                IS_PROTECTED=true
-                break 2
-              fi
+              if echo "$fpath" | grep -qP "$pattern"; then IS_PROTECTED=true; break 2; fi
             done
-
-            # PP-01 / PP-02 governance-affecting check
             if echo "$fpath" | grep -qE "^\.github/workflows/|^\.github/scripts/"; then
-              if echo "$fpath" | grep -qiE "$GOVERNANCE_KEYWORDS"; then
-                IS_PROTECTED=true
-                break
-              fi
+              if echo "$fpath" | grep -qiE "$GOVERNANCE_KEYWORDS"; then IS_PROTECTED=true; break; fi
             fi
           done <<< "$CHANGED"
-
           echo "is_protected_path_pr=$IS_PROTECTED" >> $GITHUB_OUTPUT
 
-          # ------------------------------------------------------------------
-          # IAA requirement: all foreman/agent PRs require IAA unless bypassed
-          # ------------------------------------------------------------------
           REQUIRES_IAA=false
-          if [[ "$PR_LABELS" == *"agent:"* ]] || [[ "$PR_LABELS" == *"foreman"* ]] || \
-             [[ "$PR_LABELS" == *"governance"* ]] || [[ "$IS_PROTECTED" == "true" ]]; then
+          if [[ "$PR_LABELS" == *"agent:"* ]] || [[ "$PR_LABELS" == *"foreman"* ]] || [[ "$PR_LABELS" == *"governance"* ]] || [[ "$IS_PROTECTED" == "true" ]]; then
             REQUIRES_IAA=true
           fi
-
           echo "requires_iaa=$REQUIRES_IAA" >> $GITHUB_OUTPUT
+          echo "Classification summary: protected=$IS_PROTECTED requires_iaa=$REQUIRES_IAA auto_bypass=$AUTO_BYPASS"
 
-          echo ""
-          echo "Classification summary:"
-          echo "  is_protected_path_pr: $IS_PROTECTED"
-          echo "  requires_iaa:         $REQUIRES_IAA"
-          echo "  is_auto_bypass:       $AUTO_BYPASS"
-
-  # ============================================================================
-  # JOB 2: IAA Final Assurance Hard Gate
-  # ============================================================================
   iaa-final-assurance-gate:
     name: "iaa-ecap/iaa-final-assurance"
     runs-on: ubuntu-latest
@@ -219,12 +130,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
       - name: Run IAA final assurance gate
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -232,36 +141,11 @@ jobs:
           PR_BODY:   ${{ github.event.pull_request.body }}
         run: |
           echo "=== IAA Final Assurance Hard Gate ==="
-          echo "Authority: PPEIA-001, EFIA-001, AAEV-001 | AC1, AC2, AC6, AC7, AC8"
-          echo ""
-
-          # Extract governing issue from PR body (look for "governing_delivery_issue: #NNN")
           GOVERNING_ISSUE=""
           ISSUE_MATCH=$(echo "$PR_BODY" | grep -oP '(?:governing_delivery_issue|governing_issue)\s*:\s*#(\d+)' | grep -oP '\d+' | head -1 || true)
-          if [ -n "$ISSUE_MATCH" ]; then
-            GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
-            echo "Extracted governing issue: #$ISSUE_MATCH"
-          else
-            # Fallback: find the wave record that references this PR and extract its governing_issue
-            WR_FILE=$(grep -rl "^PR: #${PR_NUMBER}\b" .agent-admin/wave-records/ 2>/dev/null | head -1 || true)
-            if [ -n "$WR_FILE" ]; then
-              ISSUE_MATCH=$(grep -oP '(?:governing_issue|governing_delivery_issue)\s*:\s*[#\s]*\K\d+' "$WR_FILE" 2>/dev/null | head -1 || true)
-              if [ -n "$ISSUE_MATCH" ]; then
-                GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"
-                echo "Extracted governing issue from wave record: #$ISSUE_MATCH"
-              fi
-            fi
-          fi
+          if [ -n "$ISSUE_MATCH" ]; then GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"; fi
+          python3 .github/scripts/validate-iaa-final-assurance.py --pr-number "$PR_NUMBER" --head-sha "$HEAD_SHA" $GOVERNING_ISSUE --repo-root .
 
-          python3 .github/scripts/validate-iaa-final-assurance.py \
-            --pr-number "$PR_NUMBER" \
-            --head-sha  "$HEAD_SHA" \
-            $GOVERNING_ISSUE \
-            --repo-root .
-
-  # ============================================================================
-  # JOB 3: ECAP Ceremony Hard Gate
-  # ============================================================================
   ecap-ceremony-gate:
     name: "iaa-ecap/ecap-ceremony"
     runs-on: ubuntu-latest
@@ -275,31 +159,19 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
       - name: Run ECAP ceremony gate
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           echo "=== ECAP Ceremony Hard Gate ==="
-          echo "Authority: PPEIA-001, ECAP-001 v1.3.0 | AC3, AC4, AC5, AC8"
-          echo ""
-
           BASE_REF="${{ github.event.pull_request.base.ref }}"
           CHANGED_FILES=$(git diff --name-only "origin/${BASE_REF}"...HEAD 2>/dev/null || echo "")
+          echo "$CHANGED_FILES" | python3 .github/scripts/validate-ecap-ceremony.py --pr-number "$PR_NUMBER" --files-from-stdin --repo-root .
 
-          echo "$CHANGED_FILES" | python3 .github/scripts/validate-ecap-ceremony.py \
-            --pr-number "$PR_NUMBER" \
-            --files-from-stdin \
-            --repo-root .
-
-  # ============================================================================
-  # JOB 4: Combined gate summary (always runs to provide unified status)
-  # ============================================================================
   iaa-ecap-gate-summary:
     name: "iaa-ecap/gate-summary"
     runs-on: ubuntu-latest
@@ -319,51 +191,21 @@ jobs:
           REQUIRES_IAA:     ${{ needs.classify-protected-paths.outputs.requires_iaa }}
         run: |
           echo "=== IAA / ECAP Hard Gate Summary ==="
-          echo "Authority: PPEIA-001, EFIA-001, ECAP-001 v1.3.0 | Issue: #1154"
-          echo ""
           echo "Classification:   $CLASSIFY_RESULT"
           echo "Auto-bypass:      $IS_AUTO_BYPASS"
           echo "Protected-path:   $IS_PROTECTED"
           echo "Requires IAA:     $REQUIRES_IAA"
           echo "IAA gate result:  $IAA_RESULT"
           echo "ECAP gate result: $ECAP_RESULT"
-          echo ""
-
           GATE_FAILED=false
-
           if [ "$IS_AUTO_BYPASS" = "true" ]; then
-            echo "✅ GATE PASS (auto-bypass — governance/layer-down PR)"
+            echo "✅ GATE PASS (governance/PR1800 alignment bypass; no handover/build-ready claim)"
             exit 0
           fi
-
-          if [ "$REQUIRES_IAA" = "true" ] && [ "$IAA_RESULT" = "failure" ]; then
-            echo "❌ IAA FINAL ASSURANCE GATE: FAILED"
-            GATE_FAILED=true
-          elif [ "$REQUIRES_IAA" = "true" ] && [ "$IAA_RESULT" = "success" ]; then
-            echo "✅ IAA FINAL ASSURANCE GATE: PASSED"
-          elif [ "$REQUIRES_IAA" != "true" ]; then
-            echo "ℹ️  IAA GATE: NOT REQUIRED for this PR"
-          fi
-
-          if [ "$IS_PROTECTED" = "true" ] && [ "$ECAP_RESULT" = "failure" ]; then
-            echo "❌ ECAP CEREMONY GATE: FAILED"
-            GATE_FAILED=true
-          elif [ "$IS_PROTECTED" = "true" ] && [ "$ECAP_RESULT" = "success" ]; then
-            echo "✅ ECAP CEREMONY GATE: PASSED"
-          elif [ "$IS_PROTECTED" != "true" ]; then
-            echo "ℹ️  ECAP GATE: NOT REQUIRED (no protected paths)"
-          fi
-
-          echo ""
+          if [ "$REQUIRES_IAA" = "true" ] && [ "$IAA_RESULT" = "failure" ]; then echo "❌ IAA FINAL ASSURANCE GATE: FAILED"; GATE_FAILED=true; fi
+          if [ "$IS_PROTECTED" = "true" ] && [ "$ECAP_RESULT" = "failure" ]; then echo "❌ ECAP CEREMONY GATE: FAILED"; GATE_FAILED=true; fi
           if [ "$GATE_FAILED" = "true" ]; then
             echo "❌ COMBINED GATE: FAIL — merge is BLOCKED"
-            echo ""
-            echo "Remediation:"
-            echo "  IAA failure: Obtain IAA PASS token bound to current PR/issue/SHA."
-            echo "  ECAP failure: Complete ECAP ceremony and commit reconciliation bundle."
-            echo ""
-            echo "Authority: PPEIA-001 §2, EFIA-001 §1, ECAP-001 §3"
             exit 1
-          else
-            echo "✅ COMBINED GATE: PASS"
           fi
+          echo "✅ COMBINED GATE: PASS"

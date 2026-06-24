@@ -1,0 +1,14 @@
+name: Required Checks Alignment
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  required-checks-alignment:
+    name: "preflight/merge-gate-required-checks-alignment"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: node .github/scripts/merge-gate-required-checks-alignment.js

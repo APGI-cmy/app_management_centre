@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/APGI-cmy/app_management_centre/.agent-admin/control/schemas/iaa-preflight-brief.schema.json",
+  "title": "AMC IAA Preflight Brief",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version", "wave", "qualifying_tasks", "result"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "wave": { "type": "string", "minLength": 1 },
+    "issue": { "type": "string" },
+    "branch": { "type": "string" },
+    "qualifying_tasks": { "type": "array" },
+    "required_build_gates": { "type": "array" },
+    "expected_qa_scope": { "type": "array" },
+    "high_risk_failure_modes": { "type": "array" },
+    "required_builder_evidence": { "type": "array" },
+    "required_foreman_qp_checks": { "type": "array" },
+    "ecap_required": { "type": "boolean" },
+    "final_iaa_focus": { "type": "array" },
+    "result": { "enum": ["PREFLIGHT_BRIEF_COMPLETE", "PHASE_A_ADVISORY"] }
+  }
+}

@@ -1,0 +1,14 @@
+name: Wave 7 Governance Validation
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  wave7-governance-validation:
+    name: "preflight/wave7-governance-validation"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: node .github/scripts/wave7-governance-validation.js
