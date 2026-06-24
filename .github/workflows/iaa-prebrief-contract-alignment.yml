@@ -23,7 +23,7 @@ jobs:
           set -euo pipefail
           test -f .agent-admin/control/schemas/iaa-preflight-brief.schema.json
           test -f .agent-admin/control/protocols/IAA_PREFLIGHT_BRIEF_PROTOCOL.md
-          active_path_regex='^(\.github/workflows/iaa-prebrief-contract-alignment\.yml|\.agent-admin/control/(protocols|overlays|templates|checklists)/)'
+          active_path_regex='^(\.github/workflows/iaa-prebrief-contract-alignment\.yml|\.agent-admin/control/(protocols|overlays|templates|checklists)/|governance/canon/IAA_PRE_BRIEF_PROTOCOL\.md|\.github/agents/(independent-assurance-agent|foreman-v2-agent)\.md|modules/amc/09-iaa-pre-brief/)'
           changed_active=false
           targets=()
           if [ "${EVENT_NAME}" = "pull_request" ] && [ -n "${PR_BASE_SHA:-}" ] && [ -n "${PR_HEAD_SHA:-}" ]; then
@@ -39,10 +39,10 @@ jobs:
             fi
           else
             changed_active=true
-            mapfile -t targets < <(find .agent-admin/control -type f 2>/dev/null | sort)
+            mapfile -t targets < <(find .agent-admin/control governance/canon .github/agents modules/amc/09-iaa-pre-brief -type f 2>/dev/null | sort)
           fi
           if [ "$changed_active" = true ] && [ "${#targets[@]}" -gt 0 ]; then
-            matches=$(grep -InE '(Generate|Create|Write|Persist|File|Save|commit).*(iaa-prebrief-[^[:space:]]*\.md|iaa-prebrief-\*)' "${targets[@]}" 2>/dev/null | grep -viE '(do not|must not|prohibit|prohibited|legacy|example|archive|older|supersedes|superseded|instead|not a standalone)' || true)
+            matches=$(grep -InE '(Generate|Create|Write|Persist|Save|commit).*(iaa-prebrief-[^[:space:]]*\.md|iaa-prebrief-\*)' "${targets[@]}" 2>/dev/null | grep -viE '(do not|must not|prohibit|prohibited|legacy|historical|example|archive|older|supersedes|superseded|instead|not a standalone|must not be used|retained only)' || true)
             if [ -n "$matches" ]; then
               printf '%s\n' "$matches"
               echo "::error::Active guidance still instructs agents to create standalone iaa-prebrief artifacts."
@@ -51,7 +51,7 @@ jobs:
           else
             echo "No changed non-self active IAA guidance to legacy-scan."
           fi
-          if ! grep -RInE 'IAA_PREFLIGHT_BRIEF' .agent-admin/control/protocols .agent-admin/control/overlays 2>/dev/null | grep -v '.github/workflows/iaa-prebrief-contract-alignment.yml'; then
+          if ! grep -RInE 'IAA_PREFLIGHT_BRIEF' .agent-admin/control/protocols .agent-admin/control/overlays governance/canon/IAA_PRE_BRIEF_PROTOCOL.md .github/agents/independent-assurance-agent.md modules/amc/09-iaa-pre-brief 2>/dev/null | grep -v '.github/workflows/iaa-prebrief-contract-alignment.yml'; then
             echo "::error::No canonical IAA_PREFLIGHT_BRIEF references found in active AMC guidance."
             exit 1
           fi
