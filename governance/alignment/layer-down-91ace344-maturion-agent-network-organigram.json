@@ -19,5 +19,5 @@
   },
   "non_agent_change": true,
   "requires_cs2_agent_contract_escalation": false,
-  "pre_handover_proof": ".agent-admin/prehandover/PREHANDOVER_PROOF_LAYER_DOWN_91ACE344_ISSUE_1183.md"
+  "evidence_record": ".agent-admin/build-evidence/layer-down-91ace344-issue-1183-evidence.md"
 }
