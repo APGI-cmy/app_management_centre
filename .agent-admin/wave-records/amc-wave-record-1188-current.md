@@ -22,7 +22,7 @@ This is a Stage 5 retrofit review record for CS2 review.
 
 The protected-path condition is caused by tracker and architecture documentation updates in PR #1188.
 
-The ECAP reconciliation bundle path under `.agent-admin/prehandover/` causes the Foreman prehandover lane gate to treat this documentation retrofit as a handover lane. To avoid a false handover signal, this PR uses the explicit ECAP waiver reference above and does not claim handover authorization.
+Placing the ECAP reconciliation bundle under `.agent-admin/prehandover/` caused the Foreman prehandover lane gate to treat this documentation retrofit as a handover lane. That prehandover artifact has been removed from this PR. This PR uses the explicit ECAP waiver reference above instead and does not claim handover authorization.
 
 delta_assurance_verdict: PASS
 base_head: 0286e7b92d1746b889e2c5d64b74bf375844d867
