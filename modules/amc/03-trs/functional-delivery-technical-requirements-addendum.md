@@ -31,10 +31,13 @@ Every material CTA/action must have a named route, API endpoint, callback, servi
 - No material CTA may exist without a corresponding technical target.
 - Disabled or placeholder CTAs must be recorded as placeholders and cannot be counted complete.
 - Stage 5 must map each material CTA to a frontend component, route, and backend/API target.
+- Endpoint names, callback paths, external service URLs, data ownership, and audit-event names must follow the approved Stage 4 TRS. This addendum cannot introduce a competing endpoint namespace.
 
 ### TR-1902 — Typed Success, Failure, Blocked, and Degraded Responses
 
 Every material API/action endpoint must return typed responses for success, validation failure, authorization failure, blocked-by-approval, dependency degraded/unavailable, and unexpected failure.
+
+**Encoding rule**: These response classes are semantic classes for deterministic architecture and QA coverage. They must be represented through the existing Stage 4 TRS HTTP status/error-response patterns and per-endpoint JSON bodies. Where a single envelope discriminator is needed, Stage 5 Architecture may define one consistent field such as `status` or `error_code`, but it must not conflict with the TRS-defined HTTP status codes or per-endpoint payload contracts. Stage 6 tests must assert the concrete encoding selected by Stage 5.
 
 **Minimum response classes**:
 
