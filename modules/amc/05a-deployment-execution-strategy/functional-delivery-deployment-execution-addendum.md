@@ -4,7 +4,7 @@
 **Module**: App Management Centre (AMC)  
 **Version**: 1.0  
 **Status**: Produced for CS2 review  
-**Wave**: amc-stage5a-deployment-execution-retrofit-20260626  
+**Wave**: amc-stage5a-deployment-execution-retrofit-20260629  
 **Issue**: app_management_centre#1189  
 **Authority basis**: PR #1186, PR #1188, TR-1910, Stage 5 functional-delivery architecture addendum, Stage 5 architecture map, Stage 5 change-propagation audit  
 **Non-scope**: This addendum does not start Stage 6, Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, or implementation work.
