@@ -3,7 +3,7 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-06-29  
-**Updated By**: foreman-v2-agent (wave: amc-stage5a-deployment-execution-retrofit-20260629 — issue #1189; PR #1190; Stage 5a Deployment Execution functional-delivery retrofit artifacts produced for CS2 review. Stage 6, Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, and implementation remain blocked.)
+**Updated By**: foreman-v2-agent (wave: amc-stage5a-deployment-execution-retrofit-20260629 — issue #1189; PR #1190; Stage 5a Deployment Execution functional-delivery retrofit artifacts produced for CS2 review. Stage 5 remains approval-pending with merged retrofit inputs. Stage 6, Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, and implementation remain blocked.)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
@@ -16,7 +16,7 @@
 
 > ⚠️ **FUNCTIONAL DELIVERY RETROFIT NOTE (issue #1185, PR #1186, 2026-06-25)**: AMC Stages 1-4 were retrofitted with Stage 1 functional-delivery definition, Stage 2 CTA/API/Data/Audit matrix, Stage 3 FR-1900, Stage 4 TR-1900, and a Stage 1-4 change-propagation audit. Stages 5, 5a, 6, and 7 must import or explicitly disposition those obligations before Stage 8 may begin.
 
-> ⚠️ **STAGE 5 RETROFIT NOTE (issue #1187, PR #1188, 2026-06-26)**: Stage 5 Architecture was reviewed against the merged Stage 1-4 retrofit. PR #1188 merged the Stage 5 functional-delivery architecture addendum, architecture map, change-propagation audit, architecture review notes, coverage note, and environment template. This does not start Stage 5a, Stage 6, Stage 8, builder checklist, IAA pre-brief, builder appointment, or implementation.
+> ⚠️ **STAGE 5 RETROFIT NOTE (issue #1187, PR #1188, 2026-06-26)**: Stage 5 Architecture was reviewed against the merged Stage 1-4 retrofit. PR #1188 merged Stage 5 functional-delivery retrofit inputs. Stage 5 remains approval-pending until CS2 disposition of the original architecture plus the retrofit package. This does not start Stage 5a, Stage 6, Stage 8, builder checklist, IAA pre-brief, builder appointment, or implementation.
 
 > ⚠️ **STAGE 5A RETROFIT NOTE (issue #1189, PR #1190, 2026-06-29)**: Stage 5a Deployment Execution Strategy is being reviewed against the merged Stage 1-5 functional-delivery controls. The wave produced a Stage 5a functional-delivery deployment execution addendum, deployment execution validation matrix, and Stage 5a change-propagation audit. This does not start Stage 6, Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, or implementation.
 
@@ -38,8 +38,8 @@
 | 3 | FRS | ✅ COMPLETE — CS2 APPROVED + 🟡 RETROFIT ADDENDUM PRODUCED | FR-1900 merged in #1186. |
 | 4 | TRS | ✅ TREATED AS APPROVED + 🟡 RETROFIT ADDENDUM PRODUCED | TR-1900, including TR-1910, merged in #1186. |
 | 1-4 Retrofit | Functional Delivery Retrofit | ✅ MERGED / REFERENCE INPUT | PR #1186 merged. Stage 5/5a/6/7 must import or disposition its obligations. |
-| 5 | Architecture | ✅ MERGED / REFERENCE INPUT | PR #1188 merged Stage 5 functional-delivery addendum, architecture map, change-propagation audit, review notes, coverage note, `.env.example`, tracker update, and wave record. |
-| **5a** | **Deployment Execution Strategy** | **🟡 IN PROGRESS — RETROFIT PRODUCED FOR CS2 REVIEW** | Existing Stage 5a DES pack remains produced approval-pending. PR #1190 adds Stage 5a functional-delivery addendum, validation matrix, and change-propagation audit. |
+| 5 | Architecture | 🟡 APPROVAL-PENDING / RETROFIT MERGED AS REFERENCE INPUT | Original Stage 5 Architecture remains approval-pending. PR #1188 merged retrofit inputs for CS2 disposition; merge is not Stage 5 approval. |
+| **5a** | **Deployment Execution Strategy** | **🟡 IN PROGRESS — RETROFIT PRODUCED FOR CS2 REVIEW** | Existing Stage 5a DES pack remains produced approval-pending. PR #1190 adds Stage 5a functional-delivery addendum, validation matrix, artifact-index reconciliation, and change-propagation audit. |
 | 6 | QA-to-Red | 🟡 PRODUCED APPROVAL-PENDING / NOT STARTED BY #1190 | Stage 6 must later import Stage 5 and Stage 5a functional-delivery maps for RED tests. |
 | 7 | PBFAG | 🟡 PRODUCED APPROVAL-PENDING / NOT STARTED BY #1190 | Stage 7 must later import Stage 5/5a retrofit as hard functional-delivery and deployment-execution gates. |
 | 8 | Implementation Plan | ⬜ Not Started | 🔴 BLOCKED — must not start until Stages 5, 5a, 6, 7 and retrofit obligations are CS2-dispositioned/imported. |
@@ -48,7 +48,7 @@
 | 11 | Builder Appointment | ⬜ Not Started | 🔴 BLOCKED — no builders appointed. |
 | 12 | Build | ⬜ Not Started | 🔴 BLOCKED — no implementation/build authorization. |
 
-**Legend**: ✅ Complete | 🟡 Active / Produced / In Progress | ⬜ Not Started | 🔴 Blocked
+**Legend**: ✅ Complete | 🟡 Active / Produced / In Progress / Approval-Pending | ⬜ Not Started | 🔴 Blocked
 
 ---
 
@@ -100,18 +100,18 @@
 
 ### Stage 5 — Architecture
 
-**Status**: ✅ MERGED AS RETROFIT REFERENCE INPUT  
+**Status**: 🟡 APPROVAL-PENDING — RETROFIT MERGED AS REFERENCE INPUT  
 **Location**: `modules/amc/04-architecture/`  
 **Key Artifacts**:
-- [x] `architecture-specification.md`
-- [x] `trs-to-architecture-traceability.md`
-- [x] `functional-delivery-architecture-addendum.md`
-- [x] `functional-delivery-architecture-map.md`
-- [x] `stage5-functional-delivery-change-propagation-audit.md`
-- [x] `stage5-review-notes.md`
-- [x] `extra-review-note.md`
+- [x] `architecture-specification.md` — Stage 5 Architecture Specification v1.0 remains approval-pending.
+- [x] `trs-to-architecture-traceability.md` — remains approval-pending with Stage 5.
+- [x] `functional-delivery-architecture-addendum.md` — merged in PR #1188 as retrofit input.
+- [x] `functional-delivery-architecture-map.md` — merged in PR #1188 as retrofit input.
+- [x] `stage5-functional-delivery-change-propagation-audit.md` — merged in PR #1188 as retrofit input.
+- [x] `stage5-review-notes.md` — merged in PR #1188 as retrofit input.
+- [x] `extra-review-note.md` — merged in PR #1188 as retrofit input.
 
-**Current gate note**: Stage 5 is now a merged reference input for Stage 5a/6/7 propagation. This does not authorize implementation.
+**Current gate note**: Stage 5 is a merged reference input for Stage 5a/6/7 propagation, but it is not marked CS2-approved by tracker. Stage 5 still requires CS2 disposition of the original architecture together with the retrofit package. This does not authorize implementation.
 
 ---
 
@@ -127,7 +127,7 @@
 - [x] `deployment-execution-validation-matrix.md` — produced in issue #1189 / PR #1190
 - [x] `stage5a-functional-delivery-change-propagation-audit.md` — produced in issue #1189 / PR #1190
 
-**Current gate note**: Stage 5a can only be dispositioned after CS2 reviews the existing DES pack together with the Stage 5a retrofit addendum, validation matrix, and change-propagation audit. This tracker update does not approve Stage 5a.
+**Current gate note**: Stage 5a can only be dispositioned after CS2 reviews the existing DES pack together with the Stage 5a retrofit addendum, validation matrix, artifact-index reconciliation, and change-propagation audit. This tracker update does not approve Stage 5a.
 
 ---
 
@@ -202,7 +202,7 @@
 ## Next Action
 
 1. Review PR #1190 for Stage 5a deployment-execution functional-delivery alignment.
-2. CS2 to disposition whether the existing Stage 5a DES pack may be approved with the Stage 5a addendum, validation matrix, and audit attached.
+2. CS2 to disposition whether the existing Stage 5a DES pack may be approved with the Stage 5a addendum, validation matrix, artifact-index reconciliation, and audit attached.
 3. Do not start Stage 6, Stage 7, or Stage 8 from this PR.
 4. Do not appoint builders until the canonical pre-build sequence authorizes Stage 11.
 
@@ -223,3 +223,4 @@
 - [functional-delivery-deployment-execution-addendum.md](./05a-deployment-execution-strategy/functional-delivery-deployment-execution-addendum.md)
 - [deployment-execution-validation-matrix.md](./05a-deployment-execution-strategy/deployment-execution-validation-matrix.md)
 - [stage5a-functional-delivery-change-propagation-audit.md](./05a-deployment-execution-strategy/stage5a-functional-delivery-change-propagation-audit.md)
+- [AMC_PRE_BUILD_ARTIFACT_INDEX.md](./AMC_PRE_BUILD_ARTIFACT_INDEX.md)
