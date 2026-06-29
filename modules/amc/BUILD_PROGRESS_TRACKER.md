@@ -211,12 +211,15 @@
 ## References
 
 - [PRE_BUILD_STAGE_MODEL_CANON.md](../../governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md)
+- [architecture-specification.md](./04-architecture/architecture-specification.md)
 - [functional-delivery-definition.md](./00-app-description/functional-delivery-definition.md)
 - [cta-api-data-audit-contract-matrix.md](./01-ux-workflow-wiring-spec/cta-api-data-audit-contract-matrix.md)
 - [functional-delivery-requirements-addendum.md](./02-frs/functional-delivery-requirements-addendum.md)
 - [functional-delivery-technical-requirements-addendum.md](./03-trs/functional-delivery-technical-requirements-addendum.md)
 - [functional-delivery-architecture-addendum.md](./04-architecture/functional-delivery-architecture-addendum.md)
 - [functional-delivery-architecture-map.md](./04-architecture/functional-delivery-architecture-map.md)
+- [stage1-4-functional-delivery-change-propagation-audit.md](./06-pbfag/stage1-4-functional-delivery-change-propagation-audit.md)
+- [stage5-functional-delivery-change-propagation-audit.md](./04-architecture/stage5-functional-delivery-change-propagation-audit.md)
 - [deployment-execution-strategy.md](./05a-deployment-execution-strategy/deployment-execution-strategy.md)
 - [deployment-surface-ownership-table.md](./05a-deployment-execution-strategy/deployment-surface-ownership-table.md)
 - [runner-and-environment-constraints.md](./05a-deployment-execution-strategy/runner-and-environment-constraints.md)
