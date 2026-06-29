@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-06-29 (Stage 6 QA-to-Red functional-delivery retrofit artifacts produced for CS2 review — wave amc-stage6-qa-to-red-retrofit-20260629; issue #1191. Prior: Stage 5a functional-delivery deployment execution retrofit merged as approval-pending reference input — issue #1189; PR #1190. Prior: Stage 5 architecture functional-delivery retrofit merged as approval-pending reference input — issue #1187; PR #1188. Prior: Stage 1-4 functional-delivery retrofit merged — issue #1185; PR #1186.)  
+**Last Updated**: 2026-06-29 (Stage 6 QA-to-Red functional-delivery retrofit artifacts produced for CS2 review — wave amc-stage6-qa-to-red-retrofit-20260629; issue #1191; PR #1192. Prior: Stage 5a functional-delivery deployment execution retrofit merged as approval-pending reference input — issue #1189; PR #1190. Prior: Stage 5 architecture functional-delivery retrofit merged as approval-pending reference input — issue #1187; PR #1188. Prior: Stage 1-4 functional-delivery retrofit merged — issue #1185; PR #1186.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -21,6 +21,8 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | App Description Approval | `modules/amc/00-app-description/app-description-approval.md` | ✅ Complete | Formal Stage 1 approval record. |
 | Functional Delivery Definition | `modules/amc/00-app-description/functional-delivery-definition.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1186. Adds fully functional delivery definition. CS2 disposition required as part of retrofit chain. |
 | AMC Role Authority & Operating Model | `modules/amc/00-app-description/amc-role-authority-and-operating-model.md` | ⬜ Placeholder | Follow-on work required. Does not block Stage 2. |
+| FM App Description (superseded) | `docs/governance/FM_APP_DESCRIPTION.md` | 📦 Superseded | Retained as historical/provenance reference only. No longer the active canonical Stage 1 source. |
+| App Description (root pointer) | `APP_DESCRIPTION.md` | 📌 Reference Only | Follow-on update to point to new canonical location pending. |
 
 ---
 
@@ -65,13 +67,16 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | Stage 5 Functional Delivery Change-Propagation Audit | `modules/amc/04-architecture/stage5-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1188. Conditional pass for retrofit production; not build-ready and not Stage-8-ready. |
 | Stage 5 Review Notes | `modules/amc/04-architecture/stage5-review-notes.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1188. |
 | Stage 5 Coverage Note | `modules/amc/04-architecture/extra-review-note.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1188. |
+| Architecture (superseded placeholder) | `modules/amc/04-architecture/architecture.md` | 📦 Superseded | `architecture-specification.md` is the canonical Stage 5 artifact. |
+| Architecture Decision Records | `modules/amc/04-architecture/architecture-decision-records.md` | ⬜ Placeholder | Not started. |
+| Architecture Completeness Checklist | `modules/amc/04-architecture/architecture-completeness-checklist.md` | ⬜ Placeholder | Not started / remains a placeholder unless separately populated. |
 
 ---
 
 ## Stage 5a — Deployment Execution Strategy *(AMC-local mandatory stage)*
 
 > **Stage 5a Definition Authority**: `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` (AMC-GOV-OVERSIGHT-001 v1.0)  
-> **Status**: 🟡 Retrofit produced — CS2 review/disposition pending  
+> **Status**: 🟡 Retrofit merged as reference input — CS2 review/disposition pending  
 > **Blocks**: Stage 6 retrofit/disposition, Stage 7 final disposition, Stage 8, and all subsequent build-readiness activities.
 
 | Artifact | Location | Status | Notes |
@@ -89,6 +94,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 ## Stage 6 — QA-to-Red
 
 > **Current Retrofit Issue**: app_management_centre#1191  
+> **Current Retrofit PR**: app_management_centre#1192  
 > **Status**: 🟡 Retrofit produced — CS2 review/disposition pending  
 > **Blocks**: Stage 7 final disposition, Stage 8, and all subsequent build-readiness activities.
 
@@ -97,9 +103,9 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | QA-to-Red Specification | `modules/amc/05-qa-to-red/qa-to-red-specification.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. Must be reviewed with Stage 6 retrofit artifacts. |
 | Architecture and DES to QA Traceability | `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. Must be reconciled with Stage 5/5a retrofit maps before Stage 8. |
 | Red Test Catalog | `modules/amc/05-qa-to-red/red-test-catalog.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. 79 test cases across 20 families. Retrofit adds QA-FD and QA-DEPLOY families. |
-| Functional Delivery QA-to-Red Addendum | `modules/amc/05-qa-to-red/functional-delivery-qa-to-red-addendum.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1191. Imports Stage 1-5a functional-delivery and deployment-execution obligations into Stage 6. |
-| Functional Delivery RED Test Expansion Matrix | `modules/amc/05-qa-to-red/functional-delivery-red-test-expansion-matrix.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1191. Defines QA-FD and QA-DEPLOY RED test families. |
-| Stage 6 Functional Delivery Change-Propagation Audit | `modules/amc/05-qa-to-red/stage6-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1191. Conditional pass for Stage 6 retrofit production; not build-ready and not Stage-8-ready. |
+| Functional Delivery QA-to-Red Addendum | `modules/amc/05-qa-to-red/functional-delivery-qa-to-red-addendum.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1191 / PR #1192. Imports Stage 1-5a functional-delivery and deployment-execution obligations into Stage 6. |
+| Functional Delivery RED Test Expansion Matrix | `modules/amc/05-qa-to-red/functional-delivery-red-test-expansion-matrix.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1191 / PR #1192. Defines QA-FD and QA-DEPLOY RED test families. |
+| Stage 6 Functional Delivery Change-Propagation Audit | `modules/amc/05-qa-to-red/stage6-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1191 / PR #1192. Conditional pass for Stage 6 retrofit production; not build-ready and not Stage-8-ready. |
 | QA-to-Red Suite (superseded placeholder) | `modules/amc/05-qa-to-red/qa-to-red-suite.md` | ⛔ Superseded | Placeholder superseded by qa-to-red-specification.md v1.0. |
 | QA Catalog Alignment (superseded placeholder) | `modules/amc/05-qa-to-red/qa-catalog-alignment.md` | ⛔ Superseded | Placeholder superseded by architecture-and-des-to-qa-traceability.md v1.0. |
 
@@ -131,14 +137,40 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 ---
 
-## Later Stages
+## Stage 9 — Builder Checklist
 
-| Stage | Artifact | Location | Status |
-|---|---|---|---|
-| 9 | Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | ⬜ Placeholder |
-| 10 | IAA Pre-Brief | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ⬜ Placeholder |
-| 11 | Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder |
-| 12 | Build Evidence Index | `modules/amc/11-build/build-evidence-index.md` | ⬜ Placeholder |
+| Artifact | Location | Status | Notes |
+|----------|----------|--------|-------|
+| Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | ⬜ Placeholder | Not started. |
+| Builder Readiness Attestations | `modules/amc/08-builder-checklist/builder-readiness-attestations.md` | ⬜ Placeholder | Not started. |
+
+---
+
+## Stage 10 — IAA Pre-Brief
+
+| Artifact | Location | Status | Notes |
+|----------|----------|--------|-------|
+| IAA Pre-Brief | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ⬜ Placeholder | Not started. |
+| IAA Pre-Brief Response | `modules/amc/09-iaa-pre-brief/iaa-pre-brief-response.md` | ⬜ Placeholder | Not started. |
+
+---
+
+## Stage 11 — Builder Appointment
+
+| Artifact | Location | Status | Notes |
+|----------|----------|--------|-------|
+| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder | Not started. |
+| Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | ⬜ Placeholder | Not started. |
+
+---
+
+## Stage 12 — Build
+
+| Artifact | Location | Status | Notes |
+|----------|----------|--------|-------|
+| Build Evidence Index | `modules/amc/11-build/build-evidence-index.md` | ⬜ Placeholder | Not started. |
+| QA-to-Green Evidence | `modules/amc/11-build/qa-to-green-evidence.md` | ⬜ Placeholder | Not started. |
+| Handover | `modules/amc/11-build/handover.md` | ⬜ Placeholder | Not started. |
 
 ---
 
