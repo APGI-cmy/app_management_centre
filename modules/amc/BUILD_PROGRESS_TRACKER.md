@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-06-29  
-**Updated By**: foreman-v2-agent (wave: amc-stage6-qa-to-red-retrofit-20260629 — issue #1191; Stage 6 QA-to-Red functional-delivery retrofit artifacts produced for CS2 review. PR #1190 is merged. Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, and implementation remain blocked.)
+**Updated By**: foreman-v2-agent (wave: amc-stage6-qa-to-red-retrofit-20260629 — issue #1191; PR #1192; Stage 6 QA-to-Red functional-delivery retrofit artifacts produced for CS2 review. PR #1190 is merged. Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, and implementation remain blocked.)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — This is the designated primary operational monitor for AMC pre-build stage progress. CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 plus current ISMS/MMM functional-delivery retrofit lessons  
 > **Current Issue**: [app_management_centre#1191](https://github.com/APGI-cmy/app_management_centre/issues/1191)  
-> **Current PR**: pending Stage 6 PR creation  
+> **Current PR**: [app_management_centre#1192](https://github.com/APGI-cmy/app_management_centre/pull/1192)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 > ⚠️ **GOVERNANCE OVERSIGHT NOTE (issue #1133, 2026-04-26)**: A mandatory deployment execution planning stage exists as Stage 5a between Stage 5 Architecture and Stage 6 QA-to-Red. Architecture/platform topology alone is insufficient. Stage 5a must remain separate and CS2-dispositioned before build execution can be considered.
@@ -20,7 +20,7 @@
 
 > ⚠️ **STAGE 5A RETROFIT NOTE (issue #1189, PR #1190, 2026-06-29)**: Stage 5a Deployment Execution Strategy was reviewed against the merged Stage 1-5 functional-delivery controls. PR #1190 merged the Stage 5a functional-delivery deployment execution addendum, deployment execution validation matrix, artifact-index reconciliation, and Stage 5a change-propagation audit. This does not start Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, or implementation.
 
-> ⚠️ **STAGE 6 RETROFIT NOTE (issue #1191, 2026-06-29)**: Stage 6 QA-to-Red is being reviewed against the merged Stage 1-5a functional-delivery and deployment-execution controls. The wave produced a Stage 6 functional-delivery QA-to-Red addendum, functional-delivery RED test expansion matrix, and Stage 6 change-propagation audit. This does not start Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, or implementation.
+> ⚠️ **STAGE 6 RETROFIT NOTE (issue #1191, PR #1192, 2026-06-29)**: Stage 6 QA-to-Red is being reviewed against the merged Stage 1-5a functional-delivery and deployment-execution controls. The wave produced a Stage 6 functional-delivery QA-to-Red addendum, functional-delivery RED test expansion matrix, and Stage 6 change-propagation audit. This does not start Stage 7, Stage 8, builder checklist, IAA pre-brief, builder appointment, or implementation.
 
 ---
 
@@ -42,8 +42,8 @@
 | 1-4 Retrofit | Functional Delivery Retrofit | ✅ MERGED / REFERENCE INPUT | PR #1186 merged. Stage 5/5a/6/7 must import or disposition its obligations. |
 | 5 | Architecture | 🟡 APPROVAL-PENDING / RETROFIT MERGED AS REFERENCE INPUT | Original Stage 5 Architecture remains approval-pending. PR #1188 merged retrofit inputs for CS2 disposition; merge is not Stage 5 approval. |
 | 5a | Deployment Execution Strategy | 🟡 APPROVAL-PENDING / RETROFIT MERGED AS REFERENCE INPUT | Original Stage 5a DES pack remains approval-pending. PR #1190 merged retrofit inputs for CS2 disposition; merge is not Stage 5a approval. |
-| **6** | **QA-to-Red** | **🟡 IN PROGRESS — RETROFIT PRODUCED FOR CS2 REVIEW** | Existing Stage 6 QA pack remains produced approval-pending. Issue #1191 adds Stage 6 functional-delivery addendum, RED expansion matrix, and change-propagation audit. |
-| 7 | PBFAG | 🟡 PRODUCED APPROVAL-PENDING / NOT STARTED BY #1191 | Stage 7 must later import Stage 5/5a/6 retrofit as hard functional-delivery, deployment-execution, and QA gates. |
+| **6** | **QA-to-Red** | **🟡 IN PROGRESS — RETROFIT PRODUCED FOR CS2 REVIEW** | Existing Stage 6 QA pack remains produced approval-pending. PR #1192 adds Stage 6 functional-delivery addendum, RED expansion matrix, and change-propagation audit. |
+| 7 | PBFAG | 🟡 PRODUCED APPROVAL-PENDING / NOT STARTED BY #1192 | Stage 7 must later import Stage 5/5a/6 retrofit as hard functional-delivery, deployment-execution, and QA gates. |
 | 8 | Implementation Plan | ⬜ Not Started | 🔴 BLOCKED — must not start until Stages 5, 5a, 6, 7 and retrofit obligations are CS2-dispositioned/imported. |
 | 9 | Builder Checklist | ⬜ Not Started | 🔴 BLOCKED |
 | 10 | IAA Pre-Brief | ⬜ Not Started | 🔴 BLOCKED |
@@ -80,9 +80,9 @@
 - [x] `qa-to-red-specification.md`
 - [x] `architecture-and-des-to-qa-traceability.md`
 - [x] `red-test-catalog.md`
-- [x] `functional-delivery-qa-to-red-addendum.md` — produced in issue #1191
-- [x] `functional-delivery-red-test-expansion-matrix.md` — produced in issue #1191
-- [x] `stage6-functional-delivery-change-propagation-audit.md` — produced in issue #1191
+- [x] `functional-delivery-qa-to-red-addendum.md` — produced in issue #1191 / PR #1192
+- [x] `functional-delivery-red-test-expansion-matrix.md` — produced in issue #1191 / PR #1192
+- [x] `stage6-functional-delivery-change-propagation-audit.md` — produced in issue #1191 / PR #1192
 
 **Current gate note**: Stage 6 can only be dispositioned after CS2 reviews the existing Stage 6 QA pack together with the Stage 6 retrofit addendum, RED expansion matrix, artifact-index reconciliation, and change-propagation audit. This tracker update does not approve Stage 6.
 
@@ -90,7 +90,7 @@
 
 ### Stage 7 — PBFAG
 
-**Status**: 🟡 PRODUCED APPROVAL-PENDING; not started by #1191  
+**Status**: 🟡 PRODUCED APPROVAL-PENDING; not started by #1192  
 **Location**: `modules/amc/06-pbfag/`  
 **Current gate note**: Stage 7 must later import Stage 5/5a/6 retrofit and fail/condition Stage 8 if material action coverage, deployment execution, route/event authority, evidence package, QA coverage, or placeholder controls remain unresolved.
 
@@ -100,7 +100,7 @@
 
 **Status**: ⬜ Not Started  
 **Location**: `modules/amc/07-implementation-plan/`  
-**Current blocker**: Stage 8 remains blocked. Issue #1191 does not start Stage 8.
+**Current blocker**: Stage 8 remains blocked. PR #1192 does not start Stage 8.
 
 ---
 
@@ -132,15 +132,15 @@
 
 **Status**: ⬜ Not Started  
 **Location**: `modules/amc/11-build/`  
-**Current blocker**: Build remains blocked. Issue #1191 does not authorize implementation.
+**Current blocker**: Build remains blocked. PR #1192 does not authorize implementation.
 
 ---
 
 ## Next Action
 
-1. Review the Stage 6 retrofit package for QA-to-Red functional-delivery alignment.
+1. Review PR #1192 for Stage 6 QA-to-Red functional-delivery alignment.
 2. CS2 to disposition whether the existing Stage 6 QA-to-Red pack may be approved with the Stage 6 addendum, RED expansion matrix, artifact-index reconciliation, and audit attached.
-3. Do not start Stage 7 or Stage 8 from this wave.
+3. Do not start Stage 7 or Stage 8 from this PR.
 4. Do not appoint builders until the canonical pre-build sequence authorizes Stage 11.
 
 ---
