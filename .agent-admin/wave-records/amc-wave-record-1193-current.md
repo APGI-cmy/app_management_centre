@@ -1,8 +1,9 @@
-# AMC Wave Record Current - Stage 7 Retrofit
+# AMC Wave Record Current - PR #1194
 
+PR: #1194
 Issue: #1193
 Wave: amc-stage7-pbfag-retrofit-20260630
-Reviewed SHA: 9f573a78e7f360562d0917c993375ac941874ed1
+Reviewed SHA: bae6594472e1c9e714f475414a5f9d05397a5959
 Verdict: PASS
 PHASE_B_BLOCKING_TOKEN: IAA-session-1193-20260630-PASS
 ecap_waiver_ref: CS2-proxy-admin-loop-control-1193-20260630
@@ -18,12 +19,12 @@ This is a Stage 7 PBFAG retrofit review record for CS2 review.
 
 ## ECAP Loop Control
 
-The protected-path condition is caused by tracker, artifact-index, wave-record, and PBFAG documentation updates in issue #1193.
+The protected-path condition is caused by tracker, artifact-index, wave-record, and PBFAG documentation updates in PR #1194.
 
 This record does not claim Stage 8, build readiness, builder appointment, or implementation authority.
 
 delta_assurance_verdict: PASS
-base_head: main
-final_head: 9f573a78e7f360562d0917c993375ac941874ed1
+base_head: bae6594472e1c9e714f475414a5f9d05397a5959
+final_head: bae6594472e1c9e714f475414a5f9d05397a5959
 delta_classification: token-recording-only
 final_token_binding: IAA-session-1193-20260630-PASS
