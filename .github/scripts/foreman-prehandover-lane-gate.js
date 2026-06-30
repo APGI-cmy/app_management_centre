@@ -9,7 +9,8 @@ const prBaseSha = process.env.PR_BASE_SHA || '';
 const controlPath = path.join(repoRoot, '.agent-admin/control/handover-allowed.json');
 
 const handoverArtifactPattern = /(^|\/)(PREHANDOVER[^/]*\.md|handover[^/]*\.md)$/i;
-const handoverPathPattern = /^(\.agent-admin\/handover\/|\.agent-admin\/prehandover\/|\.agent-admin\/ecap\/.*handover|\.agent-admin\/quality\/.*handover|modules\/amc\/11-build\/.*handover)/i;
+const evidenceOnlyPrehandoverPattern = /^\.agent-admin\/prehandover\/ecap-reconciliation-[^/]+\.md$/i;
+const handoverPathPattern = /^(\.agent-admin\/handover\/|\.agent-admin\/prehandover\/(?!ecap-reconciliation-[^/]+\.md$)|\.agent-admin\/ecap\/.*handover|\.agent-admin\/quality\/.*handover|modules\/amc\/11-build\/.*handover)/i;
 const docsOnlySuppressionPattern = /^(FOREMAN_OPERATING_MODEL\.md|ISMS_AMC_REPO_ALIGNMENT\.md|\.github\/agents\/|\.github\/workflows\/|\.github\/scripts\/|\.agent-admin\/control\/|\.agent-admin\/assurance\/IAA_LEGACY_PREFLIGHT_SUPPRESSION_REGISTER\.md|\.agent-admin\/assurance\/iaa-wave-record-.*\.md|modules\/amc\/(0[0-9]|10|11)-)/;
 const explicitHandoverClaim = /\b(final handover|handover package|handover allowed|ready for review|merge ready|build ready|completion claim|wave closure|wave closed)\b/i;
 const requiredTrue = ['handover_allowed','foreman_qp_pass','builder_delegation_verified','delegation_precedes_implementation','iaa_prebrief_ready','scope_current','all_required_checks_green'];
@@ -35,9 +36,14 @@ function isSuppressedDocsOnly(file) {
 }
 function hasHandoverClaim(files) {
   for (const file of files) {
+    const content = /\.(md|txt|json|yml|yaml)$/i.test(file) ? read(file) : '';
+    if (evidenceOnlyPrehandoverPattern.test(file)) {
+      if (explicitHandoverClaim.test(content)) return true;
+      continue;
+    }
     if (handoverArtifactPattern.test(file) || handoverPathPattern.test(file)) return true;
     if (isSuppressedDocsOnly(file)) continue;
-    if (/\.(md|txt|json|yml|yaml)$/i.test(file) && explicitHandoverClaim.test(read(file))) return true;
+    if (content && explicitHandoverClaim.test(content)) return true;
   }
   return false;
 }
@@ -46,7 +52,7 @@ const files = changedFiles();
 console.log('=== AMC Foreman Prehandover Lane Gate ===');
 console.log(`Changed files: ${files.length}`);
 if (!hasHandoverClaim(files)) {
-  console.log('No operative handover/readiness claim detected. Docs/control/agent-contract/IAA-prebrief alignment is not handover. Gate passes.');
+  console.log('No operative handover/readiness claim detected. ECAP reconciliation evidence alone is not handover. Gate passes.');
   process.exit(0);
 }
 if (!fs.existsSync(controlPath)) {
