@@ -65,8 +65,8 @@ function getChangedFiles() {
       .map((file) => file.trim())
       .filter(Boolean);
   } catch (error) {
-    warn(`Could not determine changed files from git fallback: ${error.message}`);
-    return [];
+    fail(`Could not determine changed files from git fallback: ${error.message}`);
+    exitWithStopAndFix(process.exitCode || 1);
   }
 }
 
