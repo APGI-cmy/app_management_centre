@@ -205,9 +205,8 @@ function selectControlEvidence() {
     return { path: scopedControlPath, relPath: scopedControlRelPath };
   }
 
-  if (!prNumber && fs.existsSync(legacyControlPath)) {
-    warn(`PR_NUMBER was not available; falling back to legacy singleton ${legacyControlRelPath}.`);
-    return { path: legacyControlPath, relPath: legacyControlRelPath };
+  if (!prNumber) {
+    return null;
   }
 
   return null;
