@@ -10,7 +10,7 @@
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 plus current ISMS/MMM functional-delivery retrofit lessons  
 > **Current Issue**: [app_management_centre#1193](https://github.com/APGI-cmy/app_management_centre/issues/1193)  
 > **Current PR**: [app_management_centre#1194](https://github.com/APGI-cmy/app_management_centre/pull/1194)  
-> **Update Rule**: This document MUST be updated after every AMC stage issue, wave completion, approval, or readiness/blocker change.
+> **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 ## Retrofit Notes
 
@@ -26,33 +26,36 @@
 
 | Stage | Name | Status | Notes |
 |-------|------|--------|-------|
-| 1 | App Description | COMPLETE + RETROFIT ADDENDUM PRODUCED | CS2-approved 2026-04-22. Functional-delivery addendum merged in #1186. |
-| 2 | UX Workflow & Wiring Spec | COMPLETE + RETROFIT ADDENDUM PRODUCED | CS2-approved 2026-04-22. CTA/API/Data/Audit matrix merged in #1186. |
-| 3 | FRS | COMPLETE - CS2 APPROVED + RETROFIT ADDENDUM PRODUCED | FR-1900 merged in #1186. |
-| 4 | TRS | TREATED AS APPROVED + RETROFIT ADDENDUM PRODUCED | TR-1900, including TR-1910, merged in #1186. |
-| 5 | Architecture | APPROVAL-PENDING / RETROFIT MERGED AS REFERENCE INPUT | PR #1188 merged retrofit inputs; merge is not Stage 5 approval. |
-| 5a | Deployment Execution Strategy | APPROVAL-PENDING / RETROFIT MERGED AS REFERENCE INPUT | PR #1190 merged retrofit inputs; merge is not Stage 5a approval. |
-| 6 | QA-to-Red | APPROVAL-PENDING / RETROFIT MERGED AS REFERENCE INPUT | PR #1192 merged retrofit inputs; merge is not Stage 6 approval. |
-| **7** | **PBFAG** | **IN PROGRESS - RETROFIT ACTIVE** | PR #1194 imports Stage 5/5a/6 retrofit controls as hard PBFAG gates. |
-| 8 | Implementation Plan | Not Started | BLOCKED until Stages 5, 5a, 6, and 7 are CS2-dispositioned. |
-| 9 | Builder Checklist | Not Started | BLOCKED |
-| 10 | IAA Pre-Brief | Not Started | BLOCKED |
-| 11 | Builder Appointment | Not Started | BLOCKED |
-| 12 | Build | Not Started | BLOCKED |
+| 1 | App Description | ✅ COMPLETE + 🟡 RETROFIT ADDENDUM PRODUCED | CS2-approved 2026-04-22. Functional-delivery addendum merged in #1186. |
+| 2 | UX Workflow & Wiring Spec | ✅ COMPLETE + 🟡 RETROFIT ADDENDUM PRODUCED | CS2-approved 2026-04-22. CTA/API/Data/Audit matrix merged in #1186. |
+| 3 | FRS | ✅ COMPLETE - CS2 APPROVED + 🟡 RETROFIT ADDENDUM PRODUCED | FR-1900 merged in #1186. |
+| 4 | TRS | ✅ TREATED AS APPROVED + 🟡 RETROFIT ADDENDUM PRODUCED | TR-1900, including TR-1910, merged in #1186. |
+| 5 | Architecture | 🟡 IN PROGRESS — Produced Approval-Pending | PR #1188 merged retrofit inputs; merge is not Stage 5 approval. |
+| 5a | Deployment Execution Strategy | 🟡 IN PROGRESS — Produced Approval-Pending | PR #1190 merged retrofit inputs; merge is not Stage 5a approval. |
+| 6 | QA-to-Red | 🟡 IN PROGRESS — Produced Approval-Pending | PR #1192 merged retrofit inputs; merge is not Stage 6 approval. |
+| **7** | **PBFAG** | **🟡 IN PROGRESS — Produced Approval-Pending** | PR #1194 imports Stage 5/5a/6 retrofit controls as hard PBFAG gates. |
+| 8 | Implementation Plan | ⬜ Not Started — 🔴 BLOCKED | Must not start until Stages 5, 5a, 6, and 7 are CS2-dispositioned. |
+| 9 | Builder Checklist | ⬜ Not Started — 🔴 BLOCKED | Blocked until Stage 8 is authorized and complete. |
+| 10 | IAA Pre-Brief | ⬜ Not Started — 🔴 BLOCKED | Blocked until canonical sequence authorizes it. |
+| 11 | Builder Appointment | ⬜ Not Started — 🔴 BLOCKED | No builders appointed. |
+| 12 | Build | ⬜ Not Started — 🔴 BLOCKED | No implementation/build authorization. |
 
 ---
 
 ## Stage 7 - PBFAG
 
-**Status**: IN PROGRESS - RETROFIT ACTIVE  
+**Status**: 🟡 IN PROGRESS — Produced Approval-Pending  
 **Location**: `modules/amc/06-pbfag/`
 
-**Key Artifacts**:
+**Key Artifacts and Hard-Gate Inputs**:
 - [x] `pre-build-final-assurance-gate.md`
 - [x] `pbfag-evidence-matrix.md`
 - [x] `pbfag-findings-and-verdict.md`
 - [x] `pbfag-checklist.md`
 - [x] `stage1-4-functional-delivery-change-propagation-audit.md`
+- [x] `functional-delivery-architecture-map.md` - Stage 5 hard-gate input
+- [x] `deployment-execution-validation-matrix.md` - Stage 5a hard-gate input
+- [x] `functional-delivery-red-test-expansion-matrix.md` - Stage 6 QA-FD / QA-DEPLOY hard-gate input
 - [x] `functional-delivery-pbfag-addendum.md` - produced in issue #1193 / PR #1194
 - [x] `pbfag-retrofit-evidence-matrix.md` - produced in issue #1193 / PR #1194
 - [x] `stage7-functional-delivery-change-propagation-audit.md` - produced in issue #1193 / PR #1194
@@ -63,11 +66,11 @@
 
 ## Blocked Downstream Stages
 
-- Stage 8 Implementation Plan: not started.
-- Stage 9 Builder Checklist: not started.
-- Stage 10 IAA Pre-Brief: not started.
-- Stage 11 Builder Appointment: not started.
-- Stage 12 Build: not started.
+- Stage 8 Implementation Plan: not started and blocked.
+- Stage 9 Builder Checklist: not started and blocked.
+- Stage 10 IAA Pre-Brief: not started and blocked.
+- Stage 11 Builder Appointment: not started and blocked.
+- Stage 12 Build: not started and blocked.
 
 ---
 
