@@ -41,6 +41,8 @@ It does not implement tests. It defines the gate evidence that must exist before
 | PBFAG-DEPLOY-007 | Stage 5a matrix | Runtime health/smoke proof is required | Health/smoke proof is a closure requirement | Feature closure lacks smoke proof | BLOCK |
 | PBFAG-DEPLOY-008 | Stage 5a matrix | Dependency readiness/degraded evidence is required | AIMC/AIMCC/KUC/knowledge/Foreman/specialist/push/Supabase/Vercel readiness or degraded evidence required | Dependency failure hidden | BLOCK |
 | PBFAG-DEPLOY-009 | Stage 5a matrix | Deployment evidence package is defined | URL/API/state/audit/env/dependency/visual-log proof required | Feature marked complete without bundle | BLOCK |
+| PBFAG-DEPLOY-010 | Stage 5a matrix | CI boundary is preserved | PR CI may lint/test/schema-check only and must not mutate production | PR CI can mutate production or use live credentials | BLOCK |
+| PBFAG-DEPLOY-011 | Stage 5a matrix | Preview boundary is preserved | Preview deploy uses staging/preview resources only | Preview uses production data or production credentials | BLOCK |
 | PBFAG-QA-001 | Stage 6 QA-FD family | QA-FD family imported | QA-FD-001 through QA-FD-015 are visible in PBFAG evidence | Any QA-FD row omitted | BLOCK |
 | PBFAG-QA-002 | Stage 6 QA-DEPLOY family | QA-DEPLOY family imported | QA-DEPLOY-001 through QA-DEPLOY-010 are visible in PBFAG evidence | Any QA-DEPLOY row omitted | BLOCK |
 | PBFAG-QA-003 | Stage 6 matrix | Fail/pass criteria are exact | Each QA-FD/QA-DEPLOY row has RED and GREEN expectations | Vague pass criteria | BLOCK |
