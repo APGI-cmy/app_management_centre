@@ -104,7 +104,8 @@ jobs:
             fi
           done <<< "$CHANGED"
 
-          if [[ "$SELF_REPAIR_REQUESTED" == "true" && \
+          if [[ -n "$CHANGED" && \
+                "$SELF_REPAIR_REQUESTED" == "true" && \
                 "$CS2_OVERRIDE_PRESENT" == "true" && \
                 "$NO_HANDOVER_OR_BUILD_READY_CLAIM" == "true" && \
                 "$HAS_POSITIVE_READY_CLAIM" == "false" && \
