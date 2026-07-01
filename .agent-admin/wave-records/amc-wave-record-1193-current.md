@@ -3,7 +3,7 @@
 PR: #1194
 Issue: #1193
 Wave: amc-stage7-pbfag-retrofit-20260630
-Reviewed SHA: c98bc21ea80188a79f1ae678d9d3a54acc952c62
+Reviewed SHA: c9a7b4237113acf6629db6d50fb63636ae1ac614
 Verdict: PASS
 PHASE_B_BLOCKING_TOKEN: IAA-session-1193-20260630-PASS
 ecap_waiver_ref: CS2-proxy-admin-loop-control-1193-20260630
@@ -24,7 +24,7 @@ The protected-path condition is caused by tracker, artifact-index, wave-record, 
 This record does not claim Stage 8, build readiness, builder appointment, or implementation authority.
 
 delta_assurance_verdict: PASS
-base_head: c98bc21ea80188a79f1ae678d9d3a54acc952c62
-final_head: c98bc21ea80188a79f1ae678d9d3a54acc952c62
-delta_classification: token-recording-only
+base_head: ab019edc74ba9fef8acff1b4dae0e6f986e0a441
+final_head: c9a7b4237113acf6629db6d50fb63636ae1ac614
+delta_classification: protected-path-docs-only
 final_token_binding: IAA-session-1193-20260630-PASS
