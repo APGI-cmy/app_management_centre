@@ -39,8 +39,9 @@ jobs:
           echo "Authority: PPEIA-001, EFIA-001, ECAP-001 with AMC transition overlay"
           echo ""
 
-          BASE_REF="${{ github.event.pull_request.base.ref }}"
-          CHANGED=$(git diff --name-only "origin/${BASE_REF}"...HEAD 2>/dev/null || echo "")
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          CHANGED=$(git diff --name-only "${BASE_SHA}...${HEAD_SHA}" 2>/dev/null || echo "")
           echo "Changed files:"
           echo "$CHANGED" | head -30
 
