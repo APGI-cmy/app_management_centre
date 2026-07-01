@@ -56,16 +56,14 @@ jobs:
           # - explicit positive handover/build-ready/merge-ready claims block the bypass.
           SELF_REPAIR_REQUESTED=false
           if [[ "$PR_TITLE" == *"self-repair"* || \
-                "$PR_TITLE" == *"hard-gate"* || \
                 "$PR_BRANCH" == *"self-repair"* || \
-                "$PR_BRANCH" == *"hard-gate"* || \
                 "$PR_BODY" == *"gate self-repair"* || \
                 "$PR_BODY" == *"self-repair bypass"* ]]; then
             SELF_REPAIR_REQUESTED=true
           fi
 
           CS2_OVERRIDE_PRESENT=false
-          if [[ "$PR_BODY" == *"CS2 override"* || "$PR_BODY" == *"CS2 override authorization"* ]]; then
+          if echo "$PR_BODY" | grep -qiE "CS2 override authorization[[:space:]]*:[[:space:]]*(approved|granted|true)|CS2 override authorization is recorded"; then
             CS2_OVERRIDE_PRESENT=true
           fi
 
@@ -77,7 +75,7 @@ jobs:
           fi
 
           HAS_POSITIVE_READY_CLAIM=false
-          POSITIVE_READY_PATTERNS="handover complete|build-ready:[[:space:]]*true|build readiness:[[:space:]]*pass|merge-ready|merge readiness:[[:space:]]*pass|production-ready|ready for implementation"
+          POSITIVE_READY_PATTERNS="handover[[:space:]]*:[[:space:]]*complete|handover complete|build-ready|build readiness[[:space:]]*[=:][[:space:]]*(pass|ready)|merge-ready|merge readiness[[:space:]]*[=:][[:space:]]*(pass|ready)|production-ready|ready for implementation"
           if echo "$PR_TITLE" "$PR_BODY" | grep -qiE "$POSITIVE_READY_PATTERNS"; then
             HAS_POSITIVE_READY_CLAIM=true
           fi
