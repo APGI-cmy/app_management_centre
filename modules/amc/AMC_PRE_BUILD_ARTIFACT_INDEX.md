@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-06-30 (Stage 7 PBFAG functional-delivery / deployment-execution / QA retrofit artifacts produced for CS2 review - wave amc-stage7-pbfag-retrofit-20260630; issue #1193; PR #1194. Prior: Stage 6 QA-to-Red functional-delivery retrofit merged as approval-pending reference input - issue #1191; PR #1192. Prior: Stage 5a retrofit merged as approval-pending reference input - issue #1189; PR #1190. Prior: Stage 5 architecture retrofit merged as approval-pending reference input - issue #1187; PR #1188. Prior: Stage 1-4 retrofit merged - issue #1185; PR #1186.)  
+**Last Updated**: 2026-07-01 (CS2 disposition pack for Stages 5, 5a, 6, and 7 added for review - PR #1194. Stage 7 PBFAG functional-delivery / deployment-execution / QA retrofit artifacts produced for CS2 review - wave amc-stage7-pbfag-retrofit-20260630; issue #1193; PR #1194. Prior: Stage 6 QA-to-Red functional-delivery retrofit merged as approval-pending reference input - issue #1191; PR #1192. Prior: Stage 5a retrofit merged as approval-pending reference input - issue #1189; PR #1190. Prior: Stage 5 architecture retrofit merged as approval-pending reference input - issue #1187; PR #1188. Prior: Stage 1-4 retrofit merged - issue #1185; PR #1186.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -114,6 +114,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | Functional Delivery PBFAG Addendum | `modules/amc/06-pbfag/functional-delivery-pbfag-addendum.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1193 / PR #1194. Imports Stage 5/5a/6 retrofit obligations into Stage 7. |
 | PBFAG Retrofit Evidence Matrix | `modules/amc/06-pbfag/pbfag-retrofit-evidence-matrix.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1193 / PR #1194. Maps Stage 5/5a/6 obligations to PBFAG gate checks. |
 | Stage 7 Functional Delivery Change-Propagation Audit | `modules/amc/06-pbfag/stage7-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1193 / PR #1194. Conditional pass for Stage 7 retrofit production; not build-ready and not Stage-8-ready. |
+| CS2 Disposition Pack - Stages 5, 5a, 6, and 7 | `modules/amc/06-pbfag/cs2-disposition-pack-stages-5-5a-6-7.md` | 🟡 Prepared for CS2 Review | Produced in PR #1194. Summarises readiness, blockers, risks, conditions, and recommended CS2 disposition. Does not authorize Stage 8. |
 
 ---
 
