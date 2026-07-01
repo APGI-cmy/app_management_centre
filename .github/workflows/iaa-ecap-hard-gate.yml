@@ -2,7 +2,7 @@ name: IAA and ECAP Hard Gate
 
 # Authority: PPEIA-001, EFIA-001, AAEV-001, ECAP-001 v1.3.0
 # Transition overlay: FOREMAN_OPERATING_MODEL.md and ISMS_AMC_REPO_ALIGNMENT.md
-# Purpose: Hard-block protected-path merge readiness, while avoiding legacy ceremony paradoxes for PR1800 gate-alignment PRs.
+# Purpose: Hard-block protected-path merge readiness, while allowing only tightly-scoped CS2-authorized gate self-repair.
 
 on:
   pull_request:
@@ -36,10 +36,91 @@ jobs:
           PR_BODY:   ${{ github.event.pull_request.body }}
         run: |
           echo "=== IAA / ECAP Gate — PR Classification ==="
-          echo "Authority: PPEIA-001, EFIA-001, ECAP-001 with AMC PR1800 transition overlay"
+          echo "Authority: PPEIA-001, EFIA-001, ECAP-001 with AMC transition overlay"
           echo ""
 
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          CHANGED=$(git diff --name-only "${BASE_SHA}...${HEAD_SHA}" 2>/dev/null || echo "")
+          echo "Changed files:"
+          echo "$CHANGED" | head -30
+
           AUTO_BYPASS=false
+
+          # CS2 narrow self-repair bypass.
+          # This is intentionally stricter than the legacy PR1800 transition bypass:
+          # - the PR must explicitly be a gate self-repair PR;
+          # - the PR body must record CS2 override authorization;
+          # - the PR body must include the no-handover/build-ready disavowal;
+          # - every changed file must be a known gate/governance control file;
+          # - explicit positive handover/build-ready/merge-ready claims block the bypass.
+          SELF_REPAIR_REQUESTED=false
+          if [[ "$PR_TITLE" == *"self-repair"* || \
+                "$PR_BRANCH" == *"self-repair"* || \
+                "$PR_BODY" == *"gate self-repair"* || \
+                "$PR_BODY" == *"self-repair bypass"* ]]; then
+            SELF_REPAIR_REQUESTED=true
+          fi
+
+          CS2_OVERRIDE_PRESENT=false
+          if echo "$PR_BODY" | grep -qiE "CS2 override authorization[[:space:]]*:[[:space:]]*(approved|granted|true)|CS2 override authorization is recorded"; then
+            CS2_OVERRIDE_PRESENT=true
+          fi
+
+          NO_HANDOVER_OR_BUILD_READY_CLAIM=false
+          if [[ "$PR_BODY" == *"not a completion, handover, merge-readiness, or build-readiness claim"* || \
+                "$PR_BODY" == *"No handover/build-ready claim"* || \
+                "$PR_BODY" == *"no handover/build-ready claim"* ]]; then
+            NO_HANDOVER_OR_BUILD_READY_CLAIM=true
+          fi
+
+          HAS_POSITIVE_READY_CLAIM=false
+          POSITIVE_READY_PATTERNS="handover[[:space:]]*:[[:space:]]*complete|handover complete|build-ready|build readiness[[:space:]]*[=:][[:space:]]*(pass|ready)|merge-ready|merge readiness[[:space:]]*[=:][[:space:]]*(pass|ready)|production-ready|ready for implementation"
+          if echo "$PR_TITLE" "$PR_BODY" | grep -qiE "$POSITIVE_READY_PATTERNS"; then
+            HAS_POSITIVE_READY_CLAIM=true
+          fi
+
+          SELF_REPAIR_FILES_ONLY=true
+          SELF_REPAIR_ALLOWED_PATTERNS=(
+            "^\.github/workflows/iaa-ecap-hard-gate\.yml$"
+            "^\.github/scripts/validate-iaa-final-assurance\.py$"
+            "^\.github/scripts/validate-ecap-ceremony\.py$"
+            "^tests/test_iaa_ecap_gates\.py$"
+            "^governance/canon/.*(GATE|Gate|gate|IAA|ECAP|ASSURANCE|Assurance|assurance|BYPASS|Bypass|bypass).*\.md$"
+            "^\.admin/pr\.json$"
+          )
+          while IFS= read -r fpath; do
+            [ -z "$fpath" ] && continue
+            allowed=false
+            for pattern in "${SELF_REPAIR_ALLOWED_PATTERNS[@]}"; do
+              if echo "$fpath" | grep -qE "$pattern"; then allowed=true; break; fi
+            done
+            if [ "$allowed" != "true" ]; then
+              echo "Self-repair bypass rejected: non-gate/non-governance file changed: $fpath"
+              SELF_REPAIR_FILES_ONLY=false
+              break
+            fi
+          done <<< "$CHANGED"
+
+          if [[ -n "$CHANGED" && \
+                "$SELF_REPAIR_REQUESTED" == "true" && \
+                "$CS2_OVERRIDE_PRESENT" == "true" && \
+                "$NO_HANDOVER_OR_BUILD_READY_CLAIM" == "true" && \
+                "$HAS_POSITIVE_READY_CLAIM" == "false" && \
+                "$SELF_REPAIR_FILES_ONLY" == "true" ]]; then
+            echo "✅ Narrow CS2 gate self-repair bypass activated."
+            echo "Reason: governance-only gate repair, no product/runtime changes, CS2 override present, no handover/build-ready claim."
+            AUTO_BYPASS=true
+          fi
+
+          if [ "$AUTO_BYPASS" = "true" ]; then
+            echo "is_auto_bypass=true"        >> $GITHUB_OUTPUT
+            echo "is_protected_path_pr=false" >> $GITHUB_OUTPUT
+            echo "requires_iaa=false"         >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Legacy transition bypass retained for already-defined PR1800 governance alignment cases.
           if [[ ( "$PR_LABELS" == *"governance"* && "$PR_LABELS" == *"automated"* && "$PR_LABELS" == *"agent:liaison"* ) || \
                "$PR_BRANCH" == "governance-alignment-auto" || \
                "$PR_BRANCH" == *"layer-down"* || \
@@ -71,8 +152,7 @@ jobs:
             SA_REQ_IAA=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_iaa',True)).lower())" 2>/dev/null || echo "true")
             SA_REQ_ECAP=$(python3 -c "import json,sys; d=json.load(open('.admin/pr.json')); print(str(d.get('requires_ecap',True)).lower())" 2>/dev/null || echo "true")
             if [[ "$SA_VALID" == "true" ]] && [[ "$SA_TYPE" == "product-fix" || "$SA_TYPE" == "docs-only" ]] && [[ "$SA_REQ_IAA" == "false" ]] && [[ "$SA_REQ_ECAP" == "false" ]]; then
-              BASE_REF_SA="${{ github.event.pull_request.base.ref }}"
-              CHANGED_SA=$(git diff --name-only "origin/${BASE_REF_SA}"...HEAD 2>/dev/null || echo "")
+              CHANGED_SA="$CHANGED"
               HAS_FORCED_PATHS=false
               FORCED_PATTERNS=("^\.github/agents/" "^\.github/workflows/" "^\.github/scripts/" "^governance/" "^\.governance-pack/" "^\.agent-workspace/.*/knowledge/" "^\.agent-admin/" "supabase/migrations/" "^schema/" "^migrations/" "BUILD_PROGRESS_TRACKER")
               while IFS= read -r fpath; do
@@ -90,11 +170,6 @@ jobs:
               fi
             fi
           fi
-
-          BASE_REF="${{ github.event.pull_request.base.ref }}"
-          CHANGED=$(git diff --name-only "origin/${BASE_REF}"...HEAD 2>/dev/null || echo "")
-          echo "Changed files:"
-          echo "$CHANGED" | head -30
 
           IS_PROTECTED=false
           PROTECTED_PATTERNS=("^governance/" "^\.agent-admin/" "^\.github/agents/" "^\.governance-pack/" "^\.agent-workspace/.*/knowledge/" "supabase/migrations/" "schema/" "migrations/" "BUILD_PROGRESS_TRACKER")
@@ -199,7 +274,7 @@ jobs:
           echo "ECAP gate result: $ECAP_RESULT"
           GATE_FAILED=false
           if [ "$IS_AUTO_BYPASS" = "true" ]; then
-            echo "✅ GATE PASS (governance/PR1800 alignment bypass; no handover/build-ready claim)"
+            echo "✅ GATE PASS (authorized governance self-repair or PR1800 transition bypass; no handover/build-ready claim)"
             exit 0
           fi
           if [ "$REQUIRES_IAA" = "true" ] && [ "$IAA_RESULT" = "failure" ]; then echo "❌ IAA FINAL ASSURANCE GATE: FAILED"; GATE_FAILED=true; fi
