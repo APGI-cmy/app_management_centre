@@ -8,7 +8,9 @@ const repoRoot = process.cwd();
 const workflowSha = process.env.GITHUB_SHA || '';
 const prHeadSha = process.env.PR_HEAD_SHA || workflowSha;
 const prBaseSha = process.env.PR_BASE_SHA || '';
-const prNumber = (process.env.PR_NUMBER || '').trim();
+const githubRef = process.env.GITHUB_REF || '';
+const inferredPrNumber = (githubRef.match(/^refs\/pull\/(\d+)\//) || [])[1] || '';
+const prNumber = (process.env.PR_NUMBER || inferredPrNumber || '').trim();
 
 const legacyControlRelPath = '.agent-admin/control/delegation-order.json';
 const scopedControlRelPath = prNumber ? `.agent-admin/control/delegation-orders/pr-${prNumber}.json` : '';
