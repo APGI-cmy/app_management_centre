@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (PRE_BUILD_STAGE_MODEL_CANON.md v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-01 (CS2 disposition pack for Stages 5, 5a, 6, and 7 added for review - PR #1194. Stage 7 PBFAG functional-delivery / deployment-execution / QA retrofit artifacts produced for CS2 review - wave amc-stage7-pbfag-retrofit-20260630; issue #1193; PR #1194. Prior: Stage 6 QA-to-Red functional-delivery retrofit merged as approval-pending reference input - issue #1191; PR #1192. Prior: Stage 5a retrofit merged as approval-pending reference input - issue #1189; PR #1190. Prior: Stage 5 architecture retrofit merged as approval-pending reference input - issue #1187; PR #1188. Prior: Stage 1-4 retrofit merged - issue #1185; PR #1186.)  
+**Last Updated**: 2026-07-02 (CS2 decision record for Stages 5, 5a, 6, and 7 prepared for PR review - issue #1197. Stage 8 is eligible to be opened next as a separate governed wave, but has not been started by this record.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -60,15 +60,15 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Architecture Specification | `modules/amc/04-architecture/architecture-specification.md` | 🟡 Approval Pending | v1.0, produced 2026-04-26. CS2 approval required. |
-| TRS-to-Architecture Traceability | `modules/amc/04-architecture/trs-to-architecture-traceability.md` | 🟡 Approval Pending | v1.0, produced 2026-04-26. |
-| Functional Delivery Architecture Addendum | `modules/amc/04-architecture/functional-delivery-architecture-addendum.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1188. CS2 disposition required. |
-| Functional Delivery Architecture Map | `modules/amc/04-architecture/functional-delivery-architecture-map.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1188. Route/action/state/audit/degraded-mode map for Stage 6/7 derivation. CS2 disposition required. |
-| Stage 5 Functional Delivery Change-Propagation Audit | `modules/amc/04-architecture/stage5-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1188. Conditional pass for retrofit production; not build-ready and not Stage-8-ready. |
-| Stage 5 Review Notes | `modules/amc/04-architecture/stage5-review-notes.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1188. |
-| Stage 5 Coverage Note | `modules/amc/04-architecture/extra-review-note.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1188. |
+| Architecture Specification | `modules/amc/04-architecture/architecture-specification.md` | ✅ CS2 Approved with Conditions | v1.0, produced 2026-04-26. Approved by CS2 decision record in issue #1197; Stage 5 retrofit obligations remain binding inputs for Stage 8. |
+| TRS-to-Architecture Traceability | `modules/amc/04-architecture/trs-to-architecture-traceability.md` | ✅ CS2 Approved with Conditions | v1.0, produced 2026-04-26. Approved by CS2 decision record in issue #1197. |
+| Functional Delivery Architecture Addendum | `modules/amc/04-architecture/functional-delivery-architecture-addendum.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1188. Binding Stage 8 input. |
+| Functional Delivery Architecture Map | `modules/amc/04-architecture/functional-delivery-architecture-map.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1188. Route/action/state/audit/degraded-mode map remains binding for Stage 8. |
+| Stage 5 Functional Delivery Change-Propagation Audit | `modules/amc/04-architecture/stage5-functional-delivery-change-propagation-audit.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1188. Conditions carried forward to Stage 8. |
+| Stage 5 Review Notes | `modules/amc/04-architecture/stage5-review-notes.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1188. |
+| Stage 5 Coverage Note | `modules/amc/04-architecture/extra-review-note.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1188. |
 | Architecture (superseded placeholder) | `modules/amc/04-architecture/architecture.md` | ⛔ Superseded | `architecture-specification.md` is the canonical Stage 5 artifact. |
-| Architecture Decision Records | `modules/amc/04-architecture/architecture-decision-records.md` | ⬜ Placeholder | Not started. |
+| Architecture Decision Records | `modules/amc/04-architecture/architecture-decision-records.md` | ⬜ Placeholder | Not started. Create later only if CS2 or Stage 8 requires ADRs. |
 | Architecture Completeness Checklist | `modules/amc/04-architecture/architecture-completeness-checklist.md` | ⬜ Placeholder | Not started / remains a placeholder unless separately populated. |
 
 ---
@@ -77,12 +77,12 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Deployment Execution Strategy | `modules/amc/05a-deployment-execution-strategy/deployment-execution-strategy.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. CS2 approval required. |
-| Deployment Surface Ownership Table | `modules/amc/05a-deployment-execution-strategy/deployment-surface-ownership-table.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. |
-| Runner and Environment Constraints | `modules/amc/05a-deployment-execution-strategy/runner-and-environment-constraints.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. |
-| Functional Delivery Deployment Execution Addendum | `modules/amc/05a-deployment-execution-strategy/functional-delivery-deployment-execution-addendum.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1190. Imports TR-1910, Stage 5 architecture map, deployment evidence, runtime health/smoke validation, dependency readiness, and no-operational-speculation controls. CS2 disposition required. |
-| Deployment Execution Validation Matrix | `modules/amc/05a-deployment-execution-strategy/deployment-execution-validation-matrix.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1190. Adds workflow, environment, migration, protected approval, health, rollback, dependency, audit, and evidence validation obligations for Stage 6/7 derivation. CS2 disposition required. |
-| Stage 5a Functional Delivery Change-Propagation Audit | `modules/amc/05a-deployment-execution-strategy/stage5a-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1190. Conditional pass for Stage 5a retrofit production; not build-ready and not Stage-8-ready. |
+| Deployment Execution Strategy | `modules/amc/05a-deployment-execution-strategy/deployment-execution-strategy.md` | ✅ CS2 Approved with Conditions | v1.0, produced 2026-04-27. Approved by CS2 decision record in issue #1197. |
+| Deployment Surface Ownership Table | `modules/amc/05a-deployment-execution-strategy/deployment-surface-ownership-table.md` | ✅ CS2 Approved with Conditions | v1.0, produced 2026-04-27. Deployment ownership remains binding for Stage 8. |
+| Runner and Environment Constraints | `modules/amc/05a-deployment-execution-strategy/runner-and-environment-constraints.md` | ✅ CS2 Approved with Conditions | v1.0, produced 2026-04-27. Runner and environment constraints remain binding for Stage 8. |
+| Functional Delivery Deployment Execution Addendum | `modules/amc/05a-deployment-execution-strategy/functional-delivery-deployment-execution-addendum.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1190. Binding Stage 8 input. |
+| Deployment Execution Validation Matrix | `modules/amc/05a-deployment-execution-strategy/deployment-execution-validation-matrix.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1190. Deployment, CI, preview, secret, migration, rollback, health/smoke, and dependency conditions remain binding for Stage 8. |
+| Stage 5a Functional Delivery Change-Propagation Audit | `modules/amc/05a-deployment-execution-strategy/stage5a-functional-delivery-change-propagation-audit.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1190. Conditions carried forward to Stage 8. |
 | Governance Oversight Record | `modules/amc/governance-oversight/DEPLOYMENT_STRATEGY_OVERSIGHT.md` | ✅ Complete | Formal oversight record. CS2 auth: #1133. |
 
 ---
@@ -91,12 +91,12 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| QA-to-Red Specification | `modules/amc/05-qa-to-red/qa-to-red-specification.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. Must be reviewed with Stage 6 retrofit artifacts. |
-| Architecture and DES to QA Traceability | `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. Must be reconciled with Stage 5/5a retrofit maps before Stage 8. |
-| Red Test Catalog | `modules/amc/05-qa-to-red/red-test-catalog.md` | 🟡 Approval Pending | v1.0, produced 2026-04-27. 79 test cases across 20 families. Retrofit adds QA-FD and QA-DEPLOY families. |
-| Functional Delivery QA-to-Red Addendum | `modules/amc/05-qa-to-red/functional-delivery-qa-to-red-addendum.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1192. Imports Stage 1-5a functional-delivery and deployment-execution obligations into Stage 6. CS2 disposition required. |
-| Functional Delivery RED Test Expansion Matrix | `modules/amc/05-qa-to-red/functional-delivery-red-test-expansion-matrix.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1192. Defines QA-FD and QA-DEPLOY RED test families. CS2 disposition required. |
-| Stage 6 Functional Delivery Change-Propagation Audit | `modules/amc/05-qa-to-red/stage6-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1192. Conditional pass for Stage 6 retrofit production; not build-ready and not Stage-8-ready. |
+| QA-to-Red Specification | `modules/amc/05-qa-to-red/qa-to-red-specification.md` | ✅ CS2 Approved with Conditions | v1.0, produced 2026-04-27. Approved by CS2 decision record in issue #1197. |
+| Architecture and DES to QA Traceability | `modules/amc/05-qa-to-red/architecture-and-des-to-qa-traceability.md` | ✅ CS2 Approved with Conditions | v1.0, produced 2026-04-27. Must be carried into Stage 8 implementation planning. |
+| Red Test Catalog | `modules/amc/05-qa-to-red/red-test-catalog.md` | ✅ CS2 Approved with Conditions | v1.0, produced 2026-04-27. 79 test cases across 20 families. Retrofit adds QA-FD and QA-DEPLOY families. |
+| Functional Delivery QA-to-Red Addendum | `modules/amc/05-qa-to-red/functional-delivery-qa-to-red-addendum.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1192. Binding Stage 8 input. |
+| Functional Delivery RED Test Expansion Matrix | `modules/amc/05-qa-to-red/functional-delivery-red-test-expansion-matrix.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1192. QA-FD and QA-DEPLOY rows remain binding for Stage 8. |
+| Stage 6 Functional Delivery Change-Propagation Audit | `modules/amc/05-qa-to-red/stage6-functional-delivery-change-propagation-audit.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1192. Conditions carried forward to Stage 8. |
 | QA-to-Red Suite (superseded placeholder) | `modules/amc/05-qa-to-red/qa-to-red-suite.md` | ⛔ Superseded | Placeholder superseded by qa-to-red-specification.md v1.0. |
 | QA Catalog Alignment (superseded placeholder) | `modules/amc/05-qa-to-red/qa-catalog-alignment.md` | ⛔ Superseded | Placeholder superseded by architecture-and-des-to-qa-traceability.md v1.0. |
 
@@ -106,15 +106,16 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Pre-Build Final Assurance Gate | `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` | 🟡 Approval Pending | Must be reconciled with Stage 5/5a/6 retrofit obligations before Stage 8. |
-| PBFAG Evidence Matrix | `modules/amc/06-pbfag/pbfag-evidence-matrix.md` | 🟡 Approval Pending | Must include tracker/index agreement for new retrofit artifacts before final Stage 8 disposition. |
-| PBFAG Findings and Verdict | `modules/amc/06-pbfag/pbfag-findings-and-verdict.md` | 🟡 Approval Pending | Stage 8 gate remains conditional. |
-| PBFAG Checklist | `modules/amc/06-pbfag/pbfag-checklist.md` | 🟡 Approval Pending | References canonical PBFAG artifacts. |
-| Stage 1-4 Functional Delivery Change-Propagation Audit | `modules/amc/06-pbfag/stage1-4-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Reference Input | Produced/merged in PR #1186 chain and retained as upstream disposition input. CS2 disposition required. |
-| Functional Delivery PBFAG Addendum | `modules/amc/06-pbfag/functional-delivery-pbfag-addendum.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1193 / PR #1194. Imports Stage 5/5a/6 retrofit obligations into Stage 7. |
-| PBFAG Retrofit Evidence Matrix | `modules/amc/06-pbfag/pbfag-retrofit-evidence-matrix.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1193 / PR #1194. Maps Stage 5/5a/6 obligations to PBFAG gate checks. |
-| Stage 7 Functional Delivery Change-Propagation Audit | `modules/amc/06-pbfag/stage7-functional-delivery-change-propagation-audit.md` | 🟡 Retrofit Produced for CS2 Review | Produced in issue #1193 / PR #1194. Conditional pass for Stage 7 retrofit production; not build-ready and not Stage-8-ready. |
-| CS2 Disposition Pack - Stages 5, 5a, 6, and 7 | `modules/amc/06-pbfag/cs2-disposition-pack-stages-5-5a-6-7.md` | 🟡 Prepared for CS2 Review | Produced in PR #1194. Summarises readiness, blockers, risks, conditions, and recommended CS2 disposition. Does not authorize Stage 8. |
+| Pre-Build Final Assurance Gate | `modules/amc/06-pbfag/pre-build-final-assurance-gate.md` | ✅ CS2 Approved with Conditions | Approved by CS2 decision record in issue #1197. Conditions remain binding for Stage 8. |
+| PBFAG Evidence Matrix | `modules/amc/06-pbfag/pbfag-evidence-matrix.md` | ✅ CS2 Approved with Conditions | Tracker/index agreement and Stage 8 gate conditions remain binding. |
+| PBFAG Findings and Verdict | `modules/amc/06-pbfag/pbfag-findings-and-verdict.md` | ✅ CS2 Approved with Conditions | Stage 8 may be opened next only as a separate governed wave. |
+| PBFAG Checklist | `modules/amc/06-pbfag/pbfag-checklist.md` | ✅ CS2 Approved with Conditions | References canonical PBFAG artifacts. |
+| Stage 1-4 Functional Delivery Change-Propagation Audit | `modules/amc/06-pbfag/stage1-4-functional-delivery-change-propagation-audit.md` | ✅ CS2 Approved with Conditions | Produced/merged in PR #1186 chain and retained as upstream input. |
+| Functional Delivery PBFAG Addendum | `modules/amc/06-pbfag/functional-delivery-pbfag-addendum.md` | ✅ CS2 Approved with Conditions | Produced in issue #1193 / PR #1194. Binding Stage 8 input. |
+| PBFAG Retrofit Evidence Matrix | `modules/amc/06-pbfag/pbfag-retrofit-evidence-matrix.md` | ✅ CS2 Approved with Conditions | PBFAG-FD, PBFAG-DEPLOY, PBFAG-QA, PBFAG-TRACK, and PBFAG-STAGE8 rows remain binding for Stage 8. |
+| Stage 7 Functional Delivery Change-Propagation Audit | `modules/amc/06-pbfag/stage7-functional-delivery-change-propagation-audit.md` | ✅ CS2 Approved with Conditions | Conditions carried forward to Stage 8. |
+| CS2 Disposition Pack - Stages 5, 5a, 6, and 7 | `modules/amc/06-pbfag/cs2-disposition-pack-stages-5-5a-6-7.md` | ✅ Used for CS2 Decision | Produced in PR #1194. Source for issue #1197 decision record. |
+| CS2 Decision Record - Stages 5, 5a, 6, and 7 | `modules/amc/06-pbfag/cs2-decision-record-stages-5-5a-6-7.md` | ✅ Prepared for CS2 Review | Produced in issue #1197. Records explicit CS2 approval with conditions. Does not authorize implementation or build. |
 
 ---
 
@@ -122,7 +123,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |----------|----------|--------|-------|
-| Implementation Plan | `modules/amc/07-implementation-plan/implementation-plan.md` | ⬜ Placeholder | Not started. |
+| Implementation Plan | `modules/amc/07-implementation-plan/implementation-plan.md` | ⬜ Placeholder | Not started. Eligible to be opened next only by separate Stage 8 issue/PR. |
 | Wave Breakdown | `modules/amc/07-implementation-plan/wave-breakdown.md` | ⬜ Placeholder | Not started. |
 
 ---
