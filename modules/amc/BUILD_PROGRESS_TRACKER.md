@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-02  
-**Updated By**: foreman-v2-agent (wave: amc-cs2-disposition-stages-5-7 - issue #1197; CS2 decision record for Stages 5, 5a, 6, and 7 prepared. Stage 8 is eligible to be opened next as a separate governed wave, but this PR does not start Stage 8.)
+**Updated By**: foreman-v2-agent (wave: amc-cs2-disposition-stages-5-7 - issue #1197; PR #1198; CS2 decision record for Stages 5, 5a, 6, and 7 prepared. Stage 8 is eligible to be opened next as a separate governed wave, but this PR does not start Stage 8.)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT - CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 plus current ISMS/MMM functional-delivery retrofit lessons  
 > **Current Issue**: [app_management_centre#1197](https://github.com/APGI-cmy/app_management_centre/issues/1197)  
-> **Current PR**: pending CS2 disposition PR creation  
+> **Current PR**: [app_management_centre#1198](https://github.com/APGI-cmy/app_management_centre/pull/1198)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 ## Retrofit and Disposition Notes
@@ -19,7 +19,7 @@
 - PR #1190 merged Stage 5a deployment-execution retrofit reference inputs.
 - PR #1192 merged Stage 6 QA-to-Red retrofit reference inputs.
 - PR #1194 merged Stage 7 PBFAG retrofit artifacts and `cs2-disposition-pack-stages-5-5a-6-7.md`.
-- Issue #1197 records the explicit CS2 decision approving Stages 5, 5a, 6, and 7 with conditions.
+- Issue #1197 / PR #1198 records the explicit CS2 decision approving Stages 5, 5a, 6, and 7 with conditions.
 
 ---
 
