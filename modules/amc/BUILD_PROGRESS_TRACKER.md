@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-02  
-**Updated By**: foreman-v2-agent (wave: amc-stage8-implementation-plan-20260702 - issue #1199; Stage 8 implementation plan artifacts produced for CS2 review. Stages 9-12 remain blocked.)
+**Updated By**: foreman-v2-agent (wave: amc-stage8-implementation-plan-20260702 - issue #1199; PR #1200; Stage 8 implementation plan artifacts produced for CS2 review. Stages 9-12 remain blocked.)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT - CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 plus current ISMS/MMM functional-delivery retrofit lessons  
 > **Current Issue**: [app_management_centre#1199](https://github.com/APGI-cmy/app_management_centre/issues/1199)  
-> **Current PR**: pending Stage 8 PR creation  
+> **Current PR**: [app_management_centre#1200](https://github.com/APGI-cmy/app_management_centre/pull/1200)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 ## Retrofit and Disposition Notes
@@ -20,7 +20,7 @@
 - PR #1192 merged Stage 6 QA-to-Red retrofit reference inputs.
 - PR #1194 merged Stage 7 PBFAG retrofit artifacts and `cs2-disposition-pack-stages-5-5a-6-7.md`.
 - PR #1198 recorded explicit CS2 approval with conditions for Stages 5, 5a, 6, and 7.
-- Issue #1199 opens Stage 8 implementation planning only.
+- Issue #1199 / PR #1200 opens Stage 8 implementation planning only.
 
 ---
 
@@ -36,7 +36,7 @@
 | 5a | Deployment Execution Strategy | ✅ CS2 APPROVED WITH CONDITIONS | Deployment validation, CI, preview, secret, migration, rollback, health/smoke, and dependency conditions remain binding inputs for Stage 8. |
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY rows remain binding inputs for Stage 8 and later QA-to-Green evidence. |
 | **7** | **PBFAG** | **✅ CS2 APPROVED WITH CONDITIONS** | PBFAG-FD, PBFAG-DEPLOY, PBFAG-QA, tracker/index, and Stage 8 block rows remain binding inputs for Stage 8. |
-| **8** | **Implementation Plan** | **🟡 IN PROGRESS — Produced for CS2 Review** | Issue #1199 produces implementation-plan artifacts only. No builder checklist, IAA pre-brief, builder appointment, code, build evidence, or build work. |
+| **8** | **Implementation Plan** | **🟡 IN PROGRESS — Produced for CS2 Review** | Issue #1199 / PR #1200 produces implementation-plan artifacts only. No builder checklist, IAA pre-brief, builder appointment, code, build evidence, or build work. |
 | 9 | Builder Checklist | ⬜ Not Started — 🔴 BLOCKED | Blocked until Stage 8 is CS2-accepted and Stage 9 is separately authorized. |
 | 10 | IAA Pre-Brief | ⬜ Not Started — 🔴 BLOCKED | Blocked until canonical sequence authorizes it. |
 | 11 | Builder Appointment | ⬜ Not Started — 🔴 BLOCKED | No builders appointed. |
