@@ -3,7 +3,7 @@
 PR: #1198
 Issue: #1197
 Wave: amc-cs2-disposition-stages-5-7-20260702
-Reviewed SHA: 86ce7496ab9ffa066bd4cff6f6d15ccc3167dab4
+Reviewed SHA: ce217ff3a183f4ad0354c148c192060e8c7d4ab3
 Verdict: PASS
 PHASE_B_BLOCKING_TOKEN: IAA-session-1197-20260702-PASS
 ecap_waiver_ref: CS2-proxy-disposition-record-1197-20260702
@@ -21,6 +21,6 @@ This record does not start Stage 8 and does not create implementation, builder a
 
 delta_assurance_verdict: PASS
 base_head: 86c9ad61cc8218848dab77a37de5db4abdfa9e40
-final_head: 86ce7496ab9ffa066bd4cff6f6d15ccc3167dab4
-delta_classification: protected-path-docs-only
+final_head: ce217ff3a183f4ad0354c148c192060e8c7d4ab3
+delta_classification: token-recording-only
 final_token_binding: IAA-session-1197-20260702-PASS
