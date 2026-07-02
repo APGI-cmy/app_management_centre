@@ -3,7 +3,7 @@
 PR: #1194
 Issue: #1193
 Wave: amc-stage7-pbfag-retrofit-20260630
-Reviewed SHA: a4ca38c782f94e8863b0efd68fef554de268a078
+Reviewed SHA: e98b343b63656bea2a59cecc3caca8b5cc8d8fd7
 Verdict: PASS
 PHASE_B_BLOCKING_TOKEN: IAA-session-1193-20260630-PASS
 ecap_waiver_ref: CS2-proxy-admin-loop-control-1193-20260630
@@ -26,6 +26,6 @@ This record does not claim Stage 8, build readiness, builder appointment, or imp
 
 delta_assurance_verdict: PASS
 base_head: ab019edc74ba9fef8acff1b4dae0e6f986e0a441
-final_head: a4ca38c782f94e8863b0efd68fef554de268a078
-delta_classification: protected-path-docs-only
+final_head: e98b343b63656bea2a59cecc3caca8b5cc8d8fd7
+delta_classification: token-recording-only
 final_token_binding: IAA-session-1193-20260630-PASS
