@@ -1,8 +1,9 @@
-# AMC Wave Record Current - Issue 1199
+# AMC Wave Record Current - PR 1200
 
+PR: #1200
 Issue: #1199
 Wave: amc-stage8-implementation-plan-20260702
-Reviewed SHA: 5543ad3f21fd6697ff0b945cdb8a3826a7157656
+Reviewed SHA: d900e8bb7e38852188a5038c4346d33451e21406
 Verdict: PASS
 PHASE_B_BLOCKING_TOKEN: IAA-session-1199-20260702-PASS
 ecap_waiver_ref: stage8-planning-1199-20260702
@@ -14,12 +15,12 @@ Reviewed files:
 - modules/amc/BUILD_PROGRESS_TRACKER.md
 - modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md
 
-This record supports AMC Stage 8 planning for issue #1199.
+This record supports AMC Stage 8 planning for issue #1199 and PR #1200.
 
 This record is limited to planning and tracker/index documentation.
 
 delta_assurance_verdict: PASS
 base_head: 6357c520dd245e2466a6cb5760a52f34ce1290aa
-final_head: 5543ad3f21fd6697ff0b945cdb8a3826a7157656
-delta_classification: protected-path-docs-only
+final_head: d900e8bb7e38852188a5038c4346d33451e21406
+delta_classification: token-recording-only
 final_token_binding: IAA-session-1199-20260702-PASS
