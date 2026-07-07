@@ -2,15 +2,15 @@
 
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
-**Last Updated**: 2026-07-02  
-**Updated By**: foreman-v2-agent (wave: amc-stage8-implementation-plan-20260702 - issue #1199; PR #1200; Stage 8 implementation plan artifacts produced for CS2 review. Stages 9-12 remain blocked.)
+**Last Updated**: 2026-07-07  
+**Updated By**: foreman-v2-agent (wave: amc-stage8-cs2-disposition - issue #1201; Stage 8 CS2 disposition record prepared. Stage 9 is eligible next only after this disposition PR is merged as a separate governed wave.)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT - CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 plus current ISMS/MMM functional-delivery retrofit lessons  
-> **Current Issue**: [app_management_centre#1199](https://github.com/APGI-cmy/app_management_centre/issues/1199)  
-> **Current PR**: [app_management_centre#1200](https://github.com/APGI-cmy/app_management_centre/pull/1200)  
-> **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
+> **Current Issue**: [app_management_centre#1201](https://github.com/APGI-cmy/app_management_centre/issues/1201)  
+> **Current PR**: pending Stage 8 CS2 disposition PR creation  
+> **Update Rule**: This document MUST be updated after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Retrofit and Disposition Notes
 
@@ -20,7 +20,8 @@
 - PR #1192 merged Stage 6 QA-to-Red retrofit reference inputs.
 - PR #1194 merged Stage 7 PBFAG retrofit artifacts and `cs2-disposition-pack-stages-5-5a-6-7.md`.
 - PR #1198 recorded explicit CS2 approval with conditions for Stages 5, 5a, 6, and 7.
-- Issue #1199 / PR #1200 opens Stage 8 implementation planning only.
+- PR #1200 produced the Stage 8 Implementation Plan artifacts.
+- Issue #1201 records CS2 disposition of Stage 8 only.
 
 ---
 
@@ -32,63 +33,55 @@
 | 2 | UX Workflow & Wiring Spec | ✅ COMPLETE + 🟡 RETROFIT ADDENDUM PRODUCED | CS2-approved 2026-04-22. CTA/API/Data/Audit matrix merged in #1186. |
 | 3 | FRS | ✅ COMPLETE - CS2 APPROVED + 🟡 RETROFIT ADDENDUM PRODUCED | FR-1900 merged in #1186. |
 | 4 | TRS | ✅ TREATED AS APPROVED + 🟡 RETROFIT ADDENDUM PRODUCED | TR-1900, including TR-1910, merged in #1186. |
-| 5 | Architecture | ✅ CS2 APPROVED WITH CONDITIONS | Stage 5 retrofit obligations remain binding inputs for Stage 8. |
-| 5a | Deployment Execution Strategy | ✅ CS2 APPROVED WITH CONDITIONS | Deployment validation, CI, preview, secret, migration, rollback, health/smoke, and dependency conditions remain binding inputs for Stage 8. |
-| 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY rows remain binding inputs for Stage 8 and later QA-to-Green evidence. |
-| **7** | **PBFAG** | **✅ CS2 APPROVED WITH CONDITIONS** | PBFAG-FD, PBFAG-DEPLOY, PBFAG-QA, tracker/index, and Stage 8 block rows remain binding inputs for Stage 8. |
-| **8** | **Implementation Plan** | **🟡 IN PROGRESS — Produced for CS2 Review** | Issue #1199 / PR #1200 produces implementation-plan artifacts only. No builder checklist, IAA pre-brief, builder appointment, code, build evidence, or build work. |
-| 9 | Builder Checklist | ⬜ Not Started — 🔴 BLOCKED | Blocked until Stage 8 is CS2-accepted and Stage 9 is separately authorized. |
-| 10 | IAA Pre-Brief | ⬜ Not Started — 🔴 BLOCKED | Blocked until canonical sequence authorizes it. |
+| 5 | Architecture | ✅ CS2 APPROVED WITH CONDITIONS | Stage 5 retrofit obligations remain binding inputs for later stages. |
+| 5a | Deployment Execution Strategy | ✅ CS2 APPROVED WITH CONDITIONS | Deployment validation, CI, preview, secret, migration, rollback, health/smoke, and dependency conditions remain binding inputs. |
+| 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY rows remain binding inputs for QA-to-Green evidence. |
+| **7** | **PBFAG** | **✅ CS2 APPROVED WITH CONDITIONS** | PBFAG retrofit rows remain binding inputs. |
+| **8** | **Implementation Plan** | **✅ CS2 APPROVED WITH CONDITIONS — Disposition Prepared** | Issue #1201 records CS2 acceptance. Stage 9 is eligible next only after the disposition PR is merged. |
+| 9 | Builder Checklist | ⬜ Not Started — 🟡 ELIGIBLE NEXT AFTER STAGE 8 DISPOSITION MERGE | Must be opened separately. This PR does not create Stage 9 artifacts. |
+| 10 | IAA Pre-Brief | ⬜ Not Started — 🔴 BLOCKED | Blocked until Stage 9 is authorized and complete. |
 | 11 | Builder Appointment | ⬜ Not Started — 🔴 BLOCKED | No builders appointed. |
 | 12 | Build | ⬜ Not Started — 🔴 BLOCKED | No build authorization. |
 
 ---
 
-## Stage 8 Artifacts
+## Stage 8 Disposition Record
 
-**Status**: Produced for CS2 review  
-**Location**: `modules/amc/07-implementation-plan/`
+**Status**: Prepared for PR review  
+**Location**: `modules/amc/07-implementation-plan/cs2-decision-record-stage-8.md`
 
-Artifacts:
-- `implementation-plan.md`
-- `wave-breakdown.md`
-- `condition-import-matrix.md`
-
----
-
-## Stage 8 Conditions Imported
-
-The Stage 8 package imports:
-
-1. `cs2-decision-record-stages-5-5a-6-7.md`.
-2. Stage 5 route/action/state/audit/degraded-mode map.
-3. Stage 5a deployment validation matrix, including CI and preview boundaries.
-4. Stage 6 QA-FD and QA-DEPLOY rows.
-5. Stage 7 PBFAG-FD, PBFAG-DEPLOY, PBFAG-QA, PBFAG-TRACK, and PBFAG-STAGE8 rows.
-6. First E2E `/alerts` acknowledgement path.
-7. Placeholder/stub rejection rule.
-8. Production approval gates and secret separation.
-9. Supabase migration command freeze.
-10. Rollback planning.
-11. Runtime health and smoke validation.
-12. Dependency readiness and visible degraded-mode behavior.
-13. Complete delivery evidence package.
+**Decision summary**:
+- Stage 8 Implementation Plan: approved with conditions.
+- Stage 9 Builder Checklist: eligible next only after this disposition PR merges and only through a separate governed issue/PR.
 
 ---
 
-## Blocked Downstream Stages
+## Stage 9 Carry-Forward Conditions
 
-- Stage 9 Builder Checklist: not started and blocked.
-- Stage 10 IAA Pre-Brief: not started and blocked.
-- Stage 11 Builder Appointment: not started and blocked.
-- Stage 12 Build: not started and blocked.
+Any later Stage 9 wave must import:
+
+1. Stage 8 implementation plan.
+2. Stage 8 wave breakdown.
+3. Stage 8 condition-import matrix.
+4. Stage 5 route/action/state/audit/degraded-mode obligations.
+5. Stage 5a deployment inheritance.
+6. Secret and environment separation.
+7. Production approval gates and protected/manual surfaces.
+8. Migration command and migration evidence planning.
+9. Rollback or recovery proof requirements.
+10. Runtime health and smoke validation.
+11. Dependency readiness and visible degraded-mode behavior.
+12. Per-wave red-test coverage for W1 through W8.
+13. First E2E `/alerts` acknowledgement path.
+14. Complete evidence package requirements.
+15. Placeholder, stub, skipped, todo, and trivial-proof rejection.
 
 ---
 
 ## Next Action
 
-1. Review Stage 8 PR for issue #1199.
-2. Do not open Stage 9 until Stage 8 is CS2-accepted.
+1. Review and merge the Stage 8 CS2 disposition PR for issue #1201.
+2. After merge, Stage 9 may be opened as a separate governed Builder Checklist wave.
 3. Do not create IAA pre-brief, builder appointment, or build work from this PR.
 
 ---
@@ -96,7 +89,7 @@ The Stage 8 package imports:
 ## References
 
 - [PRE_BUILD_STAGE_MODEL_CANON.md](../../governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md)
-- [cs2-decision-record-stages-5-5a-6-7.md](./06-pbfag/cs2-decision-record-stages-5-5a-6-7.md)
+- [cs2-decision-record-stage-8.md](./07-implementation-plan/cs2-decision-record-stage-8.md)
 - [condition-import-matrix.md](./07-implementation-plan/condition-import-matrix.md)
 - [implementation-plan.md](./07-implementation-plan/implementation-plan.md)
 - [wave-breakdown.md](./07-implementation-plan/wave-breakdown.md)
