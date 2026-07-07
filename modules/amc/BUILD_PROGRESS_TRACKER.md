@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-07  
-**Updated By**: foreman-v2-agent (wave: amc-stage8-cs2-disposition - issue #1201; Stage 8 CS2 disposition record prepared. Stage 9 is eligible next only after this disposition PR is merged as a separate governed wave.)
+**Updated By**: foreman-v2-agent (wave: amc-stage8-cs2-disposition - issue #1201; PR #1202; Stage 8 CS2 disposition record prepared. Stage 9 is eligible next only after this disposition PR is merged as a separate governed wave.)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT - CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 plus current ISMS/MMM functional-delivery retrofit lessons  
 > **Current Issue**: [app_management_centre#1201](https://github.com/APGI-cmy/app_management_centre/issues/1201)  
-> **Current PR**: pending Stage 8 CS2 disposition PR creation  
+> **Current PR**: [app_management_centre#1202](https://github.com/APGI-cmy/app_management_centre/pull/1202)  
 > **Update Rule**: This document MUST be updated after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Retrofit and Disposition Notes
@@ -21,7 +21,7 @@
 - PR #1194 merged Stage 7 PBFAG retrofit artifacts and `cs2-disposition-pack-stages-5-5a-6-7.md`.
 - PR #1198 recorded explicit CS2 approval with conditions for Stages 5, 5a, 6, and 7.
 - PR #1200 produced the Stage 8 Implementation Plan artifacts.
-- Issue #1201 records CS2 disposition of Stage 8 only.
+- Issue #1201 / PR #1202 records CS2 disposition of Stage 8 only.
 
 ---
 
@@ -37,7 +37,7 @@
 | 5a | Deployment Execution Strategy | ✅ CS2 APPROVED WITH CONDITIONS | Deployment validation, CI, preview, secret, migration, rollback, health/smoke, and dependency conditions remain binding inputs. |
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY rows remain binding inputs for QA-to-Green evidence. |
 | **7** | **PBFAG** | **✅ CS2 APPROVED WITH CONDITIONS** | PBFAG retrofit rows remain binding inputs. |
-| **8** | **Implementation Plan** | **✅ CS2 APPROVED WITH CONDITIONS — Disposition Prepared** | Issue #1201 records CS2 acceptance. Stage 9 is eligible next only after the disposition PR is merged. |
+| **8** | **Implementation Plan** | **✅ CS2 APPROVED WITH CONDITIONS — Disposition Prepared** | Issue #1201 / PR #1202 records CS2 acceptance. Stage 9 is eligible next only after the disposition PR is merged. |
 | 9 | Builder Checklist | ⬜ Not Started — 🟡 ELIGIBLE NEXT AFTER STAGE 8 DISPOSITION MERGE | Must be opened separately. This PR does not create Stage 9 artifacts. |
 | 10 | IAA Pre-Brief | ⬜ Not Started — 🔴 BLOCKED | Blocked until Stage 9 is authorized and complete. |
 | 11 | Builder Appointment | ⬜ Not Started — 🔴 BLOCKED | No builders appointed. |
