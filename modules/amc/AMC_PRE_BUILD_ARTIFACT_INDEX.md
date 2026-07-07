@@ -127,7 +127,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | Implementation Plan | `modules/amc/07-implementation-plan/implementation-plan.md` | ✅ CS2 Approved with Conditions | Produced in issue #1199 / PR #1200. Approved by issue #1201 disposition record. |
 | Wave Breakdown | `modules/amc/07-implementation-plan/wave-breakdown.md` | ✅ CS2 Approved with Conditions | Produced in issue #1199 / PR #1200. Approved by issue #1201 disposition record. |
 | Condition Import Matrix | `modules/amc/07-implementation-plan/condition-import-matrix.md` | ✅ CS2 Approved with Conditions | Maps CS2 conditions into Stage 8 planning waves. Approved by issue #1201 disposition record. |
-| CS2 Decision Record - Stage 8 | `modules/amc/07-implementation-plan/cs2-decision-record-stage-8.md` | 🟡 Prepared for PR Review | Records Stage 8 acceptance with conditions. Does not create Stage 9 work. |
+| CS2 Decision Record - Stage 8 | `modules/amc/07-implementation-plan/cs2-decision-record-stage-8.md` | ✅ Current Authority | Records Stage 8 acceptance with conditions. Does not create Stage 9 work. |
 
 ---
 
