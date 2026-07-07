@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-02  
-**Updated By**: foreman-v2-agent (wave: amc-cs2-disposition-stages-5-7 - issue #1197; PR #1198; CS2 decision record for Stages 5, 5a, 6, and 7 prepared. Stage 8 is eligible to be opened next as a separate governed wave, but this PR does not start Stage 8.)
+**Updated By**: foreman-v2-agent (wave: amc-stage8-implementation-plan-20260702 - issue #1199; PR #1200; Stage 8 implementation plan artifacts produced for CS2 review. Stages 9-12 remain blocked.)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT - CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 plus current ISMS/MMM functional-delivery retrofit lessons  
-> **Current Issue**: [app_management_centre#1197](https://github.com/APGI-cmy/app_management_centre/issues/1197)  
-> **Current PR**: [app_management_centre#1198](https://github.com/APGI-cmy/app_management_centre/pull/1198)  
+> **Current Issue**: [app_management_centre#1199](https://github.com/APGI-cmy/app_management_centre/issues/1199)  
+> **Current PR**: [app_management_centre#1200](https://github.com/APGI-cmy/app_management_centre/pull/1200)  
 > **Update Rule**: This document MUST be updated immediately after every AMC stage issue, wave completion, approval, or readiness/blocker change. Stale tracker text is a governance defect.
 
 ## Retrofit and Disposition Notes
@@ -19,7 +19,8 @@
 - PR #1190 merged Stage 5a deployment-execution retrofit reference inputs.
 - PR #1192 merged Stage 6 QA-to-Red retrofit reference inputs.
 - PR #1194 merged Stage 7 PBFAG retrofit artifacts and `cs2-disposition-pack-stages-5-5a-6-7.md`.
-- Issue #1197 / PR #1198 records the explicit CS2 decision approving Stages 5, 5a, 6, and 7 with conditions.
+- PR #1198 recorded explicit CS2 approval with conditions for Stages 5, 5a, 6, and 7.
+- Issue #1199 / PR #1200 opens Stage 8 implementation planning only.
 
 ---
 
@@ -35,32 +36,29 @@
 | 5a | Deployment Execution Strategy | ✅ CS2 APPROVED WITH CONDITIONS | Deployment validation, CI, preview, secret, migration, rollback, health/smoke, and dependency conditions remain binding inputs for Stage 8. |
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY rows remain binding inputs for Stage 8 and later QA-to-Green evidence. |
 | **7** | **PBFAG** | **✅ CS2 APPROVED WITH CONDITIONS** | PBFAG-FD, PBFAG-DEPLOY, PBFAG-QA, tracker/index, and Stage 8 block rows remain binding inputs for Stage 8. |
-| 8 | Implementation Plan | ⬜ Not Started — 🟡 ELIGIBLE NEXT | May be opened only by a separate Stage 8 issue/PR that imports the CS2 decision record and all conditions. |
-| 9 | Builder Checklist | ⬜ Not Started — 🔴 BLOCKED | Blocked until Stage 8 is authorized and complete. |
+| **8** | **Implementation Plan** | **🟡 IN PROGRESS — Produced for CS2 Review** | Issue #1199 / PR #1200 produces implementation-plan artifacts only. No builder checklist, IAA pre-brief, builder appointment, code, build evidence, or build work. |
+| 9 | Builder Checklist | ⬜ Not Started — 🔴 BLOCKED | Blocked until Stage 8 is CS2-accepted and Stage 9 is separately authorized. |
 | 10 | IAA Pre-Brief | ⬜ Not Started — 🔴 BLOCKED | Blocked until canonical sequence authorizes it. |
 | 11 | Builder Appointment | ⬜ Not Started — 🔴 BLOCKED | No builders appointed. |
-| 12 | Build | ⬜ Not Started — 🔴 BLOCKED | No implementation/build authorization. |
+| 12 | Build | ⬜ Not Started — 🔴 BLOCKED | No build authorization. |
 
 ---
 
-## CS2 Disposition Record
+## Stage 8 Artifacts
 
-**Status**: Prepared for PR review  
-**Location**: `modules/amc/06-pbfag/cs2-decision-record-stages-5-5a-6-7.md`
+**Status**: Produced for CS2 review  
+**Location**: `modules/amc/07-implementation-plan/`
 
-**Decision summary**:
-- Stage 5 Architecture: approved with conditions.
-- Stage 5a Deployment Execution Strategy: approved with conditions.
-- Stage 6 QA-to-Red: approved with conditions.
-- Stage 7 PBFAG: approved with conditions.
-
-**Boundary**: This tracker update does not start Stage 8, does not create implementation work, does not appoint builders, and does not authorize build.
+Artifacts:
+- `implementation-plan.md`
+- `wave-breakdown.md`
+- `condition-import-matrix.md`
 
 ---
 
-## Stage 8 Eligibility Conditions
+## Stage 8 Conditions Imported
 
-Any later Stage 8 issue and implementation plan must import:
+The Stage 8 package imports:
 
 1. `cs2-decision-record-stages-5-5a-6-7.md`.
 2. Stage 5 route/action/state/audit/degraded-mode map.
@@ -71,10 +69,10 @@ Any later Stage 8 issue and implementation plan must import:
 7. Placeholder/stub rejection rule.
 8. Production approval gates and secret separation.
 9. Supabase migration command freeze.
-10. Rollback evidence planning.
-11. Runtime health/smoke validation.
-12. External dependency readiness and visible degraded-mode behavior.
-13. Complete implementation evidence package.
+10. Rollback planning.
+11. Runtime health and smoke validation.
+12. Dependency readiness and visible degraded-mode behavior.
+13. Complete delivery evidence package.
 
 ---
 
@@ -89,19 +87,17 @@ Any later Stage 8 issue and implementation plan must import:
 
 ## Next Action
 
-1. Review and merge the CS2 disposition record PR for issue #1197.
-2. After merge, Stage 8 may be opened as a separate governed Stage 8 implementation-planning wave.
-3. Do not create builder checklist, IAA pre-brief, builder appointment, or build work from this PR.
+1. Review Stage 8 PR for issue #1199.
+2. Do not open Stage 9 until Stage 8 is CS2-accepted.
+3. Do not create IAA pre-brief, builder appointment, or build work from this PR.
 
 ---
 
 ## References
 
 - [PRE_BUILD_STAGE_MODEL_CANON.md](../../governance/canon/PRE_BUILD_STAGE_MODEL_CANON.md)
-- [cs2-disposition-pack-stages-5-5a-6-7.md](./06-pbfag/cs2-disposition-pack-stages-5-5a-6-7.md)
 - [cs2-decision-record-stages-5-5a-6-7.md](./06-pbfag/cs2-decision-record-stages-5-5a-6-7.md)
-- [functional-delivery-architecture-map.md](./04-architecture/functional-delivery-architecture-map.md)
-- [deployment-execution-validation-matrix.md](./05a-deployment-execution-strategy/deployment-execution-validation-matrix.md)
-- [functional-delivery-red-test-expansion-matrix.md](./05-qa-to-red/functional-delivery-red-test-expansion-matrix.md)
-- [pbfag-retrofit-evidence-matrix.md](./06-pbfag/pbfag-retrofit-evidence-matrix.md)
+- [condition-import-matrix.md](./07-implementation-plan/condition-import-matrix.md)
+- [implementation-plan.md](./07-implementation-plan/implementation-plan.md)
+- [wave-breakdown.md](./07-implementation-plan/wave-breakdown.md)
 - [AMC_PRE_BUILD_ARTIFACT_INDEX.md](./AMC_PRE_BUILD_ARTIFACT_INDEX.md)

@@ -1,17 +1,51 @@
-# Wave Breakdown — Stage 8
+# Wave Breakdown - Stage 8
 
-**Stage**: 8 — Implementation Plan  
+**Stage**: 8 - Implementation Plan  
 **Module**: App Management Centre (AMC)  
-**Status**: ⬜ Not Started
+**Version**: 1.0  
+**Status**: Produced for CS2 review  
+**Issue**: app_management_centre#1199  
+**Wave**: amc-stage8-implementation-plan-20260702
 
 ---
 
-## Purpose
+## 1. Purpose
 
-This document breaks down the AMC build into waves, specifying scope, builder assignments, and sequencing for each wave.
+This file breaks the AMC delivery plan into governed planning waves.
+
+It is not a builder checklist and does not appoint delivery agents.
 
 ---
 
-## Status
+## 2. Wave Summary
 
-Placeholder. Not started.
+| Wave | Name | Summary | Required evidence later |
+|---|---|---|---|
+| W1 | Foundation | Repo, runtime, env, CI, preview, secret boundaries | Env contract, CI proof, preview isolation proof |
+| W2 | Security and Audit Baseline | Auth, tenancy, authority middleware, audit baseline | Authority proof, RLS/tenant proof, audit proof |
+| W3 | Core Surfaces | Material AMC routes and visible actions | Route/action/state/audit/degraded-mode proof |
+| W4 | Alerts E2E | First E2E `/alerts` acknowledgement path | UI/API/authority/state/audit/realtime/visible result proof |
+| W5 | Executive Workflow | ARC, approvals, interventions, workflow surfaces | ARC model proof, workflow state proof, audit proof |
+| W6 | External Integrations | AIMC, AIMCC, KUC, knowledge, Foreman, specialists, push | Service-token proof, dependency readiness, degraded-mode proof |
+| W7 | Deployment Execution | Migration, release gates, rollback, health/smoke | Migration command proof, rollback proof, smoke proof |
+| W8 | QA Evidence | Red-to-green consolidation and evidence package | QA-FD, QA-DEPLOY, PBFAG proof set |
+
+---
+
+## 3. Wave Ordering
+
+W1 and W2 must complete before material user-action work.
+
+W3 establishes the surface map. W4 proves the first full E2E path. W5 and W6 expand the operating surface and integrations. W7 validates deployment controls. W8 consolidates QA evidence.
+
+---
+
+## 4. Stage 9 Inputs
+
+If CS2 later opens Stage 9, the builder checklist must preserve this wave order and must not weaken the required evidence in this file.
+
+---
+
+## 5. Boundary
+
+This wave breakdown does not start build work.
