@@ -47,7 +47,7 @@
 
 ## Stage 8 Disposition Record
 
-**Status**: Prepared for PR review  
+**Status**: Approved with conditions - disposition PR prepared for review and merge  
 **Location**: `modules/amc/07-implementation-plan/cs2-decision-record-stage-8.md`
 
 **Decision summary**:
