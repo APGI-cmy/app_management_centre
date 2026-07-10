@@ -1,7 +1,7 @@
 # AMC Wave Record Current — Stage 9 Builder Checklist
 
 Issue: #1203
-PR: Pending PR creation
+PR: #1204
 Wave: amc-stage9-builder-checklist-20260710
 Branch: `foreman/amc-stage9-builder-checklist`
 Status: STAGE_9_ARTIFACTS_PRODUCED_FOR_CS2_REVIEW
@@ -53,7 +53,7 @@ This wave does not:
 ## 6. Current Gate Posture
 
 - Stage 8: Approved with conditions; disposition merged in PR #1202.
-- Stage 9: Produced for CS2 review; candidate execution not started.
+- Stage 9: Produced for CS2 review in PR #1204; candidate execution not started.
 - Stage 10: Blocked.
 - Stage 11: Blocked.
 - Stage 12: Blocked.
