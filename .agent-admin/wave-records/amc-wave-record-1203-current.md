@@ -5,7 +5,9 @@ PR: #1204
 Wave: amc-stage9-builder-checklist-20260710
 Branch: `foreman/amc-stage9-builder-checklist`
 Status: STAGE_9_ARTIFACTS_PRODUCED_FOR_CS2_REVIEW
-Verdict: NOT A FINAL ASSURANCE OR BUILD-READINESS VERDICT
+Verdict: PASS
+Reviewed SHA: 1bd0846a4ea2304f6e787c7351b4a943c405406d
+PHASE_B_BLOCKING_TOKEN: IAA-session-1204-20260712-PASS
 
 ## 1. Purpose
 
@@ -15,11 +17,14 @@ This wave translates the approved Stage 8 W1–W8 implementation plan into audit
 
 ## 2. Declared Scope
 
+- `.admin/pr.json`
 - `modules/amc/08-builder-checklist/builder-checklist.md`
 - `modules/amc/08-builder-checklist/builder-readiness-attestations.md`
 - `modules/amc/BUILD_PROGRESS_TRACKER.md`
 - `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
 - `.agent-admin/wave-records/amc-wave-record-1203-current.md`
+- `.agent-admin/prehandover/ecap-reconciliation-1204.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-1204-20260712.md`
 
 ## 3. Authority Inputs
 
@@ -36,8 +41,10 @@ This wave translates the approved Stage 8 W1–W8 implementation plan into audit
 1. AMC-specific universal candidate readiness checks are defined.
 2. W1–W8 wave-specific readiness, RED-test, evidence, dependency, stop-condition, and exit gates are defined.
 3. A controlled candidate and Foreman attestation record is defined.
-4. Tracker and artifact index record Stage 9 as produced for CS2 review.
-5. Stages 10–12 remain blocked.
+4. Mandatory governance reading and full deployment workflow paths are explicit.
+5. Tracker and artifact index record Stage 9 as produced for CS2 review.
+6. PR-specific ECAP and final IAA evidence is recorded.
+7. Stages 10–12 remain blocked.
 
 ## 5. Explicit Non-Scope
 
@@ -58,4 +65,19 @@ This wave does not:
 - Stage 11: Blocked.
 - Stage 12: Blocked.
 
-This record is a governance wave record for Stage 9 artifact production. It is not an IAA pre-brief carrier and contains no assurance token.
+## 7. Final Assurance
+
+PR: #1204
+governing_issue: #1203
+Verdict: PASS
+Reviewed SHA: 1bd0846a4ea2304f6e787c7351b4a943c405406d
+PHASE_B_BLOCKING_TOKEN: IAA-session-1204-20260712-PASS
+Adoption Phase: PHASE_B_BLOCKING
+
+delta_assurance_verdict: PASS
+delta_classification: token-recording-only
+base_head: 1bd0846a4ea2304f6e787c7351b4a943c405406d
+final_head: 1bd0846a4ea2304f6e787c7351b4a943c405406d
+final_token_binding: IAA-session-1204-20260712-PASS
+
+The PASS verdict applies only to the Stage 9 governance/documentation artifact scope. It is not CS2 Stage 9 approval, a builder-candidate PASS, Stage 10 authorisation, builder appointment, or build authorisation.
