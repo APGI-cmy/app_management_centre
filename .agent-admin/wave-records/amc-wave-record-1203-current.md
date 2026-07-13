@@ -6,8 +6,8 @@ Wave: amc-stage9-builder-checklist-20260710
 Branch: `foreman/amc-stage9-builder-checklist`
 Status: STAGE_9_ARTIFACTS_PRODUCED_FOR_CS2_REVIEW
 Verdict: PASS
-Reviewed SHA: 1bd0846a4ea2304f6e787c7351b4a943c405406d
-PHASE_B_BLOCKING_TOKEN: IAA-session-1204-20260712-PASS
+Reviewed SHA: 4f2eae4974cd3bd8dfeee254ffc1826bf58b6a0f
+PHASE_B_BLOCKING_TOKEN: IAA-session-1204-20260713-PASS
 
 ## 1. Purpose
 
@@ -24,7 +24,7 @@ This wave translates the approved Stage 8 W1–W8 implementation plan into audit
 - `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
 - `.agent-admin/wave-records/amc-wave-record-1203-current.md`
 - `.agent-admin/prehandover/ecap-reconciliation-1204.md`
-- `.agent-workspace/independent-assurance-agent/memory/session-1204-20260712.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-1204-20260713.md`
 
 ## 3. Authority Inputs
 
@@ -39,14 +39,22 @@ This wave translates the approved Stage 8 W1–W8 implementation plan into audit
 ## 4. Produced Result
 
 1. AMC-specific universal candidate readiness checks are defined.
-2. W1–W8 wave-specific readiness, RED-test, evidence, dependency, stop-condition, and exit gates are defined.
-3. A controlled candidate and Foreman attestation record is defined.
-4. Mandatory governance reading and full deployment workflow paths are explicit.
-5. Tracker and artifact index record Stage 9 as produced for CS2 review.
-6. PR-specific ECAP and final IAA evidence is recorded.
-7. Stages 10–12 remain blocked.
+2. Every W1–W8 wave now has an explicit seven-part readiness contract covering scope, authority inputs, RED obligations, dependencies/prerequisites, required evidence, stop conditions, and objective exit criteria.
+3. Every W1–W8 wave includes detailed checks confirming its exit criteria are understood and objectively verifiable.
+4. Fully functional delivery protection covers end-to-end action wiring, authority, state, audit, visible result, recovery, degraded mode, real evidence, and shortcut rejection.
+5. A controlled candidate and Foreman attestation record is defined.
+6. Mandatory governance reading and full deployment workflow paths are explicit.
+7. Tracker and artifact index record Stage 9 as produced for CS2 review.
+8. PR-specific ECAP and refreshed final IAA evidence is recorded.
+9. Stages 10–12 remain blocked.
 
-## 5. Explicit Non-Scope
+## 5. Proxy-Review Remediation
+
+The proxy review identified that the earlier condensed W1–W8 sections did not consistently expose all required Stage 9 contract dimensions.
+
+Checklist v1.2 resolves that gap by making all seven dimensions separately visible and auditable for each wave. A wave assignment is now explicitly blocked unless those dimensions are accepted and traceable.
+
+## 6. Explicit Non-Scope
 
 This wave does not:
 
@@ -57,7 +65,7 @@ This wave does not:
 - certify build readiness, handover readiness, or merge readiness;
 - start Stage 12.
 
-## 6. Current Gate Posture
+## 7. Current Gate Posture
 
 - Stage 8: Approved with conditions; disposition merged in PR #1202.
 - Stage 9: Produced for CS2 review in PR #1204; candidate execution not started.
@@ -65,19 +73,19 @@ This wave does not:
 - Stage 11: Blocked.
 - Stage 12: Blocked.
 
-## 7. Final Assurance
+## 8. Final Assurance
 
 PR: #1204
 governing_issue: #1203
 Verdict: PASS
-Reviewed SHA: 1bd0846a4ea2304f6e787c7351b4a943c405406d
-PHASE_B_BLOCKING_TOKEN: IAA-session-1204-20260712-PASS
+Reviewed SHA: 4f2eae4974cd3bd8dfeee254ffc1826bf58b6a0f
+PHASE_B_BLOCKING_TOKEN: IAA-session-1204-20260713-PASS
 Adoption Phase: PHASE_B_BLOCKING
 
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
-base_head: 1bd0846a4ea2304f6e787c7351b4a943c405406d
-final_head: 1bd0846a4ea2304f6e787c7351b4a943c405406d
-final_token_binding: IAA-session-1204-20260712-PASS
+base_head: 4f2eae4974cd3bd8dfeee254ffc1826bf58b6a0f
+final_head: 4f2eae4974cd3bd8dfeee254ffc1826bf58b6a0f
+final_token_binding: IAA-session-1204-20260713-PASS
 
-The PASS verdict applies only to the Stage 9 governance/documentation artifact scope. It is not CS2 Stage 9 approval, a builder-candidate PASS, Stage 10 authorisation, builder appointment, or build authorisation.
+The PASS verdict applies only to the corrected Stage 9 governance/documentation artifact scope. It confirms the proxy-review gap is resolved and fully functional delivery principles are protected in the readiness contract. It is not CS2 Stage 9 approval, a builder-candidate PASS, Stage 10 authorisation, builder appointment, or build authorisation.
