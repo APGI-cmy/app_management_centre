@@ -2,8 +2,8 @@
   "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1172",
-  "scope_summary": "Layer-down POLC execution model canon (v1.0.0) and update AMC Simple PR Admin Model to v1.2.0 per upstream governance commit 77a8297b. Adds execution_model enforcement (Check 13), schema fields, validator, tests, and GOVERNANCE_ALIGNMENT_INVENTORY updates.",
-  "created_by": "governance-liaison-amc-agent",
-  "created_at": "2026-05-12T08:36:45Z"
+  "governing_issue": "#1203",
+  "scope_summary": "Produce AMC Stage 9 Builder Checklist and readiness-attestation artifacts, align the tracker and artifact index, and record the governed Stage 9 wave for PR #1204. Checklist-only: no Stage 10 pre-brief, builder appointment, delegation, implementation, build evidence, or build.",
+  "created_by": "foreman-v2-agent",
+  "created_at": "2026-07-10T15:25:43Z"
 }
