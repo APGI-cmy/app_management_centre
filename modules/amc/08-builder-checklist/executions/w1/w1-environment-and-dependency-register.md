@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Issue | #1205 |
-| PR | Pending PR creation |
+| PR | #1206 |
 | Candidate | `integration-builder` |
 | Wave | W1 — Runtime Foundation and Environment Setup |
 | Overall Status | 🔴 BLOCKED — access and ownership evidence incomplete |
