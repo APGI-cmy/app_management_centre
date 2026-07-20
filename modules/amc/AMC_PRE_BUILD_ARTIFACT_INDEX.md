@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-10 (Stage 8 disposition merged in PR #1202. Stage 9 Builder Checklist artifacts produced for CS2 review under issue #1203. Stages 10–12 remain blocked.)  
+**Last Updated**: 2026-07-15 (PR #1204 merged the Stage 9 checklist structure. Issue #1205 / PR #1206 records W1 candidate readiness as BLOCKED. Stages 10–12 remain blocked.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -135,10 +135,14 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | 🟡 Produced for CS2 Review | Issue #1203. AMC-specific universal and W1–W8 readiness gates produced. Not executed against a candidate. |
-| Builder Readiness Attestations | `modules/amc/08-builder-checklist/builder-readiness-attestations.md` | 🟡 Produced for CS2 Review | Controlled candidate/Foreman attestation record produced. No attestation executed. |
+| Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | ✅ Produced / Merged | PR #1204 merged the AMC-specific universal and W1–W8 readiness gates. |
+| Builder Readiness Attestations | `modules/amc/08-builder-checklist/builder-readiness-attestations.md` | ✅ Produced / Merged | PR #1204 merged the controlled candidate/Foreman attestation template. |
+| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | 🔴 BLOCKED | Issue #1205 / PR #1206. Contract fit is preliminary; candidate and access evidence outstanding. |
+| W1 Candidate Readiness Attestation — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md` | 🔴 NOT EXECUTED / BLOCKED | Candidate self-attestation has not been executed. |
+| W1 Environment and Dependency Register | `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md` | 🔴 BLOCKED | GitHub, Vercel, Supabase, secret, ownership and gate evidence outstanding. |
+| W1 RED-Test and Evidence Map | `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md` | 🟡 Defined / BLOCKED | W1 obligations mapped; candidate comprehension and operational evidence outstanding. |
 
-Stage 9 production does not approve a candidate, create Stage 10, appoint a builder, authorize implementation, or certify build readiness.
+Stage 9 candidate execution remains BLOCKED. Passing PR ceremony gates does not approve the candidate, create Stage 10, appoint a builder, authorize implementation, or certify build readiness.
 
 ---
 
@@ -146,7 +150,7 @@ Stage 9 production does not approve a candidate, create Stage 10, appoint a buil
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| IAA Pre-Brief | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ⬜ Placeholder — 🔴 Blocked | Not started. Blocked pending Stage 9 CS2 disposition and governed candidate readiness. |
+| IAA Pre-Brief | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ⬜ Placeholder — 🔴 Blocked | Not started. Blocked pending a governed W1 candidate-readiness PASS and CS2 disposition. |
 | IAA Pre-Brief Response | `modules/amc/09-iaa-pre-brief/iaa-pre-brief-response.md` | ⬜ Placeholder — 🔴 Blocked | Not started. |
 
 ---
