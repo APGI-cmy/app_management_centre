@@ -51,6 +51,7 @@ Adoption Phase: PHASE_B_BLOCKING
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
 base_head: 57aca9706a9c3523577cb3a53b9ff7e5e52432d8
+final_head: 57aca9706a9c3523577cb3a53b9ff7e5e52432d8
 final_token_binding: IAA-session-1206-20260715-PASS
 
 The assurance PASS certifies the integrity and consistency of this governance record. It does not convert the candidate's BLOCKED result to PASS and does not authorize Stage 10, appointment, delegation or implementation.
