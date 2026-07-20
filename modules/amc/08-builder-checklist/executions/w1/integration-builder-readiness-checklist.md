@@ -8,7 +8,7 @@
 | Stage | 9 — Builder Checklist Execution |
 | Wave | W1 — Runtime Foundation and Environment Setup |
 | Governing Issue | `app_management_centre#1205` |
-| Governing PR | Pending PR creation |
+| Governing PR | `app_management_centre#1206` |
 | Candidate | `integration-builder` |
 | Candidate Contract | `.github/agents/integration-builder.md` |
 | Foreman | `foreman-v2-agent` |
@@ -110,7 +110,7 @@ The candidate contract describes integration and external-connection implementat
 
 | ID | Check | Result | Evidence / Notes |
 |---|---|---|---|
-| G-01 | Required current PR gates exist for this governance wave | TO BE VERIFIED BY PR CI | Pending PR creation and workflow completion |
+| G-01 | Required current PR gates exist for this governance wave | PASS | PR #1206 workflow family exists; final completion is rechecked after remediation |
 | G-02 | Build-to-Green is confirmed active and blocking for later implementation PRs | BLOCKED | Must be demonstrated before Stage 10/11; a green documentation check alone is insufficient |
 | G-03 | Canonical Stage 10 IAA Pre-Brief remains absent | PASS | Correct for Stage 9 execution; Stage 10 remains blocked |
 | G-04 | No builder delegation or appointment exists | PASS | This execution is nomination/evaluation only |
