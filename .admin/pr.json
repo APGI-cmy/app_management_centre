@@ -5,5 +5,8 @@
   "governing_issue": "#1205",
   "scope_summary": "Execute the AMC Stage 9 W1 builder-candidate readiness checklist for nominated integration-builder, record honest PASS/FAIL/BLOCKED evidence, and keep Stages 10-12 blocked. No appointment, delegation, implementation, deployment, migration, QA-to-Green evidence, or build work.",
   "created_by": "foreman-v2-agent",
-  "created_at": "2026-07-15T10:42:31Z"
+  "created_at": "2026-07-15T10:42:31Z",
+  "execution_model": "foreman-orchestrated",
+  "orchestrating_agent": "foreman-v2-agent",
+  "implementing_agent": "integration-builder"
 }
