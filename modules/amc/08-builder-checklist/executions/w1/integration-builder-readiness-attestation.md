@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Issue | #1205 |
-| PR | Pending PR creation |
+| PR | #1206 |
 | Candidate | `integration-builder` |
 | Contract | `.github/agents/integration-builder.md` |
 | Wave | W1 — Runtime Foundation and Environment Setup |
