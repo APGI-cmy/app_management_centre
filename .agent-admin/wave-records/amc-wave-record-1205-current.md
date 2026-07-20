@@ -1,7 +1,7 @@
 # AMC Wave Record Current — Stage 9 W1 Builder Candidate Readiness
 
 Issue: #1205
-PR: Pending PR creation
+PR: #1206
 Wave: amc-stage9-w1-builder-readiness-20260715
 Branch: `foreman/amc-stage9-w1-builder-readiness`
 Candidate: `integration-builder`
@@ -18,6 +18,8 @@ Execute the approved Stage 9 checklist against the nominated W1 candidate withou
 - `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md`
 - `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md`
 - `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md`
+- `modules/amc/BUILD_PROGRESS_TRACKER.md`
+- `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
 
 ## Current Finding
 
