@@ -7,8 +7,8 @@ Branch: `foreman/amc-stage9-w1-builder-readiness`
 Candidate: `integration-builder`
 Status: W1_CANDIDATE_READINESS_EXECUTION_OPEN
 Verdict: BLOCKED
-Reviewed SHA: 57aca9706a9c3523577cb3a53b9ff7e5e52432d8
-PHASE_B_BLOCKING_TOKEN: IAA-session-1206-20260715-PASS
+Reviewed SHA: 744392d14c0052614a71c132a73a9a5b9b560eda
+PHASE_B_BLOCKING_TOKEN: IAA-session-1206-20260721-PASS
 
 ## Purpose
 
@@ -20,14 +20,16 @@ Execute the approved Stage 9 checklist against the nominated W1 candidate withou
 - `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md`
 - `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md`
 - `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md`
+- `modules/amc/08-builder-checklist/executions/w1/w1-environment-evidence-update-20260721.md`
 - `modules/amc/BUILD_PROGRESS_TRACKER.md`
 - `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
 - `.agent-admin/prehandover/ecap-reconciliation-1206.md`
 - `.agent-workspace/independent-assurance-agent/memory/session-1206-20260715.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-1206-20260721.md`
 
 ## Current Finding
 
-Contract-level review identifies `integration-builder` as a plausible W1 candidate. A PASS is prohibited because candidate attestation, scope/RED-test demonstration, environment access, dependency ownership, secret-boundary evidence and Build-to-Green blocking evidence remain outstanding.
+Contract-level review identifies `integration-builder` as a plausible W1 candidate. CS2 has now provisioned the AMC Supabase production resource and Vercel project and corrected the false Vite preset. This materially advances environment readiness but does not complete candidate attestation, candidate-specific GitHub/Vercel/Supabase access, separate preview/staging isolation, secret-boundary proof, Build-to-Green protection or final Foreman role fit.
 
 ## Blocking Posture
 
@@ -44,14 +46,14 @@ PR: #1206
 governing_issue: #1205
 Administrative Verdict: PASS
 Candidate Readiness Verdict: BLOCKED
-Reviewed SHA: 57aca9706a9c3523577cb3a53b9ff7e5e52432d8
-PHASE_B_BLOCKING_TOKEN: IAA-session-1206-20260715-PASS
+Reviewed SHA: 744392d14c0052614a71c132a73a9a5b9b560eda
+PHASE_B_BLOCKING_TOKEN: IAA-session-1206-20260721-PASS
 Adoption Phase: PHASE_B_BLOCKING
 
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
-base_head: 57aca9706a9c3523577cb3a53b9ff7e5e52432d8
-final_head: 57aca9706a9c3523577cb3a53b9ff7e5e52432d8
-final_token_binding: IAA-session-1206-20260715-PASS
+base_head: 744392d14c0052614a71c132a73a9a5b9b560eda
+final_head: 744392d14c0052614a71c132a73a9a5b9b560eda
+final_token_binding: IAA-session-1206-20260721-PASS
 
 The assurance PASS certifies the integrity and consistency of this governance record. It does not convert the candidate's BLOCKED result to PASS and does not authorize Stage 10, appointment, delegation or implementation.
