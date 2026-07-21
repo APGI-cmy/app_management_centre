@@ -13,7 +13,8 @@
 | Candidate Contract | `.github/agents/integration-builder.md` |
 | Foreman | `foreman-v2-agent` |
 | Execution Date | 2026-07-15 |
-| Overall Status | 🔴 BLOCKED — candidate attestation and operational access evidence outstanding |
+| Evidence Updated | 2026-07-21 |
+| Overall Status | 🔴 BLOCKED — core Vercel/Supabase resources exist; candidate attestation, governed access, non-production isolation and final role-fit evidence remain outstanding |
 
 ---
 
@@ -92,10 +93,10 @@ The candidate contract describes integration and external-connection implementat
 |---|---|---|---|
 | E-01 | Repository/branch access verified for candidate | BLOCKED | Candidate-specific access evidence absent |
 | E-02 | GitHub Actions/workflow access verified | BLOCKED | Candidate-specific access evidence absent |
-| E-03 | Vercel preview/staging access verified | BLOCKED | No candidate-specific access proof |
-| E-04 | Supabase non-production access verified | BLOCKED | No candidate-specific access proof |
-| E-05 | Secret access and separation verified | BLOCKED | No candidate-specific secret/environment evidence |
-| E-06 | External dependency ownership is explicit | BLOCKED | Environment register requires owner confirmations |
+| E-03 | Vercel project and preview/staging access verified | PARTIAL | CS2 created `app-management-centre` and corrected Framework Preset to `Other`; candidate access and preview isolation remain unproven |
+| E-04 | Supabase environment access verified | PARTIAL | AMC project `icawesooswoqzepcdevg` exists and is ACTIVE_HEALTHY; candidate access and separate non-production boundary remain unproven |
+| E-05 | Secret access and separation verified | PARTIAL | Production-scoped variable names were populated by the Vercel/Supabase integration without exposing values; preview/staging separation and candidate method remain unproven |
+| E-06 | External dependency ownership is explicit | PARTIAL | CS2 is confirmed environment owner for initial provisioning; workflow/deployment ownership and candidate boundary remain outstanding |
 
 ### F. Evidence and Protocol Commitments
 
@@ -122,7 +123,7 @@ The candidate contract describes integration and external-connection implementat
 | H-01 | Contract capabilities plausibly match W1 | CONDITIONAL | Integration/runtime scope is relevant; exact workflow/deployment competency requires candidate evidence |
 | H-02 | Contract authority does not overreach | PASS | Builder-only authority; no governance or merge release authority |
 | H-03 | Candidate demonstrates W1 and RED-test comprehension | BLOCKED | Not yet executed |
-| H-04 | Candidate operational readiness and access are verified | BLOCKED | Not yet evidenced |
+| H-04 | Candidate operational readiness and access are verified | BLOCKED | Core resources exist, but candidate-specific access and non-production isolation are not evidenced |
 | H-05 | Foreman confirms final W1 role fit | BLOCKED | Cannot sign off before candidate and access evidence |
 
 ---
@@ -134,10 +135,10 @@ The candidate contract describes integration and external-connection implementat
 | Scope | Repository/runtime foundation, CI, preview posture, environment contract, secret separation, and initial deployment plumbing | PASS — explicitly defined |
 | Authority inputs | Stage 5a, TR-1910, Stage 6 W1 RED tests, Stage 8 plan/conditions, Stage 9 checklist | PASS — identified |
 | RED obligations | QA-DEPLOY-001/002/003/004/006/007/010 plus applicable QA-CONFIG/QA-DES controls | PASS — mapped, candidate comprehension pending |
-| Dependencies / prerequisites | Workflow ownership; GitHub/Vercel/Supabase access; `.env.example`; preview/staging ownership; active blocking gates | BLOCKED — access/owner proof outstanding |
+| Dependencies / prerequisites | Workflow ownership; GitHub/Vercel/Supabase access; `.env.example`; preview/staging ownership; active blocking gates | PARTIAL — Vercel and Supabase production resources exist; candidate access, non-production isolation, workflow ownership and runtime contract remain blocked |
 | Required evidence | Workflow definitions; CI/type/lint/test/schema logs; preview isolation; no-production-side-effect; secret-boundary proof | PASS as definition; execution commitment pending |
 | Stop conditions | Missing owner/access; production credential/data leakage; inactive gate; undocumented deviation; committed secret | PASS — explicit and binding |
-| Exit criteria | Candidate identifies all workflows, owners, tests, dependencies and evidence; governed access exists; PR CI cannot mutate production | BLOCKED — candidate/access proof outstanding |
+| Exit criteria | Candidate identifies all workflows, owners, tests, dependencies and evidence; governed access exists; PR CI cannot mutate production | BLOCKED — candidate/access and preview/staging proof outstanding |
 
 ---
 
@@ -147,18 +148,29 @@ The candidate contract describes integration and external-connection implementat
 |---|---|---|---|---|
 | W1-BLK-001 | Candidate has not executed the readiness attestation | Candidate completes all applicable attestation statements with evidence | `integration-builder` / Foreman | OPEN |
 | W1-BLK-002 | Candidate-specific GitHub repository and workflow access not proven | Record governed access proof | Foreman / repository owner | OPEN |
-| W1-BLK-003 | Vercel preview/staging project access and ownership not proven | Record project, environment, owner and candidate access | Foreman / environment owner | OPEN |
-| W1-BLK-004 | Supabase non-production project access and ownership not proven | Record project, environment, owner and candidate access | Foreman / environment owner | OPEN |
-| W1-BLK-005 | Secret separation and candidate access method not proven | Record approved secret-handling path without exposing values | Foreman / environment owner | OPEN |
+| W1-BLK-003 | Vercel resource now exists, but candidate access and preview/staging isolation are not proven | Record project identifier, environment scopes, protection, owner and candidate access | Foreman / environment owner | PARTIALLY RESOLVED |
+| W1-BLK-004 | Supabase production resource now exists, but no separate non-production resource and no candidate access proof exist | Record production classification/protection plus separate non-production project/branch and candidate access | Foreman / environment owner | PARTIALLY RESOLVED |
+| W1-BLK-005 | Production variable names are provisioned, but preview/staging separation and candidate secret-access method are not proven | Record approved environment scoping and candidate method without exposing values | Foreman / environment owner | PARTIALLY RESOLVED |
 | W1-BLK-006 | Build-to-Green blocking posture for later implementation is not yet evidenced | Provide workflow/branch-protection evidence that implementation PRs are blocked on it | Foreman / governance owner | OPEN |
 | W1-BLK-007 | Final Foreman role-fit assessment cannot be completed | Resolve W1-BLK-001 through W1-BLK-006 and re-evaluate | Foreman | OPEN |
 
 ---
 
-## 6. Current Verdict
+## 6. Evidence Reference
+
+- `w1-environment-evidence-update-20260721.md`
+- `w1-environment-and-dependency-register.md`
+- CS2-provided Vercel and GitHub-secret screenshots
+- Connector-verified Supabase project metadata for `icawesooswoqzepcdevg`
+
+No secret values are stored in this PR.
+
+---
+
+## 7. Current Verdict
 
 **VERDICT: BLOCKED**
 
-`integration-builder` is a plausible W1 candidate at contract level, but no readiness PASS may be issued until the candidate attests, demonstrates scope/RED-test comprehension, and the required access, dependency, secret-boundary and blocking-gate evidence is present.
+`integration-builder` is a plausible W1 candidate at contract level. Environment provisioning has materially advanced, but no readiness PASS may be issued until the candidate attests, demonstrates scope/RED-test comprehension, and candidate-specific access, non-production isolation, secret-boundary and blocking-gate evidence are complete.
 
 Stage 10, Stage 11 and Stage 12 remain blocked.
