@@ -2,14 +2,14 @@
 
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
-**Last Updated**: 2026-07-10  
-**Updated By**: foreman-v2-agent (wave: amc-stage9-builder-checklist — issue #1203; PR #1204; Stage 9 Builder Checklist artifacts produced for CS2 review. Stages 10–12 remain blocked.)
+**Last Updated**: 2026-07-21  
+**Updated By**: foreman-v2-agent (wave: amc-stage9-w1-candidate-readiness — issue #1205; PR #1207; W1 candidate execution recorded as BLOCKED. Stages 10–12 remain blocked.)
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 plus current ISMS/MMM functional-delivery retrofit lessons  
-> **Current Issue**: [app_management_centre#1203](https://github.com/APGI-cmy/app_management_centre/issues/1203)  
-> **Current PR**: [app_management_centre#1204](https://github.com/APGI-cmy/app_management_centre/pull/1204)  
+> **Current Issue**: [app_management_centre#1205](https://github.com/APGI-cmy/app_management_centre/issues/1205)  
+> **Current PR**: [app_management_centre#1207](https://github.com/APGI-cmy/app_management_centre/pull/1207)  
 > **Update Rule**: This document MUST be updated after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Retrofit and Disposition Notes
@@ -39,7 +39,7 @@
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY rows remain binding inputs for QA-to-Green evidence. |
 | **7** | **PBFAG** | **✅ CS2 APPROVED WITH CONDITIONS** | PBFAG retrofit rows remain binding inputs. |
 | **8** | **Implementation Plan** | **✅ CS2 APPROVED WITH CONDITIONS — DISPOSITION MERGED** | PR #1202 merged the Stage 8 decision record. |
-| **9** | **Builder Checklist** | **🟡 PRODUCED FOR CS2 REVIEW — NOT EXECUTED** | Issue #1203 / PR #1204. Checklist and readiness-attestation artifacts produced; no builder candidate evaluated or appointed. |
+| **9** | **Builder Checklist** | **🔴 W1 CANDIDATE EXECUTION BLOCKED** | Issue #1205 / PR #1207 executed W1 candidate-readiness for `integration-builder`; result BLOCKED. Stage 9 structure from issue #1203 / PR #1204 remains authoritative. |
 | 10 | IAA Pre-Brief | ⬜ Not Started — 🔴 BLOCKED | Blocked until Stage 9 is explicitly dispositioned and candidate readiness is governed. |
 | 11 | Builder Appointment | ⬜ Not Started — 🔴 BLOCKED | No builders appointed. |
 | 12 | Build | ⬜ Not Started — 🔴 BLOCKED | No build authorization. |
@@ -80,6 +80,27 @@
 
 ---
 
+## Stage 9 W1 Candidate Execution
+
+**Issue**: #1205  
+**PR**: #1207  
+**Candidate**: `integration-builder`  
+**Wave**: W1 — Runtime foundation and environment setup  
+**Result**: 🔴 BLOCKED
+
+**Execution artifacts**:
+- `modules/amc/08-builder-checklist/w1-integration-builder-checklist-execution.md`
+- `modules/amc/08-builder-checklist/w1-integration-builder-readiness-attestation.md`
+- `.agent-admin/wave-records/amc-wave-record-1205-current.md`
+
+**Blocking summary**:
+1. Candidate-attested mandatory governance reading and W1 scope/RED acknowledgement not evidenced.
+2. Candidate-specific environment/dependency access (GitHub protected environment, Vercel, Supabase, secrets) not verified.
+3. Stage 9 W1 references workflow surfaces (`ci.yml`, `deploy-frontend.yml`, `db-migrate.yml`) that are not present in the current repository tree.
+4. Stage 10, Stage 11, and Stage 12 remain blocked pending governed closure and CS2 disposition.
+
+---
+
 ## Stage 9 Carry-Forward Conditions
 
 Stage 9 preserves:
@@ -104,9 +125,9 @@ Stage 9 preserves:
 
 ## Next Action
 
-1. Review PR #1204 under issue #1203.
-2. Record explicit CS2 disposition of Stage 9 before opening Stage 10.
-3. Do not create the Stage 10 IAA Pre-Brief, builder appointment, delegation order, implementation code, build evidence, or build work from this Stage 9 artifact-production PR.
+1. Review PR #1207 under issue #1205 and disposition the W1 candidate BLOCKED findings.
+2. Resolve candidate attestation and W1 access/dependency blockers before any Stage 10 consideration.
+3. Keep Stage 10 IAA Pre-Brief, builder appointment, delegation order, implementation code, build evidence, and build work blocked until governed PASS and CS2 disposition are recorded.
 
 ---
 

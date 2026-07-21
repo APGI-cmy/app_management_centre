@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-10 (Stage 8 disposition merged in PR #1202. Stage 9 Builder Checklist artifacts produced for CS2 review under issue #1203. Stages 10–12 remain blocked.)  
+**Last Updated**: 2026-07-21 (Stage 9 W1 candidate-readiness execution for `integration-builder` recorded under issue #1205 / PR #1207 with BLOCKED result. Stages 10–12 remain blocked.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -137,8 +137,11 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 |---|---|---|---|
 | Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | 🟡 Produced for CS2 Review | Issue #1203. AMC-specific universal and W1–W8 readiness gates produced. Not executed against a candidate. |
 | Builder Readiness Attestations | `modules/amc/08-builder-checklist/builder-readiness-attestations.md` | 🟡 Produced for CS2 Review | Controlled candidate/Foreman attestation record produced. No attestation executed. |
+| W1 Candidate Checklist Execution (`integration-builder`) | `modules/amc/08-builder-checklist/w1-integration-builder-checklist-execution.md` | 🔴 Executed — BLOCKED | Issue #1205 / PR #1207. Candidate-specific Stage 9 W1 execution record with explicit blockers and evidence. |
+| W1 Candidate Readiness Attestation (`integration-builder`) | `modules/amc/08-builder-checklist/w1-integration-builder-readiness-attestation.md` | 🔴 Executed — BLOCKED | Issue #1205 / PR #1207. Candidate and Foreman attestation/verification outcomes kept distinct; final result FAIL/BLOCKED. |
+| Stage 9 W1 Current Wave Record | `.agent-admin/wave-records/amc-wave-record-1205-current.md` | 🔴 Current — BLOCKED | Consolidated Stage 9 W1 candidate-execution governance record. |
 
-Stage 9 production does not approve a candidate, create Stage 10, appoint a builder, authorize implementation, or certify build readiness.
+Stage 9 checklist production does not approve a candidate, create Stage 10, appoint a builder, authorize implementation, or certify build readiness. Candidate execution requires governed PASS evidence; issue #1205 result is BLOCKED.
 
 ---
 
