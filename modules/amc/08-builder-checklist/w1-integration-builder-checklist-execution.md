@@ -63,7 +63,7 @@ This execution does not appoint the candidate, does not start Stage 10, does not
 | Section | Result | Evidence / Notes |
 |---|---|---|
 | A. Contract and Identity | ⚠️ PARTIAL PASS | Contract bootstrap confirms builder-class and repository scope (`scope.repository: APGI-cmy/app_management_centre`). No supersession evidence found in-session. |
-| B. Mandatory Governance Reading | ❌ FAIL | No candidate-signed acknowledgement supplied for B-01 through B-10 in this wave. |
+| B. Mandatory Governance Reading | ❌ FAIL | No candidate-signed acknowledgement supplied for B-01 through B-10 (defined in `modules/amc/08-builder-checklist/builder-checklist.md` Section B) in this wave. |
 | C. AMC Scope/Boundary Comprehension | ❌ FAIL | No candidate-comprehension response/evidence supplied in this wave. |
 | D. QA-to-Red Comprehension | ⚠️ PARTIAL PASS | W1 RED obligations are mapped by Foreman; no candidate-provided comprehension proof supplied. |
 | E. Environment/Dependency Readiness | ❌ FAIL | External environment/secret access (GitHub protected env, Vercel, Supabase) not candidate-verified in this wave. |
@@ -102,6 +102,8 @@ Any FAIL in Sections B/C/E/F/H blocks progression per Stage 9 rules.
 | Secret separation (PR/preview/staging/production) | Strict separation, no prod secrets in PR/staging | Rules documented in Stage 5a artifacts; candidate acknowledgement not evidenced | ⚠️ BLOCKED |
 | Workflow surfaces | `ci.yml`, `deploy-frontend.yml`, `db-migrate.yml` understood and governable | Referenced by Stage 5a and Stage 9; files absent in current repository tree | ❌ FAIL |
 | Tooling (Node/npm or pnpm, Supabase CLI, Vercel CLI, runner constraints) | Required versions/pinning and hosted-runner model understood | Constraints documented; candidate-specific readiness not evidenced | ⚠️ BLOCKED |
+
+Status rule in this register: **FAIL** = objectively missing/contradicted artifact in the current repo; **BLOCKED** = required candidate-specific evidence/access not yet provided.
 
 ---
 
@@ -146,4 +148,3 @@ Any FAIL in Sections B/C/E/F/H blocks progression per Stage 9 rules.
 **FINAL RESULT**: **BLOCKED**
 
 Stage 10, Stage 11, and Stage 12 remain blocked. No builder appointment or implementation authorization may proceed from this execution.
-

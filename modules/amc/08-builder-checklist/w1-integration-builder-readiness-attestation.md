@@ -69,7 +69,7 @@ No candidate-authored attestation response artifact was supplied for this wave.
 
 | ID | Verification | Result | Evidence / Notes |
 |---|---|---|---|
-| FV-01 | Candidate contract is current and authorizes proposed class/scope | [x] PASS [ ] FAIL | Bootstrap scope points to `APGI-cmy/app_management_centre`; builder-class authority present. |
+| FV-01 | Candidate contract is current and authorizes proposed class/scope | [x] PASS [ ] FAIL | Bootstrap scope points to the target AMC repository; builder-class authority present. |
 | FV-02 | Candidate accurately demonstrated W1 scope/boundaries | [ ] PASS [x] FAIL | No candidate demonstration artifact supplied. |
 | FV-03 | Candidate accurately identified W1 RED/evidence obligations | [ ] PASS [x] FAIL | Mapping completed by Foreman; candidate evidence not supplied. |
 | FV-04 | Required tools/environments/dependencies are available or governed-access confirmed | [ ] PASS [x] FAIL | External platform access and ownership confirmation not evidenced by candidate. |
@@ -94,4 +94,3 @@ No candidate-authored attestation response artifact was supplied for this wave.
 **FINAL RESULT**: [ ] PASS [x] FAIL/BLOCKED
 
 Stage 10 consideration and any appointment/delegation remain prohibited until the failed and blocked checks are closed with governed evidence.
-
