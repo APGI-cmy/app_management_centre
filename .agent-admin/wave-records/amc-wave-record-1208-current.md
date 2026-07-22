@@ -7,8 +7,8 @@ Branch: `foreman/amc-stage9-w1-readiness-reconciliation`
 Candidate: `integration-builder`
 Status: STAGE_9_W1_RECONCILED_BLOCKED
 Verdict: BLOCKED
-Reviewed SHA: 448cdb9c37699a4fde0888bb4a4a3cc50d10cfb8
-PHASE_B_BLOCKING_TOKEN: IAA-session-1209-20260722-PASS
+Reviewed SHA: 78f569c17cc989ed769946b2509d1b906e74016e
+PHASE_B_BLOCKING_TOKEN: IAA-session-1209-20260722-R2-PASS
 
 ## Purpose
 
@@ -34,6 +34,7 @@ Reconcile the post-merge W1 candidate-readiness record, align all live controls,
 - Supabase production and `develop` resources exist and are healthy.
 - Vercel project and preview evidence exist.
 - Build-to-Green configuration is enabled.
+- Individual A–H and W1 readiness checks are preserved with check-level results and evidence.
 - Candidate permissions, environment isolation, protected-production and final role-fit remain incomplete.
 
 ## Blocking Posture
@@ -51,14 +52,14 @@ PR: #1209
 governing_issue: #1208
 Administrative Verdict: PASS
 Candidate Readiness Verdict: BLOCKED
-Reviewed SHA: 448cdb9c37699a4fde0888bb4a4a3cc50d10cfb8
-PHASE_B_BLOCKING_TOKEN: IAA-session-1209-20260722-PASS
+Reviewed SHA: 78f569c17cc989ed769946b2509d1b906e74016e
+PHASE_B_BLOCKING_TOKEN: IAA-session-1209-20260722-R2-PASS
 Adoption Phase: PHASE_B_BLOCKING
 
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
-base_head: 448cdb9c37699a4fde0888bb4a4a3cc50d10cfb8
-final_head: 448cdb9c37699a4fde0888bb4a4a3cc50d10cfb8
-final_token_binding: IAA-session-1209-20260722-PASS
+base_head: 78f569c17cc989ed769946b2509d1b906e74016e
+final_head: 78f569c17cc989ed769946b2509d1b906e74016e
+final_token_binding: IAA-session-1209-20260722-R2-PASS
 
 The assurance PASS certifies the integrity and consistency of this governance record. It does not convert the candidate's BLOCKED result to PASS and does not authorize Stage 10, appointment, delegation or implementation.
