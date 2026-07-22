@@ -8,12 +8,14 @@
 | Stage | 9 — Builder Checklist Execution |
 | Wave | W1 — Runtime Foundation and Environment Setup |
 | Historical issue / PR | #1205 / merged PR #1206 |
-| Reconciliation issue / PR | #1208 / #1209 |
+| Reconciliation issue / PR | #1208 / merged PR #1209 |
+| Closure issue / PR | #1213 / this PR |
 | Candidate | `integration-builder` |
 | Candidate Contract | `.github/agents/integration-builder.md` v3.4.0 |
 | Foreman | `foreman-v2-agent` |
 | Evidence reconciled | 2026-07-22 |
-| Overall Status | 🔴 BLOCKED — attestation executed; candidate governance acknowledgement, governed access, isolation and final role-fit remain incomplete |
+| Residual blockers closed | 2026-07-22 |
+| Overall Status | ✅ PASS — all residual blockers closed; candidate governance acknowledgement, governed access boundaries, environment isolation and final Foreman role-fit are now fully evidenced |
 
 ## 1. Evaluation Boundary
 
@@ -29,7 +31,7 @@ A PASS requires evidence for every applicable universal and W1-specific check. U
 | Contract path/version | `.github/agents/integration-builder.md` v3.4.0 | PASS |
 | Agent class/repository scope | Builder / `APGI-cmy/app_management_centre` | PASS |
 | Governance and merge overreach | Prohibited by contract | PASS |
-| Candidate self-attestation | Executed; `CA-02 = NO`, `CA-07 = NO` | BLOCKED |
+| Candidate self-attestation | v2 re-attestation completed; all CA items YES | ✅ PASS |
 
 ## 3. Universal Stage 9 Checks
 
@@ -47,16 +49,16 @@ A PASS requires evidence for every applicable universal and W1-specific check. U
 
 | ID | Check | Result | Evidence / Notes |
 |---|---|---|---|
-| B-01 | Candidate read `PRE_BUILD_STAGE_MODEL_CANON.md` | BLOCKED | Candidate CA-02 remained NO. Foreman later reviewed; candidate acknowledgement cannot be inferred. |
-| B-02 | Candidate read `BUILD_PHILOSOPHY.md` | BLOCKED | Candidate full mandatory-set acknowledgement incomplete. |
-| B-03 | Candidate read `STOP_AND_FIX_DOCTRINE.md` | BLOCKED | Candidate full mandatory-set acknowledgement incomplete. |
-| B-04 | Candidate read `MERGE_GATE_INTERFACE_STANDARD.md` | BLOCKED | Candidate full mandatory-set acknowledgement incomplete. |
-| B-05 | Candidate read `EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md` | BLOCKED | Candidate full mandatory-set acknowledgement incomplete. |
-| B-06 | Candidate accepts PREHANDOVER proof requirements | PASS | Candidate evidence and completion commitments recorded in CA-08/CA-09. |
-| B-07 | Candidate read all AMC authority inputs listed by Stage 9 | BLOCKED | Candidate CA-02 remained NO. |
-| B-08 | Candidate understands Foreman/ECAP/IAA separation | PASS | Candidate Stage 9 boundary and non-appointment acknowledgement recorded. |
-| B-09 | Candidate accepts implementation-only work is not handover | PASS | Candidate CA-08/CA-10. |
-| B-10 | Candidate rejects skipped/todo/stub/trivial/weakened proof | PASS | Candidate CA-05. |
+| B-01 | Candidate read `PRE_BUILD_STAGE_MODEL_CANON.md` | ✅ PASS | Candidate v2 attestation CA-02 = YES; full 30-item mandatory read-set enumerated in `integration-builder-readiness-attestation-v2-20260722.md`. |
+| B-02 | Candidate read `BUILD_PHILOSOPHY.md` | ✅ PASS | Included in v2 mandatory read-set. |
+| B-03 | Candidate read `STOP_AND_FIX_DOCTRINE.md` | ✅ PASS | Included in v2 mandatory read-set. |
+| B-04 | Candidate read `MERGE_GATE_INTERFACE_STANDARD.md` | ✅ PASS | Included in v2 mandatory read-set. |
+| B-05 | Candidate read `EVIDENCE_ARTIFACT_BUNDLE_STANDARD.md` | ✅ PASS | Included in v2 mandatory read-set. |
+| B-06 | Candidate accepts PREHANDOVER proof requirements | ✅ PASS | Candidate evidence and completion commitments in CA-08/CA-09 (v1 and v2). |
+| B-07 | Candidate read all AMC authority inputs listed by Stage 9 | ✅ PASS | v2 mandatory read-set includes all Stage 1–9 authority inputs (items 7–30). |
+| B-08 | Candidate understands Foreman/ECAP/IAA separation | ✅ PASS | Candidate Stage 9 boundary and non-appointment acknowledgement in CA-10 (v1 and v2). |
+| B-09 | Candidate accepts implementation-only work is not handover | ✅ PASS | CA-08/CA-10 (v1 and v2). |
+| B-10 | Candidate rejects skipped/todo/stub/trivial/weakened proof | ✅ PASS | CA-05 (v1 and v2). |
 
 ### C. AMC Scope and Boundary Comprehension
 
@@ -84,12 +86,12 @@ A PASS requires evidence for every applicable universal and W1-specific check. U
 
 | ID | Check | Result | Evidence / Notes |
 |---|---|---|---|
-| E-01 | Repository, branch and required tool access available | PARTIAL PASS | Candidate demonstrated repository/branch visibility; governed write boundary is not independently documented. |
-| E-02 | Vercel, Supabase, GitHub environment and secret access available or governed | BLOCKED | Candidate CA-07 remained NO; candidate-specific permissions are incomplete. |
-| E-03 | PR, preview, staging and production resources/secrets separated | BLOCKED | Resource names exist, but scoping and protection evidence is incomplete. |
-| E-04 | Production deploy and migration protected/manual where required | BLOCKED | Protected-production approval path is not fully evidenced. |
-| E-05 | External dependencies ready or visibly degraded | PARTIAL PASS | Vercel project plus Supabase production/develop resources exist; candidate access boundaries remain incomplete. |
-| E-06 | No unresolved environment/dependency blocker remains | BLOCKED | E-02 through E-04 remain unresolved. |
+| E-01 | Repository, branch and required tool access available | ✅ PASS | GitHub boundary defined in `w1-access-boundary-evidence-20260722.md`; `GITHUB_TOKEN` in Actions; no direct push to `main`/`develop`. |
+| E-02 | Vercel, Supabase, GitHub environment and secret access available or governed | ✅ PASS | Access boundaries documented in `w1-access-boundary-evidence-20260722.md`; all three surfaces governed via workflow secrets only. |
+| E-03 | PR, preview, staging and production resources/secrets separated | ✅ PASS | Vercel preview vs production variable scoping documented in `w1-environment-isolation-record-20260722.md`; Supabase `develop` isolated from production. |
+| E-04 | Production deploy and migration protected/manual where required | ✅ PASS | Branch protection on `main`, Vercel production-branch gate, Supabase credential boundary, and W7 deferral of `db-migrate.yml` documented in `w1-environment-isolation-record-20260722.md`. |
+| E-05 | External dependencies ready or visibly degraded | ✅ PASS | Vercel project `app-management-centre` exists; Supabase production `icawesooswoqzepcdevg` healthy; Supabase `develop` `kkksclwvbmyexpsdyejj` healthy; access boundaries now complete. |
+| E-06 | No unresolved environment/dependency blocker remains | ✅ PASS | W1-BLK-002, W1-BLK-003 and W1-BLK-004 closed by closure evidence artifacts. |
 
 ### F. Evidence and Protocol Commitments
 
@@ -119,8 +121,8 @@ A PASS requires evidence for every applicable universal and W1-specific check. U
 | H-01 | Candidate competencies match W1 | PASS — CLASS FIT | Integration/runtime foundation capability is relevant. |
 | H-02 | Candidate authority matches scope without overreach | PASS | Contract is builder-only and repository-scoped. |
 | H-03 | Candidate demonstrates AMC and RED-test comprehension | PASS | Scope and RED-test responses verified. |
-| H-04 | No unresolved integrity/performance concern affects assignment | BLOCKED | Candidate governance-reading and access evidence remain incomplete. |
-| H-05 | Foreman confirms final candidate role fit | BLOCKED | Cannot approve while B and E blockers remain. |
+| H-04 | No unresolved integrity/performance concern affects assignment | ✅ PASS | Candidate governance-reading and access evidence complete; all five blockers closed. |
+| H-05 | Foreman confirms final candidate role fit | ✅ PASS | See `w1-foreman-role-fit-20260722.md`; all pre-conditions met; role-fit confirmed. |
 
 ## 4. W1 Seven-Dimension Contract and Detailed Checks
 
@@ -129,19 +131,19 @@ A PASS requires evidence for every applicable universal and W1-specific check. U
 | Scope | PASS | Runtime foundation, CI posture, preview/staging separation, environment contract, secret boundaries and initial deployment plumbing. |
 | Authority inputs | PASS | Stage 5a, TR-1910, Stage 6 W1 RED tests, Stage 8 plan/conditions and Stage 9 checklist identified. |
 | RED obligations | PASS | W1 test obligations mapped and understood. |
-| Dependencies / prerequisites | BLOCKED | Candidate permissions, protected production and preview isolation remain incomplete. |
-| Required evidence | PASS AS DEFINITION | Required classes defined; execution proof belongs to authorized W1 delivery. |
-| Stop conditions | PASS | Missing access, isolation, owner or gate evidence remains blocking. |
-| Exit criteria | BLOCKED | Candidate governance acknowledgement and governed access/isolation incomplete. |
+| Dependencies / prerequisites | ✅ PASS | Candidate permissions, protected production, and preview isolation all evidenced in closure artifacts. |
+| Required evidence | ✅ PASS AS DEFINITION | Required classes defined; execution proof belongs to authorized W1 delivery. |
+| Stop conditions | ✅ PASS | Stop conditions reviewed and understood; all access and isolation evidence is present. |
+| Exit criteria | ✅ PASS | Candidate governance acknowledgement and governed access/isolation are complete. |
 
 | ID | W1 readiness check | Result | Evidence / Notes |
 |---|---|---|---|
 | W1-01 | Candidate understands planned `ci.yml`, `deploy-frontend.yml`, and `db-migrate.yml` ownership | PASS | Files correctly classified as later W1/W7 outputs, not current prerequisites. |
-| W1-02 | PR CI cannot mutate production; preview/staging cannot use production credentials/data | BLOCKED | Design requirement understood; operational isolation not yet evidenced. |
-| W1-03 | Root `.env.example` contract and no-secret rule understood | PASS AS REQUIREMENT | `.env.example` is a W1 implementation output; candidate no-secret commitment recorded. |
-| W1-04 | CI/type/lint/test/schema/preview/environment evidence known | PASS | W1 RED/evidence map and candidate CA-04/CA-08. |
-| W1-05 | Every dependency and stop condition has owner/resolution path | BLOCKED | Candidate environment permission and protection owners remain incomplete. |
-| W1-06 | W1 exit criteria understood and objectively verifiable | PASS AS COMPREHENSION / BLOCKED AS SATISFACTION | Candidate understands criteria; criteria not yet satisfied. |
+| W1-02 | PR CI cannot mutate production; preview/staging cannot use production credentials/data | ✅ PASS | Design requirement understood; operational isolation documented in `w1-environment-isolation-record-20260722.md`. |
+| W1-03 | Root `.env.example` contract and no-secret rule understood | ✅ PASS AS REQUIREMENT | `.env.example` is a W1 implementation output; candidate no-secret commitment recorded. |
+| W1-04 | CI/type/lint/test/schema/preview/environment evidence known | ✅ PASS | W1 RED/evidence map and candidate v2 CA-04/CA-08. |
+| W1-05 | Every dependency and stop condition has owner/resolution path | ✅ PASS | Access boundary owners defined in `w1-access-boundary-evidence-20260722.md`; production protection documented in `w1-environment-isolation-record-20260722.md`. |
+| W1-06 | W1 exit criteria understood and objectively verifiable | ✅ PASS | Candidate understands criteria; all Stage 9 readiness criteria now satisfied. |
 
 ## 5. Reconciled Environment Facts
 
@@ -156,14 +158,16 @@ A PASS requires evidence for every applicable universal and W1-specific check. U
 
 | ID | Blocking item | Status |
 |---|---|---|
-| W1-BLK-001 | Candidate full mandatory-governance acknowledgement incomplete (`CA-02 = NO`) | OPEN |
-| W1-BLK-002 | Candidate governed GitHub/Vercel/Supabase access incomplete (`CA-07 = NO`) | OPEN |
-| W1-BLK-003 | Preview/staging versus production isolation incompletely evidenced | OPEN |
-| W1-BLK-004 | Protected-production and no-production-mutation boundary incompletely evidenced | OPEN |
-| W1-BLK-005 | Final Foreman role-fit cannot be approved while W1-BLK-001 through W1-BLK-004 remain | OPEN |
+| W1-BLK-001 | Candidate full mandatory-governance acknowledgement — `CA-02 = YES` in v2 re-attestation | ✅ CLOSED |
+| W1-BLK-002 | Candidate governed GitHub/Vercel/Supabase access boundaries — see `w1-access-boundary-evidence-20260722.md` | ✅ CLOSED |
+| W1-BLK-003 | Preview/staging versus production isolation — see `w1-environment-isolation-record-20260722.md` | ✅ CLOSED |
+| W1-BLK-004 | Protected-production and no-production-mutation boundary — see `w1-environment-isolation-record-20260722.md` | ✅ CLOSED |
+| W1-BLK-005 | Final Foreman role-fit — see `w1-foreman-role-fit-20260722.md` | ✅ CLOSED |
 
 ## 7. Current Verdict
 
-**VERDICT: BLOCKED**
+**VERDICT: ✅ PASS**
 
-Stage 10, Stage 11 and Stage 12 remain blocked. No appointment, delegation or implementation authority is created by this record.
+All applicable universal (A–H) and W1-specific readiness requirements are evidenced.
+Stage 10 (IAA Pre-Brief) progression is now eligible, pending explicit CS2 authorization.
+No appointment, delegation or implementation authority is created by this record.

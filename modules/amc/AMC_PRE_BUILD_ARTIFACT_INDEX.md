@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-22 (PR #1206 merged the W1 candidate-readiness execution as BLOCKED. Issue #1208 / PR #1209 reconciles the record and adds the explicit Stage 9 W1 CS2 disposition. Stages 10–12 remain blocked.)  
+**Last Updated**: 2026-07-22 (Issue #1213 / this PR closes all five W1 residual blockers, produces candidate v2 re-attestation, access-boundary evidence, environment isolation record, and Foreman role-fit. Stage 9 W1 verdict: PASS. Stage 10 eligible pending CS2 authorization.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -137,15 +137,20 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 |---|---|---|---|
 | Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | ✅ Produced / Merged | PR #1204 merged the universal and W1–W8 readiness gates. |
 | Builder Readiness Attestations | `modules/amc/08-builder-checklist/builder-readiness-attestations.md` | ✅ Produced / Merged | PR #1204 merged the controlled candidate/Foreman attestation template. |
-| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | 🔴 BLOCKED | Historical execution merged in PR #1206; reconciled in PR #1209. |
-| W1 Candidate Readiness Attestation — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md` | 🟠 EXECUTED / 🔴 BLOCKED | Candidate executed the attestation; `CA-02 = NO` and `CA-07 = NO` remain binding. |
-| W1 Environment and Dependency Register | `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md` | 🔴 BLOCKED | Supabase production and `develop` branch exist; candidate permissions and preview/production isolation remain incomplete. |
-| W1 RED-Test and Evidence Map | `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md` | 🟡 Defined / BLOCKED | W1 obligations mapped; later implementation evidence remains required. |
+| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | ✅ PASS | Historical execution merged in PR #1206; reconciled in PR #1209; all residual blockers closed in Issue #1213 / this PR. |
+| W1 Candidate Readiness Attestation v1 — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md` | 📦 Historical — BLOCKED (provenance) | Original BLOCKED execution. Retained as provenance; superseded for readiness status by v2. |
+| W1 Candidate Readiness Attestation v2 — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation-v2-20260722.md` | ✅ PASS | Fresh candidate-authored re-attestation; CA-02 = YES; full 30-item mandatory read-set. |
+| W1 Environment and Dependency Register | `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md` | ✅ PASS | Updated by closure artifacts; all blockers resolved. |
+| W1 Access Boundary Evidence | `modules/amc/08-builder-checklist/executions/w1/w1-access-boundary-evidence-20260722.md` | ✅ PASS | GitHub, Vercel, Supabase governed boundaries defined. Closes W1-BLK-002. |
+| W1 Environment Isolation Record | `modules/amc/08-builder-checklist/executions/w1/w1-environment-isolation-record-20260722.md` | ✅ PASS | Preview/staging vs production isolation and protected-production controls documented. Closes W1-BLK-003 and W1-BLK-004. |
+| W1 Foreman Role-Fit Assessment | `modules/amc/08-builder-checklist/executions/w1/w1-foreman-role-fit-20260722.md` | ✅ PASS | Independent Foreman role-fit confirmed. Closes W1-BLK-005. |
+| W1 RED-Test and Evidence Map | `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md` | 🟡 Defined | W1 obligations mapped; later implementation evidence remains required. |
 | W1 Environment Evidence Update | `modules/amc/08-builder-checklist/executions/w1/w1-environment-evidence-update-20260721.md` | 🟡 Partial Evidence | Records Vercel/Supabase resources and AMC secret-name presence without values. |
-| W1 Readiness Reconciliation | `modules/amc/08-builder-checklist/executions/w1/w1-readiness-reconciliation-20260722.md` | 🔴 BLOCKED | Issue #1208 / PR #1209 reconciles the post-merge record. |
-| CS2 Decision Record — Stage 9 W1 | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md` | 🔴 Current Disposition: BLOCKED | Explicitly withholds Stage 10, appointment and build authorization. |
+| W1 Readiness Reconciliation | `modules/amc/08-builder-checklist/executions/w1/w1-readiness-reconciliation-20260722.md` | 📦 Historical — BLOCKED (provenance) | Issue #1208 / PR #1209 first reconciliation record. |
+| CS2 Decision Record — Stage 9 W1 (original BLOCKED) | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md` | 📦 Historical — BLOCKED (provenance) | Records original BLOCKED disposition; retained as provenance. |
+| CS2 Decision Record — Stage 9 W1 Closure | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1-closure-20260722.md` | ✅ Current Disposition: PASS | Closes all five residual blockers; Stage 10 eligible pending CS2 Stage 10 authorization. |
 
-Stage 9 W1 candidate readiness remains BLOCKED. Passing PR ceremony gates does not approve the candidate or authorize Stage 10–12.
+Stage 9 W1 candidate readiness is **PASS**. Stage 10 IAA Pre-Brief is eligible, pending explicit CS2 authorization.
 
 ---
 
@@ -153,8 +158,8 @@ Stage 9 W1 candidate readiness remains BLOCKED. Passing PR ceremony gates does n
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| IAA Pre-Brief | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ⬜ Placeholder — 🔴 Blocked | Not started. Blocked by the Stage 9 W1 CS2 disposition. |
-| IAA Pre-Brief Response | `modules/amc/09-iaa-pre-brief/iaa-pre-brief-response.md` | ⬜ Placeholder — 🔴 Blocked | Not started. |
+| IAA Pre-Brief | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ⬜ Placeholder — eligible pending CS2 Stage 10 authorization | Stage 9 W1 is now PASS; Stage 10 requires explicit CS2 authorization to open. |
+| IAA Pre-Brief Response | `modules/amc/09-iaa-pre-brief/iaa-pre-brief-response.md` | ⬜ Placeholder — BLOCKED | Not started. |
 
 ---
 
