@@ -4,10 +4,10 @@
 **PR**: #1209  
 **Wave**: amc-stage9-w1-readiness-reconciliation-20260722  
 **Branch**: `foreman/amc-stage9-w1-readiness-reconciliation`  
-**ECAP Session**: `ecap-session-1209-20260722`  
-**Final IAA Session Reference**: `session-1209-20260722`  
-**Final Token Reference**: `IAA-session-1209-20260722-PASS`  
-**Reviewed Substantive SHA**: `448cdb9c37699a4fde0888bb4a4a3cc50d10cfb8`  
+**ECAP Session**: `ecap-session-1209-20260722-r2`  
+**Final IAA Session Reference**: `session-1209-20260722-r2`  
+**Final Token Reference**: `IAA-session-1209-20260722-R2-PASS`  
+**Reviewed Substantive SHA**: `78f569c17cc989ed769946b2509d1b906e74016e`  
 **Date**: 2026-07-22
 
 protected_path_touched: true
@@ -31,7 +31,8 @@ The PR #1209 governance/documentation bundle is administratively complete and in
 |---|---|
 | `.admin/pr.json` | PASS — issue #1208 and foreman-orchestrated execution fields recorded |
 | Stage 8 artifact headers | PASS — aligned to Approved with Conditions |
-| W1 checklist and attestation | PASS as governance records — attestation executed, candidate remains BLOCKED |
+| W1 checklist | PASS — individual A–H and W1 check IDs, results and evidence preserved |
+| W1 attestation | PASS as governance record — executed, candidate remains BLOCKED |
 | W1 environment register | PASS as reconciled blocker register |
 | W1 reconciliation record | PASS |
 | CS2 Stage 9 W1 decision record | PASS — BLOCKED disposition recorded |
@@ -52,10 +53,17 @@ Protected paths include `.admin`, `.agent-admin`, live tracker/index, Stage 8 au
 | Candidate | `integration-builder` — nominated only | PASS |
 | Candidate readiness verdict | BLOCKED | PASS — consistently recorded |
 | Stage 10–12 posture | BLOCKED | PASS |
-| Reviewed substantive head | `448cdb9c37699a4fde0888bb4a4a3cc50d10cfb8` | PASS |
-| Final token | `IAA-session-1209-20260722-PASS` | PASS |
+| Reviewed substantive head | `78f569c17cc989ed769946b2509d1b906e74016e` | PASS |
+| Final token | `IAA-session-1209-20260722-R2-PASS` | PASS |
 
-## C5. Administrative Verdict
+## C5. Review-Finding Reconciliation
+
+1. The artifact index is current and includes both reconciliation artifacts.
+2. All temporary “Pending PR” references were replaced with PR #1209.
+3. The W1 checklist preserves every required check ID and evidence result rather than only aggregate section verdicts.
+4. The BLOCKED candidate result is preserved without manufacturing access or governance acknowledgement.
+
+## C6. Administrative Verdict
 
 administrative_readiness: PASS  
 protected_path_ceremony_verdict: PASS  
