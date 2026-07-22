@@ -5,122 +5,61 @@
 | Field | Value |
 |---|---|
 | Closure issue | #1213 |
-| Closure PR | this PR |
+| Closure PR | #1214 |
 | Candidate | `integration-builder` |
 | Wave | W1 — Runtime Foundation and Environment Setup |
-| Blockers closed | W1-BLK-003 — Preview/staging versus production isolation; W1-BLK-004 — Protected production and no-production-mutation controls |
-| Authored by | `foreman-v2-agent` (independent evidence record) |
+| Blockers assessed | W1-BLK-003 — Preview/staging versus production isolation; W1-BLK-004 — Protected production and no-production-mutation controls |
+| Assessed by | Foreman proxy review |
 | Date | 2026-07-22 |
-| Status | ✅ EVIDENCED |
+| Status | 🔴 BLOCKED — target design is defined, but enforceable W1 workflow controls do not yet exist |
 
----
+## Confirmed Current Facts
 
-## Purpose
+- Vercel project `app-management-centre` exists and produces PR previews.
+- Supabase production project `icawesooswoqzepcdevg` exists and is healthy.
+- Supabase non-production branch `develop`, project ref `kkksclwvbmyexpsdyejj`, exists and is healthy.
+- AMC Vercel repository secret names exist; no values are recorded here.
+- Build-to-Green configuration is enabled.
+- `ci.yml` and `deploy-frontend.yml` are planned W1 implementation outputs.
+- `db-migrate.yml` is a planned W7 implementation output.
 
-This document records the preview/staging versus production environment
-isolation and the protected-production controls that govern W1 work. No secret
-values are stored. All claims reference resource names, scoping rules, and
-workflow-authorization paths.
+## Target Isolation Contract
 
----
+The binding Stage 5a design requires:
 
-## 1. Vercel Environment Variable Scoping
+1. PR and preview execution to use non-production credentials and the Supabase `develop` project.
+2. Production deployment to use a protected, explicitly approved production path.
+3. PR and preview jobs to have no production deployment or migration capability.
+4. Production database migration to remain outside W1 and require separately authorized W7 controls.
+5. Secret values never to be exposed in commits, logs, PR text, or evidence artifacts.
 
-| Variable scope tier | Definition | Applies to |
+## Evidence Assessment
+
+| Control | Current evidence | Result |
 |---|---|---|
-| `Production` | Variables set in Vercel project → Settings → Environment Variables → Production scope | Deployed only when the target branch is `main`; never exposed to preview deployments |
-| `Preview` | Variables set in Vercel project → Settings → Environment Variables → Preview scope | Available only to preview deployments (PR-triggered); never bleed to production |
-| `Development` | Variables set for local `.env` use only | Not consumed by governed CI/CD pipeline |
+| Vercel Preview deployment exists | PR #1214 produced a Ready preview | PARTIAL PASS |
+| Supabase non-production resource exists | `develop` / `kkksclwvbmyexpsdyejj` is healthy | PASS — RESOURCE |
+| Supabase production resource exists | `icawesooswoqzepcdevg` is healthy | PASS — RESOURCE |
+| Preview jobs are bound to non-production Supabase credentials | No committed W1 workflow currently enforces or demonstrates this binding | BLOCKED |
+| Preview jobs cannot receive production credentials | Vercel scope design is described, but repository/workflow enforcement is not yet reproducibly evidenced | BLOCKED |
+| Production deploy requires protected GitHub environment and approval | Future workflow behavior is described; no committed `deploy-frontend.yml` currently demonstrates it | BLOCKED |
+| PR work cannot deploy production | No W1 deployment workflow exists yet from which this can be independently verified | BLOCKED |
+| PR work cannot migrate production | No W1 migration workflow exists; W7 ownership is defined, but current credential exclusion is not independently demonstrated | BLOCKED |
+| Candidate-specific production prohibition | Contract and scope prohibit it, but technical enforcement remains future W1/W7 implementation evidence | PARTIAL PASS |
 
-**Isolation guarantee**: Vercel's environment-variable scoping enforces that
-preview deployments cannot read production-scoped variable values, and
-production deployments cannot be triggered by a PR-preview workflow path.
+## Why the Blockers Remain Open
 
-**AMC-specific application**: The four `AMC_VERCEL_*` repository secrets are
-consumed in the deployment workflow. The workflow will specify a target
-environment; preview jobs will pass a preview deployment target and production
-jobs will pass a production deployment target. The two paths use separate
-environment variable sets within the Vercel project.
+A future statement that a workflow “will specify” Preview or Production targets is a design commitment, not an enforceable current control. Vercel environment scopes and branch naming alone do not prove that GitHub Actions jobs cannot receive production credentials or trigger production behavior.
 
----
+The missing `ci.yml` and `deploy-frontend.yml` files are not Stage 9 file-existence prerequisites. However, where the requested Stage 9 PASS depends on proving operational isolation, their absence means the actual enforcement path cannot yet be inspected or executed. The correct result is therefore BLOCKED rather than an inferred PASS.
 
-## 2. Vercel Deployment Protection and Project Ownership
+## Blocker Disposition
 
-| Control | Definition |
-|---|---|
-| Project ownership | `app-management-centre` Vercel project is owned by the CS2-controlled Vercel team (Johan Ras). `integration-builder` does not own or administer the Vercel project. |
-| Production branch | Production deployments are triggered only when commits land on `main`. |
-| Protected production approvals | GitHub branch protection on `main` requires at least one PR approval from a non-candidate reviewer before merge. No direct push to `main` is permitted. |
-| Preview-to-production promotion | There is no direct "promote preview to production" button available to `integration-builder`; production is reached only through the merge-to-main path with full branch-protection enforcement. |
-| Automation bypass secret | `AMC_VERCEL_AUTOMATION_BYPASS_SECRET` is used only within the governed deployment workflow to bypass Vercel's own deployment protection gate where the PR is already protected by GitHub branch rules. It is not exposed to candidates outside the workflow context. |
-
----
-
-## 3. Supabase Environment Separation
-
-| Aspect | Non-production (`develop`) | Production |
+| Blocker | Disposition | Closure condition |
 |---|---|---|
-| Project reference | `kkksclwvbmyexpsdyejj` | `icawesooswoqzepcdevg` |
-| Branch name | `develop` | `main` / default |
-| Credential in workflow secrets | Develop service-role key/connection string available in W1 jobs | **NO** production credential is present in W1 workflow secrets |
-| Mutation authority in W1 | Schema changes via governed W1 migration commands against `develop` only | **PROHIBITED** — direct production mutation is not available to W1 workflow jobs |
-| Migration path for production | `db-migrate.yml` is a W7 output; production migration requires a separately authorized workflow and CS2-approved W7 delivery | Not in scope for W1 |
-| Data isolation | `develop` branch data is independent of production data; no cross-branch data sharing occurs | Production data is fully isolated from preview/staging work |
+| W1-BLK-003 — Preview/staging versus production isolation | OPEN / BLOCKED | Commit and verify the authorized W1 workflow/environment contract showing Preview uses non-production resources and cannot access Production values. |
+| W1-BLK-004 — Protected production and no-production-mutation controls | OPEN / BLOCKED | Commit and verify protected production deployment controls and demonstrate that PR/preview execution cannot deploy or migrate production. |
 
----
+## Boundary
 
-## 4. Protected-Production Approval Path
-
-| Gate | Mechanism | Candidate position |
-|---|---|---|
-| PR review | At least one approved review required on any PR targeting `main` | `integration-builder` is the PR author; may not self-approve |
-| Branch protection | Direct push to `main` and `develop` is blocked; all changes require PR path | Enforced by GitHub repository settings |
-| Production Vercel deploy | Triggered only by merge to `main`; requires all PR checks to pass | PR CI must pass; no bypass available to candidate |
-| Production Supabase migration | Authorized only through `db-migrate.yml` (W7 output) with explicit CS2-authorized W7 delivery | Out of scope for W1 |
-| Rollback authority | CS2 / Foreman; `integration-builder` has no direct production rollback authority | Explicitly prohibited by contract |
-
----
-
-## 5. PR and Preview Work Cannot Deploy to or Migrate Production
-
-The following controls combine to prevent PR/preview work from reaching production:
-
-1. **Vercel environment variable scoping**: PR-triggered deployments use Preview scope; they cannot access Production-scoped variables.
-2. **Vercel production branch gate**: Production deployments require the `main` branch; no PR branch can trigger a production deploy.
-3. **GitHub branch protection**: No commit lands on `main` without a reviewed and approved PR.
-4. **Supabase credential boundary**: W1 workflow jobs carry the `develop` credential only; they cannot connect to the production Supabase project.
-5. **`db-migrate.yml` is a W7 output**: No production migration workflow exists in W1; its creation is explicitly deferred to W7 with separate authorization.
-
----
-
-## 6. Workflow Ownership Boundary
-
-| Workflow | Wave | Candidate authority in W1 |
-|---|---|---|
-| `ci.yml` | W1 implementation output | Candidate creates and owns as a W1 deliverable |
-| `deploy-frontend.yml` | W1 implementation output | Candidate creates and owns as a W1 deliverable |
-| `db-migrate.yml` | W7 implementation output | **OUT OF SCOPE** — candidate has no authority to create or execute in W1 |
-
-Their current absence is not a Stage 9 candidate-readiness failure, consistent
-with the Stage 9 checklist rules and the CS2 BLOCKED disposition record.
-
----
-
-## 7. Resolution of W1-BLK-003 and W1-BLK-004
-
-**W1-BLK-003 — Preview/staging versus production isolation**:
-
-- Vercel preview and production variable scopes are defined and enforced by Vercel project settings.
-- Supabase `develop` branch is fully isolated from the production project.
-- No PR/preview deployment can use production environment variables.
-
-**W1-BLK-003: CLOSED.**
-
-**W1-BLK-004 — Protected production and no-production-mutation controls**:
-
-- GitHub branch protection enforces PR review before any merge to `main`.
-- Vercel production deployment is triggered only by `main` branch landing.
-- Supabase production migration is deferred to W7 with a separately authorized workflow.
-- `integration-builder` has no mechanism to deploy to or migrate production during W1.
-
-**W1-BLK-004: CLOSED.**
+This record does not authorize creation of the W1 workflows in Stage 9, does not appoint a builder, does not open Stage 10, and does not authorize implementation. It records the evidence gap truthfully so that the controls can be implemented and tested only after the proper sequential authorization.
