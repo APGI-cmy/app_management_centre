@@ -2,10 +2,10 @@
   "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1208",
-  "scope_summary": "Reconcile the merged AMC Stage 9 W1 readiness record, align Stage 8 status headers, tracker, artifact index, candidate and environment records, produce a truthful final W1 disposition, and keep Stages 10-12 blocked unless every readiness requirement is evidenced.",
+  "governing_issue": "#1210",
+  "scope_summary": "Close the five residual AMC Stage 9 W1 candidate-readiness blockers, obtain a fresh candidate-authored re-attestation, verify governed access and environment isolation, complete final Foreman role-fit, and seek a truthful PASS or BLOCKED disposition while keeping Stages 10-12 blocked unless explicitly authorized.",
   "created_by": "foreman-v2-agent",
-  "created_at": "2026-07-22T06:41:30Z",
+  "created_at": "2026-07-22T12:30:47Z",
   "execution_model": "foreman-orchestrated",
   "orchestrating_agent": "foreman-v2-agent",
   "implementing_agent": "integration-builder"
