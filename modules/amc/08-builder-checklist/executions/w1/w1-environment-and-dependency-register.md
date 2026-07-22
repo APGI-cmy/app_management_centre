@@ -6,7 +6,7 @@
 |---|---|
 | Historical issue / PR | #1205 / merged PR #1206 |
 | Reconciliation issue | #1208 |
-| Reconciliation PR | Pending creation |
+| Reconciliation PR | #1209 |
 | Candidate | `integration-builder` |
 | Wave | W1 — Runtime Foundation and Environment Setup |
 | Overall Status | 🔴 BLOCKED — core resources and non-production Supabase now exist; candidate permission and environment-isolation evidence remain incomplete |
