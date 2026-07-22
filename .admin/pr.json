@@ -3,9 +3,9 @@
   "requires_iaa": true,
   "requires_ecap": true,
   "governing_issue": "#1210",
-  "scope_summary": "Close the five residual AMC Stage 9 W1 candidate-readiness blockers, obtain a fresh candidate-authored re-attestation, verify governed access and environment isolation, complete final Foreman role-fit, and seek a truthful PASS or BLOCKED disposition while keeping Stages 10-12 blocked unless explicitly authorized.",
+  "scope_summary": "Update the AMC tracker and artifact index for merged PR #1209, add the final integration-builder re-attestation form and reproducible W1 access/isolation evidence, preserve a truthful BLOCKED posture until candidate-authored completion and Foreman verification, and keep Stages 10-12 blocked unless explicitly authorized.",
   "created_by": "foreman-v2-agent",
-  "created_at": "2026-07-22T12:30:47Z",
+  "created_at": "2026-07-15T10:42:31Z",
   "execution_model": "foreman-orchestrated",
   "orchestrating_agent": "foreman-v2-agent",
   "implementing_agent": "integration-builder"
