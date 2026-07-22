@@ -4,7 +4,7 @@
 **Stage**: 9 — Builder Checklist / W1 Candidate Readiness  
 **Issue**: app_management_centre#1208  
 **Related historical execution**: issue #1205 / merged PR #1206  
-**Governing reconciliation PR**: Pending PR creation  
+**Governing reconciliation PR**: app_management_centre#1209  
 **Decision Date**: 2026-07-22  
 **Decision Authority**: CS2 — Johan Ras  
 **Status**: BLOCKED — Stage 9 W1 Candidate Not Approved
