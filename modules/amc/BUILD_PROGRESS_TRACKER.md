@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-22  
-**Updated By**: foreman-v2-agent — Stage 9 W1 readiness reconciliation, issue #1208 / PR #1209  
+**Updated By**: foreman-v2-agent — Stage 9 W1 residual blocker closure, issue #1210 / PR #1211
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1208](https://github.com/APGI-cmy/app_management_centre/issues/1208)  
-> **Current PR**: [app_management_centre#1209](https://github.com/APGI-cmy/app_management_centre/pull/1209)  
+> **Current Issue**: [app_management_centre#1210](https://github.com/APGI-cmy/app_management_centre/issues/1210)  
+> **Current PR**: [app_management_centre#1211](https://github.com/APGI-cmy/app_management_centre/pull/1211)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -25,7 +25,8 @@
 - PR #1204 merged the Stage 9 Builder Checklist structure.
 - PR #1206 merged the W1 candidate-readiness execution with a truthful BLOCKED result and closed Issue #1205.
 - PR #1207 was closed unmerged as a duplicate/superseded path.
-- Issue #1208 / PR #1209 reconciles the W1 record and records final CS2 disposition.
+- PR #1209 merged the W1 reconciliation and explicit CS2 BLOCKED disposition; Issue #1208 is completed.
+- Issue #1210 / PR #1211 is the sole residual-blocker closure and final candidate re-attestation wave.
 
 ## Stage Summary
 
@@ -40,7 +41,7 @@
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY obligations remain binding. |
 | 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | PBFAG evidence rows remain binding. |
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
-| 9 | Builder Checklist / W1 Readiness | 🔴 BLOCKED — RECONCILIATION OPEN | Checklist structure merged; W1 candidate attestation executed but did not reach PASS. |
+| 9 | Builder Checklist / W1 Readiness | 🔴 BLOCKED — RESIDUAL CLOSURE OPEN | Final BLOCKED disposition merged in PR #1209; PR #1211 seeks evidence-complete closure only. |
 | 10 | IAA Pre-Brief | ⬜ NOT STARTED — BLOCKED | Not authorized while Stage 9 W1 remains BLOCKED. |
 | 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED | No builder appointed. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No build authorization. |
@@ -48,37 +49,39 @@
 ## Stage 9 W1 Current Facts
 
 - Candidate: `integration-builder` — nominated only.
-- Candidate attestation: **EXECUTED — BLOCKED**.
-- Recorded candidate blockers: `CA-02 = NO` and `CA-07 = NO`.
+- Historical candidate attestation: **EXECUTED — BLOCKED** with `CA-02 = NO` and `CA-07 = NO`.
+- Fresh final re-attestation: created in PR #1211 and **PENDING CANDIDATE-AUTHORED COMPLETION**.
 - Supabase production project: `icawesooswoqzepcdevg` — healthy.
-- Supabase non-production branch: `develop`, project ref `kkksclwvbmyexpsdyejj` — healthy.
-- Vercel project: `app-management-centre` — exists; preview deployment evidence observed.
+- Supabase non-production branch: `develop`, project ref `kkksclwvbmyexpsdyejj` — healthy and separate from production.
+- Vercel project: `app-management-centre`; PR #1211 produced a successful Preview deployment.
 - AMC Vercel secret namespace is present without values being recorded.
 - Build-to-Green phase switch is enabled in `.github/build-wave-phase.json`.
-- `ci.yml` and `deploy-frontend.yml` are W1 implementation outputs; `db-migrate.yml` is a W7 output. Their absence is not a Stage 9 candidate-readiness file-existence failure.
+- `ci.yml` and `deploy-frontend.yml` are W1 implementation outputs; `db-migrate.yml` is a W7 output. Their absence is not a Stage 9 file-existence failure.
 
 ## Residual Blocking Items
 
-1. Candidate-authored acknowledgement of the complete mandatory governance-reading set remains incomplete.
-2. Candidate governed access boundaries for GitHub, Vercel and Supabase remain incompletely evidenced.
-3. Preview/staging versus production environment-variable and protection isolation remains incompletely evidenced.
-4. Protected-production and no-production-mutation boundaries remain incompletely evidenced.
-5. Final Foreman role-fit cannot be approved while items 1–4 remain unresolved.
+1. Candidate-authored completion of all RA-01 through RA-24 governance, scope, access and isolation acknowledgements.
+2. Candidate-specific Vercel and Supabase permission evidence remains incomplete.
+3. Vercel Preview/Production variable scoping and protected-production enforcement remain partially evidenced rather than operationally proved.
+4. Production deployment/migration and no-production-mutation controls are binding but implementation workflows do not yet exist.
+5. Final Foreman role-fit remains pending until items 1–4 are verified.
 
 ## Current Disposition
 
-**W1 candidate readiness: BLOCKED.**
+**W1 candidate readiness: BLOCKED pending final candidate re-attestation and Foreman verification.**
 
-Passing PR ceremony gates does not convert this result to PASS. Stage 10, Stage 11 and Stage 12 remain prohibited until a later evidence-complete PASS and explicit CS2 authorization.
+Passing PR ceremony gates does not convert this result to PASS. Stage 10, Stage 11 and Stage 12 remain prohibited until an evidence-complete PASS and explicit CS2 authorization.
 
-## Current Reconciliation Artifacts
+## Current Closure Artifacts
 
+- `modules/amc/08-builder-checklist/executions/w1/integration-builder-final-reattestation-20260722.md`
+- `modules/amc/08-builder-checklist/executions/w1/w1-access-isolation-evidence-20260722.md`
 - `modules/amc/08-builder-checklist/executions/w1/w1-readiness-reconciliation-20260722.md`
 - `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md`
 
 ## Next Action
 
-Complete PR #1209, refresh final ECAP/IAA against the final substantive head, and retain BLOCKED unless every applicable readiness requirement is supported by evidence.
+`integration-builder` must complete the candidate-only RA-01 through RA-24 section in PR #1211. The Foreman must then independently verify RFV-01 through RFV-07, refresh the checklist/environment register, obtain final ECAP/IAA against the substantive head, and seek explicit CS2 disposition.
 
 ## References
 
