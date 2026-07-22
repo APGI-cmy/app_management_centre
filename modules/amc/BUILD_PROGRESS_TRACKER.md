@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-22  
-**Updated By**: foreman-v2-agent — Stage 9 W1 readiness reconciliation, issue #1208 / PR #1209  
+**Updated By**: Foreman proxy — Stage 9 W1 residual blocker evidence review, issue #1213 / PR #1214
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1208](https://github.com/APGI-cmy/app_management_centre/issues/1208)  
-> **Current PR**: [app_management_centre#1209](https://github.com/APGI-cmy/app_management_centre/pull/1209)  
+> **Current Issue**: [app_management_centre#1213](https://github.com/APGI-cmy/app_management_centre/issues/1213)  
+> **Current PR**: [app_management_centre#1214](https://github.com/APGI-cmy/app_management_centre/pull/1214)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -25,7 +25,9 @@
 - PR #1204 merged the Stage 9 Builder Checklist structure.
 - PR #1206 merged the W1 candidate-readiness execution with a truthful BLOCKED result and closed Issue #1205.
 - PR #1207 was closed unmerged as a duplicate/superseded path.
-- Issue #1208 / PR #1209 reconciles the W1 record and records final CS2 disposition.
+- Issue #1208 / PR #1209 reconciled the W1 record and recorded the explicit CS2 BLOCKED disposition.
+- Issue #1210 / PR #1211 was closed as a superseded duplicate path.
+- Issue #1213 / PR #1214 produced the candidate v2 re-attestation. Independent review closed the governance-reading blocker but retained access, isolation, protected-production and final role-fit blockers.
 
 ## Stage Summary
 
@@ -40,45 +42,50 @@
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY obligations remain binding. |
 | 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | PBFAG evidence rows remain binding. |
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
-| 9 | Builder Checklist / W1 Readiness | 🔴 BLOCKED — RECONCILIATION OPEN | Checklist structure merged; W1 candidate attestation executed but did not reach PASS. |
-| 10 | IAA Pre-Brief | ⬜ NOT STARTED — BLOCKED | Not authorized while Stage 9 W1 remains BLOCKED. |
+| 9 | Builder Checklist / W1 Readiness | 🔴 BLOCKED — residual closure reviewed | Candidate governance acknowledgement completed; operational access/isolation and final role-fit remain blocked. |
+| 10 | IAA Pre-Brief | ⬜ NOT STARTED — BLOCKED | Not authorized while Stage 9 remains BLOCKED. |
 | 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED | No builder appointed. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No build authorization. |
 
 ## Stage 9 W1 Current Facts
 
 - Candidate: `integration-builder` — nominated only.
-- Candidate attestation: **EXECUTED — BLOCKED**.
-- Recorded candidate blockers: `CA-02 = NO` and `CA-07 = NO`.
+- Historical attestation v1: **EXECUTED — BLOCKED**.
+- Candidate re-attestation v2: all candidate statements answered YES; mandatory read-set enumerated.
+- Candidate governance acknowledgement blocker W1-BLK-001: **CLOSED**.
 - Supabase production project: `icawesooswoqzepcdevg` — healthy.
 - Supabase non-production branch: `develop`, project ref `kkksclwvbmyexpsdyejj` — healthy.
-- Vercel project: `app-management-centre` — exists; preview deployment evidence observed.
-- AMC Vercel secret namespace is present without values being recorded.
-- Build-to-Green phase switch is enabled in `.github/build-wave-phase.json`.
-- `ci.yml` and `deploy-frontend.yml` are W1 implementation outputs; `db-migrate.yml` is a W7 output. Their absence is not a Stage 9 candidate-readiness file-existence failure.
+- Vercel project: `app-management-centre` — exists; PR Preview deployment evidence observed.
+- AMC Vercel secret names are present without values being recorded.
+- Build-to-Green phase switch is enabled.
+- `ci.yml` and `deploy-frontend.yml` are W1 implementation outputs; `db-migrate.yml` is a W7 output.
+- The current evidence does not reproducibly prove that Preview execution is technically bound to non-production Supabase credentials or excluded from production credentials.
+- The current evidence does not demonstrate an enforceable protected-production deployment path because the W1 deployment workflow does not yet exist.
 
 ## Residual Blocking Items
 
-1. Candidate-authored acknowledgement of the complete mandatory governance-reading set remains incomplete.
-2. Candidate governed access boundaries for GitHub, Vercel and Supabase remain incompletely evidenced.
-3. Preview/staging versus production environment-variable and protection isolation remains incompletely evidenced.
-4. Protected-production and no-production-mutation boundaries remain incompletely evidenced.
-5. Final Foreman role-fit cannot be approved while items 1–4 remain unresolved.
+1. **W1-BLK-002:** Candidate-specific governed GitHub, Vercel and Supabase access remains incompletely demonstrated.
+2. **W1-BLK-003:** Preview/staging versus production isolation remains a target design rather than an inspected and executed control.
+3. **W1-BLK-004:** Protected-production and no-production-mutation controls remain incompletely evidenced.
+4. **W1-BLK-005:** Final Foreman role-fit cannot be approved while blockers 2–4 remain.
 
 ## Current Disposition
 
 **W1 candidate readiness: BLOCKED.**
 
-Passing PR ceremony gates does not convert this result to PASS. Stage 10, Stage 11 and Stage 12 remain prohibited until a later evidence-complete PASS and explicit CS2 authorization.
+Passing PR ceremony gates certifies the integrity of this governance record only. It does not convert the candidate result to PASS. Stage 10, Stage 11 and Stage 12 remain prohibited until a later evidence-complete PASS and explicit CS2 authorization.
 
-## Current Reconciliation Artifacts
+## Current Closure Artifacts
 
-- `modules/amc/08-builder-checklist/executions/w1/w1-readiness-reconciliation-20260722.md`
-- `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md`
+- `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation-v2-20260722.md`
+- `modules/amc/08-builder-checklist/executions/w1/w1-access-boundary-evidence-20260722.md`
+- `modules/amc/08-builder-checklist/executions/w1/w1-environment-isolation-record-20260722.md`
+- `modules/amc/08-builder-checklist/executions/w1/w1-foreman-role-fit-20260722.md`
+- `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1-closure-20260722.md`
 
 ## Next Action
 
-Complete PR #1209, refresh final ECAP/IAA against the final substantive head, and retain BLOCKED unless every applicable readiness requirement is supported by evidence.
+Complete PR #1214 as a truthful BLOCKED closure record, refresh ECAP and IAA against the final substantive head, and do not open Stage 10. A later governed wave must resolve the enforceable access and isolation evidence gap without collapsing Stage 9 into unauthorized implementation.
 
 ## References
 
