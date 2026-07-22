@@ -10,7 +10,7 @@
 | Branch | `copilot/amc-stage-9-w1-residual-blocker-closure` |
 | Wave | `amc-stage9-w1-residual-blocker-review-20260722` |
 | Candidate | `integration-builder` |
-| Reviewed substantive SHA | `98253fc9731a90f559ac72efb0ae4ad77e84ae5c` |
+| Reviewed substantive SHA | `2337a27be88fff2b2c7821120ab79b3f23b7518d` |
 | Current readiness verdict | BLOCKED |
 
 ## 2. Scope
@@ -39,7 +39,7 @@ ecap_invoked: true
 ecap_verdict: PASS
 ceremony_admin_appointed: true
 protected_path_ceremony_verdict: PASS
-ECAP session: ecap-session-1214-20260722-r1
+ECAP session: ecap-session-1214-20260722-r2
 
 The ECAP PASS applies to administrative and protected-path ceremony integrity. It does not approve candidate readiness.
 
@@ -48,8 +48,8 @@ The ECAP PASS applies to administrative and protected-path ceremony integrity. I
 IAA session: session-1214-20260722
 Verdict: PASS
 Adoption Phase: PHASE_B_BLOCKING
-PHASE_B_BLOCKING_TOKEN: IAA-session-1214-R1-20260722-PASS
-Reviewed SHA: 98253fc9731a90f559ac72efb0ae4ad77e84ae5c
+PHASE_B_BLOCKING_TOKEN: IAA-session-1214-R2-20260722-PASS
+Reviewed SHA: 2337a27be88fff2b2c7821120ab79b3f23b7518d
 
 candidate_readiness_verdict: BLOCKED
 stage_10_authorized: false
@@ -60,9 +60,9 @@ The IAA PASS certifies the governance integrity and truthfulness of the BLOCKED 
 
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
-base_head: 98253fc9731a90f559ac72efb0ae4ad77e84ae5c
-final_head: 98253fc9731a90f559ac72efb0ae4ad77e84ae5c
-final_token_binding: IAA-session-1214-R1-20260722-PASS
+base_head: 2337a27be88fff2b2c7821120ab79b3f23b7518d
+final_head: 2337a27be88fff2b2c7821120ab79b3f23b7518d
+final_token_binding: IAA-session-1214-R2-20260722-PASS
 
 ## 6. Final Wave Posture
 
