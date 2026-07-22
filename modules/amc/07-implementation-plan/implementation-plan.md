@@ -3,8 +3,9 @@
 **Stage**: 8 - Implementation Plan  
 **Module**: App Management Centre (AMC)  
 **Version**: 1.0  
-**Status**: Produced for CS2 review  
+**Status**: ✅ CS2 Approved with Conditions  
 **Issue**: app_management_centre#1199  
+**Disposition**: app_management_centre#1201 / merged PR #1202  
 **Wave**: amc-stage8-implementation-plan-20260702
 
 ---
@@ -112,7 +113,7 @@ Later delivery waves must produce evidence for:
 
 ## 7. Stage 8 Exit Criteria
 
-Stage 8 can be recommended for CS2 acceptance when:
+Stage 8 was accepted by CS2 with conditions in the decision record merged by PR #1202 after confirming:
 
 1. every CS2 condition is mapped to a delivery wave;
 2. the `/alerts` first E2E path is planned;
