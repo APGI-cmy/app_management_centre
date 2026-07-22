@@ -36,7 +36,7 @@ workflow-context references only.
 | Direct push to `develop` | **PROHIBITED** | Same branch-protection rules apply. |
 | Governance / merge-release authority | **PROHIBITED** | Explicitly denied in contract v3.4.0. |
 | Actions workflow authority | Read workflow definitions; trigger via PR/push event; write own job context | Cannot modify `.github/workflows/` without PR review gate. |
-| GITHUB_TOKEN scope | `contents: write` (PR branch only), `pull-requests: write`, `checks: write` | Standard Actions permissions; cannot grant own elevated scope. |
+| GITHUB_TOKEN permissions | Defined by repository default workflow permissions and each workflow’s explicit `permissions:` block | Avoid asserting specific scopes here unless you cite the exact workflow file + permissions configuration. |
 | Cross-repository access | **PROHIBITED** | Contract and Actions token are repository-scoped. |
 
 **Result**: GitHub boundary is governed, documented, and reproducible without personal access assumptions.
