@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Issue | #1208 |
-| Governing PR | Pending PR creation |
+| Governing PR | #1209 |
 | Historical execution | Issue #1205 / merged PR #1206 |
 | Candidate | `integration-builder` |
 | Date | 2026-07-22 |
