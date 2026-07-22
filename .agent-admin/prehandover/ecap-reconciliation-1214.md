@@ -4,10 +4,10 @@
 **PR**: #1214  
 **Wave**: amc-stage9-w1-residual-blocker-review-20260722  
 **Branch**: `copilot/amc-stage-9-w1-residual-blocker-closure`  
-**ECAP Session**: `ecap-session-1214-20260722-r1`  
+**ECAP Session**: `ecap-session-1214-20260722-r2`  
 **Final IAA Session Reference**: `session-1214-20260722`  
-**Final Token Reference**: `IAA-session-1214-R1-20260722-PASS`  
-**Reviewed Substantive SHA**: `98253fc9731a90f559ac72efb0ae4ad77e84ae5c`  
+**Final Token Reference**: `IAA-session-1214-R2-20260722-PASS`  
+**Reviewed Substantive SHA**: `2337a27be88fff2b2c7821120ab79b3f23b7518d`  
 **Date**: 2026-07-22
 
 protected_path_touched: true
@@ -55,17 +55,18 @@ Protected paths include `.admin`, `.agent-admin`, the live tracker/index and Sta
 | Final Foreman role-fit | BLOCKED | PASS — consistently recorded |
 | Stage 9 verdict | BLOCKED | PASS — consistently recorded |
 | Stage 10–12 posture | BLOCKED | PASS |
-| Reviewed substantive head | `98253fc9731a90f559ac72efb0ae4ad77e84ae5c` | PASS |
-| Final token | `IAA-session-1214-R1-20260722-PASS` | PASS |
+| Reviewed substantive head | `2337a27be88fff2b2c7821120ab79b3f23b7518d` | PASS |
+| Final token | `IAA-session-1214-R2-20260722-PASS` | PASS |
 
 ## C5. Review-Finding Reconciliation
 
-1. The unresolved P1 finding was accepted: future workflow promises are not current enforceable isolation evidence.
+1. The P1 finding was accepted: future workflow promises are not current enforceable isolation evidence.
 2. W1-BLK-003 and W1-BLK-004 were restored to BLOCKED.
 3. Candidate-specific governed access remains incomplete, so W1-BLK-002 remains BLOCKED.
 4. Final Foreman role-fit was restored to BLOCKED.
 5. Candidate-produced Foreman, IAA and CS2 PASS assertions were neutralized or replaced with correctly attributed records.
-6. Tracker, index and checklist now agree on the BLOCKED posture.
+6. Tracker, index and checklist agree on the BLOCKED posture.
+7. All review conversations are resolved.
 
 ## C6. Administrative Verdict
 
