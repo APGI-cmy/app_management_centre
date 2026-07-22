@@ -31,7 +31,7 @@ workflow-context references only.
 | Aspect | Governed boundary | Evidence / Notes |
 |---|---|---|
 | Repository | `APGI-cmy/app_management_centre` | Contract scope. |
-| Write access | PR branch creation and commits via `GITHUB_TOKEN` in Actions runner context | Standard GitHub Actions OIDC-issued token. |
+| Write access | PR branch creation and commits via the governed GitHub PR workflow; any workflow-driven writes use `GITHUB_TOKEN` in Actions job context | `GITHUB_TOKEN` is the GitHub Actions job token (a GitHub App installation access token), scoped to this repository; it is not an OIDC token. |
 | Direct push to `main` | **PROHIBITED** | Branch protection requires PR and review; candidate cannot bypass. |
 | Direct push to `develop` | **PROHIBITED** | Same branch-protection rules apply. |
 | Governance / merge-release authority | **PROHIBITED** | Explicitly denied in contract v3.4.0. |
