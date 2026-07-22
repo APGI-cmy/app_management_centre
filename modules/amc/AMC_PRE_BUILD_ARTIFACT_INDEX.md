@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-22 (PR #1206 merged the W1 candidate-readiness execution as BLOCKED. Issue #1208 / PR #1209 reconciles the record and adds the explicit Stage 9 W1 CS2 disposition. Stages 10–12 remain blocked.)  
+**Last Updated**: 2026-07-22 (PR #1209 merged the W1 reconciliation and explicit BLOCKED CS2 disposition. Issue #1210 / PR #1211 is the sole residual-blocker closure and final candidate re-attestation wave. Stages 10–12 remain blocked.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -137,15 +137,17 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 |---|---|---|---|
 | Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | ✅ Produced / Merged | PR #1204 merged the universal and W1–W8 readiness gates. |
 | Builder Readiness Attestations | `modules/amc/08-builder-checklist/builder-readiness-attestations.md` | ✅ Produced / Merged | PR #1204 merged the controlled candidate/Foreman attestation template. |
-| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | 🔴 BLOCKED | Historical execution merged in PR #1206; reconciled in PR #1209. |
-| W1 Candidate Readiness Attestation — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md` | 🟠 EXECUTED / 🔴 BLOCKED | Candidate executed the attestation; `CA-02 = NO` and `CA-07 = NO` remain binding. |
-| W1 Environment and Dependency Register | `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md` | 🔴 BLOCKED | Supabase production and `develop` branch exist; candidate permissions and preview/production isolation remain incomplete. |
+| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | 🔴 BLOCKED | Historical execution merged in PR #1206; reconciled in merged PR #1209. |
+| Historical W1 Candidate Readiness Attestation — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md` | 🟠 EXECUTED / 🔴 BLOCKED | Historical candidate attestation; `CA-02 = NO` and `CA-07 = NO` remain provenance. |
+| Final W1 Candidate Re-Attestation — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-final-reattestation-20260722.md` | 🟡 PENDING CANDIDATE | Issue #1210 / PR #1211. Candidate-only RA-01 through RA-24 must be completed by `integration-builder`. |
+| W1 Environment and Dependency Register | `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md` | 🔴 BLOCKED | Supabase production and `develop` exist; candidate-specific permissions and operational enforcement remain incomplete. |
+| W1 Access and Isolation Evidence | `modules/amc/08-builder-checklist/executions/w1/w1-access-isolation-evidence-20260722.md` | 🟡 PARTIAL EVIDENCE | Records GitHub gate execution, successful Vercel Preview, Supabase branch separation and protected-production boundaries without exposing secret values. |
 | W1 RED-Test and Evidence Map | `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md` | 🟡 Defined / BLOCKED | W1 obligations mapped; later implementation evidence remains required. |
 | W1 Environment Evidence Update | `modules/amc/08-builder-checklist/executions/w1/w1-environment-evidence-update-20260721.md` | 🟡 Partial Evidence | Records Vercel/Supabase resources and AMC secret-name presence without values. |
-| W1 Readiness Reconciliation | `modules/amc/08-builder-checklist/executions/w1/w1-readiness-reconciliation-20260722.md` | 🔴 BLOCKED | Issue #1208 / PR #1209 reconciles the post-merge record. |
-| CS2 Decision Record — Stage 9 W1 | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md` | 🔴 Current Disposition: BLOCKED | Explicitly withholds Stage 10, appointment and build authorization. |
+| W1 Readiness Reconciliation | `modules/amc/08-builder-checklist/executions/w1/w1-readiness-reconciliation-20260722.md` | 🔴 Historical BLOCKED | Issue #1208 / merged PR #1209 reconciled the post-merge record. |
+| CS2 Decision Record — Stage 9 W1 | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md` | 🔴 Current Disposition: BLOCKED | Explicitly withholds Stage 10, appointment and build authorization pending a later evidence-complete PASS. |
 
-Stage 9 W1 candidate readiness remains BLOCKED. Passing PR ceremony gates does not approve the candidate or authorize Stage 10–12.
+Stage 9 W1 candidate readiness remains BLOCKED while the final candidate re-attestation and independent Foreman verification are incomplete. Passing PR ceremony gates does not approve the candidate or authorize Stage 10–12.
 
 ---
 
