@@ -5,8 +5,8 @@
 **Wave**: amc-stage9-w1-readiness-reconciliation-20260722  
 **Branch**: `foreman/amc-stage9-w1-readiness-reconciliation`  
 **ECAP Session**: `ecap-session-1209-20260722-r2`  
-**Final IAA Session Reference**: `session-1209-20260722-r2`  
-**Final Token Reference**: `IAA-session-1209-20260722-R2-PASS`  
+**Final IAA Session Reference**: `session-1209-r2-20260722`  
+**Final Token Reference**: `IAA-session-1209-R2-20260722-PASS`  
 **Reviewed Substantive SHA**: `78f569c17cc989ed769946b2509d1b906e74016e`  
 **Date**: 2026-07-22
 
@@ -54,7 +54,7 @@ Protected paths include `.admin`, `.agent-admin`, live tracker/index, Stage 8 au
 | Candidate readiness verdict | BLOCKED | PASS — consistently recorded |
 | Stage 10–12 posture | BLOCKED | PASS |
 | Reviewed substantive head | `78f569c17cc989ed769946b2509d1b906e74016e` | PASS |
-| Final token | `IAA-session-1209-20260722-R2-PASS` | PASS |
+| Final token | `IAA-session-1209-R2-20260722-PASS` | PASS |
 
 ## C5. Review-Finding Reconciliation
 
