@@ -9,7 +9,7 @@
 | Wave | W1 — Runtime Foundation and Environment Setup |
 | Historical issue / PR | #1205 / merged PR #1206 |
 | Reconciliation issue | #1208 |
-| Reconciliation PR | Pending creation |
+| Reconciliation PR | #1209 |
 | Candidate | `integration-builder` |
 | Candidate Contract | `.github/agents/integration-builder.md` |
 | Foreman | `foreman-v2-agent` |
