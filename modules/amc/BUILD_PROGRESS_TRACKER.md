@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-22  
-**Updated By**: foreman-v2-agent — Stage 9 W1 readiness reconciliation, issue #1208  
+**Updated By**: foreman-v2-agent — Stage 9 W1 readiness reconciliation, issue #1208 / PR #1209  
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT — CS2 should use this document as the main live progress dashboard.  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
 > **Current Issue**: [app_management_centre#1208](https://github.com/APGI-cmy/app_management_centre/issues/1208)  
-> **Current PR**: Pending creation  
+> **Current PR**: [app_management_centre#1209](https://github.com/APGI-cmy/app_management_centre/pull/1209)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -25,7 +25,7 @@
 - PR #1204 merged the Stage 9 Builder Checklist structure.
 - PR #1206 merged the W1 candidate-readiness execution with a truthful BLOCKED result and closed Issue #1205.
 - PR #1207 was closed unmerged as a duplicate/superseded path.
-- Issue #1208 opens the final W1 reconciliation and CS2 disposition wave.
+- Issue #1208 / PR #1209 reconciles the W1 record and records final CS2 disposition.
 
 ## Stage Summary
 
@@ -78,7 +78,7 @@ Passing PR ceremony gates does not convert this result to PASS. Stage 10, Stage 
 
 ## Next Action
 
-Complete issue #1208 and its governed PR, refresh final ECAP/IAA against the final substantive head, and retain BLOCKED unless every applicable readiness requirement is supported by evidence.
+Complete PR #1209, refresh final ECAP/IAA against the final substantive head, and retain BLOCKED unless every applicable readiness requirement is supported by evidence.
 
 ## References
 
