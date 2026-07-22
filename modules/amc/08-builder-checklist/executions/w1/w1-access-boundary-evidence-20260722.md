@@ -5,91 +5,69 @@
 | Field | Value |
 |---|---|
 | Closure issue | #1213 |
-| Closure PR | this PR |
+| Closure PR | #1214 |
 | Candidate | `integration-builder` |
 | Wave | W1 — Runtime Foundation and Environment Setup |
-| Blocker closed | W1-BLK-002 — Governed candidate access boundaries |
-| Authored by | `foreman-v2-agent` (independent evidence record) |
+| Blocker assessed | W1-BLK-002 — Governed candidate access boundaries |
+| Assessed by | Foreman proxy review |
 | Date | 2026-07-22 |
-| Status | ✅ EVIDENCED |
-
----
+| Status | 🔴 BLOCKED — boundary design exists; candidate-specific technical permissions and workflow secret availability are not independently demonstrated |
 
 ## Purpose
 
-This document defines the reproducible governed access boundaries for the W1
-candidate (`integration-builder`) across the three required surfaces: GitHub,
-Vercel, and Supabase.
-
-No secret values are recorded here. All claims use resource names, scopes, and
-workflow-context references only.
-
----
+This document records the intended governed access boundaries for GitHub, Vercel and Supabase and distinguishes confirmed facts from controls that still require reproducible evidence. No secret values are recorded.
 
 ## 1. GitHub Repository and Branch Boundary
 
-| Aspect | Governed boundary | Evidence / Notes |
+| Aspect | Current finding | Result |
 |---|---|---|
-| Repository | `APGI-cmy/app_management_centre` | Contract scope. |
-| Write access | PR branch creation and commits via the governed GitHub PR workflow; any workflow-driven writes use `GITHUB_TOKEN` in Actions job context | `GITHUB_TOKEN` is the GitHub Actions job token (a GitHub App installation access token), scoped to this repository; it is not an OIDC token. |
-| Direct push to `main` | **PROHIBITED** | Branch protection requires PR and review; candidate cannot bypass. |
-| Direct push to `develop` | **PROHIBITED** | Same branch-protection rules apply. |
-| Governance / merge-release authority | **PROHIBITED** | Explicitly denied in contract v3.4.0. |
-| Actions workflow authority | Read workflow definitions; trigger via PR/push event; write own job context | Cannot modify `.github/workflows/` without PR review gate. |
-| GITHUB_TOKEN permissions | Defined by repository default workflow permissions and each workflow’s explicit `permissions:` block | Avoid asserting specific scopes here unless you cite the exact workflow file + permissions configuration. |
-| Cross-repository access | **PROHIBITED** | Contract and Actions token are repository-scoped. |
+| Repository | `APGI-cmy/app_management_centre` | PASS |
+| Candidate PR branch activity | Candidate-authored commits exist on PR #1214 | PASS — OBSERVED |
+| Direct push to `main` | Prohibited by governance design; branch-setting enforcement not independently captured in this PR | PARTIAL PASS |
+| Workflow permissions | Actual permissions vary by repository defaults and each workflow `permissions:` block | PARTIAL PASS |
+| Governance / merge-release authority | Prohibited by candidate contract | PASS — AUTHORITY BOUNDARY |
+| Cross-repository access | Not required for W1 and not claimed | PASS AS SCOPE |
 
-**Result**: GitHub boundary is governed, documented, and reproducible without personal access assumptions.
-
----
+GitHub repository and PR visibility are demonstrated. Exact governed write and branch-protection enforcement should be cited from repository settings or the relevant workflow files when they exist.
 
 ## 2. Vercel Access Boundary
 
-| Aspect | Governed boundary | Evidence / Notes |
+| Aspect | Current finding | Result |
 |---|---|---|
-| Vercel project | `app-management-centre` | Established in PR #1206 and confirmed in `w1-environment-evidence-update-20260721.md`. |
-| Access mechanism | Repository secrets consumed in GitHub Actions workflow context only | Secrets: `AMC_VERCEL_ORG_ID`, `AMC_VERCEL_PROJECT_ID`, `AMC_VERCEL_TOKEN`, `AMC_VERCEL_AUTOMATION_BYPASS_SECRET`. |
-| Secret availability | Available to `integration-builder` only when executing within a governed workflow job | Cannot be read outside the Actions runner context. |
-| Direct Vercel dashboard access | **NOT REQUIRED** and not claimed | All Vercel operations must route through workflow steps using the above secrets. |
-| Production deployment trigger | Production deployments triggered only by merge to `main`; requires PR approval and branch protection | PR/preview work does not deploy to production. |
-| Preview deployment trigger | Automatic on PR open/update; uses preview environment variable scope | Preview does not use production variable values. |
-| Secret value exposure | **PROHIBITED** | No secret value may appear in commits, logs, PR bodies, or evidence artifacts. |
-
-**Result**: Vercel access is scoped to AMC project and repository-secret/workflow boundary; no personal or unscoped access is claimed.
-
----
+| Vercel project | `app-management-centre` exists; PR #1214 produced a Ready Preview | PASS — RESOURCE |
+| Repository secret names | `AMC_VERCEL_ORG_ID`, `AMC_VERCEL_PROJECT_ID`, `AMC_VERCEL_TOKEN`, `AMC_VERCEL_AUTOMATION_BYPASS_SECRET` recorded as present without values | PASS — NAME PRESENCE |
+| Candidate-specific use of secrets | No committed W1 deployment workflow currently demonstrates that these secrets are available only in the intended governed job context | BLOCKED |
+| Preview versus Production credentials | Vercel scope model is described, but AMC-specific variable bindings are not reproducibly inspected in-repo | BLOCKED |
+| Direct dashboard access | Not required and not claimed | PASS AS DESIGN |
+| Production deployment capability | No W1 workflow exists from which candidate prohibition can be independently verified | BLOCKED |
 
 ## 3. Supabase Access Boundary
 
-| Aspect | Governed boundary | Evidence / Notes |
+| Aspect | Current finding | Result |
 |---|---|---|
-| Non-production project | `develop` branch, project ref `kkksclwvbmyexpsdyejj` | Established as `ACTIVE_HEALTHY` in PR #1206 and confirmed in `w1-environment-and-dependency-register.md`. |
-| Non-production access mechanism | Repository secret (Supabase `develop` connection string / service role key) available in Actions workflow context | Consumed by W1 migration and test jobs only; not accessible outside runner. |
-| Production project | `icawesooswoqzepcdevg` | Exists and is healthy; candidate access boundary is **explicitly prohibited**. |
-| Direct production mutation | **PROHIBITED** | No production Supabase credential is available to `integration-builder` workflow jobs. |
-| Production secret access in W1 | **PROHIBITED** | `db-migrate.yml` is a W7 implementation output; production migration authority is outside W1 scope. |
-| Cross-project Supabase access | **PROHIBITED** | Develop and production secrets are kept in separate named repository secrets; W1 jobs consume develop credentials only. |
+| Non-production resource | `develop`, project ref `kkksclwvbmyexpsdyejj`, exists and is healthy | PASS — RESOURCE |
+| Production resource | `icawesooswoqzepcdevg` exists and is healthy | PASS — RESOURCE |
+| Candidate access to `develop` | Intended through governed workflow credentials; no W1 workflow currently demonstrates candidate-specific access | BLOCKED |
+| Production credential exclusion | Claimed by design, but the actual W1 workflow secret set does not yet exist for inspection | BLOCKED |
+| Direct production mutation | Prohibited by contract and scope; technical enforcement remains unproved | PARTIAL PASS |
+| Production migration | `db-migrate.yml` belongs to W7 and is outside W1 | PASS AS SCOPE |
 
-**Result**: Supabase access is explicitly scoped to the `develop` non-production branch; direct production mutation is prohibited by secret-boundary design.
+## 4. Evidence Rule
 
----
+A resource name, secret name, contractual prohibition or future workflow design is not equivalent to demonstrated candidate-specific governed access. PASS requires evidence that the candidate can perform required non-production work while production credentials and mutation paths remain unavailable.
 
-## 4. Summary Table
+No secret values may be used as evidence.
 
-| Surface | Governed boundary | Direct-production mutation | Personal-access assumption |
-|---|---|---|---|
-| GitHub | `APGI-cmy/app_management_centre`; PR-branch writes; no direct main/develop push | N/A | None |
-| Vercel | AMC project via `AMC_VERCEL_*` secrets in workflow context | Preview ≠ production; merge-to-main required for production deploy | None |
-| Supabase | `develop` branch (`kkksclwvbmyexpsdyejj`) via workflow secret | **PROHIBITED** — production ref `icawesooswoqzepcdevg` has no W1 credential | None |
+## 5. W1-BLK-002 Disposition
 
----
+| Required surface | Status |
+|---|---|
+| GitHub repository / PR branch visibility | PARTIAL PASS |
+| Governed GitHub write and protection boundary | PARTIAL PASS |
+| Governed Vercel workflow access | BLOCKED |
+| Governed Supabase `develop` access | BLOCKED |
+| Production credential exclusion | BLOCKED |
 
-## Resolution of W1-BLK-002
+**W1-BLK-002: OPEN / BLOCKED.**
 
-All three required surfaces (GitHub, Vercel, Supabase) now have:
-
-- A defined and reproducible access mechanism.
-- A governed boundary that prohibits personal access or secret-value pasting.
-- An explicit prohibition on direct production mutation.
-
-**W1-BLK-002: CLOSED.**
+Closure requires reproducible evidence of candidate-specific governed non-production access and production exclusion. This record does not authorize implementation or Stage 10.
