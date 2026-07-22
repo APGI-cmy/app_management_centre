@@ -8,7 +8,7 @@ Candidate: `integration-builder`
 Status: STAGE_9_W1_RECONCILED_BLOCKED
 Verdict: BLOCKED
 Reviewed SHA: 78f569c17cc989ed769946b2509d1b906e74016e
-PHASE_B_BLOCKING_TOKEN: IAA-session-1209-20260722-R2-PASS
+PHASE_B_BLOCKING_TOKEN: IAA-session-1209-R2-20260722-PASS
 
 ## Purpose
 
@@ -53,13 +53,13 @@ governing_issue: #1208
 Administrative Verdict: PASS
 Candidate Readiness Verdict: BLOCKED
 Reviewed SHA: 78f569c17cc989ed769946b2509d1b906e74016e
-PHASE_B_BLOCKING_TOKEN: IAA-session-1209-20260722-R2-PASS
+PHASE_B_BLOCKING_TOKEN: IAA-session-1209-R2-20260722-PASS
 Adoption Phase: PHASE_B_BLOCKING
 
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
 base_head: 78f569c17cc989ed769946b2509d1b906e74016e
 final_head: 78f569c17cc989ed769946b2509d1b906e74016e
-final_token_binding: IAA-session-1209-20260722-R2-PASS
+final_token_binding: IAA-session-1209-R2-20260722-PASS
 
 The assurance PASS certifies the integrity and consistency of this governance record. It does not convert the candidate's BLOCKED result to PASS and does not authorize Stage 10, appointment, delegation or implementation.
