@@ -8,8 +8,7 @@
 | Closure PR | this PR |
 | Candidate | `integration-builder` |
 | Wave | W1 — Runtime Foundation and Environment Setup |
-| Blockers closed | W1-BLK-003 — Preview/staging versus production isolation |
-| | W1-BLK-004 — Protected production and no-production-mutation controls |
+| Blockers closed | W1-BLK-003 — Preview/staging versus production isolation; W1-BLK-004 — Protected production and no-production-mutation controls |
 | Authored by | `foreman-v2-agent` (independent evidence record) |
 | Date | 2026-07-22 |
 | Status | ✅ EVIDENCED |
