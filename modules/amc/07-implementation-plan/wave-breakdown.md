@@ -3,8 +3,9 @@
 **Stage**: 8 - Implementation Plan  
 **Module**: App Management Centre (AMC)  
 **Version**: 1.0  
-**Status**: Produced for CS2 review  
+**Status**: ✅ CS2 Approved with Conditions  
 **Issue**: app_management_centre#1199  
+**Disposition**: app_management_centre#1201 / merged PR #1202  
 **Wave**: amc-stage8-implementation-plan-20260702
 
 ---
@@ -42,7 +43,7 @@ W3 establishes the surface map. W4 proves the first full E2E path. W5 and W6 exp
 
 ## 4. Stage 9 Inputs
 
-If CS2 later opens Stage 9, the builder checklist must preserve this wave order and must not weaken the required evidence in this file.
+The Stage 9 Builder Checklist must preserve this wave order and must not weaken the required evidence in this file.
 
 ---
 

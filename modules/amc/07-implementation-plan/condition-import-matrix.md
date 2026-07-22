@@ -3,7 +3,8 @@
 **Stage**: 8 - Implementation Plan  
 **Module**: App Management Centre (AMC)  
 **Issue**: app_management_centre#1199  
-**Status**: Produced for CS2 review
+**Status**: ✅ CS2 Approved with Conditions  
+**Disposition**: app_management_centre#1201 / merged PR #1202
 
 ---
 
@@ -38,7 +39,7 @@ This matrix maps the CS2-approved Stage 5, 5a, 6, and 7 conditions into Stage 8 
 
 ## Stage 9 Carry-Forward Rule
 
-A later Stage 9 checklist must import this matrix without reducing the evidence standard.
+The Stage 9 checklist must import this matrix without reducing the evidence standard.
 
 ---
 
