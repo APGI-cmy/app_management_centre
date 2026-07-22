@@ -19,9 +19,10 @@
 > **Preservation rule**: The historical attestation at
 > `integration-builder-readiness-attestation.md` is retained unchanged as the
 > authoritative record of the original BLOCKED execution (PR #1206) and the
-> reconciled CS2 BLOCKED disposition (PR #1209). This v2 document is an
-> additive closure record only; it does not overwrite, supersede, or replace
-> the historical attestation.
+> reconciled CS2 BLOCKED disposition (PR #1209). This v2 document supersedes
+> v1 for the purpose of current W1 candidate readiness determination.
+> The historical v1 attestation remains preserved as provenance of the BLOCKED
+> execution history and is not overwritten or removed.
 
 ---
 
