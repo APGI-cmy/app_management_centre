@@ -14,15 +14,15 @@
 | Candidate | `integration-builder` |
 | Candidate contract | `.github/agents/integration-builder.md` v3.4.0 |
 | Foreman | `foreman-v2-agent` |
-| Corrected authority | `w1-bootstrap-readiness-model-correction-20260723.md` |
+| Proposed correction | `w1-bootstrap-readiness-model-correction-20260723.md` |
 | Reassessed | 2026-07-23 |
-| Overall status | ✅ PASS — all corrected pre-appointment readiness requirements evidenced; implementation proof retained for W1 build exit |
+| Overall status | 🟡 RECOMMENDED PASS — becomes final only upon explicit CS2 acceptance/merge of PR #1216 |
 
 ## 1. Evaluation Boundary
 
 This record evaluates whether `integration-builder` is ready to proceed to Stage 10 consideration for W1. It does not appoint, delegate or authorize implementation.
 
-The binding correction separates Stage 9 readiness evidence from Stage 12 W1 build-exit evidence. Workflow files, executed logs, actual credential binding, no-production-side-effect proof and deployment/isolation execution evidence remain mandatory W1 outputs, not Stage 9 prerequisites.
+The proposed correction separates Stage 9 readiness evidence from Stage 12 W1 build-exit evidence. Until CS2 accepts PR #1216, the existing BLOCKED disposition remains authoritative. Upon acceptance, workflow files, executed logs, actual credential binding, no-production-side-effect proof and deployment/isolation execution evidence remain mandatory W1 outputs rather than Stage 9 prerequisites.
 
 ## 2. Candidate and Contract Record
 
@@ -123,7 +123,7 @@ The binding correction separates Stage 9 readiness evidence from Stage 12 W1 bui
 | H-02 | PASS | Contract authority matches scope without overreach. |
 | H-03 | PASS | AMC and RED-test comprehension evidenced. |
 | H-04 | PASS | No unresolved pre-appointment integrity or performance concern. |
-| H-05 | PASS | Final role-fit confirmed under corrected readiness boundary. |
+| H-05 | PASS | Final role-fit confirmed under the proposed corrected readiness boundary. |
 
 ## 4. Corrected W1 Seven-Dimension Contract
 
@@ -143,7 +143,7 @@ The binding correction separates Stage 9 readiness evidence from Stage 12 W1 bui
 |---|---|---|
 | W1-01 | PASS | Candidate understands `ci.yml` and `deploy-frontend.yml` are W1 outputs and `db-migrate.yml` is W7. |
 | W1-02 | PASS AS READINESS RULE | Candidate understands PR/Preview must not mutate Production or receive Production credentials/data; execution proof remains mandatory W1 build evidence. |
-| W1-03 | PASS AS REQUIREMENT | `.env.example` and no-secret rule understood; file remains W1 output. |
+| W1-03 | PASS AS REQUIREMENT | Candidate understands the existing root `.env.example` contract and no-secret rule; validation/update remains a W1 implementation obligation. |
 | W1-04 | PASS | Required CI/type/lint/test/schema/Preview/environment evidence identified. |
 | W1-05 | PASS | Every pre-appointment dependency and stop condition has an owner, arrangement and escalation path. |
 | W1-06 | PASS | Stage 9 readiness exit and W1 build exit are separately understood and verifiable. |
@@ -154,7 +154,7 @@ The following remain mandatory after authorized appointment and implementation:
 
 1. `ci.yml` and `deploy-frontend.yml`.
 2. Executed CI/type/lint/test/schema logs.
-3. Root `.env.example` implementation contract.
+3. Validation and any required update of the existing root `.env.example`, including proof it remains non-secret.
 4. Actual Preview-to-non-production Supabase binding.
 5. Workflow secret-consumption proof without value disclosure.
 6. No-Production-side-effect execution proof.
@@ -162,11 +162,11 @@ The following remain mandatory after authorized appointment and implementation:
 8. Preview deployment/isolation evidence.
 9. W1 RED-to-GREEN evidence bundle.
 
-These are not waived by this PASS.
+These are not waived by the recommended PASS.
 
 ## 7. Blocking Register
 
-| ID | Item | Corrected Stage 9 status |
+| ID | Item | Corrected Stage 9 status if CS2 accepts PR #1216 |
 |---|---|---|
 | W1-BLK-001 | Candidate mandatory-governance acknowledgement | CLOSED |
 | W1-BLK-002 | Governed access arrangement, owners, resources, secret scopes and escalation path | CLOSED AS READINESS |
@@ -176,6 +176,6 @@ These are not waived by this PASS.
 
 ## 8. Current Verdict
 
-**VERDICT: PASS — Stage 9 W1 candidate readiness.**
+**RECOMMENDED VERDICT: PASS — Stage 9 W1 candidate readiness, pending explicit CS2 acceptance/merge of PR #1216.**
 
-`integration-builder` is eligible for Stage 10 consideration. This record does not authorize Stage 10, appoint the candidate or authorize implementation. Stage 10 requires explicit CS2 authorization; Stages 11 and 12 remain sequentially blocked.
+Until that acceptance, the prior BLOCKED disposition remains current authority. After acceptance, `integration-builder` becomes eligible for Stage 10 consideration. This record does not authorize Stage 10, appoint the candidate or authorize implementation.
