@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-23  
-**Updated By**: Foreman proxy — Stage 10 W1 IAA Pre-Brief, issue #1217 / PR #1218
+**Updated By**: Foreman proxy — Stage 10 post-merge reconciliation, issue #1219
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1217](https://github.com/APGI-cmy/app_management_centre/issues/1217)  
-> **Current PR**: [app_management_centre#1218](https://github.com/APGI-cmy/app_management_centre/pull/1218)  
+> **Current Issue**: [app_management_centre#1219](https://github.com/APGI-cmy/app_management_centre/issues/1219)  
+> **Current PR**: Not yet opened  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -27,7 +27,8 @@
 - PR #1209 reconciled the record and retained BLOCKED.
 - PR #1214 merged the candidate re-attestation and truthful BLOCKED residual review.
 - PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
-- Issue #1217 / PR #1218 prepares and dispositions the canonical Stage 10 W1 IAA Pre-Brief.
+- Issue #1217 / merged PR #1218 completed and accepted the canonical Stage 10 W1 IAA Pre-Brief with token `IAA-session-1218-R2-20260723-PASS`.
+- Issue #1219 reconciles the post-merge Stage 10 control records; it does not authorize Stage 11 or Stage 12.
 
 ## Stage Summary
 
@@ -43,8 +44,8 @@
 | 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | Evidence rows remain binding. |
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
 | 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Corrected pre-appointment readiness model accepted in merged PR #1216. |
-| 10 | IAA Pre-Brief | 🟡 ACTIVE — PREFLIGHT_BRIEF_COMPLETE pending merge/CS2 acceptance | Canonical W1 pre-brief is in PR #1218. |
-| 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED | Awaiting Stage 10 merge and separate CS2 authorization. |
+| 10 | IAA Pre-Brief | ✅ COMPLETE — PREFLIGHT_BRIEF_COMPLETE | Accepted through merged PR #1218; final token `IAA-session-1218-R2-20260723-PASS`. |
+| 11 | Builder Appointment | ⬜ NOT STARTED — REQUIRES SEPARATE CS2 AUTHORIZATION | Stage 10 is complete; no appointment authority is created by issue #1219. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority. |
 
 ## Stage 9 W1 Final Facts
@@ -100,9 +101,11 @@ The pre-brief defines:
 
 ## Current Disposition
 
-**Stage 10 W1 IAA Pre-Brief: PREFLIGHT_BRIEF_COMPLETE — pending merge and final CS2 acceptance of PR #1218.**
+**Stage 10 W1 IAA Pre-Brief: COMPLETE — `PREFLIGHT_BRIEF_COMPLETE`, accepted through merged PR #1218.**
 
-This does not appoint the builder or authorize Stage 12. Stage 11 requires a separate CS2-authorized appointment issue after Stage 10 is accepted.
+Final assurance token: `IAA-session-1218-R2-20260723-PASS`.
+
+This does not appoint the builder or authorize Stage 12. Stage 11 requires a separate explicit CS2-authorized appointment issue.
 
 ## Current Artifacts
 
@@ -114,7 +117,7 @@ This does not appoint the builder or authorize Stage 12. Stage 11 requires a sep
 
 ## Next Action
 
-Complete review and merge of PR #1218. After merge, CS2 may separately authorize Stage 11 — W1 Builder Appointment. Do not begin Stage 12 implementation before Stage 11 is completed.
+Complete issue #1219 post-merge reconciliation. Stage 11 — W1 Builder Appointment is the next lifecycle stage but remains unstarted and requires separate explicit CS2 authorization. Do not begin Stage 12 implementation before a valid Stage 11 appointment is completed.
 
 ## References
 
