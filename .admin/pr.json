@@ -2,10 +2,10 @@
   "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1213",
-  "scope_summary": "Record the candidate-authored W1 re-attestation, verify governed access and preview/production isolation against reproducible evidence, retain BLOCKED where controls are not currently enforceable, update tracker and artifact index, and seek a truthful final Stage 9 disposition without opening Stages 10-12.",
+  "governing_issue": "#1215",
+  "scope_summary": "Correct the W1 Stage 9 bootstrap-readiness model by separating pre-appointment readiness evidence from Stage 12 build-exit evidence, reassess integration-builder under the corrected boundary, update tracker/index and produce a final Stage 9 disposition without opening Stages 10-12.",
   "created_by": "foreman-v2-agent",
-  "created_at": "2026-07-22T06:41:30Z",
+  "created_at": "2026-07-23T07:04:21Z",
   "execution_model": "foreman-orchestrated",
   "orchestrating_agent": "foreman-v2-agent",
   "implementing_agent": "integration-builder"
