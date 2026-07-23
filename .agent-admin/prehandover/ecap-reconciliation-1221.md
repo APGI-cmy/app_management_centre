@@ -5,7 +5,8 @@
 **Wave**: amc-stage10-postmerge-reconciliation-20260723  
 **Branch**: `foreman/amc-stage10-postmerge-reconciliation-1219`  
 **ECAP Session**: `ecap-session-1221-20260723`  
-**Reviewed Substantive SHA**: `af0ef96ad76816085748cc25ff261500425f058b`  
+**ECAP-Reviewed Pre-Evidence SHA**: `af0ef96ad76816085748cc25ff261500425f058b`  
+**Later IAA-Reviewed Substantive SHA**: `80d316f30fd380bef5dde938efeea602b39f6613`  
 **Date**: 2026-07-23
 
 protected_path_touched: true
@@ -29,7 +30,8 @@ This record is limited to administrative completeness, evidence-path validation,
 | Governing issue | PASS — #1219 |
 | Pull request | PASS — #1221 |
 | Branch | PASS — `foreman/amc-stage10-postmerge-reconciliation-1219` |
-| Reviewed substantive SHA | PASS — `af0ef96ad76816085748cc25ff261500425f058b` |
+| ECAP-reviewed pre-evidence SHA | PASS — `af0ef96ad76816085748cc25ff261500425f058b` |
+| Later IAA-reviewed substantive SHA | Provenance pointer only — `80d316f30fd380bef5dde938efeea602b39f6613` |
 | PR state at review | Open draft |
 | `.admin/pr.json` | PASS — valid governance-control metadata |
 | `requires_iaa` | PASS — `true` |
@@ -38,13 +40,15 @@ This record is limited to administrative completeness, evidence-path validation,
 
 ## C3. Changed-File Inventory
 
-The reviewed substantive head contains five changed files:
+The ECAP-reviewed pre-evidence head `af0ef96ad76816085748cc25ff261500425f058b` contains five changed files:
 
 1. `.admin/pr.json`
 2. `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md`
 3. `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md`
 4. `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
 5. `modules/amc/BUILD_PROGRESS_TRACKER.md`
+
+The later ECAP-record commit and one-line administrative-only wording correction produced the separate IAA-reviewed substantive head `80d316f30fd380bef5dde938efeea602b39f6613`. The subsequent two-path token-recording delta is documented in the PR-specific wave and IAA records. These lifecycle SHAs are intentionally distinct and must not be rewritten as though ECAP reviewed a later head.
 
 No runtime implementation, workflow, migration, schema, deployment configuration, Production setting, builder appointment, or Stage 12 build artifact is included.
 
@@ -75,11 +79,11 @@ These are administrative record checks only. They do not constitute independent 
 
 ## C6. Workflow and Review Administration
 
-At reviewed substantive SHA `af0ef96ad76816085748cc25ff261500425f058b`:
+At the ECAP-reviewed pre-evidence SHA `af0ef96ad76816085748cc25ff261500425f058b`:
 
 - the ECAP Admin Boundary Gate passed;
 - the governance and preflight workflows other than the combined IAA/ECAP hard gate completed successfully;
-- the combined hard gate remained blocked because this PR-specific ECAP record and PR-specific IAA evidence were not yet committed;
+- before the evidence-record commits, the combined hard gate remained blocked because the PR-specific ECAP record and PR-specific IAA evidence were not yet present at that pre-evidence head;
 - no submitted reviews or unresolved inline review threads were present at the time of ECAP inspection.
 
 The repository-local `agent_bootstrap` tool referenced by the automated PR notice was not exposed to this ECAP evaluator session. This note records the tool-access limitation only and does not grant broader authority or substitute for repository preflight controls.
