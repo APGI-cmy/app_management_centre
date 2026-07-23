@@ -1,4 +1,8 @@
-# Wave 1.0 Implementation Progress — Canonical Record
+# Wave 1.0 Implementation Progress — Historical Legacy Record
+
+> **Classification:** HISTORICAL / LEGACY PROVENANCE — NOT CURRENT LIFECYCLE AUTHORITY  
+> **Current authority:** `modules/amc/BUILD_PROGRESS_TRACKER.md` under the active 12-stage AMC lifecycle.  
+> The historical “COMPLETE” and “210/210 GREEN” claims below describe an earlier Wave 1.0 lifecycle and must not be used as evidence that current AMC Stage 12 has started or completed. The remainder of this record is preserved as historical evidence.
 
 **Document Type:** Canonical Progress Record  
 **Created:** 2026-01-04  

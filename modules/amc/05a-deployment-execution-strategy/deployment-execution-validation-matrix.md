@@ -3,7 +3,7 @@
 **Stage**: 5a — Deployment execution validation matrix  
 **Module**: App Management Centre (AMC)  
 **Version**: 1.0  
-**Status**: Produced for CS2 review  
+**Status**: ✅ CS2 Approved with Conditions — decision issue #1197 / merged PR #1198.
 **Wave**: amc-stage5a-deployment-execution-retrofit-20260629  
 **Issue**: app_management_centre#1189  
 **Authority basis**: TR-1910, Stage 5 architecture map, Stage 5 review notes, existing Stage 5a DES artifacts  

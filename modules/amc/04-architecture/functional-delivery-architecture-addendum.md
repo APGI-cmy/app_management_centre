@@ -3,7 +3,7 @@
 **Stage**: 5 — Architecture addendum  
 **Module**: App Management Centre (AMC)  
 **Version**: 1.0  
-**Status**: Produced for CS2 review  
+**Status**: ✅ CS2 Approved with Conditions — decision issue #1197 / merged PR #1198.
 **Wave**: amc-stage5-functional-delivery-retrofit-20260626  
 **Issue**: app_management_centre#1187  
 **Authority basis**: PR #1186, Stage 1 functional-delivery definition, Stage 2 CTA/API/Data/Audit matrix, Stage 3 FR-1900, Stage 4 TR-1900, Stage 1-4 change-propagation audit  

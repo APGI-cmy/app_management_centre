@@ -160,25 +160,16 @@ Standalone `iaa-prebrief-*` artifacts are legacy and must not be used as active 
 
 ## 5. AMC current build posture
 
-AMC is not build-ready yet.
-
-The current build posture is:
+AMC has completed Stages 1–10 of the governed pre-build sequence. Issue #1222 is the active Stage 11 appointment-readiness blocker investigation.
 
 ```text
-Stages 1-3: complete / approved
-Stage 4: treated as approved
-Stage 5: produced, approval-pending
-Stage 5a: produced, approval-pending
-Stage 6 QA-to-Red: produced, approval-pending
-Stage 7 PBFAG: produced, approval-pending
-Stage 8 Implementation Plan: not started / blocked
-Stage 9 Builder Checklist: not started / blocked
-Stage 10 IAA Pre-Brief: not started / blocked
-Stage 11 Builder Appointment: not started / blocked
+Stages 1–10: complete / accepted as recorded in modules/amc/BUILD_PROGRESS_TRACKER.md
+Stage 11 Builder Appointment: NO-GO while Issue #1222 blockers B1, B4, B5 and B8 remain open
 Stage 12 Build: not started / blocked
+integration-builder: nominated/readiness-approved but not appointed
 ```
 
-Therefore the next AMC work is governance/admin alignment and pre-build closure, not implementation.
+The primary live lifecycle authority is `modules/amc/BUILD_PROGRESS_TRACKER.md`. Earlier posture statements retained in historical records do not override that tracker.
 
 ---
 

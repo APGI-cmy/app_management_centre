@@ -2,11 +2,11 @@
   "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1219",
-  "scope_summary": "Reconcile the post-merge Stage 10 control surfaces with merged PR #1218, align the progress tracker, pre-build artifact index and Stage 10 pointer with the approved Stage 8 implementation plan, and preserve the boundary that Stage 11 requires separate CS2 authorization and Stage 12 remains blocked.",
+  "governing_issue": "#1222",
+  "scope_summary": "Investigate and truthfully disposition AMC Stage 11 blockers B1-B8, normalize live pre-build authority surfaces, preserve historical evidence, and retain the boundary that no builder is appointed and Stage 12 remains blocked.",
   "created_by": "foreman-v2-agent",
-  "created_at": "2026-07-23T11:51:23Z",
+  "created_at": "2026-07-23T13:56:30Z",
   "execution_model": "foreman-orchestrated",
   "orchestrating_agent": "foreman-v2-agent",
-  "implementing_agent": "none-postmerge-alignment-only"
+  "implementing_agent": "none-investigation-and-reconciliation-only"
 }

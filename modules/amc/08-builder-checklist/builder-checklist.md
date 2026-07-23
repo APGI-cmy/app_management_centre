@@ -1,5 +1,7 @@
 # AMC Builder Checklist — Stage 9
 
+**Status**: ✅ Produced / Merged — PR #1204; W1 candidate PASS accepted separately in merged PR #1216.  
+
 ## Status Header
 
 | Field | Value |

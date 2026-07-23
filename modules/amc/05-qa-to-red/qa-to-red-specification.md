@@ -3,7 +3,7 @@
 **Stage**: 6 — QA-to-Red
 **Module**: App Management Centre (AMC)
 **Version**: 1.0
-**Status**: 🟡 Produced — Approval Pending (CS2)
+**Status**: ✅ CS2 Approved with Conditions — decision issue #1197 / merged PR #1198.
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
 **CS2 Authorization**: app_management_centre#1141 (Stage 6 kickoff — CS2 @APGI-cmy)
 **Governing Delivery Issue**: app_management_centre#1141

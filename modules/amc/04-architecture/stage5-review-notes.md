@@ -1,5 +1,7 @@
 # AMC Stage 5 Review Notes
 
+**Status**: ✅ CS2 Approved with Conditions — decision issue #1197 / merged PR #1198.  
+
 Stage: 5 Architecture
 Issue: app_management_centre#1187
 PR: app_management_centre#1188

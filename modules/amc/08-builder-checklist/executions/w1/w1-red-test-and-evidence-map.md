@@ -8,7 +8,7 @@
 | PR | #1206 |
 | Candidate | `integration-builder` |
 | Wave | W1 — Runtime Foundation and Environment Setup |
-| Status | 🟡 Defined — candidate comprehension and access evidence pending |
+| Status | ✅ Defined / Binding for W1 — candidate comprehension accepted in merged PR #1216; executable intended-RED evidence remains unproduced |
 
 ---
 
@@ -16,15 +16,15 @@
 
 | Test / control | W1 intent | Required later GREEN evidence | Candidate comprehension |
 |---|---|---|---|
-| `QA-DEPLOY-001` | Required deployment workflow family exists and is owned | Full-path workflow definitions and owner evidence | BLOCKED — candidate review pending |
-| `QA-DEPLOY-002` | PR CI has no production side effects | Workflow/test evidence proving no production mutation | BLOCKED |
-| `QA-DEPLOY-003` | Preview/staging resources are separated from production | Environment/project isolation evidence | BLOCKED |
-| `QA-DEPLOY-004` | Secret boundaries prevent production secret exposure | Secret-source/environment mapping without values | BLOCKED |
-| `QA-DEPLOY-006` | Production action remains protected/manual | Protected-environment/approval evidence | BLOCKED |
-| `QA-DEPLOY-007` | Migration execution uses approved protected path | Workflow and command contract evidence | BLOCKED |
-| `QA-DEPLOY-010` | Runtime/deployment configuration is complete and non-placeholder | CI/configuration validation logs | BLOCKED |
-| Applicable QA-CONFIG | Environment and runtime configuration are explicit and valid | Config inventory and validation output | BLOCKED |
-| Applicable QA-DES | Deployment execution follows approved Stage 5a design | Traceability from Stage 5a to workflow/configuration | BLOCKED |
+| `QA-DEPLOY-001` | Required deployment workflow family exists and is owned | Full-path workflow definitions and owner evidence | COMPREHENSION ACCEPTED — executable RED pending |
+| `QA-DEPLOY-002` | PR CI has no production side effects | Workflow/test evidence proving no production mutation | COMPREHENSION ACCEPTED — executable RED pending |
+| `QA-DEPLOY-003` | Preview/staging resources are separated from production | Environment/project isolation evidence | COMPREHENSION ACCEPTED — executable RED pending |
+| `QA-DEPLOY-004` | Secret boundaries prevent production secret exposure | Secret-source/environment mapping without values | COMPREHENSION ACCEPTED — executable RED pending |
+| `QA-DEPLOY-006` | Production action remains protected/manual | Protected-environment/approval evidence | COMPREHENSION ACCEPTED — executable RED pending |
+| `QA-DEPLOY-007` | Migration execution uses approved protected path | Workflow and command contract evidence | COMPREHENSION ACCEPTED — executable RED pending |
+| `QA-DEPLOY-010` | Runtime/deployment configuration is complete and non-placeholder | CI/configuration validation logs | COMPREHENSION ACCEPTED — executable RED pending |
+| Applicable QA-CONFIG | Environment and runtime configuration are explicit and valid | Config inventory and validation output | COMPREHENSION ACCEPTED — executable RED pending |
+| Applicable QA-DES | Deployment execution follows approved Stage 5a design | Traceability from Stage 5a to workflow/configuration | COMPREHENSION ACCEPTED — executable RED pending |
 
 ---
 
@@ -62,6 +62,6 @@ The following cannot satisfy W1:
 
 ## Current Result
 
-The W1 test and evidence obligations are mapped, but the candidate has not yet acknowledged them and the environment/access evidence is absent.
+The W1 test and evidence obligations are mapped and candidate comprehension was accepted in merged PR #1216. Issue #1222 confirmed that executable W1 tests and observed intended-RED evidence are not committed, Supabase develop and Vercel configuration are not independently visible through the current connectors, and the bootstrap control is not operational in the current session.
 
-**Result: BLOCKED for Stage 10 progression.**
+**Current result: BLOCKING for `integration-builder` appointment pending Issues #1226, #1227 and #1228.**

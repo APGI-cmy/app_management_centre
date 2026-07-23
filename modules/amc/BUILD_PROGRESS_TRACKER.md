@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-23  
-**Updated By**: Foreman proxy — Stage 10 post-merge alignment, issue #1219 / PR #1220
+**Updated By**: Foreman — Issue #1222 Stage 11 blocker investigation
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1219](https://github.com/APGI-cmy/app_management_centre/issues/1219)  
-> **Current PR**: [app_management_centre#1220](https://github.com/APGI-cmy/app_management_centre/pull/1220)  
+> **Current Issue**: [app_management_centre#1222](https://github.com/APGI-cmy/app_management_centre/issues/1222)  
+> **Current PR**: Pending — branch `foreman/amc-stage11-blocker-investigation-1222`  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -28,7 +28,9 @@
 - PR #1214 merged the candidate re-attestation and truthful BLOCKED residual review.
 - PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
 - PR #1218 merged the canonical Stage 10 W1 IAA Pre-Brief with disposition `PREFLIGHT_BRIEF_COMPLETE` at merge commit `7889309cf4f357894d496bde1bf79349a24bb450`.
-- Issue #1219 / PR #1220 reconciles post-merge tracker/index/pointer status only.
+- Issue #1219 / merged PR #1220 reconciled post-merge tracker/index/pointer status.
+- PR #1221 is closed unmerged and superseded; it is not an authority carrier.
+- Issue #1222 investigates Stage 11 blockers B1–B8 and preserves Stage 12 as blocked.
 
 ## Stage Summary
 
@@ -45,7 +47,7 @@
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
 | 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Corrected pre-appointment readiness model accepted in merged PR #1216. |
 | 10 | IAA Pre-Brief | ✅ COMPLETE — `PREFLIGHT_BRIEF_COMPLETE` | Accepted through merged PR #1218; final token `IAA-session-1218-R2-20260723-PASS`. |
-| 11 | Builder Appointment | ⬜ NOT STARTED — ELIGIBLE PENDING EXPLICIT CS2 AUTHORIZATION | `integration-builder` remains nominated/readiness-approved but not appointed. |
+| 11 | Builder Appointment | ⛔ NO-GO — BLOCKERS OPEN | B1 executable RED, B4 Supabase, B5 Vercel and B8 bootstrap remain blocking; `integration-builder` is not appointed. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority; requires completed Stage 11 appointment. |
 
 ## Stage 9 W1 Final Facts
@@ -123,7 +125,7 @@ The current posture remains aligned with the approved Stage 8 implementation pla
 
 **Stages 1–10 are complete for W1 pre-build progression.**
 
-Stage 11 is now the next eligible governed stage but is not yet authorized. Stage 12 remains blocked. No builder is appointed and no implementation work has begun.
+Issue #1222 completed the blocker investigation but did not close the prerequisites. Stage 11 remains NO-GO while B1, B4, B5 and B8 are open. Stage 12 remains blocked. No builder is appointed and no implementation work has begun.
 
 ## Current Artifacts
 
@@ -140,7 +142,15 @@ Stage 11 is now the next eligible governed stage but is not yet authorized. Stag
 
 ## Next Action
 
-Complete and merge Issue #1219 / PR #1220. After that, CS2 may explicitly authorize **Stage 11 — W1 Builder Appointment**. Do not begin Stage 12 implementation before Stage 11 is completed and separately accepted.
+Obtain explicit CS2 authorization for the proposed successor remediations:
+
+1. Issue #1226 — executable W1 QA-to-Red and bounded QA-builder appointment.
+2. Issue #1227 — Supabase security/parity and Vercel configuration verification.
+3. Issue #1228 — operationalise `agent_bootstrap` and align truthful enforcement.
+
+The separate ISMS/MMM boundary correction is proposed in `maturion-isms#1960` and does not itself authorize AMC implementation.
+
+Do not appoint `integration-builder` until the blocking successor evidence is merged and accepted. Do not begin Stage 12 before a valid Stage 11 appointment is completed and separately accepted.
 
 ## References
 
