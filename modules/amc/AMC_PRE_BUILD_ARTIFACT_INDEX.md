@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Merged PR #1218 completed the W1 Stage 10 IAA Pre-Brief. Issue #1219 reconciles post-merge control metadata and confirms Stage 11 as the next eligible, separately authorized stage.)  
+**Last Updated**: 2026-07-23 (Merged PR #1218 completed the W1 Stage 10 IAA Pre-Brief. Issue #1219 / PR #1220 reconciles post-merge control metadata and confirms Stage 11 as the next eligible, separately authorized stage.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -194,7 +194,8 @@ The pre-build pack remains aligned with the approved Stage 8 plan:
 - W1 remains the next delivery wave.
 - W1 retains CI, Preview, environment and secret-boundary controls.
 - W1 retains CI, Preview-isolation, environment-separation, secret-boundary and no-Production-side-effect RED coverage.
-- `ci.yml` and `deploy-frontend.yml` remain W1 implementation outputs.
+- `ci.yml` is introduced in W1 and remains a W8 consolidation/validation surface.
+- `deploy-frontend.yml` is introduced in W1 and remains a W7 deployment-execution validation surface.
 - `db-migrate.yml` remains a W7 output.
 - W1 and W2 must complete before material user-action work.
 - No delivery wave has been skipped, reordered or weakened.
