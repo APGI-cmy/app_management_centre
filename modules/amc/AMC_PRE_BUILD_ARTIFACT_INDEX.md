@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Issue #1215 / PR #1216 corrects the W1 bootstrap-readiness model, preserves all implementation evidence obligations for W1 build exit, and records Stage 9 W1 PASS pending final CS2 review.)  
+**Last Updated**: 2026-07-23 (Issue #1215 / PR #1216 corrects the W1 bootstrap-readiness model, preserves all implementation evidence obligations for W1 build exit, and records a recommended Stage 9 W1 PASS pending final CS2 acceptance/merge.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -136,9 +136,9 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
 | Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | ✅ Produced / Merged | PR #1204 merged the universal and W1–W8 readiness gates. |
-| W1 Bootstrap Readiness Model Correction | `modules/amc/08-builder-checklist/w1-bootstrap-readiness-model-correction-20260723.md` | ✅ Binding Correction — pending CS2 acceptance | Separates Stage 9 readiness evidence from Stage 12 W1 build-exit evidence without weakening obligations. |
+| W1 Bootstrap Readiness Model Correction | `modules/amc/08-builder-checklist/w1-bootstrap-readiness-model-correction-20260723.md` | 🟡 Proposed Correction — binding only upon CS2 acceptance/merge | Separates Stage 9 readiness evidence from Stage 12 W1 build-exit evidence without weakening obligations. |
 | Builder Readiness Attestations | `modules/amc/08-builder-checklist/builder-readiness-attestations.md` | ✅ Produced / Merged | Controlled candidate/Foreman attestation template. |
-| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | ✅ PASS — pending CS2 acceptance | Reassessed under corrected non-circular Stage 9 model. |
+| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | 🟡 RECOMMENDED PASS — pending CS2 acceptance/merge | Reassessed under corrected non-circular Stage 9 model. |
 | W1 Candidate Readiness Attestation v1 | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md` | 📦 Historical — BLOCKED | Original PR #1206 execution retained. |
 | W1 Candidate Readiness Attestation v2 | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation-v2-20260722.md` | ✅ Candidate Attestation Complete | Mandatory read-set and commitments recorded. |
 | W1 Environment and Dependency Register | `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md` | 🟡 Historical/Reconciliation Input | Resource facts retained; current readiness authority is checklist plus correction. |
@@ -151,7 +151,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | CS2 Decision Record — Stage 9 W1 (historical) | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md` | 📦 Historical — BLOCKED | Retained as provenance. |
 | Stage 9 W1 Bootstrap Correction Decision | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1-bootstrap-correction-20260723.md` | 🟡 DRAFT — recommended PASS | Final CS2 review artifact for PR #1216. |
 
-Stage 9 W1 candidate readiness is **PASS pending final CS2 acceptance of PR #1216**. This PASS is pre-appointment readiness only. W1 implementation evidence remains mandatory and unproduced.
+Stage 9 W1 candidate readiness is **RECOMMENDED PASS pending final CS2 acceptance/merge of PR #1216**. This is pre-appointment readiness only. W1 implementation evidence remains mandatory and unproduced.
 
 ---
 
