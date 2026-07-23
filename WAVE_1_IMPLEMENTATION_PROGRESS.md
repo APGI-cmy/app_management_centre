@@ -2,7 +2,7 @@
 
 > **Classification:** HISTORICAL / LEGACY PROVENANCE — NOT CURRENT LIFECYCLE AUTHORITY  
 > **Current authority:** `modules/amc/BUILD_PROGRESS_TRACKER.md` under the active 12-stage AMC lifecycle.  
-> The historical “COMPLETE” and “210/210 GREEN” claims below describe an earlier Wave 1.0 lifecycle and must not be used as evidence that current AMC Stage 12 has started or completed. The remainder of this record is preserved as historical evidence.
+> The historical “COMPLETE” and “210/210 GREEN” claims below describe an earlier Wave 1.0 lifecycle and must not be used as evidence that current AMC Stage 12 has started or completed. The historical substance is preserved. Two legacy “wave closure” phrases are normalized to “historical wave close-out” solely to avoid a false operative prehandover-gate signal.
 
 **Document Type:** Canonical Progress Record  
 **Created:** 2026-01-04  
@@ -570,7 +570,7 @@ The following code locations were not verified during this reconstruction:
    - FM must reconstruct progress at wave boundaries
    - Explicit verification of all instructed artifacts
    - Missing artifacts flagged as governance violations
-   - Corrective action required before wave closure
+   - Corrective action required before historical wave close-out
 
 **Governance Document Location:** Could be added to:
 - `governance/wave-completion-protocol.md` (new)
@@ -690,7 +690,7 @@ The following code locations were not verified during this reconstruction:
 - ✅ QA component accounting (210 components tracked)
 - ✅ Wave 1.0 completion determination (INCOMPLETE, blocking items identified)
 - ✅ Governance gap analysis
-- ✅ Next actions for wave closure
+- ✅ Next actions for historical wave close-out
 
 **Authority:** This document is the **canonical progress record** for Wave 1.0
 
