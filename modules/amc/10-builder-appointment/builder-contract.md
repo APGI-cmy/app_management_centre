@@ -4,9 +4,10 @@
 **Module**: App Management Centre (AMC)  
 **Wave**: W1 — Runtime Foundation and Environment Setup  
 **Builder**: `integration-builder`  
-**Source Contract**: `.github/agents/integration-builder.md`  
+**Source Contract**: `.github/agents/integration-builder.md` v3.4.0  
 **Governing Issue**: #1223  
-**Status**: 🟡 PROPOSED W1 CONTRACT OVERLAY — binding after merge and CS2 acceptance
+**Governing PR**: #1224  
+**Status**: 🟠 W1 CONTRACT OVERLAY COMPLETE — binding only after acknowledgment, merge and CS2 acceptance
 
 ---
 
@@ -16,7 +17,7 @@ This W1 overlay narrows the existing `integration-builder` contract to the exact
 
 ## 2. Authority and Execution State
 
-The builder is appointed for W1 only. After Stage 11 acceptance its state is:
+The intended post-acceptance state is:
 
 ```text
 APPOINTED — AWAITING STAGE 12 AUTHORIZATION
@@ -24,24 +25,47 @@ APPOINTED — AWAITING STAGE 12 AUTHORIZATION
 
 The builder has no authority to execute, modify implementation files, run migrations, deploy, or change infrastructure until a separate Stage 12 authorization is issued.
 
-## 3. Allowed W1 Paths After Stage 12 Authorization
+## 3. Exact Allowed W1 Paths After Stage 12 Authorization
+
+The builder may modify only the following implementation and evidence paths unless the Foreman explicitly expands scope in the Stage 12 issue:
 
 - `.github/workflows/ci.yml`
 - `.github/workflows/deploy-frontend.yml`
 - `.env.example`
-- approved W1 test/evidence paths
-- `modules/amc/11-build/` evidence surfaces
+- `modules/amc/11-build/build-evidence-index.md`
+- `modules/amc/11-build/qa-to-green-evidence.md`
+- `modules/amc/11-build/handover.md`
 - `modules/amc/BUILD_PROGRESS_TRACKER.md`
 - `modules/amc/AMC_PRE_BUILD_ARTIFACT_INDEX.md`
-- PR administration and evidence files required by repository gates
+- `.admin/pr.json`
+- `.agent-admin/prehandover/ecap-reconciliation-<stage12-pr>.md`
+- `.agent-admin/wave-records/amc-wave-record-stage12-w1-<stage12-pr>.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-<stage12-pr>-<date>.md`
 
-Any other path requires explicit Foreman confirmation or escalation before modification.
+The builder may read but must not modify the following authority and test-definition paths:
+
+- `modules/amc/00-app-description/`
+- `modules/amc/01-ux-workflow-wiring-spec/`
+- `modules/amc/02-frs/`
+- `modules/amc/03-trs/`
+- `modules/amc/04-architecture/`
+- `modules/amc/05a-deployment-execution-strategy/`
+- `modules/amc/05-qa-to-red/`
+- `modules/amc/06-pbfag/`
+- `modules/amc/07-implementation-plan/`
+- `modules/amc/08-builder-checklist/`
+- `modules/amc/09-iaa-pre-brief/`
+- `modules/amc/10-builder-appointment/`
+- `governance/`
+- `.github/agents/`
+
+Any path not expressly listed as writable is out of scope and requires STOP-and-escalate before modification.
 
 ## 4. Restricted and Prohibited Paths/Actions
 
 The builder must not:
 
-- create or modify `db-migrate.yml` in W1;
+- create or modify `.github/workflows/db-migrate.yml` in W1;
 - alter Supabase schemas or run Production migrations;
 - expose or consume Production credentials in PR/Preview execution;
 - create a direct Production deployment path;
@@ -89,7 +113,7 @@ The builder commits to:
 
 W1 may be handed over only when:
 
-- every applicable W1 RED obligation is GREEN;
+- all nine mapped W1 RED obligations are GREEN;
 - all required workflows and configuration surfaces exist and are executable;
 - every required check is green on the final implementation head;
 - Preview/non-production and Production boundaries are separately inspected;
@@ -132,18 +156,27 @@ The builder produces implementation and evidence only. It does not perform Forem
 
 ## 12. Stage 11 Acknowledgment Requirement
 
-Before Stage 12 authorization, `integration-builder` must explicitly acknowledge each of the following:
+The candidate-owned acknowledgment carrier is:
+
+```text
+modules/amc/10-builder-appointment/integration-builder-stage11-acknowledgment.md
+```
+
+Stage 11 cannot complete until the candidate explicitly acknowledges:
 
 1. OPOJD continuous execution.
 2. `BLOCKED` or `COMPLETE` terminal states only.
 3. One-Time Build Law and 100% GREEN.
 4. Zero test debt and zero warnings.
-5. STOP and escalation conditions.
-6. Execution Bootstrap Protocol and PREHANDOVER_PROOF.
-7. W1 scope and cross-wave boundaries.
-8. No Production credentials, mutation, migration, or direct deployment.
-9. No implementation before Stage 12 authorization.
+5. Architecture-as-Law and Design Freeze.
+6. All nine mapped W1 RED obligations.
+7. STOP and escalation conditions.
+8. Execution Bootstrap Protocol and PREHANDOVER_PROOF.
+9. The exact path allowlist and cross-wave boundaries.
+10. No Production credentials, mutation, migration, direct deployment, or premature implementation.
+11. Foreman supervision and independent IAA review.
+12. No self-approval, self-merge, test weakening, or false GREEN claims.
 
 ## 13. Contract Disposition
 
-This overlay becomes binding only when the Stage 11 PR is merged and accepted by CS2. Until then, the builder remains nominated/readiness-approved but not appointed.
+This overlay becomes binding only when the acknowledgment is candidate-authored, independently verified, PR #1224 is merged, and CS2 accepts the Stage 11 appointment. Until then, the candidate remains readiness-approved but not constitutionally appointed.
