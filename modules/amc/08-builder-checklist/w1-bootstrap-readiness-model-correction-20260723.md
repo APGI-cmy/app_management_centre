@@ -7,18 +7,18 @@
 | Module | App Management Centre (AMC) |
 | Stage | 9 — Builder Checklist |
 | Governing issue | #1215 |
-| Historical checklist | PR #1204 |
+| Canonical checklist | `modules/amc/08-builder-checklist/builder-checklist.md` v1.2 — introduced by PR #1204 |
 | Historical executions | PRs #1206, #1209 and #1214 |
 | Authority | CS2 — Johan Ras |
 | Date | 2026-07-23 |
-| Status | Approved methodology correction — pending CS2 disposition in this PR |
+| Status | Proposed methodology correction — becomes binding only upon explicit CS2 acceptance/merge of PR #1216 |
 | Entry condition | NORMAL — Stage 8 approved; this is Stage 9 re-entry/correction under `PRE_BUILD_STAGE_MODEL_CANON.md` §4.4 |
 
-## 1. Purpose
+## 1. Purpose and Activation
 
 This correction removes a circular dependency in the W1 Stage 9 readiness model. Stage 9 is a pre-appointment gate. It may verify that the candidate, owners, resources, governed access arrangement, design, stop conditions and evidence obligations are ready. It may not require implementation artifacts or executed controls that can only exist after Stage 10, Stage 11 and Stage 12.
 
-This document is a binding amendment to `builder-checklist.md`. Where the historical checklist conflicts with this correction for W1, this document takes precedence until the checklist is consolidated in a later editorial release.
+Until CS2 explicitly accepts or merges PR #1216, `modules/amc/08-builder-checklist/builder-checklist.md` v1.2 and the existing BLOCKED CS2 disposition remain authoritative. Upon CS2 acceptance/merge, this document becomes the binding W1 amendment and takes precedence only where the historical W1 readiness wording conflicts with the corrected lifecycle boundary. The historical checklist remains authoritative for all unaffected checks and all other waves.
 
 ## 2. Non-Weakening Rule
 
@@ -50,11 +50,11 @@ Stage 9 does not require the candidate to personally read secret values or hold 
 
 ## 4. Stage 12 W1 Build-Exit Evidence
 
-The following are mandatory W1 implementation outputs and may not be used as Stage 9 entry prerequisites:
+The following are mandatory W1 implementation outputs or validation obligations and may not be used as Stage 9 entry prerequisites:
 
 - `.github/workflows/ci.yml`;
 - `.github/workflows/deploy-frontend.yml`;
-- root `.env.example` implementation contract;
+- validation and any required update of the existing root `.env.example` contract, including proof that it remains non-secret;
 - executed CI, type, lint, test and schema logs;
 - inspected Preview-to-non-production Supabase binding;
 - workflow secret-consumption proof without secret disclosure;
@@ -96,11 +96,11 @@ The historical Section 5.E checks are interpreted as follows for pre-appointment
 |---|---|
 | W1-01 | Candidate understands the intended ownership and purpose of `ci.yml` and `deploy-frontend.yml`, and understands `db-migrate.yml` belongs to W7. |
 | W1-02 | Candidate understands the design rule that PR/Preview work must not mutate Production or receive Production credentials/data, and accepts this as a mandatory W1 build-exit proof obligation. |
-| W1-03 | Candidate understands the root `.env.example` contract and no-committed-secret rule; the file itself is a W1 implementation output. |
+| W1-03 | Candidate understands the existing root `.env.example` contract and no-committed-secret rule; validation/update of that contract remains a W1 implementation obligation. |
 | W1-04 | Candidate identifies the required CI/type/lint/test/schema/Preview/environment evidence to be produced during W1. |
 | W1-05 | Every pre-appointment dependency and stop condition has an owner, governed arrangement and escalation path. |
 | W1-06 | Stage 9 exit criteria and later W1 build-exit criteria are separately understood and objectively verifiable. |
 
 ## 8. Final Boundary
 
-This correction does not create Stage 10, appoint a builder, authorize implementation, create workflow files, run migrations, deploy Production or begin Stage 12. Stage 10 may open only after a corrected Stage 9 candidate assessment reaches PASS and CS2 explicitly authorizes progression.
+This correction does not create Stage 10, appoint a builder, authorize implementation, create workflow files, run migrations, deploy Production or begin Stage 12. Stage 10 may open only after CS2 accepts the corrected Stage 9 candidate PASS and separately authorizes progression.
