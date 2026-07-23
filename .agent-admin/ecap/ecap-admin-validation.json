@@ -6,7 +6,7 @@
   "repository": "APGI-cmy/app_management_centre",
   "governing_issue": "#1222",
   "branch": "foreman/amc-stage11-blocker-investigation-1222",
-  "reviewed_package_head_sha": "16116995609a2483efb19a24f3e8f61bafc169f8",
+  "reviewed_package_head_sha": "3837779799de4667bfbced4076f93933dd903c5a",
   "reviewed_substantive_head_sha": "1a0fbdfb2edcf5cc642716190c2ebca0eee9c97c",
   "base_sha": "4546f65e80aca5e80e7f95717b8fe69bbf317cdc",
   "validation_scope": [
@@ -61,6 +61,6 @@
   "blocking_admin_findings": [],
   "notes": [
     "agent_bootstrap was not exposed in the ECAP session.",
-    "No substantive readiness, assurance, acceptance or risk judgment was made."
+    "Administrative only; ECAP must not make a substantive readiness, assurance, acceptance or risk judgment."
   ]
 }
