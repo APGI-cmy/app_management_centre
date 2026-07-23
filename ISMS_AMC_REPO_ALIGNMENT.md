@@ -15,7 +15,7 @@
 
 ## Current lifecycle normalization — Issue #1222
 
-This strategy records the original repository-alignment programme. The live lifecycle position is controlled by `modules/amc/BUILD_PROGRESS_TRACKER.md`: Stages 1–10 are complete, Stage 11 remains NO-GO while Issue #1222 blockers are open, and Stage 12 is blocked. Historical planning sections below remain provenance and must not be read as current progress status.
+This strategy records the original repository-alignment programme. The live lifecycle position is controlled by `modules/amc/BUILD_PROGRESS_TRACKER.md`: Stages 1–5 remain complete, Stage 6 is in authorized re-entry, Stages 7–10 await dependent reverification, Stage 11 remains NO-GO, and Stage 12 is blocked. Historical planning sections below remain provenance and must not be read as current progress status.
 
 ## 1. Executive verdict
 
