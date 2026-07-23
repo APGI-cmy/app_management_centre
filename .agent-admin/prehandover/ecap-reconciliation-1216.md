@@ -4,10 +4,10 @@
 **PR**: #1216  
 **Wave**: amc-stage9-w1-bootstrap-readiness-correction-20260723  
 **Branch**: `foreman/amc-stage9-w1-bootstrap-readiness-correction`  
-**ECAP Session**: `ecap-session-1216-20260723-r2`  
+**ECAP Session**: `ecap-session-1216-20260723-r3`  
 **Final IAA Session Reference**: `session-1216-20260723`  
-**Final Token Reference**: `IAA-session-1216-R2-20260723-PASS`  
-**Reviewed Substantive SHA**: `e4e60a6009886baed346270c896c472a173e6ed0`  
+**Final Token Reference**: `IAA-session-1216-R3-20260723-PASS`  
+**Reviewed Substantive SHA**: `663b9a49a020324739adf2449e8ac0db262f7e34`  
 **Date**: 2026-07-23
 
 protected_path_touched: true
@@ -34,10 +34,10 @@ PR #1216 is administratively complete for a proposed corrected Stage 9 W1 readin
 | Environment isolation record | PASS as proposed Stage 9 design/policy readiness |
 | Foreman role-fit | PASS under the proposed corrected boundary |
 | Progress tracker | PASS — current issue/PR and pending-CS2 disposition aligned |
-| Artifact index | PASS — correction and current statuses indexed |
-| Draft CS2 decision | PASS as review artifact |
-| Canonical wave record | PASS — R2 token and substantive SHA recorded |
-| IAA memory | PASS — R2 assurance bound to substantive SHA |
+| Artifact index | PASS — proposed correction and recommended PASS status aligned |
+| Draft CS2 decision | PASS as review artifact; existing `.env.example` validation/update obligation stated accurately |
+| Canonical wave record | PASS — R3 token and substantive SHA recorded |
+| IAA memory | PASS — R3 assurance bound to substantive SHA |
 
 ## C3. Review-Finding Reconciliation
 
@@ -45,6 +45,8 @@ PR #1216 is administratively complete for a proposed corrected Stage 9 W1 readin
 2. The canonical checklist path/version and PR #1204 provenance are recorded.
 3. The existing root `.env.example` is treated as a W1 validation/update obligation, not a new-file output.
 4. Tracker, index and draft disposition are committed and aligned.
+5. The artifact index no longer labels a pending correction as already binding.
+6. The PR body records the same pending-CS2 activation boundary.
 
 ## C4. Non-Weakening Review
 
