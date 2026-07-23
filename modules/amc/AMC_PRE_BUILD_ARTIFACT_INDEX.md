@@ -163,8 +163,11 @@ Stage 9 W1 candidate readiness is **PASS ACCEPTED**. This is pre-appointment rea
 | PR-Specific Stage 10 Wave Record | `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md` | ✅ Assurance Carrier | Carries PR #1218 ECAP/IAA token and Stage 10 disposition. |
 | Stage 10 IAA Memory | `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md` | ✅ PASS | Independent assurance record for PR #1218. |
 | Stage 10 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1218.md` | ✅ PASS | Protected-path ceremony record. |
+| PR #1221 Post-Merge Reconciliation Wave Record | `.agent-admin/wave-records/amc-wave-record-stage10-postmerge-reconciliation-1221.md` | ✅ Reconciliation Evidence | Records the six-path substantive state, two-path token-recording delta and preserved Stage 11/12 boundary. |
+| PR #1221 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1221.md` | ✅ PASS — Administrative Only | Records protected-path ceremony and the distinct ECAP/IAA review-head chronology. |
+| PR #1221 IAA Session | `.agent-workspace/independent-assurance-agent/memory/session-1221-20260723.md` | ✅ PASS | Carries token `IAA-session-1221-20260723-PASS` and exact delta provenance. |
 
-Stage 10 is complete and accepted through merged PR #1218 with final token `IAA-session-1218-R2-20260723-PASS`. No builder is appointed and no implementation is authorized.
+Stage 10 is complete and accepted through merged PR #1218 with final token `IAA-session-1218-R2-20260723-PASS`. PR #1221 supplies the post-merge reconciliation evidence and token `IAA-session-1221-20260723-PASS`. No builder is appointed and no implementation is authorized.
 
 ---
 
