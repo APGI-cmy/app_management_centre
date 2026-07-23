@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-23  
-**Updated By**: Foreman proxy — W1 bootstrap readiness model correction, issue #1215 / PR #1216
+**Updated By**: Foreman proxy — Stage 10 W1 IAA Pre-Brief, issue #1217 / PR #1218
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1215](https://github.com/APGI-cmy/app_management_centre/issues/1215)  
-> **Current PR**: [app_management_centre#1216](https://github.com/APGI-cmy/app_management_centre/pull/1216)  
+> **Current Issue**: [app_management_centre#1217](https://github.com/APGI-cmy/app_management_centre/issues/1217)  
+> **Current PR**: [app_management_centre#1218](https://github.com/APGI-cmy/app_management_centre/pull/1218)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -26,7 +26,8 @@
 - PR #1206 merged the original W1 BLOCKED execution.
 - PR #1209 reconciled the record and retained BLOCKED.
 - PR #1214 merged the candidate re-attestation and truthful BLOCKED residual review.
-- Issue #1215 / PR #1216 corrects the circular W1 readiness model and reassesses the candidate.
+- PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
+- Issue #1217 / PR #1218 prepares and dispositions the canonical Stage 10 W1 IAA Pre-Brief.
 
 ## Stage Summary
 
@@ -41,40 +42,53 @@
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY obligations remain binding. |
 | 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | Evidence rows remain binding. |
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
-| 9 | Builder Checklist / W1 Readiness | ✅ PASS — corrected model / final disposition pending CS2 review | Pre-appointment readiness satisfied; build-exit proof preserved for W1. |
-| 10 | IAA Pre-Brief | ⬜ NOT STARTED — ELIGIBLE PENDING EXPLICIT CS2 AUTHORIZATION | No Stage 10 artifact yet. |
-| 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED | Awaiting Stage 10 completion. |
+| 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Corrected pre-appointment readiness model accepted in merged PR #1216. |
+| 10 | IAA Pre-Brief | 🟡 ACTIVE — PREFLIGHT_BRIEF_COMPLETE pending merge/CS2 acceptance | Canonical W1 pre-brief is in PR #1218. |
+| 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED | Awaiting Stage 10 merge and separate CS2 authorization. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority. |
 
-## Stage 9 W1 Current Facts
+## Stage 9 W1 Final Facts
 
-- Candidate: `integration-builder` — nominated only.
-- Candidate v2 re-attestation: complete; mandatory read-set enumerated.
+- Candidate: `integration-builder` — readiness PASS accepted; still not appointed.
+- Candidate v2 re-attestation: complete.
 - Vercel project `app-management-centre`: exists.
 - Supabase Production `icawesooswoqzepcdevg`: healthy.
 - Supabase non-production `develop` / `kkksclwvbmyexpsdyejj`: healthy.
-- AMC Vercel secret names: recorded without values.
-- Build-to-Green: enabled.
 - GitHub/Vercel/Supabase owners, intended scopes and escalation paths: documented.
 - Preview/non-production versus Production design: documented.
 - Protected-Production policy and candidate prohibitions: documented.
-- Final Foreman role-fit: PASS under corrected Stage 9 boundary.
+- Final Foreman role-fit: PASS under the corrected Stage 9 boundary.
 
-## Corrected Evidence Boundary
+## Stage 10 W1 IAA Pre-Brief
 
-### Stage 9 readiness evidence — complete
+Canonical carrier:
 
-- candidate authority and governance comprehension;
-- owners, resources and governed access arrangement;
-- secret names/scopes without values;
-- environment design and Production-protection policy;
-- stop conditions and escalation path;
-- objective W1 build-exit evidence plan.
+```text
+.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md
+```
 
-### W1 build-exit evidence — still mandatory later
+Current disposition:
 
-- `ci.yml` and `deploy-frontend.yml`;
-- `.env.example` implementation contract;
+```text
+PREFLIGHT_BRIEF_COMPLETE
+```
+
+The pre-brief defines:
+
+- exact W1 scope and exclusions;
+- applicable QA-to-Red and deployment obligations;
+- high-risk failure modes;
+- required builder outputs and reproducible evidence;
+- required Foreman quality-control checks;
+- ECAP applicability;
+- final IAA focus;
+- stop and escalation conditions.
+
+## W1 Build-Exit Evidence — Still Mandatory Later
+
+- `.github/workflows/ci.yml`;
+- `.github/workflows/deploy-frontend.yml`;
+- validation/update of the existing root `.env.example` without secrets;
 - executed CI/type/lint/test/schema logs;
 - actual Preview-to-`develop` binding;
 - Production credential exclusion;
@@ -84,30 +98,23 @@
 
 `db-migrate.yml` remains a W7 output.
 
-## Residual Blocking Items
-
-No corrected Stage 9 pre-appointment blocker remains.
-
-This does not mean W1 implementation is complete. All build-exit evidence remains RED/unproduced until authorized Stage 12 work.
-
 ## Current Disposition
 
-**W1 candidate readiness: PASS — pending explicit CS2 acceptance of PR #1216.**
+**Stage 10 W1 IAA Pre-Brief: PREFLIGHT_BRIEF_COMPLETE — pending merge and final CS2 acceptance of PR #1218.**
 
-Stage 10 may be opened only after PR #1216 receives final independent assurance, merges, and CS2 explicitly authorizes Stage 10. Stage 11 and Stage 12 remain blocked.
+This does not appoint the builder or authorize Stage 12. Stage 11 requires a separate CS2-authorized appointment issue after Stage 10 is accepted.
 
 ## Current Artifacts
 
-- `modules/amc/08-builder-checklist/w1-bootstrap-readiness-model-correction-20260723.md`
-- `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md`
-- `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation-v2-20260722.md`
-- `modules/amc/08-builder-checklist/executions/w1/w1-access-boundary-evidence-20260722.md`
-- `modules/amc/08-builder-checklist/executions/w1/w1-environment-isolation-record-20260722.md`
-- `modules/amc/08-builder-checklist/executions/w1/w1-foreman-role-fit-20260722.md`
+- `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md`
+- `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md`
+- `.agent-admin/prehandover/ecap-reconciliation-1218.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md`
+- `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md`
 
 ## Next Action
 
-Complete PR #1216 review and independent assurance. If merged and accepted by CS2, open a new governed issue for Stage 10 — W1 IAA Pre-Brief.
+Complete review and merge of PR #1218. After merge, CS2 may separately authorize Stage 11 — W1 Builder Appointment. Do not begin Stage 12 implementation before Stage 11 is completed.
 
 ## References
 
