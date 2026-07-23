@@ -12,6 +12,8 @@
 | Orchestrating Foreman | `foreman-v2-agent` |
 | Stage 9 authority | Merged PR #1216 / merge commit `95271c288b2ba95e3a58cb4916d6a617cef90036` |
 | Entry condition | NORMAL — Stage 9 accepted; Stage 10 explicitly authorized by CS2 |
+| Stage 10 disposition | `PREFLIGHT_BRIEF_COMPLETE` — accepted in merged PR #1218 |
+| Final assurance token | `IAA-session-1218-R2-20260723-PASS` |
 | Builder appointed | false |
 | Implementation authorized | false |
 
@@ -240,6 +242,6 @@ This disposition means the W1 assurance expectations are sufficiently defined fo
 
 ## Current Boundary
 
-- Stage 10 pre-brief: COMPLETE — pending PR review, ECAP and independent IAA confirmation.
-- Stage 11 builder appointment: BLOCKED pending Stage 10 merge and explicit CS2 authorization.
-- Stage 12 implementation: BLOCKED pending Stage 11 appointment.
+- Stage 10 pre-brief: COMPLETE — accepted through merged PR #1218 with final token `IAA-session-1218-R2-20260723-PASS`.
+- Stage 11 builder appointment: ELIGIBLE only after separate explicit CS2 authorization; no builder is appointed by this record.
+- Stage 12 implementation: BLOCKED pending a completed Stage 11 appointment and separate implementation authorization.
