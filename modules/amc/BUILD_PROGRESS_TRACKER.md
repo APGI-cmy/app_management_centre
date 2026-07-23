@@ -54,10 +54,10 @@
 
 - Candidate: `integration-builder` — readiness PASS accepted; still not appointed.
 - Candidate v2 re-attestation: complete.
-- Vercel project `app-management-centre`: exists.
+- Historical Stage 9 record identified Vercel project `app-management-centre`; Issue #1222 could not independently retrieve its live configuration through the current connector.
 - Supabase Production `icawesooswoqzepcdevg`: healthy.
-- Supabase non-production `develop` / `kkksclwvbmyexpsdyejj`: healthy.
-- GitHub/Vercel/Supabase owners, intended scopes and escalation paths: documented.
+- Supabase non-production `develop` / `kkksclwvbmyexpsdyejj`: not accessible through the current connector; current parity/health unverified.
+- GitHub/Vercel/Supabase intended scopes and escalation paths: documented; live Vercel ownership/configuration and Supabase develop access remain blockers.
 - Preview/non-production versus Production design: documented.
 - Protected-Production policy and candidate prohibitions: documented.
 - Final Foreman role-fit: PASS under the corrected Stage 9 boundary.
