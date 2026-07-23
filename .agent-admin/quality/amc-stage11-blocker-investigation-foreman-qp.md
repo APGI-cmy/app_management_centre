@@ -20,7 +20,7 @@
 | Correct entry authority | PASS | PR #1220 merged; PR #1221 closed unmerged/superseded |
 | B1–B8 individually dispositioned | PASS | Blocker register and supporting records |
 | Executable RED gap truthful | PASS | Exact W1 IDs mapped; no test implementation claimed |
-| Legacy contradiction resolved non-destructively | PASS | Historical banner added; historical body preserved |
+| Legacy contradiction resolved non-destructively | PASS | Historical banner added; historical substance preserved with two disclosed close-out wording normalizations |
 | Active header drift normalized | PASS | Stage 2–9 active module headers bound to later decision records |
 | Supabase evidence accurate | PASS | Live project, SQL and advisor reads; develop access failure disclosed |
 | Vercel evidence accurate | PASS | Exact commit statuses retained; connector visibility limitation disclosed |
