@@ -3,10 +3,10 @@
 **Issue**: #1222  
 **PR**: #1229  
 **Branch**: `foreman/amc-stage11-blocker-investigation-1222`  
-**Reviewed Package Head**: `3837779799de4667bfbced4076f93933dd903c5a`  
-**Reviewed Substantive Head**: `1a0fbdfb2edcf5cc642716190c2ebca0eee9c97c`  
+**Reviewed Package Head**: `754edf2a01a43a1adf028c231d0150dd4fca2443`  
+**Reviewed Substantive Head**: `e5755e4fb3260cfe6a7a9bc097d879ee5284c782`  
 **Base**: `4546f65e80aca5e80e7f95717b8fe69bbf317cdc`  
-**ECAP Session**: `ecap-1229-20260723-revalidation`
+**ECAP Session**: `ecap-1229-20260723-r1-delta`
 
 protected_path_touched: true
 ecap_required: true
@@ -26,10 +26,10 @@ protected_path_ceremony_verdict: PASS
 | Blocker register and B1–B8 paths resolved | PASS |
 | Foreman QP present | PASS |
 | QP bound to substantive head `1a0fbdf…` | PASS |
-| Post-QP delta classified | PASS — QP, tracker link and ECAP carrier normalization only |
+| Post-substantive delta classified | PASS — revised Foreman QP only |
 | Review submissions / unresolved threads | 0 / 0 |
 | ECAP-contract protected paths changed | None |
-| Required ECAP carriers committed and resolved | PASS |
+| Required ECAP carriers current | PASS |
 | `agent_bootstrap` called | No — tool unavailable in this session |
 
 ## Reconciliation
