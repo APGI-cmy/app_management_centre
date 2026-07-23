@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Issue #1217 / PR #1218 records the active W1 Stage 10 IAA Pre-Brief and preserves the Stage 11/12 boundary.)  
+**Last Updated**: 2026-07-23 (Issue #1219 reconciles completed Stage 10 after merged PR #1218 and preserves the Stage 11/12 boundary.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -158,13 +158,13 @@ Stage 9 W1 candidate readiness is **PASS ACCEPTED**. This is pre-appointment rea
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Stage 10 Pointer | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | 🟡 ACTIVE | Points to the canonical W1 wave-record carrier. |
-| Canonical W1 IAA Pre-Brief | `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md` | 🟡 PREFLIGHT_BRIEF_COMPLETE — pending merge/CS2 acceptance | Contains schema-conformant payload and full assurance plan. |
+| Stage 10 Pointer | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ✅ COMPLETE / CURRENT | Points to the completed canonical W1 wave-record carrier and merged provenance. |
+| Canonical W1 IAA Pre-Brief | `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md` | ✅ ACCEPTED — PREFLIGHT_BRIEF_COMPLETE | Accepted through merged PR #1218; final token `IAA-session-1218-R2-20260723-PASS`. |
 | PR-Specific Stage 10 Wave Record | `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md` | ✅ Assurance Carrier | Carries PR #1218 ECAP/IAA token and Stage 10 disposition. |
 | Stage 10 IAA Memory | `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md` | ✅ PASS | Independent assurance record for PR #1218. |
 | Stage 10 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1218.md` | ✅ PASS | Protected-path ceremony record. |
 
-Stage 10 is complete at pre-brief level, pending merge and CS2 acceptance of PR #1218. No builder is appointed and no implementation is authorized.
+Stage 10 is complete and accepted through merged PR #1218 with final token `IAA-session-1218-R2-20260723-PASS`. No builder is appointed and no implementation is authorized.
 
 ---
 
@@ -172,7 +172,7 @@ Stage 10 is complete at pre-brief level, pending merge and CS2 acceptance of PR 
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🔴 Blocked | Requires Stage 10 merge and separate CS2 authorization. |
+| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🟠 Requires CS2 Authorization | Stage 10 is complete; a separate explicit CS2-authorized issue is still required. |
 | Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | ⬜ Placeholder — 🔴 Blocked | Not started. |
 
 ---
