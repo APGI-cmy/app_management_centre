@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "session_id": "ecap-1229-20260723",
+  "repository": "APGI-cmy/app_management_centre",
+  "issue": 1222,
+  "pull_request": 1229,
+  "branch": "foreman/amc-stage11-blocker-investigation-1222",
+  "reviewed_head_sha": "e9c6b6a1fceb318b6bbcf6adfcddaab8332a2eb0",
+  "base_sha": "4546f65e80aca5e80e7f95717b8fe69bbf317cdc",
+  "protected_path_touched": true,
+  "ecap_required": true,
+  "ecap_invoked": true,
+  "ecap_verdict": "FAIL",
+  "admin_validation_result": "ADMIN_BLOCKED",
+  "artifact_paths_resolved": false,
+  "scope_declaration_current": true,
+  "pr_admin_json_current": true,
+  "commit_state_verified": true,
+  "substantive_readiness_judgment_made": false,
+  "iaa_invoked_by_ecap": false,
+  "foreman_qp_judgment_rewritten": false,
+  "blocking_defects": [
+    {
+      "id": "ECAP-ADMIN-001",
+      "description": "No accepted ECAP carrier was committed at the reviewed head."
+    }
+  ],
+  "notes": [
+    "This initial validation record is committed so ECAP can revalidate a package with accepted carriers.",
+    "agent_bootstrap was not exposed in the ECAP session."
+  ]
+}
