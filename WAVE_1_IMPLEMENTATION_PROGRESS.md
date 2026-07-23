@@ -2,7 +2,7 @@
 
 > **Classification:** HISTORICAL / LEGACY PROVENANCE — NOT CURRENT LIFECYCLE AUTHORITY  
 > **Current authority:** `modules/amc/BUILD_PROGRESS_TRACKER.md` under the active 12-stage AMC lifecycle.  
-> The historical “COMPLETE” and “210/210 GREEN” claims below describe an earlier Wave 1.0 lifecycle and must not be used as evidence that current AMC Stage 12 has started or completed. The historical substance is preserved. Two legacy “wave closure” phrases are normalized to “historical wave close-out” solely to avoid a false operative prehandover-gate signal.
+> The historical “COMPLETE” and “210/210 GREEN” claims below describe an earlier Wave 1.0 lifecycle and must not be used as evidence that current AMC Stage 12 has started or completed. The historical substance is preserved. Two legacy close-out phrases are normalized to “historical wave close-out” solely to avoid a false operative prehandover-gate signal.
 
 **Document Type:** Canonical Progress Record  
 **Created:** 2026-01-04  
