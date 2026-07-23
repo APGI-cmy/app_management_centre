@@ -47,7 +47,7 @@
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
 | 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Corrected readiness model accepted in PR #1216. |
 | 10 | IAA Pre-Brief | ✅ COMPLETE — `PREFLIGHT_BRIEF_COMPLETE` | Accepted through PR #1218 and reconciled in PR #1220. |
-| 11 | Builder Appointment | 🟡 ACTIVE — APPOINTMENT PROPOSED | `integration-builder` appointment and W1 contract are in PR #1224; not authoritative until merge/CS2 acceptance. |
+| 11 | Builder Appointment | 🔴 BLOCKED — ACKNOWLEDGMENT PENDING | Appointment package is complete in PR #1224, but the mandatory candidate-authored Stage 11 acknowledgment is not yet supplied. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority; requires completed Stage 11 and separate Stage 12 authorization. |
 
 ## Stage 10 Final Facts
@@ -60,27 +60,43 @@
 
 ## Stage 11 W1 Appointment
 
-Proposed appointment:
+Appointment package:
 
 ```text
 Builder: integration-builder
 Class: Integration Builder
 Wave: W1 — Runtime Foundation and Environment Setup
-Post-merge state: APPOINTED — AWAITING STAGE 12 AUTHORIZATION
+Package status: COMPLETE
+Appointment status: BLOCKED — ACKNOWLEDGMENT PENDING
+Intended post-acceptance state: APPOINTED — AWAITING STAGE 12 AUTHORIZATION
 Implementation authorized: false
 ```
 
-The Stage 11 package defines:
+The Stage 11 package now defines:
 
-- constitutional onboarding and acknowledgment requirements;
+- formal constitutional appointment instruction;
+- exact architecture and QA suite references;
+- verified RED target of 9 mapped W1 obligations;
 - OPOJD and terminal-state discipline;
 - One-Time Build Law and 100% GREEN;
 - Zero Test Debt and zero warnings;
 - Architecture-as-Law and Design Freeze;
-- allowed W1 paths and prohibited actions;
+- exact W1 path allowlist and read-only authority paths;
+- prohibited Production, migration, credential, test and self-merge actions;
+- Ripple Intelligence confirmation with `ALIGNED` / `STABLE` status;
 - STOP and escalation conditions;
 - Foreman supervision and IAA review;
-- the strict separation between appointment and Stage 12 execution authority.
+- strict separation between appointment and Stage 12 execution authority.
+
+Candidate acknowledgment carrier:
+
+```text
+modules/amc/10-builder-appointment/integration-builder-stage11-acknowledgment.md
+```
+
+Current acknowledgment status: `PENDING CANDIDATE RESPONSE`.
+
+The Foreman cannot author or infer this response on the candidate's behalf. Stage 11 therefore remains blocked until the candidate supplies the explicit acknowledgment and timestamp and independent assurance verifies it.
 
 ## Implementation Plan Alignment
 
@@ -93,7 +109,7 @@ The Stage 11 package defines:
 - W1 and W2 must complete before material user-action work.
 - No wave has been skipped, reordered, or weakened.
 
-## W1 Build-Exit Evidence — Mandatory After Stage 12 Authorization
+## W1 Build-Exit Evidence — Mandatory Only After Stage 12 Authorization
 
 - `.github/workflows/ci.yml` creation and W1 proof, with W8 consolidation still required;
 - `.github/workflows/deploy-frontend.yml` creation and W1 proof, with W7 deployment validation still required;
@@ -107,15 +123,17 @@ The Stage 11 package defines:
 
 ## Current Disposition
 
-**Stages 1–10 are complete. Stage 11 is active but not yet accepted.**
+**Stages 1–10 are complete. Stage 11 package preparation is complete, but the appointment is constitutionally blocked pending the builder's explicit acknowledgment.**
 
-`integration-builder` remains readiness-approved and is proposed for appointment in PR #1224. No implementation may begin until Stage 11 is merged and CS2 separately authorizes Stage 12.
+`integration-builder` remains readiness-approved but not yet appointed. No implementation may begin. Stage 12 remains blocked.
 
 ## Current Artifacts
 
 - `modules/amc/10-builder-appointment/builder-appointment.md`
 - `modules/amc/10-builder-appointment/builder-contract.md`
+- `modules/amc/10-builder-appointment/integration-builder-stage11-acknowledgment.md`
 - `.github/agents/integration-builder.md`
+- `governance/alignment/canonical_sync_status.json`
 - `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md`
 - `modules/amc/07-implementation-plan/implementation-plan.md`
 - `modules/amc/07-implementation-plan/wave-breakdown.md`
@@ -123,4 +141,4 @@ The Stage 11 package defines:
 
 ## Next Action
 
-Complete review and merge of PR #1224. After merge and CS2 acceptance, open a separate **Stage 12 — W1 Build Authorization and Implementation** issue. Do not begin implementation before that authorization.
+Obtain the candidate-authored Stage 11 acknowledgment in `integration-builder-stage11-acknowledgment.md`, refresh independent assurance, then complete review of PR #1224. Do not merge or open Stage 12 until the acknowledgment gate is satisfied.
