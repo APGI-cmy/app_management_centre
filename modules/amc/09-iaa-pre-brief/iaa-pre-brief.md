@@ -2,8 +2,10 @@
 
 **Stage**: 10 — IAA Pre-Brief  
 **Module**: App Management Centre (AMC)  
-**Status**: 🟡 Active — `PREFLIGHT_BRIEF_COMPLETE` pending merge/CS2 acceptance of PR #1218  
-**Governing issue / PR**: #1217 / #1218  
+**Status**: ✅ Complete / Current — `PREFLIGHT_BRIEF_COMPLETE` accepted through merged PR #1218  
+**Governing issue / PR**: #1217 / merged #1218  
+**Post-merge reconciliation**: #1219  
+**Final assurance token**: `IAA-session-1218-R2-20260723-PASS`  
 **Prerequisite**: Stage 9 Builder Checklist complete and accepted in merged PR #1216
 
 ---
@@ -80,6 +82,8 @@ The canonical W1 wave-record pre-brief includes:
 PREFLIGHT_BRIEF_COMPLETE
 ```
 
-This means the W1 assurance expectations are sufficiently defined for Stage 11 consideration after PR #1218 merges and CS2 accepts Stage 10.
+This means the W1 assurance expectations are sufficiently defined for Stage 11 consideration. PR #1218 is merged and Stage 10 is accepted.
+
+Stage 11 remains unstarted and requires a separate explicit CS2-authorized appointment issue.
 
 It does not appoint or delegate `integration-builder`, authorize Stage 12, create implementation outputs, run migrations, or deploy Production.
