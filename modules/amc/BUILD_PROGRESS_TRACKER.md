@@ -30,7 +30,7 @@
 - PR #1218 merged the canonical Stage 10 W1 IAA Pre-Brief with disposition `PREFLIGHT_BRIEF_COMPLETE` at merge commit `7889309cf4f357894d496bde1bf79349a24bb450`.
 - Issue #1219 / merged PR #1220 reconciled post-merge tracker/index/pointer status.
 - PR #1221 is closed unmerged and superseded; it is not an authority carrier.
-- Issue #1222 investigates Stage 11 blockers B1–B8 and preserves Stage 12 as blocked.
+- Issue #1222 / PR #1229 completes the B1–B8 investigation with `FINAL_ASSURANCE_PASS` token `IAA-session-1229-R3-20260723-PASS`; the token validates the investigation and its NO-GO disposition, not progression.
 
 ## Stage Summary
 
@@ -125,7 +125,7 @@ The current posture remains aligned with the approved Stage 8 implementation pla
 
 **Stages 1–10 are complete for W1 pre-build progression.**
 
-Issue #1222 completed the blocker investigation but did not close the prerequisites. Stage 11 remains NO-GO while B1, B4, B5 and B8 are open. Stage 12 remains blocked. No builder is appointed and no implementation work has begun.
+Issue #1222 completed the blocker investigation and independent assurance. IAA R1/R2 findings were corrected, and R3 issued `FINAL_ASSURANCE_PASS` for evidence integrity and the truthful disposition. The prerequisites themselves are not closed: Stage 11 remains NO-GO while B1, B4, B5 and B8 are open. Stage 12 remains blocked. No builder is appointed and no implementation work has begun.
 
 ## Current Artifacts
 
@@ -135,6 +135,10 @@ Issue #1222 completed the blocker investigation but did not close the prerequisi
 - `modules/amc/08-builder-checklist/w1-bootstrap-readiness-model-correction-20260723.md`
 - `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md`
 - `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md`
+- `.agent-admin/assurance/iaa-wave-record-amc-stage11-blocker-investigation-1222.md`
+- `.agent-admin/wave-records/amc-wave-record-stage11-blocker-investigation-1229.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-1229-20260723.md`
+- `.agent-admin/prehandover/ecap-reconciliation-1229.md`
 - `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md`
 - `.agent-admin/prehandover/ecap-reconciliation-1218.md`
 - `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md`
