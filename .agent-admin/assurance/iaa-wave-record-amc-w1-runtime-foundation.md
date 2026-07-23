@@ -240,6 +240,6 @@ This disposition means the W1 assurance expectations are sufficiently defined fo
 
 ## Current Boundary
 
-- Stage 10 pre-brief: COMPLETE — pending PR review, ECAP and independent IAA confirmation.
-- Stage 11 builder appointment: BLOCKED pending Stage 10 merge and explicit CS2 authorization.
+- Stage 10 pre-brief: COMPLETE and accepted through merged PR #1218; final assurance token `IAA-session-1218-R2-20260723-PASS`.
+- Stage 11 builder appointment: NOT STARTED; requires separate explicit CS2 authorization.
 - Stage 12 implementation: BLOCKED pending Stage 11 appointment.
