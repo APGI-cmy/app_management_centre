@@ -1,32 +1,66 @@
 {
-  "schema_version": "1.0",
-  "session_id": "ecap-1229-20260723",
+  "schema_version": "1.0.0",
+  "wave_id": "amc-stage11-blocker-investigation-1222",
+  "pr_number": 1229,
+  "ecap_session_id": "ecap-1229-20260723-revalidation",
   "repository": "APGI-cmy/app_management_centre",
-  "issue": 1222,
-  "pull_request": 1229,
+  "governing_issue": "#1222",
   "branch": "foreman/amc-stage11-blocker-investigation-1222",
-  "reviewed_head_sha": "e9c6b6a1fceb318b6bbcf6adfcddaab8332a2eb0",
+  "reviewed_package_head_sha": "16116995609a2483efb19a24f3e8f61bafc169f8",
+  "reviewed_substantive_head_sha": "1a0fbdfb2edcf5cc642716190c2ebca0eee9c97c",
   "base_sha": "4546f65e80aca5e80e7f95717b8fe69bbf317cdc",
+  "validation_scope": [
+    "ECAP identity and Foreman appointment",
+    "PR and scope metadata",
+    "Evidence-path resolution",
+    "QP and commit binding",
+    "Protected-path classification",
+    "Administrative check and review-state inventory"
+  ],
+  "admin_checks": [
+    {
+      "check": "foreman_appointment",
+      "result": "PASS"
+    },
+    {
+      "check": "scope_metadata",
+      "result": "PASS"
+    },
+    {
+      "check": "evidence_paths",
+      "result": "PASS"
+    },
+    {
+      "check": "qp_presence_and_binding",
+      "result": "PASS"
+    },
+    {
+      "check": "ecap_carriers",
+      "result": "PASS"
+    },
+    {
+      "check": "review_threads",
+      "result": "PASS",
+      "detail": "0 reviews and 0 unresolved threads"
+    }
+  ],
   "protected_path_touched": true,
   "ecap_required": true,
   "ecap_invoked": true,
-  "ecap_verdict": "FAIL",
-  "admin_validation_result": "ADMIN_BLOCKED",
-  "artifact_paths_resolved": false,
+  "ecap_verdict": "PASS",
+  "ceremony_admin_appointed": true,
+  "protected_path_ceremony_verdict": "PASS",
+  "artifact_paths_resolved": true,
   "scope_declaration_current": true,
   "pr_admin_json_current": true,
   "commit_state_verified": true,
   "substantive_readiness_judgment_made": false,
   "iaa_invoked_by_ecap": false,
   "foreman_qp_judgment_rewritten": false,
-  "blocking_defects": [
-    {
-      "id": "ECAP-ADMIN-001",
-      "description": "No accepted ECAP carrier was committed at the reviewed head."
-    }
-  ],
+  "admin_validation_result": "ADMIN_VALIDATED",
+  "blocking_admin_findings": [],
   "notes": [
-    "This initial validation record is committed so ECAP can revalidate a package with accepted carriers.",
-    "agent_bootstrap was not exposed in the ECAP session."
+    "agent_bootstrap was not exposed in the ECAP session.",
+    "No substantive readiness, assurance, acceptance or risk judgment was made."
   ]
 }
