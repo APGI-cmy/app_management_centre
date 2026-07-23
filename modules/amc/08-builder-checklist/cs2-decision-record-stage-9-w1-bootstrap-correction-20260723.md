@@ -31,7 +31,7 @@ Under the corrected boundary, `integration-builder` satisfies every applicable p
 The following remain mandatory W1 build-exit evidence and are not waived:
 
 - `ci.yml` and `deploy-frontend.yml`;
-- `.env.example` implementation contract;
+- validation and any required update of the existing root `.env.example` contract, including proof that it remains non-secret;
 - executed CI/type/lint/test/schema logs;
 - actual Preview-to-non-production Supabase binding;
 - workflow secret-consumption proof;
