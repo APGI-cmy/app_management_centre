@@ -1,73 +1,70 @@
-# AMC W1 Candidate Access-Boundary Evidence — 2026-07-22
+# AMC W1 Candidate Access-Boundary Evidence
 
 ## Governance Context
 
 | Field | Value |
 |---|---|
-| Closure issue | #1213 |
-| Closure PR | #1214 |
+| Model-correction issue / PR | #1215 / #1216 |
 | Candidate | `integration-builder` |
 | Wave | W1 — Runtime Foundation and Environment Setup |
-| Blocker assessed | W1-BLK-002 — Governed candidate access boundaries |
-| Assessed by | Foreman proxy review |
-| Date | 2026-07-22 |
-| Status | 🔴 BLOCKED — boundary design exists; candidate-specific technical permissions and workflow secret availability are not independently demonstrated |
+| Corrected authority | `w1-bootstrap-readiness-model-correction-20260723.md` |
+| Assessed by | Foreman proxy |
+| Date reassessed | 2026-07-23 |
+| Status | ✅ PASS AS STAGE 9 GOVERNED ACCESS ARRANGEMENT |
 
-## Purpose
+## 1. Evidence Rule
 
-This document records the intended governed access boundaries for GitHub, Vercel and Supabase and distinguishes confirmed facts from controls that still require reproducible evidence. No secret values are recorded.
+Stage 9 does not require direct candidate access to secret values or vendor dashboards. It requires a governed arrangement with named owners, existing resources, intended workflow consumers, secret names/scopes and a stop/escalation path. Actual workflow secret consumption and Production exclusion remain mandatory W1 build-exit evidence.
 
-## 1. GitHub Repository and Branch Boundary
+No secret values are recorded.
 
-| Aspect | Current finding | Result |
+## 2. GitHub Boundary
+
+| Aspect | Readiness evidence | Result |
 |---|---|---|
 | Repository | `APGI-cmy/app_management_centre` | PASS |
-| Candidate PR branch activity | Candidate-authored commits exist on PR #1214 | PASS — OBSERVED |
-| Direct push to `main` | Prohibited by governance design; branch-setting enforcement not independently captured in this PR | PARTIAL PASS |
-| Workflow permissions | Actual permissions vary by repository defaults and each workflow `permissions:` block | PARTIAL PASS |
-| Governance / merge-release authority | Prohibited by candidate contract | PASS — AUTHORITY BOUNDARY |
-| Cross-repository access | Not required for W1 and not claimed | PASS AS SCOPE |
+| Candidate execution path | Governed PR branch under Foreman review | PASS |
+| Workflow owner | W1 appointed builder under Foreman supervision | PASS |
+| Main/merge authority | Candidate has none; CS2-controlled reviewed PR path | PASS |
+| Gate owner | Repository governance workflows / CS2 | PASS |
+| Access failure path | Stop and escalate to Foreman/CS2 | PASS |
 
-GitHub repository and PR visibility are demonstrated. Exact governed write and branch-protection enforcement should be cited from repository settings or the relevant workflow files when they exist.
+## 3. Vercel Boundary
 
-## 2. Vercel Access Boundary
-
-| Aspect | Current finding | Result |
+| Aspect | Readiness evidence | Result |
 |---|---|---|
-| Vercel project | `app-management-centre` exists; PR #1214 produced a Ready Preview | PASS — RESOURCE |
-| Repository secret names | `AMC_VERCEL_ORG_ID`, `AMC_VERCEL_PROJECT_ID`, `AMC_VERCEL_TOKEN`, `AMC_VERCEL_AUTOMATION_BYPASS_SECRET` recorded as present without values | PASS — NAME PRESENCE |
-| Candidate-specific use of secrets | No committed W1 deployment workflow currently demonstrates that these secrets are available only in the intended governed job context | BLOCKED |
-| Preview versus Production credentials | Vercel scope model is described, but AMC-specific variable bindings are not reproducibly inspected in-repo | BLOCKED |
-| Direct dashboard access | Not required and not claimed | PASS AS DESIGN |
-| Production deployment capability | No W1 workflow exists from which candidate prohibition can be independently verified | BLOCKED |
+| Project | `app-management-centre` exists | PASS |
+| Owner/custodian | CS2-controlled Vercel account/team | PASS |
+| Intended access path | GitHub Actions workflow using repository secret names | PASS AS ARRANGEMENT |
+| Secret names | `AMC_VERCEL_ORG_ID`, `AMC_VERCEL_PROJECT_ID`, `AMC_VERCEL_TOKEN`, `AMC_VERCEL_AUTOMATION_BYPASS_SECRET` | PASS — names only |
+| Direct dashboard access | Not required and not granted by Stage 9 | PASS |
+| Failure path | Stop; Foreman/CS2 verifies secret scope or grants governed correction | PASS |
+| Actual secret consumption | Deferred to W1 build-exit evidence | NOT A STAGE 9 PREREQUISITE |
 
-## 3. Supabase Access Boundary
+## 4. Supabase Boundary
 
-| Aspect | Current finding | Result |
+| Aspect | Readiness evidence | Result |
 |---|---|---|
-| Non-production resource | `develop`, project ref `kkksclwvbmyexpsdyejj`, exists and is healthy | PASS — RESOURCE |
-| Production resource | `icawesooswoqzepcdevg` exists and is healthy | PASS — RESOURCE |
-| Candidate access to `develop` | Intended through governed workflow credentials; no W1 workflow currently demonstrates candidate-specific access | BLOCKED |
-| Production credential exclusion | Claimed by design, but the actual W1 workflow secret set does not yet exist for inspection | BLOCKED |
-| Direct production mutation | Prohibited by contract and scope; technical enforcement remains unproved | PARTIAL PASS |
-| Production migration | `db-migrate.yml` belongs to W7 and is outside W1 | PASS AS SCOPE |
+| Non-production resource | `develop`, project ref `kkksclwvbmyexpsdyejj`, healthy | PASS |
+| Production resource | `icawesooswoqzepcdevg`, healthy | PASS AS KNOWN PROTECTED RESOURCE |
+| Owner/custodian | CS2-controlled Supabase project ownership | PASS |
+| Intended W1 access | Governed workflow credentials scoped to non-production | PASS AS ARRANGEMENT |
+| Production mutation | Prohibited for W1 candidate | PASS AS AUTHORITY POLICY |
+| Production migration | W7 only through separately authorized workflow | PASS AS SCOPE |
+| Actual credential binding/exclusion | Deferred to W1 build-exit evidence | NOT A STAGE 9 PREREQUISITE |
+| Failure path | Stop before mutation; escalate to Foreman/CS2 | PASS |
 
-## 4. Evidence Rule
+## 5. Disposition
 
-A resource name, secret name, contractual prohibition or future workflow design is not equivalent to demonstrated candidate-specific governed access. PASS requires evidence that the candidate can perform required non-production work while production credentials and mutation paths remain unavailable.
+The candidate has a complete pre-appointment governed access arrangement:
 
-No secret values may be used as evidence.
+- named owners/custodians;
+- existing required resources;
+- named secret surfaces without values;
+- intended workflow-mediated access;
+- explicit Production prohibition; and
+- stop/escalation paths.
 
-## 5. W1-BLK-002 Disposition
+**W1-BLK-002: CLOSED AS STAGE 9 READINESS.**
 
-| Required surface | Status |
-|---|---|
-| GitHub repository / PR branch visibility | PARTIAL PASS |
-| Governed GitHub write and protection boundary | PARTIAL PASS |
-| Governed Vercel workflow access | BLOCKED |
-| Governed Supabase `develop` access | BLOCKED |
-| Production credential exclusion | BLOCKED |
-
-**W1-BLK-002: OPEN / BLOCKED.**
-
-Closure requires reproducible evidence of candidate-specific governed non-production access and production exclusion. This record does not authorize implementation or Stage 10.
+This closure does not prove actual secret consumption, Preview binding or Production exclusion. Those remain mandatory W1 build-exit evidence and must fail the W1 delivery if not demonstrated after appointment.
