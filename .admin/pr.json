@@ -2,11 +2,11 @@
   "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1217",
-  "scope_summary": "Prepare and disposition the canonical Stage 10 W1 IAA pre-brief, align the tracker and artifact index, and preserve the boundary that no builder appointment, delegation, implementation, migration, deployment, or Stage 12 work is authorized.",
+  "governing_issue": "#1219",
+  "scope_summary": "Reconcile the post-merge Stage 10 control surfaces with merged PR #1218, align the progress tracker, pre-build artifact index and Stage 10 pointer with the approved Stage 8 implementation plan, and preserve the boundary that Stage 11 requires separate CS2 authorization and Stage 12 remains blocked.",
   "created_by": "foreman-v2-agent",
-  "created_at": "2026-07-23T08:53:26Z",
+  "created_at": "2026-07-23T11:51:23Z",
   "execution_model": "foreman-orchestrated",
   "orchestrating_agent": "foreman-v2-agent",
-  "implementing_agent": "none-stage10-prebrief-only"
+  "implementing_agent": "none-postmerge-alignment-only"
 }
