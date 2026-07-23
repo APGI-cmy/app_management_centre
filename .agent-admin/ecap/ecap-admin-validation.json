@@ -2,12 +2,12 @@
   "schema_version": "1.0.0",
   "wave_id": "amc-stage11-blocker-investigation-1222",
   "pr_number": 1229,
-  "ecap_session_id": "ecap-1229-20260723-revalidation",
+  "ecap_session_id": "ecap-1229-20260723-r1-delta",
   "repository": "APGI-cmy/app_management_centre",
   "governing_issue": "#1222",
   "branch": "foreman/amc-stage11-blocker-investigation-1222",
-  "reviewed_package_head_sha": "3837779799de4667bfbced4076f93933dd903c5a",
-  "reviewed_substantive_head_sha": "1a0fbdfb2edcf5cc642716190c2ebca0eee9c97c",
+  "reviewed_package_head_sha": "754edf2a01a43a1adf028c231d0150dd4fca2443",
+  "reviewed_substantive_head_sha": "e5755e4fb3260cfe6a7a9bc097d879ee5284c782",
   "base_sha": "4546f65e80aca5e80e7f95717b8fe69bbf317cdc",
   "validation_scope": [
     "ECAP identity and Foreman appointment",
@@ -61,6 +61,7 @@
   "blocking_admin_findings": [],
   "notes": [
     "agent_bootstrap was not exposed in the ECAP session.",
-    "Administrative only; ECAP must not make a substantive readiness, assurance, acceptance or risk judgment."
+    "Administrative only; ECAP must not make a substantive readiness, assurance, acceptance or risk judgment.",
+    "R1 delta classification: PROTECTED_ADMIN_AND_PREBUILD_EVIDENCE_DELTA; final commit is revised Foreman QP only."
   ]
 }
