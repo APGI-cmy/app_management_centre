@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Issue #1222 Stage 11 blocker investigation: PR #1220 authoritative; PR #1221 superseded; Stage 11 NO-GO while B1/B4/B5/B8 remain open.)  
+**Last Updated**: 2026-07-23 (Issue #1222 / PR #1229 investigation assured by `IAA-session-1229-R3-20260723-PASS`; Stage 11 remains NO-GO while B1/B4/B5/B8 remain open.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -196,7 +196,11 @@ Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11
 | Authority-Header Reconciliation | `.agent-admin/assurance/amc-stage11-authority-header-reconciliation-20260723.md` | ✅ Current | Active Stage 1–10 status normalization; history preserved. |
 | Infrastructure Verification | `.agent-admin/assurance/amc-stage11-infrastructure-verification-20260723.md` | ✅ Current | Supabase, Vercel and Render evidence. |
 | Module-Boundary Impact | `.agent-admin/assurance/amc-stage11-module-boundary-impact-20260723.md` | ✅ Current | AMC impact and separate ISMS/MMM route. |
-| IAA Wave Record | `.agent-admin/assurance/iaa-wave-record-amc-stage11-blocker-investigation-1222.md` | 🟡 Pending final IAA | Assurance carrier for Issue #1222. |
+| IAA Wave Record | `.agent-admin/assurance/iaa-wave-record-amc-stage11-blocker-investigation-1222.md` | ✅ FINAL_ASSURANCE_PASS | Investigation/evidence integrity token `IAA-session-1229-R3-20260723-PASS`; progression remains NO-GO. |
+| PR-Specific IAA Gate Carrier | `.agent-admin/wave-records/amc-wave-record-stage11-blocker-investigation-1229.md` | ✅ Current Assurance Carrier | Gate-compatible PR/issue/SHA-bound R3 token. |
+| IAA Session Memory | `.agent-workspace/independent-assurance-agent/memory/session-1229-20260723.md` | ✅ PASS | Records R1/R2 corrections and R3 final result. |
+| Foreman QP | `.agent-admin/quality/amc-stage11-blocker-investigation-foreman-qp.md` | ✅ PASS after R1 correction | Bound to corrected substantive head `e5755e4…`. |
+| ECAP Validation | `.agent-admin/prehandover/ecap-reconciliation-1229.md` and `.agent-admin/ecap/ecap-admin-validation.json` | ✅ PASS / ADMIN_VALIDATED | Administrative carriers current; no readiness judgment. |
 
 Stage 11 remains **NO-GO** while B1, B4, B5 and B8 remain open. Stage 12 remains blocked.
 
