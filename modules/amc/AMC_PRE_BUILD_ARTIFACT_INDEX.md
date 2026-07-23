@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Merged PR #1218 completed the W1 Stage 10 IAA Pre-Brief. Issue #1219 / PR #1220 reconciles post-merge control metadata and confirms Stage 11 as the next eligible, separately authorized stage.)  
+**Last Updated**: 2026-07-23 (Issue #1223 / PR #1224 contains the complete W1 Stage 11 appointment package. Appointment remains blocked pending the mandatory candidate-authored acknowledgment. Stage 12 is not authorized.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -145,7 +145,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | W1 Access Boundary Evidence | `modules/amc/08-builder-checklist/executions/w1/w1-access-boundary-evidence-20260722.md` | ✅ PASS AS READINESS ARRANGEMENT | Actual consumption remains W1 build evidence. |
 | W1 Environment Isolation Record | `modules/amc/08-builder-checklist/executions/w1/w1-environment-isolation-record-20260722.md` | ✅ PASS AS DESIGN/POLICY READINESS | Executed enforcement remains mandatory W1/W7 evidence. |
 | W1 Foreman Role-Fit Assessment | `modules/amc/08-builder-checklist/executions/w1/w1-foreman-role-fit-20260722.md` | ✅ PASS | Candidate fit confirmed. |
-| W1 RED-Test and Evidence Map | `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md` | ✅ Defined / Binding for W1 | All RED and build-exit obligations retained. |
+| W1 RED-Test and Evidence Map | `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md` | ✅ Defined / Binding for W1 | Nine mapped W1 obligations retained. |
 | W1 Readiness Reconciliation | `modules/amc/08-builder-checklist/executions/w1/w1-readiness-reconciliation-20260722.md` | 📦 Historical — BLOCKED | PR #1209 provenance. |
 | CS2 Decision Record — Stage 9 W1 (historical) | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md` | 📦 Historical — BLOCKED | Retained as provenance. |
 | Stage 9 W1 Bootstrap Correction Decision | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1-bootstrap-correction-20260723.md` | ✅ Accepted by merge | PR #1216 merged. |
@@ -164,7 +164,7 @@ Stage 9 W1 candidate readiness is **PASS ACCEPTED**. This is pre-appointment rea
 | Stage 10 IAA Memory | `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md` | ✅ PASS | Final assurance token `IAA-session-1218-R2-20260723-PASS`. |
 | Stage 10 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1218.md` | ✅ PASS | Protected-path ceremony record for merged PR #1218. |
 
-Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11 consideration. No builder is appointed and no implementation is authorized.
+Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11 consideration. No implementation is authorized.
 
 ---
 
@@ -172,8 +172,12 @@ Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🟡 Eligible pending explicit CS2 authorization | `integration-builder` remains nominated/readiness-approved but not appointed. |
-| Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | ⬜ Placeholder — 🟡 Eligible pending explicit CS2 authorization | Must preserve Stage 8 W1 scope and Stage 10 assurance conditions. |
+| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | 🟠 PACKAGE COMPLETE — ACKNOWLEDGMENT BLOCKED | Formal W1 appointment instruction, exact QA target, Ripple confirmation and Stage 12 boundary are defined. |
+| Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | 🟠 OVERLAY COMPLETE — NOT YET BINDING | Exact W1 path allowlist, prohibitions, evidence and acceptance requirements are defined. |
+| Stage 11 Candidate Acknowledgment | `modules/amc/10-builder-appointment/integration-builder-stage11-acknowledgment.md` | 🔴 PENDING CANDIDATE RESPONSE | Candidate-authored acknowledgment and timestamp are mandatory before Stage 11 completion. |
+| Governance Sync Registry | `governance/alignment/canonical_sync_status.json` | ✅ ALIGNED / STABLE | `integration-builder` registry entry aligned to active contract v3.4.0. |
+
+Stage 11 is **BLOCKED — ACKNOWLEDGMENT PENDING**. The candidate is not constitutionally appointed until the acknowledgment is committed, independently verified, PR #1224 is merged, and CS2 accepts the appointment.
 
 ---
 
