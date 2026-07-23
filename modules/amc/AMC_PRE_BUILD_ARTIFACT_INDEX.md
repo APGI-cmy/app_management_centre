@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Issue #1219 reconciles completed Stage 10 after merged PR #1218 and preserves the Stage 11/12 boundary.)  
+**Last Updated**: 2026-07-23 (Issue #1219 / PR #1221 reconciles completed Stage 10 after merged PR #1218 and preserves the Stage 11/12 boundary.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
