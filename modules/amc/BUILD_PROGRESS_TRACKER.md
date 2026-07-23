@@ -42,11 +42,11 @@
 | 4 | TRS | ✅ TREATED AS APPROVED | TR-1900/TR-1910 remain binding. |
 | 5 | Architecture | ✅ CS2 APPROVED WITH CONDITIONS | Binding downstream obligations retained. |
 | 5a | Deployment Execution Strategy | ✅ CS2 APPROVED WITH CONDITIONS | Environment/deployment controls remain binding. |
-| 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY obligations remain binding. |
-| 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | Evidence rows remain binding. |
-| 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
-| 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Corrected pre-appointment readiness model accepted in merged PR #1216. |
-| 10 | IAA Pre-Brief | ✅ COMPLETE — `PREFLIGHT_BRIEF_COMPLETE` | Accepted through merged PR #1218; final token `IAA-session-1218-R2-20260723-PASS`. |
+| 6 | QA-to-Red | ⏪ RE-ENTRY AUTHORIZED — REMEDIATION PENDING | Issue #1226 must produce the executable intended-RED suite and evidence; prior specification approval remains the baseline. |
+| 7 | PBFAG | ⏸ REVERIFICATION PENDING | Prior approval remains provenance; reverify after Stage 6 correction under canon §4.4. |
+| 8 | Implementation Plan | ⏸ REVERIFICATION PENDING | Reconfirm plan alignment after Stage 6/7 reverification. |
+| 9 | Builder Checklist / W1 Readiness | ⏸ REVERIFICATION PENDING | Prior PASS remains provenance; re-evaluate after Stage 6 correction. |
+| 10 | IAA Pre-Brief | ⏸ REVERIFICATION PENDING | Prior pre-brief is the baseline; refresh after Stage 6–9 reverification before Stage 11. |
 | 11 | Builder Appointment | ⛔ NO-GO — BLOCKERS OPEN | B1 executable RED, B4 Supabase, B5 Vercel and B8 bootstrap remain blocking; `integration-builder` is not appointed. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority; requires completed Stage 11 appointment. |
 
@@ -123,9 +123,9 @@ The current posture remains aligned with the approved Stage 8 implementation pla
 
 ## Current Disposition
 
-**Stages 1–10 are complete for W1 pre-build progression.**
+**Stages 1–5 remain complete. Stage 6 is formally re-entered; Stages 7–10 are paused for dependent reverification.**
 
-Issue #1222 completed the blocker investigation and independent assurance. IAA R1/R2 findings were corrected, and R3 issued `FINAL_ASSURANCE_PASS` for evidence integrity and the truthful disposition. The prerequisites themselves are not closed: Stage 11 remains NO-GO while B1, B4, B5 and B8 are open. Stage 12 remains blocked. No builder is appointed and no implementation work has begun.
+Issue #1222 completed the blocker investigation and independent assurance. Subsequent review correctly triggered Stage 6 re-entry under `PRE_BUILD_STAGE_MODEL_CANON.md` §4.4. Issue #1226 is authorized for a bounded QA-remediation delegation once its entry controls are met. Stage 7–10 reverification cannot complete until the executable intended-RED suite exists. Stage 11 remains NO-GO while B1, B4, B5 and B8 are open; Stage 12 remains blocked and `integration-builder` is not appointed.
 
 ## Current Artifacts
 
@@ -148,7 +148,7 @@ Issue #1222 completed the blocker investigation and independent assurance. IAA R
 
 Obtain explicit CS2 authorization for the proposed successor remediations:
 
-1. Issue #1226 — executable W1 QA-to-Red and bounded QA-builder appointment.
+1. Issue #1226 — authorized Stage 6 re-entry and bounded QA-remediation delegation, subject to its mandatory entry controls.
 2. Issue #1227 — Supabase security/parity and Vercel configuration verification.
 3. Issue #1228 — operationalise `agent_bootstrap` and align truthful enforcement.
 
