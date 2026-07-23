@@ -103,7 +103,14 @@ The pre-brief defines:
 
 **Stage 10 W1 IAA Pre-Brief: COMPLETE — `PREFLIGHT_BRIEF_COMPLETE`, accepted through merged PR #1218.**
 
-Final assurance token: `IAA-session-1218-R2-20260723-PASS`.
+Stage 10 acceptance token: `IAA-session-1218-R2-20260723-PASS`.
+
+PR #1221 post-merge reconciliation evidence:
+
+- `.agent-admin/wave-records/amc-wave-record-stage10-postmerge-reconciliation-1221.md`;
+- `.agent-admin/prehandover/ecap-reconciliation-1221.md`;
+- `.agent-workspace/independent-assurance-agent/memory/session-1221-20260723.md`;
+- reconciliation token: `IAA-session-1221-20260723-PASS`.
 
 This does not appoint the builder or authorize Stage 12. Stage 11 requires a separate explicit CS2-authorized appointment issue.
 
@@ -114,6 +121,9 @@ This does not appoint the builder or authorize Stage 12. Stage 11 requires a sep
 - `.agent-admin/prehandover/ecap-reconciliation-1218.md`
 - `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md`
 - `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md`
+- `.agent-admin/wave-records/amc-wave-record-stage10-postmerge-reconciliation-1221.md`
+- `.agent-admin/prehandover/ecap-reconciliation-1221.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-1221-20260723.md`
 
 ## Next Action
 
