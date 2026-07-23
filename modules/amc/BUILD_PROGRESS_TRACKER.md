@@ -9,7 +9,7 @@
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
 > **Current Issue**: [app_management_centre#1222](https://github.com/APGI-cmy/app_management_centre/issues/1222)  
-> **Current PR**: Pending — branch `foreman/amc-stage11-blocker-investigation-1222`  
+> **Current PR**: [app_management_centre#1229](https://github.com/APGI-cmy/app_management_centre/pull/1229)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
