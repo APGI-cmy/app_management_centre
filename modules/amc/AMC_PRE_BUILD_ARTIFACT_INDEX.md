@@ -158,13 +158,13 @@ Stage 9 W1 candidate readiness is **PASS ACCEPTED**. This is pre-appointment rea
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Stage 10 Pointer | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ✅ COMPLETE POINTER | Points to the accepted canonical W1 carrier and final assurance token. |
-| Canonical W1 IAA Pre-Brief | `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md` | ✅ `PREFLIGHT_BRIEF_COMPLETE` | Accepted through merged PR #1218; schema-conformant payload and full assurance plan. |
+| Stage 10 Pointer | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ⏸ PRIOR BASELINE — REVERIFICATION PENDING | Points to the previously accepted W1 carrier; refresh is required after Stage 6–9 reverification. |
+| Canonical W1 IAA Pre-Brief | `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md` | ⏸ PRIOR `PREFLIGHT_BRIEF_COMPLETE` BASELINE | Accepted through merged PR #1218; dependent refresh is required before Stage 11 after Stage 6 re-entry. |
 | PR-Specific Stage 10 Wave Record | `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md` | ✅ Current Assurance Carrier | Carries PR #1218 ECAP/IAA token and Stage 10 disposition. |
 | Stage 10 IAA Memory | `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md` | ✅ PASS | Final assurance token `IAA-session-1218-R2-20260723-PASS`. |
 | Stage 10 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1218.md` | ✅ PASS | Protected-path ceremony record for merged PR #1218. |
 
-Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11 consideration. No builder is appointed and no implementation is authorized.
+Stage 10 was complete before the Stage 6 defect triggered canon §4.4 re-entry. Its accepted pre-brief remains the baseline, but Stage 10 must be reverified after Stages 6–9 before Stage 11 may be reconsidered. No Stage 11 builder is appointed and no Stage 12 implementation is authorized.
 
 ---
 
@@ -192,7 +192,7 @@ Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
 | Stage 11 Blocker Register | `.agent-admin/assurance/amc-stage11-blocker-register-20260723.md` | ✅ Current | B1–B8 evidence and disposition paths. |
-| Executable W1 QA-to-Red Gap Analysis | `.agent-admin/assurance/amc-w1-executable-qa-to-red-gap-analysis-20260723.md` | ✅ Current | Exact W1 RED inventory and bounded QA-builder proposal. |
+| Executable W1 QA-to-Red Gap Analysis | `.agent-admin/assurance/amc-w1-executable-qa-to-red-gap-analysis-20260723.md` | ✅ Current | Exact W1 RED inventory and authorized bounded Stage 6 QA-remediation path. |
 | Authority-Header Reconciliation | `.agent-admin/assurance/amc-stage11-authority-header-reconciliation-20260723.md` | ✅ Current | Active Stage 1–10 status normalization; history preserved. |
 | Infrastructure Verification | `.agent-admin/assurance/amc-stage11-infrastructure-verification-20260723.md` | ✅ Current | Supabase, Vercel and Render evidence. |
 | Module-Boundary Impact | `.agent-admin/assurance/amc-stage11-module-boundary-impact-20260723.md` | ✅ Current | AMC impact and separate ISMS/MMM route. |
