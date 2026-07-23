@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-23  
-**Updated By**: Foreman proxy — Stage 10 post-merge alignment, issue #1219
+**Updated By**: Foreman proxy — Stage 10 post-merge alignment, issue #1219 / PR #1220
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
 > **Current Issue**: [app_management_centre#1219](https://github.com/APGI-cmy/app_management_centre/issues/1219)  
-> **Current PR**: Post-merge alignment PR to be opened from `foreman/amc-stage10-postmerge-alignment`  
+> **Current PR**: [app_management_centre#1220](https://github.com/APGI-cmy/app_management_centre/pull/1220)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -28,7 +28,7 @@
 - PR #1214 merged the candidate re-attestation and truthful BLOCKED residual review.
 - PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
 - PR #1218 merged the canonical Stage 10 W1 IAA Pre-Brief with disposition `PREFLIGHT_BRIEF_COMPLETE` at merge commit `7889309cf4f357894d496bde1bf79349a24bb450`.
-- Issue #1219 reconciles post-merge tracker/index/pointer status only.
+- Issue #1219 / PR #1220 reconciles post-merge tracker/index/pointer status only.
 
 ## Stage Summary
 
@@ -99,16 +99,16 @@ The current posture remains aligned with the approved Stage 8 implementation pla
 - W1 scope remains Runtime Foundation and Environment Setup.
 - Required controls remain CI, Preview, secret and environment boundaries.
 - Required W1 RED coverage remains CI, Preview isolation, environment separation, secret boundaries and no-Production-side-effect tests.
-- `.github/workflows/ci.yml` is a W1 implementation output.
-- `.github/workflows/deploy-frontend.yml` is a W1 implementation output.
+- `.github/workflows/ci.yml` is introduced in W1 and remains a W8 consolidation/validation surface.
+- `.github/workflows/deploy-frontend.yml` is introduced in W1 and remains a W7 deployment-execution validation surface.
 - `db-migrate.yml` remains a W7 output.
 - W1 and W2 must complete before material user-action work.
 - No later wave is opened or reordered by the Stage 10 completion.
 
 ## W1 Build-Exit Evidence — Still Mandatory Later
 
-- `.github/workflows/ci.yml`;
-- `.github/workflows/deploy-frontend.yml`;
+- `.github/workflows/ci.yml` creation and W1 proof, with W8 consolidation still required;
+- `.github/workflows/deploy-frontend.yml` creation and W1 proof, with W7 deployment validation still required;
 - validation/update of the existing root `.env.example` without secrets;
 - executed CI/type/lint/test/schema logs;
 - actual Preview-to-`develop` binding;
@@ -140,7 +140,7 @@ Stage 11 is now the next eligible governed stage but is not yet authorized. Stag
 
 ## Next Action
 
-Complete and merge the narrow Issue #1219 post-merge alignment PR. After that, CS2 may explicitly authorize **Stage 11 — W1 Builder Appointment**. Do not begin Stage 12 implementation before Stage 11 is completed and separately accepted.
+Complete and merge Issue #1219 / PR #1220. After that, CS2 may explicitly authorize **Stage 11 — W1 Builder Appointment**. Do not begin Stage 12 implementation before Stage 11 is completed and separately accepted.
 
 ## References
 
