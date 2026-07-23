@@ -2,11 +2,11 @@
   "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1215",
-  "scope_summary": "Correct the W1 Stage 9 bootstrap-readiness model by separating pre-appointment readiness evidence from Stage 12 build-exit evidence, reassess integration-builder under the corrected boundary, update tracker/index and produce a final Stage 9 disposition without opening Stages 10-12.",
+  "governing_issue": "#1217",
+  "scope_summary": "Prepare and disposition the canonical Stage 10 W1 IAA pre-brief, align the tracker and artifact index, and preserve the boundary that no builder appointment, delegation, implementation, migration, deployment, or Stage 12 work is authorized.",
   "created_by": "foreman-v2-agent",
-  "created_at": "2026-07-23T07:04:21Z",
+  "created_at": "2026-07-23T08:53:26Z",
   "execution_model": "foreman-orchestrated",
   "orchestrating_agent": "foreman-v2-agent",
-  "implementing_agent": "integration-builder"
+  "implementing_agent": "none-stage10-prebrief-only"
 }
