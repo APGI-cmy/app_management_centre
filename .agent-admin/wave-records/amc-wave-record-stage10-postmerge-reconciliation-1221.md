@@ -11,7 +11,8 @@
 | Wave | `amc-stage10-postmerge-reconciliation-20260723` |
 | Orchestrating agent | `foreman-v2-agent` |
 | Implementing agent | `none-governance-reconciliation-only` |
-| Reviewed SHA | `80d316f30fd380bef5dde938efeea602b39f6613` |
+| Reviewed substantive SHA | `80d316f30fd380bef5dde938efeea602b39f6613` |
+| Token-recording head | `f35c1ecabcdd94aceeb92706c6bb9bbaf33e7ab6` |
 | Entry condition | NORMAL — Stage 10 accepted through merged PR #1218 |
 
 ## 2. Scope
@@ -34,7 +35,7 @@ This wave does not appoint or delegate a builder, authorize implementation, crea
 - `FOREMAN_OPERATING_MODEL.md`;
 - Foreman and Independent Assurance Agent contracts;
 - Issue #1219 and PR #1221;
-- exact six-file PR diff;
+- exact six-file substantive diff at `80d316f30fd380bef5dde938efeea602b39f6613`;
 - `.admin/pr.json`;
 - `.agent-admin/prehandover/ecap-reconciliation-1221.md`;
 - Stage 8 implementation plan, wave breakdown and condition-import matrix;
@@ -43,8 +44,11 @@ This wave does not appoint or delegate a builder, authorize implementation, crea
 - Stage 10 pointer;
 - AMC pre-build artifact index;
 - AMC build progress tracker;
-- current workflows, status, reviews and review threads;
-- exact one-line ECAP machine-wording delta from `9465740e00f9fcc26ecd33a34dc87d857953776d` to `80d316f30fd380bef5dde938efeea602b39f6613`.
+- current workflows, status, reviews and review threads at the reviewed substantive head;
+- exact one-line ECAP machine-wording delta from `9465740e00f9fcc26ecd33a34dc87d857953776d` to `80d316f30fd380bef5dde938efeea602b39f6613`;
+- exact token-recording-only delta from `80d316f30fd380bef5dde938efeea602b39f6613` to `f35c1ecabcdd94aceeb92706c6bb9bbaf33e7ab6`, adding only:
+  - `.agent-admin/wave-records/amc-wave-record-stage10-postmerge-reconciliation-1221.md`;
+  - `.agent-workspace/independent-assurance-agent/memory/session-1221-20260723.md`.
 
 ## 4. Reconciliation Result
 
@@ -63,8 +67,10 @@ This wave does not appoint or delegate a builder, authorize implementation, crea
 | Runtime/workflow/migration/schema mutation absence | PASS |
 | Infrastructure/Production mutation absence | PASS |
 | ECAP administrative-role boundary | PASS |
-| Exact substantive-head binding | PASS |
-| Review-thread state | PASS — none unresolved |
+| Exact substantive-head binding | PASS — `80d316f30fd380bef5dde938efeea602b39f6613` |
+| Final eight-path inventory | PASS — six substantive paths plus two token-recording artifacts |
+| Token-recording delta binding | PASS — `80d316f…` to `f35c1ec…` |
+| Review-thread state at substantive review | PASS — none unresolved |
 
 ## 5. ECAP Ceremony
 
@@ -82,7 +88,8 @@ ECAP is administrative only. It does not issue substantive assurance, CS2 accept
 
 Issue: #1219
 PR: #1221
-Reviewed SHA: 80d316f30fd380bef5dde938efeea602b39f6613
+Reviewed substantive SHA: 80d316f30fd380bef5dde938efeea602b39f6613
+Token-recording head: f35c1ecabcdd94aceeb92706c6bb9bbaf33e7ab6
 Verdict: PASS
 Adoption Phase: PHASE_B_BLOCKING
 PHASE_B_BLOCKING_TOKEN: IAA-session-1221-20260723-PASS
@@ -96,10 +103,17 @@ The assurance result does not authorize Stage 11 or Stage 12 and does not consti
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
 base_head: 80d316f30fd380bef5dde938efeea602b39f6613
-final_head: 80d316f30fd380bef5dde938efeea602b39f6613
+token_recording_head: f35c1ecabcdd94aceeb92706c6bb9bbaf33e7ab6
+token_recording_paths:
+- .agent-admin/wave-records/amc-wave-record-stage10-postmerge-reconciliation-1221.md
+- .agent-workspace/independent-assurance-agent/memory/session-1221-20260723.md
 final_token_binding: IAA-session-1221-20260723-PASS
 
-## 7. Final Posture
+## 7. Post-Assurance Inventory Correction
+
+The ready-for-review Codex inspection identified that the earlier wording described only the six-file substantive state while the PR’s token-recording head contained eight changed paths. This record now distinguishes those states explicitly. The correction changes audit-trail wording only; it does not alter the Stage 10 reconciliation, token verdict, lifecycle boundaries, runtime, infrastructure, or Production.
+
+## 8. Final Posture
 
 - Stage 10 post-merge reconciliation: COMPLETE, subject to merge and CS2 disposition.
 - Stage 11 Builder Appointment: NOT STARTED.
