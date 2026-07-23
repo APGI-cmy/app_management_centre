@@ -31,7 +31,7 @@
 | Infrastructure scope respected | PASS | Read-only verification; no secret, migration, deploy or mutation |
 | Tracker/index parity | PASS | Issue #1222 and PR #1229 current; Stage 11/12 NO-GO |
 | Review threads | PASS | 0 unresolved threads at reviewed head |
-| Hosted checks | CONDITIONAL | Vercel success; all completed governance checks green except prehandover lane, which correctly requires final handover evidence |
+| Hosted checks | CONDITIONAL | Vercel success; all completed governance checks green except prehandover lane, which correctly requires IAA/ECAP ceremony evidence |
 
 ## CI interpretation
 
