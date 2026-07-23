@@ -10,7 +10,7 @@
 | Branch | `foreman/amc-stage9-w1-bootstrap-readiness-correction` |
 | Wave | `amc-stage9-w1-bootstrap-readiness-correction-20260723` |
 | Candidate | `integration-builder` |
-| Reviewed substantive SHA | `e4e60a6009886baed346270c896c472a173e6ed0` |
+| Reviewed substantive SHA | `663b9a49a020324739adf2449e8ac0db262f7e34` |
 | Entry condition status | NORMAL — Stage 9 re-entry/correction under `PRE_BUILD_STAGE_MODEL_CANON.md` §4.4 |
 
 ## 2. Scope
@@ -44,15 +44,15 @@ ecap_invoked: true
 ecap_verdict: PASS
 ceremony_admin_appointed: true
 protected_path_ceremony_verdict: PASS
-ECAP session: ecap-session-1216-20260723-r2
+ECAP session: ecap-session-1216-20260723-r3
 
 ## 6. IAA Final Assurance
 
 IAA session: session-1216-20260723
 Verdict: PASS
 Adoption Phase: PHASE_B_BLOCKING
-PHASE_B_BLOCKING_TOKEN: IAA-session-1216-R2-20260723-PASS
-Reviewed SHA: e4e60a6009886baed346270c896c472a173e6ed0
+PHASE_B_BLOCKING_TOKEN: IAA-session-1216-R3-20260723-PASS
+Reviewed SHA: 663b9a49a020324739adf2449e8ac0db262f7e34
 
 candidate_readiness_verdict: PASS_PENDING_CS2_ACCEPTANCE
 stage_10_authorized: false
@@ -63,9 +63,9 @@ The assurance PASS certifies that the proposed lifecycle correction is non-circu
 
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
-base_head: e4e60a6009886baed346270c896c472a173e6ed0
-final_head: e4e60a6009886baed346270c896c472a173e6ed0
-final_token_binding: IAA-session-1216-R2-20260723-PASS
+base_head: 663b9a49a020324739adf2449e8ac0db262f7e34
+final_head: 663b9a49a020324739adf2449e8ac0db262f7e34
+final_token_binding: IAA-session-1216-R3-20260723-PASS
 
 ## 7. Final Wave Posture
 
