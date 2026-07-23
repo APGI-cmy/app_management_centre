@@ -9,7 +9,7 @@
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
 > **Current Issue**: [app_management_centre#1219](https://github.com/APGI-cmy/app_management_centre/issues/1219)  
-> **Current PR**: Not yet opened  
+> **Current PR**: [app_management_centre#1221](https://github.com/APGI-cmy/app_management_centre/pull/1221)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -28,7 +28,7 @@
 - PR #1214 merged the candidate re-attestation and truthful BLOCKED residual review.
 - PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
 - Issue #1217 / merged PR #1218 completed and accepted the canonical Stage 10 W1 IAA Pre-Brief with token `IAA-session-1218-R2-20260723-PASS`.
-- Issue #1219 reconciles the post-merge Stage 10 control records; it does not authorize Stage 11 or Stage 12.
+- Issue #1219 / PR #1221 reconciles the post-merge Stage 10 control records; it does not authorize Stage 11 or Stage 12.
 
 ## Stage Summary
 
