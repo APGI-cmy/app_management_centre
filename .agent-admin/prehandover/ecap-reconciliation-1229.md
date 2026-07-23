@@ -3,7 +3,7 @@
 **Issue**: #1222  
 **PR**: #1229  
 **Branch**: `foreman/amc-stage11-blocker-investigation-1222`  
-**Reviewed Package Head**: `16116995609a2483efb19a24f3e8f61bafc169f8`  
+**Reviewed Package Head**: `3837779799de4667bfbced4076f93933dd903c5a`  
 **Reviewed Substantive Head**: `1a0fbdfb2edcf5cc642716190c2ebca0eee9c97c`  
 **Base**: `4546f65e80aca5e80e7f95717b8fe69bbf317cdc`  
 **ECAP Session**: `ecap-1229-20260723-revalidation`
@@ -41,8 +41,8 @@ protected_path_ceremony_verdict: PASS
 
 ## Scope boundary
 
-ECAP made no substantive readiness judgment, did not invoke IAA, and did not alter
-the Foreman QP or the recorded Stage 11 / Stage 12 NO-GO disposition.
+ECAP is administrative only and must not make a substantive readiness judgment, invoke IAA,
+or alter the Foreman QP or the recorded Stage 11 / Stage 12 NO-GO disposition.
 
 administrative_readiness: ADMIN_VALIDATED
 protected_path_ceremony_verdict: PASS
