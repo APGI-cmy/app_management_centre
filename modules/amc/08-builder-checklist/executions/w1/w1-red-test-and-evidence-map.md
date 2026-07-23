@@ -45,8 +45,10 @@ their implementation and GREEN exit remain W7 obligations.
 
 - Stage 8 keeps `db-migrate.yml`, migration command proof, rollback and
   health/smoke execution in W7.
-- Stage 11 may authorize a bounded QA builder to create executable RED guards for
-  those future obligations before the integration builder is appointed.
+- CS2-authorized Issue #1226 may delegate a bounded Stage 6 QA-remediation role to
+  create executable RED guards for those future obligations. This is not a Stage 11
+  appointment; Stage 11 remains unavailable until Stage 6 is corrected and dependent
+  Stages 7–10 are reverified.
 - A RED guard does not authorize W1 implementation of its target and is not a W1
   GREEN exit requirement where the table assigns W7.
 - `integration-builder` remains unappointed until the executable suite has been
