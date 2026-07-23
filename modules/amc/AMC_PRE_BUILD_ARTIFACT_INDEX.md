@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Issue #1217 / PR #1218 records the active W1 Stage 10 IAA Pre-Brief and preserves the Stage 11/12 boundary.)  
+**Last Updated**: 2026-07-23 (Merged PR #1218 completed the W1 Stage 10 IAA Pre-Brief. Issue #1219 / PR #1220 reconciles post-merge control metadata and confirms Stage 11 as the next eligible, separately authorized stage.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -158,13 +158,13 @@ Stage 9 W1 candidate readiness is **PASS ACCEPTED**. This is pre-appointment rea
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Stage 10 Pointer | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | 🟡 ACTIVE | Points to the canonical W1 wave-record carrier. |
-| Canonical W1 IAA Pre-Brief | `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md` | 🟡 PREFLIGHT_BRIEF_COMPLETE — pending merge/CS2 acceptance | Contains schema-conformant payload and full assurance plan. |
-| PR-Specific Stage 10 Wave Record | `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md` | ✅ Assurance Carrier | Carries PR #1218 ECAP/IAA token and Stage 10 disposition. |
-| Stage 10 IAA Memory | `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md` | ✅ PASS | Independent assurance record for PR #1218. |
-| Stage 10 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1218.md` | ✅ PASS | Protected-path ceremony record. |
+| Stage 10 Pointer | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ✅ COMPLETE POINTER | Points to the accepted canonical W1 carrier and final assurance token. |
+| Canonical W1 IAA Pre-Brief | `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md` | ✅ `PREFLIGHT_BRIEF_COMPLETE` | Accepted through merged PR #1218; schema-conformant payload and full assurance plan. |
+| PR-Specific Stage 10 Wave Record | `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md` | ✅ Current Assurance Carrier | Carries PR #1218 ECAP/IAA token and Stage 10 disposition. |
+| Stage 10 IAA Memory | `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md` | ✅ PASS | Final assurance token `IAA-session-1218-R2-20260723-PASS`. |
+| Stage 10 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1218.md` | ✅ PASS | Protected-path ceremony record for merged PR #1218. |
 
-Stage 10 is complete at pre-brief level, pending merge and CS2 acceptance of PR #1218. No builder is appointed and no implementation is authorized.
+Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11 consideration. No builder is appointed and no implementation is authorized.
 
 ---
 
@@ -172,8 +172,8 @@ Stage 10 is complete at pre-brief level, pending merge and CS2 acceptance of PR 
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🔴 Blocked | Requires Stage 10 merge and separate CS2 authorization. |
-| Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | ⬜ Placeholder — 🔴 Blocked | Not started. |
+| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🟡 Eligible pending explicit CS2 authorization | `integration-builder` remains nominated/readiness-approved but not appointed. |
+| Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | ⬜ Placeholder — 🟡 Eligible pending explicit CS2 authorization | Must preserve Stage 8 W1 scope and Stage 10 assurance conditions. |
 
 ---
 
@@ -181,9 +181,24 @@ Stage 10 is complete at pre-brief level, pending merge and CS2 acceptance of PR 
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Build Evidence Index | `modules/amc/11-build/build-evidence-index.md` | ⬜ Placeholder — 🔴 Blocked | Not started. |
+| Build Evidence Index | `modules/amc/11-build/build-evidence-index.md` | ⬜ Placeholder — 🔴 Blocked | Requires completed Stage 11 appointment and separate Stage 12 authority. |
 | QA-to-Green Evidence | `modules/amc/11-build/qa-to-green-evidence.md` | ⬜ Placeholder — 🔴 Blocked | Not started. |
 | Handover | `modules/amc/11-build/handover.md` | ⬜ Placeholder — 🔴 Blocked | Not started. |
+
+---
+
+## Implementation Plan Alignment
+
+The pre-build pack remains aligned with the approved Stage 8 plan:
+
+- W1 remains the next delivery wave.
+- W1 retains CI, Preview, environment and secret-boundary controls.
+- W1 retains CI, Preview-isolation, environment-separation, secret-boundary and no-Production-side-effect RED coverage.
+- `ci.yml` is introduced in W1 and remains a W8 consolidation/validation surface.
+- `deploy-frontend.yml` is introduced in W1 and remains a W7 deployment-execution validation surface.
+- `db-migrate.yml` remains a W7 output.
+- W1 and W2 must complete before material user-action work.
+- No delivery wave has been skipped, reordered or weakened.
 
 ---
 

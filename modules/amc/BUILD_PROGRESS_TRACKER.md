@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-23  
-**Updated By**: Foreman proxy — Stage 10 W1 IAA Pre-Brief, issue #1217 / PR #1218
+**Updated By**: Foreman proxy — Stage 10 post-merge alignment, issue #1219 / PR #1220
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1217](https://github.com/APGI-cmy/app_management_centre/issues/1217)  
-> **Current PR**: [app_management_centre#1218](https://github.com/APGI-cmy/app_management_centre/pull/1218)  
+> **Current Issue**: [app_management_centre#1219](https://github.com/APGI-cmy/app_management_centre/issues/1219)  
+> **Current PR**: [app_management_centre#1220](https://github.com/APGI-cmy/app_management_centre/pull/1220)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -27,7 +27,8 @@
 - PR #1209 reconciled the record and retained BLOCKED.
 - PR #1214 merged the candidate re-attestation and truthful BLOCKED residual review.
 - PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
-- Issue #1217 / PR #1218 prepares and dispositions the canonical Stage 10 W1 IAA Pre-Brief.
+- PR #1218 merged the canonical Stage 10 W1 IAA Pre-Brief with disposition `PREFLIGHT_BRIEF_COMPLETE` at merge commit `7889309cf4f357894d496bde1bf79349a24bb450`.
+- Issue #1219 / PR #1220 reconciles post-merge tracker/index/pointer status only.
 
 ## Stage Summary
 
@@ -43,9 +44,9 @@
 | 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | Evidence rows remain binding. |
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
 | 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Corrected pre-appointment readiness model accepted in merged PR #1216. |
-| 10 | IAA Pre-Brief | 🟡 ACTIVE — PREFLIGHT_BRIEF_COMPLETE pending merge/CS2 acceptance | Canonical W1 pre-brief is in PR #1218. |
-| 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED | Awaiting Stage 10 merge and separate CS2 authorization. |
-| 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority. |
+| 10 | IAA Pre-Brief | ✅ COMPLETE — `PREFLIGHT_BRIEF_COMPLETE` | Accepted through merged PR #1218; final token `IAA-session-1218-R2-20260723-PASS`. |
+| 11 | Builder Appointment | ⬜ NOT STARTED — ELIGIBLE PENDING EXPLICIT CS2 AUTHORIZATION | `integration-builder` remains nominated/readiness-approved but not appointed. |
+| 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority; requires completed Stage 11 appointment. |
 
 ## Stage 9 W1 Final Facts
 
@@ -67,13 +68,19 @@ Canonical carrier:
 .agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md
 ```
 
-Current disposition:
+Final disposition:
 
 ```text
 PREFLIGHT_BRIEF_COMPLETE
 ```
 
-The pre-brief defines:
+Final assurance token:
+
+```text
+IAA-session-1218-R2-20260723-PASS
+```
+
+The accepted pre-brief defines:
 
 - exact W1 scope and exclusions;
 - applicable QA-to-Red and deployment obligations;
@@ -84,10 +91,24 @@ The pre-brief defines:
 - final IAA focus;
 - stop and escalation conditions.
 
+## Implementation Plan Alignment
+
+The current posture remains aligned with the approved Stage 8 implementation plan and wave breakdown:
+
+- W1 is the next delivery wave.
+- W1 scope remains Runtime Foundation and Environment Setup.
+- Required controls remain CI, Preview, secret and environment boundaries.
+- Required W1 RED coverage remains CI, Preview isolation, environment separation, secret boundaries and no-Production-side-effect tests.
+- `.github/workflows/ci.yml` is introduced in W1 and remains a W8 consolidation/validation surface.
+- `.github/workflows/deploy-frontend.yml` is introduced in W1 and remains a W7 deployment-execution validation surface.
+- `db-migrate.yml` remains a W7 output.
+- W1 and W2 must complete before material user-action work.
+- No later wave is opened or reordered by the Stage 10 completion.
+
 ## W1 Build-Exit Evidence — Still Mandatory Later
 
-- `.github/workflows/ci.yml`;
-- `.github/workflows/deploy-frontend.yml`;
+- `.github/workflows/ci.yml` creation and W1 proof, with W8 consolidation still required;
+- `.github/workflows/deploy-frontend.yml` creation and W1 proof, with W7 deployment validation still required;
 - validation/update of the existing root `.env.example` without secrets;
 - executed CI/type/lint/test/schema logs;
 - actual Preview-to-`develop` binding;
@@ -100,12 +121,17 @@ The pre-brief defines:
 
 ## Current Disposition
 
-**Stage 10 W1 IAA Pre-Brief: PREFLIGHT_BRIEF_COMPLETE — pending merge and final CS2 acceptance of PR #1218.**
+**Stages 1–10 are complete for W1 pre-build progression.**
 
-This does not appoint the builder or authorize Stage 12. Stage 11 requires a separate CS2-authorized appointment issue after Stage 10 is accepted.
+Stage 11 is now the next eligible governed stage but is not yet authorized. Stage 12 remains blocked. No builder is appointed and no implementation work has begun.
 
 ## Current Artifacts
 
+- `modules/amc/07-implementation-plan/implementation-plan.md`
+- `modules/amc/07-implementation-plan/wave-breakdown.md`
+- `modules/amc/07-implementation-plan/condition-import-matrix.md`
+- `modules/amc/08-builder-checklist/w1-bootstrap-readiness-model-correction-20260723.md`
+- `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md`
 - `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md`
 - `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md`
 - `.agent-admin/prehandover/ecap-reconciliation-1218.md`
@@ -114,7 +140,7 @@ This does not appoint the builder or authorize Stage 12. Stage 11 requires a sep
 
 ## Next Action
 
-Complete review and merge of PR #1218. After merge, CS2 may separately authorize Stage 11 — W1 Builder Appointment. Do not begin Stage 12 implementation before Stage 11 is completed.
+Complete and merge Issue #1219 / PR #1220. After that, CS2 may explicitly authorize **Stage 11 — W1 Builder Appointment**. Do not begin Stage 12 implementation before Stage 11 is completed and separately accepted.
 
 ## References
 
