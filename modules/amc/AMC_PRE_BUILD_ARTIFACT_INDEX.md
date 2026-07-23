@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Issue #1215 / PR #1216 corrects the W1 bootstrap-readiness model, preserves all implementation evidence obligations for W1 build exit, and records a recommended Stage 9 W1 PASS pending final CS2 acceptance/merge.)  
+**Last Updated**: 2026-07-23 (Issue #1217 / PR #1218 records the active W1 Stage 10 IAA Pre-Brief and preserves the Stage 11/12 boundary.)  
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -136,22 +136,21 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
 | Builder Checklist | `modules/amc/08-builder-checklist/builder-checklist.md` | ✅ Produced / Merged | PR #1204 merged the universal and W1–W8 readiness gates. |
-| W1 Bootstrap Readiness Model Correction | `modules/amc/08-builder-checklist/w1-bootstrap-readiness-model-correction-20260723.md` | 🟡 Proposed Correction — binding only upon CS2 acceptance/merge | Separates Stage 9 readiness evidence from Stage 12 W1 build-exit evidence without weakening obligations. |
+| W1 Bootstrap Readiness Model Correction | `modules/amc/08-builder-checklist/w1-bootstrap-readiness-model-correction-20260723.md` | ✅ Accepted / Binding | Accepted in merged PR #1216; separates Stage 9 readiness from Stage 12 build-exit evidence. |
 | Builder Readiness Attestations | `modules/amc/08-builder-checklist/builder-readiness-attestations.md` | ✅ Produced / Merged | Controlled candidate/Foreman attestation template. |
-| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | 🟡 RECOMMENDED PASS — pending CS2 acceptance/merge | Reassessed under corrected non-circular Stage 9 model. |
+| W1 Candidate Readiness Checklist — `integration-builder` | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md` | ✅ PASS ACCEPTED | Stage 9 W1 readiness accepted in merged PR #1216. |
 | W1 Candidate Readiness Attestation v1 | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation.md` | 📦 Historical — BLOCKED | Original PR #1206 execution retained. |
 | W1 Candidate Readiness Attestation v2 | `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-attestation-v2-20260722.md` | ✅ Candidate Attestation Complete | Mandatory read-set and commitments recorded. |
-| W1 Environment and Dependency Register | `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md` | 🟡 Historical/Reconciliation Input | Resource facts retained; current readiness authority is checklist plus correction. |
-| W1 Access Boundary Evidence | `modules/amc/08-builder-checklist/executions/w1/w1-access-boundary-evidence-20260722.md` | ✅ PASS AS READINESS ARRANGEMENT | Owners, resources, secret names/scopes and escalation path documented; actual consumption remains W1 evidence. |
+| W1 Environment and Dependency Register | `modules/amc/08-builder-checklist/executions/w1/w1-environment-and-dependency-register.md` | 🟡 Historical/Reconciliation Input | Resource facts retained. |
+| W1 Access Boundary Evidence | `modules/amc/08-builder-checklist/executions/w1/w1-access-boundary-evidence-20260722.md` | ✅ PASS AS READINESS ARRANGEMENT | Actual consumption remains W1 build evidence. |
 | W1 Environment Isolation Record | `modules/amc/08-builder-checklist/executions/w1/w1-environment-isolation-record-20260722.md` | ✅ PASS AS DESIGN/POLICY READINESS | Executed enforcement remains mandatory W1/W7 evidence. |
-| W1 Foreman Role-Fit Assessment | `modules/amc/08-builder-checklist/executions/w1/w1-foreman-role-fit-20260722.md` | ✅ PASS | Candidate fit confirmed under corrected Stage 9 boundary. |
+| W1 Foreman Role-Fit Assessment | `modules/amc/08-builder-checklist/executions/w1/w1-foreman-role-fit-20260722.md` | ✅ PASS | Candidate fit confirmed. |
 | W1 RED-Test and Evidence Map | `modules/amc/08-builder-checklist/executions/w1/w1-red-test-and-evidence-map.md` | ✅ Defined / Binding for W1 | All RED and build-exit obligations retained. |
-| W1 Environment Evidence Update | `modules/amc/08-builder-checklist/executions/w1/w1-environment-evidence-update-20260721.md` | 🟡 Resource Evidence | Vercel/Supabase resources and secret-name presence. |
 | W1 Readiness Reconciliation | `modules/amc/08-builder-checklist/executions/w1/w1-readiness-reconciliation-20260722.md` | 📦 Historical — BLOCKED | PR #1209 provenance. |
 | CS2 Decision Record — Stage 9 W1 (historical) | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md` | 📦 Historical — BLOCKED | Retained as provenance. |
-| Stage 9 W1 Bootstrap Correction Decision | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1-bootstrap-correction-20260723.md` | 🟡 DRAFT — recommended PASS | Final CS2 review artifact for PR #1216. |
+| Stage 9 W1 Bootstrap Correction Decision | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1-bootstrap-correction-20260723.md` | ✅ Accepted by merge | PR #1216 merged. |
 
-Stage 9 W1 candidate readiness is **RECOMMENDED PASS pending final CS2 acceptance/merge of PR #1216**. This is pre-appointment readiness only. W1 implementation evidence remains mandatory and unproduced.
+Stage 9 W1 candidate readiness is **PASS ACCEPTED**. This is pre-appointment readiness only; W1 implementation evidence remains mandatory and unproduced.
 
 ---
 
@@ -159,8 +158,13 @@ Stage 9 W1 candidate readiness is **RECOMMENDED PASS pending final CS2 acceptanc
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| IAA Pre-Brief | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | ⬜ Placeholder — eligible only after CS2 acceptance and explicit authorization | Not started. |
-| IAA Pre-Brief Response | `modules/amc/09-iaa-pre-brief/iaa-pre-brief-response.md` | ⬜ Placeholder — BLOCKED | Not started. |
+| Stage 10 Pointer | `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md` | 🟡 ACTIVE | Points to the canonical W1 wave-record carrier. |
+| Canonical W1 IAA Pre-Brief | `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md` | 🟡 PREFLIGHT_BRIEF_COMPLETE — pending merge/CS2 acceptance | Contains schema-conformant payload and full assurance plan. |
+| PR-Specific Stage 10 Wave Record | `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md` | ✅ Assurance Carrier | Carries PR #1218 ECAP/IAA token and Stage 10 disposition. |
+| Stage 10 IAA Memory | `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md` | ✅ PASS | Independent assurance record for PR #1218. |
+| Stage 10 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1218.md` | ✅ PASS | Protected-path ceremony record. |
+
+Stage 10 is complete at pre-brief level, pending merge and CS2 acceptance of PR #1218. No builder is appointed and no implementation is authorized.
 
 ---
 
@@ -168,7 +172,7 @@ Stage 9 W1 candidate readiness is **RECOMMENDED PASS pending final CS2 acceptanc
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🔴 Blocked | No builder appointed. |
+| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🔴 Blocked | Requires Stage 10 merge and separate CS2 authorization. |
 | Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | ⬜ Placeholder — 🔴 Blocked | Not started. |
 
 ---
