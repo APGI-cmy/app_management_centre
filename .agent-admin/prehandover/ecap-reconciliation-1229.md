@@ -25,7 +25,7 @@ protected_path_ceremony_verdict: PASS
 | PR, branch, base and head verified | PASS |
 | Blocker register and B1–B8 paths resolved | PASS |
 | Foreman QP present | PASS |
-| QP bound to substantive head `1a0fbdf…` | PASS |
+| QP bound to substantive head `e5755e4…` | PASS |
 | Post-substantive delta classified | PASS — revised Foreman QP only |
 | Review submissions / unresolved threads | 0 / 0 |
 | ECAP-contract protected paths changed | None |
