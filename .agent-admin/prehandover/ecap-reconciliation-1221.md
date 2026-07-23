@@ -111,4 +111,4 @@ builder_appointed: false
 implementation_authorized: false  
 stage_12_status: BLOCKED
 
-This ECAP PASS is limited to administrative ceremony integrity for the reviewed substantive head. It does not constitute substantive readiness, independent assurance, CS2 acceptance, stage authorization, or merge authority.
+This ECAP PASS is administrative only and limited to ceremony integrity for the reviewed substantive head. It does not constitute substantive readiness, independent assurance, CS2 acceptance, stage authorization, or merge authority.
