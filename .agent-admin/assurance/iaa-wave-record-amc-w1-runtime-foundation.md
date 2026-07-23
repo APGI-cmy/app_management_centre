@@ -18,6 +18,86 @@
 ## PRE-BRIEF
 IAA_PREFLIGHT_BRIEF
 
+```json
+{
+  "schema_version": "1.0.0",
+  "wave": "amc-w1-runtime-foundation",
+  "issue": "#1217",
+  "branch": "foreman/amc-stage10-w1-iaa-prebrief",
+  "qualifying_tasks": [
+    "Establish the repository and runtime foundation required by W1",
+    "Implement .github/workflows/ci.yml",
+    "Implement .github/workflows/deploy-frontend.yml",
+    "Validate or update the existing root .env.example without secrets",
+    "Prove CI, Preview deployment, environment isolation and Production protection",
+    "Produce the complete W1 RED-to-GREEN evidence bundle"
+  ],
+  "required_build_gates": [
+    "CI type, lint, test and schema enforcement",
+    "Vercel Preview deployment validation",
+    "Preview-to-Supabase-develop binding validation",
+    "Production credential exclusion validation",
+    "No-Production-side-effect validation",
+    "Code review closure and Build-to-Green enforcement"
+  ],
+  "expected_qa_scope": [
+    "Applicable QA-DEPLOY controls",
+    "Applicable QA-CONFIG controls",
+    "Applicable QA-DES controls",
+    "All W1 PBFAG and Stage 8 imported conditions",
+    "No regression, no test debt and stop-and-fix behavior"
+  ],
+  "high_risk_failure_modes": [
+    "Preview or PR jobs receive Production credentials",
+    "Preview binds to Production Supabase instead of develop",
+    "PR work can deploy to or mutate Production",
+    "Secret values appear in commits, logs, comments or evidence",
+    "CI omits or weakens required checks",
+    "Production deployment is not protected and explicitly approved",
+    "Architecture or scope drifts from approved authority",
+    "Tests or gates are bypassed, diluted or converted into debt",
+    "Evidence is asserted without reproducible proof",
+    "GREEN is claimed while any applicable RED obligation remains unmet"
+  ],
+  "required_builder_evidence": [
+    "Committed ci.yml and deploy-frontend.yml with explicit permissions, triggers, environments and secret references",
+    "Non-secret .env.example validation or update evidence",
+    "Reproducible CI, type, lint, test and schema results",
+    "Inspected workflow-to-secret mapping without secret disclosure",
+    "Vercel Preview deployment evidence",
+    "Proof Preview uses Supabase develop",
+    "Proof Production credentials are unavailable to PR and Preview jobs",
+    "Proof PR and Preview work cannot deploy or migrate Production",
+    "No-Production-side-effect evidence",
+    "Traceability from every applicable W1 RED obligation to implementation evidence",
+    "W1 RED-to-GREEN evidence bundle and prehandover record"
+  ],
+  "required_foreman_qp_checks": [
+    "Verify scope matches the Stage 8 W1 contract",
+    "Verify every applicable RED ID is mapped to evidence",
+    "Verify workflow permissions and environment scopes are least-privilege and explicit",
+    "Inspect Preview/non-production and Production bindings separately",
+    "Verify no secret values are exposed",
+    "Verify Production deployment and migration controls remain protected",
+    "Verify all required checks run on the implementation head and are green",
+    "Verify no unresolved review conversation remains",
+    "Verify no test weakening, bypass, debt or hidden deferred work exists",
+    "Verify tracker, evidence index and handover records reflect the actual final state"
+  ],
+  "ecap_required": true,
+  "final_iaa_focus": [
+    "Conformance with accepted architecture, deployment and QA authorities",
+    "All applicable RED obligations genuinely GREEN",
+    "Preview bound only to non-production resources",
+    "Production credentials and mutation paths excluded from PR and Preview execution",
+    "CI and deployment evidence reproducible",
+    "No regression, test debt, scope drift or false assurance",
+    "Final head and evidence carrier correctly bound"
+  ],
+  "result": "PREFLIGHT_BRIEF_COMPLETE"
+}
+```
+
 ### 1. Purpose
 
 Define the independent-assurance expectations for W1 before any builder appointment or implementation authority is issued.
