@@ -54,18 +54,23 @@ the W1 builder to implement W7 work.
 The original Stage 6 pack states that actual test code is a Stage 12 qa-builder
 responsibility. Issue #1222 establishes a later and narrower sequencing
 requirement: executable intended-RED proof must exist before
-`integration-builder` appointment. The safe reconciliation is a bounded Stage
-11 QA-builder appointment before the integration builder—not a waiver and not
-Foreman-authored tests.
+`integration-builder` appointment. Under `PRE_BUILD_STAGE_MODEL_CANON.md` §4.4,
+this defect requires formal Stage 6 re-entry: correct and re-verify Stage 6,
+then reverify dependent Stages 7–10 before Stage 11 is reconsidered. A bounded
+Stage 6 QA-remediation delegation is not a Stage 11 appointment, does not waive
+the sequence, and does not authorize Foreman-authored tests.
 
 ## Proposed QA-builder work package
 
-Proposed Issue #1226 must receive explicit CS2 authorization, carry a canonical
-IAA pre-brief, appoint a QA builder only for executable RED creation, prohibit
-workflow/runtime implementation, capture reproducible intended-RED evidence for
-each exact row above, distinguish W1 GREEN obligations from W7 cross-wave RED
-guards, obtain QP/ECAP/IAA, and return to CS2 before any
-`integration-builder` appointment.
+Issue #1226 is the CS2-authorized bounded Stage 6 re-entry lane. Before any QA
+remediation delegation, its mandatory entry controls must be met, including
+review closure, an exact IAA pre-brief, and an operational `agent_bootstrap` or
+CS2-approved truthful fallback. The delegated QA role may create only the
+executable RED suite and reproducible intended-RED evidence for each exact row
+above; workflow/runtime implementation remains prohibited. After Stage 6 is
+corrected, Foreman must reverify Stage 7 PBFAG, Stage 8 plan alignment, Stage 9
+readiness, and Stage 10 IAA pre-brief, obtain QP/ECAP/IAA as applicable, and
+return to CS2 before any Stage 11 `integration-builder` appointment.
 
 ## Anti-dodging controls
 
