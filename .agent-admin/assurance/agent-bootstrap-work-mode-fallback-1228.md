@@ -9,7 +9,7 @@
 | Direct `agent_bootstrap` availability | unavailable in the verified Work Mode tool registry |
 | CI enforcement claim | NOT MADE |
 | Protected workflow/contract/canon change | none |
-| Status | PROPOSED — PENDING INDEPENDENT IAA AND CS2 CONFIRMATION |
+| Status | CS2-PROXY APPROVED FOR ISSUE #1226 ONLY — substantive IAA design review PASS at PR #1229 head `00e9a3872cbe912354c3ebd5009e53fedff4cb65`; final appointment remains subject to exact-head IAA PASS |
 
 This fallback does not waive Phase 1. It replaces only the unavailable transport
 mechanism with an auditable read-only contract-load sequence. Runtime surfaces
