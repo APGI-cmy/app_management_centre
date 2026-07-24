@@ -8,7 +8,7 @@
 | Alignment target | `APGI-cmy/maturion-isms` PR #1800 governance model |
 | Product/module | App Management Centre (AMC) |
 | CS2 authority | Johan Ras |
-| Current posture | Stages 1–10 complete; Stage 11 NO-GO pending Issue #1222 blocker closure; Stage 12 blocked |
+| Current posture | Stages 1–5 complete; Stage 6 re-entry authorized under #1226; Stages 7–10 pending reverification; Stage 11 NO-GO; Stage 12 blocked |
 | Purpose | Preserve the repo-alignment context before AMC build work begins |
 
 ---
