@@ -11,9 +11,17 @@
 | Integration builder | NOT APPOINTED |
 | Stage 12 authority | false |
 | Infrastructure mutation | false |
-| Status | IAA PREFLIGHT REVIEW REQUESTED — QA BUILDER NOT YET APPOINTED |
+| Status | PREFLIGHT_BRIEF_COMPLETE — INDEPENDENT IAA CONFIRMATION PENDING; QA BUILDER NOT YET APPOINTED |
+| Appointment branch | `qa/issue-1226-stage6-executable-red` |
+| Carrier edit parent SHA | `00e9a3872cbe912354c3ebd5009e53fedff4cb65` |
+| Appointment head rule | Appointment must bind the final exact PR #1229 head that receives independent IAA PASS; no moving or inferred ref is permitted. |
+| Contract | `.github/agents/qa-builder.md` blob `3c6ce22423ceeca872bbb156063bda2ffeccc223` |
+| ECAP applicability | REQUIRED — administrative validation only |
+| Pre-brief disposition | `PREFLIGHT_BRIEF_COMPLETE` |
 
-## PRE-BRIEF / IAA_PREFLIGHT_BRIEF
+## PRE-BRIEF
+
+IAA_PREFLIGHT_BRIEF
 
 ### Exact job
 
@@ -63,6 +71,36 @@ or implement that target.
 4. The appointment instruction binds the exact issue, branch/base SHA, contract
    path/blob SHA, permitted files, prohibited surfaces and evidence commands.
 5. The QA role attests Phase 1 before its first repository write.
+
+## Foreman QP checks
+
+Foreman QP must verify all of the following against the QA-builder output:
+
+1. Every appointed test ID maps to its corrected canonical failure meaning.
+2. Each target test executes and fails only for the intended unmet reason, twice reproducibly.
+3. Harness, collection, syntax/type/lint, existing regression and anti-dodging checks remain GREEN.
+4. No skip, todo, stub, placeholder, trivial pass, warning suppression, hidden exclusion, mocking-away, deletion or renaming-around exists.
+5. W1/W7 GREEN ownership remains unchanged; absent W7 targets are not implemented by this lane.
+6. The changed-file set is confined to the appointment allowlist and contains no product, workflow, migration, infrastructure, credential, governance or agent-contract mutation.
+7. Command lines, runtime/dependency versions and unedited outputs are complete and reproducible.
+8. Any unexpected GREEN target, unrelated RED, ambiguity or prohibited dependency caused an immediate halt and escalation.
+
+## ECAP applicability
+
+ECAP is **REQUIRED** and administrative only. ECAP must validate the exact issue,
+appointment branch, frozen head/contract bindings, changed-file inventory,
+evidence paths, command-output presence, timestamps and QP/IAA carrier fields.
+ECAP must not decide test meaning, Stage 6 correction, readiness, appointment
+success, Stage 7–10 reverification or merge authority.
+
+## Final independent IAA focus
+
+Final IAA must independently verify exact-head binding, canonical test-ID
+semantics, intended-RED reproducibility, harness/regression GREEN, zero test
+debt/dodging, allowlist compliance, W1/W7 ownership preservation, fallback
+preflight sequence, QP quality and ECAP role separation. A PASS may accept only
+the bounded Stage 6 correction; it may not appoint `integration-builder`,
+reverify Stages 7–10 by assertion, authorize Stage 12 or grant merge authority.
 
 ## Required evidence
 
