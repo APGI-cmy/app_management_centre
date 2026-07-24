@@ -160,11 +160,13 @@ Standalone `iaa-prebrief-*` artifacts are legacy and must not be used as active 
 
 ## 5. AMC current build posture
 
-AMC has completed Stages 1–10 of the governed pre-build sequence. Issue #1222 is the active Stage 11 appointment-readiness blocker investigation.
+AMC has completed Stages 1–5. The B1 executable-QA defect triggered canonical Stage 6 re-entry; Stages 7–10 now await dependent reverification after the executable intended-RED suite exists.
 
 ```text
-Stages 1–10: complete / accepted as recorded in modules/amc/BUILD_PROGRESS_TRACKER.md
-Stage 11 Builder Appointment: NO-GO while Issue #1222 blockers B1, B4, B5 and B8 remain open
+Stages 1–5: complete / accepted as recorded in modules/amc/BUILD_PROGRESS_TRACKER.md
+Stage 6 QA-to-Red: re-entry authorized / remediation pending under Issue #1226
+Stages 7–10: dependent reverification pending after Stage 6 correction
+Stage 11 Builder Appointment: NO-GO while B1, B4, B5 and B8 remain open
 Stage 12 Build: not started / blocked
 integration-builder: nominated/readiness-approved but not appointed
 ```
