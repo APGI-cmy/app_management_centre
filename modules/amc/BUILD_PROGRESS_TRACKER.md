@@ -136,6 +136,7 @@ Issue #1222 completed the blocker investigation and independent assurance. Subse
 - `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md`
 - `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md`
 - `.agent-admin/assurance/iaa-wave-record-amc-stage11-blocker-investigation-1222.md`
+- `.agent-admin/assurance/iaa-wave-record-amc-w1-stage6-qa-remediation-1226.md`
 - `.agent-admin/wave-records/amc-wave-record-stage11-blocker-investigation-1229.md`
 - `.agent-workspace/independent-assurance-agent/memory/session-1229-20260723.md`
 - `.agent-admin/prehandover/ecap-reconciliation-1229.md`
@@ -144,13 +145,13 @@ Issue #1222 completed the blocker investigation and independent assurance. Subse
 - `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md`
 - `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md`
 
-## Next Action
+## Authorized Successor Dispositions
 
-Obtain explicit CS2 authorization for the proposed successor remediations:
+CS2-proxy dispositions are recorded for the successor work:
 
-1. Issue #1226 — authorized Stage 6 re-entry and bounded QA-remediation delegation, subject to its mandatory entry controls.
-2. Issue #1227 — Supabase security/parity and Vercel configuration verification.
-3. Issue #1228 — operationalise `agent_bootstrap` and align truthful enforcement.
+1. Issue #1226 — **AUTHORIZED WITH CONDITIONS** for Stage 6 re-entry and bounded QA-remediation delegation, subject to its mandatory entry controls.
+2. Issue #1227 — **GO** for read-only Supabase security/parity and Vercel configuration verification and remediation design; infrastructure or Production mutation remains **NO-GO**.
+3. Issue #1228 — **GO** for tooling diagnosis and Work Mode fallback design; protected workflow, agent-contract, gate or governance changes require separate CS2 approval.
 
 The separate ISMS/MMM boundary correction is proposed in `maturion-isms#1960` and does not itself authorize AMC implementation.
 
