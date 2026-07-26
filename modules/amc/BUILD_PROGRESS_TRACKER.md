@@ -3,13 +3,13 @@
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
 **Last Updated**: 2026-07-26<br>
-**Updated By**: Foreman proxy — Issue #1226 / PR #1230 review disposition correction
+**Updated By**: Foreman proxy — Issue #1226 / PR #1230 review disposition correction<br>
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
 > **Current Issue**: [app_management_centre#1226](https://github.com/APGI-cmy/app_management_centre/issues/1226)<br>
-> **Current PR**: [app_management_centre#1230](https://github.com/APGI-cmy/app_management_centre/pull/1230)
+> **Current PR**: [app_management_centre#1230](https://github.com/APGI-cmy/app_management_centre/pull/1230)<br>
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -29,7 +29,9 @@
 - PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
 - PR #1218 merged the canonical Stage 10 W1 IAA Pre-Brief with disposition `PREFLIGHT_BRIEF_COMPLETE` at merge commit `7889309cf4f357894d496bde1bf79349a24bb450`.
 - Issue #1219 / PR #1220 reconciles post-merge tracker/index/pointer status only.
-- Issue #1226 / PR #1230 attempted a Stage 6 executable RED correction, but the candidate delivery is not accepted for merge on the reviewed head/branch; authoritative blocker disposition PR #1229 or a fresh exact-head CS2 binding is required before re-entry.
+- Issue #1226 / PR #1230 attempted a Stage 6 executable RED correction.
+- The reviewed head/branch candidate delivery is not accepted for merge.
+- Authoritative blocker disposition PR #1229, or a fresh exact-head CS2 binding, is required before re-entry.
 
 ## Stage Summary
 
@@ -44,8 +46,8 @@
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY obligations remain binding. |
 | 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | Evidence rows remain binding. |
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
-| 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Historical Stage 9 acceptance from merged PR #1216 remains provenance only; any renewed W1 candidate progression now requires exact-head re-verification after the Issue #1226 / PR #1230 review disposition. |
-| 10 | IAA Pre-Brief | ✅ COMPLETE — `PREFLIGHT_BRIEF_COMPLETE` | Historical Stage 10 acceptance from merged PR #1218 remains provenance only; any renewed W1 candidate progression now requires exact-head re-verification after the Issue #1226 / PR #1230 review disposition. |
+| 9 | Builder Checklist / W1 Readiness | ✅ HISTORICAL — PASS ACCEPTED | Historical Stage 9 acceptance from merged PR #1216 remains provenance only; any renewed W1 candidate progression now requires exact-head re-verification after the Issue #1226 / PR #1230 review disposition. |
+| 10 | IAA Pre-Brief | ✅ HISTORICAL — `PREFLIGHT_BRIEF_COMPLETE` | Historical Stage 10 acceptance from merged PR #1218 remains provenance only; any renewed W1 candidate progression now requires exact-head re-verification after the Issue #1226 / PR #1230 review disposition. |
 | 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED PENDING RE-VERIFICATION AND EXPLICIT CS2 AUTHORIZATION | `integration-builder` remains nominated/readiness-approved but not appointed. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority; requires completed Stage 11 appointment. |
 
