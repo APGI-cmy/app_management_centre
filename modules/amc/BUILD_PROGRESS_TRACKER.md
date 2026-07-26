@@ -2,14 +2,14 @@
 
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
-**Last Updated**: 2026-07-23  
-**Updated By**: Foreman proxy — Stage 10 post-merge alignment, issue #1219 / PR #1220
+**Last Updated**: 2026-07-26<br>
+**Updated By**: Foreman proxy — Issue #1226 / PR #1230 review disposition correction
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1219](https://github.com/APGI-cmy/app_management_centre/issues/1219)  
-> **Current PR**: [app_management_centre#1220](https://github.com/APGI-cmy/app_management_centre/pull/1220)  
+> **Current Issue**: [app_management_centre#1226](https://github.com/APGI-cmy/app_management_centre/issues/1226)<br>
+> **Current PR**: [app_management_centre#1230](https://github.com/APGI-cmy/app_management_centre/pull/1230)
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -29,6 +29,7 @@
 - PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
 - PR #1218 merged the canonical Stage 10 W1 IAA Pre-Brief with disposition `PREFLIGHT_BRIEF_COMPLETE` at merge commit `7889309cf4f357894d496bde1bf79349a24bb450`.
 - Issue #1219 / PR #1220 reconciles post-merge tracker/index/pointer status only.
+- Issue #1226 / PR #1230 attempted a Stage 6 executable RED correction, but the candidate delivery is not accepted for merge on the reviewed head/branch; authoritative blocker disposition PR #1229 or a fresh exact-head CS2 binding is required before re-entry.
 
 ## Stage Summary
 
@@ -43,9 +44,9 @@
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY obligations remain binding. |
 | 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | Evidence rows remain binding. |
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
-| 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Corrected pre-appointment readiness model accepted in merged PR #1216. |
-| 10 | IAA Pre-Brief | ✅ COMPLETE — `PREFLIGHT_BRIEF_COMPLETE` | Accepted through merged PR #1218; final token `IAA-session-1218-R2-20260723-PASS`. |
-| 11 | Builder Appointment | ⬜ NOT STARTED — ELIGIBLE PENDING EXPLICIT CS2 AUTHORIZATION | `integration-builder` remains nominated/readiness-approved but not appointed. |
+| 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Historical Stage 9 acceptance from merged PR #1216 remains provenance only; any renewed W1 candidate progression now requires exact-head re-verification after the Issue #1226 / PR #1230 review disposition. |
+| 10 | IAA Pre-Brief | ✅ COMPLETE — `PREFLIGHT_BRIEF_COMPLETE` | Historical Stage 10 acceptance from merged PR #1218 remains provenance only; any renewed W1 candidate progression now requires exact-head re-verification after the Issue #1226 / PR #1230 review disposition. |
+| 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED PENDING RE-VERIFICATION AND EXPLICIT CS2 AUTHORIZATION | `integration-builder` remains nominated/readiness-approved but not appointed. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority; requires completed Stage 11 appointment. |
 
 ## Stage 9 W1 Final Facts
@@ -121,9 +122,16 @@ The current posture remains aligned with the approved Stage 8 implementation pla
 
 ## Current Disposition
 
-**Stages 1–10 are complete for W1 pre-build progression.**
+**Historical Stage 1–10 artifacts remain accepted as provenance, but W1 pre-build progression is not currently eligible to advance on the invalidated Issue #1226 / PR #1230 candidate delivery.**
 
-Stage 11 is now the next eligible governed stage but is not yet authorized. Stage 12 remains blocked. No builder is appointed and no implementation work has begun.
+- Issue #1226 execution is incomplete.
+- PR #1230 is not merge-ready.
+- Stage 6 executable RED correction is not delivered.
+- Stages 7–10 require re-verification against the next exact-head, exact-branch candidate after blocker disposition.
+- Stage 11 appointment is blocked pending that re-verification and a separate explicit CS2 authorization.
+- Stage 12 remains blocked.
+
+No builder is appointed and no implementation work has begun.
 
 ## Current Artifacts
 
@@ -140,7 +148,7 @@ Stage 11 is now the next eligible governed stage but is not yet authorized. Stag
 
 ## Next Action
 
-Complete and merge Issue #1219 / PR #1220. After that, CS2 may explicitly authorize **Stage 11 — W1 Builder Appointment**. Do not begin Stage 12 implementation before Stage 11 is completed and separately accepted.
+First merge or accept the authoritative blocker-disposition PR #1229, or obtain a fresh exact-head CS2 binding for the next candidate. Only then may the appointed QA session perform the required Phase 1 fallback attestation, create the exact authorized branch, deliver the bounded Stage 6 executable RED artifacts, and return for Stage 7–10 re-verification. Do not begin Stage 11 or Stage 12 work before that sequence is completed and separately accepted.
 
 ## References
 

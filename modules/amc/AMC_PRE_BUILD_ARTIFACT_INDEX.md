@@ -2,7 +2,7 @@
 
 **Module**: App Management Centre (AMC)  
 **Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)  
-**Last Updated**: 2026-07-23 (Merged PR #1218 completed the W1 Stage 10 IAA Pre-Brief. Issue #1219 / PR #1220 reconciles post-merge control metadata and confirms Stage 11 as the next eligible, separately authorized stage.)  
+**Last Updated**: 2026-07-26 (Historical Stage 9 and Stage 10 acceptance remains recorded, but the attempted Issue #1226 / PR #1230 Stage 6 executable RED correction is not accepted on the reviewed head/branch. Re-entry requires blocker disposition PR #1229 or a fresh exact-head CS2 binding before Stage 7–10 re-verification.)<br>
 **Authority**: Maturion Foreman / CS2
 
 ---
@@ -150,7 +150,7 @@ This index catalogs all pre-build artifacts for the AMC module, mapped to their 
 | CS2 Decision Record — Stage 9 W1 (historical) | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1.md` | 📦 Historical — BLOCKED | Retained as provenance. |
 | Stage 9 W1 Bootstrap Correction Decision | `modules/amc/08-builder-checklist/cs2-decision-record-stage-9-w1-bootstrap-correction-20260723.md` | ✅ Accepted by merge | PR #1216 merged. |
 
-Stage 9 W1 candidate readiness is **PASS ACCEPTED**. This is pre-appointment readiness only; W1 implementation evidence remains mandatory and unproduced.
+Stage 9 W1 candidate readiness remains **PASS ACCEPTED** as historical provenance from merged PR #1216. It may not be used to advance the invalidated Issue #1226 / PR #1230 candidate delivery; exact-head re-verification is required before any renewed Stage 11 consideration. W1 implementation evidence remains mandatory and unproduced.
 
 ---
 
@@ -164,7 +164,7 @@ Stage 9 W1 candidate readiness is **PASS ACCEPTED**. This is pre-appointment rea
 | Stage 10 IAA Memory | `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md` | ✅ PASS | Final assurance token `IAA-session-1218-R2-20260723-PASS`. |
 | Stage 10 ECAP Reconciliation | `.agent-admin/prehandover/ecap-reconciliation-1218.md` | ✅ PASS | Protected-path ceremony record for merged PR #1218. |
 
-Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11 consideration. No builder is appointed and no implementation is authorized.
+Stage 10 remains **COMPLETE** as historical provenance from merged PR #1218. It may not be used to advance the invalidated Issue #1226 / PR #1230 candidate delivery; exact-head re-verification is required before any renewed Stage 11 consideration. No builder is appointed and no implementation is authorized.
 
 ---
 
@@ -172,8 +172,8 @@ Stage 10 is **COMPLETE**. The W1 pre-brief is accepted and suitable for Stage 11
 
 | Artifact | Location | Status | Notes |
 |---|---|---|---|
-| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🟡 Eligible pending explicit CS2 authorization | `integration-builder` remains nominated/readiness-approved but not appointed. |
-| Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | ⬜ Placeholder — 🟡 Eligible pending explicit CS2 authorization | Must preserve Stage 8 W1 scope and Stage 10 assurance conditions. |
+| Builder Appointment | `modules/amc/10-builder-appointment/builder-appointment.md` | ⬜ Placeholder — 🔴 Blocked pending re-verification and explicit CS2 authorization | `integration-builder` remains nominated/readiness-approved but not appointed. |
+| Builder Contract | `modules/amc/10-builder-appointment/builder-contract.md` | ⬜ Placeholder — 🔴 Blocked pending re-verification and explicit CS2 authorization | Must preserve Stage 8 W1 scope and Stage 10 assurance conditions. |
 
 ---
 
