@@ -1,16 +1,17 @@
 # AMC Build Progress Tracker
 
-**Module**: App Management Centre (AMC)  
-**Module Slug**: AMC  
-**Last Updated**: 2026-07-26<br>
-**Updated By**: Foreman proxy — Issue #1226 / PR #1230 review disposition correction<br>
-
-> **Classification**: ACTIVE  
-> **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
-> **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1226](https://github.com/APGI-cmy/app_management_centre/issues/1226)<br>
-> **Current PR**: [app_management_centre#1230](https://github.com/APGI-cmy/app_management_centre/pull/1230)<br>
-> **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
+| Field | Value |
+|---|---|
+| Module | App Management Centre (AMC) |
+| Module Slug | AMC |
+| Last Updated | 2026-07-26 |
+| Updated By | Foreman proxy — Issue #1226 / PR #1230 review disposition correction |
+| Classification | ACTIVE |
+| Document Role | PRIMARY LIVE CONTROL DOCUMENT |
+| Canon Reference | `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0 |
+| Current Issue | [app_management_centre#1226](https://github.com/APGI-cmy/app_management_centre/issues/1226) |
+| Current PR | [app_management_centre#1230](https://github.com/APGI-cmy/app_management_centre/pull/1230) |
+| Update Rule | Update after every AMC stage issue, wave completion, approval, or readiness/blocker change. |
 
 ## Disposition History
 
@@ -46,8 +47,8 @@
 | 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY obligations remain binding. |
 | 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | Evidence rows remain binding. |
 | 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
-| 9 | Builder Checklist / W1 Readiness | ✅ HISTORICAL — PASS ACCEPTED | Historical Stage 9 acceptance from merged PR #1216 remains provenance only; any renewed W1 candidate progression now requires exact-head re-verification after the Issue #1226 / PR #1230 review disposition. |
-| 10 | IAA Pre-Brief | ✅ HISTORICAL — `PREFLIGHT_BRIEF_COMPLETE` | Historical Stage 10 acceptance from merged PR #1218 remains provenance only; any renewed W1 candidate progression now requires exact-head re-verification after the Issue #1226 / PR #1230 review disposition. |
+| 9 | Builder Checklist / W1 Readiness | ✅ HISTORICAL — PASS ACCEPTED | Historical Stage 9 acceptance from merged PR #1216 remains provenance only; renewed W1 candidate progression requires re-verification on the next exact-head, exact-branch candidate authorized after the Issue #1226 / PR #1230 review disposition is resolved. |
+| 10 | IAA Pre-Brief | ✅ HISTORICAL — `PREFLIGHT_BRIEF_COMPLETE` | Historical Stage 10 acceptance from merged PR #1218 remains provenance only; the invalidated candidate delivery may not rely on it, and renewed W1 candidate progression requires re-verification on the next exact-head, exact-branch candidate authorized after the Issue #1226 / PR #1230 review disposition is resolved. |
 | 11 | Builder Appointment | ⬜ NOT STARTED — BLOCKED PENDING RE-VERIFICATION AND EXPLICIT CS2 AUTHORIZATION | `integration-builder` remains nominated/readiness-approved but not appointed. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority; requires completed Stage 11 appointment. |
 

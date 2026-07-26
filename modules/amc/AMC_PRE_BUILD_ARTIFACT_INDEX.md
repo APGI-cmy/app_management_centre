@@ -1,11 +1,12 @@
 # AMC Pre-Build Artifact Index
 
-**Module**: App Management Centre (AMC)<br>
-**Lifecycle Model**: 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001)<br>
-**Last Updated**: 2026-07-26<br>
-**Authority**: Maturion Foreman / CS2
-
-**Disposition Note**: Historical Stage 9 and Stage 10 acceptance remains recorded, but the attempted Issue #1226 / PR #1230 Stage 6 executable RED correction is not accepted on the reviewed head/branch. Re-entry requires blocker disposition PR #1229 or a fresh exact-head CS2 binding before Stage 7–10 re-verification.
+| Field | Value |
+|---|---|
+| Module | App Management Centre (AMC) |
+| Lifecycle Model | 12-Stage Pre-Build Sequence + Stage 5a (`PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0; AMC-GOV-OVERSIGHT-001) |
+| Last Updated | 2026-07-26 |
+| Authority | Maturion Foreman / CS2 |
+| Disposition Note | Historical Stage 9 and Stage 10 acceptance remains recorded, but the attempted Issue #1226 / PR #1230 Stage 6 executable RED correction is not accepted on the reviewed head/branch. Re-entry requires blocker disposition PR #1229 or a fresh exact-head CS2 binding before Stage 7–10 re-verification. |
 
 ---
 
