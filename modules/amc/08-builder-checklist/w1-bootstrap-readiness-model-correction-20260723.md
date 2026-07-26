@@ -11,14 +11,14 @@
 | Historical executions | PRs #1206, #1209 and #1214 |
 | Authority | CS2 — Johan Ras |
 | Date | 2026-07-23 |
-| Status | Proposed methodology correction — becomes binding only upon explicit CS2 acceptance/merge of PR #1216 |
+| Status | ✅ Accepted / Binding — merged PR #1216 |
 | Entry condition | NORMAL — Stage 8 approved; this is Stage 9 re-entry/correction under `PRE_BUILD_STAGE_MODEL_CANON.md` §4.4 |
 
 ## 1. Purpose and Activation
 
 This correction removes a circular dependency in the W1 Stage 9 readiness model. Stage 9 is a pre-appointment gate. It may verify that the candidate, owners, resources, governed access arrangement, design, stop conditions and evidence obligations are ready. It may not require implementation artifacts or executed controls that can only exist after Stage 10, Stage 11 and Stage 12.
 
-Until CS2 explicitly accepts or merges PR #1216, `modules/amc/08-builder-checklist/builder-checklist.md` v1.2 and the existing BLOCKED CS2 disposition remain authoritative. Upon CS2 acceptance/merge, this document becomes the binding W1 amendment and takes precedence only where the historical W1 readiness wording conflicts with the corrected lifecycle boundary. The historical checklist remains authoritative for all unaffected checks and all other waves.
+Merged PR #1216 accepted this correction. It is the binding W1 amendment where the historical checklist conflicts with the corrected lifecycle boundary; the historical checklist remains authoritative for unaffected checks and other waves.
 
 ## 2. Non-Weakening Rule
 

@@ -1,5 +1,7 @@
 # AMC Builder Checklist — Stage 9
 
+**Status**: ✅ Produced / Merged — PR #1204; W1 candidate PASS accepted separately in merged PR #1216.  
+
 ## Status Header
 
 | Field | Value |
@@ -7,7 +9,7 @@
 | Module | App Management Centre (AMC) |
 | Stage | 9 — Builder Checklist |
 | Version | 1.2 |
-| Status | 🟡 Produced for CS2 Review — Not Executed Against Any Builder Candidate |
+| Status | ✅ Produced / Merged — PR #1204; W1 candidate PASS accepted separately in merged PR #1216 |
 | Governing Issue | `app_management_centre#1203` |
 | Governing PR | `app_management_centre#1204` |
 | Foreman | `foreman-v2-agent` |

@@ -1,15 +1,20 @@
-# Wave 1.0 Implementation Progress — Canonical Record
+# Wave 1.0 Implementation Progress — Historical Legacy Record
 
-**Document Type:** Canonical Progress Record  
+> **Classification:** HISTORICAL / LEGACY PROVENANCE — NOT CURRENT LIFECYCLE AUTHORITY  
+> **Current authority:** `modules/amc/BUILD_PROGRESS_TRACKER.md` under the active 12-stage AMC lifecycle.  
+> The historical “COMPLETE” and “210/210 GREEN” claims below describe an earlier Wave 1.0 lifecycle and must not be used as evidence that current AMC Stage 12 has started or completed. The historical substance is preserved. Two legacy close-out phrases are normalized to “historical wave close-out” solely to avoid a false operative prehandover-gate signal.
+
+**Document Type:** Historical / Legacy Provenance Record  
 **Created:** 2026-01-04  
-**Authority:** Maturion Foreman (FM)  
-**Purpose:** Single authoritative source of truth for Wave 1.0 implementation status
+**Historical Authority:** Maturion Foreman (FM), as recorded 2026-01-04  
+**Current Authority:** `modules/amc/BUILD_PROGRESS_TRACKER.md`  
+**Purpose:** Preserve the superseded Wave 1.0 implementation history as non-operative provenance
 
 ---
 
 ## Executive Summary
 
-**Wave 1.0 Status:** ✅ COMPLETE (210/210 QA components GREEN, 100%)
+**Historical Wave 1.0 Status (as recorded 2026-01-04):** ✅ COMPLETE (210/210 QA components GREEN, 100%)
 
 **Completion Breakdown:**
 - **Schema Foundation (Wave 1.0.1):** ✅ COMPLETE — 18/18 QA GREEN
@@ -566,7 +571,7 @@ The following code locations were not verified during this reconstruction:
    - FM must reconstruct progress at wave boundaries
    - Explicit verification of all instructed artifacts
    - Missing artifacts flagged as governance violations
-   - Corrective action required before wave closure
+   - Corrective action required before historical wave close-out
 
 **Governance Document Location:** Could be added to:
 - `governance/wave-completion-protocol.md` (new)
@@ -676,7 +681,7 @@ The following code locations were not verified during this reconstruction:
 
 **This Document:** `WAVE_1_IMPLEMENTATION_PROGRESS.md`
 
-**Status:** ✅ COMPLETE — Single authoritative source of truth for Wave 1.0
+**Status:** HISTORICAL SNAPSHOT — recorded as complete within the superseded Wave 1.0 lifecycle; not current lifecycle authority
 
 **Contents:**
 - ✅ Wave 1.0 definition and scope
@@ -686,14 +691,11 @@ The following code locations were not verified during this reconstruction:
 - ✅ QA component accounting (210 components tracked)
 - ✅ Wave 1.0 completion determination (INCOMPLETE, blocking items identified)
 - ✅ Governance gap analysis
-- ✅ Next actions for wave closure
+- ✅ Next actions for historical wave close-out
 
-**Authority:** This document is the **canonical progress record** for Wave 1.0
+**Authority:** Historical provenance only. Current AMC lifecycle authority is `modules/amc/BUILD_PROGRESS_TRACKER.md`.
 
-**Maintenance:** This document SHALL be updated upon:
-- PR #377 gate decision
-- Wave 1.0 completion
-- Any material changes to Wave 1.0 status
+**Maintenance:** Frozen as historical provenance. Record current AMC lifecycle changes only in `modules/amc/BUILD_PROGRESS_TRACKER.md`.
 
 ---
 
@@ -702,7 +704,7 @@ The following code locations were not verified during this reconstruction:
 **Document Created:** 2026-01-04  
 **Reconstructed By:** Maturion Foreman (FM)  
 **Authority:** FM Agent Contract v3.2.0  
-**Purpose:** Canonical progress record for Wave 1.0
+**Purpose:** Historical provenance record for the superseded Wave 1.0 lifecycle
 
 **Wave 1.0 Reconstruction:** ✅ COMPLETE  
 **Wave 1.0 Status:** ✅ COMPLETE (210/210 QA verified GREEN, 100%)  

@@ -3,7 +3,7 @@
 **Stage**: 6 — QA-to-Red addendum  
 **Module**: App Management Centre (AMC)  
 **Version**: 1.0  
-**Status**: Produced for CS2 review  
+**Status**: ✅ CS2 Approved with Conditions — decision issue #1197 / merged PR #1198.
 **Wave**: amc-stage6-qa-to-red-retrofit-20260629  
 **Issue**: app_management_centre#1191  
 **Authority basis**: PR #1186, PR #1188, PR #1190, FR-1900, TR-1900, TR-1910, Stage 2 CTA/API/Data/Audit matrix, Stage 5 architecture map, Stage 5a deployment execution validation matrix  

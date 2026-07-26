@@ -3,7 +3,7 @@
 **Stage**: 4 — Technical Requirements Specification (TRS)
 **Module**: App Management Centre (AMC)
 **Version**: 1.1
-**Status**: 🟡 Produced Approval-Ready — 2026-04-23 (Hardened 2026-04-23)
+**Status**: ✅ Treated as Approved — progression authority issue #1131; TR-1900/TR-1910 remain binding.
 **Author**: foreman-v2-agent (POLC_ORCHESTRATION)
 **CS2 Authorization**: app_management_centre#1125
 **Hardening Authorization**: Pre-merge hardening wave (app_management_centre#1127) — ARC explicit domain, Dynamic Upload Quota Management console, alert timing/retry/escalation contract family, audit delivery atomicity, inter-service trust boundary, state ownership contract family declarations

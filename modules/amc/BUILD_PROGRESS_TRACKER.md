@@ -2,14 +2,15 @@
 
 **Module**: App Management Centre (AMC)  
 **Module Slug**: AMC  
-**Last Updated**: 2026-07-23  
-**Updated By**: Foreman proxy — Stage 10 post-merge alignment, issue #1219 / PR #1220
+**Last Updated**: 2026-07-26  
+**Updated By**: Foreman — AMC ownership and PR authority reconciliation
 
 > **Classification**: ACTIVE  
 > **Document Role**: PRIMARY LIVE CONTROL DOCUMENT  
 > **Canon Reference**: `PRE_BUILD_STAGE_MODEL_CANON.md` v1.0.0  
-> **Current Issue**: [app_management_centre#1219](https://github.com/APGI-cmy/app_management_centre/issues/1219)  
-> **Current PR**: [app_management_centre#1220](https://github.com/APGI-cmy/app_management_centre/pull/1220)  
+> **Current Issue**: [app_management_centre#1222](https://github.com/APGI-cmy/app_management_centre/issues/1222)  
+> **Current PR**: [app_management_centre#1229](https://github.com/APGI-cmy/app_management_centre/pull/1229)  
+> **Active remediation issue**: [app_management_centre#1226](https://github.com/APGI-cmy/app_management_centre/issues/1226)  
 > **Update Rule**: Update after every AMC stage issue, wave completion, approval, or readiness/blocker change.
 
 ## Disposition History
@@ -28,7 +29,10 @@
 - PR #1214 merged the candidate re-attestation and truthful BLOCKED residual review.
 - PR #1216 merged the corrected W1 readiness model and accepted the Stage 9 W1 PASS.
 - PR #1218 merged the canonical Stage 10 W1 IAA Pre-Brief with disposition `PREFLIGHT_BRIEF_COMPLETE` at merge commit `7889309cf4f357894d496bde1bf79349a24bb450`.
-- Issue #1219 / PR #1220 reconciles post-merge tracker/index/pointer status only.
+- Issue #1219 / merged PR #1220 reconciled post-merge tracker/index/pointer status.
+- PR #1221 is closed unmerged and superseded; it is not an authority carrier.
+- PR #1224 is closed unmerged and superseded by the later Stage 6 re-entry disposition in Issue #1222 / PR #1229. Its Stage 11 appointment artifacts and assurance history remain preserved as historical reference only and must not be merged or reused as current authority.
+- Issue #1222 / PR #1229 completes the B1–B8 investigation with `FINAL_ASSURANCE_PASS` token `IAA-session-1229-R3-20260723-PASS`; the token validates the investigation and its NO-GO disposition, not progression.
 
 ## Stage Summary
 
@@ -40,22 +44,22 @@
 | 4 | TRS | ✅ TREATED AS APPROVED | TR-1900/TR-1910 remain binding. |
 | 5 | Architecture | ✅ CS2 APPROVED WITH CONDITIONS | Binding downstream obligations retained. |
 | 5a | Deployment Execution Strategy | ✅ CS2 APPROVED WITH CONDITIONS | Environment/deployment controls remain binding. |
-| 6 | QA-to-Red | ✅ CS2 APPROVED WITH CONDITIONS | QA-FD and QA-DEPLOY obligations remain binding. |
-| 7 | PBFAG | ✅ CS2 APPROVED WITH CONDITIONS | Evidence rows remain binding. |
-| 8 | Implementation Plan | ✅ CS2 APPROVED WITH CONDITIONS | Decision merged in PR #1202. |
-| 9 | Builder Checklist / W1 Readiness | ✅ COMPLETE — PASS ACCEPTED | Corrected pre-appointment readiness model accepted in merged PR #1216. |
-| 10 | IAA Pre-Brief | ✅ COMPLETE — `PREFLIGHT_BRIEF_COMPLETE` | Accepted through merged PR #1218; final token `IAA-session-1218-R2-20260723-PASS`. |
-| 11 | Builder Appointment | ⬜ NOT STARTED — ELIGIBLE PENDING EXPLICIT CS2 AUTHORIZATION | `integration-builder` remains nominated/readiness-approved but not appointed. |
+| 6 | QA-to-Red | ⏪ RE-ENTRY AUTHORIZED — REMEDIATION PENDING | Issue #1226 must produce the executable intended-RED suite and evidence; prior specification approval remains the baseline. |
+| 7 | PBFAG | ⏸ REVERIFICATION PENDING | Prior approval remains provenance; reverify after Stage 6 correction under canon §4.4. |
+| 8 | Implementation Plan | ⏸ REVERIFICATION PENDING | Reconfirm plan alignment after Stage 6/7 reverification. |
+| 9 | Builder Checklist / W1 Readiness | ⏸ REVERIFICATION PENDING | Prior PASS remains provenance; re-evaluate after Stage 6 correction. |
+| 10 | IAA Pre-Brief | ⏸ REVERIFICATION PENDING | Prior pre-brief is the baseline; refresh after Stage 6–9 reverification before Stage 11. |
+| 11 | Builder Appointment | ⛔ NO-GO — BLOCKERS OPEN | B1 executable RED, B4 Supabase, B5 Vercel and B8 bootstrap remain blocking; `integration-builder` is not appointed. Closed PR #1224 is historical only. |
 | 12 | Build | ⬜ NOT STARTED — BLOCKED | No implementation authority; requires completed Stage 11 appointment. |
 
 ## Stage 9 W1 Final Facts
 
 - Candidate: `integration-builder` — readiness PASS accepted; still not appointed.
 - Candidate v2 re-attestation: complete.
-- Vercel project `app-management-centre`: exists.
+- Historical Stage 9 record identified Vercel project `app-management-centre`; Issue #1222 could not independently retrieve its live configuration through the current connector.
 - Supabase Production `icawesooswoqzepcdevg`: healthy.
-- Supabase non-production `develop` / `kkksclwvbmyexpsdyejj`: healthy.
-- GitHub/Vercel/Supabase owners, intended scopes and escalation paths: documented.
+- Supabase non-production `develop` / `kkksclwvbmyexpsdyejj`: not accessible through the current connector; current parity/health unverified.
+- GitHub/Vercel/Supabase intended scopes and escalation paths: documented; live Vercel ownership/configuration and Supabase develop access remain blockers.
 - Preview/non-production versus Production design: documented.
 - Protected-Production policy and candidate prohibitions: documented.
 - Final Foreman role-fit: PASS under the corrected Stage 9 boundary.
@@ -95,7 +99,7 @@ The accepted pre-brief defines:
 
 The current posture remains aligned with the approved Stage 8 implementation plan and wave breakdown:
 
-- W1 is the next delivery wave.
+- W1 is the next delivery wave after pre-build correction and reverification.
 - W1 scope remains Runtime Foundation and Environment Setup.
 - Required controls remain CI, Preview, secret and environment boundaries.
 - Required W1 RED coverage remains CI, Preview isolation, environment separation, secret boundaries and no-Production-side-effect tests.
@@ -103,7 +107,7 @@ The current posture remains aligned with the approved Stage 8 implementation pla
 - `.github/workflows/deploy-frontend.yml` is introduced in W1 and remains a W7 deployment-execution validation surface.
 - `db-migrate.yml` remains a W7 output.
 - W1 and W2 must complete before material user-action work.
-- No later wave is opened or reordered by the Stage 10 completion.
+- No later wave is opened or reordered by the Stage 6 re-entry.
 
 ## W1 Build-Exit Evidence — Still Mandatory Later
 
@@ -121,9 +125,9 @@ The current posture remains aligned with the approved Stage 8 implementation pla
 
 ## Current Disposition
 
-**Stages 1–10 are complete for W1 pre-build progression.**
+**Stages 1–5 remain complete. Stage 6 is formally re-entered; Stages 7–10 are paused for dependent reverification.**
 
-Stage 11 is now the next eligible governed stage but is not yet authorized. Stage 12 remains blocked. No builder is appointed and no implementation work has begun.
+Issue #1222 completed the blocker investigation and independent assurance. The investigation correctly triggered Stage 6 re-entry under `PRE_BUILD_STAGE_MODEL_CANON.md` §4.4. Issue #1226 is the sole active bounded QA-remediation lane. Stage 7–10 reverification cannot complete until the executable intended-RED suite exists and is accepted. PR #1224 is closed unmerged and cannot appoint `integration-builder`. Stage 11 remains NO-GO while B1, B4, B5 and B8 are open; Stage 12 remains blocked and `integration-builder` is not appointed.
 
 ## Current Artifacts
 
@@ -133,14 +137,29 @@ Stage 11 is now the next eligible governed stage but is not yet authorized. Stag
 - `modules/amc/08-builder-checklist/w1-bootstrap-readiness-model-correction-20260723.md`
 - `modules/amc/08-builder-checklist/executions/w1/integration-builder-readiness-checklist.md`
 - `.agent-admin/assurance/iaa-wave-record-amc-w1-runtime-foundation.md`
+- `.agent-admin/assurance/iaa-wave-record-amc-stage11-blocker-investigation-1222.md`
+- `.agent-admin/assurance/iaa-wave-record-amc-w1-stage6-qa-remediation-1226.md`
+- `.agent-admin/assurance/agent-bootstrap-work-mode-fallback-1228.md`
+- `.agent-admin/wave-records/amc-wave-record-stage11-blocker-investigation-1229.md`
+- `.agent-workspace/independent-assurance-agent/memory/session-1229-20260723.md`
+- `.agent-admin/prehandover/ecap-reconciliation-1229.md`
 - `.agent-admin/wave-records/amc-wave-record-stage10-w1-iaa-prebrief-1218.md`
 - `.agent-admin/prehandover/ecap-reconciliation-1218.md`
 - `.agent-workspace/independent-assurance-agent/memory/session-1218-20260723.md`
 - `modules/amc/09-iaa-pre-brief/iaa-pre-brief.md`
+- Closed PR #1224 and branch `foreman/amc-stage11-w1-builder-appointment` — historical Stage 11 preparation evidence only; not current authority.
 
-## Next Action
+## Authorized Successor Dispositions
 
-Complete and merge Issue #1219 / PR #1220. After that, CS2 may explicitly authorize **Stage 11 — W1 Builder Appointment**. Do not begin Stage 12 implementation before Stage 11 is completed and separately accepted.
+CS2-proxy dispositions are recorded for the successor work:
+
+1. Issue #1226 — **QA-BUILDER APPOINTED WITH FROZEN BOUNDARIES** for Stage 6 re-entry and executable QA-to-Red remediation. Execution must satisfy the appointment preflight/fallback sequence before branch creation or writes.
+2. Issue #1227 — **GO** for read-only Supabase security/parity and Vercel configuration verification and remediation design; infrastructure or Production mutation remains **NO-GO**.
+3. Issue #1228 — **GO** for tooling diagnosis and the approved Work Mode fallback; protected workflow, agent-contract, gate or governance changes require separate CS2 approval.
+
+The separate ISMS/MMM boundary correction is proposed in `maturion-isms#1960` and does not itself authorize AMC implementation.
+
+Do not appoint `integration-builder` until Issue #1226 is completed and accepted, Stages 7–10 are reverified, and the remaining B4/B5/B8 blockers are closed or explicitly dispositioned. Do not begin Stage 12 before a valid Stage 11 appointment is completed and separately accepted.
 
 ## References
 

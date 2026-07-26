@@ -3,7 +3,7 @@
 **Stage**: 7 — PBFAG (Pre-Build Functionality Assessment Gate)
 **Module**: App Management Centre (AMC)
 **Version**: 1.0
-**Status**: 🟡 Produced — Approval Pending (CS2)
+**Status**: ✅ CS2 Approved with Conditions — decision issue #1197 / merged PR #1198.
 **Author**: foreman-v2-agent (QUALITY_PROFESSOR)
 **CS2 Authorization**: app_management_centre#1150
 **Governing Delivery Issue**: app_management_centre#1150
@@ -19,6 +19,8 @@
 > Stage 7 PBFAG artifacts are produced before Stages 5, 5a, and 6 receive formal CS2 approval.
 > CS2 explicitly authorized parallel production per issue #1150. Stage 8 is **BLOCKED** until
 > Stages 5, 5a, 6, and 7 all receive CS2 approval.
+>
+> **Point-in-time evidence note:** The approval-posture checks below preserve the 2026-04-28 Stage 7 snapshot. `modules/amc/BUILD_PROGRESS_TRACKER.md` is the source of truth for the current lifecycle posture.
 
 ---
 

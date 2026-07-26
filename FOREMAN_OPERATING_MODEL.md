@@ -160,25 +160,18 @@ Standalone `iaa-prebrief-*` artifacts are legacy and must not be used as active 
 
 ## 5. AMC current build posture
 
-AMC is not build-ready yet.
-
-The current build posture is:
+AMC has completed Stages 1–5. The B1 executable-QA defect triggered canonical Stage 6 re-entry; Stages 7–10 now await dependent reverification after the executable intended-RED suite exists.
 
 ```text
-Stages 1-3: complete / approved
-Stage 4: treated as approved
-Stage 5: produced, approval-pending
-Stage 5a: produced, approval-pending
-Stage 6 QA-to-Red: produced, approval-pending
-Stage 7 PBFAG: produced, approval-pending
-Stage 8 Implementation Plan: not started / blocked
-Stage 9 Builder Checklist: not started / blocked
-Stage 10 IAA Pre-Brief: not started / blocked
-Stage 11 Builder Appointment: not started / blocked
+Stages 1–5: complete / accepted as recorded in modules/amc/BUILD_PROGRESS_TRACKER.md
+Stage 6 QA-to-Red: re-entry authorized / remediation pending under Issue #1226
+Stages 7–10: dependent reverification pending after Stage 6 correction
+Stage 11 Builder Appointment: NO-GO while B1, B4, B5 and B8 remain open
 Stage 12 Build: not started / blocked
+integration-builder: nominated/readiness-approved but not appointed
 ```
 
-Therefore the next AMC work is governance/admin alignment and pre-build closure, not implementation.
+The primary live lifecycle authority is `modules/amc/BUILD_PROGRESS_TRACKER.md`. Earlier posture statements retained in historical records do not override that tracker.
 
 ---
 

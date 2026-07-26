@@ -3,7 +3,7 @@
 **Stage**: 7 — PBFAG (Pre-Build Functionality Assessment Gate)
 **Module**: App Management Centre (AMC)
 **Version**: 1.0
-**Status**: 🟡 Produced — Approval Pending (CS2)
+**Status**: ✅ CS2 Approved with Conditions — decision issue #1197 / merged PR #1198.
 **Author**: foreman-v2-agent (QUALITY_PROFESSOR / POLC_ORCHESTRATION)
 **CS2 Authorization**: app_management_centre#1150 — "Stage 7 — Create AMC PBFAG pack and update progress tracker first" (opened by CS2 @APGI-cmy)
 **Governing Delivery Issue**: app_management_centre#1150

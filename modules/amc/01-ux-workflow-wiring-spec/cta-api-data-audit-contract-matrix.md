@@ -3,7 +3,7 @@
 **Stage**: 2 — UX Workflow & Wiring Spec addendum  
 **Module**: App Management Centre (AMC)  
 **Version**: 1.0  
-**Status**: Produced for CS2 review  
+**Status**: 🟡 Retrofit Reference Input — merged PR #1186; downstream obligations adopted by the approved Stage 5–8 authority chain.
 **Wave**: amc-stage1-4-functional-delivery-retrofit-20260625  
 **Issue**: app_management_centre#1185  
 **Authority basis**: ISMS/MMM Phase 3 functional-delivery retrofit, PRE_BUILD_STAGE_MODEL_CANON, MMM dead-CTA / visual-shell failure lesson  

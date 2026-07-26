@@ -4,7 +4,7 @@
 **Stage**: 5a — Deployment Execution Strategy  
 **Module**: App Management Centre (AMC)  
 **Version**: 1.0  
-**Status**: Produced for CS2 review  
+**Status**: ✅ CS2 Approved with Conditions — decision issue #1197 / merged PR #1198.
 **Wave**: amc-stage5a-deployment-execution-retrofit-20260629  
 **Issue**: app_management_centre#1189  
 **Authority basis**: PR #1186, PR #1188, TR-1910, existing Stage 5a deployment-execution artifacts  

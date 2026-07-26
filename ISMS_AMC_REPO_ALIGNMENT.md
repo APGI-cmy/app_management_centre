@@ -8,10 +8,14 @@
 | Alignment target | `APGI-cmy/maturion-isms` PR #1800 governance model |
 | Product/module | App Management Centre (AMC) |
 | CS2 authority | Johan Ras |
-| Current posture | Build not ready; governance/admin alignment required first |
+| Current posture | Stages 1–5 complete; Stage 6 re-entry authorized under #1226; Stages 7–10 pending reverification; Stage 11 NO-GO; Stage 12 blocked |
 | Purpose | Preserve the repo-alignment context before AMC build work begins |
 
 ---
+
+## Current lifecycle normalization — Issue #1222
+
+This strategy records the original repository-alignment programme. The live lifecycle position is controlled by `modules/amc/BUILD_PROGRESS_TRACKER.md`: Stages 1–5 remain complete, Stage 6 is in authorized re-entry, Stages 7–10 await dependent reverification, Stage 11 remains NO-GO, and Stage 12 is blocked. Historical planning sections below remain provenance and must not be read as current progress status.
 
 ## 1. Executive verdict
 
