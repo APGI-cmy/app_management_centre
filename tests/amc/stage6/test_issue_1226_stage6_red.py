@@ -12,7 +12,7 @@ MIGRATION_WORKFLOW = WORKFLOW_DIR / "db-migrate.yml"
 ENV_EXAMPLE = PROJECT_ROOT / ".env.example"
 ISSUE_EVIDENCE_DIR = PROJECT_ROOT / "qa" / "evidence" / "issue-1226"
 
-W1_STARTUP_REQUIRED_VARS = {
+WAVE1_STARTUP_REQUIRED_VARS = {
     "AIMC_API_BASE_URL",
     "AIMCC_API_BASE_URL",
     "KUC_API_BASE_URL",
@@ -69,9 +69,17 @@ def _runtime_source_files():
 def _runtime_sources_containing(token: str):
     matches = []
     for source_file in _runtime_source_files():
-        if token in source_file.read_text(encoding="utf-8", errors="ignore"):
+        if token in source_file.read_text(encoding="utf-8", errors="replace"):
             matches.append(source_file)
     return matches
+
+
+def _is_workflow_dispatch_only(on_block):
+    return (
+        on_block == "workflow_dispatch"
+        or on_block == {"workflow_dispatch": None}
+        or (isinstance(on_block, dict) and set(on_block.keys()) == {"workflow_dispatch"})
+    )
 
 
 def test_qa_deploy_001_required_workflow_family_exists():
@@ -126,7 +134,7 @@ def test_qa_deploy_004_migration_command_is_frozen():
 
 
 def test_qa_deploy_006_required_runtime_and_workflow_variables_exist_in_env_example():
-    expected = W1_STARTUP_REQUIRED_VARS | {"SUPABASE_PROJECT_REF"}
+    expected = WAVE1_STARTUP_REQUIRED_VARS | {"SUPABASE_PROJECT_REF"}
     present = _env_example_variables()
     missing = sorted(expected - present)
     assert not missing, (
@@ -157,7 +165,7 @@ def test_qa_deploy_010_placeholder_evidence_is_rejected():
 def test_qa_config_001_startup_fails_if_any_required_env_is_missing():
     missing_runtime_checks = [
         variable
-        for variable in sorted(W1_STARTUP_REQUIRED_VARS)
+        for variable in sorted(WAVE1_STARTUP_REQUIRED_VARS)
         if not _runtime_sources_containing(variable)
     ]
     assert not missing_runtime_checks, (
@@ -184,11 +192,11 @@ def test_qa_config_002_startup_error_names_missing_variable_explicitly():
 
 def test_qa_config_003_all_required_env_vars_are_individually_validated():
     sources_with_checks = {
-        var for var in W1_STARTUP_REQUIRED_VARS if _runtime_sources_containing(var)
+        var for var in WAVE1_STARTUP_REQUIRED_VARS if _runtime_sources_containing(var)
     }
-    assert sources_with_checks == W1_STARTUP_REQUIRED_VARS, (
+    assert sources_with_checks == WAVE1_STARTUP_REQUIRED_VARS, (
         "QA-CONFIG-003: full required startup-variable validation set is incomplete. "
-        f"Validated={len(sources_with_checks)}/{len(W1_STARTUP_REQUIRED_VARS)}"
+        f"Validated={len(sources_with_checks)}/{len(WAVE1_STARTUP_REQUIRED_VARS)}"
     )
 
 
@@ -261,8 +269,8 @@ def test_qa_des004_001_db_migrate_uses_exact_command():
 def test_qa_des005_001_db_migrate_trigger_is_manual_only():
     migration_payload = _workflow_payload(MIGRATION_WORKFLOW, "QA-DES005-001")
     on_block = migration_payload.get("on")
-    assert on_block == "workflow_dispatch" or on_block == {"workflow_dispatch": None} or (
-        isinstance(on_block, dict) and set(on_block.keys()) == {"workflow_dispatch"}
+    assert _is_workflow_dispatch_only(
+        on_block
     ), "QA-DES005-001: db-migrate trigger is not workflow_dispatch only."
 
 

@@ -3,7 +3,7 @@
 ## Run posture
 
 - Suite path: `tests/amc/stage6/test_issue_1226_stage6_red.py`
-- Collection: GREEN (`19` tests collected)
+- Collection: SUCCESS (`19` tests collected)
 - Target run 1: RED (`19` failed)
 - Target run 2: RED (`19` failed)
 - Reproducibility: same failing test IDs and same intended unmet reasons across both runs

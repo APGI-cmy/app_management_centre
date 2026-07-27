@@ -1,4 +1,4 @@
-# PREHANDOVER Proof — QA Builder Issue #1226 Stage 6 Re-entry
+# PRE-HANDOVER Proof — QA Builder Issue #1226 Stage 6 Re-entry
 
 ## Scope and boundary
 
