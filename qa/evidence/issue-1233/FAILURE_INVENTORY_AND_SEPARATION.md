@@ -66,7 +66,7 @@ The result set reconciles exactly into three classes:
 - import/compile proof;
 - targeted wave0 collection and execution;
 - no test modification;
-- rerun of both parent regression commands.
+- rerun of all frozen populations defined by B0.
 
 ### A2. Missing `UTC` imports
 
@@ -88,16 +88,41 @@ The result set reconciles exactly into three classes:
 
 **Observed impact:** 44 ordinary test failures.
 
-**Disposition:** genuine defects, but broader than A1. They must be inventoried file-by-file before appointment and corrected without behavioural changes beyond restoring the intended timezone symbol.
+**Disposition:** genuine defects, but broader than A1 and spanning two authority surfaces. A2 is therefore split into two separately governed repair lanes.
 
-**Proposed write allowlist:** exact files proven to reference `UTC` without importing it, plus dedicated evidence files. No unrelated refactor.
+#### A2-T — Test-side `UTC` import repair
+
+**Authority surface:** exact affected test files only.
+
+**Proposed role:** QA-builder.
+
+**Write boundary:** exact test files proven to reference `UTC` without importing it, plus dedicated evidence files.
+
+**Permitted change type:** import-only. No assertion, fixture, marker, expected-result, control-flow or behavioural changes.
 
 **Required proof:**
 
-- static inventory of every affected file;
-- per-file import-only diff unless a different root cause is proven;
-- focused tests for each owning subsystem;
-- both parent regression commands rerun.
+- static file-by-file inventory;
+- import-only diff;
+- targeted test execution;
+- rerun of all frozen populations defined by B0.
+
+#### A2-R — Runtime-side `UTC` import repair
+
+**Authority surface:** exact affected production/runtime files only.
+
+**Proposed role:** appropriate Python/runtime builder, appointed only after B0 and a bounded pre-brief.
+
+**Write boundary:** exact runtime files proven to reference `UTC` without importing it, plus dedicated evidence files.
+
+**Permitted change type:** import-only unless a different root cause is independently proven and separately authorised. No refactor or behavioural expansion.
+
+**Required proof:**
+
+- static file-by-file inventory;
+- import-only diff;
+- focused subsystem tests for each owning surface;
+- rerun of all frozen populations defined by B0.
 
 ## Class B — Historical intentional QA-to-RED obligations
 
@@ -140,28 +165,66 @@ This is not authority to hide or exclude debt. A canonical separation must:
 - preserve their existing wave/subwave ownership;
 - run them in a separately named expected-RED lane with evidence;
 - keep the ordinary regression lane fully GREEN;
-- prohibit blanket ignore, skip, xfail, deletion, or marker manipulation merely to obtain a passing result.
+- prohibit blanket ignore, skip, xfail, deletion, marker manipulation or undisclosed deselection merely to obtain a passing result.
 
-## Recommended governed sequence
+## B0 — Regression population and outcome freeze
 
-1. **Repair Lane A1:** missing `Optional` import only.
-2. Rerun `wave0` and broad collection to confirm setup errors are removed.
-3. **Repair Lane A2:** exact missing-`UTC` import inventory and import-only corrections.
-4. Rerun ordinary regressions and record remaining failures.
-5. **Governance Lane B:** define the canonical expected-RED execution lane for the 25 retained wave2 obligations without weakening or hiding them.
-6. Rerun:
-   - ordinary GREEN regression population;
-   - retained expected-RED population with exact expected failure IDs;
-   - Issue #1226 Stage 6 suite twice RED.
-7. Only after all three outcomes are proven may Issue #1226 Foreman QP resume.
+B0 is the mandatory first successor lane and is governance/evidence work only. It must complete before any repair builder is appointed.
+
+B0 must freeze four exact populations:
+
+1. **Wave0 ordinary population**
+   - exact node manifest and command;
+   - required final outcome: GREEN.
+
+2. **Ordinary non-wave0 regression population**
+   - exact node/file manifest and command;
+   - may exclude only the separately frozen retained expected-RED node set;
+   - required final outcome: GREEN.
+
+3. **Retained expected-RED population**
+   - exactly QA-211 through QA-225 and QA-416 through QA-425;
+   - exact node manifest and command;
+   - required final outcome: exactly 25 failures for the frozen intentional reasons.
+
+4. **Issue #1226 Stage 6 population**
+   - exactly the 19 tests in `tests/amc/stage6/test_issue_1226_stage6_red.py`;
+   - exact command;
+   - required final outcome: RED twice with the same exact test IDs and intended reasons.
+
+B0 must also freeze:
+
+- success and stop criteria for every population;
+- anti-hiding controls;
+- changed-file and marker controls;
+- evidence log names and retention paths;
+- the prohibition on blanket skip, xfail, ignore, deletion, marker removal, test renaming or undisclosed deselection.
+
+## Authoritative governed sequence
+
+1. **Accept this Issue #1233 inventory and separation record.**
+2. **B0 — Regression population and outcome freeze.** No repair builder appointment before B0 acceptance.
+3. **A1 — Missing `Optional` import repair.** One production file plus evidence only.
+4. Rerun wave0 and broad collection to prove the setup-error class is removed.
+5. **A2-T — Test-side missing-`UTC` import repair.** Exact affected test files, import-only.
+6. **A2-R — Runtime-side missing-`UTC` import repair.** Exact affected runtime files, import-only.
+7. **B1 — Final governed execution of the frozen populations:**
+   - wave0 ordinary population GREEN;
+   - ordinary non-wave0 regression population GREEN;
+   - retained 25-test expected-RED population RED for exactly the frozen reasons;
+   - Issue #1226 19-test suite RED twice for exactly the frozen reasons.
+8. Refresh PR #1232 evidence and complete Foreman QP, ECAP and independent IAA bound to the final exact head.
+9. Only after those controls pass may Stage 6 acceptance and Stages 7–10 reverification resume.
 
 ## Prohibitions
 
 - No repair builder appointment from this inventory alone.
-- No modifications to `tests/amc/stage6/**`.
-- No blanket skip, xfail, ignore, deselection, marker removal, or test deletion.
+- No repair builder appointment before B0 is accepted.
+- No modifications to `tests/amc/stage6/**` under Issue #1233.
+- No blanket skip, xfail, ignore, deletion, marker removal, test renaming or undisclosed deselection.
 - No implementation of QA-211..225 or QA-416..425 under Issue #1233.
 - No broad refactor while correcting import defects.
+- No mixing of A2-T and A2-R authority surfaces in one builder allowlist.
 - No Stage 6 acceptance or downstream progression while the genuine defect lanes and canonical RED/GREEN separation remain unresolved.
 
 ## Foreman disposition
@@ -169,9 +232,10 @@ This is not authority to hide or exclude debt. A canonical separation must:
 ```text
 Failure inventory: COMPLETE
 Root-cause separation: COMPLETE
-Genuine defect classes: A1 and A2
+Authoritative sequence: B0 -> A1 -> A2-T -> A2-R -> B1
+Genuine defect classes: A1, A2-T and A2-R
 Historical intentional RED classes: B1 and B2
-Repair builder appointment: NOT AUTHORISED
+Repair builder appointment: NOT AUTHORISED before B0 acceptance
 Issue #1226 Foreman QP: BLOCKED
 PR #1232: DRAFT / NOT MERGE-READY
 Stages 7–10: BLOCKED
