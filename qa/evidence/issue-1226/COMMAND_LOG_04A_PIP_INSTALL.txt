@@ -1,0 +1,71 @@
+Defaulting to user installation because normal site-packages is not writeable
+Collecting Flask>=3.0.0 (from -r requirements.txt (line 2))
+  Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+Collecting flask-cors>=4.0.0 (from -r requirements.txt (line 3))
+  Downloading flask_cors-6.0.5-py3-none-any.whl.metadata (5.4 kB)
+Collecting SQLAlchemy>=2.0.0 (from -r requirements.txt (line 6))
+  Downloading sqlalchemy-2.0.51-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+Collecting blinker>=1.9.0 (from Flask>=3.0.0->-r requirements.txt (line 2))
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Requirement already satisfied: click>=8.1.3 in /usr/lib/python3/dist-packages (from Flask>=3.0.0->-r requirements.txt (line 2)) (8.1.6)
+Collecting itsdangerous>=2.2.0 (from Flask>=3.0.0->-r requirements.txt (line 2))
+  Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+Requirement already satisfied: jinja2>=3.1.2 in /usr/lib/python3/dist-packages (from Flask>=3.0.0->-r requirements.txt (line 2)) (3.1.2)
+Requirement already satisfied: markupsafe>=2.1.1 in /usr/lib/python3/dist-packages (from Flask>=3.0.0->-r requirements.txt (line 2)) (2.1.5)
+Collecting werkzeug>=3.1.0 (from Flask>=3.0.0->-r requirements.txt (line 2))
+  Downloading werkzeug-3.1.8-py3-none-any.whl.metadata (4.0 kB)
+Collecting greenlet>=1 (from SQLAlchemy>=2.0.0->-r requirements.txt (line 6))
+  Downloading greenlet-3.5.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Requirement already satisfied: typing-extensions>=4.6.0 in /usr/lib/python3/dist-packages (from SQLAlchemy>=2.0.0->-r requirements.txt (line 6)) (4.10.0)
+Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.4/103.4 kB 7.4 MB/s eta 0:00:00
+Downloading flask_cors-6.0.5-py3-none-any.whl (16 kB)
+Downloading sqlalchemy-2.0.51-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 40.6 MB/s eta 0:00:00
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading greenlet-3.5.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (621 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 621.5/621.5 kB 173.6 MB/s eta 0:00:00
+Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Downloading werkzeug-3.1.8-py3-none-any.whl (226 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.5/226.5 kB 93.9 MB/s eta 0:00:00
+Installing collected packages: werkzeug, itsdangerous, greenlet, blinker, SQLAlchemy, Flask, flask-cors
+Successfully installed Flask-3.1.3 SQLAlchemy-2.0.51 blinker-1.9.0 flask-cors-6.0.5 greenlet-3.5.4 itsdangerous-2.2.0 werkzeug-3.1.8
+Defaulting to user installation because normal site-packages is not writeable
+Collecting pytest>=8.0.0 (from -r requirements-test.txt (line 2))
+  Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting pytest-asyncio>=0.23.0 (from -r requirements-test.txt (line 3))
+  Downloading pytest_asyncio-1.4.0-py3-none-any.whl.metadata (4.1 kB)
+Collecting pytest-cov>=4.1.0 (from -r requirements-test.txt (line 4))
+  Downloading pytest_cov-7.1.0-py3-none-any.whl.metadata (32 kB)
+Collecting pytest-mock>=3.12.0 (from -r requirements-test.txt (line 5))
+  Downloading pytest_mock-3.15.1-py3-none-any.whl.metadata (3.9 kB)
+Requirement already satisfied: jsonschema>=4.0.0 in /usr/lib/python3/dist-packages (from -r requirements-test.txt (line 6)) (4.10.3)
+Collecting ruff>=0.1.0 (from -r requirements-test.txt (line 9))
+  Downloading ruff-0.16.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (26 kB)
+Collecting iniconfig>=1.0.1 (from pytest>=8.0.0->-r requirements-test.txt (line 2))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Requirement already satisfied: packaging>=22 in /usr/lib/python3/dist-packages (from pytest>=8.0.0->-r requirements-test.txt (line 2)) (24.0)
+Collecting pluggy<2,>=1.5 (from pytest>=8.0.0->-r requirements-test.txt (line 2))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Requirement already satisfied: pygments>=2.7.2 in /usr/lib/python3/dist-packages (from pytest>=8.0.0->-r requirements-test.txt (line 2)) (2.17.2)
+Collecting typing-extensions>=4.12 (from pytest-asyncio>=0.23.0->-r requirements-test.txt (line 3))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting coverage>=7.10.6 (from coverage[toml]>=7.10.6->pytest-cov>=4.1.0->-r requirements-test.txt (line 4))
+  Downloading coverage-7.15.2-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.6 kB)
+Requirement already satisfied: attrs>=17.4.0 in /usr/lib/python3/dist-packages (from jsonschema>=4.0.0->-r requirements-test.txt (line 6)) (23.2.0)
+Requirement already satisfied: pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0 in /usr/lib/python3/dist-packages (from jsonschema>=4.0.0->-r requirements-test.txt (line 6)) (0.20.0)
+Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 386.5/386.5 kB 13.1 MB/s eta 0:00:00
+Downloading pytest_asyncio-1.4.0-py3-none-any.whl (16 kB)
+Downloading pytest_cov-7.1.0-py3-none-any.whl (22 kB)
+Downloading pytest_mock-3.15.1-py3-none-any.whl (10 kB)
+Downloading ruff-0.16.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.4/11.4 MB 54.1 MB/s eta 0:00:00
+Downloading coverage-7.15.2-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (256 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 256.2/256.2 kB 8.2 MB/s eta 0:00:00
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 8.1 MB/s eta 0:00:00
+Installing collected packages: typing-extensions, ruff, pluggy, iniconfig, coverage, pytest, pytest-mock, pytest-cov, pytest-asyncio
+Successfully installed coverage-7.15.2 iniconfig-2.3.0 pluggy-1.6.0 pytest-9.1.1 pytest-asyncio-1.4.0 pytest-cov-7.1.0 pytest-mock-3.15.1 ruff-0.16.0 typing-extensions-4.16.0

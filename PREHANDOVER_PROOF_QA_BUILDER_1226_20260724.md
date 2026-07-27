@@ -21,6 +21,7 @@
 - `qa/evidence/issue-1226/COMMAND_LOG_02_COLLECT_ONLY.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_03_STAGE6_RED_RUN1.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_04_STAGE6_RED_RUN2.txt`
+- `qa/evidence/issue-1226/COMMAND_LOG_04A_PIP_INSTALL.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_05_REGRESSION_NOT_WAVE0.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_06_REGRESSION_WAVE0.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_07_ANTI_DODGING_SCAN.txt`
@@ -29,7 +30,13 @@
 
 ## Stop condition encountered
 
-Required non-target regression commands did not reach normal suite execution because baseline environment/collection errors were encountered (`flask` missing, `sqlalchemy` missing, and missing `subwave_3_3` marker registration). This is recorded as a hard-stop condition per Issue #1226 instruction.
+After Foreman baseline harness recovery, declared dependencies were installed and both required non-target regression commands were rerun. Both suites reached normal execution but are still not GREEN:
+
+- `python -m pytest tests/ -v -m 'not wave0' --ignore=tests/amc/stage6` ended `69 failed, 893 passed, 13 deselected, 20 errors`
+- `python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6` ended with `13` errors
+- recurring blocking error: `NameError: name 'Optional' is not defined` from `foreman/domain/task.py`
+
+This remains a hard-stop condition because the mandatory non-target regression requirement is not yet GREEN.
 
 ## W1/W7 ownership preservation
 

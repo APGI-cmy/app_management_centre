@@ -3,87 +3,193 @@ platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/app_management_centre/app_management_centre
 configfile: pytest.ini
-collecting ... collected 905 items / 4 errors / 892 deselected / 13 selected
+plugins: asyncio-1.4.0, cov-7.1.0, mock-3.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 995 items / 982 deselected / 13 selected
+
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_created_to_assigned_transition ERROR [  7%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_assigned_to_in_progress_transition ERROR [ 15%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_in_progress_to_completed_transition ERROR [ 23%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_cannot_skip_states ERROR [ 30%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_state_transitions_are_logged ERROR [ 38%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_lifecycle_validates_prerequisites ERROR [ 46%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_task_failure_creates_explicit_failed_state ERROR [ 53%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_explicit_reason ERROR [ 61%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_diagnostic_information ERROR [ 69%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_state_creates_blocker ERROR [ 76%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_observable_in_program_status ERROR [ 84%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_triggers_escalation_notification ERROR [ 92%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_recovery_path_is_documented ERROR [100%]
 
 ==================================== ERRORS ====================================
-_______________ ERROR collecting tests/test_build_control_api.py _______________
-ImportError while importing test module '/home/runner/work/app_management_centre/app_management_centre/tests/test_build_control_api.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-../../../.local/lib/python3.12/site-packages/_pytest/python.py:508: in importtestmodule
-    mod = import_path(
-../../../.local/lib/python3.12/site-packages/_pytest/pathlib.py:596: in import_path
-    importlib.import_module(module_name)
-/usr/lib/python3.12/importlib/__init__.py:90: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-<frozen importlib._bootstrap>:1387: in _gcd_import
-    ???
-<frozen importlib._bootstrap>:1360: in _find_and_load
-    ???
-<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
-    ???
-<frozen importlib._bootstrap>:935: in _load_unlocked
-    ???
-../../../.local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
-    exec(co, module.__dict__)
-tests/test_build_control_api.py:15: in <module>
-    from build_control_api import create_app
-fm/orchestration/build_control_api.py:8: in <module>
-    from flask import Flask, jsonify, request, send_from_directory
-E   ModuleNotFoundError: No module named 'flask'
-______________ ERROR collecting tests/test_build_intervention.py _______________
-ImportError while importing test module '/home/runner/work/app_management_centre/app_management_centre/tests/test_build_intervention.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-../../../.local/lib/python3.12/site-packages/_pytest/python.py:508: in importtestmodule
-    mod = import_path(
-../../../.local/lib/python3.12/site-packages/_pytest/pathlib.py:596: in import_path
-    importlib.import_module(module_name)
-/usr/lib/python3.12/importlib/__init__.py:90: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-<frozen importlib._bootstrap>:1387: in _gcd_import
-    ???
-<frozen importlib._bootstrap>:1360: in _find_and_load
-    ???
-<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
-    ???
-<frozen importlib._bootstrap>:935: in _load_unlocked
-    ???
-../../../.local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
-    exec(co, module.__dict__)
-tests/test_build_intervention.py:15: in <module>
-    from fm.orchestration.build_intervention import BuildInterventionController, create_intervention_controller
-fm/orchestration/__init__.py:8: in <module>
-    from .build_control_api import app
-fm/orchestration/build_control_api.py:8: in <module>
-    from flask import Flask, jsonify, request, send_from_directory
-E   ModuleNotFoundError: No module named 'flask'
-________________ ERROR collecting tests/wave1_schema_foundation ________________
-/usr/lib/python3.12/importlib/__init__.py:90: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-<frozen importlib._bootstrap>:1387: in _gcd_import
-    ???
-<frozen importlib._bootstrap>:1360: in _find_and_load
-    ???
-<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
-    ???
-<frozen importlib._bootstrap>:935: in _load_unlocked
-    ???
-../../../.local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
-    exec(co, module.__dict__)
-tests/wave1_schema_foundation/conftest.py:11: in <module>
-    from sqlalchemy import create_engine
-E   ModuleNotFoundError: No module named 'sqlalchemy'
-_ ERROR collecting tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py __
-'subwave_3_3' not found in `markers` configuration option
+_ ERROR at setup of TestTaskLifecycleTransitions.test_task_created_to_assigned_transition _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestTaskLifecycleTransitions.test_task_assigned_to_in_progress_transition _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestTaskLifecycleTransitions.test_task_in_progress_to_completed_transition _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestTaskLifecycleTransitions.test_task_cannot_skip_states __
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestTaskLifecycleTransitions.test_task_state_transitions_are_logged _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestTaskLifecycleTransitions.test_task_lifecycle_validates_prerequisites _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestObservableFailureStates.test_task_failure_creates_explicit_failed_state _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestObservableFailureStates.test_failure_includes_explicit_reason _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestObservableFailureStates.test_failure_includes_diagnostic_information _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestObservableFailureStates.test_failure_state_creates_blocker _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestObservableFailureStates.test_failure_observable_in_program_status _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestObservableFailureStates.test_failure_triggers_escalation_notification _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestObservableFailureStates.test_failure_recovery_path_is_documented _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
 =========================== short test summary info ============================
-ERROR tests/test_build_control_api.py
-ERROR tests/test_build_intervention.py
-ERROR tests/wave1_schema_foundation - ModuleNotFoundError: No module named 'sqlalchemy'
-ERROR tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py - Failed: 'subwave_3_3' not found in `markers` configuration option
-!!!!!!!!!!!!!!!!!!! Interrupted: 4 errors during collection !!!!!!!!!!!!!!!!!!!!
-====================== 892 deselected, 4 errors in 0.65s =======================
-EXIT_CODE:2
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_created_to_assigned_transition - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_assigned_to_in_progress_transition - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_in_progress_to_completed_transition - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_cannot_skip_states - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_state_transitions_are_logged - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_lifecycle_validates_prerequisites - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_task_failure_creates_explicit_failed_state - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_explicit_reason - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_diagnostic_information - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_state_creates_blocker - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_observable_in_program_status - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_triggers_escalation_notification - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_recovery_path_is_documented - NameError: name 'Optional' is not defined
+====================== 982 deselected, 13 errors in 0.59s ======================

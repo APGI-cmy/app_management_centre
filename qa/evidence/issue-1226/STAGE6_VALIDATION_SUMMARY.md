@@ -34,14 +34,21 @@
 
 ## Non-target regression execution result
 
-Both required regression commands exited during collection with unrelated environment/baseline errors:
+Foreman harness recovery command sequence executed:
 
-- `ModuleNotFoundError: No module named 'flask'`
-- `ModuleNotFoundError: No module named 'sqlalchemy'`
-- marker registration error: `'subwave_3_3' not found in markers configuration`
+- `python -m pip install -r requirements.txt` (GREEN)
+- `python -m pip install -r requirements-test.txt` (GREEN; required because `pytest` is declared there)
+- `python -m pytest tests/ -v -m 'not wave0' --ignore=tests/amc/stage6` (NOT GREEN)
+- `python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6` (NOT GREEN)
 
-Per hard-stop contract, this is recorded as an encountered stop condition.
-Baseline recovery path (outside this bounded Stage 6 lane): install missing dependencies (`flask`, `sqlalchemy`) and align marker registration in `pytest.ini` before rerunning non-target regressions.
+Observed outcomes:
+
+- `not wave0` run reached normal execution but ended with failures/errors (`69 failed, 893 passed, 13 deselected, 20 errors`), including:
+  - wave2.0 intentional placeholders raising `NotImplementedError` (e.g., QA-217..QA-225, QA-416..QA-425)
+  - wave0 governance import/runtime error: `NameError: name 'Optional' is not defined` from `foreman/domain/task.py`
+- `wave0` run reached normal execution but ended with `13` errors, all caused by `NameError: name 'Optional' is not defined` from `foreman/domain/task.py`
+
+Per hard-stop contract, this remains an encountered stop condition because both required non-target regression suites are not GREEN.
 
 ## Evidence log paths
 
@@ -49,6 +56,7 @@ Baseline recovery path (outside this bounded Stage 6 lane): install missing depe
 - `qa/evidence/issue-1226/COMMAND_LOG_02_COLLECT_ONLY.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_03_STAGE6_RED_RUN1.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_04_STAGE6_RED_RUN2.txt`
+- `qa/evidence/issue-1226/COMMAND_LOG_04A_PIP_INSTALL.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_05_REGRESSION_NOT_WAVE0.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_06_REGRESSION_WAVE0.txt`
 - `qa/evidence/issue-1226/COMMAND_LOG_07_ANTI_DODGING_SCAN.txt`
