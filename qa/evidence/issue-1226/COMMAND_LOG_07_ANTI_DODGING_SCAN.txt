@@ -1,0 +1,3 @@
+$ rg -n "(\.skip|xfail|pytest\.skip|TODO|FIXME|pass[[:space:]]*#|NotImplemented)" tests/amc/stage6
+No matches found.
+EXIT_CODE:0

@@ -1,0 +1,89 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/work/app_management_centre/app_management_centre
+configfile: pytest.ini
+collecting ... collected 905 items / 4 errors / 892 deselected / 13 selected
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_build_control_api.py _______________
+ImportError while importing test module '/home/runner/work/app_management_centre/app_management_centre/tests/test_build_control_api.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.local/lib/python3.12/site-packages/_pytest/python.py:508: in importtestmodule
+    mod = import_path(
+../../../.local/lib/python3.12/site-packages/_pytest/pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+../../../.local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests/test_build_control_api.py:15: in <module>
+    from build_control_api import create_app
+fm/orchestration/build_control_api.py:8: in <module>
+    from flask import Flask, jsonify, request, send_from_directory
+E   ModuleNotFoundError: No module named 'flask'
+______________ ERROR collecting tests/test_build_intervention.py _______________
+ImportError while importing test module '/home/runner/work/app_management_centre/app_management_centre/tests/test_build_intervention.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../.local/lib/python3.12/site-packages/_pytest/python.py:508: in importtestmodule
+    mod = import_path(
+../../../.local/lib/python3.12/site-packages/_pytest/pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+../../../.local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests/test_build_intervention.py:15: in <module>
+    from fm.orchestration.build_intervention import BuildInterventionController, create_intervention_controller
+fm/orchestration/__init__.py:8: in <module>
+    from .build_control_api import app
+fm/orchestration/build_control_api.py:8: in <module>
+    from flask import Flask, jsonify, request, send_from_directory
+E   ModuleNotFoundError: No module named 'flask'
+________________ ERROR collecting tests/wave1_schema_foundation ________________
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+../../../.local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests/wave1_schema_foundation/conftest.py:11: in <module>
+    from sqlalchemy import create_engine
+E   ModuleNotFoundError: No module named 'sqlalchemy'
+_ ERROR collecting tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py __
+'subwave_3_3' not found in `markers` configuration option
+=========================== short test summary info ============================
+ERROR tests/test_build_control_api.py
+ERROR tests/test_build_intervention.py
+ERROR tests/wave1_schema_foundation - ModuleNotFoundError: No module named 'sqlalchemy'
+ERROR tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py - Failed: 'subwave_3_3' not found in `markers` configuration option
+!!!!!!!!!!!!!!!!!!! Interrupted: 4 errors during collection !!!!!!!!!!!!!!!!!!!!
+====================== 892 deselected, 4 errors in 0.65s =======================
+EXIT_CODE:2
