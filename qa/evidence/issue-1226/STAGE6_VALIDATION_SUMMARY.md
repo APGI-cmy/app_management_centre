@@ -41,6 +41,7 @@ Both required regression commands exited during collection with unrelated enviro
 - marker registration error: `'subwave_3_3' not found in markers configuration`
 
 Per hard-stop contract, this is recorded as an encountered stop condition.
+Baseline recovery path (outside this bounded Stage 6 lane): install missing dependencies (`flask`, `sqlalchemy`) and align marker registration in `pytest.ini` before rerunning non-target regressions.
 
 ## Evidence log paths
 

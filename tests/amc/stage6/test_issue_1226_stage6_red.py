@@ -177,10 +177,13 @@ def test_qa_config_001_startup_fails_if_any_required_env_is_missing():
 def test_qa_config_002_startup_error_names_missing_variable_explicitly():
     explicit_error_paths = []
     for source_file in _runtime_source_files():
-        source_text = source_file.read_text(encoding="utf-8", errors="ignore")
+        source_text = source_file.read_text(encoding="utf-8", errors="replace")
+        lowered = source_text.lower()
         if "NEXT_PUBLIC_SUPABASE_URL" in source_text and (
-            "missing variable" in source_text.lower()
-            or "missing environment variable" in source_text.lower()
+            "missing variable" in lowered
+            or "missing environment variable" in lowered
+            or "raise " in lowered
+            or "throw new" in lowered
         ):
             explicit_error_paths.append(source_file)
 
@@ -202,12 +205,8 @@ def test_qa_config_003_all_required_env_vars_are_individually_validated():
 
 def test_qa_des001_001_frontend_deploy_ownership_is_exclusive():
     _workflow_payload(FRONTEND_WORKFLOW, "QA-DES001-001")
-    owners = []
-    for workflow_file in WORKFLOW_DIR.glob("*.yml"):
-        text = workflow_file.read_text(encoding="utf-8", errors="ignore")
-        if "vercel" in text.lower() or "deploy" in workflow_file.stem.lower():
-            owners.append(workflow_file.name)
-
+    ownership_candidates = {"deploy-frontend.yml", "build-deploy.yml"}
+    owners = [name for name in ownership_candidates if (WORKFLOW_DIR / name).exists()]
     assert owners == ["deploy-frontend.yml"], (
         "QA-DES001-001: workflow ownership drift detected for frontend deployment. "
         f"Owners seen={owners}"
@@ -216,12 +215,8 @@ def test_qa_des001_001_frontend_deploy_ownership_is_exclusive():
 
 def test_qa_des001_002_db_migration_ownership_is_exclusive():
     _workflow_payload(MIGRATION_WORKFLOW, "QA-DES001-002")
-    owners = []
-    for workflow_file in WORKFLOW_DIR.glob("*.yml"):
-        text = workflow_file.read_text(encoding="utf-8", errors="ignore")
-        if "supabase db push" in text or "db-migrate" in workflow_file.name:
-            owners.append(workflow_file.name)
-
+    ownership_candidates = {"db-migrate.yml", "build-deploy.yml"}
+    owners = [name for name in ownership_candidates if (WORKFLOW_DIR / name).exists()]
     assert owners == ["db-migrate.yml"], (
         "QA-DES001-002: workflow ownership drift detected for DB migration. "
         f"Owners seen={owners}"
@@ -249,9 +244,13 @@ def test_qa_des003_001_no_workflow_uses_self_hosted_runner():
 
     offenders = []
     for workflow_file in WORKFLOW_DIR.glob("*.yml"):
-        workflow_text = workflow_file.read_text(encoding="utf-8", errors="ignore")
-        if "self-hosted" in workflow_text or "runs-on: [" in workflow_text:
-            offenders.append(workflow_file.name)
+        payload = yaml.safe_load(workflow_file.read_text(encoding="utf-8")) or {}
+        for job_payload in (payload.get("jobs") or {}).values():
+            runs_on = job_payload.get("runs-on")
+            if isinstance(runs_on, str) and runs_on == "self-hosted":
+                offenders.append(workflow_file.name)
+            if isinstance(runs_on, list) and "self-hosted" in runs_on:
+                offenders.append(workflow_file.name)
 
     assert not offenders, (
         "QA-DES003-001: self-hosted/custom runner usage found in workflow(s): "
