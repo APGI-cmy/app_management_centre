@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.1",
+  "issue": 1235,
+  "parent_issue": 1233,
+  "parent_qa_issue": 1226,
+  "parked_pr": 1232,
+  "accepted_base": "eaf9ced583e61b2392a3772a1bea09944ee71439",
+  "pytest_ini_blob": "13621e46ce44818368b3688e867f2f6a2f114848",
+  "parent_non_wave0_log_blob": "3a1984f46f51a884d7bae538656ea7f3694b5778",
+  "stage6_source": {
+    "pull_request": 1232,
+    "branch": "qa/issue-1226-stage6-executable-red-r2",
+    "evidence_head": "ebadbe0a25f8d8e88bfe154bb4e488c3a23dbd8d",
+    "test_blob": "71bc3d0428e0ac2594ea53f72adfa3c10de01728",
+    "execution_checkout": "synchronised PR #1232 head after A1, A2-T and A2-R land"
+  },
+  "populations": {
+    "P1": {
+      "name": "wave0_ordinary",
+      "collection_command": "python -m pytest tests/ --collect-only -q -m wave0 --ignore=tests/amc/stage6",
+      "execution_command": "python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6",
+      "expected": {"passed": 13, "failed": 0, "errors": 0, "skipped": 0, "xfailed": 0},
+      "nodes": [
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_created_to_assigned_transition",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_assigned_to_in_progress_transition",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_in_progress_to_completed_transition",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_cannot_skip_states",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_state_transitions_are_logged",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_lifecycle_validates_prerequisites",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_task_failure_creates_explicit_failed_state",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_explicit_reason",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_diagnostic_information",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_state_creates_blocker",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_observable_in_program_status",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_triggers_escalation_notification",
+        "tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_recovery_path_is_documented"
+      ]
+    },
+    "P2": {
+      "name": "ordinary_non_wave0",
+      "collection_command": "python -m pytest tests/ --collect-only -q -m 'not wave0' --ignore=tests/amc/stage6 --ignore=tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py --ignore=tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py",
+      "execution_command": "python -m pytest tests/ -v -m 'not wave0' --ignore=tests/amc/stage6 --ignore=tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py --ignore=tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py",
+      "manifest_source_blob": "3a1984f46f51a884d7bae538656ea7f3694b5778",
+      "derivation": "ordered node list in source blob minus exact P3 node manifest",
+      "baseline_selected": 957,
+      "substitution_permitted": false,
+      "expected": {"all_selected_pass": true, "failed": 0, "errors": 0, "skipped": 0, "xfailed": 0},
+      "exclusive_exclusions": [
+        "tests/amc/stage6/**",
+        "tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py",
+        "tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py",
+        "tests/wave0_minimum_red/RED_QA"
+      ]
+    },
+    "P3": {
+      "name": "retained_expected_red",
+      "collection_command": "python -m pytest tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py --collect-only -q",
+      "execution_command": "python -m pytest tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py -vv",
+      "expected": {"passed": 0, "failed": 25, "errors": 0, "skipped": 0, "xfailed": 0, "exception": "NotImplementedError"},
+      "qa_ranges": ["QA-211..QA-225", "QA-416..QA-425"]
+    },
+    "P4": {
+      "name": "issue_1226_stage6_intended_red",
+      "source_pull_request": 1232,
+      "source_branch": "qa/issue-1226-stage6-executable-red-r2",
+      "source_head": "ebadbe0a25f8d8e88bfe154bb4e488c3a23dbd8d",
+      "source_test_blob": "71bc3d0428e0ac2594ea53f72adfa3c10de01728",
+      "execution_checkout": "synchronised PR #1232 head after repair lanes",
+      "collection_command": "python -m pytest tests/amc/stage6 --collect-only -q",
+      "execution_command": "python -m pytest tests/amc/stage6 -vv",
+      "required_runs": 2,
+      "expected_per_run": {"passed": 0, "failed": 19, "errors": 0, "skipped": 0, "xfailed": 0},
+      "qa_ids": [
+        "QA-DEPLOY-001",
+        "QA-DEPLOY-002",
+        "QA-DEPLOY-003",
+        "QA-DEPLOY-004",
+        "QA-DEPLOY-006",
+        "QA-DEPLOY-007",
+        "QA-DEPLOY-010",
+        "QA-CONFIG-001",
+        "QA-CONFIG-002",
+        "QA-CONFIG-003",
+        "QA-DES001-001",
+        "QA-DES001-002",
+        "QA-DES002-001",
+        "QA-DES003-001",
+        "QA-DES004-001",
+        "QA-DES005-001",
+        "QA-DES006-001",
+        "QA-DES007-001",
+        "QA-DES008-001"
+      ]
+    }
+  },
+  "changed_file_control": "git diff --name-status eaf9ced583e61b2392a3772a1bea09944ee71439...HEAD",
+  "successor_order": [
+    "A1",
+    "A2-T",
+    "A2-R",
+    "synchronise PR #1232 with repaired main while preserving pinned Stage 6 suite",
+    "B1",
+    "refresh PR #1232 evidence",
+    "Foreman QP",
+    "ECAP",
+    "independent IAA",
+    "CS2 merge disposition"
+  ],
+  "builder_appointment_authorised": false
+}
