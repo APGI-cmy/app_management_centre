@@ -1,11 +1,19 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "issue": 1235,
   "parent_issue": 1233,
   "parent_qa_issue": 1226,
   "parked_pr": 1232,
   "accepted_base": "eaf9ced583e61b2392a3772a1bea09944ee71439",
-  "stage6_test_blob": "71bc3d0428e0ac2594ea53f72adfa3c10de01728",
+  "pytest_ini_blob": "13621e46ce44818368b3688e867f2f6a2f114848",
+  "parent_non_wave0_log_blob": "3a1984f46f51a884d7bae538656ea7f3694b5778",
+  "stage6_source": {
+    "pull_request": 1232,
+    "branch": "qa/issue-1226-stage6-executable-red-r2",
+    "evidence_head": "ebadbe0a25f8d8e88bfe154bb4e488c3a23dbd8d",
+    "test_blob": "71bc3d0428e0ac2594ea53f72adfa3c10de01728",
+    "execution_checkout": "synchronised PR #1232 head after A1, A2-T and A2-R land"
+  },
   "populations": {
     "P1": {
       "name": "wave0_ordinary",
@@ -32,7 +40,10 @@
       "name": "ordinary_non_wave0",
       "collection_command": "python -m pytest tests/ --collect-only -q -m 'not wave0' --ignore=tests/amc/stage6 --ignore=tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py --ignore=tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py",
       "execution_command": "python -m pytest tests/ -v -m 'not wave0' --ignore=tests/amc/stage6 --ignore=tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py --ignore=tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py",
+      "manifest_source_blob": "3a1984f46f51a884d7bae538656ea7f3694b5778",
+      "derivation": "ordered node list in source blob minus exact P3 node manifest",
       "baseline_selected": 957,
+      "substitution_permitted": false,
       "expected": {"all_selected_pass": true, "failed": 0, "errors": 0, "skipped": 0, "xfailed": 0},
       "exclusive_exclusions": [
         "tests/amc/stage6/**",
@@ -50,6 +61,11 @@
     },
     "P4": {
       "name": "issue_1226_stage6_intended_red",
+      "source_pull_request": 1232,
+      "source_branch": "qa/issue-1226-stage6-executable-red-r2",
+      "source_head": "ebadbe0a25f8d8e88bfe154bb4e488c3a23dbd8d",
+      "source_test_blob": "71bc3d0428e0ac2594ea53f72adfa3c10de01728",
+      "execution_checkout": "synchronised PR #1232 head after repair lanes",
       "collection_command": "python -m pytest tests/amc/stage6 --collect-only -q",
       "execution_command": "python -m pytest tests/amc/stage6 -vv",
       "required_runs": 2,
@@ -77,6 +93,18 @@
       ]
     }
   },
-  "successor_order": ["A1", "A2-T", "A2-R", "B1"],
+  "changed_file_control": "git diff --name-status eaf9ced583e61b2392a3772a1bea09944ee71439...HEAD",
+  "successor_order": [
+    "A1",
+    "A2-T",
+    "A2-R",
+    "synchronise PR #1232 with repaired main while preserving pinned Stage 6 suite",
+    "B1",
+    "refresh PR #1232 evidence",
+    "Foreman QP",
+    "ECAP",
+    "independent IAA",
+    "CS2 merge disposition"
+  ],
   "builder_appointment_authorised": false
 }
