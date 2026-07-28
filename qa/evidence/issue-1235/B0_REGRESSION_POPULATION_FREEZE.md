@@ -7,11 +7,13 @@
 - Parent QA issue: #1226
 - Parked draft PR: #1232
 - Merged inventory PR: #1234
-- Accepted base: `eaf9ced583e61b2392a3772a1bea09944ee71439`
+- Accepted B0 base: `eaf9ced583e61b2392a3772a1bea09944ee71439`
 - Parent Stage 6 evidence head: `ebadbe0a25f8d8e88bfe154bb4e488c3a23dbd8d`
+- Authoritative Stage 6 branch: `qa/issue-1226-stage6-executable-red-r2`
 - Stage 6 test blob: `71bc3d0428e0ac2594ea53f72adfa3c10de01728`
 - Parent non-wave0 log blob: `3a1984f46f51a884d7bae538656ea7f3694b5778`
 - Parent wave0 log blob: `8bbd91e9596c221815cf81b70ac3cf17d161a984`
+- Accepted `pytest.ini` blob: `13621e46ce44818368b3688e867f2f6a2f114848`
 
 This is a governance and evidence record only. No repair builder is appointed and no test or runtime change is authorised.
 
@@ -22,19 +24,14 @@ python -m pip install -r requirements.txt
 python -m pip install -r requirements-test.txt
 ```
 
-Any dependency change after this freeze requires Foreman review before relying on population counts.
+Any dependency or pytest-configuration change after this freeze requires Foreman review before relying on population membership or counts.
 
 ## P1 — Wave0 ordinary population
 
-### Collection command
+### Commands
 
 ```bash
 python -m pytest tests/ --collect-only -q -m wave0 --ignore=tests/amc/stage6
-```
-
-### Execution command
-
-```bash
 python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6
 ```
 
@@ -56,83 +53,50 @@ tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates:
 tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_recovery_path_is_documented
 ```
 
-### Required final outcome
-
-```text
-13 passed
-0 failed
-0 errors
-0 skipped
-0 xfailed
-```
-
-Collection must match the 13-node manifest exactly.
+Required final outcome: exactly `13 passed`, with zero failures, errors, skips or xfails. Collection must match the manifest exactly.
 
 ## P2 — Ordinary non-wave0 regression population
 
-### Collection command
+### Commands
 
 ```bash
 python -m pytest tests/ --collect-only -q -m 'not wave0' \
   --ignore=tests/amc/stage6 \
   --ignore=tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py \
   --ignore=tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py
-```
 
-### Execution command
-
-```bash
 python -m pytest tests/ -v -m 'not wave0' \
   --ignore=tests/amc/stage6 \
   --ignore=tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py \
   --ignore=tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py
 ```
 
-### Frozen population rule
+### Immutable population definition
 
-P2 consists of every node collected beneath `tests/` under the accepted `pytest.ini` and marker expression `not wave0`, except:
-
-1. `tests/amc/stage6/**`, which belongs exclusively to P4;
-2. `tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py`, which belongs exclusively to P3;
-3. `tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py`, which belongs exclusively to P3;
-4. the existing repository-level exclusion `tests/wave0_minimum_red/RED_QA` already frozen in `pytest.ini`.
-
-No other ignore, deselection, `-k`, file list, marker expression or collection manipulation is permitted.
-
-### Baseline count
-
-The parent evidence selected 982 non-wave0 nodes. P3 contains exactly 25 nodes. Therefore the frozen baseline is:
+P2 is not frozen by count alone. Its authoritative membership is the ordered non-wave0 node list recorded in immutable Git blob:
 
 ```text
-957 ordinary non-wave0 nodes
+3a1984f46f51a884d7bae538656ea7f3694b5778
 ```
 
-A count other than 957 before code repair is a hard stop. After an authorised repair branch is synchronised with a changed main head, collection drift must be explained file-by-file and approved by Foreman before B1.
+Derive the exact P2 manifest by taking every collected node in that blob and removing only the exact 25 P3 node IDs frozen below. The resulting ordered manifest contains exactly `957` nodes.
 
-### Required final outcome
+The existing repository-level exclusion `tests/wave0_minimum_red/RED_QA` remains inherited from accepted `pytest.ini` blob `13621e46ce44818368b3688e867f2f6a2f114848`.
 
-```text
-all collected P2 nodes passed
-0 failed
-0 errors
-0 skipped
-0 xfailed
-```
+No substitution is permitted: a node removal paired with an added node is drift even when the total remains 957. Before B1, collection output must be compared node-for-node against the immutable derived manifest. Any difference requires file-by-file Foreman disposition.
+
+Required final outcome: all exact P2 nodes passed, with zero failures, errors, skips or xfails.
 
 ## P3 — Retained expected-RED population
 
-### Collection command
+### Commands
 
 ```bash
 python -m pytest \
   tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py \
   tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py \
   --collect-only -q
-```
 
-### Execution command
-
-```bash
 python -m pytest \
   tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py \
   tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py \
@@ -169,29 +133,19 @@ tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperat
 tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_425_bulk_error_handling
 ```
 
-### Required final outcome
-
-```text
-25 failed
-0 passed
-0 errors
-0 skipped
-0 xfailed
-```
-
-Every failure must be `NotImplementedError` for its frozen QA ID and existing owning subwave. A changed ID, changed reason, pass, error, skip or xfail is a hard stop.
+Required final outcome: exactly `25 failed`, zero passed, errors, skips or xfails. Every failure must remain `NotImplementedError` for the frozen QA ID and owning subwave.
 
 ## P4 — Issue #1226 Stage 6 population
 
-### Collection command
+P4 does not exist on accepted B0 base `eaf9ced583e61b2392a3772a1bea09944ee71439`. It is pinned to PR #1232 branch `qa/issue-1226-stage6-executable-red-r2`, evidence head `ebadbe0a25f8d8e88bfe154bb4e488c3a23dbd8d`, and test blob `71bc3d0428e0ac2594ea53f72adfa3c10de01728`.
+
+Before P4 collection or B1 execution, PR #1232 must be synchronised with the repaired `main` while preserving the pinned Stage 6 test blob and all authorised Issue #1226 evidence. B1 executes on that exact synchronised PR #1232 head, not on plain `main`.
+
+### Commands — on the synchronised PR #1232 checkout
 
 ```bash
 python -m pytest tests/amc/stage6 --collect-only -q
-```
-
-### Execution command — required twice
-
-```bash
+python -m pytest tests/amc/stage6 -vv
 python -m pytest tests/amc/stage6 -vv
 ```
 
@@ -219,19 +173,9 @@ tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des007_001_frontend_prod
 tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des008_001_missing_next_public_supabase_url_fails_explicitly
 ```
 
-### Required final outcome — both runs
+Required outcome for each run: exactly `19 failed`, zero passed, errors, skips or xfails, with identical IDs and intended reasons.
 
-```text
-19 failed
-0 passed
-0 errors
-0 skipped
-0 xfailed
-```
-
-Run 1 and run 2 must contain the same 19 IDs and the same intended unmet reasons. Any difference is a hard stop.
-
-## Frozen evidence filenames for B1
+## Frozen B1 evidence paths
 
 ```text
 qa/evidence/issue-1235/b1/01_P1_COLLECTION.txt
@@ -250,39 +194,38 @@ qa/evidence/issue-1235/b1/B1_VALIDATION_SUMMARY.md
 
 ## Anti-hiding and anti-weakening controls
 
-The following are prohibited unless a new Foreman disposition explicitly changes this freeze:
+Prohibited unless a new Foreman disposition explicitly changes this freeze:
 
-- modifying `pytest.ini`, any `conftest.py`, discovery patterns, markers or dependencies to alter population membership;
+- modifying `pytest.ini`, any `conftest.py`, discovery patterns, markers or dependencies to alter membership;
 - adding or removing skip, xfail, ignore, deselection, `-k`, file filters, `--maxfail` or early-exit behaviour;
 - deleting, renaming, moving or weakening tests;
 - changing expected-RED tests to pass, error, skip or xfail;
 - changing Stage 6 tests or their expected reasons;
-- hiding count drift or changed failure reasons;
+- hiding node substitution, count drift or changed failure reasons;
 - mixing P1, P2, P3 or P4 evidence;
-- treating P3 expected RED as ordinary regression failure;
-- treating P4 intended RED as build-to-Green work;
-- implementing QA-211..225 or QA-416..425 in Issue #1233;
+- implementing QA-211..225 or QA-416..425 under Issue #1233;
 - appointing a repair builder before B0 merge and successor pre-brief approval.
 
-## Required changed-file control
+## Changed-file controls
 
-Each successor PR must commit:
+For this B0 PR, the exact control is:
 
 ```bash
-git diff --name-status <accepted-base>...HEAD
+git diff --name-status eaf9ced583e61b2392a3772a1bea09944ee71439...HEAD
 ```
 
-Every changed file must fall within that successor lane's explicit allowlist. Any cross-lane change is a hard stop.
+Each successor issue must declare its own literal accepted-base commit and freeze the corresponding command before appointment. Placeholders are not permitted.
 
-## Successor order
+## Authoritative successor order
 
 ```text
 B0 merge
   -> A1 missing Optional repair
   -> A2-T test-side UTC import repair
   -> A2-R runtime-side UTC import repair
-  -> B1 frozen-population execution
-  -> refresh PR #1232 evidence
+  -> synchronise PR #1232 with repaired main while preserving pinned Stage 6 suite
+  -> B1 execute P1-P4 on the exact synchronised PR #1232 head
+  -> refresh PR #1232 evidence as part of B1
   -> Foreman QP
   -> ECAP
   -> independent IAA
@@ -293,15 +236,15 @@ B0 merge
 
 ```text
 P1 population: FROZEN
-P2 population: FROZEN BY DETERMINISTIC RULE AND BASELINE COUNT
+P2 population: FROZEN BY IMMUTABLE SOURCE BLOB AND DERIVATION RULE
 P3 population: FROZEN
-P4 population: FROZEN
+P4 population: FROZEN AND EXECUTION SOURCE PINNED
 Commands: FROZEN
 Expected outcomes: FROZEN
 Evidence paths: FROZEN
 Anti-hiding controls: FROZEN
 Repair builder appointment: NOT AUTHORISED
-PR #1232: OPEN / DRAFT / PARKED
+PR #1232: OPEN / DRAFT / PARKED UNTIL REPAIRS LAND
 Stage 6 acceptance: NO-GO
 Stage 11: NO-GO
 Stage 12: BLOCKED
