@@ -5,7 +5,7 @@ Implements the Task entity with state transitions and lifecycle management.
 """
 
 from enum import Enum
-from typing import Any
+from typing import Any, Optional
 from datetime import datetime
 
 

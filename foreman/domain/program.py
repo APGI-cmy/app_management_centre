@@ -6,6 +6,7 @@ Implements the Program entity representing a high-level initiative.
 
 from enum import Enum
 from datetime import datetime
+from typing import Optional
 
 
 class ProgramState(Enum):
