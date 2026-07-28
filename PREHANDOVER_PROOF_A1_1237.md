@@ -79,7 +79,14 @@ Command:
 rg -n "(pytest\.skip|xfail|TODO|FIXME|NotImplemented|from typing import|from datetime import)" foreman/domain/task.py foreman/domain/program.py foreman/domain/wave.py foreman/domain/blocker.py qa/evidence/issue-1237 PREHANDOVER_PROOF_A1_1237.md
 ```
 
-Result: **PASS** (run output captured in final validation step)
+Result: **PASS**
+
+Output lines confirming bounded import additions:
+
+- `foreman/domain/task.py:8:from typing import Any, Optional`
+- `foreman/domain/program.py:9:from typing import Optional`
+- `foreman/domain/wave.py:9:from typing import Optional`
+- `foreman/domain/blocker.py:9:from typing import Optional`
 
 ### 6) Diff against frozen base
 
@@ -89,7 +96,17 @@ Command:
 git diff --name-status ff5ec09024210789c2d2941a4aa6fe1ddb166515...HEAD
 ```
 
-Result captured after final commit.
+Result: **PASS**
+
+```text
+A	PREHANDOVER_PROOF_A1_1237.md
+M	foreman/domain/blocker.py
+M	foreman/domain/program.py
+M	foreman/domain/task.py
+M	foreman/domain/wave.py
+A	qa/evidence/issue-1237/API_BUILDER_PHASE1_ATTESTATION.md
+A	qa/evidence/issue-1237/FOREMAN_APPOINTMENT_CONTROL.md
+```
 
 ## A1 boundary statement
 
