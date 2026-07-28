@@ -10,8 +10,8 @@
 | Parent QA issue | #1226 |
 | Completed B0 authority | #1235 / PR #1236 |
 | Accepted base | `34b1af8feef4a7f8d0a93859c45f797e21507c84` |
-| Target path | `foreman/domain/task.py` |
-| Target blob | `6994d9713058afbb69805ccb1fb6f74ea6ba92bf` |
+| Target paths | `foreman/domain/task.py`, `program.py`, `wave.py`, `blocker.py` |
+| Target blobs | `6994d9713058afbb69805ccb1fb6f74ea6ba92bf`, `7ed374bac9b756df66f9bfde37f4713a0b552381`, `2adabd64317c0c80c87adc370c50b5012100df1a`, `0433571718f52878b84d0240281940137de9b72e` |
 | Proposed delegated role | `api-builder` |
 | Builder contract | `.github/agents/api-builder.md` blob `f5d6c7789134600592343bd0fab0dc68d7d6fa30` |
 | Builder appointment | **NOT APPOINTED** |
@@ -26,44 +26,50 @@ IAA_PREFLIGHT_BRIEF
 
 ### Independent assurance posture
 
-This pre-brief is scoped independently from implementation. It defines the evidence and assurance conditions that a later appointed builder must satisfy. It does not appoint the builder, perform the repair, accept A1, or grant merge authority.
+This pre-brief defines the evidence and assurance conditions for a later bounded builder appointment. It does not appoint the builder, perform the repair, accept A1 or grant merge authority.
 
 ### Exact qualifying task
 
-Repair one import defect in `foreman/domain/task.py`:
+Repair the complete `Optional` import defect class exposed by the frozen P1 fixture across exactly four Foreman domain modules:
+
+```text
+foreman/domain/task.py
+foreman/domain/program.py
+foreman/domain/wave.py
+foreman/domain/blocker.py
+```
+
+Permitted changes are limited to adding `Optional` to the typing imports. In `task.py` the exact form is:
 
 ```diff
 -from typing import Any
 +from typing import Any, Optional
 ```
 
+In the other three modules, the permitted form is:
+
+```python
+from typing import Optional
+```
+
 No other semantic or formatting change is authorised.
 
-The file also references `UTC` without importing it. That defect belongs exclusively to later A2-R and must remain unchanged in A1.
+All four files also reference `UTC` without importing it. That defect belongs exclusively to A2-R and must remain unchanged in A1.
 
 ### Defect reproduction
 
-Accepted-base source state:
+The accepted-base source evaluates `Optional` without defining it in all four modules. The appointed builder must capture unedited pre-repair failures before implementation, including the first failure encountered by P1.
 
-```python
-from typing import Any
-...
-def get_by_id(cls, task_id: str) -> Optional['Task']:
-```
-
-Canonical pre-repair command:
+Canonical commands:
 
 ```bash
 python -c "import foreman.domain.task"
+python -c "import foreman.domain.program"
+python -c "import foreman.domain.wave"
+python -c "import foreman.domain.blocker"
 ```
 
-Expected pre-repair outcome:
-
-```text
-NameError: name 'Optional' is not defined
-```
-
-The appointed builder must capture the unedited failure output before implementation.
+Expected pre-repair result: each module fails during import with `NameError: name 'Optional' is not defined`.
 
 ### Write boundary
 
@@ -71,11 +77,14 @@ Permitted implementation and evidence paths only:
 
 ```text
 foreman/domain/task.py
+foreman/domain/program.py
+foreman/domain/wave.py
+foreman/domain/blocker.py
 qa/evidence/issue-1237/**
 PREHANDOVER_PROOF_A1_1237.md
 ```
 
-The active pre-brief carrier itself is:
+The active pre-brief carrier is:
 
 ```text
 .agent-admin/assurance/iaa-wave-record-amc-a1-optional-import-1237.md
@@ -88,32 +97,32 @@ No other file is authorised.
 - no `UTC` import or datetime repair;
 - no test creation, editing, deletion, move, rename or marker change;
 - no `pytest.ini`, `conftest.py`, workflow, dependency, lock-file, infrastructure or deployment change;
-- no skip, xfail, ignore, deselection, assertion weakening or changed test discovery;
-- no refactor of `Task`, `TaskState`, registry behaviour, timestamps or annotations beyond importing `Optional`;
+- no skip, xfail, ignore, deselection, assertion weakening or changed discovery;
+- no domain-model refactor, annotation rewrite, registry change or formatting churn;
 - no A2-T, A2-R, B1 or PR #1232 synchronisation;
-- no builder appointment until this pre-brief is reviewed and accepted.
+- no builder appointment until this pre-brief is reviewed, merged and accepted.
 
 ### Expected QA scope
 
 Mandatory commands after appointment:
 
 ```bash
-python -m compileall -q foreman/domain/task.py
-python -c "from foreman.domain.task import Task; assert Task.get_by_id('__a1_missing__') is None"
+python -m compileall -q foreman/domain/task.py foreman/domain/program.py foreman/domain/wave.py foreman/domain/blocker.py
+python -c "import foreman.domain.task, foreman.domain.program, foreman.domain.wave, foreman.domain.blocker"
 python -m pytest tests/ --collect-only -q -m wave0 --ignore=tests/amc/stage6
 python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6
-rg -n "(pytest\.skip|xfail|TODO|FIXME|NotImplemented|from typing import)" foreman/domain/task.py qa/evidence/issue-1237 PREHANDOVER_PROOF_A1_1237.md
+rg -n "(pytest\.skip|xfail|TODO|FIXME|NotImplemented|from typing import|from datetime import)" foreman/domain/task.py foreman/domain/program.py foreman/domain/wave.py foreman/domain/blocker.py qa/evidence/issue-1237 PREHANDOVER_PROOF_A1_1237.md
 git diff --name-status 34b1af8feef4a7f8d0a93859c45f797e21507c84...HEAD
 ```
 
 Required outcomes:
 
-1. `foreman/domain/task.py` compiles.
-2. Direct import and `Task.get_by_id` lookup complete without an `Optional` NameError.
+1. All four target modules compile.
+2. All four target modules import without an `Optional` NameError.
 3. P1 collection remains exactly the frozen 13-node B0 population.
 4. P1 output contains zero `Optional` NameError occurrences.
-5. Any remaining P1 failure is attributable only to the separately frozen missing-`UTC` A2-R defect.
-6. Production diff is exactly the one-line `Optional` import addition.
+5. Any remaining P1 failure maps only to the separately frozen missing-`UTC` A2-R defect.
+6. Production diff contains only the four bounded `Optional` import additions.
 7. No file outside the allowlist changes.
 
 A1 does not claim or require full P1/P2 GREEN. Full baseline GREEN remains downstream of A2-T and A2-R.
@@ -121,12 +130,12 @@ A1 does not claim or require full P1/P2 GREEN. Full baseline GREEN remains downs
 ### High-risk failure modes
 
 - builder repairs `UTC` opportunistically and collapses A1/A2-R separation;
+- one of the four `Optional` defects is omitted;
 - builder modifies tests or markers to conceal remaining failures;
-- direct import still fails after the nominal change;
 - P1 node population drifts;
 - a new failure class appears;
 - production diff includes refactoring or formatting churn;
-- accepted base, target blob or builder contract changes before appointment;
+- accepted base, any target blob or builder contract changes before appointment;
 - evidence reports GREEN by excluding or reclassifying tests;
 - PR #1232 is synchronised prematurely.
 
@@ -137,7 +146,7 @@ Each condition is a mandatory halt and escalation.
 ```text
 qa/evidence/issue-1237/01_PRE_REPAIR_OPTIONAL_REPRODUCTION.txt
 qa/evidence/issue-1237/02_COMPILEALL.txt
-qa/evidence/issue-1237/03_DIRECT_IMPORT_LOOKUP.txt
+qa/evidence/issue-1237/03_DIRECT_IMPORTS.txt
 qa/evidence/issue-1237/04_P1_COLLECTION.txt
 qa/evidence/issue-1237/05_P1_EXECUTION.txt
 qa/evidence/issue-1237/06_ANTI_DODGING_SCAN.txt
@@ -152,11 +161,11 @@ Evidence must include exact commands, runtime and dependency versions, timestamp
 
 Foreman QP must independently verify:
 
-1. exact base, branch, target blob and builder-contract binding;
+1. exact base, branch, four target blobs and builder-contract binding;
 2. pre-repair reproduction genuinely fails on missing `Optional`;
-3. production diff is limited to `Any, Optional` import addition;
+3. production diff is limited to four `Optional` import additions;
 4. zero `UTC` or unrelated changes;
-5. direct import and lookup are GREEN;
+5. all four direct imports are GREEN;
 6. P1 collection exactly matches the frozen B0 13-node manifest;
 7. no `Optional` NameError remains;
 8. remaining failures, if any, map only to frozen `UTC` debt;
@@ -167,26 +176,20 @@ Foreman QP must independently verify:
 
 ### ECAP applicability
 
-ECAP is **REQUIRED** and administrative only. ECAP validates:
-
-- issue, branch, accepted base and exact final head;
-- builder identity and contract binding;
-- changed-file inventory and allowlist;
-- evidence filenames, timestamps, command presence and exit codes;
-- Foreman QP and final IAA carrier completeness.
+ECAP is **REQUIRED** and administrative only. ECAP validates issue, branch, accepted base, exact final head, builder identity and contract binding, four target blobs, changed-file inventory, evidence paths, timestamps, command presence, exit codes and carrier completeness.
 
 ECAP must not decide defect semantics, expand A1 scope, accept `UTC` work, declare Stage 6 complete or grant merge authority.
 
 ### Final independent IAA focus
 
-Final IAA must evaluate the exact implementation head and independently confirm:
+Final IAA must independently confirm:
 
-- one-line import-only repair;
+- four-file import-only repair;
 - no `UTC` or cross-lane work;
-- successful direct import and lookup;
+- successful direct imports;
 - frozen P1 population integrity;
 - zero `Optional` NameError;
-- no test-debt concealment or weakening;
+- no concealment or weakening;
 - complete Foreman QP and ECAP separation;
 - exact-head workflow and review closure;
 - retained lifecycle blocks for A2-T, A2-R, B1, PR #1232 and Stages 6–12.
@@ -195,21 +198,21 @@ A final IAA PASS may recommend only A1 merge. It may not appoint an integration 
 
 ### Entry conditions for later appointment
 
-A builder may be appointed only after all of the following are true:
+A builder may be appointed only after:
 
-1. Issue #1237 remains open with unchanged scope.
+1. Issue #1237 remains open with the corrected four-file scope.
 2. This wave record is merged and accepted.
 3. Its exact final blob is bound in the appointment instruction.
-4. The accepted base remains `34b1af8feef4a7f8d0a93859c45f797e21507c84`, or a new Foreman disposition rebases the lane explicitly.
-5. Target blob remains `6994d9713058afbb69805ccb1fb6f74ea6ba92bf`.
-6. Proposed builder contract remains blob `f5d6c7789134600592343bd0fab0dc68d7d6fa30`.
+4. The accepted base remains `34b1af8feef4a7f8d0a93859c45f797e21507c84`, or a new Foreman disposition explicitly rebases the lane.
+5. All four target blobs remain unchanged.
+6. The builder contract remains blob `f5d6c7789134600592343bd0fab0dc68d7d6fa30`.
 7. CS2 explicitly authorises the bounded appointment.
 
 ### Disposition
 
 ```text
 IAA preflight brief: PREFLIGHT_BRIEF_COMPLETE
-A1 scope: BOUNDED
+A1 scope: BOUNDED FOUR-FILE OPTIONAL IMPORT REPAIR
 A1 builder: NOT APPOINTED
 Implementation authority: NOT GRANTED
 ECAP: REQUIRED / ADMINISTRATIVE ONLY
