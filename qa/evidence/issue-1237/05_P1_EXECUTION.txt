@@ -1,0 +1,49 @@
+UTC_TIMESTAMP: 2026-07-29T08:15:09Z
+WORKING_COMMIT_SHA: e019b9473033eef0c28a5353c48667e18befd5f1
+WORKING_DIRECTORY: /home/runner/work/app_management_centre/app_management_centre
+COMMAND: python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6
+PYTHON_VERSION: Python 3.12.3
+PYTEST_VERSION: pytest 9.1.1
+--- STDOUT_STDERR_BEGIN ---
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /home/runner/work/app_management_centre/app_management_centre/.venv-a1-1237/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/work/app_management_centre/app_management_centre
+configfile: pytest.ini
+collecting ... collected 980 items / 2 errors / 967 deselected / 13 selected
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_modular_agent_loading.py _____________
+ImportError while importing test module '/home/runner/work/app_management_centre/app_management_centre/tests/test_modular_agent_loading.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv-a1-1237/lib/python3.12/site-packages/_pytest/python.py:508: in importtestmodule
+    mod = import_path(
+.venv-a1-1237/lib/python3.12/site-packages/_pytest/pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+.venv-a1-1237/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests/test_modular_agent_loading.py:19: in <module>
+    import yaml
+E   ModuleNotFoundError: No module named 'yaml'
+_ ERROR collecting tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py __
+'subwave_3_3' not found in `markers` configuration option
+=========================== short test summary info ============================
+ERROR tests/test_modular_agent_loading.py
+ERROR tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py - Failed: 'subwave_3_3' not found in `markers` configuration option
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+====================== 967 deselected, 2 errors in 0.79s =======================
+--- STDOUT_STDERR_END ---
+EXIT_CODE: 2
+DISPOSITION: BLOCKED_OR_RED

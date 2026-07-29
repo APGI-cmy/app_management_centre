@@ -1,115 +1,55 @@
-# PREHANDOVER PROOF — A1 Optional Imports (Issue #1237)
+# PREHANDOVER PROOF — A1 Optional Imports (Issue #1237) — Continuation
 
 ## Bound identifiers
 
 - Issue: `#1237`
-- Base: `ff5ec09024210789c2d2941a4aa6fe1ddb166515`
+- Accepted base: `ff5ec09024210789c2d2941a4aa6fe1ddb166515`
 - Branch: `builder/issue-1237-a1-optional-imports`
+- Continuation start head: `e019b9473033eef0c28a5353c48667e18befd5f1`
 - Contract blob: `f5d6c7789134600592343bd0fab0dc68d7d6fa30`
 - Pre-brief blob: `f30dd3adaa9ad9be4b6bff2fe4bcd6b378a02d34`
 
-## Authorized production delta
+## Production boundary
 
-Added missing `Optional` typing import only in:
+No new production edits were made in this continuation. Authorized production delta remains only:
 
 - `foreman/domain/task.py`
 - `foreman/domain/program.py`
 - `foreman/domain/wave.py`
 - `foreman/domain/blocker.py`
 
-## Mandatory validation evidence
+## Evidence package
 
-### 1) Compile targeted modules
+- `/home/runner/work/app_management_centre/app_management_centre/qa/evidence/issue-1237/01_PRE_REPAIR_OPTIONAL_REPRODUCTION.txt`
+- `/home/runner/work/app_management_centre/app_management_centre/qa/evidence/issue-1237/02_COMPILEALL.txt`
+- `/home/runner/work/app_management_centre/app_management_centre/qa/evidence/issue-1237/03_DIRECT_IMPORTS.txt`
+- `/home/runner/work/app_management_centre/app_management_centre/qa/evidence/issue-1237/04_P1_COLLECTION.txt`
+- `/home/runner/work/app_management_centre/app_management_centre/qa/evidence/issue-1237/05_P1_EXECUTION.txt`
+- `/home/runner/work/app_management_centre/app_management_centre/qa/evidence/issue-1237/06_ANTI_DODGING_SCAN.txt`
+- `/home/runner/work/app_management_centre/app_management_centre/qa/evidence/issue-1237/07_CHANGED_FILES.txt`
+- `/home/runner/work/app_management_centre/app_management_centre/qa/evidence/issue-1237/A1_VALIDATION_SUMMARY.md`
 
-Command:
+## Result matrix
 
-```bash
-python -m compileall -q foreman/domain/task.py foreman/domain/program.py foreman/domain/wave.py foreman/domain/blocker.py
-```
+- Compileall (frozen command): **PASS**
+- Direct imports (frozen command): **PASS**
+- Pre-repair Optional defect reproduction at accepted base: **PASS** (`NameError: Optional` reproduced)
+- P1 collection (frozen command): **BLOCKED**
+- P1 execution (frozen command): **BLOCKED**
+- Anti-dodging scan (frozen command): **PASS**
+- Changed-files command (frozen command): **PASS**
 
-Result: **PASS** (exit 0)
+## Blocking detail (truthful)
 
-### 2) Import targeted modules
+The exact frozen pytest commands are blocked by repository-level harness issues outside A1 scope:
 
-Command:
+1. `ModuleNotFoundError: No module named 'yaml'` during collection.
+2. Strict marker error: `'subwave_3_3' not found in markers configuration option`.
 
-```bash
-python -c "import foreman.domain.task, foreman.domain.program, foreman.domain.wave, foreman.domain.blocker"
-```
+No disallowed mitigations were used.
 
-Result: **PASS** (exit 0)
+## Stop-rule disposition
 
-### 3) P1 collect-only check
+**BLOCKED — FOREMAN HARNESS CORRECTION REQUIRED**
 
-Command:
-
-```bash
-python -m pytest tests/ --collect-only -q -m wave0 --ignore=tests/amc/stage6
-```
-
-Result: **BLOCKED IN ENVIRONMENT** (exit 2)
-
-Observed blockers:
-
-- `ModuleNotFoundError: No module named 'flask'`
-- `ModuleNotFoundError: No module named 'sqlalchemy'`
-- marker config failure: `'subwave_3_3' not found in markers`
-
-Collection line remained:
-
-- `collected 905 items / 4 errors / 892 deselected / 13 selected`
-
-### 4) P1 execution check
-
-Command:
-
-```bash
-python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6
-```
-
-Result: **BLOCKED IN ENVIRONMENT** (exit 2)
-
-Observed blockers are the same 4 collection errors above.
-
-### 5) Scope and token scan
-
-Command:
-
-```bash
-rg -n "(pytest\.skip|xfail|TODO|FIXME|NotImplemented|from typing import|from datetime import)" foreman/domain/task.py foreman/domain/program.py foreman/domain/wave.py foreman/domain/blocker.py qa/evidence/issue-1237 PREHANDOVER_PROOF_A1_1237.md
-```
-
-Result: **PASS**
-
-Output lines confirming bounded import additions:
-
-- `foreman/domain/task.py:8:from typing import Any, Optional`
-- `foreman/domain/program.py:9:from typing import Optional`
-- `foreman/domain/wave.py:9:from typing import Optional`
-- `foreman/domain/blocker.py:9:from typing import Optional`
-
-### 6) Diff against frozen base
-
-Command:
-
-```bash
-git diff --name-status ff5ec09024210789c2d2941a4aa6fe1ddb166515...HEAD
-```
-
-Result: **PASS**
-
-```text
-A	PREHANDOVER_PROOF_A1_1237.md
-M	foreman/domain/blocker.py
-M	foreman/domain/program.py
-M	foreman/domain/task.py
-M	foreman/domain/wave.py
-A	qa/evidence/issue-1237/API_BUILDER_PHASE1_ATTESTATION.md
-A	qa/evidence/issue-1237/FOREMAN_APPOINTMENT_CONTROL.md
-```
-
-## A1 boundary statement
-
-- No `UTC` import or datetime repair performed.
-- No test/config/workflow/dependency/infra/production changes made.
-- Production change class stayed import-only for `Optional` in the 4 authorized files.
+A1 continuation cannot truthfully claim readiness while the mandatory frozen P1 commands are blocked by harness issues outside allowlist.

@@ -1,0 +1,16 @@
+UTC_TIMESTAMP: 2026-07-29T08:16:44Z
+WORKING_COMMIT_SHA: e019b9473033eef0c28a5353c48667e18befd5f1
+WORKING_DIRECTORY: /home/runner/work/app_management_centre/app_management_centre
+COMMAND: git diff --name-status ff5ec09024210789c2d2941a4aa6fe1ddb166515...HEAD
+PYTHON_VERSION: Python 3.12.3
+--- STDOUT_STDERR_BEGIN ---
+A	PREHANDOVER_PROOF_A1_1237.md
+M	foreman/domain/blocker.py
+M	foreman/domain/program.py
+M	foreman/domain/task.py
+M	foreman/domain/wave.py
+A	qa/evidence/issue-1237/API_BUILDER_PHASE1_ATTESTATION.md
+A	qa/evidence/issue-1237/FOREMAN_APPOINTMENT_CONTROL.md
+--- STDOUT_STDERR_END ---
+EXIT_CODE: 0
+DISPOSITION: PASS

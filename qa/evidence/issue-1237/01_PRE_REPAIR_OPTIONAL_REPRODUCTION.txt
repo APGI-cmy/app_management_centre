@@ -1,0 +1,26 @@
+UTC_TIMESTAMP: 2026-07-29T08:15:32Z
+WORKING_COMMIT_SHA: e019b9473033eef0c28a5353c48667e18befd5f1
+WORKING_DIRECTORY: /home/runner/work/app_management_centre/app_management_centre
+COMMANDS:
+  git worktree add --detach ../amc-a1-base-repro ff5ec09024210789c2d2941a4aa6fe1ddb166515
+  cd ../amc-a1-base-repro
+  . /home/runner/work/app_management_centre/app_management_centre/.venv-a1-1237/bin/activate
+  python -c "import foreman.domain.task, foreman.domain.program, foreman.domain.wave, foreman.domain.blocker"
+  cd -
+  git worktree remove --force ../amc-a1-base-repro
+PYTHON_VERSION: Python 3.12.3
+--- STDOUT_STDERR_BEGIN ---
+Preparing worktree (detached HEAD ff5ec09)
+HEAD is now at ff5ec09 A1: publish independent IAA preflight brief before Optional repair appointment (#1238)
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/runner/work/app_management_centre/amc-a1-base-repro/foreman/domain/task.py", line 26, in <module>
+    class Task:
+  File "/home/runner/work/app_management_centre/amc-a1-base-repro/foreman/domain/task.py", line 86, in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+NameError: name 'Optional' is not defined
+--- STDOUT_STDERR_END ---
+EXIT_CODE: 1
+DISPOSITION: EXPECTED_PRE_REPAIR_FAILURE_REPRODUCED
+DETAIL_EXIT_CODES: add=0 cd=0 import=1 remove=0
