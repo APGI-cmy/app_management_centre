@@ -1,0 +1,73 @@
+EVIDENCE FILE: 05_COMBINED_A1_HARNESS_COLLECTION.txt
+PR: #1241 (harness deltas) + PR #1239 (A1 head)
+Issue: #1240
+A1 head: cf6b276898d8e9d761f8c38f5c4ee421c1d5a122
+Harness commit 1: 70c26e51ca4d82800acf3cba6ff4776bef4a3da4 (requirements.txt PyYAML)
+Harness commit 2: ebd43e9531ff49cbd7f717b13c09fae4e5ee87fe (pytest.ini subwave_3_3)
+UTC timestamp: 2026-07-29T10:54:00Z
+Working directory: /tmp/worktree-combined-1240 (disposable worktree, now removed)
+Python: 3.12.3 | pytest: 9.1.1
+
+--- WORKTREE SETUP ---
+Command: git worktree add --detach /tmp/worktree-combined-1240 cf6b276898d8e9d761f8c38f5c4ee421c1d5a122
+Output: Preparing worktree (detached HEAD cf6b276) / HEAD is now at cf6b276 docs(a1): add full continuation evidence and blocker disposition
+Exit code: 0
+
+--- HARNESS DELTA APPLICATION ---
+Command 1: git cherry-pick 70c26e51ca4d82800acf3cba6ff4776bef4a3da4 --no-commit
+Exit code: 0
+
+Command 2: git cherry-pick ebd43e9531ff49cbd7f717b13c09fae4e5ee87fe --no-commit
+Exit code: 0
+
+Diff stat from HEAD in worktree:
+  pytest.ini       | 1 +
+  requirements.txt | 3 +++
+  2 files changed, 4 insertions(+)
+
+--- ENVIRONMENT SETUP IN COMBINED STATE ---
+python -m pip install -r requirements.txt → exit 0
+python -m pip install pytest             → exit 0
+python -m pip check                      → No broken requirements found. / exit 0
+python -c "import yaml; print(yaml.__version__)" → 6.0.3 / exit 0
+
+--- P1 COLLECTION IN COMBINED STATE ---
+Command: python -m pytest tests/ --collect-only -q -m wave0 --ignore=tests/amc/stage6
+
+Output:
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /tmp/worktree-combined-1240
+configfile: pytest.ini
+collected 995 items / 982 deselected / 13 selected
+
+<Dir worktree-combined-1240>
+  <Package tests>
+    <Package wave0_minimum_red>
+      <Module test_integration_sanity.py>
+        <Class TestTaskLifecycleTransitions>
+          <Function test_task_created_to_assigned_transition>
+          <Function test_task_assigned_to_in_progress_transition>
+          <Function test_task_in_progress_to_completed_transition>
+          <Function test_task_cannot_skip_states>
+          <Function test_task_state_transitions_are_logged>
+          <Function test_task_lifecycle_validates_prerequisites>
+        <Class TestObservableFailureStates>
+          <Function test_task_failure_creates_explicit_failed_state>
+          <Function test_failure_includes_explicit_reason>
+          <Function test_failure_includes_diagnostic_information>
+          <Function test_failure_state_creates_blocker>
+          <Function test_failure_observable_in_program_status>
+          <Function test_failure_triggers_escalation_notification>
+          <Function test_failure_recovery_path_is_documented>
+
+=============== 13/995 tests collected (982 deselected) in 2.67s ===============
+
+Exit code: 0
+
+CLASSIFICATION: PASS
+- Exactly 13 selected nodes
+- Zero collection errors
+- No strict-marker failure for subwave_3_3
+- No YAML ModuleNotFoundError
+- No Optional NameError during collection phase

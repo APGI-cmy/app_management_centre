@@ -1,0 +1,50 @@
+EVIDENCE FILE: 07_SCOPE_AND_ANTI_DODGING_SCAN.txt
+PR: #1241
+Issue: #1240
+Exact validation head: 45d7f1ed44fb8a63425ef04de2768f658cb4c7f1
+UTC timestamp: 2026-07-29T10:54:45Z
+Working directory: /home/runner/work/app_management_centre/app_management_centre
+
+--- ANTI-DODGING SCAN ---
+Command: grep -rn "PyYAML\|subwave_3_3\|strict-markers\|pytest\.skip\|xfail\|PYTEST_ADDOPTS"
+         requirements.txt pytest.ini tests/ qa/evidence/issue-1240/
+
+Output:
+requirements.txt:9:PyYAML>=6.0
+pytest.ini:17:    --strict-markers
+pytest.ini:50:    subwave_3_3: Subwave 3.3 Governance Dashboard V2 tests
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py:21:@pytest.mark.subwave_3_3
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py:314:@pytest.mark.subwave_3_3
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py:594:@pytest.mark.subwave_3_3
+qa/evidence/issue-1240/FOREMAN_HARNESS_CORRECTION_CONTROL.md (references, not active config)
+
+Exit code: 0
+
+ANTI-DODGING VERDICT:
+- PyYAML: present in requirements.txt (line 9) only — correct
+- subwave_3_3: registered in pytest.ini markers section (line 50) — correct
+- --strict-markers: active in pytest.ini addopts (line 17) — strict enforcement RETAINED
+- No PYTEST_ADDOPTS found in any in-scope file
+- No pytest.skip found in scope
+- No xfail found in requirements.txt or pytest.ini
+- No ignore/deselection/config-override applied
+- test_enhanced_dashboard.py uses @pytest.mark.subwave_3_3 decorators — these are the consumers of the newly registered marker, confirming the marker was needed
+- No test edits made by PR #1241
+
+SCOPE CHECK:
+Changed files (vs accepted base ff5ec09):
+  M requirements.txt
+  M pytest.ini
+  A qa/evidence/issue-1240/FOREMAN_HARNESS_CORRECTION_CONTROL.md
+  A qa/evidence/issue-1240/01_ENVIRONMENT_SETUP.txt
+  A qa/evidence/issue-1240/02_YAML_IMPORT.txt
+  A qa/evidence/issue-1240/03_P1_COLLECTION_EXACT_HEAD.txt
+  A qa/evidence/issue-1240/04_P1_EXECUTION_EXACT_HEAD.txt
+  A qa/evidence/issue-1240/05_COMBINED_A1_HARNESS_COLLECTION.txt
+  A qa/evidence/issue-1240/06_COMBINED_A1_HARNESS_EXECUTION.txt
+  A qa/evidence/issue-1240/07_SCOPE_AND_ANTI_DODGING_SCAN.txt
+  A qa/evidence/issue-1240/08_CHANGED_FILES.txt
+  A qa/evidence/issue-1240/HARNESS_VALIDATION_SUMMARY.md
+  A PREHANDOVER_PROOF_HARNESS_1240.md
+
+All additions are within the declared evidence allowlist. No runtime/application/test code touched.

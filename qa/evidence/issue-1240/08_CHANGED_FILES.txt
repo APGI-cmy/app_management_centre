@@ -1,0 +1,35 @@
+EVIDENCE FILE: 08_CHANGED_FILES.txt
+PR: #1241
+Issue: #1240
+Exact validation head: 45d7f1ed44fb8a63425ef04de2768f658cb4c7f1
+Accepted base: ff5ec09024210789c2d2941a4aa6fe1ddb166515
+UTC timestamp: 2026-07-29T10:54:50Z
+Working directory: /home/runner/work/app_management_centre/app_management_centre
+
+--- CHANGED FILES (vs accepted base) ---
+Command: git diff --name-status ff5ec09024210789c2d2941a4aa6fe1ddb166515...HEAD
+
+Output:
+M	pytest.ini
+A	qa/evidence/issue-1240/FOREMAN_HARNESS_CORRECTION_CONTROL.md
+M	requirements.txt
+
+Exit code: 0
+
+--- HARNESS COMMITS ---
+70c26e5  fix(harness): declare PyYAML for collected validation tests
+ebd43e9  fix(harness): register subwave_3_3 strict marker
+45d7f1e  docs(harness): record bounded Foreman correction control
+
+--- SCOPE VERDICT ---
+Implementation changes limited to exactly:
+  1. requirements.txt: added `PyYAML>=6.0` (one line)
+  2. pytest.ini: added `subwave_3_3: Subwave 3.3 Governance Dashboard V2 tests` (one line)
+  3. qa/evidence/issue-1240/FOREMAN_HARNESS_CORRECTION_CONTROL.md: new Foreman control record
+
+Evidence files added by validation execution (within declared allowlist):
+  4-13. qa/evidence/issue-1240/01_ENVIRONMENT_SETUP.txt through HARNESS_VALIDATION_SUMMARY.md
+  14.   PREHANDOVER_PROOF_HARNESS_1240.md
+
+No application code, no test code, no runtime changes, no workflow, migration,
+infrastructure, deployment, or credential files modified.

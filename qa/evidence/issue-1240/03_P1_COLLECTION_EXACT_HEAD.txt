@@ -1,0 +1,48 @@
+EVIDENCE FILE: 03_P1_COLLECTION_EXACT_HEAD.txt
+PR: #1241
+Issue: #1240
+Exact validation head: 45d7f1ed44fb8a63425ef04de2768f658cb4c7f1
+UTC timestamp: 2026-07-29T10:53:15Z
+Working directory: /home/runner/work/app_management_centre/app_management_centre
+Python: 3.12.3 | pytest: 9.1.1
+
+--- P1 COLLECTION ---
+Command: python -m pytest tests/ --collect-only -q -m wave0 --ignore=tests/amc/stage6
+
+Output:
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/runner/work/app_management_centre/app_management_centre
+configfile: pytest.ini
+collected 995 items / 982 deselected / 13 selected
+
+<Dir app_management_centre>
+  <Package tests>
+    <Package wave0_minimum_red>
+      <Module test_integration_sanity.py>
+        <Class TestTaskLifecycleTransitions>
+          <Function test_task_created_to_assigned_transition>
+          <Function test_task_assigned_to_in_progress_transition>
+          <Function test_task_in_progress_to_completed_transition>
+          <Function test_task_cannot_skip_states>
+          <Function test_task_state_transitions_are_logged>
+          <Function test_task_lifecycle_validates_prerequisites>
+        <Class TestObservableFailureStates>
+          <Function test_task_failure_creates_explicit_failed_state>
+          <Function test_failure_includes_explicit_reason>
+          <Function test_failure_includes_diagnostic_information>
+          <Function test_failure_state_creates_blocker>
+          <Function test_failure_observable_in_program_status>
+          <Function test_failure_triggers_escalation_notification>
+          <Function test_failure_recovery_path_is_documented>
+
+=============== 13/995 tests collected (982 deselected) in 2.69s ===============
+
+Exit code: 0
+
+CLASSIFICATION: PASS
+- Exactly 13 selected nodes (frozen P1 requirement met)
+- Zero collection errors
+- No `subwave_3_3 not found in markers` error (strict-marker enforcement active, subwave_3_3 now registered)
+- No ModuleNotFoundError for yaml
+- configfile: pytest.ini loaded correctly with --strict-markers active
