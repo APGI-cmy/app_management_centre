@@ -42,10 +42,10 @@ PHASE_B_BLOCKING_TOKEN: IAA-session-1241-HARNESS-20260729-PASS
 
 delta_assurance_verdict: PASS
 base_head: 966ad0594ef4181d3ede854581d0e40d5c6e18c7
-final_head: f70ce4b774c5227739437f904d7785c1b8ad6dc0
+final_head: 92f6ed2a667035f8c1c75daa408e61caa440342c
 delta_classification: token-recording-only
 
-The post-review delta consists only of neutral evidence-path normalization, removal of the premature PREHANDOVER artifact, ECAP wording normalization, and this canonical token carrier. It introduces no substantive implementation change.
+The post-review delta consists only of neutral evidence-path normalization, removal of the premature PREHANDOVER artifact, ECAP wording normalization, canonical token recording, and PR metadata normalization. It introduces no substantive implementation change.
 
 ## Limits
 
