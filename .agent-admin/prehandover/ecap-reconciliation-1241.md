@@ -22,19 +22,22 @@ ecap_invoked: true
 ecap_verdict: PASS
 ceremony_admin_appointed: true
 protected_path_ceremony_verdict: PASS
+substantive_readiness_judgment_made: false
+iaa_invoked_by_ecap: false
+foreman_qp_judgment_rewritten: false
 
-## C1. Final-state declaration
+## C1. Administrative scope
 
-**Final state:** `ADMINISTRATIVELY READY FOR INDEPENDENT IAA`
+ECAP records ceremony completeness only. It does not make or replace the Foreman QP judgment, invoke independent assurance, or grant merge authority.
 
-| Dimension | Status |
+| Administrative item | Recorded state |
 |---|---|
-| Substantive readiness | ACCEPTED — Foreman QP PASS at `3f01f433…` |
-| Harness correction | ACCEPTED — PyYAML declaration and `subwave_3_3` registration validated |
-| Exact-head collection | ACCEPTED — exactly 13 selected nodes, zero collection errors |
-| Combined-state compatibility | ACCEPTED — PR #1239 A1 head plus harness deltas leaves only frozen UTC A2-R RED |
-| Administrative readiness | ACCEPTED — ceremony bundle complete |
-| Merge readiness | NOT GRANTED — CS2 proxy review and explicit merge instruction still required |
+| Foreman QP record | Present at `3f01f433…` |
+| Harness evidence bundle | Present and cross-referenced |
+| Exact P1 collection evidence | Present: 13 selected nodes, zero collection errors |
+| Combined-state compatibility evidence | Present and cross-referenced |
+| Ceremony bundle | Complete |
+| Merge authority | Not granted |
 
 ## C2. Artifact completeness
 
@@ -52,7 +55,7 @@ protected_path_ceremony_verdict: PASS
 | Anti-dodging evidence | Yes | Yes | PASS |
 | Changed-file evidence | Yes | Yes | PASS |
 | Validation summary | Yes | Yes | PASS |
-| PREHANDOVER proof | Yes | Yes | PASS |
+| Neutral validation proof | Yes | Yes | PASS |
 | Foreman QP | Yes | Yes | PASS |
 | ECAP reconciliation | Yes | This file | PASS |
 
@@ -79,9 +82,10 @@ protected_path_ceremony:
   protected_paths_identified:
     - "PP-04: .agent-admin/quality/amc-harness-correction-1240-foreman-qp.md"
     - "PP-04: .agent-admin/prehandover/ecap-reconciliation-1241.md"
+    - "PP-04: .agent-admin/wave-records/amc-wave-record-harness-correction-1240.md"
   ecap_waiver_applicable: "NO"
   evidence_first_material_verified: "PASS — raw command outputs, exact heads, exit codes, node counts, failure-class separation and combined-state proof are committed"
-  diff_scope_matches_declared_scope: "PASS — implementation is limited to requirements.txt and pytest.ini; all additional files are authorised evidence/assurance artifacts"
+  diff_scope_matches_declared_scope: "PASS — implementation is limited to requirements.txt and pytest.ini; all additional files are authorised evidence and ceremony artifacts"
   governance_impact_assessed: "PASS — no canon, workflow, gate logic or agent contract changed; strict-marker protection is retained"
   operational_risk_class: "LOW — dependency declaration and marker registration only; no runtime, test, workflow or data mutation"
   protected_path_ceremony_verdict: "PASS"
@@ -102,11 +106,11 @@ protected_path_ceremony:
 
 ## C6. Hosted-gate inventory
 
-The initial substantive head showed successful repository checks, but Build-to-Green was an informational documentation-only skip rather than executable Python proof. The later Copilot evidence head showed `action_required` without exposed jobs. ECAP therefore relies on the committed executable evidence package rather than representing those hosted statuses as test execution.
+The initial substantive head showed successful repository checks, but Build-to-Green was an informational documentation-only skip rather than executable Python proof. The Copilot evidence head showed `action_required` without exposed jobs. ECAP therefore cross-references the committed executable evidence package and does not represent those hosted statuses as test execution.
 
-This is not treated as a hidden PASS. Final exact-head hosted status must be re-read after IAA token recording and before any merge recommendation.
+Exact-head hosted statuses must be re-read after the normalized token carrier is committed and before any CS2 proxy recommendation.
 
-## C7. §14.6 QP admin-compliance checkpoint
+## C7. §14.6 administrative checkpoint
 
 | Check | Result |
 |---|---|
@@ -116,12 +120,12 @@ This is not treated as a hidden PASS. Final exact-head hosted status must be re-
 | Scope declaration and diff coherent | PASS |
 | Known downstream RED separated and truthful | PASS |
 | Merge authority absent | PASS |
-| IAA invocation permitted | YES |
+| Independent review may be performed by the assigned role | YES |
 
 **§14.6 CHECKPOINT: ACCEPTED**
 
 ## ECAP verdict
 
-**PASS — ADMINISTRATIVE READINESS ACCEPTED FOR INDEPENDENT IAA**
+**PASS — CEREMONY ADMINISTRATION COMPLETE**
 
-This ECAP PASS does not merge PR #1241, grant merge authority, repair `UTC`, accept Stage 6, or alter PR #1239.
+This ECAP record does not merge PR #1241, grant merge authority, repair `UTC`, accept Stage 6, alter PR #1239, invoke independent assurance, or replace the Foreman QP judgment.
