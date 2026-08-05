@@ -48,7 +48,7 @@ No test, application/runtime, workflow, migration, infrastructure, credential, d
 
 ## Evidence reviewed
 
-- `PREHANDOVER_PROOF_HARNESS_1240.md`
+- `qa/evidence/issue-1240/HARNESS_VALIDATION_PROOF.md`
 - `qa/evidence/issue-1240/01_ENVIRONMENT_SETUP.txt`
 - `qa/evidence/issue-1240/02_YAML_IMPORT.txt`
 - `qa/evidence/issue-1240/03_P1_COLLECTION_EXACT_HEAD.txt`
