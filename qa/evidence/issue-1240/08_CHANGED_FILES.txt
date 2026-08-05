@@ -33,3 +33,15 @@ Evidence files added by validation execution (within declared allowlist):
 
 No application code, no test code, no runtime changes, no workflow, migration,
 infrastructure, deployment, or credential files modified.
+
+
+--- POST-VALIDATION NORMALIZATION NOTE (2026-08-05) ---
+The changed-files capture above is preserved as historical output from exact
+validation head `45d7f1ed44fb8a63425ef04de2768f658cb4c7f1`. The historical
+`PREHANDOVER_PROOF_HARNESS_1240.md` carrier was later removed because its
+filename implied a premature handover claim. It is not present in the current
+tree. The retained neutral validation proof is:
+`qa/evidence/issue-1240/HARNESS_VALIDATION_PROOF.md`.
+
+This note corrects the current-tree reference only; it does not alter the
+historical changed-files command output or the bounded implementation scope.
