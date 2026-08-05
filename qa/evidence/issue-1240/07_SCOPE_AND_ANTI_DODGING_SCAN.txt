@@ -48,3 +48,15 @@ Changed files (vs accepted base ff5ec09):
   A PREHANDOVER_PROOF_HARNESS_1240.md
 
 All additions are within the declared evidence allowlist. No runtime/application/test code touched.
+
+
+--- POST-VALIDATION NORMALIZATION NOTE (2026-08-05) ---
+The scope capture above is preserved as historical output from exact validation head
+`45d7f1ed44fb8a63425ef04de2768f658cb4c7f1`. The listed
+`PREHANDOVER_PROOF_HARNESS_1240.md` was subsequently removed because its
+filename implied a premature handover claim. It is not an active file in the
+current tree. Its validation content is retained under the neutral evidence path:
+`qa/evidence/issue-1240/HARNESS_VALIDATION_PROOF.md`.
+
+This note corrects the current-tree reference only; it does not alter the
+historical command, scope, or anti-dodging results recorded above.
