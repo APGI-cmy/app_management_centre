@@ -6,6 +6,7 @@
 - Branch: `qa/issue-1226-stage6-executable-red-r2`
 - Accepted base: `1d93459509abb92467f91deb4eefb879c1497362`
 - Allowed writes respected: `tests/amc/stage6/**`, `qa/evidence/issue-1226/**`, this prehandover file
+- Foreman-only delegation evidence exception: `.agent-admin/control/delegation-orders/pr-1232.json`
 
 ## Delivery produced
 

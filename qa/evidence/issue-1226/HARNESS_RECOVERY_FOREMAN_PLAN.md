@@ -37,3 +37,7 @@ Preserve unedited outputs and refresh the Issue #1226 validation summary and PRE
 ## Stop conditions
 
 Stop on any additional missing dependency not declared in repository manifests, new collection defect, unrelated failing test, need to weaken/exclude tests, or requirement to modify any path outside the approved harness/evidence scope.
+
+## Foreman follow-up
+
+This record is a Foreman-owned follow-up and does not expand the QA-builder write allowlist.

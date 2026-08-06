@@ -268,6 +268,8 @@ def test_qa_des004_001_db_migrate_uses_exact_command():
 def test_qa_des005_001_db_migrate_trigger_is_manual_only():
     migration_payload = _workflow_payload(MIGRATION_WORKFLOW, "QA-DES005-001")
     on_block = migration_payload.get("on")
+    if on_block is None and True in migration_payload:
+        on_block = migration_payload.get(True)
     assert _is_workflow_dispatch_only(
         on_block
     ), "QA-DES005-001: db-migrate trigger is not workflow_dispatch only."
