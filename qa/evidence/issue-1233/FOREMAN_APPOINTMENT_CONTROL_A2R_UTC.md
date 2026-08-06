@@ -9,7 +9,7 @@
 | Task ID | `AMC-A2R-UTC-IMPORT-1233` |
 | Appointed role | `api-builder` |
 | Appointment authority | Johan Ras, CS2, exercised through expressly authorised proxy |
-| Appointment issue comment | PENDING COMMENT ID |
+| Appointment issue comment | `5204208854` |
 | Appointment branch | `builder/issue-1233-a2r-utc-imports` |
 | Builder contract | `.github/agents/api-builder.md` |
 | Canonical pre-brief | `.agent-admin/assurance/iaa-wave-record-amc-a2r-utc-import-1233.md` |
