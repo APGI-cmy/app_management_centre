@@ -4,8 +4,7 @@ QA Coverage: QA-204
 """
 
 from typing import Any
-from datetime import datetime
-
+from datetime import UTC, datetime
 _approvals = {}
 _requirements = {}
 
@@ -48,8 +47,7 @@ class ApprovalManager:
     def handle_approval(self, requirement_id: str, approver: str, decision: str,
                        comments: str = None, reason: str = None) -> dict[str, Any]:
         """Handle approval decision (approve/reject). QA-204"""
-        from datetime import datetime
-        
+        from datetime import UTC, datetime
         # Get or create requirement entry
         if requirement_id not in _requirements[self.organisation_id]:
             _requirements[self.organisation_id][requirement_id] = {

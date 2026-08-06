@@ -5,7 +5,7 @@ Implements the Wave entity representing an execution phase.
 """
 
 from enum import Enum
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Optional
 
 

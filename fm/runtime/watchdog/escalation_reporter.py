@@ -16,8 +16,7 @@ All it does:
 
 import logging
 from typing import Any, Optional
-from datetime import datetime
-
+from datetime import UTC, datetime
 
 logger = logging.getLogger(__name__)
 

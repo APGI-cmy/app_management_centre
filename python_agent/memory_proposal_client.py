@@ -34,7 +34,7 @@ pending = list_memory_proposals(status='pending')
 
 import json
 import os
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 

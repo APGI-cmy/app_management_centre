@@ -19,8 +19,7 @@ import json
 import logging
 from typing import Any, Optional
 from pathlib import Path
-from datetime import datetime
-
+from datetime import UTC, datetime
 
 logger = logging.getLogger(__name__)
 

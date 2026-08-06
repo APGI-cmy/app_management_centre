@@ -5,7 +5,7 @@ Implements the Blocker entity representing obstacles preventing progress.
 """
 
 from enum import Enum
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Optional
 
 

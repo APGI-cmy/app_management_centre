@@ -7,7 +7,7 @@ QA Coverage: QA-132 to QA-136 (5 QA components)
 Architectural Reference: FM_ARCHITECTURE_SPEC_V2_WIRING_COMPLETE.md Section 16.3
 """
 
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Any
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')

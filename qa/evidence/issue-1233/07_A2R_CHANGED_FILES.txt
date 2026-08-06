@@ -1,0 +1,16 @@
+﻿A2-R changed files:
+fm/orchestration/build_authorization_gate.py
+fm/runtime/watchdog/alert_reader.py
+fm/runtime/watchdog/escalation_reporter.py
+foreman/analytics/cost_tracker.py
+foreman/analytics/metrics_engine.py
+foreman/analytics/storage.py
+foreman/analytics/usage_analyzer.py
+foreman/domain/blocker.py
+foreman/domain/program.py
+foreman/domain/task.py
+foreman/domain/wave.py
+foreman/flows/flow_executor.py
+foreman/intent/approval_manager.py
+foreman/intent/intake_handler.py
+python_agent/memory_proposal_client.py
