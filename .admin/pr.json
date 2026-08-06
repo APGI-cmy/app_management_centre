@@ -1,12 +1,12 @@
 {
-  "type": "governance-control",
+  "type": "product-fix",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1222",
-  "scope_summary": "Investigate and truthfully disposition AMC Stage 11 blockers B1-B8, normalize live pre-build authority surfaces, preserve historical evidence, and retain the boundary that no builder is appointed and Stage 12 remains blocked.",
-  "created_by": "foreman-v2-agent",
-  "created_at": "2026-07-23T13:56:30Z",
+  "governing_issue": "#1237",
+  "scope_summary": "Bounded A1 repair: add missing Optional typing imports to foreman/domain/task.py, program.py, wave.py, blocker.py. No UTC, test, marker, workflow, or dependency changes.",
+  "created_by": "api-builder",
+  "created_at": "2026-07-28T10:36:50Z",
   "execution_model": "foreman-orchestrated",
   "orchestrating_agent": "foreman-v2-agent",
-  "implementing_agent": "none-investigation-and-reconciliation-only"
+  "implementing_agent": "api-builder"
 }
