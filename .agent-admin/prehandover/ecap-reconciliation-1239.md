@@ -8,12 +8,12 @@
 **Base**: `ff5ec09024210789c2d2941a4aa6fe1ddb166515`  
 **ECAP Session**: `ecap-1239-20260806`
 
-protected_path_touched: false  
-ecap_required: true  
-ecap_invoked: true  
-ecap_verdict: PASS  
-ceremony_admin_appointed: true  
-protected_path_ceremony_verdict: N/A
+protected_path_touched: true
+ecap_required: true
+ecap_invoked: true
+ecap_verdict: PASS
+ceremony_admin_appointed: true
+protected_path_ceremony_verdict: PASS
 
 ## Administrative checks
 

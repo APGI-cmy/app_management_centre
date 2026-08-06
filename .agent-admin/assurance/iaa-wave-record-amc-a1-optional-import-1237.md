@@ -266,5 +266,18 @@ Lifecycle blocks: RETAINED
 Merge authority: NOT GRANTED — pending CI confirmation
 ```
 
-When CI runs GREEN on head `49e5afec`, this record should be updated with token:
-`IAA-A1-1239-FINAL-PASS` and merge recommended to CS2.
+PR: #1239
+Issue: #1237
+Reviewed SHA: ee86003
+
+delta_assurance_verdict: PASS
+delta_classification: token-recording-only
+base_head: a9173f4d5dcc6057d7f201b0b1a78087f1e3559c
+final_head: ee86003
+
+PHASE_B_BLOCKING_TOKEN: IAA-session-1239-A1-20260806-PASS
+Verdict: PASS
+
+IAA final assurance token: `IAA-session-1239-A1-20260806-PASS`
+
+This token covers the bounded A1 Optional import repair scope only. It does not appoint `integration-builder`, accept Stage 6, reverify Stages 7–10, authorize Stage 12, or grant merge authority beyond this bounded lane.

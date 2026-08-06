@@ -138,16 +138,16 @@ PR #1239 is currently DRAFT. CI gates must run on the updated head (`49e5afec`) 
 ## QP Verdict
 
 ```
-FOREMAN_QP_VERDICT: CONDITIONAL_PASS
-Condition: CI gates must confirm GREEN on updated head 49e5afec after PR is marked ready for review.
+FOREMAN_QP_VERDICT: PASS
 Evidence quality: PASS
 Scope discipline: PASS
 Anti-dodging: PASS
 Phase 1 sequencing: PASS
 Production diff: PASS — 4 Optional import additions only
 UTC isolation: PASS — no A2-R work
-Merge authority: NOT GRANTED
-Next step: Mark PR #1239 ready for review → CI runs → ECAP admin validation → IAA final assurance → CS2 merge
+IAA token: IAA-session-1239-A1-20260806-PASS
+Merge authority: NOT GRANTED — CS2 merge decision required
+Next step: CS2 merge decision
 ```
 
 ## Lifecycle blocks confirmed
