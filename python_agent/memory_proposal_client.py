@@ -36,13 +36,13 @@ import json
 import os
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Any
+from typing import Any
 
 
 class MemoryProposalClient:
     """Client for memory write proposals"""
     
-    def __init__(self, memory_root: Optional[str] = None):
+    def __init__(self, memory_root: str | None = None):
         """
         Initialize memory proposal client
         
@@ -59,12 +59,12 @@ class MemoryProposalClient:
     def submit_memory_proposal(
         self,
         proposed_by: str,
-        proposed_memory: Dict[str, Any],
+        proposed_memory: dict[str, Any],
         rationale: str,
-        evidence_count: Optional[int] = None,
-        first_observed: Optional[str] = None,
-        last_observed: Optional[str] = None,
-        metadata: Optional[Dict[str, Any]] = None
+        evidence_count: int | None = None,
+        first_observed: str | None = None,
+        last_observed: str | None = None,
+        metadata: dict[str, Any] | None = None
     ) -> str:
         """
         Submit a memory write proposal
@@ -139,8 +139,8 @@ class MemoryProposalClient:
     
     def list_memory_proposals(
         self,
-        status: Optional[str] = None
-    ) -> List[Dict[str, Any]]:
+        status: str | None = None
+    ) -> list[dict[str, Any]]:
         """
         List memory proposals by status
         
@@ -190,7 +190,7 @@ class MemoryProposalClient:
         
         return proposals
     
-    def get_proposal(self, proposal_id: str) -> Optional[Dict[str, Any]]:
+    def get_proposal(self, proposal_id: str) -> dict[str, Any] | None:
         """
         Get a specific proposal by ID
         
@@ -214,7 +214,7 @@ class MemoryProposalClient:
         
         return None
     
-    def get_proposal_status(self, proposal_id: str) -> Optional[str]:
+    def get_proposal_status(self, proposal_id: str) -> str | None:
         """
         Get proposal status
         
@@ -274,7 +274,7 @@ class MemoryProposalClient:
         next_num = max_num + 1
         return f'prop-{date_str}-{next_num:03d}'
     
-    def _validate_proposal(self, proposal: Dict[str, Any]) -> None:
+    def _validate_proposal(self, proposal: dict[str, Any]) -> None:
         """
         Validate proposal against basic rules
         
@@ -306,7 +306,7 @@ class MemoryProposalClient:
         if len(proposal['rationale']) < 50:
             raise ValueError('Rationale must be at least 50 characters')
     
-    def _write_proposal(self, proposal: Dict[str, Any], status: str) -> None:
+    def _write_proposal(self, proposal: dict[str, Any], status: str) -> None:
         """
         Write proposal to file
         
@@ -327,13 +327,13 @@ class MemoryProposalClient:
 
 def submit_memory_proposal(
     proposed_by: str,
-    proposed_memory: Dict[str, Any],
+    proposed_memory: dict[str, Any],
     rationale: str,
-    evidence_count: Optional[int] = None,
-    first_observed: Optional[str] = None,
-    last_observed: Optional[str] = None,
-    metadata: Optional[Dict[str, Any]] = None,
-    memory_root: Optional[str] = None
+    evidence_count: int | None = None,
+    first_observed: str | None = None,
+    last_observed: str | None = None,
+    metadata: dict[str, Any] | None = None,
+    memory_root: str | None = None
 ) -> str:
     """
     Submit a memory write proposal (convenience function)
@@ -364,9 +364,9 @@ def submit_memory_proposal(
 
 
 def list_memory_proposals(
-    status: Optional[str] = None,
-    memory_root: Optional[str] = None
-) -> List[Dict[str, Any]]:
+    status: str | None = None,
+    memory_root: str | None = None
+) -> list[dict[str, Any]]:
     """
     List memory proposals (convenience function)
     
@@ -383,8 +383,8 @@ def list_memory_proposals(
 
 def get_proposal(
     proposal_id: str,
-    memory_root: Optional[str] = None
-) -> Optional[Dict[str, Any]]:
+    memory_root: str | None = None
+) -> dict[str, Any] | None:
     """
     Get a specific proposal (convenience function)
     
@@ -401,8 +401,8 @@ def get_proposal(
 
 def get_proposal_status(
     proposal_id: str,
-    memory_root: Optional[str] = None
-) -> Optional[str]:
+    memory_root: str | None = None
+) -> str | None:
     """
     Get proposal status (convenience function)
     
