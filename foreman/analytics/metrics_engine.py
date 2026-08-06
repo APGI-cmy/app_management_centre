@@ -3,7 +3,7 @@ Metrics Engine (ANALYTICS-02)
 QA Coverage: QA-137 to QA-141
 """
 
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 import time
 import sys

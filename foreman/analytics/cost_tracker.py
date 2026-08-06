@@ -4,7 +4,7 @@ QA Coverage: QA-142 to QA-146
 """
 
 from typing import Any
-from datetime import datetime
+from datetime import UTC, datetime
 import sys
 sys.path.insert(0, '/home/runner/work/maturion-foreman-office-app/maturion-foreman-office-app')
 from foreman.analytics.exceptions import TokenCountingError, CostCalculationError

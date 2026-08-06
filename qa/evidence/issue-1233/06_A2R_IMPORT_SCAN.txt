@@ -1,0 +1,63 @@
+A2-R import scan:
+--- fm/orchestration/build_authorization_gate.py
+from datetime import UTC, datetime
+            timestamp=datetime.now(UTC).isoformat() + 'Z',
+--- fm/runtime/watchdog/alert_reader.py
+from datetime import UTC, datetime
+            'generated_at': datetime.now(UTC).isoformat()
+--- fm/runtime/watchdog/escalation_reporter.py
+from datetime import UTC, datetime
+            'generated_at': datetime.now(UTC).isoformat(),
+            'generated_at': datetime.now(UTC).isoformat()
+--- foreman/analytics/cost_tracker.py
+from datetime import UTC, datetime
+            timestamp = datetime.now(UTC)
+--- foreman/analytics/metrics_engine.py
+from datetime import UTC, datetime
+            timestamp = datetime.now(UTC)
+--- foreman/analytics/storage.py
+from datetime import UTC, datetime, timedelta
+        cutoff = datetime.now(UTC) - timedelta(days=days)
+            if h.get("metric") == metric_name and h.get("timestamp", datetime.now(UTC)) >= cutoff
+--- foreman/analytics/usage_analyzer.py
+from datetime import UTC, datetime, timedelta
+            "timestamp": datetime.now(UTC)
+            "timestamp": datetime.now(UTC)
+            "timestamp": datetime.now(UTC)
+--- foreman/domain/blocker.py
+from datetime import UTC, datetime
+        self.created_at = datetime.now(UTC)
+        self.updated_at = datetime.now(UTC)
+--- foreman/domain/program.py
+from datetime import UTC, datetime
+        self.created_at = datetime.now(UTC)
+        self.updated_at = datetime.now(UTC)
+--- foreman/domain/task.py
+from datetime import UTC, datetime
+        self.created_at = datetime.now(UTC)
+        self.updated_at = datetime.now(UTC)
+--- foreman/domain/wave.py
+from datetime import UTC, datetime
+        self.created_at = datetime.now(UTC)
+        self.updated_at = datetime.now(UTC)
+--- foreman/flows/flow_executor.py
+from datetime import UTC, datetime
+            {"state": "INTENT_RECEIVED", "timestamp": datetime.now(UTC)},
+            {"state": "CLARIFYING", "timestamp": datetime.now(UTC)},
+            {"state": "REQUIREMENT_GENERATED", "timestamp": datetime.now(UTC)},
+            {"state": "PENDING_APPROVAL", "timestamp": datetime.now(UTC)},
+            {"state": "APPROVED", "timestamp": datetime.now(UTC)},
+            {"state": "BUILD_INITIATED", "timestamp": datetime.now(UTC)},
+            {"state": "IN_PROGRESS", "timestamp": datetime.now(UTC)},
+            {"state": "COMPLETED", "timestamp": datetime.now(UTC)}
+--- foreman/intent/approval_manager.py
+from datetime import UTC, datetime
+        from datetime import UTC, datetime
+            requirement["approved_at"] = datetime.now(UTC).isoformat()
+            requirement["rejected_at"] = datetime.now(UTC).isoformat()
+--- foreman/intent/intake_handler.py
+from datetime import UTC, datetime
+            "created_at": datetime.now(UTC)
+--- python_agent/memory_proposal_client.py
+from datetime import UTC, datetime
+        timestamp = datetime.now(UTC).isoformat() + 'Z'

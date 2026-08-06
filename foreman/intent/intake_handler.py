@@ -4,8 +4,7 @@ QA Coverage: QA-201
 """
 
 from typing import Any
-from datetime import datetime
-
+from datetime import UTC, datetime
 
 _intents = {}
 
