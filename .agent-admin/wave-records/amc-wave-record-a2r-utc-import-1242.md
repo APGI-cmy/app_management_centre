@@ -15,6 +15,11 @@ adoption_phase: PHASE_B_BLOCKING
 PHASE_B_BLOCKING_TOKEN: IAA-session-1242-A2R-20260806-PASS
 Reviewed SHA: 45edccf8ce2d440a69e399162ba522322814f182
 
+delta_assurance_verdict: PASS
+delta_classification: token-recording-only
+base_head: 45edccf8ce2d440a69e399162ba522322814f182
+final_head: 37dc65dc3f9f77dd41c5e7693958272eb290101f
+
 ## Disposition
 
 - Phase 1 attestation: PASS
