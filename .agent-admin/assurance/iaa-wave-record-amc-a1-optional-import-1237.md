@@ -226,3 +226,45 @@ Stages 7–10: BLOCKED
 Stage 11: NO-GO
 Stage 12: BLOCKED
 ```
+
+---
+
+## FINAL ASSURANCE
+
+| Field | Value |
+|---|---|
+| PR | #1239 |
+| Branch | `builder/issue-1237-a1-optional-imports` |
+| Package head reviewed | `49e5afec461cc2aca3afee50f980ba093e2c2389` |
+| Substantive implementation head | `a9173f4d5dcc6057d7f201b0b1a78087f1e3559c` |
+| Foreman QP | `.agent-admin/quality/amc-a1-optional-import-1237-foreman-qp.md` — CONDITIONAL_PASS |
+| ECAP | `.agent-admin/prehandover/ecap-reconciliation-1239.md` — PASS |
+| Final assurance status | PENDING_CI |
+
+### Independent findings
+
+1. **Four-file import-only repair** — Confirmed. Only `foreman/domain/{task,program,wave,blocker}.py` changed in production scope. PASS.
+2. **No UTC or cross-lane work** — Anti-dodging scan clean. No UTC imports, datetime repair, test, marker, workflow, or dependency change by builder. PASS.
+3. **Successful direct imports** — `03_DIRECT_IMPORTS.txt` EXIT_CODE: 0 for all four modules. PASS.
+4. **Frozen P1 population integrity** — P1 collection evidence present. Pre-#1241 errors (yaml, subwave_3_3) are attributed to the resolved harness defect, not A1. Branch updated with main. PASS with CI confirmation pending.
+5. **Zero Optional NameError** — Confirmed by direct import test. PASS.
+6. **No concealment or weakening** — Anti-dodging scan PASS. No skip/xfail/todo in target files. PASS.
+7. **Complete Foreman QP and ECAP separation** — Foreman QP and ECAP records present and correctly scoped. PASS.
+8. **Exact-head review closure** — CI re-run on `49e5afec` required to confirm workflow gates GREEN before merge.
+9. **Retained lifecycle blocks** — A2-T, A2-R, B1, PR #1232, Stages 6–12 remain blocked. Confirmed.
+
+### Final assurance verdict
+
+```text
+IAA_FINAL_ASSURANCE: PENDING_CI
+Condition: CI gates must run GREEN on head 49e5afec461cc2aca3afee50f980ba093e2c2389
+           before this token is upgraded to PASS and merge is recommended.
+A1 scope and evidence quality: PASS
+Phase 1 sequencing: PASS
+Production delta: PASS — four Optional import additions only
+Lifecycle blocks: RETAINED
+Merge authority: NOT GRANTED — pending CI confirmation
+```
+
+When CI runs GREEN on head `49e5afec`, this record should be updated with token:
+`IAA-A1-1239-FINAL-PASS` and merge recommended to CS2.
