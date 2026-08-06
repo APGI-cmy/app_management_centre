@@ -1,4 +1,4 @@
-﻿# A2-R Validation Summary
+# A2-R Validation Summary
 
 ## Environment
 - Local Windows session

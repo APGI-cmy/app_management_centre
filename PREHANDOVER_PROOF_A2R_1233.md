@@ -1,4 +1,4 @@
-﻿# PREHANDOVER Proof — A2-R UTC Runtime Repair
+# PREHANDOVER Proof — A2-R UTC Runtime Repair
 
 - Governing issue: #1233
 - Lane: A2-R runtime-side UTC import repair

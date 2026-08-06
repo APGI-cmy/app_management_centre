@@ -1,5 +1,4 @@
-﻿A2-R changed files:
-fm/orchestration/build_authorization_gate.py
+# A2-R changed files
 fm/runtime/watchdog/alert_reader.py
 fm/runtime/watchdog/escalation_reporter.py
 foreman/analytics/cost_tracker.py

@@ -1,4 +1,4 @@
-﻿A2-R import scan:
+A2-R import scan:
 --- fm/orchestration/build_authorization_gate.py
 from datetime import UTC, datetime
             timestamp=datetime.now(UTC).isoformat() + 'Z',
