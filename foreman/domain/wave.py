@@ -6,6 +6,7 @@ Implements the Wave entity representing an execution phase.
 
 from enum import Enum
 from datetime import datetime
+from typing import Optional
 
 
 class WaveState(Enum):

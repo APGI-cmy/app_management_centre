@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "wave_id": "amc-a1-optional-import-1237",
+  "pr_number": 1239,
+  "state": "HANDOVER_ALLOWED",
+  "handover_allowed": true,
+  "foreman_qp_pass": true,
+  "builder_delegation_verified": true,
+  "delegation_precedes_implementation": true,
+  "iaa_prebrief_ready": true,
+  "scope_current": true,
+  "ecap_required": true,
+  "ecap_admin_validated": true,
+  "all_required_checks_green": true,
+  "iaa_final_required": true,
+  "iaa_final_token": "IAA-session-1239-A1-20260806-PASS",
+  "blocking_findings": []
+}

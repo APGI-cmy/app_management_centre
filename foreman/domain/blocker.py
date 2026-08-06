@@ -6,6 +6,7 @@ Implements the Blocker entity representing obstacles preventing progress.
 
 from enum import Enum
 from datetime import datetime
+from typing import Optional
 
 
 class BlockerStatus(Enum):
