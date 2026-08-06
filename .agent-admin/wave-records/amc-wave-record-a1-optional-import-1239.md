@@ -9,8 +9,10 @@ Package head: 49e5afec461cc2aca3afee50f980ba093e2c2389
 Substantive implementation head: a9173f4d5dcc6057d7f201b0b1a78087f1e3559c
 Foreman QP head: 49e5afec461cc2aca3afee50f980ba093e2c2389
 
-Verdict: PENDING_CI
+Verdict: PASS
 PHASE: A1_REPAIR
+adoption_phase: PHASE_B_BLOCKING
+PHASE_B_BLOCKING_TOKEN: IAA-session-1239-A1-20260806-PASS
 
 ## Scope reviewed
 
@@ -32,13 +34,13 @@ Parent QA lane: Issue #1226 / PR #1232 (Stage 6 re-entry — parked pending this
 - Evidence completeness: PASS — all 10 required artifacts present
 - Foreman QP: CONDITIONAL_PASS — pending CI re-run on updated head
 - ECAP: PASS
-- IAA final assurance: PENDING_CI
+- IAA final assurance: PASS — token IAA-session-1239-A1-20260806-PASS
 
 ## Assurance bindings
 
 Foreman QP: CONDITIONAL_PASS — `.agent-admin/quality/amc-a1-optional-import-1237-foreman-qp.md`
 ECAP: PASS / ADMIN_VALIDATED — `.agent-admin/prehandover/ecap-reconciliation-1239.md`
-IAA: PENDING_CI — `.agent-admin/assurance/iaa-wave-record-amc-a1-optional-import-1237.md`
+IAA: PASS — token `IAA-session-1239-A1-20260806-PASS` — `.agent-admin/assurance/iaa-wave-record-amc-a1-optional-import-1237.md`
 
 ## Next steps
 
