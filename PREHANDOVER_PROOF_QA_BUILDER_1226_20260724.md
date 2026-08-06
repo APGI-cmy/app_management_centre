@@ -38,6 +38,16 @@ After Foreman baseline harness recovery, declared dependencies were installed an
 
 This remains a hard-stop condition because the mandatory non-target regression requirement is not yet GREEN.
 
+## Refreshed-head rerun (2026-08-06, PR #1232 R2)
+
+**Executed by:** Foreman session on branch `qa/issue-1226-stage6-executable-red-r2`
+**Toolchain:** Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+**Command:** `python -m pytest tests/amc/stage6/test_issue_1226_stage6_red.py -v`
+**Result:** `19 failed, 0 passed` — full RED confirmed on refreshed HEAD
+**Log:** `qa/evidence/issue-1226/COMMAND_LOG_09_STAGE6_RED_RERUN_R2.txt`
+
+All 19 test IDs failed with identical unmet-requirement reasons as Runs 1 and 2. RED posture is stable, reproducible, and bounded.
+
 ## W1/W7 ownership preservation
 
 No runtime/workflow/migration/deployment/infrastructure implementation was added. Missing W7 targets remain RED guards only.
