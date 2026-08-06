@@ -179,7 +179,7 @@ class MemoryProposalClient:
                 file_path = os.path.join(dir_path, file)
                 
                 try:
-                    with open(file_path, 'r', encoding='utf-8') as f:
+                    with open(file_path, encoding='utf-8') as f:
                         proposal = json.load(f)
                         proposals.append(proposal)
                 except (OSError, json.JSONDecodeError) as e:
@@ -207,7 +207,7 @@ class MemoryProposalClient:
             
             if os.path.exists(file_path):
                 try:
-                    with open(file_path, 'r', encoding='utf-8') as f:
+                    with open(file_path, encoding='utf-8') as f:
                         return json.load(f)
                 except (OSError, json.JSONDecodeError):
                     continue
