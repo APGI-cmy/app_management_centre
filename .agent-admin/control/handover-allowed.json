@@ -2,7 +2,6 @@
   "schema_version": "1.0.0",
   "wave_id": "amc-a1-optional-import-1237",
   "pr_number": 1239,
-  "current_head_sha": "f43be9c3d80cbe497d9916bfe20d1a983ecd0784",
   "state": "HANDOVER_ALLOWED",
   "handover_allowed": true,
   "foreman_qp_pass": true,
