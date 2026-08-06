@@ -13,6 +13,12 @@ Verdict: PASS
 PHASE: A1_REPAIR
 adoption_phase: PHASE_B_BLOCKING
 PHASE_B_BLOCKING_TOKEN: IAA-session-1239-A1-20260806-PASS
+Reviewed SHA: a9173f4d5dcc6057d7f201b0b1a78087f1e3559c
+
+delta_assurance_verdict: PASS
+delta_classification: token-recording-only
+base_head: a9173f4d5dcc6057d7f201b0b1a78087f1e3559c
+final_head: a710eedbebd100236db6975249b3c948ac7f7d88
 
 ## Scope reviewed
 
