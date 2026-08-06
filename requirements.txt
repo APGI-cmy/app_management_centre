@@ -4,3 +4,6 @@ flask-cors>=4.0.0
 
 # Database ORM and migrations
 SQLAlchemy>=2.0.0
+
+# YAML parsing used by agent-loading validation
+PyYAML>=6.0

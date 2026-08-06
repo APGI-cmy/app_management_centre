@@ -1,0 +1,63 @@
+EVIDENCE FILE: 04_P1_EXECUTION_EXACT_HEAD.txt
+PR: #1241
+Issue: #1240
+Exact validation head: 45d7f1ed44fb8a63425ef04de2768f658cb4c7f1
+UTC timestamp: 2026-07-29T10:53:20Z
+Working directory: /home/runner/work/app_management_centre/app_management_centre
+Python: 3.12.3 | pytest: 9.1.1
+
+--- P1 EXECUTION ---
+Command: python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6
+
+Output:
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /home/runner/work/app_management_centre/app_management_centre/.venv-harness-1240/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/work/app_management_centre/app_management_centre
+configfile: pytest.ini
+collecting ... collected 995 items / 982 deselected / 13 selected
+
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_created_to_assigned_transition ERROR [  7%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_assigned_to_in_progress_transition ERROR [ 15%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_in_progress_to_completed_transition ERROR [ 23%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_cannot_skip_states ERROR [ 30%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_state_transitions_are_logged ERROR [ 38%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_lifecycle_validates_prerequisites ERROR [ 46%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_task_failure_creates_explicit_failed_state ERROR [ 53%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_explicit_reason ERROR [ 61%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_diagnostic_information ERROR [ 69%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_state_creates_blocker ERROR [ 76%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_observable_in_program_status ERROR [ 84%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_triggers_escalation_notification ERROR [ 92%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_recovery_path_is_documented ERROR [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at setup of TestTaskLifecycleTransitions.test_task_created_to_assigned_transition _
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+[... same error repeated for all 13 nodes ...]
+
+=========================== short test summary info ============================
+ERROR tests/wave0_minimum_red/test_integration_sanity.py::... - NameError: name 'Optional' is not defined
+[13 errors total, all identical NameError: name 'Optional' is not defined]
+====================== 982 deselected, 13 errors in 0.94s ======================
+
+Exit code: 1
+
+CLASSIFICATION: EXPECTED SEPARATE A1 DEFECT — PR #1239 NOT YET MERGED
+- 13 selected nodes collected correctly (harness PASS)
+- All 13 errors occur at setup phase, traceback: foreman/domain/task.py:86 `Optional` not imported
+- Root cause: missing `from typing import Optional` in foreman/domain/task.py — pre-existing defect
+  in PR #1239 branch, not yet merged into this lane
+- No YAML import errors
+- No strict-marker collection errors
+- No subwave_3_3 marker errors
+- Strict-marker enforcement confirmed active (--strict-markers in addopts)
+- This failure class is isolated to the unmerged PR #1239 Optional repair
+- No regression introduced by PR #1241 harness correction

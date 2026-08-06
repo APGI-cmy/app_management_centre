@@ -1,0 +1,65 @@
+EVIDENCE FILE: 06_COMBINED_A1_HARNESS_EXECUTION.txt
+PR: #1241 (harness deltas) + PR #1239 (A1 head)
+Issue: #1240
+A1 head: cf6b276898d8e9d761f8c38f5c4ee421c1d5a122
+UTC timestamp: 2026-07-29T10:54:30Z
+Working directory: /tmp/worktree-combined-1240 (disposable worktree, now removed)
+Python: 3.12.3 | pytest: 9.1.1
+
+--- P1 EXECUTION IN COMBINED STATE ---
+Command: python -m pytest tests/ -v -m wave0 --ignore=tests/amc/stage6
+
+Output:
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /tmp/worktree-combined-1240/.venv-combined-1240/bin/python
+cachedir: .pytest_cache
+rootdir: /tmp/worktree-combined-1240
+configfile: pytest.ini
+collecting ... collected 995 items / 982 deselected / 13 selected
+
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_created_to_assigned_transition FAILED [  7%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_assigned_to_in_progress_transition FAILED [ 15%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_in_progress_to_completed_transition FAILED [ 23%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_cannot_skip_states FAILED [ 30%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_state_transitions_are_logged FAILED [ 38%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestTaskLifecycleTransitions::test_task_lifecycle_validates_prerequisites FAILED [ 46%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_task_failure_creates_explicit_failed_state FAILED [ 53%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_explicit_reason FAILED [ 61%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_includes_diagnostic_information FAILED [ 69%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_state_creates_blocker FAILED [ 76%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_observable_in_program_status FAILED [ 84%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_triggers_escalation_notification FAILED [ 92%]
+tests/wave0_minimum_red/test_integration_sanity.py::TestObservableFailureStates::test_failure_recovery_path_is_documented FAILED [100%]
+
+=================================== FAILURES ===================================
+____ TestTaskLifecycleTransitions.test_task_created_to_assigned_transition _____
+tests/wave0_minimum_red/test_integration_sanity.py:35: in test_task_created_to_assigned_transition
+    task = Task(...)
+foreman/domain/task.py:76: in __init__
+    self.created_at = datetime.now(UTC)
+                                   ^^^
+E   NameError: name 'UTC' is not defined
+[... same UTC NameError for all 13 nodes ...]
+
+=========================== short test summary info ============================
+FAILED tests/wave0_minimum_red/test_integration_sanity.py::... - NameError: name 'UTC' is not defined
+[13 failures total]
+====================== 13 failed, 982 deselected in 0.87s ======================
+
+Exit code: 1
+
+COMBINED-STATE ACCEPTANCE VERDICT:
+- Exactly 13 selected nodes: PASS
+- Zero collection errors: PASS
+- Zero Optional NameError: PASS (PR #1239 Optional repair is present at A1 head)
+- Zero YAML import failure: PASS
+- Zero strict-marker failure: PASS
+- No skip/xfail/config override used: PASS
+- Remaining RED class: exclusively NameError: name 'UTC' is not defined
+
+CLASSIFICATION: COMBINED-STATE COMPATIBLE
+The harness correction (PR #1241) unblocks PR #1239 at the harness level.
+Remaining 13 failures map exclusively to the separately frozen UTC A2-R defect class.
+No new failure class introduced.
+No combined branch pushed.
+Disposable worktree and virtual environment removed after evidence capture.
