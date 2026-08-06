@@ -1,0 +1,18 @@
+EVIDENCE FILE: 02_YAML_IMPORT.txt
+PR: #1241
+Issue: #1240
+Exact validation head: 45d7f1ed44fb8a63425ef04de2768f658cb4c7f1
+UTC timestamp: 2026-07-29T10:53:10Z
+Working directory: /home/runner/work/app_management_centre/app_management_centre
+Python: 3.12.3
+PyYAML installed: 6.0.3
+
+--- YAML IMPORT TEST ---
+Command: python -c "import yaml; print(yaml.__version__)"
+Output: 6.0.3
+Exit code: 0
+
+CLASSIFICATION: PASS
+- PyYAML 6.0.3 installed from requirements.txt
+- `import yaml` succeeds without ModuleNotFoundError
+- yaml.__version__ = 6.0.3 (satisfies >=6.0 constraint)
