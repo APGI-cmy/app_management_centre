@@ -218,6 +218,9 @@ jobs:
           echo "=== IAA Final Assurance Hard Gate ==="
           GOVERNING_ISSUE=""
           ISSUE_MATCH=$(echo "$PR_BODY" | grep -oP '(?:governing_delivery_issue|governing_issue)\s*:\s*#(\d+)' | grep -oP '\d+' | head -1 || true)
+          if [ -z "$ISSUE_MATCH" ] && [ -f ".admin/pr.json" ]; then
+            ISSUE_MATCH=$(python3 -c "import json; d=json.load(open('.admin/pr.json')); print(str(d.get('governing_issue','')).replace('#','').strip())" 2>/dev/null || true)
+          fi
           if [ -n "$ISSUE_MATCH" ]; then GOVERNING_ISSUE="--governing-issue $ISSUE_MATCH"; fi
           python3 .github/scripts/validate-iaa-final-assurance.py --pr-number "$PR_NUMBER" --head-sha "$HEAD_SHA" $GOVERNING_ISSUE --repo-root .
 
