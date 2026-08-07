@@ -13,7 +13,6 @@
   "ecap_admin_validated": true,
   "all_required_checks_green": true,
   "iaa_final_required": true,
-  "current_head_sha": "276ee64b2494e0b1ccedc8cbdaa36d054de4deac",
   "iaa_final_token": "IAA-session-1232-STAGE6-20260806-PASS",
   "blocking_findings": []
 }
