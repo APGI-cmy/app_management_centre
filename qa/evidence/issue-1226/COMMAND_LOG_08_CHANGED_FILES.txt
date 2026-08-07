@@ -1,0 +1,15 @@
+1. A	PREHANDOVER_PROOF_QA_BUILDER_1226_20260724.md
+2. A	qa/evidence/issue-1226/COMMAND_LOG_01_COMPILEALL.txt
+3. A	qa/evidence/issue-1226/COMMAND_LOG_02_COLLECT_ONLY.txt
+4. A	qa/evidence/issue-1226/COMMAND_LOG_03_STAGE6_RED_RUN1.txt
+5. A	qa/evidence/issue-1226/COMMAND_LOG_04_STAGE6_RED_RUN2.txt
+6. A	qa/evidence/issue-1226/COMMAND_LOG_05_REGRESSION_NOT_WAVE0.txt
+7. A	qa/evidence/issue-1226/COMMAND_LOG_06_REGRESSION_WAVE0.txt
+8. A	qa/evidence/issue-1226/COMMAND_LOG_07_ANTI_DODGING_SCAN.txt
+9. A	qa/evidence/issue-1226/COMMAND_LOG_08_CHANGED_FILES.txt
+10. A	qa/evidence/issue-1226/FOREMAN_EXECUTION_CARRIER.md
+11. A	qa/evidence/issue-1226/FOREMAN_EXECUTION_CONTROL.md
+12. A	qa/evidence/issue-1226/QA_BUILDER_PHASE1_ATTESTATION.md
+13. A	qa/evidence/issue-1226/STAGE6_VALIDATION_SUMMARY.md
+14. A	tests/amc/stage6/test_issue_1226_stage6_red.py
+15. A	.agent-admin/control/delegation-orders/pr-1232.json

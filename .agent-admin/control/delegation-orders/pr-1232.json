@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "wave_id": "issue-1226-stage6-executable-red-r2",
+  "pr_number": 1232,
+  "prebrief_commit_sha": "8a414040d2ced9a0a7e6588d7f50f80ef2f19729",
+  "builder_appointment_timestamp": "2026-08-06T12:12:55Z",
+  "builder_appointment_commit_sha": "f1986320adda0e551264afae5cee5e51bc72df9e",
+  "builder_agent": "qa-builder",
+  "builder_task_ref": "PR #1232 bounded Stage 6 executable RED rerun",
+  "first_implementation_commit_sha": "01a287496d43f7ee8024af19f33cb8acf9dfe797",
+  "qp_review_timestamp": "2026-08-06T15:21:11Z",
+  "result": "DELEGATION_ORDER_VERIFIED"
+}

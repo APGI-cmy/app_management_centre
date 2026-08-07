@@ -1,0 +1,33 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/runner/work/app_management_centre/app_management_centre
+configfile: pytest.ini
+collected 19 items
+
+<Dir app_management_centre>
+  <Package tests>
+    <Dir amc>
+      <Dir stage6>
+        <Module test_issue_1226_stage6_red.py>
+          <Function test_qa_deploy_001_required_workflow_family_exists>
+          <Function test_qa_deploy_002_production_jobs_use_protected_environment>
+          <Function test_qa_deploy_003_non_production_jobs_cannot_reference_production_secrets>
+          <Function test_qa_deploy_004_migration_command_is_frozen>
+          <Function test_qa_deploy_006_required_runtime_and_workflow_variables_exist_in_env_example>
+          <Function test_qa_deploy_007_health_and_smoke_evidence_exists>
+          <Function test_qa_deploy_010_placeholder_evidence_is_rejected>
+          <Function test_qa_config_001_startup_fails_if_any_required_env_is_missing>
+          <Function test_qa_config_002_startup_error_names_missing_variable_explicitly>
+          <Function test_qa_config_003_all_required_env_vars_are_individually_validated>
+          <Function test_qa_des001_001_frontend_deploy_ownership_is_exclusive>
+          <Function test_qa_des001_002_db_migration_ownership_is_exclusive>
+          <Function test_qa_des002_001_ci_runner_is_ubuntu_latest>
+          <Function test_qa_des003_001_no_workflow_uses_self_hosted_runner>
+          <Function test_qa_des004_001_db_migrate_uses_exact_command>
+          <Function test_qa_des005_001_db_migrate_trigger_is_manual_only>
+          <Function test_qa_des006_001_frontend_workflow_has_no_db_mutation_step>
+          <Function test_qa_des007_001_frontend_production_job_has_protected_environment>
+          <Function test_qa_des008_001_missing_next_public_supabase_url_fails_explicitly>
+
+========================= 19 tests collected in 0.09s ==========================
+EXIT_CODE:0

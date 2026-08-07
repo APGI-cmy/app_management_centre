@@ -1,0 +1,1760 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python
+cachedir: .pytest_cache
+rootdir: /home/runner/work/app_management_centre/app_management_centre
+configfile: pytest.ini
+plugins: asyncio-1.4.0, cov-7.1.0, mock-3.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 995 items / 13 deselected / 982 selected
+
+tests/test_agent_boundary_validation.py::test_valid_builder_qa PASSED    [  0%]
+tests/test_agent_boundary_validation.py::test_valid_fm_qa PASSED         [  0%]
+tests/test_agent_boundary_validation.py::test_valid_governance_qa PASSED [  0%]
+tests/test_agent_boundary_validation.py::test_cross_agent_violation_builder_to_governance PASSED [  0%]
+tests/test_agent_boundary_validation.py::test_cross_agent_violation_fm_to_builder PASSED [  0%]
+tests/test_agent_boundary_validation.py::test_missing_metadata PASSED    [  0%]
+tests/test_agent_boundary_validation.py::test_no_reports PASSED          [  0%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_gate_initialization PASSED [  0%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_precondition_1_pass PASSED [  0%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_precondition_1_fail_missing_evidence PASSED [  1%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_precondition_2_pass PASSED [  1%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_precondition_3_pass PASSED [  1%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_precondition_8_pass PASSED [  1%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_precondition_8_fail_with_debt PASSED [  1%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_all_preconditions_fail FAILED [  1%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_all_preconditions_pass FAILED [  1%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_generate_evidence_package FAILED [  1%]
+tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_to_dict_conversion FAILED [  1%]
+tests/test_build_authorization_gate.py::TestGateResolution::test_gate_fails_with_one_failed_precondition FAILED [  1%]
+tests/test_build_authorization_gate.py::TestGateResolution::test_gate_summary_format FAILED [  2%]
+tests/test_build_control_api.py::TestHealthEndpoint::test_health_check PASSED [  2%]
+tests/test_build_control_api.py::TestListBuildsEndpoint::test_list_builds_empty PASSED [  2%]
+tests/test_build_control_api.py::TestListBuildsEndpoint::test_list_builds_with_builds PASSED [  2%]
+tests/test_build_control_api.py::TestValidateBuildEndpoint::test_validate_build_not_found FAILED [  2%]
+tests/test_build_control_api.py::TestValidateBuildEndpoint::test_validate_build_returns_structure FAILED [  2%]
+tests/test_build_control_api.py::TestExecuteBuildEndpoint::test_execute_build_without_authorization PASSED [  2%]
+tests/test_build_control_api.py::TestExecuteBuildEndpoint::test_execute_build_with_failed_authorization FAILED [  2%]
+tests/test_build_control_api.py::TestExecuteBuildEndpoint::test_execute_build_with_passed_authorization FAILED [  2%]
+tests/test_build_control_api.py::TestGetBuildStatusEndpoint::test_get_status_not_validated PASSED [  2%]
+tests/test_build_control_api.py::TestGetBuildStatusEndpoint::test_get_status_after_validation FAILED [  3%]
+tests/test_build_control_api.py::TestAPIErrorHandling::test_invalid_build_id_characters PASSED [  3%]
+tests/test_build_intervention.py::TestInterventionControllerInitialization::test_controller_initialization PASSED [  3%]
+tests/test_build_intervention.py::TestInterventionControllerInitialization::test_factory_function PASSED [  3%]
+tests/test_build_intervention.py::TestAlertIssuance::test_issue_alert_success PASSED [  3%]
+tests/test_build_intervention.py::TestAlertIssuance::test_issue_alert_invalid_scope PASSED [  3%]
+tests/test_build_intervention.py::TestAlertIssuance::test_issue_alert_rationale_too_short PASSED [  3%]
+tests/test_build_intervention.py::TestAlertIssuance::test_issue_alert_routing_step PASSED [  3%]
+tests/test_build_intervention.py::TestAlertIssuance::test_issue_alert_routing_application PASSED [  3%]
+tests/test_build_intervention.py::TestAlertIssuance::test_alert_persistence PASSED [  3%]
+tests/test_build_intervention.py::TestEmergencyStop::test_issue_emergency_stop_success PASSED [  4%]
+tests/test_build_intervention.py::TestEmergencyStop::test_emergency_stop_invalid_scope PASSED [  4%]
+tests/test_build_intervention.py::TestEmergencyStop::test_emergency_stop_rationale_too_short PASSED [  4%]
+tests/test_build_intervention.py::TestEmergencyStop::test_emergency_stop_missing_acknowledgment PASSED [  4%]
+tests/test_build_intervention.py::TestEmergencyStop::test_emergency_stop_wrong_confirmation PASSED [  4%]
+tests/test_build_intervention.py::TestEmergencyStop::test_emergency_stop_affected_nodes_step PASSED [  4%]
+tests/test_build_intervention.py::TestEmergencyStop::test_emergency_stop_affected_nodes_application PASSED [  4%]
+tests/test_build_intervention.py::TestEmergencyStop::test_stop_persistence PASSED [  4%]
+tests/test_build_intervention.py::TestInterventionContext::test_get_alert_context PASSED [  4%]
+tests/test_build_intervention.py::TestInterventionContext::test_get_stop_context PASSED [  4%]
+tests/test_build_intervention.py::TestInterventionContext::test_get_context_not_found PASSED [  5%]
+tests/test_build_intervention.py::TestResumption::test_resume_after_stop_success PASSED [  5%]
+tests/test_build_intervention.py::TestResumption::test_resume_not_found PASSED [  5%]
+tests/test_build_intervention.py::TestResumption::test_resume_already_resumed PASSED [  5%]
+tests/test_build_intervention.py::TestResumption::test_resume_resolution_too_short PASSED [  5%]
+tests/test_build_intervention.py::TestResumption::test_resume_persistence PASSED [  5%]
+tests/test_build_intervention.py::TestAuditTrail::test_audit_log_created PASSED [  5%]
+tests/test_build_intervention.py::TestAuditTrail::test_audit_log_contains_entries PASSED [  5%]
+tests/test_build_intervention.py::TestDataModel::test_alert_data_schema PASSED [  5%]
+tests/test_build_intervention.py::TestDataModel::test_stop_data_schema PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspector_initialization PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_create_inspector_factory PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_invalid_type PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_invalid_depth PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_level_1 PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_level_2 PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_level_3 PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_level_4 PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_level_5 PASSED [  6%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_with_children PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspect_node_without_children PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_state_explanation_structure PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_governing_checks_structure PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_requirements_structure PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_evidence_structure PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_evidence_summary_structure PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_decisions_structure PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_audit_reports_structure PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_blockers_structure PASSED [  7%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_stop_conditions_structure PASSED [  8%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_log_inspection PASSED [  8%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_node_types_supported PASSED [  8%]
+tests/test_build_node_inspector.py::TestBuildNodeInspector::test_inspection_is_read_only PASSED [  8%]
+tests/test_build_node_inspector.py::TestBuildNodeInspectorAPI::test_inspector_response_format PASSED [  8%]
+tests/test_chp_memory_integration.py::TestCHPAuthorization::test_chp_can_read_global_scope PASSED [  8%]
+tests/test_chp_memory_integration.py::TestCHPAuthorization::test_chp_can_read_foreman_scope PASSED [  8%]
+tests/test_chp_memory_integration.py::TestCHPAuthorization::test_chp_can_read_experience_scope PASSED [  8%]
+tests/test_chp_memory_integration.py::TestCHPAuthorization::test_chp_cannot_read_runtime_scope PASSED [  8%]
+tests/test_chp_memory_integration.py::TestCHPAuthorization::test_chp_cannot_read_platform_scope PASSED [  8%]
+tests/test_chp_memory_integration.py::TestCHPAuthorization::test_chp_cannot_write_directly PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPAuthorization::test_chp_mixed_scope_request PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPAuditLogging::test_chp_read_creates_audit_entry PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPAuditLogging::test_audit_entry_has_required_fields PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPAuditLogging::test_audit_log_is_immutable PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPAuditLogging::test_unauthorized_access_attempt_is_audited PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPAuditLogging::test_audit_retention_period PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPProposalGeneration::test_can_generate_architecture_drift_proposal PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPProposalGeneration::test_proposal_has_unique_id PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPProposalGeneration::test_proposal_structure_matches_spec PASSED [  9%]
+tests/test_chp_memory_integration.py::TestCHPProposalGeneration::test_proposal_routing_based_on_severity PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestCHPProposalGeneration::test_proposal_includes_evidence PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestCHPProposalGeneration::test_proposal_includes_recommended_action PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestCHPProposalGeneration::test_proposal_can_include_precedent PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestCHPProposalWorkflow::test_proposals_stored_in_pending_queue PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestCHPProposalWorkflow::test_proposals_have_pending_status PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestCHPProposalWorkflow::test_proposal_state_transitions PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestCHPProposalWorkflow::test_approved_proposal_moves_to_approved_queue PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestCHPProposalWorkflow::test_rejected_proposal_moves_to_rejected_queue PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestNoAutoPromotion::test_architecture_proposals_never_auto_apply PASSED [ 10%]
+tests/test_chp_memory_integration.py::TestNoAutoPromotion::test_governance_proposals_never_auto_apply PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestNoAutoPromotion::test_privacy_proposals_never_auto_apply PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestNoAutoPromotion::test_documentation_proposals_may_auto_apply_if_authorized PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestNoAutoPromotion::test_proposals_require_approval_token PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestNoAutoPromotion::test_approval_token_includes_approver_identity PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestCHPFailureHandling::test_chp_conservative_mode_when_memory_failed PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestCHPFailureHandling::test_chp_degraded_mode_when_memory_degraded PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestCHPFailureHandling::test_chp_unavailable_does_not_block_foreman PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestCHPFailureHandling::test_proposal_queue_overflow_triggers_backpressure PASSED [ 11%]
+tests/test_chp_memory_integration.py::TestCHPIntegration::test_chp_proposals_use_existing_proposal_queue PASSED [ 12%]
+tests/test_chp_memory_integration.py::TestCHPIntegration::test_chp_audit_entries_visible_to_watchdog PASSED [ 12%]
+tests/test_chp_memory_integration.py::TestCHPIntegration::test_chp_respects_memory_lifecycle_state PASSED [ 12%]
+tests/test_chp_memory_integration.py::TestCHPIntegration::test_chp_integrates_with_privacy_checker PASSED [ 12%]
+tests/test_commissioning_controller.py::TestCommissioningControllerStructure::test_controller_file_exists PASSED [ 12%]
+tests/test_commissioning_controller.py::TestCommissioningControllerStructure::test_index_file_exists PASSED [ 12%]
+tests/test_commissioning_controller.py::TestCommissioningControllerStructure::test_readme_exists PASSED [ 12%]
+tests/test_commissioning_controller.py::TestCommissioningControllerStructure::test_runtime_directory_exists PASSED [ 12%]
+tests/test_commissioning_controller.py::TestCommissioningControllerStructure::test_runtime_gitignore_exists PASSED [ 12%]
+tests/test_commissioning_controller.py::TestCommissioningControllerImplementation::test_exports_commissioning_state_enum PASSED [ 12%]
+tests/test_commissioning_controller.py::TestCommissioningControllerImplementation::test_exports_controller_class PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerImplementation::test_has_initialize_method PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerImplementation::test_has_is_commissioned_method PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerImplementation::test_has_check_access_method PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerImplementation::test_has_validate_access_method PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerImplementation::test_has_get_commissioning_route_method PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerImplementation::test_exports_singleton_instance PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerDocumentation::test_readme_has_purpose PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerDocumentation::test_readme_has_usage_examples PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerDocumentation::test_readme_has_api_reference PASSED [ 13%]
+tests/test_commissioning_controller.py::TestCommissioningControllerDocumentation::test_readme_documents_constraints PASSED [ 14%]
+tests/test_commissioning_controller.py::TestCommissioningControllerCompliance::test_enforces_commissioned_requirement PASSED [ 14%]
+tests/test_commissioning_controller.py::TestCommissioningControllerCompliance::test_no_ui_implementation PASSED [ 14%]
+tests/test_commissioning_controller.py::TestCommissioningControllerCompliance::test_no_memory_activation PASSED [ 14%]
+tests/test_commissioning_controller.py::TestCommissioningControllerCompliance::test_state_persistence_is_read_only PASSED [ 14%]
+tests/test_commissioning_controller.py::TestCommissioningControllerIntegration::test_example_state_file_is_valid_json PASSED [ 14%]
+tests/test_commissioning_controller.py::TestCommissioningControllerIntegration::test_module_exports_are_complete PASSED [ 14%]
+tests/test_commissioning_wizard_spec.py::TestCommissioningWizardSpec::test_spec_file_exists PASSED [ 14%]
+tests/test_commissioning_wizard_spec.py::TestCommissioningWizardSpec::test_spec_includes_purpose PASSED [ 14%]
+tests/test_commissioning_wizard_spec.py::TestUXPrinciples::test_linear_flow_principle PASSED [ 14%]
+tests/test_commissioning_wizard_spec.py::TestUXPrinciples::test_clear_instructions_principle PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestUXPrinciples::test_validation_feedback_principle PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestUXPrinciples::test_no_silent_progress_principle PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestStepDefinitions::test_minimum_step_count PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestStepDefinitions::test_memory_validation_step PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestStepDefinitions::test_governance_validation_step PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestStepDefinitions::test_final_check_step PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestStepDefinitions::test_completion_step PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestUIComponents::test_progress_bar_component PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestUIComponents::test_status_card_component PASSED [ 15%]
+tests/test_commissioning_wizard_spec.py::TestUIComponents::test_blocker_modal_component PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestNavigationRules::test_prohibited_navigation_defined PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestNavigationRules::test_forced_redirection_defined PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestBatch2Constraints::test_no_auto_activation PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestBatch2Constraints::test_no_auto_advance PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestBatch2Constraints::test_explicit_human_action_required PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestBatch2Constraints::test_critical_statement_present PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestIntegrationPoints::test_requirement_loader_integration PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestIntegrationPoints::test_commissioning_controller_integration PASSED [ 16%]
+tests/test_commissioning_wizard_spec.py::TestAccessibility::test_keyboard_navigation PASSED [ 17%]
+tests/test_commissioning_wizard_spec.py::TestAccessibility::test_screen_reader_support PASSED [ 17%]
+tests/test_commissioning_wizard_spec.py::TestAcceptanceCriteria::test_ac_linear_steps_only PASSED [ 17%]
+tests/test_commissioning_wizard_spec.py::TestAcceptanceCriteria::test_ac_clear_instructions PASSED [ 17%]
+tests/test_commissioning_wizard_spec.py::TestAcceptanceCriteria::test_ac_status_visible PASSED [ 17%]
+tests/test_commissioning_wizard_spec.py::TestAcceptanceCriteria::test_ac_forced_redirects PASSED [ 17%]
+tests/test_global_memory_runtime.py::TestGlobalMemoryLoading::test_can_load_global_memory PASSED [ 17%]
+tests/test_global_memory_runtime.py::TestGlobalMemoryLoading::test_can_filter_by_importance PASSED [ 17%]
+tests/test_global_memory_runtime.py::TestGlobalMemoryLoading::test_can_filter_by_tags PASSED [ 17%]
+tests/test_global_memory_runtime.py::TestGlobalMemoryLoading::test_load_process_guidance_memories PASSED [ 17%]
+tests/test_global_memory_runtime.py::TestGlobalMemoryLoading::test_load_escalation_heuristics_memories PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestGlobalMemoryLoading::test_load_pattern_memories PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestMemoryValidation::test_memory_schema_exists PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestMemoryValidation::test_loaded_memories_have_required_fields PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestMemoryValidation::test_memory_importance_is_valid PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestMemoryValidation::test_memory_tags_is_array PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestMemoryValidation::test_memory_scope_is_global PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestFailFastBehavior::test_memory_health_check_succeeds PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestFailFastBehavior::test_memory_directory_structure_exists PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestFailFastBehavior::test_global_memory_files_exist PASSED [ 18%]
+tests/test_global_memory_runtime.py::TestFailFastBehavior::test_seed_governance_memory_exists PASSED [ 19%]
+tests/test_global_memory_runtime.py::TestReadOnlyEnforcement::test_no_append_memory_in_runtime_loader PASSED [ 19%]
+tests/test_global_memory_runtime.py::TestReadOnlyEnforcement::test_python_memory_client_write_is_separate PASSED [ 19%]
+tests/test_global_memory_runtime.py::TestReadOnlyEnforcement::test_memory_immutability_at_runtime PASSED [ 19%]
+tests/test_global_memory_runtime.py::TestMemoryIntegration::test_memory_can_enrich_system_prompt PASSED [ 19%]
+tests/test_global_memory_runtime.py::TestMemoryIntegration::test_memory_loading_before_governance_action PASSED [ 19%]
+tests/test_global_memory_runtime.py::TestMemoryIntegration::test_memory_health_check_integration PASSED [ 19%]
+tests/test_governance_memory_sync.py::TestGovernanceVersionTracking::test_governance_version_file_exists PASSED [ 19%]
+tests/test_governance_memory_sync.py::TestGovernanceVersionTracking::test_governance_version_has_required_fields PASSED [ 19%]
+tests/test_governance_memory_sync.py::TestGovernanceVersionTracking::test_governance_version_format_is_valid PASSED [ 19%]
+tests/test_governance_memory_sync.py::TestGovernanceVersionTracking::test_governance_version_files_list_not_empty PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestGovernanceVersionTracking::test_governance_version_schema_exists PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestMemoryStateTransitions::test_memory_state_types_defined PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestMemoryStateTransitions::test_state_transition_rules_documented PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestChangeDetection::test_version_comparison_logic_exists PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestChangeDetection::test_checksum_validation_defined PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestChangeDetection::test_stale_detection_triggers_defined PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestAtomicReload::test_atomic_reload_requirement_documented PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestAtomicReload::test_partial_load_prohibition_documented PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestAtomicReload::test_reload_logging_required PASSED [ 20%]
+tests/test_governance_memory_sync.py::TestInvalidationTracking::test_invalidation_event_structure_defined PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestInvalidationTracking::test_invalidation_reasons_defined PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestInvalidationTracking::test_invalidation_auditability_required PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestSoftStopBehavior::test_soft_stop_on_version_mismatch_documented PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestSoftStopBehavior::test_version_mismatch_state_transition_defined PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestAPIExtensions::test_api_extensions_documented PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestAPIExtensions::test_state_getter_documented PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestIntegrationPatterns::test_startup_pattern_documented PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestIntegrationPatterns::test_periodic_sync_check_pattern_documented PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestIntegrationPatterns::test_ui_state_display_pattern_documented PASSED [ 21%]
+tests/test_governance_memory_sync.py::TestAcceptanceCriteria::test_ac1_change_detection_addressed PASSED [ 22%]
+tests/test_governance_memory_sync.py::TestAcceptanceCriteria::test_ac2_reload_without_restart_addressed PASSED [ 22%]
+tests/test_governance_memory_sync.py::TestAcceptanceCriteria::test_ac3_invalidation_explicit_and_auditable PASSED [ 22%]
+tests/test_governance_memory_sync.py::TestAcceptanceCriteria::test_ac4_ui_shows_memory_state PASSED [ 22%]
+tests/test_governance_memory_sync.py::TestComplianceAndScope::test_read_only_enforcement_maintained PASSED [ 22%]
+tests/test_governance_memory_sync.py::TestComplianceAndScope::test_out_of_scope_clearly_defined PASSED [ 22%]
+tests/test_iaa_ecap_gates.py::TestIaaGateTokenFormat::test_canonical_token_accepted PASSED [ 22%]
+tests/test_iaa_ecap_gates.py::TestIaaGateTokenFormat::test_canonical_token_with_complex_session_id PASSED [ 22%]
+tests/test_iaa_ecap_gates.py::TestIaaGateTokenFormat::test_deprecated_token_detected PASSED [ 22%]
+tests/test_iaa_ecap_gates.py::TestIaaGateTokenFormat::test_canonical_token_not_deprecated PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateTokenFormat::test_invalid_token_not_canonical PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateExtraction::test_extract_canonical_token PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateExtraction::test_extract_pr_number PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateExtraction::test_extract_issue_number PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateExtraction::test_extract_reviewed_sha PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateExtraction::test_extract_verdict PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateExtraction::test_extract_stale_wording PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateExtraction::test_stale_phase_b_pending PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateExtraction::test_no_stale_wording_clean_text PASSED [ 23%]
+tests/test_iaa_ecap_gates.py::TestIaaGateShaComparison::test_full_sha_match PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGateShaComparison::test_short_sha_matches_long PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGateShaComparison::test_different_sha_no_match PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGateShaComparison::test_empty_sha_no_match PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGatePassCondition::test_valid_evidence_passes PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGatePassCondition::test_valid_evidence_with_short_sha PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGateFailConditions::test_missing_token_fails PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGateFailConditions::test_no_evidence_files_fails PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGateFailConditions::test_wrong_pr_fails PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGateFailConditions::test_wrong_issue_fails PASSED [ 24%]
+tests/test_iaa_ecap_gates.py::TestIaaGateFailConditions::test_missing_reviewed_sha_fails PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestIaaGateFailConditions::test_stale_sha_fails PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestIaaGateFailConditions::test_stale_pending_wording_fails PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestIaaGateAc6DeprecatedFormat::test_deprecated_format_fails PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestIaaGateIaaMemoryEvidence::test_iaa_memory_file_accepted PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_governance_path_is_protected PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_agent_admin_is_protected PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_github_agents_is_protected PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_governance_pack_is_protected PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_knowledge_path_is_protected PASSED [ 25%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_governance_workflow_is_protected PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_non_governance_workflow_not_protected PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_regular_source_file_not_protected PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_docs_only_file_not_protected PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_empty_file_list_not_protected PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapProtectedPathClassification::test_multiple_protected_paths PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapGatePassCondition::test_non_protected_pr_passes PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapGatePassCondition::test_protected_pr_with_valid_ecap_passes PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapGatePassCondition::test_cs2_waiver_passes PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapGateFailConditions::test_protected_path_without_ecap_fails PASSED [ 26%]
+tests/test_iaa_ecap_gates.py::TestEcapGateFailConditions::test_self_certified_ecap_fails PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateFailConditions::test_missing_ecap_fields_fails PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateFailConditions::test_ecap_required_na_fails PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateFailConditions::test_ecap_invoked_na_fails PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateFailConditions::test_stale_pending_wording_in_ecap_fails PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateAc4AntiSelfCertification::test_no_ecap_reconciliation_with_wave_assertions_is_self_certified PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateAc4AntiSelfCertification::test_committed_ecap_bundle_not_self_certified PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateAc4AntiSelfCertification::test_no_evidence_not_self_certified PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateAc5WaiverPath::test_empty_waiver_ref_not_accepted PASSED [ 27%]
+tests/test_iaa_ecap_gates.py::TestEcapGateAc5WaiverPath::test_valid_cs2_waiver_overrides_missing_fields PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateAc7DeltaAssurance::test_stale_sha_without_delta_assurance_fails PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateAc7DeltaAssurance::test_valid_token_recording_only_delta_passes PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateAc7DeltaAssurance::test_substantive_delta_requires_iaa_rerun_fails PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateAc7DeltaAssurance::test_delta_final_head_stale_token_recording_only_passes PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateAc7DeltaAssurance::test_delta_final_head_mismatch_substantive_fails PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateGoverningIssueMandatory::test_no_governing_issue_no_evidence_issue_fails PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateGoverningIssueMandatory::test_no_governing_issue_always_fails_regardless_of_evidence PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateMultipleWaveRecords::test_selects_pr_specific_evidence_ignores_unrelated_token PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestIaaGateMultipleWaveRecords::test_unrelated_token_only_wave_record_not_selected PASSED [ 28%]
+tests/test_iaa_ecap_gates.py::TestCombinedGates::test_full_pass_scenario PASSED [ 29%]
+tests/test_iaa_ecap_gates.py::TestCombinedGates::test_both_gates_fail_independently PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestMemoryLifecycleStates::test_lifecycle_states_defined PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestMemoryLifecycleStates::test_state_transition_paths_defined PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestFailureModes::test_hard_stop_scenarios_defined PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestFailureModes::test_degraded_mode_scenarios_defined PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestHealthChecks::test_health_check_endpoint_specified PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestHealthChecks::test_health_check_includes_scope_status PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestStateTransitionAudit::test_state_transitions_are_auditable PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestStateTransitionAudit::test_transition_history_trackable PASSED [ 29%]
+tests/test_memory_lifecycle_runtime.py::TestPrivacyValidation::test_privacy_checks_in_validation_state PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestPrivacyValidation::test_pii_detection_triggers_failure PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestObservability::test_lifecycle_events_defined PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestObservability::test_event_consumers_specified PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestComponentIntegration::test_lifecycle_manager_component_specified PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestComponentIntegration::test_memory_store_component_specified PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestComponentIntegration::test_schema_validator_component_specified PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestComponentIntegration::test_privacy_checker_component_specified PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestAcceptanceCriteria::test_ac_state_machine_transitions PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestAcceptanceCriteria::test_ac_failure_modes_trigger_correctly PASSED [ 30%]
+tests/test_memory_lifecycle_runtime.py::TestAcceptanceCriteria::test_ac_health_check_returns_state PASSED [ 31%]
+tests/test_memory_lifecycle_runtime.py::TestAcceptanceCriteria::test_ac_transitions_are_logged PASSED [ 31%]
+tests/test_memory_lifecycle_runtime.py::TestAcceptanceCriteria::test_ac_all_states_reachable PASSED [ 31%]
+tests/test_memory_lifecycle_runtime.py::TestImplementationFiles::test_lifecycle_manager_file_exists PASSED [ 31%]
+tests/test_memory_lifecycle_runtime.py::TestImplementationFiles::test_store_file_exists PASSED [ 31%]
+tests/test_memory_lifecycle_runtime.py::TestImplementationFiles::test_schema_validator_file_exists PASSED [ 31%]
+tests/test_memory_lifecycle_runtime.py::TestImplementationFiles::test_privacy_checker_file_exists PASSED [ 31%]
+tests/test_memory_lifecycle_runtime.py::TestImplementationFiles::test_health_monitor_file_exists PASSED [ 31%]
+tests/test_memory_proposals.py::TestProposalSubmission::test_can_submit_memory_proposal FAILED [ 31%]
+tests/test_memory_proposals.py::TestProposalSubmission::test_proposal_requires_rationale PASSED [ 31%]
+tests/test_memory_proposals.py::TestProposalSubmission::test_proposal_requires_proposed_by PASSED [ 32%]
+tests/test_memory_proposals.py::TestProposalSubmission::test_proposal_requires_complete_memory_entry PASSED [ 32%]
+tests/test_memory_proposals.py::TestProposalStorage::test_proposals_stored_separately_from_memory FAILED [ 32%]
+tests/test_memory_proposals.py::TestProposalStorage::test_proposals_have_pending_status FAILED [ 32%]
+tests/test_memory_proposals.py::TestProposalStorage::test_can_retrieve_submitted_proposal FAILED [ 32%]
+tests/test_memory_proposals.py::TestMemoryFabricIsolation::test_memory_fabric_unchanged_by_proposals FAILED [ 32%]
+tests/test_memory_proposals.py::TestMemoryFabricIsolation::test_proposal_does_not_create_memory_entry FAILED [ 32%]
+tests/test_memory_proposals.py::TestGovernanceReviewPath::test_can_list_pending_proposals FAILED [ 32%]
+tests/test_memory_proposals.py::TestGovernanceReviewPath::test_proposals_contain_review_metadata FAILED [ 32%]
+tests/test_memory_proposals.py::TestNoAutoApproval::test_proposals_not_auto_approved FAILED [ 32%]
+tests/test_memory_proposals.py::TestNoAutoApproval::test_no_automatic_memory_creation FAILED [ 33%]
+tests/test_memory_proposals.py::TestProposalValidation::test_proposal_rejects_potential_pii FAILED [ 33%]
+tests/test_memory_proposals.py::TestProposalValidation::test_proposal_validates_required_fields PASSED [ 33%]
+tests/test_memory_proposals.py::TestProposalDirectoryStructure::test_proposals_directory_exists PASSED [ 33%]
+tests/test_memory_proposals.py::TestProposalDirectoryStructure::test_proposals_separate_from_memory_scopes PASSED [ 33%]
+tests/test_memory_proposals.py::TestProposalIntegration::test_proposal_schema_exists PASSED [ 33%]
+tests/test_memory_proposals.py::TestProposalIntegration::test_governance_policy_exists PASSED [ 33%]
+tests/test_memory_proposals.py::TestProposalIntegration::test_proposal_client_separate_from_memory_client PASSED [ 33%]
+tests/test_runtime_telemetry_audit.py::TestTelemetrySpans::test_start_and_complete_span PASSED [ 33%]
+tests/test_runtime_telemetry_audit.py::TestTelemetrySpans::test_span_with_errors PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestTelemetrySpans::test_nested_spans_with_trace_id PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestTelemetrySpans::test_tenant_isolation_in_spans PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestTelemetryMetrics::test_record_metric PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestTelemetryMetrics::test_query_metrics_by_name PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestTelemetryMetrics::test_tenant_isolation_in_metrics PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestAuditTrail::test_log_governance_event PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestAuditTrail::test_log_authority_event PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestAuditTrail::test_query_audit_log PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestAuditTrail::test_audit_log_immutability PASSED [ 34%]
+tests/test_runtime_telemetry_audit.py::TestAuditTrail::test_tenant_isolation_in_audit PASSED [ 35%]
+tests/test_runtime_telemetry_audit.py::TestAuditTrail::test_audit_statistics PASSED [ 35%]
+tests/test_runtime_telemetry_audit.py::TestSLABreachDetection::test_log_sla_breach PASSED [ 35%]
+tests/test_runtime_telemetry_audit.py::TestTenantIsolationEnforcement::test_log_isolation_success PASSED [ 35%]
+tests/test_runtime_telemetry_audit.py::TestTenantIsolationEnforcement::test_log_isolation_violation PASSED [ 35%]
+tests/test_runtime_telemetry_audit.py::TestTraceCorrelation::test_audit_event_with_trace_correlation PASSED [ 35%]
+tests/test_simple_pr_admin_validator.py::TestRequiredFields::test_missing_required_field_fails[type] PASSED [ 35%]
+tests/test_simple_pr_admin_validator.py::TestRequiredFields::test_missing_required_field_fails[requires_iaa] PASSED [ 35%]
+tests/test_simple_pr_admin_validator.py::TestRequiredFields::test_missing_required_field_fails[requires_ecap] PASSED [ 35%]
+tests/test_simple_pr_admin_validator.py::TestRequiredFields::test_missing_required_field_fails[governing_issue] PASSED [ 35%]
+tests/test_simple_pr_admin_validator.py::TestRequiredFields::test_missing_required_field_fails[scope_summary] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestRequiredFields::test_all_required_fields_pass PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_invalid_type_fails[bugfix] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_invalid_type_fails[hotfix] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_invalid_type_fails[feature] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_invalid_type_fails[test-only] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_invalid_type_fails[] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_invalid_type_fails[governance_control] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_valid_type_passes[product-fix] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_valid_type_passes[docs-only] PASSED [ 36%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_valid_type_passes[governance-control] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_valid_type_passes[agent-contract] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_valid_type_passes[migration] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_valid_type_passes[deployment] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestTypeEnum::test_valid_type_passes[high-risk] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_iaa_fails[governance-control] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_iaa_fails[agent-contract] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_iaa_fails[migration] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_iaa_fails[deployment] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_iaa_fails[high-risk] PASSED [ 37%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_ecap_fails[governance-control] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_ecap_fails[agent-contract] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_ecap_fails[migration] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_ecap_fails[deployment] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_without_ecap_fails[high-risk] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_with_both_passes[governance-control] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_with_both_passes[agent-contract] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_with_both_passes[migration] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_with_both_passes[deployment] PASSED [ 38%]
+tests/test_simple_pr_admin_validator.py::TestFullCeremonyTypes::test_full_ceremony_type_with_both_passes[high-risk] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestGovernanceControlDiff::test_governance_file_in_diff_requires_iaa_ecap[.github/workflows/iaa-ecap-hard-gate.yml] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestGovernanceControlDiff::test_governance_file_in_diff_requires_iaa_ecap[.github/scripts/validate-simple-pr-admin.sh] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestGovernanceControlDiff::test_governance_file_in_diff_requires_iaa_ecap[.github/agents/foreman-v2-agent.md] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestGovernanceControlDiff::test_governance_file_in_diff_requires_iaa_ecap[governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestGovernanceControlDiff::test_governance_file_in_diff_requires_iaa_ecap[.agent-admin/wave-records/amc-wave-record.md] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestGovernanceControlDiff::test_governance_file_in_diff_requires_iaa_ecap[some-file.agent.md] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestGovernanceControlDiff::test_non_governance_file_no_enforcement PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestExecutionModelRequired::test_implementation_file_without_execution_model_fails[apps/dashboard/index.tsx] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestExecutionModelRequired::test_implementation_file_without_execution_model_fails[src/api/users.py] PASSED [ 39%]
+tests/test_simple_pr_admin_validator.py::TestExecutionModelRequired::test_implementation_file_without_execution_model_fails[modules/isms/controller.ts] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestExecutionModelRequired::test_implementation_file_without_execution_model_fails[lib/utils/helpers.py] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestExecutionModelRequired::test_implementation_file_without_execution_model_fails[packages/shared/Button.tsx] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestExecutionModelRequired::test_non_implementation_file_no_execution_model_enforcement[governance/canon/MMM_SIMPLE_PR_ADMIN_MODEL.md] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestExecutionModelRequired::test_non_implementation_file_no_execution_model_enforcement[.admin/pr.json] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestExecutionModelRequired::test_non_implementation_file_no_execution_model_enforcement[docs/README.md] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestInvalidExecutionModel::test_invalid_execution_model_fails[copilot-governed] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestInvalidExecutionModel::test_invalid_execution_model_fails[agent-governed] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestInvalidExecutionModel::test_invalid_execution_model_fails[manual] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestInvalidExecutionModel::test_invalid_execution_model_fails[cs2-override] PASSED [ 40%]
+tests/test_simple_pr_admin_validator.py::TestBuilderGoverned::test_builder_governed_with_implementing_agent_passes PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestBuilderGoverned::test_builder_governed_without_implementing_agent_fails PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestBuilderGoverned::test_builder_governed_with_impl_files_passes PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestForemanOrchestrated::test_foreman_orchestrated_with_all_fields_passes PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestForemanOrchestrated::test_foreman_orchestrated_without_orchestrating_agent_fails PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestForemanOrchestrated::test_foreman_orchestrated_without_implementing_agent_fails PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestForemanOrchestrated::test_foreman_orchestrated_with_impl_files_passes PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestCS2HotfixOverride::test_cs2_hotfix_with_justification_passes PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestCS2HotfixOverride::test_cs2_hotfix_without_justification_fails PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestCS2HotfixOverride::test_cs2_hotfix_with_empty_justification_fails PASSED [ 41%]
+tests/test_simple_pr_admin_validator.py::TestDocsOnlyNoExecutionModelRequired::test_docs_only_without_execution_model_passes PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestDocsOnlyNoExecutionModelRequired::test_governance_control_without_execution_model_passes PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestDocsOnlyNoExecutionModelRequired::test_no_impl_files_no_execution_model_required PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestGoverningIssue::test_invalid_governing_issue_fails[1172] PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestGoverningIssue::test_invalid_governing_issue_fails[#abc] PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestGoverningIssue::test_invalid_governing_issue_fails[issue-1172] PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestGoverningIssue::test_invalid_governing_issue_fails[#] PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestGoverningIssue::test_invalid_governing_issue_fails[] PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestGoverningIssue::test_valid_governing_issue_passes[#1172] PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestGoverningIssue::test_valid_governing_issue_passes[#1] PASSED [ 42%]
+tests/test_simple_pr_admin_validator.py::TestGoverningIssue::test_valid_governing_issue_passes[#99999] PASSED [ 43%]
+tests/test_simple_pr_admin_validator.py::TestScopeSummaryLength::test_too_short_fails PASSED [ 43%]
+tests/test_simple_pr_admin_validator.py::TestScopeSummaryLength::test_too_long_fails PASSED [ 43%]
+tests/test_simple_pr_admin_validator.py::TestScopeSummaryLength::test_exactly_10_chars_passes PASSED [ 43%]
+tests/test_simple_pr_admin_validator.py::TestScopeSummaryLength::test_exactly_500_chars_passes PASSED [ 43%]
+tests/test_simple_pr_admin_validator.py::TestAdditionalProperties::test_unknown_property_fails PASSED [ 43%]
+tests/test_simple_pr_admin_validator.py::TestAdditionalProperties::test_known_optional_fields_pass PASSED [ 43%]
+tests/test_simple_pr_admin_validator.py::TestIntegrationLayerDownManifest::test_governance_control_layer_down_manifest_passes PASSED [ 43%]
+tests/test_startup_guard_spec.py::TestStartupGuardSpec::test_spec_file_exists PASSED [ 43%]
+tests/test_startup_guard_spec.py::TestStartupGuardSpec::test_spec_includes_purpose PASSED [ 43%]
+tests/test_startup_guard_spec.py::TestGuardBehavior::test_state_based_routing_defined PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestGuardBehavior::test_protected_routes_defined PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestGuardBehavior::test_unprotected_routes_defined PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestRedirectRules::test_deterministic_redirection PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestRedirectRules::test_no_bypass_paths PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestRedirectRules::test_persistent_state_check PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestBypassPrevention::test_bypass_checklist PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestBypassPrevention::test_no_exceptions_stated PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestBatch2Constraints::test_no_temporary_unlocks PASSED [ 44%]
+tests/test_startup_guard_spec.py::TestBatch2Constraints::test_does_not_section PASSED [ 45%]
+tests/test_startup_guard_spec.py::TestBatch2Constraints::test_read_only_state_check PASSED [ 45%]
+tests/test_startup_guard_spec.py::TestBatch2Constraints::test_critical_statement_present PASSED [ 45%]
+tests/test_startup_guard_spec.py::TestEnforcementLayer::test_enforcement_mechanism PASSED [ 45%]
+tests/test_startup_guard_spec.py::TestEnforcementLayer::test_impossible_to_bypass_stated PASSED [ 45%]
+tests/test_startup_guard_spec.py::TestIntegration::test_commissioning_controller_integration PASSED [ 45%]
+tests/test_startup_guard_spec.py::TestAcceptanceCriteria::test_ac_blocks_invalid_access PASSED [ 45%]
+tests/test_startup_guard_spec.py::TestAcceptanceCriteria::test_ac_no_bypass_paths PASSED [ 45%]
+tests/test_startup_guard_spec.py::TestAcceptanceCriteria::test_ac_deterministic_redirects PASSED [ 45%]
+tests/test_startup_requirement_loader.py::TestRequirementLoaderStructure::test_loader_file_exists PASSED [ 45%]
+tests/test_startup_requirement_loader.py::TestRequirementLoaderStructure::test_index_file_exists PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestRequirementLoaderStructure::test_readme_exists PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestRequirementsSchema::test_schema_file_exists PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestRequirementsSchema::test_requirements_file_exists PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestRequirementsSchema::test_requirements_structure PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestRequirementsSchema::test_requirements_include_memory_checks PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestLoaderAPI::test_loader_exports_required_methods PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestLoaderAPI::test_loader_defines_types PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestLoaderAPI::test_assessment_includes_status PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestBatch2Constraints::test_no_execution_in_loader PASSED [ 46%]
+tests/test_startup_requirement_loader.py::TestBatch2Constraints::test_readme_states_no_execution PASSED [ 47%]
+tests/test_startup_requirement_loader.py::TestBatch2Constraints::test_critical_statement_present PASSED [ 47%]
+tests/test_startup_requirement_loader.py::TestIntegration::test_integration_with_commissioning_documented PASSED [ 47%]
+tests/test_startup_requirement_loader.py::TestIntegration::test_validators_are_read_only PASSED [ 47%]
+tests/test_startup_requirement_loader.py::TestAcceptanceCriteria::test_ac_requirements_loadable PASSED [ 47%]
+tests/test_startup_requirement_loader.py::TestAcceptanceCriteria::test_ac_validation_results_surfaced PASSED [ 47%]
+tests/test_startup_requirement_loader.py::TestAcceptanceCriteria::test_ac_read_only_assessment_only PASSED [ 47%]
+tests/test_startup_requirement_loader.py::TestAcceptanceCriteria::test_ac_no_execution_triggers PASSED [ 47%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_init_with_custom_path PASSED [ 47%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_read_all_alerts PASSED [ 47%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_tenant_isolation PASSED [ 48%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_get_active_alerts PASSED [ 48%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_get_critical_alerts PASSED [ 48%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_get_alerts_by_type PASSED [ 48%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_get_alert_summary FAILED [ 48%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_file_not_found_raises_error PASSED [ 48%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_invalid_json_raises_error PASSED [ 48%]
+tests/test_watchdog_runtime.py::TestAlertReader::test_read_only_no_modifications FAILED [ 48%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_init PASSED [ 48%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_should_escalate_critical PASSED [ 48%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_should_escalate_high_new PASSED [ 49%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_should_not_escalate_medium PASSED [ 49%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_should_escalate_already_escalated PASSED [ 49%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_generate_escalation_report FAILED [ 49%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_get_escalation_reason_critical PASSED [ 49%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_get_escalation_reason_high_new PASSED [ 49%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_get_escalation_summary FAILED [ 49%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_log_escalation FAILED [ 49%]
+tests/test_watchdog_runtime.py::TestEscalationReporter::test_no_modifications_to_alerts FAILED [ 49%]
+tests/test_watchdog_runtime.py::TestWatchdogRuntimeIntegration::test_full_workflow FAILED [ 50%]
+tests/test_watchdog_runtime.py::TestWatchdogRuntimeIntegration::test_multi_tenant_isolation FAILED [ 50%]
+tests/test_watchdog_runtime.py::TestWatchdogRuntimeIntegration::test_error_escalation_no_silent_failures PASSED [ 50%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestAppDescriptionValidator::test_validator_exists ERROR [ 50%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestAppDescriptionValidator::test_validator_is_executable ERROR [ 50%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestAppDescriptionValidator::test_validator_runs ERROR [ 50%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestFRSAlignmentValidator::test_validator_exists ERROR [ 50%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestFRSAlignmentValidator::test_validator_runs ERROR [ 50%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestArchitectureCompilationValidator::test_validator_exists ERROR [ 50%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestArchitectureCompilationValidator::test_validator_runs ERROR [ 50%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestBuildAuthorizationGateValidator::test_validator_exists ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestBuildAuthorizationGateValidator::test_validator_runs ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestBuildAuthorizationGateValidator::test_validator_checks_preconditions ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceGate::test_gate_exists ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceGate::test_gate_runs ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceGate::test_gate_makes_decision ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceEvidence::test_evidence_directory_created ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceEvidence::test_evidence_files_generated ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestExecutionLayerIntegration::test_plan_build_checks_governance ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestExecutionLayerIntegration::test_create_build_tasks_has_lineage ERROR [ 51%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestExecutionLayerIntegration::test_validate_repository_checks_governance ERROR [ 52%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceEnforcementEnd2End::test_governance_blocks_non_compliant_build ERROR [ 52%]
+tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceEnforcementEnd2End::test_validators_produce_machine_readable_output ERROR [ 52%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_137_calculate_aggregate_metrics FAILED [ 52%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_138_track_metric_history FAILED [ 52%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_139_generate_metric_alerts FAILED [ 52%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_140_export_metrics FAILED [ 52%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_141_metrics_engine_failure_modes FAILED [ 52%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestCostTracker::test_qa_142_track_ai_usage_cost_per_build PASSED [ 52%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestCostTracker::test_qa_143_detect_cost_anomaly FAILED [ 52%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestCostTracker::test_qa_144_generate_cost_reports FAILED [ 53%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestCostTracker::test_qa_145_cost_forecasting FAILED [ 53%]
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestCostTracker::test_qa_146_cost_tracker_failure_modes PASSED [ 53%]
+tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py::TestUsageAnalyzer::test_qa_132_render_analytics_section PASSED [ 53%]
+tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py::TestUsageAnalyzer::test_qa_133_display_build_success_rate FAILED [ 53%]
+tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py::TestUsageAnalyzer::test_qa_134_display_average_build_time FAILED [ 53%]
+tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py::TestUsageAnalyzer::test_qa_135_display_cost_metrics FAILED [ 53%]
+tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py::TestUsageAnalyzer::test_qa_136_metrics_dashboard_failure_modes PASSED [ 53%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_memory_manager.py::TestGlobalMemoryManager::test_qa_147_initialize_memory_fabric PASSED [ 53%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_memory_manager.py::TestGlobalMemoryManager::test_qa_148_read_memory_entries PASSED [ 53%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_memory_manager.py::TestGlobalMemoryManager::test_qa_149_generate_memory_write_proposal PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_memory_manager.py::TestGlobalMemoryManager::test_qa_150_execute_approved_write PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_memory_manager.py::TestGlobalMemoryManager::test_qa_151_memory_versioning PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_memory_manager.py::TestGlobalMemoryManager::test_qa_152_memory_manager_failure_modes PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_memory_manager.py::TestGlobalMemoryManager::test_qa_153_memory_consistency_validation PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_memory_manager.py::TestGlobalMemoryManager::test_qa_154_memory_isolation PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestAuthorityEnforcer::test_qa_158_validate_johan_role PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestAuditLogger::test_qa_169_log_governance_event PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestEvidenceStore::test_qa_180_store_evidence_artifact PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestNotificationDispatcher::test_qa_190_deliver_notification PASSED [ 54%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestSystemHealthWatchdog::test_qa_195_monitor_system_health PASSED [ 55%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestSystemHealthWatchdog::test_qa_196_detect_system_failure PASSED [ 55%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestSystemHealthWatchdog::test_qa_197_independent_operation PASSED [ 55%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestSystemHealthWatchdog::test_qa_198_watchdog_reporting PASSED [ 55%]
+tests/wave1_0_qa_infrastructure/cross_cutting/test_other_components.py::TestSystemHealthWatchdog::test_qa_199_watchdog_self_health PASSED [ 55%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestIntentToBuildFlow::test_qa_200_end_to_end_intent_to_build_completion FAILED [ 55%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestIntentToBuildFlow::test_qa_201_intent_intake_step FAILED [ 55%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestIntentToBuildFlow::test_qa_202_clarification_step PASSED [ 55%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestIntentToBuildFlow::test_qa_203_requirement_generation_step PASSED [ 55%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestIntentToBuildFlow::test_qa_204_approval_step FAILED [ 56%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestEvidenceDrillDownFlow::test_qa_205_evidence_navigation PASSED [ 56%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestEvidenceDrillDownFlow::test_qa_206_drill_down_path_traversal PASSED [ 56%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestEvidenceDrillDownFlow::test_qa_207_evidence_retrieval_and_display PASSED [ 56%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestEscalationResolutionFlow::test_qa_208_escalation_creation PASSED [ 56%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestEscalationResolutionFlow::test_qa_209_escalation_routing_start PASSED [ 56%]
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestEscalationResolutionFlow::test_qa_210_escalation_resolution_start PASSED [ 56%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildOrchestrator::test_qa_078_initiate_build PASSED [ 56%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildOrchestrator::test_qa_079_assign_builder_to_qa_range PASSED [ 56%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildOrchestrator::test_qa_080_monitor_build_progress PASSED [ 56%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildOrchestrator::test_qa_081_handle_build_blocking PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildOrchestrator::test_qa_082_complete_build_success PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildOrchestrator::test_qa_082_complete_build_incomplete PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildOrchestrator::test_qa_083_handle_builder_unavailable PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildOrchestrator::test_qa_083_handle_orchestration_corruption PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildStateManager::test_qa_084_track_state_transition PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildStateManager::test_qa_084_invalid_state_transition PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildStateManager::test_qa_085_update_progress_metrics PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildStateManager::test_qa_086_detect_stall_no_heartbeat PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildStateManager::test_qa_086_detect_stall_threshold_exceeded PASSED [ 57%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildStateManager::test_qa_087_persist_build_state PASSED [ 58%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildStateManager::test_qa_088_handle_state_corruption PASSED [ 58%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildStateManager::test_qa_088_handle_conflicting_updates PASSED [ 58%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildProgressTracker::test_qa_089_get_progress_data PASSED [ 58%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildProgressTracker::test_qa_090_get_build_details PASSED [ 58%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildProgressTracker::test_qa_091_push_realtime_update PASSED [ 58%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildProgressTracker::test_qa_092_handle_update_push_failure PASSED [ 58%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestBuildProgressTracker::test_qa_092_handle_ui_desync PASSED [ 58%]
+tests/wave1_api_builder/test_execution_orchestration.py::TestIntegration::test_complete_build_flow PASSED [ 58%]
+tests/wave1_api_builder/test_intent_processing.py::TestIntentIntakeHandler::test_qa_058_accept_informal_intent PASSED [ 58%]
+tests/wave1_api_builder/test_intent_processing.py::TestIntentIntakeHandler::test_qa_058_empty_content_rejection PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestIntentIntakeHandler::test_qa_059_validate_intent_input PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestIntentIntakeHandler::test_qa_059_validation_missing_context PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestIntentIntakeHandler::test_qa_060_route_to_clarification PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestIntentIntakeHandler::test_qa_061_handle_unparseable_input PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestIntentIntakeHandler::test_qa_061_handle_context_loss PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestClarificationLoopManager::test_qa_062_manage_clarification_iterations PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestClarificationLoopManager::test_qa_062_timeout_detection PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestClarificationLoopManager::test_qa_063_detect_sufficient_clarification PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestClarificationLoopManager::test_qa_064_handle_clarification_timeout PASSED [ 59%]
+tests/wave1_api_builder/test_intent_processing.py::TestClarificationLoopManager::test_qa_065_preserve_clarification_history PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestClarificationLoopManager::test_qa_066_infinite_loop_prevention PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestClarificationLoopManager::test_qa_066_resolution_failure_handling PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestRequirementGenerator::test_qa_067_generate_requirement PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestRequirementGenerator::test_qa_068_include_approval_metadata PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestRequirementGenerator::test_qa_069_link_to_intent PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestRequirementGenerator::test_qa_070_handle_generation_failure PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_071_present_for_approval PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_072_handle_approval_accept PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_073_handle_rejection PASSED [ 60%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_074_handle_conditional_approval PASSED [ 61%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_075_detect_timeout PASSED [ 61%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_076_memory_proposal_approval PASSED [ 61%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_076_invalid_proposal_format PASSED [ 61%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_077_handle_notification_failure PASSED [ 61%]
+tests/wave1_api_builder/test_intent_processing.py::TestApprovalManager::test_qa_077_handle_state_consistency_failure PASSED [ 61%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestPingGenerator::test_qa_093_generate_ping_for_attention_required PASSED [ 61%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestPingGenerator::test_qa_094_route_ping_to_notification_service PASSED [ 61%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestPingGenerator::test_qa_095_track_ping_lifecycle PASSED [ 61%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestPingGenerator::test_qa_096_ping_generator_failure_modes PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestEscalationManager::test_qa_097_create_escalation_with_5_elements PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestEscalationManager::test_qa_098_route_escalation_to_johan PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestEscalationManager::test_qa_099_present_escalation_in_ui PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestEscalationManager::test_qa_100_handle_escalation_decision PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestEscalationManager::test_qa_101_track_escalation_lifecycle PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestEscalationManager::test_qa_102_escalation_priority_handling PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestEscalationManager::test_qa_103_escalation_context_linking PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestEscalationManager::test_qa_104_escalation_manager_failure_modes PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestSilenceDetector::test_qa_105_monitor_build_heartbeat PASSED [ 62%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestSilenceDetector::test_qa_106_detect_silence PASSED [ 63%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestSilenceDetector::test_qa_107_differentiate_silence_types PASSED [ 63%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestSilenceDetector::test_qa_108_silence_recovery PASSED [ 63%]
+tests/wave1_integration_builder/test_escalation_subsystem.py::TestSilenceDetector::test_qa_109_silence_detector_failure_modes PASSED [ 63%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceLoader::test_qa_117_load_governance_repository_at_startup PASSED [ 63%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceLoader::test_qa_118_parse_governance_rules PASSED [ 63%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceLoader::test_qa_119_cache_governance_in_memory PASSED [ 63%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceLoader::test_qa_120_governance_loader_failure_modes PASSED [ 63%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceValidator::test_qa_121_validate_against_governance_rules PASSED [ 63%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceValidator::test_qa_122_detect_governance_violations PASSED [ 63%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceValidator::test_qa_123_generate_violation_report PASSED [ 64%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceValidator::test_qa_124_log_governance_validation_events PASSED [ 64%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceValidator::test_qa_125_governance_validator_failure_modes PASSED [ 64%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceSupremacyEnforcer::test_qa_126_enforce_hard_governance_violations PASSED [ 64%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceSupremacyEnforcer::test_qa_127_enforce_soft_governance_violations PASSED [ 64%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceSupremacyEnforcer::test_qa_128_prevent_governance_weakening PASSED [ 64%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceSupremacyEnforcer::test_qa_129_audit_governance_overrides PASSED [ 64%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceSupremacyEnforcer::test_qa_130_governance_update_handling PASSED [ 64%]
+tests/wave1_integration_builder/test_governance_subsystem.py::TestGovernanceSupremacyEnforcer::test_qa_131_governance_supremacy_failure_modes PASSED [ 64%]
+tests/wave1_schema_foundation/test_qa001_qa005_conversation_manager.py::TestConversationManager::test_qa001_create_conversation PASSED [ 64%]
+tests/wave1_schema_foundation/test_qa001_qa005_conversation_manager.py::TestConversationManager::test_qa002_retrieve_conversation PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa001_qa005_conversation_manager.py::TestConversationManager::test_qa003_archive_conversation PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa001_qa005_conversation_manager.py::TestConversationManager::test_qa003_archive_conversation_already_archived PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa001_qa005_conversation_manager.py::TestConversationManager::test_qa004_resume_conversation PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa001_qa005_conversation_manager.py::TestConversationManager::test_qa004_resume_conversation_not_archived PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa001_qa005_conversation_manager.py::TestConversationManager::test_qa005_conversation_manager_failure_database_write PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa001_qa005_conversation_manager.py::TestConversationManager::test_qa005_conversation_manager_failure_state_conflict PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa006_send_message PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa007_deliver_message PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa007_deliver_message_invalid_state PASSED [ 65%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa008_mark_message_read PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa008_mark_message_read_invalid_state PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa009_message_validation_empty_content PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa009_message_validation_invalid_conversation PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa009_message_validation_max_length PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa010_message_handler_failure_persistence PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa006_qa010_message_handler.py::TestMessageHandler::test_qa010_message_handler_failure_intent_processing PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa011_qa013_fm_conversation_initiator.py::TestFMConversationInitiator::test_qa011_fm_initiates_conversation PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa011_qa013_fm_conversation_initiator.py::TestFMConversationInitiator::test_qa012_attach_context_escalation PASSED [ 66%]
+tests/wave1_schema_foundation/test_qa011_qa013_fm_conversation_initiator.py::TestFMConversationInitiator::test_qa012_attach_context_build PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa011_qa013_fm_conversation_initiator.py::TestFMConversationInitiator::test_qa012_attach_context_evidence PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa011_qa013_fm_conversation_initiator.py::TestFMConversationInitiator::test_qa012_attach_context_validation PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa011_qa013_fm_conversation_initiator.py::TestFMConversationInitiator::test_qa013_fm_urgent_conversation PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa011_qa013_fm_conversation_initiator.py::TestFMConversationInitiator::test_qa013_priority_validation PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa011_qa013_fm_conversation_initiator.py::TestFMConversationInitiator::test_qa013_urgent_conversation_ordering PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa014_detect_ambiguity PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa014_ambiguity_score_validation PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa015_generate_clarifying_questions PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa016_resolve_clarification PASSED [ 67%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa017_clarification_loop_limits_iteration_count PASSED [ 68%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa017_clarification_loop_check_stalled PASSED [ 68%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa017_clarification_structured_capture PASSED [ 68%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa018_clarification_engine_failure_ambiguity_detection PASSED [ 68%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa018_clarification_engine_failure_storage PASSED [ 68%]
+tests/wave1_schema_foundation/test_qa014_qa018_clarification_engine.py::TestClarificationEngine::test_qa018_clarification_engine_failure_timeout PASSED [ 68%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestBuildVisibilityUI::test_qa_089_render_build_progress PASSED [ 68%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestBuildVisibilityUI::test_qa_090_render_builder_status PASSED [ 68%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestBuildVisibilityUI::test_qa_091_render_qa_status_grid PASSED [ 68%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestBuildVisibilityUI::test_qa_092_build_visibility_ui_updates PASSED [ 68%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestEscalationUI::test_qa_110_render_escalation_inbox PASSED [ 69%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestEscalationUI::test_qa_111_render_escalation_detail PASSED [ 69%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestEscalationUI::test_qa_112_escalation_action_buttons PASSED [ 69%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestEscalationUI::test_qa_113_escalation_resolution_ui PASSED [ 69%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestEscalationUI::test_qa_114_escalation_priority_indicators PASSED [ 69%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestEscalationUI::test_qa_115_escalation_context_display PASSED [ 69%]
+tests/wave1_ui/test_build_visibility_and_escalation_ui.py::TestEscalationUI::test_qa_116_escalation_ui_error_handling PASSED [ 69%]
+tests/wave1_ui/test_conversation_ui.py::TestConversationUIRenderer::test_qa_019_render_conversation_ui PASSED [ 69%]
+tests/wave1_ui/test_conversation_ui.py::TestConversationUIRenderer::test_qa_020_update_conversation_ui_realtime PASSED [ 69%]
+tests/wave1_ui/test_conversation_ui.py::TestConversationUIRenderer::test_qa_021_render_conversation_state_indicators PASSED [ 69%]
+tests/wave1_ui/test_conversation_ui.py::TestConversationUIRenderer::test_qa_022_conversation_ui_error_handling PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestExecutiveViewController::test_qa_033_default_to_executive_view PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestExecutiveViewController::test_qa_034_navigate_to_analytics_section PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestExecutiveViewController::test_qa_035_executive_view_controller_failure_modes PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestDashboardUIRenderer::test_qa_036_render_rag_status_visualization PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestDashboardUIRenderer::test_qa_037_render_domain_grouping PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestDashboardUIRenderer::test_qa_038_update_dashboard_in_realtime PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestDashboardUIRenderer::test_qa_039_render_historical_status PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestDashboardUIRenderer::test_qa_040_dashboard_accessibility PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestDashboardUIRenderer::test_qa_041_dashboard_responsiveness PASSED [ 70%]
+tests/wave1_ui/test_dashboard_renderer.py::TestDashboardUIRenderer::test_qa_042_dashboard_ui_failure_modes PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDomainStatusManagerUI::test_qa_023_initialize_domain_statuses_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDomainStatusManagerUI::test_qa_024_update_domain_status_to_amber_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDomainStatusManagerUI::test_qa_025_update_domain_status_to_red_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDomainStatusManagerUI::test_qa_026_query_domain_status_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDomainStatusManagerUI::test_qa_027_domain_status_manager_failure_modes_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDrillDownNavigatorUI::test_qa_028_navigate_from_red_status_to_root_cause_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDrillDownNavigatorUI::test_qa_029_navigate_from_amber_status_to_reason_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDrillDownNavigatorUI::test_qa_030_navigate_to_evidence_artifacts_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDrillDownNavigatorUI::test_qa_031_multi_level_drill_down_ui PASSED [ 71%]
+tests/wave1_ui/test_dashboard_ui.py::TestDrillDownNavigatorUI::test_qa_032_drill_down_navigator_failure_modes_ui PASSED [ 72%]
+tests/wave1_ui/test_parking_station_ui.py::TestParkingStationUI::test_qa_054_render_parked_items_list PASSED [ 72%]
+tests/wave1_ui/test_parking_station_ui.py::TestParkingStationUI::test_qa_055_park_unpark_item_actions PASSED [ 72%]
+tests/wave1_ui/test_parking_station_ui.py::TestParkingStationUI::test_qa_056_parking_reason_display PASSED [ 72%]
+tests/wave1_ui/test_parking_station_ui.py::TestParkingStationUI::test_qa_057_parking_station_ui_error_handling PASSED [ 72%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestPredictiveModeling::test_qa_531_predictive_model_initialization PASSED [ 72%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestPredictiveModeling::test_qa_532_predictive_model_training PASSED [ 72%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestPredictiveModeling::test_qa_533_predictive_model_inference PASSED [ 72%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestPredictiveModeling::test_qa_534_predictive_model_evaluation PASSED [ 72%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestPredictiveModeling::test_qa_535_predictive_model_versioning PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestTrendAnalysis::test_qa_536_trend_detection_initialization PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestTrendAnalysis::test_qa_537_historical_trend_analysis PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestTrendAnalysis::test_qa_538_realtime_trend_monitoring PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestTrendAnalysis::test_qa_539_trend_visualization PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestTrendAnalysis::test_qa_540_trend_forecasting PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestInsightGeneration::test_qa_541_insight_extraction PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestInsightGeneration::test_qa_542_insight_validation PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestInsightGeneration::test_qa_543_insight_prioritization PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestInsightGeneration::test_qa_544_insight_presentation PASSED [ 73%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase1.py::TestInsightGeneration::test_qa_545_insight_actionability PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestTrendAnalysis::test_qa_446_trend_calculation PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestTrendAnalysis::test_qa_447_trend_visualization PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestTrendAnalysis::test_qa_448_trend_forecasting PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestTrendAnalysis::test_qa_449_trend_anomaly_detection PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestTrendAnalysis::test_qa_450_trend_comparison PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestPredictiveAnalytics::test_qa_451_model_initialization PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestPredictiveAnalytics::test_qa_452_prediction_generation PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestPredictiveAnalytics::test_qa_453_accuracy_tracking PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestPredictiveAnalytics::test_qa_454_prediction_visualization PASSED [ 74%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestPredictiveAnalytics::test_qa_455_prediction_error_handling PASSED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestCustomReportGeneration::test_qa_456_template_creation PASSED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestCustomReportGeneration::test_qa_457_data_aggregation PASSED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestCustomReportGeneration::test_qa_458_report_rendering PASSED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestCustomReportGeneration::test_qa_459_report_export PASSED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_analytics_phase2.py::TestCustomReportGeneration::test_qa_460_report_scheduling PASSED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_211_state_persistence_across_flow FAILED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_212_evidence_generation_across_flow FAILED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_213_authorization_checks_across_flow FAILED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_214_timeout_handling_in_flow FAILED [ 75%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_215_flow_cancellation FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_216_escalation_end_to_end FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_217_escalation_trigger_detection FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_218_escalation_creation FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_219_escalation_routing FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_220_escalation_presentation FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_221_escalation_decision FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_222_escalation_resolution FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_223_escalation_timeout FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_224_multiple_concurrent_escalations FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_225_escalation_error_handling FAILED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_drilldown.py::TestDrillDownNavigation::test_qa_361_drilldown_ui_component_rendering PASSED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_drilldown.py::TestDrillDownNavigation::test_qa_362_drilldown_state_management PASSED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_drilldown.py::TestDrillDownNavigation::test_qa_363_drilldown_navigation_handlers PASSED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_drilldown.py::TestDrillDownNavigation::test_qa_364_breadcrumb_navigation PASSED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_drilldown.py::TestDrillDownNavigation::test_qa_365_drilldown_data_flow PASSED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_filtering.py::TestAdvancedFiltering::test_qa_366_filter_ui_component_rendering PASSED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_filtering.py::TestAdvancedFiltering::test_qa_367_filter_state_management PASSED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_filtering.py::TestAdvancedFiltering::test_qa_368_multi_criteria_filtering PASSED [ 77%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_filtering.py::TestAdvancedFiltering::test_qa_369_filter_persistence PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_filtering.py::TestAdvancedFiltering::test_qa_370_filter_reset_handling PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_realtime.py::TestRealTimeUpdates::test_qa_371_websocket_connection_setup PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_realtime.py::TestRealTimeUpdates::test_qa_372_realtime_data_update_handlers PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_realtime.py::TestRealTimeUpdates::test_qa_373_dashboard_auto_refresh_logic PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_realtime.py::TestRealTimeUpdates::test_qa_374_update_notification_ui PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_dashboard_enhanced_realtime.py::TestRealTimeUpdates::test_qa_375_realtime_data_consistency PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestCrossSubsystemIntegration::test_qa_461_event_propagation PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestCrossSubsystemIntegration::test_qa_462_data_synchronization PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestCrossSubsystemIntegration::test_qa_463_state_coordination PASSED [ 78%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestCrossSubsystemIntegration::test_qa_464_dependency_management PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestCrossSubsystemIntegration::test_qa_465_error_handling PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestEventBus::test_qa_466_bus_initialization PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestEventBus::test_qa_467_event_publishing PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestEventBus::test_qa_468_event_subscription PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestEventBus::test_qa_469_ordering_guarantees PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestEventBus::test_qa_470_failure_handling PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestServiceCommunication::test_qa_471_service_discovery PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestServiceCommunication::test_qa_472_request_response PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestServiceCommunication::test_qa_473_retry_logic PASSED [ 79%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestServiceCommunication::test_qa_474_health_checking PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase1.py::TestServiceCommunication::test_qa_475_communication_security PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestTransactionManagement::test_qa_476_transaction_initialization PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestTransactionManagement::test_qa_477_transaction_commit PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestTransactionManagement::test_qa_478_transaction_rollback PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestTransactionManagement::test_qa_479_distributed_coordination PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestTransactionManagement::test_qa_480_failure_recovery PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestDataConsistency::test_qa_481_consistency_validation PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestDataConsistency::test_qa_482_consistency_repair PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestDataConsistency::test_qa_483_consistency_monitoring PASSED [ 80%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestDataConsistency::test_qa_484_eventual_consistency PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestDataConsistency::test_qa_485_conflict_resolution PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestIntegrationTestingFramework::test_qa_486_fixture_setup PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestIntegrationTestingFramework::test_qa_487_test_execution PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestIntegrationTestingFramework::test_qa_488_test_cleanup PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestIntegrationTestingFramework::test_qa_489_coverage_metrics PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_deep_integration_phase2.py::TestIntegrationTestingFramework::test_qa_490_failure_analysis PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestIntentToBuildE2E::test_qa_491_e2e_intent_intake PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestIntentToBuildE2E::test_qa_492_e2e_clarification PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestIntentToBuildE2E::test_qa_493_e2e_requirement_generation PASSED [ 81%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestIntentToBuildE2E::test_qa_494_e2e_build_execution PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestIntentToBuildE2E::test_qa_495_e2e_build_delivery PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestEscalationE2E::test_qa_496_e2e_escalation_trigger PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestEscalationE2E::test_qa_497_e2e_escalation_presentation PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestEscalationE2E::test_qa_498_e2e_escalation_decision PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestEscalationE2E::test_qa_499_e2e_escalation_audit PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestEscalationE2E::test_qa_500_e2e_escalation_error_recovery PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestParkingStationE2E::test_qa_501_e2e_idea_submission PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestParkingStationE2E::test_qa_502_e2e_discussion PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestParkingStationE2E::test_qa_503_e2e_requirement_conversion PASSED [ 82%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestParkingStationE2E::test_qa_504_e2e_build_from_parking PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestParkingStationE2E::test_qa_505_e2e_parking_audit PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestDashboardE2E::test_qa_506_e2e_status_update PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestDashboardE2E::test_qa_507_e2e_drill_down PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestDashboardE2E::test_qa_508_e2e_filter_application PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestDashboardE2E::test_qa_509_e2e_real_time_update PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase1.py::TestDashboardE2E::test_qa_510_e2e_dashboard_audit PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestMultiUserE2E::test_qa_511_e2e_multi_user_conversation PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestMultiUserE2E::test_qa_512_e2e_multi_user_collaboration PASSED [ 83%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestMultiUserE2E::test_qa_513_e2e_multi_user_approval PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestMultiUserE2E::test_qa_514_e2e_multi_user_notification PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestMultiUserE2E::test_qa_515_e2e_multi_user_audit PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestErrorRecoveryE2E::test_qa_516_e2e_failure_detection PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestErrorRecoveryE2E::test_qa_517_e2e_retry_logic PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestErrorRecoveryE2E::test_qa_518_e2e_fallback_handling PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestErrorRecoveryE2E::test_qa_519_e2e_escalation_on_failure PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestErrorRecoveryE2E::test_qa_520_e2e_failure_audit PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestPerformanceE2E::test_qa_521_e2e_response_time PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestPerformanceE2E::test_qa_522_e2e_throughput PASSED [ 84%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestPerformanceE2E::test_qa_523_e2e_resource_utilization PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestPerformanceE2E::test_qa_524_e2e_scalability PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestPerformanceE2E::test_qa_525_e2e_performance_monitoring PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestSecurityE2E::test_qa_526_e2e_authentication PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestSecurityE2E::test_qa_527_e2e_authorization PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestSecurityE2E::test_qa_528_e2e_data_encryption PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestSecurityE2E::test_qa_529_e2e_audit_trail PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_e2e_flows_phase2.py::TestSecurityE2E::test_qa_530_e2e_incident_response PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestDrillDownNavigation::test_qa_401_navigate_red_to_root_cause PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestDrillDownNavigation::test_qa_402_navigate_amber_to_reason PASSED [ 85%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestDrillDownNavigation::test_qa_403_navigate_to_evidence PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestDrillDownNavigation::test_qa_404_multi_level_drill_down PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestDrillDownNavigation::test_qa_405_drill_down_error_handling PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestAdvancedFiltering::test_qa_406_filter_by_domain PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestAdvancedFiltering::test_qa_407_filter_by_status PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestAdvancedFiltering::test_qa_408_filter_by_time_range PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestAdvancedFiltering::test_qa_409_filter_by_component PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestAdvancedFiltering::test_qa_410_filter_combination PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestRealTimeUpdates::test_qa_411_websocket_status_update PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestRealTimeUpdates::test_qa_412_real_time_domain_addition PASSED [ 86%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestRealTimeUpdates::test_qa_413_real_time_evidence_linking PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestRealTimeUpdates::test_qa_414_connection_loss_handling PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_enhanced_dashboard.py::TestRealTimeUpdates::test_qa_415_update_throttling PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestRecoveryWorkflows::test_qa_241_multi_level_drill_down_recovery PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestRecoveryWorkflows::test_qa_242_drill_down_error_handling_recovery PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestRecoveryWorkflows::test_qa_243_intent_state_transition_recovery PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestRecoveryWorkflows::test_qa_244_intent_clarification_completion_recovery PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestRecoveryWorkflows::test_qa_245_intent_rejection_recovery PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestTimeoutHandling::test_qa_246_intent_rework_timeout PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestTimeoutHandling::test_qa_247_requirement_approval_timeout PASSED [ 87%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestTimeoutHandling::test_qa_248_requirement_approval_decision_timeout PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestTimeoutHandling::test_qa_249_requirement_rejection_timeout PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestTimeoutHandling::test_qa_250_conditional_approval_timeout PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestErrorCascadeManagement::test_qa_251_requirement_freeze_immutability PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestErrorCascadeManagement::test_qa_252_build_initiation_cascade PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestErrorCascadeManagement::test_qa_253_build_blocking_cascade PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestErrorCascadeManagement::test_qa_254_build_unblocking_cascade PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase1.py::TestErrorCascadeManagement::test_qa_255_build_completion_cascade PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestAdvancedRecoveryPatterns::test_qa_256_adaptive_recovery_pattern PASSED [ 88%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestAdvancedRecoveryPatterns::test_qa_257_cascading_recovery_orchestration PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestAdvancedRecoveryPatterns::test_qa_258_contextual_recovery_strategy PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestAdvancedRecoveryPatterns::test_qa_259_recovery_rollback_on_failure PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestAdvancedRecoveryPatterns::test_qa_260_parallel_recovery_coordination PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestFailurePrediction::test_qa_261_failure_pattern_detection PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestFailurePrediction::test_qa_262_predictive_failure_scoring PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestFailurePrediction::test_qa_263_proactive_failure_alerting PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestFailurePrediction::test_qa_264_failure_trend_analysis PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestFailurePrediction::test_qa_265_ml_based_failure_prediction PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestResiliencePatterns::test_qa_266_circuit_breaker_pattern PASSED [ 89%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestResiliencePatterns::test_qa_267_bulkhead_isolation_pattern PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestResiliencePatterns::test_qa_268_retry_with_exponential_backoff PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestResiliencePatterns::test_qa_269_timeout_and_cancellation_pattern PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_failure_modes_phase2.py::TestResiliencePatterns::test_qa_270_graceful_degradation_pattern PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_full_watchdog_coverage.py::TestCascadingComponentFailure::test_qa_396_cascading_component_failure PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_full_watchdog_coverage.py::TestDeadlockDetection::test_qa_397_deadlock_detection PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_full_watchdog_coverage.py::TestRaceConditionHandling::test_qa_398_race_condition_handling PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_full_watchdog_coverage.py::TestDataConsistencyFailure::test_qa_399_data_consistency_failure PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_full_watchdog_coverage.py::TestSystemWideFailure::test_qa_400_system_wide_failure PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_integration.py::TestIntegrationFailureModes::test_qa_391_github_api_rate_limit PASSED [ 90%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_integration.py::TestIntegrationFailureModes::test_qa_392_github_webhook_delivery_failure PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_integration.py::TestIntegrationFailureModes::test_qa_393_external_service_unavailable PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_integration.py::TestIntegrationFailureModes::test_qa_394_data_sync_failure PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_integration.py::TestIntegrationFailureModes::test_qa_395_integration_contract_violation PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_security.py::TestSecurityFailureModes::test_qa_386_unauthorized_access_attempt PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_security.py::TestSecurityFailureModes::test_qa_387_authority_escalation_abuse PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_security.py::TestSecurityFailureModes::test_qa_388_data_tampering_attempt PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_security.py::TestSecurityFailureModes::test_qa_389_governance_bypass_attempt PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_governance_advanced_security.py::TestSecurityFailureModes::test_qa_390_memory_fabric_unauthorized_write PASSED [ 91%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_416_assign_priority FAILED [ 91%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_417_sort_by_priority FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_418_priority_change_workflow FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_419_priority_escalation FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_420_priority_display FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_421_bulk_select FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_422_bulk_priority_update FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_423_bulk_archive FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_424_bulk_export FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_425_bulk_error_handling FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestCachingImplementation::test_qa_426_cache_layer_initialization PASSED [ 92%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestCachingImplementation::test_qa_427_cache_key_generation PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestCachingImplementation::test_qa_428_cache_hit_miss_handling PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestCachingImplementation::test_qa_429_cache_invalidation_logic PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestCachingImplementation::test_qa_430_cache_statistics_tracking PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestQueryOptimization::test_qa_431_query_analysis_and_profiling PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestQueryOptimization::test_qa_432_query_plan_optimization PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestQueryOptimization::test_qa_433_index_usage_optimization PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestQueryOptimization::test_qa_434_query_result_caching PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase1.py::TestQueryOptimization::test_qa_435_query_performance_monitoring PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestConnectionPooling::test_qa_436_pool_initialization PASSED [ 93%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestConnectionPooling::test_qa_437_connection_acquisition PASSED [ 94%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestConnectionPooling::test_qa_438_connection_return PASSED [ 94%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestConnectionPooling::test_qa_439_pool_health_monitoring PASSED [ 94%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestConnectionPooling::test_qa_440_pool_statistics PASSED [ 94%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestLazyLoading::test_qa_441_lazy_initialization PASSED [ 94%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestLazyLoading::test_qa_442_lazy_data_fetch PASSED [ 94%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestLazyLoading::test_qa_443_lazy_error_handling PASSED [ 94%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestLazyLoading::test_qa_444_lazy_performance_metrics PASSED [ 94%]
+tests/wave2_0_qa_infrastructure/test_system_optimizations_phase2.py::TestLazyLoading::test_qa_445_lazy_consistency PASSED [ 94%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestQueryPerformance::test_query_monitor_tracks_execution_time PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestQueryPerformance::test_query_monitor_calculates_p95_latency PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestQueryPerformance::test_query_monitor_calculates_p99_latency PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestQueryPerformance::test_query_execution_time_under_100ms_p95 PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestQueryPerformance::test_slow_query_detection_and_alerting PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestQueryPerformance::test_query_optimizer_caches_execution_plans PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestQueryPerformance::test_tenant_isolation_in_query_monitoring PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestCacheEffectiveness::test_cache_manager_initialization PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestCacheEffectiveness::test_cache_hit_rate_meets_80_percent_target PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestCacheEffectiveness::test_cache_stores_and_retrieves_correctly PASSED [ 95%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestCacheEffectiveness::test_cache_ttl_expiration PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestCacheEffectiveness::test_cache_invalidation_on_data_update PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestCacheEffectiveness::test_cache_tenant_isolation PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestCacheEffectiveness::test_cache_memory_limits PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestCacheEffectiveness::test_cache_statistics_tracking PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestLoadAndScalability::test_concurrent_query_execution PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestLoadAndScalability::test_tenant_isolation_under_concurrent_load PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestLoadAndScalability::test_cache_performance_under_high_load PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestLoadAndScalability::test_query_performance_degradation_detection PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestLoadAndScalability::test_resource_limit_enforcement PASSED [ 96%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestPerformanceRegression::test_no_regression_from_wave2_baseline PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestPerformanceRegression::test_cache_hit_rate_maintained_over_time PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestPerformanceRegression::test_query_optimization_effectiveness PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestResilienceIntegration::test_performance_degradation_triggers_circuit_breaker PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::TestResilienceIntegration::test_cache_invalidation_conflict_resolution PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_performance_validation.py::test_wave3_5_test_suite_complete PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestCircuitBreakerTuning::test_create_circuit_breaker_config_with_defaults PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestCircuitBreakerTuning::test_create_circuit_breaker_config_custom_params PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestCircuitBreakerTuning::test_circuit_breaker_validation_failure PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestCircuitBreakerTuning::test_circuit_breaker_scenario_defaults PASSED [ 97%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestCircuitBreakerTuning::test_calibrate_for_high_error_rate PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestBackoffPolicyConfiguration::test_create_backoff_policy_with_defaults PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestBackoffPolicyConfiguration::test_create_backoff_policy_custom_params PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestBackoffPolicyConfiguration::test_backoff_policy_validation_failure PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestBackoffPolicyConfiguration::test_backoff_policy_scenario_defaults PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestBackoffPolicyConfiguration::test_calibrate_for_high_throughput PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestConflictResolutionGuards::test_acquire_and_release_lock PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestConflictResolutionGuards::test_lock_timeout_on_contention PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestConflictResolutionGuards::test_deadlock_detection_and_prevention PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestConflictResolutionGuards::test_race_condition_detection PASSED [ 98%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestConflictResolutionGuards::test_execute_with_lock_context_manager PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestConflictResolutionGuards::test_release_all_operation_locks PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestEscalationAnalytics::test_collect_failure_evidence PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestEscalationAnalytics::test_generate_comprehensive_evidence_artifact PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestEscalationAnalytics::test_create_escalation_context PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestEscalationAnalytics::test_register_and_trigger_escalation_hook PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestEscalationAnalytics::test_analyze_failure_patterns PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestEscalationAnalytics::test_export_evidence_artifact PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestResilienceIntegration::test_config_calibration_integration PASSED [ 99%]
+tests/wave3_0_qa_infrastructure/test_resilience_expansion.py::TestResilienceIntegration::test_conflict_and_escalation_integration PASSED [100%]
+
+==================================== ERRORS ====================================
+_____ ERROR at setup of TestAppDescriptionValidator.test_validator_exists ______
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+__ ERROR at setup of TestAppDescriptionValidator.test_validator_is_executable __
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+______ ERROR at setup of TestAppDescriptionValidator.test_validator_runs _______
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+______ ERROR at setup of TestFRSAlignmentValidator.test_validator_exists _______
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_______ ERROR at setup of TestFRSAlignmentValidator.test_validator_runs ________
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestArchitectureCompilationValidator.test_validator_exists _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+__ ERROR at setup of TestArchitectureCompilationValidator.test_validator_runs __
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestBuildAuthorizationGateValidator.test_validator_exists __
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+__ ERROR at setup of TestBuildAuthorizationGateValidator.test_validator_runs ___
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestBuildAuthorizationGateValidator.test_validator_checks_preconditions _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+____________ ERROR at setup of TestGovernanceGate.test_gate_exists _____________
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_____________ ERROR at setup of TestGovernanceGate.test_gate_runs ______________
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+________ ERROR at setup of TestGovernanceGate.test_gate_makes_decision _________
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+___ ERROR at setup of TestGovernanceEvidence.test_evidence_directory_created ___
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+____ ERROR at setup of TestGovernanceEvidence.test_evidence_files_generated ____
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestExecutionLayerIntegration.test_plan_build_checks_governance _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestExecutionLayerIntegration.test_create_build_tasks_has_lineage _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestExecutionLayerIntegration.test_validate_repository_checks_governance _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestGovernanceEnforcementEnd2End.test_governance_blocks_non_compliant_build _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+_ ERROR at setup of TestGovernanceEnforcementEnd2End.test_validators_produce_machine_readable_output _
+../../../.local/lib/python3.12/site-packages/pytest_asyncio/plugin.py:924: in pytest_fixture_setup
+    return (yield)
+            ^^^^^
+tests/wave0_minimum_red/conftest.py:18: in clear_global_registries
+    from foreman.domain import task, program, wave, blocker
+foreman/domain/task.py:26: in <module>
+    class Task:
+foreman/domain/task.py:86: in Task
+    def get_by_id(cls, task_id: str) -> Optional['Task']:
+                                        ^^^^^^^^
+E   NameError: name 'Optional' is not defined
+=================================== FAILURES ===================================
+_______ TestBuildAuthorizationGate.test_validate_all_preconditions_fail ________
+tests/test_build_authorization_gate.py:140: in test_validate_all_preconditions_fail
+    result = gate_validator.validate(build_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fm/orchestration/build_authorization_gate.py:145: in validate
+    timestamp=datetime.now(UTC).isoformat() + 'Z',
+                           ^^^
+E   NameError: name 'UTC' is not defined
+_______ TestBuildAuthorizationGate.test_validate_all_preconditions_pass ________
+tests/test_build_authorization_gate.py:164: in test_validate_all_preconditions_pass
+    (evidence_dir / "freeze-timestamp.txt").write_text(datetime.now(UTC).isoformat())
+                                                                    ^^^
+E   NameError: name 'UTC' is not defined
+__________ TestBuildAuthorizationGate.test_generate_evidence_package ___________
+tests/test_build_authorization_gate.py:179: in test_generate_evidence_package
+    result = gate_validator.validate(build_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fm/orchestration/build_authorization_gate.py:145: in validate
+    timestamp=datetime.now(UTC).isoformat() + 'Z',
+                           ^^^
+E   NameError: name 'UTC' is not defined
+______________ TestBuildAuthorizationGate.test_to_dict_conversion ______________
+tests/test_build_authorization_gate.py:200: in test_to_dict_conversion
+    result = gate_validator.validate(build_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fm/orchestration/build_authorization_gate.py:145: in validate
+    timestamp=datetime.now(UTC).isoformat() + 'Z',
+                           ^^^
+E   NameError: name 'UTC' is not defined
+_______ TestGateResolution.test_gate_fails_with_one_failed_precondition ________
+tests/test_build_authorization_gate.py:232: in test_gate_fails_with_one_failed_precondition
+    (evidence_dir / "freeze-timestamp.txt").write_text(datetime.now(UTC).isoformat())
+                                                                    ^^^
+E   NameError: name 'UTC' is not defined
+_________________ TestGateResolution.test_gate_summary_format __________________
+tests/test_build_authorization_gate.py:246: in test_gate_summary_format
+    result = gate_validator.validate(build_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fm/orchestration/build_authorization_gate.py:145: in validate
+    timestamp=datetime.now(UTC).isoformat() + 'Z',
+                           ^^^
+E   NameError: name 'UTC' is not defined
+___________ TestValidateBuildEndpoint.test_validate_build_not_found ____________
+tests/test_build_control_api.py:97: in test_validate_build_not_found
+    assert response.status_code == 200  # Validation runs but finds no evidence
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   assert 500 == 200
+E    +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+------------------------------ Captured log call -------------------------------
+ERROR    build_control_api:build_control_api.py:162 Error validating build nonexistent-build: name 'UTC' is not defined
+_______ TestValidateBuildEndpoint.test_validate_build_returns_structure ________
+tests/test_build_control_api.py:106: in test_validate_build_returns_structure
+    assert response.status_code == 200
+E   assert 500 == 200
+E    +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+------------------------------ Captured log call -------------------------------
+ERROR    build_control_api:build_control_api.py:162 Error validating build test-build-api-001: name 'UTC' is not defined
+____ TestExecuteBuildEndpoint.test_execute_build_with_failed_authorization _____
+tests/test_build_control_api.py:145: in test_execute_build_with_failed_authorization
+    assert validate_response.status_code == 200
+E   assert 500 == 200
+E    +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+------------------------------ Captured log call -------------------------------
+ERROR    build_control_api:build_control_api.py:162 Error validating build test-build-api-001: name 'UTC' is not defined
+____ TestExecuteBuildEndpoint.test_execute_build_with_passed_authorization _____
+tests/test_build_control_api.py:184: in test_execute_build_with_passed_authorization
+    assert validate_response.status_code == 200
+E   assert 500 == 200
+E    +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+------------------------------ Captured log call -------------------------------
+ERROR    build_control_api:build_control_api.py:162 Error validating build test-build-api-001: name 'UTC' is not defined
+_________ TestGetBuildStatusEndpoint.test_get_status_after_validation __________
+tests/test_build_control_api.py:218: in test_get_status_after_validation
+    assert data['status'] in ['PASS', 'FAIL']
+E   AssertionError: assert 'NOT_VALIDATED' in ['PASS', 'FAIL']
+------------------------------ Captured log call -------------------------------
+ERROR    build_control_api:build_control_api.py:162 Error validating build test-build-api-001: name 'UTC' is not defined
+____________ TestProposalSubmission.test_can_submit_memory_proposal ____________
+tests/test_memory_proposals.py:51: in test_can_submit_memory_proposal
+    proposal_id = submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_______ TestProposalStorage.test_proposals_stored_separately_from_memory _______
+tests/test_memory_proposals.py:134: in test_proposals_stored_separately_from_memory
+    proposal_id = submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+____________ TestProposalStorage.test_proposals_have_pending_status ____________
+tests/test_memory_proposals.py:167: in test_proposals_have_pending_status
+    proposal_id = submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+___________ TestProposalStorage.test_can_retrieve_submitted_proposal ___________
+tests/test_memory_proposals.py:189: in test_can_retrieve_submitted_proposal
+    proposal_id = submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_____ TestMemoryFabricIsolation.test_memory_fabric_unchanged_by_proposals ______
+tests/test_memory_proposals.py:230: in test_memory_fabric_unchanged_by_proposals
+    submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_____ TestMemoryFabricIsolation.test_proposal_does_not_create_memory_entry _____
+tests/test_memory_proposals.py:262: in test_proposal_does_not_create_memory_entry
+    submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+___________ TestGovernanceReviewPath.test_can_list_pending_proposals ___________
+tests/test_memory_proposals.py:298: in test_can_list_pending_proposals
+    proposal_id = submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_______ TestGovernanceReviewPath.test_proposals_contain_review_metadata ________
+tests/test_memory_proposals.py:326: in test_proposals_contain_review_metadata
+    proposal_id = submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_____________ TestNoAutoApproval.test_proposals_not_auto_approved ______________
+tests/test_memory_proposals.py:363: in test_proposals_not_auto_approved
+    proposal_id = submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_____________ TestNoAutoApproval.test_no_automatic_memory_creation _____________
+tests/test_memory_proposals.py:393: in test_no_automatic_memory_creation
+    submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+__________ TestProposalValidation.test_proposal_rejects_potential_pii __________
+tests/test_memory_proposals.py:425: in test_proposal_rejects_potential_pii
+    submit_memory_proposal(
+python_agent/memory_proposal_client.py:355: in submit_memory_proposal
+    return client.submit_memory_proposal(
+python_agent/memory_proposal_client.py:107: in submit_memory_proposal
+    timestamp = datetime.now(UTC).isoformat() + 'Z'
+                             ^^^
+E   NameError: name 'UTC' is not defined
+____________________ TestAlertReader.test_get_alert_summary ____________________
+tests/test_watchdog_runtime.py:185: in test_get_alert_summary
+    summary = reader.get_alert_summary(organisation_id="org-123")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fm/runtime/watchdog/alert_reader.py:206: in get_alert_summary
+    'generated_at': datetime.now(UTC).isoformat()
+                                 ^^^
+E   NameError: name 'UTC' is not defined
+_______________ TestAlertReader.test_read_only_no_modifications ________________
+tests/test_watchdog_runtime.py:230: in test_read_only_no_modifications
+    reader.get_alert_summary()
+fm/runtime/watchdog/alert_reader.py:206: in get_alert_summary
+    'generated_at': datetime.now(UTC).isoformat()
+                                 ^^^
+E   NameError: name 'UTC' is not defined
+____________ TestEscalationReporter.test_generate_escalation_report ____________
+tests/test_watchdog_runtime.py:298: in test_generate_escalation_report
+    report = reporter.generate_escalation_report(
+fm/runtime/watchdog/escalation_reporter.py:106: in generate_escalation_report
+    'generated_at': datetime.now(UTC).isoformat(),
+                                 ^^^
+E   NameError: name 'UTC' is not defined
+______________ TestEscalationReporter.test_get_escalation_summary ______________
+tests/test_watchdog_runtime.py:345: in test_get_escalation_summary
+    summary = reporter.get_escalation_summary(alerts)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fm/runtime/watchdog/escalation_reporter.py:215: in get_escalation_summary
+    'generated_at': datetime.now(UTC).isoformat()
+                                 ^^^
+E   NameError: name 'UTC' is not defined
+__________________ TestEscalationReporter.test_log_escalation __________________
+tests/test_watchdog_runtime.py:357: in test_log_escalation
+    report = reporter.generate_escalation_report(alerts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fm/runtime/watchdog/escalation_reporter.py:106: in generate_escalation_report
+    'generated_at': datetime.now(UTC).isoformat(),
+                                 ^^^
+E   NameError: name 'UTC' is not defined
+____________ TestEscalationReporter.test_no_modifications_to_alerts ____________
+tests/test_watchdog_runtime.py:372: in test_no_modifications_to_alerts
+    reporter.generate_escalation_report(alerts)
+fm/runtime/watchdog/escalation_reporter.py:106: in generate_escalation_report
+    'generated_at': datetime.now(UTC).isoformat(),
+                                 ^^^
+E   NameError: name 'UTC' is not defined
+______________ TestWatchdogRuntimeIntegration.test_full_workflow _______________
+tests/test_watchdog_runtime.py:394: in test_full_workflow
+    summary = reader.get_alert_summary(organisation_id="org-123")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+fm/runtime/watchdog/alert_reader.py:206: in get_alert_summary
+    'generated_at': datetime.now(UTC).isoformat()
+                                 ^^^
+E   NameError: name 'UTC' is not defined
+__________ TestWatchdogRuntimeIntegration.test_multi_tenant_isolation __________
+tests/test_watchdog_runtime.py:418: in test_multi_tenant_isolation
+    report_123 = reporter.generate_escalation_report(
+fm/runtime/watchdog/escalation_reporter.py:106: in generate_escalation_report
+    'generated_at': datetime.now(UTC).isoformat(),
+                                 ^^^
+E   NameError: name 'UTC' is not defined
+__________ TestMetricsEngine.test_qa_137_calculate_aggregate_metrics ___________
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py:44: in test_qa_137_calculate_aggregate_metrics
+    data_source.add_metric("builds_completed", 10, timestamp=datetime.now(UTC))
+                                                                          ^^^
+E   NameError: name 'UTC' is not defined
+______________ TestMetricsEngine.test_qa_138_track_metric_history ______________
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py:114: in test_qa_138_track_metric_history
+    base_time = datetime.now(UTC)
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_____________ TestMetricsEngine.test_qa_139_generate_metric_alerts _____________
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py:178: in test_qa_139_generate_metric_alerts
+    engine.record_metric("build_failure_rate", 15.0)  # Exceeds threshold
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+foreman/analytics/metrics_engine.py:84: in record_metric
+    timestamp = datetime.now(UTC)
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_________________ TestMetricsEngine.test_qa_140_export_metrics _________________
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py:245: in test_qa_140_export_metrics
+    engine.record_metric("builds_completed", 10)
+foreman/analytics/metrics_engine.py:84: in record_metric
+    timestamp = datetime.now(UTC)
+                             ^^^
+E   NameError: name 'UTC' is not defined
+__________ TestMetricsEngine.test_qa_141_metrics_engine_failure_modes __________
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py:323: in test_qa_141_metrics_engine_failure_modes
+    engine.record_metric("test_metric", 10**308)  # Near float max
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+foreman/analytics/metrics_engine.py:84: in record_metric
+    timestamp = datetime.now(UTC)
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_______________ TestCostTracker.test_qa_143_detect_cost_anomaly ________________
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py:477: in test_qa_143_detect_cost_anomaly
+    tracker.record_build_cost(build_id=f"build-{i:03d}", cost_usd=10.0)
+foreman/analytics/cost_tracker.py:77: in record_build_cost
+    timestamp = datetime.now(UTC)
+                             ^^^
+E   NameError: name 'UTC' is not defined
+______________ TestCostTracker.test_qa_144_generate_cost_reports _______________
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py:551: in test_qa_144_generate_cost_reports
+    tracker.record_build_cost(build_id="build-001", builder_id="ui-builder", cost_usd=12.50)
+foreman/analytics/cost_tracker.py:77: in record_build_cost
+    timestamp = datetime.now(UTC)
+                             ^^^
+E   NameError: name 'UTC' is not defined
+_________________ TestCostTracker.test_qa_145_cost_forecasting _________________
+tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py:619: in test_qa_145_cost_forecasting
+    base_time = datetime.now(UTC)
+                             ^^^
+E   NameError: name 'UTC' is not defined
+___________ TestUsageAnalyzer.test_qa_133_display_build_success_rate ___________
+tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py:93: in test_qa_133_display_build_success_rate
+    analyzer.record_build_completion(build_id="build-001", status="SUCCESS")
+foreman/analytics/usage_analyzer.py:75: in record_build_completion
+    "timestamp": datetime.now(UTC)
+                              ^^^
+E   NameError: name 'UTC' is not defined
+___________ TestUsageAnalyzer.test_qa_134_display_average_build_time ___________
+tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py:160: in test_qa_134_display_average_build_time
+    analyzer.record_build_time(build_id="build-001", wave="wave-1.0", duration_minutes=45)
+foreman/analytics/usage_analyzer.py:91: in record_build_time
+    "timestamp": datetime.now(UTC)
+                              ^^^
+E   NameError: name 'UTC' is not defined
+______________ TestUsageAnalyzer.test_qa_135_display_cost_metrics ______________
+tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py:231: in test_qa_135_display_cost_metrics
+    analyzer.record_build_cost(build_id="build-001", cost_usd=12.50, qa_components=50)
+foreman/analytics/usage_analyzer.py:107: in record_build_cost
+    "timestamp": datetime.now(UTC)
+                              ^^^
+E   NameError: name 'UTC' is not defined
+___ TestIntentToBuildFlow.test_qa_200_end_to_end_intent_to_build_completion ____
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py:57: in test_qa_200_end_to_end_intent_to_build_completion
+    flow_result = executor.execute_flow(flow=flow, input_data=intent_input)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+foreman/flows/flow_executor.py:18: in execute_flow
+    {"state": "INTENT_RECEIVED", "timestamp": datetime.now(UTC)},
+                                                           ^^^
+E   NameError: name 'UTC' is not defined
+_____________ TestIntentToBuildFlow.test_qa_201_intent_intake_step _____________
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py:132: in test_qa_201_intent_intake_step
+    intent_result = intake.accept_intent(
+foreman/intent/intake_handler.py:31: in accept_intent
+    "created_at": datetime.now(UTC)
+                               ^^^
+E   NameError: name 'UTC' is not defined
+_______________ TestIntentToBuildFlow.test_qa_204_approval_step ________________
+tests/wave1_0_qa_infrastructure/flows/test_core_flows.py:367: in test_qa_204_approval_step
+    approval_result = approval_mgr.handle_approval(
+foreman/intent/approval_manager.py:66: in handle_approval
+    requirement["approved_at"] = datetime.now(UTC).isoformat()
+                                              ^^^
+E   NameError: name 'UTC' is not defined
+_____ TestAdvancedFlowScenarios.test_qa_211_state_persistence_across_flow ______
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:39: in test_qa_211_state_persistence_across_flow
+    raise NotImplementedError("QA-211: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-211: To be implemented by qa-builder in Subwave 2.5
+____ TestAdvancedFlowScenarios.test_qa_212_evidence_generation_across_flow _____
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:52: in test_qa_212_evidence_generation_across_flow
+    raise NotImplementedError("QA-212: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-212: To be implemented by qa-builder in Subwave 2.5
+____ TestAdvancedFlowScenarios.test_qa_213_authorization_checks_across_flow ____
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:65: in test_qa_213_authorization_checks_across_flow
+    raise NotImplementedError("QA-213: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-213: To be implemented by qa-builder in Subwave 2.5
+________ TestAdvancedFlowScenarios.test_qa_214_timeout_handling_in_flow ________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:78: in test_qa_214_timeout_handling_in_flow
+    raise NotImplementedError("QA-214: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-214: To be implemented by qa-builder in Subwave 2.5
+___________ TestAdvancedFlowScenarios.test_qa_215_flow_cancellation ____________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:91: in test_qa_215_flow_cancellation
+    raise NotImplementedError("QA-215: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-215: To be implemented by qa-builder in Subwave 2.5
+_____________ TestEscalationFlow.test_qa_216_escalation_end_to_end _____________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:110: in test_qa_216_escalation_end_to_end
+    raise NotImplementedError("QA-216: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-216: To be implemented by qa-builder in Subwave 2.5
+_________ TestEscalationFlow.test_qa_217_escalation_trigger_detection __________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:123: in test_qa_217_escalation_trigger_detection
+    raise NotImplementedError("QA-217: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-217: To be implemented by qa-builder in Subwave 2.5
+______________ TestEscalationFlow.test_qa_218_escalation_creation ______________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:136: in test_qa_218_escalation_creation
+    raise NotImplementedError("QA-218: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-218: To be implemented by qa-builder in Subwave 2.5
+______________ TestEscalationFlow.test_qa_219_escalation_routing _______________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:149: in test_qa_219_escalation_routing
+    raise NotImplementedError("QA-219: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-219: To be implemented by qa-builder in Subwave 2.5
+____________ TestEscalationFlow.test_qa_220_escalation_presentation ____________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:162: in test_qa_220_escalation_presentation
+    raise NotImplementedError("QA-220: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-220: To be implemented by qa-builder in Subwave 2.5
+______________ TestEscalationFlow.test_qa_221_escalation_decision ______________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:175: in test_qa_221_escalation_decision
+    raise NotImplementedError("QA-221: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-221: To be implemented by qa-builder in Subwave 2.5
+_____________ TestEscalationFlow.test_qa_222_escalation_resolution _____________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:188: in test_qa_222_escalation_resolution
+    raise NotImplementedError("QA-222: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-222: To be implemented by qa-builder in Subwave 2.5
+______________ TestEscalationFlow.test_qa_223_escalation_timeout _______________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:201: in test_qa_223_escalation_timeout
+    raise NotImplementedError("QA-223: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-223: To be implemented by qa-builder in Subwave 2.5
+________ TestEscalationFlow.test_qa_224_multiple_concurrent_escalations ________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:214: in test_qa_224_multiple_concurrent_escalations
+    raise NotImplementedError("QA-224: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-224: To be implemented by qa-builder in Subwave 2.5
+___________ TestEscalationFlow.test_qa_225_escalation_error_handling ___________
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py:227: in test_qa_225_escalation_error_handling
+    raise NotImplementedError("QA-225: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-225: To be implemented by qa-builder in Subwave 2.5
+____________ TestPrioritizationFeatures.test_qa_416_assign_priority ____________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:23: in test_qa_416_assign_priority
+    raise NotImplementedError("QA-416: To be implemented by ui-builder")
+E   NotImplementedError: QA-416: To be implemented by ui-builder
+___________ TestPrioritizationFeatures.test_qa_417_sort_by_priority ____________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:27: in test_qa_417_sort_by_priority
+    raise NotImplementedError("QA-417: To be implemented by ui-builder")
+E   NotImplementedError: QA-417: To be implemented by ui-builder
+_______ TestPrioritizationFeatures.test_qa_418_priority_change_workflow ________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:31: in test_qa_418_priority_change_workflow
+    raise NotImplementedError("QA-418: To be implemented by ui-builder")
+E   NotImplementedError: QA-418: To be implemented by ui-builder
+__________ TestPrioritizationFeatures.test_qa_419_priority_escalation __________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:35: in test_qa_419_priority_escalation
+    raise NotImplementedError("QA-419: To be implemented by ui-builder")
+E   NotImplementedError: QA-419: To be implemented by ui-builder
+___________ TestPrioritizationFeatures.test_qa_420_priority_display ____________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:39: in test_qa_420_priority_display
+    raise NotImplementedError("QA-420: To be implemented by ui-builder")
+E   NotImplementedError: QA-420: To be implemented by ui-builder
+__________________ TestBulkOperations.test_qa_421_bulk_select __________________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:49: in test_qa_421_bulk_select
+    raise NotImplementedError("QA-421: To be implemented by ui-builder")
+E   NotImplementedError: QA-421: To be implemented by ui-builder
+_____________ TestBulkOperations.test_qa_422_bulk_priority_update ______________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:53: in test_qa_422_bulk_priority_update
+    raise NotImplementedError("QA-422: To be implemented by ui-builder")
+E   NotImplementedError: QA-422: To be implemented by ui-builder
+_________________ TestBulkOperations.test_qa_423_bulk_archive __________________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:57: in test_qa_423_bulk_archive
+    raise NotImplementedError("QA-423: To be implemented by ui-builder")
+E   NotImplementedError: QA-423: To be implemented by ui-builder
+__________________ TestBulkOperations.test_qa_424_bulk_export __________________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:61: in test_qa_424_bulk_export
+    raise NotImplementedError("QA-424: To be implemented by ui-builder")
+E   NotImplementedError: QA-424: To be implemented by ui-builder
+______________ TestBulkOperations.test_qa_425_bulk_error_handling ______________
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py:65: in test_qa_425_bulk_error_handling
+    raise NotImplementedError("QA-425: To be implemented by ui-builder")
+E   NotImplementedError: QA-425: To be implemented by ui-builder
+=========================== short test summary info ============================
+FAILED tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_all_preconditions_fail - NameError: name 'UTC' is not defined
+FAILED tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_validate_all_preconditions_pass - NameError: name 'UTC' is not defined
+FAILED tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_generate_evidence_package - NameError: name 'UTC' is not defined
+FAILED tests/test_build_authorization_gate.py::TestBuildAuthorizationGate::test_to_dict_conversion - NameError: name 'UTC' is not defined
+FAILED tests/test_build_authorization_gate.py::TestGateResolution::test_gate_fails_with_one_failed_precondition - NameError: name 'UTC' is not defined
+FAILED tests/test_build_authorization_gate.py::TestGateResolution::test_gate_summary_format - NameError: name 'UTC' is not defined
+FAILED tests/test_build_control_api.py::TestValidateBuildEndpoint::test_validate_build_not_found - assert 500 == 200
+ +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+FAILED tests/test_build_control_api.py::TestValidateBuildEndpoint::test_validate_build_returns_structure - assert 500 == 200
+ +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+FAILED tests/test_build_control_api.py::TestExecuteBuildEndpoint::test_execute_build_with_failed_authorization - assert 500 == 200
+ +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+FAILED tests/test_build_control_api.py::TestExecuteBuildEndpoint::test_execute_build_with_passed_authorization - assert 500 == 200
+ +  where 500 = <WrapperTestResponse streamed [500 INTERNAL SERVER ERROR]>.status_code
+FAILED tests/test_build_control_api.py::TestGetBuildStatusEndpoint::test_get_status_after_validation - AssertionError: assert 'NOT_VALIDATED' in ['PASS', 'FAIL']
+FAILED tests/test_memory_proposals.py::TestProposalSubmission::test_can_submit_memory_proposal - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestProposalStorage::test_proposals_stored_separately_from_memory - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestProposalStorage::test_proposals_have_pending_status - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestProposalStorage::test_can_retrieve_submitted_proposal - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestMemoryFabricIsolation::test_memory_fabric_unchanged_by_proposals - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestMemoryFabricIsolation::test_proposal_does_not_create_memory_entry - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestGovernanceReviewPath::test_can_list_pending_proposals - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestGovernanceReviewPath::test_proposals_contain_review_metadata - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestNoAutoApproval::test_proposals_not_auto_approved - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestNoAutoApproval::test_no_automatic_memory_creation - NameError: name 'UTC' is not defined
+FAILED tests/test_memory_proposals.py::TestProposalValidation::test_proposal_rejects_potential_pii - NameError: name 'UTC' is not defined
+FAILED tests/test_watchdog_runtime.py::TestAlertReader::test_get_alert_summary - NameError: name 'UTC' is not defined
+FAILED tests/test_watchdog_runtime.py::TestAlertReader::test_read_only_no_modifications - NameError: name 'UTC' is not defined
+FAILED tests/test_watchdog_runtime.py::TestEscalationReporter::test_generate_escalation_report - NameError: name 'UTC' is not defined
+FAILED tests/test_watchdog_runtime.py::TestEscalationReporter::test_get_escalation_summary - NameError: name 'UTC' is not defined
+FAILED tests/test_watchdog_runtime.py::TestEscalationReporter::test_log_escalation - NameError: name 'UTC' is not defined
+FAILED tests/test_watchdog_runtime.py::TestEscalationReporter::test_no_modifications_to_alerts - NameError: name 'UTC' is not defined
+FAILED tests/test_watchdog_runtime.py::TestWatchdogRuntimeIntegration::test_full_workflow - NameError: name 'UTC' is not defined
+FAILED tests/test_watchdog_runtime.py::TestWatchdogRuntimeIntegration::test_multi_tenant_isolation - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_137_calculate_aggregate_metrics - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_138_track_metric_history - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_139_generate_metric_alerts - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_140_export_metrics - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestMetricsEngine::test_qa_141_metrics_engine_failure_modes - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestCostTracker::test_qa_143_detect_cost_anomaly - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestCostTracker::test_qa_144_generate_cost_reports - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_cost_tracker.py::TestCostTracker::test_qa_145_cost_forecasting - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py::TestUsageAnalyzer::test_qa_133_display_build_success_rate - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py::TestUsageAnalyzer::test_qa_134_display_average_build_time - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/analytics/test_usage_analyzer.py::TestUsageAnalyzer::test_qa_135_display_cost_metrics - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestIntentToBuildFlow::test_qa_200_end_to_end_intent_to_build_completion - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestIntentToBuildFlow::test_qa_201_intent_intake_step - NameError: name 'UTC' is not defined
+FAILED tests/wave1_0_qa_infrastructure/flows/test_core_flows.py::TestIntentToBuildFlow::test_qa_204_approval_step - NameError: name 'UTC' is not defined
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_211_state_persistence_across_flow - NotImplementedError: QA-211: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_212_evidence_generation_across_flow - NotImplementedError: QA-212: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_213_authorization_checks_across_flow - NotImplementedError: QA-213: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_214_timeout_handling_in_flow - NotImplementedError: QA-214: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_215_flow_cancellation - NotImplementedError: QA-215: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_216_escalation_end_to_end - NotImplementedError: QA-216: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_217_escalation_trigger_detection - NotImplementedError: QA-217: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_218_escalation_creation - NotImplementedError: QA-218: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_219_escalation_routing - NotImplementedError: QA-219: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_220_escalation_presentation - NotImplementedError: QA-220: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_221_escalation_decision - NotImplementedError: QA-221: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_222_escalation_resolution - NotImplementedError: QA-222: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_223_escalation_timeout - NotImplementedError: QA-223: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_224_multiple_concurrent_escalations - NotImplementedError: QA-224: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_225_escalation_error_handling - NotImplementedError: QA-225: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_416_assign_priority - NotImplementedError: QA-416: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_417_sort_by_priority - NotImplementedError: QA-417: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_418_priority_change_workflow - NotImplementedError: QA-418: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_419_priority_escalation - NotImplementedError: QA-419: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_420_priority_display - NotImplementedError: QA-420: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_421_bulk_select - NotImplementedError: QA-421: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_422_bulk_priority_update - NotImplementedError: QA-422: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_423_bulk_archive - NotImplementedError: QA-423: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_424_bulk_export - NotImplementedError: QA-424: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_425_bulk_error_handling - NotImplementedError: QA-425: To be implemented by ui-builder
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestAppDescriptionValidator::test_validator_exists - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestAppDescriptionValidator::test_validator_is_executable - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestAppDescriptionValidator::test_validator_runs - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestFRSAlignmentValidator::test_validator_exists - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestFRSAlignmentValidator::test_validator_runs - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestArchitectureCompilationValidator::test_validator_exists - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestArchitectureCompilationValidator::test_validator_runs - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestBuildAuthorizationGateValidator::test_validator_exists - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestBuildAuthorizationGateValidator::test_validator_runs - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestBuildAuthorizationGateValidator::test_validator_checks_preconditions - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceGate::test_gate_exists - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceGate::test_gate_runs - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceGate::test_gate_makes_decision - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceEvidence::test_evidence_directory_created - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceEvidence::test_evidence_files_generated - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestExecutionLayerIntegration::test_plan_build_checks_governance - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestExecutionLayerIntegration::test_create_build_tasks_has_lineage - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestExecutionLayerIntegration::test_validate_repository_checks_governance - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceEnforcementEnd2End::test_governance_blocks_non_compliant_build - NameError: name 'Optional' is not defined
+ERROR tests/wave0_minimum_red/test_governance_enforcement.py::TestGovernanceEnforcementEnd2End::test_validators_produce_machine_readable_output - NameError: name 'Optional' is not defined
+========== 69 failed, 893 passed, 13 deselected, 20 errors in 43.07s ===========
