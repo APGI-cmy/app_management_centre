@@ -1,12 +1,12 @@
-{
-  "type": "product-fix",
+﻿{
+  "type": "governance-control",
   "requires_iaa": true,
   "requires_ecap": true,
-  "governing_issue": "#1226",
-  "scope_summary": "Bounded Stage 6 QA-to-RED re-entry: maintain executable RED suite and evidence for Issue #1226 on the synchronized PR head, including required PR-scoped governance controls.",
-  "created_by": "qa-builder",
-  "created_at": "2026-08-06T11:48:08Z",
+  "governing_issue": "#1233",
+  "scope_summary": "Issue #1233 A2-T intentional-RED lifecycle classification: governance documentation record for all 25 P3 QA-to-Red nodes. No test or runtime code modified.",
+  "created_by": "foreman",
+  "created_at": "2026-08-07T10:00:00Z",
   "execution_model": "foreman-orchestrated",
   "orchestrating_agent": "foreman-v2-agent",
-  "implementing_agent": "qa-builder"
+  "implementing_agent": "foreman"
 }
