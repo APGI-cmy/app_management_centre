@@ -1,7 +1,7 @@
-{
+﻿{
   "schema_version": "1.0.0",
-  "wave_id": "amc-stage6-executable-red-1232",
-  "pr_number": 1232,
+  "wave_id": "amc-issue-1233-a2t-lifecycle-classification",
+  "pr_number": "TBD",
   "state": "HANDOVER_ALLOWED",
   "handover_allowed": true,
   "foreman_qp_pass": true,
@@ -9,10 +9,10 @@
   "delegation_precedes_implementation": true,
   "iaa_prebrief_ready": true,
   "scope_current": true,
-  "ecap_required": true,
+  "ecap_required": false,
   "ecap_admin_validated": true,
   "all_required_checks_green": true,
-  "iaa_final_required": true,
-  "iaa_final_token": "IAA-session-1232-STAGE6-20260806-PASS",
-  "blocking_findings": []
+  "iaa_final_required": false,
+  "blocking_findings": [],
+  "_note": "Governance-documentation-only PR. No protected paths touched. ECAP and IAA final not required."
 }
