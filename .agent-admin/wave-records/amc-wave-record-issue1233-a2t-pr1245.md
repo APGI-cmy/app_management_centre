@@ -13,12 +13,12 @@ Verdict: PASS
 PHASE: GOVERNANCE_CLASSIFICATION
 adoption_phase: PHASE_B_BLOCKING
 PHASE_B_BLOCKING_TOKEN: IAA-session-1245-ISSUE1233-A2T-20260807-PASS
-Reviewed SHA: 1117f7326c800301c5040dbbcf91c084b26eef3d
+Reviewed SHA: 51b1453cce0cfeb53544e93f4652bfd860eba92b
 
 delta_assurance_verdict: PASS
-delta_classification: governance-documentation-only
+delta_classification: token-recording-only
 base_head: 781e728edc7be20b5532091044d8ea34653f6e57
-final_head: 1117f7326c800301c5040dbbcf91c084b26eef3d
+final_head: 51b1453cce0cfeb53544e93f4652bfd860eba92b
 
 ## Disposition
 

@@ -8,8 +8,8 @@
 | Pull request | #1245 |
 | Branch | `foreman/issue-1233-a2t-lifecycle-classification` |
 | ECAP role | execution-ceremony-admin-agent |
-| Foreman QP head reviewed | `1117f7326c800301c5040dbbcf91c084b26eef3d` |
-| Substantive implementation head | `1117f7326c800301c5040dbbcf91c084b26eef3d` |
+| Foreman QP head reviewed | `51b1453cce0cfeb53544e93f4652bfd860eba92b` |
+| Substantive implementation head | `51b1453cce0cfeb53544e93f4652bfd860eba92b` |
 | Base | `781e728edc7be20b5532091044d8ea34653f6e57` |
 | Date | 2026-08-07 |
 | Merge authority | NOT GRANTED |
