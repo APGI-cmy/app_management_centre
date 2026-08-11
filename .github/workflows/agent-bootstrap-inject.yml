@@ -77,7 +77,7 @@ jobs:
               `agent_bootstrap(agent_id: "${agentId}")`,
               '```',
               '',
-              'This is your **required first tool call** in every session. Skipping is a **GOV-BREACH-AIMC-W5-002 POLC violation** and will cause your PR to be blocked by the CI preflight gate.',
+              'This is your **required first tool call** in every session. Skipping is a **GOV-BREACH-AIMC-W5-002 POLC violation** (mandatory CI enforcement is planned for Phase 2).',
               '',
               'The `agent_bootstrap` tool is provided by the `agent-bootstrap` MCP server registered in `.mcp.json`. It returns your full agent contract file. Read it in full and complete **Phase 1 (Identity & Preflight)** before doing anything else.',
               '',
