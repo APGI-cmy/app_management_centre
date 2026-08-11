@@ -142,7 +142,7 @@ The \`agent-bootstrap\` MCP server is not available in this runtime.
 **Location of fallback template:**
 \`.github/scripts/agent-bootstrap-fallback-instructions.md\`
 
-This is an approved alternative to the direct MCP call. CS2 enforces this via merge gate.`;
+This is an approved alternative to the direct MCP call. Automated enforcement is deferred to Phase 2; CS2 reviews fallback attestations post-facto.';
 }
 
 /**
