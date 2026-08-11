@@ -23,12 +23,12 @@ jobs:
 
       - name: Detect MCP bootstrap availability
         id: detect-mcp
+        continue-on-error: true
         run: |
-          node .github/scripts/detect-mcp-bootstrap-availability.js > /tmp/mcp-detection.json 2>&1
+          node .github/scripts/detect-mcp-bootstrap-availability.js > /tmp/mcp-detection.json || true
           cat /tmp/mcp-detection.json
-          AVAILABLE=$(jq -r '.available' /tmp/mcp-detection.json)
+          AVAILABLE=$(jq -r '.available // false' /tmp/mcp-detection.json 2>/dev/null || echo "false")
           echo "available=$AVAILABLE" >> "$GITHUB_OUTPUT"
-
       - name: Determine agent ID from assignees or title
         id: detect
         env:
