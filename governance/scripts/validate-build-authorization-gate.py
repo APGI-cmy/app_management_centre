@@ -22,6 +22,7 @@ Returns:
     FAIL: Build blocked - one or more preconditions not satisfied
 """
 
+import io
 import json
 import os
 import re
@@ -29,6 +30,10 @@ import subprocess
 import sys
 from pathlib import Path
 from datetime import datetime
+
+# Wrap stdout with UTF-8 encoding for cross-platform emoji support
+if sys.stdout.encoding and sys.stdout.encoding.lower() not in ('utf-8', 'utf8'):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 
 class BuildAuthorizationGateValidator:

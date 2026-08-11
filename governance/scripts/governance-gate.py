@@ -18,11 +18,16 @@ Returns:
     Exit 1: One or more governance requirements not satisfied (FAIL)
 """
 
+import io
 import json
 import sys
 from pathlib import Path
 from datetime import datetime
 import subprocess
+
+# Wrap stdout with UTF-8 encoding for cross-platform emoji support
+if sys.stdout.encoding and sys.stdout.encoding.lower() not in ('utf-8', 'utf8'):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 
 class GovernanceGate:

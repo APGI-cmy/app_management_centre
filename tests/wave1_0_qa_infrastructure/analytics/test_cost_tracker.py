@@ -14,8 +14,10 @@ Expected State: RED (intentionally failing until implementation exists)
 """
 
 import pytest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import json
+
+UTC = timezone.utc
 
 
 @pytest.mark.analytics
