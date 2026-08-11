@@ -111,7 +111,7 @@ console.log(`Live workflow job names: ${liveJobs.size}`);
 if (mcpStatus.available === false) {
   console.log('');
   console.log('::notice::MCP unavailable — agents will receive fallback instruction comments');
-  console.log('::notice::Merge gate will log fallback attestations for CS2 post-facto review');
+  console.log('::notice::MCP unavailable — fallback attestations require CS2 post-facto review (no automated validation in this script)');
 }
 
 if (process.exitCode) process.exit(1);
