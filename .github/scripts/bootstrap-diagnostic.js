@@ -296,7 +296,7 @@ function testMCPStartup() {
     // Try to load the script (Node.js syntax check)
     // Note: We don't actually run it (would hang waiting for stdin)
     try {
-      require(bootstrapScript);
+      execSync(`node --check "${bootstrapScript}"`, { stdio: "ignore" });
       return {
         status: "warn",
         message:
