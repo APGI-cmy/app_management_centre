@@ -54,10 +54,12 @@ async function runDiagnostics() {
     },
   };
 
+  const progress = jsonOutput
+    ? (msg) => process.stderr.write(msg + "\n")
+    : (msg) => console.log(msg);
+
   // Check 1: .mcp.json exists and is valid
-  console.log(
-    `${colors.blue}[CHECK 1]${colors.reset} Verifying .mcp.json...`
-  );
+  progress(`${colors.blue}[CHECK 1]${colors.reset} Verifying .mcp.json...`);
   const mcpCheck = checkMCPConfig();
   diagnostics.checks.mcp_config = mcpCheck;
   diagnostics.summary.total_checks++;
@@ -66,7 +68,7 @@ async function runDiagnostics() {
   else diagnostics.summary.failed++;
 
   // Check 2: agent-bootstrap server is registered
-  console.log(
+  progress(
     `${colors.blue}[CHECK 2]${colors.reset} Verifying agent-bootstrap server registration...`
   );
   const bootstrapCheck = checkBootstrapServer(mcpCheck.data?.config);
@@ -77,10 +79,8 @@ async function runDiagnostics() {
   else diagnostics.summary.failed++;
 
   // Check 3: .github/agents directory and contracts
-  console.log(
-    `${colors.blue}[CHECK 3]${colors.reset} Scanning agent contracts...`
-  );
-  const agentsCheck = checkAgentContracts();
+  progress(`${colors.blue}[CHECK 3]${colors.reset} Scanning agent contracts...`);
+  const agentsCheck = checkAgentContracts(agentFilter);
   diagnostics.checks.agent_contracts = agentsCheck;
   diagnostics.summary.total_checks++;
   if (agentsCheck.status === "pass") diagnostics.summary.passed++;
@@ -88,8 +88,8 @@ async function runDiagnostics() {
   else diagnostics.summary.failed++;
 
   // Check 4: Required agent IDs from agent-ids.js
-  console.log(`${colors.blue}[CHECK 4]${colors.reset} Verifying required agents...`);
-  const requiredCheck = checkRequiredAgents(agentsCheck.data?.contracts || []);
+  progress(`${colors.blue}[CHECK 4]${colors.reset} Verifying required agents...`);
+  const requiredCheck = checkRequiredAgents(agentsCheck.data?.contracts || [], agentFilter);
   diagnostics.checks.required_agents = requiredCheck;
   diagnostics.summary.total_checks++;
   if (requiredCheck.status === "pass") diagnostics.summary.passed++;
@@ -97,7 +97,7 @@ async function runDiagnostics() {
   else diagnostics.summary.failed++;
 
   // Check 5: MCP server startup test (non-blocking)
-  console.log(`${colors.blue}[CHECK 5]${colors.reset} Testing MCP server startup...`);
+  progress(`${colors.blue}[CHECK 5]${colors.reset} Testing MCP server startup...`);
   const mcpStartupCheck = testMCPStartup();
   diagnostics.checks.mcp_startup = mcpStartupCheck;
   diagnostics.summary.total_checks++;
@@ -106,7 +106,7 @@ async function runDiagnostics() {
   else diagnostics.summary.failed++;
 
   // Check 6: Fallback instructions available
-  console.log(`${colors.blue}[CHECK 6]${colors.reset} Verifying fallback instructions...`);
+  progress(`${colors.blue}[CHECK 6]${colors.reset} Verifying fallback instructions...`);
   const fallbackCheck = checkFallbackInstructions();
   diagnostics.checks.fallback_instructions = fallbackCheck;
   diagnostics.summary.total_checks++;
@@ -115,10 +115,10 @@ async function runDiagnostics() {
   else diagnostics.summary.failed++;
 
   // Output results
-  console.log("\n");
   if (jsonOutput) {
-    console.log(JSON.stringify(diagnostics, null, 2));
+    process.stdout.write(JSON.stringify(diagnostics, null, 2) + "\n");
   } else {
+    console.log();
     printSummary(diagnostics);
   }
 
@@ -182,7 +182,7 @@ function checkBootstrapServer(mcpConfig) {
 /**
  * Check 3: Scan .github/agents directory
  */
-function checkAgentContracts() {
+function checkAgentContracts(agentFilter) {
   const agentsDir = path.join(REPO_ROOT, ".github", "agents");
   try {
     if (!fs.existsSync(agentsDir)) {
@@ -192,14 +192,19 @@ function checkAgentContracts() {
         data: { path: agentsDir },
       };
     }
-    const contracts = fs
+    let contracts = fs
       .readdirSync(agentsDir)
       .filter((f) => f.endsWith(".md") && !f.startsWith("_"))
       .sort();
+    if (agentFilter) {
+      contracts = contracts.filter((f) => f === `${agentFilter}.md`);
+    }
     if (contracts.length === 0) {
       return {
         status: "fail",
-        message: "No agent contracts found in .github/agents",
+        message: agentFilter
+          ? `No contract found for agent: ${agentFilter}`
+          : "No agent contracts found in .github/agents",
         data: { path: agentsDir, count: 0 },
       };
     }
@@ -220,7 +225,7 @@ function checkAgentContracts() {
 /**
  * Check 4: Verify required agents from agent-ids.js
  */
-function checkRequiredAgents(discoveredContracts) {
+function checkRequiredAgents(discoveredContracts, agentFilter) {
   try {
     // Load required agents from mcp-servers/agent-bootstrap/agent-ids.js
     const agentIdsPath = path.join(
@@ -251,21 +256,25 @@ function checkRequiredAgents(discoveredContracts) {
       .map((s) => s.trim().replace(/['"]/g, ""))
       .filter((s) => s.length > 0);
 
+    const filteredRequired = agentFilter
+      ? requiredIds.filter((id) => id === agentFilter)
+      : requiredIds;
+
     const contractIds = discoveredContracts.map((f) => f.replace(/\.md$/, ""));
-    const missing = requiredIds.filter((id) => !contractIds.includes(id));
+    const missing = filteredRequired.filter((id) => !contractIds.includes(id));
 
     if (missing.length > 0) {
       return {
         status: "warn",
         message: `Missing required agent contracts: ${missing.join(", ")}`,
-        data: { required: requiredIds, found: contractIds, missing },
+        data: { required: filteredRequired, found: contractIds, missing },
       };
     }
 
     return {
       status: "pass",
-      message: `All ${requiredIds.length} required agents present`,
-      data: { required: requiredIds, found: contractIds },
+      message: `All ${filteredRequired.length} required agents present`,
+      data: { required: filteredRequired, found: contractIds },
     };
   } catch (err) {
     return {
