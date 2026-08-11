@@ -93,10 +93,10 @@ This attestation fulfills MCP bootstrap requirement when MCP server is unavailab
 
 Once your Phase 1 attestation is filed:
 
-1. The merge gate CI will log that fallback attestation was used
-2. CS2 governance (QP—Quality Partner) validates attestation post-facto
-3. You may proceed with work on the scope
-4. Treat attestation as binding commitment to Phase 1 findings
+1. Ensure your PR includes the required Phase 1 preflight evidence (see the `preflight/phase-1-evidence` required check)
+2. CS2 governance (QP—Quality Partner) may review the attestation post-facto
+3. Proceed with work only after the required CI checks pass
+4. Treat attestation as a binding commitment to Phase 1 findings
 
 ---
 
