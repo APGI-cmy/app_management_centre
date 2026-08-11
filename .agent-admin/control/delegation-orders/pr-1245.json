@@ -1,0 +1,14 @@
+﻿{
+  "schema_version": "1.0.0",
+  "wave_id": "amc-issue-1233-a2t-lifecycle-classification",
+  "pr_number": 1245,
+  "prebrief_commit_sha": "781e728edc7be20b5532091044d8ea34653f6e57",
+  "builder_appointment_timestamp": "2026-08-07T10:00:00Z",
+  "builder_appointment_commit_sha": "781e728edc7be20b5532091044d8ea34653f6e57",
+  "builder_agent": "foreman",
+  "builder_task_ref": "PR #1245 Issue #1233 A2-T intentional-RED lifecycle classification (governance-only, Foreman-authored)",
+  "first_implementation_commit_sha": "1117f7326c800301c5040dbbcf91c084b26eef3d",
+  "qp_review_timestamp": "2026-08-07T10:20:00Z",
+  "result": "DELEGATION_ORDER_VERIFIED",
+  "_note": "Foreman-authored governance-documentation-only PR. No builder appointment required. Delegation order records Foreman-QP-to-implementation sequence."
+}
