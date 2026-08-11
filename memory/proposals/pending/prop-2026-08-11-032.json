@@ -1,0 +1,18 @@
+{
+  "proposal_id": "prop-2026-08-11-032",
+  "proposed_by": "test-agent",
+  "proposed_at": "2026-08-11T09:06:51.813240+00:00Z",
+  "status": "pending",
+  "proposed_memory": {
+    "scope": "runtime",
+    "title": "Metadata Test",
+    "summary": "Testing that proposals have sufficient metadata for review",
+    "importance": "high",
+    "tags": [
+      "test",
+      "metadata"
+    ]
+  },
+  "rationale": "This tests that proposals include all necessary metadata for governance review",
+  "review_notes": []
+}

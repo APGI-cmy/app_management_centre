@@ -1,0 +1,29 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\Johan\.copilot\repos\app_management_centre
+configfile: pytest.ini
+plugins: asyncio-1.4.0, cov-7.1.0, mock-3.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 995 items / 982 deselected / 13 selected
+
+<Dir app_management_centre>
+  <Package tests>
+    <Package wave0_minimum_red>
+      <Module test_integration_sanity.py>
+        <Class TestTaskLifecycleTransitions>
+          <Function test_task_created_to_assigned_transition>
+          <Function test_task_assigned_to_in_progress_transition>
+          <Function test_task_in_progress_to_completed_transition>
+          <Function test_task_cannot_skip_states>
+          <Function test_task_state_transitions_are_logged>
+          <Function test_task_lifecycle_validates_prerequisites>
+        <Class TestObservableFailureStates>
+          <Function test_task_failure_creates_explicit_failed_state>
+          <Function test_failure_includes_explicit_reason>
+          <Function test_failure_includes_diagnostic_information>
+          <Function test_failure_state_creates_blocker>
+          <Function test_failure_observable_in_program_status>
+          <Function test_failure_triggers_escalation_notification>
+          <Function test_failure_recovery_path_is_documented>
+
+============== 13/995 tests collected (982 deselected) in 0.78s ===============

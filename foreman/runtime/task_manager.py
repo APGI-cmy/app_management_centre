@@ -5,7 +5,7 @@ Implements task assignment, execution tracking, and completion validation.
 """
 
 from typing import Any
-from datetime import datetime
+from datetime import datetime, UTC
 import uuid
 
 from foreman.domain.task import Task, TaskState

@@ -1,0 +1,302 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Johan\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Johan\.copilot\repos\app_management_centre
+configfile: pytest.ini
+plugins: asyncio-1.4.0, cov-7.1.0, mock-3.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 19 items
+
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_001_required_workflow_family_exists FAILED [  5%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_002_production_jobs_use_protected_environment FAILED [ 10%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_003_non_production_jobs_cannot_reference_production_secrets FAILED [ 15%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_004_migration_command_is_frozen FAILED [ 21%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_006_required_runtime_and_workflow_variables_exist_in_env_example FAILED [ 26%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_007_health_and_smoke_evidence_exists FAILED [ 31%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_010_placeholder_evidence_is_rejected FAILED [ 36%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_config_001_startup_fails_if_any_required_env_is_missing FAILED [ 42%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_config_002_startup_error_names_missing_variable_explicitly FAILED [ 47%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_config_003_all_required_env_vars_are_individually_validated FAILED [ 52%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des001_001_frontend_deploy_ownership_is_exclusive FAILED [ 57%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des001_002_db_migration_ownership_is_exclusive FAILED [ 63%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des002_001_ci_runner_is_ubuntu_latest FAILED [ 68%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des003_001_no_workflow_uses_self_hosted_runner FAILED [ 73%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des004_001_db_migrate_uses_exact_command FAILED [ 78%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des005_001_db_migrate_trigger_is_manual_only FAILED [ 84%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des006_001_frontend_workflow_has_no_db_mutation_step FAILED [ 89%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des007_001_frontend_production_job_has_protected_environment FAILED [ 94%]
+tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des008_001_missing_next_public_supabase_url_fails_explicitly FAILED [100%]
+
+================================== FAILURES ===================================
+_____________ test_qa_deploy_001_required_workflow_family_exists ______________
+tests\amc\stage6\test_issue_1226_stage6_red.py:91: in test_qa_deploy_001_required_workflow_family_exists
+    assert not missing, (
+E   AssertionError: QA-DEPLOY-001: required workflow family missing/renamed without disposition: ci.yml, deploy-frontend.yml, db-migrate.yml
+E   assert not ['ci.yml', 'deploy-frontend.yml', 'db-migrate.yml']
+________ test_qa_deploy_002_production_jobs_use_protected_environment _________
+tests\amc\stage6\test_issue_1226_stage6_red.py:98: in test_qa_deploy_002_production_jobs_use_protected_environment
+    frontend = _workflow_payload(FRONTEND_WORKFLOW, "QA-DEPLOY-002")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\amc\stage6\test_issue_1226_stage6_red.py:32: in _workflow_payload
+    assert path.exists(), (
+E   AssertionError: QA-DEPLOY-002: workflow 'deploy-frontend.yml' is missing, so the ownership/control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/deploy-frontend.yml').exists
+_ test_qa_deploy_003_non_production_jobs_cannot_reference_production_secrets __
+tests\amc\stage6\test_issue_1226_stage6_red.py:116: in test_qa_deploy_003_non_production_jobs_cannot_reference_production_secrets
+    _workflow_text(CI_WORKFLOW, "QA-DEPLOY-003")
+tests\amc\stage6\test_issue_1226_stage6_red.py:41: in _workflow_text
+    assert path.exists(), (
+E   AssertionError: QA-DEPLOY-003: workflow 'ci.yml' is missing, so the deployment control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/ci.yml').exists
+_______________ test_qa_deploy_004_migration_command_is_frozen ________________
+tests\amc\stage6\test_issue_1226_stage6_red.py:127: in test_qa_deploy_004_migration_command_is_frozen
+    migration_text = _workflow_text(MIGRATION_WORKFLOW, "QA-DEPLOY-004")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\amc\stage6\test_issue_1226_stage6_red.py:41: in _workflow_text
+    assert path.exists(), (
+E   AssertionError: QA-DEPLOY-004: workflow 'db-migrate.yml' is missing, so the deployment control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/db-migrate.yml').exists
+_ test_qa_deploy_006_required_runtime_and_workflow_variables_exist_in_env_example _
+tests\amc\stage6\test_issue_1226_stage6_red.py:140: in test_qa_deploy_006_required_runtime_and_workflow_variables_exist_in_env_example
+    assert not missing, (
+E   AssertionError: QA-DEPLOY-006: required variable(s) absent from .env.example: SUPABASE_PROJECT_REF
+E   assert not ['SUPABASE_PROJECT_REF']
+_____________ test_qa_deploy_007_health_and_smoke_evidence_exists _____________
+tests\amc\stage6\test_issue_1226_stage6_red.py:148: in test_qa_deploy_007_health_and_smoke_evidence_exists
+    assert health_smoke_evidence.exists(), (
+E   AssertionError: QA-DEPLOY-007: deployment evidence lacks app/API/Supabase/realtime health-smoke validation artifact.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/qa/evidence/issue-1226/DEPLOYMENT_HEALTH_SMOKE_EVIDENCE.md').exists
+_____________ test_qa_deploy_010_placeholder_evidence_is_rejected _____________
+tests\amc\stage6\test_issue_1226_stage6_red.py:156: in test_qa_deploy_010_placeholder_evidence_is_rejected
+    assert placeholder_disposition.exists(), (
+E   AssertionError: QA-DEPLOY-010: placeholder evidence disposition record is missing.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/qa/evidence/issue-1226/PLACEHOLDER_EVIDENCE_DISPOSITION.md').exists
+_______ test_qa_config_001_startup_fails_if_any_required_env_is_missing _______
+tests\amc\stage6\test_issue_1226_stage6_red.py:171: in test_qa_config_001_startup_fails_if_any_required_env_is_missing
+    assert not missing_runtime_checks, (
+E   AssertionError: QA-CONFIG-001: startup runtime does not enforce required variable(s): AIMCC_API_BASE_URL, AIMCC_SERVICE_TOKEN, AIMC_API_BASE_URL, AIMC_SERVICE_TOKEN, FOREMAN_API_BASE_URL, FOREMAN_SERVICE_TOKEN, KNOWLEDGE_API_BASE_URL, KNOWLEDGE_SERVICE_TOKEN, KUC_API_BASE_URL, KUC_SERVICE_TOKEN, SPECIALIST_AGENT_API_BASE_URL, SPECIALIST_AGENT_SERVICE_TOKEN
+E   assert not ['AIMCC_API_BASE_URL', 'AIMCC_SERVICE_TOKEN', 'AIMC_API_BASE_URL', 'AIMC_SERVICE_TOKEN', 'FOREMAN_API_BASE_URL', 'FOREMAN_SERVICE_TOKEN', 'KNOWLEDGE_API_BASE_URL', 'KNOWLEDGE_SERVICE_TOKEN', 'KUC_API_BASE_URL', 'KUC_SERVICE_TOKEN', 'SPECIALIST_AGENT_API_BASE_URL', 'SPECIALIST_AGENT_SERVICE_TOKEN']
+_____ test_qa_config_002_startup_error_names_missing_variable_explicitly ______
+tests\amc\stage6\test_issue_1226_stage6_red.py:190: in test_qa_config_002_startup_error_names_missing_variable_explicitly
+    assert explicit_error_paths, (
+E   AssertionError: QA-CONFIG-002: startup runtime does not show explicit named missing-variable error handling.
+E   assert []
+_____ test_qa_config_003_all_required_env_vars_are_individually_validated _____
+tests\amc\stage6\test_issue_1226_stage6_red.py:200: in test_qa_config_003_all_required_env_vars_are_individually_validated
+    assert sources_with_checks == WAVE1_STARTUP_REQUIRED_VARS, (
+E   AssertionError: QA-CONFIG-003: full required startup-variable validation set is incomplete. Validated=0/12
+E   assert set() == {'FOREMAN_API_BASE_URL', 'AIMC_SERVICE_TOKEN', 'AIMCC_SERVICE_TOKEN', 'KNOWLEDGE_SERVICE_TOKEN', 'SPECIALIST_AGENT_API_BASE_URL', 'AIMC_API_BASE_URL', 'SPECIALIST_AGENT_SERVICE_TOKEN', 'KUC_API_BASE_URL', 'FOREMAN_SERVICE_TOKEN', 'KNOWLEDGE_API_BASE_URL', 'AIMCC_API_BASE_URL', 'KUC_SERVICE_TOKEN'}
+E     
+E     Extra items in the right set:
+E     'FOREMAN_API_BASE_URL'
+E     'AIMC_SERVICE_TOKEN'
+E     'AIMCC_SERVICE_TOKEN'
+E     'KNOWLEDGE_SERVICE_TOKEN'
+E     'SPECIALIST_AGENT_API_BASE_URL'
+E     'AIMC_API_BASE_URL'
+E     'SPECIALIST_AGENT_SERVICE_TOKEN'
+E     'KUC_API_BASE_URL'
+E     'FOREMAN_SERVICE_TOKEN'
+E     'KNOWLEDGE_API_BASE_URL'
+E     'AIMCC_API_BASE_URL'
+E     'KUC_SERVICE_TOKEN'
+E     
+E     Full diff:
+E     + set()
+E     - {
+E     -     'AIMCC_API_BASE_URL',
+E     -     'AIMCC_SERVICE_TOKEN',
+E     -     'AIMC_API_BASE_URL',
+E     -     'AIMC_SERVICE_TOKEN',
+E     -     'FOREMAN_API_BASE_URL',
+E     -     'FOREMAN_SERVICE_TOKEN',
+E     -     'KNOWLEDGE_API_BASE_URL',
+E     -     'KNOWLEDGE_SERVICE_TOKEN',
+E     -     'KUC_API_BASE_URL',
+E     -     'KUC_SERVICE_TOKEN',
+E     -     'SPECIALIST_AGENT_API_BASE_URL',
+E     -     'SPECIALIST_AGENT_SERVICE_TOKEN',
+E     - }
+__________ test_qa_des001_001_frontend_deploy_ownership_is_exclusive __________
+tests\amc\stage6\test_issue_1226_stage6_red.py:207: in test_qa_des001_001_frontend_deploy_ownership_is_exclusive
+    _workflow_payload(FRONTEND_WORKFLOW, "QA-DES001-001")
+tests\amc\stage6\test_issue_1226_stage6_red.py:32: in _workflow_payload
+    assert path.exists(), (
+E   AssertionError: QA-DES001-001: workflow 'deploy-frontend.yml' is missing, so the ownership/control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/deploy-frontend.yml').exists
+___________ test_qa_des001_002_db_migration_ownership_is_exclusive ____________
+tests\amc\stage6\test_issue_1226_stage6_red.py:217: in test_qa_des001_002_db_migration_ownership_is_exclusive
+    _workflow_payload(MIGRATION_WORKFLOW, "QA-DES001-002")
+tests\amc\stage6\test_issue_1226_stage6_red.py:32: in _workflow_payload
+    assert path.exists(), (
+E   AssertionError: QA-DES001-002: workflow 'db-migrate.yml' is missing, so the ownership/control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/db-migrate.yml').exists
+________________ test_qa_des002_001_ci_runner_is_ubuntu_latest ________________
+tests\amc\stage6\test_issue_1226_stage6_red.py:227: in test_qa_des002_001_ci_runner_is_ubuntu_latest
+    ci_payload = _workflow_payload(CI_WORKFLOW, "QA-DES002-001")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\amc\stage6\test_issue_1226_stage6_red.py:32: in _workflow_payload
+    assert path.exists(), (
+E   AssertionError: QA-DES002-001: workflow 'ci.yml' is missing, so the ownership/control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/ci.yml').exists
+___________ test_qa_des003_001_no_workflow_uses_self_hosted_runner ____________
+tests\amc\stage6\test_issue_1226_stage6_red.py:240: in test_qa_des003_001_no_workflow_uses_self_hosted_runner
+    assert not missing, (
+E   AssertionError: QA-DES003-001: required workflows missing, cannot satisfy repository-wide runner validation: ci.yml, deploy-frontend.yml, db-migrate.yml
+E   assert not ['ci.yml', 'deploy-frontend.yml', 'db-migrate.yml']
+______________ test_qa_des004_001_db_migrate_uses_exact_command _______________
+tests\amc\stage6\test_issue_1226_stage6_red.py:262: in test_qa_des004_001_db_migrate_uses_exact_command
+    migration_text = _workflow_text(MIGRATION_WORKFLOW, "QA-DES004-001")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\amc\stage6\test_issue_1226_stage6_red.py:41: in _workflow_text
+    assert path.exists(), (
+E   AssertionError: QA-DES004-001: workflow 'db-migrate.yml' is missing, so the deployment control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/db-migrate.yml').exists
+____________ test_qa_des005_001_db_migrate_trigger_is_manual_only _____________
+tests\amc\stage6\test_issue_1226_stage6_red.py:269: in test_qa_des005_001_db_migrate_trigger_is_manual_only
+    migration_payload = _workflow_payload(MIGRATION_WORKFLOW, "QA-DES005-001")
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\amc\stage6\test_issue_1226_stage6_red.py:32: in _workflow_payload
+    assert path.exists(), (
+E   AssertionError: QA-DES005-001: workflow 'db-migrate.yml' is missing, so the ownership/control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/db-migrate.yml').exists
+________ test_qa_des006_001_frontend_workflow_has_no_db_mutation_step _________
+tests\amc\stage6\test_issue_1226_stage6_red.py:279: in test_qa_des006_001_frontend_workflow_has_no_db_mutation_step
+    frontend_text = _workflow_text(FRONTEND_WORKFLOW, "QA-DES006-001")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\amc\stage6\test_issue_1226_stage6_red.py:41: in _workflow_text
+    assert path.exists(), (
+E   AssertionError: QA-DES006-001: workflow 'deploy-frontend.yml' is missing, so the deployment control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/deploy-frontend.yml').exists
+____ test_qa_des007_001_frontend_production_job_has_protected_environment _____
+tests\amc\stage6\test_issue_1226_stage6_red.py:286: in test_qa_des007_001_frontend_production_job_has_protected_environment
+    frontend_payload = _workflow_payload(FRONTEND_WORKFLOW, "QA-DES007-001")
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\amc\stage6\test_issue_1226_stage6_red.py:32: in _workflow_payload
+    assert path.exists(), (
+E   AssertionError: QA-DES007-001: workflow 'deploy-frontend.yml' is missing, so the ownership/control requirement is unmet.
+E   assert False
+E    +  where False = exists()
+E    +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/deploy-frontend.yml').exists
+____ test_qa_des008_001_missing_next_public_supabase_url_fails_explicitly _____
+tests\amc\stage6\test_issue_1226_stage6_red.py:300: in test_qa_des008_001_missing_next_public_supabase_url_fails_explicitly
+    assert matches, (
+E   AssertionError: QA-DES008-001: startup runtime has no explicit NEXT_PUBLIC_SUPABASE_URL validation path.
+E   assert []
+=========================== short test summary info ===========================
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_001_required_workflow_family_exists - AssertionError: QA-DEPLOY-001: required workflow family missing/renamed without disposition: ci.yml, deploy-frontend.yml, db-migrate.yml
+assert not ['ci.yml', 'deploy-frontend.yml', 'db-migrate.yml']
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_002_production_jobs_use_protected_environment - AssertionError: QA-DEPLOY-002: workflow 'deploy-frontend.yml' is missing, so the ownership/control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/deploy-frontend.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_003_non_production_jobs_cannot_reference_production_secrets - AssertionError: QA-DEPLOY-003: workflow 'ci.yml' is missing, so the deployment control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/ci.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_004_migration_command_is_frozen - AssertionError: QA-DEPLOY-004: workflow 'db-migrate.yml' is missing, so the deployment control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/db-migrate.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_006_required_runtime_and_workflow_variables_exist_in_env_example - AssertionError: QA-DEPLOY-006: required variable(s) absent from .env.example: SUPABASE_PROJECT_REF
+assert not ['SUPABASE_PROJECT_REF']
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_007_health_and_smoke_evidence_exists - AssertionError: QA-DEPLOY-007: deployment evidence lacks app/API/Supabase/realtime health-smoke validation artifact.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/qa/evidence/issue-1226/DEPLOYMENT_HEALTH_SMOKE_EVIDENCE.md').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_deploy_010_placeholder_evidence_is_rejected - AssertionError: QA-DEPLOY-010: placeholder evidence disposition record is missing.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/qa/evidence/issue-1226/PLACEHOLDER_EVIDENCE_DISPOSITION.md').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_config_001_startup_fails_if_any_required_env_is_missing - AssertionError: QA-CONFIG-001: startup runtime does not enforce required variable(s): AIMCC_API_BASE_URL, AIMCC_SERVICE_TOKEN, AIMC_API_BASE_URL, AIMC_SERVICE_TOKEN, FOREMAN_API_BASE_URL, FOREMAN_SERVICE_TOKEN, KNOWLEDGE_API_BASE_URL, KNOWLEDGE_SERVICE_TOKEN, KUC_API_BASE_URL, KUC_SERVICE_TOKEN, SPECIALIST_AGENT_API_BASE_URL, SPECIALIST_AGENT_SERVICE_TOKEN
+assert not ['AIMCC_API_BASE_URL', 'AIMCC_SERVICE_TOKEN', 'AIMC_API_BASE_URL', 'AIMC_SERVICE_TOKEN', 'FOREMAN_API_BASE_URL', 'FOREMAN_SERVICE_TOKEN', 'KNOWLEDGE_API_BASE_URL', 'KNOWLEDGE_SERVICE_TOKEN', 'KUC_API_BASE_URL', 'KUC_SERVICE_TOKEN', 'SPECIALIST_AGENT_API_BASE_URL', 'SPECIALIST_AGENT_SERVICE_TOKEN']
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_config_002_startup_error_names_missing_variable_explicitly - AssertionError: QA-CONFIG-002: startup runtime does not show explicit named missing-variable error handling.
+assert []
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_config_003_all_required_env_vars_are_individually_validated - AssertionError: QA-CONFIG-003: full required startup-variable validation set is incomplete. Validated=0/12
+assert set() == {'FOREMAN_API_BASE_URL', 'AIMC_SERVICE_TOKEN', 'AIMCC_SERVICE_TOKEN', 'KNOWLEDGE_SERVICE_TOKEN', 'SPECIALIST_AGENT_API_BASE_URL', 'AIMC_API_BASE_URL', 'SPECIALIST_AGENT_SERVICE_TOKEN', 'KUC_API_BASE_URL', 'FOREMAN_SERVICE_TOKEN', 'KNOWLEDGE_API_BASE_URL', 'AIMCC_API_BASE_URL', 'KUC_SERVICE_TOKEN'}
+  
+  Extra items in the right set:
+  'FOREMAN_API_BASE_URL'
+  'AIMC_SERVICE_TOKEN'
+  'AIMCC_SERVICE_TOKEN'
+  'KNOWLEDGE_SERVICE_TOKEN'
+  'SPECIALIST_AGENT_API_BASE_URL'
+  'AIMC_API_BASE_URL'
+  'SPECIALIST_AGENT_SERVICE_TOKEN'
+  'KUC_API_BASE_URL'
+  'FOREMAN_SERVICE_TOKEN'
+  'KNOWLEDGE_API_BASE_URL'
+  'AIMCC_API_BASE_URL'
+  'KUC_SERVICE_TOKEN'
+  
+  Full diff:
+  + set()
+  - {
+  -     'AIMCC_API_BASE_URL',
+  -     'AIMCC_SERVICE_TOKEN',
+  -     'AIMC_API_BASE_URL',
+  -     'AIMC_SERVICE_TOKEN',
+  -     'FOREMAN_API_BASE_URL',
+  -     'FOREMAN_SERVICE_TOKEN',
+  -     'KNOWLEDGE_API_BASE_URL',
+  -     'KNOWLEDGE_SERVICE_TOKEN',
+  -     'KUC_API_BASE_URL',
+  -     'KUC_SERVICE_TOKEN',
+  -     'SPECIALIST_AGENT_API_BASE_URL',
+  -     'SPECIALIST_AGENT_SERVICE_TOKEN',
+  - }
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des001_001_frontend_deploy_ownership_is_exclusive - AssertionError: QA-DES001-001: workflow 'deploy-frontend.yml' is missing, so the ownership/control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/deploy-frontend.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des001_002_db_migration_ownership_is_exclusive - AssertionError: QA-DES001-002: workflow 'db-migrate.yml' is missing, so the ownership/control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/db-migrate.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des002_001_ci_runner_is_ubuntu_latest - AssertionError: QA-DES002-001: workflow 'ci.yml' is missing, so the ownership/control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/ci.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des003_001_no_workflow_uses_self_hosted_runner - AssertionError: QA-DES003-001: required workflows missing, cannot satisfy repository-wide runner validation: ci.yml, deploy-frontend.yml, db-migrate.yml
+assert not ['ci.yml', 'deploy-frontend.yml', 'db-migrate.yml']
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des004_001_db_migrate_uses_exact_command - AssertionError: QA-DES004-001: workflow 'db-migrate.yml' is missing, so the deployment control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/db-migrate.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des005_001_db_migrate_trigger_is_manual_only - AssertionError: QA-DES005-001: workflow 'db-migrate.yml' is missing, so the ownership/control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/db-migrate.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des006_001_frontend_workflow_has_no_db_mutation_step - AssertionError: QA-DES006-001: workflow 'deploy-frontend.yml' is missing, so the deployment control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/deploy-frontend.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des007_001_frontend_production_job_has_protected_environment - AssertionError: QA-DES007-001: workflow 'deploy-frontend.yml' is missing, so the ownership/control requirement is unmet.
+assert False
+ +  where False = exists()
+ +    where exists = WindowsPath('C:/Users/Johan/.copilot/repos/app_management_centre/.github/workflows/deploy-frontend.yml').exists
+FAILED tests/amc/stage6/test_issue_1226_stage6_red.py::test_qa_des008_001_missing_next_public_supabase_url_fails_explicitly - AssertionError: QA-DES008-001: startup runtime has no explicit NEXT_PUBLIC_SUPABASE_URL validation path.
+assert []
+============================= 19 failed in 0.27s ==============================

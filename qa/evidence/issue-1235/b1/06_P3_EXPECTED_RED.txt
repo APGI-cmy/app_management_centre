@@ -1,0 +1,163 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Johan\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Johan\.copilot\repos\app_management_centre
+configfile: pytest.ini
+plugins: asyncio-1.4.0, cov-7.1.0, mock-3.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 25 items
+
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_211_state_persistence_across_flow FAILED [  4%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_212_evidence_generation_across_flow FAILED [  8%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_213_authorization_checks_across_flow FAILED [ 12%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_214_timeout_handling_in_flow FAILED [ 16%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_215_flow_cancellation FAILED [ 20%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_216_escalation_end_to_end FAILED [ 24%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_217_escalation_trigger_detection FAILED [ 28%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_218_escalation_creation FAILED [ 32%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_219_escalation_routing FAILED [ 36%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_220_escalation_presentation FAILED [ 40%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_221_escalation_decision FAILED [ 44%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_222_escalation_resolution FAILED [ 48%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_223_escalation_timeout FAILED [ 52%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_224_multiple_concurrent_escalations FAILED [ 56%]
+tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_225_escalation_error_handling FAILED [ 60%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_416_assign_priority FAILED [ 64%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_417_sort_by_priority FAILED [ 68%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_418_priority_change_workflow FAILED [ 72%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_419_priority_escalation FAILED [ 76%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_420_priority_display FAILED [ 80%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_421_bulk_select FAILED [ 84%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_422_bulk_priority_update FAILED [ 88%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_423_bulk_archive FAILED [ 92%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_424_bulk_export FAILED [ 96%]
+tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_425_bulk_error_handling FAILED [100%]
+
+================================== FAILURES ===================================
+_____ TestAdvancedFlowScenarios.test_qa_211_state_persistence_across_flow _____
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:39: in test_qa_211_state_persistence_across_flow
+    raise NotImplementedError("QA-211: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-211: To be implemented by qa-builder in Subwave 2.5
+____ TestAdvancedFlowScenarios.test_qa_212_evidence_generation_across_flow ____
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:52: in test_qa_212_evidence_generation_across_flow
+    raise NotImplementedError("QA-212: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-212: To be implemented by qa-builder in Subwave 2.5
+___ TestAdvancedFlowScenarios.test_qa_213_authorization_checks_across_flow ____
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:65: in test_qa_213_authorization_checks_across_flow
+    raise NotImplementedError("QA-213: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-213: To be implemented by qa-builder in Subwave 2.5
+_______ TestAdvancedFlowScenarios.test_qa_214_timeout_handling_in_flow ________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:78: in test_qa_214_timeout_handling_in_flow
+    raise NotImplementedError("QA-214: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-214: To be implemented by qa-builder in Subwave 2.5
+___________ TestAdvancedFlowScenarios.test_qa_215_flow_cancellation ___________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:91: in test_qa_215_flow_cancellation
+    raise NotImplementedError("QA-215: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-215: To be implemented by qa-builder in Subwave 2.5
+____________ TestEscalationFlow.test_qa_216_escalation_end_to_end _____________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:110: in test_qa_216_escalation_end_to_end
+    raise NotImplementedError("QA-216: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-216: To be implemented by qa-builder in Subwave 2.5
+_________ TestEscalationFlow.test_qa_217_escalation_trigger_detection _________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:123: in test_qa_217_escalation_trigger_detection
+    raise NotImplementedError("QA-217: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-217: To be implemented by qa-builder in Subwave 2.5
+_____________ TestEscalationFlow.test_qa_218_escalation_creation ______________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:136: in test_qa_218_escalation_creation
+    raise NotImplementedError("QA-218: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-218: To be implemented by qa-builder in Subwave 2.5
+______________ TestEscalationFlow.test_qa_219_escalation_routing ______________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:149: in test_qa_219_escalation_routing
+    raise NotImplementedError("QA-219: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-219: To be implemented by qa-builder in Subwave 2.5
+___________ TestEscalationFlow.test_qa_220_escalation_presentation ____________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:162: in test_qa_220_escalation_presentation
+    raise NotImplementedError("QA-220: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-220: To be implemented by qa-builder in Subwave 2.5
+_____________ TestEscalationFlow.test_qa_221_escalation_decision ______________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:175: in test_qa_221_escalation_decision
+    raise NotImplementedError("QA-221: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-221: To be implemented by qa-builder in Subwave 2.5
+____________ TestEscalationFlow.test_qa_222_escalation_resolution _____________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:188: in test_qa_222_escalation_resolution
+    raise NotImplementedError("QA-222: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-222: To be implemented by qa-builder in Subwave 2.5
+______________ TestEscalationFlow.test_qa_223_escalation_timeout ______________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:201: in test_qa_223_escalation_timeout
+    raise NotImplementedError("QA-223: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-223: To be implemented by qa-builder in Subwave 2.5
+_______ TestEscalationFlow.test_qa_224_multiple_concurrent_escalations ________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:214: in test_qa_224_multiple_concurrent_escalations
+    raise NotImplementedError("QA-224: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-224: To be implemented by qa-builder in Subwave 2.5
+__________ TestEscalationFlow.test_qa_225_escalation_error_handling ___________
+tests\wave2_0_qa_infrastructure\test_advanced_flow_scenarios.py:227: in test_qa_225_escalation_error_handling
+    raise NotImplementedError("QA-225: To be implemented by qa-builder in Subwave 2.5")
+E   NotImplementedError: QA-225: To be implemented by qa-builder in Subwave 2.5
+___________ TestPrioritizationFeatures.test_qa_416_assign_priority ____________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:23: in test_qa_416_assign_priority
+    raise NotImplementedError("QA-416: To be implemented by ui-builder")
+E   NotImplementedError: QA-416: To be implemented by ui-builder
+___________ TestPrioritizationFeatures.test_qa_417_sort_by_priority ___________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:27: in test_qa_417_sort_by_priority
+    raise NotImplementedError("QA-417: To be implemented by ui-builder")
+E   NotImplementedError: QA-417: To be implemented by ui-builder
+_______ TestPrioritizationFeatures.test_qa_418_priority_change_workflow _______
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:31: in test_qa_418_priority_change_workflow
+    raise NotImplementedError("QA-418: To be implemented by ui-builder")
+E   NotImplementedError: QA-418: To be implemented by ui-builder
+_________ TestPrioritizationFeatures.test_qa_419_priority_escalation __________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:35: in test_qa_419_priority_escalation
+    raise NotImplementedError("QA-419: To be implemented by ui-builder")
+E   NotImplementedError: QA-419: To be implemented by ui-builder
+___________ TestPrioritizationFeatures.test_qa_420_priority_display ___________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:39: in test_qa_420_priority_display
+    raise NotImplementedError("QA-420: To be implemented by ui-builder")
+E   NotImplementedError: QA-420: To be implemented by ui-builder
+_________________ TestBulkOperations.test_qa_421_bulk_select __________________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:49: in test_qa_421_bulk_select
+    raise NotImplementedError("QA-421: To be implemented by ui-builder")
+E   NotImplementedError: QA-421: To be implemented by ui-builder
+_____________ TestBulkOperations.test_qa_422_bulk_priority_update _____________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:53: in test_qa_422_bulk_priority_update
+    raise NotImplementedError("QA-422: To be implemented by ui-builder")
+E   NotImplementedError: QA-422: To be implemented by ui-builder
+_________________ TestBulkOperations.test_qa_423_bulk_archive _________________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:57: in test_qa_423_bulk_archive
+    raise NotImplementedError("QA-423: To be implemented by ui-builder")
+E   NotImplementedError: QA-423: To be implemented by ui-builder
+_________________ TestBulkOperations.test_qa_424_bulk_export __________________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:61: in test_qa_424_bulk_export
+    raise NotImplementedError("QA-424: To be implemented by ui-builder")
+E   NotImplementedError: QA-424: To be implemented by ui-builder
+_____________ TestBulkOperations.test_qa_425_bulk_error_handling ______________
+tests\wave2_0_qa_infrastructure\test_parking_station_advanced.py:65: in test_qa_425_bulk_error_handling
+    raise NotImplementedError("QA-425: To be implemented by ui-builder")
+E   NotImplementedError: QA-425: To be implemented by ui-builder
+=========================== short test summary info ===========================
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_211_state_persistence_across_flow - NotImplementedError: QA-211: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_212_evidence_generation_across_flow - NotImplementedError: QA-212: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_213_authorization_checks_across_flow - NotImplementedError: QA-213: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_214_timeout_handling_in_flow - NotImplementedError: QA-214: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestAdvancedFlowScenarios::test_qa_215_flow_cancellation - NotImplementedError: QA-215: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_216_escalation_end_to_end - NotImplementedError: QA-216: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_217_escalation_trigger_detection - NotImplementedError: QA-217: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_218_escalation_creation - NotImplementedError: QA-218: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_219_escalation_routing - NotImplementedError: QA-219: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_220_escalation_presentation - NotImplementedError: QA-220: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_221_escalation_decision - NotImplementedError: QA-221: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_222_escalation_resolution - NotImplementedError: QA-222: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_223_escalation_timeout - NotImplementedError: QA-223: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_224_multiple_concurrent_escalations - NotImplementedError: QA-224: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_advanced_flow_scenarios.py::TestEscalationFlow::test_qa_225_escalation_error_handling - NotImplementedError: QA-225: To be implemented by qa-builder in Subwave 2.5
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_416_assign_priority - NotImplementedError: QA-416: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_417_sort_by_priority - NotImplementedError: QA-417: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_418_priority_change_workflow - NotImplementedError: QA-418: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_419_priority_escalation - NotImplementedError: QA-419: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestPrioritizationFeatures::test_qa_420_priority_display - NotImplementedError: QA-420: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_421_bulk_select - NotImplementedError: QA-421: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_422_bulk_priority_update - NotImplementedError: QA-422: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_423_bulk_archive - NotImplementedError: QA-423: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_424_bulk_export - NotImplementedError: QA-424: To be implemented by ui-builder
+FAILED tests/wave2_0_qa_infrastructure/test_parking_station_advanced.py::TestBulkOperations::test_qa_425_bulk_error_handling - NotImplementedError: QA-425: To be implemented by ui-builder
+============================= 25 failed in 0.15s ==============================

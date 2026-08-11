@@ -1,0 +1,18 @@
+{
+  "proposal_id": "prop-2026-08-11-031",
+  "proposed_by": "test-agent",
+  "proposed_at": "2026-08-11T09:06:51.807240+00:00Z",
+  "status": "pending",
+  "proposed_memory": {
+    "scope": "foreman",
+    "title": "Review Path Test",
+    "summary": "Testing that proposals are visible for governance review",
+    "importance": "high",
+    "tags": [
+      "test",
+      "review"
+    ]
+  },
+  "rationale": "This tests that pending proposals can be listed and are visible for human review",
+  "review_notes": []
+}

@@ -54,7 +54,7 @@ class TestCommissioningWizardSpec:
         Expected: Purpose section explaining wizard objective
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "## Purpose" in content or "Purpose" in content, \
             "Spec must include Purpose section"
@@ -77,7 +77,7 @@ class TestUXPrinciples:
         Expected: No skipping ahead, steps must be completed in order
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "linear" in content.lower() or "Linear" in content, \
             "Spec must define linear flow principle"
@@ -92,7 +92,7 @@ class TestUXPrinciples:
         Expected: Every step has explicit, actionable instructions
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "clear instructions" in content.lower() or "Clear Instructions" in content, \
             "Spec must define clear instructions principle"
@@ -107,7 +107,7 @@ class TestUXPrinciples:
         Expected: Show feedback after each validation
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "validation feedback" in content.lower() or "Validation Feedback" in content, \
             "Spec must define validation feedback principle"
@@ -125,7 +125,7 @@ class TestUXPrinciples:
         Expected: Every state change must be visible
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "no silent" in content.lower() or "No Silent" in content, \
             "Spec must define no silent progress principle"
@@ -145,7 +145,7 @@ class TestStepDefinitions:
         Expected: Welcome, validations, final check, complete
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         # Count step definitions
         step_count = content.count("### Step ")
@@ -159,7 +159,7 @@ class TestStepDefinitions:
         Expected: Step validating memory fabric and lifecycle
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Memory" in content and "Validation" in content, \
             "Must include memory validation step"
@@ -174,7 +174,7 @@ class TestStepDefinitions:
         Expected: Step validating governance structure
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Governance" in content and "Validation" in content, \
             "Must include governance validation step"
@@ -186,7 +186,7 @@ class TestStepDefinitions:
         Expected: Comprehensive readiness check before commissioning
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Final" in content and ("Check" in content or "System" in content), \
             "Must include final check step"
@@ -198,7 +198,7 @@ class TestStepDefinitions:
         Expected: Confirmation and access grant
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Complete" in content or "Success" in content, \
             "Must include completion step"
@@ -215,7 +215,7 @@ class TestUIComponents:
         Expected: Shows current step and completion percentage
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Progress Bar" in content or "progress bar" in content.lower(), \
             "Must specify progress bar component"
@@ -227,7 +227,7 @@ class TestUIComponents:
         Expected: Shows validation results for each step
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Status Card" in content or "status card" in content.lower(), \
             "Must specify status card component"
@@ -239,7 +239,7 @@ class TestUIComponents:
         Expected: Prevents skipping steps
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Blocker Modal" in content or "blocker modal" in content.lower(), \
             "Must specify blocker modal component"
@@ -259,7 +259,7 @@ class TestNavigationRules:
         Expected: No skipping ahead, no exiting wizard
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Prohibited Navigation" in content or "prohibited navigation" in content.lower(), \
             "Must define prohibited navigation"
@@ -277,7 +277,7 @@ class TestNavigationRules:
         Expected: All routes redirect to wizard until complete
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "redirect" in content.lower(), \
             "Must define redirection behavior"
@@ -297,7 +297,7 @@ class TestBatch2Constraints:
         Expected: Clear statement about no auto-activation
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "auto-activate" in content.lower() or "Auto-activate" in content, \
             "Spec must address auto-activation"
@@ -313,7 +313,7 @@ class TestBatch2Constraints:
         Expected: No automatic progression through steps
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "auto-advance" in content.lower() or "Auto-advance" in content, \
             "Spec must address auto-advance"
@@ -325,7 +325,7 @@ class TestBatch2Constraints:
         Expected: Documentation of human-in-loop requirement
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "explicit" in content.lower() and "action" in content.lower(), \
             "Spec must require explicit human action"
@@ -337,7 +337,7 @@ class TestBatch2Constraints:
         Expected: Statement: "This UI does not trigger execution, builds, or external delegation"
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "does not trigger execution" in content.lower() or "does NOT trigger execution" in content, \
             "Spec must include critical statement about no execution"
@@ -357,7 +357,7 @@ class TestIntegrationPoints:
         Expected: Description of how wizard uses RequirementLoader
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "RequirementLoader" in content, \
             "Spec must document RequirementLoader integration"
@@ -372,7 +372,7 @@ class TestIntegrationPoints:
         Expected: Description of state management
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "CommissioningController" in content, \
             "Spec must document CommissioningController integration"
@@ -389,7 +389,7 @@ class TestAccessibility:
         Expected: Tab, Enter, Escape support
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Keyboard" in content or "keyboard" in content.lower(), \
             "Spec must define keyboard navigation"
@@ -401,7 +401,7 @@ class TestAccessibility:
         Expected: ARIA labels and announcements
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "Screen Reader" in content or "screen reader" in content.lower(), \
             "Spec must define screen reader support"
@@ -421,7 +421,7 @@ class TestAcceptanceCriteria:
         Expected: Documentation of step-lock mechanism
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "linear" in content.lower(), \
             "Must document linear flow"
@@ -435,7 +435,7 @@ class TestAcceptanceCriteria:
         Expected: Instruction format defined
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "DO THIS NOW" in content, \
             "Must define clear instruction format"
@@ -447,7 +447,7 @@ class TestAcceptanceCriteria:
         Expected: Status sidebar or equivalent
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "status" in content.lower() and "visible" in content.lower(), \
             "Must ensure status visibility"
@@ -459,7 +459,7 @@ class TestAcceptanceCriteria:
         Expected: Navigation rules prevent accessing main app
         """
         spec_path = project_root / "docs" / "ui" / "commissioning" / "COMMISSIONING_WIZARD_UI_SPEC.md"
-        content = spec_path.read_text()
+        content = spec_path.read_text(encoding='utf-8')
         
         assert "redirect" in content.lower(), \
             "Must define redirection behavior"

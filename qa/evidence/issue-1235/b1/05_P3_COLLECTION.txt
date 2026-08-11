@@ -1,0 +1,42 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\Johan\.copilot\repos\app_management_centre
+configfile: pytest.ini
+collected 25 items
+
+<Dir app_management_centre>
+  <Package tests>
+    <Package wave2_0_qa_infrastructure>
+      <Module test_advanced_flow_scenarios.py>
+        <Class TestAdvancedFlowScenarios>
+          <Function test_qa_211_state_persistence_across_flow>
+          <Function test_qa_212_evidence_generation_across_flow>
+          <Function test_qa_213_authorization_checks_across_flow>
+          <Function test_qa_214_timeout_handling_in_flow>
+          <Function test_qa_215_flow_cancellation>
+        <Class TestEscalationFlow>
+          <Function test_qa_216_escalation_end_to_end>
+          <Function test_qa_217_escalation_trigger_detection>
+          <Function test_qa_218_escalation_creation>
+          <Function test_qa_219_escalation_routing>
+          <Function test_qa_220_escalation_presentation>
+          <Function test_qa_221_escalation_decision>
+          <Function test_qa_222_escalation_resolution>
+          <Function test_qa_223_escalation_timeout>
+          <Function test_qa_224_multiple_concurrent_escalations>
+          <Function test_qa_225_escalation_error_handling>
+      <Module test_parking_station_advanced.py>
+        <Class TestPrioritizationFeatures>
+          <Function test_qa_416_assign_priority>
+          <Function test_qa_417_sort_by_priority>
+          <Function test_qa_418_priority_change_workflow>
+          <Function test_qa_419_priority_escalation>
+          <Function test_qa_420_priority_display>
+        <Class TestBulkOperations>
+          <Function test_qa_421_bulk_select>
+          <Function test_qa_422_bulk_priority_update>
+          <Function test_qa_423_bulk_archive>
+          <Function test_qa_424_bulk_export>
+          <Function test_qa_425_bulk_error_handling>
+
+========================= 25 tests collected in 0.06s =========================

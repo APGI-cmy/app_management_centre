@@ -10,10 +10,13 @@ This module validates all 8 mandatory preconditions before a build can proceed.
 import json
 import os
 from dataclasses import dataclass, asdict
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Optional
+
+# Define UTC for compatibility
+UTC = timezone.utc
 
 
 class GateResult(Enum):
@@ -455,7 +458,7 @@ class BuildAuthorizationGate:
         
         # Write gate validation report
         report_path = evidence_dir / "gate-validation-report.md"
-        with open(report_path, 'w') as f:
+        with open(report_path, 'w', encoding='utf-8') as f:
             f.write(f"# Build Authorization Gate Validation Report\n\n")
             f.write(f"**Build ID**: {result.build_id}\n")
             f.write(f"**Timestamp**: {result.timestamp}\n")
@@ -482,7 +485,7 @@ class BuildAuthorizationGate:
         
         # Write authorization decision
         decision_path = evidence_dir / "authorization-decision.md"
-        with open(decision_path, 'w') as f:
+        with open(decision_path, 'w', encoding='utf-8') as f:
             f.write(f"# Build Authorization Decision\n\n")
             f.write(f"**Build ID**: {result.build_id}\n")
             f.write(f"**Decision**: {result.gate_result.value}\n")
@@ -492,12 +495,12 @@ class BuildAuthorizationGate:
             if result.gate_result == GateResult.PASS:
                 # Write authorization timestamp
                 timestamp_path = evidence_dir / "authorization-timestamp.txt"
-                with open(timestamp_path, 'w') as ts:
+                with open(timestamp_path, 'w', encoding='utf-8') as ts:
                     ts.write(result.timestamp)
             else:
                 # Write blocker report
                 blocker_path = evidence_dir / "blocker-report.md"
-                with open(blocker_path, 'w') as b:
+                with open(blocker_path, 'w', encoding='utf-8') as b:
                     b.write(f"# Build Authorization Blockers\n\n")
                     b.write(f"**Build ID**: {result.build_id}\n")
                     b.write(f"**Timestamp**: {result.timestamp}\n\n")

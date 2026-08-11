@@ -98,7 +98,7 @@ class TestCommissioningControllerImplementation:
         Expected: File contains CommissioningState enum definition
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         assert "enum CommissioningState" in content, \
             "CommissioningController.ts must define CommissioningState enum"
@@ -123,7 +123,7 @@ class TestCommissioningControllerImplementation:
         Expected: File contains CommissioningController class
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         assert "class CommissioningController" in content, \
             "CommissioningController.ts must define CommissioningController class"
@@ -138,7 +138,7 @@ class TestCommissioningControllerImplementation:
         Expected: initialize() method is defined
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         assert "async initialize()" in content or "initialize(): Promise" in content, \
             "CommissioningController must have initialize() method"
@@ -150,7 +150,7 @@ class TestCommissioningControllerImplementation:
         Expected: isCommissioned() method is defined
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         assert "isCommissioned()" in content, \
             "CommissioningController must have isCommissioned() method"
@@ -162,7 +162,7 @@ class TestCommissioningControllerImplementation:
         Expected: checkAccess() method is defined
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         assert "checkAccess(" in content, \
             "CommissioningController must have checkAccess() method"
@@ -174,7 +174,7 @@ class TestCommissioningControllerImplementation:
         Expected: validateAccess() method throws on invalid access
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         assert "validateAccess(" in content, \
             "CommissioningController must have validateAccess() method"
@@ -186,7 +186,7 @@ class TestCommissioningControllerImplementation:
         Expected: getCommissioningRoute() method is defined
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         assert "getCommissioningRoute()" in content, \
             "CommissioningController must have getCommissioningRoute() method"
@@ -198,7 +198,7 @@ class TestCommissioningControllerImplementation:
         Expected: commissioningController singleton is exported
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         assert "export const commissioningController" in content, \
             "Must export singleton commissioningController instance"
@@ -215,7 +215,7 @@ class TestCommissioningControllerDocumentation:
         Expected: README contains Purpose section
         """
         readme_path = project_root / "lib" / "commissioning" / "README.md"
-        content = readme_path.read_text()
+        content = readme_path.read_text(encoding='utf-8')
         
         assert "## Purpose" in content or "# Purpose" in content, \
             "README must document purpose"
@@ -227,7 +227,7 @@ class TestCommissioningControllerDocumentation:
         Expected: README contains Usage section with code examples
         """
         readme_path = project_root / "lib" / "commissioning" / "README.md"
-        content = readme_path.read_text()
+        content = readme_path.read_text(encoding='utf-8')
         
         assert "## Usage" in content or "# Usage" in content, \
             "README must provide usage examples"
@@ -242,7 +242,7 @@ class TestCommissioningControllerDocumentation:
         Expected: README contains API Reference section
         """
         readme_path = project_root / "lib" / "commissioning" / "README.md"
-        content = readme_path.read_text()
+        content = readme_path.read_text(encoding='utf-8')
         
         assert "## API Reference" in content or "# API" in content, \
             "README must document API reference"
@@ -254,7 +254,7 @@ class TestCommissioningControllerDocumentation:
         Expected: README mentions architecture-only constraints
         """
         readme_path = project_root / "lib" / "commissioning" / "README.md"
-        content = readme_path.read_text()
+        content = readme_path.read_text(encoding='utf-8')
         
         assert "F-A1" in content or "architecture-only" in content.lower(), \
             "README must document F-A1 constraints"
@@ -271,7 +271,7 @@ class TestCommissioningControllerCompliance:
         Expected: isCommissioned() check exists and is documented
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         # Check for enforcement logic
         assert "isCommissioned" in content, \
@@ -279,7 +279,7 @@ class TestCommissioningControllerCompliance:
         
         # Check documentation mentions enforcement
         readme_path = project_root / "lib" / "commissioning" / "README.md"
-        readme_content = readme_path.read_text()
+        readme_content = readme_path.read_text(encoding='utf-8')
         
         assert "MUST NOT function unless" in readme_content or \
                "must not function unless" in readme_content.lower(), \
@@ -292,7 +292,7 @@ class TestCommissioningControllerCompliance:
         Expected: No React/Vue/UI component code in implementation
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         # Check for common UI framework imports
         ui_indicators = [
@@ -318,7 +318,7 @@ class TestCommissioningControllerCompliance:
         Expected: No memory activation code
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         # Check for memory activation patterns
         memory_patterns = [
@@ -338,7 +338,7 @@ class TestCommissioningControllerCompliance:
         Expected: No write/save/update methods in initial implementation
         """
         controller_path = project_root / "lib" / "commissioning" / "CommissioningController.ts"
-        content = controller_path.read_text()
+        content = controller_path.read_text(encoding='utf-8')
         
         # loadState should exist (read)
         assert "loadState" in content, \
@@ -346,7 +346,7 @@ class TestCommissioningControllerCompliance:
         
         # Check documentation mentions read-only
         readme_path = project_root / "lib" / "commissioning" / "README.md"
-        readme_content = readme_path.read_text()
+        readme_content = readme_path.read_text(encoding='utf-8')
         
         assert "read-only" in readme_content.lower(), \
             "README must document read-only constraint"
@@ -365,7 +365,7 @@ class TestCommissioningControllerIntegration:
         example_path = project_root / "runtime" / "commissioning" / "state.example.json"
         
         if example_path.exists():
-            content = example_path.read_text()
+            content = example_path.read_text(encoding='utf-8')
             
             # Should be valid JSON
             try:
@@ -384,7 +384,7 @@ class TestCommissioningControllerIntegration:
         Expected: index.ts exports controller, state enum, and types
         """
         index_path = project_root / "lib" / "commissioning" / "index.ts"
-        content = index_path.read_text()
+        content = index_path.read_text(encoding='utf-8')
         
         required_exports = [
             "CommissioningController",

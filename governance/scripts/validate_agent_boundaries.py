@@ -15,8 +15,13 @@ Exit Codes:
 
 import json
 import sys
+import io
 from pathlib import Path
 from typing import Optional
+
+# Ensure UTF-8 output on Windows
+if sys.stdout.encoding.lower() != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 
 class AgentBoundaryViolation(Exception):

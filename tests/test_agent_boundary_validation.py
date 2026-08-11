@@ -20,7 +20,7 @@ def run_validation(report_path: str, repo: str) -> tuple[int, str]:
         Tuple of (exit_code, output)
     """
     cmd = [
-        'python3',
+        sys.executable,
         'governance/scripts/validate_agent_boundaries.py',
         '--reports', report_path,
         '--current-repo', repo
@@ -31,6 +31,8 @@ def run_validation(report_path: str, repo: str) -> tuple[int, str]:
             cmd,
             capture_output=True,
             text=True,
+            encoding='utf-8',
+            errors='replace',
             timeout=30
         )
         return result.returncode, result.stdout + result.stderr
@@ -77,18 +79,18 @@ def test_valid_builder_qa():
             "test_duration_seconds": 30.5
         }
     }
-    
     with tempfile.NamedTemporaryFile(mode='w', suffix='-qa-report.json', delete=False) as f:
         json.dump(report, f)
         f.flush()
-        exit_code, output = run_validation(f.name, "MaturionISMS/isms-test-module")
-        Path(f.name).unlink()
+        report_path = f.name
+    exit_code, output = run_validation(report_path, "MaturionISMS/isms-test-module")
+    Path(report_path).unlink(missing_ok=True)
     
     if exit_code == 0 and "ALL AGENT BOUNDARIES RESPECTED" in output:
-        print("  ✅ PASS: Valid builder QA report accepted")
+        print("  [PASS] PASS: Valid builder QA report accepted")
         assert True
     else:
-        print(f"  ❌ FAIL: Valid builder QA report rejected (exit code: {exit_code})")
+        print(f"  [FAIL] FAIL: Valid builder QA report rejected (exit code: {exit_code})")
         print(f"  Output: {output}")
         assert False, "Valid builder QA report was rejected"
 
@@ -140,14 +142,16 @@ def test_valid_fm_qa():
     with tempfile.NamedTemporaryFile(mode='w', suffix='-qa-report.json', delete=False) as f:
         json.dump(report, f)
         f.flush()
-        exit_code, output = run_validation(f.name, "MaturionISMS/maturion-foreman-office-app")
-        Path(f.name).unlink()
+        report_path = f.name
+    
+    exit_code, output = run_validation(report_path, "MaturionISMS/maturion-foreman-office-app")
+    Path(report_path).unlink(missing_ok=True)
     
     if exit_code == 0 and "ALL AGENT BOUNDARIES RESPECTED" in output:
-        print("  ✅ PASS: Valid FM QA report accepted")
+        print("  [PASS] PASS: Valid FM QA report accepted")
         assert True
     else:
-        print(f"  ❌ FAIL: Valid FM QA report rejected (exit code: {exit_code})")
+        print(f"  [FAIL] FAIL: Valid FM QA report rejected (exit code: {exit_code})")
         print(f"  Output: {output}")
         assert False, "Valid FM QA report was rejected"
 
@@ -198,14 +202,16 @@ def test_valid_governance_qa():
     with tempfile.NamedTemporaryFile(mode='w', suffix='-qa-report.json', delete=False) as f:
         json.dump(report, f)
         f.flush()
-        exit_code, output = run_validation(f.name, "MaturionISMS/maturion-foreman-governance")
-        Path(f.name).unlink()
+        report_path = f.name
+    
+    exit_code, output = run_validation(report_path, "MaturionISMS/maturion-foreman-governance")
+    Path(report_path).unlink(missing_ok=True)
     
     if exit_code == 0 and "ALL AGENT BOUNDARIES RESPECTED" in output:
-        print("  ✅ PASS: Valid Governance QA report accepted")
+        print("  [PASS] PASS: Valid Governance QA report accepted")
         assert True
     else:
-        print(f"  ❌ FAIL: Valid Governance QA report rejected (exit code: {exit_code})")
+        print(f"  [FAIL] FAIL: Valid Governance QA report rejected (exit code: {exit_code})")
         print(f"  Output: {output}")
         assert False, "Valid Governance QA report was rejected"
 
@@ -245,16 +251,18 @@ def test_cross_agent_violation_builder_to_governance():
     with tempfile.NamedTemporaryFile(mode='w', suffix='-qa-report.json', delete=False) as f:
         json.dump(report, f)
         f.flush()
-        exit_code, output = run_validation(f.name, "MaturionISMS/isms-test-module")
-        Path(f.name).unlink()
+    
+    report_path = f.name
+    exit_code, output = run_validation(report_path, "MaturionISMS/isms-test-module")
+    Path(report_path).unlink(missing_ok=True)
     
     if exit_code == 1 and "CROSS_AGENT_QA_EXECUTION" in output and "CATASTROPHIC" in output:
-        print("  ✅ PASS: Violation correctly detected and blocked")
+        print("  [PASS] PASS: Violation correctly detected and blocked")
         assert True
     else:
-        print(f"  ❌ FAIL: Violation not detected (exit code: {exit_code})")
+        print(f"  [FAIL] FAIL: Violation not detected (exit code: {exit_code})")
         print(f"  Output: {output}")
-        assert False, "Builder→Governance violation was not detected"
+        assert False, "Builder->Governance violation was not detected"
 
 
 def test_cross_agent_violation_fm_to_builder():
@@ -292,16 +300,18 @@ def test_cross_agent_violation_fm_to_builder():
     with tempfile.NamedTemporaryFile(mode='w', suffix='-qa-report.json', delete=False) as f:
         json.dump(report, f)
         f.flush()
-        exit_code, output = run_validation(f.name, "MaturionISMS/maturion-foreman-office-app")
-        Path(f.name).unlink()
+    
+    report_path = f.name
+    exit_code, output = run_validation(report_path, "MaturionISMS/maturion-foreman-office-app")
+    Path(report_path).unlink(missing_ok=True)
     
     if exit_code == 1 and "CROSS_AGENT_QA_EXECUTION" in output and "CATASTROPHIC" in output:
-        print("  ✅ PASS: Violation correctly detected and blocked")
+        print("  [PASS] PASS: Violation correctly detected and blocked")
         assert True
     else:
-        print(f"  ❌ FAIL: Violation not detected (exit code: {exit_code})")
+        print(f"  [FAIL] FAIL: Violation not detected (exit code: {exit_code})")
         print(f"  Output: {output}")
-        assert False, "FM→Builder violation was not detected"
+        assert False, "FM->Builder violation was not detected"
 
 
 def test_missing_metadata():
@@ -331,14 +341,16 @@ def test_missing_metadata():
     with tempfile.NamedTemporaryFile(mode='w', suffix='-qa-report.json', delete=False) as f:
         json.dump(report, f)
         f.flush()
-        exit_code, output = run_validation(f.name, "MaturionISMS/isms-test-module")
-        Path(f.name).unlink()
+    
+    report_path = f.name
+    exit_code, output = run_validation(report_path, "MaturionISMS/isms-test-module")
+    Path(report_path).unlink(missing_ok=True)
     
     if exit_code == 1 and "MISSING_AGENT_ATTRIBUTION" in output:
-        print("  ✅ PASS: Missing metadata correctly detected")
+        print("  [PASS] PASS: Missing metadata correctly detected")
         assert True
     else:
-        print(f"  ❌ FAIL: Missing metadata not detected (exit code: {exit_code})")
+        print(f"  [FAIL] FAIL: Missing metadata not detected (exit code: {exit_code})")
         print(f"  Output: {output}")
         assert False, "Missing metadata was not detected"
 
@@ -351,10 +363,10 @@ def test_no_reports():
         exit_code, output = run_validation(tmpdir, "MaturionISMS/test-repo")
     
     if exit_code == 0 and "No QA report files found" in output:
-        print("  ✅ PASS: No reports handled correctly (non-blocking)")
+        print("  [PASS] PASS: No reports handled correctly (non-blocking)")
         assert True
     else:
-        print(f"  ❌ FAIL: No reports scenario failed (exit code: {exit_code})")
+        print(f"  [FAIL] FAIL: No reports scenario failed (exit code: {exit_code})")
         print(f"  Output: {output}")
         assert False, "No reports scenario was not handled correctly"
 
@@ -370,8 +382,8 @@ def main():
         ("Valid Builder QA", test_valid_builder_qa),
         ("Valid FM QA", test_valid_fm_qa),
         ("Valid Governance QA", test_valid_governance_qa),
-        ("Cross-Agent Violation: Builder→Governance", test_cross_agent_violation_builder_to_governance),
-        ("Cross-Agent Violation: FM→Builder", test_cross_agent_violation_fm_to_builder),
+        ("Cross-Agent Violation: Builder->Governance", test_cross_agent_violation_builder_to_governance),
+        ("Cross-Agent Violation: FM->Builder", test_cross_agent_violation_fm_to_builder),
         ("Missing Metadata", test_missing_metadata),
         ("No Reports", test_no_reports),
     ]
@@ -382,7 +394,7 @@ def main():
             result = test_func()
             results.append((name, result))
         except Exception as e:
-            print(f"  ❌ FAIL: Test raised exception: {e}")
+            print(f"  [FAIL] FAIL: Test raised exception: {e}")
             results.append((name, False))
         print()
     
@@ -395,7 +407,7 @@ def main():
     failed = sum(1 for _, result in results if not result)
     
     for name, result in results:
-        status = "✅ PASS" if result else "❌ FAIL"
+        status = "[PASS] PASS" if result else "[FAIL] FAIL"
         print(f"{status}: {name}")
     
     print()
@@ -408,7 +420,7 @@ def main():
         print("🎉 ALL TESTS PASSED")
         return 0
     else:
-        print("❌ SOME TESTS FAILED")
+        print("[FAIL] SOME TESTS FAILED")
         return 1
 
 

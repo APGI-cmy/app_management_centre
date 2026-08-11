@@ -1,0 +1,18 @@
+{
+  "proposal_id": "prop-2026-08-11-029",
+  "proposed_by": "test-agent",
+  "proposed_at": "2026-08-11T09:06:51.799320+00:00Z",
+  "status": "pending",
+  "proposed_memory": {
+    "scope": "runtime",
+    "title": "Isolation Test Pattern",
+    "summary": "Testing that proposals do not modify the memory fabric",
+    "importance": "high",
+    "tags": [
+      "test",
+      "isolation"
+    ]
+  },
+  "rationale": "This tests that submitting a proposal does not add entries to the memory fabric",
+  "review_notes": []
+}

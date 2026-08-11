@@ -10,9 +10,12 @@ Tests the Build Authorization Gate validator logic including:
 import pytest
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 import sys
 import os
+
+# Define UTC for compatibility
+UTC = timezone.utc
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent / 'fm' / 'orchestration'))
