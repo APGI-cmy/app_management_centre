@@ -2,10 +2,10 @@
   "schema_version": "1.0.0",
   "consumer_repo": "APGI-cmy/app_management_centre",
   "canonical_source": "APGI-cmy/maturion-foreman-governance",
-  "last_layer_down_commit": "77a8297bc2408bbc1c224083fd6028affb052107",
-  "last_updated": "2026-05-12",
+  "last_layer_down_commit": "021c8ad1d7c0ee6ba6d4ce0f7548a3a6d8a4a4e9",
+  "last_updated": "2026-08-12",
   "alignment_status": "ALIGNED",
-  "total_artifacts": 43,
+  "total_artifacts": 44,
   "artifacts": [
     {
       "filename": "GOVERNANCE_CANON_MANIFEST.md",
@@ -481,6 +481,19 @@
       "canonical_commit": "77a8297bc2408bbc1c224083fd6028affb052107",
       "layered_down_at": "2026-05-12T11:56:36Z",
       "file_hash_sha256": "bfc27875f6d79cc6bd2e368b1809e60daf37042f52ea9a48f930a00bf35c2f33",
+      "action": "CREATED"
+    },
+    {
+      "filename": "INTERIM_CS2_AMC_AUTOMATION_GOVERNANCE.md",
+      "path": "governance/canon/INTERIM_CS2_AMC_AUTOMATION_GOVERNANCE.md",
+      "version": "1.0.0",
+      "type": "canon",
+      "layer_down_status": "PUBLIC_API",
+      "canonical_commit": "021c8ad1d7c0ee6ba6d4ce0f7548a3a6d8a4a4e9",
+      "source_repo": "APGI-cmy/maturion-foreman-governance",
+      "source_commit": "021c8ad1d7c0ee6ba6d4ce0f7548a3a6d8a4a4e9",
+      "layered_down_at": "2026-08-12T09:17:15Z",
+      "file_hash_sha256": "d484470b235d350e1cbaa0890cf8ffc5e6b8f4964a603e81a73521a42d6e1dcf",
       "action": "CREATED"
     }
   ],
