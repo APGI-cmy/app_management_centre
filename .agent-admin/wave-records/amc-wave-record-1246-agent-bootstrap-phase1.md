@@ -5,19 +5,19 @@ PR: #1246
 Wave: amc-agent-bootstrap-phase1-1228
 Branch: pr/1246/apgi-cmy-ideal-doodle
 Base: 3d43947e46d4689a9953a2b5237a3ac25af7328b
-Package head: bf81b29e47b803bd8815501d4154636cb9c89022
-Substantive implementation head: bf81b29e47b803bd8815501d4154636cb9c89022
+Package head: 8066307b7e8a500d4e5adbc9ebb2934b80e8c5e3
+Substantive implementation head: 8066307b7e8a500d4e5adbc9ebb2934b80e8c5e3
 
 Verdict: PASS
 PHASE: AGENT_BOOTSTRAP_PHASE_1
 adoption_phase: PHASE_B_BLOCKING
 PHASE_B_BLOCKING_TOKEN: IAA-session-1246-agent-bootstrap-20260812-PASS
-Reviewed SHA: bf81b29e47b803bd8815501d4154636cb9c89022
+Reviewed SHA: 8066307b7e8a500d4e5adbc9ebb2934b80e8c5e3
 
 delta_assurance_verdict: PASS
 delta_classification: token-recording-only
-base_head: bf81b29e47b803bd8815501d4154636cb9c89022
-final_head: bf81b29e47b803bd8815501d4154636cb9c89022
+base_head: 8066307b7e8a500d4e5adbc9ebb2934b80e8c5e3
+final_head: 8066307b7e8a500d4e5adbc9ebb2934b80e8c5e3
 
 ## Scope reviewed
 

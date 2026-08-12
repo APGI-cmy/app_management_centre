@@ -3,7 +3,7 @@
 **Issue**: #1228
 **PR**: #1246
 **Branch**: `pr/1246/apgi-cmy-ideal-doodle`
-**Reviewed Package Head**: `bf81b29e47b803bd8815501d4154636cb9c89022`
+**Reviewed Package Head**: `8066307b7e8a500d4e5adbc9ebb2934b80e8c5e3`
 **Base**: `3d43947e46d4689a9953a2b5237a3ac25af7328b`
 **ECAP Session**: `ecap-1246-20260812`
 
