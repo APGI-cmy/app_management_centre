@@ -36,6 +36,18 @@ import sys
 from pathlib import Path
 
 
+def _force_utf8_stdio() -> None:
+    """Ensure CI output works under Windows default encoding."""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8")
+        except (AttributeError, ValueError, OSError):
+            pass
+
+
+_force_utf8_stdio()
+
+
 # ---------------------------------------------------------------------------
 # Token format patterns (AC6)
 # ---------------------------------------------------------------------------
