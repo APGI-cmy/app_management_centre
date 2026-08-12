@@ -18,6 +18,17 @@ jobs:
   inject-bootstrap-instruction:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect MCP bootstrap availability
+        id: detect-mcp
+        continue-on-error: true
+        run: |
+          node .github/scripts/detect-mcp-bootstrap-availability.js > /tmp/mcp-detection.json || true
+          cat /tmp/mcp-detection.json
+          AVAILABLE=$(jq -r '.available // false' /tmp/mcp-detection.json 2>/dev/null || echo "false")
+          echo "available=$AVAILABLE" >> "$GITHUB_OUTPUT"
       - name: Determine agent ID from assignees or title
         id: detect
         env:
@@ -50,7 +61,8 @@ jobs:
 
           echo "agent_id=$DETECTED_ID" >> "$GITHUB_OUTPUT"
 
-      - name: Post agent_bootstrap instruction comment
+      - name: Post agent_bootstrap instruction comment (MCP Available)
+        if: steps.detect-mcp.outputs.available == 'true'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.MATURION_BOT_TOKEN }}
@@ -65,13 +77,81 @@ jobs:
               `agent_bootstrap(agent_id: "${agentId}")`,
               '```',
               '',
-              'This is your **required first tool call** in every session. Skipping is a **GOV-BREACH-AIMC-W5-002 POLC violation** and will cause your PR to be blocked by the CI preflight gate.',
+              'This is your **required first tool call** in every session. Skipping is a **GOV-BREACH-AIMC-W5-002 POLC violation** (mandatory CI enforcement is planned for Phase 2).',
               '',
               'The `agent_bootstrap` tool is provided by the `agent-bootstrap` MCP server registered in `.mcp.json`. It returns your full agent contract file. Read it in full and complete **Phase 1 (Identity & Preflight)** before doing anything else.',
               '',
               '---',
               '',
               '**Authority**: CS2 (@APGI-cmy) — agent contract Phase 1, `agent-bootstrap` MCP server.',
+            ].join('\n');
+
+            const isIssue = context.eventName === 'issues';
+            if (isIssue) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body,
+              });
+            }
+
+      - name: Post agent_bootstrap fallback instruction comment (MCP Unavailable)
+        if: steps.detect-mcp.outputs.available == 'false'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.MATURION_BOT_TOKEN }}
+          script: |
+            const agentId = '${{ steps.detect.outputs.agent_id }}';
+            const fs = require('fs');
+            const fallbackTemplate = fs.readFileSync('.github/scripts/agent-bootstrap-fallback-instructions.md', 'utf8');
+            const body = [
+              '## ⚠️ MCP SERVER UNAVAILABLE — USE FALLBACK PATH (Issue #1228)',
+              '',
+              'The `agent-bootstrap` MCP server is not available in this runtime environment.',
+              '',
+              '**Approved fallback workflow (Issue #1226 precedent):**',
+              '1. Fetch your agent contract directly from `.github/agents/' + agentId + '.md`',
+              '2. Complete Phase 1 (Identity & Preflight) by reading the entire contract',
+              '3. File Phase 1 attestation comment in this issue/PR (see template below)',
+              '4. Proceed with work after attestation is submitted',
+              '',
+              '---',
+              '',
+              '## Phase 1 Attestation Template',
+              '',
+              '```markdown',
+              '## ✅ Phase 1 Attestation (Fallback Path — Issue #1228)',
+              '',
+              '**Agent:** ' + agentId,
+              '**Contract Location:** `.github/agents/' + agentId + '.md`',
+              '**Attestation Date:** <ISO8601 timestamp>',
+              '**Phase 1 Status:** COMPLETE',
+              '',
+              '### Phase 1 Checklist',
+              '- [ ] Read agent contract Phase 1 in full',
+              '- [ ] Confirmed role and responsibilities',
+              '- [ ] Noted all prerequisites and blockers',
+              '- [ ] Identified escalation path (CS2 or governance liaison)',
+              '- [ ] No unresolved conflicts with current work assignments',
+              '- [ ] Ready to proceed with Phase 2 (if applicable)',
+              '',
+              '**Notes:**',
+              '(Document any Phase 1 findings or questions here)',
+              '```',
+              '',
+              '---',
+              '',
+              '**Full fallback instructions:** See `.github/scripts/agent-bootstrap-fallback-instructions.md`',
+              '',
+              '**Authority**: CS2 (@APGI-cmy) — Issue #1226 (approved fallback path), Issue #1228 (Phase 1 operationalisation)',
             ].join('\n');
 
             const isIssue = context.eventName === 'issues';
